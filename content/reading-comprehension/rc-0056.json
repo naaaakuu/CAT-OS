@@ -7,8 +7,8 @@
     "status": "accepted",
     "quality_score": 86,
     "genre": "literature-theory",
-    "difficulty": "easy",
-    "difficulty_numeric": 3,
+    "difficulty": "medium",
+    "difficulty_numeric": 4,
     "stage": "developing",
     "skills": [
       "main-idea-extraction",
@@ -17,16 +17,15 @@
       "scope-control"
     ],
     "word_count": 427,
-    "question_count": 5,
+    "question_count": 4,
     "question_types": [
       "agree_disagree",
-      "except",
       "inference",
       "primary_purpose",
       "strengthen"
     ],
     "theme": "the untranslatable word as a claim that has shrunk: it began as a claim about what speakers could think, retreated under testing to a claim about what one word can carry, and now records only how many words a rendering takes, so what is lost is form rather than meaning",
-    "estimated_time_min": 8.5,
+    "estimated_time_min": 7.5,
     "source": {
       "publication": "original",
       "url": null,
@@ -37,7 +36,7 @@
     "date_added": "2026-09-12",
     "batch_id": "batch-rc-003",
     "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-03",
-    "reviewer_notes": "An easy passage whose difficulty is entirely chronological: three stages of one claim, each weaker than the last, and a closing concession that keeps a real loss in the picture. Every question is decided by which stage an option belongs to, which is why the discarded first stage is offered back three times.",
+    "reviewer_notes": "An easy passage whose difficulty is entirely chronological: three stages of one claim, each weaker than the last, and a closing concession that keeps a real loss in the picture. Every question is decided by which stage an option belongs to, which is why the discarded first stage is offered back three times. 2026-10-03 CAT-size pass: 427→427 words, 4→4 paragraphs, 5→4 questions. Dropped q3 (except on p3, a leak of the paragraph that agree q2, inference q4 and strengthen q5 already test); difficulty raised from easy (3) to medium (4): plain words, but it tracks one concept through three redefinitions and then defends a residue.",
     "length_class": "medium",
     "structure": "history_of_an_idea",
     "viewpoints": 2,
@@ -75,7 +74,7 @@
     ],
     "quality": {
       "status": "reviewed",
-      "adversarial_review": "Every question in this set can be got wrong in the same way, by answering from the stage of the history the option belongs to rather than the stage the stem asks about. Q1's live rival is the option that nothing of consequence is lost in translation, which a reader builds out of the second paragraph and which the fourth paragraph refuses in three words: the loss is real. Q2's rival is the option whose first clause is the passage's own finding about explanation and whose second clause denies any loss at all; the same three words settle it. Q3's exception is the claim about hearers who cannot come to understand, which is the discarded first stage and not the modern use the stem asks about. Q4's rival says that disagreement about the label is disagreement about meaning, which the third paragraph forecloses by making the boundary a matter of taste rather than of evidence. Q5's rival is the paragraph of explanation, which is genuine evidence against the first stage and says nothing about what the modern label reports; the key instead shows the label tracking the receiving language's stock of words, which is what the author claims it now records.",
+      "adversarial_review": "Every question in this set can be got wrong in the same way, by answering from the stage of the history the option belongs to rather than the stage the stem asks about. Q1's live rival is the option that nothing of consequence is lost in translation, which a reader builds out of the second paragraph and which the fourth paragraph refuses in three words: the loss is real. Q2's rival is the option whose first clause is the passage's own finding about explanation and whose second clause denies any loss at all; the same three words settle it. Q3's exception is the claim about hearers who cannot come to understand, which is the discarded first stage and not the modern use the stem asks about. Q4's rival says that disagreement about the label is disagreement about meaning, which the third paragraph forecloses by making the boundary a matter of taste rather than of evidence. Q5's rival is the paragraph of explanation, which is genuine evidence against the first stage and says nothing about what the modern label reports; the key instead shows the label tracking the receiving language's stock of words, which is what the author claims it now records. (2026-10-03, CAT-size pass: q3 was dropped, so any note above about it no longer applies.)",
       "blind_solve": null
     },
     "vocab_extracted": [
@@ -217,62 +216,6 @@
             "trap_type": "prescriptive_leap",
             "why_wrong": "No instruction to translators is issued anywhere. The passage describes what a translator is choosing between and what each choice costs, and it never says which cost ought to be paid.",
             "seductive_element": "The closing paragraph is about form and economy, and a reader who has just been shown a loss expects to be told how to avoid it."
-          }
-        ]
-      }
-    },
-    {
-      "id": "rc-0056-q3",
-      "type": "except",
-      "skill": "specific_detail",
-      "patterns": [
-        "comp.explicit_detail",
-        "comp.paraphrase",
-        "scope.time_period"
-      ],
-      "target_mistake": "answering from the first stage of the history when the stem asks about the last one",
-      "prediction_target": null,
-      "difficulty": {
-        "inference_depth": 1,
-        "distractor_similarity": 3,
-        "reasoning_depth": 2
-      },
-      "secondary_skills": [
-        "scope"
-      ],
-      "stem": "According to the passage, each of the following is true of the way the word untranslatable is used now EXCEPT:",
-      "options": {
-        "A": "The test that decides the question is how much room a rendering has to take up.",
-        "B": "No claim is being made about what the speakers of a language are able to think.",
-        "C": "Where the line falls is settled by taste rather than by evidence.",
-        "D": "The word names something that hearers of another language cannot understand."
-      },
-      "correct": "D",
-      "estimated_time_sec": 60,
-      "explanation": {
-        "expert_notice": "The stem fixes a date. Three of the four statements sit inside the third paragraph, which describes the modern use and nothing else; the fourth belongs to the first paragraph, where untranslatability was still a discovery about the reach of thought.",
-        "correct_reasoning": "The exception is the discarded first stage. The second paragraph kills it outright by reporting that scholars who went looking for a concept outsiders could not acquire kept finding instead that it could be explained, understood and then employed, and the third paragraph then states that nothing about minds is being claimed at all. Everything else in the list is a sentence of the third paragraph in other words.",
-        "passage_anchor": "rc-0056-p3",
-        "question_type_note": "An EXCEPT question is three verifications and one exclusion. Where a passage narrates stages, the exception is usually a true statement about the wrong stage, which is why the stem's time words are worth underlining.",
-        "reading_habit": "In a passage organised as a history, write a one-word label beside each paragraph for the stage it describes. Then answer any detail question by first deciding which label the stem is pointing at.",
-        "distractors": [
-          {
-            "option": "A",
-            "trap_type": "passage_language_shifted",
-            "why_wrong": "The passage says the test applied is length, and illustrates it with a word needing eight English words against one needing two; room taken up is the same test in plainer words, so it is verified rather than excluded.",
-            "seductive_element": "The option's wording appears nowhere in the passage, which makes a faithful paraphrase look like an invention."
-          },
-          {
-            "option": "B",
-            "trap_type": "temporal_distortion",
-            "why_wrong": "The third paragraph says exactly this, in a sentence of its own: nothing about minds is being claimed at all. A reader who carries the first paragraph forward hears the whole passage as still discussing minds.",
-            "seductive_element": "Minds are the subject of the opening paragraph and the most memorable thing in the passage, so a denial of them reads as a claim the passage never made."
-          },
-          {
-            "option": "C",
-            "trap_type": "true_but_irrelevant",
-            "why_wrong": "This closes the third paragraph word for word in substance: where the boundary falls is a matter of taste rather than of evidence. It is an aside about the modern use, and asides are still statements.",
-            "seductive_element": "It sounds like a judgement the author is passing rather than a description he is giving, and readers exclude judgements when a stem asks what a passage says."
           }
         ]
       }
@@ -451,6 +394,17 @@
     "reading_lesson": "When a passage narrates how an idea changed, label each stage as you pass it and keep the labels beside you for the questions. Almost every distractor in a historical passage is a true statement about the wrong stage, and such an option cannot be caught by asking whether it is in the passage, only by asking when it was in the passage. The habit transfers to any passage that reports what was once believed before saying what is believed now.",
     "real_world": "The same shrinkage happens to words like addictive, exponential and literally: a term that once carried a strong technical claim survives as a loose one, and the excitement attached to the old sense is still being charged for the new.",
     "takeaway": "An idea can keep its name long after it has given up the claim that made it interesting.",
-    "reflection_question": "Which words do you use with the confidence of their older, stronger meaning, and would you still use them if you said out loud what they now claim?"
+    "reflection_question": "Which words do you use with the confidence of their older, stronger meaning, and would you still use them if you said out loud what they now claim?",
+    "eli10": {
+      "big_idea": "'Untranslatable' once meant others could not think a word's idea; now it means translating takes more words, which loses the shape, not the sense.",
+      "story": "People enjoy lists of 'untranslatable' words. In the 1800s, such a word seemed to prove something. Its speakers, people thought, had an idea the rest of us could not have. Testing killed that claim. Explain the word for a paragraph, and an outsider can usually use the idea freely. So the claim shrank: anyone could have the idea, but it needed more than one word. Today 'untranslatable' only means another language needs a phrase or a footnote. That is about words, not minds. How many words is too many is a matter of taste. Still, the writer says something is lost. Think of a joke that has to be explained. You get the meaning, but the timing is gone. A poem loses its tight shape the same way. The sense survives; the form does not. The lists are fun only if nobody notices which one went.",
+      "paragraphs": [
+        "Sets out the old view: a word with no match abroad showed its speakers had thoughts we lacked.",
+        "Shows it failing: a short explanation teaches outsiders the idea, so the claim shrinks to 'not in one word'.",
+        "Gives today's meaning: the word just takes several words to translate; it says nothing about minds.",
+        "Insists a real loss remains: translating costs length and rhythm, so a poem loses form, not meaning."
+      ],
+      "author_view": "Cool and precise: the writer enjoys deflating a popular idea but carefully protects the one real loss."
+    }
   }
 }

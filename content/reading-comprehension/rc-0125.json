@@ -1,0 +1,332 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0125",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 86,
+    "genre": "linguistics",
+    "difficulty": "easy",
+    "difficulty_numeric": 2,
+    "stage": "foundation",
+    "skills": [
+      "main-idea-extraction",
+      "argument-tracking",
+      "inference",
+      "structure-mapping"
+    ],
+    "word_count": 311,
+    "question_count": 3,
+    "question_types": [
+      "main_idea",
+      "inference",
+      "paragraph_function"
+    ],
+    "theme": "people asked a hard moral question in a second language answer it differently, which one view explains as a second way of thinking and another as distance, since a language learned from books carries less feeling; random assignment shows that the language of the question changes the answer, but because the second language was always also the one learned later, the results fit both explanations, so the evidence shows a change in decisions and not which cause produced it",
+    "estimated_time_min": 5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-03",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted."
+    },
+    "date_added": "2026-10-03",
+    "batch_id": "batch-rc-005",
+    "prompt_version": "content engine v1 + CAT-size brief 2026-10",
+    "reviewer_notes": "A foundation item in dialectic form: a finding and the view built on it (a second language as a second way of thinking), a rival reading of the same finding (distance, because a language learned from books carries less feeling), and a third paragraph that says what the evidence can and cannot settle. rc-0039 asks whether a first language's grammar shapes habits of attention; this passage is about the second-language effect on judgement, and what it adds is the confound: in these studies the second language is always also the later, bookish one, so the results cannot separate the two causes. The main-idea near-tie states the distance view as fact; the last sentence ('the evidence does not yet say') decides it.",
+    "length_class": "short",
+    "structure": "dialectic",
+    "viewpoints": 2,
+    "tone": "even-handed, curious, careful",
+    "difficulty_vector": {
+      "lexical": 1,
+      "syntactic": 2,
+      "abstraction": 2,
+      "inference_depth": 2,
+      "distractor_similarity": 3,
+      "reasoning_depth": 3,
+      "structural_ambiguity": 1,
+      "time_pressure": 2
+    },
+    "reasoning_patterns": [
+      "struct.two_views_adjudication",
+      "struct.claim_counterclaim",
+      "struct.qualification",
+      "comp.central_idea",
+      "comp.function_over_words",
+      "arg.evidence_vs_conclusion",
+      "arg.counterargument",
+      "arg.causal_claim",
+      "inf.author_view_application",
+      "inf.author_vs_reported",
+      "lang.may_vs_must",
+      "elim.near_tie"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1: the live rival is the option that bilinguals judge differently in a second language because its words carry less feeling. It is the second view stated as fact; the passage offers it only conditionally ('If so') and ends 'the evidence does not yet say'. The first view's option is reported ('To many, this suggests'), not held. Q2: a strong candidate might pick the option about people for whom a curse in their second language barely stings, because it is the second paragraph's own example; on the second view those are the people with the most distance and so the largest difference, the reverse of what the stem asks. Q3: the finalist is 'decide which of the two views the experiments in fact support', since doubt begins in the second paragraph; deciding is attempted only in the third, which opens 'The experiments settle less than either side hopes'.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "bilinguals",
+      "grand",
+      "dilemma"
+    ]
+  },
+  "passage": {
+    "title": "Asked in Another Language",
+    "reading_time_min": 1.7,
+    "paragraphs": [
+      {
+        "id": "rc-0125-p1",
+        "text": "Would you push a heavy stranger off a bridge, to his death, if his body would stop a runaway train about to kill five people? In several experiments, volunteers who spoke two languages were split at random into two groups and given this problem. Those given it in their first language mostly refused to push. Those given it in a second language, learned later in life, were clearly more willing. Many bilinguals also say they feel like a different person in each language. To many, this suggests that a second language brings a second way of thinking, with its own habits of judgement."
+      },
+      {
+        "id": "rc-0125-p2",
+        "text": "Others doubt that anything so grand is happening. The second language in these experiments was usually learned in classrooms and from books, and its words carry less feeling than the words of childhood. Many bilinguals say that a curse in their second language barely stings, and an 'I love you' barely warms. If so, the second language adds no new way of thinking. It adds distance. A dilemma faced from further away feels less like a real person on a real bridge, and so it gets a cooler answer."
+      },
+      {
+        "id": "rc-0125-p3",
+        "text": "The experiments settle less than either side hopes. They do show something real. Because the groups were split at random, the different answers came from the language of the question, not from different people. What they cannot show is which view is right. In each study the second language was both a different language and one learned later, from books. The two came together, so the results fit either view equally well. The evidence therefore answers a smaller question than the one people ask. A second language can change what a person decides while she is using it. Whether it changes how she thinks, or only how close she stands to the question, the evidence does not yet say."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0125-q1",
+      "type": "main_idea",
+      "skill": "main_idea",
+      "patterns": [
+        "comp.central_idea",
+        "arg.evidence_vs_conclusion",
+        "elim.near_tie"
+      ],
+      "target_mistake": "taking one of the two views for the author's conclusion, or reducing the passage to the experiment's result",
+      "prediction_target": "The learner should be able to say beforehand: a second language can change people's decisions, but the experiments cannot tell whether that is a new way of thinking or just distance.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "logical_structure"
+      ],
+      "stem": "Which of the following best expresses the main idea of the passage?",
+      "options": {
+        "A": "A second language gives a person a second way of thinking, with its own habits of judgement.",
+        "B": "People are more willing to sacrifice one life to save five when asked in a second language.",
+        "C": "Bilinguals judge differently in a second language because its words carry less feeling.",
+        "D": "A second language can change people's choices, but the evidence cannot yet show why."
+      },
+      "correct": "D",
+      "estimated_time_sec": 70,
+      "explanation": {
+        "expert_notice": "The passage gives two views and then judges what the evidence can settle. The first paragraph reports the experiments and the view that a second language brings a second way of thinking; the second offers the rival view that it only adds distance; the third says the results 'fit either view equally well'. The main idea is the third paragraph's verdict, which needs the first two.",
+        "correct_reasoning": "The last paragraph says the experiments show something real, that the language of the question changed the answers, but cannot show which view explains it, because the second language was always also one learned later, from books. The correct option keeps both halves: the choices change, and the evidence cannot yet say why.",
+        "passage_anchor": "rc-0125-p3",
+        "question_type_note": "When a passage weighs two views, the main idea is usually the author's verdict on them, not either view. Check that the option does not quietly take one side.",
+        "reading_habit": "In a two-view passage, label each paragraph by whose view it gives: theirs, the others', the author's. The main idea lives in the paragraph labelled 'the author's'.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "reported_view_as_author",
+            "why_wrong": "This is the first view, which the passage reports ('To many, this suggests') and then sets against a rival. The last paragraph says the evidence cannot show which of the two is right, so the author does not hold it.",
+            "seductive_element": "It is set out in the first paragraph and sounds like the passage's most exciting claim."
+          },
+          {
+            "option": "B",
+            "trap_type": "too_narrow",
+            "why_wrong": "This is the experimental finding from the first paragraph and nothing more. It leaves out both explanations and the last paragraph's judgement about what the finding can and cannot show.",
+            "seductive_element": "It is the most concrete and memorable fact in the passage."
+          },
+          {
+            "option": "C",
+            "trap_type": "possibility_as_certainty",
+            "why_wrong": "This takes the second view's explanation and states it as fact. The passage offers it as one of two explanations ('If so') and ends by saying the evidence 'does not yet say' which is right.",
+            "seductive_element": "It sounds like a careful scientific explanation, and it uses the passage's own point about feeling."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0125-q2",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.author_view_application",
+        "inf.author_vs_reported",
+        "arg.causal_claim"
+      ],
+      "target_mistake": "attaching the second view's own evidence to the opposite prediction, or carrying over the first view's evidence, instead of running the second view's rule on a new case",
+      "prediction_target": "The learner should be able to say beforehand: on the second view the effect comes from a language that carries less feeling, so it should shrink for people whose second language carries the feeling of childhood too.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 2,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "application"
+      ],
+      "stem": "Those who hold the second view would most likely expect the difference between the two groups to be smaller among people who",
+      "options": {
+        "A": "were given the problem in writing rather than out loud",
+        "B": "had spoken both languages at home since early childhood",
+        "C": "find that a curse in their second language barely stings",
+        "D": "say they feel like a different person in each language"
+      },
+      "correct": "B",
+      "estimated_time_sec": 80,
+      "explanation": {
+        "expert_notice": "The second view rests on one link: the second language in these experiments was learned in classrooms and from books, so its words carry less feeling than the words of childhood, and that distance cools the answer. Ask what happens to the difference when that link is removed.",
+        "correct_reasoning": "If both languages were spoken at home from early childhood, the second language's words would carry the feeling of childhood too, and on the second view there would be little distance to cool the answer. Those who hold that view would therefore expect the gap between the two groups to shrink, and the correct option describes exactly those people.",
+        "passage_anchor": "rc-0125-p2",
+        "question_type_note": "This inference applies a view to a case the passage never discusses. State the view as a rule (less feeling, more distance, cooler answers), then run the new case through the rule.",
+        "reading_habit": "When a passage gives an explanation, find the condition it depends on, here a language learned from books, and ask what the explanation predicts when that condition is missing.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "out_of_scope",
+            "why_wrong": "Nothing in the passage connects writing or speaking aloud with the difference between the groups. The second view turns on how much feeling a language's words carry.",
+            "seductive_element": "How a question is put to people sounds like the kind of detail that could change an experiment's result."
+          },
+          {
+            "option": "C",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "This borrows the second paragraph's own example and attaches it to the wrong prediction. People for whom a curse in the second language barely stings are exactly the people with distance, so on the second view their difference should be as large as ever, not smaller.",
+            "seductive_element": "It is the second view's own evidence, almost word for word, so it looks like the answer that view would give."
+          },
+          {
+            "option": "D",
+            "trap_type": "true_but_irrelevant",
+            "why_wrong": "Many bilinguals do say this, but in the passage it is evidence offered for the first view. The second view says nothing about it, so it gives no reason to expect a smaller difference among these people.",
+            "seductive_element": "It is a true statement from the first paragraph, and it is about bilinguals' feelings, which sounds close to the second view's subject."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0125-q3",
+      "type": "paragraph_function",
+      "skill": "paragraph_function",
+      "patterns": [
+        "comp.function_over_words",
+        "struct.claim_counterclaim",
+        "arg.counterargument"
+      ],
+      "target_mistake": "giving the second paragraph the first paragraph's view or the third paragraph's job of judging between the two",
+      "prediction_target": "The learner should be able to say beforehand: the second paragraph gives a rival explanation of the same results, distance rather than a new way of thinking.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 2,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "logical_structure"
+      ],
+      "stem": "The second paragraph serves mainly to",
+      "options": {
+        "A": "give further evidence that a second language brings a new way of thinking",
+        "B": "prove that people feel nothing at all when they speak a second language",
+        "C": "offer another way of explaining the results of the experiments",
+        "D": "decide which of the two views the experiments in fact support"
+      },
+      "correct": "C",
+      "estimated_time_sec": 60,
+      "explanation": {
+        "expert_notice": "The second paragraph opens 'Others doubt that anything so grand is happening.' 'Others' signals a second group with a different view, and the paragraph ends with that view's own account of the experiments: a second language adds distance, so a dilemma gets a cooler answer.",
+        "correct_reasoning": "The paragraph accepts the experimental result and explains it differently: not a second way of thinking but distance, because a language learned from books carries less feeling. That is another explanation of the same results, which is what the correct option says. It does not judge between the views; the third paragraph does that.",
+        "passage_anchor": "rc-0125-p2",
+        "question_type_note": "A paragraph-function question asks for the paragraph's job, not its content. Opening words such as 'Others doubt' usually tell you the job before you read the rest.",
+        "reading_habit": "Label each paragraph with one verb as you finish it: reports, doubts, judges. Options that hand a paragraph another paragraph's job are then easy to spot.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The paragraph argues against that view. It says the second language 'adds no new way of thinking', only distance.",
+            "seductive_element": "The paragraph discusses what bilinguals feel, which the first paragraph had used as evidence for the first view."
+          },
+          {
+            "option": "B",
+            "trap_type": "extreme_language",
+            "why_wrong": "The paragraph says a curse in a second language 'barely stings' and an 'I love you' 'barely warms': less feeling, not none. It also reports what bilinguals say rather than proving anything.",
+            "seductive_element": "It catches the paragraph's real point, that the second language carries less feeling, and only pushes it too far."
+          },
+          {
+            "option": "D",
+            "trap_type": "wrong_structural_role",
+            "why_wrong": "Weighing the two views is the third paragraph's job, and even there the author says the experiments cannot settle it. The second paragraph only states the second view.",
+            "seductive_element": "The second paragraph is where the doubt begins, so it can look like the place where the question is decided."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "bilinguals",
+      "passage_use": "Many bilinguals also say they feel like a different person in each language.",
+      "meaning_here": "people who speak two languages",
+      "difficulty": "easy"
+    },
+    {
+      "word": "grand",
+      "passage_use": "Others doubt that anything so grand is happening.",
+      "meaning_here": "large and impressive; here, as big a change as a whole new way of thinking",
+      "difficulty": "easy"
+    },
+    {
+      "word": "dilemma",
+      "passage_use": "A dilemma faced from further away feels less like a real person on a real bridge",
+      "meaning_here": "a hard choice between two options, both of which are bad in some way",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "Two views and a verdict. Keep track of whose view each paragraph gives, and notice exactly what the author says the evidence can and cannot settle.",
+    "one_sentence_summary": "Bilinguals asked a hard moral question in a second language answer it differently, which some take as a sign that a second language brings a second way of thinking and others explain as mere distance, since a language learned from books carries less feeling; the experiments show that the language of a question changes the answer, but because the second language was always also one learned later, they cannot say which explanation is right.",
+    "main_idea": "Experiments show that people answer a hard moral question differently in a second language. One view says a second language brings a new way of thinking; another says it only adds emotional distance. Because the two causes always came together in the experiments, the evidence cannot yet tell them apart.",
+    "simple_explanation": "Imagine you could stop a runaway train from killing five people by pushing a stranger off a bridge. Most people refuse. But in experiments, people who were asked in a second language, one they learned later in life, were more willing to push. Many bilinguals also say they feel like a different person in each language. Some people think this shows that a second language gives you a second way of thinking.\n\nOthers disagree. In these experiments the second language was usually learned in a classroom, so its words carry less feeling than the words you grew up with. A swear word in a second language barely hurts, and an 'I love you' barely warms. On this view, the second language does not change how you think. It just puts the question further from your feelings, so you answer it more coolly.\n\nThe writer then judges what the experiments can settle. They do show something real: the groups were split at random, so the language really did change the answers. But they cannot show which view is right, because in every study the second language was both a different language and one learned later from books. Both explanations fit. So the evidence answers a smaller question: a second language can change what you decide while you use it. Whether it changes how you think, the evidence does not yet say.",
+    "why_difficult": "The passage is fair to both sides, so a reader looking for the author's side may pick whichever view sounds more convincing. In fact the author takes neither: the third paragraph says the results fit both. Options that state one view as fact, or turn the experiment's finding into the whole point, are built to catch readers who skim that verdict.",
+    "author_intention": "To set out a striking finding and two explanations of it fairly, and then to show precisely how much the evidence can settle.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0125-p1",
+        "role": "Reports the finding",
+        "note": "People asked a hard moral question in a second language were more willing to push. Some say a second language brings a second way of thinking."
+      },
+      {
+        "paragraph_id": "rc-0125-p2",
+        "role": "Gives the rival view",
+        "note": "Others say a language learned from books carries less feeling, so it adds distance, not a new way of thinking."
+      },
+      {
+        "paragraph_id": "rc-0125-p3",
+        "role": "Judges the evidence",
+        "note": "The language really did change the answers, but the experiments cannot tell which view is right, because both causes always came together."
+      }
+    ],
+    "tone_progression": "Engaging at the start, with a direct question to the reader, even-handed through the two views, and careful at the close, where the author refuses to claim more than the evidence shows.",
+    "key_transitions": [
+      "'Others doubt that anything so grand is happening.' (opening of paragraph 2): the first view meets a rival.",
+      "'The experiments settle less than either side hopes.' (opening of paragraph 3): the author steps in to judge what the evidence can show."
+    ],
+    "misunderstanding": "A hurried reader decides that the passage proves a second language makes people think differently, or, from the second paragraph, that it proves they simply feel less. The author says neither has been shown: the experiments prove only that the language of the question changed the answers.",
+    "traps_summary": "The options state the first view as the author's own, shrink the passage to the experiment's result, and turn the second view's possible explanation into a fact. In the inference question the trap describes the very people the second view is built on, and in the function question the second paragraph is given the third paragraph's job.",
+    "reading_lesson": "When a passage sets two explanations against the same evidence, look for the sentence that says what the evidence can tell apart. Main-idea questions on such passages reward the option that claims exactly that much and no more.",
+    "real_world": "Whenever two possible causes always arrive together, such as a new teacher and a new textbook in the same year, a better result fits both explanations. Before crediting either one, ask whether the evidence ever saw them apart.",
+    "takeaway": "When two possible causes always come together, the evidence cannot say which one did the work.",
+    "reflection_question": "If you speak more than one language, which one would you rather use to make a hard decision, and why?",
+    "eli10": {
+      "big_idea": "Using a second language can change people's choices, but the evidence cannot yet say whether it changes how they think.",
+      "story": "Here is a hard question. Would you push one stranger in front of a train to save five people? Most people say no. In some experiments, people got the question in their second language. They were more willing to push. Many people who speak two languages also say they feel different in each one. So some think a second language gives you a second way of thinking. Others are not so sure. In these tests, the second language was often learned from books at school. Its words carry less feeling. A rude word in it does not sting much. So the question feels further away, and people answer more coolly. Who is right? The writer says the tests cannot tell. In them, the second language was always learned later, from books. Both ideas fit that. So the language can change the answer. We do not yet know why.",
+      "paragraphs": [
+        "Gives a finding: people asked a hard question in a second language answer it differently.",
+        "Gives another view: a second language feels more distant, so people answer more coolly.",
+        "Judges both: the tests show the change is real, but cannot say which view is right."
+      ],
+      "author_view": "The writer is fair to both sides and careful not to claim more than the experiments show."
+    }
+  }
+}

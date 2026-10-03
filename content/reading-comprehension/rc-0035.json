@@ -9,7 +9,7 @@
     "genre": "public-policy",
     "difficulty": "hard",
     "difficulty_numeric": 8,
-    "stage": "advanced",
+    "stage": "elite",
     "skills": [
       "argument-tracking",
       "structure-mapping",
@@ -17,18 +17,16 @@
       "application",
       "concession-tracking"
     ],
-    "word_count": 630,
-    "question_count": 6,
+    "word_count": 623,
+    "question_count": 4,
     "question_types": [
       "agree_disagree",
       "application",
       "best_characterization",
-      "except",
-      "paragraph_function",
-      "phrase_in_context"
+      "paragraph_function"
     ],
     "theme": "the precautionary principle as a choice of default under uncertainty, adjudicated between its critics and its defenders",
-    "estimated_time_min": 10.5,
+    "estimated_time_min": 9,
     "source": {
       "publication": "original",
       "url": null,
@@ -39,7 +37,7 @@
     "date_added": "2026-09-12",
     "batch_id": "batch-rc-002",
     "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); authored as the long-passage exemplar",
-    "reviewer_notes": "The long exemplar: three voices (critics, defenders, author), a genuine adjudication in the fourth paragraph and a closing move that turns the quarrel into a shared problem. Six questions across six types; the application question is the set's near-tie.",
+    "reviewer_notes": "The long exemplar: three voices (critics, defenders, author), a genuine adjudication in the fourth paragraph and a closing move that turns the quarrel into a shared problem. Six questions across six types; the application question is the set's near-tie. 2026-10-03 CAT-size pass: 623→623 words, 5→5 paragraphs, 6→4 questions. Dropped q4 (EXCEPT, which leaks the critics' case) and q5 (phrase_in_context, a third question on p3 beside q3 and q6); at 623 words the passage now fits elite rather than advanced.",
     "length_class": "long",
     "structure": "two_views_adjudication",
     "viewpoints": 3,
@@ -72,8 +70,8 @@
       "comp.paraphrase"
     ],
     "quality": {
-      "status": "verified",
-      "adversarial_review": "Q6 (application) is the near-tie: the groundwater compound meets all three triggers named in p3 (plausible threat, irreversible harm, uncertainty), while the bicycle-lane case meets uncertainty but not irreversibility and the additive meets neither; a strong candidate may argue the proven-harm case is 'grave', but p3 makes uncertainty a trigger and proven harm is its absence. Q1: the option calling the principle empty or paralysing is the critics' view, which the author endorses only for the slogan (p4 'stated as a slogan'); the option must carry the author's whole position, including the defensible default. Q2: 'ordinary weighing' is tempting because p3 says it applies outside the trigger, but the stem gives no trigger information and the author's point in p5 is that 'permit until harm is shown' is itself a default choice.",
+      "status": "reviewed",
+      "adversarial_review": "Q6 (application) is the near-tie: the groundwater compound meets all three triggers named in p3 (plausible threat, irreversible harm, uncertainty), while the bicycle-lane case meets uncertainty but not irreversibility and the additive meets neither; a strong candidate may argue the proven-harm case is 'grave', but p3 makes uncertainty a trigger and proven harm is its absence. Q1: the option calling the principle empty or paralysing is the critics' view, which the author endorses only for the slogan (p4 'stated as a slogan'); the option must carry the author's whole position, including the defensible default. Q2: 'ordinary weighing' is tempting because p3 says it applies outside the trigger, but the stem gives no trigger information and the author's point in p5 is that 'permit until harm is shown' is itself a default choice. (2026-10-03, CAT-size pass: q4, q5 were dropped, so any note above about them no longer applies.)",
       "blind_solve": {
         "solver": "blind reviewer (fresh session, no key)",
         "agreed": 6,
@@ -89,7 +87,7 @@
   },
   "passage": {
     "title": "Which Error Would You Rather Make?",
-    "reading_time_min": 2.9,
+    "reading_time_min": 3.4,
     "paragraphs": [
       {
         "id": "rc-0035-p1",
@@ -284,117 +282,6 @@
       }
     },
     {
-      "id": "rc-0035-q4",
-      "type": "except",
-      "skill": "specific_detail",
-      "patterns": [
-        "comp.explicit_detail",
-        "inf.author_vs_reported",
-        "comp.paraphrase",
-        "meta.attention"
-      ],
-      "target_mistake": "failing to match a paraphrase of the critics' case, or confusing the defenders' description of the principle with the critics' description of it",
-      "prediction_target": null,
-      "difficulty": {
-        "inference_depth": 2,
-        "distractor_similarity": 3,
-        "reasoning_depth": 2
-      },
-      "secondary_skills": [],
-      "stem": "According to the passage, each of the following is part of the critics' case against the precautionary principle EXCEPT:",
-      "options": {
-        "A": "The principle places the burden of producing evidence on whoever proposes a novel intervention.",
-        "B": "Refusing to act carries risks of its own, just as acting does, because something is given up either way.",
-        "C": "The principle records the harms of action while leaving the harms of inaction unrecorded.",
-        "D": "A rule that forbids every risky action would forbid inaction as well, and so could guide nothing at all."
-      },
-      "correct": "A",
-      "estimated_time_sec": 70,
-      "explanation": {
-        "expert_notice": "The critics' case is p2, and it has three parts: every refusal to act carries risk; precaution counts only the harm of doing; strictly applied it forbids everything, including inaction. The burden-of-evidence description is the defenders' account of the principle in p3, not part of any charge against it.",
-        "correct_reasoning": "Three options paraphrase the three limbs of p2. The remaining option comes from p3, where the defenders say the serious principle 'demands… that the burden of producing evidence fall on whoever proposes the novel intervention'. It is a description offered in the principle's defence, not a criticism, so it is the exception.",
-        "passage_anchor": "rc-0035-p2",
-        "question_type_note": "An EXCEPT question is three verification tasks and one exclusion. Each of the three true options is a paraphrase, so the work is matching claims, not words; the exception is usually something true of the passage but belonging to a different speaker or paragraph.",
-        "reading_habit": "For EXCEPT questions, tick each option against the paragraph the stem points at, in your own words. The option you cannot tick is the answer, and it will often be true somewhere else in the passage.",
-        "distractors": [
-          {
-            "option": "B",
-            "trap_type": "passage_language_shifted",
-            "why_wrong": "This paraphrases p2's 'Every action… carries risk, and so does every refusal to act'; a reader matching words rather than claims may miss it because 'refusal to act' has become 'refusing to act'.",
-            "seductive_element": "The wording is plainer than the passage's, so it does not look like a quotation."
-          },
-          {
-            "option": "C",
-            "trap_type": "misattributed_view",
-            "why_wrong": "This is p2's 'counts only one kind of harm… and lets the harm of not doing pass unrecorded', the core of the critics' case; a reader who remembers p3's insistence that the principle is 'not indifferent to the costs of inaction' may wrongly file the charge under the defenders.",
-            "seductive_element": "The defenders answer exactly this point, which makes it feel like their material."
-          },
-          {
-            "option": "D",
-            "trap_type": "fact_right_interpretation_wrong",
-            "why_wrong": "This is p2's final sentence: 'a principle that forbids every risky action forbids everything, including inaction'. It is the critics' reductio, not a neutral observation, and it belongs to their case.",
-            "seductive_element": "The author later endorses this point against the slogan, so it can feel like the author's rather than the critics'."
-          }
-        ]
-      }
-    },
-    {
-      "id": "rc-0035-q5",
-      "type": "phrase_in_context",
-      "skill": "vocabulary_in_context",
-      "patterns": [
-        "word.context_clue",
-        "lang.implicit_negation",
-        "arg.necessary_vs_sufficient"
-      ],
-      "target_mistake": "reading the double negation backwards, or merging this clause with the burden-of-evidence clause beside it",
-      "prediction_target": "The learner should paraphrase before looking: not having found evidence of harm is not the same as having found evidence that there is no harm.",
-      "difficulty": {
-        "inference_depth": 2,
-        "distractor_similarity": 3,
-        "reasoning_depth": 3
-      },
-      "secondary_skills": [
-        "argument"
-      ],
-      "stem": "In the third paragraph, the demand that \"the absence of evidence not be treated as evidence of absence\" most nearly means that",
-      "options": {
-        "A": "a lack of proof that something is harmful should not be taken as proof that it is safe",
-        "B": "regulators should not act against a substance until evidence of harm has been collected",
-        "C": "whoever proposes a new intervention must supply whatever evidence is missing",
-        "D": "a threat that cannot be proven should be treated as though it had been proven"
-      },
-      "correct": "A",
-      "estimated_time_sec": 50,
-      "explanation": {
-        "expert_notice": "The phrase is a chiasmus: absence of evidence (nobody has found harm) versus evidence of absence (someone has shown there is no harm). The defenders are saying the first must not be mistaken for the second, which is exactly the mistake the 'permit until harm is shown' default makes.",
-        "correct_reasoning": "Unpacked, the clause says: not having evidence of harm is not evidence that harm is absent. The correct option states that in plain words, no proof of harm is not proof of safety, at the same strength, without adding a rule about who must act or how.",
-        "passage_anchor": "rc-0035-p3",
-        "question_type_note": "A phrase built on a reversal is tested by asking the learner to unfold it; the distractors are the reversal read backwards, the neighbouring clause, and an inflated version.",
-        "reading_habit": "For any phrase of the form 'X of Y is not Y of X', write both halves out as plain sentences before choosing. The half the author denies is usually the one the exam offers you.",
-        "distractors": [
-          {
-            "option": "B",
-            "trap_type": "opposite_direction",
-            "why_wrong": "Waiting for evidence of harm before acting is precisely treating absence of evidence as evidence of absence; the clause forbids that, so this option states its opposite.",
-            "seductive_element": "It sounds like a cautious, evidence-based rule, and 'evidence of harm' echoes the phrase."
-          },
-          {
-            "option": "C",
-            "trap_type": "half_right",
-            "why_wrong": "This is the other demand in the same sentence, the burden of producing evidence, not the meaning of the clause about absence of evidence; the two are listed as 'two narrower things'.",
-            "seductive_element": "It is genuinely part of what the defenders say in the same sentence."
-          },
-          {
-            "option": "D",
-            "trap_type": "overstatement",
-            "why_wrong": "The clause asks that a lack of proof not be treated as proof of safety; it does not ask that an unproven threat be treated as proven, which would be the mirror-image error.",
-            "seductive_element": "It pushes the precautionary side's logic to a strong form that its critics accuse it of holding."
-          }
-        ]
-      }
-    },
-    {
       "id": "rc-0035-q6",
       "type": "application",
       "skill": "application",
@@ -518,6 +405,18 @@
     "reading_lesson": "In a passage that reports two sides before judging, decide for every sentence whose voice it is in, and treat the author's verdict as a distribution, this much to one side, that much to the other, rather than a winner. Options that hand the whole verdict to one side are always available and always wrong.",
     "real_world": "Every debate about a new drug, a new pesticide, an AI system or a vaccine mandate is this argument in disguise; knowing that both 'wait for harm' and 'wait for safety' are choices of default makes the shouting easier to see through.",
     "takeaway": "There is no neutral rule for acting before you know; the only honest question is which mistake you would rather make.",
-    "reflection_question": "In a decision you face now, which default have you adopted without noticing, and who pays if it is wrong?"
+    "reflection_question": "In a decision you face now, which default have you adopted without noticing, and who pays if it is wrong?",
+    "eli10": {
+      "big_idea": "Before we know if something is safe, any rule chooses which mistake to risk; the real question is when caution should kick in.",
+      "story": "When something new arrives, like a chemical, two instincts clash. Allow it until harm is shown, or hold it back until safety is shown. The second is the precautionary principle. Critics say holding back has costs too: a delayed medicine can cost lives. Defenders say the critics attack a cartoon. The real principle asks the newcomer to bring evidence. It applies only when a threat is believable, the harm serious or permanent, and the science unsure. The writer says each side is half right. The slogan is useless; the serious version is not. Any rule for the waiting time picks which mistake to risk. Precaution says that if harm would be grave and permanent, wrongly holding back is the better mistake. Think of pond ice. 'Stay off till it is proved thick' and 'walk on till it cracks' are both choices. The honest question is when caution should kick in.",
+      "paragraphs": [
+        "Sets out two instincts: allow until harm is shown, or hold back until safety is shown.",
+        "Gives the critics' case: holding back has costs too, so strict precaution forbids everything.",
+        "Gives the defenders' reply: the real principle sets who must bring evidence, and when it applies.",
+        "Gives the writer's verdict: both sides are partly right, and every waiting rule picks a mistake to risk.",
+        "Turns the quarrel round: 'allow it' is a choice too, so the real question is where caution starts."
+      ],
+      "author_view": "Even-handed, with a quiet impatience for slogans: the writer wants an honest argument about where caution should begin."
+    }
   }
 }

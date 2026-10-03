@@ -4,7 +4,7 @@
  * The whole game on one screen, in the order a learner reads it:
  *
  *   TOP      Toffee's fire (the days in a row) · the village level and its
- *            stars · your friends · your cottage (sound, settings)
+ *            stars · every subject · settings (sound, name, progress)
  *   THE MAP  the painting, alive: friends walking, doing chores, waving.
  *            A "!" floats over each of today's three friends.
  *   BOTTOM   today's three friends and their gift, and ONE big button:
@@ -13,13 +13,16 @@
  *
  * The camera is a transform on one 1536×1024 layer, so every coordinate
  * below is a pixel of the painting (src/pets/paths.js), whatever the screen.
+ * It never zooms (owner, 2026-10-03: zoomed out, the village "does not look
+ * good"): the painting always fills the screen at full detail, and on a phone
+ * you scroll left and right to see the rest of it.
  */
 
 import { loadWorld, loadWorldRecords, deriveWorldState } from '../world/state.js';
 import { loadValley, saveValley, valleyName } from '../world/companion.js';
 import { derivePets } from '../pets/economy.js';
-import { PETS, PET_BY_ID, LINES, lineFor, petForPlace } from '../pets/pets.js';
-import { MAP, HOMES, PLACES, NODES, LAMPS, WINDOWS, CLOCK, nearestNode } from '../pets/paths.js';
+import { PETS, PET_BY_ID, HOUSES, LINES, lineFor, petForPlace } from '../pets/pets.js';
+import { MAP, HOMES, PLACES, SIGNS, NODES, LAMPS, WINDOWS, CLOCK, nearestNode } from '../pets/paths.js';
 import { petRig, petPortrait } from '../pets/sprite.js';
 import { nextFor } from '../pets/next.js';
 import { createLife, PET_SIZE } from './life.js';
@@ -80,15 +83,14 @@ export async function renderVillageHome(outlet, ctx) {
           <button class="cw-chip cw-chip--level" data-open="level"></button>
         </div>
         <div class="cw-hud__right">
-          <button class="cw-round" data-open="friends" aria-label="Your six friends: who they are and what they teach">${friendsSVG}</button>
-          <button class="cw-round" data-open="cottage" aria-label="Your cottage: sound, settings and progress">${houseSVG}</button>
+          <button class="cw-round" data-open="friends" aria-label="All subjects: start any of them">${subjectsSVG}</button>
+          <button class="cw-round" data-open="cottage" aria-label="Settings: sound, your village's name and your progress">${gearSVG}</button>
         </div>
       </header>
       <div class="cw-dock">
         <button class="cw-today" data-open="today"></button>
         <a class="cw-play" data-play href="#/world"></a>
       </div>
-      <button class="cw-overview" data-camera="overview" aria-label="Show the whole village" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5m6 0h5v5M4 15v5h5m6 0h5v-5"/></svg></button>
       <button class="cw-edge" hidden></button>
       <div class="cw-toast" role="status" aria-live="polite"></div>
       <div class="cw-overlay" hidden><div class="cw-scrim" data-close></div><section class="cw-card"></section></div>
@@ -107,37 +109,29 @@ export async function renderVillageHome(outlet, ctx) {
   const later = (fn, ms) => { const id = setTimeout(() => { timers.delete(id); if (!disposed) fn(); }, ms); timers.add(id); return id; };
 
   /* ---------------- The camera ---------------- */
-  const cam = { x: NODES.pc.x, y: NODES.pc.y + 40, z: 1 };
-  let vw = 1, vh = 1, base = 1, minZoom = 1, laidOut = false, tween = null, onCamera = () => {};
-  const MAX_Z = 1.7;
-  const scale = () => base * cam.z;
-  const overviewBtn = root.querySelector('.cw-overview');
+  const cam = { x: NODES.pc.x, y: NODES.pc.y + 40 };
+  let vw = 1, vh = 1, s = 1, tween = null, onCamera = () => {};
+  const scale = () => s;
   const apply = () => {
-    const s = scale();
     const hw = vw / 2 / s, hh = vh / 2 / s;
     cam.x = hw * 2 >= MAP.w ? MAP.w / 2 : clamp(cam.x, hw, MAP.w - hw);
     cam.y = hh * 2 >= MAP.h ? MAP.h / 2 : clamp(cam.y, hh, MAP.h - hh);
     map.style.transform = `translate3d(${(vw / 2 - cam.x * s).toFixed(2)}px,${(vh / 2 - cam.y * s).toFixed(2)}px,0) scale(${s.toFixed(4)})`;
     map.style.setProperty('--inv', (1 / s).toFixed(4));
-    overviewBtn.setAttribute('aria-pressed', String(cam.z <= minZoom + 0.01));
     onCamera();
   };
   const layout = () => {
     vw = viewport.clientWidth || window.innerWidth; vh = viewport.clientHeight || window.innerHeight;
-    base = Math.max(vw / MAP.w, vh / MAP.h);
-    minZoom = Math.min(vw / MAP.w, vh / MAP.h) / base;
-    if (!laidOut && vw >= 900) cam.z = minZoom;
-    cam.z = clamp(cam.z, minZoom, MAX_Z);
-    laidOut = true;
+    s = Math.max(vw / MAP.w, vh / MAP.h); // always covers the screen; a phone sees a third of the width
     apply();
   };
-  const panTo = (x, y, { z = cam.z, ms = 900 } = {}) => {
-    if (reduced || ms <= 0) { cam.x = x; cam.y = y; cam.z = z; apply(); return; }
+  const panTo = (x, y, { ms = 900 } = {}) => {
+    if (reduced || ms <= 0) { cam.x = x; cam.y = y; apply(); return; }
     const from = { ...cam }, t0 = performance.now();
     const step = (t) => {
       if (tween !== step || disposed) return;
       const p = Math.min(1, (t - t0) / ms), e = 1 - (1 - p) ** 3;
-      cam.x = from.x + (x - from.x) * e; cam.y = from.y + (y - from.y) * e; cam.z = from.z + (z - from.z) * e;
+      cam.x = from.x + (x - from.x) * e; cam.y = from.y + (y - from.y) * e;
       apply();
       if (p < 1) requestAnimationFrame(step); else tween = null;
     };
@@ -150,14 +144,9 @@ export async function renderVillageHome(outlet, ctx) {
     else panTo(p.x + (0.5 - 0.36) * vw / s, p.y, { ms: 600 });
   };
   const ro = new ResizeObserver(layout); ro.observe(viewport); layout();
-  overviewBtn.addEventListener('click', () => {
-    tween = null; fling = null;
-    play('tap');
-    if (cam.z <= minZoom + 0.01) panTo(NODES.pc.x, NODES.pc.y + 40, { z: Math.max(minZoom, Math.min(1, MAX_Z)), ms: 650 });
-    else panTo(MAP.w / 2, MAP.h / 2, { z: minZoom, ms: 650 });
-  });
 
-  /* Drag, fling, pinch, wheel, keys. A drag never becomes a tap. */
+  /* Drag, fling, wheel, keys. A drag never becomes a tap. A second finger
+     does nothing: there is no zoom to pinch. */
   const ptrs = new Map();
   let drag = null, moved = false, fling = null;
   viewport.addEventListener('pointerdown', (e) => {
@@ -165,16 +154,11 @@ export async function renderVillageHome(outlet, ctx) {
     tween = null; fling = null;
     ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY });
     if (ptrs.size === 1) { drag = { x: e.clientX, y: e.clientY, cx: cam.x, cy: cam.y, t: performance.now(), vx: 0, vy: 0 }; moved = false; }
-    if (ptrs.size === 2) { const [a, b] = [...ptrs.values()]; drag = { ...drag, pinch: Math.hypot(a.x - b.x, a.y - b.y), z: cam.z }; }
   });
   viewport.addEventListener('pointermove', (e) => {
     if (!drag || !ptrs.has(e.pointerId)) return;
     ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY });
-    if (ptrs.size >= 2 && drag.pinch) {
-      const [a, b] = [...ptrs.values()];
-      cam.z = clamp(drag.z * Math.hypot(a.x - b.x, a.y - b.y) / drag.pinch, minZoom, MAX_Z);
-      moved = true; apply(); return;
-    }
+    if (e.pointerId !== ptrs.keys().next().value) return; // only the first finger drags
     const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
     if (!moved && Math.hypot(dx, dy) < 7) return;
     if (!moved) { moved = true; try { viewport.setPointerCapture(e.pointerId); } catch { /* fine */ } viewport.classList.add('is-dragging'); }
@@ -185,9 +169,11 @@ export async function renderVillageHome(outlet, ctx) {
   });
   const endDrag = (e) => {
     ptrs.delete(e.pointerId);
-    // A pinch that becomes a one-finger drag carries on from here, not from where the first finger landed.
+    // When the first finger lifts and another stays down, the drag carries on from the one still down.
     if (ptrs.size) { const [p] = [...ptrs.values()]; drag = { x: p.x, y: p.y, cx: cam.x, cy: cam.y, t: performance.now(), vx: 0, vy: 0 }; return; }
     viewport.classList.remove('is-dragging');
+    // A drag swallows the click it ends in (below), and only that one: a click from the keyboard comes later.
+    if (moved) setTimeout(() => { moved = false; }, 0);
     if (moved && drag && !reduced && Math.hypot(drag.vx, drag.vy) > 0.05) {
       let { vx, vy } = drag, last = performance.now();
       const step = (t) => {
@@ -205,15 +191,16 @@ export async function renderVillageHome(outlet, ctx) {
   viewport.addEventListener('click', (e) => { if (moved) { e.stopPropagation(); e.preventDefault(); moved = false; } }, true);
   viewport.addEventListener('wheel', (e) => {
     e.preventDefault(); tween = null;
-    if (e.ctrlKey) { cam.z = clamp(cam.z * (1 - e.deltaY * 0.01), minZoom, MAX_Z); apply(); return; }
-    const s = scale(); cam.x += e.deltaX / s; cam.y += e.deltaY / s; apply();
+    // The painting fills the height on a phone-shaped window, so an ordinary wheel scrolls it sideways.
+    const sideways = MAP.h * s <= vh + 1;
+    cam.x += (e.deltaX + (sideways ? e.deltaY : 0)) / s;
+    if (!sideways) cam.y += e.deltaY / s;
+    apply();
   }, { passive: false });
   viewport.addEventListener('keydown', (e) => {
-    const s = scale(), step = 70 / s;
+    const step = 70 / s;
     const keys = { ArrowLeft: [-step, 0], ArrowRight: [step, 0], ArrowUp: [0, -step], ArrowDown: [0, step] };
     if (keys[e.key] && e.target === viewport) { e.preventDefault(); panTo(cam.x + keys[e.key][0], cam.y + keys[e.key][1], { ms: 220 }); }
-    if ((e.key === '+' || e.key === '=') && e.target === viewport) { e.preventDefault(); cam.z = clamp(cam.z + 0.15, minZoom, MAX_Z); apply(); }
-    if (e.key === '-' && e.target === viewport) { e.preventDefault(); cam.z = clamp(cam.z - 0.15, minZoom, MAX_Z); apply(); }
   });
   // A focused friend or building that sits off-screen is brought into view.
   viewport.addEventListener('focusin', (e) => {
@@ -227,7 +214,7 @@ export async function renderVillageHome(outlet, ctx) {
   /* ---------------- Life ---------------- */
   const life = createLife(root, { pets, atmo, reduced });
   // For the browser gates: put the camera somewhere, find a friend.
-  root.__village = { look: (x, y, z = cam.z) => panTo(x, y, { z: clamp(z, minZoom, MAX_Z), ms: 0 }), positionOf: (id) => life.positionOf(id) };
+  root.__village = { look: (x, y) => panTo(x, y, { ms: 0 }), positionOf: (id) => life.positionOf(id) };
   viewport.addEventListener('click', (e) => {
     if (e.target.closest('button')) return;
     const bounds = map.getBoundingClientRect(), s = scale();
@@ -360,10 +347,10 @@ export async function renderVillageHome(outlet, ctx) {
     const spot = e.target.closest('[data-spot]');
     if (spot) {
       const s = spot.dataset.spot;
-      if (s === 'clock') { play('tap'); location.hash = '#/growth'; return; }
-      if (s === 'cottage') { openCard('cottage', null, spot); return; }
-      if (s === 'fire' || s === 'toffee') { reveal(NODES.f1); openCard('fire', null, spot); return; }
-      if (PET_BY_ID.has(s)) { life.poke(s); reveal(life.positionOf(s)); openCard('pet', s, spot); }
+      // The rose cottage and the clock tower are a friend's second house: straight to their subject.
+      if (!PET_BY_ID.has(s)) { unlock(); play('open'); location.hash = `#/world/place/${HOUSES.find((h) => h.spot === s).place}`; return; }
+      if (s === 'toffee') { reveal(NODES.f1); openCard('fire', null, spot); return; }
+      life.poke(s); reveal(life.positionOf(s)); openCard('pet', s, spot);
       return;
     }
     const opener = e.target.closest('[data-open]');
@@ -441,7 +428,9 @@ export async function renderVillageHome(outlet, ctx) {
         later(checkParties, 2600);
       }, reduced ? 50 : 700);
     } else if (focusSlug && petForPlace(focusSlug)) {
-      const home = NODES[HOMES[petForPlace(focusSlug)].node];
+      // Back from a place: face its own house (the rose cottage and the clock tower are not their friend's home).
+      const spot = HOUSES.find((h) => h.place === focusSlug)?.spot ?? petForPlace(focusSlug);
+      const home = NODES[(HOMES[spot] ?? PLACES[spot]).node];
       panTo(home.x, home.y, { ms: 0 });
     }
   }
@@ -462,7 +451,7 @@ export async function renderVillageHome(outlet, ctx) {
         if (i === 1) panTo(NODES.pc.x, NODES.pc.y, { ms: 1400 });
       }
       if (disposed) return;
-      root.classList.remove('is-intro');
+      root.classList.remove('is-intro', 'is-pointing');
     }, reduced ? 100 : 900);
   } else if (!welcomed) {
     /* ---------------- Every other arrival: they wave; after a day away, someone comes to meet you ---------------- */
@@ -519,13 +508,12 @@ function glow(p, kind, i) {
   return `<i class="cw-glow cw-glow--${kind}" style="left:${p.x}px;top:${p.y}px;--r:${p.r}px;--bd:-${((i * 1.37) % 5.2).toFixed(2)}s"></i>`;
 }
 
+/** Every house, with its subject on a sign that is always up: on a phone there is no hover to reveal it. */
 function spotsHTML() {
-  const spot = (id, h, label, who) => `<button class="cw-spot" data-spot="${id}" style="left:${h.x}px;top:${h.y}px;width:${h.w}px;height:${h.h}px" aria-label="${escapeHTML(label)}${who ? `: ${who}` : ''}"><span class="cw-plate">${escapeHTML(label)}${who ? `<small>${who}</small>` : ''}</span></button>`;
-  return [
-    ...PETS.map((p) => spot(p.id, HOMES[p.id].hit, HOMES[p.id].label, `${p.name}'s home`)),
-    spot('cottage', PLACES.cottage.hit, PLACES.cottage.label, 'sound, settings, your name'),
-    spot('clock', PLACES.clock.hit, PLACES.clock.label, 'how far you have come'),
-  ].join('');
+  return HOUSES.map((h) => {
+    const b = HOMES[h.spot] ?? PLACES[h.spot], at = SIGNS[h.spot], who = PET_BY_ID.get(h.pet).name;
+    return `<button class="cw-spot" data-spot="${h.spot}" style="left:${b.hit.x}px;top:${b.hit.y}px;width:${b.hit.w}px;height:${b.hit.h}px" aria-label="${escapeHTML(`${h.subject}, with ${who}: ${b.label}`)}"><span class="cw-plate" style="left:${at.x - b.hit.x}px;top:${at.y - b.hit.y}px">${petPortrait(h.pet, 24)}<b>${escapeHTML(h.subject)}</b></span></button>`;
+  }).join('');
 }
 
 function petHTML(p, pets) {
@@ -553,7 +541,7 @@ function flameSVG(tier) {
 const starSVG = '<svg class="cw-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.9 6.1 6.7.8-4.9 4.6 1.3 6.6L12 17.5l-6 3.2 1.3-6.6L2.4 9.5l6.7-.8z" fill="#F4C443" stroke="#B88A12" stroke-width="1.2" stroke-linejoin="round"/></svg>';
 const giftSVG = '<svg viewBox="0 0 32 32" aria-hidden="true"><rect x="4" y="13" width="24" height="15" rx="2.5" fill="#D9603A" stroke="#5a2e1a" stroke-width="1.5"/><rect x="2.5" y="9" width="27" height="6" rx="2" fill="#E9A23B" stroke="#5a2e1a" stroke-width="1.5"/><path d="M16 9v19" stroke="#F6EEDB" stroke-width="3"/><path d="M16 9c-3-6-9-5-8-1 1 3 8 1 8 1zm0 0c3-6 9-5 8-1-1 3-8 1-8 1z" fill="#F4C443" stroke="#5a2e1a" stroke-width="1.3" stroke-linejoin="round"/></svg>';
 const playSVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg>';
-const friendsSVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="9" r="3.4" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3 19.5c.6-3.4 3-5.4 6-5.4s5.4 2 6 5.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="16.5" cy="8" r="2.7" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M15.8 13.2c2.6-.2 4.6 1.6 5.2 4.6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>';
-const houseSVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 11 12 4l8.5 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 9.5V20h12V9.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M10 20v-5h4v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M16 6.5V4h2v4.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>';
+const subjectsSVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><rect x="4" y="4" width="6.5" height="6.5" rx="1.6"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.6"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.6"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.6"/></g></svg>';
+const gearSVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 3.5l1.4 2.3 2.6-.7.7 2.6 2.3 1.4-1.2 2.4 1.2 2.4-2.3 1.4-.7 2.6-2.6-.7L12 20.5l-1.4-2.3-2.6.7-.7-2.6-2.3-1.4L6.2 12 5 9.6l2.3-1.4.7-2.6 2.6.7z"/></g></svg>';
 
 export { MOOD_LABEL, starSVG, giftSVG, flameSVG };

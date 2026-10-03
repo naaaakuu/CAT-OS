@@ -9,24 +9,23 @@
     "genre": "public-policy",
     "difficulty": "medium",
     "difficulty_numeric": 4,
-    "stage": "developing",
+    "stage": "intermediate",
     "skills": [
       "argument-tracking",
       "structure-mapping",
       "application",
       "inference"
     ],
-    "word_count": 625,
-    "question_count": 5,
+    "word_count": 499,
+    "question_count": 4,
     "question_types": [
       "application",
       "inference",
-      "role_of_detail",
       "specific_detail",
       "title_selection"
     ],
     "theme": "the demand for evidence that a policy works is three demands, that the effect is real, that it will be reproduced by the machinery available here, and that the result is the one wanted, of which only the first is answered by trials and the third is not an evidential question at all, so the characteristic misuse of the phrase is to close a disagreement about objectives with a demonstration of effects",
-    "estimated_time_min": 9.5,
+    "estimated_time_min": 7.5,
     "source": {
       "publication": "original",
       "url": null,
@@ -37,8 +36,8 @@
     "date_added": "2026-09-13",
     "batch_id": "batch-rc-003",
     "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-04",
-    "reviewer_notes": "Heavily signposted, which is what keeps a long passage at this stage: first, second and third are named and kept in order. The difficulty is entirely in not letting the three merge, and four of the five questions are decided by sorting a statement into the right one of the three. The closing paragraph is a concession, and the role-of-detail question is built on readers who take it for a change of position.",
-    "length_class": "long",
+    "reviewer_notes": "Heavily signposted, which is what keeps a long passage at this stage: first, second and third are named and kept in order. The difficulty is entirely in not letting the three merge, and four of the five questions are decided by sorting a statement into the right one of the three. The closing paragraph is a concession, and the role-of-detail question is built on readers who take it for a change of position. 2026-10-03 CAT-size pass: 625→499 words, 5→5 paragraphs, 5→4 questions. Each of the five paragraphs is one of the numbered parts or the fence round the complaint, so tightened all five instead of dropping one; dropped q5 (role of detail), which shared its paragraph with the inference question.",
+    "length_class": "medium",
     "structure": "question_answer",
     "viewpoints": 2,
     "tone": "patient, discriminating",
@@ -75,38 +74,37 @@
     ],
     "quality": {
       "status": "reviewed",
-      "adversarial_review": "Q1's live rival is the option that a bigger and more precise trial would settle the case, which is true about measurement and beside the point about the exchange: the passage says a study reports how many of each and nothing whatever about how many of one are worth one of the other, because that is not a fact about the rule. Q2's rival is the option that the second question is what trials are built to answer, which is a true sentence about the first question docked at the wrong number. Q3's rival is the option that the phrase was introduced in order to conceal disagreements about objectives, which converts a described abuse into an original purpose; the fifth paragraph credits the demand with displacing ministerial confidence and calls it an enormous improvement. Q4's rival is the title about rescuing policy from intuition, which names the concession rather than the argument. Q5's rival is the option that the recollection is there as the history of a phrase, which mistakes a defensive move for a narrative one.",
+      "adversarial_review": "Q1's live rival is the option that a bigger and more precise trial would settle the case, which is true about measurement and beside the point about the exchange: the passage says a study reports how many of each and nothing whatever about how many of one are worth one of the other, because that is not a fact about the rule. Q2's rival is the option that the second question is what trials are built to answer, which is a true sentence about the first question docked at the wrong number. Q3's rival is the option that the phrase was introduced in order to conceal disagreements about objectives, which converts a described abuse into an original purpose; the fifth paragraph credits the demand with displacing ministerial confidence and calls it an enormous improvement. Q4's rival is the title about rescuing policy from intuition, which names the concession rather than the argument. Q5's rival is the option that the recollection is there as the history of a phrase, which mistakes a defensive move for a narrative one. (2026-10-03, CAT-size pass: q5 was dropped, so any note above about it no longer applies.)",
       "blind_solve": null
     },
     "vocab_extracted": [
       "evidential",
-      "resemblance",
-      "displaced"
+      "resemblance"
     ]
   },
   "passage": {
     "title": "The Warrant to Act",
-    "reading_time_min": 3.4,
+    "reading_time_min": 2.7,
     "paragraphs": [
       {
         "id": "rc-0075-p1",
-        "text": "What is a person asking for when he asks whether there is evidence that a policy works? The question sounds like one demand and it is three, and the three are answered by different means and by different people. The first is whether the effect is real: whether the thing, somewhere, under some conditions, produced the result attributed to it. The second is whether it will be produced here, by the staff, the buildings and the habits that this administration actually has. The third is whether the result, once obtained, is the one we wanted, weighed against the other results we might have bought with the same money and the same attention."
+        "text": "What is a person asking for when he asks whether there is evidence that a policy works? The question sounds like one demand and it is three. The first is whether the effect is real: whether the thing, somewhere, under some conditions, produced the result attributed to it. The second is whether it will be produced here, by the staff, the buildings and the habits that this administration actually has. The third is whether the result is the one we wanted, weighed against the other results the same money and attention might have bought."
       },
       {
         "id": "rc-0075-p2",
-        "text": "Only the first is an evidential question in the narrow sense, and it is the one that trials were designed to settle. They settle it well. A comparison between groups sorted by something unrelated to the outcome will tell you, within a stated margin, whether the difference between them can be attributed to the thing you did, and a generation of careful work has made such comparisons harder to fake and easier to read. When the phrase evidence-based is used precisely, this is what it names, and there is nothing wrong with it."
+        "text": "Only the first is an evidential question in the narrow sense, and it is the one that trials were designed to settle. They settle it well. A comparison between groups sorted by something unrelated to the outcome will tell you whether the difference between them was caused by what you did, and a generation of careful work has made such comparisons harder to fake. When the phrase evidence-based is used precisely, this is what it names, and there is nothing wrong with it."
       },
       {
         "id": "rc-0075-p3",
-        "text": "The second question is administrative, and no trial answers it, because a trial runs with the attention it was given and a programme runs with the attention it can get. This is not a counsel of despair. It is a question about resemblance, and it can be argued about with evidence of a different kind: what this department has managed to sustain before, how many of its instructions survived contact with the twentieth office, how long its last scheme kept the staff it started with. Such records are unglamorous and they are not nothing, and a person who asks for them is asking for evidence quite as properly as the person who asks for a trial."
+        "text": "The second question is administrative, and no trial answers it, because a trial runs with the attention it was given and a programme runs with the attention it can get. Yet it is a question about resemblance, and it can be argued about with evidence of a different kind: what this department has sustained before, how long its last scheme kept its staff. Whoever asks for such records is asking for evidence quite as properly as whoever asks for a trial."
       },
       {
         "id": "rc-0075-p4",
-        "text": "The third question is not an evidential question at all, and no quantity of trials will convert it into one. Consider a rule that lowers the number of dangerous people released and raises the number of harmless people detained. A good study will tell you how many of each, and it will tell you nothing whatever about how many of the second are worth one of the first, because that is not a fact about the rule. It is a judgement about what we owe to two sets of people whose interests are opposed, and the two sets do not agree about it. Here the phrase does its damage. It promises all three answers and delivers one, and its characteristic abuse is not the falsifying of a figure; it is the production of an answer to the first question at the moment when the disagreement is plainly of the third kind, so that a dispute about what we want is closed by a demonstration of what works."
+        "text": "The third question is not an evidential question at all, and no number of trials will make it one. Consider a rule that lowers the number of dangerous people released and raises the number of harmless people detained. A good study will tell you how many of each, and nothing whatever about how many of the second are worth one of the first, because that is not a fact about the rule. It is a judgement about what we owe to two sets of people whose interests are opposed. Here the phrase does its damage. It promises all three answers and delivers one, and its characteristic abuse is not falsifying a figure but answering the first question when the disagreement is plainly of the third kind, so that a dispute about what we want is closed by a demonstration of what works."
       },
       {
         "id": "rc-0075-p5",
-        "text": "None of this is an argument against asking for evidence, and it is worth recalling what the demand displaced. Before it, a scheme was adopted because a minister was confident, because the department had always done it, or because somebody told a story that hung together well. Measured against those, an answer to the first question is an enormous improvement, and nobody who has watched a plausible story defeat a set of figures will want to give it up. The complaint is narrower than it looks. A phrase that names one of three questions should not be allowed to stand for all three, and the sign that it is being misused is easy to describe: it appears at the moment when a disagreement about objectives appears, and not at the moment when a disagreement about effects does."
+        "text": "None of this is an argument against asking for evidence. Before the demand, a scheme was adopted because a minister was confident, because the department had always done it, or because somebody told a story that hung together well, and an answer to the first question is an enormous improvement on any of them. The complaint is narrower: a phrase that names one of three questions should not be allowed to stand for all three. The sign of misuse is easy to describe: it appears when a disagreement about objectives appears, and not when a disagreement about effects does."
       }
     ]
   },
@@ -337,63 +335,6 @@
           }
         ]
       }
-    },
-    {
-      "id": "rc-0075-q5",
-      "type": "role_of_detail",
-      "skill": "paragraph_function",
-      "patterns": [
-        "comp.function_over_words",
-        "arg.concession",
-        "arg.qualification"
-      ],
-      "target_mistake": "reading the closing recollection as history or as a retreat, rather than as the fence the author puts round his own complaint",
-      "prediction_target": "The learner should be able to say: this material is here to stop a narrow objection being taken for a wide one, by naming what the demand for evidence was better than.",
-      "difficulty": {
-        "inference_depth": 3,
-        "distractor_similarity": 4,
-        "reasoning_depth": 4
-      },
-      "secondary_skills": [
-        "logical_structure",
-        "author_purpose"
-      ],
-      "stem": "The author recalls the confident minister, the departmental habit and the story that hung together well chiefly in order to",
-      "options": {
-        "A": "explain why ministers were once able to act on nothing more than their own confidence",
-        "B": "show that the first of the three questions matters least of the three in practice",
-        "C": "give the history of a phrase whose meaning has shifted a good deal since it was coined",
-        "D": "stop his complaint being read as a case against evidence, by naming what the demand improved on"
-      },
-      "correct": "D",
-      "estimated_time_sec": 80,
-      "explanation": {
-        "expert_notice": "The paragraph announces its own job in its first clause: none of this is an argument against asking for evidence. The three items that follow are what the demand displaced, and they are chosen to be worse than it, which is why the paragraph closes by calling the complaint narrower than it looks.",
-        "correct_reasoning": "The correct option names that function. Having spent a paragraph showing that the phrase closes arguments it cannot settle, the author needs to prevent the reader concluding that evidence is the problem, and the cheapest way to do it is to put the alternative on the page. The items are a fence round the complaint, not a story about where the phrase came from.",
-        "passage_anchor": "rc-0075-p5",
-        "question_type_note": "A role-of-detail question asks what a detail does for the claim beside it. Detail introduced immediately after a denial is almost always evidence for the denial.",
-        "reading_habit": "When an author says what he is not arguing, read the next two sentences as the proof of it. Material in that position is defensive, and describing it as anything else will cost you the question.",
-        "distractors": [
-          {
-            "option": "A",
-            "trap_type": "out_of_scope",
-            "why_wrong": "No explanation of how ministers came to have such latitude is offered or needed. The three items appear as a set of former practices being compared unfavourably with an answer to the first question.",
-            "seductive_element": "The items are historical in flavour, and a reader who registers their content rather than their position will look for a historical purpose."
-          },
-          {
-            "option": "B",
-            "trap_type": "opposite_direction",
-            "why_wrong": "The paragraph does the reverse, calling an answer to the first question an enormous improvement on all three of these and adding that nobody who has watched a plausible story defeat a set of figures will want to give it up.",
-            "seductive_element": "The fourth paragraph has just said the first question is the wrong one to answer in a dispute of the third kind, which a reader may generalise into a verdict on its importance."
-          },
-          {
-            "option": "C",
-            "trap_type": "wrong_structural_role",
-            "why_wrong": "Nothing is traced. The passage gives no account of when the phrase appeared or how its sense changed; it names what preceded the demand in order to measure the demand against it.",
-            "seductive_element": "Naming what something displaced is the usual opening of a history, and the sentence has the shape of one."
-          }
-        ]
-      }
     }
   ],
   "vocabulary": [
@@ -408,20 +349,14 @@
       "passage_use": "It is a question about resemblance",
       "meaning_here": "how far the new setting is like the one the result came from",
       "difficulty": "medium"
-    },
-    {
-      "word": "displaced",
-      "passage_use": "it is worth recalling what the demand displaced",
-      "meaning_here": "pushed out and took the place of",
-      "difficulty": "medium"
     }
   ],
   "mentor": {
     "challenge": "One question is split into three in the first paragraph, and the rest of the passage takes them in order. Keep the numbers straight; almost every question in the set is decided by which of the three a sentence belongs to.",
     "one_sentence_summary": "Asking whether there is evidence that a policy works is really asking three different things, whether the effect is real, whether this administration will reproduce it, and whether the result is the one we wanted, of which trials answer only the first and the third is not an evidential question at all, so the phrase does its damage when it is produced to close a disagreement about objectives with a demonstration of effects.",
     "main_idea": "The demand for evidence bundles three questions. Trials answer the first, about whether the effect is real. The second, about whether this administration can reproduce it, is answered by records of what the department has sustained before. The third, about whether the result is worth its cost to others, is not answerable by evidence at all, because it asks what is owed to people whose interests conflict. The phrase promises all three and delivers one, and its misuse is recognisable: it appears when the disagreement is about objectives.",
-    "simple_explanation": "Somebody says: show me the evidence that this policy works. That sounds like one request. It is really three.\n\nThe first is: did this thing actually produce the result somewhere? The second is: will it produce that result here, with the people and buildings and habits this particular department has? The third is: is that result the one we actually want, once you count what it costs other people?\n\nOnly the first is a question that trials answer, and they answer it well. Compare two groups sorted in a way unrelated to the outcome, and you can say, within a stated margin, whether your intervention made the difference. When people use the phrase evidence-based carefully, this is what they mean, and it is a good thing.\n\nThe second question is about administration, not about the intervention. A trial runs with the attention it was given; a national programme runs with whatever attention it can get. That is not hopeless, though. You can argue about it with a different sort of evidence: what this department has kept going before, how many of its instructions survived being passed down twenty offices, whether its last scheme held on to its staff. Boring records, but real evidence.\n\nThe third question is different in kind. Suppose a rule releases fewer dangerous people and also locks up more harmless ones. A good study tells you how many of each. It cannot tell you how many wrongly detained people are worth one dangerous person kept in, because that is not a fact about the rule at all. It is a judgement about what we owe two groups whose interests clash, and those groups do not agree.\n\nAnd this is where the phrase does harm. It promises answers to all three questions and delivers one. The typical abuse is not faking numbers. It is producing an answer to the first question at the exact moment when the argument is obviously about the third, so that a disagreement about what we want gets settled by a demonstration of what works.\n\nThe author is careful to add that none of this means we should stop asking for evidence. Before the demand existed, schemes were adopted because a minister felt sure, or because it was always done that way, or because someone told a convincing story. Compared with those, an answer to the first question is an enormous improvement. The complaint is narrow: one phrase should not be allowed to stand for three questions, and you can spot the misuse easily, because it turns up when people disagree about goals rather than when they disagree about effects.",
-    "why_difficult": "The passage is long and the difficulty is not in any one sentence but in keeping three numbered things apart across five paragraphs. Every wrong option in the set is a true statement about one of the three attached to another, and under time those migrations are very hard to catch, especially since the paragraph describing trials happens to be the second paragraph while the question it describes is the first. The other trap is the closing paragraph, which concedes generously and reads like a change of position, so that readers take the concession for the thesis or take the whole passage for an attack on evidence, which it says twice that it is not.",
+    "simple_explanation": "Somebody says: show me the evidence that this policy works. That sounds like one request. It is really three.\n\nThe first is: did this thing actually produce the result somewhere? The second is: will it produce that result here, with the people and buildings and habits this particular department has? The third is: is that result the one we actually want, once you weigh it against what the same money and attention could have bought instead?\n\nOnly the first is a question that trials answer, and they answer it well. Compare two groups sorted in a way unrelated to the outcome, and you can say whether your intervention made the difference. When people use the phrase evidence-based carefully, this is what they mean, and it is a good thing.\n\nThe second question is about administration, not about the intervention. A trial runs with the attention it was given; a national programme runs with whatever attention it can get. That is not hopeless, though. You can argue about it with a different sort of evidence: what this department has kept going before, whether its last scheme held on to its staff. Boring records, but real evidence.\n\nThe third question is different in kind. Suppose a rule releases fewer dangerous people and also locks up more harmless ones. A good study tells you how many of each. It cannot tell you how many wrongly detained people are worth one dangerous person kept in, because that is not a fact about the rule at all. It is a judgement about what we owe two groups whose interests clash.\n\nAnd this is where the phrase does harm. It promises answers to all three questions and delivers one. The typical abuse is not faking numbers. It is producing an answer to the first question at the exact moment when the argument is obviously about the third, so that a disagreement about what we want gets settled by a demonstration of what works.\n\nThe author is careful to add that none of this means we should stop asking for evidence. Before the demand existed, schemes were adopted because a minister felt sure, or because it was always done that way, or because someone told a convincing story. Compared with those, an answer to the first question is an enormous improvement. The complaint is narrow: one phrase should not be allowed to stand for three questions, and you can spot the misuse easily, because it turns up when people disagree about goals rather than when they disagree about effects.",
+    "why_difficult": "The difficulty is not in any one sentence but in keeping three numbered things apart across five paragraphs. Most wrong options in the set are true statements about one of the three attached to another, and under time those migrations are very hard to catch, especially since the paragraph describing trials happens to be the second paragraph while the question it describes is the first. The other trap is the closing paragraph, which concedes generously and reads like a change of position, so that readers take the concession for the thesis or take the whole passage for an attack on evidence, which it says twice that it is not.",
     "author_intention": "To break a single slogan into the three demands it conceals, so that a reader can see which of them any particular appeal to evidence has actually answered, and then to stop that analysis being used as a licence to ignore evidence altogether.",
     "paragraph_journey": [
       {
@@ -457,10 +392,22 @@
       "'None of this is an argument against asking for evidence' (opening of paragraph 5): the author fences his own complaint before anyone else can widen it."
     ],
     "misunderstanding": "Two readings go wrong. The first collapses the three questions into a general suspicion of trials, so the passage becomes an attack on evidence in policy, which its second paragraph and its last both refuse. The second keeps the three questions but loses their order, which is easy because the paragraph about trials is the second paragraph while the question it answers is the first; from there a reader will confidently attach the wrong description to the wrong number. The signposting looks generous and is the very thing that makes the migration invisible.",
-    "traps_summary": "This set moves true statements between the three numbered questions, offers more measurement where the dispute is not about measurement, converts a described abuse into an original purpose, takes the concession as the thesis, and reads a defensive paragraph as a piece of history. Numbering the three questions in your own words before starting answers most of them.",
+    "traps_summary": "This set moves true statements between the three numbered questions, offers more measurement where the dispute is not about measurement, converts a described abuse into an original purpose, and takes the concession as the thesis. Numbering the three questions in your own words before starting answers most of them.",
     "reading_lesson": "When an author numbers his parts, write the list down in a few words each and keep it beside you, because in passages of this shape the distractors are almost never false statements: they are true statements filed under the wrong number. Then watch for the paragraph that begins by saying what the author is not arguing, and treat everything in it as a fence rather than as a retreat, since the questions on such passages are built on readers who take a concession for a conclusion.",
     "real_world": "The same three questions sit under any appeal to what the research shows: a school method, a management technique, a drug, a piece of software procurement. Asking which of the three a study has answered is usually enough to change the conversation.",
     "takeaway": "A trial can tell you what a policy does; it cannot tell you whether what it does is what you wanted.",
-    "reflection_question": "When you last settled an argument by producing evidence, was the disagreement really about what would happen, or about what ought to?"
+    "reflection_question": "When you last settled an argument by producing evidence, was the disagreement really about what would happen, or about what ought to?",
+    "eli10": {
+      "big_idea": "Asking for evidence that a policy works is really three questions, and trials answer only one; the third is about what we want.",
+      "story": "Someone says, 'Show me the evidence that this plan works.' It sounds like one question. The writer says it is three. First: did it really work somewhere? Second: will it work here, with our people and habits? Third: is the result what we want? Fair tests (trials comparing two groups) answer the first well. The second needs a different kind of proof, like the department's past record. The third is not about facts at all. Imagine a rule that keeps more dangerous people locked up but also locks up more harmless people. A study can count both groups. It cannot say how many harmless people are worth one dangerous one. That is about what we owe people. The trouble starts when someone answers the first question to shut down an argument about the third. Still, the writer is not against evidence. It beats a minister's hunch or a good story.",
+      "paragraphs": [
+        "Splits one question into three: did it work, will it work here, and is it what we want?",
+        "Answers the first: fair trials settle whether an effect is real, and they do it well.",
+        "Answers the second: trials cannot, but a department's past record is real evidence too.",
+        "Says the third is not about facts at all, and shows how the phrase gets misused there.",
+        "Heads off a misreading: evidence beats hunches, but one phrase must not stand for three questions."
+      ],
+      "author_view": "The writer is patient and precise, gets sharp about the misuse, and stays fair to evidence itself."
+    }
   }
 }

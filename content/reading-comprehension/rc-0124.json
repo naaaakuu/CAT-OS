@@ -1,0 +1,332 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0124",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 86,
+    "genre": "architecture",
+    "difficulty": "easy",
+    "difficulty_numeric": 2,
+    "stage": "foundation",
+    "skills": [
+      "main-idea-extraction",
+      "inference",
+      "structure-mapping",
+      "causal-reasoning"
+    ],
+    "word_count": 307,
+    "question_count": 3,
+    "question_types": [
+      "primary_purpose",
+      "inference",
+      "role_of_detail"
+    ],
+    "theme": "a stepwell stayed cool for a cellar's reasons, because a few metres down the earth stays near the year's average temperature and cool air settles at the bottom, and its depth and shade kept sun and wind off the water; unlike a cellar it stored almost nothing, reaching instead the water held in the ground, which falls through every dry month, so the steps let people follow that water down, and a stepwell runs dry however sound its stone once pumps lower the water beyond its reach",
+    "estimated_time_min": 5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-03",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted."
+    },
+    "date_added": "2026-10-03",
+    "batch_id": "batch-rc-005",
+    "prompt_version": "content engine v1 + CAT-size brief 2026-10",
+    "reviewer_notes": "An impersonal foundation item built on an analogy that is pressed through two tests and broken at one joint, with the break as the payload: a stepwell is cool for a cellar's reasons and protects its water as a cellar would, but it stores almost nothing, so its stairs exist to follow a falling water table and it fails when pumps lower that table. It answers AUTHORING §4a's call for an exposition whose reward is the thing described, with no argument about method attached. The facts are kept safe and general: Rani ki Vav (Patan, eleventh century, seven storeys), a monsoon of about three months, cool ground at depth, cool air settling, evaporation from open water, the seasonal fall of groundwater, and pumping. The near-tie is the purpose option that takes the cellar comparison whole.",
+    "length_class": "short",
+    "structure": "analogy_driven",
+    "viewpoints": 1,
+    "tone": "admiring, explanatory, exact",
+    "difficulty_vector": {
+      "lexical": 2,
+      "syntactic": 2,
+      "abstraction": 2,
+      "inference_depth": 2,
+      "distractor_similarity": 2,
+      "reasoning_depth": 2,
+      "structural_ambiguity": 1,
+      "time_pressure": 2
+    },
+    "reasoning_patterns": [
+      "struct.analogy",
+      "struct.contrast",
+      "struct.cause_effect",
+      "struct.pivot",
+      "comp.purpose",
+      "comp.function_over_words",
+      "arg.analogy",
+      "arg.example",
+      "inf.strongly_supported",
+      "lang.temporal_qualifier",
+      "lang.contrast_marker",
+      "elim.near_tie"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1: the live rival is the option saying stepwells kept water as cellars keep food, cool and out of the sun. It is faithful to the second paragraph and is exactly the joint the third paragraph breaks: 'A cellar keeps whatever is put into it. A stepwell holds almost nothing of its own.' The restoration option is settled by the passage recommending nothing; the dry stepwells illustrate the break. Q2: a strong candidate might argue for 'just after the monsoon has ended', reasoning that shortage begins when the rains stop; 'which the monsoon refills and every dry month lowers' and 'until the next rains' put the low point at the end of the dry season instead. Q3: the finalist is the option making the pond an example of water kept cool as in a cellar, since it sits in the cellar paragraph; 'lies open to sun and wind all day' and the contrast 'loses far less' show it is the counter-case.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "storeys",
+      "galleries",
+      "landings"
+    ]
+  },
+  "passage": {
+    "title": "Down to the Water",
+    "reading_time_min": 1.7,
+    "paragraphs": [
+      {
+        "id": "rc-0124-p1",
+        "text": "At Rani ki Vav, an eleventh-century stepwell in Patan, Gujarat, a visitor walks down seven storeys of stairs and carved galleries to reach the water. Hundreds of stepwells were built across Gujarat and Rajasthan. The rain there falls in about three months of the year, and through the long dry season that follows, sun and dry wind draw water out of every open pond. Stepwells kept water within reach through those dry months. To see how, think of a cellar."
+      },
+      {
+        "id": "rc-0124-p2",
+        "text": "A cellar is cool because it is deep. A few metres down, the earth stays near the year's average temperature, far cooler than a summer afternoon. A stepwell uses the same fact. Its lowest landings are wrapped in cool earth and stone, and the sun reaches them only briefly around midday. Cool air is heavier than warm air, so it settles there instead of drifting out, and the bottom can be several degrees cooler than the street. The same depth protects the water. A village pond lies open to sun and wind all day and loses much of its water to the air. Water at the bottom of a deep, narrow, shaded shaft loses far less."
+      },
+      {
+        "id": "rc-0124-p3",
+        "text": "The comparison breaks at one point, and the break explains the steps. A cellar keeps whatever is put into it. A stepwell holds almost nothing of its own. It is dug down to the water held in the ground, which the monsoon refills and every dry month lowers. As that water sinks, so does the water in the well, and the stairs let people follow it down, landing by landing, until the next rains. The same break explains why many stepwells now stand dry even where their stone is sound. Where pumps have pulled the ground's water far below the lowest step, there is nothing left for the stairs to reach."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0124-q1",
+      "type": "primary_purpose",
+      "skill": "author_purpose",
+      "patterns": [
+        "comp.purpose",
+        "struct.analogy",
+        "elim.near_tie"
+      ],
+      "target_mistake": "taking the cellar comparison whole and missing the paragraph in which the author says where it breaks",
+      "prediction_target": "The learner should be able to say beforehand: the author explains how stepwells worked by comparing them with a cellar, and then by showing where the comparison fails.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "logical_structure"
+      ],
+      "stem": "The primary purpose of the passage is to",
+      "options": {
+        "A": "argue that India's dry stepwells should be repaired and used again",
+        "B": "explain how stepwells worked, using a cellar comparison and where it breaks",
+        "C": "show that stepwells kept water as cellars keep food, cool and out of the sun",
+        "D": "describe the history and the carved galleries of Rani ki Vav at Patan"
+      },
+      "correct": "B",
+      "estimated_time_sec": 70,
+      "explanation": {
+        "expert_notice": "The passage announces its method at the end of the first paragraph: 'To see how, think of a cellar.' The second paragraph shows where a stepwell is like a cellar, cool because it is deep. The third begins 'The comparison breaks at one point, and the break explains the steps.' A statement of purpose has to include both the comparison and the break.",
+        "correct_reasoning": "The author sets out to explain how stepwells kept cool and kept water within reach. He does it with a cellar, which accounts for the coolness and the protection from sun and wind, and then with the point where the cellar fails: a stepwell stores almost nothing and reaches down to the water held in the ground. The correct option names both the comparison and its break.",
+        "passage_anchor": "rc-0124-p1, rc-0124-p3",
+        "question_type_note": "A primary-purpose question asks what the author is doing. Name the verb (explain, argue, describe) and its object, then check that the option keeps the passage's turn as well as its opening.",
+        "reading_habit": "When an author says 'think of' something, expect a comparison, and watch for the sentence where the comparison stops working. In a passage built on a comparison, that sentence usually carries the main point.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "prescriptive_leap",
+            "why_wrong": "The passage recommends nothing. It mentions dry stepwells only to show what the cellar comparison misses: where pumps have pulled the ground's water down, there is nothing left for the stairs to reach.",
+            "seductive_element": "The closing sentences about dry stepwells sound like the start of a call to restore them."
+          },
+          {
+            "option": "C",
+            "trap_type": "half_right",
+            "why_wrong": "The first half fits the second paragraph: a stepwell is cool for a cellar's reason. The second half is exactly where the passage says the comparison breaks: 'A cellar keeps whatever is put into it. A stepwell holds almost nothing of its own.'",
+            "seductive_element": "It takes the passage's own comparison at face value, which is what the second paragraph seems to invite."
+          },
+          {
+            "option": "D",
+            "trap_type": "example_as_thesis",
+            "why_wrong": "Rani ki Vav is the opening example, used to show what walking down a stepwell is like. The passage never returns to its history or its carvings; its subject is how stepwells in general worked.",
+            "seductive_element": "It is the one named place in the passage, and the first sentence is about it."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0124-q2",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.strongly_supported",
+        "lang.temporal_qualifier",
+        "struct.cause_effect"
+      ],
+      "target_mistake": "placing the lowest water at the end of the rains instead of the end of the dry season, or confusing a daily change with a seasonal one",
+      "prediction_target": "The learner should be able to say beforehand: the monsoon refills the ground's water and every dry month lowers it, so the water is lowest at the end of the dry season, just before the rains return.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "specific_detail"
+      ],
+      "stem": "It can be inferred from the passage that the water in a stepwell would usually stand furthest below the street",
+      "options": {
+        "A": "just after the monsoon has ended",
+        "B": "in the middle of the monsoon months",
+        "C": "just before the monsoon returns",
+        "D": "around midday on a summer day"
+      },
+      "correct": "C",
+      "estimated_time_sec": 75,
+      "explanation": {
+        "expert_notice": "Two sentences settle this. The first paragraph says the rain falls in about three months, followed by a long dry season. The third says the ground's water is something 'the monsoon refills and every dry month lowers', and that people follow it down 'until the next rains'.",
+        "correct_reasoning": "If every dry month lowers the water and only the monsoon refills it, the water keeps sinking through the whole dry season and is lowest when that season ends, just before the next monsoon. The phrase 'until the next rains' marks the same end point.",
+        "passage_anchor": "rc-0124-p1, rc-0124-p3",
+        "question_type_note": "This inference asks you to follow a process to its end. Find the sentence that says what makes a level rise and what makes it fall, then ask when the falling stops.",
+        "reading_habit": "When a passage describes something rising and falling with the seasons, picture the year: what fills it, what drains it, and when each one stops.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "temporal_distortion",
+            "why_wrong": "When the monsoon has just ended, the ground has just been refilled, so the water is near its highest. It then falls through every dry month, so the low point comes at the end of the dry season, not at its start.",
+            "seductive_element": "The end of the rains feels like the start of shortage, so it is easy to put the lowest water there."
+          },
+          {
+            "option": "B",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The monsoon is what refills the ground's water, so during the rains the water is rising, not at its lowest.",
+            "seductive_element": "It names the monsoon, the season the passage treats as decisive."
+          },
+          {
+            "option": "D",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "Midday appears in the passage only as the time when the sun briefly reaches the lowest landings. The level of the water changes with the seasons, not with the hour of the day.",
+            "seductive_element": "It borrows the passage's own detail about the midday sun, and summer sounds like the driest time."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0124-q3",
+      "type": "role_of_detail",
+      "skill": "paragraph_function",
+      "patterns": [
+        "comp.function_over_words",
+        "struct.contrast",
+        "arg.example"
+      ],
+      "target_mistake": "taking the pond for one more example of water kept cool, when it is the case the stepwell is contrasted with",
+      "prediction_target": "The learner should be able to say beforehand: the pond shows, by contrast, how much less water the deep, shaded stepwell loses to the air.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 2,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "logical_structure"
+      ],
+      "stem": "The author mentions a village pond in order to",
+      "options": {
+        "A": "show by contrast why water lasts longer at the bottom of a stepwell",
+        "B": "suggest that villages relied on ponds more than on stepwells",
+        "C": "give an example of water that stays cool as it would in a cellar",
+        "D": "help explain why many stepwells now stand dry even where their stone is sound"
+      },
+      "correct": "A",
+      "estimated_time_sec": 60,
+      "explanation": {
+        "expert_notice": "The pond appears in the second paragraph straight after 'The same depth protects the water.' It is set beside 'Water at the bottom of a deep, narrow, shaded shaft loses far less.' The two sentences are built as a contrast.",
+        "correct_reasoning": "The pond lies open to sun and wind all day and loses much of its water to the air; the water at the bottom of a stepwell does not. The pond is there to make the stepwell's advantage visible by showing the alternative, and the correct option names that job.",
+        "passage_anchor": "rc-0124-p2",
+        "question_type_note": "A 'why does the author mention' question asks about the job a detail does for the claim beside it. Name the claim first, here 'The same depth protects the water', and the detail's job follows.",
+        "reading_habit": "When a detail sits next to a claim, ask whether it supports the claim by example or by contrast. Words such as 'far less' in the next sentence usually signal a contrast.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "comparison_distortion",
+            "why_wrong": "The passage never compares how much villages relied on ponds and on stepwells. It compares how much water each loses to the air.",
+            "seductive_element": "A pond and a stepwell both belong to a village, so a comparison of their use seems natural."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The pond is the opposite of the cellar: it 'lies open to sun and wind all day' and loses much of its water. It is the case the stepwell is contrasted with, not an example of what the stepwell does.",
+            "seductive_element": "It sits in the paragraph about cellars, where the other details are examples of keeping cool."
+          },
+          {
+            "option": "D",
+            "trap_type": "wrong_structural_role",
+            "why_wrong": "Dry stepwells are explained in the third paragraph by pumps lowering the ground's water. The pond belongs to the second paragraph's point about water lost to the air and plays no part in that explanation.",
+            "seductive_element": "Both the pond and the dry stepwells are about water being lost, so the two can seem connected."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "storeys",
+      "passage_use": "a visitor walks down seven storeys of stairs and carved galleries",
+      "meaning_here": "levels of a building, each one floor high; here the levels go down into the ground",
+      "difficulty": "easy"
+    },
+    {
+      "word": "galleries",
+      "passage_use": "seven storeys of stairs and carved galleries",
+      "meaning_here": "long covered walkways, open on one side and lined with pillars",
+      "difficulty": "medium"
+    },
+    {
+      "word": "landings",
+      "passage_use": "Its lowest landings are wrapped in cool earth and stone",
+      "meaning_here": "flat floors between one flight of stairs and the next",
+      "difficulty": "easy"
+    }
+  ],
+  "mentor": {
+    "challenge": "A passage built on a comparison. Notice where the comparison works, and the exact sentence where the author says it stops working.",
+    "one_sentence_summary": "Stepwells such as Rani ki Vav stayed cool for a cellar's reasons, because deep earth stays near the year's average temperature, cool air settles at the bottom and the depth keeps sun and wind off the water, but unlike a cellar a stepwell stored almost nothing: it reached down to the water held in the ground, which falls through the dry months, so the stairs let people follow it, and where pumps have lowered that water, stepwells stand dry.",
+    "main_idea": "A stepwell is like a cellar in being cool, because it is deep, and in protecting its water from sun and wind. It is unlike a cellar in that it stores almost nothing: it is a way down to the water in the ground. The steps exist because that water sinks through the dry months, and stepwells go dry when pumps lower it too far.",
+    "simple_explanation": "In Gujarat and Rajasthan, the year's rain falls in about three months. For the rest of the year, sun and dry wind take water out of any open pond. Stepwells, such as Rani ki Vav at Patan, were one answer: you walk down several storeys of stairs to reach the water. The writer explains them by comparing them with a cellar.\n\nA cellar is cool because it is deep. A few metres under the ground, the earth stays at about the year's average temperature, which is far cooler than a summer afternoon. A stepwell works the same way. Its lowest steps are surrounded by cool earth and stone, the sun reaches them only around midday, and cool air, being heavier, sinks and stays at the bottom. The depth also protects the water: an open pond loses a lot of water to the air, while water at the bottom of a deep, narrow, shady shaft loses much less.\n\nThen the writer shows where the comparison fails. A cellar stores whatever you put in it, but a stepwell stores almost nothing. It is dug down to the water held in the ground, which the monsoon fills up and which sinks lower every dry month. As it sinks, the water in the well sinks too, and the stairs let people follow it down until the rains return. That is also why many stepwells are dry today: pumps have pulled the ground's water below the lowest step.",
+    "why_difficult": "The passage is easy to read, and the comparison with a cellar is so neat that a reader may take it whole. The key sentence, 'The comparison breaks at one point', is short and easy to skim, and the questions test whether you noticed that a stepwell does not store water the way a cellar stores food. The inference about when the water is lowest also needs two sentences from different paragraphs.",
+    "author_intention": "To explain an old piece of engineering through one familiar comparison, and to make the point where the comparison fails the most informative part of the explanation.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0124-p1",
+        "role": "Sets the problem",
+        "note": "Rain comes in about three months, and the long dry season takes water from open ponds. Stepwells kept water within reach, and a cellar will explain how."
+      },
+      {
+        "paragraph_id": "rc-0124-p2",
+        "role": "Shows the likeness",
+        "note": "Like a cellar, a stepwell is cool because it is deep, and its depth and shade stop the water drying up the way a pond does."
+      },
+      {
+        "paragraph_id": "rc-0124-p3",
+        "role": "Finds the break",
+        "note": "A stepwell stores almost nothing; it reaches the water in the ground, which sinks every dry month. The stairs follow it, and pumps that lower it leave stepwells dry."
+      }
+    ],
+    "tone_progression": "Descriptive and quietly admiring at the start, plainly explanatory through the comparison, and exact at the close, where the author marks the comparison's limit and ends on a sober fact about stepwells today.",
+    "key_transitions": [
+      "'To see how, think of a cellar.' (end of paragraph 1): the description becomes an explanation by comparison.",
+      "'The comparison breaks at one point, and the break explains the steps.' (opening of paragraph 3): the author turns from the likeness to the difference."
+    ],
+    "misunderstanding": "A hurried reader concludes that a stepwell is simply a cool underground store of water, a cellar for water. The passage says the opposite about storage: a stepwell holds almost nothing of its own and depends on the water held in the ground, which is why its level falls and why it can run dry.",
+    "traps_summary": "The options take the comparison whole and ignore the break, turn the closing remark about dry stepwells into a call to restore them, shrink the passage to its opening example, and, in the inference question, put the lowest water at the wrong point in the year.",
+    "reading_lesson": "In a passage built on a comparison, find the sentence where the author says the comparison fails. That sentence usually carries the main point, and questions on purpose and inference are built around it.",
+    "real_world": "The same is true of a village well or a borewell today: it does not hold water, it reaches it. When the water in the ground falls, the well fails however well it was built.",
+    "takeaway": "A stepwell was not a store of water but a staircase down to the water the ground was storing.",
+    "reflection_question": "What else around you looks like a store of something but is really a way of reaching something stored elsewhere?",
+    "eli10": {
+      "big_idea": "A stepwell stays cool like a cellar, but it does not store water; it is a staircase down to water in the ground.",
+      "story": "In parts of India, the rain falls in about three months. Then comes a long dry season. The sun and wind dry up open ponds. So people built stepwells. You walk down many flights of stairs to reach the water. How did they work? Think of a cellar. A cellar is cool because it is deep. Deep earth stays cool even on hot days. Cool air is heavy, so it sinks and stays at the bottom. The deep, shady water also dries up much more slowly than a pond. But here the cellar idea stops working. A cellar keeps what you put in it. A stepwell keeps almost nothing. It reaches down to water inside the ground. Each dry month, that water sinks lower. The steps let people follow it down. Today, pumps have pulled some of that water too deep. So many stepwells are dry.",
+      "paragraphs": [
+        "Sets the problem: rain comes in three months, and stepwells kept water close in the long dry season.",
+        "Shows the likeness: like a cellar, a stepwell stays cool because it is deep and shady.",
+        "Finds the difference: a stepwell stores almost nothing; its steps follow the water in the ground down."
+      ],
+      "author_view": "The writer admires how cleverly stepwells were designed, and is careful to show where the cellar comparison stops being true."
+    }
+  }
+}

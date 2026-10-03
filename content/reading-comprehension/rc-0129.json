@@ -1,0 +1,334 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0129",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 86,
+    "genre": "history",
+    "difficulty": "easy",
+    "difficulty_numeric": 1,
+    "stage": "foundation",
+    "skills": [
+      "main-idea-extraction",
+      "evidence-anchoring",
+      "inference",
+      "causal-reasoning"
+    ],
+    "word_count": 267,
+    "question_count": 3,
+    "question_types": [
+      "title_selection",
+      "specific_detail",
+      "inference"
+    ],
+    "theme": "tea became India's everyday drink through a campaign the tea industry began when prices abroad fell and it had more tea than buyers, but the British method the campaign taught did not catch on; the habit lasted in a form the drinkers made for themselves, boiled with milk, sugar and spice, because it tasted like the spiced milk homes already made, cost little and gave the working day a pause, so the cause that starts a habit and the cause that keeps it can be different: persuasion won the first cup and ownership kept the habit",
+    "estimated_time_min": 4.5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-03",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted."
+    },
+    "date_added": "2026-10-03",
+    "batch_id": "batch-rc-005",
+    "prompt_version": "content engine v1 + CAT-size brief 2026-10",
+    "reviewer_notes": "An impersonal foundation item told as a history: a crop grown for export, a campaign to sell it at home when prices abroad fell, and a third paragraph that turns from the persuaders to the drinkers. Facts are kept general (no organisation names, dates or figures) and no question needs outside knowledge. The usual telling is a story of successful marketing; what this adds is the distinction between the cause that started a habit and the cause that kept it, with the irony that the drink that lasted is the one the campaign never taught. The set's near-tie is the inference about the industry's point of view, where the key sets what the industry needed against what it got.",
+    "length_class": "short",
+    "structure": "history_of_an_idea",
+    "viewpoints": 1,
+    "tone": "plain, historical, quietly ironic",
+    "difficulty_vector": {
+      "lexical": 2,
+      "syntactic": 2,
+      "abstraction": 1,
+      "inference_depth": 2,
+      "distractor_similarity": 2,
+      "reasoning_depth": 2,
+      "structural_ambiguity": 1,
+      "time_pressure": 1
+    },
+    "reasoning_patterns": [
+      "struct.history_of_an_idea",
+      "struct.chronology",
+      "struct.pivot",
+      "struct.cause_effect",
+      "comp.central_idea",
+      "comp.explicit_detail",
+      "comp.paraphrase",
+      "arg.causal_claim",
+      "inf.strongly_supported",
+      "inf.vs_speculation",
+      "lang.causal_wording",
+      "lang.contrast_marker",
+      "scope.too_narrow",
+      "elim.near_tie"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1: a strong candidate might argue for 'How India Was Taught to Drink Tea', since the campaign is the passage's most detailed stretch; the third paragraph's 'The method did not catch on, but the drink did, in a form nobody had taught' settles it, and 'The Failure of a Tea Campaign' is answered by 'Persuasion had won the first cup'. Q2: the live rival is the stations-and-mills option, which reverses the order of events: the stalls 'appeared' as part of the campaign that the 'So' sentence starts. The spiced-milk option borrows a reason from the last paragraph for why the habit lasted, not why the campaign began. Q3: the near-tie is that the outcome was a failure because the drink was not the one taught; the industry's aim, stated in the first paragraph, was buyers for tea it could not sell, and it got them, while the only cost the passage names is that the drink 'used less leaf than the industry would have liked'.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "doorstep",
+      "steeped",
+      "vendors"
+    ]
+  },
+  "passage": {
+    "title": "A Cup of Their Own",
+    "reading_time_min": 1.4,
+    "paragraphs": [
+      {
+        "id": "rc-0129-p1",
+        "text": "In the nineteenth century, India grew tea for other people. British planters cleared forest in Assam and on the hills of Darjeeling for tea gardens, and shipped most of the leaf to Britain. In India itself few people drank it. Then, early in the twentieth century, prices abroad fell, and the tea industry faced a simple problem. It had more tea than buyers, and a vast country on its doorstep that hardly touched the stuff."
+      },
+      {
+        "id": "rc-0129-p2",
+        "text": "So it set out to make Indians into tea drinkers. Over the following decades its campaign sent demonstrators into towns and villages to brew tea in the street and hand out free cups. Stalls appeared at railway stations, in mills and in markets, and posters praised tea as cheap and refreshing. The demonstrators taught the British method. A spoonful of leaf was steeped in boiling water for a few minutes, with a little milk and sugar added at the end."
+      },
+      {
+        "id": "rc-0129-p3",
+        "text": "The method did not catch on, but the drink did, in a form nobody had taught. Vendors and households boiled the leaf in a single pan with milk, water and plenty of sugar, often adding ginger or cardamom. What they poured out was thick and sweet. It used less leaf than the industry would have liked, and it is what most Indians now mean by tea. Persuasion had won the first cup. What kept the habit was that drinkers made the drink their own. It tasted like the spiced milk many homes already made, it cost little, and the stall where it was poured became the place where a working day paused."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0129-q1",
+      "type": "title_selection",
+      "skill": "main_idea",
+      "patterns": [
+        "comp.central_idea",
+        "struct.history_of_an_idea",
+        "scope.too_narrow"
+      ],
+      "target_mistake": "naming the passage after the campaign, which the third paragraph says did not decide the form the habit took, or after one of its vivid places",
+      "prediction_target": "The learner should be able to say beforehand: a campaign got Indians to try tea, but the habit lasted in a form the drinkers made for themselves.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 2,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "logical_structure"
+      ],
+      "stem": "Which of the following would be the most suitable title for the passage?",
+      "options": {
+        "A": "How India Was Taught to Drink Tea",
+        "B": "Tea Stalls and the Railway Platform",
+        "C": "Taught One Way, Kept Another",
+        "D": "The Failure of a Tea Campaign"
+      },
+      "correct": "C",
+      "estimated_time_sec": 70,
+      "explanation": {
+        "expert_notice": "The passage moves from a crop grown for export, to a campaign to sell it at home, to a turn: 'The method did not catch on, but the drink did, in a form nobody had taught.' A title has to cover both the persuading and what the drinkers did with it.",
+        "correct_reasoning": "The campaign taught the British method, and the drinkers kept tea in another form, boiled in one pan with milk, sugar and spice. 'Persuasion had won the first cup. What kept the habit was that drinkers made the drink their own.' The correct option says that in four words, and it fits all three paragraphs.",
+        "passage_anchor": "rc-0129-p3",
+        "question_type_note": "A title is the main idea at its shortest. Test each option against the paragraph where the passage turns, here the third, because a title that ignores the turn names only the set-up.",
+        "reading_habit": "In a passage that tells a history, find the sentence where the story changes direction. The best title usually names both sides of that change.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "too_narrow",
+            "why_wrong": "The teaching is the second paragraph, and the third says the method 'did not catch on'. A title about how India was taught leaves out the passage's point, that the habit lasted in a form nobody had taught.",
+            "seductive_element": "The campaign is the most detailed part of the passage, and it did get Indians drinking tea."
+          },
+          {
+            "option": "B",
+            "trap_type": "example_as_thesis",
+            "why_wrong": "Railway stations are one of several places where stalls appeared, mentioned in a single clause. The passage is about how a country took up a drink, not about stations.",
+            "seductive_element": "Tea at a railway station is a vivid picture, and the passage ends at a stall."
+          },
+          {
+            "option": "D",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The campaign got what it set out to get, a country of tea drinkers: 'Persuasion had won the first cup', and tea is now what 'most Indians' drink. Only its method failed to last.",
+            "seductive_element": "The passage does say 'The method did not catch on', which can sound like a verdict on the whole campaign."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0129-q2",
+      "type": "specific_detail",
+      "skill": "specific_detail",
+      "patterns": [
+        "comp.explicit_detail",
+        "comp.paraphrase",
+        "lang.causal_wording"
+      ],
+      "target_mistake": "giving a later reason, or a result of the campaign, as the reason the campaign began",
+      "prediction_target": null,
+      "difficulty": {
+        "inference_depth": 1,
+        "distractor_similarity": 2,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "inference"
+      ],
+      "stem": "According to the passage, the tea industry set out to win drinkers in India because",
+      "options": {
+        "A": "falling prices abroad had left it with more tea than buyers",
+        "B": "few Indians could afford the tea that was sold in Britain",
+        "C": "the spiced milk many homes made could easily be turned into tea",
+        "D": "railway stations and mills needed something cheap to sell"
+      },
+      "correct": "A",
+      "estimated_time_sec": 45,
+      "explanation": {
+        "expert_notice": "The reason is given at the end of the first paragraph, where the passage names the problem: prices abroad fell, and the industry 'had more tea than buyers'. The second paragraph opens with 'So', which ties the campaign to that problem.",
+        "correct_reasoning": "When prices abroad fell, the industry 'had more tea than buyers, and a vast country on its doorstep that hardly touched the stuff'. The next sentence begins 'So it set out to make Indians into tea drinkers'. The correct option restates that cause.",
+        "passage_anchor": "rc-0129-p1",
+        "question_type_note": "A detail question asks you to point at a sentence. When the stem asks 'because', look for the sentence that states a cause, and for a linking word such as 'so' that joins it to the result.",
+        "reading_habit": "Notice the small words that join a cause to its effect: so, because, then. They tell you which sentence a 'why' question will be built on.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "out_of_scope",
+            "why_wrong": "The passage says nothing about what Indians could afford. Its reason is the industry's surplus, not the price of tea in Britain.",
+            "seductive_element": "Cost is a natural reason for few people drinking something, and the posters did praise tea as cheap."
+          },
+          {
+            "option": "C",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "The spiced milk appears in the last paragraph, as one reason the drinkers' own version lasted. It was never the campaign's reason for starting.",
+            "seductive_element": "It uses the passage's own words about spiced milk, and it does link tea to something Indians already drank."
+          },
+          {
+            "option": "D",
+            "trap_type": "reversed_causation",
+            "why_wrong": "The stalls at stations and mills were part of the campaign, set up after it began. The campaign put tea into those places; those places did not cause the campaign.",
+            "seductive_element": "Stations and mills appear beside tea in the passage, so it is easy to read them as the reason rather than the result."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0129-q3",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.strongly_supported",
+        "inf.vs_speculation",
+        "elim.near_tie"
+      ],
+      "target_mistake": "judging the outcome by the method alone, as a failure or as a plan fulfilled, instead of setting what the industry needed against what it got",
+      "prediction_target": "The learner should be able to say beforehand: the industry got the drinkers it needed, but the drink they chose used less leaf than it wanted.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "specific_detail"
+      ],
+      "stem": "It can be inferred from the passage that, from the tea industry's point of view, the drink that spread across India was",
+      "options": {
+        "A": "a failure, since it was not the drink its demonstrators had taught",
+        "B": "a gain in drinkers, though each cup used less leaf than it wanted",
+        "C": "a threat to the trade abroad on which its gardens depended",
+        "D": "exactly the result its campaign had been designed to produce"
+      },
+      "correct": "B",
+      "estimated_time_sec": 75,
+      "explanation": {
+        "expert_notice": "Two sentences far apart settle this. The first paragraph says what the industry needed: buyers for tea it could not sell abroad. The third says what it got: the drink most Indians now mean by tea, which 'used less leaf than the industry would have liked'.",
+        "correct_reasoning": "The industry's problem was more tea than buyers, and the drink that spread turned a country that 'hardly touched the stuff' into one where tea is the everyday drink, which solved that problem. The passage adds that this drink used less leaf than the industry wanted. The correct option keeps both sides: more drinkers, less leaf in each cup.",
+        "passage_anchor": "rc-0129-p1, rc-0129-p3",
+        "question_type_note": "An inference about someone's point of view joins what they wanted with what happened. Find both in the passage before you judge the result.",
+        "reading_habit": "When a passage says why someone acted, hold on to that aim. Later questions about success or failure are measured against it, not against the method.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "fact_right_interpretation_wrong",
+            "why_wrong": "It is true that the drink was not the one taught, but the industry wanted buyers, not a method, and it got them. The passage calls the result a win for persuasion: 'Persuasion had won the first cup'.",
+            "seductive_element": "It starts from a true fact, that the method did not catch on."
+          },
+          {
+            "option": "C",
+            "trap_type": "out_of_scope",
+            "why_wrong": "The passage never connects the drink at home to the trade abroad, and nothing suggests that Indian drinkers harmed sales in Britain.",
+            "seductive_element": "The passage begins with the export trade, so linking the two sounds like a natural step."
+          },
+          {
+            "option": "D",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The drink spread 'in a form nobody had taught', and it used less leaf than the industry wanted. A result the campaign had designed would have been the British method.",
+            "seductive_element": "The campaign's aim, a country of tea drinkers, was met, so the outcome can look planned."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "doorstep",
+      "passage_use": "a vast country on its doorstep that hardly touched the stuff",
+      "meaning_here": "very close by, within easy reach",
+      "difficulty": "easy"
+    },
+    {
+      "word": "steeped",
+      "passage_use": "A spoonful of leaf was steeped in boiling water for a few minutes",
+      "meaning_here": "left to soak in hot water so that its flavour comes out",
+      "difficulty": "medium"
+    },
+    {
+      "word": "vendors",
+      "passage_use": "Vendors and households boiled the leaf in a single pan",
+      "meaning_here": "people who sell food or drink, often from a stall or a cart",
+      "difficulty": "easy"
+    }
+  ],
+  "mentor": {
+    "challenge": "A short history with a turn near the end. Notice the difference between what people were taught and what they actually kept.",
+    "one_sentence_summary": "When prices abroad fell, India's tea industry ran a long campaign to make Indians drink tea and taught them the British way of making it, but the habit that lasted was a drink the people made for themselves, boiled with milk, sugar and spice, because it tasted familiar, cost little and gave the working day a pause.",
+    "main_idea": "A campaign by the tea industry got Indians to try tea, but the British method it taught did not catch on. Tea stayed because drinkers made it their own: boiled, milky, sweet and spiced, cheap, and served at the stall where the working day stopped for a while.",
+    "simple_explanation": "In the nineteenth century, tea grown in India went abroad, mostly to Britain, and few Indians drank it. Early in the twentieth century prices abroad fell, and the tea industry had more tea than it could sell. So it looked at the huge country right next to its gardens, where hardly anyone drank tea.\n\nIt set out to change that. For decades, demonstrators went into towns and villages, made tea in the street and gave it away. Stalls opened at railway stations, in mills and in markets, and posters said tea was cheap and refreshing. The demonstrators taught the British way: soak a spoonful of leaf in boiling water for a few minutes, then add a little milk and sugar.\n\nPeople took to tea, but not to that method. Vendors and families boiled the leaf with milk, water and lots of sugar in one pan, often with ginger or cardamom. That thick, sweet drink is what most Indians now call tea, and it used less leaf than the industry wanted. The writer's point is that persuasion got people to try the first cup, but the habit lasted because people made the drink their own: it tasted like the spiced milk many homes already made, it was cheap, and the tea stall became the place where people took a break from work.",
+    "why_difficult": "The passage reads like a simple story, so readers tend to sum it up as 'India was taught to drink tea'. The last paragraph says something more careful: the teaching won the first cup, but the drink that stayed was one nobody taught. The title question and the question about the industry's point of view both turn on keeping those two apart.",
+    "author_intention": "To tell how tea became India's everyday drink, and to show that what made the habit last was not the persuasion that started it but what the drinkers did with it.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0129-p1",
+        "role": "Sets the problem",
+        "note": "India grew tea mainly for Britain and drank little of it, so when prices abroad fell the industry had more tea than buyers."
+      },
+      {
+        "paragraph_id": "rc-0129-p2",
+        "role": "Describes the campaign",
+        "note": "Demonstrators, free cups, stalls at stations and mills, and posters: the industry taught Indians to drink tea the British way."
+      },
+      {
+        "paragraph_id": "rc-0129-p3",
+        "role": "Turns to the drinkers",
+        "note": "The British method did not last but tea did, boiled with milk, sugar and spice; persuasion won the first cup, and the drinkers' own version kept the habit."
+      }
+    ],
+    "tone_progression": "Plain and factual through the history, brisk in the account of the campaign, and quietly ironic at the end, where the drink that won is the one the campaign never taught.",
+    "key_transitions": [
+      "'So it set out to make Indians into tea drinkers.' (opening of paragraph 2): the problem becomes a campaign.",
+      "'The method did not catch on, but the drink did, in a form nobody had taught.' (opening of paragraph 3): the story turns from the persuaders to the drinkers."
+    ],
+    "misunderstanding": "A hurried reader thinks the passage is a success story for the campaign, or else a story of its failure. It is neither: the campaign succeeded in getting people to try tea and failed only to fix how they would make it, which is the part the drinkers decided.",
+    "traps_summary": "The options give the campaign the whole credit, turn its unused method into a total failure, name the passage after one of its vivid places, and offer a later reason (the spiced milk) or a result (the stalls) as the cause of the campaign.",
+    "reading_lesson": "In a history, separate the cause that started something from the cause that kept it going. Passages often say these are different, and the questions test whether you noticed which is which.",
+    "real_world": "Many habits that were first sold to people last only once they are changed to suit them: a food adapted to local taste, a game played by local rules, a festival given a new meaning.",
+    "takeaway": "Persuasion can win a first try; only the people who adopt a habit can make it last.",
+    "reflection_question": "Which of your own habits began because someone sold it to you, and what did you change to make it yours?",
+    "eli10": {
+      "big_idea": "People first tried tea because they were persuaded, but they kept drinking it because they made it in their own way.",
+      "story": "Long ago, India grew lots of tea, but sent most of it to Britain. Few people in India drank it. Then tea prices abroad fell. The tea growers had too much tea. So they tried to get Indians to drink it. They gave away free cups. They opened tea stalls at railway stations. They showed people the British way to make tea, with a little milk added at the end. But people did not keep that way. They boiled the tea with lots of milk and sugar in one pan. Often they added ginger too. That sweet drink is what most Indians call tea today. The writer says the selling got people to try it. People kept it because they made it their own. It tasted like spiced milk from home, it was cheap, and the tea stall became the place for a break from work.",
+      "paragraphs": [
+        "Sets up a problem: India grew tea for Britain, and when prices fell there was too much.",
+        "Describes the campaign: free cups, stalls and lessons in the British way of making tea.",
+        "Turns to the drinkers: they kept tea but made it their own way, and that is why it lasted."
+      ],
+      "author_view": "The writer tells the story calmly and finds it a little ironic that the tea people loved was not the tea they were taught."
+    }
+  }
+}

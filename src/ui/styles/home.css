@@ -174,16 +174,19 @@
 .cw-spots { z-index: 1; }
 .cw-spot { position: absolute; padding: 0; border: 0; background: none; border-radius: 40%; }
 .cw-spot:focus-visible { outline: 3px solid var(--honey); outline-offset: -6px; }
+/* Each house's subject sign: always up (a phone has no hover), held at a
+   readable size by --inv, and part of the button, so the sign is a tap target too. */
 .cw-plate {
-  position: absolute; left: 50%; top: 4%; transform: translate(-50%, 0) scale(var(--inv, 1)); transform-origin: 50% 0;
-  display: flex; flex-direction: column; align-items: center; gap: 1px;
-  padding: 7px 13px; border-radius: 12px; white-space: nowrap; pointer-events: none;
-  background: color-mix(in srgb, var(--color-surface) 94%, transparent); color: var(--color-ink);
-  font: 600 13px/1.2 var(--font-ui); box-shadow: 0 6px 18px rgba(40, 30, 16, 0.22);
-  opacity: 0; transition: opacity 0.18s, translate 0.18s; translate: 0 6px;
+  position: absolute; transform: translate(-50%, -100%) scale(var(--inv, 1)); transform-origin: 50% 100%;
+  display: flex; align-items: center; gap: 6px;
+  padding: 3px 12px 3px 3px; border-radius: 999px; white-space: nowrap;
+  background: color-mix(in srgb, var(--color-surface) 93%, transparent); color: var(--color-ink);
+  border: 1px solid color-mix(in srgb, var(--color-line-strong) 60%, transparent);
+  font: 750 13px/1.15 var(--font-ui); box-shadow: 0 4px 14px rgba(40, 30, 16, 0.3);
+  transition: translate 0.18s;
 }
-.cw-plate small { font-weight: 450; font-size: 11px; color: var(--color-ink-3); }
-.cw-spot:hover .cw-plate, .cw-spot:focus-visible .cw-plate { opacity: 1; translate: 0 0; }
+.cw-plate .pet-portrait { flex: none; }
+.cw-spot:hover .cw-plate, .cw-spot:focus-visible .cw-plate { translate: 0 -3px; background: var(--color-surface); }
 
 /* ---------------- The friends ---------------- */
 .pet {
@@ -298,7 +301,7 @@
 }
 .cw-hud > *, .cw-hud__left > *, .cw-hud__right > * { pointer-events: auto; }
 .cw-hud__left, .cw-hud__right { display: flex; gap: 8px; min-width: 0; }
-.cw-chip, .cw-round, .cw-today, .cw-overview {
+.cw-chip, .cw-round, .cw-today {
   border: 1px solid color-mix(in srgb, var(--color-line-strong) 70%, transparent);
   background: color-mix(in srgb, var(--color-surface) 94%, transparent); color: var(--color-ink);
   box-shadow: 0 6px 20px rgba(30, 24, 12, 0.22), 0 1px 0 rgba(255, 255, 255, 0.6) inset;
@@ -354,11 +357,6 @@
 .cw.is-pointing .cw-play { animation: cw-call 1.1s ease-in-out infinite; }
 .cw.is-pointing .cw-dock::before { content: "▼"; position: absolute; left: 50%; top: -34px; translate: -50% 0; font: 900 24px/1 var(--font-ui); color: #FFE7A0; text-shadow: 0 2px 6px rgba(40, 20, 0, 0.6); animation: cw-mark 0.9s ease-in-out infinite; pointer-events: none; }
 @keyframes cw-call { 0%, 100% { box-shadow: 0 5px 0 #B9741C, 0 0 0 0 rgba(255, 220, 120, 0.8); } 50% { box-shadow: 0 5px 0 #B9741C, 0 0 0 12px rgba(255, 220, 120, 0); } }
-
-.cw-overview { position: absolute; z-index: 10; right: 12px; bottom: max(150px, calc(env(safe-area-inset-bottom) + 144px)); width: 44px; height: 44px; border-radius: 14px; display: grid; place-items: center; padding: 0; }
-.cw-overview svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
-.cw-overview[aria-pressed="true"] { background: var(--color-accent); color: var(--color-accent-ink); }
-@media (min-width: 900px) { .cw-overview { bottom: 24px; } }
 
 .cw-toast {
   position: absolute; z-index: 12; left: 50%; top: calc(max(12px, env(safe-area-inset-top)) + 60px);
@@ -507,7 +505,9 @@
 
 /* Who is who */
 .cw-roster { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; }
-.cw-roster button { width: 100%; display: flex; align-items: center; gap: 12px; padding: 8px 12px 8px 8px; border-radius: 16px; border: 1px solid var(--color-line); background: var(--color-surface); text-align: left; min-height: 64px; }
+.cw-roster a { width: 100%; display: flex; align-items: center; gap: 12px; padding: 8px 14px 8px 8px; border-radius: 16px; border: 1px solid var(--color-line); background: var(--color-surface); text-align: left; min-height: 64px; text-decoration: none; }
+.cw-roster a:active { translate: 0 1px; }
+.cw-roster__go { flex: none; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--color-accent); color: var(--color-accent-ink); font-style: normal; font-size: 13px; }
 .cw-roster__who { flex: 1; min-width: 0; }
 .cw-roster__who b { display: block; font: 400 18px/1.2 var(--font-display); }
 .cw-roster__who small { display: block; font-size: 12.5px; line-height: 1.35; color: var(--color-ink-2); }

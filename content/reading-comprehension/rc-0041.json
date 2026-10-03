@@ -7,9 +7,9 @@
     "status": "accepted",
     "quality_score": 89,
     "genre": "culture",
-    "difficulty": "easy",
-    "difficulty_numeric": 3,
-    "stage": "developing",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "stage": "intermediate",
     "skills": [
       "argument-tracking",
       "concession-tracking",
@@ -17,18 +17,16 @@
       "inference",
       "scope-control"
     ],
-    "word_count": 610,
-    "question_count": 6,
+    "word_count": 500,
+    "question_count": 4,
     "question_types": [
       "implication",
       "inference",
       "main_idea",
-      "paragraph_function",
-      "phrase_in_context",
-      "scope"
+      "paragraph_function"
     ],
     "theme": "manners as moral practice rather than decoration: a manner claims nothing about feeling, which is why it can make consideration reliable, and why an arbitrary code can still be judged by whether it puts a stranger at ease",
-    "estimated_time_min": 10.5,
+    "estimated_time_min": 8,
     "source": {
       "publication": "original",
       "url": null,
@@ -39,8 +37,8 @@
     "date_added": "2026-09-12",
     "batch_id": "batch-rc-003",
     "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-01",
-    "reviewer_notes": "Two objections are conceded at length before the turn, so the passage reads for two paragraphs as an attack on its own thesis. The set is built to catch readers who stop at either concession, and the scope question checks whether the reader kept the narrowed version at the end.",
-    "length_class": "long",
+    "reviewer_notes": "Two objections are conceded at length before the turn, so the passage reads for two paragraphs as an attack on its own thesis. The set is built to catch readers who stop at either concession, and the scope question checks whether the reader kept the narrowed version at the end. 2026-10-03 CAT-size pass: 610→500 words, 5→5 paragraphs, 6→4 questions. Every paragraph carries a move (two charges, two answers, the thesis), so none was dropped; tightened each paragraph instead. Kept main idea, paragraph function, inference and implication; dropped the phrase-in-context and scope questions, which shared paragraphs with the kept ones.",
+    "length_class": "medium",
     "structure": "concession_thesis",
     "viewpoints": 2,
     "tone": "candid, quietly argumentative",
@@ -77,7 +75,7 @@
     ],
     "quality": {
       "status": "reviewed",
-      "adversarial_review": "All four options in the main-idea question now open on the same concession, so the concession certifies nothing and the question is decided entirely by the clause after 'but'. Three readings then run through the paper. The shadow is the reply mistaken for the argument: the case for manners is that a manner makes no claim about feeling and so cannot be a lie, with everything after that taken for illustration. It holds an option in every question (Q1 'the decisive reply', Q2 'bound to mean it', Q4 'tells its recipient nothing whatever', Q5 'no use of a code can be dishonest', Q6 'leaves open whether such an act has any value') and it dies on the opening of the fourth paragraph, 'That is the whole argument', which is placed after the hypocrisy reply and before the case about mood, and on the closing paragraph's counterfeit, which is a dishonest use of a code by a performer who has claimed nothing. The second rival ranks habit above feeling and lets manners displace judgement; the fourth paragraph blocks it twice, calling manners 'the part of this work that has been decided in advance' and ending 'This is not a substitute for morality', and it calls the person moved to kindness pleasant company rather than a lesser person. The third rival keeps the first charge at full strength and confines the defence to the community that inherited the code; the last paragraph denies exactly that, since what is arbitrary is the code and not the practice, and attending to another's comfort is 'recognisable across every code that has one'. The paragraph-function question has been re-cut so that its key names the paragraph's move, deriving dependability from the cost of deciding afresh, rather than restating the thesis the main-idea key already carries. Strength parity was imposed across the set afterwards: no distractor in this file is quantified more strongly than its key, because a single overreaching option was found to condemn the whole reading it belonged to without the passage being read.",
+      "adversarial_review": "All four options in the main-idea question now open on the same concession, so the concession certifies nothing and the question is decided entirely by the clause after 'but'. Three readings then run through the paper. The shadow is the reply mistaken for the argument: the case for manners is that a manner makes no claim about feeling and so cannot be a lie, with everything after that taken for illustration. It holds an option in every question (Q1 'the decisive reply', Q2 'bound to mean it', Q4 'tells its recipient nothing whatever', Q5 'no use of a code can be dishonest', Q6 'leaves open whether such an act has any value') and it dies on the opening of the fourth paragraph, 'That is the whole argument', which is placed after the hypocrisy reply and before the case about mood, and on the closing paragraph's counterfeit, which is a dishonest use of a code by a performer who has claimed nothing. The second rival ranks habit above feeling and lets manners displace judgement; the fourth paragraph blocks it twice, calling manners 'the part of this work that has been decided in advance' and ending 'This is not a substitute for morality', and it calls the person moved to kindness pleasant company rather than a lesser person. The third rival keeps the first charge at full strength and confines the defence to the community that inherited the code; the last paragraph denies exactly that, since what is arbitrary is the code and not the practice, and attending to another's comfort is 'recognisable across every code that has one'. The paragraph-function question has been re-cut so that its key names the paragraph's move, deriving dependability from the cost of deciding afresh, rather than restating the thesis the main-idea key already carries. Strength parity was imposed across the set afterwards: no distractor in this file is quantified more strongly than its key, because a single overreaching option was found to condemn the whole reading it belonged to without the passage being read. (2026-10-03, CAT-size pass: q2, q6 were dropped, so any note above about them no longer applies.)",
       "blind_solve": {
         "solver": "blind reviewer (fresh session, no key)",
         "agreed": 6,
@@ -93,27 +91,27 @@
   },
   "passage": {
     "title": "Good Form",
-    "reading_time_min": 3.3,
+    "reading_time_min": 2.7,
     "paragraphs": [
       {
         "id": "rc-0041-p1",
-        "text": "The case against manners is strong and should be made first. Codes of etiquette are arbitrary: which fork, which greeting, how long to wait before speaking, how much to protest before accepting. They are local, and they change; what was courteous in one generation is stiff in the next and comic in the one after that. Worse, they have a history of being used badly. A code that is elaborate and unwritten makes an excellent instrument for sorting people, because it can be learned only by growing up among those who already have it. Anyone who has watched a newcomer hesitate over a table, or noticed the small pleasure that hesitation gives to a room, knows that manners have served cruelty as faithfully as they have served kindness. None of this is exaggerated, and nothing that follows denies it."
+        "text": "The case against manners is strong and should be made first. Codes of etiquette are arbitrary: which fork, which greeting, how long to wait. They are local, and they change. Worse, an elaborate, unwritten code is an excellent instrument for sorting people, since it can be learned only by growing up among those who already have it. Anyone who has watched a room enjoy a newcomer's hesitation over a table knows that manners have served cruelty as faithfully as kindness. None of this is exaggerated, and nothing that follows denies it."
       },
       {
         "id": "rc-0041-p2",
-        "text": "There is a second charge, and it is the one most people feel more strongly. Manners are mere form. The polite word does not come from the heart, the courteous act is performed whether or not the performer means it, and a performance that is not meant is a small lie. On this view good manners at best decorate a good character and at worst disguise a bad one, and the honest person is the one who behaves as they feel."
+        "text": "A second charge is the one most people feel more strongly: manners are mere form. The courteous act is performed whether or not it is meant, and a performance that is not meant is a small lie. On this view manners at best decorate a good character and at worst disguise a bad one, and honesty means behaving as you feel."
       },
       {
         "id": "rc-0041-p3",
-        "text": "The second charge is the easier to answer, and answering it is what makes the first one answerable too. Consider a host at the end of a long day, who would rather be alone, and whose guest has arrived early. The host rises, takes the coat, asks about the journey, offers the chair with the better light. None of this is a lie, because none of it is a statement. The host has not claimed to be delighted. Hypocrisy is the claim of a feeling one does not have; a manner claims nothing about feeling at all. It is an action offered to another person, and what makes it valuable is precisely that it did not have to be felt."
+        "text": "The second charge is the easier to answer, and answering it makes the first answerable too. Consider a tired host, longing to be alone, whose guest has arrived early. The host rises, takes the coat and offers the chair with the better light. None of this is a lie, because none of it is a statement. The host has not claimed to be delighted. Hypocrisy is the claim of a feeling one does not have; a manner claims nothing about feeling at all. It is an action offered to another person, and what makes it valuable is precisely that it did not have to be felt."
       },
       {
         "id": "rc-0041-p4",
-        "text": "That is the whole argument, and it can be put plainly. Morality asks us to take other people into account. Taking people into account, done from scratch each time, is expensive: it requires noticing, weighing and deciding, and nobody has that much attention to spend on an ordinary Tuesday. Manners are the part of this work that has been decided in advance. They turn consideration from something one must summon into something one already does, and the conversion matters most on the days when it would not have been summoned. A person who is kind whenever moved to be kind is pleasant company and cannot be relied upon. A person with manners has made a promise that their mood is not consulted about. This is not a substitute for morality. It is the form morality takes when it has to work every day, in small amounts, among people one does not particularly love."
+        "text": "That is the whole argument. Morality asks us to take others into account, and doing that from scratch each time is expensive: it requires noticing, weighing and deciding, and nobody has that much attention to spend on an ordinary Tuesday. Manners are the part of this work that has been decided in advance. They turn consideration from something one must summon into something one already does, which matters most on the days when it would not have been summoned. A person who is kind whenever moved to be kind is pleasant company and cannot be relied upon. A person with manners has made a promise that their mood is not consulted about. This is not a substitute for morality. It is the form morality takes when it must work every day, among people one does not particularly love."
       },
       {
         "id": "rc-0041-p5",
-        "text": "The first charge survives, but narrowed. What is arbitrary is the code, not the practice. Whether one rises or bows, offers the right hand or the left, is a matter of local accident; attending to another's comfort before one's own convenience is not, and it is recognisable across every code that has one. That is also the test when a code is used badly. The same rule of etiquette can be applied to put a stranger at ease or to establish that he does not know it, and these are not two styles of good manners but the practice and its counterfeit. Nothing in the code itself tells you which is happening. Everything in the situation does."
+        "text": "The first charge survives, but narrowed. What is arbitrary is the code, not the practice. Whether one rises or bows is local accident; attending to another's comfort before one's own convenience is not, and it is recognisable across every code that has one. That is also the test of a code used badly. The same rule can be applied to put a stranger at ease or to establish that he does not know it, and these are not two styles of good manners but the practice and its counterfeit. Nothing in the code itself tells you which is happening. Everything in the situation does."
       }
     ]
   },
@@ -171,61 +169,6 @@
             "trap_type": "prescriptive_leap",
             "why_wrong": "The passage recommends nothing about the sympathies. It calls a person moved to kindness 'pleasant company' and merely unreliable, and it says manners are the form morality takes rather than a better guide than feeling. Nothing in it tells anyone what to do about what they feel.",
             "seductive_element": "The contrast between a mood that is not consulted and a kindness that waits to be moved does sound as though it were building towards advice about the feelings."
-          }
-        ]
-      }
-    },
-    {
-      "id": "rc-0041-q2",
-      "type": "phrase_in_context",
-      "skill": "vocabulary_in_context",
-      "patterns": [
-        "word.context_clue",
-        "comp.paraphrase"
-      ],
-      "target_mistake": "reading the phrase as being about who chose the rule, about what the performer is committed to feeling, or about judgement being given up, when the sentences around it are about when the deciding was done",
-      "prediction_target": "The learner should paraphrase from the neighbouring sentences: the work of deciding has already been done, so that none is required on the occasion itself.",
-      "difficulty": {
-        "inference_depth": 2,
-        "distractor_similarity": 3,
-        "reasoning_depth": 2
-      },
-      "secondary_skills": [
-        "specific_detail"
-      ],
-      "stem": "In the fourth paragraph, the phrase \"decided in advance\" most nearly means",
-      "options": {
-        "A": "settled beforehand, so that the occasion itself calls for no working out",
-        "B": "agreed on by a community instead of chosen by its individual members",
-        "C": "committed to before the occasion, so that the performer is bound to mean it",
-        "D": "made a matter of habit, so that the person is spared the exercise of judgement"
-      },
-      "correct": "A",
-      "estimated_time_sec": 50,
-      "explanation": {
-        "expert_notice": "The phrase is defined by its contrast, which stands in the sentence before: taking people into account 'done from scratch each time' is expensive. What has been decided in advance is whatever no longer has to be done from scratch.",
-        "correct_reasoning": "The correct option is that contrast in plain words. The deciding has already happened, so the occasion when the manner is performed requires no working out; that is why the passage says the conversion matters most on the days when consideration would not have been summoned. The decision was taken on some earlier day, and the present day does not get a vote.",
-        "passage_anchor": "rc-0041-p4",
-        "question_type_note": "A phrase question is answered from the contrast the phrase is drawn into, not from the associations of its words. 'In advance' can mean by whom, by when, or for how long; only the neighbouring sentence says which.",
-        "reading_habit": "Read the sentence before and the sentence after, and ask what the phrase is being contrasted with. Here it is contrasted with doing the work from scratch, which fixes the meaning as timing rather than authorship.",
-        "distractors": [
-          {
-            "option": "B",
-            "trap_type": "near_synonym_confusion",
-            "why_wrong": "This answers a different question, about who made the rule rather than when the deciding happened; the passage's contrast is with deciding from scratch each time, and a person could decide their own manners beforehand and gain exactly the benefit described.",
-            "seductive_element": "Codes really are communal in this passage, and the first paragraph dwells on how they are inherited."
-          },
-          {
-            "option": "C",
-            "trap_type": "wrong_condition",
-            "why_wrong": "The third paragraph removes the commitment to feeling explicitly: 'The host has not claimed to be delighted', and 'a manner claims nothing about feeling at all'. What was decided in advance is the action, and the passage's whole point is that it can be offered without being meant.",
-            "seductive_element": "It is the near-tie, because deciding in advance does sound like a commitment, and the passage is at that moment defending manners against the charge of insincerity."
-          },
-          {
-            "option": "D",
-            "trap_type": "overstatement",
-            "why_wrong": "Manners are 'the part of this work that has been decided in advance', a part and not the whole, and the paragraph ends by refusing the exchange outright: 'This is not a substitute for morality.' Judgement is spared on the occasion because it was exercised earlier, not retired from the person.",
-            "seductive_element": "The passage does say that noticing, weighing and deciding are too expensive for an ordinary Tuesday, which sounds like judgement being put aside."
           }
         ]
       }
@@ -398,63 +341,6 @@
           }
         ]
       }
-    },
-    {
-      "id": "rc-0041-q6",
-      "type": "scope",
-      "skill": "scope",
-      "patterns": [
-        "scope.condition",
-        "arg.qualification",
-        "scope.too_broad"
-      ],
-      "target_mistake": "carrying the thesis away without the narrowing the final paragraph performs, confining it to the community that inherited a code, or shrinking it to the reply about feeling",
-      "prediction_target": "The learner should be able to state the limit before the options: the defence is of the practice rather than of any code, and it does not cover a code being used to catch someone out.",
-      "difficulty": {
-        "inference_depth": 3,
-        "distractor_similarity": 4,
-        "reasoning_depth": 4
-      },
-      "secondary_skills": [
-        "main_idea",
-        "logical_structure"
-      ],
-      "stem": "Which of the following best states what the author's argument about manners does and does not cover?",
-      "options": {
-        "A": "It applies to the whole of an inherited code, but only inside the community that inherited it, since manners cannot be judged from outside.",
-        "B": "It shows only that a courteous act is not a lie, and stops short of saying what such an act is worth.",
-        "C": "It covers only the practice of considering others rather than any particular code, and it stops where a code is used to catch people out.",
-        "D": "It covers any consideration settled in advance, and trusts habit over feeling wherever the two differ."
-      },
-      "correct": "C",
-      "estimated_time_sec": 80,
-      "explanation": {
-        "expert_notice": "The final paragraph performs the narrowing in two moves: 'What is arbitrary is the code, not the practice', and then the distinction between putting a stranger at ease and establishing that he does not know the rule, which are 'the practice and its counterfeit'. A scope question here is asking whether the reader kept both.",
-        "correct_reasoning": "The correct option reports the two limits exactly, and reports nothing else. What is defended is a practice, attending to another's comfort before one's own convenience, and not any particular set of rules, which the passage has already granted to be arbitrary and changeable. And the defence stops where the counterfeit begins: a rule used to expose someone is not a lesser form of good manners but the opposite of them. Each of the other options states one thing the passage allows and then attaches a boundary the passage does not draw, which is why the second half of every option is where the question is decided.",
-        "passage_anchor": "rc-0041-p5",
-        "question_type_note": "A scope question asks how far a claim reaches. The answer is built from the author's own qualifying sentences, and the distractors either widen the claim past them or add a condition the author never set.",
-        "reading_habit": "At the end of an argumentative passage, write the thesis with its limits attached in one sentence. If you cannot say what the claim does not cover, you have not finished reading the last paragraph.",
-        "distractors": [
-          {
-            "option": "A",
-            "trap_type": "misattributed_view",
-            "why_wrong": "The passage says the opposite of both halves: what is arbitrary is the code rather than the practice, so the defence is not of an inherited code at all, and the practice is 'recognisable across every code that has one', which is what allows an outsider's treatment to be judged from anywhere.",
-            "seductive_element": "The first paragraph's account of how local and changeable codes are makes a community-bound limit sound like the author's own caution."
-          },
-          {
-            "option": "B",
-            "trap_type": "too_narrow",
-            "why_wrong": "The reply about lying is finished by the end of the third paragraph, and the fourth opens 'That is the whole argument' before saying what a manner is worth: it makes consideration available on the days it would not have been summoned. An account that leaves the value open stops one paragraph before the case begins.",
-            "seductive_element": "The hypocrisy reply is the passage's most quotable passage of reasoning, and a modest statement of scope sounds like the careful answer to a question about limits."
-          },
-          {
-            "option": "D",
-            "trap_type": "too_broad",
-            "why_wrong": "Both halves overshoot. The passage confines itself to manners, 'small amounts, among people one does not particularly love', and refuses the general exchange in terms: 'This is not a substitute for morality.' It also declines to rank the two, calling the person who is kind when moved to be kind pleasant company and merely unreliable.",
-            "seductive_element": "The fourth paragraph is confident and unhedged, and a reader who stops there has met no limit yet, so a wide statement of scope sounds like the author's own confidence."
-          }
-        ]
-      }
     }
   ],
   "vocabulary": [
@@ -481,8 +367,8 @@
     "challenge": "For two paragraphs the author argues against the position the passage will defend. Decide where the concessions stop, because several options are built from the part where the author is agreeing with the other side.",
     "one_sentence_summary": "Codes of manners really are arbitrary and really have been used cruelly, but a manner is not a lie about one's feelings and never claimed to be one, and its worth lies exactly there: it makes consideration available on the days when nobody feels like offering any.",
     "main_idea": "Manners are not decoration on a good character and not a disguise on a bad one. Because a courteous act says nothing about what the person feels, it cannot be a lie, and because it has been settled in advance it does not have to be summoned. That makes consideration reliable. The rules themselves are local and changeable, and they can be turned into a way of catching people out, which is not manners but its counterfeit.",
-    "simple_explanation": "Start with everything wrong with manners. The rules are made up. Which fork, how long to wait, how much to refuse before saying yes: none of it had to be that way, and it changes every generation. Worse, an unwritten code is a very good way to sort people, because you can only learn it by growing up among those who already know it. Anyone who has seen a newcomer freeze at a table knows this.\n\nThen there is the other complaint, the one people feel more strongly. Manners are just form. You say the polite thing whether or not you mean it, and pretending is a small lie.\n\nThe writer answers the second complaint first. Picture a host who is exhausted, wants to be alone, and whose guest turns up early. The host stands, takes the coat, asks about the journey, points to the better chair. None of that is a lie, because none of it is a claim. The host never said 'I am delighted'. Lying about a feeling is hypocrisy; a manner does not mention feelings at all. And here is the surprise: the fact that it did not have to be felt is what makes it worth something.\n\nNow the main point. Being moral means taking other people into account. Doing that from scratch every time is expensive, you have to notice, weigh, decide, and nobody has that much attention on an ordinary day. Manners are the bit that has already been decided. They turn consideration from something you have to work up into something you simply do, and that matters most on the days you would not have worked it up. Someone who is kind whenever they feel kind is nice to be around and cannot be relied on. Someone with manners has made a promise that their mood does not get a vote.\n\nFinally, back to the first complaint, now smaller. The rules are arbitrary; the practice is not. Bow or shake hands, it does not matter: putting someone else's comfort before your own convenience is the same thing everywhere. And that is how you spot the abuse. The very same rule can be used to make a stranger comfortable or to show that he does not know it. Those are not two kinds of good manners. One is the real thing and the other is a fake. The rule will not tell you which; the situation will.",
-    "why_difficult": "Half the passage is spent agreeing with the other side, and both concessions are made in strong, quotable language. A reader who samples the first two paragraphs comes away with the impression that the passage attacks manners, and the questions are full of options taken from exactly those paragraphs. The turn is then unusual: instead of denying that manners are mere form, the author accepts that they are form and argues that form is the point. Readers who expect a defence of sincerity have to give up the standard they came in with, which is harder than following a new idea.",
+    "simple_explanation": "Start with everything wrong with manners. The rules are made up: which fork, which greeting, how long to wait. None of it had to be that way, and it keeps changing. Worse, an unwritten code is a very good way to sort people, because you can only learn it by growing up among those who already know it. Anyone who has seen a room enjoy a newcomer freezing at a table knows this.\n\nThen there is the other complaint, the one people feel more strongly. Manners are just form. You do the polite thing whether or not you mean it, and pretending is a small lie.\n\nThe writer answers the second complaint first. Picture a tired host who wants to be alone and whose guest turns up early. The host stands, takes the coat, points to the chair with the better light. None of that is a lie, because none of it is a claim. The host never said 'I am delighted'. Lying about a feeling is hypocrisy; a manner does not mention feelings at all. And here is the surprise: the fact that it did not have to be felt is what makes it worth something.\n\nNow the main point. Being moral means taking other people into account. Doing that from scratch every time is expensive: you have to notice, weigh and decide, and nobody has that much attention on an ordinary day. Manners are the bit that has already been decided. They turn consideration from something you have to work up into something you simply do, and that matters most on the days you would not have worked it up. Someone who is kind whenever they feel kind is nice to be around and cannot be relied on. Someone with manners has made a promise that their mood does not get a vote.\n\nFinally, back to the first complaint, now smaller. The rules are arbitrary; the practice is not. Bow or rise, it does not matter: putting someone else's comfort before your own convenience is recognisable everywhere. And that is how you spot the abuse. The very same rule can be used to make a stranger comfortable or to show that he does not know it. Those are not two kinds of good manners. One is the real thing and the other is a fake. The rule will not tell you which; the situation will.",
+    "why_difficult": "Much of the passage is spent agreeing with the other side, and both concessions are made in strong, quotable language. A reader who samples the first two paragraphs comes away with the impression that the passage attacks manners, and the questions are full of options taken from exactly those paragraphs. The turn is then unusual: instead of denying that manners are mere form, the author accepts that they are form and argues that form is the point. Readers who expect a defence of sincerity have to give up the standard they came in with, which is harder than following a new idea.",
     "author_intention": "To take the two strongest objections seriously enough that the defence cannot be dismissed as sentimental, and then to move the value of manners from the feelings behind them to their reliability.",
     "paragraph_journey": [
       {
@@ -515,13 +401,25 @@
     "key_transitions": [
       "'None of this is exaggerated, and nothing that follows denies it.' (end of paragraph 1): the concession is sealed rather than withdrawn.",
       "'Hypocrisy is the claim of a feeling one does not have; a manner claims nothing about feeling at all.' (paragraph 3): the objection is dissolved by a distinction.",
-      "'That is the whole argument, and it can be put plainly.' (opening of paragraph 4): the thesis finally arrives."
+      "'That is the whole argument.' (opening of paragraph 4): the thesis finally arrives."
     ],
     "misunderstanding": "Hurried readers build one of two pictures. In the first, the passage is a criticism of etiquette, because that is what the opening paragraph is and it is written with more energy than anything else in the piece. In the second, the passage is a defence of sincerity, in which good manners are valuable when they express real feeling; that reading survives only until the third paragraph, which says the opposite, but it survives long enough to make the inference question look easy. Both mistakes come from reading the passage's topic rather than its argument.",
     "traps_summary": "The options in this set are drawn mostly from two places: the conceded objections in the first half, and the ordinary opinions a reader brings in. Expect the concession dressed as the thesis, the ordinary view of sincerity dressed as an inference, and the author's criterion inflated into a forecast or a recommendation. The cure in each case is to ask which paragraph is speaking and whether it is speaking for the author.",
     "reading_lesson": "When a passage opens by making the case against itself, find the sentence that closes the concession and mark it. Everything before it can be true, well written and quotable while being no part of the author's position, and examiners build their most attractive wrong options from exactly that material. The author's claim begins where the agreeing stops.",
     "real_world": "The same question arrives whenever someone says they will not attend a ceremony they do not believe in, or that they would rather be honest than polite: the passage suggests asking not what the gesture expresses, but what it makes available to the other person.",
     "takeaway": "A manner is a promise that your mood does not get a vote.",
-    "reflection_question": "Which of your kindnesses would survive a week in which you did not feel like being kind?"
+    "reflection_question": "Which of your kindnesses would survive a week in which you did not feel like being kind?",
+    "eli10": {
+      "big_idea": "The rules of politeness are made up, but manners are a real part of being good: kindness decided beforehand, so moods cannot cancel it.",
+      "story": "Some people attack manners. The rules are made up and keep changing. Worse, unwritten rules can make newcomers feel small. The writer agrees. A second complaint is that manners are fake: smiling without meaning it is a small lie. Picture a tired host whose guest comes early. The host takes the coat and offers the best chair. That is not a lie, because the host never said 'I am happy'. A manner makes no claim about feelings. Now the main point. Being kind from scratch every time takes effort, and nobody has that much on an ordinary day. Manners are kindness decided beforehand. So you still say 'good morning' on a grumpy day, and your mood does not get a vote. Finally, the rules are made up, but caring about others is not. The same rule can welcome a stranger or embarrass him. Only the situation shows which.",
+      "paragraphs": [
+        "Grants the first charge: the rules are made up, keep changing and can be used to shame outsiders.",
+        "States the second charge: manners are empty form, and politeness you do not mean is a small lie.",
+        "Answers it with a tired host: a manner claims nothing about feelings, so it is no lie.",
+        "Gives the main point: manners are consideration decided in advance, so moods cannot switch it off.",
+        "Narrows the first charge: the rules are arbitrary, the caring is not, and misuse shows in the situation."
+      ],
+      "author_view": "The writer is fair to the critics, then calmly confident: manners matter precisely because they do not depend on how we feel."
+    }
   }
 }

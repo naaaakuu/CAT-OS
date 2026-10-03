@@ -1,0 +1,331 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0122",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 85,
+    "genre": "human-behaviour",
+    "difficulty": "easy",
+    "difficulty_numeric": 1,
+    "stage": "foundation",
+    "skills": [
+      "main-idea-extraction",
+      "inference",
+      "vocabulary-in-context",
+      "causal-reasoning"
+    ],
+    "word_count": 311,
+    "question_count": 3,
+    "question_types": [
+      "main_idea",
+      "inference",
+      "vocabulary_in_context"
+    ],
+    "theme": "people put off the tasks they care about most because approaching such a task brings at once the bad feeling of the gap between the work they imagine and the work they could actually produce, and any other job relieves that feeling immediately; the relief is real but borrowed, since each delay raises the standard the eventual work must meet, which widens the gap and makes the next start harder",
+    "estimated_time_min": 5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-03",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted."
+    },
+    "date_added": "2026-10-03",
+    "batch_id": "batch-rc-005",
+    "prompt_version": "content engine v1 + CAT-size brief 2026-10",
+    "reviewer_notes": "A third-person foundation item: a Saturday scene, a mechanism drawn from it, and a third paragraph that turns the relief into a cost. rc-0074 already defines putting things off as the removal of an unpleasant feeling and defends that definition by its predictions; this passage adds two things it does not have: why caring is what charges a task (a task that says something about the person doing it opens a gap between the imagined work and the possible one, a form for the electricity board does not), and the loop by which the delay feeds itself (the longer the work waits, the better it has to be). The main-idea near-tie turns on that loop, and the inference question on the form that says nothing about the person who fills it in; the inference key was kept off the loop so that it does not paraphrase the main-idea key.",
+    "length_class": "short",
+    "structure": "narrative_reflection",
+    "viewpoints": 1,
+    "tone": "observant, sympathetic, wry",
+    "difficulty_vector": {
+      "lexical": 1,
+      "syntactic": 2,
+      "abstraction": 2,
+      "inference_depth": 2,
+      "distractor_similarity": 2,
+      "reasoning_depth": 2,
+      "structural_ambiguity": 1,
+      "time_pressure": 1
+    },
+    "reasoning_patterns": [
+      "struct.example",
+      "struct.cause_effect",
+      "struct.pivot",
+      "comp.central_idea",
+      "comp.supporting_idea",
+      "arg.causal_claim",
+      "arg.example",
+      "inf.strongly_supported",
+      "inf.author_view_application",
+      "word.context_clue",
+      "word.polysemy",
+      "elim.near_tie"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1: the live rival is the option saying a task we care about is put off because starting it would show the gap between the work we imagine and the work we can do. It is the second paragraph exactly and loses only to the third, which turns on 'But the relief is borrowed' and says each delay raises the standard and widens the gap; the key keeps that half. The laziness option is settled by 'Nobody who saw her kitchen would call her lazy' and 'She was not avoiding effort'. Q2: a strong candidate might argue that she would have put the form off along with the story, since dull paperwork is what people usually avoid; the passage sets the form against the story precisely because it 'says nothing about the person who fills it in', and her morning went on 'everything except' the story. The gap option borrows 'the story in her head' and moves it to a task that opens no such gap. Q3: the finalist is the dictionary sense, 'taken from another person for a while'; no other person appears, and the next sentences explain the borrowing as a cost paid later, a higher standard for the first page. 'Bought by doing small jobs instead' is true of the relief but describes a price already paid, the reverse of borrowing.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "mended",
+      "clumsiness",
+      "justify"
+    ]
+  },
+  "passage": {
+    "title": "Everything but the Story",
+    "reading_time_min": 1.7,
+    "paragraphs": [
+      {
+        "id": "rc-0122-p1",
+        "text": "Meera has wanted to write a short story for three years. She knows the plot and even the last line. Last Saturday she kept the whole morning free for it. By noon she had cleaned the fridge, answered eleven emails, sorted her books by colour and mended a dripping tap. She had not written a word. Nobody who saw her kitchen would call her lazy. She had worked hard all morning, at everything except the one task she actually wanted to finish."
+      },
+      {
+        "id": "rc-0122-p2",
+        "text": "She was not avoiding effort. She was avoiding a feeling. Whenever she thought of sitting down to write, she met the gap between the story in her head and the sentences she could actually produce. In her head the story is finished and very good. On the page it would come out slow and clumsy, and the clumsiness would be hers. That gap feels bad, and it feels bad at once. The fridge carried no such risk. Nobody judges a person by how well she cleans a fridge, and every shelf she wiped was visible progress. So each small job bought a few minutes of relief. This is also why people delay the tasks they care about most. A form for the electricity board says nothing about the person who fills it in; a story does."
+      },
+      {
+        "id": "rc-0122-p3",
+        "text": "As a way of managing a bad mood, the delay works, and that is what makes the habit so hard to break. But the relief is borrowed. A story that has waited three years cannot be just a decent story any more. It must be good enough to justify the wait. So every Saturday given to the fridge raises the standard the first page must meet, and a higher standard makes the gap she was escaping even wider. Her kitchen has never been cleaner, and the story has never been harder to start."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0122-q1",
+      "type": "main_idea",
+      "skill": "main_idea",
+      "patterns": [
+        "comp.central_idea",
+        "struct.cause_effect",
+        "elim.near_tie"
+      ],
+      "target_mistake": "stopping at the second paragraph's explanation of the delay and leaving out the third paragraph's point that each delay raises the standard and makes the start harder",
+      "prediction_target": "The learner should be able to say beforehand: people put off what they care about to escape the bad feeling of starting it, but each delay raises the bar and makes starting harder.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "logical_structure"
+      ],
+      "stem": "Which of the following best expresses the main idea of the passage?",
+      "options": {
+        "A": "We put off a task we care about to escape the bad feeling of starting it, and each delay makes the start harder.",
+        "B": "A task we care about gets put off because starting it would show the gap between the work we imagine and the work we can do.",
+        "C": "Putting off a task that matters is a kind of laziness, hidden behind a busy morning of smaller jobs.",
+        "D": "Delay eases the bad feeling an important task brings, and that relief soon leaves a person ready to begin."
+      },
+      "correct": "A",
+      "estimated_time_sec": 70,
+      "explanation": {
+        "expert_notice": "After the opening scene the passage makes two moves. The second paragraph explains the delay: Meera is avoiding the bad feeling of the gap between the story in her head and what she could actually write. The third turns on 'But the relief is borrowed' and adds the cost: each delay raises the standard the first page must meet. A main idea has to carry both moves.",
+        "correct_reasoning": "The correct option holds both halves. 'To escape the bad feeling of starting it' is the second paragraph, where she is avoiding a feeling, not effort. 'Each delay makes the start harder' is the third, where every Saturday given to the fridge widens the gap she was escaping. The scene in the first paragraph is the example that both halves explain.",
+        "passage_anchor": "rc-0122-p2, rc-0122-p3",
+        "question_type_note": "A main-idea answer must need every paragraph. When the last paragraph adds a cost or a twist, the option that stops just before it is the commonest wrong answer.",
+        "reading_habit": "Before you look at the options, say the passage in one sentence that includes its 'but': people delay to escape a feeling, but the delay makes the feeling worse. Then look for the option that keeps the 'but'.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "too_narrow",
+            "why_wrong": "Every word of it matches the second paragraph, and it stops there. It leaves out what the third paragraph adds: the relief is borrowed, and each delay raises the standard and makes the gap wider. That cost is half of what the passage says.",
+            "seductive_element": "It is accurate, and it names the mechanism the passage spends the most sentences on."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage rejects laziness in so many words: 'Nobody who saw her kitchen would call her lazy', and 'She was not avoiding effort.' The busy morning is the evidence against laziness, not a disguise for it.",
+            "seductive_element": "Laziness is the everyday explanation for putting things off, and the option borrows the passage's own picture of a morning spent on small jobs."
+          },
+          {
+            "option": "D",
+            "trap_type": "half_right",
+            "why_wrong": "The first half fits, since the small jobs did bring relief. The second half reverses the third paragraph, which calls the relief borrowed and ends with the story 'never' having been 'harder to start'. The relief makes the next start harder, not easier.",
+            "seductive_element": "Relief sounds like rest, and rest usually leaves a person readier to work."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0122-q2",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.author_view_application",
+        "inf.strongly_supported",
+        "arg.example"
+      ],
+      "target_mistake": "bringing in the everyday idea that dull jobs are the first to be put off, or carrying the story's gap over to a task that says nothing about the person doing it",
+      "prediction_target": "The learner should be able to say beforehand: the form says nothing about her, so, like the fridge, it carries no risk, and she would most likely have done it that morning.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 2,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "application"
+      ],
+      "stem": "The passage suggests that if Meera had also needed to fill in a form for the electricity board that Saturday, she would most likely have",
+      "options": {
+        "A": "put it off along with the story, since dull jobs are the easiest to avoid",
+        "B": "met the same gap between the form in her head and the one on the page",
+        "C": "found it harder to begin than the story, because it mattered less to her",
+        "D": "dealt with it that morning, as one more job that said nothing about her"
+      },
+      "correct": "D",
+      "estimated_time_sec": 75,
+      "explanation": {
+        "expert_notice": "The form appears once, at the end of the second paragraph: 'A form for the electricity board says nothing about the person who fills it in; a story does.' Set that beside how Meera spent the morning: on every job that carried no risk, 'everything except the one task she actually wanted to finish'.",
+        "correct_reasoning": "A form that says nothing about the person filling it in opens no gap between an imagined result and a real one, so it brings none of the bad feeling the story brings. It is like the fridge: a safe job that shows progress. Meera spent the morning on exactly such jobs, so she would most likely have dealt with the form as well.",
+        "passage_anchor": "rc-0122-p1, rc-0122-p2",
+        "question_type_note": "This inference applies the passage's rule to a case it mentions only in passing. State the rule first (tasks that say something about you get put off, tasks that do not get done), then place the new case on the right side of it.",
+        "reading_habit": "When a passage sets two examples against each other in one sentence, as it does the form and the story, ask which side of the argument each one stands on. Inference questions often use the example the passage mentions least.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "common_knowledge_intrusion",
+            "why_wrong": "The passage never says dull jobs are easy to avoid. It says the reverse about jobs like this one: they carry 'no such risk', and Meera spent her whole morning doing them.",
+            "seductive_element": "Everyday experience says that boring paperwork is the first thing people put off."
+          },
+          {
+            "option": "B",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "The gap belongs to the story: it lies between 'the story in her head' and the sentences she could produce. The form 'says nothing about the person who fills it in', so it opens no such gap.",
+            "seductive_element": "It reuses the passage's own picture of a gap between head and page and simply moves it to the form."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage says people delay 'the tasks they care about most'. A task that matters less to her is easier to begin, not harder, which is why the form is set against the story.",
+            "seductive_element": "It sounds reasonable that a task nobody cares about would be hard to get round to."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0122-q3",
+      "type": "vocabulary_in_context",
+      "skill": "vocabulary_in_context",
+      "patterns": [
+        "word.context_clue",
+        "word.polysemy"
+      ],
+      "target_mistake": "choosing the everyday sense of 'borrowed', or giving where the relief came from instead of what the word says about it",
+      "prediction_target": "The learner should be able to say beforehand: the relief is had now and paid for later, by a higher standard and a harder start.",
+      "difficulty": {
+        "inference_depth": 1,
+        "distractor_similarity": 2,
+        "reasoning_depth": 1
+      },
+      "secondary_skills": [
+        "inference"
+      ],
+      "stem": "As it is used in the passage, the word 'borrowed' ('But the relief is borrowed') most nearly means",
+      "options": {
+        "A": "taken from another person for a while",
+        "B": "enjoyed now but paid for later",
+        "C": "bought by doing small jobs instead",
+        "D": "copied from someone else's work"
+      },
+      "correct": "B",
+      "estimated_time_sec": 40,
+      "explanation": {
+        "expert_notice": "The sentences on either side define the word. Just before it, the delay 'works' as a way of managing a bad mood. Just after it, the passage gives the cost: a story that has waited three years must justify the wait, so each delay raises the standard the first page must meet.",
+        "correct_reasoning": "Borrowing gives you something now and makes you pay later. That is the sense here: the relief is enjoyed at once, and the price arrives afterwards as a higher standard and a wider gap. No other person is involved and nothing is copied.",
+        "passage_anchor": "rc-0122-p3",
+        "question_type_note": "A word-in-context question asks for the sense the sentence forces, which is often a figure of speech. The word's everyday meaning is the usual trap.",
+        "reading_habit": "When a familiar word is used about something unusual, such as relief being borrowed, read the next two sentences. Writers who use a word as a figure usually explain the figure straight away.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "near_synonym_confusion",
+            "why_wrong": "This is the dictionary sense, and no second person appears anywhere in the sentence. The relief comes from Meera's own small jobs; what makes it 'borrowed' is that it has to be paid back later.",
+            "seductive_element": "It is the first meaning of 'borrowed' that anyone would give."
+          },
+          {
+            "option": "C",
+            "trap_type": "true_but_irrelevant",
+            "why_wrong": "Each small job did buy 'a few minutes of relief', but that is where the relief came from, not what 'borrowed' says about it. Something bought is already paid for; something borrowed must be paid back, and the next sentences give the later price: a higher standard for the first page.",
+            "seductive_element": "It repeats a true detail from the second paragraph about how the relief was obtained."
+          },
+          {
+            "option": "D",
+            "trap_type": "out_of_scope",
+            "why_wrong": "Nothing in the passage is copied from anyone. The word describes relief, not the contents of the story, so the sense of taking another writer's work has no place here.",
+            "seductive_element": "The passage is about writing a story, and 'borrowed' is often said of ideas taken from other writers."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "mended",
+      "passage_use": "sorted her books by colour and mended a dripping tap",
+      "meaning_here": "repaired something that was broken or not working",
+      "difficulty": "easy"
+    },
+    {
+      "word": "clumsiness",
+      "passage_use": "and the clumsiness would be hers",
+      "meaning_here": "awkwardness; the quality of something done without skill or grace",
+      "difficulty": "easy"
+    },
+    {
+      "word": "justify",
+      "passage_use": "It must be good enough to justify the wait.",
+      "meaning_here": "to give a good enough reason for something, so that it seems worth it",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "A short scene, an explanation of it, and a cost added at the end. Keep track of what the delay gives Meera and what it takes away.",
+    "one_sentence_summary": "Meera spends a free morning on every job except the story she wants to write, not out of laziness but to escape the bad feeling of the gap between the story she imagines and the one she could write; the relief works, but it is borrowed, because each delay raises the standard the story must meet and makes the next start harder.",
+    "main_idea": "People often put off the task they care about most, not because they are lazy but because starting it brings an immediate bad feeling. Other jobs relieve that feeling at once. The relief has a cost: each delay raises the bar the work must clear, and that makes starting even harder.",
+    "simple_explanation": "Meera has wanted to write a short story for three years. Last Saturday she cleared the whole morning for it, and then spent the morning cleaning the fridge, answering emails, sorting books and mending a tap. She worked hard, so she was not being lazy. She simply did everything except the story.\n\nThe writer explains why. Whenever Meera thought of writing, she met a gap: the story in her head is finished and very good, but on paper it would come out slow and clumsy, and that clumsiness would be hers. Facing that gap feels bad straight away. Cleaning a fridge cannot make her feel like that, because nobody judges a person by her fridge, and every wiped shelf shows progress. So each little job gave her a few minutes of relief. This is why people put off the things they care about most: a dull form says nothing about you, but a story does.\n\nThen comes the cost. The delay works, which is why the habit sticks, but the relief is borrowed. After three years of waiting, the story cannot be just decent; it has to be good enough to make the wait worthwhile. So each Saturday spent on other jobs raises the bar for the first page, which makes the gap wider and the next start even harder. Her kitchen is spotless, and the story is harder to begin than ever.",
+    "why_difficult": "The language is easy and the scene is familiar, which tempts a reader to bring in a familiar explanation, laziness or lack of time, or to stop at the second paragraph. The third paragraph changes the picture: the same delay that eases the feeling makes it worse later. A reader who skims it picks the summary that stops halfway, or the one that says relief leads to a fresh start.",
+    "author_intention": "To explain a common and puzzling habit through one ordinary Saturday, to clear away the charge of laziness, and to show the cost hidden inside the relief.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0122-p1",
+        "role": "Sets the scene",
+        "note": "Meera keeps a morning free for her story and spends it on every other job. She works hard, so laziness cannot be the reason."
+      },
+      {
+        "paragraph_id": "rc-0122-p2",
+        "role": "Explains the delay",
+        "note": "Starting the story means facing the gap between the story she imagines and the clumsy one she could write. Small jobs carry no such risk and give quick relief."
+      },
+      {
+        "paragraph_id": "rc-0122-p3",
+        "role": "Shows the cost",
+        "note": "The relief is borrowed. Each delay means the story must be better to justify the wait, so the gap grows and starting gets harder."
+      }
+    ],
+    "tone_progression": "Observant and gently amused in the first paragraph, plainly explanatory in the second, and wry at the close, where the clean kitchen becomes the measure of the unwritten story.",
+    "key_transitions": [
+      "'She was not avoiding effort. She was avoiding a feeling.' (opening of paragraph 2): the scene becomes an explanation.",
+      "'But the relief is borrowed.' (paragraph 3): the explanation turns to what the delay costs."
+    ],
+    "misunderstanding": "A hurried reader thinks the passage is about laziness or about being too busy, or stops at the idea that people avoid a bad feeling. The last paragraph says more: the relief that makes the delay attractive also raises the standard the work must meet, so the delay feeds itself.",
+    "traps_summary": "The options try the everyday ideas the passage rejects (laziness, dull jobs being the first to be put off), a summary that stops before the last paragraph, a claim that relief leads to a fresh start, the story's gap carried over to a form that says nothing about Meera, and the plain dictionary meaning of 'borrowed'.",
+    "reading_lesson": "When a passage explains a habit, look for the paragraph that says what the habit costs. Words such as 'but' and a figure such as 'borrowed' often mark the point where an explanation becomes an argument, and main-idea questions check whether you kept it.",
+    "real_world": "The same pattern shows up with a job application, a difficult phone call or a thesis chapter: the longer it waits, the more it has to be worth the wait, and the harder it becomes to begin.",
+    "takeaway": "The relief of putting something off is paid for later, with a higher bar and a harder start.",
+    "reflection_question": "Which task have you been putting off the longest, and has the wait made it feel bigger or smaller?",
+    "eli10": {
+      "big_idea": "We put off the jobs we care about to avoid a bad feeling, but every delay makes the job harder to start.",
+      "story": "Meera wants to write a story. She has wanted to for three years. On Saturday she kept the morning free. Then she cleaned the fridge, answered emails and fixed a tap. She wrote nothing. Was she lazy? No. She worked hard all morning. She was running from a feeling. In her head, the story is perfect. On paper, it would come out clumsy, and that would feel bad. Cleaning a fridge cannot feel bad like that. Nobody judges you by your fridge. So each little job gave her some relief. That is why we put off the things we care about most. But the relief has a price. After three years, the story must be very good to be worth the wait. So each delay makes starting even harder. Her kitchen is spotless. Her story is still not started.",
+      "paragraphs": [
+        "Tells a story: Meera spends a free morning on every job except the story she wants to write.",
+        "Explains why: starting the story brings a bad feeling, and small jobs give quick relief.",
+        "Shows the cost: every delay raises the bar, so the story gets harder to start."
+      ],
+      "author_view": "The writer is kind to Meera and a little amused, and sees the delay as a trap that tightens the longer it lasts."
+    }
+  }
+}

@@ -1,0 +1,334 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0118",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 85,
+    "genre": "education",
+    "difficulty": "easy",
+    "difficulty_numeric": 1,
+    "stage": "foundation",
+    "skills": [
+      "main-idea-extraction",
+      "inference",
+      "vocabulary-in-context",
+      "qualifier-tracking"
+    ],
+    "word_count": 286,
+    "question_count": 3,
+    "question_types": [
+      "main_idea",
+      "inference",
+      "vocabulary_in_context"
+    ],
+    "theme": "handwritten notes tend to be remembered better because a hand too slow to copy a lecturer must choose and compress, and that choosing is the thinking that is remembered; so the advantage stops wherever the hand can keep up, as with slow dictation or copied slides, and wherever an exact record matters more than a memory",
+    "estimated_time_min": 4.5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-03",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted."
+    },
+    "date_added": "2026-10-03",
+    "batch_id": "batch-rc-005",
+    "prompt_version": "content engine v1 + CAT-size brief 2026-10",
+    "reviewer_notes": "A claim with its limit, in the second person. The finding that longhand notes beat typed ones is usually reported with the pen as the hero; this passage puts the cause in the gap between the speed of speech and the speed of a hand, and the limits follow from the cause: no gap, no advantage, and a loss wherever a word-for-word record is the goal. Related to rc-0107 (a difficulty pays only when it forces the right operation), but the specific idea here is the speed gap and the two conditions under which it stops mattering.",
+    "vocab_extracted": [
+      "share",
+      "dictates",
+      "record"
+    ],
+    "length_class": "short",
+    "structure": "claim_qualification",
+    "viewpoints": 1,
+    "tone": "practical, direct, measured",
+    "difficulty_vector": {
+      "lexical": 1,
+      "syntactic": 2,
+      "abstraction": 2,
+      "inference_depth": 2,
+      "distractor_similarity": 2,
+      "reasoning_depth": 2,
+      "structural_ambiguity": 1,
+      "time_pressure": 1
+    },
+    "reasoning_patterns": [
+      "struct.claim_evidence",
+      "struct.qualification",
+      "struct.cause_effect",
+      "struct.contrast",
+      "comp.central_idea",
+      "arg.causal_claim",
+      "arg.qualification",
+      "scope.condition",
+      "inf.author_view_application",
+      "inf.vs_speculation",
+      "word.context_clue",
+      "word.near_synonym",
+      "elim.near_tie"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1: the near-tie is the option saying handwritten notes are remembered better because a hand too slow to copy must put each point in fewer words. It is accurate and stops at the end of the second paragraph; the third paragraph's opening, 'This also shows where the advantage stops', is what the key keeps and it drops. The option crediting the act of forming letters is ruled out by 'the reason is not the pen itself. It is speed.' Q2: a strong candidate may argue that the hand-copier will remember better, since that is the passage's general claim; the third paragraph removes this case from it: 'It stops wherever the hand can keep up.' The option saying the copier will forget sooner than a typist overreaches from 'no advantage' to 'a disadvantage'. Q3: the live rival is 'writing with a pen rather than on a keyboard', because the same sentence mentions the pen; 'with either tool' settles it.",
+      "blind_solve": null
+    }
+  },
+  "passage": {
+    "title": "Too Slow to Copy",
+    "reading_time_min": 1.5,
+    "paragraphs": [
+      {
+        "id": "rc-0118-p1",
+        "text": "If you take notes in a lecture with a pen, you will probably remember more of it a week later than a friend who typed. Studies of students have found this often enough to take seriously, and the reason is not the pen itself. It is speed. A lecturer may say a hundred and fifty words a minute. A typist can keep up with a good share of them, word for word. Your hand cannot come close, so you are forced to decide, as the lecture goes on, what each point was and how to say it in fewer words."
+      },
+      {
+        "id": "rc-0118-p2",
+        "text": "That decision is where the memory is made. Suppose the lecturer spends a minute explaining why onion prices jumped after a poor harvest. Your friend's screen fills with the lecturer's sentences. Your page says 'bad crop, less supply, price up'. To write those six words you had to understand the minute and find your own words for it. That small piece of thinking is what stays with you. The typed notes are fuller, but less happened in the typist's head on the way to the screen."
+      },
+      {
+        "id": "rc-0118-p3",
+        "text": "This also shows where the advantage stops. It stops wherever the hand can keep up. If a teacher dictates slowly, or you copy the lines on a slide, you are transcribing with either tool, and the pen forces no choices. It stops, too, when what you need is an exact record rather than a memory: a list of dates, a chemical formula, a sentence you mean to quote. There the slow hand simply loses what it could not catch. Take the pen to a lecture you want to understand, and the keyboard to one whose every word you will need."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0118-q1",
+      "type": "main_idea",
+      "skill": "main_idea",
+      "patterns": [
+        "comp.central_idea",
+        "arg.qualification",
+        "elim.near_tie"
+      ],
+      "target_mistake": "keeping the claim and dropping its limits, or crediting the pen itself with what the passage credits to the gap in speed",
+      "prediction_target": "The learner should be able to say beforehand: handwriting helps because the slow hand must summarise, and the help ends where the hand can keep up or where every word is needed.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "scope"
+      ],
+      "stem": "Which of the following best expresses the main idea of the passage?",
+      "options": {
+        "A": "Forming each letter by hand fixes words in the memory in a way that pressing keys on a keyboard never can.",
+        "B": "A slow hand aids memory by forcing you to summarise, so it stops helping when copying is possible or every word counts.",
+        "C": "Typed notes are of little real use, because a typist simply copies down whatever the lecturer happens to say.",
+        "D": "Handwritten notes are remembered better because a hand too slow to copy a whole lecture must put each point in fewer words."
+      },
+      "correct": "B",
+      "estimated_time_sec": 70,
+      "explanation": {
+        "expert_notice": "The first paragraph names the cause in two short sentences, 'the reason is not the pen itself. It is speed.', and the third opens with 'This also shows where the advantage stops.' A main idea needs both the cause and the stopping point.",
+        "correct_reasoning": "The correct option has both parts. The slow hand forces you to summarise, which is the first two paragraphs, and it stops helping when copying is possible or every word counts, which is the third: the advantage stops wherever the hand can keep up, and where an exact record is needed. It also keeps the passage's cause, speed, rather than the pen.",
+        "passage_anchor": "rc-0118-p1, rc-0118-p3",
+        "question_type_note": "When a passage spends a whole paragraph limiting its own claim, the limit is part of the main idea. An option that states only the claim is the near-miss.",
+        "reading_habit": "Look for the sentence that says where something stops working. In a claim-and-limit passage it is usually the first sentence of the last paragraph.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "common_knowledge_intrusion",
+            "why_wrong": "The passage rules this out in its second sentence: 'the reason is not the pen itself. It is speed.' It adds that copying slowly by hand brings no advantage at all, which could not be true if forming the letters were what helped.",
+            "seductive_element": "Many people believe that writing by hand has a special effect on memory, and the passage is about handwriting."
+          },
+          {
+            "option": "C",
+            "trap_type": "extreme_language",
+            "why_wrong": "The passage says typed notes are fuller and recommends the keyboard for any lecture whose every word you will need. It never calls typed notes useless.",
+            "seductive_element": "The passage does say that little happens in the typist's head, which can sound like a dismissal of typing."
+          },
+          {
+            "option": "D",
+            "trap_type": "too_narrow",
+            "why_wrong": "Everything in it is true, and it stops at the end of the second paragraph. The third paragraph's limits, where the hand can keep up and where an exact record is needed, are left out.",
+            "seductive_element": "It states the passage's explanation clearly and in the passage's own terms."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0118-q2",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.author_view_application",
+        "scope.condition",
+        "inf.vs_speculation"
+      ],
+      "target_mistake": "applying the handwriting advantage outside the condition the author attaches to it, or turning 'no advantage' into 'a disadvantage'",
+      "prediction_target": "The learner should be able to say beforehand: if the hand can keep up, nothing forces a summary, so the student who copies by hand gets no special benefit.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 2,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "application",
+        "scope"
+      ],
+      "stem": "It can be inferred from the passage that a student who copies down, by hand, a slow teacher's dictation",
+      "options": {
+        "A": "will forget it sooner than a classmate who typed the dictation",
+        "B": "must decide what each point was and put it in fewer words",
+        "C": "gets little of the advantage handwriting usually brings",
+        "D": "will remember it better than a classmate who typed it"
+      },
+      "correct": "C",
+      "estimated_time_sec": 80,
+      "explanation": {
+        "expert_notice": "The third paragraph sets the condition directly: the advantage 'stops wherever the hand can keep up', and slow dictation is its first example. The only work is to notice that the stem describes exactly that case.",
+        "correct_reasoning": "When a teacher dictates slowly, the passage says, 'you are transcribing with either tool, and the pen forces no choices'. Without the forced choosing there is nothing for handwriting to add, so the student gets little of its usual advantage. That is as far as the passage allows us to go.",
+        "passage_anchor": "rc-0118-p3",
+        "question_type_note": "Inference questions often hand you a case and ask what the author's rule says about it. First check whether the case meets the rule's condition; here it is the very case the rule excludes.",
+        "reading_habit": "When an author gives a cause, ask what happens when the cause is absent. A passage that explains why something works usually tells you, at least in passing, when it will not.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "The passage says the advantage disappears, not that the student who copies by hand ends up worse off than a typist. Losing an advantage is not the same as suffering a disadvantage.",
+            "seductive_element": "If handwriting no longer helps, it is a short, careless step to thinking that it now hurts."
+          },
+          {
+            "option": "B",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "These are the first paragraph's words, but they describe a student whose hand cannot keep up with a fast lecturer. With slow dictation the hand keeps up, and the passage says the pen forces no choices.",
+            "seductive_element": "It is the passage's own description of what handwriting makes you do."
+          },
+          {
+            "option": "D",
+            "trap_type": "opposite_direction",
+            "why_wrong": "This is the general claim of the first paragraph, applied to the one situation the third paragraph excludes from it. With slow dictation both students are simply transcribing.",
+            "seductive_element": "It is what the passage says about handwriting in general, so it looks like the safe answer."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0118-q3",
+      "type": "vocabulary_in_context",
+      "skill": "vocabulary_in_context",
+      "patterns": [
+        "word.context_clue",
+        "word.near_synonym",
+        "struct.contrast"
+      ],
+      "target_mistake": "tying the word to the pen because the sentence mentions the pen, or giving it the meaning of the summarising it is contrasted with",
+      "prediction_target": "The learner should be able to say beforehand: here it means copying words down exactly as they come, which can be done with a pen or a keyboard.",
+      "difficulty": {
+        "inference_depth": 1,
+        "distractor_similarity": 2,
+        "reasoning_depth": 1
+      },
+      "secondary_skills": [
+        "specific_detail"
+      ],
+      "stem": "As it is used in the passage, the word 'transcribing' most nearly means",
+      "options": {
+        "A": "taking words down exactly as they are given",
+        "B": "cutting what is said down to its main points",
+        "C": "writing with a pen rather than on a keyboard",
+        "D": "making notes of any kind during a class"
+      },
+      "correct": "A",
+      "estimated_time_sec": 40,
+      "explanation": {
+        "expert_notice": "The sentence gives two examples, a teacher who dictates slowly and the lines on a slide, and then says 'with either tool'. So the word cannot be about the pen, and it names what happens when the hand keeps up.",
+        "correct_reasoning": "Taking down a dictation or the lines on a slide means putting the words down exactly as they come, and the sentence says this happens 'with either tool'. The correct option gives that sense and nothing more.",
+        "passage_anchor": "rc-0118-p3",
+        "question_type_note": "A word-in-context question is settled by the sentence around the word. Find the examples or contrasts beside it before you read the options.",
+        "reading_habit": "When you meet an unfamiliar word, look for examples in the same sentence. Writers often define a word by showing two cases of it.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "opposite_direction",
+            "why_wrong": "This is what the passage says the slow hand is forced to do in a fast lecture, the very thing transcribing is set against.",
+            "seductive_element": "It describes good note-taking, which is what the passage praises."
+          },
+          {
+            "option": "C",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "The sentence says you are transcribing 'with either tool', so the word cannot mean writing with a pen in particular.",
+            "seductive_element": "The same sentence mentions the pen, so the word seems to belong to it."
+          },
+          {
+            "option": "D",
+            "trap_type": "wrong_abstraction_level",
+            "why_wrong": "The passage uses the word for one kind of note-taking, the word-for-word kind. Most of the notes it praises, the six-word summary for example, are not transcribing at all.",
+            "seductive_element": "Transcribing is a kind of note-taking, so the wider meaning seems to include the right one."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "share",
+      "passage_use": "A typist can keep up with a good share of them, word for word.",
+      "meaning_here": "a part or portion of a larger whole",
+      "difficulty": "easy"
+    },
+    {
+      "word": "dictates",
+      "passage_use": "If a teacher dictates slowly",
+      "meaning_here": "speaks words aloud so that others can write them down",
+      "difficulty": "easy"
+    },
+    {
+      "word": "record",
+      "passage_use": "when what you need is an exact record rather than a memory",
+      "meaning_here": "a written copy kept so that it can be checked later",
+      "difficulty": "easy"
+    }
+  ],
+  "mentor": {
+    "challenge": "A practical passage that makes a claim and then marks its own limits. Notice the sentence that names the real cause.",
+    "one_sentence_summary": "Notes taken by hand tend to be remembered better because a hand too slow to copy a lecturer must choose and compress, and that choosing is the thinking you remember; the advantage disappears where the hand can keep up, as with slow dictation or slides, and where you need an exact record.",
+    "main_idea": "Writing by hand helps memory not because of the pen but because it is slow. A slow hand cannot copy everything, so it forces you to summarise, and summarising is what makes you remember. Where nothing forces you to summarise, or where you need every word, the advantage is gone.",
+    "simple_explanation": "People who take lecture notes by hand often remember more than people who type. The author says the reason is not the pen. It is speed. A lecturer talks fast. A typist can keep up with a lot of it, word for word. A hand cannot, so the person writing by hand has to decide what each point was and put it in fewer words.\n\nThat deciding is what builds the memory. If the lecturer explains why onion prices rose after a bad harvest, the typist's screen fills with the lecturer's sentences, but the hand-writer writes 'bad crop, less supply, price up'. To write those six words, you had to understand the point. The typed notes are longer, but less thinking went into them.\n\nThen the author shows where this stops. If the teacher speaks slowly enough for the hand to keep up, or you are copying a slide, you are just copying either way, and the pen gives no advantage. And if you need an exact record, such as dates, a formula or a quotation, the slow hand loses things. So use a pen when you want to understand, and a keyboard when you need every word.",
+    "why_difficult": "The language is simple and the advice sounds familiar, which tempts readers to stop at the familiar part. The passage's real point is the cause, speed rather than the pen, and the cause is what tells you where the advantage ends.",
+    "author_intention": "To replace a vague faith in the pen with a precise cause, and to use that cause to show a student exactly when the pen helps and when it does not.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0118-p1",
+        "role": "States the claim",
+        "note": "Handwritten notes tend to be remembered better, and the reason is speed: the hand cannot keep up, so it must decide what matters."
+      },
+      {
+        "paragraph_id": "rc-0118-p2",
+        "role": "Shows the mechanism",
+        "note": "Putting a point into your own few words takes understanding, and that is what stays with you; the typist's fuller notes took less thought."
+      },
+      {
+        "paragraph_id": "rc-0118-p3",
+        "role": "Sets the limits",
+        "note": "The advantage stops where the hand can keep up and where an exact record is needed, so the tool should suit the job."
+      }
+    ],
+    "tone_progression": "Direct and confident from the start, concrete in the middle with the onion-price example, and practical at the end, where the limits become advice.",
+    "key_transitions": [
+      "'the reason is not the pen itself. It is speed.' (paragraph 1): the passage names its cause.",
+      "'This also shows where the advantage stops.' (opening of paragraph 3): the claim turns into its limits."
+    ],
+    "misunderstanding": "A hurried reader takes the passage as a simple instruction to write by hand. It is narrower than that: the pen helps only when it is too slow to copy, and the passage itself recommends the keyboard when every word matters.",
+    "traps_summary": "The wrong options give the pen the credit the passage gives to speed, stop the main idea before the limits, overstate the case against typing, and apply the general claim to the very case the third paragraph excludes.",
+    "reading_lesson": "When a passage names a cause, use it to predict the limits before you read them. If speed is the cause, then wherever speed stops mattering the effect should stop too, and that is exactly where this passage goes.",
+    "real_world": "The same logic applies to any study method: a summary you write yourself works because it makes you decide what matters, and anything that does the deciding for you, however neat, takes that benefit away.",
+    "takeaway": "The pen helps only when it is too slow to copy.",
+    "reflection_question": "When you take notes, are you deciding what matters, or only copying?",
+    "eli10": {
+      "big_idea": "Writing notes by hand helps you remember because your hand is too slow to copy, so you must think.",
+      "story": "Some students take notes with a pen. Others type. The pen students often remember more. Why? It is not magic in the pen. It is speed. A teacher talks fast. A typist can copy many of the words. A hand cannot keep up. So the pen student must pick the main point and say it short. Say the teacher explains why onion prices went up. The typist copies down the teacher's sentences. The pen student writes: bad crop, less supply, price up. To write that, you had to understand it. That thinking is what you remember. But the trick has limits. If the teacher speaks slowly, your hand can copy everything. Then the pen gives no help. And sometimes you need every exact word, like a date or a formula. Then typing is better.",
+      "paragraphs": [
+        "Makes a claim: pen notes are remembered better, because the slow hand must choose what to write.",
+        "Gives an example: writing 'bad crop, less supply, price up' means you understood the point.",
+        "Shows the limits: no help if the hand can keep up, or if you need every word."
+      ],
+      "author_view": "The writer thinks the pen really helps, but only for a clear reason, and is careful to say when it does not."
+    }
+  }
+}

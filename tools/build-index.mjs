@@ -65,6 +65,8 @@ function mirror(type, item) {
         title: item.passage.title, theme: m.theme, schema_version: v, stage: m.stage, version: m.version,
         question_types: uniq(item.questions.map((q) => q.type)),
       };
+      // A real, public-domain essay names its source on the Reading House shelf.
+      if (src.publication && src.publication !== 'original') row.real_source = src.publication;
       if (v >= 5) Object.assign(row, {
         length_class: m.length_class, structure: m.structure,
         skills_trained: uniq(item.questions.map((q) => q.skill)),
@@ -204,7 +206,7 @@ export const BOOT_FIELDS = Object.freeze([
   'length_class', 'structure', 'skills_trained', 'skills',
   'kind', 'kinds', 'genres', 'band', 'letter', 'entry_count', 'language',
   'item_count', 'item_ids', 'member_count',
-  'root_origin', 'root_meaning', 'garden', 'word', 'gap_function', 'sentence_count',
+  'root_origin', 'root_meaning', 'garden', 'word', 'gap_function', 'sentence_count', 'real_source',
 ]);
 
 export function bootIndexFrom(index) {

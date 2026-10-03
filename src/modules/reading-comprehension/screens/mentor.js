@@ -2,6 +2,12 @@
  * mentor.js (screen) — the Learning Page: what turns "I scored 4/5"
  * into "I understand this now." One of CAT OS's signature surfaces.
  *
+ * 3.2: it opens on "Explained simply" (mentor.eli10): the big idea, the
+ * passage told the way you would tell a ten-year-old, one line per
+ * paragraph, and what the writer thinks. Everything below folds under "Go
+ * deeper". The whole page is the extra a rewarded ad will one day open
+ * (core/ads/rewarded.js); in this build it is free.
+ *
  * Design intent (0.6.0): a chapter from a beautiful book. A calm
  * monochrome illustration drawn for THIS passage's theme, then the
  * sections a mentor would actually walk you through:
@@ -30,6 +36,7 @@ import { SEED_LINES } from '../../../core/mentor/garden-voice.js';
 import { escapeHTML } from '../../../core/utils/format.js';
 import { toast } from '../../../ui/components/cat-toast.js';
 import { cue } from '../../../core/engagement/feedback.js';
+import { isUnlocked, unlockWithAd } from '../../../core/ads/rewarded.js';
 import '../../../ui/components/cat-reflection.js';
 
 /* ------------------------------------------------------------------ */
@@ -297,7 +304,7 @@ export async function renderMentor(outlet, { storage }, params) {
   } catch (err) {
     outlet.innerHTML = `<section class="screen"><h1>Can't open the Learning Page</h1>
       <div class="card"><p>${escapeHTML(err.message)}</p>
-      <p class="muted"><a href="#/rc">Back to the library</a></p></div></section>`;
+      <p class="muted"><a href="#/world/place/reading-room">Back to the Reading House</a></p></div></section>`;
     return;
   }
 
@@ -317,7 +324,39 @@ export async function renderMentor(outlet, { storage }, params) {
     return;
   }
 
+  /* The explanation of a whole passage is the extra a rewarded ad will one
+     day open (core/ads/rewarded.js). Today no ad is wired, so this is open. */
+  const key = `explain:${item.meta.id}`;
+  if (!isUnlocked(key)) {
+    outlet.innerHTML = `
+      <section class="screen">
+        <div class="session-bar"><a href="#/world/place/reading-room">← The Reading House</a></div>
+        <article class="mentor">
+          <header class="mentor__hero">
+            <p class="screen__eyebrow">Explain this passage simply</p>
+            <h1 class="mentor__title">${escapeHTML(item.passage.title)}</h1>
+          </header>
+          <div class="card mentor__lock">
+            <p>The whole passage in plain words, paragraph by paragraph, and what the writer really thinks. Watch one short video to open it. It stays open on this device.</p>
+            <button class="btn btn--primary" id="unlock">Watch and open</button>
+            <p class="hint" id="unlock-said" role="status" aria-live="polite"></p>
+          </div>
+        </article>
+      </section>`;
+    const btn = outlet.querySelector('#unlock');
+    btn.addEventListener('click', async () => {
+      btn.disabled = true;
+      btn.textContent = 'Playing…';
+      if (await unlockWithAd(key)) { if (outlet.isConnected) renderMentor(outlet, { storage }, params); return; }
+      btn.disabled = false;
+      btn.textContent = 'Watch and open';
+      outlet.querySelector('#unlock-said').textContent = 'The video did not finish, so the explanation is still closed. Try again any time.';
+    });
+    return;
+  }
+
   const vocab = item.vocabulary ?? [];
+  const kid = mentor.eli10; // the passage told as you would tell a ten-year-old; the expert page folds under it
 
   // The Gate, inward (LANGUAGE_GARDEN_BIBLE §19.2): a word met here that
   // matches a garden family still open ground can be carried back and
@@ -352,7 +391,7 @@ export async function renderMentor(outlet, { storage }, params) {
   outlet.innerHTML = `
     <section class="screen">
       <div class="session-bar">
-        <a href="#/rc">← Journey</a>
+        <a href="#/world/place/reading-room">← The Reading House</a>
         ${last ? `<a href="#/rc/review/${item.meta.id}">Your answers</a>` : ''}
       </div>
 
@@ -363,8 +402,22 @@ export async function renderMentor(outlet, { storage }, params) {
           </div>
           <p class="screen__eyebrow">Learning page · ${escapeHTML(item.meta.genre)} · ${escapeHTML(item.meta.stage ?? '')}</p>
           <h1 class="mentor__title">${escapeHTML(item.passage.title)}</h1>
-          <p class="mentor__lede">${escapeHTML(item.meta.theme)}</p>
+          ${kid ? '' : `<p class="mentor__lede">${escapeHTML(item.meta.theme)}</p>`}
+          ${item.meta.source?.publication && item.meta.source.publication !== 'original' ? `<p class="mentor__lede"><i>From ${escapeHTML(item.meta.source.publication)}</i></p>` : ''}
         </header>
+
+        ${kid ? `
+          <section class="mentor__section mentor__simple">
+            <div class="mentor__mark"><h2>Explained simply</h2><div class="rule"></div></div>
+            <p class="mentor__one-line">${escapeHTML(kid.big_idea)}</p>
+            <div class="mentor__plain">${prose(kid.story)}</div>
+            <h3 class="mentor__subhead">Paragraph by paragraph</h3>
+            <ol class="journey">${kid.paragraphs.map((line, i) => `<li data-n="${i + 1}"><p class="note">${escapeHTML(line)}</p></li>`).join('')}</ol>
+            <p class="mentor__view"><b>What the writer thinks.</b> ${escapeHTML(kid.author_view)}</p>
+          </section>` : ''}
+
+        <details class="mentor__deeper"${kid ? '' : ' open'}>
+        <summary>Go deeper: the full breakdown</summary>
 
         ${section('What was this actually about?', `
           <details class="mentor__recall">
@@ -376,7 +429,7 @@ export async function renderMentor(outlet, { storage }, params) {
             </div>
           </details>`)}
 
-        ${mentor.simple_explanation ? section('The passage, explained simply', `
+        ${mentor.simple_explanation ? section('The passage, retold in full', `
           <div class="mentor__plain">${prose(mentor.simple_explanation)}</div>`) : ''}
 
         ${section('What was the author doing?', `<p>${escapeHTML(mentor.author_intention)}</p>`)}
@@ -421,6 +474,7 @@ export async function renderMentor(outlet, { storage }, params) {
           <blockquote class="mentor__keep">${escapeHTML(mentor.takeaway)}</blockquote>`)}
 
         ${section('Where life will show you this again', `<p>${escapeHTML(mentor.real_world)}</p>`)}
+        </details>
       </article>
 
       <div class="mentor-actions">
@@ -450,7 +504,7 @@ export async function renderMentor(outlet, { storage }, params) {
           ${last
             ? `<a class="btn" href="#/rc/review/${item.meta.id}">Review answers</a>`
             : `<a class="btn" href="#/rc/session/${item.meta.id}">Practice this passage</a>`}
-          <a class="btn btn--primary" href="#/rc">Continue the journey</a>
+          <a class="btn btn--primary" href="#/world/place/reading-room">Next passage</a>
         </div>
       </div>
     </section>

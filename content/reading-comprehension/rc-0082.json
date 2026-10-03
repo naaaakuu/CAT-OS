@@ -17,17 +17,16 @@
       "tone-detection",
       "scope-control"
     ],
-    "word_count": 669,
-    "question_count": 5,
+    "word_count": 595,
+    "question_count": 4,
     "question_types": [
       "author_purpose",
       "inference",
-      "must_be_true",
       "specific_detail",
       "tone"
     ],
     "theme": "why an undisputed distinction between repeatability and closeness to the truth keeps collapsing in practice, diagnosed as an asymmetry in what an apparatus can certify about itself, illustrated by published values that moved together while their quoted intervals stayed narrow, and prescribed for by labelling which of the two a number is rather than by more careful language",
-    "estimated_time_min": 10,
+    "estimated_time_min": 8,
     "source": {
       "publication": "original",
       "url": null,
@@ -38,8 +37,8 @@
     "date_added": "2026-09-13",
     "batch_id": "batch-rc-003",
     "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-05",
-    "reviewer_notes": "The diagnosis is an asymmetry rather than a fault, which is what keeps the tone question hard: everything in the passage sounds like an accusation and the author twice refuses to make one. The prescription is deliberately smaller than the diagnosis, and the concession that the intervals remain worth having sits immediately before it, which is where the purpose and inference questions are decided.",
-    "length_class": "long",
+    "reviewer_notes": "The diagnosis is an asymmetry rather than a fault, which is what keeps the tone question hard: everything in the passage sounds like an accusation and the author twice refuses to make one. The prescription is deliberately smaller than the diagnosis, and the concession that the intervals remain worth having sits immediately before it, which is where the purpose and inference questions are decided. 2026-10-03 CAT-size pass: 669→595 words, 5→5 paragraphs, 5→4 questions. No paragraph dropped, since each of the five carries a step (puzzle, asymmetry, drift, record, remedy); tightened them by cutting asides, one restatement and the aphoristic closer; dropped q1 (must-be-true), which tested the same clustering-versus-truth point as the kept inference question.",
+    "length_class": "medium",
     "structure": "problem_diagnosis_prescription",
     "viewpoints": 1,
     "tone": "exacting, unaccusing, practical at the close",
@@ -83,7 +82,7 @@
     ],
     "quality": {
       "status": "reviewed",
-      "adversarial_review": "Q1's live rival is the option that an accurate measurement repeated often enough becomes precise, which treats one of the two as producing the other; the passage makes them independent in the second sentence and gives both crossed cases. Q2's rival is the indignant reading, which every image in the passage invites and which two sentences forbid, the one saying no deception is involved anywhere and the one locating the drift in which quantity happens to be cheap. Q3's rival is the option about abandoning reported uncertainties, which the concession expressly refuses by calling the intervals a good number honestly described and worth more than two vague ones. Q4's rival is the option that disagreement between methods shows which one is accurate, which uses a real device of the prescription and draws from it a conclusion the passage never permits, since agreement and disagreement are both evidence about the pair rather than about either member. Q5's rival is the option about mattering to the question the scientist is answering, which is true of accuracy and therefore the wrong member of the pair for a stem about what can be established from the readings.",
+      "adversarial_review": "Q1's live rival is the option that an accurate measurement repeated often enough becomes precise, which treats one of the two as producing the other; the passage makes them independent in the second sentence and gives both crossed cases. Q2's rival is the indignant reading, which every image in the passage invites and which two sentences forbid, the one saying no deception is involved anywhere and the one locating the drift in which quantity happens to be cheap. Q3's rival is the option about abandoning reported uncertainties, which the concession expressly refuses by calling the intervals a good number honestly described and worth more than two vague ones. Q4's rival is the option that disagreement between methods shows which one is accurate, which uses a real device of the prescription and draws from it a conclusion the passage never permits, since agreement and disagreement are both evidence about the pair rather than about either member. Q5's rival is the option about mattering to the question the scientist is answering, which is true of accuracy and therefore the wrong member of the pair for a stem about what can be established from the readings. (2026-10-03, CAT-size pass: q1 was dropped, so any note above about it no longer applies.)",
       "blind_solve": null
     },
     "vocab_extracted": [
@@ -95,88 +94,31 @@
   },
   "passage": {
     "title": "Repeatably Wrong",
-    "reading_time_min": 3.8,
+    "reading_time_min": 3.2,
     "paragraphs": [
       {
         "id": "rc-0082-p1",
-        "text": "Every physicist can state the difference in a sentence, and most of them learned it before they were twenty. Precision is how closely a set of measurements agree with one another. Accuracy is how close they are to the quantity being measured. The two are independent: readings can cluster inside a hair's breadth and sit a mile from the truth, and a scattered set can have its centre exactly right. The distinction is not subtle and nobody disputes it, and it collapses constantly in practice, including in the work of people who could have defined it faultlessly the day before. That regularity is the thing worth explaining, because a mistake everybody knows how to avoid and nobody avoids is usually not a mistake about words."
+        "text": "Every physicist can state the difference in a sentence. Precision is how closely a set of measurements agree with one another. Accuracy is how close they are to the quantity being measured. The two are independent: readings can cluster inside a hair's breadth and sit a mile from the truth, and a scattered set can have its centre exactly right. The distinction is not subtle and nobody disputes it, yet it collapses constantly in practice, even for people who could have defined it faultlessly the day before. That regularity is the thing worth explaining, because a mistake everybody knows how to avoid and nobody avoids is usually not a mistake about words."
       },
       {
         "id": "rc-0082-p2",
-        "text": "The explanation is an asymmetry in what can be had from the data. Precision is available from the readings themselves. Take them, compute their spread, and the result is a fact about the set in front of you that needs nothing from outside it. Accuracy is not available from the readings at all. To know how far a set of them sits from the true value you need the true value, or something standing in for it: a reference artefact, an independent method resting on different physics, a sample whose composition was fixed before the instrument ever saw it. None of that comes out of the numbers. An apparatus asked about its own accuracy is a ruler asked to measure itself, and it will report that it is exactly a foot long."
+        "text": "The explanation is an asymmetry in what can be had from the data. Precision is available from the readings themselves: compute their spread and the result is a fact about the set in front of you, needing nothing from outside it. Accuracy is not available from the readings at all. To know how far they sit from the true value you need the true value, or something standing in for it: a reference artefact, an independent method resting on different physics, a sample whose composition was fixed before the instrument ever saw it. An apparatus asked about its own accuracy is a ruler asked to measure itself, and it will report that it is exactly a foot long."
       },
       {
         "id": "rc-0082-p3",
-        "text": "Consider what this does inside a scientific culture that has quite rightly made the reporting of uncertainty a condition of publication. An author must attach a number, and only one of the two numbers can be produced on demand. A spread can be computed on the afternoon of the deadline out of data already in hand; a comparison against something external may not exist, may cost a year, and may be nobody's to arrange. So the interval printed after a measurement is characteristically a statement about repeatability wearing the label of a statement about truth, and it is read as the second by everybody, its author included. No deception is involved anywhere in this. The drift is produced by which of the two quantities happens to be cheap."
+        "text": "Now take a scientific culture that has quite rightly made the reporting of uncertainty a condition of publication. An author must attach a number, and only one of the two numbers can be produced on demand. A spread can be computed on the afternoon of the deadline; a comparison against something external may not exist, may cost a year, and may be nobody's to arrange. So the interval printed after a measurement is characteristically a statement about repeatability wearing the label of a statement about truth, and it is read as the second by everybody, its author included. No deception is involved anywhere in this. The drift is produced by which of the two quantities happens to be cheap."
       },
       {
         "id": "rc-0082-p4",
-        "text": "The record carries the mark of it. When a physical constant is measured repeatedly across decades, the published values do not wander at random about the figure finally settled on. They sit close together for a period, then move as a group into a new region, and the intervals quoted by the earlier group often fail to reach the later figure at all. Those readings were exactly as repeatable as their intervals claimed. They were repeatably wrong, and the repeatability was the very thing that made the error difficult to see, since agreement between laboratories is what everybody reaches for as a check."
+        "text": "The record carries the mark of it. When a physical constant is measured repeatedly across decades, the published values do not wander at random about the figure finally settled on. They sit close together for a period, then move as a group into a new region, and the intervals quoted by the earlier group often fail to reach the later figure. Those readings were exactly as repeatable as their intervals claimed. They were repeatably wrong, and the repeatability was what hid the error, since agreement between laboratories is what everybody reaches for as a check."
       },
       {
         "id": "rc-0082-p5",
-        "text": "The remedy cannot be more careful language, because the language was never the difficulty. It has to be some habit that brings in from outside what an apparatus cannot supply about itself: a standard measured alongside the unknown, a second method chosen because its failures are of a different kind, a duplicate sent out under another name. All of these are expensive, several are unavailable, and no laboratory can run them on everything. None of this makes the published intervals worthless, either. They bound one of the two quantities exactly, and one quantity known exactly is worth more than two known vaguely. So the prescription has to be smaller than the diagnosis, and it is this: say which of the two a number is. An interval labelled as repeatability is a good number honestly described. The same interval offered as the distance to the truth is a claim the apparatus was never in a position to make. The distinction is not hard to keep. It is hard to keep only when keeping it costs you a claim you wanted to make."
+        "text": "The remedy cannot be more careful language, because the language was never the difficulty. It has to bring in from outside what an apparatus cannot supply about itself: a standard measured alongside the unknown, a second method whose failures are of a different kind, a duplicate sent out under another name. All of these are expensive, several are unavailable, and no laboratory can run them on everything. None of this makes the published intervals worthless, either. They bound one of the two quantities exactly, and one quantity known exactly is worth more than two known vaguely. So the prescription has to be smaller than the diagnosis, and it is this: say which of the two a number is. An interval labelled as repeatability is a good number honestly described. The same interval offered as the distance to the truth is a claim the apparatus was never in a position to make."
       }
     ]
   },
   "questions": [
-    {
-      "id": "rc-0082-q1",
-      "type": "must_be_true",
-      "skill": "inference",
-      "patterns": [
-        "inf.necessary",
-        "comp.paraphrase",
-        "meta.contradiction"
-      ],
-      "target_mistake": "treating the two quantities as connected, so that having one in good order is taken to produce or guarantee the other",
-      "prediction_target": null,
-      "difficulty": {
-        "inference_depth": 3,
-        "distractor_similarity": 4,
-        "reasoning_depth": 4
-      },
-      "secondary_skills": [
-        "specific_detail",
-        "scope"
-      ],
-      "stem": "Which of the following must be true, given the passage?",
-      "options": {
-        "A": "A measurement that is accurate will become precise as well if it is repeated often enough",
-        "B": "Instruments whose makers report an uncertainty are more likely to be biased than those whose makers do not",
-        "C": "Every reported uncertainty in every field of science is a statement about repeatability alone",
-        "D": "A set of measurements can be tightly clustered and lie a very long way from the quantity being measured"
-      },
-      "correct": "D",
-      "estimated_time_sec": 90,
-      "explanation": {
-        "expert_notice": "The first paragraph states the independence and then gives both crossed cases in one sentence: readings can cluster inside a hair's breadth and sit a mile from the truth, and a scattered set can have its centre exactly right. The fourth paragraph supplies the same combination from the record, where repeatable values were repeatably wrong.",
-        "correct_reasoning": "The correct option is the first of those two cases restated. If the passage is true, this cannot be false, because independence means that fixing one of the quantities leaves the other entirely open, and the passage's central example is a body of measurements that agreed with each other closely while the group as a whole later moved. Nothing more than the definition is needed.",
-        "passage_anchor": "rc-0082-p1, rc-0082-p4",
-        "question_type_note": "A must-be-true question is a test rather than a judgement: ask of each option whether the passage could be wholly true and the option false. Anything the passage merely permits fails that test.",
-        "reading_habit": "When a passage declares two things independent, expect a question that tries to reconnect them. The forced answer is usually one of the crossed cases the author has already named.",
-        "distractors": [
-          {
-            "option": "A",
-            "trap_type": "necessary_as_sufficient",
-            "why_wrong": "Independence forbids the inference. Repetition tightens a spread and says nothing about where the centre lies, and the passage allows a scattered set to be centred exactly right, which is an accurate set that repetition alone did not make precise.",
-            "seductive_element": "Repeating a measurement is the standard remedy for error of every kind, and the passage does treat repetition as the source of the one quantity that can be computed."
-          },
-          {
-            "option": "B",
-            "trap_type": "unsupported_inference",
-            "why_wrong": "No comparison between instruments that report uncertainty and those that do not appears anywhere. The passage's claim is about what an interval means once it is printed, not about which apparatus is more likely to be biased.",
-            "seductive_element": "The passage does associate the reporting requirement with a drift, so a reader who converts an institutional pressure into a property of the instruments lands here."
-          },
-          {
-            "option": "C",
-            "trap_type": "too_broad",
-            "why_wrong": "The passage says characteristically rather than always, and speaks of a drift produced by cost rather than of a universal rule. It also describes external comparisons that do get made, which would be impossible if every published interval were a spread.",
-            "seductive_element": "It is the live rival, because it is the passage's own diagnosis with the hedging word removed, and the removed word is the only thing separating it from the argument."
-          }
-        ]
-      }
-    },
     {
       "id": "rc-0082-q2",
       "type": "tone",
@@ -435,7 +377,7 @@
     "challenge": "The passage describes a failing that looks like carelessness and then says it is nobody's fault. Watch for the two sentences that refuse to blame anyone, because the tone question is decided there rather than by the sharp phrases around them.",
     "one_sentence_summary": "The undisputed distinction between how closely measurements agree with one another and how close they are to the truth keeps collapsing because only the first can be computed from the readings while the second needs a standard from outside, so a culture that requires a printed uncertainty ends up printing repeatability and reading it as truth, and since the external comparisons that would fix this are expensive the author asks only that a number be labelled with which of the two it is.",
     "main_idea": "Precision and accuracy are independent, everyone knows it, and the distinction fails constantly anyway. The reason is that a spread can be computed from the data while closeness to the truth needs something external. Since journals require a printed uncertainty, and only one of the two can be produced to order, the interval after a measurement is usually repeatability read as truth. The record shows values agreeing closely and then moving as a group. The cure is not better wording but external comparison, and where that is unaffordable, an honest label.",
-    "simple_explanation": "Two words that sound alike mean different things. Precision is how closely your measurements agree with each other. Accuracy is how close they are to the real value. They have nothing to do with each other: you can have ten readings that agree to the last decimal place and are all badly wrong, and you can have a messy scatter whose average is exactly right.\n\nEvery scientist knows this. And it goes wrong all the time, including for people who could have explained it perfectly the day before. That is the interesting bit. When everybody knows how to avoid a mistake and nobody avoids it, the trouble is not the words.\n\nHere is the real trouble. You can work out precision from your own numbers. Take the readings, see how spread out they are, done. You cannot work out accuracy from your own numbers at all. To know how far off you are, you need something from outside: an object whose value is already known, a completely different method, a sample somebody prepared before your machine ever touched it. Nothing inside the data can tell you. An instrument asked how accurate it is, is like a ruler asked to measure itself: it says it is exactly a foot long.\n\nNow put that inside a world where journals require you to print an uncertainty. You have to attach a number, and only one of the two numbers can be produced on demand. The spread you can calculate the afternoon before the deadline. The external comparison might not exist, might take a year, and might not be yours to arrange. So the little interval after the measurement is usually a statement about repeatability with a label on it saying truth, and everybody reads it as truth, including the person who wrote it. Nobody is lying. It happens because one of the two is cheap.\n\nThe history shows it. Measure a physical constant again and again over decades, and the published values do not scatter randomly round the final answer. They sit tightly together for a while, then the whole group shifts to a new place, and the old error bars often do not even reach the new value. Those readings were exactly as repeatable as they claimed. They were repeatably wrong, and the repeatability was what hid the error, because laboratories agreeing with each other is what everyone treats as proof.\n\nSo what do you do? Not talk more carefully; the words were never the problem. You need something from outside: a known standard alongside your unknown, a second method that fails in different ways, a duplicate sample sent out under a false name. All of that costs money, some of it is impossible, and no lab can do it for everything. The author also refuses to say the error bars are useless: they pin down one of the two quantities exactly, and one exact number beats two vague ones.\n\nSo his request is deliberately small. Say which of the two your number is. An interval labelled as repeatability is an honest number. The same interval presented as your distance from the truth is a claim your equipment was never able to make. Keeping the two apart is easy, except on the days when keeping them apart costs you the claim you wanted to make.",
+    "simple_explanation": "Two words that sound alike mean different things. Precision is how closely your measurements agree with each other. Accuracy is how close they are to the real value. They have nothing to do with each other: you can have ten readings that agree to the last decimal place and are all badly wrong, and you can have a messy scatter whose average is exactly right.\n\nEvery scientist knows this. And it goes wrong all the time, including for people who could have explained it perfectly the day before. That is the interesting bit. When everybody knows how to avoid a mistake and nobody avoids it, the trouble is not the words.\n\nHere is the real trouble. You can work out precision from your own numbers. Take the readings, see how spread out they are, done. You cannot work out accuracy from your own numbers at all. To know how far off you are, you need something from outside: an object whose value is already known, a completely different method, a sample somebody prepared before your machine ever touched it. Nothing inside the data can tell you. An instrument asked how accurate it is, is like a ruler asked to measure itself: it says it is exactly a foot long.\n\nNow put that inside a world where journals require you to print an uncertainty. You have to attach a number, and only one of the two numbers can be produced on demand. The spread you can calculate the afternoon before the deadline. The external comparison might not exist, might take a year, and might not be yours to arrange. So the little interval after the measurement is usually a statement about repeatability with a label on it saying truth, and everybody reads it as truth, including the person who wrote it. Nobody is lying. It happens because one of the two is cheap.\n\nThe history shows it. Measure a physical constant again and again over decades, and the published values do not scatter randomly round the final answer. They sit tightly together for a while, then the whole group shifts to a new place, and the old error bars often do not even reach the new value. Those readings were exactly as repeatable as they claimed. They were repeatably wrong, and the repeatability was what hid the error, because laboratories agreeing with each other is what everyone treats as proof.\n\nSo what do you do? Not talk more carefully; the words were never the problem. You need something from outside: a known standard alongside your unknown, a second method that fails in different ways, a duplicate sample sent out under a false name. All of that costs money, some of it is impossible, and no lab can do it for everything. The author also refuses to say the error bars are useless: they pin down one of the two quantities exactly, and one exact number beats two vague ones.\n\nSo his request is deliberately small. Say which of the two your number is. An interval labelled as repeatability is an honest number. The same interval presented as your distance from the truth is a claim your equipment was never able to make.",
     "why_difficult": "Everything in the passage sounds like an accusation and none of it is one, so readers reliably overshoot the tone. The sharp phrases, the ruler measuring itself and the constants that were repeatably wrong, sit two sentences away from the flat statement that no deception is involved. The second difficulty is that the passage refuses two conclusions a reader will already have drawn by the fourth paragraph: that published intervals are worthless, and that the answer is to be more careful with words. The third is that the prescription is smaller than the diagnosis on purpose, which readers experience as an anticlimax and therefore skim.",
     "author_intention": "To explain a persistent error by the economics of what can be computed rather than by anybody's carelessness, and then to ask for the one repair that costs nothing, so that the reader stops treating a number as evidence of something it was never able to establish.",
     "paragraph_journey": [
@@ -472,10 +414,22 @@
       "'So the prescription has to be smaller than the diagnosis' (paragraph 5): the remedy is cut to what can actually be done."
     ],
     "misunderstanding": "Readers finish holding one of two wrong models. The first is that scientists have been overstating their certainty and ought to be called out, which the passage denies twice, once by excluding deception and once by locating the cause in cost. The second is that reported uncertainties are misleading and should go, which the fifth paragraph refuses in a sentence most readers have stopped attending to by the time it arrives, since it sits between the expensive remedies and the modest one.",
-    "traps_summary": "The set offers the diagnosis with its hedge removed, indignation in place of structural criticism, the definitions in place of the argument, agreement between laboratories as evidence about truth, and the more important of the two quantities in place of the one the stem asked about. Deciding which member of the pair an option is about, and whether the author was blaming anybody, answers all five.",
+    "traps_summary": "The set offers indignation in place of structural criticism, the definitions in place of the argument, agreement between laboratories as evidence about truth, and the more important of the two quantities in place of the one the stem asked about. Deciding which member of the pair an option is about, and whether the author was blaming anybody, answers all four.",
     "reading_lesson": "When a passage explains a persistent error, look for the sentence that says whose fault it is. Authors who answer nobody's have written a structural argument, and every sharp phrase in it is description rather than complaint, which is what tone questions on such passages are built to test. The companion habit is to check the last paragraph for what the author refuses: a prescription deliberately smaller than the diagnosis almost always sits next to a conclusion the reader had already drawn and the author declines.",
     "real_world": "The same asymmetry governs any figure an organisation can produce about itself. A forecast's consistency can be measured from its own history; its correspondence to the world cannot. So can a model's stability, an assessor's agreement with other assessors, a survey's margin of sampling error. In each case the cheap number gets printed and is read as the expensive one.",
     "takeaway": "An instrument can tell you how much it agrees with itself, and that is the one thing you never wanted to know.",
-    "reflection_question": "Which of the numbers you rely on describe how consistent a process is rather than how right it is?"
+    "reflection_question": "Which of the numbers you rely on describe how consistent a process is rather than how right it is?",
+    "eli10": {
+      "big_idea": "Everyone knows precision is not accuracy, but they get mixed up because only precision comes cheaply from your own data.",
+      "story": "Precision means your measurements agree with each other. Accuracy means they are close to the true value. Ten darts can land in a tight bunch far from the bullseye. Scientists know this, yet still mix the two up. The writer says the trouble is not the words. Precision comes from your own readings alone. Accuracy needs a check from outside, like a known standard. A ruler cannot measure itself. Journals ask every paper to print an uncertainty. The spread is ready by the deadline. An outside check may take a year. So the printed number shows precision but is read as accuracy. Nobody is lying; one number is cheaper. Measurements of a fixed quantity in nature once agreed closely, then all jumped together. They were repeatably wrong. Outside checks are costly, and the printed numbers are still useful. So the writer asks only this: say which kind each number is.",
+      "paragraphs": [
+        "Starts with a puzzle: everyone knows precision differs from accuracy, yet the two still get mixed up.",
+        "Gives the cause: precision comes from your own readings, but accuracy needs an outside check.",
+        "Explains the slip: journals demand a number, only the cheap one is ready, and nobody is lying.",
+        "Gives evidence: results for a fixed quantity agreed closely, then moved together, repeatably wrong.",
+        "Offers a small fix: outside checks are costly, so at least label which kind a number is."
+      ],
+      "author_view": "The writer is exacting but fair: he blames the cost of checking, not any scientist, and asks for a modest fix."
+    }
   }
 }

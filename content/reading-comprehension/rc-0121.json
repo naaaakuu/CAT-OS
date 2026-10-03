@@ -1,0 +1,333 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0121",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 87,
+    "genre": "science",
+    "difficulty": "easy",
+    "difficulty_numeric": 2,
+    "stage": "foundation",
+    "skills": [
+      "main-idea-extraction",
+      "evidence-anchoring",
+      "inference",
+      "causal-reasoning"
+    ],
+    "word_count": 313,
+    "question_count": 3,
+    "question_types": [
+      "specific_detail",
+      "title_selection",
+      "inference"
+    ],
+    "theme": "a season's rainfall for a whole country can be forecast while one town's rain on one day cannot, because small errors in measuring the air grow until a single day is beyond reach, whereas a country's seasonal total adds up thousands of such accidents that cancel out and leaves the slow, measurable influences such as ocean temperature; the same averaging is why a 'normal' forecast says nothing about any one field",
+    "estimated_time_min": 5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-03",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted."
+    },
+    "date_added": "2026-10-03",
+    "batch_id": "batch-rc-005",
+    "prompt_version": "content engine v1 + CAT-size brief 2026-10",
+    "reviewer_notes": "A distinction that does work, in the first-person plural. Weather against climate is a familiar contrast; what this passage adds is the mechanism stated as one fact, averaging, which explains both why the season can be forecast and why that forecast is silent about any one field, with the consequence for the farmer who hears 'normal'. Facts kept general and checkable: the seasonal forecast is issued in April, and 'normal' is a band within a few per cent of the long-term average for June to September.",
+    "vocab_extracted": [
+      "guesswork",
+      "spell",
+      "averaging"
+    ],
+    "length_class": "short",
+    "structure": "comparison_contrast",
+    "viewpoints": 1,
+    "tone": "patient, explanatory, quietly admiring",
+    "difficulty_vector": {
+      "lexical": 2,
+      "syntactic": 2,
+      "abstraction": 3,
+      "inference_depth": 2,
+      "distractor_similarity": 2,
+      "reasoning_depth": 3,
+      "structural_ambiguity": 1,
+      "time_pressure": 2
+    },
+    "reasoning_patterns": [
+      "struct.contrast",
+      "struct.cause_effect",
+      "struct.qualification",
+      "comp.explicit_detail",
+      "comp.central_idea",
+      "comp.paraphrase",
+      "arg.causal_claim",
+      "arg.analogy",
+      "arg.qualification",
+      "inf.reasonable_implication",
+      "inf.strongly_supported",
+      "lang.comparative",
+      "scope.too_narrow"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1: the option a strong candidate is pulled towards is 'the chance events of single days cancel out over longer spans', a real mechanism from the same paragraph; it is the passage's reason why the season can be forecast, not why the day cannot, and the cause of the two-week limit is the sentence just before it, about small errors that grow. The oceans option reverses 'can be measured in advance'. Q2: the rival is 'Why Weather Forecasts Cannot Be Trusted', drawn from the farmer's disappointment; the passage says a forecast for one place is useful for a few days and explains why the season can be forecast at all. Q3: a careful reader may hesitate over 'as reliable as the national forecast, since it covers the same four months'; the passage puts reliability in the size of the sum, 'In a sum that large, they tend to cancel out', and a village's season is a far smaller sum.",
+      "blind_solve": null
+    }
+  },
+  "passage": {
+    "title": "Normal for the Country",
+    "reading_time_min": 1.7,
+    "paragraphs": [
+      {
+        "id": "rc-0121-p1",
+        "text": "Every April, India's weather office tells us whether the coming monsoon will be normal. Normal means that the country's rain from June to September will come within a few per cent of its long-term average. Farmers, banks and ministries plan around the forecast. Yet the same office will not tell us whether it will rain in Nagpur on a Tuesday three weeks from now. At first this looks backwards. One town on one day sounds like the smaller, easier question."
+      },
+      {
+        "id": "rc-0121-p2",
+        "text": "The two questions are different in kind. Whether rain falls on one town on one day depends on the accident of where a particular cloud forms. No instrument measures the air exactly, and the small errors in every reading grow day by day. A forecast for one place is useful for a few days and close to guesswork after two weeks. A season's total for a whole country adds up thousands of these accidents. In a sum that large, they tend to cancel out. None of us can call a single coin toss, but we can all say that a thousand tosses will land close to half heads. What remains is shaped by slow things, such as the temperature of the oceans, which change over months and can be measured in advance."
+      },
+      {
+        "id": "rc-0121-p3",
+        "text": "The distinction explains why the season can be forecast, and it also marks the forecast's limit. The averaging that makes the season predictable is exactly what makes the forecast silent about any one field. A normal monsoon can bring a three-week dry spell in July, just when rice must be sown. It can bring a drought in one state balanced by floods in another. A farmer who hears 'normal' in April has been given a fact about the country's total. What he needs to know is when the rain will reach his own field, and that is a question about Tuesdays."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0121-q1",
+      "type": "specific_detail",
+      "skill": "specific_detail",
+      "patterns": [
+        "comp.explicit_detail",
+        "arg.causal_claim",
+        "comp.paraphrase"
+      ],
+      "target_mistake": "giving the reason the season can be forecast as the reason the day cannot, or turning the effect, forecasters not forecasting far ahead, into the cause",
+      "prediction_target": null,
+      "difficulty": {
+        "inference_depth": 1,
+        "distractor_similarity": 2,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "logical_structure"
+      ],
+      "stem": "According to the passage, a forecast for a single place becomes close to guesswork after about two weeks because",
+      "options": {
+        "A": "the slow changes in the oceans cannot be measured that far ahead",
+        "B": "forecasters choose not to look more than a few days ahead",
+        "C": "the small errors in every reading of the air grow day by day",
+        "D": "the chance events of single days cancel out over longer spans"
+      },
+      "correct": "C",
+      "estimated_time_sec": 45,
+      "explanation": {
+        "expert_notice": "The second paragraph gives the cause just before the two-week figure: 'No instrument measures the air exactly, and the small errors in every reading grow day by day.' The next sentence states the consequence the stem asks about.",
+        "correct_reasoning": "The passage says no instrument measures the air exactly and that the small errors in every reading grow day by day; the very next sentence concludes that a forecast for one place is useful for a few days and close to guesswork after two weeks. The correct option restates that cause.",
+        "passage_anchor": "rc-0121-p2",
+        "question_type_note": "When a detail question asks 'because', find the sentence just before the effect it names. Causes are usually given right beside their consequences.",
+        "reading_habit": "In a passage that compares two things, keep a short note of the reason given for each. Detail questions often offer you the reason that belongs to the other one.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "The passage says the opposite about the oceans: they change over months and 'can be measured in advance'. They are what makes the season predictable, not what limits the forecast for a day.",
+            "seductive_element": "Oceans, measurement and looking ahead all appear in the passage, close together."
+          },
+          {
+            "option": "B",
+            "trap_type": "reversed_causation",
+            "why_wrong": "Forecasters declining to name a Tuesday three weeks away is the result of the problem, not its cause. The passage gives the cause as small errors that grow.",
+            "seductive_element": "The first paragraph does say the office will not forecast a particular Tuesday three weeks ahead."
+          },
+          {
+            "option": "D",
+            "trap_type": "wrong_structural_role",
+            "why_wrong": "Cancelling out is the passage's reason why a season's total can be forecast. It explains the other half of the contrast, not why a forecast for one place fails.",
+            "seductive_element": "It is a real mechanism from the same paragraph, and it is about time."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0121-q2",
+      "type": "title_selection",
+      "skill": "main_idea",
+      "patterns": [
+        "comp.central_idea",
+        "struct.contrast",
+        "scope.too_narrow"
+      ],
+      "target_mistake": "choosing a title that turns the forecast's limit into distrust of all forecasts, or that names one cause as the subject",
+      "prediction_target": "The learner should be able to say beforehand: the title should name the contrast, that a season can be forecast and a single day cannot.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 2,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "main_idea"
+      ],
+      "stem": "Which of the following would be the most suitable title for the passage?",
+      "options": {
+        "A": "Forecasting the Season, Not the Day",
+        "B": "Why Weather Forecasts Cannot Be Trusted",
+        "C": "How the Oceans Decide India's Rain",
+        "D": "What Every Farmer Should Plan For"
+      },
+      "correct": "A",
+      "estimated_time_sec": 65,
+      "explanation": {
+        "expert_notice": "The argument starts with 'The two questions are different in kind.' Everything after it either explains the difference or draws a consequence from it, so the title has to name both sides of the difference.",
+        "correct_reasoning": "The passage explains why a season's total can be forecast while one town's rain on one day cannot, and its last paragraph shows that the season's forecast says nothing about the day or the field. The correct title holds both halves: the season can be forecast, the day cannot.",
+        "passage_anchor": "rc-0121-p2, rc-0121-p3",
+        "question_type_note": "A good title covers what every paragraph is about. When a passage is built on a contrast, the right title usually names both sides of it.",
+        "reading_habit": "When a passage says two things are 'different in kind', expect the rest of it to explain the difference, and keep both sides in mind when you summarise.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "too_broad",
+            "why_wrong": "The passage says a forecast for one place is useful for a few days, and it explains why the season can be forecast at all. It marks a limit; it does not dismiss forecasting.",
+            "seductive_element": "The passage does describe what a forecast cannot do, and the farmer is left without the answer he needs."
+          },
+          {
+            "option": "C",
+            "trap_type": "example_as_thesis",
+            "why_wrong": "Ocean temperature is one example of the slow things that shape a season's total. It is mentioned once, and it is not what the passage is about.",
+            "seductive_element": "It sounds like the scientific heart of the passage, and the oceans do matter to the monsoon."
+          },
+          {
+            "option": "D",
+            "trap_type": "prescriptive_leap",
+            "why_wrong": "The farmer appears in the last paragraph to show what a seasonal forecast cannot tell him. The passage gives him no plan.",
+            "seductive_element": "The passage ends on the farmer's needs, which invites a title about advice."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0121-q3",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.reasonable_implication",
+        "inf.strongly_supported",
+        "lang.comparative"
+      ],
+      "target_mistake": "treating the number of months as what makes a forecast reliable, when the passage puts it in the size of the sum",
+      "prediction_target": "The learner should be able to say beforehand: a village's season adds up far fewer accidents than the country's, so less cancels out and the forecast would be less reliable.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 2,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "scope"
+      ],
+      "stem": "It can be inferred from the passage that a forecast of the total rain one village will receive over a whole monsoon would be",
+      "options": {
+        "A": "as reliable as the national forecast, since it covers the same four months",
+        "B": "impossible to make, since rain in one place cannot be forecast at all",
+        "C": "more reliable than the national forecast, since a village is easier to measure",
+        "D": "less reliable than the national forecast, as a smaller sum averages out less"
+      },
+      "correct": "D",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "Two sentences carry this question. The second paragraph says a country's seasonal total can be forecast because 'In a sum that large, they tend to cancel out.' The third adds that the averaging is exactly what makes the forecast silent about any one field.",
+        "correct_reasoning": "The national forecast works because it adds up thousands of local accidents, and in a sum that large they cancel out. One village's season is a much smaller sum: one place over the same months, with far fewer accidents to balance one another. Less cancels out, so its forecast would be less reliable.",
+        "passage_anchor": "rc-0121-p2, rc-0121-p3",
+        "question_type_note": "This inference takes the passage's own reason and applies it to a smaller case. Ask what the reason depends on, here the size of the sum, and check whether the new case has more of it or less.",
+        "reading_habit": "When a passage says something works 'in a sum that large' or 'for a whole country', notice the size. It is a condition, and inference questions test what happens when it is not met.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "comparison_distortion",
+            "why_wrong": "The months are the same, but the passage puts the forecast's reliability in the size of the sum, a whole country's thousands of accidents. Matching the months does not make a village's total as predictable.",
+            "seductive_element": "Both forecasts cover June to September, so they sound alike."
+          },
+          {
+            "option": "B",
+            "trap_type": "extreme_language",
+            "why_wrong": "The passage says a forecast for one place is useful for a few days; it never says rain in one place cannot be forecast at all. A season's total is also a different question from a single day.",
+            "seductive_element": "The passage stresses how little can be said about one town, so ruling it out entirely feels close."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage's logic runs the other way: the larger the sum, the more the accidents cancel. A smaller area gives a smaller sum, so its forecast is less reliable, not more.",
+            "seductive_element": "A small place sounds easier to watch than a whole country."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "guesswork",
+      "passage_use": "useful for a few days and close to guesswork after two weeks",
+      "meaning_here": "guessing without enough knowledge to be confident",
+      "difficulty": "easy"
+    },
+    {
+      "word": "spell",
+      "passage_use": "A normal monsoon can bring a three-week dry spell in July",
+      "meaning_here": "a period of a particular kind of weather",
+      "difficulty": "medium"
+    },
+    {
+      "word": "averaging",
+      "passage_use": "The averaging that makes the season predictable",
+      "meaning_here": "combining many separate amounts into one total, so that their ups and downs even out",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "A passage built on one distinction. Find the reason the season can be forecast, and you will see why the same reason limits the forecast.",
+    "one_sentence_summary": "We can be told in April whether the monsoon will be normal but not whether it will rain in one town on one Tuesday, because small errors in measuring the air make a single day unpredictable after about two weeks, while a whole country's seasonal total adds up thousands of such accidents that cancel out and leaves the slow, measurable influence of things like ocean temperature; the same averaging means the forecast says nothing about any one field.",
+    "main_idea": "A season's total rain for the whole country can be forecast because day-to-day accidents cancel out in such a large sum, leaving slow causes that can be measured. A single day in a single town cannot be forecast far ahead, because small errors grow. The averaging that makes the season predictable also makes its forecast useless for any one field.",
+    "simple_explanation": "Every April, India's weather office announces whether the monsoon will be normal, meaning the whole country's rain from June to September will be close to its usual total. Yet it will not say whether it will rain in Nagpur on a particular Tuesday three weeks away. That seems backwards, since one day in one town sounds easier.\n\nThe author explains that these are different kinds of question. Rain in one town on one day depends on where a particular cloud happens to form, and no instrument measures the air exactly. The small errors grow, so a forecast for one place is good for a few days and little better than a guess after two weeks. But a whole country's season adds up thousands of these local accidents, and in such a big sum they cancel out, just as a thousand coin tosses land close to half heads even though no single toss can be called. What is left is shaped by slow things, like ocean temperatures, which can be measured months ahead.\n\nThis also shows the forecast's limit. Because it is an average, a 'normal' forecast says nothing about any one field. A normal season can still bring a three-week dry spell in July, when rice must be sown, or a drought in one state and floods in another. A farmer needs to know when the rain will reach his own field, and that is the kind of question that cannot be answered months ahead.",
+    "why_difficult": "The passage starts with what looks like a paradox, that the bigger question is the easier one, and resolves it with a single idea: averaging. The questions test whether you can use that idea, including on a case the passage never mentions, one village's season.",
+    "author_intention": "To explain why a forecast of the season and a forecast of the day are different kinds of claim, and to show that the reason the first works is also the reason it cannot replace the second.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0121-p1",
+        "role": "Poses an apparent paradox",
+        "note": "The season can be forecast in April, but not a Tuesday three weeks away, which looks backwards."
+      },
+      {
+        "paragraph_id": "rc-0121-p2",
+        "role": "Explains the difference",
+        "note": "One day depends on accidents that grow out of small errors; a country's season adds up thousands of them, which cancel, leaving slow causes such as ocean temperature."
+      },
+      {
+        "paragraph_id": "rc-0121-p3",
+        "role": "Draws the limit",
+        "note": "The averaging that makes the season predictable makes the forecast silent about any one field, which is what the farmer needs."
+      }
+    ],
+    "tone_progression": "Matter-of-fact at the start, patient and explanatory in the middle, and quietly sympathetic at the end, where the farmer's real question is left unanswered.",
+    "key_transitions": [
+      "'The two questions are different in kind.' (opening of paragraph 2): the paradox becomes a distinction.",
+      "'The averaging that makes the season predictable is exactly what makes the forecast silent about any one field.' (paragraph 3): the forecast's strength becomes its limit."
+    ],
+    "misunderstanding": "Readers often take the passage to say that seasonal forecasts are good and daily ones bad. Its point is subtler: they answer different questions, and the very averaging that makes the seasonal forecast possible stops it answering the question a farmer cares about.",
+    "traps_summary": "The wrong options swap the two halves of the contrast: the reason the season works offered as the reason the day fails, the oceans named as a limit when they are a help, and a forecast's limit turned into distrust of all forecasts. One reverses cause and effect, and one ties reliability to the months instead of the size of the sum.",
+    "reading_lesson": "In a passage built on a contrast, write the reason for each side in a few words before you look at the questions. Most of the wrong options here are a right reason attached to the wrong side.",
+    "real_world": "Any average behaves this way: a city's yearly count of road accidents or a shop's monthly sales can be predicted far better than what will happen at one crossing or on one afternoon.",
+    "takeaway": "An average can be predictable precisely because it hides the details you may need.",
+    "reflection_question": "Which forecast or average do you rely on that cannot tell you about your own case?",
+    "eli10": {
+      "big_idea": "A whole season's rain can be predicted because daily surprises cancel out, but that same averaging says nothing about one day.",
+      "story": "Every April, India's weather office says if the monsoon will be normal. But it will not say if it will rain in Nagpur on a Tuesday weeks away. That seems strange. Isn't one day easier? No. Rain on one day depends on where a single cloud forms. Tiny mistakes in measuring the air grow bigger every day. After two weeks, a forecast is mostly a guess. A season's total for the whole country is different. It adds up thousands of these surprises. In a big total, they cancel out. Think of tossing a coin. You cannot guess one toss. But a thousand tosses land close to half heads. Slow things, like ocean temperatures, shape the rest. Here is the catch. A normal season can still have a long dry spell in July. So a farmer still cannot know when rain will reach his field.",
+      "paragraphs": [
+        "Starts with a puzzle: the season can be forecast, but not one rainy Tuesday. Why?",
+        "Explains why: small errors spoil a day's forecast after two weeks, but a season's surprises cancel out.",
+        "Shows the limit: a normal season says nothing about when rain reaches one farmer's field."
+      ],
+      "author_view": "The writer admires what forecasters can do, and wants readers to see clearly what a 'normal' forecast cannot tell them."
+    }
+  }
+}

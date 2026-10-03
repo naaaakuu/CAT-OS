@@ -75,11 +75,27 @@ export const HOMES = Object.freeze({
   toffee: { node: 'f1', door: { x: 806, y: 760 }, hit: { x: 720, y: 680, w: 180, h: 130 }, label: 'The campfire' },
 });
 
-/** Buildings that are not a pet's: the learner's cottage and the clock. */
+/** Buildings that are not a pet's own home: Ginger's rose cottage (Sentence Placement) and Mochi's clock tower (Para Completion). */
 export const PLACES = Object.freeze({
-  cottage: { node: 'cottage', hit: { x: 170, y: 560, w: 270, h: 180 }, label: 'Your cottage' },
+  cottage: { node: 'cottage', hit: { x: 170, y: 560, w: 270, h: 180 }, label: 'The rose cottage' },
   clock: { node: 'clock', hit: { x: 1170, y: 520, w: 230, h: 280 }, label: 'The clock tower' },
   fire: { node: 'f1', hit: { x: 740, y: 836, w: 170, h: 90 }, label: 'The fire' },
+});
+
+/**
+ * Where each house's subject sign hangs: the board's bottom centre, in
+ * painting px. Low on the roof or the wall, so a phone's top bar never
+ * covers it, and clear of the door where the friend stands.
+ */
+export const SIGNS = Object.freeze({
+  chai: { x: 282, y: 168 },
+  ginger: { x: 742, y: 160 },
+  mallow: { x: 1286, y: 166 },
+  matcha: { x: 262, y: 352 },
+  mochi: { x: 1246, y: 340 },
+  cottage: { x: 300, y: 610 },
+  clock: { x: 1240, y: 668 },
+  toffee: { x: 808, y: 704 },
 });
 
 /** Places a pet may wander to and linger. */

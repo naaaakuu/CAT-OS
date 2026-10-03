@@ -43,6 +43,7 @@ import { loadWorld, loadWorldRecords, deriveWorldState, petChangeLine } from '..
 import { hostChip } from '../../../pets/sprite.js';
 import { newlyFinished } from '../../../world/collections.js';
 import { play, silenceWorld } from '../../../world/audio.js';
+import { isUnlocked } from '../../../core/ads/rewarded.js';
 import '../../../ui/components/cat-passage.js';
 import '../../../ui/components/cat-question-card.js';
 import '../../../ui/components/cat-explanation.js';
@@ -86,6 +87,8 @@ export async function renderSession(outlet, { storage }, params) {
   const targetMs = Math.max(60_000, (passage.meta.estimated_time_min ?? 6) * 60_000 * paceFactor);
   const m = passage.meta;
   const stage = STAGE_INFO[m.stage]?.label ?? m.stage ?? '';
+  /* A public-domain essay says whose words these are; an original passage says nothing. */
+  const realSource = m.source?.publication && m.source.publication !== 'original' ? m.source.publication : '';
 
   /* ---------------- BRIEFING ---------------- */
   outlet.innerHTML = `
@@ -98,6 +101,7 @@ export async function renderSession(outlet, { storage }, params) {
         <div class="brief">
           <p class="brief__eyebrow">${escapeHTML(stage)} · ${escapeHTML(m.genre ?? '')}</p>
           <h1 class="brief__title">${escapeHTML(displayTitle(passage))}</h1>
+          ${realSource ? `<p class="brief__source">A real essay: ${escapeHTML(realSource)}</p>` : ''}
           <p class="brief__line">What it argues is for you to find. Read it the way the exam reads it: once, closely, then answer from the text.</p>
           <div class="brief__facts">
             <span class="brief__fact">${m.word_count ?? ''} words</span>
@@ -204,6 +208,7 @@ export async function renderSession(outlet, { storage }, params) {
         <div class="run__body">
           <p class="hint" id="min-left" style="margin:0 0 10px;text-align:right"></p>
           <cat-passage></cat-passage>
+          ${realSource ? `<p class="hint brief__source">From ${escapeHTML(realSource)}. Public domain.</p>` : ''}
           <div class="run__actions">
             <button class="g-btn g-btn--primary" id="to-questions">I've read it…${session.total} questions</button>
           </div>
@@ -424,7 +429,7 @@ export async function renderSession(outlet, { storage }, params) {
         extraHTML: mentorHTML + habitHTML + reviewHTML,
         actions: [
           { label: 'Back to the village', href: '#/world', primary: true },
-          { label: 'Understand this passage', href: `#/rc/mentor/${passage.meta.id}` },
+          { label: isUnlocked(`explain:${passage.meta.id}`) ? 'Explain this passage simply' : 'Explain this passage simply (short video)', href: `#/rc/mentor/${passage.meta.id}` },
           { label: 'Back to the Reading House', href: '#/world/place/reading-room', quiet: true },
         ],
       });

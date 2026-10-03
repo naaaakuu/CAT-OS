@@ -49,7 +49,7 @@ export async function renderReview(outlet, { storage }, params) {
       <div id="review-questions"></div>
       <div class="session-actions">
         <a class="btn" href="#/rc/session/${passage.meta.id}">Re-attempt</a>
-        <a class="btn btn--primary" href="#/rc/mentor/${passage.meta.id}">Open the Learning Page</a>
+        <a class="btn btn--primary" href="#/rc/mentor/${passage.meta.id}">Explain this passage simply</a>
       </div>
     </section>
   `;

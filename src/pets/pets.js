@@ -42,14 +42,14 @@ export const PETS = freeze([
   freeze({
     id: 'mochi', name: 'Mochi', creature: 'pebble', subject: 'Para summary and completion',
     teaches: 'Finding the point of a paragraph', home: 'the cabin', icon: 'notes', colour: '#7D8FA8', frame: freeze([1040, 335]),
-    places: freeze(['table']), modules: freeze(['ps', 'pc']), bff: 'chai',
+    places: freeze(['table', 'completion']), modules: freeze(['ps', 'pc']), bff: 'chai',
     trouble: 'His notebook lost its notes. Every summary you find writes a page back.',
     blurb: 'Finds the gist: summaries, and the sentence a paragraph is missing.',
   }),
   freeze({
     id: 'ginger', name: 'Ginger', creature: 'fox', subject: 'Para jumbles and placement',
     teaches: 'Putting sentences in order', home: 'the workshop', icon: 'maps', colour: '#D2693A', frame: freeze([1380, 397]),
-    places: freeze(['loom']), modules: freeze(['pj', 'sp']), bff: 'mallow',
+    places: freeze(['loom', 'placement']), modules: freeze(['pj', 'sp']), bff: 'mallow',
     trouble: 'The workshop gears are stuck. Every jumble you put in order turns one again.',
     blurb: 'Maps how a paragraph goes: jumbled sentences, and the one seat a sentence can take.',
   }),
@@ -63,6 +63,25 @@ export const PETS = freeze([
 ]);
 
 export const PET_BY_ID = new Map(PETS.map((p) => [p.id, p]));
+
+/**
+ * Every house in the village holds one CAT VARC subject, and its sign says
+ * which (owner, 2026-10-03: "all houses must be filled up with only VARC
+ * subjects"). `spot` is the building on the painting (paths.js HOMES and
+ * PLACES); `place` is the page it opens. Ginger and Mochi each keep a second
+ * house: Sentence Placement in the rose cottage, Para Completion in the clock
+ * tower. Ordered as CAT weights them: reading first.
+ */
+export const HOUSES = freeze([
+  freeze({ spot: 'chai', pet: 'chai', subject: 'Reading Comprehension', place: 'reading-room', ask: 'A passage and four questions, as CAT sets them' }),
+  freeze({ spot: 'ginger', pet: 'ginger', subject: 'Para Jumbles', place: 'loom', ask: 'Put four sentences in the order the author wrote' }),
+  freeze({ spot: 'mochi', pet: 'mochi', subject: 'Para Summary', place: 'table', ask: 'Choose the summary that keeps the point' }),
+  freeze({ spot: 'mallow', pet: 'mallow', subject: 'Odd One Out', place: 'bench', ask: 'Five sentences: find the one that does not belong' }),
+  freeze({ spot: 'cottage', pet: 'ginger', subject: 'Sentence Placement', place: 'placement', ask: 'Find the one place a sentence fits' }),
+  freeze({ spot: 'clock', pet: 'mochi', subject: 'Para Completion', place: 'completion', ask: 'Choose the sentence that finishes the paragraph' }),
+  freeze({ spot: 'matcha', pet: 'matcha', subject: 'Vocabulary', place: 'meadow', ask: 'CAT words, many inside a real sentence' }),
+  freeze({ spot: 'toffee', pet: 'toffee', subject: 'The Gauntlet', place: 'wilds', ask: 'A weekly timed mix: thirty quick questions' }),
+]);
 
 /** The three friendships, said the way the village says them. */
 export const FRIENDSHIPS = freeze([
@@ -251,8 +270,8 @@ export const LINES = freeze({
   /** Toffee's welcome on the very first visit: the problem, then the purpose. */
   intro: [
     'Hi! You are here! I am Toffee. I keep the village fire.',
-    'Our village is losing its words. Pages go blank and gardens wilt.',
-    'Every question you answer brings some of them back. Will you help us?',
+    'Our village is losing its words. Every question you answer brings some of them back.',
+    'Each house holds one part of CAT English, and its sign says which. Tap any sign to go in.',
     'Hoo! Over here! I need help first. Tap the big button and we will start!',
   ],
 });

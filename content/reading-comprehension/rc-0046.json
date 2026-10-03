@@ -18,16 +18,15 @@
       "trap-recognition"
     ],
     "word_count": 514,
-    "question_count": 5,
+    "question_count": 4,
     "question_types": [
       "author_purpose",
       "cannot_be_inferred",
       "inference",
-      "not_true",
       "paragraph_function"
     ],
     "theme": "counterfactual history as a disciplined method: every causal claim already contains a counterfactual, the discipline is a minimal rewrite and a short chain, and what a good one establishes is contingency rather than an alternative past",
-    "estimated_time_min": 9.5,
+    "estimated_time_min": 8.5,
     "source": {
       "publication": "original",
       "url": null,
@@ -38,7 +37,7 @@
     "date_added": "2026-09-12",
     "batch_id": "batch-rc-003",
     "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-02",
-    "reviewer_notes": "A definition-then-application passage where the two conditions stated in the second paragraph decide four of the five questions. The near-tie sits in the inference question, where a narrow vote satisfies the first condition and a reader is invited to treat that as enough to settle what the alternative would have produced.",
+    "reviewer_notes": "A definition-then-application passage where the two conditions stated in the second paragraph decide four of the five questions. The near-tie sits in the inference question, where a narrow vote satisfies the first condition and a reader is invited to treat that as enough to settle what the alternative would have produced. 2026-10-03 CAT-size pass: 514→514 words, 4→4 paragraphs, 5→4 questions. Dropped q2 (not_true on p2: three of its options restate the two conditions); of the two NOT-form questions kept cannot_be_inferred q4, whose wrong options are genuine inferences drawing on p1, p3 and p4; traps_summary no longer cites the not-true question.",
     "length_class": "medium",
     "structure": "definition_application",
     "viewpoints": 2,
@@ -73,8 +72,8 @@
       "elim.near_tie"
     ],
     "quality": {
-      "status": "verified",
-      "adversarial_review": "Q3 is where a strong candidate is most likely to go wrong, and the live rival is the option that calls the historian safe because a narrow vote makes the alternative easy to establish. A narrow vote does satisfy the minimal rewrite, and the passage does treat such a case as the good one; but the fourth paragraph says in terms that a well-made counterfactual 'does not establish what would have happened', so satisfying the condition is a licence to run the exercise, not a warrant for its result. Q2's near miss is the option about tracing consequences as long as the record stays detailed, which sounds like ordinary evidential prudence; the second paragraph blocks it by naming the limit as one 'set by the alternative itself and not by how thoroughly the actual past happens to be documented'. Q4's rival is the option that two historians may disagree about a turning point without disagreeing about events, which reads like a paradox invented by the candidate; it is forced by the first paragraph's identification of a causal claim with a counterfactual. Q5 (all four options rebuilt as compound purposes; the key had been the only one naming two jobs, and the longest by a fifth): the rival is still the option that the author defends the method against the no-evidence objection, now paired with restoring its standing. The first half is true of the first paragraph only, the last paragraph grants that objection almost everything it asked for, and nothing in the piece is a rehabilitation. The other two pair a real move with an addition the text refuses: a charge of bad faith, where the author says only that the objection is in one respect self-defeating, and a sorting by audience, where the sorting is by method.",
+      "status": "reviewed",
+      "adversarial_review": "Q3 is where a strong candidate is most likely to go wrong, and the live rival is the option that calls the historian safe because a narrow vote makes the alternative easy to establish. A narrow vote does satisfy the minimal rewrite, and the passage does treat such a case as the good one; but the fourth paragraph says in terms that a well-made counterfactual 'does not establish what would have happened', so satisfying the condition is a licence to run the exercise, not a warrant for its result. Q2's near miss is the option about tracing consequences as long as the record stays detailed, which sounds like ordinary evidential prudence; the second paragraph blocks it by naming the limit as one 'set by the alternative itself and not by how thoroughly the actual past happens to be documented'. Q4's rival is the option that two historians may disagree about a turning point without disagreeing about events, which reads like a paradox invented by the candidate; it is forced by the first paragraph's identification of a causal claim with a counterfactual. Q5 (all four options rebuilt as compound purposes; the key had been the only one naming two jobs, and the longest by a fifth): the rival is still the option that the author defends the method against the no-evidence objection, now paired with restoring its standing. The first half is true of the first paragraph only, the last paragraph grants that objection almost everything it asked for, and nothing in the piece is a rehabilitation. The other two pair a real move with an addition the text refuses: a charge of bad faith, where the author says only that the objection is in one respect self-defeating, and a sorting by audience, where the sorting is by method. (2026-10-03, CAT-size pass: q2 was dropped, so any note above about it no longer applies.)",
       "blind_solve": {
         "solver": "blind reviewer (fresh session, no key)",
         "agreed": 5,
@@ -90,7 +89,7 @@
   },
   "passage": {
     "title": "Only One Thing at a Time",
-    "reading_time_min": 2.5,
+    "reading_time_min": 2.8,
     "paragraphs": [
       {
         "id": "rc-0046-p1",
@@ -164,62 +163,6 @@
             "trap_type": "prescriptive_leap",
             "why_wrong": "No proposal is made anywhere in the paragraph; the remark about entertainment belongs to the closing paragraph and is confined to the ambitious kind of counterfactual, which is the kind the passage has by then disqualified.",
             "seductive_element": "It sounds like the balanced verdict such a passage might reach, and it borrows a real concession from the end of the piece."
-          }
-        ]
-      }
-    },
-    {
-      "id": "rc-0046-q2",
-      "type": "not_true",
-      "skill": "specific_detail",
-      "patterns": [
-        "comp.explicit_detail",
-        "comp.paraphrase",
-        "scope.condition"
-      ],
-      "target_mistake": "accepting a plausible evidential standard, trace the consequences as far as the records allow, in place of the limit the passage actually sets",
-      "prediction_target": null,
-      "difficulty": {
-        "inference_depth": 2,
-        "distractor_similarity": 4,
-        "reasoning_depth": 3
-      },
-      "secondary_skills": [
-        "scope"
-      ],
-      "stem": "Which of the following is NOT true of the discipline the passage describes?",
-      "options": {
-        "A": "The point at which the past is altered must be one that somebody alive at the time could have decided differently.",
-        "B": "A consequence may be traced for as long as the surviving record of the actual past remains detailed.",
-        "C": "Nothing beyond the altered decision may be adjusted in order to make the new path easier to follow.",
-        "D": "The temperament of the person whose decision is altered has to be left as it was."
-      },
-      "correct": "B",
-      "estimated_time_sec": 55,
-      "explanation": {
-        "expert_notice": "The second paragraph states two conditions and then does something unusual with the second: it says where the limit comes from. The chain stops where the divergence stops being traceable, 'a limit set by the alternative itself and not by how thoroughly the actual past happens to be documented'. That clause is written to block exactly one substitution.",
-        "correct_reasoning": "The correct option performs that substitution. It replaces a limit fixed by the imagined alternative with a limit fixed by the documentation of the real past, which is a different and far more generous standard, since the actual record may stay rich for centuries after the imagined divergence has become untraceable. The passage denies the substitution in the same sentence that states the condition, so this is the one item in the list it does not hold.",
-        "passage_anchor": "rc-0046-p2",
-        "question_type_note": "In a NOT-true question three options are the passage in other words and one has been quietly re-engineered. Read for the criterion each option names, not for whether it sounds sensible.",
-        "reading_habit": "When an author says where a limit comes from, underline the source of the limit and not just its existence. Distractors are built by keeping the limit and changing what sets it.",
-        "distractors": [
-          {
-            "option": "A",
-            "trap_type": "passage_language_shifted",
-            "why_wrong": "This is the minimal rewrite in plainer words: the point of divergence 'must be something an actor at the time could have done otherwise'. A reader matching vocabulary rather than claims may not see that 'somebody alive at the time' and 'an actor at the time' name the same person.",
-            "seductive_element": "Not one of the passage's own words survives in the option, which makes a faithful paraphrase look like an alteration."
-          },
-          {
-            "option": "C",
-            "trap_type": "extreme_language",
-            "why_wrong": "The absolute is the passage's own: 'nothing else may be altered to make the new path convenient'. The option keeps the restriction at exactly the strength the second paragraph gives it, so its flat prohibition is accurate rather than overstated.",
-            "seductive_element": "An option beginning with 'nothing' is the kind that is usually caught for overstating, and the habit of suspecting absolutes fires before the sentence is checked."
-          },
-          {
-            "option": "D",
-            "trap_type": "wrong_abstraction_level",
-            "why_wrong": "The minister who may not be given a temperament he never had is the passage's own illustration of what the minimal rewrite forbids, and the option restates it. A particular case of a stated condition is still true of the discipline.",
-            "seductive_element": "It reads as a small detail rather than a rule, which invites the thought that it cannot be one of the conditions and must therefore be the odd one out."
           }
         ]
       }
@@ -452,10 +395,21 @@
       "'but it buys less than its warmest defenders suggest' (paragraph 4): the author, having built the discipline, marks down what it delivers."
     ],
     "misunderstanding": "The usual wrong picture is that the author has defended counterfactual history and therefore believes a good counterfactual tells you what would have happened. Two things produce it: the first paragraph reads as a rescue, and the third paragraph praises a particular case warmly. But the case is praised as a licence to run the exercise, not as a warrant for its result, and the fourth paragraph says so directly. A summary containing the words 'shows what would have happened' has summarised the reader's hopes rather than the passage.",
-    "traps_summary": "Three habits are punished here. Carrying approval of a method across to approval of its conclusions, which is the inference question. Replacing the author's stated limit with a more familiar evidential one, which is the not-true question. And treating a severe tone as a quantity, which is the cannot-be-inferred question, where the passage's sharpness about grand what-ifs is offered back as a claim about how much history would fail the test.",
+    "traps_summary": "Three habits are punished here. Carrying approval of a method across to approval of its conclusions, and replacing the author's stated limit on a chain of consequence with a more generous one, both of which the inference question offers. And treating a severe tone as a quantity, which is the cannot-be-inferred question, where the passage's sharpness about grand what-ifs is offered back as a claim about how much history would fail the test.",
     "reading_lesson": "When an author lays down conditions, write down not only what each condition says but what sets it. Distractors in this form of passage are made by keeping the condition and swapping the thing that fixes its limit, which is invisible unless you noted the source the first time through. The habit costs one underline and survives every question built on the rule.",
     "real_world": "The same discipline governs any argument about whether a decision mattered, a policy, a hire, a treatment, a change of course at work, because to say it mattered is to claim something about the road not taken, and the claim is only as good as the alternative you are willing to specify.",
     "takeaway": "To say a decision mattered is to describe a past that never happened, so describe it carefully and stop early.",
-    "reflection_question": "When you last called a choice in your own life a turning point, what exactly were you claiming the other choice would have led to?"
+    "reflection_question": "When you last called a choice in your own life a turning point, what exactly were you claiming the other choice would have led to?",
+    "eli10": {
+      "big_idea": "Claims about causes all hide a 'what if'; done carefully, one shows that a choice mattered, never what would have happened.",
+      "story": "Many historians say 'what if' history is useless. The past happened once, so there is no evidence about what did not happen. The writer agrees this is serious, but turns it round. Those same historians write 'the bad harvest caused the revolt'. That secretly means: no bad harvest, no revolt. It is like saying a dropped catch lost a cricket match. You are imagining the catch held. So every claim about causes hides a 'what if'. The real question is which ones are done well. Rule one: change just one choice a real person could have made, and nothing else. Rule two: stop early, once the effects can no longer be traced. A close cabinet vote passes both rules. 'What if Rome never fell?' fails both. Even a good 'what if' cannot show what would have happened. It shows only that the result hung on a choice.",
+      "paragraphs": [
+        "Grants the charge against 'what if' history, then shows its critics use it whenever they name a cause.",
+        "Changes the question to which 'what ifs' are done well, and gives two rules: one real choice, stop early.",
+        "Tests cases: a close cabinet vote passes both rules; grand guesses like 'what if Rome never fell' fail.",
+        "Limits the prize: a good 'what if' shows an outcome hung on a choice, not what would have happened."
+      ],
+      "author_view": "Firm but fair: the writer backs careful 'what if' history and is honest that it proves less than its fans claim."
+    }
   }
 }

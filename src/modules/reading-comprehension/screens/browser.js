@@ -92,7 +92,7 @@ export async function renderBrowser(outlet, { storage }) {
       </a>
       ${s ? `
         <p class="row__hint" style="margin: calc(-1 * var(--space-2)) var(--space-2) var(--space-3)">
-          <a href="#/rc/mentor/${item.id}">Learning Page</a> ·
+          <a href="#/rc/mentor/${item.id}">Explain simply</a> ·
           <a href="#/rc/review/${item.id}">Review</a>
         </p>` : ''}
     `;

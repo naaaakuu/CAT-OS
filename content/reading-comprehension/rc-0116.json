@@ -1,0 +1,331 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0116",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 85,
+    "genre": "psychology",
+    "difficulty": "easy",
+    "difficulty_numeric": 1,
+    "stage": "foundation",
+    "skills": [
+      "main-idea-extraction",
+      "inference",
+      "tone-detection",
+      "causal-reasoning"
+    ],
+    "word_count": 287,
+    "question_count": 3,
+    "question_types": [
+      "main_idea",
+      "inference",
+      "tone"
+    ],
+    "theme": "an empty wait feels long because a mind keeps track of time only when it attends to time, so a wait with nothing else to attend to fills with reminders that lengthen it, while memory measures the same stretch by how much happened in it, so the wait that dragged shrinks when looked back on",
+    "estimated_time_min": 5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-03",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted."
+    },
+    "date_added": "2026-10-03",
+    "batch_id": "batch-rc-005",
+    "prompt_version": "content engine v1 + CAT-size brief 2026-10",
+    "reviewer_notes": "A first-person foundation item: one scene, a mechanism explained from it (attention to time lengthens felt time), and a third paragraph that limits the mechanism with a second measure (memory counts events, not glances). The familiar queue-psychology point stops at 'occupied time feels shorter'; what this adds is the reversal in memory, which is what the main-idea near-tie and the inference question turn on.",
+    "vocab_extracted": [
+      "sworn",
+      "curious",
+      "stretch"
+    ],
+    "length_class": "short",
+    "structure": "phenomenon_explanation",
+    "viewpoints": 1,
+    "tone": "wry, personal, explanatory",
+    "difficulty_vector": {
+      "lexical": 1,
+      "syntactic": 2,
+      "abstraction": 2,
+      "inference_depth": 2,
+      "distractor_similarity": 2,
+      "reasoning_depth": 2,
+      "structural_ambiguity": 1,
+      "time_pressure": 1
+    },
+    "reasoning_patterns": [
+      "struct.phenomenon_explanation",
+      "struct.cause_effect",
+      "struct.qualification",
+      "comp.central_idea",
+      "comp.supporting_idea",
+      "arg.causal_claim",
+      "arg.qualification",
+      "inf.strongly_supported",
+      "inf.vs_speculation",
+      "lang.contrast_marker",
+      "word.tone_of_word",
+      "elim.near_tie"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1: the live rival is the option saying that waiting feels longer because a mind with nothing else to do keeps noticing the time. It is a faithful summary of the second paragraph and loses only to the third, which opens 'This rule has a curious limit, though' and adds the memory half that the key keeps. Q2: a strong candidate might argue that the author remembers the queue in more detail than the bicycle, since the queue is the scene he describes most fully; 'I remember almost nothing of it' settles that. The option turning the wait into an hour is settled by 'The clock ran at the same speed both times'. Q3: the finalist is 'amused at first, then gloomy about how memory deceives us'; the author calls the limit 'curious' and ends on a joke at his own expense, which is interest, not gloom.",
+      "blind_solve": null
+    }
+  },
+  "passage": {
+    "title": "Twenty Minutes Twice",
+    "reading_time_min": 1.6,
+    "paragraphs": [
+      {
+        "id": "rc-0116-p1",
+        "text": "Last week I stood for twenty minutes in the queue at my bank, and I would have sworn it was an hour. That evening I spent twenty minutes fixing the chain on my nephew's bicycle, and it felt like five. The clock ran at the same speed both times. My sense of it did not, and the reason is fairly simple."
+      },
+      {
+        "id": "rc-0116-p2",
+        "text": "The mind is not a clock. It keeps track of time only when it pays attention to time, and each time it does, its sense of how much has passed grows. In the queue there was nothing else to pay attention to. I looked at the clock above the counter, then at my phone, then at the eleven people still ahead of me. Every glance was a reminder that time was passing. At the bicycle my attention was on the chain, and I hardly thought about time at all. Fewer reminders made a shorter twenty minutes. This is why some buildings put mirrors beside their lifts. A mirror does not bring the lift any sooner; it gives the waiting mind something to look at other than the wait."
+      },
+      {
+        "id": "rc-0116-p3",
+        "text": "This rule has a curious limit, though. Ask me now how long that queue lasted and I would guess it was short, because I remember almost nothing of it. Looking back, the mind uses a different measure: it judges a stretch of time by how much happened in it. The empty wait, which dragged while it lasted, shrinks in memory, while a busy afternoon that flew past seems long when I look back on it. The queue that seemed to take an hour now fills about one sentence of my memory, and I have just used it up."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0116-q1",
+      "type": "main_idea",
+      "skill": "main_idea",
+      "patterns": [
+        "comp.central_idea",
+        "struct.qualification",
+        "elim.near_tie"
+      ],
+      "target_mistake": "stopping at the mechanism of the second paragraph and leaving out the third paragraph's point that memory measures the same wait in a different way",
+      "prediction_target": "The learner should be able to say beforehand: a wait drags because an idle mind keeps noticing the time, but memory later judges it by what happened in it, so it shrinks.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "logical_structure"
+      ],
+      "stem": "Which of the following best expresses the main idea of the passage?",
+      "options": {
+        "A": "Waiting feels slow because boredom makes each minute seem longer than it really is.",
+        "B": "A wait that drags while it lasts is remembered afterwards as having lasted even longer.",
+        "C": "An idle mind stretches a wait by noticing time, though memory later shrinks the same wait.",
+        "D": "Waiting feels longer than doing because a mind with nothing else to do keeps noticing the time."
+      },
+      "correct": "C",
+      "estimated_time_sec": 70,
+      "explanation": {
+        "expert_notice": "The passage gives two rules, one in each of its last two paragraphs. The second paragraph says an idle mind lengthens a wait by noticing time. The third opens with 'This rule has a curious limit, though' and says memory measures by what happened. A main idea has to hold both.",
+        "correct_reasoning": "The correct option carries both halves: the idle mind that stretches a wait by noticing time, and the memory that later shrinks the same wait. Those are the second and third paragraphs in one sentence, and the first paragraph is the example both of them explain. Nothing in the option goes beyond the text.",
+        "passage_anchor": "rc-0116-p2, rc-0116-p3",
+        "question_type_note": "A main-idea answer has to need every paragraph. When a passage turns in its last paragraph, the option that stops before the turn is the most common wrong answer.",
+        "reading_habit": "Before you read the options, say the passage in one sentence that includes its turn: this happens because of that, but something else. Then look for the option that keeps the 'but'.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "common_knowledge_intrusion",
+            "why_wrong": "The passage never mentions boredom. Its cause is attention: the mind keeps track of time only when it pays attention to time, and the queue gave it nothing else to attend to. The option also leaves out the third paragraph entirely.",
+            "seductive_element": "Everyone has felt that a boring wait drags, so it sounds like a fair account of the first paragraph."
+          },
+          {
+            "option": "B",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The third paragraph says the reverse: the empty wait shrinks in memory, and the author now guesses the queue was short because he remembers almost nothing of it.",
+            "seductive_element": "It carries the passage's first idea in the obvious direction, as though a long wait must also leave a long memory."
+          },
+          {
+            "option": "D",
+            "trap_type": "too_narrow",
+            "why_wrong": "This is the second paragraph put accurately, and it stops there. It leaves out the limit the third paragraph adds, that memory measures the same wait by how much happened in it, which is half of what the passage says.",
+            "seductive_element": "Every word of it is true to the passage, and it names the mechanism the author spends the most sentences on."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0116-q2",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.strongly_supported",
+        "inf.vs_speculation",
+        "comp.supporting_idea"
+      ],
+      "target_mistake": "treating the queue only as it felt at the time, or turning the author's feeling that it lasted an hour into a fact about the clock",
+      "prediction_target": "The learner should be able to say beforehand: the queue felt like an hour while he stood in it, and now he would guess it was short, so it seems shorter now than it did then.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 2,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "specific_detail"
+      ],
+      "stem": "Which of the following can be inferred about the twenty minutes the author spent in the queue?",
+      "options": {
+        "A": "They were in fact closer to an hour than to twenty minutes.",
+        "B": "They seem shorter to him now than they did while he was waiting.",
+        "C": "He remembers them in more detail than his evening at the bicycle.",
+        "D": "They felt long because he was worried the bank would close."
+      },
+      "correct": "B",
+      "estimated_time_sec": 75,
+      "explanation": {
+        "expert_notice": "Two sentences far apart answer this. The first paragraph says the queue felt like an hour at the time; the third says that now he would guess it was short. Together they compare the same twenty minutes at two moments.",
+        "correct_reasoning": "At the time, the author 'would have sworn it was an hour'. Now, he says, he would guess the queue was short, because he remembers almost nothing of it. So the twenty minutes seem shorter to him now than they did while he stood there. The inference needs both paragraphs and adds nothing to them.",
+        "passage_anchor": "rc-0116-p1, rc-0116-p3",
+        "question_type_note": "An inference often joins two statements that the passage keeps apart. When a passage describes the same event twice, ask what changed between the two descriptions.",
+        "reading_habit": "When an example comes back later in a passage, compare its two appearances directly. The difference between them is usually the point the author wanted to make.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "The hour was a feeling, not a measurement. The author says the clock ran at the same speed both times and that the wait was twenty minutes; the option turns 'I would have sworn it was an hour' into a fact.",
+            "seductive_element": "The words 'an hour' come straight from the first paragraph."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The author says he remembers almost nothing of the queue, and that a busy stretch is the one that seems long when he looks back. His memory of the queue is the thin one, not the detailed one.",
+            "seductive_element": "The queue is the experience the passage describes most fully, so it is easy to assume it is the one he remembers best."
+          },
+          {
+            "option": "D",
+            "trap_type": "out_of_scope",
+            "why_wrong": "No worry about the bank closing is mentioned anywhere. The passage explains the long feeling by attention to time, the clock, the phone and the people ahead, not by anxiety.",
+            "seductive_element": "Worry is a believable reason for a wait to drag, and banks do close."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0116-q3",
+      "type": "tone",
+      "skill": "tone",
+      "patterns": [
+        "word.tone_of_word",
+        "lang.contrast_marker"
+      ],
+      "target_mistake": "taking the subject, a tiresome queue, for the author's attitude, or reading the turn in the last paragraph as a change of mood",
+      "prediction_target": "The learner should be able to say beforehand: the author is amused by his own experience and interested in explaining it, with no complaint and no advice.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 2,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "author_purpose"
+      ],
+      "stem": "The tone of the passage is best described as",
+      "options": {
+        "A": "exasperated, as if complaining about a wasted hour",
+        "B": "earnest, as if urging readers not to waste their time",
+        "C": "amused at first, then gloomy about how memory deceives us",
+        "D": "lightly amused, and keen to explain what he noticed"
+      },
+      "correct": "D",
+      "estimated_time_sec": 50,
+      "explanation": {
+        "expert_notice": "Tone lives in a few word choices: 'I would have sworn', 'a curious limit', and the closing joke that he has just used up his one sentence of memory. These are amused and interested, and nothing in the passage complains or warns.",
+        "correct_reasoning": "The author treats his own experience as a small puzzle worth solving: he sets it out, explains it, and ends on a joke against himself. 'Lightly amused, and keen to explain what he noticed' captures both the humour and the explaining, without making either stronger than it is.",
+        "passage_anchor": "rc-0116-p3",
+        "question_type_note": "For a tone question, collect the author's own judgement words and ignore the topic words. A passage about a tiresome queue can still be cheerful.",
+        "reading_habit": "Read the last sentence of a passage twice. Authors often show their attitude most clearly in how they choose to stop.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "over_intense_tone",
+            "why_wrong": "The queue felt long, but the author never complains about it or blames anyone. He uses it as an example to explain something, and his voice stays light throughout.",
+            "seductive_element": "A long wait at a bank sounds like something to grumble about."
+          },
+          {
+            "option": "B",
+            "trap_type": "prescriptive_leap",
+            "why_wrong": "The passage gives no advice at all. It explains why waits feel long and why memory shrinks them; it never tells readers how to use their time.",
+            "seductive_element": "Passages about time often end in a lesson, so readers expect one here."
+          },
+          {
+            "option": "C",
+            "trap_type": "half_right",
+            "why_wrong": "The first half fits and the second does not. The author calls the limit 'curious', treats it as interesting, and ends with a joke, not with gloom about memory.",
+            "seductive_element": "The third paragraph does show memory giving a different length from the one he felt, which can sound like a complaint about memory."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "sworn",
+      "passage_use": "I would have sworn it was an hour",
+      "meaning_here": "been completely sure of something, as if ready to promise it",
+      "difficulty": "easy"
+    },
+    {
+      "word": "curious",
+      "passage_use": "This rule has a curious limit, though.",
+      "meaning_here": "strange or unexpected, rather than eager to know",
+      "difficulty": "medium"
+    },
+    {
+      "word": "stretch",
+      "passage_use": "it judges a stretch of time by how much happened in it",
+      "meaning_here": "an unbroken period of time",
+      "difficulty": "easy"
+    }
+  ],
+  "mentor": {
+    "challenge": "A short, friendly passage with a turn in its last paragraph. Notice that the author explains one thing and then shows where his own explanation stops working.",
+    "one_sentence_summary": "A wait feels long because a mind with nothing else to attend to keeps noticing the time, and each notice adds to its sense of how much has passed, but memory later measures the same wait by how much happened in it, so the wait that dragged shrinks when we look back.",
+    "main_idea": "Time spent waiting feels longer than the same time spent busy, because an idle mind keeps checking the time and every check makes the stretch feel longer. Looking back, though, memory measures time by events, so the empty wait seems short and the busy evening seems long.",
+    "simple_explanation": "The writer stood in a queue for twenty minutes and it felt like an hour. The same evening he fixed a bicycle chain for twenty minutes and it felt like five. The clock did not change speed; his sense of time did.\n\nHis explanation is that the mind keeps track of time only when it pays attention to time. In the queue there was nothing else to pay attention to, so he kept looking at the clock, his phone and the people ahead, and every look reminded him that time was passing. More reminders made the wait feel longer. Fixing the bicycle, he hardly thought about time at all. Mirrors beside lifts work the same way: they do not make the lift come sooner, they just give you something else to look at.\n\nThen he adds a twist. Looking back now, the queue seems short, because almost nothing happened in it. Memory measures time by how much happened, not by how often you checked the clock. So the wait that dragged shrinks in memory, while a busy afternoon that flew past seems long afterwards.",
+    "why_difficult": "Nothing in the language is hard. The difficulty is that the passage gives two rules that point in opposite directions, one for how time feels while it passes and one for how it seems in memory. A reader who keeps only the first rule will choose the option that stops halfway, or the one that says long waits are remembered as long.",
+    "author_intention": "To explain a familiar experience with a simple mechanism, using his own day as the example, and then to show honestly that the mechanism covers only the moment, not the memory.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0116-p1",
+        "role": "Sets up the puzzle",
+        "note": "Twenty minutes in a queue felt like an hour; twenty minutes at a bicycle felt like five. The clock was the same, the feeling was not."
+      },
+      {
+        "paragraph_id": "rc-0116-p2",
+        "role": "Explains the mechanism",
+        "note": "The mind tracks time only when it attends to time. An empty wait fills with glances at the clock, and each glance lengthens it; mirrors by lifts work by giving the eye something else."
+      },
+      {
+        "paragraph_id": "rc-0116-p3",
+        "role": "Marks its limit",
+        "note": "Looking back, memory measures by events, so the empty queue now seems short and a busy afternoon seems long."
+      }
+    ],
+    "tone_progression": "Chatty and self-observing in the first paragraph, plainly explanatory in the second, and amused in the third, where the author turns the explanation on his own memory and ends on a joke at his own expense.",
+    "key_transitions": [
+      "'The mind is not a clock.' (opening of paragraph 2): the puzzle becomes an explanation.",
+      "'This rule has a curious limit, though.' (opening of paragraph 3): the author stops explaining and starts limiting what he has explained."
+    ],
+    "misunderstanding": "A hurried reader thinks the passage is simply about how boring waits feel long, and stops there. The last paragraph says something less obvious: the same wait that dragged is remembered as short, because memory counts events rather than glances at the clock.",
+    "traps_summary": "The options try a popular explanation the passage never gives (boredom), a summary that stops before the last paragraph, and a reversal that says waits are remembered as long. One option also turns the author's feeling that the wait was an hour into a fact about the clock.",
+    "reading_lesson": "When a passage gives you a rule, watch for the sentence that limits it. Words such as though, but and 'a curious limit' usually mark the place where the author narrows his own claim, and main-idea questions are built to see whether you kept that narrowing.",
+    "real_world": "This is why a long journey with nothing to do seems endless on the day and almost blank a month later, while a crowded holiday week flies past and then seems long in the telling.",
+    "takeaway": "How long time feels and how long it seems afterwards are measured by different rulers.",
+    "reflection_question": "Which week of your last year felt shortest while you lived it, and which seems longest now?",
+    "eli10": {
+      "big_idea": "Waiting feels long because we keep checking the time, but later we remember the wait as short because nothing happened in it.",
+      "story": "The writer waited in a queue for twenty minutes. It felt like an hour. That evening he fixed a bicycle chain for twenty minutes. It felt like five. Why? When you wait, there is nothing else to think about. So you keep checking the clock, your phone and the line. Every check reminds you that time is passing. More reminders make the wait feel longer. When you are busy, you hardly check at all. That is why some buildings put mirrors next to lifts. The mirror does not make the lift faster. It just gives you something else to look at. Then comes a twist. Now the writer remembers the queue as short. Memory measures time in a different way. It counts how much happened. Almost nothing happened in the queue, so it shrinks. A busy afternoon grows longer in memory instead.",
+      "paragraphs": [
+        "Tells a story: a twenty-minute queue felt like an hour; twenty minutes fixing a bicycle felt like five.",
+        "Explains why: a waiting mind keeps noticing the time, and every notice makes the wait feel longer.",
+        "Adds a twist: looking back, memory counts what happened, so the empty wait now seems short."
+      ],
+      "author_view": "The writer finds this funny and interesting, and he is honest that his explanation only works while you are waiting."
+    }
+  }
+}

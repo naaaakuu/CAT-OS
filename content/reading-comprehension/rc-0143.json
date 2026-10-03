@@ -1,0 +1,426 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0143",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 90,
+    "genre": "literature-theory",
+    "difficulty": "hard",
+    "difficulty_numeric": 8,
+    "stage": "elite",
+    "skills": [
+      "main-idea-extraction",
+      "inference",
+      "application",
+      "tone-detection",
+      "qualifier-tracking"
+    ],
+    "word_count": 569,
+    "question_count": 4,
+    "question_types": [
+      "application",
+      "author_attitude",
+      "inference",
+      "primary_purpose"
+    ],
+    "theme": "a critic's charge that the most skilful novelists of her day are 'materialists', spending immense skill on making the trivial look enduring under convention's demand for plot and probability, so that the best craftsman is the worst culprit, while life, which seen from within is a varied halo of impressions rather than a symmetrical series of events, is what fiction should convey",
+    "estimated_time_min": 8.5,
+    "source": {
+      "publication": "Virginia Woolf, The Common Reader (1925), \"Modern Fiction\"",
+      "url": "https://www.gutenberg.org/ebooks/64457",
+      "author": "Virginia Woolf",
+      "date_accessed": "2026-10-03",
+      "usage_note": "Public domain: Virginia Woolf died in 1941 and the work was first published in 1925. The passage is the author's own words, with some sentences left out to fit CAT length; the questions, explanations and notes are original to CAT OS."
+    },
+    "date_added": "2026-10-03",
+    "batch_id": "batch-rc-006",
+    "prompt_version": "content engine v1 + CAT-size brief 2026-10",
+    "reviewer_notes": "Cut from the middle of the essay: the charge against Wells, Bennett and Galsworthy (source paragraph 3: their disappointing of hopes, the one word 'materialists', the spirit and the body, and the admission that one word cannot hit three targets), Bennett as best workman and worst culprit (the same paragraph, the well-built house and 'if life should refuse to live there?'), the definition of materialists (paragraph 4, whole), the diagnosis (paragraph 5: the admission of being exacting, Bennett's apparatus, 'Life escapes', the tyrant and the closing questions) and the proposal (paragraph 6 without the long sentence on the shower of atoms). Left out: the opening on progress in literature, Wells and Galsworthy in detail, the railway carriage and the Brighton hotel, and the section on Joyce, whose source text also carries a footnote marker. The author's dashes are written as spaced en dashes. The essay is famous; the set leans on what readers of its famous lines tend to miss, the private sense of 'materialists' and the fence around the last sentence.",
+    "length_class": "medium",
+    "structure": "problem_diagnosis_prescription",
+    "viewpoints": 2,
+    "tone": "disappointed, exacting, lyrical, tentative",
+    "difficulty_vector": {
+      "lexical": 4,
+      "syntactic": 4,
+      "abstraction": 4,
+      "inference_depth": 4,
+      "distractor_similarity": 4,
+      "reasoning_depth": 4,
+      "structural_ambiguity": 4,
+      "time_pressure": 4
+    },
+    "reasoning_patterns": [
+      "struct.problem_solution",
+      "struct.definition",
+      "struct.pivot",
+      "comp.purpose",
+      "comp.organization",
+      "comp.reference_tracking",
+      "sum.qualification_kept",
+      "arg.premise",
+      "arg.qualification",
+      "arg.description_vs_evaluation",
+      "inf.strongly_supported",
+      "inf.author_view_application",
+      "lang.tone_shift",
+      "lang.modal_verbs",
+      "word.connotation",
+      "elim.near_tie"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1's live rival is the plea for courage and sincerity, which a reader who skims the last paragraph will take for its point; the sentence itself refuses it ('We are not pleading merely for courage and sincerity'). The option about doing without plot and characters is attractive because the tyrant's demands are listed with disdain, and it fails on 'a little other than custom would have us believe it'. Q2 is the hardest item: its near-tie ties Bennett's guilt to his skill through his influence on readers, the right link by the wrong route; the passage gives the route itself, 'inasmuch as he is by far the best workman', and the definition of materialists explains why better workmanship makes the fault more complete. The lifeless-characters option turns a question ('if life should refuse to live there?') into a verdict. Q3's rivals are the everyday sense of materialist and the literal 'body'; the author's own definition ('we mean by it') settles both, and the option about passing thoughts is her alternative, not her target. Q4's rival is contempt, built from 'the sooner English fiction turns its back upon them'; 'as politely as may be' and the gratitude of the first sentence keep the dissatisfaction courteous, and the hedges of the fourth and fifth paragraphs rule out the confident programme.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "thrall",
+      "embalming",
+      "evanescent",
+      "gig lamps"
+    ]
+  },
+  "passage": {
+    "title": "Life Escapes",
+    "reading_time_min": 3.1,
+    "paragraphs": [
+      {
+        "id": "rc-0143-p1",
+        "text": "Mr. Wells, Mr. Bennett, and Mr. Galsworthy have excited so many hopes and disappointed them so persistently that our gratitude largely takes the form of thanking them for having shown us what they might have done but have not done; what we certainly could not do, but as certainly, perhaps, do not wish to do. If we tried to formulate our meaning in one word we should say that these three writers are materialists. It is because they are concerned not with the spirit but with the body that they have disappointed us, and left us with the feeling that the sooner English fiction turns its back upon them, as politely as may be, and marches, if only into the desert, the better for its soul. Naturally, no single word reaches the centre of three separate targets."
+      },
+      {
+        "id": "rc-0143-p2",
+        "text": "But Mr. Bennett is perhaps the worst culprit of the three, inasmuch as he is by far the best workman. He can make a book so well constructed and solid in its craftsmanship that it is difficult for the most exacting of critics to see through what chink or crevice decay can creep in. There is not so much as a draught between the frames of the windows, or a crack in the boards. And yet – if life should refuse to live there?"
+      },
+      {
+        "id": "rc-0143-p3",
+        "text": "If we fasten, then, one label on all these books, on which is one word materialists, we mean by it that they write of unimportant things; that they spend immense skill and immense industry making the trivial and the transitory appear the true and the enduring."
+      },
+      {
+        "id": "rc-0143-p4",
+        "text": "We have to admit that we are exacting, and, further, that we find it difficult to justify our discontent by explaining what it is that we exact. Can it be that owing to one of those little deviations which the human spirit seems to make from time to time Mr. Bennett has come down with his magnificent apparatus for catching life just an inch or two on the wrong side? Life escapes; and perhaps without life nothing else is worth while. The writer seems constrained, not by his own free will but by some powerful and unscrupulous tyrant who has him in thrall to provide a plot, to provide comedy, tragedy, love, interest, and an air of probability embalming the whole so impeccable that if all his figures were to come to life they would find themselves dressed down to the last button of their coats in the fashion of the hour. The tyrant is obeyed; the novel is done to a turn. Is life like this? Must novels be like this?"
+      },
+      {
+        "id": "rc-0143-p5",
+        "text": "Look within and life, it seems, is very far from being “like this”. Examine for a moment an ordinary mind on an ordinary day. The mind receives a myriad impressions – trivial, fantastic, evanescent, or engraved with the sharpness of steel. Life is not a series of gig lamps symmetrically arranged; but a luminous halo, a semi-transparent envelope surrounding us from the beginning of consciousness to the end. Is it not the task of the novelist to convey this varying, this unknown and uncircumscribed spirit, whatever aberration or complexity it may display, with as little mixture of the alien and external as possible? We are not pleading merely for courage and sincerity; we are suggesting that the proper stuff of fiction is a little other than custom would have us believe it."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0143-q1",
+      "type": "primary_purpose",
+      "skill": "author_purpose",
+      "patterns": [
+        "comp.purpose",
+        "comp.organization",
+        "sum.qualification_kept"
+      ],
+      "target_mistake": "taking the reading the author explicitly sets aside, a plea for courage and sincerity, for her purpose, or reading 'worst culprit' as a verdict on Bennett's skill",
+      "prediction_target": "The learner should be able to say: she explains what the skilful novels of her day miss and suggests that fiction's real material is the inner life.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 3,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "main_idea",
+        "logical_structure"
+      ],
+      "stem": "The author's primary purpose in the passage is",
+      "options": {
+        "A": "to say what is missing from a skilful kind of novel and what fiction should attend to instead",
+        "B": "to urge novelists to write with more courage and sincerity than their predecessors ever showed",
+        "C": "to show that Mr. Bennett's craftsmanship is weaker than his admirers have supposed",
+        "D": "to argue that novels should do without plot and without characters of any kind"
+      },
+      "correct": "A",
+      "estimated_time_sec": 80,
+      "explanation": {
+        "expert_notice": "The passage moves from a charge (the three novelists are 'materialists'), through the case of the best of them, to a definition of the charge, a diagnosis (a 'tyrant' who demands plot, comedy and probability) and a proposal ('Look within'). It closes by saying exactly what it is and is not arguing: not 'merely for courage and sincerity' but that 'the proper stuff of fiction is a little other than custom would have us believe it'.",
+        "correct_reasoning": "The correct option covers both halves of that design: what is missing ('Life escapes') from novels made with 'immense skill and immense industry', and what fiction should attend to instead, the 'luminous halo' of an ordinary mind on an ordinary day.",
+        "passage_anchor": "rc-0143-p4, rc-0143-p5",
+        "question_type_note": "A purpose question is often settled by the author's own statement of purpose. When a passage ends 'We are not pleading merely for X; we are suggesting Y', the answer is about Y.",
+        "reading_habit": "Read the last sentence of a critical essay twice. Authors often use it to fence their claim, and the fence is what the purpose question tests.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "The author names this reading in order to set it aside: 'We are not pleading merely for courage and sincerity'. Her claim is about the material of fiction, not about the virtues of novelists.",
+            "seductive_element": "Courage and sincerity are in the passage, and urging them sounds like what a critic of timid novels would do."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "She calls Mr. Bennett 'by far the best workman' and says his books are so solid that the most exacting critic can find no chink. Her complaint is that the craftsmanship is spent on the wrong thing, not that it is weak.",
+            "seductive_element": "He is called 'perhaps the worst culprit of the three', which sounds like a verdict on his skill."
+          },
+          {
+            "option": "D",
+            "trap_type": "overstatement",
+            "why_wrong": "She objects to plot and probability supplied because a 'tyrant' demands them, and asks only that fiction be 'a little other' than custom expects. Doing without characters altogether is a demand she never makes.",
+            "seductive_element": "The passage does treat plot, comedy and probability as impositions, so abolishing everything conventional looks like the logical next step."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0143-q2",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.strongly_supported",
+        "comp.reference_tracking",
+        "arg.premise",
+        "elim.near_tie"
+      ],
+      "target_mistake": "reading 'culprit' as a charge of hidden flaws, or turning the question 'if life should refuse to live there?' into a verdict that his characters are lifeless",
+      "prediction_target": "The learner should be able to say: since the fault is skill spent on making trivial things look lasting, the most skilful builder commits it most completely.",
+      "difficulty": {
+        "inference_depth": 4,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "logical_structure"
+      ],
+      "stem": "It can be inferred that the author thinks Mr. Bennett 'perhaps the worst culprit of the three' because",
+      "options": {
+        "A": "his books, for all their care, contain flaws that a sufficiently exacting critic can find",
+        "B": "being the most skilful, he has done most to win readers over to the kind of novel she dislikes",
+        "C": "the better a novel is built, the more completely it can make trivial things look enduring",
+        "D": "his characters, unlike those of the other two writers, never really come to life at all"
+      },
+      "correct": "C",
+      "estimated_time_sec": 95,
+      "explanation": {
+        "expert_notice": "The sentence states a paradox and gives its reason in a single clause: worst 'inasmuch as he is by far the best workman'. The definition in the following paragraph supplies what the workmanship is spent on: 'making the trivial and the transitory appear the true and the enduring'.",
+        "correct_reasoning": "Put the reason beside the definition. If the fault is skill spent on making trivial things look enduring, then the more skill, the more complete the illusion; a perfectly built house with no draught is the fullest example of the fault, not an exception to it. That is the correct option.",
+        "passage_anchor": "rc-0143-p2, rc-0143-p3",
+        "question_type_note": "When an author offers a paradox with 'inasmuch as', the inference asked for is usually the hidden premise that makes it sensible. Look for that premise elsewhere in the passage rather than in your own knowledge.",
+        "reading_habit": "When praise and blame land on the same person in one sentence, look for the link between them. Here it is the definition of 'materialists', which arrives a paragraph later and explains the paradox.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage says the reverse: his books are so well made that 'it is difficult for the most exacting of critics to see through what chink or crevice decay can creep in'. The fault is not in the building.",
+            "seductive_element": "'Culprit' suggests a defect somewhere in the work, and an exacting critic is mentioned."
+          },
+          {
+            "option": "B",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "Nothing is said about readers or about Bennett's influence on taste. The reason given, 'inasmuch as he is by far the best workman', concerns what his skill does to the book.",
+            "seductive_element": "It also ties his guilt to his skill, which is the right idea, and influence is a common reason for blaming the most successful."
+          },
+          {
+            "option": "D",
+            "trap_type": "possibility_as_certainty",
+            "why_wrong": "'If life should refuse to live there?' is a question, a risk raised rather than a verdict delivered, and the passage compares no characters of Bennett's with those of the other two.",
+            "seductive_element": "The image of a perfect house that life may refuse to live in sounds like a judgement that his books are lifeless."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0143-q3",
+      "type": "application",
+      "skill": "application",
+      "patterns": [
+        "inf.author_view_application",
+        "word.connotation",
+        "struct.definition"
+      ],
+      "target_mistake": "applying the everyday sense of 'materialist', or taking 'the body' literally, instead of the definition the author gives",
+      "prediction_target": "The learner should be able to say: a materialist in her sense spends great skill on solid outward detail to make a story seem lifelike, while life itself escapes.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 3,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "vocabulary_in_context",
+        "inference"
+      ],
+      "stem": "Which of the following novelists would the author most clearly count as a 'materialist' in her sense of the word?",
+      "options": {
+        "A": "A novelist who writes chiefly about rich people and the many possessions they accumulate",
+        "B": "A novelist who labours over a family's house and dress so the story will seem true to life",
+        "C": "A novelist who describes illness and bodily appetite in close and unsparing physical detail",
+        "D": "A novelist who follows a character's passing thoughts and leaves the plot unresolved at the end"
+      },
+      "correct": "B",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "The author defines her own term, so the question is answered from her definition, not from the dictionary: materialists 'write of unimportant things; that they spend immense skill and immense industry making the trivial and the transitory appear the true and the enduring'. The images around it show what that looks like: a house without a draught, figures 'dressed down to the last button of their coats in the fashion of the hour'.",
+        "correct_reasoning": "The correct option is the definition at work: great labour on external solidity, the house and the dress, in the service of 'an air of probability'. That is skill spent on making the trivial look enduring, which is the fault the passage names.",
+        "passage_anchor": "rc-0143-p3, rc-0143-p4",
+        "question_type_note": "An application question gives new cases and asks which one the author's concept fits. When the author has defined the concept, apply that definition word by word, and distrust the option that fits the word's ordinary meaning.",
+        "reading_habit": "When an author says 'we mean by it', stop and write the meaning down. A familiar word given a private sense is the commonest trap in literary criticism.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "common_knowledge_intrusion",
+            "why_wrong": "This is the everyday sense of materialist, someone attached to money and possessions. The author's sense concerns how a novelist spends skill, on 'the trivial and the transitory', whatever the characters happen to own.",
+            "seductive_element": "It is what the word usually means, and novels about comfortable people are just what such criticism might be expected to attack."
+          },
+          {
+            "option": "C",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "'The body' is set against 'the spirit' as the outward against the inward, the solid fabric of a book against the life in it. It has nothing to do with illness or appetite, which an inward novel could treat as well as any other.",
+            "seductive_element": "The passage does say these writers are concerned 'not with the spirit but with the body', and this option takes that literally."
+          },
+          {
+            "option": "D",
+            "trap_type": "opposite_direction",
+            "why_wrong": "Following the mind's passing impressions is what the last paragraph asks for ('Examine for a moment an ordinary mind on an ordinary day'), so this is the author's alternative to materialism, not an example of it.",
+            "seductive_element": "Leaving a plot unresolved can look like careless craft, and the materialists are being blamed for something."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0143-q4",
+      "type": "author_attitude",
+      "skill": "tone",
+      "patterns": [
+        "lang.tone_shift",
+        "lang.modal_verbs",
+        "arg.qualification"
+      ],
+      "target_mistake": "hearing the firm verdicts as contempt, or the sketch of an alternative as a confident programme, and missing the hedges that run through the positive account",
+      "prediction_target": "The learner should be able to say: she is certain these novels miss life and tentative about saying what life is or how fiction should catch it.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 3,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "main_idea",
+        "author_purpose"
+      ],
+      "stem": "The author's attitude in the passage is best described as",
+      "options": {
+        "A": "contemptuous of the fiction of her day and certain that it has nothing to teach",
+        "B": "confident that she has found a method that will replace the conventional novel",
+        "C": "regretful that she lacks the skill of the novelists whose work she criticises",
+        "D": "sure these novels lack something, but tentative in saying what it is"
+      },
+      "correct": "D",
+      "estimated_time_sec": 60,
+      "explanation": {
+        "expert_notice": "Two kinds of sentence alternate. The verdicts are firm: 'Life escapes', 'The tyrant is obeyed'. The positive account is hedged at every step: 'We have to admit that we are exacting', 'Can it be...', 'it seems', and a closing claim that fiction's proper stuff is only 'a little other' than custom supposes.",
+        "correct_reasoning": "The correct option holds both: certainty that the novels miss something, and diffidence about saying what. The author admits she finds it 'difficult to justify our discontent by explaining what it is that we exact', and she puts her proposal as a question ('Is it not the task of the novelist...?').",
+        "passage_anchor": "rc-0143-p4, rc-0143-p5",
+        "question_type_note": "Attitude questions on criticism often turn on degree: how sure is the critic, and about what? Sort the author's sentences into verdicts and proposals and check how confident each kind is.",
+        "reading_habit": "Count the hedges ('perhaps', 'it seems', 'a little') and the questions. A passage that is certain in its complaints and questioning in its proposals has a two-part attitude, and the answer must name both parts.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "over_intense_tone",
+            "why_wrong": "Her dissatisfaction is real but courteous: she speaks of 'gratitude', of turning away from these writers 'as politely as may be', and of Mr. Bennett as 'by far the best workman'. Contempt would not trouble to be polite.",
+            "seductive_element": "'The sooner English fiction turns its back upon them... the better for its soul' sounds like a total dismissal."
+          },
+          {
+            "option": "B",
+            "trap_type": "overstatement",
+            "why_wrong": "She proposes no method. She asks a question ('Is it not the task of the novelist...?') and suggests only that fiction's proper stuff is 'a little other than custom would have us believe it'.",
+            "seductive_element": "The last paragraph does sketch an alternative, and a reader who knows how the modern novel developed may credit her with a programme."
+          },
+          {
+            "option": "C",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "She does say the novelists have shown 'what we certainly could not do', but she adds that we 'perhaps, do not wish to do' it. The admission is a shrug, not a regret.",
+            "seductive_element": "It is built from her own words, and admitting that you could not do something usually sounds like envy."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "thrall",
+      "passage_use": "some powerful and unscrupulous tyrant who has him in thrall",
+      "meaning_here": "complete power over someone, as a master has over a slave",
+      "difficulty": "hard"
+    },
+    {
+      "word": "embalming",
+      "passage_use": "an air of probability embalming the whole",
+      "meaning_here": "preserving, as a dead body is preserved; the story is made lifelike but lifeless",
+      "difficulty": "medium"
+    },
+    {
+      "word": "evanescent",
+      "passage_use": "trivial, fantastic, evanescent, or engraved with the sharpness of steel",
+      "meaning_here": "fading away almost as soon as it appears",
+      "difficulty": "hard"
+    },
+    {
+      "word": "gig lamps",
+      "passage_use": "Life is not a series of gig lamps symmetrically arranged",
+      "meaning_here": "the lamps on either side of a gig, a light two-wheeled carriage; a row of separate, evenly spaced lights",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "This is criticism written like fiction, full of images and questions, and every word is the author's own. Before answering anything, decide which of her sentences are verdicts and which are guesses.",
+    "one_sentence_summary": "Woolf charges three admired novelists with being 'materialists', writers who spend immense skill making trivial and passing things look true and lasting, so that the best craftsman is the worst offender; under a tyranny of convention that demands plot, comedy and probability, life escapes, and the novelist's real task is to convey the varied, uncircumscribed life of an ordinary mind.",
+    "main_idea": "The most skilful novelists of the day, Woolf says, build solid, convincing books that miss what matters most: life itself. They obey the conventions of plot and probability, but life as we actually experience it is a shifting glow of impressions, and that is what fiction should try to convey.",
+    "simple_explanation": "Woolf is disappointed in three famous novelists of her time, Wells, Bennett and Galsworthy. Her one-word charge is that they are 'materialists': they care about the body, not the spirit. She admits that one word cannot fit three different writers exactly.\n\nBennett is the worst offender precisely because he is the best craftsman. His novels are built like perfect houses, with no draughts and no cracks. And yet, she asks, what if life refuses to live in them?\n\nShe explains what she means by materialists: they write about unimportant things and use enormous skill to make the trivial and the passing look true and lasting.\n\nShe admits she is hard to please and cannot easily say what she wants. But she feels that life escapes these books. Writers seem to obey a tyrant who demands a plot, comedy, tragedy, a love story and an air of probability, with every character dressed in the latest fashion down to the last button. Is life like this? Must novels be?\n\nLook inside an ordinary mind on an ordinary day, she says, and life is nothing like that. Impressions pour in from every side, some trivial, some as sharp as steel. Life is not a row of evenly spaced lamps but a glowing halo around us from the first moment of consciousness to the last. The novelist's job is to convey that. She is not just asking writers to be braver or more sincere; she is saying that the very material of fiction is a little different from what custom supposes.",
+    "why_difficult": "Woolf argues in images (a draught-proof house, an apparatus for catching life, a tyrant, gig lamps, a halo) and in questions rather than statements, so the reader has to turn pictures into claims. She uses an everyday word, 'materialists', in a private sense that she defines herself, and she hedges her positive proposal while being blunt in her complaints. The names of half-forgotten novelists add strangeness without being needed for any answer.",
+    "author_intention": "To say what is wrong with the most accomplished fiction of her day, that its skill serves the solid and the external while life escapes, and to point, tentatively, toward the inner life as fiction's proper material.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0143-p1",
+        "role": "Makes the charge",
+        "note": "Wells, Bennett and Galsworthy have disappointed: in one word, they are materialists, concerned with the body rather than the spirit."
+      },
+      {
+        "paragraph_id": "rc-0143-p2",
+        "role": "Presses a paradox",
+        "note": "Bennett is the worst culprit because he is the best workman: his books are perfectly built, but life may refuse to live in them."
+      },
+      {
+        "paragraph_id": "rc-0143-p3",
+        "role": "Defines the label",
+        "note": "Materialists write of unimportant things, spending immense skill to make the trivial and transitory look true and enduring."
+      },
+      {
+        "paragraph_id": "rc-0143-p4",
+        "role": "Diagnoses the cause",
+        "note": "Admitting she is exacting, Woolf says life escapes because writers obey a tyrant of convention: plot, comedy, probability."
+      },
+      {
+        "paragraph_id": "rc-0143-p5",
+        "role": "Proposes the alternative",
+        "note": "An ordinary mind receives a myriad impressions; life is a luminous halo, and conveying it is the novelist's task."
+      }
+    ],
+    "tone_progression": "Courteous but disappointed at first, sharpening into paradox over Bennett, careful and self-questioning in the middle, and finally lyrical and quietly insistent as she turns from what is wrong to what life is like.",
+    "key_transitions": [
+      "'But Mr. Bennett is perhaps the worst culprit of the three, inasmuch as he is by far the best workman.' (second paragraph): skill becomes the problem.",
+      "'Look within and life, it seems, is very far from being “like this”.' (opening of the last paragraph): diagnosis gives way to proposal.",
+      "'We are not pleading merely for courage and sincerity; we are suggesting that the proper stuff of fiction is a little other than custom would have us believe it.' (last sentence): the claim is fenced."
+    ],
+    "misunderstanding": "Hurried readers take 'materialists' in its everyday sense, writers who care about money and possessions, or take 'the body' literally. Woolf defines the word herself: writers who spend 'immense skill and immense industry making the trivial and the transitory appear the true and the enduring'. The fault lies in where the skill goes, which is why the best craftsman is the worst culprit.",
+    "traps_summary": "The options exploit the everyday sense of 'materialist' and a literal 'body', turn a question ('if life should refuse to live there?') into a verdict, read 'worst culprit' as a judgement on Bennett's skill, and offer 'courage and sincerity', the reading the author explicitly sets aside.",
+    "reading_lesson": "When a critic writes in images, translate each image into a plain claim before answering anything: the draught-proof house means faultless construction, the tyrant means convention, the halo means continuous inner experience. Then notice which claims are asserted and which are only asked; questions on such passages turn on the difference.",
+    "real_world": "Virginia Woolf, who died in 1941, collected this essay in The Common Reader in 1925, the year of Mrs Dalloway, a novel built on its idea: one ordinary day seen from inside several minds. The complaint outlives its targets, since any form can become so well made that it stops noticing what it was for.",
+    "takeaway": "Craftsmanship spent on the wrong thing fails more completely than clumsiness, because it is more convincing.",
+    "reflection_question": "Think of a book or film that was perfectly made and left you cold: what did it leave out?",
+    "eli10": {
+      "big_idea": "Some very skilled writers build perfect stories that miss real life, which is a glow of thoughts and feelings, not a neat plot.",
+      "story": "Woolf is disappointed in three famous writers of her time. She calls them 'materialists'. She means they care about the outside of things, not the inside. The best builder of the three is the worst. His books are like a perfect house with no cracks. But what if life will not live in that house? These writers use huge skill to make small, passing things look true and lasting. Woolf admits she is hard to please. Still, she feels life slips out of their books. A strict boss seems to order every writer: add a plot, a love story, and make it believable. But look inside your own head on an ordinary day. Thoughts and feelings pour in like rain. Life is not a neat row of street lamps. It is a soft glow all around us. Woolf thinks writers should try to show that.",
+      "paragraphs": [
+        "Makes a charge: three famous novelists are 'materialists', caring for the body, not the spirit.",
+        "Presses a paradox: Bennett, the best builder, is the worst offender, since life may not live there.",
+        "Defines the word: they spend great skill making trivial, passing things look true and lasting.",
+        "Explains why: writers obey a tyrant of convention, plot and probability, so life escapes.",
+        "Suggests an answer: life is a glowing halo of impressions, and novels should convey it."
+      ],
+      "author_view": "Woolf is disappointed and searching: sure these skilled books miss life, less sure how to say what is missing."
+    }
+  }
+}

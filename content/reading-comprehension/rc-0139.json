@@ -1,0 +1,402 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0139",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 86,
+    "genre": "sociology",
+    "difficulty": "easy",
+    "difficulty_numeric": 3,
+    "stage": "developing",
+    "skills": [
+      "main-idea-extraction",
+      "inference",
+      "tone-detection",
+      "application",
+      "causal-reasoning"
+    ],
+    "word_count": 397,
+    "question_count": 4,
+    "question_types": [
+      "title_selection",
+      "inference",
+      "tone",
+      "application"
+    ],
+    "theme": "people pay into an honesty box with nobody watching because cheating would cost them their picture of themselves and because they believe others pay; they stop when they come to believe that others are not paying, so a notice complaining of theft, by announcing that not paying is common, can make it more common, while a true notice that nearly everyone pays keeps the many paying, though no notice moves the few determined thieves, who need a lock",
+    "estimated_time_min": 7,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-03",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted."
+    },
+    "date_added": "2026-10-03",
+    "batch_id": "batch-rc-005",
+    "prompt_version": "content engine v1 + CAT-size brief 2026-10",
+    "reviewer_notes": "A first-person developing item in which a scene carries the argument. The finding behind the park signs is known; what this adds is a single case followed from cause to repair, two reasons for paying (self-image and the belief that others pay) shown to be linked, since the first weakens once the second goes, and a limit: a notice reaches the many who pay while they think others do, not the few determined thieves, so the stall ends with both a thank-you notice and a padlock. It does not overlap rc-0091, which explains obedience to law by the standing of the authority. Four questions: title, an inference from 'works only if', attitude to the first notice, and an application to a library.",
+    "length_class": "medium",
+    "structure": "narrative_reflection",
+    "viewpoints": 2,
+    "tone": "personal, warm, observant",
+    "difficulty_vector": {
+      "lexical": 2,
+      "syntactic": 2,
+      "abstraction": 2,
+      "inference_depth": 2,
+      "distractor_similarity": 3,
+      "reasoning_depth": 2,
+      "structural_ambiguity": 2,
+      "time_pressure": 2
+    },
+    "reasoning_patterns": [
+      "struct.specific_to_general",
+      "struct.cause_effect",
+      "comp.central_idea",
+      "arg.causal_claim",
+      "arg.principle",
+      "arg.qualification",
+      "inf.strongly_supported",
+      "inf.author_vs_reported",
+      "inf.author_view_application",
+      "scope.condition",
+      "lang.absolute_vs_qualified",
+      "word.tone_of_word",
+      "word.connotation",
+      "elim.near_tie"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1: a strong candidate might argue for 'Most People Are Simply Honest', since most people did pay; the author says that 'names the result rather than the reason'. The padlock title overstates a limit that applies only to 'the few who forced the tin'. Q2: the rival is that the neighbours keep watch, which the passage rules out ('Nobody sits at the stall'; 'when nobody is watching'); the tin's working is offered as the ground for the belief that others pay. Q3: the rival is 'unsure whether it made any difference'; the takings 'fell further, even in weeks when nobody forced the tin', and the author explains why. Q4: the near-tie is the notice saying every reader returns books on time, which is false in the stem's case; the passage's notice was true, and the author says it speaks to people who pay as long as they believe others do. The naming option rests on being watched, which the passage's argument does not use.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "modest",
+      "forced",
+      "takings"
+    ]
+  },
+  "passage": {
+    "title": "Plums on Trust",
+    "reading_time_min": 2.1,
+    "paragraphs": [
+      {
+        "id": "rc-0139-p1",
+        "text": "On the road out of our town there is a table under a walnut tree. In summer it holds bags of plums and jars of honey, a price chalked on a slate, and a tin with a slot in the lid. Nobody sits at the stall. The farmer who fills it lives two fields away and empties the tin each evening. For years, she told me, the tin held almost exactly what the missing plums were worth."
+      },
+      {
+        "id": "rc-0139-p2",
+        "text": "Why do people pay when nobody is watching? One answer is simply that most people are honest, but that names the result rather than the reason. Part of the reason is that cheating has a cost even when nobody sees it. If I took a bag without paying, I would become, in my own eyes, a man who steals from a farmer who trusted him. Most people will pay a modest price not to become that person. The other part is that they believe others pay too. A tin left by a road works only if most people are honest, and this one plainly works."
+      },
+      {
+        "id": "rc-0139-p3",
+        "text": "Then one summer the tin was forced open and emptied twice. The farmer, understandably angry, pinned a notice to the tree: 'Thieves have been stealing from this stall. Shame on you.' After the notice went up, the takings fell further, even in weeks when nobody forced the tin. The notice was aimed at the thieves, but what it told everyone else was that not paying had become common. Once people believe that, paying stops feeling like what decent people do and starts to feel like being the only fool. Studies of signs in parks have found the same thing: telling visitors that many people take things from a park can make more of them do it."
+      },
+      {
+        "id": "rc-0139-p4",
+        "text": "Her daughter took the notice down and put up another: 'Nearly everyone pays. Thank you.' Within a few weeks the takings were back to what they had been. The new notice is no charm, though, nor does it pretend to be one. It speaks to the many who pay as long as they believe others do. It does nothing about the few who forced the tin, who were never going to be moved by a notice. So the tin on the table is now a heavier one, with a padlock, and above it the notice still says thank you."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0139-q1",
+      "type": "title_selection",
+      "skill": "main_idea",
+      "patterns": [
+        "comp.central_idea",
+        "inf.author_vs_reported",
+        "struct.specific_to_general"
+      ],
+      "target_mistake": "naming the passage after the notice that failed, after the explanation the author sets aside, or after the limit that applies only to thieves",
+      "prediction_target": "The learner should be able to say beforehand: people keep paying while they believe others pay, and stop when told that others do not.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "logical_structure"
+      ],
+      "stem": "Which of the following would be the most suitable title for the passage?",
+      "options": {
+        "A": "Thieves Have Been Stealing",
+        "B": "Paying Because Others Pay",
+        "C": "Most People Are Simply Honest",
+        "D": "A Padlock for Every Honesty Box"
+      },
+      "correct": "B",
+      "estimated_time_sec": 70,
+      "explanation": {
+        "expert_notice": "One belief runs through every paragraph after the first. People pay partly because 'they believe others pay too'; they stop when a notice tells them 'not paying had become common'; and the second notice works on 'the many who pay as long as they believe others do'.",
+        "correct_reasoning": "The belief that others pay is one of the two reasons for paying, its loss explains the fall in takings, and its repair explains the recovery. The correct option names that thread. The other reason, the cost of cheating to one's picture of oneself, depends on the same belief, since once not paying seems common, paying 'starts to feel like being the only fool'.",
+        "passage_anchor": "rc-0139-p2, rc-0139-p3, rc-0139-p4",
+        "question_type_note": "A title should name the idea the whole passage turns on. Look for the idea that explains both the problem and its repair.",
+        "reading_habit": "In a passage that tells a story, ask what changed between the beginning and the end, and why. The why is usually the title.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "example_as_thesis",
+            "why_wrong": "These are the words of the notice that made things worse. The passage is about why it made things worse, and about what worked instead.",
+            "seductive_element": "It is quoted in the passage and marks its turning point."
+          },
+          {
+            "option": "C",
+            "trap_type": "reported_view_as_author",
+            "why_wrong": "The author mentions this only to set it aside: 'One answer is simply that most people are honest, but that names the result rather than the reason.'",
+            "seductive_element": "Most people did pay for years, which seems to show that most people are honest."
+          },
+          {
+            "option": "D",
+            "trap_type": "overstatement",
+            "why_wrong": "The padlock is for 'the few who forced the tin'. The passage's point is that the many are moved by what they believe others do, which a notice can reach and a lock cannot.",
+            "seductive_element": "The passage does end with a padlock on the tin."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0139-q2",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.strongly_supported",
+        "scope.condition"
+      ],
+      "target_mistake": "explaining the tin's survival by someone watching it, or reading past the passage's own figure for what the tin held",
+      "prediction_target": "The learner should be able to say beforehand: a tin that only works if most people pay, and plainly works, shows passers-by that most people pay.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 2,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "specific_detail"
+      ],
+      "stem": "It can be inferred that, in the author's view, a tin that has stood by the road for years",
+      "options": {
+        "A": "is safe from thieves because the neighbours keep watch over it",
+        "B": "is itself a sign to passers-by that most people pay",
+        "C": "would soon be emptied if strangers began to use the road",
+        "D": "leads people to pay more than the plums are worth"
+      },
+      "correct": "B",
+      "estimated_time_sec": 75,
+      "explanation": {
+        "expert_notice": "The second paragraph gives the second reason people pay, 'they believe others pay too', and then backs the belief with the tin itself: 'A tin left by a road works only if most people are honest, and this one plainly works.'",
+        "correct_reasoning": "If a tin by the road can work only when most people pay, then a tin that has gone on working for years shows that most people pay. The author offers this as the ground for the belief that others pay, so the tin itself tells passers-by what others do. That is the correct option, one step from the sentence.",
+        "passage_anchor": "rc-0139-p2",
+        "question_type_note": "An inference may join a 'works only if' sentence to the observation that it works. The conclusion is that the condition holds, and that people can see that it holds.",
+        "reading_habit": "When a writer says something works 'only if' a condition holds, ask what its working tells an onlooker. Many inferences are that step.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage says the reverse: 'Nobody sits at the stall', and its question is why people pay 'when nobody is watching'. The tin was also forced open, so it was not safe from thieves.",
+            "seductive_element": "Neighbours keeping watch would be a simple explanation for a full tin."
+          },
+          {
+            "option": "C",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "Strangers are never mentioned. The passage describes what happened when people came to believe that others were not paying, not what strangers would do.",
+            "seductive_element": "It sounds like common sense that honesty boxes work best among people who know each other."
+          },
+          {
+            "option": "D",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "The tin 'held almost exactly what the missing plums were worth', neither more nor less. The option keeps the word 'worth' and changes the amount.",
+            "seductive_element": "It echoes the passage's own sentence about what the plums were worth."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0139-q3",
+      "type": "tone",
+      "skill": "tone",
+      "patterns": [
+        "word.tone_of_word",
+        "word.connotation"
+      ],
+      "target_mistake": "reading the author's judgement on the notice as scorn or approval, or missing that the author is sure of its effect",
+      "prediction_target": "The learner should be able to say beforehand: the author understands why the farmer was angry but is clear that the notice made things worse.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 2,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "author_purpose"
+      ],
+      "stem": "The author's attitude towards the farmer's first notice is best described as",
+      "options": {
+        "A": "scornful of a foolish and easily avoided mistake",
+        "B": "approving, since thieves deserve public shame",
+        "C": "sympathetic to the anger, but clear it did harm",
+        "D": "unsure whether it made any difference"
+      },
+      "correct": "C",
+      "estimated_time_sec": 50,
+      "explanation": {
+        "expert_notice": "One word sets the attitude: the farmer was 'understandably angry'. Then the author says plainly what the notice did: 'After the notice went up, the takings fell further'.",
+        "correct_reasoning": "'Understandably' grants that the anger was natural. The next sentences show that the notice made things worse by telling everyone else that not paying had become common. Sympathy with the feeling and a clear judgement on the result together are what the correct option describes.",
+        "passage_anchor": "rc-0139-p3",
+        "question_type_note": "A tone question asks for the author's attitude, which can be mixed. Collect the author's own words about the thing, here 'understandably', and the author's verdict on what it did.",
+        "reading_habit": "Adverbs such as understandably, rightly or oddly are the author speaking. Underline them; they carry the tone more than any description does.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "over_intense_tone",
+            "why_wrong": "Nothing in the passage mocks the farmer, and 'understandably angry' is a sympathetic phrase. The author explains the mistake rather than scorning it.",
+            "seductive_element": "The notice did make things worse, and the author says so clearly."
+          },
+          {
+            "option": "B",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The author shows the notice doing harm: the takings 'fell further'. Shaming the thieves is not something the author approves of here.",
+            "seductive_element": "The farmer's anger is called understandable, which can sound like approval of what she wrote."
+          },
+          {
+            "option": "D",
+            "trap_type": "weakened_version",
+            "why_wrong": "The author is not unsure: the takings fell further, 'even in weeks when nobody forced the tin', and the passage explains why.",
+            "seductive_element": "The passage gives no figures, so it might seem to leave the effect open."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0139-q4",
+      "type": "application",
+      "skill": "application",
+      "patterns": [
+        "inf.author_view_application",
+        "arg.principle",
+        "lang.absolute_vs_qualified",
+        "elim.near_tie"
+      ],
+      "target_mistake": "copying the notice that failed, reaching for a remedy the passage never discusses, or overstating the true message until it becomes false",
+      "prediction_target": "The learner should be able to say beforehand: tell readers, truthfully, that most of them already return books on time.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 3,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "inference"
+      ],
+      "stem": "A library wants fewer books to come back late. Most of its readers already return their books on time. Which notice would the passage's reasoning recommend?",
+      "options": {
+        "A": "'Most of our readers return their books on time.'",
+        "B": "'Late returns have become a serious problem in this library.'",
+        "C": "'Readers who return books late will be named on this board.'",
+        "D": "'Every one of our readers returns books on time.'"
+      },
+      "correct": "A",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "The passage gives a failure and a repair. A notice saying that many people do the wrong thing makes it seem common; the notice that worked said 'Nearly everyone pays', which was true, and it 'speaks to the many who pay as long as they believe others do'.",
+        "correct_reasoning": "The library is in the farmer's position: most people already do the right thing, and the aim is to keep it that way. The passage's reasoning recommends telling them so, truthfully, as the second notice did. The correct option reports the true habit of the majority and nothing more.",
+        "passage_anchor": "rc-0139-p3, rc-0139-p4",
+        "question_type_note": "An application question asks you to carry the author's reasoning to a new setting. Match the new case to the passage's case first, then copy the move that worked, not the one that failed.",
+        "reading_habit": "When a passage contains a failure and a fix, note exactly what the fix changed. In a new case, the right answer usually makes the same change.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "opposite_direction",
+            "why_wrong": "This is the farmer's first notice in a library's words. By announcing that late returns are common, it would tell readers what the stall's notice told passers-by, that the wrong thing 'had become common'.",
+            "seductive_element": "It is honest about the problem and sounds like a reasonable warning."
+          },
+          {
+            "option": "C",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "The passage says nothing about naming people, and its argument is about what people believe others do, not about being seen. Nothing in it supports this notice.",
+            "seductive_element": "Public naming seems a natural cure for people who misbehave when nobody is watching."
+          },
+          {
+            "option": "D",
+            "trap_type": "extreme_language",
+            "why_wrong": "In the library's case some books do come back late, so this notice is false. The notice at the stall said 'Nearly everyone', and the author's point depends on its being true of the many.",
+            "seductive_element": "It sounds like a stronger version of the notice that worked."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "modest",
+      "passage_use": "Most people will pay a modest price",
+      "meaning_here": "small; not large",
+      "difficulty": "easy"
+    },
+    {
+      "word": "forced",
+      "passage_use": "the tin was forced open and emptied twice",
+      "meaning_here": "opened by breaking it",
+      "difficulty": "easy"
+    },
+    {
+      "word": "takings",
+      "passage_use": "the takings fell further",
+      "meaning_here": "the money a seller receives from sales",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "A story about a roadside stall that turns into an argument about honesty. Keep track of the two reasons people pay, and of what exactly the first notice told the people who read it.",
+    "one_sentence_summary": "People pay at an unattended stall because cheating would cost them their picture of themselves and because they believe others pay; when an angry notice complained of theft, it told honest customers that not paying had become common and the takings fell, while a true notice that nearly everyone pays brought them back, though no notice moves the few determined thieves, who need a padlock.",
+    "main_idea": "People pay into an honesty box partly to stay, in their own eyes, the kind of person who does not cheat, and partly because they believe others pay. Tell them that many people are not paying and many will stop; tell them truthfully that nearly everyone pays and they will keep paying. A notice works on the many, not on the few thieves.",
+    "simple_explanation": "On a road out of the writer's town there is a stall under a walnut tree: plums, honey, a price written on a slate, and a tin with a slot for money. Nobody looks after it. The farmer lives nearby and empties the tin each evening, and for years it held almost exactly what the plums taken were worth.\n\nWhy do people pay when nobody is watching? Saying 'most people are honest' only describes what happens; it does not explain it. The writer gives two reasons. First, cheating has a cost even when nobody sees it: if he took plums without paying, he would become, in his own eyes, someone who steals from a farmer who trusted him, and most people will pay a little to avoid that. Second, people believe that others pay too, and the tin, which could only work if most people were honest, plainly works.\n\nThen one summer the tin was broken open and emptied twice. The angry farmer put up a notice saying that thieves had been stealing, and shame on them. After that the money fell even more, even in weeks when nobody broke the tin. The notice was meant for the thieves, but it told everyone else that not paying had become common. Once people believe that, paying stops feeling like what good people do and starts to feel like being the only fool. Studies of signs in parks have found the same: telling visitors that many people take things can make more of them do it.\n\nThe farmer's daughter replaced it with a notice saying 'Nearly everyone pays. Thank you.' Within weeks the money was back to normal. The writer adds that this notice is no magic charm. It works on the many people who pay as long as they believe others do, but it does nothing about the few real thieves. So the tin now has a padlock, and the thank-you notice still hangs above it.",
+    "why_difficult": "The passage reads like a story, so the argument is easy to miss. The key move is quiet: the first notice was aimed at thieves but read by everyone, and what it told everyone was that not paying had become common.",
+    "author_intention": "To explain, through one stall's story, why people pay when nobody is watching, why a complaint made matters worse, and what a notice can and cannot do.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0139-p1",
+        "role": "Sets the scene",
+        "note": "A stall with no seller, a price on a slate and a tin; for years the tin held almost exactly what was owed."
+      },
+      {
+        "paragraph_id": "rc-0139-p2",
+        "role": "Explains the paying",
+        "note": "Cheating would make a person a thief in their own eyes, and people believe others pay, as the working tin shows."
+      },
+      {
+        "paragraph_id": "rc-0139-p3",
+        "role": "Shows the failure",
+        "note": "After thefts, an angry notice told everyone that not paying was common, and the takings fell further."
+      },
+      {
+        "paragraph_id": "rc-0139-p4",
+        "role": "Shows the repair",
+        "note": "A notice saying nearly everyone pays brought the takings back; it moves the many, but the few thieves still need a padlock."
+      }
+    ],
+    "tone_progression": "Warm and unhurried in the opening scene, thoughtful in the second paragraph, sympathetic but clear in the third, and gently amused at the close, where the padlock and the thank-you notice share the tree.",
+    "key_transitions": [
+      "'Why do people pay when nobody is watching?' (opening of paragraph 2): the scene becomes a question.",
+      "'The notice was aimed at the thieves, but what it told everyone else was that not paying had become common.' (paragraph 3): the author explains the failure.",
+      "'The new notice is no charm, though, nor does it pretend to be one.' (paragraph 4): the author limits the repair."
+    ],
+    "misunderstanding": "A hurried reader thinks the passage says people are simply honest, or that shaming thieves is the answer. The author says people pay partly because they believe others do, which is why a complaint about theft backfired.",
+    "traps_summary": "The options name the passage after the notice that failed or after the explanation the author sets aside, stretch the padlock to every stall, put watchers at a stall that has none, change the passage's figure for what the tin held, misjudge the author's attitude as scorn, approval or doubt, and turn a true message into a false one.",
+    "reading_lesson": "In a passage that tells a story, look for the sentence that explains why something in the story happened. That sentence is the argument, and most questions test it rather than the events.",
+    "real_world": "The same thing lies behind signs about litter, fare-dodging or late fees: a message saying that many people break a rule tells everyone that breaking it is normal.",
+    "takeaway": "Tell people that most others do the right thing, when it is true, and more of them will keep doing it.",
+    "reflection_question": "Have you ever seen a notice complaining about bad behaviour, and did it make you more or less likely to behave well?",
+    "eli10": {
+      "big_idea": "People pay when nobody watches partly because they think others pay, so telling them others cheat makes cheating spread.",
+      "story": "There is a stall by a road with plums and honey. Nobody sits there. People put money in a tin. For years, almost everyone paid. Why? Cheating would make you a thief in your own eyes. And people think others pay too. It is like a class where everyone tidies up, so you tidy up too. Then thieves broke open the tin twice. The angry farmer put up a sign. It said thieves were stealing, and shame on them. After that, even fewer people paid. The sign told everyone that cheating was common. So paying started to feel silly. Then her daughter put up a new sign. It said nearly everyone pays, thank you. Soon the money came back. But no sign stops real thieves. So now the tin has a padlock too.",
+      "paragraphs": [
+        "Sets a scene: a stall with no seller, and a tin that people pay into.",
+        "Explains why people pay: to stay honest in their own eyes, and because others pay.",
+        "Shows a mistake: an angry sign told everyone that cheating was common, so fewer paid.",
+        "Shows a fix: a sign saying nearly everyone pays worked, though thieves still need a lock."
+      ],
+      "author_view": "The writer is warm towards the farmer, clear about her mistake, and pleased with the daughter's better sign."
+    }
+  }
+}

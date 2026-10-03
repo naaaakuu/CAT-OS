@@ -1,0 +1,404 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0133",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 86,
+    "genre": "psychology",
+    "difficulty": "medium",
+    "difficulty_numeric": 4,
+    "stage": "developing",
+    "skills": [
+      "main-idea-extraction",
+      "argument-tracking",
+      "inference",
+      "tone-detection",
+      "causal-reasoning"
+    ],
+    "word_count": 380,
+    "question_count": 4,
+    "question_types": [
+      "title_selection",
+      "inference",
+      "tone",
+      "weaken"
+    ],
+    "theme": "boredom is useful not because it is creative in itself but because it is a signal that pushes a person to look for something better, so that the ideas come from the search; the push helps only where the person is free to act on it, so the two common reputations, boredom as an illness to cure and boredom as a gift, describe boredom one cannot and can act on, and a phone carried into free time answers the push at once, so the search that makes boredom useful never starts",
+    "estimated_time_min": 7,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-03",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted."
+    },
+    "date_added": "2026-10-03",
+    "batch_id": "batch-rc-005",
+    "prompt_version": "content engine v1 + CAT-size brief 2026-10",
+    "reviewer_notes": "An impersonal developing item built as two views weighed rather than as a correction: both reputations survive, each with its situation marked. The creativity-from-boredom claim is familiar; what this adds is the mechanism stated exactly (boredom as a signal that pushes, so the ideas come from the search and not from the boredom), the condition on which its usefulness depends (freedom to act on the push), and the observation that the two reputations describe different situations. The fourth paragraph adds a case that fits neither view, which the weaken question targets, and the passage ends on a question. The experiment is described in general terms and no question depends on knowing it.",
+    "length_class": "medium",
+    "structure": "two_views_adjudication",
+    "viewpoints": 3,
+    "tone": "even-handed, dry, reflective",
+    "difficulty_vector": {
+      "lexical": 2,
+      "syntactic": 2,
+      "abstraction": 3,
+      "inference_depth": 3,
+      "distractor_similarity": 3,
+      "reasoning_depth": 3,
+      "structural_ambiguity": 2,
+      "time_pressure": 2
+    },
+    "reasoning_patterns": [
+      "struct.two_views_adjudication",
+      "struct.claim_counterclaim",
+      "struct.qualification",
+      "comp.central_idea",
+      "arg.causal_claim",
+      "arg.evidence_vs_conclusion",
+      "arg.qualification",
+      "inf.directly_implied",
+      "inf.author_vs_reported",
+      "cr.weaken",
+      "word.tone_of_word",
+      "lang.concession_marker",
+      "lang.often_vs_always",
+      "elim.near_tie"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1: a strong candidate might argue for 'In Praise of Boredom', since the second paragraph opens 'There is something in the second view'; the next sentences limit that ('Boredom is not itself creative'), and the third makes boredom 'a weight' for anyone who cannot act on it. 'The Weight of Waiting' names only that half. Q2: the near-tie is that the extra ideas came from the copying itself, which the passage denies in its own words: 'The copying produced no ideas. It produced the push'. The option stretching the result to anyone who feels bored runs into the worker, the patient and the pupil. Q3: the live rival is 'detached, declining to decide', which mistakes giving each view its due for refusing to judge; 'The two reputations describe different situations' is a verdict. Q4: the tempting wrong answer is that a phone sometimes offers something better, which contradicts only a claim the author did not make ('rarely better', not never better); the option about phones during the dull task strengthens the claim, and the screens-and-complaints option concerns comfort, not the push.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "reputations",
+      "confined",
+      "muddles"
+    ]
+  },
+  "passage": {
+    "title": "A Long Afternoon",
+    "reading_time_min": 2.1,
+    "paragraphs": [
+      {
+        "id": "rc-0133-p1",
+        "text": "Boredom has two reputations. In the first, it is a small illness with a ready cure. Waiting rooms have screens, shops play music, and a phone means that no adult need ever spend ninety seconds in a queue with nothing to look at. In the second, popular in books about creativity, boredom is a gift. Leave a child with nothing to do on a long afternoon, the argument goes, and she will invent a game, write a play or take the clock apart."
+      },
+      {
+        "id": "rc-0133-p2",
+        "text": "There is something in the second view, but it helps to say exactly what. Boredom is not itself creative. It is a signal: the unpleasant sense that what you are doing is not worth the attention you are paying it. Like hunger, it pushes you to go and find something better. In one kind of experiment, some people first spend a quarter of an hour copying numbers from a list. Afterwards they tend to suggest more uses for a plastic cup than people who skipped the copying. The copying produced no ideas. It produced the push, and the people did the rest."
+      },
+      {
+        "id": "rc-0133-p3",
+        "text": "That is also where the second view stops being true, because a push is useful only if there is somewhere to go. The child on the long afternoon can wander off and take the clock apart. A worker on a production line feels the same push. So does a patient confined to bed, or a pupil made to sit through a lesson he mastered a year ago. None of them can do anything with it. For them boredom is not a gift but a weight, and being told it is good for them does not make it lighter. The two reputations describe different situations: boredom you are free to act on, and boredom you are not."
+      },
+      {
+        "id": "rc-0133-p4",
+        "text": "The phone muddles the picture. It was welcome as a cure for the queue, but it goes everywhere, including into the long afternoon. There it answers the push the moment it arrives, with something rarely better than what was there before, and the search never starts. The useful kind of boredom needs two things, a dull moment and the freedom to find a way out of it for yourself. How many of our dull moments still come with both?"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0133-q1",
+      "type": "title_selection",
+      "skill": "main_idea",
+      "patterns": [
+        "comp.central_idea",
+        "struct.two_views_adjudication",
+        "inf.author_vs_reported"
+      ],
+      "target_mistake": "naming the passage after the view it accepts only in part, after its experiment, or after the half of its limit that concerns people who cannot act",
+      "prediction_target": "The learner should be able to say beforehand: boredom is useful as a push, but only when there is somewhere to go.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "logical_structure"
+      ],
+      "stem": "Which of the following would be the most suitable title for the passage?",
+      "options": {
+        "A": "In Praise of Boredom",
+        "B": "Copying Numbers, Counting Cups",
+        "C": "The Weight of Waiting",
+        "D": "A Push Needs Somewhere to Go"
+      },
+      "correct": "D",
+      "estimated_time_sec": 70,
+      "explanation": {
+        "expert_notice": "The passage sets out two reputations, says what is true in the second ('It is a signal' that 'pushes you to go and find something better'), then marks where it stops: 'a push is useful only if there is somewhere to go'. That sentence is the hinge of the passage, and a title should carry it.",
+        "correct_reasoning": "The author's claim is that boredom helps by pushing a person to look for something better, and that this helps only when the person is free to act on the push: the child can wander off, the worker on the line cannot. The correct option compresses both halves, a push and the need for somewhere to go, and it also fits the last paragraph, where a phone answers the push before any search begins.",
+        "passage_anchor": "rc-0133-p2, rc-0133-p3",
+        "question_type_note": "A title is the main idea at its shortest. In a passage that weighs two views, the title should name the author's own position, not either of the views being weighed.",
+        "reading_habit": "When a passage begins by describing two views, keep a note of which sentences are the views and which are the author's. The title, like the main idea, belongs to the author.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "reported_view_as_author",
+            "why_wrong": "Praise is the second reputation, which the author accepts only in part: boredom 'is not itself creative', and for those who cannot act on it, it is 'a weight'.",
+            "seductive_element": "The author does defend some of what boredom does, and the second paragraph opens 'There is something in the second view'."
+          },
+          {
+            "option": "B",
+            "trap_type": "example_as_thesis",
+            "why_wrong": "The experiment is one piece of support in the second paragraph. The passage's point is about when boredom's push is useful, which the experiment does not address.",
+            "seductive_element": "It is the most concrete and memorable detail in the passage."
+          },
+          {
+            "option": "C",
+            "trap_type": "too_narrow",
+            "why_wrong": "The weight of boredom belongs to the people who cannot act on it, in the third paragraph. The title leaves out the useful push and the phone.",
+            "seductive_element": "The third paragraph carries the author's limit and is written with feeling."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0133-q2",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.directly_implied",
+        "arg.evidence_vs_conclusion",
+        "elim.near_tie"
+      ],
+      "target_mistake": "crediting the dull task with the ideas, or stretching one experiment into a rule about everyone who is bored",
+      "prediction_target": "The learner should be able to say beforehand: the copying produced a push, and the people produced the ideas.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "specific_detail"
+      ],
+      "stem": "It can be inferred from the passage that, in the experiment described, the people who copied numbers",
+      "options": {
+        "A": "got their extra ideas from the dull copying itself",
+        "B": "got their extra ideas from the urge that the copying created",
+        "C": "had more ideas because they had practised listing things",
+        "D": "showed that boredom improves the thinking of anyone who feels it"
+      },
+      "correct": "B",
+      "estimated_time_sec": 75,
+      "explanation": {
+        "expert_notice": "Two short sentences after the experiment tell you how the author reads it: 'The copying produced no ideas. It produced the push, and the people did the rest.'",
+        "correct_reasoning": "The author calls boredom a signal that 'pushes you to go and find something better'. In the experiment the dull copying created that push, and the people, looking for something more interesting, came up with the extra uses. So the ideas came from the urge the copying created, not from the copying.",
+        "passage_anchor": "rc-0133-p2",
+        "question_type_note": "When an author describes an experiment and then interprets it, the inference questions are built on the interpretation. Find the sentences that say what the result means.",
+        "reading_habit": "After any experiment in a passage, look for the sentence that says what the result shows. It is usually short and comes straight after the result.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "The author says the opposite in almost the same words: 'The copying produced no ideas. It produced the push'.",
+            "seductive_element": "The group that copied did produce more ideas, so the copying looks like the cause."
+          },
+          {
+            "option": "C",
+            "trap_type": "out_of_scope",
+            "why_wrong": "No practice is mentioned. Copying numbers from a list has nothing to do with thinking of uses for a cup, and the author explains the result by the push, not by practice.",
+            "seductive_element": "Practice is a common explanation for doing better at a task."
+          },
+          {
+            "option": "D",
+            "trap_type": "too_broad",
+            "why_wrong": "The next paragraph says the reverse for many people: for a worker on a production line or a patient confined to bed, boredom is 'not a gift but a weight'. One experiment on copying does not speak for everyone who feels bored.",
+            "seductive_element": "It sounds like the second reputation's claim, which the experiment seems to support."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0133-q3",
+      "type": "tone",
+      "skill": "tone",
+      "patterns": [
+        "word.tone_of_word",
+        "inf.author_vs_reported",
+        "lang.concession_marker"
+      ],
+      "target_mistake": "mistaking the author's settlement of the two views for enthusiasm, scorn or a refusal to judge",
+      "prediction_target": "The learner should be able to say beforehand: the author gives each view its due, showing that each is right about a different situation.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "author_purpose"
+      ],
+      "stem": "The author's attitude towards the two reputations of boredom is best described as",
+      "options": {
+        "A": "even-handed: each is right about a different situation",
+        "B": "admiring of the second view and contemptuous of the first",
+        "C": "detached, declining to decide between the two views",
+        "D": "dismissive of both as confusions that need clearing away"
+      },
+      "correct": "A",
+      "estimated_time_sec": 50,
+      "explanation": {
+        "expert_notice": "The author grants something to each view and limits each: 'There is something in the second view', and later, 'The two reputations describe different situations: boredom you are free to act on, and boredom you are not.'",
+        "correct_reasoning": "The author neither sides with one reputation nor rejects both. The gift view is right where a person can act on the push, and the illness view is right where a person cannot, where boredom is 'not a gift but a weight'. Giving each view its own situation is the attitude the correct option names.",
+        "passage_anchor": "rc-0133-p3",
+        "question_type_note": "For an attitude question, collect the author's own verdict words. A passage that ends by giving each view its own territory is even-handed, however warmly it describes either one.",
+        "reading_habit": "When a passage weighs two views, find the sentence where the author speaks in their own voice about both. That sentence decides the attitude.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "over_intense_tone",
+            "why_wrong": "The author accepts only part of the second view, since boredom 'is not itself creative', and grants the first view its own situation. 'Admiring' and 'contemptuous' are far stronger than anything in the passage.",
+            "seductive_element": "The author does take the second view more seriously and is wary of the phone, so the direction feels right."
+          },
+          {
+            "option": "C",
+            "trap_type": "weakened_version",
+            "why_wrong": "The author does decide: the two reputations 'describe different situations', and the passage goes on to say what the useful kind of boredom needs. That is a judgement, not a refusal to make one.",
+            "seductive_element": "Giving both views some credit can look like sitting on the fence."
+          },
+          {
+            "option": "D",
+            "trap_type": "criticism_as_rejection",
+            "why_wrong": "The author limits both views but keeps something from each; nothing is cleared away. The gift view survives where people can act, and the weight of boredom is granted where they cannot.",
+            "seductive_element": "The author corrects both views, which can look like rejecting them."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0133-q4",
+      "type": "weaken",
+      "skill": "strengthen_weaken",
+      "patterns": [
+        "cr.weaken",
+        "arg.causal_claim",
+        "lang.often_vs_always"
+      ],
+      "target_mistake": "choosing a statement that supports the claim, attacks a stronger claim than the author made, or concerns comfort rather than the push",
+      "prediction_target": "The learner should be able to say beforehand: the claim would be weakened by evidence that people who answer boredom with a phone in their free time still get its benefit.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 3,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "argument",
+        "inference"
+      ],
+      "stem": "Which of the following, if true, would most weaken the author's claim about the phone in the last paragraph?",
+      "options": {
+        "A": "People allowed their phones during a dull task later suggest fewer uses for a plastic cup than others.",
+        "B": "A phone sometimes offers something better than the dull moment it replaces.",
+        "C": "People who fill a dull free afternoon with a phone later have as many ideas as those without one.",
+        "D": "Waiting rooms with screens receive fewer complaints from visitors than waiting rooms without them."
+      },
+      "correct": "C",
+      "estimated_time_sec": 90,
+      "explanation": {
+        "expert_notice": "The claim is a cause and an effect, and it has a place: the phone goes 'into the long afternoon', and 'There it answers the push the moment it arrives', so 'the search never starts' and boredom's benefit is lost. To weaken it, look for evidence that free time filled with a phone keeps that benefit.",
+        "correct_reasoning": "If people who fill a dull free afternoon with a phone go on to have as many ideas as people without one, then the phone has not cancelled boredom's benefit in the very situation the author describes, and the claim that it stops the search loses its force. The correct option attacks exactly the effect the author predicts, in the place the author predicts it.",
+        "passage_anchor": "rc-0133-p4",
+        "question_type_note": "A weaken question asks for the fact that most damages one specific claim. State the claim as a cause and an effect first, then look for the option that breaks the link.",
+        "reading_habit": "Before weighing the options on a weaken question, write the claim in the form 'X, so Y'. The best weakener usually shows X happening without Y.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "This would support the claim, not weaken it: phones during the dull task and fewer ideas afterwards is just what the author predicts.",
+            "seductive_element": "It is about phones and the cup experiment, the two things the question seems to be about."
+          },
+          {
+            "option": "B",
+            "trap_type": "extreme_language",
+            "why_wrong": "The author says the phone offers something 'rarely better', not never better. An occasional better offer fits the claim as written.",
+            "seductive_element": "It seems to contradict the author directly, but it contradicts only a stronger claim than the one made."
+          },
+          {
+            "option": "D",
+            "trap_type": "true_but_irrelevant",
+            "why_wrong": "Fewer complaints show that screens ease the discomfort of waiting, which the author never denies. The claim is about what happens to the push and the search, not about whether people feel better.",
+            "seductive_element": "It shows the cure working, which can look like a point against the author's doubts about the phone."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "reputations",
+      "passage_use": "Boredom has two reputations.",
+      "meaning_here": "the views that people commonly hold about something",
+      "difficulty": "easy"
+    },
+    {
+      "word": "confined",
+      "passage_use": "a patient confined to bed",
+      "meaning_here": "kept in one place and unable to leave it",
+      "difficulty": "medium"
+    },
+    {
+      "word": "muddles",
+      "passage_use": "The phone muddles the picture.",
+      "meaning_here": "makes something less clear by mixing things up",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "A passage that weighs two common views of boredom and gives each its place. Keep the author's own position apart from the views being weighed.",
+    "one_sentence_summary": "Boredom is often treated either as an illness to cure or as a gift that breeds creativity, but it is really a signal that pushes a person to look for something better, so it helps only where the person is free to act on the push and is merely a weight where they are not; a phone, carried everywhere, answers the push at once, so the search that makes boredom useful never starts.",
+    "main_idea": "Boredom is useful not because it is creative in itself but because it pushes us to look for something better. That push helps only when we are free to act on it, so the two popular views of boredom each describe a different situation. A phone muddles this, because it answers the push before any search can begin.",
+    "simple_explanation": "People think about boredom in two ways. Some see it as a small illness with an easy cure: screens in waiting rooms, music in shops, and a phone so that no one ever has to stand in a queue with nothing to look at. Others, especially in books about creativity, see it as a gift: leave a child with nothing to do and she will invent a game or take a clock apart.\n\nThe writer thinks the second view has something right, but says exactly what. Boredom does not create anything by itself. It is a signal, the unpleasant feeling that what you are doing is not worth your attention, and like hunger it pushes you to go and find something better. In one kind of experiment, people who first copy numbers from a list for fifteen minutes then think of more uses for a plastic cup than people who did not. The copying gave them no ideas; it gave them the push, and they did the rest.\n\nThat is also where the gift view stops being true. A push only helps if you have somewhere to go. The child on a free afternoon can wander off. A factory worker, a patient stuck in bed or a pupil forced to sit through a lesson he already knows feels the same push but can do nothing with it. For them boredom is a weight, not a gift. So the two views describe two different situations: boredom you can act on, and boredom you cannot.\n\nThe phone complicates this. It was welcome as a cure for queues, but now it goes everywhere, even into the free afternoon. There it answers the push straight away, usually with something no better, and the search never begins. Useful boredom needs a dull moment and the freedom to find your own way out. The writer ends by asking how often we still get both.",
+    "why_difficult": "The passage reports two views and agrees with parts of each, so the author's own position is easy to lose. Readers tend to take the passage as praise of boredom, because the second view gets the most room, and miss the limit in the third paragraph and the turn about the phone in the fourth.",
+    "author_intention": "To settle a quarrel between two views of boredom by showing that each describes a different situation, and to point out how a phone removes the conditions in which boredom helps.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0133-p1",
+        "role": "Presents two views",
+        "note": "Boredom as a small illness with a cure (screens, music, phones), and boredom as a gift that makes a child invent."
+      },
+      {
+        "paragraph_id": "rc-0133-p2",
+        "role": "Explains the gift",
+        "note": "Boredom is not creative in itself; it is a signal that pushes you to find something better, as the copying experiment shows."
+      },
+      {
+        "paragraph_id": "rc-0133-p3",
+        "role": "Limits the gift",
+        "note": "The push helps only if there is somewhere to go; for the worker, the patient and the bored pupil, boredom is a weight. Each view fits its own situation."
+      },
+      {
+        "paragraph_id": "rc-0133-p4",
+        "role": "Adds the phone",
+        "note": "Carried everywhere, the phone answers the push at once, so the search never starts; useful boredom needs a dull moment and the freedom to escape it yourself."
+      }
+    ],
+    "tone_progression": "Dry and amused in setting out the two reputations, careful and precise in the second paragraph, more serious in the third, where boredom becomes a weight, and reflective at the close, which ends on a question.",
+    "key_transitions": [
+      "'There is something in the second view, but it helps to say exactly what.' (opening of paragraph 2): the author starts sorting the views.",
+      "'That is also where the second view stops being true' (opening of paragraph 3): the limit arrives.",
+      "'The phone muddles the picture.' (opening of paragraph 4): a case that fits neither view."
+    ],
+    "misunderstanding": "A hurried reader thinks the passage praises boredom, or that it simply attacks phones. Its claim is narrower: boredom helps only as a push towards something better, only where a person is free to follow the push, and a phone tends to answer the push before the search begins.",
+    "traps_summary": "The options take the gift view for the author's own, name the passage after its experiment, credit the copying with the ideas, stretch one experiment to everyone, mistake a judgement for fence-sitting, and attack a stronger claim about the phone than the author made.",
+    "reading_lesson": "In a passage that weighs two views, sort every sentence into 'their view' or 'the author's view' as you read. The questions are built on the difference, and the author's view is usually where both reported views are given their limits.",
+    "real_world": "The same distinction matters wherever boredom is discussed, from a free weekend to a long train journey, a classroom or a job: whether boredom helps depends on whether the bored person has any room to act on it.",
+    "takeaway": "Boredom is a push, and a push is useful only when there is somewhere to go.",
+    "reflection_question": "When were you last bored with the freedom to do something about it, and what did you do?",
+    "eli10": {
+      "big_idea": "Boredom helps by pushing you to find something better, but only when you are free to go and find it.",
+      "story": "Some people think boredom is like a small illness. Screens and phones are the cure. Others think boredom is a gift. A bored child will invent a game or take a clock apart. The writer says boredom is really a signal. It is the feeling that what you are doing is not worth your attention. Like hunger, it pushes you to find something better. In one test, people did a dull copying job first. Afterwards they had more ideas for using a plastic cup. The copying did not give them ideas. It gave them a push. But a push only helps if you can go somewhere. A child on a free afternoon can. A sick person stuck in bed cannot. For them, boredom is just heavy. So each view is partly right. A phone answers the push at once. So the search for something better never starts.",
+      "paragraphs": [
+        "Presents two views: boredom is an illness to cure, or a gift that makes children inventive.",
+        "Explains the gift: boredom is a push to find something better, not a source of ideas.",
+        "Sets a limit: the push helps only if you are free to act; each view fits its own case.",
+        "Adds a twist: a phone answers the push at once, so the search never starts."
+      ],
+      "author_view": "The writer is fair to both views and a little wary of phones, and ends by asking a question rather than giving orders."
+    }
+  }
+}

@@ -1,0 +1,332 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0127",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 85,
+    "genre": "culture",
+    "difficulty": "easy",
+    "difficulty_numeric": 1,
+    "stage": "foundation",
+    "skills": [
+      "main-idea-extraction",
+      "argument-tracking",
+      "inference",
+      "tone-detection"
+    ],
+    "word_count": 291,
+    "question_count": 3,
+    "question_types": [
+      "primary_purpose",
+      "inference",
+      "tone"
+    ],
+    "theme": "styles from about twenty years back return not through nostalgia, since the nostalgic are the people who no longer wear those clothes and the buyers are too young to remember them, but because clothes mark each age group off from the one next to it: the young avoid the styles of those just older and take up the ones no age group near theirs is wearing, which explains when a style can return though not which one will",
+    "estimated_time_min": 5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-03",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted."
+    },
+    "date_added": "2026-10-03",
+    "batch_id": "batch-rc-005",
+    "prompt_version": "content engine v1 + CAT-size brief 2026-10",
+    "reviewer_notes": "A first-person foundation item: one family lunch, the usual explanation of revivals (nostalgia) refuted by asking who actually buys the revived clothes, and a replacement (clothes mark each age group off from the one next to it) with its limit stated (it explains when a style can return, not which). rc-0065 deals with imitation and flight between classes and with marks that cannot be bought; this passage is about age groups and timing, and what it adds to the familiar twenty-year rule is the observation that nostalgia belongs to the people who do not buy. One of the batch's two 'people think X; actually Y' passages (the other is rc-0122). The tone question carries the set's register; the purpose near-tie is the option crediting the author with explaining which styles return.",
+    "length_class": "short",
+    "structure": "view_critique_replacement",
+    "viewpoints": 2,
+    "tone": "wry, personal, argumentative",
+    "difficulty_vector": {
+      "lexical": 1,
+      "syntactic": 2,
+      "abstraction": 2,
+      "inference_depth": 2,
+      "distractor_similarity": 2,
+      "reasoning_depth": 2,
+      "structural_ambiguity": 1,
+      "time_pressure": 1
+    },
+    "reasoning_patterns": [
+      "struct.view_critique_replacement",
+      "struct.example",
+      "struct.qualification",
+      "comp.purpose",
+      "comp.intent",
+      "arg.rebuttal",
+      "arg.concession",
+      "arg.principle",
+      "arg.example",
+      "inf.author_view_application",
+      "lang.contrast_marker",
+      "word.tone_of_word",
+      "elim.near_tie"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1: the live rival is 'explain why some old styles return and others stay forgotten', which sounds like the job of any theory of revivals; the author disowns it in so many words ('though not which one will'). The nostalgia option is settled by 'Nostalgia may explain why I smiled at lunch', a concession, not a rejection. Q2: a strong candidate might argue that the niece will drop the style when she grows nostalgic for her childhood clothes, since nostalgia is the passage's key word; the rule the passage offers is about age groups, and its one worked example, 'I dropped my cargo trousers when younger boys took them up', fixes the pattern. Q3: the finalist is 'nostalgic, missing the clothes of the author's youth', because he admits he misses 2004; 'I would not wear those trousers again for money' and 'a photograph I hide' rule out longing for the clothes.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "nostalgia",
+      "outfit",
+      "second-hand"
+    ]
+  },
+  "passage": {
+    "title": "Not Her Nostalgia",
+    "reading_time_min": 1.6,
+    "paragraphs": [
+      {
+        "id": "rc-0127-p1",
+        "text": "Last month my niece came to lunch in baggy cargo trousers and a trucker cap. I wore almost exactly that outfit in 2004. I threw it out two years later, when my younger brother's friends began wearing it too. Clothes from about twenty years back seem to return like this again and again. The usual explanation is nostalgia: people miss the look of their youth, and the shops are happy to sell it back to them."
+      },
+      {
+        "id": "rc-0127-p2",
+        "text": "But nostalgia belongs to the wrong people. The person who misses 2004 is me, and I would not wear those trousers again for money. On me they would look like a photograph I hide. The people actually buying them are my niece and her friends, who were not born in 2004. Nobody can miss a year they never lived through. Nostalgia may explain why I smiled at lunch, but it cannot explain why she paid for the trousers."
+      },
+      {
+        "id": "rc-0127-p3",
+        "text": "A better explanation starts from a job that clothes do for the young: they mark each age group off from the one next to it. That is why I dropped my cargo trousers when younger boys took them up. It is also why my niece avoids the styles of the last ten years, which belong to her older cousins. The styles of twenty years ago belong to no age group near hers. The people who wore them gave them up long ago, and then for years nobody did. To her they look new, yet they are near enough to be found in family albums and second-hand shops. This explains when a style can come back, though not which one will. Plenty of 2004 has stayed in the cupboard, and my niece is welcome to leave it there."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0127-q1",
+      "type": "primary_purpose",
+      "skill": "author_purpose",
+      "patterns": [
+        "comp.purpose",
+        "struct.view_critique_replacement",
+        "elim.near_tie"
+      ],
+      "target_mistake": "crediting the author with more than he claims, either a total rejection of nostalgia or an account of which styles return",
+      "prediction_target": "The learner should be able to say beforehand: the author rejects the usual nostalgia explanation of revivals and offers a better one about age groups.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "logical_structure"
+      ],
+      "stem": "The author's main purpose in the passage is to",
+      "options": {
+        "A": "describe the clothes that were in fashion in 2004 and have returned now",
+        "B": "question a common explanation of fashion revivals and propose another",
+        "C": "show that nostalgia plays no part at all in how people feel about old styles",
+        "D": "explain why some old styles return and others stay forgotten"
+      },
+      "correct": "B",
+      "estimated_time_sec": 70,
+      "explanation": {
+        "expert_notice": "The paragraphs announce their own jobs: 'The usual explanation is nostalgia' (first), 'But nostalgia belongs to the wrong people' (second), 'A better explanation starts from' (third). Together those openings are a purpose statement: report a view, reject it, replace it.",
+        "correct_reasoning": "The author sets up the usual explanation of revivals, shows that it fits the wrong people, since those who feel nostalgic do not buy and those who buy cannot be nostalgic, and then offers a better explanation about age groups marking themselves off. The correct option names both moves, the questioning and the proposing.",
+        "passage_anchor": "rc-0127-p2, rc-0127-p3",
+        "question_type_note": "For a purpose question, name what the author does in verbs: here, reports, rejects, replaces. The right option keeps all the verbs, at the right strength.",
+        "reading_habit": "Notice the first words of each paragraph: 'The usual explanation', 'But', 'A better explanation'. Signposts like these give you the purpose before you have finished reading.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "example_as_thesis",
+            "why_wrong": "The cargo trousers and the trucker cap are the opening example. The passage uses them to test an explanation of revivals; it is not a description of the fashions of 2004.",
+            "seductive_element": "The clothes are described vividly and turn up in every paragraph."
+          },
+          {
+            "option": "C",
+            "trap_type": "criticism_as_rejection",
+            "why_wrong": "The author rejects nostalgia as the reason young people buy old styles, not as a feeling. He even grants it a part: 'Nostalgia may explain why I smiled at lunch.'",
+            "seductive_element": "The passage argues hard against nostalgia, so it is easy to read the argument as a complete dismissal."
+          },
+          {
+            "option": "D",
+            "trap_type": "too_broad",
+            "why_wrong": "The author says the opposite about his own explanation: it 'explains when a style can come back, though not which one will'. Explaining which styles return is the one thing the passage says it cannot do.",
+            "seductive_element": "It sounds like what any explanation of revivals ought to deliver."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0127-q2",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.author_view_application",
+        "arg.principle",
+        "arg.example"
+      ],
+      "target_mistake": "reaching for nostalgia, wear and tear or the twenty-year figure instead of applying the passage's rule and the author's own example of it",
+      "prediction_target": "The learner should be able to say beforehand: the author dropped his style when younger boys took it up, so by the same rule the niece will drop hers when girls just younger than her take it up.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 2,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "application"
+      ],
+      "stem": "It can be inferred from the passage that the niece is most likely to give up her cargo trousers when",
+      "options": {
+        "A": "girls a few years younger than her start wearing them",
+        "B": "she grows nostalgic for the clothes of her own childhood",
+        "C": "the trousers wear out or the shops stop selling them",
+        "D": "about twenty years have passed since she first wore them"
+      },
+      "correct": "A",
+      "estimated_time_sec": 75,
+      "explanation": {
+        "expert_notice": "The third paragraph gives a rule and an example of it. The rule: clothes 'mark each age group off from the one next to it'. The example: the author 'dropped my cargo trousers when younger boys took them up'. Apply the same rule to the niece.",
+        "correct_reasoning": "The author gave up his trousers when the age group just below his began to wear them. By the passage's rule, the niece's style marks her off from younger girls only until they adopt it, so she is most likely to drop it when girls a few years younger start wearing it.",
+        "passage_anchor": "rc-0127-p1, rc-0127-p3",
+        "question_type_note": "An inference about a future case applies the passage's rule to new people. Find the rule, find the example the author gives of it, and copy the example's pattern.",
+        "reading_habit": "When an author gives a rule and then his own example of it, the example shows how to apply the rule. Use it as a template for the question's case.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "reported_view_as_author",
+            "why_wrong": "Nostalgia is the explanation the author rejects, and nothing in the passage links it with giving up a style. The rule he offers is about age groups, not longing.",
+            "seductive_element": "Nostalgia is the word the passage repeats most often."
+          },
+          {
+            "option": "C",
+            "trap_type": "common_knowledge_intrusion",
+            "why_wrong": "Worn-out clothes and empty shelves are everyday reasons to stop wearing something, but the passage never mentions them. Its reason for dropping a style is that a younger group has taken it up.",
+            "seductive_element": "These are the practical reasons most people would give for giving up a pair of trousers."
+          },
+          {
+            "option": "D",
+            "trap_type": "temporal_distortion",
+            "why_wrong": "Twenty years is the passage's measure of how long a style waits before it returns, not how long one person keeps wearing it. The author dropped his own trousers after two years.",
+            "seductive_element": "The figure of twenty years runs through the passage, so it is easy to attach it to the wrong thing."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0127-q3",
+      "type": "tone",
+      "skill": "tone",
+      "patterns": [
+        "word.tone_of_word",
+        "comp.intent"
+      ],
+      "target_mistake": "reading the jokes as bitterness, the word 'nostalgia' as the author's own mood, or the step-by-step argument as detachment",
+      "prediction_target": "The learner should be able to say beforehand: the author laughs at himself and is fond of his niece, while arguing his case seriously.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 2,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "author_purpose"
+      ],
+      "stem": "The tone of the passage is best described as",
+      "options": {
+        "A": "scornful of young people who copy older fashions",
+        "B": "nostalgic, missing the clothes of the author's youth",
+        "C": "detached, setting out facts without any comment",
+        "D": "amused and personal, while making a real argument"
+      },
+      "correct": "D",
+      "estimated_time_sec": 50,
+      "explanation": {
+        "expert_notice": "Tone lives in a few choices: 'I would not wear those trousers again for money', 'a photograph I hide', and the closing line that his niece 'is welcome to leave it there'. They are jokes at the author's own expense. Meanwhile the argument is serious: a common explanation is refuted and a better one offered, with its limit stated.",
+        "correct_reasoning": "The author tells a story about himself, laughs at his own past, and still argues carefully, conceding what nostalgia does explain and stating what his own theory cannot. The correct option keeps both the humour and the argument, without making either stronger than it is.",
+        "passage_anchor": "rc-0127-p2, rc-0127-p3",
+        "question_type_note": "For a tone question, collect the author's own judgement words and jokes, and set the topic aside. A passage about clothes can be serious, and a serious argument can be told with a smile.",
+        "reading_habit": "Read the last sentence twice. Authors often show their attitude most clearly in the way they choose to stop.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "over_intense_tone",
+            "why_wrong": "Nothing in the passage looks down on the young. The author's jokes are at his own expense, and he is relaxed about his niece's choice, only hoping she leaves some of 2004 in the cupboard.",
+            "seductive_element": "An older person describing the young copying his old clothes might be expected to grumble."
+          },
+          {
+            "option": "B",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "The passage uses the word nostalgia, but the author says he 'would not wear those trousers again for money' and that on him they would look like 'a photograph I hide'. He does not long for the clothes of his youth.",
+            "seductive_element": "He admits that he is the one who misses 2004, and that he smiled at lunch."
+          },
+          {
+            "option": "C",
+            "trap_type": "weakened_version",
+            "why_wrong": "The author is far from detached: he writes in the first person, tells a story about his own trousers, and argues against one explanation and for another.",
+            "seductive_element": "The third paragraph sets out an explanation step by step, which can read like neutral reporting."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "nostalgia",
+      "passage_use": "The usual explanation is nostalgia",
+      "meaning_here": "a fond, slightly sad longing for a time in the past",
+      "difficulty": "medium"
+    },
+    {
+      "word": "outfit",
+      "passage_use": "I wore almost exactly that outfit in 2004.",
+      "meaning_here": "a set of clothes worn together",
+      "difficulty": "easy"
+    },
+    {
+      "word": "second-hand",
+      "passage_use": "found in family albums and second-hand shops",
+      "meaning_here": "already owned and used by someone else before being sold again",
+      "difficulty": "easy"
+    }
+  ],
+  "mentor": {
+    "challenge": "A personal story with an argument inside it. Find the sentence where the author rejects the usual explanation, and the one where he admits what his own explanation cannot do.",
+    "one_sentence_summary": "Styles from about twenty years ago keep returning, and the usual explanation, nostalgia, fails because the nostalgic are the people who no longer wear those clothes while the buyers are too young to remember them; a better explanation is that clothes mark each age group off from the one next to it, so the young avoid the styles of those just older and take up ones no group near theirs is wearing, which explains when a style can return, though not which one will.",
+    "main_idea": "Old styles do not come back because of nostalgia, since the people who remember them are not the ones wearing them again. They come back because young people use clothes to look unlike the age group next to them, and the styles of about twenty years ago belong to no group near theirs. This explains when a style can return, not which one will.",
+    "simple_explanation": "The writer's niece came to lunch in baggy cargo trousers and a trucker cap, almost the same outfit he wore in 2004. He threw his away two years later, when his younger brother's friends started wearing it. Old styles seem to come back like this every twenty years or so, and people usually say the reason is nostalgia: people miss the look of their youth.\n\nThe writer disagrees. The person who misses 2004 is him, and he would never wear those trousers again. The people buying them are his niece and her friends, who were not even born in 2004. You cannot miss a time you never lived through. So nostalgia might explain why he smiled at lunch, but not why she bought the trousers.\n\nHis better explanation is that young people use clothes to mark themselves off from the age group next to them. He dropped his trousers when younger boys took them up, and his niece avoids the styles of the last ten years because her older cousins wear them. The styles of twenty years ago belong to no age group near hers: the people who wore them gave them up long ago. So to her they look new, and they are still easy to find in family photos and second-hand shops. The writer admits that this explains when a style can come back, but not which style will.",
+    "why_difficult": "The story is light and easy to follow, so the argument inside it can slip past. A reader may take the author for a nostalgic man, or think he dismisses nostalgia completely, or credit his theory with predicting which styles return. Each of these misses a precise sentence: 'I would not wear those trousers again for money', 'Nostalgia may explain why I smiled at lunch', and 'though not which one will'.",
+    "author_intention": "To test the usual explanation of fashion revivals against one family lunch, show that it fits the wrong people, and offer a better explanation with its limit stated plainly.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0127-p1",
+        "role": "Tells the story",
+        "note": "The author's niece wears the outfit he threw out years ago. The usual explanation for such returns is nostalgia."
+      },
+      {
+        "paragraph_id": "rc-0127-p2",
+        "role": "Rejects the usual view",
+        "note": "The people who feel nostalgic will not wear the clothes again, and the people buying them are too young to remember them."
+      },
+      {
+        "paragraph_id": "rc-0127-p3",
+        "role": "Offers a better one",
+        "note": "Clothes mark each age group off from the next. Styles from twenty years ago belong to no group near the young, so they look new. This explains when a style returns, not which."
+      }
+    ],
+    "tone_progression": "Chatty and self-mocking at the start, sharper in the second paragraph as the author turns the nostalgia explanation against itself, and amused again at the close, after he has said plainly what his own explanation cannot do.",
+    "key_transitions": [
+      "'But nostalgia belongs to the wrong people.' (opening of paragraph 2): the usual explanation is turned against itself.",
+      "'This explains when a style can come back, though not which one will.' (paragraph 3): the author states the limit of his own explanation."
+    ],
+    "misunderstanding": "A hurried reader thinks the author is nostalgic for his youth, or that he denies nostalgia any part at all, or that his theory predicts which styles will return. He says none of these: he would not wear the clothes again, he grants that nostalgia explains his smile, and his theory explains only when a style can return.",
+    "traps_summary": "The options shrink the passage to the clothes of 2004, turn a criticism of nostalgia into a total rejection, credit the author with explaining which styles return, use nostalgia, wear and tear or the twenty-year figure to predict what the niece will do, and misread the author's humour as scorn, longing or detachment.",
+    "reading_lesson": "In a passage that rejects one view and offers another, find three sentences: where the old view is stated, where it fails, and where the new view admits its limit. Purpose and inference questions are usually built on those three.",
+    "real_world": "Music and slang behave in a similar way: what belongs to the generation just ahead feels dated to the young, while what an older generation left behind long ago can feel fresh.",
+    "takeaway": "A style can come back once it belongs to no age group near the young, whether or not anybody misses it.",
+    "reflection_question": "Which style worn by people a few years older than you would you avoid, and which much older one would you happily wear?",
+    "eli10": {
+      "big_idea": "Old styles come back because young people want to look different from those just older, not because anyone misses them.",
+      "story": "The writer's niece wore baggy cargo trousers and a cap to lunch. He wore the same outfit in 2004! He threw it out when younger boys started wearing it. Old styles often come back after about twenty years. Most people blame nostalgia, which means missing the old days. But the writer says that cannot be right. He is the one who remembers 2004, and he would never wear those clothes again. His niece buys them, and she was not even born then. You cannot miss a time you never had. So what is going on? Young people want to look different from the group just older than them. The styles of ten years ago belong to her older cousins. The styles of twenty years ago belong to nobody near her age. So to her, they look new. The writer says this explains when a style returns, but not which one.",
+      "paragraphs": [
+        "Tells a story: the niece wears the outfit the writer threw out, and most people blame nostalgia.",
+        "Says no: the nostalgic people don't wear it, and the buyers are too young to remember.",
+        "Gives a better reason: the young avoid styles of those just older and pick ones nobody near them wears."
+      ],
+      "author_view": "The writer is amused by his niece and by his own past, and thinks the usual nostalgia story points at the wrong people."
+    }
+  }
+}

@@ -1,0 +1,415 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0140",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "psychology",
+    "difficulty": "medium",
+    "difficulty_numeric": 6,
+    "stage": "advanced",
+    "skills": [
+      "argument-tracking",
+      "concession-tracking",
+      "qualifier-tracking",
+      "vocabulary-in-context",
+      "inference"
+    ],
+    "word_count": 574,
+    "question_count": 4,
+    "question_types": [
+      "inference",
+      "paragraph_function",
+      "primary_purpose",
+      "vocabulary_in_context"
+    ],
+    "theme": "habit as a law of the body that survives the objection from sudden conversion: strong new stimuli rupture old habits by the same law rather than against it, and because the nervous system keeps whatever it is repeatedly made to do, the accumulation that makes a vice is the same one that silently builds competence",
+    "estimated_time_min": 8,
+    "source": {
+      "publication": "William James, Talks to Teachers on Psychology (1899), \"The Laws of Habit\"",
+      "url": "https://www.gutenberg.org/ebooks/16287",
+      "author": "William James",
+      "date_accessed": "2026-10-03",
+      "usage_note": "Public domain: William James died in 1910 and the work was first published in 1899. The passage is the author's own words, with some sentences left out to fit CAT length; the questions, explanations and notes are original to CAT OS."
+    },
+    "date_added": "2026-10-03",
+    "batch_id": "batch-rc-006",
+    "prompt_version": "content engine v1 + CAT-size brief 2026-10",
+    "reviewer_notes": "Cut from the second half of the chapter rather than its famous opening: the bodily basis of habit (source paragraph 4, whole), the objection from sudden conversion and its answer (paragraph 24, whole), Rip Van Winkle (paragraph 25 without the sentences on hell, on 'spinning our own fates' and on the 'never-so-little scar', and without the sentence about the young becoming 'mere walking bundles of habits', whose American spelling the corpus check refuses and which the argument does not need) and the good side (paragraph 26, whole). What this adds to the usual quotation of James on habit is the objection and its answer: the passage is a law stated, attacked, defended and then turned round, which gives the set a paragraph-function question and a purpose question with real rivals. Leaving out 'We are spinning our own fates, good or evil' keeps the third paragraph all warning, so that the opening of the fourth is a genuine turn.",
+    "length_class": "medium",
+    "structure": "concession_thesis",
+    "viewpoints": 2,
+    "tone": "assured, exhortatory, wry",
+    "difficulty_vector": {
+      "lexical": 3,
+      "syntactic": 4,
+      "abstraction": 3,
+      "inference_depth": 3,
+      "distractor_similarity": 3,
+      "reasoning_depth": 3,
+      "structural_ambiguity": 2,
+      "time_pressure": 3
+    },
+    "reasoning_patterns": [
+      "struct.claim_evidence",
+      "struct.analogy",
+      "struct.claim_counterclaim",
+      "struct.pivot",
+      "comp.purpose",
+      "comp.organization",
+      "comp.function_over_words",
+      "arg.counterargument",
+      "arg.rebuttal",
+      "arg.concession",
+      "inf.strongly_supported",
+      "scope.condition",
+      "lang.concession_marker",
+      "word.context_clue",
+      "word.polysemy",
+      "elim.near_tie"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1's live rival is plasticity read as yielding without keeping, which matches the soft feel of the word; the creased paper that 'tends to fall forever afterward into the same identical folds' settles it, and the same image kills the elastic reading, since the paper does not spring back. Q2's rival is the rarity defence built from 'however infrequent they may be'; the author says conversions 'unquestionably do occur' and that a doctrine forbidding them would 'suffice to condemn' itself, so he cannot be leaning on their rarity, and the concession option fails on 'there is no incompatibility'. Q3 holds the near-tie of the set: the option promising competence to every young person whatever he does with his hours differs from the key only by the dropped condition 'If he keep faithfully busy each hour of the working day'. Q4's strongest rival is the warning taken for the whole passage, that every lapse is recorded and reform is out of reach; 'New habits can be launched' in the second paragraph and the whole of the fourth refuse it. The option about physiology replacing theology is attractive only to a reader who turns 'the most powerful ally of hortatory ethics' into a takeover.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "hortatory",
+      "dereliction",
+      "regenerate",
+      "upshot"
+    ]
+  },
+  "passage": {
+    "title": "Counted None the Less",
+    "reading_time_min": 3.1,
+    "paragraphs": [
+      {
+        "id": "rc-0140-p1",
+        "text": "I believe that we are subject to the law of habit in consequence of the fact that we have bodies. The plasticity of the living matter of our nervous system, in short, is the reason why we do a thing with difficulty the first time, but soon do it more and more easily, and finally, with sufficient practice, do it semi-mechanically, or with hardly any consciousness at all. Our nervous systems have (in Dr. Carpenter's words) grown to the way in which they have been exercised, just as a sheet of paper or a coat, once creased or folded, tends to fall forever afterward into the same identical folds."
+      },
+      {
+        "id": "rc-0140-p2",
+        "text": "I have been accused, when talking of the subject of habit, of making old habits appear so strong that the acquiring of new ones, and particularly anything like a sudden reform or conversion, would be made impossible by my doctrine. Of course, this would suffice to condemn the latter; for sudden conversions, however infrequent they may be, unquestionably do occur. But there is no incompatibility between the general laws I have laid down and the most startling sudden alterations in the way of character. New habits can be launched, I have expressly said, on condition of there being new stimuli and new excitements. Now life abounds in these, and sometimes they are such critical and revolutionary experiences that they change a man's whole scale of values and system of ideas. In such cases, the old order of his habits will be ruptured; and, if the new motives are lasting, new habits will be formed, and build up in him a new or regenerate 'nature.'"
+      },
+      {
+        "id": "rc-0140-p3",
+        "text": "All this kind of fact I fully allow. But the general laws of habit are no wise altered thereby, and the physiological study of mental conditions still remains on the whole the most powerful ally of hortatory ethics. The drunken Rip Van Winkle, in Jefferson's play, excuses himself for every fresh dereliction by saying, \"I won't count this time!\" Well, he may not count it, and a kind Heaven may not count it; but it is being counted none the less. Down among his nerve-cells and fibres the molecules are counting it, registering and storing it up to be used against him when the next temptation comes. Nothing we ever do is, in strict scientific literalness, wiped out."
+      },
+      {
+        "id": "rc-0140-p4",
+        "text": "Of course, this has its good side as well as its bad one. As we become permanent drunkards by so many separate drinks, so we become saints in the moral, and authorities and experts in the practical and scientific spheres, by so many separate acts and hours of work. Let no youth have any anxiety about the upshot of his education, whatever the line of it may be. If he keep faithfully busy each hour of the working day, he may safely leave the final result to itself. He can with perfect certainty count on waking up some fine morning to find himself one of the competent ones of his generation, in whatever pursuit he may have singled out. Silently, between all the details of his business, the power of judging in all that class of matter will have built itself up within him as a possession that will never pass away. Young people should know this truth in advance. The ignorance of it has probably engendered more discouragement and faint-heartedness in youths embarking on arduous careers than all other causes put together."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0140-q1",
+      "type": "vocabulary_in_context",
+      "skill": "vocabulary_in_context",
+      "patterns": [
+        "word.context_clue",
+        "word.polysemy",
+        "struct.analogy"
+      ],
+      "target_mistake": "reading 'plasticity' in today's sense of a manufactured material, or confusing it with elasticity, instead of letting the paragraph's own image define it",
+      "prediction_target": "The learner should be able to say beforehand: whatever plasticity is, it is what lets the nervous system take a shape from use and keep it, as the creased paper keeps its fold.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "specific_detail"
+      ],
+      "stem": "In the first paragraph, the word 'plasticity' (in 'The plasticity of the living matter of our nervous system') most nearly means",
+      "options": {
+        "A": "a softness that gives way to each new pressure and holds none of them for long",
+        "B": "a readiness to spring back to its first shape once the pressure is removed",
+        "C": "a capacity to be shaped by use and then to keep the shape it has taken",
+        "D": "an artificial quality, like that of something made in a factory"
+      },
+      "correct": "C",
+      "estimated_time_sec": 50,
+      "explanation": {
+        "expert_notice": "The paragraph defines the word by what it explains. Plasticity is 'the reason why' an act goes from difficult to easy to nearly unconscious, and the closing image says what the nervous system is like: paper or a coat that, once creased, 'tends to fall forever afterward into the same identical folds'. Whatever the word means here, it has to cover both taking the crease and keeping it.",
+        "correct_reasoning": "The correct option has both halves. Use shapes the nervous system, which has 'grown to the way in which they have been exercised', and the shape lasts, as the fold in the paper does. Each of the other three senses either drops one of those halves or brings in a meaning the paragraph never uses.",
+        "passage_anchor": "rc-0140-p1",
+        "question_type_note": "On an old text, a vocabulary-in-context question often turns on a word whose everyday sense has drifted. Read the sentence's own account of the word and the image placed beside it, and let them decide, not today's usage.",
+        "reading_habit": "When a technical word is followed by 'in short', or by an image introduced with 'just as', treat what follows as the author's definition and test every option against it.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "half_right",
+            "why_wrong": "It keeps the yielding and loses the keeping. A fold that falls 'forever afterward into the same identical folds' is the opposite of a shape held for a short time, and the whole paragraph is about acts that become fixed.",
+            "seductive_element": "Softness and giving way are what the word suggests, and the paragraph does say that the nervous system is shaped by what it does."
+          },
+          {
+            "option": "B",
+            "trap_type": "opposite_direction",
+            "why_wrong": "This is elasticity, the reverse of the paragraph's point: the creased paper does not return to flatness, it keeps the crease, just as the nervous system keeps the way it has been exercised.",
+            "seductive_element": "Plastic and elastic are easily confused, and springing back sounds like a healthy property for living tissue to have."
+          },
+          {
+            "option": "D",
+            "trap_type": "common_knowledge_intrusion",
+            "why_wrong": "This is today's everyday sense of plastic, a manufactured material. The sentence is about 'living matter' that has 'grown' to its use, which is the opposite of something made.",
+            "seductive_element": "It is the sense most readers meet first, and the paragraph does talk about matter."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0140-q2",
+      "type": "paragraph_function",
+      "skill": "paragraph_function",
+      "patterns": [
+        "comp.function_over_words",
+        "arg.counterargument",
+        "arg.rebuttal",
+        "lang.concession_marker"
+      ],
+      "target_mistake": "taking the author's concession that a doctrine forbidding conversion would be condemned for a surrender, or taking 'however infrequent' for his defence",
+      "prediction_target": "The learner should be able to say: the paragraph states a charge against the author's account of habit and answers it by fitting sudden conversion inside the same laws.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "logical_structure",
+        "argument"
+      ],
+      "stem": "Which of the following best describes the function of the second paragraph in the passage?",
+      "options": {
+        "A": "To meet a charge against the author's account by showing that sudden changes of character fit within it",
+        "B": "To concede that sudden conversions are a real exception, one which the laws of habit leave unexplained",
+        "C": "To argue that sudden conversions occur far too rarely to count as evidence against the laws of habit",
+        "D": "To recommend that critical and revolutionary experiences be arranged for those whose old habits need reform"
+      },
+      "correct": "A",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "The paragraph has a shape a CAT setter loves: a charge ('I have been accused'), a concession that would be fatal if the charge were true ('this would suffice to condemn the latter'), then a denial ('there is no incompatibility') and the mechanism that removes the conflict, new stimuli that rupture old habits.",
+        "correct_reasoning": "The paragraph defends the doctrine against one objection, and it does so not by denying the conversions but by placing them inside the laws. New habits 'can be launched... on condition of there being new stimuli', a critical experience is such a stimulus, and so the old order is 'ruptured' and new habits form by the same process as any others. That is a charge met by showing consistency.",
+        "passage_anchor": "rc-0140-p2",
+        "question_type_note": "A function question asks what job a paragraph does in the argument, not what it says. Name the job with one verb before reading the options; here the verb is 'answers'.",
+        "reading_habit": "When a paragraph opens with an accusation or an 'it may be objected', read on for the word that turns it, here 'But there is no incompatibility', and treat everything after that word as the author's reply.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "concession_as_position",
+            "why_wrong": "The author grants that conversions happen ('unquestionably do occur') but denies that they are left unexplained: the next sentence finds 'no incompatibility', and the rest of the paragraph supplies the mechanism.",
+            "seductive_element": "The paragraph does concede something, and 'this would suffice to condemn the latter' sounds like an admission of defeat when it is read on its own."
+          },
+          {
+            "option": "C",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "'However infrequent they may be' sets rarity aside rather than leaning on it. The author insists that conversions 'unquestionably do occur' and that his laws must account for them, which is what the rest of the paragraph does.",
+            "seductive_element": "It reuses the passage's own word about infrequency and turns it into a defence that sounds cautious and reasonable."
+          },
+          {
+            "option": "D",
+            "trap_type": "prescriptive_leap",
+            "why_wrong": "The paragraph explains how sudden change happens when life supplies critical experiences. It recommends nothing, and certainly not that anyone should arrange such experiences for someone else.",
+            "seductive_element": "The last paragraph does give advice to the young, so a recommendation here feels in keeping with the passage."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0140-q3",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.strongly_supported",
+        "scope.condition",
+        "elim.near_tie"
+      ],
+      "target_mistake": "dropping the condition 'If he keep faithfully busy each hour of the working day' from the author's promise, or importing the conversion mechanism of the second paragraph into the slow route of the fourth",
+      "prediction_target": "The learner should be able to say: competence is built up from many ordinary hours of work, quietly, and is discovered only after it is there.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "specific_detail",
+        "scope"
+      ],
+      "stem": "It can be inferred from the passage that, in the author's view, competence in a chosen pursuit",
+      "options": {
+        "A": "depends on some decisive experience that changes the worker's whole scale of values",
+        "B": "will come to every young person, however he chooses to spend his working hours",
+        "C": "comes to those who keep the final result steadily in view while they work",
+        "D": "builds up silently out of ordinary hours of work, unnoticed until it is there"
+      },
+      "correct": "D",
+      "estimated_time_sec": 90,
+      "explanation": {
+        "expert_notice": "Two sentences of the last paragraph carry this. The power of judging builds itself up 'Silently, between all the details of his business', and the young man finds himself competent on waking 'some fine morning'. The first says how competence grows; the second says that it is discovered after it has grown.",
+        "correct_reasoning": "Put the two sentences together and the correct option follows: competence is assembled 'by so many separate acts and hours of work' and arrives unannounced, so that the worker wakes to find it. The paragraph's parallel with the drunkard says the same thing from the dark side, since neither the vice nor the skill is made by a single act.",
+        "passage_anchor": "rc-0140-p4",
+        "question_type_note": "An inference question rewards joining two sentences that each hold half of the answer. Look for the option that needs both of them and adds nothing that neither says.",
+        "reading_habit": "When an author makes a promise ('with perfect certainty'), find its condition before you trust it. Here the condition is one clause long: 'If he keep faithfully busy each hour of the working day'.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "wrong_condition",
+            "why_wrong": "A decisive experience belongs to the second paragraph's account of sudden conversion. The last paragraph describes the other route, the slow one, 'by so many separate acts and hours of work'.",
+            "seductive_element": "It is in the passage, and a life-changing experience sounds like the dramatic way a person becomes something new."
+          },
+          {
+            "option": "B",
+            "trap_type": "overstatement",
+            "why_wrong": "The promise has a condition: 'If he keep faithfully busy each hour of the working day'. An option that holds however he spends those hours removes the one thing the author makes the result depend on.",
+            "seductive_element": "'Let no youth have any anxiety' and 'with perfect certainty' sound unconditional when they are read on their own."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The author says the young man 'may safely leave the final result to itself'. Keeping it steadily in view is exactly what he is told he need not do.",
+            "seductive_element": "Keeping one's goal in sight is ordinary good advice, and it sounds like what a lecture on habit would recommend."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0140-q4",
+      "type": "primary_purpose",
+      "skill": "author_purpose",
+      "patterns": [
+        "comp.purpose",
+        "comp.organization",
+        "struct.pivot"
+      ],
+      "target_mistake": "taking one paragraph, the warning of Rip Van Winkle or the objection about conversion, for the purpose of the whole, and missing the turn that opens the last paragraph",
+      "prediction_target": "The learner should be able to say: James defends a bodily account of habit against an objection and shows that the same law which fixes a vice also builds a skill.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 3,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "main_idea",
+        "logical_structure"
+      ],
+      "stem": "The primary purpose of the passage is",
+      "options": {
+        "A": "to warn the young that every lapse is permanently recorded, so that reform is beyond their reach",
+        "B": "to defend a bodily account of habit and show that the law fixing vices also builds competence",
+        "C": "to show that sudden conversion is a surer road to good character than slow and steady training",
+        "D": "to argue that the study of the nervous system should replace theology as a guide to conduct"
+      },
+      "correct": "B",
+      "estimated_time_sec": 80,
+      "explanation": {
+        "expert_notice": "Track the four moves: a claim (habit is a fact about the body), a charge against it (it would make reform impossible), the reply (conversion obeys the same laws), and two consequences, one dark and one bright, joined by 'Of course, this has its good side as well as its bad one'. A purpose option has to hold the defence and both consequences.",
+        "correct_reasoning": "The correct option names the defence and the symmetry the last paragraph turns on: the accumulation that makes 'permanent drunkards by so many separate drinks' is the one that makes 'authorities and experts... by so many separate acts and hours of work'. The bodily account runs from the first sentence ('we have bodies') to the molecules that keep count.",
+        "passage_anchor": "rc-0140-p1, rc-0140-p2, rc-0140-p4",
+        "question_type_note": "Purpose questions punish options that capture one paragraph well. Check each option against the passage's first claim and its last turn; the answer has to survive both.",
+        "reading_habit": "Mark any sentence that announces a turn, such as 'this has its good side as well as its bad one', and make sure your summary includes what comes after it.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "half_right",
+            "why_wrong": "The record of every act is the third paragraph's point, but the conclusion drawn from it here contradicts the second paragraph, which insists that 'New habits can be launched' and that conversions 'unquestionably do occur'.",
+            "seductive_element": "Rip Van Winkle's lapses being 'counted none the less' sounds like a sentence passed on anyone who has ever slipped."
+          },
+          {
+            "option": "C",
+            "trap_type": "wrong_structural_role",
+            "why_wrong": "Conversion appears only as the subject of an objection the author answers. He never ranks it above steady training, and his last paragraph praises the slow road of 'each hour of the working day'.",
+            "seductive_element": "Conversion is the most dramatic idea in the passage and has a whole paragraph to itself."
+          },
+          {
+            "option": "D",
+            "trap_type": "overstatement",
+            "why_wrong": "Physiology is called 'the most powerful ally of hortatory ethics', an ally of moral teaching rather than a replacement for anything. Heaven is mentioned only to say that it may not count the lapse while the nerves do.",
+            "seductive_element": "Nerve-cells keeping a count that 'a kind Heaven may not' keep sounds like science taking over religion's work."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "regenerate",
+      "passage_use": "build up in him a new or regenerate 'nature.'",
+      "meaning_here": "made new or reborn in character; a word borrowed from religion, where it means spiritually reborn",
+      "difficulty": "medium"
+    },
+    {
+      "word": "hortatory",
+      "passage_use": "the most powerful ally of hortatory ethics",
+      "meaning_here": "urging people to act well; moral teaching that exhorts rather than explains",
+      "difficulty": "hard"
+    },
+    {
+      "word": "dereliction",
+      "passage_use": "excuses himself for every fresh dereliction",
+      "meaning_here": "a failure of duty; here, each time he gives in and drinks again",
+      "difficulty": "medium"
+    },
+    {
+      "word": "upshot",
+      "passage_use": "the upshot of his education",
+      "meaning_here": "the final result or outcome",
+      "difficulty": "easy"
+    }
+  ],
+  "mentor": {
+    "challenge": "Every word here is the author's own, from a lecture more than a century old. The argument states a law, meets an objection to it and then turns a corner near the end; notice which way the corner turns, and whether the law changes when it does.",
+    "one_sentence_summary": "Habit is a physical fact about a nervous system that keeps the shape of whatever it does repeatedly; sudden conversions do not break this law, because they happen when strong new stimuli rupture old habits, and since every act is retained, the accumulation that makes a drunkard is the same one that makes an expert.",
+    "main_idea": "We have habits because our nerves are shaped by use and keep the shape. That does not rule out sudden changes of character, which happen when powerful new experiences break old habits. It does mean that nothing we do is wiped out: lapses add up, and so do hours of honest work.",
+    "simple_explanation": "James starts with the body. We have habits because our nerves are 'plastic': they take the shape of what we do and keep it. That is why something hard the first time gets easier with practice until we hardly notice doing it, the way a folded sheet of paper keeps falling into the same fold.\n\nCritics said this made old habits sound so strong that nobody could ever pick up new ones, least of all suddenly. James agrees that if that were true his theory would be finished, because sudden conversions really happen. But he says there is no conflict. New habits can start when strong new experiences arrive, and some experiences are so shattering that they break a person's old habits all at once. That is the law working, not the law failing.\n\nSo the law stands, and it has a sharp edge. A drinker in a play who says 'I won't count this time' is fooling himself: his nerves count every drink, and they will use it against him at the next temptation.\n\nThen James turns the same fact round. Skill is built exactly the way a vice is, one act at a time. A young person who works steadily every day need not worry about the result. One morning they will find that they have become good at their work, because judgement has been quietly piling up the whole time. Not knowing this, James says, has discouraged more young people than anything else.",
+    "why_difficult": "The prose is an 1899 lecture, long-sentenced and confident, and the argument changes direction twice. The second paragraph sounds at first like an admission of defeat ('this would suffice to condemn the latter') and is in fact a defence. The last paragraph reverses the mood of the third, from a warning to a reassurance, while using the very same mechanism. A reader who keeps only the mood of each paragraph misses that one law runs through all four.",
+    "author_intention": "To show that habit is a law of the body that survives the strongest objection made to it, and that this law, which makes every lapse count, also guarantees that steady work will add up.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0140-p1",
+        "role": "States the mechanism",
+        "note": "Habits exist because the nervous system is plastic: it is shaped by what it does and keeps the shape, like a creased sheet of paper."
+      },
+      {
+        "paragraph_id": "rc-0140-p2",
+        "role": "Answers an objection",
+        "note": "Critics say this rules out sudden reform. James grants that conversions happen and shows that they fit his laws: strong new experiences rupture old habits."
+      },
+      {
+        "paragraph_id": "rc-0140-p3",
+        "role": "Draws the warning",
+        "note": "The laws are unaltered, so every lapse is recorded. Rip Van Winkle may refuse to count his drinks, but his nerve-cells count them."
+      },
+      {
+        "paragraph_id": "rc-0140-p4",
+        "role": "Turns to the good side",
+        "note": "The same accumulation builds competence. A young person who works faithfully every day will wake one morning to find that it has come."
+      }
+    ],
+    "tone_progression": "Explanatory and sure in the first paragraph, briskly argumentative in answering the critics, grimly comic over Rip Van Winkle, and finally warm and encouraging, speaking directly to the young.",
+    "key_transitions": [
+      "'But there is no incompatibility between the general laws I have laid down and the most startling sudden alterations in the way of character.' (second paragraph): the objection is turned.",
+      "'Of course, this has its good side as well as its bad one.' (opening of the last paragraph): the warning becomes a promise, by the same law."
+    ],
+    "misunderstanding": "A hurried reader takes the third paragraph as the message: every lapse is counted against us, so reform is hopeless. But the second paragraph has already said that sudden change of character is possible, and the fourth uses the very same counting to promise that steady work is never wasted. The law is neutral; it records virtue as faithfully as vice.",
+    "traps_summary": "The options trade on four slips: reading 'plasticity' as springiness or as something manufactured; taking a concession in the objection paragraph for a surrender, or its word 'infrequent' for a defence; dropping the condition 'If he keep faithfully busy'; and taking one paragraph, the warning or the conversion, for the whole passage.",
+    "reading_lesson": "Follow one mechanism through changes of mood. Here a single fact, that the nervous system keeps what it is made to do, explains the folded paper, answers the critics, condemns Rip Van Winkle and reassures the young. When a passage's tone swings, ask whether its logic has changed or only its application. Usually it is the application.",
+    "real_world": "William James, the American psychologist and philosopher who died in 1910, gave these talks to teachers in the 1890s, and his point survives in every modern account of practice. Daily practice, small regular savings, a fixed hour of reading: each is the bet he describes, that unremarkable repetitions add up.",
+    "takeaway": "Nothing done repeatedly is neutral: the law that hardens a vice is the law that quietly builds a skill.",
+    "reflection_question": "Which small thing you do every day is building, without your noticing, the person you will be in five years?",
+    "eli10": {
+      "big_idea": "Our bodies keep the shape of what we do again and again, so every act counts, for bad habits and for good skills.",
+      "story": "William James says habits live in our bodies. Our nerves are like paper. Fold paper once, and it keeps falling into the same fold. That is why things get easier each time we do them. Some people said: then nobody could ever change, least of all suddenly! James says people do change, sometimes suddenly. A big new experience can break old habits and start new ones. That still follows his rule. But the rule has a warning. A man in a play keeps drinking and says, 'I won't count this time.' His nerves count it anyway. Nothing we do is wiped away. Then James gives the good news. Skill grows the same way, one hour of work at a time. Keep working steadily every day. One morning you will find you are good at it.",
+      "paragraphs": [
+        "Explains habit: our nerves keep the shape of what we do, like folded paper.",
+        "Answers critics: sudden change is possible, because a big new experience can break old habits.",
+        "Gives a warning: our nerves count every slip, even when we pretend they do not.",
+        "Turns to good news: skill builds up the same way, so steady daily work pays off in the end."
+      ],
+      "author_view": "James is sure and lively: habit is a law of the body, and that is both a warning and a comfort."
+    }
+  }
+}

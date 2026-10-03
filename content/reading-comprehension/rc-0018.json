@@ -17,17 +17,16 @@
       "structure-mapping",
       "trap-recognition"
     ],
-    "word_count": 592,
-    "question_count": 5,
+    "word_count": 524,
+    "question_count": 4,
     "question_types": [
-      "main_idea",
       "inference",
+      "main_idea",
       "tone",
-      "author_purpose",
       "vocabulary_in_context"
     ],
     "theme": "wilderness as a cultural construction whose idealisation distorts conservation",
-    "estimated_time_min": 9.5,
+    "estimated_time_min": 9,
     "source": {
       "publication": "original",
       "url": null,
@@ -38,7 +37,7 @@
     "date_added": "2026-07-06",
     "batch_id": "batch-rc-003",
     "prompt_version": "in-repo authored (Premium Reading Library milestone); RC_MASTER_GENERATION_PROMPT.v1 + CAT_VARC_BIBLE craft rules applied",
-    "reviewer_notes": "Elite environmental-humanities passage; the thesis criticises an idea beloved by environmentalists, and the central trap is to read it as anti-environmental. Owner review pending.",
+    "reviewer_notes": "Elite environmental-humanities passage; the thesis criticises an idea beloved by environmentalists, and the central trap is to read it as anti-environmental. Owner review pending. 2026-10-03 CAT-size pass: 524→524 words, 5→5 paragraphs, 5→4 questions. Dropped q4 (author_purpose on the 'permission slip' phrase: a second big-picture type beside main-idea q1, testing the same p4 point); traps_summary no longer cites its distractor; two anchors rewritten as lists.",
     "vocab_extracted": [
       "pristine",
       "sublime",
@@ -48,7 +47,7 @@
   },
   "passage": {
     "title": "The Trouble with the Pristine",
-    "reading_time_min": 3,
+    "reading_time_min": 2.8,
     "paragraphs": [
       {
         "id": "rc-0018-p1",
@@ -87,7 +86,7 @@
       "estimated_time_sec": 105,
       "explanation": {
         "correct_reasoning": "The passage argues wilderness is something 'we have made rather than found' (p1), historically inhabited (p2) and a recent 'taste' (p3), and warns that idealising it 'license[s] us to neglect the nature close at hand' (p4), asking for 'a wider' care (p5). Option B states both halves: the construction and the danger of neglecting inhabited nature.",
-        "passage_anchor": "rc-0018-p4 and rc-0018-p5",
+        "passage_anchor": "rc-0018-p4, rc-0018-p5",
         "question_type_note": "The main idea must hold the critique together with its constructive aim; options that keep only the debunking half misrepresent it.",
         "reading_habit": "When a passage criticises an idea but explicitly says it still values the underlying goal, your summary must include both the critique and the preserved goal.",
         "distractors": [
@@ -165,7 +164,7 @@
       "estimated_time_sec": 95,
       "explanation": {
         "correct_reasoning": "The author calls the impulse 'generous' and the preserved landscapes 'real', insists the critique is 'not an argument against protecting wild places', and asks for 'not less care but a wider one'. The stance is a critique of the idea paired with sympathy for the underlying environmental concern: option D.",
-        "passage_anchor": "rc-0018-p1 and rc-0018-p5",
+        "passage_anchor": "rc-0018-p1, rc-0018-p5",
         "question_type_note": "CAT tone answers are moderate; here the author criticises an idea without turning against the people or the goal behind it.",
         "reading_habit": "Separate criticism of an IDEA from hostility to the people who hold it: the correct tone often keeps warmth toward the motive while questioning the concept.",
         "distractors": [
@@ -186,45 +185,6 @@
             "trap_type": "half_right",
             "why_wrong": "History is traced, but a side is taken throughout: the impulse is called generous, the idea is said to deserve suspicion, and the closing paragraph issues a demand. A neutral account would not warn.",
             "seductive_element": "The measured essayistic cadence can be mistaken for detachment."
-          }
-        ]
-      }
-    },
-    {
-      "id": "rc-0018-q4",
-      "type": "author_purpose",
-      "stem": "The author describes the wilderness ideal as potentially 'a permission slip for ruining everywhere else' in order to",
-      "options": {
-        "A": "commend the ideal for concentrating protection where the land can least defend itself",
-        "B": "argue that no land should be roped off as wilderness while ordinary places go unguarded",
-        "C": "accuse conservationists of trading the inhabited world away to secure the remnant",
-        "D": "name the harm that follows from locating real nature only in the pristine and faraway"
-      },
-      "correct": "D",
-      "estimated_time_sec": 90,
-      "explanation": {
-        "correct_reasoning": "The phrase follows the reasoning that if nature is 'the place without us', then everywhere we are becomes 'not nature, and therefore not our concern'. The vivid phrase names the danger: idealising the pristine licenses neglect of everywhere inhabited. Its purpose is to make that specific harm sharp: option D.",
-        "passage_anchor": "rc-0018-p4",
-        "question_type_note": "Purpose questions ask what work a vivid phrase does; here it dramatizes the consequence the paragraph has just argued.",
-        "reading_habit": "Attach a striking phrase to the argument it caps; the author's purpose is almost always to crystallise the point just made, not to launch a new accusation.",
-        "distractors": [
-          {
-            "option": "C",
-            "trap_type": "extreme_language",
-            "why_wrong": "The harm named is what an idea licenses, working through a definition rather than an intention; the author calls the conservationist impulse generous and charges no one with a bargain.",
-            "seductive_element": "'Permission slip for ruining' has the ring of an accusation of intent, and a trade-off sounds like a decision somebody made."
-          },
-          {
-            "option": "B",
-            "trap_type": "opposite_direction",
-            "why_wrong": "The passage wants protection extended rather than withdrawn, the sequoia keeps its claim while the roadside weed acquires one, so setting the two against each other is the zero-sum framing being resisted.",
-            "seductive_element": "A critique of the wilderness idea reads easily as opposition to wilderness law."
-          },
-          {
-            "option": "A",
-            "trap_type": "opposite_direction",
-            "why_wrong": "A permission slip for ruining everywhere else is an indictment, not a compliment; the paragraph faults the ideal for narrowing concern rather than crediting it with focusing protection well.",
-            "seductive_element": "Concentrating scarce protection where land is most fragile is a respectable policy, and it can be read back into a phrase whose force is entirely negative."
           }
         ]
       }
@@ -336,10 +296,22 @@
       "'What the critique asks for is not less care but a wider one…' (start of paragraph 5): the passage turns from diagnosis to its positive proposal."
     ],
     "misunderstanding": "The dominant misreading is 'this passage is against protecting wilderness'. Paragraph 4 exists precisely to forbid it, and paragraph 5 insists the sequoia still deserves protection. A second misreading over-corrects into 'focus on cities and farms instead of wild areas', when the author asks to protect both. The passage criticises an idea and its side-effects, not the protection of nature.",
-    "traps_summary": "Nearly every distractor here weaponises the pro-/anti-environment frame: opposing protection, reallocating away from wilderness, accusing conservationists of intent, or hardening a dated attitude into an incapacity. The cure is to hold the two halves together, the idea is criticised, the goal is preserved and widened, and to keep the tone warm toward the motive.",
+    "traps_summary": "Nearly every distractor here weaponises the pro-/anti-environment frame: opposing protection, reallocating away from wilderness, scorning the idea's admirers, or hardening a dated attitude into an incapacity. The cure is to hold the two halves together, the idea is criticised, the goal is preserved and widened, and to keep the tone warm toward the motive.",
     "reading_lesson": "When an author criticises an idea associated with a cause they support, track the line between attacking the concept and attacking the cause, and never let a critique of the idea collapse into opposition to the goal. The strongest distractors on such passages sit on the wrong side of that line (here, 'wild places aren't worth protecting'); the correct answers keep the author's real target (the idea and its consequences) precisely in view.",
     "real_world": "This debate shapes real policy: whether conservation means only fencing off remote reserves, or also greening cities, restoring farmland, and cleaning the rivers people live beside. It also names a habit of mind well beyond ecology: how idealising a pure, faraway version of something (nature, virtue, community) can excuse neglect of the imperfect real thing in front of us.",
     "takeaway": "A love of nature that defines humanity as nature's opposite has surrendered the ground where most of the fight for the earth must be waged.",
-    "reflection_question": "Where do you reserve your care for a pure, faraway ideal while neglecting the imperfect, inhabited version of it right in front of you?"
+    "reflection_question": "Where do you reserve your care for a pure, faraway ideal while neglecting the imperfect, inhabited version of it right in front of you?",
+    "eli10": {
+      "big_idea": "'Untouched wilderness' is an ideal humans made; loving only it lets us neglect nearby nature, so care must widen, not shrink.",
+      "story": "Many nature lovers prize wilderness: land no person has touched. To protect nature, they fence such places off. The writer says the wish is generous and the saved places are real. But the 'untouched' part is something we made, not found. Many famous wild valleys were home to people for centuries. Those people were moved out, sometimes by force, so the land could look empty. Loving wild land is also a new taste. For most of history, people feared wild country instead of admiring it. Its biggest fans today are comfortable city people. Here is the real danger. If nature means 'where people are not', then the places we live stop counting. It is like keeping one spotless guest room while the rest of the house falls apart. The writer does not want less protection. Save the giant trees, but care for the town river and the farm too.",
+      "paragraphs": [
+        "Introduces a loved idea, untouched wilderness, praises the impulse, then says its purity is made, not found.",
+        "Gives evidence: 'empty' wild lands were lived in, and their people were removed.",
+        "Gives more evidence: loving wild places is a recent taste, strongest among comfortable city people.",
+        "Says this is not anti-protection, then names the danger: the ideal excuses neglecting lived-in places.",
+        "Asks for wider care: protect wild places and ordinary ones, or we give up the main battleground."
+      ],
+      "author_view": "Critical of the idea but warm towards its aim: the writer loves nature and wants that care to reach everywhere."
+    }
   }
 }

@@ -1,0 +1,404 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0138",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 85,
+    "genre": "urban-studies",
+    "difficulty": "easy",
+    "difficulty_numeric": 3,
+    "stage": "developing",
+    "skills": [
+      "main-idea-extraction",
+      "evidence-anchoring",
+      "structure-mapping",
+      "causal-reasoning",
+      "inference"
+    ],
+    "word_count": 351,
+    "question_count": 4,
+    "question_types": [
+      "primary_purpose",
+      "specific_detail",
+      "role_of_detail",
+      "implication"
+    ],
+    "theme": "old cities stand on rivers less for drinking water, which villages needed too and got from wells, than because a city must bring in heavy loads of food and fuel and before railways only boats could move them cheaply, so a large inland city could grow only where boats could reach; railways, roads and pipes have closed most of that gap on land, so newer inland cities follow railways, highways and airports, but over long distances ships are still far cheaper than any alternative, so the old reason now favours ports rather than rivers",
+    "estimated_time_min": 6,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-03",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted."
+    },
+    "date_added": "2026-10-03",
+    "batch_id": "batch-rc-005",
+    "prompt_version": "content engine v1 + CAT-size brief 2026-10",
+    "reviewer_notes": "An impersonal developing item that sets aside the obvious answer and then follows the right one into the present. Water transport as the reason cities grew where they did is standard economic history; what this adds is the test that dismisses drinking water (villages had it and stayed small), the condition that a large city could grow only where boats could reach, and the turn that the reason has moved to the coast rather than vanished. Johannesburg and the share of trade carried by sea are stated in general terms, and no question depends on knowing them. Four questions: purpose, a detail on the cost of land transport, the role of wells and springs, and an implication from the 'only where' condition.",
+    "length_class": "medium",
+    "structure": "view_critique_replacement",
+    "viewpoints": 2,
+    "tone": "brisk, confident, explanatory",
+    "difficulty_vector": {
+      "lexical": 2,
+      "syntactic": 2,
+      "abstraction": 2,
+      "inference_depth": 2,
+      "distractor_similarity": 3,
+      "reasoning_depth": 2,
+      "structural_ambiguity": 2,
+      "time_pressure": 2
+    },
+    "reasoning_patterns": [
+      "struct.view_critique_replacement",
+      "struct.cause_effect",
+      "struct.chronology",
+      "comp.purpose",
+      "comp.explicit_detail",
+      "comp.paraphrase",
+      "comp.function_over_words",
+      "arg.causal_claim",
+      "arg.counterargument",
+      "arg.example",
+      "inf.reasonable_implication",
+      "scope.condition",
+      "scope.time_period",
+      "lang.contrast_marker",
+      "elim.near_tie"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1: the near-tie is the option that water no longer shapes where cities grow, which follows the third paragraph and ignores the fourth: 'The old reason has not vanished, though. It has moved to the coast.' The drinking-water option is the view set aside in the first paragraph. Q2: a strong candidate might argue that cities stood far from their fields, which is true but explains why loads had to move at all, not why moving them over land cost so much; the speed option borrows 'many times' from a sentence about load. Q3: the rival is that wells and springs give a second reason for rivers; they work against the water explanation, since the villages they served stayed small. Q4: the tempting wrong answer is that such a town would have become a great city once a railway reached it; the passage shows that railways made such growth possible, not that it followed everywhere. Johannesburg's growth came after railways, which the stem excludes.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "ruinously",
+      "reservoir",
+      "navigable"
+    ]
+  },
+  "passage": {
+    "title": "Cheaper by Water",
+    "reading_time_min": 1.9,
+    "paragraphs": [
+      {
+        "id": "rc-0138-p1",
+        "text": "Look at a map of old cities and a pattern jumps out. London stands on the Thames, Paris on the Seine, Cairo on the Nile and Varanasi on the Ganga. The obvious explanation is drinking water. That is not wrong, but it explains too little. Every village needed water too, and wells and springs served countless villages that never grew into towns. Defence and the power of water mills are sometimes added, but forts and mills also stood in places that stayed small."
+      },
+      {
+        "id": "rc-0138-p2",
+        "text": "What a city needs, and a village does not, is food from far away. Most people in a city grow none of their own food, so grain has to be brought in, along with timber and fuel, in great heavy loads. Before railways, moving such loads over land was ruinously expensive. A cart on a rough road carried little, and the animals pulling it had to be fed along the way. A boat could carry many times as much for the same effort. So a large city could grow only where boats could reach it, and inland that meant a river."
+      },
+      {
+        "id": "rc-0138-p3",
+        "text": "Railways, and later lorries and paved roads, removed most of that difference on land. A train can carry grain across a continent for a small part of its value. Pipes can bring water from a reservoir a hundred kilometres away. Johannesburg, founded on a gold field in 1886, has no navigable river at all, and it was railways that let it grow into a great city. Many cities that have grown up since then follow railway lines, highways and airports instead of rivers."
+      },
+      {
+        "id": "rc-0138-p4",
+        "text": "The old reason has not vanished, though. It has moved to the coast. Over long distances, ships still carry heavy goods far more cheaply than trains, lorries or aircraft, and most of the world's trade by weight still travels by sea. That is why so many of the great trading cities of recent decades, such as Singapore and Shenzhen, are ports. A new inland city is planned around a motorway junction or an airport, while a new trading city still looks for deep water."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0138-q1",
+      "type": "primary_purpose",
+      "skill": "author_purpose",
+      "patterns": [
+        "comp.purpose",
+        "struct.view_critique_replacement",
+        "lang.contrast_marker",
+        "elim.near_tie"
+      ],
+      "target_mistake": "stopping at the third paragraph, where the river's advantage fades, and missing the last paragraph's turn to the coast",
+      "prediction_target": "The learner should be able to say beforehand: the author explains why old cities grew on rivers, and shows that the reason has moved to the coast rather than vanished.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "main_idea"
+      ],
+      "stem": "The author's primary purpose in the passage is to",
+      "options": {
+        "A": "explain why old cities grew on rivers, and why that reason now favours the coast",
+        "B": "show that drinking water was the main reason cities grew up beside rivers",
+        "C": "argue that new cities should be built well away from rivers and coasts",
+        "D": "explain why old cities grew on rivers, and why water no longer shapes where cities grow"
+      },
+      "correct": "A",
+      "estimated_time_sec": 70,
+      "explanation": {
+        "expert_notice": "The passage answers two questions: why the old cities stand on rivers (the first two paragraphs), and what has become of that reason (the last two). The last paragraph opens 'The old reason has not vanished, though. It has moved to the coast.'",
+        "correct_reasoning": "The author explains the rivers by transport: a city needs heavy loads brought in, and before railways only boats moved them cheaply. Then the author follows the reason forward: railways closed most of the gap on land, but ships are still far cheaper over long distances, so the reason now favours ports. The correct option names both halves, including where the reason went.",
+        "passage_anchor": "rc-0138-p2, rc-0138-p4",
+        "question_type_note": "A primary-purpose question must cover the whole passage. When the last paragraph opens with 'though', check that the option you choose includes what comes after it.",
+        "reading_habit": "Read the first sentence of the last paragraph with special care. When it pushes back against the paragraph before, the purpose of the passage usually depends on it.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The author sets drinking water aside: 'That is not wrong, but it explains too little', since villages needed water too. The passage's own explanation is transport.",
+            "seductive_element": "Drinking water is the first explanation named, and the author admits it is 'not wrong'."
+          },
+          {
+            "option": "C",
+            "trap_type": "prescriptive_leap",
+            "why_wrong": "The passage explains where cities have grown; it gives no advice about where to build them. It even says that a new trading city 'still looks for deep water', which is no argument against coasts.",
+            "seductive_element": "A passage about where cities stand can seem to be heading towards a recommendation."
+          },
+          {
+            "option": "D",
+            "trap_type": "overstatement",
+            "why_wrong": "This keeps the first half and overstates the second. The last paragraph says the old reason 'has not vanished': water still shapes where trading cities grow, through the sea rather than the river.",
+            "seductive_element": "It follows the third paragraph faithfully, and new inland cities really do ignore rivers."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0138-q2",
+      "type": "specific_detail",
+      "skill": "specific_detail",
+      "patterns": [
+        "comp.explicit_detail",
+        "comp.paraphrase"
+      ],
+      "target_mistake": "choosing a true fact about cities, or a reworded claim about boats, instead of the reason the passage gives for the cost of land transport",
+      "prediction_target": null,
+      "difficulty": {
+        "inference_depth": 1,
+        "distractor_similarity": 2,
+        "reasoning_depth": 1
+      },
+      "secondary_skills": [
+        "inference"
+      ],
+      "stem": "According to the passage, moving heavy loads over land before railways was expensive because",
+      "options": {
+        "A": "roads charged tolls that boats on rivers did not have to pay",
+        "B": "boats could travel many times faster than carts on rough roads",
+        "C": "cities stood far from the fields and forests that supplied them",
+        "D": "a cart carried little, and its animals had to be fed on the way"
+      },
+      "correct": "D",
+      "estimated_time_sec": 45,
+      "explanation": {
+        "expert_notice": "The answer sits in two sentences of the second paragraph: 'A cart on a rough road carried little, and the animals pulling it had to be fed along the way. A boat could carry many times as much for the same effort.'",
+        "correct_reasoning": "The passage gives two reasons for the cost of land transport: a small load for each cart, and the cost of feeding the animals that pulled it. The correct option gives both, in nearly the passage's own words.",
+        "passage_anchor": "rc-0138-p2",
+        "question_type_note": "A detail question about a cause asks for the reason the passage gives, not any reason that would be true. Put your finger on the sentence before choosing.",
+        "reading_habit": "When a passage says something was expensive, difficult or slow, look for the sentence that says why. Detail questions are built on it, with decoys taken from the sentences around it.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "out_of_scope",
+            "why_wrong": "Tolls are never mentioned. The passage blames small loads and animals that had to be fed.",
+            "seductive_element": "Tolls are a familiar cost of old roads, so they sound like part of the history."
+          },
+          {
+            "option": "B",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "The passage says a boat could carry 'many times as much for the same effort'. That is about load, not speed; the option keeps 'many times' and changes what it measures.",
+            "seductive_element": "It reuses the passage's phrase 'many times', which makes it feel like a quotation."
+          },
+          {
+            "option": "C",
+            "trap_type": "true_but_irrelevant",
+            "why_wrong": "Distance is why loads had to be moved at all, not why moving them over land cost so much. The passage explains the cost by the cart and its animals.",
+            "seductive_element": "It is true that a city's food came from far away; the second paragraph opens by saying so."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0138-q3",
+      "type": "role_of_detail",
+      "skill": "paragraph_function",
+      "patterns": [
+        "comp.function_over_words",
+        "arg.counterargument",
+        "arg.example"
+      ],
+      "target_mistake": "reading a detail that undercuts an explanation as support for it, or as a comparison the passage never makes",
+      "prediction_target": "The learner should be able to say beforehand: wells and springs show that water was easy to get without a river, so water cannot explain why only some places grew into cities.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 2,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "logical_structure"
+      ],
+      "stem": "The author mentions wells and springs in the first paragraph in order to",
+      "options": {
+        "A": "show that most old cities drew their water from wells rather than rivers",
+        "B": "suggest that villages were better supplied with water than cities were",
+        "C": "show why drinking water cannot explain which places grew into cities",
+        "D": "give a second reason, besides transport, for building cities on rivers"
+      },
+      "correct": "C",
+      "estimated_time_sec": 55,
+      "explanation": {
+        "expert_notice": "Wells and springs come in the sentence after 'it explains too little'. They are the reason it explains too little: villages had water from wells and springs and still stayed villages.",
+        "correct_reasoning": "If water could be had from wells and springs, and countless villages had it without ever growing, then having water cannot be what made some places into cities. The detail is there to show the limit of the drinking-water explanation, which is what the correct option says.",
+        "passage_anchor": "rc-0138-p1",
+        "question_type_note": "When a detail follows a judgement such as 'it explains too little', it is usually the evidence for that judgement. Read the judgement first, then the detail.",
+        "reading_habit": "Ask what a detail is doing to the sentence before it: supporting it, illustrating it or limiting it. The answer is the detail's role.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "Wells and springs are said to have served villages, not cities. The option moves the passage's words into a claim about cities that the passage never makes.",
+            "seductive_element": "It repeats 'wells' and 'water' from the passage."
+          },
+          {
+            "option": "B",
+            "trap_type": "comparison_distortion",
+            "why_wrong": "The passage never compares how well villages and cities were supplied with water. Its point is that villages had enough water and still did not grow.",
+            "seductive_element": "Villages and water are set side by side, which can look like a comparison."
+          },
+          {
+            "option": "D",
+            "trap_type": "wrong_structural_role",
+            "why_wrong": "Wells and springs work against the water explanation, not for it, and the passage gives transport as the reason in the next paragraph. The detail limits an explanation; it is not a second reason for rivers.",
+            "seductive_element": "The author admits the water explanation is 'not wrong', so a detail about water can seem to support it."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0138-q4",
+      "type": "implication",
+      "skill": "inference",
+      "patterns": [
+        "inf.reasonable_implication",
+        "scope.condition",
+        "scope.time_period"
+      ],
+      "target_mistake": "bringing back the drinking-water explanation, turning what railways made possible into what always happened, or applying an example from after the railways to the age before them",
+      "prediction_target": "The learner should be able to say beforehand: a large city could grow only where boats could reach, so such a town could not have become a large city.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "scope"
+      ],
+      "stem": "It can be inferred from the passage that, before railways, a town far from any navigable river or coast",
+      "options": {
+        "A": "would have run short of drinking water as it grew",
+        "B": "would have become a great city once a railway reached it",
+        "C": "would have grown only by finding gold, as Johannesburg did",
+        "D": "could not have grown into a city of any great size"
+      },
+      "correct": "D",
+      "estimated_time_sec": 75,
+      "explanation": {
+        "expert_notice": "The second paragraph ends with a condition: 'So a large city could grow only where boats could reach it, and inland that meant a river.' A town with no navigable river and no coast is outside that condition.",
+        "correct_reasoning": "Before railways, a large city needed heavy loads of food and fuel brought in, and only boats could bring them cheaply. A town that boats could not reach could not be fed on that scale, so it could not have grown into a large city. The inference takes the condition one step and stops: it does not say the town could not exist.",
+        "passage_anchor": "rc-0138-p2",
+        "question_type_note": "An implication question asks for the next honest step from what the author says. Where the passage gives an 'only where' condition, the step is what happens to a case that fails the condition.",
+        "reading_habit": "Notice the words 'only' and 'unless' in a causal claim. They tell you what a case without the condition cannot do, which is where implication questions point.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "common_knowledge_intrusion",
+            "why_wrong": "The first paragraph points the other way: 'wells and springs served countless villages'. The town's problem would be food brought from far away, not water.",
+            "seductive_element": "Drinking water is the familiar explanation for cities on rivers, and the passage admits it is 'not wrong'."
+          },
+          {
+            "option": "B",
+            "trap_type": "possibility_as_certainty",
+            "why_wrong": "Railways made it possible for such places to grow, as Johannesburg shows, but nothing says every such town did grow once a railway came.",
+            "seductive_element": "The third paragraph shows railways freeing cities from rivers, so growth after the railway seems to follow."
+          },
+          {
+            "option": "C",
+            "trap_type": "temporal_distortion",
+            "why_wrong": "Johannesburg was founded in 1886 and grew with its railways, so it belongs to the time after the change the question rules out. On the passage's reasoning, before railways even gold would not have fed a great city that boats could not reach.",
+            "seductive_element": "Johannesburg is the passage's own example of a great city with no navigable river."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "ruinously",
+      "passage_use": "moving such loads over land was ruinously expensive",
+      "meaning_here": "so much that paying it could ruin a person or a business",
+      "difficulty": "medium"
+    },
+    {
+      "word": "reservoir",
+      "passage_use": "Pipes can bring water from a reservoir a hundred kilometres away",
+      "meaning_here": "a large store of water, often an artificial lake",
+      "difficulty": "easy"
+    },
+    {
+      "word": "navigable",
+      "passage_use": "has no navigable river at all",
+      "meaning_here": "deep and wide enough for boats to travel on",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "A passage that sets aside the obvious answer to a question about maps, gives a better one, and then follows it into the present. Watch for the turn in the last paragraph.",
+    "one_sentence_summary": "Old cities stand on rivers less for drinking water, which every village also needed, than because a city must bring in heavy loads of food and fuel, and before railways only boats could carry them cheaply; railways, roads and pipes have closed most of that gap on land, so newer inland cities follow railways, highways and airports, but ships are still far cheaper over long distances, so the old reason now favours ports.",
+    "main_idea": "Old cities grew on rivers mainly because a city must be fed from far away, and before railways only boats could carry heavy loads cheaply. Land transport has since caught up, so new inland cities need no river, but the sea is still the cheapest road over long distances, so trading cities still grow at ports.",
+    "simple_explanation": "Look at a map of old cities and you will see that many stand on rivers: London on the Thames, Paris on the Seine, Cairo on the Nile, Varanasi on the Ganga. The obvious reason is drinking water. The writer says that is not wrong but explains too little, because villages needed water too and got it from wells and springs, yet most of them never grew. Defence and water mills do not explain it either, since forts and mills also stood in places that stayed small.\n\nThe real reason is food. A city, unlike a village, must bring in most of its food, along with wood and fuel, in huge heavy loads. Before railways, moving such loads over land cost a fortune: a cart on a rough road carried little, and the animals pulling it had to be fed on the way. A boat could carry many times as much for the same effort. So a big city could only grow where boats could reach it, which inland meant a river.\n\nRailways, and later lorries and good roads, removed most of that difference on land. A train can carry grain across a continent cheaply, and pipes can bring water from far away. Johannesburg, founded on a gold field in 1886, has no river that boats can use, and railways let it become a great city. Many newer cities grow along railways, highways and airports instead of rivers.\n\nBut the old reason has not disappeared; it has moved to the coast. Over long distances, ships still carry heavy goods far more cheaply than trains, lorries or planes, and most of the world's trade by weight still goes by sea. That is why so many great trading cities of recent times, such as Singapore and Shenzhen, are ports. A new inland city is planned around a motorway or an airport, but a new trading city still looks for deep water.",
+    "why_difficult": "The passage changes direction twice. It sets aside the obvious answer, and then, after showing that its own answer has faded on land, says the answer has not vanished but moved to the coast. A reader who stops at the third paragraph concludes that water no longer matters.",
+    "author_intention": "To explain a pattern anyone can see on a map, and to show that the reason behind it has moved rather than disappeared.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0138-p1",
+        "role": "Questions the obvious",
+        "note": "Old cities sit on rivers. Drinking water is the obvious reason, but villages had water from wells and still stayed small."
+      },
+      {
+        "paragraph_id": "rc-0138-p2",
+        "role": "Gives the real reason",
+        "note": "A city must bring in heavy loads of food and fuel; before railways only boats carried them cheaply, so big cities grew where boats could reach."
+      },
+      {
+        "paragraph_id": "rc-0138-p3",
+        "role": "Shows the change",
+        "note": "Railways, roads and pipes closed the gap on land; Johannesburg grew without a river, and newer cities follow railways, roads and airports."
+      },
+      {
+        "paragraph_id": "rc-0138-p4",
+        "role": "Moves the reason",
+        "note": "Ships are still far cheaper over long distances, so many great trading cities of recent decades are ports."
+      }
+    ],
+    "tone_progression": "Brisk and inviting at the start, confident in the explanation, matter-of-fact about the railways, and quietly pleased at the close, where the old reason turns up again at the coast.",
+    "key_transitions": [
+      "'The obvious explanation is drinking water. That is not wrong, but it explains too little.' (paragraph 1): the obvious answer is set aside.",
+      "'What a city needs, and a village does not, is food from far away.' (opening of paragraph 2): the real reason arrives.",
+      "'The old reason has not vanished, though.' (opening of paragraph 4): the reason moves to the coast."
+    ],
+    "misunderstanding": "A hurried reader thinks the passage says rivers were chosen for drinking water, or that water no longer matters to where cities grow. The author's reason is transport, and the last paragraph keeps it alive at the coast.",
+    "traps_summary": "The options give the obvious answer the passage sets aside, invent a recommendation, stop before the last paragraph's turn, offer costs the passage never mentions or a claim about speed borrowed from a sentence about load, read a detail that undercuts an explanation as support for it, and treat what railways made possible as what always happened.",
+    "reading_lesson": "When a passage sets aside an obvious answer, find the evidence against it and keep that evidence apart from the new answer. And read the first sentence of the last paragraph twice: if it says 'though', the passage is not over.",
+    "real_world": "The same question, what does it cost to bring things here, still explains where warehouses, factories and new towns appear, from motorway junctions to the land around a new airport.",
+    "takeaway": "Cities grow where heavy things can be brought in cheaply; once that meant rivers, and now it means roads, railways and ports.",
+    "reflection_question": "Why is the town or city you know best where it is, and does that reason still hold today?",
+    "eli10": {
+      "big_idea": "Old cities grew on rivers because boats could bring them food cheaply; today trains and roads do that job on land.",
+      "story": "Look at a map. Many old cities sit on rivers. The easy answer is drinking water. That is part of it, but not enough. Villages need water too, and wells gave them plenty. Yet they stayed small. A city is different. Most people in a city grow no food. So food must be brought from far away. Long ago, carrying heavy loads by cart cost a great deal. Carts held little, and the animals had to be fed. A boat could carry far more for the same work. So big cities grew where boats could reach. Then came trains and lorries. Now carrying things over land costs much less. New cities can grow by roads and airports instead. But ships are still the cheapest way to carry goods across the world. That is why many great trading cities of today are ports.",
+      "paragraphs": [
+        "Asks a question: why do old cities sit on rivers, if villages had water too?",
+        "Gives the answer: boats could bring food and fuel cheaply, and carts could not.",
+        "Shows a change: trains and roads made land transport cheap, so rivers matter less.",
+        "Adds a twist: ships are still cheapest over long distances, so trading cities grow at ports."
+      ],
+      "author_view": "The writer enjoys explaining the map, and is confident that the old reason still works, now at the coast."
+    }
+  }
+}

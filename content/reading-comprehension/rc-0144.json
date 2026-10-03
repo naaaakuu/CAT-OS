@@ -1,0 +1,424 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0144",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 87,
+    "genre": "political-theory",
+    "difficulty": "hard",
+    "difficulty_numeric": 7,
+    "stage": "advanced",
+    "skills": [
+      "main-idea-extraction",
+      "vocabulary-in-context",
+      "inference",
+      "structure-mapping",
+      "scope-control"
+    ],
+    "word_count": 568,
+    "question_count": 4,
+    "question_types": [
+      "inference",
+      "main_idea",
+      "role_of_detail",
+      "vocabulary_in_context"
+    ],
+    "theme": "a nation, in Tagore's sense, is a people organised for power rather than a society living for its own sake: the political side of a society has a limited protective purpose, but once science and wealth let it outgrow that place it rules the society like a machine whose aim is success rather than goodness, and the charge falls on this method of organisation wherever it is used, not on any people",
+    "estimated_time_min": 8,
+    "source": {
+      "publication": "Rabindranath Tagore, Nationalism (1917), \"Nationalism in the West\"",
+      "url": "https://www.gutenberg.org/ebooks/40766",
+      "author": "Rabindranath Tagore",
+      "date_accessed": "2026-10-03",
+      "usage_note": "Public domain: Rabindranath Tagore died in 1941 and the work was first published in 1917. The passage is the author's own words, with some sentences left out to fit CAT length; the questions, explanations and notes are original to CAT OS."
+    },
+    "date_added": "2026-10-03",
+    "batch_id": "batch-rc-006",
+    "prompt_version": "content engine v1 + CAT-size brief 2026-10",
+    "reviewer_notes": "Cut from the middle of the lecture, where the argument is most self-contained: the definition of the Nation (source paragraph 17, whole, split in two at 'But when'), the gambling father and the machine (paragraph 21 without its last sentence, on the moral nature struggling through 'ropes and pullies'), the love for the British race (paragraph 26, first and last sentences only) and government by the Nation as an applied science (paragraph 27 without its last sentence). The lecture's later indictments of the government of India (the tinned food, the octopus, the steam-roller) are left out so that the passage carries one argument: a definition, a growth, a consequence, and the boundary the author draws round his own charge. What this adds to the usual quotation of Tagore against nationalism is that boundary: the charge is laid against a method of organisation, not against a people, and it gives the main-idea question its decisive rival.",
+    "length_class": "medium",
+    "structure": "definition_application",
+    "viewpoints": 1,
+    "tone": "grave and metaphorical, courteous at the turn",
+    "difficulty_vector": {
+      "lexical": 3,
+      "syntactic": 3,
+      "abstraction": 4,
+      "inference_depth": 3,
+      "distractor_similarity": 3,
+      "reasoning_depth": 3,
+      "structural_ambiguity": 2,
+      "time_pressure": 3
+    },
+    "reasoning_patterns": [
+      "struct.definition",
+      "struct.cause_effect",
+      "struct.analogy",
+      "struct.pivot",
+      "comp.central_idea",
+      "comp.function_over_words",
+      "comp.organization",
+      "arg.analogy",
+      "arg.qualification",
+      "inf.strongly_supported",
+      "scope.population",
+      "lang.contrast_marker",
+      "word.context_clue",
+      "word.polysemy",
+      "elim.near_tie"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1's live rival is the modern sense of 'ulterior', a purpose kept hidden; it fails because the next sentence, 'It is an end in itself', is the contrast that fixes the word: a thing can have an open purpose outside itself and still not be an end in itself, so only 'beyond itself' makes the two sentences say one thing. Q2's strongest rival is the rejection of politics read out of 'not of human ideals'; it dies on 'It is for self-preservation' and on the early days when the political side 'had its separate place', which the second paragraph's 'crosses its boundaries' presupposes. The option about science introducing the political side is attractive only to a reader who merges 'begins to grow' with 'begins', and the professionals option only to one who takes a description of the early days for a programme: 'restricted to the professionals' says where the power was kept, and the complaint is about its size, not its holders. Q3's rival is greed read as the lesson of the gambler; the sentence after him maps the father onto a society 'turned into a perfect organization of power', and the second paragraph has power 'trading upon the greed and fear of man', so the passage never ranks the two. Q4 holds the set's near-tie: the option condemning every political arrangement quotes the passage's best definition and then swerves past 'It is for self-preservation'; the British-character option is refused twice, by 'a deep love and a great respect for the British race' and by 'neither British nor anything else'.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "goads",
+      "automaton",
+      "perpetrate",
+      "phantom"
+    ]
+  },
+  "passage": {
+    "title": "A Mechanical Purpose",
+    "reading_time_min": 3.1,
+    "paragraphs": [
+      {
+        "id": "rc-0144-p1",
+        "text": "A nation, in the sense of the political and economic union of a people, is that aspect which a whole population assumes when organized for a mechanical purpose. Society as such has no ulterior purpose. It is an end in itself. It is a spontaneous self-expression of man as a social being. It is a natural regulation of human relationships, so that men can develop ideals of life in co-operation with one another. It has also a political side, but this is only for a special purpose. It is for self-preservation. It is merely the side of power, not of human ideals. And in the early days it had its separate place in society, restricted to the professionals."
+      },
+      {
+        "id": "rc-0144-p2",
+        "text": "But when with the help of science and the perfecting of organization this power begins to grow and brings in harvests of wealth, then it crosses its boundaries with amazing rapidity. For then it goads all its neighbouring societies with greed of material prosperity, and consequent mutual jealousy, and by the fear of each other's growth into powerfulness. The time comes when it can stop no longer, for the competition grows keener, organization grows vaster, and selfishness attains supremacy. Trading upon the greed and fear of man, it occupies more and more space in society, and at last becomes its ruling force."
+      },
+      {
+        "id": "rc-0144-p3",
+        "text": "When this organization of politics and commerce, whose other name is the Nation, becomes all-powerful at the cost of the harmony of the higher social life, then it is an evil day for humanity. When a father becomes a gambler and his obligations to his family take the secondary place in his mind, then he is no longer a man, but an automaton led by the power of greed. Then he can do things which, in his normal state of mind, he would be ashamed to do. It is the same thing with society. When it allows itself to be turned into a perfect organization of power, then there are few crimes which it is unable to perpetrate. Because success is the object and justification of a machine, while goodness only is the end and purpose of man. When this engine of organization begins to attain a vast size, and those who are mechanics are made into parts of the machine, then the personal man is eliminated to a phantom, everything becomes a revolution of policy carried out by the human parts of the machine, with no twinge of pity or moral responsibility."
+      },
+      {
+        "id": "rc-0144-p4",
+        "text": "I have a deep love and a great respect for the British race as human beings. We have felt the greatness of this people as we feel the sun; but as for the Nation, it is for us a thick mist of a stifling nature covering the sun itself."
+      },
+      {
+        "id": "rc-0144-p5",
+        "text": "This government by the Nation is neither British nor anything else; it is an applied science and therefore more or less similar in its principles wherever it is used. It is like a hydraulic press, whose pressure is impersonal, and on that account completely effective. The amount of its power may vary in different engines. Some may even be driven by hand, thus leaving a margin of comfortable looseness in their tension, but in spirit and in method their differences are small. Our government might have been Dutch, or French, or Portuguese, and its essential features would have remained much the same as they are now."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0144-q1",
+      "type": "vocabulary_in_context",
+      "skill": "vocabulary_in_context",
+      "patterns": [
+        "word.context_clue",
+        "word.polysemy",
+        "struct.definition"
+      ],
+      "target_mistake": "reading 'ulterior' in its everyday modern sense of a hidden motive instead of letting the next sentence, 'It is an end in itself', define it by contrast",
+      "prediction_target": "The learner should be able to say beforehand: having no ulterior purpose must amount to being an end in itself, so 'ulterior' means a purpose lying beyond the thing, which the thing would merely serve.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "specific_detail"
+      ],
+      "stem": "In the first paragraph, the word 'ulterior' (in 'Society as such has no ulterior purpose') most nearly means",
+      "options": {
+        "A": "concealed behind a more respectable purpose that is openly declared",
+        "B": "political or economic, concerned with power and with prosperity",
+        "C": "lying beyond the thing itself, which would be only a means to it",
+        "D": "rising from within, out of the thing's own nature and needs"
+      },
+      "correct": "C",
+      "estimated_time_sec": 50,
+      "explanation": {
+        "expert_notice": "The word is defined by the sentence that follows it. Society has no ulterior purpose; 'It is an end in itself.' Whatever 'ulterior' means, lacking such a purpose has to come to the same thing as being an end in itself.",
+        "correct_reasoning": "To have no purpose beyond oneself is to be an end in oneself, so 'ulterior' must mean lying further off: a purpose outside the thing, for which the thing would be only a means. The first sentence supplies the other half of the contrast, since a nation is what a population becomes 'when organized for a mechanical purpose', a purpose that lies outside the people themselves.",
+        "passage_anchor": "rc-0144-p1",
+        "question_type_note": "Old texts often use a word in an older sense than ours. A vocabulary question on such a text is settled by the sentence's own contrast, not by today's usage.",
+        "reading_habit": "When a short sentence follows a word you are unsure of, as 'It is an end in itself' follows 'ulterior', read it as the author's gloss and test each option by putting it back into the original sentence.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "near_synonym_confusion",
+            "why_wrong": "This is today's sense, as in 'an ulterior motive'. But a hidden purpose is not the opposite of being 'an end in itself': a thing could have an open, declared purpose outside itself and still not be an end in itself. Only 'beyond itself' makes the two sentences say one thing.",
+            "seductive_element": "It is the sense most readers know, and a passage about the Nation sounds as though it is about motives that are kept out of sight."
+          },
+          {
+            "option": "B",
+            "trap_type": "wrong_abstraction_level",
+            "why_wrong": "It names one kind of purpose, the nation's, instead of saying what the word means, and it would make the paragraph contradict itself, since society 'has also a political side', with its own special purpose of self-preservation.",
+            "seductive_element": "The paragraph sets the political and economic nation against society, so 'political or economic' looks like the missing half of the contrast."
+          },
+          {
+            "option": "D",
+            "trap_type": "opposite_direction",
+            "why_wrong": "This reverses the sense. Society is 'a spontaneous self-expression of man as a social being', so it plainly has a purpose rising out of its own nature; what it lacks is a purpose outside itself.",
+            "seductive_element": "'Ulterior' sounds like 'interior', and 'an end in itself' sounds like something turned inward."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0144-q2",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.strongly_supported",
+        "arg.qualification",
+        "lang.contrast_marker"
+      ],
+      "target_mistake": "turning the author's limit on the political side of society into a rejection of politics, or mistaking his description of the early days for a recommendation",
+      "prediction_target": "The learner should be able to say: the author gives the political side a purpose and a place, and objects only when science and wealth let it grow beyond that place.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 3,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "specific_detail",
+        "scope"
+      ],
+      "stem": "Which of the following can be inferred about the author's view of the 'political side' of society?",
+      "options": {
+        "A": "It is opposed to human ideals, and a society true to itself would do without it.",
+        "B": "It was first brought into society by science and by the perfecting of organisation.",
+        "C": "It ought to be left in the hands of trained professionals, not of the people at large.",
+        "D": "It has a limited purpose of its own, and the danger begins when it outgrows its place."
+      },
+      "correct": "D",
+      "estimated_time_sec": 90,
+      "explanation": {
+        "expert_notice": "Three phrases decide this before any option is read: the political side is 'only for a special purpose', 'It is for self-preservation', and 'in the early days it had its separate place in society'. Then the second paragraph opens with 'But when', and its verbs (crosses, goads, occupies) describe trespass, which only makes sense if there was a boundary that used to be kept.",
+        "correct_reasoning": "The author grants the political side a purpose, self-preservation, and a place, separate and restricted. His objection is to what happens next: helped by science and wealth, the power 'crosses its boundaries', 'occupies more and more space in society, and at last becomes its ruling force'. The third paragraph dates the evil day precisely to the moment this organisation 'becomes all-powerful'. A danger that begins at a boundary is what the correct option says.",
+        "passage_anchor": "rc-0144-p1, rc-0144-p2",
+        "question_type_note": "An inference question asks what the author must think, given what he says. Here it is answered as much by what he declines to condemn as by what he condemns.",
+        "reading_habit": "When an author describes something 'in the early days' and then writes 'But when', he is contrasting a thing in its place with the same thing out of it. Ask which of the two he is attacking before you read the options.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "It bends the passage's own words. 'Merely the side of power, not of human ideals' says the political side does not belong to ideals; it does not set the two at war. And a society could hardly do without what it needs 'for self-preservation'.",
+            "seductive_element": "The phrase 'not of human ideals' reads like a verdict against politics as such, and the option repeats it."
+          },
+          {
+            "option": "B",
+            "trap_type": "temporal_distortion",
+            "why_wrong": "Science enters only when 'this power begins to grow': it enlarges the political side, it did not bring it in. The political side existed 'in the early days', with 'its separate place in society', before science enlarged it.",
+            "seductive_element": "Science and organisation are the only causes the passage names, so it is easy to credit them with the beginning as well as the growth."
+          },
+          {
+            "option": "C",
+            "trap_type": "prescriptive_leap",
+            "why_wrong": "'Restricted to the professionals' describes how things stood in the early days. The author recommends nothing about who should hold power; his complaint is about how much room power takes, not about whose hands it is in.",
+            "seductive_element": "A picture of the time before the trouble began reads easily as a picture of how things ought to be."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0144-q3",
+      "type": "role_of_detail",
+      "skill": "paragraph_function",
+      "patterns": [
+        "comp.function_over_words",
+        "arg.analogy",
+        "struct.analogy"
+      ],
+      "target_mistake": "treating the gambling father as a subject in his own right, or taking greed, the vehicle of the picture, for the point it is used to make about power",
+      "prediction_target": "The learner should be able to say: the father is a familiar case of someone taken over by one aim, used to show how a society taken over by power comes to do what it would once have refused.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "logical_structure"
+      ],
+      "stem": "The author refers to a father who becomes a gambler in order to",
+      "options": {
+        "A": "make vivid how a society ruled by power comes to do what it once would not",
+        "B": "suggest that the decay of family life is the first sign that a nation is growing",
+        "C": "argue that greed, rather than the pursuit of power, lies behind the crimes of nations",
+        "D": "suggest that a society, like a father, will reform once its duties are pointed out to it"
+      },
+      "correct": "A",
+      "estimated_time_sec": 80,
+      "explanation": {
+        "expert_notice": "The sentence after the gambler states his job: 'It is the same thing with society.' A detail followed by 'the same thing' is an analogy, and an analogy is there to make the second case understood through the first.",
+        "correct_reasoning": "Once greed rules him, the father becomes 'an automaton' who 'can do things which, in his normal state of mind, he would be ashamed to do'. The society that lets itself become 'a perfect organization of power' is in the same state: 'there are few crimes which it is unable to perpetrate'. The familiar case of one man taken over by a single aim makes vivid what happens when a whole society is taken over in the same way.",
+        "passage_anchor": "rc-0144-p3",
+        "question_type_note": "A role-of-detail question asks why a detail is there, not what it says. Find the sentence that ties the detail to the argument; here it is seven words long.",
+        "reading_habit": "When an author leaves his subject for a homely example, look for the sentence where he comes back to it. That sentence tells you what the example is for.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "wrong_structural_role",
+            "why_wrong": "The family is the setting of the comparison, not a subject the passage studies. Nothing is said about family life decaying as nations grow; the father is borrowed only to show what a society becomes.",
+            "seductive_element": "A father neglecting his family sounds like social decline, and the passage is about the decline of society."
+          },
+          {
+            "option": "C",
+            "trap_type": "comparison_distortion",
+            "why_wrong": "The passage never ranks greed against power. The comparison runs from the gambler to a society 'turned into a perfect organization of power', and the second paragraph has power 'trading upon the greed and fear of man', the two working together.",
+            "seductive_element": "The father is 'led by the power of greed', so greed looks like the lesson of the picture."
+          },
+          {
+            "option": "D",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "No remedy is offered anywhere in the passage. The paragraph describes how restraint is lost and ends with the machine acting 'with no twinge of pity or moral responsibility', not with a cure.",
+            "seductive_element": "A father who neglects his family can be reminded of his duty, and readers expect an essay of this kind to end on hope."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0144-q4",
+      "type": "main_idea",
+      "skill": "main_idea",
+      "patterns": [
+        "comp.central_idea",
+        "scope.population",
+        "struct.pivot",
+        "elim.near_tie"
+      ],
+      "target_mistake": "blaming a people for what the author blames on a method of organisation, or crediting him with a rejection of every political arrangement",
+      "prediction_target": "The learner should be able to say: power organised as the Nation outgrows its place, takes over society and acts like a machine without conscience, and this is true of the method whoever uses it.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "logical_structure",
+        "scope"
+      ],
+      "stem": "Which of the following best expresses the main point of the passage?",
+      "options": {
+        "A": "The British, having come to value success above goodness, have carried that character with them into their rule over others.",
+        "B": "Power organised as a nation can outgrow its place and rule society like a machine without conscience, whoever runs it.",
+        "C": "Society is an end in itself, and every political arrangement, being only a means to something else, must corrupt it.",
+        "D": "Like a father who gambles, a society led by greed for gain soon abandons the obligations it owes to its own members."
+      },
+      "correct": "B",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "The passage moves in three steps and then draws a line. A definition: the nation is a population 'organized for a mechanical purpose'. A growth: the power 'crosses its boundaries' and 'at last becomes its ruling force'. A consequence: persons become 'parts of the machine'. Then the last two paragraphs say whose fault this is not: 'This government by the Nation is neither British nor anything else; it is an applied science'.",
+        "correct_reasoning": "Only the correct option keeps all four: the organisation for power, its growth beyond its place, its conduct without 'pity or moral responsibility', and the refusal to lay it at the door of one people, since 'Our government might have been Dutch, or French, or Portuguese' and its essential features would have been the same.",
+        "passage_anchor": "rc-0144-p2, rc-0144-p3, rc-0144-p5",
+        "question_type_note": "A main-idea question is answered by the option that needs every paragraph. Test each option against the passage's turn; here the turn separates a people from its Nation.",
+        "reading_habit": "When an author stops to praise the people he seems to be attacking, treat the praise as a boundary on his thesis and carry it into your summary.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "wrong_population",
+            "why_wrong": "The author says the opposite: he has 'a deep love and a great respect for the British race as human beings', and the government he describes 'is neither British nor anything else'. The fault lies with the Nation as a method, not with a people's character.",
+            "seductive_element": "The passage plainly concerns a foreign government, so blaming the character of its rulers looks like the natural conclusion."
+          },
+          {
+            "option": "C",
+            "trap_type": "half_right",
+            "why_wrong": "The first half is the passage's own definition; the second is not in it. Society 'has also a political side', which exists 'for self-preservation' and once had 'its separate place'. The quarrel is with power that outgrows that place, not with every political arrangement.",
+            "seductive_element": "It quotes the passage's most memorable sentence exactly before it swerves."
+          },
+          {
+            "option": "D",
+            "trap_type": "example_as_thesis",
+            "why_wrong": "The gambling father is an illustration, brought in to explain what happens to a society 'turned into a perfect organization of power'. Making the illustration the point loses the nation, the machine and the final turn.",
+            "seductive_element": "The father is the most vivid picture in the passage and the easiest thing in it to remember."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "goads",
+      "passage_use": "it goads all its neighbouring societies with greed of material prosperity",
+      "meaning_here": "drives or provokes others on, as a farmer prods an animal with a pointed stick",
+      "difficulty": "medium"
+    },
+    {
+      "word": "automaton",
+      "passage_use": "an automaton led by the power of greed",
+      "meaning_here": "a machine that moves by itself; here, a man who acts without thought or feeling of his own",
+      "difficulty": "medium"
+    },
+    {
+      "word": "perpetrate",
+      "passage_use": "few crimes which it is unable to perpetrate",
+      "meaning_here": "to carry out something wrong, such as a crime",
+      "difficulty": "medium"
+    },
+    {
+      "word": "phantom",
+      "passage_use": "the personal man is eliminated to a phantom",
+      "meaning_here": "a ghost; something that seems to be there but has no real substance",
+      "difficulty": "easy"
+    }
+  ],
+  "mentor": {
+    "challenge": "Every word of this passage is Tagore's own. He builds a definition, follows it as it grows, shows what it does to people, and then draws a careful line around his own charge. Notice exactly where that line falls, and which side of it the British stand on.",
+    "one_sentence_summary": "A nation is a people organised for power rather than a society living for its own sake; once science and wealth let that power outgrow the limited place it once had, it rules society and turns persons into parts of a machine that acts without pity, and the author lays the charge on this method of organisation wherever it is used, not on the British people, whom he admires.",
+    "main_idea": "A society exists for its own sake, and its political side exists only to protect it. When that side grows, through science, wealth and rivalry, into the Nation, it takes over the society and works like a machine, doing what no decent person would do. The author's quarrel is with this organisation of power, whoever runs it, and not with any people.",
+    "simple_explanation": "Tagore starts with two definitions. A society is people living together for its own sake: the natural way human beings arrange their lives so that they can grow better together. A society also has a political side, whose only job is to protect it, and in the old days that side kept to its own corner, run by specialists.\n\nThen science and organisation make that political power grow, and it starts bringing in wealth. Neighbouring societies become greedy, jealous and afraid of one another, the competition gets fiercer, and the power cannot stop. In the end it fills more and more of life until it rules the whole society. This organised power is what Tagore calls the Nation.\n\nHe explains the danger with a picture. A father who becomes a gambler stops being a real father: greed drives him like a machine, and he does things he would normally be ashamed of. A society that turns itself into an organisation of power is the same, because a machine cares only about success while a person cares about goodness. When the machine is huge and the people in it are only its parts, terrible things get done and nobody feels pity or responsibility.\n\nThen comes the turn. Tagore says he loves and respects the British as people; it is the Nation that hides their greatness, the way a mist hides the sun. The government he lives under is not British by nature. It is a technique, like a machine, and if the Dutch, the French or the Portuguese had ruled instead, it would look much the same.",
+    "why_difficult": "The prose is thick with metaphor (harvests of wealth, a hydraulic press, a mist over the sun) and uses at least one word, 'ulterior', in an older sense than ours. The argument also rests on a distinction the reader must hold on to: in this passage a nation is not a people or a country but a people organised for power. A reader who loses that distinction will take the passage for an attack on the British, and its last two paragraphs are written to stop exactly that reading.",
+    "author_intention": "To define the Nation as a people's organisation for power, show how it grows until it rules society and silences conscience, and make clear that the charge is against this method of organisation wherever it is used, not against any people.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0144-p1",
+        "role": "Defines two things",
+        "note": "A nation is a people organised for a mechanical purpose; a society is an end in itself, with a political side kept for self-preservation and once confined to its own place."
+      },
+      {
+        "paragraph_id": "rc-0144-p2",
+        "role": "Traces the growth",
+        "note": "Science and wealth make that power grow; greed, jealousy and fear among neighbouring societies drive it on until it becomes the society's ruling force."
+      },
+      {
+        "paragraph_id": "rc-0144-p3",
+        "role": "Shows the consequence",
+        "note": "Like a gambling father, a society turned into an organisation of power will commit almost any crime, because a machine aims at success while man aims at goodness."
+      },
+      {
+        "paragraph_id": "rc-0144-p4",
+        "role": "Separates people from Nation",
+        "note": "The author loves and respects the British as people; the Nation is a stifling mist that hides their greatness."
+      },
+      {
+        "paragraph_id": "rc-0144-p5",
+        "role": "Widens the charge",
+        "note": "Government by the Nation is an applied science, the same in spirit and method whoever runs it: it might have been Dutch, French or Portuguese."
+      }
+    ],
+    "tone_progression": "Measured and definitional at first, darkening into warning as the power grows, grave and sorrowful in the picture of the gambler and the machine, then warm and courteous towards the British people, and finally cool and exact in naming a method rather than a nation as the culprit.",
+    "key_transitions": [
+      "'But when with the help of science and the perfecting of organization this power begins to grow' (opening of paragraph 2): a limited thing starts to outgrow its place.",
+      "'It is the same thing with society.' (paragraph 3): the gambling father becomes a picture of the whole society.",
+      "'This government by the Nation is neither British nor anything else' (opening of paragraph 5): the charge moves from a people to a method."
+    ],
+    "misunderstanding": "A hurried reader takes the passage for an attack on the British. Tagore goes out of his way to block that reading: he loves and respects the British 'as human beings', and he says the same government could have been Dutch, French or Portuguese. A second mistake is to think he condemns politics altogether, when he gives the political side a real purpose, self-preservation, and objects only when it grows into the ruling force.",
+    "traps_summary": "The options trade on four slips: reading 'ulterior' in today's sense of hidden; turning the author's limit on politics into a rejection of politics; making the vivid gambling father the point of the passage instead of its illustration; and blaming a people for what the author blames on a method.",
+    "reading_lesson": "When an author praises the people he seems to be attacking, he is drawing the boundary of his own claim. Mark that boundary as you read and carry it into your summary: a main-idea option that crosses it is wrong, however faithfully it quotes the rest of the passage.",
+    "real_world": "Rabindranath Tagore, the Bengali poet who won the Nobel Prize in Literature in 1913, gave these lectures in 1916 and 1917, while the First World War was being fought. His line between a people and the machinery that acts in its name still matters whenever the citizens of a country are blamed for what its institutions do.",
+    "takeaway": "Blame the machine before the people: an organisation built for power can act without conscience whoever happens to run it.",
+    "reflection_question": "Which organisation you belong to sometimes does things that none of its members would do alone?",
+    "eli10": {
+      "big_idea": "When people organise only for power, that power can grow until it rules everything and acts like a heartless machine, whoever runs it.",
+      "story": "Tagore compares two things. A society is people living together for its own sake. It has a political side too, but only to protect itself. Long ago, that side stayed in its own small corner. Then science helped it grow and bring in wealth. Neighbours grew greedy, jealous and afraid of each other. So the power kept growing until it ruled everything. Tagore calls this the Nation. Think of a father who starts gambling. Greed drives him like a machine. He does things he would normally be ashamed of. A society run only for power is the same. A machine wants success; a person wants goodness. When people become parts of the machine, nobody feels pity. Tagore says he loves the British people. The trouble is the Nation, not them. If the Dutch or the French ruled his country instead, it would be much the same.",
+      "paragraphs": [
+        "Defines: a nation is people organised for power; a society lives for its own sake.",
+        "Traces the growth: science and wealth make that power grow until it rules society.",
+        "Gives a picture: like a gambling father, a power-run society does shameful things without pity.",
+        "Draws a line: Tagore loves the British people; the Nation hides them like a mist.",
+        "Widens the charge: this kind of government would be much the same whoever ran it."
+      ],
+      "author_view": "Tagore is grave and deeply worried about the Nation as a heartless machine, yet warm towards the British as people."
+    }
+  }
+}

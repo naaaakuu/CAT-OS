@@ -1,0 +1,333 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0126",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 86,
+    "genre": "science",
+    "difficulty": "easy",
+    "difficulty_numeric": 2,
+    "stage": "foundation",
+    "skills": [
+      "main-idea-extraction",
+      "inference",
+      "qualifier-tracking",
+      "causal-reasoning"
+    ],
+    "word_count": 313,
+    "question_count": 3,
+    "question_types": [
+      "title_selection",
+      "inference",
+      "implication"
+    ],
+    "theme": "a honeybee swarm chooses a new home well without any leader because the comparison happens in the swarm rather than in any bee: scouts dance more for better sites, recruits judge for themselves, every scout's dancing fades so support lasts only while new bees keep agreeing, and the move is triggered when about fifteen scouts gather at one site, a quorum that trades the speed a hungry swarm needs against the care of waiting for full agreement",
+    "estimated_time_min": 5.5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-03",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted."
+    },
+    "date_added": "2026-10-03",
+    "batch_id": "batch-rc-005",
+    "prompt_version": "content engine v1 + CAT-size brief 2026-10",
+    "reviewer_notes": "An impersonal foundation item of sustained scientific exposition with no argument about method, which AUTHORING §4a lists as missing from the corpus. Thesis (a good choice with no chooser), support (scouts, dances scaled to quality, independent checking, fading support, the swarm as the comparer), and a third paragraph that does the argumentative work by limiting the thesis: the quorum settles the choice before every scout agrees, which trades care for speed and is why the first paragraph says 'usually'. The facts follow the published account of nest-site selection (a swarm of about ten thousand, a few hundred scouts, dance repetitions scaled to quality, dances that fade on each return, a quorum of roughly fifteen at the site, piping, lift-off within about an hour). The set's near-tie is the half-right implication option that gets the timing right and the error rate backwards.",
+    "length_class": "short",
+    "structure": "thesis_support",
+    "viewpoints": 1,
+    "tone": "admiring, patient, exact",
+    "difficulty_vector": {
+      "lexical": 1,
+      "syntactic": 2,
+      "abstraction": 2,
+      "inference_depth": 2,
+      "distractor_similarity": 2,
+      "reasoning_depth": 2,
+      "structural_ambiguity": 1,
+      "time_pressure": 2
+    },
+    "reasoning_patterns": [
+      "struct.claim_evidence",
+      "struct.cause_effect",
+      "struct.qualification",
+      "comp.central_idea",
+      "comp.supporting_idea",
+      "arg.causal_claim",
+      "arg.qualification",
+      "inf.directly_implied",
+      "inf.reasonable_implication",
+      "lang.absolute_vs_qualified",
+      "lang.comparative",
+      "scope.too_narrow",
+      "elim.near_tie"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1: a strong candidate might choose 'Why a Swarm Never Chooses Badly', since the passage admires the method; the first paragraph says 'usually', and the last presents the quorum as a trade of care for speed, which allows mistakes. 'Fifteen Bees in Charge' borrows 'in charge' from the very sentence that says no bee is, and the dance title covers one step of the second paragraph. Q2: the finalist is 'helping the site found first to win before the food runs out', which borrows the third paragraph's words; the fading does the reverse, since 'a site keeps its support only while new bees keep agreeing', and the site found first wins more often only with a smaller crowd. The strength-saving option invents a reason the passage never gives. Q3: the near-tie is 'move later, and more often to whichever site was found first', which gets the timing right and borrows the passage's words for the smaller crowd; 'Waiting for every scout to agree would be safer, but slow' fixes the direction of the error rate.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "swarm",
+      "hollow",
+      "piping"
+    ]
+  },
+  "passage": {
+    "title": "Dancing for a Hollow Tree",
+    "reading_time_min": 1.7,
+    "paragraphs": [
+      {
+        "id": "rc-0126-p1",
+        "text": "In late spring a crowded honeybee colony splits in two. The old queen leaves with about ten thousand workers, and the swarm hangs from a branch in a cluster the size of a football. The bees carry enough honey for only a few days. In that time they must choose a new home, usually a hollow tree, and the queen takes no part in the choice. Nor is any other bee in charge. Yet the swarm usually picks the best site its scouts have found."
+      },
+      {
+        "id": "rc-0126-p2",
+        "text": "A few hundred scouts do the searching. A scout that finds a promising hollow flies back and dances on the swarm, showing other bees which way to fly and how far. The better she judged the site, the more times she repeats the dance. Some watchers go to inspect the site, and those that like it return and dance for it too. So a good site gathers supporters faster than a poor one. But each scout dances a little less on every return until she stops, so a site keeps its support only while new bees keep agreeing. No bee needs to compare two sites. The swarm does the comparing, as poor sites lose their dancers and good ones gain them."
+      },
+      {
+        "id": "rc-0126-p3",
+        "text": "The choice is settled at the site, and it is settled before every scout agrees. When scouts at one hollow find themselves in a crowd of about fifteen, they fly back and make a high piping sound, and within an hour the whole swarm lifts off and follows them. Waiting for every scout to agree would be safer, but slow, and a swarm in the open is running short of food. A smaller crowd would trigger the move sooner and would more often send the swarm to whichever site happened to be found first. A crowd of about fifteen is how the swarm trades speed against care."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0126-q1",
+      "type": "title_selection",
+      "skill": "main_idea",
+      "patterns": [
+        "comp.central_idea",
+        "lang.absolute_vs_qualified",
+        "scope.too_narrow"
+      ],
+      "target_mistake": "putting a few bees in charge of the choice, naming the passage after one step of the process, or turning 'usually' into 'never chooses badly'",
+      "prediction_target": "The learner should be able to say beforehand: the swarm makes a good choice although no single bee makes it or compares the sites.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 2,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "logical_structure"
+      ],
+      "stem": "Which of the following would be the most suitable title for the passage?",
+      "options": {
+        "A": "A Choice Made by No Single Bee",
+        "B": "Fifteen Bees in Charge",
+        "C": "What a Scout's Dance Tells Other Bees",
+        "D": "Why a Swarm Never Chooses Badly"
+      },
+      "correct": "A",
+      "estimated_time_sec": 70,
+      "explanation": {
+        "expert_notice": "The first paragraph sets the puzzle: the queen takes no part, no other bee is in charge, 'Yet the swarm usually picks the best site its scouts have found.' The rest of the passage explains how. A title has to name that achievement, a choice with no chooser, and must not lose the word 'usually'.",
+        "correct_reasoning": "The passage's point is that the choice is made by the swarm as a whole, through dances that gain and lose support and a crowd that forms at one site, and that 'No bee needs to compare two sites.' 'A Choice Made by No Single Bee' names exactly that, without claiming that the choice is always right.",
+        "passage_anchor": "rc-0126-p1, rc-0126-p2",
+        "question_type_note": "A title must cover the whole passage at the right strength. Check each option for scope (one part, or the whole?) and for degree (does it say 'never' where the passage says 'usually'?).",
+        "reading_habit": "When a sentence opens with 'Yet', it usually states the puzzle the rest of the passage will solve. Note the puzzle in a few words; a good title is often its answer.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "The passage says the reverse of 'in charge': 'Nor is any other bee in charge.' The crowd of about fifteen does not choose the site; it gathers at a site that has already won support, and its piping only sets the move off.",
+            "seductive_element": "Fifteen is the number that sends the swarm on its way, and the title borrows the passage's own words 'in charge'."
+          },
+          {
+            "option": "C",
+            "trap_type": "too_narrow",
+            "why_wrong": "The dance is one step, described early in the second paragraph. The title leaves out how support fades, how the swarm compares sites, and how the decision is made at the site.",
+            "seductive_element": "The dance is the most vivid detail in the passage."
+          },
+          {
+            "option": "D",
+            "trap_type": "extreme_language",
+            "why_wrong": "The passage says the swarm 'usually' picks the best site, and its last paragraph presents the quorum as a trade of care for speed, which leaves room for mistakes. 'Never' turns a good method into a perfect one.",
+            "seductive_element": "The passage plainly admires the method, so a title praising its results sounds right."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0126-q2",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.directly_implied",
+        "struct.cause_effect",
+        "comp.supporting_idea"
+      ],
+      "target_mistake": "inventing a reason for the fading that the passage never gives, or reversing what the fading does to an early lead",
+      "prediction_target": "The learner should be able to say beforehand: because every dance fades, a site keeps support only while new bees keep agreeing, so early support cannot carry a poor site.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 2,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "logical_structure"
+      ],
+      "stem": "It can be inferred from the passage that each scout's dancing a little less on every return helps the swarm by",
+      "options": {
+        "A": "saving the scouts' strength for the long flight to the new home",
+        "B": "making sure that every scout visits more than one site",
+        "C": "letting a site's early support fade unless new bees agree",
+        "D": "helping the site found first to win before the food runs out"
+      },
+      "correct": "C",
+      "estimated_time_sec": 70,
+      "explanation": {
+        "expert_notice": "The fading is described in one sentence of the second paragraph, and the sentence gives its own result: each scout dances a little less on every return, 'so a site keeps its support only while new bees keep agreeing'. Two sentences later the passage says what that achieves: the swarm does the comparing, 'as poor sites lose their dancers'.",
+        "correct_reasoning": "Because every dancer fades, no site can live on the support it won at the start. Support survives only where new bees inspect the site and agree, so a site that wins early backing but fails to convince newcomers loses it. That is what lets the swarm compare sites without any bee comparing them, and it is what the correct option says.",
+        "passage_anchor": "rc-0126-p2",
+        "question_type_note": "When a passage describes a feature and then says 'so', the clause after 'so' is the feature's job. An inference question about how a feature helps usually wants that clause in other words.",
+        "reading_habit": "Notice 'so' and 'as' when they follow a description; they introduce the result the description is there to explain.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "common_knowledge_intrusion",
+            "why_wrong": "The passage gives no reason of strength or rest for the fading and never mentions the length of the flight. It describes what the fading does to support, not what it saves the scouts.",
+            "seductive_element": "Doing a little less each time sounds like saving energy, which is the everyday reason anyone slows down."
+          },
+          {
+            "option": "B",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage says the reverse: 'No bee needs to compare two sites.' The fading lets the swarm compare sites without any scout visiting more than one.",
+            "seductive_element": "It sounds like the careful way to choose, and a scout who stops dancing might seem free to look elsewhere."
+          },
+          {
+            "option": "D",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "The site found first belongs to the third paragraph, where a smaller crowd 'would more often send the swarm to whichever site happened to be found first'. The fading works against that: an early lead fades unless new bees keep agreeing.",
+            "seductive_element": "It borrows the passage's own words about the site found first and about the swarm's food."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0126-q3",
+      "type": "implication",
+      "skill": "inference",
+      "patterns": [
+        "inf.reasonable_implication",
+        "lang.comparative",
+        "elim.near_tie"
+      ],
+      "target_mistake": "keeping the right timing but reversing the error rate, or treating a slower decision as an impossible one",
+      "prediction_target": "The learner should be able to say beforehand: a bigger crowd takes longer to gather, so the swarm would move later but would less often settle on a poor site.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "application"
+      ],
+      "stem": "The passage implies that if scouts waited for a crowd of fifty at a site before piping, the swarm would most likely",
+      "options": {
+        "A": "move later, and more often to whichever site was found first",
+        "B": "be unable ever to leave the branch at all",
+        "C": "move sooner, because more bees would already agree",
+        "D": "move later, and less often to a poor site"
+      },
+      "correct": "D",
+      "estimated_time_sec": 75,
+      "explanation": {
+        "expert_notice": "The last paragraph gives both ends of the scale. Waiting for every scout to agree 'would be safer, but slow'; a smaller crowd 'would trigger the move sooner and would more often send the swarm to whichever site happened to be found first'. A crowd of fifty sits towards the careful end.",
+        "correct_reasoning": "A larger crowd takes longer to gather, so the swarm would move later. It also leaves more time for good sites to gain dancers and poor ones to lose them, so the swarm would less often settle on a poor site. The passage states this for the two extremes, and the correct option takes it one step further.",
+        "passage_anchor": "rc-0126-p3",
+        "question_type_note": "An implication question asks for one honest step beyond the text. When a passage says what happens if a number is made smaller, reverse both parts of the claim for a number made larger.",
+        "reading_habit": "When a passage describes a trade-off, write it as a pair: faster and riskier, or slower and safer. Any change to the setting moves both halves together.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "half_right",
+            "why_wrong": "The first half fits, since a bigger crowd takes longer to gather. The second half belongs to the opposite case: it is a smaller crowd that 'would more often send the swarm to whichever site happened to be found first'.",
+            "seductive_element": "It borrows the passage's own words about the site found first, and it gets the timing right."
+          },
+          {
+            "option": "B",
+            "trap_type": "extreme_language",
+            "why_wrong": "The passage describes a slower decision, not an impossible one. Even waiting for every scout to agree is called 'slow', not hopeless, and fifty bees are far fewer than every scout.",
+            "seductive_element": "The passage stresses that the swarm is running short of food, so any delay can sound fatal."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "A larger crowd takes longer to form, so the move would come later, not sooner. The passage links speed to a smaller crowd.",
+            "seductive_element": "A bigger crowd sounds like stronger agreement, and strong agreement sounds like a quick decision."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "swarm",
+      "passage_use": "the swarm hangs from a branch in a cluster the size of a football",
+      "meaning_here": "a large group of bees that has left its old nest together to find a new one",
+      "difficulty": "easy"
+    },
+    {
+      "word": "hollow",
+      "passage_use": "A scout that finds a promising hollow flies back",
+      "meaning_here": "an empty space inside something, such as a hole inside a tree trunk",
+      "difficulty": "easy"
+    },
+    {
+      "word": "piping",
+      "passage_use": "they fly back and make a high piping sound",
+      "meaning_here": "high and thin, like the note of a small pipe or whistle",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "A description of how ten thousand insects make one choice. Follow the steps in order, and notice the paragraph that admits the method is a compromise.",
+    "one_sentence_summary": "A honeybee swarm usually chooses the best new home with no leader, because scouts dance more for better sites, recruits check sites for themselves, dances fade unless new bees keep agreeing, and the move is triggered when about fifteen scouts gather at one site, a threshold that trades the speed a hungry swarm needs against the care of waiting for everyone to agree.",
+    "main_idea": "No bee leads the swarm and no bee compares the sites, yet the swarm usually picks the best one. Better sites win supporters faster through longer dances, support fades unless it is renewed, and the swarm moves when enough scouts gather at one site. That quorum is a balance between deciding quickly and deciding well.",
+    "simple_explanation": "In late spring, a crowded honeybee colony splits. The old queen leaves with about ten thousand workers, and they hang in a cluster from a branch. They have honey for only a few days, so they must find a new home quickly. The queen does not choose it, and no other bee is in charge. Even so, the swarm usually picks the best site its scouts have found.\n\nA few hundred scouts search. When one finds a good hollow, she flies back and dances on the swarm. The dance shows the other bees which way to go and how far, and the better she thinks the site is, the more times she repeats it. Some bees go and check the site themselves, and if they like it, they come back and dance for it too. So good sites win supporters faster. But each scout dances a little less every time she returns, until she stops, so a site keeps its support only while new bees keep agreeing. No single bee compares two sites; the swarm does it, as poor sites lose dancers and good ones gain them.\n\nThe final decision happens at the site, before every scout agrees. When about fifteen scouts find themselves there at once, they fly back and make a piping sound, and within an hour the whole swarm flies off to the new home. Waiting for every scout to agree would be safer, but too slow for hungry bees. A smaller crowd would be faster, but would more often pick whichever site was found first. About fifteen is the balance between speed and care.",
+    "why_difficult": "The steps are simple, but there are several of them, and two are easy to miss: that support fades unless new bees keep agreeing, and that the decision is made by a crowd at the site rather than by a count on the branch. The last paragraph also presents the method as a compromise, so options that call it perfect or that reverse the trade-off are built to catch readers who skim it.",
+    "author_intention": "To describe, step by step, how a leaderless swarm makes a good choice, and to show that its rule for deciding is a balance between speed and care rather than a guarantee.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0126-p1",
+        "role": "Sets the puzzle",
+        "note": "A swarm has a few days to find a home, and no bee is in charge. Yet it usually picks the best site."
+      },
+      {
+        "paragraph_id": "rc-0126-p2",
+        "role": "Explains the contest",
+        "note": "Scouts dance more for better sites, recruits check for themselves, and fading dances mean support must keep being renewed. The swarm compares sites; no bee has to."
+      },
+      {
+        "paragraph_id": "rc-0126-p3",
+        "role": "Weighs the trade-off",
+        "note": "The move is triggered when about fifteen scouts gather at one site. Waiting for everyone would be safer but too slow; a smaller crowd would be faster but riskier."
+      }
+    ],
+    "tone_progression": "Admiring from the first paragraph, patient and exact through the description of the dances, and balanced at the close, where admiration gives way to an account of what the method gives up.",
+    "key_transitions": [
+      "'Yet the swarm usually picks the best site its scouts have found.' (end of paragraph 1): the puzzle the passage will solve.",
+      "'The choice is settled at the site, and it is settled before every scout agrees.' (opening of paragraph 3): the passage moves from how support grows to how the decision is triggered, and what that costs."
+    ],
+    "misunderstanding": "A hurried reader imagines the queen or some leading bee making the choice, or pictures the swarm counting dances until everyone agrees. In fact no bee compares the sites, support fades unless it is renewed, and the move is triggered by a crowd of about fifteen at one site, before everyone agrees.",
+    "traps_summary": "The options put the fifteen bees at the site in charge, shrink the passage to the dance, turn 'usually' into 'never chooses badly', invent a reason for the fading dances, make every scout visit more than one site, credit the fading with helping the site found first, and reverse or half-reverse the trade-off in the last paragraph.",
+    "reading_lesson": "When a passage describes a process with several steps, number the steps in your head as you read. Questions on such passages usually test a step that is easy to skip, here the fading of support or the crowd at the site.",
+    "real_world": "Committees, juries and families face the swarm's choice too: wait for everyone to agree and decide slowly, or act once enough people agree and accept the occasional mistake.",
+    "takeaway": "A group can choose well with no leader if good options win support faster, and every rule for deciding trades some care for some speed.",
+    "reflection_question": "When your class or family makes a decision together, does it wait for everyone to agree, or act once enough people do?",
+    "eli10": {
+      "big_idea": "A swarm of bees picks a good new home with no leader, by letting good sites win more support.",
+      "story": "In spring, a crowded bee colony splits in two. Thousands of bees fly off with the old queen. They hang from a branch in a big ball. They have food for only a few days, so they need a new home fast. The queen does not choose. No bee is the boss. Scouts fly out to look for hollow trees. A scout who finds one comes back and dances. The dance shows where the place is. The better the place, the more she dances. Other bees go to look, and if they like it, they dance too. So good places win fans faster. Each scout dances less every time, so a place keeps needing new fans. When about fifteen scouts meet at one place, they rush back and make a piping sound. Then the whole swarm flies there. Waiting for everyone to agree would be safer, but too slow.",
+      "paragraphs": [
+        "Sets a puzzle: a swarm with no leader must find a new home in a few days.",
+        "Explains the dances: good sites win supporters faster, and support fades unless renewed.",
+        "Explains the choice: the swarm moves when about fifteen scouts gather at one site."
+      ],
+      "author_view": "The writer admires the bees' method and is honest that it trades a little care for speed."
+    }
+  }
+}

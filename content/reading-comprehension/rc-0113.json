@@ -9,7 +9,7 @@
     "genre": "history",
     "difficulty": "medium",
     "difficulty_numeric": 6,
-    "stage": "intermediate",
+    "stage": "advanced",
     "skills": [
       "argument-tracking",
       "inference",
@@ -18,16 +18,15 @@
       "evidence-anchoring"
     ],
     "word_count": 539,
-    "question_count": 5,
+    "question_count": 4,
     "question_types": [
       "inference",
       "main_idea",
       "phrase_in_context",
-      "role_of_detail",
-      "scope"
+      "role_of_detail"
     ],
     "theme": "the biological history of the century after 1492 stated at its strongest and then bounded: organisms settled the magnitudes and settled nothing about who received what, which was decided by tenure and by law, so the ecological account answers the question of how much and leaves the question of who to a different body of evidence",
-    "estimated_time_min": 9.5,
+    "estimated_time_min": 8,
     "source": {
       "publication": "original",
       "url": null,
@@ -38,7 +37,7 @@
     "date_added": "2026-09-13",
     "batch_id": "batch-rc-003",
     "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-08",
-    "reviewer_notes": "The claim is put at its strongest before it is bounded, so the unqualified biological reading is genuinely attractive and has to be defeated by the tenure comparison rather than by hedging. The objection paragraph is written as a paragraph with a job, so that the reading which takes the objection for the thesis can be refused structurally. Three rivals, biology as the agent, ecological history as evasion, and intention as a weak unit of explanation, own one option in each of the five questions.",
+    "reviewer_notes": "The claim is put at its strongest before it is bounded, so the unqualified biological reading is genuinely attractive and has to be defeated by the tenure comparison rather than by hedging. The objection paragraph is written as a paragraph with a job, so that the reading which takes the objection for the thesis can be refused structurally. Three rivals, biology as the agent, ecological history as evasion, and intention as a weak unit of explanation, own one option in each of the five questions. 2026-10-03 CAT-size pass: 539→539 words, 5→5 paragraphs, 5→4 questions. Dropped q3 (scope: its answer restates main-idea q1's, so it was a second big-picture question in effect); phrase_in_context q2 stays as the only question on p2.",
     "length_class": "medium",
     "structure": "claim_qualification",
     "viewpoints": 3,
@@ -78,7 +77,7 @@
         "total": 5,
         "notes": "full agreement"
       },
-      "adversarial_review": "Three rivals hold an option in every question. The first, and the live one, is the claim without its qualification: organisms were the agents and human decisions the local detail. It is attractive because the first two paragraphs are written to make it as strong as possible, and it is killed by the upland comparison, where the yield is the same and the outcomes are not, and by the sentence that the difference is one of tenure and tenure is not a fact of nature. The second is the objection taken for the thesis: a history of pathogens and yields excuses the conquest, so it should be resisted. The passage answers it rather than adopting it, and the answer, the two questions take different evidence and neither substitutes for the other, makes it a paragraph with a job rather than the position of the piece. The third is the methodological generalisation that intention explains little; the passage refuses it by making tenure and law decisive at the largest scale it discusses, and by ending on somebody who marched a population to a mine. The phrase item turns on a sentence that separates the size of what must be explained from the identity of whoever acted, which is the distinction the whole argument rests on."
+      "adversarial_review": "Three rivals hold an option in every question. The first, and the live one, is the claim without its qualification: organisms were the agents and human decisions the local detail. It is attractive because the first two paragraphs are written to make it as strong as possible, and it is killed by the upland comparison, where the yield is the same and the outcomes are not, and by the sentence that the difference is one of tenure and tenure is not a fact of nature. The second is the objection taken for the thesis: a history of pathogens and yields excuses the conquest, so it should be resisted. The passage answers it rather than adopting it, and the answer, the two questions take different evidence and neither substitutes for the other, makes it a paragraph with a job rather than the position of the piece. The third is the methodological generalisation that intention explains little; the passage refuses it by making tenure and law decisive at the largest scale it discusses, and by ending on somebody who marched a population to a mine. The phrase item turns on a sentence that separates the size of what must be explained from the identity of whoever acted, which is the distinction the whole argument rests on. (2026-10-03, CAT-size pass: q3 was dropped, so any note above about it no longer applies.)"
     },
     "vocab_extracted": [
       "underwrote",
@@ -223,63 +222,6 @@
             "trap_type": "wrong_abstraction_level",
             "why_wrong": "A replacement of one study by another is a claim about how history should be done, and the phrase is a claim about one account's effect on one body of evidence. The passage ends by insisting that both studies are needed and that each has its own documents.",
             "seductive_element": "Arithmetic against cast sounds like a contrast between impersonal forces and human motives, which is the shape of a familiar methodological quarrel."
-          }
-        ]
-      }
-    },
-    {
-      "id": "rc-0113-q3",
-      "type": "scope",
-      "skill": "scope",
-      "patterns": [
-        "scope.abstraction_level",
-        "scope.condition",
-        "arg.qualification"
-      ],
-      "target_mistake": "widening the argument into a general position about historical explanation, or narrowing it into the objection the last paragraph answers",
-      "prediction_target": "Before the options the learner should be able to say: the account is offered for one question, how much changed, and is explicitly said not to settle the second, who received what.",
-      "difficulty": {
-        "inference_depth": 4,
-        "distractor_similarity": 5,
-        "reasoning_depth": 4
-      },
-      "secondary_skills": [
-        "main_idea",
-        "argument"
-      ],
-      "stem": "The account the author defends is best described as an account of",
-      "options": {
-        "A": "what happened after 1492, in which human decisions figure as the local detail of a biological process",
-        "B": "the risks run by any history that explains a great change without naming a single person in it",
-        "C": "the general weakness of intention as a unit for explaining change on the largest historical scale",
-        "D": "how much changed after 1492, which must be completed by a separate account of how it was shared out"
-      },
-      "correct": "D",
-      "estimated_time_sec": 85,
-      "explanation": {
-        "expert_notice": "The third paragraph states the boundary in two short sentences: 'Biology settled what became possible. It settled nothing about who received it', and the last paragraph gives each question its own evidence: burial grounds and yields for one, orders and contracts for the other.",
-        "correct_reasoning": "The correct option names that division of labour. The passage claims the magnitudes for biology, insists that the distribution belongs elsewhere, and treats the second account as necessary rather than optional, which is why the upland comparison and the final list of documents are in the passage at all. An option that claims more or less than this leaves one of those paragraphs unexplained.",
-        "passage_anchor": "rc-0113-p3, rc-0113-p5",
-        "question_type_note": "Scope questions ask how far a claim reaches. Look for the sentences where the author says what the claim does not cover, and make sure your option reproduces the boundary rather than the enthusiasm.",
-        "reading_habit": "State any argument as the question it answers. Wrong options are usually answers to a bigger question or to an objection the author merely handled along the way.",
-        "distractors": [
-          {
-            "option": "A",
-            "trap_type": "concession_as_position",
-            "why_wrong": "The passage refuses to make decisions a detail of the process: whether a crop fed a household or paid its rent depended on who held the land, and the upland pair differ in outcome with the plant held constant. The first two paragraphs are the claim at full strength, not its final extent.",
-            "seductive_element": "It is a fair description of the opening, which is deliberately written without qualification so that the limit arrives as a surprise."
-          },
-          {
-            "option": "B",
-            "trap_type": "wrong_structural_role",
-            "why_wrong": "This names the objection the final paragraph takes up, not the account being defended. The author answers it by separating two questions and keeping both, which would be an odd thing to do in an essay whose subject was the danger of the first.",
-            "seductive_element": "The last paragraph is the most forceful in the passage, and readers often take a closing argument for the thesis regardless of what it is arguing against."
-          },
-          {
-            "option": "C",
-            "trap_type": "wrong_abstraction_level",
-            "why_wrong": "The passage makes intention decisive exactly where it matters most, in the law that permitted a market in people and the tenure that turned a surplus into rent. Its claims are about one period and one body of evidence, and no general thesis about historical explanation is argued for.",
-            "seductive_element": "The scale of the opening invites a methodological moral, and readers expect essays of this kind to end in one."
           }
         ]
       }
@@ -464,6 +406,18 @@
     "reading_lesson": "When an author spends two paragraphs making a case as strong as possible, read on for the sentence that says what the case does not settle. Strong statements of that kind are nearly always set-ups for a boundary, and the boundary is where the questions live. Holding the two halves apart, and being able to say which question each answers, is what separates a reader who can use such a passage from one who merely agrees with it.",
     "real_world": "The same discipline is needed whenever a structural explanation meets a question about conduct: in arguments about poverty, epidemics and climate, an account of the magnitudes is routinely offered as though it settled who was responsible for the distribution.",
     "takeaway": "An explanation of how much changed is never by itself an answer to who decided.",
-    "reflection_question": "When you next hear a large problem explained by forces nobody chose, what would you need to see before deciding that nobody chose anything?"
+    "reflection_question": "When you next hear a large problem explained by forces nobody chose, what would you need to see before deciding that nobody chose anything?",
+    "eli10": {
+      "big_idea": "Germs, seeds and animals decided how much changed after 1492, but land-holding and law decided who gained or suffered, so both stories are needed.",
+      "story": "After 1492, the biggest travellers across the Atlantic were not people. They were germs, seeds and animals. Germs killed more people than any war. New crops like maize and potatoes fed population growth in Europe, Africa and China. So history without biology gets the numbers wrong. It also explains why a few hundred men could hold so much land. But the writer adds a limit. Biology decided what was possible, not who got it. A bigger cake does not decide who gets the slices. Who owned the land, and what the law allowed, decided that. Two upland places got the same sweet potato and the same harvest. In one, families owned their land and ate well. In the other, the extra was taken as rent, and people went hungry. Some fear this lets the conquerors off. It does not. Germs explain how many died, not who forced people into mines.",
+      "paragraphs": [
+        "Makes the big claim: germs, seeds and animals were the most important things to cross the Atlantic.",
+        "Puts it at its strongest: biology explains the huge scale, changing the numbers but not the people involved.",
+        "Draws the limit: biology decided what was possible; land-holding and law decided who got it.",
+        "Shows it with a pair: same crop, same harvest, but rent made one place hungry.",
+        "Answers an objection: germs do not excuse anyone, because who did what needs its own evidence."
+      ],
+      "author_view": "Confident and fair: the writer praises the biological story fully, then firmly marks where it stops."
+    }
   }
 }

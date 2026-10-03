@@ -1,0 +1,333 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0123",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 85,
+    "genre": "mathematics-logic",
+    "difficulty": "easy",
+    "difficulty_numeric": 2,
+    "stage": "foundation",
+    "skills": [
+      "main-idea-extraction",
+      "evidence-anchoring",
+      "inference",
+      "scope-control"
+    ],
+    "word_count": 315,
+    "question_count": 3,
+    "question_types": [
+      "title_selection",
+      "specific_detail",
+      "inference"
+    ],
+    "theme": "a batting average divides runs by dismissals, so it answers exactly one question, how many runs a batsman makes for each time he is out; batsmen with the same average can differ completely in how often they fail and whether they make hundreds, and a batsman often left not out can top them both without a big score, so a summary number keeps one fact by discarding the rest, and the question being asked decides which number to use",
+    "estimated_time_min": 5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-03",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted."
+    },
+    "date_added": "2026-10-03",
+    "batch_id": "batch-rc-005",
+    "prompt_version": "content engine v1 + CAT-size brief 2026-10",
+    "reviewer_notes": "An impersonal foundation item built as a definition applied: the average defined as runs per dismissal, three batsmen who show what that keeps and what it throws away, and a third paragraph that defends the number and limits it in one move ('None of these averages is wrong'). rc-0047 and rc-0121 are about averages taken over people and over a season; this one is about the divisor and the spread inside one record, and its claim is that the question chosen decides the number. The set's near-tie is the steady batsman in the inference question, who is the selector's choice; the last sentence decides it.",
+    "length_class": "short",
+    "structure": "definition_application",
+    "viewpoints": 1,
+    "tone": "plain, precise, even-handed",
+    "difficulty_vector": {
+      "lexical": 1,
+      "syntactic": 2,
+      "abstraction": 2,
+      "inference_depth": 2,
+      "distractor_similarity": 2,
+      "reasoning_depth": 2,
+      "structural_ambiguity": 1,
+      "time_pressure": 2
+    },
+    "reasoning_patterns": [
+      "struct.definition",
+      "struct.example",
+      "struct.general_to_specific",
+      "struct.qualification",
+      "comp.central_idea",
+      "comp.explicit_detail",
+      "comp.paraphrase",
+      "arg.qualification",
+      "arg.example",
+      "inf.author_view_application",
+      "inf.strongly_supported",
+      "scope.too_narrow",
+      "elim.near_tie"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1: a strong candidate might argue for 'Why Batting Averages Lie', since the passage is about what the average hides; the opening of the last paragraph, 'None of these averages is wrong', settles it, and the passage blames the question asked, not the number. 'The Value of Staying Not Out' is the most memorable case but covers two sentences. Q2: the live rival is that the lower-order batsman's scores never vary; true of him, but the steady first batsman is just as consistent and averages 45, so consistency cannot be the cause. 'Because the division is by dismissals, not innings' is. Q3: the near-tie is the steady first batsman, who is the selector's man; the captain 'needs a hundred', only the gambler makes hundreds, and the closing 'the selector would pick one and the captain the other' confirms the split.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "dismissals",
+      "steady",
+      "cheaply"
+    ]
+  },
+  "passage": {
+    "title": "Fifty Without a Fifty",
+    "reading_time_min": 1.7,
+    "paragraphs": [
+      {
+        "id": "rc-0123-p1",
+        "text": "A batting average in cricket is a simple division. Take the runs a batsman has scored and divide them by the number of times he has been out. A player with 900 runs from 20 dismissals averages 45. It is easy to work out and to compare, so it is printed beside every batsman's name. Like any summary, though, it throws away most of what went into it. What it keeps is a single fact: how many runs the batsman makes, on average, for each time he is out."
+      },
+      {
+        "id": "rc-0123-p2",
+        "text": "Now apply the definition. Suppose two batsmen have each batted ten times, been out every time and scored 450 runs, so both average 45. The first is steady, making between 35 and 55 in nearly every innings. The second is a gambler: he is out for under ten in seven innings and makes big hundreds in the other three. Because the division is by dismissals, not innings, a third player can beat them both without ever reaching fifty. If a lower-order batsman makes 20 in each of ten innings and is left not out in six of them, he has 200 runs from four dismissals, an average of 50."
+      },
+      {
+        "id": "rc-0123-p3",
+        "text": "None of these averages is wrong. Each answers its one question exactly, and over a long career that question matters, since a batsman who makes many runs per dismissal is hard to leave out. Trouble starts when the number is asked something else. A selector who needs someone to steady the side after early wickets wants to know how often a batsman fails cheaply. A captain who needs a hundred to win wants to know who can make one. The average answers neither, because a summary keeps one fact by throwing the others away. On paper the steady batsman and the gambler are the same 45, but the selector would pick one and the captain the other."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0123-q1",
+      "type": "title_selection",
+      "skill": "main_idea",
+      "patterns": [
+        "comp.central_idea",
+        "struct.qualification",
+        "scope.too_narrow"
+      ],
+      "target_mistake": "reading the passage as an attack on the batting average, or naming it after its most surprising example",
+      "prediction_target": "The learner should be able to say beforehand: the average is right about the one question it answers, and other questions need other information.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 2,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "logical_structure"
+      ],
+      "stem": "Which of the following would be the most suitable title for the passage?",
+      "options": {
+        "A": "Why Batting Averages Lie",
+        "B": "The Value of Staying Not Out",
+        "C": "One Number, One Question",
+        "D": "A Better Number for Batsmen"
+      },
+      "correct": "C",
+      "estimated_time_sec": 70,
+      "explanation": {
+        "expert_notice": "The passage moves from a definition (runs divided by dismissals) to three batsmen who show what the definition leaves out, and then to a verdict: 'None of these averages is wrong', yet 'a summary keeps one fact by throwing the others away'. A title has to fit that verdict, not just one of the batsmen.",
+        "correct_reasoning": "The passage's claim is that the average answers exactly one question, how many runs a batsman makes for each time he is out, while other questions, such as how often he fails or whether he can make a hundred, need other information. 'One Number, One Question' says that in four words, and it covers the definition, the three batsmen and the final paragraph.",
+        "passage_anchor": "rc-0123-p3",
+        "question_type_note": "A title is the main idea at its shortest. Test each option against the last paragraph, where the author says what the examples were for.",
+        "reading_habit": "When a passage defines something and then applies the definition, the payoff is usually in the last paragraph. Read it as the answer to 'so what?' and choose the title that answers that.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The author says the opposite: 'None of these averages is wrong', and each answers its own question 'exactly'. The fault lies in asking the number a question it was never built to answer, not in the number itself.",
+            "seductive_element": "A passage about what an average hides sounds as though it must be exposing the average as dishonest."
+          },
+          {
+            "option": "B",
+            "trap_type": "too_narrow",
+            "why_wrong": "Staying not out explains only the third batsman, in the last two sentences of the second paragraph. The title leaves out the two batsmen with the same 45 and the final paragraph's point about which question a number answers.",
+            "seductive_element": "The not-out batsman is the most surprising case in the passage, and the passage's own title points at him."
+          },
+          {
+            "option": "D",
+            "trap_type": "out_of_scope",
+            "why_wrong": "The passage proposes no better number. Its last paragraph says the average answers neither the selector's question nor the captain's 'because a summary keeps one fact by throwing the others away', which would be just as true of any single replacement.",
+            "seductive_element": "After a passage on what one number misses, a reader expects a better number to be offered."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0123-q2",
+      "type": "specific_detail",
+      "skill": "specific_detail",
+      "patterns": [
+        "comp.explicit_detail",
+        "comp.paraphrase",
+        "struct.definition"
+      ],
+      "target_mistake": "assuming that a higher average must mean more runs in each innings, or giving the batsman's consistency as the reason",
+      "prediction_target": null,
+      "difficulty": {
+        "inference_depth": 1,
+        "distractor_similarity": 2,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "inference"
+      ],
+      "stem": "According to the passage, the lower-order batsman averages more than the other two because",
+      "options": {
+        "A": "his runs are divided by his four dismissals, not his ten innings",
+        "B": "he makes more runs in a typical innings than either of the others",
+        "C": "his scores stay the same from one innings to the next",
+        "D": "he bats when the bowlers are already tired from bowling"
+      },
+      "correct": "A",
+      "estimated_time_sec": 45,
+      "explanation": {
+        "expert_notice": "The reason is stated in the second paragraph, in the sentence that introduces the third player: 'Because the division is by dismissals, not innings'. The first paragraph had already defined the average as runs divided by 'the number of times he has been out'.",
+        "correct_reasoning": "The lower-order batsman scores 200 runs in ten innings but is out only four times, because he is left not out in six. Dividing 200 by four gives 50, which is more than 45. The correct option names that cause: the divisor is his dismissals, and there are only four of them.",
+        "passage_anchor": "rc-0123-p2",
+        "question_type_note": "A detail question asks you to point at a sentence. When the stem asks 'because', look for the sentence that gives the reason in the passage's own terms, which here is the definition.",
+        "reading_habit": "When a passage defines a number, note what goes on top of the division and what goes underneath. Most surprises about the number come from the bottom half.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "comparison_distortion",
+            "why_wrong": "He makes 20 an innings, while each of the first two makes 450 runs in ten innings, which is 45 an innings. He scores fewer runs per innings than either; his average is higher only because it is divided by fewer dismissals.",
+            "seductive_element": "A higher average sounds as though it must mean more runs each time he bats."
+          },
+          {
+            "option": "C",
+            "trap_type": "true_but_irrelevant",
+            "why_wrong": "His scores do stay the same, 20 every time, but that is not why his average is high. The first batsman is also steady and averages 45. What lifts the third player's figure is being left not out in six innings.",
+            "seductive_element": "It is true of him, and steadiness is a quality the passage discusses."
+          },
+          {
+            "option": "D",
+            "trap_type": "common_knowledge_intrusion",
+            "why_wrong": "Tired bowlers are never mentioned. The passage's reason is arithmetic: 200 runs divided by four dismissals.",
+            "seductive_element": "Cricket followers know that lower-order batsmen often face tired bowlers, so it sounds like a real reason."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0123-q3",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.author_view_application",
+        "inf.strongly_supported",
+        "elim.near_tie"
+      ],
+      "target_mistake": "choosing by the averages, which the passage says answer neither question, or giving the captain the selector's choice",
+      "prediction_target": "The learner should be able to say beforehand: the captain needs someone who can make a hundred, and only the gambler ever makes one.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "specific_detail"
+      ],
+      "stem": "It can be inferred from the passage that the captain described in the last paragraph would choose",
+      "options": {
+        "A": "the first batsman, who makes between 35 and 55 in nearly every innings",
+        "B": "the lower-order batsman, since his average of 50 is the highest",
+        "C": "either of the first two, since both of them average exactly 45",
+        "D": "the second batsman, who makes three big hundreds in ten innings"
+      },
+      "correct": "D",
+      "estimated_time_sec": 75,
+      "explanation": {
+        "expert_notice": "The last paragraph says what the captain wants to know: 'who can make' a hundred. The second paragraph says which batsman ever makes one: the gambler, with big hundreds in three innings out of ten. The closing sentence confirms that the selector and the captain would pick different batsmen.",
+        "correct_reasoning": "Only the second batsman makes hundreds; the first stays between 35 and 55, and the lower-order batsman makes 20. A captain who needs a hundred therefore wants the gambler, and 'the selector would pick one and the captain the other' confirms that the steady batsman goes to the selector.",
+        "passage_anchor": "rc-0123-p2, rc-0123-p3",
+        "question_type_note": "An inference question often asks you to apply a stated need to stated facts. Match the person's question to the player whose record answers it, and set the averages aside, as the passage tells you to.",
+        "reading_habit": "When a passage ends by pairing people with choices, as 'the selector would pick one and the captain the other' does, work out the pairing yourself before you read the options.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The first batsman is the selector's choice: he rarely fails cheaply, which is what a side needs after early wickets. He never makes a hundred, which is what the captain needs.",
+            "seductive_element": "He is the reliable player, and reliability sounds like what any captain would want."
+          },
+          {
+            "option": "B",
+            "trap_type": "true_but_irrelevant",
+            "why_wrong": "His average of 50 is indeed the highest, but the passage says the average answers neither the selector's question nor the captain's. He makes 20 every innings and never comes near a hundred.",
+            "seductive_element": "It cites a true figure from the passage, and the highest number feels like the safest choice."
+          },
+          {
+            "option": "C",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "The passage does call the two 'the same 45' on paper, but in the same sentence it says the selector and the captain would pick different ones. Equal averages are the trap the passage warns against, not a reason to treat the two batsmen as interchangeable.",
+            "seductive_element": "It repeats the passage's own words about the two batsmen being the same 45."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "dismissals",
+      "passage_use": "A player with 900 runs from 20 dismissals averages 45.",
+      "meaning_here": "the times a batsman is out and has to stop batting",
+      "difficulty": "easy"
+    },
+    {
+      "word": "steady",
+      "passage_use": "someone to steady the side after early wickets",
+      "meaning_here": "to make calm and stable again after a shaky start",
+      "difficulty": "easy"
+    },
+    {
+      "word": "cheaply",
+      "passage_use": "how often a batsman fails cheaply",
+      "meaning_here": "for very few runs, so that his wicket costs the other side little",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "A passage built on a definition and some simple arithmetic. Keep hold of what the number is divided by, and of what the last paragraph says the examples prove.",
+    "one_sentence_summary": "A batting average divides runs by dismissals, so it answers exactly one question, how many runs a batsman makes for each time he is out; two batsmen with the same average can be very different players, and a batsman often left not out can top both without a big score, so the question being asked has to decide which number to look at.",
+    "main_idea": "A batting average is runs divided by the times a batsman is out. That one number cannot show how steady a batsman is or whether he makes big scores, so two players with the same average can be very different, and a player who is often not out can average more than both. The average is right about its own question; it simply cannot answer other questions.",
+    "simple_explanation": "A batting average is easy to work out: take the runs a batsman has scored and divide them by the number of times he has been out. Score 900 runs and get out 20 times, and you average 45. But like any summary, the number throws most of the story away. It keeps only one fact: how many runs the batsman makes for each time he gets out.\n\nThe writer shows what this hides. Two batsmen can both average 45 over ten innings. One scores between 35 and 55 almost every time. The other fails cheaply seven times and makes three big hundreds. And because the average divides by times out, not by innings, a lower-order batsman who makes 20 every time but is not out in six of his ten innings averages 50, higher than both, without ever reaching fifty in an innings.\n\nThe writer does not say the average is wrong. It answers its own question exactly, and over a long career that question matters. The trouble comes when we ask it something else. A selector who needs someone to steady the side wants to know how often a batsman fails. A captain who needs a hundred wants to know who can make one. The average cannot tell either of them. On paper the steady batsman and the gambler are the same; in a real match, the selector would pick one and the captain the other.",
+    "why_difficult": "Nothing in the language is hard, but the arithmetic in the second paragraph is easy to misread. A reader who assumes a higher average means more runs per innings will misjudge the third batsman, and a reader who treats equal averages as equal players will miss the point of the last sentence. The passage also defends the average while showing its limits, so options that call the average dishonest are attractive and wrong.",
+    "author_intention": "To show, with a familiar number and simple sums, that a summary answers one question exactly and no others, so the question should be chosen before the number.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0123-p1",
+        "role": "Defines the number",
+        "note": "The batting average is runs divided by the times a batsman is out. It keeps one fact and throws the rest away."
+      },
+      {
+        "paragraph_id": "rc-0123-p2",
+        "role": "Applies the definition",
+        "note": "Two batsmen with the same 45 play very differently, and a batsman who is often not out can average 50 without ever making fifty."
+      },
+      {
+        "paragraph_id": "rc-0123-p3",
+        "role": "Draws the limit",
+        "note": "None of the averages is wrong, but each answers only one question. The selector and the captain need answers the average cannot give."
+      }
+    ],
+    "tone_progression": "Matter-of-fact in the definition, brisk and concrete in the worked examples, and quietly firm at the close, where the author defends the number and limits it in the same breath.",
+    "key_transitions": [
+      "'Now apply the definition.' (opening of paragraph 2): the definition is tested on cases.",
+      "'None of these averages is wrong.' (opening of paragraph 3): the author turns from what the number hides to what it is for."
+    ],
+    "misunderstanding": "A hurried reader takes the passage as an attack on batting averages, or decides that the steady batsman is simply the better player. The author says neither: every average in the passage is correct, and which batsman is better depends on the question being asked.",
+    "traps_summary": "The options call the average a liar, shrink the passage to its most surprising example, offer a better number the passage never proposes, mistake a high average for high scores, and treat two equal averages as two equal players.",
+    "reading_lesson": "When a passage defines something precisely, use the definition to answer the questions. Here, knowing that the average divides by dismissals settles the detail question, and knowing that it keeps 'a single fact' settles the rest.",
+    "real_world": "A student's average mark, a city's average income and a product's average rating hide the same things: how spread out the cases are, and what the total was divided by. Before using such a number, ask which question you need it to answer.",
+    "takeaway": "A summary number answers one question well, so choose the question first and the number second.",
+    "reflection_question": "Which average do you rely on, a mark, a rating or a salary figure, and what question does it actually answer?",
+    "eli10": {
+      "big_idea": "One number can answer only one question, so a batting average can make very different players look the same.",
+      "story": "A batting average is easy to find. You take a batsman's runs. You divide them by the times he got out. Score 450 runs, get out ten times, and you average 45. Now meet two batsmen who both average 45. The first scores about 45 almost every time. The second gets out cheaply seven times, then hits three big hundreds. Same number, very different players! There is a third batsman too. He scores only 20 each time. But he is often still batting at the end, so he gets out only four times. His average is 50, the highest of all. The writer says none of these numbers is wrong. Each one answers one question. But a team may need someone who rarely fails. Or it may need someone who can score a hundred. The average cannot tell you which player that is.",
+      "paragraphs": [
+        "Explains the number: a batting average is runs divided by the times a batsman got out.",
+        "Gives examples: two batsmen with the same average play very differently, and a third beats both.",
+        "Draws the limit: the average is right, but it answers only one question."
+      ],
+      "author_view": "The writer likes the average for what it does, and warns against asking it questions it cannot answer."
+    }
+  }
+}

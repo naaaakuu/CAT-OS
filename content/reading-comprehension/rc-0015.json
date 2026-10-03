@@ -17,14 +17,13 @@
       "structure-mapping",
       "trap-recognition"
     ],
-    "word_count": 571,
-    "question_count": 5,
+    "word_count": 579,
+    "question_count": 4,
     "question_types": [
-      "main_idea",
       "inference",
-      "tone",
-      "paragraph_function",
-      "strengthen_weaken"
+      "main_idea",
+      "strengthen_weaken",
+      "tone"
     ],
     "theme": "the erosion of moral skill when judgment is delegated to automated systems",
     "estimated_time_min": 9.5,
@@ -38,7 +37,7 @@
     "date_added": "2026-07-06",
     "batch_id": "batch-rc-003",
     "prompt_version": "in-repo authored (Premium Reading Library milestone); RC_MASTER_GENERATION_PROMPT.v1 + CAT_VARC_BIBLE craft rules applied",
-    "reviewer_notes": "Hard technology-ethics with a subtle thesis (not that machines decide badly, but that our capacity to decide atrophies). Includes a strengthen/weaken item on the load-bearing assumption. Owner review pending.",
+    "reviewer_notes": "Hard technology-ethics with a subtle thesis (not that machines decide badly, but that our capacity to decide atrophies). Includes a strengthen/weaken item on the load-bearing assumption. Owner review pending. 2026-10-03 CAT-size pass: 579→579 words, 5→5 paragraphs, 5→4 questions. Dropped q4 (paragraph_function on p3, which tests the same narrowed thesis as main-idea q1 from the same anchor); the kept set spans p2, p3 and p5; q5's anchor rewritten as a list.",
     "vocab_extracted": [
       "atrophy",
       "delegate",
@@ -48,7 +47,7 @@
   },
   "passage": {
     "title": "The Outsourced Conscience",
-    "reading_time_min": 2.9,
+    "reading_time_min": 3.1,
     "paragraphs": [
       {
         "id": "rc-0015-p1",
@@ -191,45 +190,6 @@
       }
     },
     {
-      "id": "rc-0015-q4",
-      "type": "paragraph_function",
-      "stem": "The third paragraph ('It is important to state the claim carefully…') functions chiefly to",
-      "options": {
-        "A": "concede that the worry, on closer inspection, rests on a mistake the author withdraws",
-        "B": "introduce statistical evidence that automated decisions measurably harm moral behaviour in users",
-        "C": "restate the opening worry about biased machine decisions in a more careful form",
-        "D": "narrow the thesis by ruling out cruder versions and fixing it as developmental and cumulative"
-      },
-      "correct": "D",
-      "estimated_time_sec": 90,
-      "explanation": {
-        "correct_reasoning": "Paragraph 3 explicitly guards the claim: it is 'not that automated systems make us behave worse in the moment', 'nor… that any single delegated decision damages us'; rather 'the claim is developmental and cumulative'. Its function is to fence off false versions and pin the real one: option D.",
-        "passage_anchor": "rc-0015-p3",
-        "question_type_note": "Function questions ask what a paragraph does for the argument; this one sharpens scope by eliminating misreadings.",
-        "reading_habit": "A paragraph built from 'not this, nor this, but that' is defining the thesis by exclusion: its function is precision, and its final clause is the real claim.",
-        "distractors": [
-          {
-            "option": "A",
-            "trap_type": "opposite_direction",
-            "why_wrong": "The paragraph strengthens the worry by making it defensible: it concedes that cruder versions are false in order to protect the real one, not to give it up.",
-            "seductive_element": "The self-critical opening ('a careless version is false') can look like the author backing down."
-          },
-          {
-            "option": "B",
-            "trap_type": "out_of_scope",
-            "why_wrong": "No statistics appear anywhere; the paragraph reasons about the developmental shape of the claim rather than offering data about behaviour.",
-            "seductive_element": "'Cumulative' and 'measure' hint at data the paragraph never actually supplies."
-          },
-          {
-            "option": "C",
-            "trap_type": "wrong_structural_role",
-            "why_wrong": "The bias-of-machines worry was raised in paragraph 1 precisely so that it could be set aside; this paragraph refines the different worry about the decider, not the one about the machine.",
-            "seductive_element": "Both paragraphs discuss automated decisions, so their roles can blur in memory."
-          }
-        ]
-      }
-    },
-    {
       "id": "rc-0015-q5",
       "type": "strengthen_weaken",
       "stem": "Which of the following, if true, would most weaken the author's central argument?",
@@ -243,7 +203,7 @@
       "estimated_time_sec": 110,
       "explanation": {
         "correct_reasoning": "The argument rests on one load-bearing assumption: that moral judgement is a SKILL, built and maintained by exercise (p2-p3). If moral judgement were instead a fixed trait set in childhood and unaffected by adult exercise, then removing occasions for it would not erode it: the mechanism of the whole argument collapses. Option D strikes exactly this assumption.",
-        "passage_anchor": "rc-0015-p2 and rc-0015-p3",
+        "passage_anchor": "rc-0015-p2, rc-0015-p3",
         "question_type_note": "A weakener must hit the argument's load-bearing assumption; here that assumption is that moral judgement behaves like a trainable, atrophiable skill.",
         "reading_habit": "To weaken an argument, find the unstated premise the conclusion cannot survive without, then look for the option that denies it, not one that merely dislikes the conclusion.",
         "distractors": [
@@ -340,6 +300,18 @@
     "reading_lesson": "In evaluative questions, find the argument's load-bearing assumption, the unstated premise the conclusion cannot survive without, and judge strengthen/weaken options by whether they touch it. Objections that merely dislike the conclusion, or that attack a claim the author never made, are the classic traps; the real weakener denies the hidden premise (here, that moral judgement is a skill built by exercise).",
     "real_world": "Think of GPS and your own sense of direction, autocorrect and your spelling, recommendation feeds and your taste, then apply it to consequential judgement: credit, hiring, medical triage, moderation. The passage asks a question worth carrying into every 'let the system handle it': what is this decision building or unbuilding in me?",
     "takeaway": "Some hardships are the exercise that builds an organ; spare people every hard judgement and you may leave them unable to make one.",
-    "reflection_question": "Which judgements do you now let a system make for you, and are you keeping, or quietly losing, the ability to make them yourself?"
+    "reflection_question": "Which judgements do you now let a system make for you, and are you keeping, or quietly losing, the ability to make them yourself?",
+    "eli10": {
+      "big_idea": "If machines keep making our moral choices, we may never build the skill to make them, and may not notice.",
+      "story": "Most people ask one question: do machines decide well? The writer asks a quieter one: what happens to us when we stop deciding? Skills grow only with use. A child raised on phone maps may never build a map in their head. The writer thinks moral sense is a skill too. Weighing what is fair, or noticing who needs help, grows with practice. The claim is careful. Machines often decide better than tired humans. One handed-over choice does no harm. The danger builds slowly, over years of choices made for us. Worse, we cannot feel the gap. A driver notices when the map stops working. Someone who never learned to judge just follows the machine. It is not hopeless: we can keep some choices for people on purpose. The writer admits sparing people hard choices is often kind. But like exercise, some hard things make us strong.",
+      "paragraphs": [
+        "Changes the question: not 'do machines decide well?' but 'what happens to us when we stop deciding?'",
+        "Gives a comparison: like map-reading, moral judgement is a skill that grows only with use.",
+        "States the claim carefully: not worse choices now, but a skill that, over years, never gets built.",
+        "Shows why the loss hides: without the skill, we cannot see it is gone, yet there is hope.",
+        "Faces the strongest objection: sparing hard choices is kind, but some hardship is what builds the skill."
+      ],
+      "author_view": "Worried but fair: the writer sees a slow, hidden cost in handing choices to machines, and admits their real benefits."
+    }
   }
 }

@@ -9,24 +9,23 @@
     "genre": "history",
     "difficulty": "medium",
     "difficulty_numeric": 5,
-    "stage": "developing",
+    "stage": "intermediate",
     "skills": [
       "argument-tracking",
       "structure-mapping",
       "inference",
       "concession-tracking"
     ],
-    "word_count": 606,
-    "question_count": 5,
+    "word_count": 489,
+    "question_count": 4,
     "question_types": [
       "author_purpose",
-      "implication",
       "inference",
       "paragraph_function",
       "phrase_in_context"
     ],
     "theme": "two explanations of the absence of war between the strongest states, one about price and one about what counts as a reason, adjudicated as answers to different questions, with the relative weight of the two left as a quantity the record does not contain",
-    "estimated_time_min": 9.5,
+    "estimated_time_min": 7.5,
     "source": {
       "publication": "original",
       "url": null,
@@ -37,8 +36,8 @@
     "date_added": "2026-09-12",
     "batch_id": "batch-rc-003",
     "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-03",
-    "reviewer_notes": "The adjudication is unusual: the author declines to rank the two accounts and instead assigns each a different question, which is a verdict rather than a shrug. The distractors are built from readers who expect a winner, since a division of labour reads as indecision until the fourth paragraph's two clauses are compared.",
-    "length_class": "long",
+    "reviewer_notes": "The adjudication is unusual: the author declines to rank the two accounts and instead assigns each a different question, which is a verdict rather than a shrug. The distractors are built from readers who expect a winner, since a division of labour reads as indecision until the fourth paragraph's two clauses are compared. 2026-10-03 CAT-size pass: 606→489 words, 5→5 paragraphs, 5→4 questions. Kept all five moves (fact, two explanations, adjudication, limit) and tightened every paragraph; dropped q1, the implication question that duplicated the purpose question.",
+    "length_class": "medium",
     "structure": "two_views_adjudication",
     "viewpoints": 3,
     "tone": "measured, adjudicating",
@@ -79,7 +78,7 @@
     ],
     "quality": {
       "status": "reviewed",
-      "adversarial_review": "Every question in this set can be failed by supplying the winner the passage refuses to name. Q1's live rival is the option that the two are rivals and the evidence favours the second, which survives only if the fourth paragraph's opening clause is skipped, where the author says they are not really rivals and answer different questions. Q2's rival reads furniture as the instruments of politics, which the sentence forbids by listing what was done by means of war in the clauses that follow. Q3's rival says neither account can be tested against the other, which the fourth paragraph contradicts by naming the wars against weaker opponents as the place they come apart. Q4's rival is the option that the second account explains more of the period, a ranking the fifth paragraph calls a quantity the record does not contain. Q5's rival is the option that the last paragraph restates the verdict more cautiously; it does not restate anything, it names what the verdict fails to supply.",
+      "adversarial_review": "Every question in this set can be failed by supplying the winner the passage refuses to name. Q1's live rival is the option that the two are rivals and the evidence favours the second, which survives only if the fourth paragraph's opening clause is skipped, where the author says they are not really rivals and answer different questions. Q2's rival reads furniture as the instruments of politics, which the sentence forbids by listing what was done by means of war in the clauses that follow. Q3's rival says neither account can be tested against the other, which the fourth paragraph contradicts by naming the wars against weaker opponents as the place they come apart. Q4's rival is the option that the second account explains more of the period, a ranking the fifth paragraph calls a quantity the record does not contain. Q5's rival is the option that the last paragraph restates the verdict more cautiously; it does not restate anything, it names what the verdict fails to supply. (2026-10-03, CAT-size pass: q1 was dropped, so any note above about it no longer applies.)",
       "blind_solve": null
     },
     "vocab_extracted": [
@@ -90,88 +89,31 @@
   },
   "passage": {
     "title": "The Wars That Did Not Come",
-    "reading_time_min": 3.3,
+    "reading_time_min": 2.6,
     "paragraphs": [
       {
         "id": "rc-0064-p1",
-        "text": "For most of recorded European history, war between the strongest states was the ordinary furniture of politics: a recurring instrument, expected, budgeted for, and used. Dynasties rose and fell by it. Provinces changed owners by it. The map was redrawn every second generation, and the redrawing was not thought to require any special explanation, since everybody understood what such wars were for. Then, in the second half of the twentieth century, they stopped. The great powers armed heavily, quarrelled without interruption, fought through clients and in distant places, and did not fight one another. The run has now outlasted any comparable stretch since the modern state system was assembled, which makes it either the most important development of the period or an accident that has not yet finished happening."
+        "text": "For most of recorded European history, war between the strongest states was the ordinary furniture of politics: a recurring instrument, expected, budgeted for, and used. Dynasties rose and fell by it. Provinces changed owners by it. The map was redrawn every second generation, and the redrawing was not thought to require any special explanation, since everybody understood what such wars were for. Then, in the second half of the twentieth century, they stopped. The great powers armed heavily, quarrelled without interruption, fought through clients and in distant places, and did not fight one another. The run has now outlasted any comparable stretch in modern history."
       },
       {
         "id": "rc-0064-p2",
-        "text": "The first explanation is about arithmetic. Weapons arrived that would destroy the winner of a war along with the loser, and a war whose profits cannot be collected is not worth beginning. On this account nothing at all changed in anybody's wishes. The ambitions that produced the old wars are intact; what changed was the price, and the price rose past the reach of any aim a state might hold. The explanation has the merits of its simplicity. It predicts that the restraint will hold exactly as long as the arithmetic does, that it will be firmest between the best-armed rivals, and that it will say nothing whatever about how those same states behave towards everybody else."
+        "text": "The first explanation is about arithmetic. Weapons arrived that would destroy the winner of a war along with the loser, and a war whose profits cannot be collected is not worth beginning. On this account nobody's wishes changed, only the price, which rose past the reach of any aim a state might hold. The explanation has the merits of its simplicity. It predicts that the restraint will hold exactly as long as the arithmetic does and will be firmest between the best-armed rivals, and it says nothing about how those states behave towards everybody else."
       },
       {
         "id": "rc-0064-p3",
-        "text": "The second explanation is about what counts as a reason. Over the same decades, conquest quietly stopped being something a government could announce. Trade tied economies to one another, alliances and institutions made the costs of aggression collective, and, more slowly, the taking of territory ceased to be an aim that a state could present to its own population as legitimate. On this account the wishes changed and not merely the price. A war begun to acquire a province has become unavailable in something like the way a duel has become unavailable for settling a private insult: not because the arithmetic forbids it, but because nobody can any longer explain why one would."
+        "text": "The second explanation is about what counts as a reason. Over the same decades, trade tied economies together, alliances and institutions made the costs of aggression collective, and conquest quietly stopped being an aim a government could present to its own population as legitimate. On this account the wishes changed, not merely the price. A war begun to acquire a province has become unavailable in the way a duel has for settling an insult: not because the arithmetic forbids it, but because nobody can any longer explain why one would."
       },
       {
         "id": "rc-0064-p4",
-        "text": "The two are usually set against each other, and they are not really rivals. They answer different questions. The first explains why a particular pair of heavily armed states, wishing each other ill, did not proceed to fight; the second explains why a whole class of war aim disappeared from the repertoire, including among states that held no such weapons and faced no such arithmetic. Where the two can be made to come apart is in the wars the great powers did fight, against opponents who could not destroy them. Deterrence has nothing to say about those at all. The second account predicts that even there the old aim would be missing, and that is roughly what the record shows: many wars, several of them long and very destructive, and almost none of them ending with the victor keeping the ground."
+        "text": "The two are usually set against each other, and they are not really rivals. They answer different questions. The first explains why two heavily armed states, wishing each other ill, did not fight; the second explains why a whole class of war aim disappeared from the repertoire, even among states that held no such weapons. Where the two come apart is in the wars the great powers did fight, against opponents who could not destroy them. Deterrence has nothing to say about those. The second account predicts that even there the old aim would be missing, and that is roughly what the record shows: many wars, some long and destructive, almost none ending with the victor keeping the ground."
       },
       {
         "id": "rc-0064-p5",
-        "text": "What follows is a division of labour rather than a verdict, and a division of labour is not a prediction. Both mechanisms were present throughout the period; neither can be switched off and the decades run again. If the peace were to break, we should learn which of them had been carrying the weight, and that is not a piece of knowledge anybody ought to wish for. Until then the honest position is that two explanations fit one stretch of time, that they explain different parts of it, and that how much of the restraint each was producing is a quantity the record does not contain."
+        "text": "What follows is a division of labour rather than a verdict, and a division of labour is not a prediction. Both mechanisms were present throughout the period; neither can be switched off and the decades run again. If the peace were to break, we should learn which of them had been carrying the weight, and nobody ought to wish for that knowledge. Until then, how much of the restraint each was producing is a quantity the record does not contain."
       }
     ]
   },
   "questions": [
-    {
-      "id": "rc-0064-q1",
-      "type": "implication",
-      "skill": "inference",
-      "patterns": [
-        "inf.reasonable_implication",
-        "inf.author_vs_reported",
-        "arg.qualification"
-      ],
-      "target_mistake": "supplying a winner where the author has divided the questions instead, so that one account is taken to have beaten the other",
-      "prediction_target": "The learner should be able to say: since the two accounts answer different questions, both can be right about their own question, and the verdict is not a ranking.",
-      "difficulty": {
-        "inference_depth": 4,
-        "distractor_similarity": 4,
-        "reasoning_depth": 4
-      },
-      "secondary_skills": [
-        "logical_structure",
-        "scope"
-      ],
-      "stem": "Which of the following is most strongly implied by the author's adjudication?",
-      "options": {
-        "A": "Neither of the two explanations accounts for anything that happened during the period.",
-        "B": "The two explanations are rivals, and the evidence of the period favours the second one.",
-        "C": "A period may be explained by two mechanisms without either being wrong about its part.",
-        "D": "The absence of war between the strongest states shows that conquest no longer pays."
-      },
-      "correct": "C",
-      "estimated_time_sec": 85,
-      "explanation": {
-        "expert_notice": "The fourth paragraph opens by refusing the frame the reader arrived with: the two are usually set against each other, and they are not really rivals, because they answer different questions. Everything after that sentence is an assignment of questions rather than an award of points.",
-        "correct_reasoning": "If one account explains why an armed pair did not fight and the other explains why a class of war aim vanished everywhere, then both can hold at once, each about the thing it addresses. That is what the passage means by a division of labour, and the fifth paragraph confirms it by treating the remaining question, how much of the restraint each produced, as unanswered rather than as settled.",
-        "passage_anchor": "rc-0064-p4",
-        "question_type_note": "An implication question takes the author's claim one honest step. Where an author declines to rank two accounts, the honest step is that both can stand, and the three-step versions are the ones that pick a winner.",
-        "reading_habit": "When a passage sets up two explanations, check whether the author's paragraph chooses between them or re-describes the question. If it re-describes the question, every ranking option is out before it is read.",
-        "distractors": [
-          {
-            "option": "A",
-            "trap_type": "overstatement",
-            "why_wrong": "The passage assigns each account a real job and says the record roughly bears out the second account's prediction about the smaller wars. Declining to weigh two explanations is not dismissing them.",
-            "seductive_element": "The last paragraph's insistence that the decades cannot be run again reads as scepticism, and scepticism about measurement is easily heard as scepticism about the accounts."
-          },
-          {
-            "option": "B",
-            "trap_type": "half_right",
-            "why_wrong": "The second half is defensible and the first is refused in the fourth paragraph's second sentence. Because the two answer different questions, the evidence about the smaller wars tells in favour of one account without telling against the other.",
-            "seductive_element": "It is the live rival, because the fourth paragraph really does produce evidence that fits one account, and evidence in a two-sided passage is expected to settle a contest."
-          },
-          {
-            "option": "D",
-            "trap_type": "reported_view_as_author",
-            "why_wrong": "This is the first explanation stated as a finding. The author treats it as an account of one thing only, the restraint between heavily armed rivals, and notes that it says nothing whatever about how those states behaved elsewhere.",
-            "seductive_element": "It is the explanation offered first, the simplest of the two, and the one the passage credits with the merits of its simplicity."
-          }
-        ]
-      }
-    },
     {
       "id": "rc-0064-q2",
       "type": "phrase_in_context",
@@ -424,7 +366,7 @@
     "challenge": "Two explanations, each given a full paragraph, and then an adjudication that does not pick a winner. Work out what the fourth paragraph does instead, because it does decide something.",
     "one_sentence_summary": "The long absence of war between the strongest states has two explanations, one about a price that rose beyond reach and one about an aim that stopped being sayable, and the author's verdict is that they answer different questions rather than compete, leaving the share each carried as something the record cannot show.",
     "main_idea": "One account says great-power war stopped because weapons made it unprofitable; wishes were unchanged and only the price moved. The other says conquest ceased to be an aim a government could avow, so the wishes changed too. The author argues these are not rivals: the first explains restraint between armed pairs, the second explains why a class of war aim vanished everywhere, and the wars the great powers did fight, which deterrence cannot touch, fit the second. What remains unknown is how much each mechanism contributed.",
-    "simple_explanation": "For centuries, big states fought each other regularly. It was normal. Kings rose and fell that way, and provinces changed hands that way, and nobody thought it needed explaining.\n\nThen, in the second half of the twentieth century, it stopped. The most powerful states armed themselves heavily, argued constantly, fought smaller wars in other places through other people, and never fought each other directly. That has now gone on longer than any similar quiet period in modern history.\n\nThe first explanation is about cost. New weapons meant that winning a war would destroy the winner too. You cannot collect your winnings, so the war is not worth starting. Notice what this explanation says: nobody's ambitions changed. Only the price did. So it predicts that the peace lasts exactly as long as the weapons do, that it is strongest between the two best-armed rivals, and that it says nothing about how those states treat anybody else.\n\nThe second explanation is about what you can say out loud. Over the same years, taking land stopped being something a government could announce as a goal. Trade tied economies together, alliances made attacking expensive for everyone, and slowly conquest stopped being a respectable reason. On this view the wishes themselves changed. Starting a war to grab a province is now a bit like fighting a duel over an insult: not impossible, just impossible to explain.\n\nThe author then says something unexpected. These two are usually treated as opponents, and they are not. They answer different questions. The first one explains why two heavily armed enemies did not fight. The second explains why a whole kind of war aim disappeared, including among countries with no such weapons at all. And there is a place to test them: the wars the big powers did fight, against much weaker countries. Deterrence says nothing about those. The second explanation predicts that even there nobody would keep the land, and that is roughly what happened.\n\nThe last point is a warning. This gives you a division of labour, not a prediction. Both things were true at once, and you cannot switch one off and replay the decades. If the peace ever breaks we will find out which one was doing the heavy lifting, which is not a discovery to hope for. Until then, both explanations fit, they cover different parts of the story, and how much each contributed is simply not in the record.",
+    "simple_explanation": "For centuries, big states fought each other regularly. It was normal. Kings rose and fell that way, and provinces changed hands that way, and nobody thought it needed explaining.\n\nThen, in the second half of the twentieth century, it stopped. The most powerful states armed themselves heavily, argued constantly, fought smaller wars in other places through other people, and never fought each other directly. That has now gone on longer than any similar quiet period in modern history.\n\nThe first explanation is about cost. New weapons meant that winning a war would destroy the winner too. You cannot collect your winnings, so the war is not worth starting. Notice what this explanation says: nobody's wishes changed. Only the price did. So it predicts that the peace lasts exactly as long as the weapons do, that it is strongest between the best-armed rivals, and that it says nothing about how those states treat anybody else.\n\nThe second explanation is about what you can say out loud. Over the same years, trade tied economies together, alliances made attacking expensive for everyone, and conquest stopped being a goal a government could announce to its own people. On this view the wishes themselves changed. Starting a war to grab a province is now a bit like fighting a duel over an insult: not forbidden by the cost, just impossible to explain.\n\nThe author then says something unexpected. These two are usually treated as opponents, and they are not. They answer different questions. The first one explains why two heavily armed enemies did not fight. The second explains why a whole kind of war aim disappeared, even among countries with no such weapons at all. And there is a place to test them: the wars the big powers did fight, against much weaker countries. Deterrence says nothing about those. The second explanation predicts that even there nobody would keep the land, and that is roughly what happened.\n\nThe last paragraph sets a limit. This gives you a division of labour, not a prediction. Both things were true at once, and you cannot switch one off and replay the decades. If the peace ever breaks we will find out which one was doing the heavy lifting, which is not a discovery to hope for. Until then, how much each contributed is simply not in the record.",
     "why_difficult": "The passage looks like a contest and is not one. Readers trained to expect a winner reach the fourth paragraph, find evidence that fits one account, and award the match, missing the sentence two lines above that says the two are not really rivals. The fifth paragraph then withholds even the ranking that such evidence seems to justify, and its reason is about what can be measured rather than about the accounts themselves, which is an unfamiliar kind of conclusion.",
     "author_intention": "To stop a familiar argument being conducted as a contest, by showing that the two sides are explaining different things, and then to keep the reader from converting that into a score.",
     "paragraph_journey": [
@@ -465,6 +407,18 @@
     "reading_lesson": "When two explanations are set out at length, read the author's paragraph for what it does with them rather than for which one it mentions approvingly: ranking, dividing and dismissing are three different verdicts, and only one of them licenses an option that names a winner. The habit matters most in passages about history and policy, where a reader's own opinion supplies the verdict the author declined to give.",
     "real_world": "The same distinction is worth carrying into arguments about why crime fell, why a company survived, or why an epidemic ended: several mechanisms were running together, and fitting the record is not the same as having carried the weight.",
     "takeaway": "Two explanations that fit the same period may be answering two different questions, and neither has beaten the other.",
-    "reflection_question": "For something that stopped happening in your own life, can you tell whether the cost rose or the reason disappeared?"
+    "reflection_question": "For something that stopped happening in your own life, can you tell whether the cost rose or the reason disappeared?",
+    "eli10": {
+      "big_idea": "Two explanations of the great powers' long peace answer different questions, so both can be right, but the record cannot say which did more.",
+      "story": "For centuries, Europe's strongest countries fought each other often. After 1950 or so, they stopped. They still argued, armed and fought elsewhere, but never each other. One answer is about price. New weapons would wreck the winner too, so war could not pay. Nobody's wishes changed, only the cost. The other answer is about reasons. Grabbing land stopped being something a leader could say out loud. Think of a sword fight to settle an argument: nobody does it now, not because it costs too much, but because nobody could explain why. The writer says these answers are not rivals. They answer different questions. The first explains why two armed enemies held back. The second explains why land-grabbing vanished everywhere. Even in wars against weak countries, winners almost never kept the land. Which answer did more? The record cannot say. Only a war would tell us, and nobody should want that.",
+      "paragraphs": [
+        "States a puzzle: big-power wars were normal for centuries, then stopped after 1950 for an unusually long time.",
+        "Gives the first explanation: new weapons made war cost too much, though nobody's wishes changed.",
+        "Gives the second explanation: grabbing land stopped being a reason any government could say out loud.",
+        "Says they are not rivals: each answers a different question, and wars against weak countries show it.",
+        "Admits a limit: how much each did is not in the record, and only a war would show it."
+      ],
+      "author_view": "The writer is calm and careful: both explanations are right about different things, and he would rather never learn which mattered more."
+    }
   }
 }

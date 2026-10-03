@@ -1,0 +1,332 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0131",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 86,
+    "genre": "education",
+    "difficulty": "easy",
+    "difficulty_numeric": 2,
+    "stage": "foundation",
+    "skills": [
+      "main-idea-extraction",
+      "argument-tracking",
+      "inference",
+      "structure-mapping"
+    ],
+    "word_count": 311,
+    "question_count": 3,
+    "question_types": [
+      "main_idea",
+      "inference",
+      "paragraph_function"
+    ],
+    "theme": "the claim that each person learns best in their own style needs more than preferences, which are real, or visual learners doing well with pictures, which most people do: it needs a crossing result, each kind of learner doing better with lessons in their own style; tests built that way have rarely found it, because whichever kind of lesson works better tends to work better for everyone, so the best form of a lesson depends on what is being taught rather than on who is learning it",
+    "estimated_time_min": 5.5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-03",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted."
+    },
+    "date_added": "2026-10-03",
+    "batch_id": "batch-rc-005",
+    "prompt_version": "content engine v1 + CAT-size brief 2026-10",
+    "reviewer_notes": "An impersonal foundation item in the 'popular idea, then what testing shows' shape, one of the batch's two passages of that kind. The learning-styles idea is well known, and the usual debunking stops at calling it a myth; what this adds is the design of a fair test (preferences and one-sided results are not enough; the results have to cross over) and a replacement principle, that the subject being taught decides a lesson's form. The claim about the evidence is kept to what it supports ('rarely appeared'). The set's near-tie is the inference option whose second half has the listeners also doing better with pictures.",
+    "length_class": "short",
+    "structure": "view_critique_replacement",
+    "viewpoints": 2,
+    "tone": "brisk, sceptical, practical",
+    "difficulty_vector": {
+      "lexical": 1,
+      "syntactic": 2,
+      "abstraction": 2,
+      "inference_depth": 2,
+      "distractor_similarity": 3,
+      "reasoning_depth": 3,
+      "structural_ambiguity": 1,
+      "time_pressure": 2
+    },
+    "reasoning_patterns": [
+      "struct.view_critique_replacement",
+      "struct.pivot",
+      "struct.example",
+      "comp.central_idea",
+      "comp.organization",
+      "arg.evidence",
+      "arg.necessary_vs_sufficient",
+      "arg.qualification",
+      "inf.author_view_application",
+      "inf.vs_speculation",
+      "lang.contrast_marker",
+      "elim.near_tie"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1: the live rival is the option that tests have rarely shown students learning more when lessons match their preferred style. It is the second paragraph exactly and loses only by leaving out the third: 'the best form for a lesson depends far more on what is being taught than on who is learning it'. The option denying that students have preferences is answered by 'because they clearly do'. Q2: a strong candidate might pick visual learners learning well from pictures, which the passage names and sets aside with 'Nor is it enough'. The near-tie, visual learners learning more from pictures and so do the listeners, begins like the key and breaks it in its second half; only the crossing, each group better with its own kind of lesson, is what 'the results must cross over' requires. Q3: the option saying the last paragraph grants that the best form depends on who is learning reuses the paragraph's own words and reverses them.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "preferences",
+      "cross over",
+      "rhythm"
+    ]
+  },
+  "passage": {
+    "title": "Every Hand Goes Up",
+    "reading_time_min": 1.7,
+    "paragraphs": [
+      {
+        "id": "rc-0131-p1",
+        "text": "A teacher asks a class of thirty whether they learn best by seeing, by hearing or by doing, and nearly every hand goes up for one of the three. The idea behind the question is popular with parents and teachers alike. Each person, it says, has a learning style, and lessons given in that style will teach them more. It sounds kind and it sounds obvious. It is also a claim that can be tested, and it has been, many times."
+      },
+      {
+        "id": "rc-0131-p2",
+        "text": "A fair test is less simple than it looks. It is not enough to show that people have preferences, because they clearly do. Nor is it enough to show that students who call themselves visual learn well from pictures, because most people learn well from a good picture. The claim needs something stronger. Sort the students by style, into visual learners and listeners. Then teach half of each group with pictures and half with spoken explanation. If the idea is right, the results must cross over: the visual learners do better with pictures, and the listeners do better with speech. In studies built this way, that crossing pattern has rarely appeared. Whichever kind of lesson works better tends to work better for both groups, whatever style they claim."
+      },
+      {
+        "id": "rc-0131-p3",
+        "text": "This does not mean every lesson should look the same. It means that the best form for a lesson depends far more on what is being taught than on who is learning it. The shape of a coastline is learned best from a map, by everyone, and the rhythm of a poem is learned best by hearing it, by everyone. A teacher who asks what the subject needs will draw the map for the whole class. A teacher who sorts children by style may end up describing a coastline in words to the ones who like to listen, and teaching them less."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0131-q1",
+      "type": "main_idea",
+      "skill": "main_idea",
+      "patterns": [
+        "comp.central_idea",
+        "struct.view_critique_replacement",
+        "elim.near_tie"
+      ],
+      "target_mistake": "summing up the passage as a debunking and leaving out the third paragraph's claim about what should decide a lesson's form, or denying that preferences exist",
+      "prediction_target": "The learner should be able to say beforehand: matching lessons to styles has rarely been shown to help, and the subject being taught should decide a lesson's form.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "logical_structure"
+      ],
+      "stem": "Which of the following best expresses the main idea of the passage?",
+      "options": {
+        "A": "Matching lessons to styles has rarely been shown to help; what is taught should decide a lesson's form.",
+        "B": "Most students do not really have preferences about how they learn, whatever they may say when asked in class.",
+        "C": "Tests built to find it have rarely shown that students learn more when lessons match their preferred style.",
+        "D": "Teachers should present every lesson in several styles at once, so that each kind of learner is reached."
+      },
+      "correct": "A",
+      "estimated_time_sec": 70,
+      "explanation": {
+        "expert_notice": "The passage makes three moves: a popular idea, a fair test of it that has rarely found what the idea predicts, and then 'This does not mean every lesson should look the same', which introduces what should decide a lesson's form instead. A main idea has to include the third move.",
+        "correct_reasoning": "The second paragraph shows that the crossing result the idea needs has 'rarely appeared'. The third says what follows: 'the best form for a lesson depends far more on what is being taught than on who is learning it'. The correct option joins the two in one sentence, which is the whole passage compressed.",
+        "passage_anchor": "rc-0131-p2, rc-0131-p3",
+        "question_type_note": "A main-idea answer has to need every paragraph. A passage that knocks down an idea often puts something in its place, and the option that stops at the knocking down is usually the strongest wrong answer.",
+        "reading_habit": "When a passage tests a popular idea, ask two questions as you finish: what did the test show, and what does the author put in the idea's place? A summary needs both answers.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage says the opposite: showing that people have preferences is not enough 'because they clearly do'. Preferences are granted; what fails is the claim that matching lessons to them helps.",
+            "seductive_element": "A passage that doubts learning styles sounds as though it must doubt the preferences too."
+          },
+          {
+            "option": "C",
+            "trap_type": "too_narrow",
+            "why_wrong": "This is the second paragraph put accurately, and it stops there. It leaves out the third paragraph's claim that the best form of a lesson depends on what is being taught.",
+            "seductive_element": "Every word of it is true to the passage, and it states the result the passage spends longest on."
+          },
+          {
+            "option": "D",
+            "trap_type": "prescriptive_leap",
+            "why_wrong": "The passage recommends no such thing. The only advice it comes near is the reverse: choose the form the subject needs, as in drawing the map 'for the whole class'.",
+            "seductive_element": "Teaching in several styles sounds like a fair way to reach everyone, and passages about teaching often end with advice."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0131-q2",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.author_view_application",
+        "arg.evidence",
+        "arg.necessary_vs_sufficient"
+      ],
+      "target_mistake": "accepting a one-sided result, or a show of hands, as evidence for the claim, when the passage says the results have to cross over",
+      "prediction_target": "The learner should be able to say beforehand: support would mean visual learners doing better with pictures and listeners doing better with speech, both at once.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "strengthen_weaken"
+      ],
+      "stem": "According to the passage's reasoning, which of the following results would support the claim that each student learns best in their own style?",
+      "options": {
+        "A": "Students who call themselves visual learners learn well from pictures.",
+        "B": "Nearly every student, when asked, names the one way in which they learn best.",
+        "C": "Visual learners learn more from pictures, and so do the listeners.",
+        "D": "Visual learners learn more from pictures, and listeners more from speech."
+      },
+      "correct": "D",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "The second paragraph spells out what the claim needs and rules out two weaker results on the way: preferences alone, and visual learners doing well with pictures. What it needs is a pattern in which the results 'cross over'.",
+        "correct_reasoning": "If each student learns best in their own style, each group must do better with its own kind of lesson: 'the visual learners do better with pictures, and the listeners do better with speech'. Only the correct option has both halves of that crossing, which is the pattern the passage says studies have rarely found.",
+        "passage_anchor": "rc-0131-p2",
+        "question_type_note": "This inference asks you to apply the author's own test. When a passage says what a claim would need, use that requirement as the standard for every option.",
+        "reading_habit": "When a passage says 'it is not enough to show', list what it says is not enough. Those are often the wrong answers to the next question.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "true_but_insufficient",
+            "why_wrong": "The passage names this result and sets it aside: 'Nor is it enough to show that students who call themselves visual learn well from pictures, because most people learn well from a good picture.'",
+            "seductive_element": "It sounds like direct evidence for the visual half of the claim."
+          },
+          {
+            "option": "B",
+            "trap_type": "true_but_irrelevant",
+            "why_wrong": "Preferences are real, and the passage says so, but it also says showing them 'is not enough'. A show of hands is a fact about what students say, not about how much they learn.",
+            "seductive_element": "The passage opens with nearly every hand going up, which looks like support for the idea."
+          },
+          {
+            "option": "C",
+            "trap_type": "half_right",
+            "why_wrong": "The first half is what the claim needs and the second half breaks it. If the listeners also learn more from pictures, pictures are simply better for this material, which is the third paragraph's point about subjects, not support for styles.",
+            "seductive_element": "It begins exactly like the result the passage describes."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0131-q3",
+      "type": "paragraph_function",
+      "skill": "paragraph_function",
+      "patterns": [
+        "comp.organization",
+        "struct.pivot",
+        "lang.contrast_marker"
+      ],
+      "target_mistake": "treating the last paragraph as more evidence against learning styles, or reading it as a concession to the idea the passage has just tested",
+      "prediction_target": "The learner should be able to say beforehand: the last paragraph says what should decide a lesson's form, now that the learner's style has failed the test.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 2,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "logical_structure"
+      ],
+      "stem": "Which of the following best describes the function of the last paragraph?",
+      "options": {
+        "A": "It reports further studies showing that learning styles do not exist.",
+        "B": "It grants that the best form of a lesson depends on who is learning it.",
+        "C": "It turns from what tests rarely found to what should decide a lesson's form.",
+        "D": "It advises teachers to keep pictures away from students who prefer to listen."
+      },
+      "correct": "C",
+      "estimated_time_sec": 65,
+      "explanation": {
+        "expert_notice": "The paragraph opens with 'This does not mean every lesson should look the same', which stops the reader from taking the second paragraph too far, and then says what does matter: 'what is being taught'.",
+        "correct_reasoning": "The second paragraph shows that matching lessons to styles has rarely helped. The last paragraph adds no new evidence; it says what should decide a lesson's form instead, the subject, with a coastline and a poem as examples. The correct option names that move.",
+        "passage_anchor": "rc-0131-p3",
+        "question_type_note": "A paragraph-function question asks what job a paragraph does in the argument. Read its first sentence closely; it usually tells you how the paragraph relates to the one before.",
+        "reading_habit": "When a paragraph opens with 'This does not mean', expect the author to block a conclusion you might draw and to offer a better one.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "out_of_scope",
+            "why_wrong": "The last paragraph reports no studies at all; its only support is two examples, a coastline and a poem.",
+            "seductive_element": "After a paragraph about tests, more evidence against the idea seems the natural next step."
+          },
+          {
+            "option": "B",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "The paragraph uses these words to say the opposite: the best form depends 'far more on what is being taught than on who is learning it'.",
+            "seductive_element": "The phrase 'who is learning it' is in the paragraph, so the option sounds like a quotation."
+          },
+          {
+            "option": "D",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The paragraph says the map should be drawn 'for the whole class', listeners included, and warns that describing a coastline in words to the listeners would teach them less.",
+            "seductive_element": "It mentions pictures and listeners, both of which the paragraph discusses."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "preferences",
+      "passage_use": "It is not enough to show that people have preferences",
+      "meaning_here": "likings for one way of doing something over another",
+      "difficulty": "easy"
+    },
+    {
+      "word": "cross over",
+      "passage_use": "the results must cross over",
+      "meaning_here": "change places, so that each group does better with a different kind of lesson",
+      "difficulty": "medium"
+    },
+    {
+      "word": "rhythm",
+      "passage_use": "the rhythm of a poem is learned best by hearing it",
+      "meaning_here": "the regular pattern of strong and weak beats in lines of words",
+      "difficulty": "easy"
+    }
+  ],
+  "mentor": {
+    "challenge": "A short passage that tests a popular idea and then puts something in its place. Pay attention to exactly what result the idea would need.",
+    "one_sentence_summary": "The popular idea that each person learns best in their own style needs a crossing result, visual learners doing better with pictures and listeners with speech, and tests built to find it have rarely done so, since whichever lesson works better tends to work better for everyone; so the best form of a lesson depends on what is being taught, not on who is learning it.",
+    "main_idea": "People do have preferences about how they learn, but tests have rarely shown that teaching in a person's preferred style helps them learn more. What should decide the form of a lesson is the subject: a map for a coastline, a reading aloud for a poem, for everyone.",
+    "simple_explanation": "Ask a class whether they learn best by seeing, hearing or doing, and nearly everyone picks one. The popular idea is that everyone has a learning style, and that lessons in that style will teach them more. It sounds kind and obvious, and it has been tested many times.\n\nTesting it properly is harder than it looks. Showing that people have preferences is not enough, because of course they do. Showing that 'visual' students learn well from pictures is not enough either, because almost everyone learns well from a good picture. A fair test sorts students into visual learners and listeners, then teaches half of each group with pictures and half with spoken explanation. If the idea is right, the results should cross over: visual learners do better with pictures, and listeners do better with speech. Studies built this way have rarely found that. Whichever kind of lesson works better usually works better for both groups.\n\nThe writer does not conclude that every lesson should be the same. The best form for a lesson depends on what is being taught. Everyone learns the shape of a coastline best from a map, and everyone learns the rhythm of a poem best by hearing it. A teacher who thinks about the subject will draw the map for the whole class. A teacher who sorts children by style might describe the coastline in words to the listeners, and teach them less.",
+    "why_difficult": "The idea being tested is so familiar that readers bring their own opinion to it. The passage is precise: it grants that preferences are real, says exactly what result the idea needs, and then replaces the idea with a different rule. Options that deny preferences, or that stop at the debunking, are built for readers who skimmed.",
+    "author_intention": "To show what it would take to prove a popular idea about learning, to report that the proof has rarely appeared, and to offer a better rule for choosing how to teach.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0131-p1",
+        "role": "Introduces the idea",
+        "note": "Nearly every student names a learning style, and the popular idea says lessons in that style teach more. It can be tested, and it has been."
+      },
+      {
+        "paragraph_id": "rc-0131-p2",
+        "role": "Describes the test",
+        "note": "Preferences and one-sided results are not enough; the results must cross over. They rarely have: the better lesson tends to be better for everyone."
+      },
+      {
+        "paragraph_id": "rc-0131-p3",
+        "role": "Offers a replacement",
+        "note": "The subject, not the learner, should decide a lesson's form: a map for a coastline and hearing for a poem, for the whole class."
+      }
+    ],
+    "tone_progression": "Light and familiar in the classroom opening, exact and patient in the account of the test, and practical at the close, where the author turns a debunking into advice about maps and poems.",
+    "key_transitions": [
+      "'A fair test is less simple than it looks.' (opening of paragraph 2): the idea is set up for testing.",
+      "'This does not mean every lesson should look the same.' (opening of paragraph 3): the author blocks the wrong conclusion and offers a better rule."
+    ],
+    "misunderstanding": "A hurried reader thinks the passage says people have no learning preferences, or that it simply calls learning styles a myth. It says something more exact: preferences are real, matching lessons to them has rarely helped, and the subject should choose the form of the lesson.",
+    "traps_summary": "The options deny the preferences the passage grants, stop the summary before the third paragraph, accept a show of hands or a one-sided result as proof, break the crossing in its second half, and turn the last paragraph into either more evidence or its own opposite.",
+    "reading_lesson": "When a passage says what a claim would need in order to be true, write that requirement down. It becomes the standard for every option, and it is often stricter than the reader expects.",
+    "real_world": "The same test applies to many claims about matching things to people, from diets for body types to adverts for personality types: the promised match has to beat the alternative for each group, not just please them.",
+    "takeaway": "Liking a way of learning is not the same as learning more from it.",
+    "reflection_question": "Which subject have you tried to learn in your preferred way when the subject itself needed a different one?",
+    "eli10": {
+      "big_idea": "People have favourite ways to learn, but matching lessons to them rarely helps; the subject should decide how to teach.",
+      "story": "Ask a class how they learn best: by seeing, hearing or doing. Almost everyone picks one. Many people believe that lessons in your own style teach you more. Is that true? Testing it is tricky. Liking pictures does not prove you learn more from pictures. And almost everyone learns well from a good picture. So a fair test splits the class. Some picture-lovers get a picture lesson, and some get a spoken one. The same goes for the listeners. If the idea were right, picture-lovers would do best with pictures. Listeners would do best with talking. Tests like this have rarely found that. Usually the better lesson is better for everyone. The writer says the subject should decide. A coastline is best learned from a map, by everyone. A poem is best learned by hearing it, by everyone.",
+      "paragraphs": [
+        "Introduces an idea: everyone has a learning style, and lessons in that style teach more.",
+        "Explains the test: each group must do best with its own kind of lesson, and rarely does.",
+        "Offers a better rule: let the subject decide, like a map for a coastline."
+      ],
+      "author_view": "The writer is calm and a little sceptical: people's preferences are real, but the subject should choose the lesson."
+    }
+  }
+}

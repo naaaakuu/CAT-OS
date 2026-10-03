@@ -1,0 +1,428 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0145",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 87,
+    "genre": "education",
+    "difficulty": "hard",
+    "difficulty_numeric": 7,
+    "stage": "advanced",
+    "skills": [
+      "main-idea-extraction",
+      "inference",
+      "vocabulary-in-context",
+      "application",
+      "qualifier-tracking"
+    ],
+    "word_count": 575,
+    "question_count": 4,
+    "question_types": [
+      "application",
+      "inference",
+      "phrase_in_context",
+      "primary_purpose"
+    ],
+    "theme": "schooling becomes necessary exactly when adult life grows too remote, in place and in meaning, for children to learn it by sharing in it, and the same remoteness is its standing danger: what is learned through symbols can stay cut off from practice and character, so that schooling turns out specialists instead of members of a common life",
+    "estimated_time_min": 8.5,
+    "source": {
+      "publication": "John Dewey, Democracy and Education (1916), \"Education as a Necessity of Life\"",
+      "url": "https://www.gutenberg.org/ebooks/852",
+      "author": "John Dewey",
+      "date_accessed": "2026-10-03",
+      "usage_note": "Public domain: John Dewey died in 1952 and the work was first published in 1916. The passage is the author's own words, with some sentences left out to fit CAT length; the questions, explanations and notes are original to CAT OS."
+    },
+    "date_added": "2026-10-03",
+    "batch_id": "batch-rc-006",
+    "prompt_version": "content engine v1 + CAT-size brief 2026-10",
+    "reviewer_notes": "Cut from the third section of the chapter, 'The Place of Formal Education', whose heading is the title: learning where there are no schools (source paragraph 18 without its opening sentence of transition and its sentence on initiation ceremonies), why schools arise (paragraph 19, whole), the dangers of the transition (paragraph 21, whole), learning stored in symbols and the ordinary notion of education (paragraph 22 without the sentence on which interests are made conspicuous in schools) and the problem of balance (paragraph 23 without its last sentence). Paragraph 20, on what formal education makes possible, is left out to keep five paragraphs; its point survives in paragraph 19's 'depends upon a prior training'. Dewey's 'savage' and 'low grade societies' are the anthropology of 1916 and stay because nothing may be reworded; the mentor says so. What this adds to the familiar slogan that school should be connected to life is the mechanism: the widening gap that makes schools necessary is the same gap that makes their material remote.",
+    "length_class": "medium",
+    "structure": "claim_qualification",
+    "viewpoints": 2,
+    "tone": "measured, analytical, quietly warning",
+    "difficulty_vector": {
+      "lexical": 4,
+      "syntactic": 4,
+      "abstraction": 4,
+      "inference_depth": 3,
+      "distractor_similarity": 3,
+      "reasoning_depth": 3,
+      "structural_ambiguity": 2,
+      "time_pressure": 3
+    },
+    "reasoning_patterns": [
+      "struct.cause_effect",
+      "struct.contrast",
+      "struct.pivot",
+      "struct.definition",
+      "comp.purpose",
+      "comp.organization",
+      "comp.reference_tracking",
+      "arg.qualification",
+      "arg.concession",
+      "inf.strongly_supported",
+      "inf.author_view_application",
+      "scope.condition",
+      "lang.absolute_vs_qualified",
+      "lang.contrast_marker",
+      "word.context_clue",
+      "word.polysemy",
+      "elim.near_tie"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1 holds the set's near-tie: the option calling the older learning superior on the whole is what a reader takes from 'remote and dead', and it is refused by the qualifiers, since the older learning's qualities only 'compensate, in some measure, for the narrowness of available opportunities' and its knowledge is 'at least' put into practice. The meagre option is the reader who turns narrowness into failure, against 'What accumulated knowledge exists ... is at least put into practice'. Q2's rival is 'characters' as written letters, which the next paragraph's 'stored in symbols' sets directly against this knowledge; 'put into practice' and 'urgent daily interests', the clauses on either side, fix the sense as habits of action. Q3's strongest rival is the struggling pupil, a victim of remote instruction but not a 'sharp': the definition needs learning acquired ('the acquiring of information and of technical intellectual skill') that has failed to shape 'a social disposition', and only the scholar has both marks. Q4's rival is the condemnation of schooling; 'depends upon a prior training' and 'a proper balance between the informal and the formal' keep schools in the author's picture, and the method option dies on the fact that the balance is named as a problem, not solved.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "dispositions",
+      "vicariously",
+      "depreciation",
+      "unassimilated"
+    ]
+  },
+  "passage": {
+    "title": "The Place of Formal Education",
+    "reading_time_min": 3.1,
+    "paragraphs": [
+      {
+        "id": "rc-0145-p1",
+        "text": "In undeveloped social groups, we find very little formal teaching and training. Savage groups mainly rely for instilling needed dispositions into the young upon the same sort of association which keeps adults loyal to their group. For the most part, they depend upon children learning the customs of the adults, acquiring their emotional set and stock of ideas, by sharing in what the elders are doing. In part, this sharing is direct, taking part in the occupations of adults and thus serving an apprenticeship; in part, it is indirect, through the dramatic plays in which children reproduce the actions of grown-ups and thus learn to know what they are like. To savages it would seem preposterous to seek out a place where nothing but learning was going on in order that one might learn."
+      },
+      {
+        "id": "rc-0145-p2",
+        "text": "But as civilization advances, the gap between the capacities of the young and the concerns of adults widens. Learning by direct sharing in the pursuits of grown-ups becomes increasingly difficult except in the case of the less advanced occupations. Much of what adults do is so remote in space and in meaning that playful imitation is less and less adequate to reproduce its spirit. Ability to share effectively in adult activities thus depends upon a prior training given with this end in view. Intentional agencies – schools – and explicit material – studies – are devised. The task of teaching certain things is delegated to a special group of persons."
+      },
+      {
+        "id": "rc-0145-p3",
+        "text": "But there are conspicuous dangers attendant upon the transition from indirect to formal education. Sharing in actual pursuit, whether directly or vicariously in play, is at least personal and vital. These qualities compensate, in some measure, for the narrowness of available opportunities. Formal instruction, on the contrary, easily becomes remote and dead – abstract and bookish, to use the ordinary words of depreciation. What accumulated knowledge exists in low grade societies is at least put into practice; it is transmuted into character; it exists with the depth of meaning that attaches to its coming within urgent daily interests."
+      },
+      {
+        "id": "rc-0145-p4",
+        "text": "But in an advanced culture much which has to be learned is stored in symbols. It is far from translation into familiar acts and objects. Such material is relatively technical and superficial. Taking the ordinary standard of reality as a measure, it is artificial. For this measure is connection with practical concerns. Such material exists in a world by itself, unassimilated to ordinary customs of thought and expression. There is the standing danger that the material of formal instruction will be merely the subject matter of the schools, isolated from the subject matter of life-experience. The permanent social interests are likely to be lost from view. Thus we reach the ordinary notion of education: the notion which ignores its social necessity and its identity with all human association that affects conscious life, and which identifies it with imparting information about remote matters and the conveying of learning through verbal signs: the acquisition of literacy."
+      },
+      {
+        "id": "rc-0145-p5",
+        "text": "Hence one of the weightiest problems with which the philosophy of education has to cope is the method of keeping a proper balance between the informal and the formal, the incidental and the intentional, modes of education. When the acquiring of information and of technical intellectual skill do not influence the formation of a social disposition, ordinary vital experience fails to gain in meaning, while schooling, in so far, creates only \"sharps\" in learning – that is, egoistic specialists."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0145-q1",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.strongly_supported",
+        "lang.absolute_vs_qualified",
+        "arg.qualification",
+        "elim.near_tie"
+      ],
+      "target_mistake": "turning the author's qualified praise of learning by sharing into a verdict that it is better than schooling, or turning its narrowness into a failure to hand anything on",
+      "prediction_target": "The learner should be able to say beforehand: the older learning offers less, but what it offers is alive, because it is used every day and becomes part of character.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "tone",
+        "specific_detail"
+      ],
+      "stem": "It can be inferred from the passage that the author regards learning by sharing in the life of the elders as",
+      "options": {
+        "A": "superior on the whole to the formal schooling that has since taken its place",
+        "B": "narrow in range, but alive because it is bound up with action and character",
+        "C": "too meagre to hand on what such groups have built up over many generations",
+        "D": "aimed less at passing on knowledge than at keeping the young loyal to the group"
+      },
+      "correct": "B",
+      "estimated_time_sec": 90,
+      "explanation": {
+        "expert_notice": "The third paragraph praises the older way of learning twice, and both times with 'at least': sharing in actual pursuit 'is at least personal and vital', and the knowledge of such groups 'is at least put into practice'. 'At least' grants a merit while admitting a lack, and the lack is named in between: 'the narrowness of available opportunities'.",
+        "correct_reasoning": "Put the three phrases together. The qualities of learning by sharing 'compensate, in some measure, for the narrowness of available opportunities', so its range is narrow; what it teaches is 'transmuted into character' and comes 'within urgent daily interests', so it is alive. Narrow but vital is exactly the balance of the correct option.",
+        "passage_anchor": "rc-0145-p3",
+        "question_type_note": "When an inference question asks for an author's evaluation, the answer usually lies in his qualifiers. A merit granted with 'at least' or 'in some measure' is a limited merit, and the right option keeps the limit.",
+        "reading_habit": "Circle 'at least', 'in some measure' and 'relatively' when you meet them. They tell you the author is weighing rather than cheering, and the options that drop them are usually wrong.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "overstatement",
+            "why_wrong": "The qualities are granted only 'in some measure', as a compensation for narrowness, and a compensation for part of a lack is not a verdict of superiority. The second paragraph says plainly that as civilisation advances, learning by direct sharing 'becomes increasingly difficult' and playful imitation is 'less and less adequate'.",
+            "seductive_element": "The paragraph praises the older learning and calls formal instruction 'remote and dead', which sounds like a ranking."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage says the reverse: 'What accumulated knowledge exists in low grade societies is at least put into practice', and it is 'transmuted into character'. Narrowness limits what is on offer; it does not stop such groups handing on what they have.",
+            "seductive_element": "'The narrowness of available opportunities' sounds like poverty, and a poor education sounds like one that fails to hand things on."
+          },
+          {
+            "option": "D",
+            "trap_type": "fact_right_interpretation_wrong",
+            "why_wrong": "The first paragraph says these groups use 'the same sort of association which keeps adults loyal to their group' to instil what the young need. That names the means of their teaching, not an aim that competes with knowledge.",
+            "seductive_element": "Loyalty appears in the description of how these groups teach, so it is easy to promote it to the purpose of the teaching."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0145-q2",
+      "type": "phrase_in_context",
+      "skill": "vocabulary_in_context",
+      "patterns": [
+        "word.context_clue",
+        "word.polysemy",
+        "comp.reference_tracking"
+      ],
+      "target_mistake": "reading 'character' as written letters or as a group's identity, instead of letting the clauses on either side define it as the habits a person acts from",
+      "prediction_target": "The learner should be able to say: knowledge transmuted into character has stopped being information and become part of how people habitually act and feel.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "inference"
+      ],
+      "stem": "In the third paragraph, the phrase 'it is transmuted into character' suggests that such knowledge",
+      "options": {
+        "A": "becomes part of the settled habits that govern how people act and feel",
+        "B": "is set down in written characters, so that it can be kept for later generations",
+        "C": "gives each group a distinct identity that sets it apart from its neighbours",
+        "D": "makes those who learn it morally better than those who are taught in schools"
+      },
+      "correct": "A",
+      "estimated_time_sec": 50,
+      "explanation": {
+        "expert_notice": "The phrase is the middle item of three said about the same knowledge: it 'is at least put into practice'; it 'is transmuted into character'; it 'exists with the depth of meaning that attaches to its coming within urgent daily interests'. All three describe knowledge that lives in what people do.",
+        "correct_reasoning": "To transmute is to change something into another form. Knowledge transmuted into character has stopped being information and become part of how a person habitually acts and feels, the 'emotional set and stock of ideas' that the first paragraph says children acquire 'by sharing in what the elders are doing'. That is the sense the correct option gives.",
+        "passage_anchor": "rc-0145-p3",
+        "question_type_note": "A phrase-in-context question is answered by the phrase's neighbours. When the phrase sits in a list, the plainer items tell you which way the hard one leans.",
+        "reading_habit": "When an author lines up three clauses with semicolons, treat them as three views of one thing and use the plain ones to decode the difficult one.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "near_synonym_confusion",
+            "why_wrong": "'Character' here is a person's make-up, not a letter of the alphabet. The next paragraph sets this knowledge against learning that 'is stored in symbols' and is 'far from translation into familiar acts', so reading it as written down turns the contrast upside down.",
+            "seductive_element": "'Characters' can mean letters, and the passage soon turns to symbols and literacy."
+          },
+          {
+            "option": "C",
+            "trap_type": "out_of_scope",
+            "why_wrong": "Nothing in the passage compares one group with another or speaks of a group's identity. The phrase is about what happens to knowledge inside the people who hold it.",
+            "seductive_element": "People speak of a nation's 'character', so the word can sound like a group's identity."
+          },
+          {
+            "option": "D",
+            "trap_type": "comparison_distortion",
+            "why_wrong": "The passage never ranks the moral worth of the two kinds of learner. It says such knowledge is lived rather than stored, and it warns that formal instruction can become remote, not that it makes people worse.",
+            "seductive_element": "'Character' often means moral quality, and the paragraph does contrast the older learning favourably with formal instruction."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0145-q3",
+      "type": "application",
+      "skill": "application",
+      "patterns": [
+        "inf.author_view_application",
+        "struct.definition",
+        "scope.condition"
+      ],
+      "target_mistake": "taking any victim of remote schooling, or any learned person, for a 'sharp', instead of applying both halves of the author's definition",
+      "prediction_target": "The learner should be able to say: a 'sharp' is someone whose schooling succeeded in giving him information and skill, but whose learning never shaped how he lives with others.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 3,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "inference",
+        "specific_detail"
+      ],
+      "stem": "Which of the following would the author most likely regard as an example of the 'sharps' that schooling can produce?",
+      "options": {
+        "A": "an apprentice who learns his father's trade by working beside him in the shop",
+        "B": "a pupil who falls behind because his lessons are too remote from his daily life",
+        "C": "a gifted student who uses what he has learned to help the people around him",
+        "D": "a learned scholar whose knowledge leaves his dealings with others untouched"
+      },
+      "correct": "D",
+      "estimated_time_sec": 90,
+      "explanation": {
+        "expert_notice": "The word is defined in its own sentence: schooling creates 'sharps' in learning, 'that is, egoistic specialists', and it does so 'When the acquiring of information and of technical intellectual skill do not influence the formation of a social disposition'. A sharp has two marks: real learning, and learning that has not reached his relations with others.",
+        "correct_reasoning": "The correct option has both marks. The scholar has acquired a great deal, so the schooling has succeeded on its own terms; but his knowledge leaves his dealings with others untouched, which is what it means for learning not to 'influence the formation of a social disposition'. Specialist in learning, egoistic in conduct: that is the passage's definition.",
+        "passage_anchor": "rc-0145-p5",
+        "question_type_note": "An application question asks you to carry the author's definition to a new case. List the definition's conditions first, then find the case that meets all of them.",
+        "reading_habit": "When an author defines a term with 'that is', write the definition down as a short checklist. Each wrong option usually fails one item on it.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The apprentice is the passage's picture of the older way of learning, 'taking part in the occupations of adults and thus serving an apprenticeship'. He is what schooling risks losing, not an example of its danger.",
+            "seductive_element": "He is the most concrete learner among the options, and the question is about learning."
+          },
+          {
+            "option": "B",
+            "trap_type": "wrong_population",
+            "why_wrong": "A sharp is someone the schooling has succeeded with, a specialist in learning. The pupil who falls behind has a different problem: he has not acquired what the school teaches, whereas a sharp has acquired it and been made no better a member of the group.",
+            "seductive_element": "The passage warns that formal instruction 'easily becomes remote and dead', and a pupil defeated by remote lessons looks like its victim."
+          },
+          {
+            "option": "C",
+            "trap_type": "half_right",
+            "why_wrong": "The student meets the first mark, a specialist's learning, but not the second: his knowledge has plainly shaped how he treats others, which is exactly the social disposition a sharp lacks.",
+            "seductive_element": "'Gifted' and 'learned' sound alike, so the option looks halfway to the definition."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0145-q4",
+      "type": "primary_purpose",
+      "skill": "author_purpose",
+      "patterns": [
+        "comp.purpose",
+        "comp.organization",
+        "struct.pivot",
+        "lang.contrast_marker"
+      ],
+      "target_mistake": "describing only the half of the passage before its second turn, or turning a balanced diagnosis into an attack on schools",
+      "prediction_target": "The learner should be able to say: Dewey explains why a complex society needs schools and why their learning is in danger of losing touch with life.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 3,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "main_idea",
+        "logical_structure"
+      ],
+      "stem": "The primary purpose of the passage is to",
+      "options": {
+        "A": "condemn formal instruction as remote and dead, and defend learning by sharing in adult life",
+        "B": "describe how schools and studies arose as learning by imitating adults grew less adequate",
+        "C": "explain why schooling becomes needed as a society grows complex, and what it puts at risk",
+        "D": "set out a method by which the formal and informal modes of education can be kept in balance"
+      },
+      "correct": "C",
+      "estimated_time_sec": 80,
+      "explanation": {
+        "expert_notice": "The passage turns twice, and both turns open a paragraph with 'But'. 'But as civilization advances' brings in schools; 'But there are conspicuous dangers attendant upon the transition' weighs them. The last paragraph calls the result 'one of the weightiest problems' and names it 'balance', which tells you the author is holding two things at once.",
+        "correct_reasoning": "The first two paragraphs explain the necessity: when 'much of what adults do is so remote in space and in meaning that playful imitation is less and less adequate', a 'prior training' is needed and schools are devised. The last three explain the risk: formal instruction 'easily becomes remote and dead', its material is 'isolated from the subject matter of life-experience', and it can produce 'egoistic specialists'. A purpose has to carry both halves, and only the correct option does.",
+        "passage_anchor": "rc-0145-p2, rc-0145-p3, rc-0145-p5",
+        "question_type_note": "A primary-purpose question is about the whole passage's job. Count its turns: an option that describes only what comes before a turn, or only what comes after it, is too narrow.",
+        "reading_habit": "Mark every paragraph that opens with 'But'. In a passage with two of them, the purpose usually joins what comes before the first to what comes after the second.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "criticism_as_rejection",
+            "why_wrong": "The author criticises formal instruction without rejecting it. He says that 'Ability to share effectively in adult activities thus depends upon a prior training', and he ends by asking for 'a proper balance between the informal and the formal', which keeps schooling in place.",
+            "seductive_element": "'Remote and dead' and 'artificial' are the passage's strongest words, and both are aimed at formal instruction."
+          },
+          {
+            "option": "B",
+            "trap_type": "too_narrow",
+            "why_wrong": "This is the first two paragraphs only. It leaves out the dangers, the isolation of school learning from life and the 'sharps', which take up more than half of the passage.",
+            "seductive_element": "It is accurate, and it follows the passage's own order of events."
+          },
+          {
+            "option": "D",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "It reuses the passage's own words, 'the method of keeping a proper balance', and changes their job. The author names that method as 'one of the weightiest problems' the philosophy of education 'has to cope' with; he offers no method, he explains why one is needed.",
+            "seductive_element": "The phrase is lifted straight from the last paragraph, so a method sounds as though it is being supplied."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "dispositions",
+      "passage_use": "instilling needed dispositions into the young",
+      "meaning_here": "settled ways of feeling and acting; what a person is inclined to do without stopping to think",
+      "difficulty": "medium"
+    },
+    {
+      "word": "vicariously",
+      "passage_use": "whether directly or vicariously in play",
+      "meaning_here": "at second hand, by imagining or imitating someone else's activity rather than doing it for real",
+      "difficulty": "medium"
+    },
+    {
+      "word": "depreciation",
+      "passage_use": "to use the ordinary words of depreciation",
+      "meaning_here": "running something down; words that belittle it",
+      "difficulty": "medium"
+    },
+    {
+      "word": "unassimilated",
+      "passage_use": "unassimilated to ordinary customs of thought and expression",
+      "meaning_here": "not absorbed or made part of something; here, left apart from everyday ways of thinking and speaking",
+      "difficulty": "hard"
+    }
+  ],
+  "mentor": {
+    "challenge": "Every word here is Dewey's, from a book of 1916, and some of his words ('savage', 'low grade societies') belong to the anthropology of his time, not ours. Read past them to the argument, which defends something and warns against it in the same breath. Keep track of which is which.",
+    "one_sentence_summary": "Where there are no schools, children learn by sharing in the work and play of adults, but as a society grows complex its adult life becomes too remote for that, so schools and studies are devised; their danger is that learning stored in symbols drifts away from practice and character, until education comes to mean mere literacy and schooling turns out egoistic specialists, which is why the formal and the informal must be kept in balance.",
+    "main_idea": "Formal schooling becomes necessary because adult life in a complex society is too remote for children to learn by joining in. But what schools teach is largely stored in symbols, far from everyday life, so it can stay cut off from how people act. Keeping school learning tied to life is one of the hardest problems education faces.",
+    "simple_explanation": "In small societies without schools, children learn by joining in with adults. Sometimes they join in directly, working beside grown-ups like apprentices; sometimes they join in through play, acting out what adults do. The idea of going to a special place where nothing but learning happens would seem absurd to them.\n\nAs a society becomes more complex, this stops working. Much of what adults do happens far away, or means things a child cannot see by watching, so copying it in play captures less and less of it. Children now need training in advance, so schools are set up, subjects are written down, and teaching is handed to a special group of people.\n\nThat change has dangers. Learning by joining in is personal and alive, and that partly makes up for how little it can offer. School learning easily becomes distant and dead. In simpler societies, whatever people know is used every day and becomes part of who they are.\n\nIn a complex society, though, much of what must be learned is kept in symbols: words, numbers, books. It is far from anything a child can touch or use, so by the everyday test of what is real it seems artificial. School knowledge can drift into a world of its own, cut off from life, and then people start to think education simply means learning to read and write.\n\nSo the big problem is keeping a balance between learning from life and learning in school. If school knowledge never shapes how a person lives with others, schools produce clever, self-centred specialists.",
+    "why_difficult": "Dewey's sentences are long and abstract, built from nouns such as dispositions, transition and expression, and his judgements arrive as qualifications ('at least', 'in some measure', 'relatively'). The argument also holds two things at once: schools are necessary, and schools are dangerous. A reader who keeps only one of them will misread the passage as either a history of schooling or an attack on it.",
+    "author_intention": "To show why formal schooling becomes necessary as a society grows complex, and why the same complexity threatens to cut school learning off from the life it is meant to serve.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0145-p1",
+        "role": "Describes the older way",
+        "note": "Where there is little formal teaching, children learn by sharing in what adults do, directly as apprentices or indirectly in play; a place set apart only for learning would seem absurd."
+      },
+      {
+        "paragraph_id": "rc-0145-p2",
+        "role": "Explains why schools arise",
+        "note": "As civilisation advances, adult life grows too remote for imitation to capture, so prior training is needed: schools, studies and a special group of teachers."
+      },
+      {
+        "paragraph_id": "rc-0145-p3",
+        "role": "Names the danger",
+        "note": "Learning by sharing is personal and vital, which partly makes up for its narrowness; formal instruction easily becomes remote and dead."
+      },
+      {
+        "paragraph_id": "rc-0145-p4",
+        "role": "Diagnoses the cause",
+        "note": "In an advanced culture much is stored in symbols, far from practical concerns, so school learning can be cut off from life, leaving the ordinary notion of education as mere literacy."
+      },
+      {
+        "paragraph_id": "rc-0145-p5",
+        "role": "States the problem",
+        "note": "The task is to balance the formal and the informal; learning that does not shape a social disposition produces 'sharps', egoistic specialists."
+      }
+    ],
+    "tone_progression": "Descriptive and almost anthropological at first, matter-of-fact about why schools arise, then cautionary as the dangers come into view, and finally grave and exact in naming the problem education has to solve.",
+    "key_transitions": [
+      "'But as civilization advances, the gap between the capacities of the young and the concerns of adults widens.' (opening of paragraph 2): the older way stops being enough.",
+      "'But there are conspicuous dangers attendant upon the transition from indirect to formal education.' (opening of paragraph 3): the necessity is weighed against its cost.",
+      "'Hence one of the weightiest problems with which the philosophy of education has to cope' (opening of paragraph 5): the diagnosis becomes a problem to be solved."
+    ],
+    "misunderstanding": "A hurried reader hears 'remote and dead', 'artificial' and 'egoistic specialists' and decides that Dewey is against schools and for the simpler life. He is not. He says that in a complex society the ability to share in adult life 'depends upon a prior training', that the older learning's merits only 'compensate, in some measure' for its narrowness, and that the task is 'a proper balance' between the formal and the informal, not a return to one of them.",
+    "traps_summary": "The options trade on four slips: turning qualified praise of the older learning into a verdict of superiority; reading 'character' as written letters or as a group's identity; mistaking a struggling pupil or an apprentice for the learned egoist the passage calls a 'sharp'; and turning a balanced diagnosis into a condemnation of schools, or a named problem into a method supplied.",
+    "reading_lesson": "Old analytic prose carries its judgements in its qualifiers. 'At least', 'in some measure', 'relatively' and 'easily becomes' all say 'this much and no more'. When the options of an evaluation question differ in strength, find the qualifier the author used and choose the option that keeps it.",
+    "real_world": "John Dewey, the American philosopher whose Democracy and Education appeared in 1916, wrote this as schooling was spreading fast through the industrial world. His warning will be familiar to anyone who has passed an examination in a subject without being changed by it in the slightest.",
+    "takeaway": "The complexity that makes schools necessary is the same complexity that makes their lessons easy to learn and easy to leave behind.",
+    "reflection_question": "Which subject you learned at school has never changed how you deal with other people, and could it have?",
+    "eli10": {
+      "big_idea": "Complex societies need schools, but school learning kept in books can drift away from real life unless it changes how we live.",
+      "story": "Simple societies have hardly any schools. Children learn by joining in with adults. They help with real work, like apprentices. They also play at being grown-ups. A place just for learning would seem silly to them. As societies grow complex, this stops working. Much adult work is far away or hard to understand. Copying it in play works less and less. So people invent schools, subjects and teachers. But Dewey sees a danger. Learning by joining in offers less, but it is alive and personal. School learning can become distant and dead. Much of it lives in symbols, far from daily life. Think of learning to swim from a book without ever touching water. Then education starts to mean just reading and writing. Dewey says we need a balance. If school knowledge never shapes how we treat others, it makes clever but selfish specialists.",
+      "paragraphs": [
+        "Describes the old way: children learn by joining adults at work and in play.",
+        "Explains why schools arise: adult life grows too distant for children to copy.",
+        "Names the danger: school learning easily becomes distant and dead, unlike lived knowledge.",
+        "Shows the cause: much is stored in symbols, cut off from daily life.",
+        "States the problem: balance both kinds, or schools make clever, selfish specialists."
+      ],
+      "author_view": "Dewey thinks schools are necessary but worries, calmly and seriously, that their learning can lose touch with life."
+    }
+  }
+}

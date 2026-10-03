@@ -1,0 +1,333 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0119",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 86,
+    "genre": "environment",
+    "difficulty": "easy",
+    "difficulty_numeric": 2,
+    "stage": "foundation",
+    "skills": [
+      "main-idea-extraction",
+      "causal-reasoning",
+      "inference",
+      "structure-mapping"
+    ],
+    "word_count": 309,
+    "question_count": 3,
+    "question_types": [
+      "inference",
+      "paragraph_function",
+      "title_selection"
+    ],
+    "theme": "a city is warmer than the countryside mostly at night because its brick, concrete and roads store the day's heat and its narrow streets hide the sky the heat would escape to; the heat the city makes for itself cannot be the main cause, since it peaks by day while the gap is widest before dawn, and a cause that peaks at the wrong time cannot be the main one",
+    "estimated_time_min": 5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-03",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted."
+    },
+    "date_added": "2026-10-03",
+    "batch_id": "batch-rc-005",
+    "prompt_version": "content engine v1 + CAT-size brief 2026-10",
+    "reviewer_notes": "An exposition of a scientific phenomenon with no meta-argument about method, which AUTHORING 4a lists as wanted. The urban heat island is a known topic; what the passage gives a reader is the timing puzzle (the gap is small at noon and widest before dawn) and the use of timing as the test that reduces the obvious cause, the city's own heat, to a contributor. The objection answered in the third paragraph is the argumentative work.",
+    "vocab_extracted": [
+      "fiercest",
+      "exhaust",
+      "recover"
+    ],
+    "length_class": "short",
+    "structure": "question_answer",
+    "viewpoints": 2,
+    "tone": "explanatory, puzzled and then assured",
+    "difficulty_vector": {
+      "lexical": 1,
+      "syntactic": 2,
+      "abstraction": 2,
+      "inference_depth": 2,
+      "distractor_similarity": 3,
+      "reasoning_depth": 2,
+      "structural_ambiguity": 1,
+      "time_pressure": 2
+    },
+    "reasoning_patterns": [
+      "struct.question_answer",
+      "struct.phenomenon_explanation",
+      "struct.cause_effect",
+      "comp.central_idea",
+      "comp.function_over_words",
+      "arg.causal_claim",
+      "arg.counterargument",
+      "arg.rebuttal",
+      "inf.logical_gap",
+      "inf.strongly_supported",
+      "scope.too_narrow",
+      "elim.near_tie"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1: the strongest wrong answer is 'widest at four in the morning, when the streets are nearly empty', because it is what the passage says actually happens; the stem asks what the rejected explanation would predict, and the third paragraph gives that explanation's timing, 'It peaks during the working day and the evening rush'. 'Widest at noon, and gone altogether by night' points the right way and is killed by 'gone altogether', which nothing supports. Q2: a strong candidate could argue for the option saying the paragraph admits the earlier explanation cannot account for the timing, since the paragraph is about a failure to fit the timing; but the explanation that fails is the heat the city makes, raised here for the first time, not the stored heat of the second paragraph. Q3: the near-tie is 'The Heat a City Makes' against 'The Heat a City Keeps', settled by 'less because of what it burns than because of what it keeps'.",
+      "blind_solve": null
+    }
+  },
+  "passage": {
+    "title": "Four in the Morning",
+    "reading_time_min": 1.7,
+    "paragraphs": [
+      {
+        "id": "rc-0119-p1",
+        "text": "On a still summer night, a thermometer in the middle of a big city can read several degrees higher than one in the fields outside it. That alone is no surprise in a place full of engines and people. What is surprising is the timing. At noon, when the sun is fiercest and the city is hard at work, the two thermometers differ much less. The gap opens after sunset and is widest just before dawn. Why should a city be most unlike the countryside when least is happening in it?"
+      },
+      {
+        "id": "rc-0119-p2",
+        "text": "The answer lies in what happens to the day's heat. Soil and crops take in some warmth by day and give it back quickly to an open sky once the sun sets. A city stores far more. Brick, concrete and road surfaces soak up the sun's heat for hours and let it out slowly through the night. A stone wall still warm to the touch long after dusk is doing the same. That heat is also trapped. In a narrow street between tall buildings, most of the sky is hidden, so warmth given off by one wall is caught by the wall opposite. A field sees the whole sky; a street sees a strip of it."
+      },
+      {
+        "id": "rc-0119-p3",
+        "text": "The obvious suspect is the heat a city makes for itself: exhaust from traffic, warm air pumped out of offices and kitchens. That heat is real, but it cannot explain the timing. It peaks during the working day and the evening rush, while the gap is widest at four in the morning, when the streets are nearly empty. A city is warm at night less because of what it burns than because of what it keeps. So a heatwave is harder to bear in a city than in a village: city nights give the body few cool hours in which to recover."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0119-q1",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.logical_gap",
+        "arg.rebuttal",
+        "arg.causal_claim"
+      ],
+      "target_mistake": "answering with what actually happens instead of with what the rejected explanation would predict",
+      "prediction_target": "The learner should be able to say beforehand: if the city's own heat were the main cause, the gap would follow that heat and be largest when the city is busiest.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 3,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "argument"
+      ],
+      "stem": "It can be inferred from the passage that if the heat a city makes for itself were the main cause of the gap between city and countryside, that gap would be",
+      "options": {
+        "A": "widest at four in the morning, when the streets are nearly empty",
+        "B": "much the same whatever the time of day or night",
+        "C": "widest at noon, and gone altogether by night",
+        "D": "widest during the busy hours of the day and evening"
+      },
+      "correct": "D",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "The third paragraph's argument has a hidden step. It says the city's own heat 'cannot explain the timing' because that heat peaks in the working day and the evening rush. The unstated step is that a cause and its effect should rise and fall together.",
+        "correct_reasoning": "If the city's own heat were the main cause, the gap should be largest when that heat is largest. The passage says that heat peaks during the working day and the evening rush, so the gap would be widest during the busy hours. The real gap is widest at four in the morning, and that mismatch is the author's reason for rejecting the explanation.",
+        "passage_anchor": "rc-0119-p3",
+        "question_type_note": "Some inference questions ask what would follow if an explanation the author rejects were true. Work out what that explanation predicts, and do not answer with what the passage says actually happens.",
+        "reading_habit": "When an author rejects an explanation, ask how he knows it is wrong. Usually the explanation predicts something, here a timing, that does not happen.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "This is what the passage says really happens, and it is exactly what the city's own heat cannot explain. Under the stem's supposition the gap would follow the busy hours instead.",
+            "seductive_element": "Four in the morning and the empty streets are vivid details taken straight from the passage."
+          },
+          {
+            "option": "B",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "The passage says the city's own heat rises and falls, peaking in the working day and the evening rush. A cause that varies so much could not produce a gap that stays the same at every hour.",
+            "seductive_element": "Engines and kitchens are always at work somewhere in a city, so a steady effect sounds possible."
+          },
+          {
+            "option": "C",
+            "trap_type": "extreme_language",
+            "why_wrong": "The passage says the city's own heat peaks by day; it never says that heat disappears at night, and even at four in the morning the streets are only nearly empty. 'Gone altogether' goes further than the text.",
+            "seductive_element": "It points in the right direction, towards the daytime, and only its second half overreaches."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0119-q2",
+      "type": "paragraph_function",
+      "skill": "paragraph_function",
+      "patterns": [
+        "comp.function_over_words",
+        "arg.counterargument",
+        "arg.rebuttal"
+      ],
+      "target_mistake": "naming the paragraph by its closing sentence about heatwaves, or by the explanation the second paragraph has already given",
+      "prediction_target": "The learner should be able to say beforehand: the last paragraph raises the obvious cause, the city's own heat, and shows it cannot be the main one because it peaks at the wrong time.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 2,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "logical_structure"
+      ],
+      "stem": "The final paragraph of the passage serves mainly to",
+      "options": {
+        "A": "show that an obvious explanation does not fit the timing",
+        "B": "give the main reason why a city stays warm after dark",
+        "C": "warn people who live in cities about the dangers of heatwaves",
+        "D": "admit that the explanation given earlier cannot account for the timing"
+      },
+      "correct": "A",
+      "estimated_time_sec": 60,
+      "explanation": {
+        "expert_notice": "The paragraph opens by naming 'the obvious suspect', a usual way of raising an explanation in order to set it aside, and its second sentence gives the reason: 'it cannot explain the timing'.",
+        "correct_reasoning": "The final paragraph raises the explanation most readers would reach for, the heat a city makes for itself, grants that it is real, and shows that it peaks at the wrong time to account for a gap that is widest before dawn. Its last sentence draws a consequence, but the paragraph's main job is to set aside the obvious explanation.",
+        "passage_anchor": "rc-0119-p3",
+        "question_type_note": "A paragraph-function question asks what a paragraph does in the argument, not what it mentions. Name its job with a verb, here 'sets aside', before reading the options.",
+        "reading_habit": "Watch for phrases such as 'the obvious suspect' or 'one might think'. They mark an idea the author is about to answer, not one he holds.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "wrong_structural_role",
+            "why_wrong": "The main reason, heat stored by day and trapped by a hidden sky, is given in the second paragraph. The final paragraph deals with a rival explanation.",
+            "seductive_element": "The paragraph does restate the answer in its fourth sentence, about what a city keeps."
+          },
+          {
+            "option": "C",
+            "trap_type": "too_narrow",
+            "why_wrong": "Only the last sentence mentions heatwaves, and it is a consequence drawn from the argument rather than the paragraph's purpose.",
+            "seductive_element": "Heatwaves are the most practical and memorable point in the paragraph."
+          },
+          {
+            "option": "D",
+            "trap_type": "misattributed_view",
+            "why_wrong": "The explanation that fails the timing test is the heat the city makes, which this paragraph raises for the first time. The earlier explanation, stored and trapped heat, is the one the timing supports.",
+            "seductive_element": "The paragraph is about something failing to fit the timing, and the option gets that much right."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0119-q3",
+      "type": "title_selection",
+      "skill": "main_idea",
+      "patterns": [
+        "comp.central_idea",
+        "elim.near_tie",
+        "scope.too_narrow"
+      ],
+      "target_mistake": "choosing the title built on the explanation the passage sets aside, which differs from the right one by a single word",
+      "prediction_target": "The learner should be able to say beforehand: the title should say that a city stays warm at night because of the heat it stores and traps, not the heat it produces.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "main_idea"
+      ],
+      "stem": "Which of the following would be the most suitable title for the passage?",
+      "options": {
+        "A": "The Heat a City Makes",
+        "B": "Keeping Our Cities Cool at Night",
+        "C": "The Heat a City Keeps",
+        "D": "The Danger of the Urban Heatwave"
+      },
+      "correct": "C",
+      "estimated_time_sec": 65,
+      "explanation": {
+        "expert_notice": "Two options differ by one word, makes and keeps. The passage chooses between exactly these two in a single sentence: 'A city is warm at night less because of what it burns than because of what it keeps.'",
+        "correct_reasoning": "The passage's answer to its own question is the heat a city keeps: heat stored by brick, concrete and roads and trapped by streets that see only a strip of sky. The third paragraph then sets aside the heat a city makes. The correct title names the explanation the passage accepts, and the puzzle, the answer and the objection all belong under it.",
+        "passage_anchor": "rc-0119-p2, rc-0119-p3",
+        "question_type_note": "A title is the main idea in a few words. When two titles look alike, find the sentence where the passage chooses between them.",
+        "reading_habit": "Notice when a passage sets two words against each other, as in 'less because of what it burns than because of what it keeps'. Questions are often built on exactly that pair.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "reported_view_as_author",
+            "why_wrong": "This names the explanation the final paragraph raises in order to set it aside: the heat a city makes 'cannot explain the timing'.",
+            "seductive_element": "The passage does discuss the heat a city makes, and the phrase sounds like the obvious answer."
+          },
+          {
+            "option": "B",
+            "trap_type": "prescriptive_leap",
+            "why_wrong": "The passage explains why city nights stay warm; it offers no plan for cooling them.",
+            "seductive_element": "An explanation of a problem invites the thought that a remedy must follow."
+          },
+          {
+            "option": "D",
+            "trap_type": "too_narrow",
+            "why_wrong": "Heatwaves appear only in the last sentence, as a consequence of the explanation. The title leaves out the puzzle and the answer that fill the rest of the passage.",
+            "seductive_element": "It is the most urgent and practical point in the passage."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "fiercest",
+      "passage_use": "when the sun is fiercest and the city is hard at work",
+      "meaning_here": "at its strongest and most intense",
+      "difficulty": "easy"
+    },
+    {
+      "word": "exhaust",
+      "passage_use": "exhaust from traffic, warm air pumped out of offices and kitchens",
+      "meaning_here": "the hot waste gas that comes out of an engine",
+      "difficulty": "medium"
+    },
+    {
+      "word": "recover",
+      "passage_use": "city nights give the body few cool hours in which to recover",
+      "meaning_here": "return to a normal, healthy state after strain",
+      "difficulty": "easy"
+    }
+  ],
+  "mentor": {
+    "challenge": "The passage asks a question in its first paragraph and answers it in the next two. Notice the explanation it accepts and the one it sets aside.",
+    "one_sentence_summary": "A city is warmer than the countryside mainly at night, because brick, concrete and roads store the day's heat and narrow streets hide the sky it would escape to, and the heat the city makes for itself cannot be the main cause, since it peaks by day while the gap is widest before dawn.",
+    "main_idea": "Cities stay warm at night mostly because they store the day's heat and trap it, not because of the heat their traffic and offices produce. The timing shows it: the gap is biggest just before dawn, when the city produces least.",
+    "simple_explanation": "At night, the middle of a big city can be several degrees warmer than the fields outside it. You might expect that, since cities are full of engines and people. The strange part is the timing: at noon the city and the countryside are much closer in temperature, and the gap is biggest just before dawn, when almost nothing is happening.\n\nThe answer is storage. Fields take in a little heat by day and lose it quickly to an open sky at night. A city's brick, concrete and roads soak up heat all day and let it out slowly through the night, like a stone wall that is still warm after dark. The heat is also trapped: in a narrow street between tall buildings most of the sky is hidden, so heat from one wall is caught by the wall opposite.\n\nWhat about the heat from cars, offices and kitchens? It is real, but it peaks in the day and the evening, while the gap is widest at four in the morning. So the city is warm at night because of what it keeps, not what it burns. That is why a heatwave is harder in a city: the nights give the body little chance to cool down.",
+    "why_difficult": "The passage is easy to follow, but it contains one argument that has to be rebuilt: the city's own heat is ruled out as the main cause because it peaks at the wrong time. Two questions depend on seeing that step, and one of them asks what would happen if the rejected explanation were true.",
+    "author_intention": "To solve a real puzzle about city weather, and to show the reader how timing can rule out an explanation that seems obvious.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0119-p1",
+        "role": "Poses the puzzle",
+        "note": "A city is warmer than the countryside, but the gap is small at noon and widest before dawn, when least is happening."
+      },
+      {
+        "paragraph_id": "rc-0119-p2",
+        "role": "Gives the answer",
+        "note": "Brick, concrete and roads store the day's heat and release it slowly, and narrow streets hide the sky that would let it escape."
+      },
+      {
+        "paragraph_id": "rc-0119-p3",
+        "role": "Sets aside a rival",
+        "note": "The heat the city makes is real but peaks at the wrong time, so it cannot be the main cause; hence the hard nights of a city heatwave."
+      }
+    ],
+    "tone_progression": "Puzzled in the first paragraph, which ends on a question, then calmly explanatory, and finally assured, as the obvious answer is weighed and set aside.",
+    "key_transitions": [
+      "'What is surprising is the timing.' (paragraph 1): a familiar fact becomes a puzzle.",
+      "'The answer lies in what happens to the day's heat.' (opening of paragraph 2): the explanation begins.",
+      "'That heat is real, but it cannot explain the timing.' (paragraph 3): the rival explanation is granted and set aside."
+    ],
+    "misunderstanding": "Many readers come to the passage already believing that traffic and offices are what heat a city, and they read the third paragraph as agreeing with them. It does the opposite: it grants that such heat exists and shows that it cannot be the main cause.",
+    "traps_summary": "The options test whether you kept the passage's two explanations apart. One title differs from the right one by a single word, makes for keeps. One inference option offers what actually happens instead of what the rejected explanation would predict, and one function option pins the rejected explanation's failure on the accepted one.",
+    "reading_lesson": "When a passage explains something, look for the evidence it uses to rule out the alternative. Here it is timing: a cause should be strongest when its effect is strongest. Seeing that test lets you answer questions about the explanation the author rejects as well as the one he keeps.",
+    "real_world": "Timing is one of the simplest tests of any explanation: if the supposed cause is busiest at noon and the effect is largest at four in the morning, look for another cause.",
+    "takeaway": "A cause that peaks at the wrong time cannot be the main cause.",
+    "reflection_question": "Can you think of an explanation you once believed that would have failed if you had checked its timing?",
+    "eli10": {
+      "big_idea": "Cities stay warm at night because their buildings store the day's heat and trap it, not because of their traffic.",
+      "story": "At night, a big city is warmer than the fields around it. That seems normal. But here is the odd part. At noon, the city and the fields are much closer. The gap is biggest just before dawn. Why? Think of a stone wall on a sunny day. It stays warm long after dark. A city is full of brick, concrete and roads. They soak up the sun all day. At night they slowly let the heat out. Tall buildings also hide the sky. So heat from one wall hits the wall across the street, and much of it cannot escape. What about cars and offices? They make heat too. But they are busiest in the day and evening. The gap is biggest at four in the morning, when the streets are nearly empty. So the city keeps heat more than it makes it.",
+      "paragraphs": [
+        "Asks a puzzle: why is a city warmest, compared with fields, when least is happening?",
+        "Answers it: city stone and roads store the day's heat, and tall buildings trap it.",
+        "Sets aside another answer: traffic heat peaks by day, but the gap peaks before dawn."
+      ],
+      "author_view": "The writer enjoys the puzzle and is sure of the answer: what a city keeps matters more than what it burns."
+    }
+  }
+}

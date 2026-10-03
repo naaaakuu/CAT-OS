@@ -1,0 +1,413 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0142",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 89,
+    "genre": "linguistics",
+    "difficulty": "hard",
+    "difficulty_numeric": 7,
+    "stage": "advanced",
+    "skills": [
+      "main-idea-extraction",
+      "structure-mapping",
+      "argument-tracking",
+      "concession-tracking",
+      "inference"
+    ],
+    "word_count": 580,
+    "question_count": 4,
+    "question_types": [
+      "comparative",
+      "main_idea",
+      "role_of_detail",
+      "weaken"
+    ],
+    "theme": "speech feels as natural as walking but differs from it in kind: walking develops from the body in any society or none and varies only between individuals, while speech is a group's historical inheritance that varies without limit between groups, and the instinctive cries of feeling are no counter-evidence because they are not symbols",
+    "estimated_time_min": 9,
+    "source": {
+      "publication": "Edward Sapir, Language: An Introduction to the Study of Speech (1921), \"Introductory: Language Defined\"",
+      "url": "https://www.gutenberg.org/ebooks/12629",
+      "author": "Edward Sapir",
+      "date_accessed": "2026-10-03",
+      "usage_note": "Public domain: Edward Sapir died in 1939 and the work was first published in 1921. The passage is the author's own words, with some sentences left out to fit CAT length; the questions, explanations and notes are original to CAT OS."
+    },
+    "date_added": "2026-10-03",
+    "batch_id": "batch-rc-006",
+    "prompt_version": "content engine v1 + CAT-size brief 2026-10",
+    "reviewer_notes": "Cut from the opening of the chapter: the walking comparison (source paragraph 2 without the sentences on biological heredity, on the conformation of the muscles and on being 'predestined to walk'), the two thought experiments (the first seven sentences of paragraph 3), the conclusion of the comparison (the rest of paragraph 3 without 'It varies as all creative effort varies'), and the objection from cries of feeling (paragraph 4 without the 'automatic overflow' sentence and the three on cries being overheard rather than addressed). Source paragraph 3 is split at a sentence boundary. The walking comparison is the setter's obvious target; what this cut adds is the objection and its reductio, so that the set can ask what the clouds are doing and which evidence would actually hurt the argument. The chapter's later treatment of interjections and its formal definition of language are not used.",
+    "length_class": "medium",
+    "structure": "comparison_contrast",
+    "viewpoints": 2,
+    "tone": "lucid, assured, faintly ironic",
+    "difficulty_vector": {
+      "lexical": 4,
+      "syntactic": 5,
+      "abstraction": 4,
+      "inference_depth": 3,
+      "distractor_similarity": 3,
+      "reasoning_depth": 4,
+      "structural_ambiguity": 2,
+      "time_pressure": 4
+    },
+    "reasoning_patterns": [
+      "struct.claim_evidence",
+      "struct.contrast",
+      "struct.claim_counterclaim",
+      "comp.central_idea",
+      "comp.function_over_words",
+      "arg.rebuttal",
+      "arg.concession",
+      "arg.assumption",
+      "arg.evidence_vs_conclusion",
+      "inf.reasonable_implication",
+      "inf.author_vs_reported",
+      "scope.population",
+      "lang.comparative",
+      "elim.near_tie"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1's live rival is the option that both functions are learnt and speech merely takes longer: it uses the passage's own 'learning to walk' and the right idea of dependence on other people, and it fails because the passage draws a difference of kind ('an utterly different sort of thing') and says nothing about time. Q2's rival is the walk option built on 'involuntary', which sounds like a tell-tale sign; the transplant experiment, in which the child walks 'very much as he would have developed it in the old', settles that a walk reveals nothing about where it was learnt. Q3's rival reads the clouds as one more example of the instinctive and non-symbolic; the if-sentence that introduces them and the verdict that follows ('utterly meaningless') show they are the absurd conclusion of the rival view, not an illustration of the author's. Q4's strongest rival is the universality of cries of pain and joy, which looks like an instinctive basis for language; the author has already granted that the cries are instinctive and denied that they are speech, so evidence of their universality costs him nothing, while words of an unheard parental language would strike the transplant experiment itself. The walking option in Q4 points the wrong way: it confirms the half of the contrast the author needs.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "circumscribed",
+      "assignable",
+      "conventional",
+      "aloof"
+    ]
+  },
+  "passage": {
+    "title": "Not So Language",
+    "reading_time_min": 3.1,
+    "paragraphs": [
+      {
+        "id": "rc-0142-p1",
+        "text": "Speech is so familiar a feature of daily life that we rarely pause to define it. It seems as natural to man as walking, and only less so than breathing. Yet it needs but a moment's reflection to convince us that this naturalness of speech is but an illusory feeling. The process of acquiring speech is, in sober fact, an utterly different sort of thing from the process of learning to walk. In the case of the latter function, culture, in other words, the traditional body of social usage, is not seriously brought into play. To put it concisely, walking is an inherent, biological function of man."
+      },
+      {
+        "id": "rc-0142-p2",
+        "text": "Not so language. It is of course true that in a certain sense the individual is predestined to talk, but that is due entirely to the circumstance that he is born not merely in nature, but in the lap of a society that is certain, reasonably certain, to lead him to its traditions. Eliminate society and there is every reason to believe that he will learn to walk, if, indeed, he survives at all. But it is just as certain that he will never learn to talk, that is, to communicate ideas according to the traditional system of a particular society. Or, again, remove the new-born individual from the social environment into which he has come and transplant him to an utterly alien one. He will develop the art of walking in his new environment very much as he would have developed it in the old. But his speech will be completely at variance with the speech of his native environment."
+      },
+      {
+        "id": "rc-0142-p3",
+        "text": "Walking, then, is a general human activity that varies only within circumscribed limits as we pass from individual to individual. Its variability is involuntary and purposeless. Speech is a human activity that varies without assignable limit as we pass from social group to social group, because it is a purely historical heritage of the group, the product of long-continued social usage. Walking is an organic, an instinctive, function (not, of course, itself an instinct); speech is a non-instinctive, acquired, \"cultural\" function."
+      },
+      {
+        "id": "rc-0142-p4",
+        "text": "There is one fact that has frequently tended to prevent the recognition of language as a merely conventional system of sound symbols, that has seduced the popular mind into attributing to it an instinctive basis that it does not really possess. This is the well-known observation that under the stress of emotion, say of a sudden twinge of pain or of unbridled joy, we do involuntarily give utterance to sounds that the hearer interprets as indicative of the emotion itself. But there is all the difference in the world between such involuntary expression of feeling and the normal type of communication of ideas that is speech. The former kind of utterance is indeed instinctive, but it is non-symbolic; in other words, the sound of pain or the sound of joy does not, as such, indicate the emotion, it does not stand aloof, as it were, and announce that such and such an emotion is being felt. If the involuntary cry of pain which is conventionally represented by \"Oh!\" be looked upon as a true speech symbol equivalent to some such idea as \"I am in great pain,\" it is just as allowable to interpret the appearance of clouds as an equivalent symbol that carries the definite message \"It is likely to rain.\" A definition of language, however, that is so extended as to cover every type of inference becomes utterly meaningless."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0142-q1",
+      "type": "main_idea",
+      "skill": "main_idea",
+      "patterns": [
+        "comp.central_idea",
+        "struct.contrast",
+        "arg.rebuttal"
+      ],
+      "target_mistake": "turning the author's difference of kind between walking and speech into a difference of degree, or stopping at the contrast and leaving out the answer to the objection",
+      "prediction_target": "The learner should be able to say: speech, unlike walking, comes from a society's tradition, and the cries of feeling that seem to show otherwise are not language.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 3,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "logical_structure"
+      ],
+      "stem": "Which of the following best expresses the main idea of the passage?",
+      "options": {
+        "A": "Speech and walking are both learnt, but speech takes far longer because it depends on other people.",
+        "B": "Speech grew out of the instinctive cries with which people everywhere have always expressed pain and joy.",
+        "C": "The languages of different social groups can differ from one another without any assignable limit.",
+        "D": "Unlike walking, speech comes from a society's tradition, and cries of feeling do not prove otherwise."
+      },
+      "correct": "D",
+      "estimated_time_sec": 80,
+      "explanation": {
+        "expert_notice": "The passage announces its thesis early ('this naturalness of speech is but an illusory feeling'), turns on a sentence of three words ('Not so language'), sums the contrast up at the end of the third paragraph ('speech is a non-instinctive, acquired, \"cultural\" function') and spends its last paragraph removing the one fact that seems to tell against it.",
+        "correct_reasoning": "The correct option holds both halves of that design: the contrast with walking, which the first three paragraphs build, and the reply to the objection from cries of pain and joy, which the fourth gives. Neither half alone is the main idea.",
+        "passage_anchor": "rc-0142-p1, rc-0142-p3, rc-0142-p4",
+        "question_type_note": "A main-idea question over a passage that meets an objection must include the author's answer to it. An option that stops at the contrast summarises three paragraphs out of four.",
+        "reading_habit": "Notice when an author tells you what a paragraph is for. 'There is one fact that has frequently tended to prevent the recognition...' says that the last paragraph defends the thesis; it does not open a new subject.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "weakened_version",
+            "why_wrong": "The passage calls the two processes 'an utterly different sort of thing', a difference of kind: remove society and the child still walks but never talks. Saying that speech merely takes longer turns that into a difference of degree, and the passage says nothing about time.",
+            "seductive_element": "The passage itself speaks of 'learning to walk', and speech's dependence on other people is the right idea."
+          },
+          {
+            "option": "B",
+            "trap_type": "opposite_direction",
+            "why_wrong": "This is the view of 'the popular mind' that the last paragraph argues against: the cries are 'indeed instinctive, but... non-symbolic', and treating them as speech would make clouds a message about rain.",
+            "seductive_element": "The cries of pain and joy are the passage's most vivid material, and they really are instinctive."
+          },
+          {
+            "option": "C",
+            "trap_type": "too_narrow",
+            "why_wrong": "True, and stated in the third paragraph, but it is one piece of evidence for the thesis. It leaves out walking, the claim that speech is cultural rather than instinctive, and the whole of the last paragraph.",
+            "seductive_element": "It follows the passage's wording closely ('without assignable limit'), which makes it feel safe."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0142-q2",
+      "type": "comparative",
+      "skill": "inference",
+      "patterns": [
+        "inf.reasonable_implication",
+        "struct.contrast",
+        "scope.population"
+      ],
+      "target_mistake": "attaching walking's individual, purposeless variation to speech, or treating walking as something a child takes from the people around it",
+      "prediction_target": "The learner should be able to say: a walk develops much the same in any society, so only speech can show where someone was raised.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 3,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "specific_detail",
+        "application"
+      ],
+      "stem": "It can be inferred from the passage that someone trying to tell which society a stranger grew up in would learn more from",
+      "options": {
+        "A": "the way he walks, since the variations in a walk are involuntary and cannot be disguised",
+        "B": "neither his walk nor his speech, since each varies from one individual to the next",
+        "C": "the way he speaks, since speech carries the history of the group in which it was learnt",
+        "D": "his walk and his speech alike, since a child takes both from the people around him"
+      },
+      "correct": "C",
+      "estimated_time_sec": 90,
+      "explanation": {
+        "expert_notice": "The second experiment settles this before any option is read. Transplant a newborn and 'He will develop the art of walking in his new environment very much as he would have developed it in the old', while 'his speech will be completely at variance with the speech of his native environment'. The third paragraph generalises: walking varies 'from individual to individual', speech 'from social group to social group'.",
+        "correct_reasoning": "A trait that comes out much the same whichever society raises you cannot tell anyone which society raised you; a trait that changes completely with the society can. Speech is 'a purely historical heritage of the group', so it is the one that carries the information, which is what the correct option says.",
+        "passage_anchor": "rc-0142-p2, rc-0142-p3",
+        "question_type_note": "A comparative inference asks you to apply a contrast the passage draws to a case it does not mention. State the contrast in one line first (walking: individual and purposeless; speech: by group and historical), then let it decide the case.",
+        "reading_habit": "When a passage runs a thought experiment, write its result down in plain words. Results are what inference questions are built from, and they are easy to lose inside long sentences.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "'Involuntary and purposeless' is said of walking's variation to show that it means nothing. The transplanted child walks as he would have walked at home, so a walk reveals nothing about where it was learnt.",
+            "seductive_element": "It borrows the passage's own word 'involuntary', and something involuntary sounds as though it ought to give a person away."
+          },
+          {
+            "option": "B",
+            "trap_type": "wrong_population",
+            "why_wrong": "Variation 'from individual to individual' is what the passage says of walking. Speech varies 'from social group to social group', which is exactly why it can identify a group.",
+            "seductive_element": "Every speaker is an individual, so it seems natural to think that speech varies person by person, as walking does."
+          },
+          {
+            "option": "D",
+            "trap_type": "opposite_direction",
+            "why_wrong": "Only speech is taken from the people around the child. In walking 'culture... is not seriously brought into play', and a child with no society at all would still learn to walk, 'if, indeed, he survives at all'.",
+            "seductive_element": "Children do copy the adults around them in a great many things, so taking both from them sounds like common sense."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0142-q3",
+      "type": "role_of_detail",
+      "skill": "paragraph_function",
+      "patterns": [
+        "comp.function_over_words",
+        "arg.rebuttal",
+        "lang.comparative"
+      ],
+      "target_mistake": "reading the clouds as a second example of instinctive expression, or as an endorsement of natural signs, instead of as the absurd consequence of the rival view",
+      "prediction_target": "The learner should be able to say: the clouds show that if a cry of pain were language, anything we can draw an inference from would be language too, which is absurd.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 3,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "logical_structure",
+        "argument"
+      ],
+      "stem": "The author mentions 'the appearance of clouds' in order to",
+      "options": {
+        "A": "give a further example of something instinctive that, like a cry, does not stand for anything",
+        "B": "show that if a cry counted as a word, every sign that permits an inference would count too",
+        "C": "suggest that nature, like human beings, can communicate ideas to anyone who observes it",
+        "D": "show that it is the hearer and not the speaker who settles what a sound means"
+      },
+      "correct": "B",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "The clouds arrive inside an if-sentence: if the cry 'Oh!' is a true speech symbol, 'it is just as allowable' to treat clouds as one. The next sentence says what follows: a definition 'so extended as to cover every type of inference becomes utterly meaningless'. An example brought in to produce an absurd result is doing the work of an argument, not of an illustration.",
+        "correct_reasoning": "The author is reducing the opposing view to absurdity. Clouds let us infer rain exactly as a cry lets us infer pain; if being a basis for inference made something language, clouds would be language, and since that is absurd, the cry is not language either. The correct option states that consequence.",
+        "passage_anchor": "rc-0142-p4",
+        "question_type_note": "A role-of-detail question asks why a detail is there. Read the sentence that introduces it (here an 'if') and the sentence that follows it (here the verdict on the definition); together they name its job.",
+        "reading_habit": "When an author writes 'it is just as allowable', expect a reductio: the author is about to show that the rival view, followed consistently, says something nobody would accept.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "wrong_structural_role",
+            "why_wrong": "Clouds are neither instinctive nor uttered. They are not offered as a second example of the cries but as the absurd conclusion the rival view would commit us to.",
+            "seductive_element": "It borrows the passage's account of the cries ('instinctive, but... non-symbolic'), and the clouds do sit in the same sentence as the cry."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The author does not credit clouds with a message. He says that calling them a symbol is what the rival view would force on us, and that a definition which allows it is 'utterly meaningless'.",
+            "seductive_element": "The sentence does say that clouds could carry 'the definite message \"It is likely to rain.\"', which read alone sounds like an endorsement."
+          },
+          {
+            "option": "D",
+            "trap_type": "sophisticated_sounding",
+            "why_wrong": "Nothing in the passage makes the hearer the judge of meaning. A hearer's interpreting a cry is exactly what the author says does not make it speech, since anything at all can be interpreted.",
+            "seductive_element": "The passage does stress what 'the hearer interprets', and the claim sounds like a respectable theory of meaning."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0142-q4",
+      "type": "weaken",
+      "skill": "strengthen_weaken",
+      "patterns": [
+        "arg.evidence_vs_conclusion",
+        "arg.assumption",
+        "arg.concession"
+      ],
+      "target_mistake": "choosing a fact the author has already granted, that cries of feeling are instinctive and alike everywhere, or a fact that supports the walking half of the contrast, as if it weakened him",
+      "prediction_target": "The learner should be able to say: only evidence that a particular language comes by birth rather than by upbringing would hurt the argument.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 3,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "argument",
+        "inference"
+      ],
+      "stem": "Which of the following, if true, would most seriously weaken the author's argument?",
+      "options": {
+        "A": "Infants adopted abroad at birth later used words of their parents' language that nobody taught them.",
+        "B": "Children who grow up with almost no company learn to walk at about the same age as other children.",
+        "C": "Cries of sudden pain and of joy sound much the same among peoples whose languages are wholly unlike.",
+        "D": "Some languages have changed far more over the last century than have the languages of their neighbours."
+      },
+      "correct": "A",
+      "estimated_time_sec": 90,
+      "explanation": {
+        "expert_notice": "The argument rests on two predictions: remove society and the child walks but never talks; move the child and he walks as before but speaks 'completely at variance with the speech of his native environment'. A weakener has to make one of those predictions fail for speech.",
+        "correct_reasoning": "Words of the parents' language surfacing in a child who never heard it would mean that something of a particular language travels by birth rather than by tradition, which is precisely what 'a purely historical heritage of the group' denies. It strikes the transplant experiment at its centre.",
+        "passage_anchor": "rc-0142-p2, rc-0142-p3",
+        "question_type_note": "To weaken an argument, attack the link between its evidence and its conclusion. A fact the author has already granted, or a fact about the other half of a contrast, leaves that link untouched.",
+        "reading_habit": "Before judging weakeners, list what the author has already conceded. Here he grants that cries of feeling are instinctive, so evidence that they are the same everywhere costs him nothing.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "opposite_direction",
+            "why_wrong": "This confirms the author's account of walking ('Eliminate society and... he will learn to walk'), and so supports the contrast instead of weakening it.",
+            "seductive_element": "It sounds like evidence on the topic, and a reader hunting for a weakener may not check which way it points."
+          },
+          {
+            "option": "C",
+            "trap_type": "true_but_irrelevant",
+            "why_wrong": "The author already grants that such cries are 'indeed instinctive'; his point is that they are 'non-symbolic' and so not speech. Their being alike everywhere is just what he would expect.",
+            "seductive_element": "Cries shared by everyone look like an instinctive basis for language, which is the view of 'the popular mind' the last paragraph describes."
+          },
+          {
+            "option": "D",
+            "trap_type": "out_of_scope",
+            "why_wrong": "Uneven rates of change say nothing about whether speech is inherited or acquired. If anything, change that differs from group to group fits speech's being 'the product of long-continued social usage'.",
+            "seductive_element": "It is about how languages vary, which is the subject of the third paragraph."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "circumscribed",
+      "passage_use": "varies only within circumscribed limits",
+      "meaning_here": "narrow and fixed; kept within a small range",
+      "difficulty": "medium"
+    },
+    {
+      "word": "assignable",
+      "passage_use": "varies without assignable limit",
+      "meaning_here": "able to be named or fixed; here, no limit that anyone could point to",
+      "difficulty": "hard"
+    },
+    {
+      "word": "conventional",
+      "passage_use": "a merely conventional system of sound symbols",
+      "meaning_here": "fixed by the custom and agreement of a group rather than by nature",
+      "difficulty": "medium"
+    },
+    {
+      "word": "aloof",
+      "passage_use": "it does not stand aloof, as it were, and announce",
+      "meaning_here": "apart and at a distance; here, separate from the feeling it would be reporting",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "This is the opening argument of a founding book of modern linguistics, in its author's own words. It is built on a comparison with walking and ends by removing an objection; notice exactly what the author concedes in that last paragraph and what he refuses.",
+    "one_sentence_summary": "Speech seems as natural as walking, but walking is a biological function that would develop in any society or none, while speech is acquired from a society's tradition and varies without limit from group to group; the instinctive cries of pain and joy do not show otherwise, because they are not symbols, and a definition of language wide enough to take them in would take in clouds too.",
+    "main_idea": "Talking feels natural, but it is learnt from the society you are born into, unlike walking, which your body would manage anywhere. Cries of pain or joy are instinctive, but they are not language, because they do not stand for anything.",
+    "simple_explanation": "We talk so easily that talking seems as natural as walking. Sapir says that feeling is an illusion.\n\nWalking is built into the body. A child would learn to walk even with no society around it, and a baby moved to a faraway country walks much as it would have walked at home. Talking is different. A child learns to talk only because a society surrounds it and passes on its way of speaking. Take the society away and the child never talks. Move the baby, and it grows up speaking the new country's language, not its parents'.\n\nSo walking varies only a little, from person to person, and for no reason. Speech varies endlessly from group to group, because each group's speech is its own history, built up over generations. Walking is biological; speech is cultural.\n\nThen Sapir deals with an objection. When we are hurt or delighted we cry out without thinking, and those cries seem instinctive. He agrees that they are instinctive, but says they are not language. A cry of pain is part of the pain; it does not stand apart from it and report it. If we called 'Oh!' a word meaning 'I am in great pain', we would also have to call clouds a word meaning 'It is likely to rain'. A definition of language that wide means nothing at all.",
+    "why_difficult": "The sentences are long and abstract, and the key terms ('instinctive', 'symbolic', 'conventional', 'cultural') do precise work. The argument also concedes things along the way: the individual is 'in a certain sense' predestined to talk, walking is instinctive but 'not, of course, itself an instinct', and the cries of feeling really are instinctive. A reader who takes a concession for a reversal will get the passage backwards.",
+    "author_intention": "To clear the ground for a definition of language by showing that speech, however natural it feels, is a cultural inheritance rather than a biological endowment, and that the strongest-looking evidence to the contrary is not evidence about language at all.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0142-p1",
+        "role": "Questions a feeling",
+        "note": "Speech seems as natural as walking, but the feeling is an illusion: walking is inherent and biological, untouched by culture."
+      },
+      {
+        "paragraph_id": "rc-0142-p2",
+        "role": "Runs two experiments",
+        "note": "Remove society and a child walks but never talks; move him to an alien society and he walks as before but speaks its language."
+      },
+      {
+        "paragraph_id": "rc-0142-p3",
+        "role": "Draws the contrast",
+        "note": "Walking varies a little, between individuals, for no purpose; speech varies without limit, between groups, as their historical heritage."
+      },
+      {
+        "paragraph_id": "rc-0142-p4",
+        "role": "Removes an objection",
+        "note": "Cries of pain and joy are instinctive but not symbols. Calling them speech would make clouds speech, and the definition meaningless."
+      }
+    ],
+    "tone_progression": "Calm and expository at the start, confident and almost legal in the thought experiments, summarising in the third paragraph, and brisk and faintly ironic at the end, as the popular view is reduced to clouds announcing rain.",
+    "key_transitions": [
+      "'Yet it needs but a moment's reflection to convince us that this naturalness of speech is but an illusory feeling.' (first paragraph): the familiar view is put in question.",
+      "'Not so language.' (opening of the second paragraph): the contrast with walking begins.",
+      "'But there is all the difference in the world between such involuntary expression of feeling and the normal type of communication of ideas that is speech.' (last paragraph): the objection is answered."
+    ],
+    "misunderstanding": "Readers often take the last paragraph to concede that language has an instinctive root, because the author agrees that cries of pain and joy are instinctive. He agrees only to that. His point is that such cries are not language at all, since they do not stand for the feeling but are part of it, and that counting them as language would force us to count clouds.",
+    "traps_summary": "The traps turn a difference of kind into a difference of degree, borrow the passage's own words ('involuntary', 'without assignable limit') for the wrong job, read the clouds as an illustration rather than a reductio, and offer as weakeners facts the author has already granted or that support his account of walking.",
+    "reading_lesson": "When an author grants part of an objection, write down exactly what is granted and what is refused. Here: cries are instinctive (granted); cries are language (refused). Questions on such passages, and weaken questions above all, are decided by that line.",
+    "real_world": "Edward Sapir, the American linguist and anthropologist who died in 1939, published this in 1921, and the walking comparison has outlived much of the science around it. Whatever the brain brings to language, nobody is born speaking a particular one: a child adopted at birth speaks the language of the home that raises it.",
+    "takeaway": "Feeling natural is not the same as being inborn: what a society teaches early enough feels like nature.",
+    "reflection_question": "What else that you do without thinking was in fact handed to you by the people who raised you?",
+    "eli10": {
+      "big_idea": "Talking feels as natural as walking, but we only learn to talk from the people around us; walking is built into our bodies.",
+      "story": "Talking feels as easy as walking. But Sapir says they are different. Your body is built to walk. A child would walk even with nobody around. Talking needs other people. A child learns to talk only because its family and town talk to it. Imagine a baby born in India but raised in Japan. It will walk much as it would have at home. But it will speak Japanese, not its parents' language. So walking changes only a little from person to person. Speech changes hugely from group to group. When we are hurt, we shout 'Ow!' without learning it. Sapir agrees that shout is natural. But it is not a word. It is part of the hurt, not a message about it. If 'Ow!' were a word, dark clouds would be a word for rain. Then the word language would mean nothing.",
+      "paragraphs": [
+        "Questions a feeling: talking seems as natural as walking, but only walking is built into the body.",
+        "Tests it twice: without society a child never talks; moved abroad, it walks the same but speaks differently.",
+        "Sums up: walking varies a little between people, speech varies hugely between groups.",
+        "Answers an objection: cries of pain are natural but are not words, or clouds would be words too."
+      ],
+      "author_view": "Sapir is calm and sure: speech is something a society teaches, not something the body simply does."
+    }
+  }
+}

@@ -1,0 +1,333 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0120",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 86,
+    "genre": "markets",
+    "difficulty": "easy",
+    "difficulty_numeric": 2,
+    "stage": "foundation",
+    "skills": [
+      "main-idea-extraction",
+      "argument-tracking",
+      "inference",
+      "structure-mapping"
+    ],
+    "word_count": 306,
+    "question_count": 3,
+    "question_types": [
+      "primary_purpose",
+      "role_of_detail",
+      "inference"
+    ],
+    "theme": "rival stalls can end up side by side for two different reasons: sellers competing for a fixed set of customers edge together and only divide them, while a cluster draws a bigger crowd because customers want to compare; the test that separates the two is whether a newcomer takes trade from the stalls already there, and only the second explains why the busiest stalls have the most rivals",
+    "estimated_time_min": 5.5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-03",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted."
+    },
+    "date_added": "2026-10-03",
+    "batch_id": "batch-rc-005",
+    "prompt_version": "content engine v1 + CAT-size brief 2026-10",
+    "reviewer_notes": "Two views weighed, impersonal and in the present tense, opening on a scene. The first view is the economists' beach model of two sellers, a canonical idea; what the passage adds is the customer-side explanation, the observable test that separates the two (whether a newcomer's arrival lowers the old stalls' takings), and a verdict that gives each explanation the question it can answer rather than crowning one.",
+    "vocab_extracted": [
+      "edging",
+      "gamble",
+      "rivals"
+    ],
+    "length_class": "short",
+    "structure": "two_views_adjudication",
+    "viewpoints": 2,
+    "tone": "observant, even-handed, lightly amused",
+    "difficulty_vector": {
+      "lexical": 1,
+      "syntactic": 2,
+      "abstraction": 2,
+      "inference_depth": 2,
+      "distractor_similarity": 2,
+      "reasoning_depth": 3,
+      "structural_ambiguity": 1,
+      "time_pressure": 2
+    },
+    "reasoning_patterns": [
+      "struct.two_views_adjudication",
+      "struct.example",
+      "struct.contrast",
+      "comp.purpose",
+      "comp.function_over_words",
+      "arg.example",
+      "arg.evidence",
+      "inf.author_view_application",
+      "inf.strongly_supported",
+      "lang.overstatement",
+      "scope.too_narrow",
+      "elim.systematic"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1: the rival is the option saying the passage shows the economists' account is mistaken, which a reader can build from the closing 'Only the crowd explains...'; it is settled by 'Both forces are probably at work' and by the beach being credited with why two sellers on an ordinary road drift together. Q2: the finalist is 'explain why the busiest stalls in a city are those with the most rivals', since the beach does explain why sellers stand side by side; the last sentence gives that job to the crowd and to the crowd only. Q3: a strong candidate who reads the test backwards picks 'count in favour of the beach explanation'; the third paragraph says the beach story predicts that the old stalls 'should lose trade'. 'Prove that the beach explanation plays no part anywhere' points the right way and overstates what one lane can show.",
+      "blind_solve": null
+    }
+  },
+  "passage": {
+    "title": "Side by Side",
+    "reading_time_min": 1.7,
+    "paragraphs": [
+      {
+        "id": "rc-0120-p1",
+        "text": "At nine in the evening, the busiest place to eat in many Indian cities is a lane where twenty stalls sell much the same food. Three of them make pav bhaji within a few steps of one another. Any one could move half a kilometre away and have a street to itself. One explanation, borrowed from economics, imagines two ice-cream carts on a beach. If the carts stand far apart, each serves the half of the beach nearer to it. But each can win a few of the other's customers by edging towards the middle, so both keep edging until they stand side by side. On this view, crowding together brings in no new customers. It only divides the same ones."
+      },
+      {
+        "id": "rc-0120-p2",
+        "text": "A second explanation starts from the customer. Someone going out to eat at night is not looking for the nearest stall. She wants to compare, to see which pan is busiest and which food looks freshest, and to be sure of finding something good. One stall is a gamble; a lane of twenty is a promise. On this view, crowding together draws people from across the city who would never have come for a single stall, so every seller gets a share of a bigger crowd."
+      },
+      {
+        "id": "rc-0120-p3",
+        "text": "The two explanations can be told apart by watching what happens when a new stall opens in the lane. If the beach story is right, the old stalls should lose trade, since the same customers are now split more ways. If the second story is right, they may lose nothing, because the newcomer helps draw a bigger crowd. Both forces are probably at work, but they explain different things. The beach explains why two sellers on an ordinary road drift together. Only the crowd explains why the busiest stalls in a city are the ones with the most rivals."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0120-q1",
+      "type": "primary_purpose",
+      "skill": "author_purpose",
+      "patterns": [
+        "comp.purpose",
+        "struct.two_views_adjudication",
+        "scope.too_narrow"
+      ],
+      "target_mistake": "naming one of the two explanations as the purpose, or reading the verdict as a rejection of the first",
+      "prediction_target": "The learner should be able to say beforehand: the author sets out two explanations of why rival stalls cluster and decides what each one can explain.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 2,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "main_idea"
+      ],
+      "stem": "The author's main purpose in the passage is to",
+      "options": {
+        "A": "explain how two carts on a beach end up side by side",
+        "B": "weigh two explanations of why rival stalls crowd together",
+        "C": "show that the economists' account of crowding stalls is mistaken",
+        "D": "advise new stall owners to set up beside their busiest rivals"
+      },
+      "correct": "B",
+      "estimated_time_sec": 70,
+      "explanation": {
+        "expert_notice": "The passage labels its own structure: 'One explanation', 'A second explanation', and then 'The two explanations can be told apart'. Two views and a judgement between them is the whole design.",
+        "correct_reasoning": "The first paragraph gives the beach explanation, the second gives the customer's explanation, and the third proposes a test and assigns each explanation what it can account for. Weighing two explanations is what the passage does from start to finish.",
+        "passage_anchor": "rc-0120-p1, rc-0120-p2, rc-0120-p3",
+        "question_type_note": "For a primary-purpose question, count the views in the passage and decide what the author does with them. Two views plus a verdict is weighing, not describing one view or attacking it.",
+        "reading_habit": "Underline the signposts that introduce explanations, such as 'one explanation', 'a second explanation' and 'on this view'. They give you the skeleton of a passage before you have understood its details.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "too_narrow",
+            "why_wrong": "The beach is the picture inside the first explanation. It takes half of one paragraph, and the passage goes on to a second explanation and a verdict.",
+            "seductive_element": "The ice-cream carts are the most memorable picture in the passage."
+          },
+          {
+            "option": "C",
+            "trap_type": "criticism_as_rejection",
+            "why_wrong": "The author limits the beach explanation rather than rejecting it. He says both forces are probably at work, and that the beach explains why two sellers on an ordinary road drift together.",
+            "seductive_element": "The closing sentence gives the busiest stalls to the second explanation, which can read as a defeat for the first."
+          },
+          {
+            "option": "D",
+            "trap_type": "prescriptive_leap",
+            "why_wrong": "The passage explains why stalls cluster; it never tells anyone where to set up a stall.",
+            "seductive_element": "An account of why clustering pays seems to carry a recommendation with it."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0120-q2",
+      "type": "role_of_detail",
+      "skill": "paragraph_function",
+      "patterns": [
+        "arg.example",
+        "comp.function_over_words",
+        "lang.overstatement"
+      ],
+      "target_mistake": "giving the beach the job the passage reserves for the second explanation, or making the example claim more than it does",
+      "prediction_target": "The learner should be able to say beforehand: the beach shows, in a simple picture, how two sellers competing for the same customers move together.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "logical_structure"
+      ],
+      "stem": "The author mentions the two ice-cream carts on a beach in order to",
+      "options": {
+        "A": "suggest that beach sellers face less competition than stalls in a lane",
+        "B": "explain why the busiest stalls in a city are those with the most rivals",
+        "C": "prove that crowding together always leaves every seller worse off",
+        "D": "show how sellers chasing the same customers can end up side by side"
+      },
+      "correct": "D",
+      "estimated_time_sec": 60,
+      "explanation": {
+        "expert_notice": "The carts arrive inside the first explanation: 'One explanation, borrowed from economics, imagines two ice-cream carts on a beach.' Whatever job they do, they do it for that explanation and no other.",
+        "correct_reasoning": "The beach story shows each cart edging towards the middle to win some of the other's customers until both stand side by side. That is the first explanation's whole logic in one picture: sellers chasing the same customers end up together, without bringing in any new ones.",
+        "passage_anchor": "rc-0120-p1",
+        "question_type_note": "A role-of-detail question asks what job an example does. Find the claim the example sits inside; the job is usually to make that claim easy to see.",
+        "reading_habit": "When an example appears, ask which claim it belongs to before asking what it says. Examples are never the point; they serve one.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "comparison_distortion",
+            "why_wrong": "The passage never compares the competition on a beach with the competition in a lane. The beach is a simplified picture of the lane, not a contrast with it.",
+            "seductive_element": "There are two carts on the beach and twenty stalls in the lane, which invites a comparison."
+          },
+          {
+            "option": "B",
+            "trap_type": "misattributed_view",
+            "why_wrong": "The passage gives this job to the other explanation: 'Only the crowd explains why the busiest stalls in a city are the ones with the most rivals.' The beach explains only why sellers drift together.",
+            "seductive_element": "The beach does explain why sellers end up side by side, so it seems to explain the busy lane as well."
+          },
+          {
+            "option": "C",
+            "trap_type": "extreme_language",
+            "why_wrong": "On the beach story each cart still serves half the beach; crowding together divides the same customers, and nothing in the passage says every seller always ends up worse off.",
+            "seductive_element": "'It only divides the same ones' sounds like a loss for the sellers."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0120-q3",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.author_view_application",
+        "inf.strongly_supported",
+        "arg.evidence"
+      ],
+      "target_mistake": "reading the passage's test backwards, so that steady takings count for the beach explanation, or treating one observation as a proof",
+      "prediction_target": "The learner should be able to say beforehand: if the old stalls lose nothing when a rival arrives, the crowd must have grown, which is what the second explanation predicts.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 2,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "application"
+      ],
+      "stem": "Suppose a new pav bhaji stall opens in the lane and the takings of the stalls already there do not fall. It can be inferred from the passage that this would",
+      "options": {
+        "A": "suggest that the newcomer had helped to draw in more customers",
+        "B": "count in favour of the beach explanation rather than the second",
+        "C": "prove that the beach explanation plays no part anywhere",
+        "D": "mean that the same customers were now being split more ways"
+      },
+      "correct": "A",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "The third paragraph sets out a test with two outcomes: if the beach story is right, the old stalls should lose trade; if the second story is right, they may lose nothing, because the newcomer helps draw a bigger crowd. The stem describes the second outcome.",
+        "correct_reasoning": "Steady takings for the old stalls after a newcomer arrives is the result the passage links to the second explanation, in which the newcomer helps draw a bigger crowd. So the observation suggests the newcomer helped bring in more customers. 'Suggest' is as far as one observation can go.",
+        "passage_anchor": "rc-0120-p3",
+        "question_type_note": "When a passage gives you a test, an inference question will usually give you a result. Match the result to the outcome the passage attached to it, and keep the conclusion as modest as the evidence.",
+        "reading_habit": "When an author says 'if this is right, we should see that', write the pair down. Later questions often hand you the 'that' and ask which 'this' it supports.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The beach explanation predicts that the old stalls should lose trade, since the same customers are split more ways. Takings that do not fall count against it, not for it.",
+            "seductive_element": "The beach explanation comes first and carries the authority of economics, so it is easy to read any result as support for it."
+          },
+          {
+            "option": "C",
+            "trap_type": "possibility_as_certainty",
+            "why_wrong": "One lane's result is evidence, not proof, and the passage says both forces are probably at work; it still credits the beach with explaining why two sellers on an ordinary road drift together.",
+            "seductive_element": "It points the right way, against the beach story, and only overstates how far the evidence goes."
+          },
+          {
+            "option": "D",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "'Split more ways' belongs to the beach prediction, in which the old stalls lose trade. If their takings do not fall, the customers were not simply being divided.",
+            "seductive_element": "The words come straight from the third paragraph's description of the test."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "edging",
+      "passage_use": "by edging towards the middle, so both keep edging until they stand side by side",
+      "meaning_here": "moving slowly, a little at a time",
+      "difficulty": "easy"
+    },
+    {
+      "word": "gamble",
+      "passage_use": "One stall is a gamble; a lane of twenty is a promise.",
+      "meaning_here": "a choice whose result is uncertain and may disappoint",
+      "difficulty": "easy"
+    },
+    {
+      "word": "rivals",
+      "passage_use": "the busiest stalls in a city are the ones with the most rivals",
+      "meaning_here": "competitors selling the same thing to the same people",
+      "difficulty": "easy"
+    }
+  ],
+  "mentor": {
+    "challenge": "Two explanations of the same scene, and a test that tells them apart. Keep each explanation's prediction separate.",
+    "one_sentence_summary": "Rival food stalls cluster for two reasons, sellers chasing a fixed set of customers edge together as on the economists' beach, and a cluster draws a bigger crowd because customers want to compare; the two can be told apart by whether a newcomer takes trade from the old stalls, and only the second explains why the busiest stalls have the most rivals.",
+    "main_idea": "Two explanations account for rival stalls standing side by side. One says sellers fighting over the same customers end up together; the other says a cluster attracts more customers than a lone stall could. Watching what happens when a new stall opens tells them apart, and only the second explains why the busiest stalls have the most rivals.",
+    "simple_explanation": "In many Indian cities the busiest place to eat at night is a lane of stalls selling nearly the same food. Why don't the stalls spread out, so that each has a street to itself?\n\nThe first explanation uses two ice-cream carts on a beach. If they stand apart, each serves the half of the beach nearer to it. But each can win a few of the other's customers by moving towards the middle, so both keep moving until they are side by side. On this view, crowding together brings in no new customers. It just divides the same ones.\n\nThe second explanation starts with the customer. Someone going out to eat wants to compare and to be sure of finding something good. One stall is a gamble; a lane of twenty is a promise. So a lane brings in people from all over the city, and every stall gets a share of a bigger crowd.\n\nTo tell them apart, watch what happens when a new stall opens. If the old stalls lose trade, the first explanation fits. If they lose nothing, the crowd has grown, which fits the second. The author thinks both are at work, but only the second explains why the busiest stalls are the ones with the most rivals.",
+    "why_difficult": "The two explanations reach the same picture, sellers side by side, for opposite reasons, and they make opposite predictions about a newcomer. Readers who blur them together cannot tell which result supports which explanation.",
+    "author_intention": "To set two explanations side by side fairly, to show how a simple observation could separate them, and to say which one the busiest stalls need.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0120-p1",
+        "role": "Gives the first explanation",
+        "note": "A lane of twenty similar stalls; the beach story says sellers chasing the same customers edge together and only divide them."
+      },
+      {
+        "paragraph_id": "rc-0120-p2",
+        "role": "Gives the second",
+        "note": "Customers want to compare, so a lane of stalls draws people a single stall never would, and every seller shares a bigger crowd."
+      },
+      {
+        "paragraph_id": "rc-0120-p3",
+        "role": "Tests and decides",
+        "note": "A newcomer who takes trade supports the first; one who does not supports the second. Both are at work, but only the crowd explains the busiest stalls."
+      }
+    ],
+    "tone_progression": "Observant and lightly amused in the opening scene, patient and fair through the two explanations, and decisive in the last two sentences.",
+    "key_transitions": [
+      "'A second explanation starts from the customer.' (opening of paragraph 2): the passage turns from the seller's view to the buyer's.",
+      "'The two explanations can be told apart by watching what happens when a new stall opens in the lane.' (opening of paragraph 3): the weighing begins.",
+      "'Both forces are probably at work, but they explain different things.' (paragraph 3): the verdict divides the ground instead of crowning a winner."
+    ],
+    "misunderstanding": "A hurried reader thinks the author picks one explanation and throws the other away. He does not: the beach still explains why two sellers on an ordinary road drift together. What he denies is that the beach can explain why the busiest stalls have the most rivals.",
+    "traps_summary": "The options mix up the two explanations. One gives the beach the job the passage reserves for the crowd, one reads the test backwards, and one turns 'it only divides the same ones' into a claim that every seller always loses. Another treats the verdict as a rejection of the economists' account.",
+    "reading_lesson": "When a passage gives two explanations, write down what each one predicts. A test in the passage is useful to you only if you know which result belongs to which explanation.",
+    "real_world": "The same question can be asked of a street of jewellers, a road of car showrooms or a row of coaching centres: is each newcomer taking a slice of a fixed crowd, or helping to draw a bigger one?",
+    "takeaway": "Two explanations that produce the same picture can still be told apart by what each predicts next.",
+    "reflection_question": "Which shops cluster together near where you live, and would a new one take customers from the others or bring in more?",
+    "eli10": {
+      "big_idea": "Stalls crowd together for two reasons, and only one of them explains why the busiest stalls have the most rivals.",
+      "story": "Picture a lane where twenty stalls sell almost the same food. Why don't they spread out? First idea: think of two ice-cream carts on a beach. Each moves a little towards the middle to win some of the other's customers. Soon they stand side by side. They have not found new customers. They have only split the same ones. Second idea: hungry people like to choose. A lane full of stalls feels like a sure thing. One stall feels like a risk. So the lane pulls in people from all over the city, and every stall shares a bigger crowd. How can we tell? Watch when a new stall opens. If the old stalls sell less, the first idea fits. If they do not, the second fits. The writer thinks both happen. But only the second explains why the busiest stalls have the most rivals.",
+      "paragraphs": [
+        "Gives the first idea: sellers chasing the same customers end up side by side, like two beach carts.",
+        "Gives the second idea: people like choice, so a lane of stalls pulls in a bigger crowd.",
+        "Tests and decides: a new stall shows which is at work; only the second explains the busiest stalls."
+      ],
+      "author_view": "The writer is fair to both ideas, thinks both are at work, and gives the busiest stalls to the second."
+    }
+  }
+}

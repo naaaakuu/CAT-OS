@@ -16,17 +16,16 @@
       "argument-tracking",
       "trap-recognition"
     ],
-    "word_count": 566,
-    "question_count": 5,
+    "word_count": 509,
+    "question_count": 4,
     "question_types": [
-      "main_idea",
       "inference",
-      "author_purpose",
-      "tone",
-      "specific_detail"
+      "main_idea",
+      "specific_detail",
+      "tone"
     ],
     "theme": "replication and the epistemic status of a single result",
-    "estimated_time_min": 8.5,
+    "estimated_time_min": 8,
     "source": {
       "publication": "original",
       "url": null,
@@ -37,7 +36,7 @@
     "date_added": "2026-07-02",
     "batch_id": "batch-rc-001",
     "prompt_version": "in-repo authored (Milestone 2); RC_MASTER_GENERATION_PROMPT.v1 criteria applied",
-    "reviewer_notes": "Authored during Milestone 2 build; hard item with 5 questions. Self-scored against Pipeline §6. Owner review pending; verify difficulty feels genuinely hard, not obscure. Mentor layer added in Reading Mentor milestone (v2); reading-habit + misunderstanding layer added in Reading Experience milestone (v3). Owner review pending for all layers.",
+    "reviewer_notes": "Authored during Milestone 2 build; hard item with 5 questions. Self-scored against Pipeline §6. Owner review pending; verify difficulty feels genuinely hard, not obscure. Mentor layer added in Reading Mentor milestone (v2); reading-habit + misunderstanding layer added in Reading Experience milestone (v3). Owner review pending for all layers. 2026-10-03 CAT-size pass: 509→509 words, 5→5 paragraphs, 5→4 questions. Dropped q4 (author_purpose on the last two paragraphs: a second big-picture type beside main-idea q1, resting on p5 where tone q5 already does); the challenge line now counts four questions.",
     "vocab_extracted": [
       "provenance",
       "spurious",
@@ -190,45 +189,6 @@
       }
     },
     {
-      "id": "rc-0003-q4",
-      "type": "author_purpose",
-      "stem": "The author's primary purpose in the fourth and fifth paragraphs is to",
-      "options": {
-        "A": "pre-empt the misreading that the reckoning shows scientific knowledge to be unreliable or merely opinion",
-        "B": "concede that the reckoning has genuinely weakened the confidence a reader may place in results",
-        "C": "propose the specific reforms, pre-registration, null results, shared data, that a field should adopt",
-        "D": "compare scientific claims with opinions to show how much the two share once the metaphor is dropped"
-      },
-      "correct": "A",
-      "estimated_time_sec": 80,
-      "explanation": {
-        "correct_reasoning": "P4 opens 'It would be a misreading to take this as a counsel of despair' and p5 opens 'None of this vindicates the cynic.' Both paragraphs are structured as rebuttals to a distrustful interpretation: their purpose is to pre-empt it. Option A names that purpose.",
-        "passage_anchor": "rc-0003-p5",
-        "question_type_note": "Purpose questions ask what the author is doing with a passage stretch; explicit 'it would be a misreading' / 'none of this vindicates' signposts a pre-emptive rebuttal.",
-        "reading_habit": "Treat phrases like 'it would be a misreading' as purpose signposts: they mean the author has switched from arguing the claim to defending it from interpretations of it.",
-        "distractors": [
-          {
-            "option": "C",
-            "trap_type": "half_right",
-            "why_wrong": "The reforms are listed in p4, but as evidence that the reckoning strengthens the enterprise; nothing is framed as a proposal, and no journal is told what to adopt.",
-            "seductive_element": "The reforms are genuinely listed, so 'proposing reforms' feels close."
-          },
-          {
-            "option": "B",
-            "trap_type": "opposite_direction",
-            "why_wrong": "The author argues the reckoning strengthens science, the reforms are 'the machinery by which it distinguishes the durable from the spurious', so weakened confidence is the reading these paragraphs exist to refute.",
-            "seductive_element": "It matches the popular framing of a 'crisis.'"
-          },
-          {
-            "option": "D",
-            "trap_type": "opposite_direction",
-            "why_wrong": "P5 sets claims against opinion in order to separate them, arguing that the apparatus of replication is what makes the difference between them real.",
-            "seductive_element": "The words 'claim' and 'opinion' both appear, inviting a comparison reading."
-          }
-        ]
-      }
-    },
-    {
       "id": "rc-0003-q5",
       "type": "tone",
       "stem": "The author's attitude toward the replication reforms is best described as",
@@ -289,7 +249,7 @@
     }
   ],
   "mentor": {
-    "challenge": "Five questions, one controlling metaphor, and an author who spends two paragraphs blocking the cynical misreading you may be tempted toward. Precision about what the author does NOT claim will decide your score.",
+    "challenge": "Four questions, one controlling metaphor, and an author who spends two paragraphs blocking the cynical misreading you may be tempted toward. Precision about what the author does NOT claim will decide your score.",
     "main_idea": "A single experiment does not hand science a fact; it places a bet that the result will happen again. Replication settles the bet. The 'crisis' was really the collapse of a bad metaphor, findings as finished objects, and fixing the metaphor makes science stronger, not weaker.",
     "author_intention": "To reframe how the reader thinks about the word 'finding', and to block, in advance, the cynic's conclusion that science is just opinion.",
     "paragraph_journey": [
@@ -327,6 +287,18 @@
     "misunderstanding": "Readers arrive carrying the headline version of this story, 'science is broken', and paragraph 2's warnings seem to confirm it, so they stop updating. But the author spends the final two paragraphs explicitly forbidding that reading. The subtler misreading is treating 'claim' as a demotion: in this passage a claim is not weaker than a fact, it is what a fact looks like before the work of replication is done.",
     "traps_summary": "Advanced passages are lost to overstatement. The wrong options here stretched 'a predictable fraction are flukes' into 'most findings are false', or rode the object-to-claim reframe straight into 'science is opinion': the exact conclusion paragraph 5 forbids. Mark what the author fences off, not just what the author asserts.",
     "real_world": "Next time a headline says 'study finds', you will hear it differently: a bet has been placed, not a fact delivered. Ask whether anyone has repeated it: that one question is most of scientific literacy.",
-    "takeaway": "One study is a bet; replication is the payout. Never confuse the wager with the winnings."
+    "takeaway": "One study is a bet; replication is the payout. Never confuse the wager with the winnings.",
+    "eli10": {
+      "big_idea": "One experiment does not hand us a fact; it makes a claim others must repeat, and that checking is what earns science our trust.",
+      "story": "People say a study 'showed' something, as if it handed over a finished object. The writer says this way of talking can mislead us. A single result is weak evidence. Luck alone can produce it. Worse, the surprising results journals love to print are the likeliest to be flukes. So one study does not give us a fact. It makes a bet that others, repeating it, will get the same result. Only repeating settles the bet, however neat the first study looked. Think of a new bowler's one brilliant over. You wait for him to do it again before you trust it. A result that fails to repeat is not proved false; it was a bet mistaken for a fact. None of this means science is just opinion, or a lost cause. Printing failures, sharing data and repeating tests are how it sorts strong results from weak ones.",
+      "paragraphs": [
+        "Questions a habit: we talk as if a study hands over a finished fact.",
+        "Explains the danger: one result is weak, and the striking ones journals print are the likeliest flukes.",
+        "Gives the main claim: a study is a bet, settled only when others repeat it.",
+        "Says there is no cause for despair: the fault was in our words; new checks sort strong from weak.",
+        "Answers the doubter: science is not just opinion, and admitting failures is what earns it trust."
+      ],
+      "author_view": "Calm and firm: the writer welcomes the new checking and will not let anyone call science mere opinion."
+    }
   }
 }

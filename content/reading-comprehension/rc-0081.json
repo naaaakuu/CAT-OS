@@ -17,18 +17,16 @@
       "evidence-anchoring",
       "trap-recognition"
     ],
-    "word_count": 757,
-    "question_count": 6,
+    "word_count": 606,
+    "question_count": 4,
     "question_types": [
-      "agree_disagree",
       "inference",
-      "not_true",
       "scope",
       "strengthen",
       "title_selection"
     ],
     "theme": "the sense of direct access to a character's mind explained by the deletion of the reporting verb rather than by the doubling of voices, with the same deletion removing the warrant that makes an unreliable report detectable, a prediction about neutral diction offered as a test, and the word illusion restricted to its optical sense",
-    "estimated_time_min": 12.5,
+    "estimated_time_min": 9,
     "source": {
       "publication": "original",
       "url": null,
@@ -39,7 +37,7 @@
     "date_added": "2026-09-13",
     "batch_id": "batch-rc-003",
     "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-05",
-    "reviewer_notes": "The rival explanation is conceded in full and then shown to answer a different question, which keeps it live for the agreement and title questions. The hardest move is the fourth paragraph, where the same subtraction that creates the effect destroys the warrant, so the passage's most positive claim and its most uncomfortable one share a mechanism. The closing paragraph restricts the word illusion and refuses two conclusions a reader will have begun to draw.",
+    "reviewer_notes": "The rival explanation is conceded in full and then shown to answer a different question, which keeps it live for the agreement and title questions. The hardest move is the fourth paragraph, where the same subtraction that creates the effect destroys the warrant, so the passage's most positive claim and its most uncomfortable one share a mechanism. The closing paragraph restricts the word illusion and refuses two conclusions a reader will have begun to draw. 2026-10-03 CAT-size pass: 757→606 words, 6→5 paragraphs, 6→4 questions. Dropped p5 (the test by neutral diction) after folding its one indispensable sentence into p3, so the live rival in the inference question stays refuted; tightened p1, p2 and p6; dropped q3 (agreement, overlapping the strengthen and title questions on p3) and q5 (NOT-true).",
     "length_class": "long",
     "structure": "phenomenon_explanation",
     "viewpoints": 2,
@@ -82,7 +80,7 @@
     ],
     "quality": {
       "status": "reviewed",
-      "adversarial_review": "Q1's live rival is the option that the sense of access survives where the idiom belongs to nobody in particular, which the fifth paragraph denies by predicting and reporting the opposite; the key instead runs the fourth paragraph forward, since a sentence that makes no claim offers nothing for a doubt to attach to. Q2's rival is the title about why some novelists persuade us, which names exactly the question the last paragraph says the account cannot answer. Q3's rival is the option that the device gives a reader knowledge other modes withhold, which inverts the mechanism: nothing is added to the characterisation, and the effect is produced by a deletion. Q4's rival is the option extending the account to every mode of representing thought, which cannot hold, since the explanation is the absence of a verb the other modes contain. Q5's exception is the claim that the device was developed to conceal the narrator's judgements, a purpose the passage never states and which contradicts the rival account it concedes, where the novelist remains present in the sentence. Q6's rival is the option about novelists praised for depth, which supports the account the passage rejects, that something has been added.",
+      "adversarial_review": "Q1's live rival is the option that the sense of access survives where the idiom belongs to nobody in particular, which the fifth paragraph denies by predicting and reporting the opposite; the key instead runs the fourth paragraph forward, since a sentence that makes no claim offers nothing for a doubt to attach to. Q2's rival is the title about why some novelists persuade us, which names exactly the question the last paragraph says the account cannot answer. Q3's rival is the option that the device gives a reader knowledge other modes withhold, which inverts the mechanism: nothing is added to the characterisation, and the effect is produced by a deletion. Q4's rival is the option extending the account to every mode of representing thought, which cannot hold, since the explanation is the absence of a verb the other modes contain. Q5's exception is the claim that the device was developed to conceal the narrator's judgements, a purpose the passage never states and which contradicts the rival account it concedes, where the novelist remains present in the sentence. Q6's rival is the option about novelists praised for depth, which supports the account the passage rejects, that something has been added. (2026-10-03, CAT-size pass: q3, q5 were dropped, so any note above about them no longer applies.)",
       "blind_solve": null
     },
     "vocab_extracted": [
@@ -94,31 +92,27 @@
   },
   "passage": {
     "title": "Inside the Thinking",
-    "reading_time_min": 3.9,
+    "reading_time_min": 3.3,
     "paragraphs": [
       {
         "id": "rc-0081-p1",
-        "text": "Ask a reader what happened in a novel and you get a summary. Ask what it was like, and with certain novels and not others you get a different kind of answer: not that the book told them what somebody thought, but that they were inside the thinking while it was going on. The effect is peculiar, it is reported consistently, and it belongs to a technique with an ugly name. Set the same moment down three ways. I shall have to answer it tonight, she thought. She thought that she would have to answer it that night. The letter would have to be answered tonight; there was no getting round it. Only the third produces the effect, and readers who cannot name the difference can feel it."
+        "text": "Ask a reader what happened in a novel and you get a summary. Ask what it was like, and with certain novels you get a different kind of answer: not that the book told them what somebody thought, but that they were inside the thinking while it was going on. The effect belongs to a technique with an ugly name. Set the same moment down three ways. I shall have to answer it tonight, she thought. She thought that she would have to answer it that night. The letter would have to be answered tonight; there was no getting round it. Only the third produces the effect."
       },
       {
         "id": "rc-0081-p2",
-        "text": "The explanation usually given is about the author. Because the third sentence carries the character's idiom inside the narrator's grammar, two voices occupy it at once, and a novelist can therefore remain present in a sentence he appears to have vacated, colouring a thought without interrupting it. That is true, and it is worth knowing, and it is an account of what the device does for the writer. It does not explain what the sentence does to the reader. A reader who feels close to a mind is not registering the author's continued presence. If anything the sensation is of the author's absence, which is the very thing the usual account was framed to deny."
+        "text": "The explanation usually given is about the author. Because the third sentence carries the character's idiom inside the narrator's grammar, two voices occupy it at once, and a novelist can remain present in a sentence he appears to have vacated, colouring a thought without interrupting it. That is true, and worth knowing, and it is an account of what the device does for the writer. It does not explain what the sentence does to the reader. If anything the sensation is of the author's absence, which is the very thing the usual account was framed to deny."
       },
       {
         "id": "rc-0081-p3",
-        "text": "The explanation of the sensation is grammatical, and it is negative. Both of the first two sentences contain a verb of reporting. A verb of reporting names an agent, and an agent implies a channel: somebody has taken the thought and passed it on, and a reader who is given a channel will place a distance along it, however short. The third sentence deletes that verb and keeps everything else, the character's words, her rhythm, her exasperation, all of it inside the narrator's tense and person. Nothing in the sentence names a transmitter. There is consequently nowhere for the reader to locate the mediation, and a thought with no visible carrier is experienced as arriving directly. The access is manufactured by a subtraction. Nothing whatever has been added to the characterisation."
+        "text": "The explanation of the sensation is grammatical, and it is negative. The first two sentences both contain a verb of reporting. A verb of reporting names an agent, and an agent implies a channel: somebody has passed the thought on, and a reader given a channel will place a distance along it, however short. The third sentence deletes that verb and keeps everything else, the character's words, her rhythm, her exasperation, all of it inside the narrator's tense and person. With no transmitter named, there is nowhere for the reader to locate the mediation, and a thought with no visible carrier is experienced as arriving directly. The thought must still be unmistakably hers: passages in which the diction is neutral are read as a narrator thinking about a character rather than a character thinking, however faithfully they keep the form. The access is manufactured by a subtraction. Nothing whatever has been added to the characterisation."
       },
       {
         "id": "rc-0081-p4",
-        "text": "The subtraction removes something else in the same stroke, and this is the part usually missed. A verb of reporting is also a warrant. When a narrator says that she thought something, the narrator has undertaken that she did, and the undertaking can be false, which is what makes an unreliable report detectable: there is a claim on the page to be disbelieved. The free indirect sentence makes no such claim and offers nobody to have got it wrong. So the mode that gives a reader the strongest sense of knowing a mind is exactly the mode in which the reader has least to go on, and unreliability inside it does not present itself as error. It is simply not visible."
-      },
-      {
-        "id": "rc-0081-p5",
-        "text": "An account of this kind earns its keep by predicting where the effect fails, and this one does. If the sensation depends on the idiom being unmistakably the character's, it ought to weaken wherever a sentence might have been produced by either party. That is what happens. Passages in which the diction is neutral, in which nothing is phrased as this person and not another would phrase it, are read as commentary however faithfully they keep the grammatical form, and what the reader senses is a narrator thinking about a character rather than a character thinking. The rival account predicts nothing of the kind, since two voices inhabit the neutral sentence exactly as they inhabit the vivid one."
+        "text": "The subtraction removes something else in the same stroke, and this is the part usually missed. A verb of reporting is also a warrant. A narrator who says that she thought something has undertaken that she did, and the undertaking can be false, which is what makes an unreliable report detectable: there is a claim on the page to be disbelieved. The free indirect sentence makes no such claim and offers nobody to have got it wrong. So the mode that gives a reader the strongest sense of knowing a mind is exactly the mode in which the reader has least to go on, and unreliability inside it does not present itself as error. It is simply not visible."
       },
       {
         "id": "rc-0081-p6",
-        "text": "Two limits should be entered here, and the first is a limit on the word illusion. It is meant as an optician means it, a reliable appearance with a known mechanism, and not as a trick played on anybody. No claim is made in such a sentence, so there is nothing in it that could be a lie, and a reader who feels close to a character has not been imposed upon. The second limit is the larger one. The account explains the sensation and not the achievement. Why one novelist's pages in this mode read like a mind and another's like a man doing an impression is a question about the ear, and nothing in the grammar answers it. What the grammar explains is why the good ones are able to work at all, which is a smaller thing and was worth establishing."
+        "text": "Two limits should be entered here, and the first is a limit on the word illusion. It is meant as an optician means it, a reliable appearance with a known mechanism, not a trick: no claim is made in such a sentence, so nothing in it could be a lie, and the reader has not been imposed upon. The second limit is larger. The account explains the sensation and not the achievement. Why one novelist's pages in this mode read like a mind and another's like a man doing an impression is a question about the ear, and nothing in the grammar answers it. What the grammar explains is why the good ones are able to work at all, which is a smaller thing and was worth establishing."
       }
     ]
   },
@@ -174,8 +168,8 @@
           {
             "option": "D",
             "trap_type": "opposite_direction",
-            "why_wrong": "The fifth paragraph predicts and then reports the reverse. Where the diction is neutral, the passage is read as commentary however faithfully it keeps the form, and what the reader senses is a narrator thinking about a character.",
-            "seductive_element": "It is the live rival, because the third paragraph locates the effect in the missing verb, which invites a reader to conclude that the missing verb is sufficient on its own."
+            "why_wrong": "The third paragraph says the reverse. The thought must be unmistakably the character's, and passages in which the diction is neutral are read as a narrator thinking about a character rather than a character thinking, however faithfully they keep the form.",
+            "seductive_element": "It is the live rival, because the third paragraph locates the effect in the missing verb, and a reader who takes the deletion for the whole story concludes that the missing verb is sufficient on its own."
           }
         ]
       }
@@ -210,8 +204,8 @@
       "correct": "C",
       "estimated_time_sec": 80,
       "explanation": {
-        "expert_notice": "The passage names an effect in its first paragraph, refuses one explanation of it in the second, supplies another in the third, draws a consequence in the fourth, tests it in the fifth and bounds it in the sixth. The one thing present in every movement after the first is the deleted verb.",
-        "correct_reasoning": "The correct title names the effect and its cause in the passage's own terms. Access is the word for what readers report, and the missing verb is what the explanation turns on, which is also what the consequence about warrants and the prediction about neutral diction both depend on. A title that drops either half loses four of the six paragraphs.",
+        "expert_notice": "The passage names an effect in its first paragraph, refuses one explanation of it in the second, supplies another in the third, draws a consequence in the fourth and bounds it in the fifth. The one thing present in every movement after the first is the deleted verb.",
+        "correct_reasoning": "The correct title names the effect and its cause in the passage's own terms. Access is the word for what readers report, and the missing verb is what the explanation turns on, which is also what the consequence about warrants depends on. A title that drops either half loses three of the five paragraphs.",
         "passage_anchor": "rc-0081-p3",
         "question_type_note": "A title is the main idea under a word limit, so altitude decides it. Too low and it names a paragraph; drawn from the conceded account, it names the position the passage is correcting.",
         "reading_habit": "Ask what each candidate title would make the passage about, and then check whether the author wrote that passage. The conceded explanation and the acknowledged limit both make attractive titles for essays nobody here has written.",
@@ -231,65 +225,8 @@
           {
             "option": "D",
             "trap_type": "overstatement",
-            "why_wrong": "The sixth paragraph forbids exactly this reading of the word illusion, saying it is meant as an optician means it, that no claim is made and nothing in the sentence could be a lie, and that the reader has not been imposed upon.",
+            "why_wrong": "The last paragraph forbids exactly this reading of the word illusion, saying it is meant as an optician means it, that no claim is made and nothing in the sentence could be a lie, and that the reader has not been imposed upon.",
             "seductive_element": "The fourth paragraph's account of invisible unreliability sounds like a charge, and a reader who has felt its force will read the closing correction as a softening rather than as a definition."
-          }
-        ]
-      }
-    },
-    {
-      "id": "rc-0081-q3",
-      "type": "agree_disagree",
-      "skill": "inference",
-      "patterns": [
-        "inf.author_vs_reported",
-        "arg.concession",
-        "inf.strongly_supported"
-      ],
-      "target_mistake": "attributing to the author the view he concedes, or the added-depth account his explanation is built to replace",
-      "prediction_target": "The learner should predict agreement with a statement about an effect produced by removal rather than by addition.",
-      "difficulty": {
-        "inference_depth": 4,
-        "distractor_similarity": 4,
-        "reasoning_depth": 4
-      },
-      "secondary_skills": [
-        "main_idea",
-        "argument"
-      ],
-      "stem": "The author would be most likely to agree with which of the following statements?",
-      "options": {
-        "A": "The technique lets a reader know things about a character that the other two forms keep back",
-        "B": "A device can produce its effect by leaving something out rather than by putting something in",
-        "C": "The novel would be an honester form if every report of a thought were marked as a report",
-        "D": "What the device is chiefly for is letting a novelist mock a character and pity her in one breath"
-      },
-      "correct": "B",
-      "estimated_time_sec": 90,
-      "explanation": {
-        "expert_notice": "The third paragraph states the author's position twice in consecutive sentences, once positively and once negatively: the access is manufactured by a subtraction, and nothing whatever has been added to the characterisation. The fourth paragraph then finds a second effect of the same subtraction.",
-        "correct_reasoning": "The correct option is that position stated as a general principle, which is the level at which agreement questions work. The whole explanation depends on the deleted verb and on nothing else being different, and the paragraph is careful to deny that any content has been supplied, which is why the same passage can produce a stronger sensation of knowing while giving the reader less to go on.",
-        "passage_anchor": "rc-0081-p3",
-        "question_type_note": "An agreement question lives on the line between what an author reports and what he holds. Sort each option into his claim, his concession, or the view he is replacing before choosing.",
-        "reading_habit": "Ask which sentence of the passage each option would have to be built from. An option that can only be built from the paragraph where the author states somebody else's view is a distractor however plausible it sounds.",
-        "distractors": [
-          {
-            "option": "A",
-            "trap_type": "fact_right_interpretation_wrong",
-            "why_wrong": "The effect is real and its cause has been reversed. The passage says nothing has been added to the characterisation, and the fourth paragraph goes further, making this the mode in which the reader has least to go on.",
-            "seductive_element": "It is the live rival, because feeling that you know a character better is exactly what readers report, and the option simply converts the feeling into the knowledge it feels like."
-          },
-          {
-            "option": "C",
-            "trap_type": "prescriptive_leap",
-            "why_wrong": "The final paragraph rules out the judgement this rests on, insisting that no claim is made in such a sentence, that nothing in it could be a lie, and that the reader has not been imposed upon. A description of invisibility is not a complaint about dishonesty.",
-            "seductive_element": "The vocabulary of warrants and undertakings in the fourth paragraph is the vocabulary of honesty, and a reader who has been told that unreliability is invisible naturally reaches for the remedy."
-          },
-          {
-            "option": "D",
-            "trap_type": "concession_as_position",
-            "why_wrong": "This is the account the second paragraph grants to somebody else, and grants only as an account of what the device does for the writer. The passage's objection is not that it is false but that it answers a different question, so chiefly for is the word that cannot stand.",
-            "seductive_element": "The passage endorses this account in unusually warm terms, calling it true and worth knowing, and a reader who registers the endorsement without the restriction will treat it as shared ground."
           }
         ]
       }
@@ -345,64 +282,8 @@
           {
             "option": "D",
             "trap_type": "opposite_direction",
-            "why_wrong": "The sixth paragraph refuses this charge rather than reaching it, saying no claim is made, nothing in the sentence could be a lie, and the reader has not been imposed upon. The account is expressly kept away from the moral sense of illusion.",
+            "why_wrong": "The last paragraph refuses this charge rather than reaching it, saying no claim is made, nothing in the sentence could be a lie, and the reader has not been imposed upon. The account is expressly kept away from the moral sense of illusion.",
             "seductive_element": "It is the live rival, because the fourth paragraph really does say the reader has least to go on where the sensation is strongest, and deception is the conclusion that pairing invites."
-          }
-        ]
-      }
-    },
-    {
-      "id": "rc-0081-q5",
-      "type": "not_true",
-      "skill": "specific_detail",
-      "patterns": [
-        "comp.explicit_detail",
-        "comp.paraphrase",
-        "comp.attention_span"
-      ],
-      "target_mistake": "accepting a purpose for the technique that the passage never states, because purposes are what discussions of technique usually supply",
-      "prediction_target": null,
-      "difficulty": {
-        "inference_depth": 2,
-        "distractor_similarity": 4,
-        "reasoning_depth": 3
-      },
-      "secondary_skills": [
-        "scope"
-      ],
-      "stem": "Which of the following is NOT true, according to the passage?",
-      "options": {
-        "A": "A reported thought contains a verb that names somebody as doing the reporting",
-        "B": "The third form keeps the narrator's tense and person while using the character's words",
-        "C": "The sense of access weakens where the wording might have come from either party",
-        "D": "The technique was developed in order to keep the narrator's judgements out of sight"
-      },
-      "correct": "D",
-      "estimated_time_sec": 60,
-      "explanation": {
-        "expert_notice": "Three of the four statements sit in named places: the verb of reporting and the agent it names in the third paragraph, the tense and person in the same paragraph, the failure under neutral diction in the fifth. No paragraph says why anybody began using the device.",
-        "correct_reasoning": "The statement that is not true of the passage is the one about development and concealment. The only purpose the passage discusses belongs to the account it concedes, where the novelist remains present in the sentence and colours a thought without interrupting it, which is the opposite of keeping judgements out of sight. Everything the passage says about the form's effects is offered as a consequence of its grammar rather than as anybody's design.",
-        "passage_anchor": "rc-0081-p2, rc-0081-p3, rc-0081-p5",
-        "question_type_note": "In a NOT-true question three options restate the passage and one adds something. The addition is very often a purpose, since readers expect an explanation of a practice to say why it was adopted.",
-        "reading_habit": "Separate what a passage says a form does from what it says anybody intended. Explanations by mechanism contain no intentions, and options that supply one are the standard way of testing whether you noticed.",
-        "distractors": [
-          {
-            "option": "A",
-            "trap_type": "passage_language_shifted",
-            "why_wrong": "The third paragraph states this as the first step of its argument: a verb of reporting names an agent, and an agent implies a channel. The option is that sentence with the technical word replaced.",
-            "seductive_element": "The passage puts it in the vocabulary of agents and channels, so a reader hunting for the word reporter finds nothing and doubts the match."
-          },
-          {
-            "option": "B",
-            "trap_type": "wrong_abstraction_level",
-            "why_wrong": "This is the third paragraph's description of what the deletion leaves behind: the character's words, her rhythm, her exasperation, all of it inside the narrator's tense and person.",
-            "seductive_element": "The passage gives the point through a list of particulars while the option states it as a general rule, which makes a faithful summary look like an addition."
-          },
-          {
-            "option": "C",
-            "trap_type": "true_but_irrelevant",
-            "why_wrong": "The fifth paragraph states this as the prediction that earns the account its keep, reporting that neutral passages are read as commentary however faithfully they keep the form.",
-            "seductive_element": "It reads as a qualification rather than as a claim, and readers hunting for the false statement discount anything that sounds like a hedge."
           }
         ]
       }
@@ -492,10 +373,10 @@
     }
   ],
   "mentor": {
-    "challenge": "A famous explanation of this technique is stated generously and then declared an answer to a different question. Keep track of which question each paragraph is answering, because four of the six questions turn on that.",
+    "challenge": "A famous explanation of this technique is stated generously and then declared an answer to a different question. Keep track of which question each paragraph is answering, because most of the questions turn on that.",
     "one_sentence_summary": "The sensation of being inside a character's mind is produced not by the doubling of voices that the usual account describes but by the deletion of the reporting verb, which leaves no agent and therefore no place for the reader to locate any mediation, and the same deletion removes the undertaking that makes an unreliable report detectable, so the mode that feels most knowing is the one that offers least to go on, though the illusion is optical rather than dishonest and the account explains the effect without explaining why any particular novelist brings it off.",
-    "main_idea": "Readers report being inside a character's thinking, and only one of the three ways of rendering a thought produces it. The usual explanation, that two voices share the sentence, describes what the device does for the writer. What it does to the reader is explained by a subtraction: the verb of reporting is gone, so no agent is named, so there is nowhere to put the distance. The same subtraction removes the warrant that makes unreliability detectable. The account predicts that the effect fails when the wording is nobody's in particular, which it does, and it stops short of saying why any given writer succeeds.",
-    "simple_explanation": "Ask people what a novel was about and they summarise it. Ask what reading it was like and, with certain novels, they say something odd: not that they were told what a character was thinking, but that they were inside the thinking as it happened.\n\nTake one moment written three ways. First: I shall have to answer it tonight, she thought. Second: She thought that she would have to answer it that night. Third: The letter would have to be answered tonight; there was no getting round it. Only the third gives you that feeling.\n\nThe usual explanation is that the third sentence has two people in it at once. It uses her words but the narrator's grammar, so the author can stay in the room while appearing to have left, and can tint a thought without breaking into it. The author of this passage says that is true and useful, and that it explains what the writer gets. It does not explain what the reader feels, because what the reader feels is that nobody is there at all.\n\nHis explanation is about grammar, and it is about something missing. The first two sentences both contain a verb of reporting, she thought. A verb like that names somebody doing the reporting, and once you have a reporter you have a route the thought travelled along, and the reader puts a little distance along that route. The third sentence has thrown that verb away and kept everything else: her words, her rhythm, her irritation, sitting inside the narrator's tense. Now nothing in the sentence names anyone passing the thought on. There is no place to put the distance, so the thought feels as if it arrived directly. The closeness comes from taking something out. Nothing extra was put in.\n\nThen the uncomfortable part. That little verb was also a promise. If a narrator tells you she thought something, the narrator has vouched for it, and a promise can be broken, which is how you catch an unreliable narrator out: there is a statement on the page you can refuse to believe. The third sentence makes no statement and gives you nobody who could be wrong. So the way of writing that makes you feel you know a mind best is the one where you have the least to go on, and its unreliability does not look like a mistake. It just cannot be seen.\n\nHow do we know this explanation is right? Because it predicts where the trick stops working. If the feeling depends on the words being unmistakably hers, it should fade when the sentence could have come from either of them. And it does: write it in flat, anonymous language and readers experience commentary, however correctly the form is kept. The rival explanation predicts nothing here, since two voices are in the flat sentence just as much as in the vivid one.\n\nFinally, two limits. Illusion here means what it means to an optician: a reliable appearance with a known cause, not a trick. Nothing is claimed in such a sentence, so nothing in it can be a lie, and you have not been taken in. And the account explains the feeling, not the art. Why one novelist's pages sound like a mind and another's like an impersonation is a question about the ear, and grammar has nothing to say about it. What grammar explains is why the good ones can work at all.",
+    "main_idea": "Readers report being inside a character's thinking, and only one of the three ways of rendering a thought produces it. The usual explanation, that two voices share the sentence, describes what the device does for the writer. What it does to the reader is explained by a subtraction: the verb of reporting is gone, so no agent is named, so there is nowhere to put the distance. The words must still be unmistakably the character's, or the sentence reads as commentary. The same subtraction removes the warrant that makes unreliability detectable, and the account stops short of saying why any given writer succeeds.",
+    "simple_explanation": "Ask people what a novel was about and they summarise it. Ask what reading it was like and, with certain novels, they say something odd: not that they were told what a character was thinking, but that they were inside the thinking as it happened. Take one moment written three ways. First: I shall have to answer it tonight, she thought. Second: She thought that she would have to answer it that night. Third: The letter would have to be answered tonight; there was no getting round it. Only the third gives you that feeling.\n\nThe usual explanation is that the third sentence has two people in it at once. It uses her words but the narrator's grammar, so the author can stay in the room while appearing to have left, and can tint a thought without breaking into it. The author of this passage says that is true and useful, and that it explains what the writer gets. It does not explain what the reader feels, because what the reader feels is that nobody is there at all.\n\nHis explanation is about grammar, and it is about something missing. The first two sentences both contain a verb of reporting, she thought. A verb like that names somebody doing the reporting, and once you have a reporter you have a route the thought travelled along, and the reader puts a little distance along that route. The third sentence has thrown that verb away and kept everything else: her words, her rhythm, her irritation, sitting inside the narrator's tense. Now nothing in the sentence names anyone passing the thought on, so the thought feels as if it arrived directly. It does have to sound unmistakably like her: put the same kind of sentence into flat, anonymous language and readers hear the narrator commenting on her instead. The closeness comes from taking something out. Nothing extra was put in.\n\nThen the uncomfortable part. That little verb was also a promise. If a narrator tells you she thought something, the narrator has vouched for it, and a promise can be broken, which is how you catch an unreliable narrator out: there is a statement on the page you can refuse to believe. The third sentence makes no statement and gives you nobody who could be wrong. So the way of writing that makes you feel you know a mind best is the one where you have the least to go on, and its unreliability does not look like a mistake. It just cannot be seen.\n\nFinally, two limits. Illusion here means what it means to an optician: a reliable appearance with a known cause, not a trick. Nothing is claimed in such a sentence, so nothing in it can be a lie, and you have not been taken in. And the account explains the feeling, not the art. Why one novelist's pages sound like a mind and another's like an impersonation is a question about the ear, and grammar has nothing to say about it. What grammar explains is why the good ones can work at all.",
     "why_difficult": "The rival explanation is conceded warmly and never called false, so it stays available as an answer for the whole passage, and readers who take the concession for agreement will assign the author a position he has expressly declined. The second difficulty is the fourth paragraph, where the same fact that produces the passage's most attractive claim produces its most uncomfortable one: the deletion gives the reader the strongest sense of knowing and the least to go on, and readers habitually keep only one of the two. The third is the last paragraph, which restricts the word illusion and confines the account, and both restrictions arrive after most readers have finished forming their view.",
     "author_intention": "To move the explanation of a familiar literary effect off the author and on to the sentence, and then to stop the reader turning the result into either a compliment about depth or a charge of deception.",
     "paragraph_journey": [
@@ -512,17 +393,12 @@
       {
         "paragraph_id": "rc-0081-p3",
         "role": "Supplies the explanation",
-        "note": "The reporting verb is gone. No verb, no agent; no agent, no channel; no channel, nowhere to put the distance. The closeness comes from a deletion."
+        "note": "The reporting verb is gone. No verb, no agent; no agent, no channel; no channel, nowhere to put the distance. The words must still be hers, or the sentence reads as commentary."
       },
       {
         "paragraph_id": "rc-0081-p4",
         "role": "Draws the hard consequence",
         "note": "That verb was also a promise somebody could break. Without it there is nothing to disbelieve, so unreliability in this mode is not caught, it is invisible."
-      },
-      {
-        "paragraph_id": "rc-0081-p5",
-        "role": "Tests the account",
-        "note": "It predicts the effect should fail when the words are nobody's in particular, and it does. The rival account predicts nothing here."
       },
       {
         "paragraph_id": "rc-0081-p6",
@@ -534,13 +410,25 @@
     "key_transitions": [
       "'It does not explain what the sentence does to the reader.' (paragraph 2): the concession is made and its boundary is drawn in one sentence.",
       "'The access is manufactured by a subtraction.' (paragraph 3): the explanation arrives, and the following sentence denies that anything was added.",
-      "'Two limits should be entered here, and the first is a limit on the word illusion.' (opening of paragraph 6): the author refuses two conclusions his own argument invites."
+      "'Two limits should be entered here, and the first is a limit on the word illusion.' (opening of paragraph 5): the author refuses two conclusions his own argument invites."
     ],
     "misunderstanding": "Two wrong models form. The first has the passage saying that this technique reveals more of a character than the alternatives, which reverses the mechanism, since the explanation is a deletion and the fourth paragraph says the reader has least to go on. The second has the passage exposing a deception, built out of the invisible unreliability and finished before the final paragraph arrives to restrict the word illusion to its optical sense. Both survive because the corrective sentences are short, flat, and late.",
-    "traps_summary": "The set offers the conceded explanation as the author's, the acknowledged limit as the title, added depth in place of a subtraction, the moral sense of illusion in place of the optical one, a purpose the passage never assigns, and support for the rejected account in place of support for the accepted one. Asking which paragraph an option belongs to, and whether the author was still holding it at the end, answers all six.",
+    "traps_summary": "The set offers a passage with nobody's idiom as still giving access, the conceded explanation and the acknowledged limit as titles, the moral sense of illusion in place of the optical one, and support for the rejected account in place of support for the accepted one. Asking which paragraph an option belongs to, and whether the author was still holding it at the end, answers all four.",
     "reading_lesson": "When an author concedes a rival explanation instead of refuting it, find the sentence that says what question the concession answers. Passages built this way keep the conceded view alive for every question that follows, and the commonest error is to hand the author a position he has politely accepted from somebody else. The second habit this passage rewards is to watch what else disappears when something is removed: an explanation by subtraction almost always has a second consequence, and that is where the hardest inference will be.",
     "real_world": "The same structure appears wherever confidence is produced by the removal of a visible intermediary: a summary with no named source, a recommendation with no disclosed sponsor, a translated remark with no translator credited, an automated decision with no officer to ask. In each the sense of directness rises exactly as the party who could be wrong disappears.",
     "takeaway": "The sentence that makes you feel closest to another mind is the one with nobody left in it to be mistaken.",
-    "reflection_question": "Which of the things you feel you know directly reached you through somebody whose name was never in the sentence?"
+    "reflection_question": "Which of the things you feel you know directly reached you through somebody whose name was never in the sentence?",
+    "eli10": {
+      "big_idea": "We feel inside a character's mind when 'she thought' is left out, but then nobody has said anything we could doubt.",
+      "story": "Some novels make you feel inside a character's head. The writer shows one thought written three ways. Two say 'she thought'. The third just gives her thought in her own words, and only it gives that feeling. Most people say two voices share that sentence, hers and the author's. The writer agrees, but says this explains the author's gain, not the reader's feeling. His answer is that 'she thought' is missing. News passed on by a friend feels second-hand. Hear it with no friend in the middle and it feels direct. It works only if the words sound like hers. But a friend in the middle can also be wrong, so you can doubt them. With nobody in the middle, nobody has claimed anything, so mistakes cannot be seen. This is not a trick on readers. And grammar cannot say why one novelist does it well and another badly.",
+      "paragraphs": [
+        "Starts with a puzzle: of three ways to write one thought, only the third feels like being inside it.",
+        "Grants the usual view, two voices in one sentence, but says it explains the author, not the reader.",
+        "Gives the cause: with 'she thought' gone, the thought feels direct, if the words are clearly hers.",
+        "Draws the hard result: with no reporter, nothing is claimed, so mistakes in her thinking stay invisible.",
+        "Sets two limits: this is no trick, and grammar cannot say why one writer does it better."
+      ],
+      "author_view": "The writer is precise and admiring: he explains the effect by what is missing and refuses to call it a trick."
+    }
   }
 }

@@ -9,7 +9,7 @@
     "genre": "technology-ethics",
     "difficulty": "medium",
     "difficulty_numeric": 5,
-    "stage": "intermediate",
+    "stage": "advanced",
     "skills": [
       "structure-mapping",
       "argument-tracking",
@@ -18,16 +18,15 @@
       "main-idea-extraction"
     ],
     "word_count": 567,
-    "question_count": 5,
+    "question_count": 4,
     "question_types": [
-      "except",
       "inference",
       "main_idea",
       "paragraph_function",
       "scope"
     ],
     "theme": "three successive descriptions of collaboratively written software, as a liberty, as a method and as a commons, with the third preferred for treating the practice as an institution and corrected at one point, since a resource that use cannot diminish faces desertion rather than depletion and is protected by reciprocity conditions rather than by rationing rules",
-    "estimated_time_min": 9,
+    "estimated_time_min": 8.5,
     "source": {
       "publication": "original",
       "url": null,
@@ -38,7 +37,7 @@
     "date_added": "2026-09-13",
     "batch_id": "batch-rc-003",
     "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-05",
-    "reviewer_notes": "Three descriptions in sequence, the newest endorsed and then corrected at exactly one point. The fourth paragraph is the pivot and is easy to read as a rejection, which is what the paragraph-function and scope questions are built on. The passage never says any description was abandoned, which is what the EXCEPT question turns on.",
+    "reviewer_notes": "Three descriptions in sequence, the newest endorsed and then corrected at exactly one point. The fourth paragraph is the pivot and is easy to read as a rejection, which is what the paragraph-function and scope questions are built on. The passage never says any description was abandoned, which is what the EXCEPT question turns on. 2026-10-03 CAT-size pass: 567→567 words, 5→5 paragraphs, 5→4 questions. Dropped q1 (except, three of whose options restate p2, p3 and p5); challenge and traps_summary updated for four questions.",
     "length_class": "medium",
     "structure": "history_of_an_idea",
     "viewpoints": 3,
@@ -78,7 +77,7 @@
     ],
     "quality": {
       "status": "reviewed",
-      "adversarial_review": "Q1's exception is the claim that the first description was abandoned, which the passage never makes: the descriptions accumulate, and the licences the first produced are named in the last paragraph as the institutions now doing the work. Q2's live rival is the option that the fourth paragraph rejects the commons description, which the fifth paragraph forbids by keeping the frame and correcting it at one point. Q3's rival is the option that the earlier descriptions were mistaken, which converts a claim about what each recorded into a verdict the passage does not deliver. Q4's rival is the option extending the criticism to the whole analogy, which the closing paragraph refuses in the sentence keeping the frame for being right about the important thing. Q5's rival is the definition of a commons offered as the main idea, which is one sentence of the third paragraph and leaves the correction with nothing to do.",
+      "adversarial_review": "Q1's exception is the claim that the first description was abandoned, which the passage never makes: the descriptions accumulate, and the licences the first produced are named in the last paragraph as the institutions now doing the work. Q2's live rival is the option that the fourth paragraph rejects the commons description, which the fifth paragraph forbids by keeping the frame and correcting it at one point. Q3's rival is the option that the earlier descriptions were mistaken, which converts a claim about what each recorded into a verdict the passage does not deliver. Q4's rival is the option extending the criticism to the whole analogy, which the closing paragraph refuses in the sentence keeping the frame for being right about the important thing. Q5's rival is the definition of a commons offered as the main idea, which is one sentence of the third paragraph and leaves the correction with nothing to do. (2026-10-03, CAT-size pass: q1 was dropped, so any note above about it no longer applies.)",
       "blind_solve": null
     },
     "vocab_extracted": [
@@ -89,7 +88,7 @@
   },
   "passage": {
     "title": "The Grass That Never Runs Out",
-    "reading_time_min": 2.8,
+    "reading_time_min": 3.1,
     "paragraphs": [
       {
         "id": "rc-0084-p1",
@@ -114,62 +113,6 @@
     ]
   },
   "questions": [
-    {
-      "id": "rc-0084-q1",
-      "type": "except",
-      "skill": "specific_detail",
-      "patterns": [
-        "comp.explicit_detail",
-        "comp.paraphrase",
-        "comp.attention_span"
-      ],
-      "target_mistake": "assuming that a later description replaced an earlier one, because a sequence of descriptions is usually a sequence of replacements",
-      "prediction_target": null,
-      "difficulty": {
-        "inference_depth": 2,
-        "distractor_similarity": 4,
-        "reasoning_depth": 3
-      },
-      "secondary_skills": [
-        "scope"
-      ],
-      "stem": "According to the passage, each of the following is true EXCEPT:",
-      "options": {
-        "A": "The second description was adopted deliberately and was aimed at firms",
-        "B": "The institutions of a pasture are concerned with who may use it and with how much of it",
-        "C": "The first description was given up once the second had proved more persuasive",
-        "D": "The third description is the first to treat the practice as an institution"
-      },
-      "correct": "C",
-      "estimated_time_sec": 55,
-      "explanation": {
-        "expert_notice": "Three of these have sentences of their own: the redescription was deliberate and aimed at firms, the rationing rules cover who may graze and how many beasts, and the commons account is the first to treat the thing as an institution. Nothing anywhere says a description stopped being used.",
-        "correct_reasoning": "The exception is the statement about abandonment. The passage describes descriptions accumulating rather than succeeding one another, and the last paragraph shows the first description still at work, since the licences it produced are the very place where the conditions of reciprocity are written. A sentence about persuasion and replacement would have to come from somewhere, and there is nowhere it could come from.",
-        "passage_anchor": "rc-0084-p2, rc-0084-p3, rc-0084-p5",
-        "question_type_note": "An EXCEPT question is three verifications and one exclusion, and the exclusion is often something the shape of the passage suggests rather than anything its sentences say.",
-        "reading_habit": "In a passage that traces an idea through stages, ask whether the earlier stages are said to have ended. Accumulation and replacement look identical in a summary and are quite different in the text.",
-        "distractors": [
-          {
-            "option": "A",
-            "trap_type": "passage_language_shifted",
-            "why_wrong": "The second paragraph states both halves: the redescription was deliberate and it was aimed at firms, which had no use for a claim about liberty and a great deal of use for a claim about defects.",
-            "seductive_element": "The option compresses a long sentence into a short one, so a reader matching words rather than claims does not find it and begins to doubt."
-          },
-          {
-            "option": "B",
-            "trap_type": "wrong_abstraction_level",
-            "why_wrong": "The fourth paragraph gives this as a list of particulars, naming who may graze, how many beasts and in which months, which the option restates as who may use it and how much.",
-            "seductive_element": "The passage speaks of grazing and beasts while the option speaks of use, which makes a faithful summary look like a generalisation the reader has supplied."
-          },
-          {
-            "option": "D",
-            "trap_type": "true_but_irrelevant",
-            "why_wrong": "The third paragraph says exactly this, and offers it as the reason the commons account is the most illuminating of the three: it is the first to treat the thing as an institution rather than as a licence or a technique.",
-            "seductive_element": "It reads as the author's judgement rather than as a statement of fact, and readers hunting for the false option discount anything that sounds like an opinion."
-          }
-        ]
-      }
-    },
     {
       "id": "rc-0084-q2",
       "type": "paragraph_function",
@@ -420,7 +363,7 @@
     }
   ],
   "mentor": {
-    "challenge": "One practice is described three times over, and the author prefers the newest description. Notice how much of it he takes back, because two of the five questions depend on the size of the correction rather than on its content.",
+    "challenge": "One practice is described three times over, and the author prefers the newest description. Notice how much of it he takes back, because two of the four questions depend on the size of the correction rather than on its content.",
     "one_sentence_summary": "Software written by many hands has been described in turn as a liberty owed to the user, as a method that produces fewer defects, and as a commons, and the third description is the best because it is the first to treat the practice as an institution, but it imports from grazing land a danger that cannot occur where use removes nothing, so the fear of depletion has to be replaced by the fear of desertion and the users who threaten a pasture become the only possible repair for a codebase.",
     "main_idea": "The same practice has been described three ways: as freedom for the user, as a better way to make software, and as a commons. The third is the most useful, because it is the first to treat the thing as an institution rather than as a licence or a technique. But it borrows from pastures a problem that cannot occur here, since copying takes nothing from anybody. The real danger is not too many users but too few contributors, and the institutions that grew up are reciprocity conditions rather than rationing rules. Keep the frame, and change what you are afraid of.",
     "simple_explanation": "People were writing and sharing software before anyone had a good way to describe what they were doing. The descriptions came later, and there have been three of them.\n\nThe first was moral. If you cannot read or change the program running on your own machine, you are in somebody else's hands. So the answer was a licence that forced the code to stay open wherever it went. The word was freedom, the argument was about the user, and nobody was claiming the software would be any better.\n\nThe second came about twenty years later and was completely different. This is a good way to make software, it said: lots of people reading the code, bugs found fast, releases that do not wait for a committee. That description was written on purpose to appeal to companies, who did not care about freedom and cared a lot about defects. It worked. But it had nothing to say about why anyone should keep helping once they had got the program they came for.\n\nThe third description is recent, and it is borrowed from people who study shared grazing land, small fishing grounds and village water systems. What has been built, they say, is a commons: nobody owns it, everybody uses it, and it is held together by rules that are neither ownership nor orders from above. The author thinks this is the best of the three, for a simple reason. It is the first one that treats the thing as an institution instead of as a licence or a trick.\n\nBut it smuggles in a mistake. On grazing land, using the thing uses it up. Another animal means less grass for everyone else, so the danger is overuse, and the rules that grow up are about rationing: who may graze, how many animals, in which months. Software is not used up. A million copies leave the original exactly as it was. So the problem all that rationing was invented for simply cannot happen here. And the problem that does happen is the other way round: not too many takers, too few givers.\n\nSo the typical disaster is not a hillside eaten bare. It is a piece of code that three hundred companies rely on, kept going by one unpaid person, until the evening he stops. And what has actually grown up around these resources is not rationing but reciprocity written into the licences, which is exactly what you would expect if the danger were being abandoned rather than being used up.\n\nKeep the commons idea, says the author, because it got the important thing right: this is an institution, not a product, and neither of the earlier descriptions could say that. Change one thing only. Stop fearing depletion and start fearing desertion. Which also turns one other thing round: on a pasture, the users are the threat. In software, the users are the only repair there will ever be.",
@@ -460,10 +403,22 @@
       "'The frame should be kept, because it was right about the thing that matters' (paragraph 5): the criticism is bounded and the description is retained."
     ],
     "misunderstanding": "Readers finish believing the passage rejects the commons analogy, which is the natural reading of a paragraph that names a mistake and works it through in detail. The fifth paragraph says the opposite twice. The other wrong model turns the sequence of descriptions into a sequence of refutations, so that the moral account is treated as discredited; the passage never says any description was given up, and the licences the moral account produced are where the reciprocity conditions of the last paragraph live.",
-    "traps_summary": "The set offers abandonment where the passage shows accumulation, rejection where it corrects, the whole analogy where one feature is at issue, a definition in place of a thesis, and a recommendation the passage never makes. Deciding which of the three descriptions an option belongs to, and whether the author was keeping it, answers all five.",
+    "traps_summary": "The set offers abandonment where the passage shows accumulation, rejection where it corrects, the whole analogy where one feature is at issue, a definition in place of a thesis, and a recommendation the passage never makes. Deciding which of the three descriptions an option belongs to, and whether the author was keeping it, answers all four.",
     "reading_lesson": "When an author borrows a comparison and then finds a fault in it, look immediately for the sentence that counts the fault. Authors who write one substitution is needed and only one are telling you how to answer every question about the scope of their criticism, and the commonest error is to let a precisely stated objection expand into a general one. The companion habit applies to any history of an idea: check whether the stages replaced one another or piled up, because summaries of such passages flatten the two into the same shape.",
     "real_world": "The same imported danger turns up wherever a vocabulary built for scarce things is applied to things that copying does not consume: a library of recordings, a dataset, a standard, a body of case law. The instinct to ration is strong, the wrong problem is easy to solve, and the failure when it comes is always somebody quietly stopping.",
     "takeaway": "When a comparison is borrowed, check which of its dangers came along with it and whether that danger can happen here at all.",
-    "reflection_question": "Which of the shared things you depend on are being kept going by somebody who could simply decide, one evening, to stop?"
+    "reflection_question": "Which of the shared things you depend on are being kept going by somebody who could simply decide, one evening, to stop?",
+    "eli10": {
+      "big_idea": "Of three ways to describe shared software, calling it a commons is best, once we fear helpers quitting, not users using it up.",
+      "story": "Some software is written by many people and given away. It has been described three ways. First, as freedom: you should be able to read and change what runs on your computer. Second, as a way to make better software. That won over companies, but could not say why anyone should keep helping. Third, and best, as a commons (something nobody owns and everybody uses). It is the first to treat it as a shared institution, not a product. But it brings one mistake from village fields. Each extra cow leaves less grass, so the danger there is overuse. Software is like a joke: telling it a million times uses nothing up. So the danger is too few givers, not too many takers. Picture one unpaid helper keeping code that hundreds of firms use. Then he quits. Keep the commons idea, says the writer, but fear helpers leaving, not overuse.",
+      "paragraphs": [
+        "Gives the first description: sharing code as the user's freedom, with a licence keeping code open.",
+        "Gives the second: a better way to make software, which won firms but cannot explain why people keep helping.",
+        "Gives the third and best: a commons, the first to see something a community keeps going.",
+        "Names one mistake: grass gets used up but code does not, so the problem is too few givers.",
+        "Keeps the idea with one swap: fear helpers leaving, not overuse, since users are the only repair."
+      ],
+      "author_view": "Approving but exact: the writer likes the commons idea and fixes just one thing in it."
+    }
   }
 }

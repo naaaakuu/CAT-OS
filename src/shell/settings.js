@@ -76,7 +76,7 @@ export function renderSettings(outlet, { storage, version }) {
   outlet.innerHTML = `
     <section class="screen screen--cottage">
       <div class="cottage__hero" style="${backdropStyle('cottage')}" aria-hidden="true"></div>
-      <p class="screen__eyebrow">Your cottage</p>
+      <p class="screen__eyebrow">Settings</p>
       <h1>Settings</h1>
       <p class="cottage__line">How the village sounds and moves, how big the words are, and your backup.</p>
 

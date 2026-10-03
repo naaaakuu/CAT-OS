@@ -1,0 +1,404 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0137",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 85,
+    "genre": "science",
+    "difficulty": "easy",
+    "difficulty_numeric": 2,
+    "stage": "developing",
+    "skills": [
+      "main-idea-extraction",
+      "inference",
+      "structure-mapping",
+      "causal-reasoning",
+      "argument-tracking"
+    ],
+    "word_count": 336,
+    "question_count": 4,
+    "question_types": [
+      "main_idea",
+      "inference",
+      "role_of_detail",
+      "weaken"
+    ],
+    "theme": "a night's sleep strengthens what was learned the day before, apparently by replaying it, so that a skill can improve and a hidden pattern can surface without further practice; but sleep works only on what the day supplied, adding no new material and unable to rescue what was never properly learned, so an all-night session before an examination trades away the night that would fix the day's work for a few hours of poorly learned reading",
+    "estimated_time_min": 6.5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-03",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted."
+    },
+    "date_added": "2026-10-03",
+    "batch_id": "batch-rc-005",
+    "prompt_version": "content engine v1 + CAT-size brief 2026-10",
+    "reviewer_notes": "An impersonal developing item built as a claim with its limit. Sleep's part in memory is well known; what this adds is the limit stated as a rule (sleep works only on what the day supplied) and its two consequences, that sleep cannot add new material or rescue careless study, which turn the familiar advice against all-nighters into a conclusion rather than a slogan. It does not overlap rc-0083, which defends an evening of cramming; this passage is about giving up the night's sleep. The finger-tap and rat findings are described in general terms and no question depends on knowing them. Four questions: main idea, an inference joining the opening example to the third paragraph's rule, the role of the rats, and a weaken question whose near-tie attacks only the minor reason.",
+    "length_class": "short",
+    "structure": "claim_qualification",
+    "viewpoints": 1,
+    "tone": "brisk, practical, explanatory",
+    "difficulty_vector": {
+      "lexical": 2,
+      "syntactic": 2,
+      "abstraction": 2,
+      "inference_depth": 2,
+      "distractor_similarity": 2,
+      "reasoning_depth": 2,
+      "structural_ambiguity": 1,
+      "time_pressure": 2
+    },
+    "reasoning_patterns": [
+      "struct.claim_evidence",
+      "struct.qualification",
+      "struct.example",
+      "comp.central_idea",
+      "comp.function_over_words",
+      "arg.evidence",
+      "arg.causal_claim",
+      "arg.qualification",
+      "arg.necessary_vs_sufficient",
+      "inf.directly_implied",
+      "lang.causal_wording",
+      "scope.too_narrow",
+      "cr.weaken",
+      "elim.near_tie"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1: the live rival is the option that people who sleep after practising do better than those who stay awake, which is the first paragraph's evidence and nothing more; the author says the limits 'matter as much as its powers'. The recordings option invents a cause the passage never gives. Q2: a strong candidate might argue that the student improved because she rested from the keys, since 'she has not touched the keys since'; but the people kept awake for the same hours also rested and did worse, and the third paragraph makes the evening's practice necessary. Q3: the rats come between the claim that the brain goes over the day's learning and the words 'This replay', so they are evidence for that claim. Q4: the near-tie is that some students take in reading better late at night; it softens the minor point about a tired mind and leaves the main cost, the lost night, untouched. The examination-anxiety option strengthens the case.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "fragile",
+      "replay",
+      "bargain"
+    ]
+  },
+  "passage": {
+    "title": "Sleeping on It",
+    "reading_time_min": 1.8,
+    "paragraphs": [
+      {
+        "id": "rc-0137-p1",
+        "text": "A student practises a hard piece on the piano one evening and stumbles through it. In the morning she plays it more smoothly, though she has not touched the keys since. Nothing was practised overnight, and yet something improved. Laboratories find the same pattern with simpler skills. People who learn a short sequence of finger taps and are tested after a night's sleep do better than people tested after the same number of hours awake."
+      },
+      {
+        "id": "rc-0137-p2",
+        "text": "Something happens to a new memory overnight. What was learned during the day is held at first in a fragile form, easily lost or confused with other things. During sleep the brain seems to go over it again. In rats that have learned their way round a maze, the brain cells that fired as they ran fire again, in the same order, while they sleep. This replay appears to strengthen the new memory and to fit it among older ones. That may be why a pattern that was hidden in the evening is sometimes plain by morning."
+      },
+      {
+        "id": "rc-0137-p3",
+        "text": "Sleep has limits, though, and they matter as much as its powers. It works only on what the day supplied. Attempts to teach people new facts by playing recordings while they sleep have mostly failed. Nor can sleep rescue what was never properly learned. A chapter read with one eye on a phone leaves little for the night to strengthen. Sleep is an editor, not an author: it can improve the day's draft, but it cannot write one."
+      },
+      {
+        "id": "rc-0137-p4",
+        "text": "This is why staying up all night before an examination is such a poor bargain. The student gains a few extra hours of reading, taken in by a tired mind. In exchange she gives up the very night that would have fixed the previous day's work. And what a tired mind reads is poorly learned in the first place, so the hours gained are worth less than they seem. The better plan sounds lazier and is not: study hard in the day, then go to bed."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0137-q1",
+      "type": "main_idea",
+      "skill": "main_idea",
+      "patterns": [
+        "comp.central_idea",
+        "struct.qualification",
+        "scope.too_narrow"
+      ],
+      "target_mistake": "keeping what sleep does and dropping what it cannot do, or stopping at the opening evidence",
+      "prediction_target": "The learner should be able to say beforehand: sleep strengthens what the day's learning put in, but cannot put in anything the day left out.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 2,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "logical_structure"
+      ],
+      "stem": "Which of the following best expresses the main idea of the passage?",
+      "options": {
+        "A": "Most learning happens during sleep, so rest matters more than hours of study.",
+        "B": "People who sleep after practising a skill perform better than those who stay awake.",
+        "C": "Sleep strengthens the day's learning, but cannot add what the day did not supply.",
+        "D": "Recordings played to sleepers fail because the sleeping brain shuts out every sound."
+      },
+      "correct": "C",
+      "estimated_time_sec": 70,
+      "explanation": {
+        "expert_notice": "The passage is built in two halves: the first two paragraphs on what sleep does for the day's learning, the last two on what it cannot do and what follows. The hinge is 'Sleep has limits, though, and they matter as much as its powers.'",
+        "correct_reasoning": "The correct option holds both halves. Sleep strengthens the day's learning: the piano piece, the finger taps, the replay in the rats. And it 'works only on what the day supplied': it adds no new facts and cannot rescue what was never learned, which is why the all-night session is a poor bargain.",
+        "passage_anchor": "rc-0137-p2, rc-0137-p3",
+        "question_type_note": "A main-idea answer must need every paragraph. When the author says the limits 'matter as much as' the powers, the main idea has to carry both.",
+        "reading_habit": "Watch for a sentence that weighs two halves against each other, such as 'matter as much as'. It is the author telling you the shape the main idea must have.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "overstatement",
+            "why_wrong": "The passage gives sleep a narrower job: it 'works only on what the day supplied'. Study comes first, and the closing advice is to 'study hard in the day'.",
+            "seductive_element": "The passage praises what sleep does, and the student in the first paragraph improves without practising."
+          },
+          {
+            "option": "B",
+            "trap_type": "too_narrow",
+            "why_wrong": "This is the first paragraph's evidence, and it stops there. It leaves out the replay of the second paragraph and the limits of the third, which the author says 'matter as much as' the powers.",
+            "seductive_element": "It is true, and it is the result the passage opens with."
+          },
+          {
+            "option": "D",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "The passage reports that recordings 'have mostly failed' and explains why by its own rule: sleep works only on what the day supplied. Nothing is said about the brain shutting out sound.",
+            "seductive_element": "It offers a believable reason for a fact the passage does state."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0137-q2",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.directly_implied",
+        "arg.necessary_vs_sufficient",
+        "lang.causal_wording"
+      ],
+      "target_mistake": "crediting sleep alone, or rest from practice, with an improvement that the passage says sleep can only build on what the day supplied",
+      "prediction_target": "The learner should be able to say beforehand: sleep only works on what the day supplied, so her evening practice was needed for the morning's improvement.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 2,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "logical_structure"
+      ],
+      "stem": "Which of the following can be inferred about the student in the first paragraph?",
+      "options": {
+        "A": "She would have improved as much if she had slept without practising first.",
+        "B": "Her evening practice was needed for the gain that showed in the morning.",
+        "C": "She improved because she dreamed about the piece during the night.",
+        "D": "She improved because she had not touched the keys since the evening."
+      },
+      "correct": "B",
+      "estimated_time_sec": 75,
+      "explanation": {
+        "expert_notice": "The first paragraph shows a gain overnight; the third says where such gains come from: sleep 'works only on what the day supplied'. Put the two together and the evening's practice becomes part of the morning's improvement.",
+        "correct_reasoning": "The student improved without touching the keys, so sleep did something. But sleep works only on what the day supplied, and what the day supplied was her stumbling evening practice. Without it there would have been nothing for the night to strengthen. The correct option draws exactly that one step.",
+        "passage_anchor": "rc-0137-p1, rc-0137-p3",
+        "question_type_note": "Some inferences join an example in one paragraph to a rule in another. When a passage states a general limit, apply it to the example that came earlier.",
+        "reading_habit": "When a later paragraph states a rule, glance back at the opening example and ask what the rule says about it. Inference questions often live in that join.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "This denies the rule of the third paragraph: sleep 'works only on what the day supplied'. Without the practice, the night would have had nothing to improve.",
+            "seductive_element": "The improvement appeared overnight, so sleep can look like the whole cause."
+          },
+          {
+            "option": "C",
+            "trap_type": "out_of_scope",
+            "why_wrong": "Dreams are never mentioned. The passage speaks of the brain going over the day's learning, as the rats' brain cells fire again, which is not the same as dreaming about it.",
+            "seductive_element": "Going over the day's learning in sleep sounds a lot like dreaming about it."
+          },
+          {
+            "option": "D",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "The passage says she improved 'though she has not touched the keys since': the rest is mentioned to show that the gain came without practice, not because of the rest. People kept awake for the same hours also rested, and they did worse.",
+            "seductive_element": "It repeats the passage's own words about not touching the keys, and rest can seem to explain a fresher performance."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0137-q3",
+      "type": "role_of_detail",
+      "skill": "paragraph_function",
+      "patterns": [
+        "comp.function_over_words",
+        "arg.evidence",
+        "struct.example"
+      ],
+      "target_mistake": "reading the rats as a comparison between animals and people, or attaching them to a claim made elsewhere in the passage",
+      "prediction_target": "The learner should be able to say beforehand: the rats are evidence that the brain goes over the day's learning during sleep.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 2,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "logical_structure"
+      ],
+      "stem": "The author mentions rats that have learned their way round a maze in order to",
+      "options": {
+        "A": "show that animals learn mazes faster after sleep than people learn skills",
+        "B": "suggest that a sleeping brain can be taught a new route it never ran",
+        "C": "explain why the student's improvement depended on her evening practice",
+        "D": "support the claim that the brain goes over the day's learning in sleep"
+      },
+      "correct": "D",
+      "estimated_time_sec": 55,
+      "explanation": {
+        "expert_notice": "The rats come straight after a claim, 'During sleep the brain seems to go over it again', and the sentence after them calls what they show 'This replay'. A detail placed between a claim and its name is evidence for the claim.",
+        "correct_reasoning": "The cells that fired as the rats ran 'fire again, in the same order, while they sleep'. That is the brain going over the day's learning, seen directly. The author uses it to support the claim in the sentence before, which is what the correct option says.",
+        "passage_anchor": "rc-0137-p2",
+        "question_type_note": "A role-of-detail question asks why a detail is there, not what it says. Find the claim the detail sits next to; the detail is almost always working for that claim.",
+        "reading_habit": "When an example appears, ask which sentence it is helping. Read one sentence before it and one after.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "comparison_distortion",
+            "why_wrong": "The passage compares nobody's speed of learning. The rats are evidence of replay during sleep, not a comparison between animals and people.",
+            "seductive_element": "Rats and people both appear in the passage, which invites a comparison."
+          },
+          {
+            "option": "B",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The rats replay a route they have already run, and the third paragraph adds that sleep cannot add new material. The detail supports the reverse of this option.",
+            "seductive_element": "Something does happen to the maze in the rats' sleep, which can sound like learning it then."
+          },
+          {
+            "option": "C",
+            "trap_type": "wrong_structural_role",
+            "why_wrong": "That the student needed her evening practice follows from the third paragraph's limit, not from the rats. The rats show what sleep does, not what it needs.",
+            "seductive_element": "The rats and the student are both cases of learning followed by sleep."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0137-q4",
+      "type": "weaken",
+      "skill": "strengthen_weaken",
+      "patterns": [
+        "cr.weaken",
+        "arg.causal_claim",
+        "elim.near_tie"
+      ],
+      "target_mistake": "choosing a fact that adds to the author's case, attacks only its minor reason, or answers a claim the author never made",
+      "prediction_target": "The learner should be able to say beforehand: the case would be weakened by evidence that staying up all night costs nothing of the previous day's learning.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 3,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "argument",
+        "inference"
+      ],
+      "stem": "Which of the following, if true, would most weaken the author's case against staying up all night before an examination?",
+      "options": {
+        "A": "Students who stay up all night remember the previous day's work as well as those who sleep.",
+        "B": "Students who stay up all night feel more anxious during the examination than those who sleep.",
+        "C": "Some students take in reading better late at night than in the morning.",
+        "D": "Students who sleep before an examination still forget some of what they studied."
+      },
+      "correct": "A",
+      "estimated_time_sec": 90,
+      "explanation": {
+        "expert_notice": "The case is a bargain with a gain and a cost. The gain is a few hours of reading that is 'poorly learned in the first place'; the cost is 'the very night that would have fixed the previous day's work'. The strongest weakener attacks the cost, since that is the heart of the argument.",
+        "correct_reasoning": "If students who stay up all night remember the previous day's work as well as students who sleep, then the night was not doing the fixing the author claims, and the bargain is no longer poor: the all-night student gives up nothing. That breaks the link the whole case depends on.",
+        "passage_anchor": "rc-0137-p4",
+        "question_type_note": "A weaken question asks for the fact that breaks the argument's main link. State the argument as a gain and a cost, then look for the option that removes the cost.",
+        "reading_habit": "When an author calls something a bad bargain, write down what is gained and what is lost. Weaken and strengthen questions nearly always aim at the larger side.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "opposite_direction",
+            "why_wrong": "Anxiety in the examination would be one more cost of staying up, so this adds to the author's case rather than weakening it.",
+            "seductive_element": "It is about all-night study and examinations, the two things the question names."
+          },
+          {
+            "option": "C",
+            "trap_type": "true_but_insufficient",
+            "why_wrong": "This softens the minor point about a tired mind, but it leaves the main cost untouched: the student still gives up the night that would have fixed the previous day's work.",
+            "seductive_element": "It answers one of the author's reasons directly, so it looks like a weakener."
+          },
+          {
+            "option": "D",
+            "trap_type": "true_but_irrelevant",
+            "why_wrong": "The author never claims that sleep keeps everything, only that it strengthens the day's learning. Some forgetting after sleep fits that claim.",
+            "seductive_element": "It seems to show that sleep is less useful than the passage says."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "fragile",
+      "passage_use": "held at first in a fragile form",
+      "meaning_here": "easily damaged or lost",
+      "difficulty": "easy"
+    },
+    {
+      "word": "replay",
+      "passage_use": "This replay appears to strengthen the new memory",
+      "meaning_here": "the brain going over the same activity again, in the same order",
+      "difficulty": "medium"
+    },
+    {
+      "word": "bargain",
+      "passage_use": "such a poor bargain",
+      "meaning_here": "a trade of one thing for another; a poor bargain gives up more than it gets",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "A passage about what sleep does for learning, followed by an equally important account of what it cannot do. Keep the powers and the limits together, and notice where the closing advice comes from.",
+    "one_sentence_summary": "Sleep strengthens what was learned during the day, apparently by replaying it, so that a skill can improve and a hidden pattern can surface without further practice; but it works only on what the day supplied, cannot teach new facts or rescue what was never learned, and so an all-night session before an examination gives up the night that would have fixed the day's work for a few hours of poorly learned reading.",
+    "main_idea": "A night's sleep strengthens and settles what was learned the day before, which is why skills often improve overnight. But sleep works only on what the day supplied, so it cannot teach new material or rescue careless study, and staying up all night before an examination is a poor trade.",
+    "simple_explanation": "A student practises a hard piano piece one evening and keeps stumbling. The next morning she plays it more smoothly, even though she has not practised since. Experiments show the same thing with simpler skills: people who learn a short pattern of finger taps do better after a night's sleep than people tested after the same number of hours awake.\n\nThe writer explains what seems to happen. New learning starts out fragile and easy to lose or mix up. During sleep the brain seems to go over it again. In rats that have learned a maze, the brain cells that fired as they ran fire again in the same order while they sleep. This replay seems to make the new memory stronger and link it to older ones, which may be why a pattern you could not see in the evening is sometimes obvious in the morning.\n\nBut sleep has limits, and they matter just as much. It only works on what you learned that day. Playing recordings to people while they sleep has mostly failed to teach them new facts. And sleep cannot save what you never properly learned: if you read a chapter while glancing at your phone, there is little for the night to strengthen. Sleep is like an editor, not an author: it can improve the day's draft, but it cannot write one.\n\nSo staying up all night before an exam is a bad trade. You gain a few hours of reading with a tired mind, which does not learn well, and you lose the night that would have fixed the previous day's work. The better plan sounds lazy but is not: study hard during the day, then go to bed.",
+    "why_difficult": "The first half praises sleep so warmly that readers carry away 'sleep makes you learn', and miss the limits in the third paragraph, which the author says 'matter as much as its powers'. The advice at the end follows from both halves together.",
+    "author_intention": "To explain what sleep does for the day's learning and, just as firmly, what it does not, so that a student draws the right practical conclusion.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0137-p1",
+        "role": "Shows the effect",
+        "note": "A pianist plays better in the morning without practising, and people tested after sleep beat people tested after the same hours awake."
+      },
+      {
+        "paragraph_id": "rc-0137-p2",
+        "role": "Explains the mechanism",
+        "note": "New memories are fragile; in sleep the brain seems to replay them, as rats' brain cells do, which strengthens them and fits them among old ones."
+      },
+      {
+        "paragraph_id": "rc-0137-p3",
+        "role": "Sets the limits",
+        "note": "Sleep works only on what the day supplied: it cannot teach new facts or rescue what was never properly learned."
+      },
+      {
+        "paragraph_id": "rc-0137-p4",
+        "role": "Draws the advice",
+        "note": "Staying up all night before an exam trades the night that fixes the day's work for a few hours of tired, poorly learned reading."
+      }
+    ],
+    "tone_progression": "Quietly curious in the opening scene, patient and explanatory in the second paragraph, firmer in the third, where the limits arrive, and brisk and practical at the close.",
+    "key_transitions": [
+      "'Something happens to a new memory overnight.' (opening of paragraph 2): the effect becomes an explanation.",
+      "'Sleep has limits, though, and they matter as much as its powers.' (opening of paragraph 3): the author turns from what sleep does to what it cannot do.",
+      "'This is why staying up all night before an examination is such a poor bargain.' (opening of paragraph 4): the limits become advice."
+    ],
+    "misunderstanding": "A hurried reader leaves thinking that sleep itself teaches, or that the passage is mainly a warning against studying late. Its claim is that sleep strengthens only what the day supplied, and the advice about examinations follows from that.",
+    "traps_summary": "The options give sleep powers the passage denies, stop at the opening evidence, invent a reason the recordings fail, credit dreams or rest from the keys with the improvement, read the rats as a comparison, and offer weakeners that leave the main cost of the all-nighter untouched.",
+    "reading_lesson": "When an author says the limits of something 'matter as much as its powers', the main idea must hold both. Keep the powers and the limits in two short lists as you read, and check every big-picture option against both.",
+    "real_world": "This is why music teachers set short daily practice rather than one long session, and why a night's sleep is part of revising rather than a break from it.",
+    "takeaway": "Sleep improves what the day put in; it cannot put in what the day left out.",
+    "reflection_question": "When did you last find something easier in the morning than it had been the night before, and what had you done the day before?",
+    "eli10": {
+      "big_idea": "Sleep makes what you learned during the day stronger, but it cannot teach you anything you did not learn.",
+      "story": "A girl practises a hard piano piece one evening. She keeps making mistakes. The next morning, she plays it better. She has not practised since. What happened? Scientists think her brain went over the piece while she slept. They have seen something like this in rats. Rats learn their way round a maze. Then, as they sleep, the same brain cells fire again, in the same order as when they ran. This seems to make new memories stronger. But sleep has limits. It only works on what you learned that day. Playing recordings to sleeping people mostly fails to teach them new facts. Read a chapter while checking your phone, and sleep has little to work with. So staying up all night before a test is a bad deal. You lose the night that makes the day's work stick.",
+      "paragraphs": [
+        "Shows a surprise: a girl plays the piano better in the morning without practising.",
+        "Explains why: in sleep the brain seems to go over the day's learning, as rats show.",
+        "Sets limits: sleep only strengthens what you learned; it cannot add new things.",
+        "Gives advice: staying up all night before a test is a bad trade."
+      ],
+      "author_view": "The writer thinks sleep is a powerful helper for learning, and is firm that it is not a shortcut."
+    }
+  }
+}

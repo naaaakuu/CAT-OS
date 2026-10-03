@@ -1,0 +1,416 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0146",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "sociology",
+    "difficulty": "hard",
+    "difficulty_numeric": 8,
+    "stage": "elite",
+    "skills": [
+      "inference",
+      "application",
+      "structure-mapping",
+      "tone-detection",
+      "evidence-anchoring"
+    ],
+    "word_count": 597,
+    "question_count": 4,
+    "question_types": [
+      "application",
+      "inference",
+      "paragraph_function",
+      "tone"
+    ],
+    "theme": "a display of standing can outlast the thing it displays: as servants disappear, the duty of performing leisure and consumption on a master's behalf narrows to the wife, so that in the lower middle class a man works hard in order that his wife can be seen not to, the taste that finds her wasted effort pleasing has itself been trained to demand it, and her consumption for show survives even lower down than her leisure, reversing her role without changing her status",
+    "estimated_time_min": 8.5,
+    "source": {
+      "publication": "Thorstein Veblen, The Theory of the Leisure Class (1899), \"Conspicuous Consumption\"",
+      "url": "https://www.gutenberg.org/ebooks/833",
+      "author": "Thorstein Veblen",
+      "date_accessed": "2026-10-03",
+      "usage_note": "Public domain: Thorstein Veblen died in 1929 and the work was first published in 1899. The passage is the author's own words, with some sentences left out to fit CAT length; the questions, explanations and notes are original to CAT OS."
+    },
+    "date_added": "2026-10-03",
+    "batch_id": "batch-rc-006",
+    "prompt_version": "content engine v1 + CAT-size brief 2026-10",
+    "reviewer_notes": "Cut from the middle of 'Conspicuous Consumption', where Veblen turns from lords and retainers to the ordinary household: the narrowing of vicarious service to the wife (source paragraph 13 without the sentence extending the decline to vicarious leisure and the one on the two groups coinciding), the curious inversion (paragraph 14 without its two sentences on the 'primary fact' and the 'derivative fact', whose dashes the Gutenberg text prints as single hyphens that the verbatim check cannot read), the housewife's disguised leisure (paragraph 15 without the sentences on manners, on form and colour, on fortuitous beauty and on presentable paraphernalia) and the wife as ceremonial consumer (paragraph 16 without its second sentence). The chapter's account of emulation down the social scale (paragraph 17) is left out because rc-0065 already treats the cycle of imitation. What this adds to the familiar phrase 'conspicuous consumption' is the delegation of display to a dependant, and the inversion in which the display outlives the leisure it once advertised.",
+    "length_class": "medium",
+    "structure": "phenomenon_explanation",
+    "viewpoints": 1,
+    "tone": "coolly analytical, drily ironic",
+    "difficulty_vector": {
+      "lexical": 5,
+      "syntactic": 5,
+      "abstraction": 3,
+      "inference_depth": 3,
+      "distractor_similarity": 3,
+      "reasoning_depth": 3,
+      "structural_ambiguity": 3,
+      "time_pressure": 3
+    },
+    "reasoning_patterns": [
+      "struct.phenomenon_explanation",
+      "struct.cause_effect",
+      "struct.general_to_specific",
+      "struct.conclusion",
+      "struct.qualification",
+      "comp.central_idea",
+      "comp.function_over_words",
+      "comp.reference_tracking",
+      "arg.concession",
+      "arg.description_vs_evaluation",
+      "inf.strongly_supported",
+      "inf.author_view_application",
+      "lang.causal_wording",
+      "lang.concession_marker",
+      "lang.comparative",
+      "word.tone_of_word",
+      "word.register",
+      "elim.near_tie"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1's live rival is the man who works simply because his household must live: he is indeed 'reduced by economic circumstances' to gaining a livelihood, and 'simply' is the word that kills the option, since the same paragraph gives his assiduity a further purpose, 'in order that his wife may in due form render for him' the leisure the time demands. The option giving him a show of leisure of his own reverses 'no pretense of leisure on the part of the head of the household', and the one that has him drop the display altogether forgets that the wife carries it on 'for the good name of the household and its master'. Q2's strongest rival is the natural love of tidiness, which the author rejects in so many words ('pleasing to us chiefly because we have been taught to find them pleasing'); the servants option fails on 'devolve upon the wife alone', and the option denying any pleasure contradicts 'Not that the results ... are not pleasing'. Q3's rival is the improvement reading of the wife's new role, refused by the sentence that follows it ('she still quite unmistakably remains his chattel in theory'); the option reversing the order in which leisure and consumption are given up misreads 'continues in force even at a lower point'. Q4's near-tie is neutrality against cool irony: the neutral reading cannot survive 'curious inversion', 'in due form' and 'the abiding mark of the unfree servant', and indignation overstates a voice that concedes ('Not that ...') and narrows its own claim ('Pretty much all that is here insisted on').",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "vicarious",
+      "assiduity",
+      "mundificatory",
+      "chattel"
+    ]
+  },
+  "passage": {
+    "title": "A Curious Inversion",
+    "reading_time_min": 3.2,
+    "paragraphs": [
+      {
+        "id": "rc-0146-p1",
+        "text": "With the disappearance of servitude, the number of vicarious consumers attached to any one gentleman tends, on the whole, to decrease. The dependent who was first delegated for these duties was the wife, or the chief wife; and, as would be expected, in the later development of the institution, when the number of persons by whom these duties are customarily performed gradually narrows, the wife remains the last. In the higher grades of society a large volume of both these kinds of service is required; and here the wife is of course still assisted in the work by a more or less numerous corps of menials. But as we descend the social scale, the point is presently reached where the duties of vicarious leisure and consumption devolve upon the wife alone. In the communities of the Western culture, this point is at present found among the lower middle class."
+      },
+      {
+        "id": "rc-0146-p2",
+        "text": "And here occurs a curious inversion. It is a fact of common observance that in this lower middle class there is no pretense of leisure on the part of the head of the household. Through force of circumstances it has fallen into disuse. But the middle-class wife still carries on the business of vicarious leisure, for the good name of the household and its master. The head of the middle-class household has been reduced by economic circumstances to turn his hand to gaining a livelihood by occupations which often partake largely of the character of industry, as in the case of the ordinary business man of today. It is by no means an uncommon spectacle to find a man applying himself to work with the utmost assiduity, in order that his wife may in due form render for him that degree of vicarious leisure which the common sense of the time demands."
+      },
+      {
+        "id": "rc-0146-p3",
+        "text": "The leisure rendered by the wife in such cases is, of course, not a simple manifestation of idleness or indolence. It almost invariably occurs disguised under some form of work or household duties or social amenities, which prove on analysis to serve little or no ulterior end beyond showing that she does not occupy herself with anything that is gainful or that is of substantial use. Not that the results of her attention to household matters, of a decorative and mundificatory character, are not pleasing to the sense of men trained in middle-class proprieties; but the taste to which these effects of household adornment and tidiness appeal is a taste which has been formed under the selective guidance of a canon of propriety that demands just these evidences of wasted effort. The effects are pleasing to us chiefly because we have been taught to find them pleasing. Pretty much all that is here insisted on is that, as regards these amenities of life, the housewife's efforts are under the guidance of traditions that have been shaped by the law of conspicuously wasteful expenditure of time and substance."
+      },
+      {
+        "id": "rc-0146-p4",
+        "text": "The requirement of vicarious consumption at the hands of the wife continues in force even at a lower point in the pecuniary scale than the requirement of vicarious leisure. So that, as the latter-day outcome of this evolution of an archaic institution, the wife, who was at the outset the drudge and chattel of the man, both in fact and in theory – the producer of goods for him to consume – has become the ceremonial consumer of goods which he produces. But she still quite unmistakably remains his chattel in theory; for the habitual rendering of vicarious leisure and consumption is the abiding mark of the unfree servant."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0146-q1",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.strongly_supported",
+        "comp.reference_tracking",
+        "lang.causal_wording",
+        "elim.near_tie"
+      ],
+      "target_mistake": "giving the husband the leisure his wife performs for him, or reading his hard work as nothing more than earning a living, when the passage gives it a further purpose",
+      "prediction_target": "The learner should be able to say beforehand: he has no leisure of his own and works hard so that his wife can perform leisure on his behalf, for his good name.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "specific_detail"
+      ],
+      "stem": "Which of the following can be inferred about the head of a lower-middle-class household, as the passage describes him?",
+      "options": {
+        "A": "He keeps up a show of leisure of his own, although he must in fact work for his living.",
+        "B": "He has given up the display of leisure, and with it any concern for his household's good name.",
+        "C": "He works so hard simply because his household needs his earnings in order to live.",
+        "D": "His hard work helps to pay for a show of leisure whose credit goes back to him."
+      },
+      "correct": "D",
+      "estimated_time_sec": 90,
+      "explanation": {
+        "expert_notice": "Two sentences of the second paragraph carry this. The wife 'carries on the business of vicarious leisure, for the good name of the household and its master', and a man applies himself to work 'with the utmost assiduity, in order that his wife may in due form render for him' the leisure the time demands. 'In order that' links his work to her leisure; 'for him' and 'its master' say whose credit it is.",
+        "correct_reasoning": "Join the two sentences. The head's own leisure 'has fallen into disuse', so he works; the work is done 'in order that' his wife may perform leisure; and that leisure is rendered 'for him', for the good name of 'its master'. His labour helps to fund a display whose repute returns to him, which is what the correct option says.",
+        "passage_anchor": "rc-0146-p2",
+        "question_type_note": "This inference needs two sentences, one giving the purpose of the work and one giving the beneficiary of the leisure. The option that needs both, and adds nothing else, is the answer.",
+        "reading_habit": "Treat 'in order that' and 'for' as arrows and draw them on the page: his work, then her leisure, then his good name.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage says the reverse: in this class 'there is no pretense of leisure on the part of the head of the household'. The leisure that survives is performed by the wife, on his behalf.",
+            "seductive_element": "A man so concerned with his household's standing sounds as though he would keep up appearances himself."
+          },
+          {
+            "option": "B",
+            "trap_type": "half_right",
+            "why_wrong": "The first half is right, since his own leisure 'has fallen into disuse'; the second is wrong, since the wife's leisure is carried on 'for the good name of the household and its master', and he works hard so that she can carry it on.",
+            "seductive_element": "Giving up leisure sounds like giving up the whole business of appearances."
+          },
+          {
+            "option": "C",
+            "trap_type": "too_narrow",
+            "why_wrong": "He does work for 'a livelihood', but the passage gives his assiduity a further purpose: he works 'in order that his wife may in due form render for him' the leisure the time demands. 'Simply' cuts that purpose away.",
+            "seductive_element": "The passage itself says he has been 'reduced by economic circumstances' to earning a living, which sounds like the whole story."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0146-q2",
+      "type": "application",
+      "skill": "application",
+      "patterns": [
+        "inf.author_view_application",
+        "arg.concession",
+        "lang.concession_marker"
+      ],
+      "target_mistake": "explaining the pleasure of a tidy, decorated room as natural, or denying that the author grants the pleasure at all, instead of carrying his account of a trained taste to the new case",
+      "prediction_target": "The learner should be able to say: the author grants that such rooms please, and says they please because our taste has been trained to admire visible evidence of wasted effort.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 3,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "inference"
+      ],
+      "stem": "A guest in a modest middle-class home admires the polished brass and the carefully arranged ornaments of its front room. The author would most likely explain the guest's pleasure as",
+      "options": {
+        "A": "a delight in order and cleanliness that comes naturally and needs no teaching",
+        "B": "admiration for the servants whose skilled work keeps such a room in order",
+        "C": "a taste trained to enjoy visible evidence of effort spent to no useful end",
+        "D": "a mistake, since such effects of adornment and tidiness cannot really please anyone"
+      },
+      "correct": "C",
+      "estimated_time_sec": 90,
+      "explanation": {
+        "expert_notice": "The third paragraph answers the question in one sentence: 'The effects are pleasing to us chiefly because we have been taught to find them pleasing.' The sentence before it names the teacher: a taste 'formed under the selective guidance of a canon of propriety that demands just these evidences of wasted effort'.",
+        "correct_reasoning": "The author grants the pleasure ('Not that the results ... are not pleasing') and then explains it. The taste that enjoys polish and arrangement has been schooled by a standard that demands visible proof of effort spent on nothing 'gainful or that is of substantial use'. The guest is pleased because the guest has learned to read such effort as propriety, which is the correct option's account.",
+        "passage_anchor": "rc-0146-p3",
+        "question_type_note": "An application question gives a new case and asks for the author's explanation of it. Find the sentence where the author explains the general case, then carry it across unchanged.",
+        "reading_habit": "When an author begins 'Not that ... are not', he is conceding something before he explains it. Keep both halves: the concession tells you what he accepts, and the 'but' tells you how he accounts for it.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "common_knowledge_intrusion",
+            "why_wrong": "This is the everyday explanation, and the passage rejects it: the effects please 'chiefly because we have been taught to find them pleasing', so the pleasure is learned, not natural.",
+            "seductive_element": "Most people do assume that tidiness pleases by nature, so the option sounds like plain good sense."
+          },
+          {
+            "option": "B",
+            "trap_type": "wrong_population",
+            "why_wrong": "In this class the duties of leisure 'devolve upon the wife alone'; the corps of menials belongs to 'the higher grades of society'. And the author's explanation concerns the observer's trained taste, not anyone's skill.",
+            "seductive_element": "Polished brass suggests servants, and the passage does mention a 'corps of menials'."
+          },
+          {
+            "option": "D",
+            "trap_type": "criticism_as_rejection",
+            "why_wrong": "The author says the opposite: 'Not that the results of her attention to household matters ... are not pleasing.' His claim is about why such things please, not that they fail to.",
+            "seductive_element": "A writer who calls household effort 'wasted' sounds as though he must think its results worthless."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0146-q3",
+      "type": "paragraph_function",
+      "skill": "paragraph_function",
+      "patterns": [
+        "comp.function_over_words",
+        "struct.conclusion",
+        "lang.comparative",
+        "struct.qualification"
+      ],
+      "target_mistake": "reading the wife's move from producer to consumer as an improvement, or reversing the order in which leisure and consumption are given up as households grow poorer",
+      "prediction_target": "The learner should be able to say: the last paragraph carries the wife's display below the point where leisure ends, and then denies that her reversed role has changed her status.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 3,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "logical_structure"
+      ],
+      "stem": "The last paragraph of the passage serves mainly to",
+      "options": {
+        "A": "show that the display of consumption gives way before the display of leisure as a household grows poorer",
+        "B": "follow the wife's display below where leisure ends, and show what her reversed role leaves unchanged",
+        "C": "concede that the wife's lot has improved, since the producer of goods has become their consumer",
+        "D": "urge the households of this class to stop spending on displays of standing that they can ill afford"
+      },
+      "correct": "B",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "The paragraph makes two moves. A comparison: consumption by the wife 'continues in force even at a lower point in the pecuniary scale than the requirement of vicarious leisure'. Then a conclusion introduced by 'So that': she has gone from 'the producer of goods for him to consume' to 'the ceremonial consumer of goods which he produces', and yet 'she still quite unmistakably remains his chattel in theory'.",
+        "correct_reasoning": "The first sentence carries the argument below the point the second paragraph reached, where leisure was still performed: lower still, consumption for show survives on its own. The rest of the paragraph reverses the wife's role and then refuses the conclusion that her standing has changed, because 'the habitual rendering of vicarious leisure and consumption is the abiding mark of the unfree servant'. An extension, and a reversal that changes nothing, is what the correct option describes.",
+        "passage_anchor": "rc-0146-p4",
+        "question_type_note": "A paragraph-function question asks what a paragraph does for the argument. Last paragraphs often do two jobs, extending and concluding; an option that catches only one of them, or misstates either, is a distractor.",
+        "reading_habit": "When a closing sentence opens with 'But' and contains 'still', expect the author to take back the comfort the sentence before it seemed to offer.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "comparison_distortion",
+            "why_wrong": "It reverses the passage's order. Consumption by the wife 'continues in force even at a lower point in the pecuniary scale than the requirement of vicarious leisure', so leisure is given up first and consumption last.",
+            "seductive_element": "Consumption costs money while leisure seems free, so it feels natural that a poorer household would give up spending first."
+          },
+          {
+            "option": "C",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "It reuses the paragraph's own reversal, 'the producer of goods for him to consume' become 'the ceremonial consumer of goods which he produces', and bends it into a claim of improvement. The very next sentence says she 'still quite unmistakably remains his chattel in theory', because rendering leisure and consumption for another is 'the abiding mark of the unfree servant'.",
+            "seductive_element": "Going from drudge to consumer sounds like a rise, and the option is built from the paragraph's own words."
+          },
+          {
+            "option": "D",
+            "trap_type": "prescriptive_leap",
+            "why_wrong": "The author recommends nothing to anyone. He describes a requirement and traces it to 'an archaic institution'; whether households should resist it is a question he never raises.",
+            "seductive_element": "An account of money spent on show by families who must work hard reads like a complaint, and complaints invite reform."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0146-q4",
+      "type": "tone",
+      "skill": "tone",
+      "patterns": [
+        "word.tone_of_word",
+        "word.register",
+        "arg.description_vs_evaluation"
+      ],
+      "target_mistake": "hearing either anger or pure neutrality in a voice that is cool on the surface and ironic underneath, or taking the author's concession about pleasing results for admiration",
+      "prediction_target": "The learner should be able to say: the author sounds like a detached analyst, but his phrasing ('curious inversion', 'in due form') is quietly ironic.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "author_purpose"
+      ],
+      "stem": "The author's tone in the passage is best described as",
+      "options": {
+        "A": "coolly analytical, with an irony that shows in its choice of words",
+        "B": "indignant, and impatient for wives to be freed from all these duties",
+        "C": "neutral, recording customs without any edge of judgement",
+        "D": "admiring of the care and taste that go into the housewife's work"
+      },
+      "correct": "A",
+      "estimated_time_sec": 55,
+      "explanation": {
+        "expert_notice": "The vocabulary is clinical ('a fact of common observance', 'prove on analysis', 'the pecuniary scale'), and the author narrows his own claim ('Pretty much all that is here insisted on'). Yet the phrasing keeps turning sharp: a 'curious inversion', leisure rendered 'in due form', the 'business of vicarious leisure', and a closing sentence in which her service is 'the abiding mark of the unfree servant'.",
+        "correct_reasoning": "Detachment and irony are both in the text. The author argues like an analyst, granting what he must ('Not that the results ... are not pleasing') and limiting what he claims. But a man working 'with the utmost assiduity' so that his wife can be seen to be idle 'in due form' is described with a straight face, and the straight face is the joke. Cool analysis with an ironic edge is the correct option.",
+        "passage_anchor": "rc-0146-p2, rc-0146-p3, rc-0146-p4",
+        "question_type_note": "A tone question asks how the author sounds, not what he argues. Collect three or four of his own phrases before you look at the options, and test each option against all of them.",
+        "reading_habit": "Irony often hides in formal words used for small things: 'in due form', 'the business of', 'which the common sense of the time demands'. When grand language describes a dusted parlour, the author is smiling.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "over_intense_tone",
+            "why_wrong": "There is no outburst and no call to free anyone. The sharpest sentence is phrased as a calm finding, and the author concedes and narrows his own claim, so indignation overstates a voice that stays cool.",
+            "seductive_element": "Calling the wife a 'chattel' sounds like an accusation, and a modern reader expects anger to go with it."
+          },
+          {
+            "option": "C",
+            "trap_type": "weakened_version",
+            "why_wrong": "Neutral is too weak. 'Curious inversion', 'evidences of wasted effort' and 'the abiding mark of the unfree servant' carry a judgement, and the man toiling so that his wife may be idle 'in due form' is plainly described with irony.",
+            "seductive_element": "The vocabulary is technical and the sentences are long and impersonal, which sounds like the voice of a neutral report."
+          },
+          {
+            "option": "D",
+            "trap_type": "concession_as_position",
+            "why_wrong": "The author grants that the results of her work are 'pleasing to the sense of men trained in middle-class proprieties', but only in order to explain the pleasure away: such effects please 'chiefly because we have been taught to find them pleasing'. A concession is not admiration.",
+            "seductive_element": "The paragraph does say her efforts produce pleasing effects, and 'Not that ... are not pleasing' reads at first like praise."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "vicarious",
+      "passage_use": "the business of vicarious leisure",
+      "meaning_here": "done by one person on behalf of another, so that the credit goes to the other",
+      "difficulty": "medium"
+    },
+    {
+      "word": "assiduity",
+      "passage_use": "applying himself to work with the utmost assiduity",
+      "meaning_here": "steady, careful, hard-working attention to a task",
+      "difficulty": "hard"
+    },
+    {
+      "word": "mundificatory",
+      "passage_use": "of a decorative and mundificatory character",
+      "meaning_here": "to do with cleaning and tidying (a very rare word, from the Latin for 'make clean')",
+      "difficulty": "hard"
+    },
+    {
+      "word": "chattel",
+      "passage_use": "the drudge and chattel of the man",
+      "meaning_here": "a piece of movable property; here, a person owned and used like a possession",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "Every word is Veblen's, from 1899, and his sentences are long and formal. Two keys help. 'Vicarious' means done by one person on another's behalf, so that the credit goes to the other; and Veblen's coolest sentences are often his most ironic. Read for the point where a display outlives the thing it once displayed.",
+    "one_sentence_summary": "As servants disappear, the duty of displaying a master's standing through leisure and consumption narrows to his wife, until in the lower middle class a man who has no leisure himself works hard so that his wife can perform it for him, her household duties being mostly evidence of effort spent on nothing useful, admired by a taste trained to admire it; lower still her consumption for show survives, so that she has gone from producing goods for him to consuming them ceremonially without ceasing to be his chattel in theory.",
+    "main_idea": "A household's good name once rested on its master's idleness and on servants who were idle and consumed on his behalf. As servants disappear, that duty falls on the wife alone. In the lower middle class the husband must work, yet his wife still performs leisure for him, and poorer households still keep up her consumption for show. Her role has reversed; her status has not.",
+    "simple_explanation": "In grand households of the past, a master showed his standing through dependants: people who did no useful work and consumed fine things, all on his behalf. Veblen calls this vicarious leisure and vicarious consumption, idleness and spending done by one person so that the credit goes to another. As servants become fewer, these duties shrink to one person, the wife, who was the first to be given them and is the last to keep them.\n\nIn the lower middle class something odd happens. The husband no longer pretends to be a man of leisure; he has to earn a living, often in business. But his wife still performs leisure for him, for the good name of the household. Veblen notes, drily, that you can often see a man working as hard as he can so that his wife can be seen to be properly idle.\n\nHer idleness does not look like idleness. It is disguised as housework and social duties, but on inspection those mostly show that she does nothing that earns money or is of real use. People do find the polished, decorated results pleasing, Veblen admits, but mainly because they have been taught to like exactly this kind of visible, wasted effort.\n\nFurther down the money scale, even the show of leisure disappears, but the wife must still consume some things for show. So her role has turned upside down: she began as the man's drudge, producing goods for him to consume, and now she consumes, for show, the goods he produces. Yet in Veblen's view she is still, in theory, his property, because doing leisure and consumption on someone else's behalf is the mark of a servant.",
+    "why_difficult": "Veblen's sentences are long, his vocabulary is formal and Latinate (vicarious, pecuniary, mundificatory, assiduity), and his key terms were defined earlier in the chapter, so the reader has to work out 'vicarious' from its use. Harder still, his judgements are carried by irony rather than stated: he describes an absurd arrangement in the language of a neutral report. A reader who takes the cool surface at face value misses the edge, and one who hears only the edge misses how carefully he limits his claims.",
+    "author_intention": "To show how the display of a master's standing, once spread across many dependants, comes to rest on the wife alone, outlasts the master's own leisure and then leisure itself, and leaves her role reversed but her status unchanged.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0146-p1",
+        "role": "Narrows the duty",
+        "note": "As servitude disappears, fewer people consume on a master's behalf; the wife, the first given the duty, is the last, and in the lower middle class she performs it alone."
+      },
+      {
+        "paragraph_id": "rc-0146-p2",
+        "role": "Names the inversion",
+        "note": "In that class the husband has no leisure and works hard, while his wife still performs leisure on his behalf, for the household's good name."
+      },
+      {
+        "paragraph_id": "rc-0146-p3",
+        "role": "Unmasks the duties",
+        "note": "Her leisure is disguised as housework whose results please mainly because a tradition of conspicuous waste has trained our taste to find them pleasing."
+      },
+      {
+        "paragraph_id": "rc-0146-p4",
+        "role": "Draws the conclusion",
+        "note": "Her consumption for show survives even lower than her leisure; she has gone from producer to ceremonial consumer, yet remains his chattel in theory."
+      }
+    ],
+    "tone_progression": "Dry and classificatory at first, mock-solemn as the 'curious inversion' is described, carefully concessive about the pleasing effects of housework, and finally cold and pointed in the last sentence's verdict on the wife's status.",
+    "key_transitions": [
+      "'And here occurs a curious inversion.' (opening of paragraph 2): the duty that has narrowed to the wife now outlasts the master's own leisure.",
+      "'Not that the results of her attention to household matters ... are not pleasing' (paragraph 3): the author concedes the pleasure in order to explain it.",
+      "'But she still quite unmistakably remains his chattel in theory' (end of paragraph 4): the reversal of her role is denied any effect on her status."
+    ],
+    "misunderstanding": "A hurried reader thinks Veblen is mocking housewives, or saying that housework is pointless. His target is the arrangement, not the woman: the wife is the person on whom an archaic duty has come to rest, and he grants that her work produces effects that really do please. His claim is narrower and stranger: the effort is shaped by a tradition that demands visible waste, and our pleasure in it has been trained by the same tradition.",
+    "traps_summary": "The options trade on four slips: giving the husband the leisure that the wife performs for him, or assuming that he works only to live; explaining the pleasure of a tidy room as natural or as the work of servants, or denying it altogether; reversing the order in which leisure and consumption are given up, or taking the wife's new role for an improvement; and hearing either anger or pure neutrality in a voice that is cool and ironic.",
+    "reading_lesson": "With an ironic writer, read the facts and the phrasing separately. The facts tell you what he claims; the phrasing ('in due form', 'curious inversion', 'the business of vicarious leisure') tells you what he thinks of it. Answer the tone question from the second list and every other question from the first.",
+    "real_world": "Thorstein Veblen, the American economist who died in 1929, published The Theory of the Leisure Class in 1899. Every carefully staged photograph of a spotless home or a perfect holiday, posted for others to see, descends from the parlour he describes: effort made visible so that it can be credited to someone.",
+    "takeaway": "A sign of standing can outlive the thing it once signalled, and someone else may be left to keep displaying it on your behalf.",
+    "reflection_question": "What do you spend time or money on mainly so that someone else's standing can be seen, and who taught you to find it pleasing?",
+    "eli10": {
+      "big_idea": "Even when the husband must work, his wife is still expected to show the family's standing, by seeming idle and by spending, on his behalf.",
+      "story": "Long ago, rich men kept many servants for show. The servants idled and used fine things, all for the master's good name. Veblen calls this 'vicarious': done by one person on another's behalf. As servants grew fewer, the job shrank down to the wife. Then comes a strange flip. In lower middle-class homes, the husband must work hard. Yet his wife must still seem a lady of leisure, for his sake. Her leisure hides inside housework, like endless polishing and arranging. It earns nothing and is of little real use. We like how it looks, Veblen says, mostly because we were taught to. Even lower down the money ladder, she must still use some goods for show. Once she made goods for him to use. Now she uses up his goods, for show. But in theory she still belongs to him, like a servant.",
+      "paragraphs": [
+        "Narrows the job: as servants vanish, showing off for the master falls to the wife alone.",
+        "Names a strange flip: the husband works hard so his wife can seem idle for him.",
+        "Unmasks housework: it shows wasted effort, and we like it because we were taught to.",
+        "Concludes: she now spends for show instead of producing, yet is still his property in theory."
+      ],
+      "author_view": "Veblen is cool and drily amused: he describes an odd custom calmly, and the calm is part of the joke."
+    }
+  }
+}

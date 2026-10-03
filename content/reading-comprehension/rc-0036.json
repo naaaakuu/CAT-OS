@@ -17,17 +17,16 @@
       "scope-control",
       "trap-recognition"
     ],
-    "word_count": 645,
-    "question_count": 5,
+    "word_count": 644,
+    "question_count": 4,
     "question_types": [
       "agree_disagree",
       "inference",
       "main_idea",
-      "phrase_in_context",
-      "tone"
+      "phrase_in_context"
     ],
     "theme": "why pilots succeed and rollouts fail: a pilot measures efficacy under attention while a rollout depends on a supervisory capacity that cannot be extended, so the two are different questions rather than one biased measurement",
-    "estimated_time_min": 10,
+    "estimated_time_min": 9,
     "source": {
       "publication": "original",
       "url": null,
@@ -38,7 +37,7 @@
     "date_added": "2026-09-12",
     "batch_id": "batch-rc-003",
     "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-01",
-    "reviewer_notes": "Two accounts of the pilot-to-scale gap are given their due and then both refused, not because they are false but because they answer the wrong question. The near-tie sits in the agreement question, where a distractor converts the author's 'not sufficient' into 'irrelevant'.",
+    "reviewer_notes": "Two accounts of the pilot-to-scale gap are given their due and then both refused, not because they are false but because they answer the wrong question. The near-tie sits in the agreement question, where a distractor converts the author's 'not sufficient' into 'irrelevant'. 2026-10-03 CAT-size pass: 644→644 words, 5→5 paragraphs, 5→4 questions. Dropped q2 (tone, a third question on p4 and the most contestable of the five); the kept set sits two on p4 and two on p5.",
     "length_class": "long",
     "structure": "two_views_adjudication",
     "viewpoints": 3,
@@ -72,7 +71,7 @@
     ],
     "quality": {
       "status": "reviewed",
-      "adversarial_review": "The set is now built so that three complete readings of the passage compete in every question, and only one survives the fourth and fifth paragraphs. The shadow reading is the compound taken too far: because 'nothing in the design separates the two', a pilot's number is said to measure the supervision rather than the intervention, from which it follows that the efficacy question cannot be answered by a pilot at all. It carries an option in every question (Q1 'the size of that effect should not weigh', Q3 'a figure that records the supervision spent', Q4 'a measure of the supervision it received', Q5 'the attention is what produces the effect', Q2 the sceptical tone), and it dies on one word and one sentence: the word is 'compound', which puts the intervention's own contribution inside the number, and the sentence is 'whether the thing works at all is a real question, and it has to be answered before the second one is worth asking'. A second rival converts the fixed-attention premise into a rule for choosing programmes, extend only what runs unwatched, and is refused because the author's criterion governs which pilot to commission, not which intervention to adopt; the passage prescribes a pilot 'visited rarely' precisely so that a supervised intervention can be tested honestly. The third rival is the correction the two reported accounts share, discounting or hostile piloting, which the author names and refuses: both 'refine with great sophistication an estimate of the wrong quantity'. Q2's live rival is the appreciative option, because the concessions really are there, 'Both accounts are true', a sympathetic paragraph each, 'None of this makes the pilot worthless', and it dies on the second half of the same sentence, 'both misdescribe the problem'. Q4's key has been narrowed to the pivot and its consequence so that it no longer restates Q1's prescription; the two global questions now ask about different parts of the movement. Strength parity was imposed across the set afterwards: no distractor in this file is quantified more strongly than its key, because a single overreaching option was found to condemn the whole reading it belonged to without the passage being read.",
+      "adversarial_review": "The set is now built so that three complete readings of the passage compete in every question, and only one survives the fourth and fifth paragraphs. The shadow reading is the compound taken too far: because 'nothing in the design separates the two', a pilot's number is said to measure the supervision rather than the intervention, from which it follows that the efficacy question cannot be answered by a pilot at all. It carries an option in every question (Q1 'the size of that effect should not weigh', Q3 'a figure that records the supervision spent', Q4 'a measure of the supervision it received', Q5 'the attention is what produces the effect', Q2 the sceptical tone), and it dies on one word and one sentence: the word is 'compound', which puts the intervention's own contribution inside the number, and the sentence is 'whether the thing works at all is a real question, and it has to be answered before the second one is worth asking'. A second rival converts the fixed-attention premise into a rule for choosing programmes, extend only what runs unwatched, and is refused because the author's criterion governs which pilot to commission, not which intervention to adopt; the passage prescribes a pilot 'visited rarely' precisely so that a supervised intervention can be tested honestly. The third rival is the correction the two reported accounts share, discounting or hostile piloting, which the author names and refuses: both 'refine with great sophistication an estimate of the wrong quantity'. Q2's live rival is the appreciative option, because the concessions really are there, 'Both accounts are true', a sympathetic paragraph each, 'None of this makes the pilot worthless', and it dies on the second half of the same sentence, 'both misdescribe the problem'. Q4's key has been narrowed to the pivot and its consequence so that it no longer restates Q1's prescription; the two global questions now ask about different parts of the movement. Strength parity was imposed across the set afterwards: no distractor in this file is quantified more strongly than its key, because a single overreaching option was found to condemn the whole reading it belonged to without the passage being read. (2026-10-03, CAT-size pass: q2 was dropped, so any note above about it no longer applies.)",
       "blind_solve": {
         "solver": "blind reviewer (fresh session, no key)",
         "agreed": 5,
@@ -166,62 +165,6 @@
             "trap_type": "prescriptive_leap",
             "why_wrong": "The passage protects the pilot rather than replacing it: 'None of this makes the pilot worthless', and whether the thing works at all 'has to be answered before the second one is worth asking'. Its advice is about which pilot to commission, and a staged rollout would answer neither question, since it withdraws the scrutiny before the efficacy question has been settled.",
             "seductive_element": "It follows the fixed-attention premise towards the practical conclusion a policymaker most wants, and the passage does close on a recommendation about how to proceed."
-          }
-        ]
-      }
-    },
-    {
-      "id": "rc-0036-q2",
-      "type": "tone",
-      "skill": "tone",
-      "patterns": [
-        "lang.tone_shift",
-        "arg.description_vs_evaluation",
-        "inf.author_vs_reported"
-      ],
-      "target_mistake": "hearing the author's concessions as agreement with the two accounts, hearing a constraint stated plainly as impatience with the people it constrains, or hearing the admission that a design separates nothing as doubt about pilots altogether",
-      "prediction_target": "The learner should be able to say before the options: the author grants both accounts and then rules against both, and he does it coolly and with a remedy of his own already in hand.",
-      "difficulty": {
-        "inference_depth": 3,
-        "distractor_similarity": 4,
-        "reasoning_depth": 3
-      },
-      "secondary_skills": [
-        "author_purpose"
-      ],
-      "stem": "The tone of the passage is best described as",
-      "options": {
-        "A": "expository: setting out two accounts and supplying the caution they had left unstated",
-        "B": "impatient with organisations that keep extending what they have no capacity to watch",
-        "C": "analytical and quietly corrective, crediting both accounts and adopting neither",
-        "D": "detached: sure of the diagnosis, and doubtful that a pilot's number can inform a rollout"
-      },
-      "correct": "C",
-      "estimated_time_sec": 60,
-      "explanation": {
-        "expert_notice": "Tone lives in the verdict words, and four places in this passage carry them. 'Both accounts are true, and both misdescribe the problem' concedes and overrules in a single flat sentence. The existing corrections 'refine with great sophistication an estimate of the wrong quantity', which is arch, and is the only arch sentence in five paragraphs. 'None of this makes the pilot worthless' keeps the method the author has just criticised. And the closing lines say which pilot to commission, which is advice rather than complaint.",
-        "correct_reasoning": "The correct option keeps all three parts of that voice. Analytical is the method: the fourth paragraph separates two questions, one about the intervention and one about the organisation, and names the input that binds, which is attention rather than money. Quietly corrective is the temperature: the verdict arrives without a single intensifier, and the fault is found in what the two accounts measure rather than in anyone who holds them. Crediting both and adopting neither is what the passage visibly does, giving each account a sympathetic paragraph and then leaving both outside the argument it goes on to make.",
-        "passage_anchor": "rc-0036-p4",
-        "question_type_note": "Tone questions are decided by judgement words, not by subject matter. Topic words tell you what the passage is about; only evaluative words tell you where the author stands, and intensity is a separate decision from direction.",
-        "reading_habit": "Read the concessions and the verdict as one voice rather than two. An author who grants a view its truth and then rules against it is neither agreeing with it nor attacking it, and the tone you want is the one word that fits both movements at once.",
-        "distractors": [
-          {
-            "option": "A",
-            "trap_type": "concession_as_position",
-            "why_wrong": "Setting the accounts out is what two of the five paragraphs do, and the fourth stops doing it: 'Both accounts are true, and both misdescribe the problem.' What the author adds is not a caution the accounts had omitted but a claim that they measured the wrong quantity, which leaves nothing of theirs standing to be supplemented.",
-            "seductive_element": "Two of the five paragraphs really are spent stating other people's positions at full strength and without heat, which is exactly what expository writing looks like."
-          },
-          {
-            "option": "B",
-            "trap_type": "over_intense_tone",
-            "why_wrong": "The direction is invented along with the volume. The passage names no culprit and scolds nobody: a ministry is described as able to double a budget and unable to double its senior people's hours, which states what a constraint is rather than complains about anyone's judgement. The one arch sentence in five paragraphs is spent on a literature's sophistication, and the passage closes by saying which pilot to commission rather than by telling anyone to stop.",
-            "seductive_element": "The remark about great sophistication spent on the wrong quantity is genuinely dry, and a reader who takes that one sentence's temperature for the passage's hears somebody being told off."
-          },
-          {
-            "option": "D",
-            "trap_type": "weakened_version",
-            "why_wrong": "The diagnosis is sure and the doubt is added. The passage protects the pilot's own question, whether the thing works at all is 'a real question, and it has to be answered before the second one is worth asking', and then names the pilot to commission: run by ordinary staff, visited rarely, reporting a smaller number that 'will mean more'. An author who says which number to believe has not concluded that no number can be believed.",
-            "seductive_element": "Attention is called fixed in a way budgets are not, and nothing in a pilot's design separates the two contributions, so a reader who stops before the final prescription hears a method being written off in a voice as cool as the author's own."
           }
         ]
       }
@@ -461,6 +404,18 @@
     "reading_lesson": "When a passage gives two established positions a paragraph each, do not look for which one the author prefers; look for the assumption they share. Authors who structure a piece this way almost always turn by denying that shared assumption, and the thesis is the denial, not a choice between the two. Mark the shared assumption as soon as the second position ends and you will have the main idea before the pivot arrives.",
     "real_world": "Anyone who has seen a team's successful experiment become a disappointing company-wide process has watched this happen; the same logic governs a trial ward, a model school, a prototype line, and any improvement that worked while somebody important was watching.",
     "takeaway": "Ask not how big the pilot's effect was, but how much attention it had to be paid to get it.",
-    "reflection_question": "Which success in your own work survived only because someone was watching, and what would it look like if nobody were?"
+    "reflection_question": "Which success in your own work survived only because someone was watching, and what would it look like if nobody were?",
+    "eli10": {
+      "big_idea": "A small trial asks if an idea works; a rollout asks if an organisation that cannot watch everything can keep it working.",
+      "story": "Governments try new ideas small first, say in nine schools. The small test usually looks good. When the idea spreads to four hundred schools, the good result shrinks. One usual explanation: the test was pampered, with spare money, chosen staff and everyone watching. Another: the schools that volunteered were better to begin with. The writer says both are true but miss the point. The small test asks: does this work when done properly? The rollout asks: can an organisation that cannot watch everything get it done properly often enough? That depends on attention, not money. A ministry can double a budget in a year, but not its senior people's hours. A teacher can coach one pupil closely, but not forty. So a pilot's result mixes the idea with borrowed care, and you cannot separate them. Pilots still matter. But trust the one that worked while being left alone.",
+      "paragraphs": [
+        "Describes a pattern: small trials look good, but results shrink when programmes go nationwide.",
+        "Gives the first explanation: the trial was pampered, and scaling up removes the pampering.",
+        "Gives the second explanation: keen volunteers took part, while a rollout must use everyone.",
+        "Turns the argument: trial and rollout ask different questions, and attention, unlike money, cannot be doubled.",
+        "Draws the lesson: a pilot borrows attention; trust one that worked while neglected, even with a smaller number."
+      ],
+      "author_view": "Calm and quietly corrective: the writer respects both usual explanations but thinks they answer the wrong question."
+    }
   }
 }

@@ -17,18 +17,16 @@
       "tone-detection",
       "application"
     ],
-    "word_count": 697,
-    "question_count": 6,
+    "word_count": 599,
+    "question_count": 4,
     "question_types": [
       "application",
       "author_attitude",
       "inference",
-      "scope",
-      "specific_detail",
       "title_selection"
     ],
     "theme": "lying against misleading: the defence that the hearer completes the inference fails once the sentence was chosen for that inference, and what survives is a difference in what the deceiver has staked, which matters where the standing of assertion needs protecting",
-    "estimated_time_min": 12,
+    "estimated_time_min": 9,
     "source": {
       "publication": "original",
       "url": null,
@@ -39,8 +37,8 @@
     "date_added": "2026-09-12",
     "batch_id": "batch-rc-003",
     "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-02",
-    "reviewer_notes": "The hardest item of the batch. The passage destroys one defence of a distinction and then rebuilds a narrower one on a different footing, so every question turns on which of the two differences an option is talking about: the contribution to the false belief, which the author denies differs, or the exposure, which he says does.",
-    "length_class": "long",
+    "reviewer_notes": "The hardest item of the batch. The passage destroys one defence of a distinction and then rebuilds a narrower one on a different footing, so every question turns on which of the two differences an option is talking about: the contribution to the false belief, which the author denies differs, or the exposure, which he says does. 2026-10-03 CAT-size pass: 697→599 words, 5→5 paragraphs, 6→4 questions. All five paragraphs carry the argument (scene, defence, refutation, what survives, where it matters), so none was dropped; tightened each. Kept inference, application, attitude and title; dropped the detail question and the scope question, which overlapped the inference.",
+    "length_class": "medium",
     "structure": "narrative_reflection",
     "viewpoints": 3,
     "tone": "exacting, quietly severe",
@@ -79,8 +77,8 @@
       "elim.near_tie"
     ],
     "quality": {
-      "status": "verified",
-      "adversarial_review": "The whole set turns on one separation, and the distractors are built out of readers who have not made it: the author denies that the two deceivers contribute differently to the false belief and affirms that they risk different things. Q1's live rival is the public defence the misleader retains, which is true of him and belongs to the fourth paragraph, where it is the author's own finding rather than the defence reported in the second. Q2's rival is the option that a narrowly answering witness does no damage a court need mind; the fifth paragraph says a court can survive such a witness, which is weaker, and the remedy it names is another question rather than an absence of harm. Q3's rival is the option that the regulator drew his own conclusion, which is the defence the third paragraph refuses in terms: responsibility follows choice, not utterance. Q4's rival is approval on the ground of a smaller contribution, which is approval for the reason the passage denies. Q5's rival is the condition about planning, which comes from the critique and not from the surviving difference. Q6's rival is the scene, which is vivid enough to read as the subject.",
+      "status": "reviewed",
+      "adversarial_review": "The whole set turns on one separation, and the distractors are built out of readers who have not made it: the author denies that the two deceivers contribute differently to the false belief and affirms that they risk different things. Q1's live rival is the public defence the misleader retains, which is true of him and belongs to the fourth paragraph, where it is the author's own finding rather than the defence reported in the second. Q2's rival is the option that a narrowly answering witness does no damage a court need mind; the fifth paragraph says a court can survive such a witness, which is weaker, and the remedy it names is another question rather than an absence of harm. Q3's rival is the option that the regulator drew his own conclusion, which is the defence the third paragraph refuses in terms: responsibility follows choice, not utterance. Q4's rival is approval on the ground of a smaller contribution, which is approval for the reason the passage denies. Q5's rival is the condition about planning, which comes from the critique and not from the surviving difference. Q6's rival is the scene, which is vivid enough to read as the subject. (2026-10-03, CAT-size pass: q1, q5 were dropped, so any note above about them no longer applies.)",
       "blind_solve": {
         "solver": "blind reviewer (fresh session, no key)",
         "agreed": 6,
@@ -96,87 +94,31 @@
   },
   "passage": {
     "title": "The True Thing He Said",
-    "reading_time_min": 3.7,
+    "reading_time_min": 3.2,
     "paragraphs": [
       {
         "id": "rc-0051-p1",
-        "text": "The investigator asked him where he had been on the Tuesday evening. He said that he had been at his sister's house until six, which was true; he had driven there after work, stayed for tea, and left when the clock in her hall struck the hour. The investigator wrote it down and moved on to the next question. What the investigator did not learn, and was not meant to learn, was that the warehouse stands eleven minutes from the sister's front door, and that the man arrived there at ten past seven. Nothing false had been said. A false belief had been produced, and produced deliberately, by a man who had spent some time before the interview deciding what to say."
+        "text": "The investigator asked where he had been on the Tuesday evening. He said he had been at his sister's house until six, which was true. The investigator wrote it down and moved on. What the investigator did not learn, and was not meant to, was that the warehouse stands eleven minutes from the sister's door, and that the man arrived there at ten past seven. Nothing false had been said. A false belief had been produced, deliberately, by a man who had spent time before the interview deciding what to say."
       },
       {
         "id": "rc-0051-p2",
-        "text": "Most people feel that this is not quite as bad as a flat denial, and philosophers have supplied the feeling with a justification. When you lie, you assert what you believe to be false, and the hearer's false belief is your work from beginning to end. When you mislead, you assert only truths; the hearer builds the false belief himself, out of an inference he was not compelled to draw. He assumed that a man accounting for his evening was accounting for all of it. You did not tell him that. On this account the misleader has left the last step to his victim, and that step, taken by the victim, is what separates the two cases. The distinction is not a lawyer's quibble, its defenders insist, but a difference in who did what."
+        "text": "Most people feel this is not quite as bad as a flat denial, and philosophers have justified the feeling. When you lie, you assert what you believe to be false, and the hearer's false belief is your work from beginning to end. When you mislead, you assert only truths; the hearer builds the false belief himself, out of an inference he was not compelled to draw. On this account the misleader has left the last step to his victim, and that is what separates the two cases. The distinction is not a lawyer's quibble, its defenders insist, but a difference in who did what."
       },
       {
         "id": "rc-0051-p3",
-        "text": "The defence does not survive contact with the scene. The man did not blurt out a true sentence and then watch, helpless, while an inference formed in somebody else's head. He chose that sentence from among the true ones available to him, and he chose it because of the inference it would produce; had he expected the investigator to draw no conclusion from it, he would have said something else. Responsibility follows choice, not utterance. A person who arranges the conditions under which another will reason wrongly has done the thing he arranged, and crediting the victim with the final movement of his own mind is like calling a man innocent of a push because gravity did the falling. Whatever else is true of the distinction, it cannot be that the misleader has made the smaller contribution to the false belief."
+        "text": "The defence does not survive contact with the scene. The man did not blurt out a true sentence and watch, helpless, as an inference formed in somebody else's head. He chose that sentence from the true ones available, and chose it for the inference it would produce; had he expected no conclusion to be drawn, he would have said something else. Responsibility follows choice, not utterance. A person who arranges the conditions under which another will reason wrongly has done the thing he arranged, and crediting the victim with the final movement of his own mind is like calling a man innocent of a push because gravity did the falling. Whatever else is true of the distinction, it cannot be that the misleader has made the smaller contribution to the false belief."
       },
       {
         "id": "rc-0051-p4",
-        "text": "Something does survive, but it is not what the defence claimed. Set the two men side by side after the interview. The liar has put his word behind a falsehood; if the truth comes out, what he said is worthless, and so, from then on, is anything else he says under the same conditions. The misleader has kept his word intact. Every sentence he uttered will survive checking, and he retains a defence he can offer in public, namely that he answered what he was asked. That is a real difference, and it is a difference in exposure rather than in guilt. The liar has spent something the misleader kept in reserve, and what he spent was not only his own comfort. It was the general standing of assertion, which the rest of us are drawing on whenever we take anybody's word for anything."
+        "text": "Something does survive, but it is not what the defence claimed. Set the two men side by side afterwards. The liar has put his word behind a falsehood; if the truth comes out, what he said is worthless, and so is anything he says under the same conditions. The misleader has kept his word intact. Every sentence he uttered will survive checking, and he keeps a public defence: he answered what he was asked. That is a real difference, but one of exposure rather than guilt. The liar has spent something the misleader kept in reserve, and it was not only his. It was the general standing of assertion, which the rest of us draw on whenever we take anybody's word for anything."
       },
       {
         "id": "rc-0051-p5",
-        "text": "That is why the distinction earns its keep in courts and under oaths, and why it thins out at a kitchen table. An institution built on testimony has to protect the standing of assertion itself; it can survive a witness who answers narrowly, because the remedy for a narrow answer is another question, and it cannot survive witnesses whose sentences mean nothing, because for that there is no remedy at all. So the law draws its line where it does, and is right to. Between friends nothing of the kind is at stake. What is protected there is not the reliability of sentences but the confidence of one person in another, and that confidence is injured by the intention, which both men had, rather than by the form of words, which only one of them took trouble over. Anyone who has received a technically true answer from someone he trusted knows how little the technicality bought."
+        "text": "That is why the distinction earns its keep in courts and under oaths, and why it thins out at a kitchen table. An institution built on testimony must protect the standing of assertion itself; it can survive a witness who answers narrowly, because the remedy for a narrow answer is another question, and it cannot survive witnesses whose sentences mean nothing, because for that there is no remedy at all. So the law draws its line where it does, and is right to. Between friends nothing of the kind is at stake. What is protected there is not the reliability of sentences but one person's confidence in another, and that is injured by the intention, which both men had, not by the form of words, which only one took trouble over. Anyone who has received a technically true answer from someone he trusted knows how little the technicality bought."
       }
     ]
   },
   "questions": [
-    {
-      "id": "rc-0051-q1",
-      "type": "specific_detail",
-      "skill": "specific_detail",
-      "patterns": [
-        "comp.explicit_detail",
-        "comp.paraphrase",
-        "inf.author_vs_reported"
-      ],
-      "target_mistake": "answering with the difference the author himself establishes in the fourth paragraph instead of the one the defenders assert in the second",
-      "prediction_target": null,
-      "difficulty": {
-        "inference_depth": 2,
-        "distractor_similarity": 4,
-        "reasoning_depth": 3
-      },
-      "secondary_skills": [
-        "logical_structure"
-      ],
-      "stem": "According to the passage, the standard defence of misleading holds that the two cases differ because",
-      "options": {
-        "A": "the misleader lacks the intention to deceive that the liar has",
-        "B": "the harm done by a misleading answer is usually the smaller one",
-        "C": "the hearer completes the false belief himself, by an inference he was not forced to draw",
-        "D": "the misleader retains a defence that he can offer in public afterwards"
-      },
-      "correct": "C",
-      "estimated_time_sec": 55,
-      "explanation": {
-        "expert_notice": "The second paragraph states the defence and then names it twice over: the hearer builds the false belief himself, out of an inference he was not compelled to draw, and the misleader has left the last step to his victim. The closing sentence labels the whole thing a difference in who did what.",
-        "correct_reasoning": "The correct option is that claim in plainer words. The defence is not about outcomes or motives but about agency: the liar performs the whole deception, whereas the misleader stops short and the victim supplies the rest. Everything the third paragraph then attacks is aimed at exactly this, which is why it matters to have taken the defence down accurately.",
-        "passage_anchor": "rc-0051-p2",
-        "question_type_note": "A detail question about a reported position is answered from the sentences that report it. Where a passage both reports a view and later supplies a better one, the decoys come from the better one.",
-        "reading_habit": "When an author sets out a view he is about to attack, mark where the report ends. Questions on such passages are built at the seam, and material from the author's own account will be offered as though it belonged to the view he rejected.",
-        "distractors": [
-          {
-            "option": "A",
-            "trap_type": "unsupported_inference",
-            "why_wrong": "Neither the defenders nor the author says anything of the kind, and the passage twice insists on the opposite: the false belief was produced deliberately, and the friendship case turns on the intention, which both men had.",
-            "seductive_element": "A lesser offence is usually explained by a lesser intention, so the reader supplies the explanation the passage never gives."
-          },
-          {
-            "option": "B",
-            "trap_type": "comparison_distortion",
-            "why_wrong": "The passage never sets the two harms side by side. Its defenders rest on who performed the deception and its author on what each deceiver put at risk, and neither party offers any comparison of how much damage was done.",
-            "seductive_element": "The passage does say that misleading feels not quite as bad, and a lesser feeling suggests a smaller harm."
-          },
-          {
-            "option": "D",
-            "trap_type": "passage_language_shifted",
-            "why_wrong": "These are the passage's own words, taken from the fourth paragraph, where the defence the misleader can offer in public belongs to the author's finding about exposure. Moved back two paragraphs they become a claim the defenders never made, since their case rests entirely on who took the last step.",
-            "seductive_element": "It is the live rival: a real feature of the misleader's position, stated in the passage, and easy to file under the earlier discussion of why his case is different."
-          }
-        ]
-      }
-    },
     {
       "id": "rc-0051-q2",
       "type": "inference",
@@ -321,7 +263,7 @@
       "correct": "A",
       "estimated_time_sec": 75,
       "explanation": {
-        "expert_notice": "The passage passes two verdicts and both are unmistakable. The defence does not survive contact with the scene, and then, four sentences later, something does survive, but it is not what the defence claimed. An attitude question has to accommodate a refusal and a rescue in the same voice.",
+        "expert_notice": "The passage passes two verdicts and both are unmistakable. The defence does not survive contact with the scene, and then, at the start of the next paragraph, something does survive, but it is not what the defence claimed. An attitude question has to accommodate a refusal and a rescue in the same voice.",
         "correct_reasoning": "The correct option names both. The usual justification is rejected outright, with an argument and an analogy; the distinction is then rebuilt on a different footing, and the author goes so far as to say the law draws its line where it does and is right to. That is not indifference, not contempt, and not the approval the defenders were asking for.",
         "passage_anchor": "rc-0051-p4",
         "question_type_note": "Attitude questions are decided by what an author does rather than by the temperature of his sentences. Where a passage refuses a reason and keeps the conclusion, the attitude has two components and the answer must carry both.",
@@ -344,63 +286,6 @@
             "trap_type": "wrong_valence_tone",
             "why_wrong": "Nothing here is neutral. One position is refuted with an analogy about a push and a fall, another is built in its place, and the law's practice is called right; an author who reaches three verdicts is not reporting.",
             "seductive_element": "The second paragraph is a fair and generous statement of the other side, which can read as even-handedness sustained throughout."
-          }
-        ]
-      }
-    },
-    {
-      "id": "rc-0051-q5",
-      "type": "scope",
-      "skill": "scope",
-      "patterns": [
-        "scope.condition",
-        "arg.qualification",
-        "elim.near_tie"
-      ],
-      "target_mistake": "borrowing the condition from the critique, that the sentence was chosen in advance, and attaching it to the difference the author allows",
-      "prediction_target": "The learner should be able to say: the difference allowed is about what is risked rather than what is done, and it matters only where the credit of assertion is the thing in need of protection.",
-      "difficulty": {
-        "inference_depth": 4,
-        "distractor_similarity": 5,
-        "reasoning_depth": 4
-      },
-      "secondary_skills": [
-        "inference",
-        "main_idea"
-      ],
-      "stem": "Which of the following best states the limits the author places on the difference he allows between lying and misleading?",
-      "options": {
-        "A": "It holds only where the deceiver chose his words in advance, and not where a misleading answer was given on the spur of the moment without any planning at all.",
-        "B": "It is a difference in what the deceiver has put at risk rather than in what he has done, and it tells where the reliability of assertion needs protecting.",
-        "C": "It applies wherever a hearer is in a position to check what was said, which is to say almost everywhere.",
-        "D": "It disappears once the deception is discovered, since both men are then known to have deceived."
-      },
-      "correct": "B",
-      "estimated_time_sec": 95,
-      "explanation": {
-        "expert_notice": "The fourth paragraph states the difference and its category in one sentence: that is a real difference, and it is a difference in exposure rather than in guilt. The fifth then gives its range, court and oath on one side, the kitchen table on the other, with a reason attached to each.",
-        "correct_reasoning": "The correct option reports both limits and nothing else. The category is exposure, which keeps the third paragraph's denial intact, since nothing has been conceded about what the two men did. The range is set by what an institution needs: where the standing of assertion is what must be protected, the difference does work, and where the thing protected is one person's confidence in another, it does very little.",
-        "passage_anchor": "rc-0051-p5",
-        "question_type_note": "A scope question asks how far a claim reaches and on what condition. The answer is usually the sentence in which the author names the category of his own claim, not the sentence in which he states it.",
-        "reading_habit": "When an author says a difference is real, read on for the noun he attaches to it. Guilt, exposure, degree, kind: the noun fixes the scope, and every scope question is decided by it.",
-        "distractors": [
-          {
-            "option": "A",
-            "trap_type": "wrong_condition",
-            "why_wrong": "Advance choice belongs to the third paragraph, where it is used to destroy the defence, not to the fourth, where the surviving difference is built. The misleader's word is intact whether or not he prepared, because what preserves it is that his sentences were true.",
-            "seductive_element": "It is the live rival: the deliberation before the interview is the passage's most emphasised fact, and a condition that prominent seems bound to qualify the conclusion."
-          },
-          {
-            "option": "C",
-            "trap_type": "too_broad",
-            "why_wrong": "The passage limits the difference by what is at stake in a setting, not by whether checking is possible. Between friends, where anything said can be checked easily, it says the difference thins out because sentences are not what is being relied on.",
-            "seductive_element": "Checking really is the mechanism by which the misleader's word survives, so making checkability the condition feels like following the argument."
-          },
-          {
-            "option": "D",
-            "trap_type": "fact_right_interpretation_wrong",
-            "why_wrong": "Discovery is when the difference becomes visible rather than when it vanishes: the passage describes the two men after the truth comes out, one with a worthless word and one with a record that survives checking and a defence he can offer in public.",
-            "seductive_element": "Once both are known to have deceived, it seems obvious that any distinction between them has become academic."
           }
         ]
       }
@@ -528,6 +413,18 @@
     "reading_lesson": "When an author keeps a conclusion but throws away the reason usually given for it, write both down separately: conclusion kept, reason replaced. Almost every distractor in a passage of this shape is built by pairing the kept conclusion with the discarded reason, and the pairing is invisible unless the two were recorded apart. The habit also protects you in reverse, against options that take the demolished reason as a demolition of the conclusion.",
     "real_world": "Anyone who has written a reference, answered a due-diligence question, or explained a delay to a client has stood where this man stood, choosing among true sentences for the one whose effect they wanted, and the passage is a test of whether the choosing counts.",
     "takeaway": "Choosing the sentence for the conclusion it will produce makes the conclusion yours, whatever the words were.",
-    "reflection_question": "When did you last say something entirely true in order that someone would believe something false?"
+    "reflection_question": "When did you last say something entirely true in order that someone would believe something false?",
+    "eli10": {
+      "big_idea": "Misleading with true words is as much your doing as lying; the only difference is what the liar risks, which matters most in courts.",
+      "story": "A man is asked where he was on Tuesday evening. He says he was at his sister's until six. That is true. He does not say he reached the warehouse at ten past seven. Most people feel this is less bad than a lie. Some say the listener drew the wrong conclusion himself. The writer disagrees. The man picked that true sentence because of the conclusion it would cause. It is like pushing someone and blaming gravity for the fall. So he did as much as a liar. But one difference survives. A liar's word becomes worthless once he is caught. The misleader's sentences all check out. The difference is in what they risk, not in what they did. That matters in a court, which runs on people's words. Between friends it hardly matters, because what hurts a friend is the plan to fool him, and both men had that.",
+      "paragraphs": [
+        "Tells a story: a man answers truthfully but leaves out what matters, on purpose, to plant a false belief.",
+        "States the usual defence: a misleader only says true things, and the listener draws the false conclusion.",
+        "Knocks it down: he chose the sentence for its effect, so he did no less than a liar.",
+        "Finds what survives: the liar risks his word and trust in words; the misleader's sentences survive checking.",
+        "Says where it matters: in courts that run on testimony, not between friends, where intention does the harm."
+      ],
+      "author_view": "The writer is severe with the usual excuse but precise rather than preachy, keeping a narrower difference and doubting that a technicality buys much."
+    }
   }
 }

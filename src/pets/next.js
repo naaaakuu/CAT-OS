@@ -18,6 +18,7 @@ const BANK = {
   cr: ['cr', 'Arguments', 'Find the assumption, weaken the link, name the flaw', 4],
 };
 
+const FIRST_PASSAGE = 'rc-0116';
 const dayN = (state) => Number(String(state?.today ?? '').replace(/\D/g, '').slice(-4)) || 0;
 const sessionsOf = (records) => (Array.isArray(records?.sessions) ? records.sessions : []);
 
@@ -55,7 +56,9 @@ function readingNext(world, opts) {
   const { content, records, state } = world;
   const rd = state?.reading;
   if (opts.first || !rd?.read) {
-    const p = [...(content?.rc ?? [])].filter((x) => x.stage === 'foundation').sort((a, b) => (a.word_count ?? 999) - (b.word_count ?? 999))[0] ?? content?.rc?.[0];
+    // The very first passage is chosen by hand: short, everyday, with a twist (a queue that felt like an hour).
+    const p = content?.rc?.find((x) => x.id === FIRST_PASSAGE)
+      ?? [...(content?.rc ?? [])].filter((x) => x.stage === 'foundation').sort((a, b) => (a.word_count ?? 999) - (b.word_count ?? 999))[0] ?? content?.rc?.[0];
     if (!p) return null;
     return { href: `#/rc/session/${p.id}`, label: p.title, sub: `${p.question_count ?? 3} questions · about ${Math.max(3, Math.round(p.estimated_time_min ?? 4))} min`, minutes: Math.round(p.estimated_time_min ?? 4), kind: 'first' };
   }
@@ -172,8 +175,8 @@ export function cornersOf(petId, world) {
       c('#/world/place/terraces', 'Word parts', 'Prefixes, suffixes and words you were never shown'),
     ];
   }
-  if (petId === 'mochi') return [c('#/world/place/table', 'The summary table', 'Every summary, tier by tier'), ...(has('pc') ? [c('#/bank/session/pc/next', 'Paragraph completion', BANK.pc[2])] : [])];
-  if (petId === 'ginger') return [c('#/world/place/loom', 'The workshop', 'Every jumble, tier by tier'), ...(has('sp') ? [c('#/bank/session/sp/next', 'Sentence placement', BANK.sp[2])] : [])];
+  if (petId === 'mochi') return [c('#/world/place/table', 'Para Summary: the archery cabin', 'Every summary, tier by tier'), ...(has('pc') ? [c('#/world/place/completion', 'Para Completion: the clock tower', BANK.pc[2])] : [])];
+  if (petId === 'ginger') return [c('#/world/place/loom', 'Para Jumbles: the workshop', 'Every jumble, tier by tier'), ...(has('sp') ? [c('#/world/place/placement', 'Sentence Placement: the rose cottage', BANK.sp[2])] : [])];
   if (petId === 'mallow') return [c('#/world/place/bench', 'The observatory', 'Every odd-one-out set, tier by tier')];
   if (petId === 'toffee') return [c('#/world/place/wilds', 'The Gauntlet', 'Everything at once, against the clock'), c('#/world/place/hearth', 'Records', 'Your days, your stars, your treasures')];
   return [];

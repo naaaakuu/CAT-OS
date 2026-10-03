@@ -1,0 +1,405 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0136",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 86,
+    "genre": "human-behaviour",
+    "difficulty": "medium",
+    "difficulty_numeric": 4,
+    "stage": "developing",
+    "skills": [
+      "main-idea-extraction",
+      "inference",
+      "structure-mapping",
+      "concession-tracking",
+      "application"
+    ],
+    "word_count": 391,
+    "question_count": 4,
+    "question_types": [
+      "title_selection",
+      "inference",
+      "paragraph_function",
+      "application"
+    ],
+    "theme": "people judge a past experience by its most intense moment and its end because memory keeps a few moments that stand for the whole rather than a running total, so how long it lasted barely counts; the shortcut serves well for deciding whether to go back, since the most intense moment shows how good or bad things can get and the end how they stood on leaving, but it misleads when the options differ mainly in length, which is why people choose a longer trial with more pain that ends gently, and why whoever designs an experience can change how it is remembered by improving its best moment and its end",
+    "estimated_time_min": 7,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-03",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted."
+    },
+    "date_added": "2026-10-03",
+    "batch_id": "batch-rc-005",
+    "prompt_version": "content engine v1 + CAT-size brief 2026-10",
+    "reviewer_notes": "A second-person developing item that explains a surprising result by a mechanism and then follows a consequence. The peak-and-end finding is famous; what this adds is an account of why the shortcut is sensible (the most intense moment shows how good or bad things can get, the end shows how they stood on leaving), exactly where it fails (when options differ mainly in length), and its use by anyone who designs an experience. The passage keeps remembered pleasantness apart from felt duration, so it does not collide with rc-0116, which is about how long a wait seems. Both studies are described in general terms and no question depends on knowing them. Four questions: title, an inference about the people who chose the longer trial, the function of the third paragraph, and an application across new cases.",
+    "length_class": "medium",
+    "structure": "phenomenon_explanation",
+    "viewpoints": 1,
+    "tone": "curious, explanatory, lightly amused",
+    "difficulty_vector": {
+      "lexical": 2,
+      "syntactic": 2,
+      "abstraction": 3,
+      "inference_depth": 3,
+      "distractor_similarity": 3,
+      "reasoning_depth": 3,
+      "structural_ambiguity": 2,
+      "time_pressure": 2
+    },
+    "reasoning_patterns": [
+      "struct.phenomenon_explanation",
+      "struct.cause_effect",
+      "struct.qualification",
+      "comp.central_idea",
+      "comp.paraphrase",
+      "comp.function_over_words",
+      "arg.causal_claim",
+      "arg.concession",
+      "arg.qualification",
+      "arg.evidence_vs_conclusion",
+      "arg.principle",
+      "inf.strongly_supported",
+      "inf.author_view_application",
+      "scope.too_narrow",
+      "lang.absolute_vs_qualified",
+      "elim.near_tie"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1: the near-tie is 'The Last Minute Counts Most', which drops the most intense moment; the longer trial won because it had 'the same worst moment' and a gentler end, so two moments count. 'Why We Choose More Pain' names only the opening result, and 'The Trouble with Memory' is denied by 'This is not simply a flaw'. Q2: a strong candidate might argue that the choosers remembered a milder worst moment; the passage says the worst moment was 'the same'. The option that they did not notice the extra time is never suggested: length is said to hardly count in memory, not to go unnoticed. Q3: the rival is the option that the shortcut can be relied on for every choice; the paragraph ends by naming the choice it gets wrong. Q4: the tempting wrong answer is that shortening an examination always makes it remembered as less unpleasant, which is common sense and runs against the hospital study; the option that a bad ending makes an evening wholly bad forgets that the best moment counts too.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "running total",
+      "intense",
+      "flaw"
+    ]
+  },
+  "passage": {
+    "title": "Ending on a Warmer Note",
+    "reading_time_min": 2.1,
+    "paragraphs": [
+      {
+        "id": "rc-0136-p1",
+        "text": "Suppose you are asked to hold one hand in painfully cold water for a minute. Later you do it again, but this time you stay in for an extra half-minute, while the water is warmed very slightly. The second trial contains all the pain of the first and thirty more seconds of somewhat milder pain. Asked which trial you would rather repeat, you would surely choose the shorter one. In experiments built this way, most people choose the longer."
+      },
+      {
+        "id": "rc-0136-p2",
+        "text": "The choice makes sense once you see what memory keeps. It does not store an experience as a running total, adding up every second. It keeps a few moments that stand for the whole. Two of them count far more than the rest: the most intense moment, whether best or worst, and the last one. The longer trial had the same worst moment as the shorter one, and a gentler end. So it was remembered as less bad, though it held more pain. How long an experience lasted hardly counts towards how good or bad it is remembered as being. Ten happy days by the sea are not remembered as twice as good as five."
+      },
+      {
+        "id": "rc-0136-p3",
+        "text": "This is not simply a flaw. A memory that kept every second would be little use for choosing. The most intense moment tells you how good or bad something can get, and the end tells you how things stood when you left. Before booking a second visit to a dentist, you need to know how bad it got and how you felt walking out. The total of every second in the chair would tell you less. The shortcut goes wrong in one kind of choice in particular: when the options differ mainly in length, because length is exactly what it leaves out."
+      },
+      {
+        "id": "rc-0136-p4",
+        "text": "Anyone who designs an experience can use this. In one hospital study, some patients had an uncomfortable examination extended by a few minutes of milder discomfort at the end. They remembered the whole as less unpleasant than other patients did, and were more willing to come back for the next one. That is a kindness if the next examination catches an illness early. It also tells a holiday company where to spend its money. One splendid day and a smooth journey home will do more for the memory than making every day a little better."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0136-q1",
+      "type": "title_selection",
+      "skill": "main_idea",
+      "patterns": [
+        "comp.central_idea",
+        "scope.too_narrow",
+        "elim.near_tie"
+      ],
+      "target_mistake": "naming the passage after one of the two moments that count, after its opening experiment, or after a fault the author says memory does not simply have",
+      "prediction_target": "The learner should be able to say beforehand: memory keeps a few moments, the most intense and the last, to stand for a whole experience.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "logical_structure"
+      ],
+      "stem": "Which of the following would be the most suitable title for the passage?",
+      "options": {
+        "A": "The Last Minute Counts Most",
+        "B": "Why We Choose More Pain",
+        "C": "The Trouble with Memory",
+        "D": "A Few Moments for the Whole"
+      },
+      "correct": "D",
+      "estimated_time_sec": 70,
+      "explanation": {
+        "expert_notice": "The passage's central sentence is in the second paragraph: memory 'keeps a few moments that stand for the whole', and two of them, the most intense and the last, count far more than the rest. The experiment is explained by it, the third paragraph defends it, and the fourth shows how it can be used.",
+        "correct_reasoning": "A title should name what the whole passage is about. The correct option names the mechanism every paragraph depends on: the choice in the experiment, the usefulness and the blind spot of the shortcut, and the advice to anyone who designs an experience all follow from memory keeping a few moments for the whole.",
+        "passage_anchor": "rc-0136-p2",
+        "question_type_note": "A title is the main idea at its shortest. Prefer the title that every paragraph serves over one that names a single paragraph's example or half of its claim.",
+        "reading_habit": "Ask which sentence the other paragraphs lean on. In an explanatory passage it is usually the sentence that states the mechanism, and the best title names that mechanism.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "too_narrow",
+            "why_wrong": "The end is only one of two moments that count; the other is 'the most intense moment, whether best or worst'. The longer trial won because it had the same worst moment and a gentler end, so both moments matter.",
+            "seductive_element": "The experiment turns on a changed ending, and the closing advice mentions the journey home."
+          },
+          {
+            "option": "B",
+            "trap_type": "example_as_thesis",
+            "why_wrong": "The choice of the longer trial is the puzzle the passage opens with. The passage goes on to explain it, defend the habit behind it and show how it can be used, and this title covers none of that.",
+            "seductive_element": "It is the most surprising fact in the passage, and a title beginning 'Why' sounds like an explanation."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The third paragraph begins 'This is not simply a flaw' and argues that the shortcut is useful for deciding whether to go back. The author names one kind of choice where it goes wrong, not a general trouble.",
+            "seductive_element": "Choosing more pain sounds like a failure of memory, and the passage does say the shortcut sometimes goes wrong."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0136-q2",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.strongly_supported",
+        "arg.evidence_vs_conclusion",
+        "comp.paraphrase"
+      ],
+      "target_mistake": "explaining the choice by something the passage never says, such as not noticing the extra time, instead of by the author's account of what memory keeps",
+      "prediction_target": "The learner should be able to say beforehand: they chose by how the trials were remembered, not by how much pain each contained.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 3,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "specific_detail"
+      ],
+      "stem": "It can be inferred from the passage that the people who chose to repeat the longer trial",
+      "options": {
+        "A": "had not noticed that the longer trial lasted longer than the other",
+        "B": "remembered the longer trial as having had a milder worst moment",
+        "C": "were judging by memory rather than by how much pain each trial held",
+        "D": "found the last half-minute of the longer trial pleasant, not painful"
+      },
+      "correct": "C",
+      "estimated_time_sec": 75,
+      "explanation": {
+        "expert_notice": "The second paragraph says what the choosers were consulting: memory, which keeps 'a few moments that stand for the whole'. The longer trial 'was remembered as less bad, though it held more pain'. The gap between what was remembered and what was felt is the inference.",
+        "correct_reasoning": "The longer trial held more pain, and yet it was chosen. The passage explains the choice by how the trial was remembered: the same worst moment, a gentler end. So the choosers were going by memory, not by the total amount of pain, which is what the correct option says.",
+        "passage_anchor": "rc-0136-p1, rc-0136-p2",
+        "question_type_note": "An inference about people in an experiment usually rests on the author's explanation of the result. Read the explanation, then ask what it says the people were doing.",
+        "reading_habit": "When an experiment produces a surprising choice, find the sentence that says what the choice was based on. That sentence, not the result itself, is where inference questions come from.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "Nothing suggests the people missed the extra half-minute. The passage's point is that length 'hardly counts' in how an experience is remembered, not that it went unnoticed at the time.",
+            "seductive_element": "If length hardly counts, it is tempting to suppose that people simply did not notice it."
+          },
+          {
+            "option": "B",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "The passage says the longer trial 'had the same worst moment as the shorter one'. What differed was the end.",
+            "seductive_element": "It uses the passage's own words, worst moment and milder, and so sounds like the explanation."
+          },
+          {
+            "option": "D",
+            "trap_type": "overstatement",
+            "why_wrong": "The extra half-minute held 'somewhat milder pain', not pleasure. It still hurt; it only hurt less.",
+            "seductive_element": "The water was warmed and the trial ended better, which can sound like a pleasant ending."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0136-q3",
+      "type": "paragraph_function",
+      "skill": "paragraph_function",
+      "patterns": [
+        "comp.function_over_words",
+        "arg.concession",
+        "arg.qualification"
+      ],
+      "target_mistake": "reading a paragraph that defends and then limits as a pure defence, a rejection, or a recommendation",
+      "prediction_target": "The learner should be able to say beforehand: it defends memory's shortcut as useful for choosing, then names the one kind of choice it gets wrong.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "logical_structure"
+      ],
+      "stem": "The third paragraph serves mainly to",
+      "options": {
+        "A": "say why the shortcut is useful, and name the choice it gets wrong",
+        "B": "show that the shortcut can be relied upon for every kind of choice",
+        "C": "reject the account of memory that the second paragraph has given",
+        "D": "argue that people should train their memories to keep every second"
+      },
+      "correct": "A",
+      "estimated_time_sec": 60,
+      "explanation": {
+        "expert_notice": "The paragraph opens 'This is not simply a flaw' and ends on a limit: 'The shortcut goes wrong in one kind of choice in particular: when the options differ mainly in length'. It defends and limits within a few sentences.",
+        "correct_reasoning": "The third paragraph does two jobs. It defends the shortcut, since the most intense moment and the end tell you what you need to know before going back. Then it names the kind of choice the shortcut gets wrong, one between options that differ mainly in length, because length is 'exactly what it leaves out'. The correct option names both jobs.",
+        "passage_anchor": "rc-0136-p3",
+        "question_type_note": "A paragraph-function question asks what the paragraph does in the argument. Label it by its first and last sentences: here a defence, then a limit.",
+        "reading_habit": "When a paragraph begins 'This is not simply...', expect a defence, and read on for the limit that usually follows. Function questions often test whether you kept both.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "overstatement",
+            "why_wrong": "The paragraph limits its own defence in its last sentence: the shortcut 'goes wrong' when the options differ mainly in length. It is useful for some choices, not for all.",
+            "seductive_element": "The paragraph does defend the shortcut, so a stronger defence sounds like its job."
+          },
+          {
+            "option": "C",
+            "trap_type": "wrong_structural_role",
+            "why_wrong": "The paragraph builds on the second paragraph's account and never doubts it. Its job is to explain why memory might sensibly work that way, not to reject the account.",
+            "seductive_element": "It opens by pushing back against a judgement, 'not simply a flaw', which can feel like a turn against what came before."
+          },
+          {
+            "option": "D",
+            "trap_type": "prescriptive_leap",
+            "why_wrong": "The paragraph says that a memory keeping every second 'would be little use for choosing'. It recommends no training, and argues the reverse of this option.",
+            "seductive_element": "Passages that describe a habit of the mind often end with advice on fixing it."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0136-q4",
+      "type": "application",
+      "skill": "application",
+      "patterns": [
+        "inf.author_view_application",
+        "arg.principle",
+        "lang.absolute_vs_qualified"
+      ],
+      "target_mistake": "predicting by the running total the passage rejects, by common sense about shorter being better, or by an ending rule pushed past what the passage says",
+      "prediction_target": "The learner should be able to say beforehand: if two experiences differ only at the end, the one that ends worse will be remembered as worse.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 3,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "inference"
+      ],
+      "stem": "On the passage's account of memory, which of the following is most likely?",
+      "options": {
+        "A": "A fortnight's holiday is remembered as about twice as good as a single week of the same holiday.",
+        "B": "Of two dinners alike but for the last course, the one that ends worse is remembered less fondly.",
+        "C": "An uncomfortable examination is always remembered as less unpleasant if it is made shorter.",
+        "D": "An evening that was happy until a bad ending will be remembered as wholly bad, however good it was."
+      },
+      "correct": "B",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "Two moments count most: 'the most intense moment, whether best or worst, and the last one'. And how long an experience lasted 'hardly counts'. Any prediction should follow from those two rules and nothing more.",
+        "correct_reasoning": "Two dinners alike in everything but the last course share their best moment, and only the ending differs. Since the last moment is one of the two that count most, the dinner that ends worse should be remembered less fondly. It is the cold-water trials turned the other way.",
+        "passage_anchor": "rc-0136-p2",
+        "question_type_note": "An application question asks you to carry the author's rule to a new case. State the rule in one sentence first, then look for the option that follows from it without help.",
+        "reading_habit": "When a passage gives a rule and a striking example, try the rule on an ordinary case of your own while reading. It makes application questions quick.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage says the reverse: 'Ten happy days by the sea are not remembered as twice as good as five.' Length hardly counts.",
+            "seductive_element": "A running total is the common-sense way to measure a holiday, and twice the days sounds like twice the pleasure."
+          },
+          {
+            "option": "C",
+            "trap_type": "common_knowledge_intrusion",
+            "why_wrong": "Common sense says shorter is better, but the hospital study went the other way: adding milder minutes at the end made an examination remembered as less unpleasant. Cutting a gentle ending could make the memory worse.",
+            "seductive_element": "Less discomfort in total sounds as if it must be remembered as less unpleasant."
+          },
+          {
+            "option": "D",
+            "trap_type": "extreme_language",
+            "why_wrong": "The ending counts heavily, but it is not the only moment that counts: the best moment counts too. A bad ending makes the evening remembered as worse, not as wholly bad.",
+            "seductive_element": "It follows the passage's rule about endings, only much further."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "running total",
+      "passage_use": "It does not store an experience as a running total",
+      "meaning_here": "a total that is brought up to date as each new amount is added",
+      "difficulty": "medium"
+    },
+    {
+      "word": "intense",
+      "passage_use": "the most intense moment, whether best or worst",
+      "meaning_here": "strongest in feeling, whether pleasant or painful",
+      "difficulty": "easy"
+    },
+    {
+      "word": "flaw",
+      "passage_use": "This is not simply a flaw.",
+      "meaning_here": "a fault or weakness in how something works",
+      "difficulty": "easy"
+    }
+  ],
+  "mentor": {
+    "challenge": "A passage that explains a surprising choice, then defends the habit behind it, then shows how it can be used. Keep track of which two moments count, and of the one kind of choice the habit gets wrong.",
+    "one_sentence_summary": "People asked to repeat one of two cold-water trials choose the longer one, which held more pain but ended more gently, because memory keeps a few moments for the whole, chiefly the most intense and the last, and hardly counts length; the shortcut is useful for deciding whether to go back but misleads when options differ mainly in length, and anyone who designs an experience can use it by improving the best moment and the end.",
+    "main_idea": "We judge a past experience by its most intense moment and its ending, not by adding up every moment, because memory keeps only a few moments that stand for the whole. That is usually a sensible shortcut, but it goes wrong when choices differ mainly in length, and it lets anyone who designs an experience change how it is remembered.",
+    "simple_explanation": "Imagine holding your hand in icy water for a minute. Then you do it again for a minute and a half, but in the last half-minute the water gets a tiny bit warmer. The second time has all the pain of the first, plus more. Asked which to repeat, you would surely choose the shorter one. But in experiments like this, most people choose the longer one.\n\nThe writer explains why. Memory does not add up every second. It keeps a few moments that stand for the whole, and two count most: the strongest moment, good or bad, and the last one. Both trials had the same worst moment, but the longer one ended more gently, so it was remembered as less bad. How long something lasts hardly matters to how good or bad it is remembered as being: ten happy days by the sea are not remembered as twice as good as five.\n\nThe writer says this is not just a fault. A memory of every second would be useless for choosing. The strongest moment tells you how good or bad something can get, and the end tells you how things stood when you left. Before going back to a dentist, that is what you need to know: how bad it got and how you felt walking out. The shortcut goes wrong when the choice is mainly about length, because length is what it leaves out.\n\nPeople who design experiences can use this. In a hospital study, patients whose uncomfortable examination ended with a few extra minutes of milder discomfort remembered it as less unpleasant, and were more willing to come back for the next one. That is a kindness if the next examination catches an illness early. It also means a holiday company should spend its money on one splendid day and a smooth trip home, rather than on making every day a little better.",
+    "why_difficult": "The passage turns a surprising result into a plain mechanism, then defends the mechanism, then limits the defence. Readers often take the third paragraph as more criticism of memory, though it begins 'This is not simply a flaw', and they forget that two moments count, not one.",
+    "author_intention": "To explain a surprising choice by the way memory works, to show that the habit is sensible for many choices, and to point out where it misleads and who can make use of it.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0136-p1",
+        "role": "Presents a puzzle",
+        "note": "Most people choose to repeat a longer cold-water trial with more pain in it, because it ended a little more gently."
+      },
+      {
+        "paragraph_id": "rc-0136-p2",
+        "role": "Explains the mechanism",
+        "note": "Memory keeps the most intense moment and the last one, and hardly counts how long the experience lasted."
+      },
+      {
+        "paragraph_id": "rc-0136-p3",
+        "role": "Defends, then limits",
+        "note": "The shortcut helps when deciding whether to go back, but it fails when the options differ mainly in length."
+      },
+      {
+        "paragraph_id": "rc-0136-p4",
+        "role": "Shows it in use",
+        "note": "A hospital and a holiday company can change how an experience is remembered by improving its ending and its best moment."
+      }
+    ],
+    "tone_progression": "Conversational and teasing in the opening, where the reader is invited to predict wrongly; clear and explanatory in the second paragraph; fair-minded in the third; and lightly amused at the close, with its advice to holiday companies.",
+    "key_transitions": [
+      "'The choice makes sense once you see what memory keeps.' (opening of paragraph 2): the puzzle becomes an explanation.",
+      "'This is not simply a flaw.' (opening of paragraph 3): the author defends the habit just described.",
+      "'Anyone who designs an experience can use this.' (opening of paragraph 4): the explanation becomes a tool."
+    ],
+    "misunderstanding": "A hurried reader thinks the passage says memory is faulty and only the ending matters. The author says two moments count, the most intense and the last, and that the shortcut is useful for many choices and misleads mainly when the options differ in length.",
+    "traps_summary": "The options keep only the ending, name the passage after its experiment, call the shortcut the flaw the author says it is not, invent reasons for the choice, stretch the defence to every choice, predict by the running total the passage rejects, and push the ending rule further than the passage does.",
+    "reading_lesson": "When a passage explains a habit of the mind, look for where the author defends it as well as where the author limits it. Questions on such passages test whether you can say when the habit works and when it fails.",
+    "real_world": "This is why a good meal can be spoiled by a long wait for the bill, a holiday by a missed flight home, and why a teacher who ends a hard lesson with something the class can do well sends pupils home willing to come back.",
+    "takeaway": "Memory judges an experience by its most intense moment and its end, not by its length.",
+    "reflection_question": "Which experience do you remember mainly by how it ended, and would you judge it differently if you added up every moment?",
+    "eli10": {
+      "big_idea": "We remember an experience by its strongest moment and its ending, not by how long it lasted.",
+      "story": "Imagine putting your hand in icy water for one minute. Then you do it again for a minute and a half. In the last half-minute, the water gets a little warmer. The second time hurts for longer. Yet most people would rather repeat it. Why? Memory does not add up every second. It keeps a few moments. The strongest moment counts most, and so does the last one. Both tries had the same worst moment. The longer one ended better. So it is remembered as less bad. Think of a good film with a bad ending. You tend to remember the whole film as worse. The writer says this habit is often useful. But it goes wrong when the choice is mainly about length. Doctors can use it too. A gentler ending makes patients happier to come back.",
+      "paragraphs": [
+        "Starts with a puzzle: people choose to repeat a longer, more painful cold-water test.",
+        "Explains why: memory keeps the strongest moment and the last one, not the total.",
+        "Defends the habit: it helps us choose, but fails when only the length differs.",
+        "Shows a use: a gentler ending makes patients more willing to come back."
+      ],
+      "author_view": "The writer finds memory's habit clever and mostly sensible, and is a little amused by how easily it can be used."
+    }
+  }
+}

@@ -1,0 +1,406 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0134",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 85,
+    "genre": "economics",
+    "difficulty": "easy",
+    "difficulty_numeric": 3,
+    "stage": "developing",
+    "skills": [
+      "main-idea-extraction",
+      "inference",
+      "vocabulary-in-context",
+      "application",
+      "causal-reasoning"
+    ],
+    "word_count": 400,
+    "question_count": 4,
+    "question_types": [
+      "main_idea",
+      "inference",
+      "vocabulary_in_context",
+      "application"
+    ],
+    "theme": "a small shop survives beside a cheaper supermarket because a customer pays for the trip as well as the goods: for small, urgent purchases the trip costs more than the difference in price, so the shop is really selling a short trip, small amounts and credit, and it can give credit only because it knows its customers; so a further price cut barely threatens it, fast delivery threatens the short trip, and the credit is the hardest part for a rival to copy",
+    "estimated_time_min": 7,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-03",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted."
+    },
+    "date_added": "2026-10-03",
+    "batch_id": "batch-rc-005",
+    "prompt_version": "content engine v1 + CAT-size brief 2026-10",
+    "reviewer_notes": "An impersonal developing item built as a puzzle explained, opening on a scene. The familiar point that a corner shop sells convenience stops at nearness; what this adds is the whole cost of a purchase (price plus trip) as the mechanism, credit as a second product that depends on knowing customers, and the consequence that a price cut barely threatens such a shop while fast delivery threatens only its first product. Four questions: main idea, a one-step inference from the condition on lending, a word in context whose trap is the notebook sense of 'copy', and an application whose near-tie is a shop that keeps the short trip but gives no credit.",
+    "length_class": "medium",
+    "structure": "question_answer",
+    "viewpoints": 1,
+    "tone": "wry, practical, observant",
+    "difficulty_vector": {
+      "lexical": 2,
+      "syntactic": 2,
+      "abstraction": 2,
+      "inference_depth": 2,
+      "distractor_similarity": 3,
+      "reasoning_depth": 3,
+      "structural_ambiguity": 2,
+      "time_pressure": 2
+    },
+    "reasoning_patterns": [
+      "struct.question_answer",
+      "struct.cause_effect",
+      "comp.central_idea",
+      "comp.supporting_idea",
+      "arg.causal_claim",
+      "arg.principle",
+      "arg.qualification",
+      "inf.strongly_supported",
+      "inf.author_view_application",
+      "scope.condition",
+      "scope.too_narrow",
+      "lang.overstatement",
+      "word.polysemy",
+      "word.context_clue",
+      "elim.near_tie"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1: the live rival is the option that for small purchases the trip to a cheaper supermarket costs more than the saving. It is the whole of the second paragraph and true, and it loses to the third paragraph's notebook, 'the hardest of all to copy', and to the last paragraph's use of both. The delivery-app option is settled by 'It cannot so easily take the notebook'. Q2: a strong candidate might push the inference to 'unable to buy anything from him'; the condition attaches only to lending ('can lend like this only because he knows his customers'), and cash sales need nothing. Q3: the writing-out sense of 'copy' is invited by the notebook in the next sentence; the sentence is about what a rival could provide, which the last paragraph confirms when it asks what an app can take. Q4: the near-tie is the shop that sells small amounts near people's homes but gives no credit; it keeps the short trip, which the second paragraph makes the main protection, while the washing-machine shop has neither a short trip worth keeping nor credit.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "sachet",
+      "payday",
+      "settles up"
+    ]
+  },
+  "passage": {
+    "title": "Mr Rao's Notebook",
+    "reading_time_min": 2.2,
+    "paragraphs": [
+      {
+        "id": "rc-0134-p1",
+        "text": "Mr Rao's shop is about as wide as a parked car. Nearly everything on its shelves costs a little more than at the supermarket a kilometre away. The supermarket buys by the lorry-load and passes some of the saving on. By the plain logic of prices, Mr Rao should have closed years ago. Yet he opens at seven every morning, and at nine at night there is still a queue at his counter."
+      },
+      {
+        "id": "rc-0134-p2",
+        "text": "The puzzle disappears once you count everything a customer pays. The price on the packet is only part of it. The rest is the trip: the time, the bus fare and the walk round long aisles. For a family's monthly shopping the trip is worth making, because the savings on a full trolley add up to more than it costs. For two eggs at nine at night the sums come out the other way. Nobody takes a bus to the supermarket to save a few rupees on two eggs. What Mr Rao really sells is a short trip. He also sells small amounts, one egg or a single sachet of shampoo, to people who are paid by the day and cannot buy a large pack at once."
+      },
+      {
+        "id": "rc-0134-p3",
+        "text": "He sells one more thing, the hardest of all to copy. Under the counter is a notebook listing what each family owes. A household that runs short before payday takes its rice now and settles up at the end of the month. Mr Rao can lend like this only because he knows his customers: where they live, where they work and whether they paid last time. The supermarket has no such knowledge. It serves thousands of strangers a week, so it must ask every one of them to pay at the till."
+      },
+      {
+        "id": "rc-0134-p4",
+        "text": "This also shows what Mr Rao has to fear, and a cheaper supermarket is the least of it. Another cut in prices would change little, since for a small purchase the trip would still cost more than the saving. A rival that shortened the trip would be another matter. A phone app that brings eggs to the door in ten minutes takes away the first thing he sells. It cannot so easily take the notebook, because it does not know which of its customers will pay at the end of the month. If the shop lasts, it may be as a small bank that happens to sell rice."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0134-q1",
+      "type": "main_idea",
+      "skill": "main_idea",
+      "patterns": [
+        "comp.central_idea",
+        "struct.question_answer",
+        "scope.too_narrow",
+        "elim.near_tie"
+      ],
+      "target_mistake": "taking the first part of a three-part answer, the short trip, for the whole of it, or turning the author's view of what threatens the shop upside down",
+      "prediction_target": "The learner should be able to say beforehand: the shop survives a cheaper rival because it sells a short trip, small amounts and credit, so price is not the contest.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "logical_structure"
+      ],
+      "stem": "Which of the following best expresses the main idea of the passage?",
+      "options": {
+        "A": "For small purchases the trip to a cheaper supermarket costs more than the saving, so small shops keep their trade.",
+        "B": "Small shops will close once supermarkets cut their prices further, because shoppers go wherever goods cost least.",
+        "C": "A small shop can outlast a cheaper rival because it sells a short trip, small amounts and credit, not low prices.",
+        "D": "Small shops cannot survive delivery apps, which can copy everything they sell, credit included."
+      },
+      "correct": "C",
+      "estimated_time_sec": 70,
+      "explanation": {
+        "expert_notice": "Each paragraph after the first adds something the shop sells. The second gives the short trip and small amounts, the third the notebook of credit, and the fourth uses both to say what the shop has to fear. A main idea has to hold all of these, not only the trip.",
+        "correct_reasoning": "The passage opens with a puzzle: Mr Rao charges more and 'should have closed years ago'. The answer is that he sells things besides goods: a short trip ('What Mr Rao really sells is a short trip'), small amounts for people paid by the day, and credit from his notebook. That is why a cheaper rival does not finish him, and why 'Another cut in prices would change little'. The correct option carries all three things he sells and the point that price is not the contest.",
+        "passage_anchor": "rc-0134-p2, rc-0134-p3",
+        "question_type_note": "A main-idea answer must need every paragraph. When a passage answers a puzzle in several parts, the option that keeps only the first part is the most common wrong answer.",
+        "reading_habit": "When a passage answers a puzzle in stages, count the stages as you read: here a trip, small amounts and a notebook. Then check that the option you choose has room for all of them.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "too_narrow",
+            "why_wrong": "This is the second paragraph alone. It leaves out the notebook, which the author calls 'the hardest of all to copy', and the last paragraph's point about what the shop really has to fear.",
+            "seductive_element": "Every word of it is true, and the trip is the first and longest part of the author's answer."
+          },
+          {
+            "option": "B",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The last paragraph says the reverse: 'Another cut in prices would change little, since for a small purchase the trip would still cost more than the saving.'",
+            "seductive_element": "The supermarket's lower prices are the first thing the passage mentions, and price is the usual way to think about shops."
+          },
+          {
+            "option": "D",
+            "trap_type": "overstatement",
+            "why_wrong": "The author says a delivery app 'takes away the first thing he sells', the short trip, but 'cannot so easily take the notebook'. The option has the app copying everything, credit included.",
+            "seductive_element": "The passage does name fast delivery as the real danger, so a stronger version of that sounds like its conclusion."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0134-q2",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.strongly_supported",
+        "scope.condition",
+        "lang.overstatement"
+      ],
+      "target_mistake": "stretching a condition that the passage attaches to lending so that it covers every sale, or reading it as a rule about prices",
+      "prediction_target": "The learner should be able to say beforehand: credit depends on knowing a customer, so a family he does not yet know is less likely to get it.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "scope"
+      ],
+      "stem": "It can be inferred from the passage that a family that had just moved into Mr Rao's street would",
+      "options": {
+        "A": "be less likely than his old customers to be given credit",
+        "B": "be charged more than his old customers for the same goods",
+        "C": "be unable to buy anything from him until he knew who they were",
+        "D": "be asked where they live and work before he would sell them rice"
+      },
+      "correct": "A",
+      "estimated_time_sec": 75,
+      "explanation": {
+        "expert_notice": "The third paragraph states a condition: Mr Rao 'can lend like this only because he knows his customers: where they live, where they work and whether they paid last time'. The word 'only' makes knowledge the condition for lending, and a family new to the street is exactly the customer he does not yet know.",
+        "correct_reasoning": "If credit depends on knowing a customer, then a family he has never served, with no record of paying, is less likely to be given it than families he has known for years. The inference goes one step from the condition and no further. It says nothing about cash sales or prices, which the passage never ties to knowing anyone.",
+        "passage_anchor": "rc-0134-p3",
+        "question_type_note": "An inference about a new case usually rests on a condition the passage states. Find the condition, check whether the new case meets it, and stop there.",
+        "reading_habit": "Circle the word 'only' when it appears in a reason. It tells you what a claim depends on, and inference questions are often built on what happens when that thing is missing.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "Nothing in the passage suggests that Mr Rao's prices vary from customer to customer. What depends on knowing a customer is credit, not the price of the goods.",
+            "seductive_element": "A shopkeeper who treats regulars specially might be imagined to treat strangers less well in every way."
+          },
+          {
+            "option": "C",
+            "trap_type": "overstatement",
+            "why_wrong": "Only lending depends on knowing a customer. Selling for cash needs no knowledge at all, and the short trip and the small amounts are open to anyone who walks in.",
+            "seductive_element": "It sounds like the correct idea pushed one step further, which can feel like being more thorough."
+          },
+          {
+            "option": "D",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "The words 'where they live, where they work' describe what Mr Rao already knows about the families he lends to. Nothing says he questions anyone before selling them rice for cash.",
+            "seductive_element": "It repeats the passage's own words about where customers live and work."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0134-q3",
+      "type": "vocabulary_in_context",
+      "skill": "vocabulary_in_context",
+      "patterns": [
+        "word.polysemy",
+        "word.context_clue"
+      ],
+      "target_mistake": "choosing the sense of 'copy' suggested by the notebook in the next sentence instead of the sense the sentence itself needs",
+      "prediction_target": "The learner should be able to say beforehand: here 'copy' means for a rival to offer the same thing, since the sentence is about what Mr Rao sells.",
+      "difficulty": {
+        "inference_depth": 1,
+        "distractor_similarity": 2,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "specific_detail"
+      ],
+      "stem": "As it is used in the passage, the word 'copy' (in 'the hardest of all to copy') most nearly means",
+      "options": {
+        "A": "write out again, as a clerk copies a list",
+        "B": "sell for less than Mr Rao does",
+        "C": "keep secret from the customers",
+        "D": "offer in the same way, as a rival would"
+      },
+      "correct": "D",
+      "estimated_time_sec": 40,
+      "explanation": {
+        "expert_notice": "The sentence is about what Mr Rao sells: 'He sells one more thing, the hardest of all to copy.' The last paragraph then shows who might try: a rival such as a delivery app, which 'cannot so easily take the notebook'.",
+        "correct_reasoning": "To copy something a shop sells is to offer the same thing yourself. The passage goes on to explain why credit is hard for a rival to offer: it depends on knowing customers, and a supermarket serving thousands of strangers does not know them. The correct option gives that sense of the word.",
+        "passage_anchor": "rc-0134-p3, rc-0134-p4",
+        "question_type_note": "A word-in-context question tests which of a word's senses the sentence needs. The sense suggested by something nearby on the page, here a notebook, is often the trap.",
+        "reading_habit": "Before reading the options, put your own words in place of the passage's word and check that the sentence still says the same thing. 'The hardest for a rival to offer' fits here; 'the hardest to write out' does not.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "near_synonym_confusion",
+            "why_wrong": "Writing out is a common sense of the word, but the sentence is about something Mr Rao sells and how hard it is for others to provide. Nobody needs to write the notebook out again.",
+            "seductive_element": "The very next sentence mentions a notebook, which brings the writing sense of the word to mind."
+          },
+          {
+            "option": "B",
+            "trap_type": "true_but_irrelevant",
+            "why_wrong": "Selling for less is what the supermarket already does, and the passage says that is not what Mr Rao has to fear. It is a fact from the passage, not a meaning of the word.",
+            "seductive_element": "Lower prices are the supermarket's main weapon, so a rival copying him could seem to mean undercutting him."
+          },
+          {
+            "option": "C",
+            "trap_type": "out_of_scope",
+            "why_wrong": "Nothing in the passage is about secrecy. What makes credit hard to copy is that it depends on knowing customers, not that anything is hidden.",
+            "seductive_element": "A notebook kept 'Under the counter' can suggest something private."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0134-q4",
+      "type": "application",
+      "skill": "application",
+      "patterns": [
+        "inf.author_view_application",
+        "arg.principle",
+        "scope.condition",
+        "elim.near_tie"
+      ],
+      "target_mistake": "judging a shop's protection by its prices, or treating a shop that lacks one protection as if it lacked them all",
+      "prediction_target": "The learner should be able to say beforehand: the least protected shop sells large, planned purchases that are worth a trip, and gives no credit.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 3,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "inference",
+        "scope"
+      ],
+      "stem": "On the passage's reasoning, which of the following shops would have least protection against a large, cheaper rival a bus ride away?",
+      "options": {
+        "A": "A shop selling washing machines, bought rarely and paid for at the till",
+        "B": "A shop that charges more than the supermarket for exactly the same brands",
+        "C": "A shop near people's homes that sells small amounts but gives no credit",
+        "D": "A late-opening shop that sells single eggs to the people on its own street"
+      },
+      "correct": "A",
+      "estimated_time_sec": 90,
+      "explanation": {
+        "expert_notice": "The passage names what protects Mr Rao: for small, urgent purchases the trip costs more than the saving, small amounts suit people paid by the day, and credit depends on knowing customers. The weakest shop is the one with none of these.",
+        "correct_reasoning": "A washing machine is a large purchase, made rarely and planned ahead, so, like the family's monthly shopping, it is worth a trip to save money: the short trip protects nothing. It is paid for at the till, so there is no notebook either. On the passage's reasoning nothing stands between such a shop and a cheaper rival.",
+        "passage_anchor": "rc-0134-p2, rc-0134-p3",
+        "question_type_note": "An application question asks you to use the author's reasons on a case the passage never mentions. List the reasons first, then score each option against the list.",
+        "reading_habit": "When a passage explains why something survives, turn the explanation into a short checklist. Applying a checklist is quicker and safer than judging each new case by feel.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "true_but_irrelevant",
+            "why_wrong": "Mr Rao himself charges more than the supermarket, and the whole passage explains why he survives anyway. On this reasoning, higher prices are not what decides.",
+            "seductive_element": "Charging more sounds like the obvious weakness against a cheaper rival."
+          },
+          {
+            "option": "C",
+            "trap_type": "true_but_insufficient",
+            "why_wrong": "This shop lacks credit, but it keeps the short trip and the small amounts that the second paragraph says carry most of the trade. It has less protection than Mr Rao, but more than a shop with none.",
+            "seductive_element": "It is missing the protection the author calls 'the hardest of all to copy', which makes it look exposed."
+          },
+          {
+            "option": "D",
+            "trap_type": "opposite_direction",
+            "why_wrong": "This is Mr Rao's own position: open late, close to its customers, selling small amounts. On the passage's reasoning it is among the best protected.",
+            "seductive_element": "A small corner shop is exactly the kind of business usually said to be threatened by supermarkets."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "sachet",
+      "passage_use": "one egg or a single sachet of shampoo",
+      "meaning_here": "a small sealed packet holding enough for one use",
+      "difficulty": "medium"
+    },
+    {
+      "word": "payday",
+      "passage_use": "A household that runs short before payday",
+      "meaning_here": "the day on which wages are paid",
+      "difficulty": "easy"
+    },
+    {
+      "word": "settles up",
+      "passage_use": "takes its rice now and settles up at the end of the month",
+      "meaning_here": "pays what it owes",
+      "difficulty": "easy"
+    }
+  ],
+  "mentor": {
+    "challenge": "A short puzzle with an answer in three parts. Keep count of everything the shop is said to sell, and notice which part the author thinks a rival will find hardest to take.",
+    "one_sentence_summary": "A small shop that charges more than a nearby supermarket survives because customers pay for the trip as well as the goods, so for small, urgent purchases its short trip wins; it also sells small amounts, and credit from a notebook that only knowing its customers makes possible, so a further price cut would barely hurt it, fast delivery threatens the short trip, and the credit is the hardest thing to copy.",
+    "main_idea": "Mr Rao's shop costs more than the supermarket but survives, because it sells things besides goods: a short trip for small purchases, small amounts for people paid by the day, and credit based on knowing its customers. So its real danger is not lower prices but anything that shortens the trip, and even then the credit is hard to copy.",
+    "simple_explanation": "Mr Rao has a tiny shop. Almost everything in it costs a little more than at the supermarket a kilometre away, which buys in huge amounts. You would expect him to have closed long ago. Instead he is busy from seven in the morning until late at night.\n\nThe writer explains that the price on the packet is not the whole cost. Getting to a shop also costs time, bus fare and the walk round the aisles. For a big monthly shop, the supermarket's savings are worth the trip. For two eggs late at night they are not: nobody takes a bus to save a few rupees on two eggs. So what Mr Rao really sells is a short trip. He also sells tiny amounts, one egg or one sachet of shampoo, to people who are paid by the day and cannot buy big packs.\n\nHe sells credit too. He keeps a notebook of what each family owes, and a family that runs short before payday can take its rice now and pay at the end of the month. He can do this only because he knows his customers. The supermarket serves thousands of strangers, so it must make everyone pay at the till.\n\nSo a cheaper supermarket is not his real danger: another price cut would change little. A rival that shortens the trip, such as an app that delivers eggs in ten minutes, does threaten the short trip. But an app cannot easily copy the notebook, because it does not know who will pay. If the shop survives, it may be mainly as a small lender that also sells rice.",
+    "why_difficult": "The language is easy, but the answer comes in three parts spread over three paragraphs. Readers who stop at the trip, the first and longest part, miss the credit, which the author calls the hardest thing to copy and which decides what the last paragraph says about delivery apps.",
+    "author_intention": "To solve a familiar puzzle about small shops by counting the whole cost of a purchase, and to use that answer to say what would and would not threaten such a shop.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0134-p1",
+        "role": "Sets the puzzle",
+        "note": "Mr Rao's tiny shop charges more than the supermarket nearby, yet it is still busy at nine at night."
+      },
+      {
+        "paragraph_id": "rc-0134-p2",
+        "role": "Answers with the trip",
+        "note": "A customer pays for the trip too. For small, urgent buys the trip costs more than the saving, so the shop sells a short trip and small amounts."
+      },
+      {
+        "paragraph_id": "rc-0134-p3",
+        "role": "Adds the notebook",
+        "note": "He lends to families until payday, which he can do only because he knows them. The supermarket serves strangers and cannot."
+      },
+      {
+        "paragraph_id": "rc-0134-p4",
+        "role": "Draws the consequence",
+        "note": "Lower prices are no real threat; a fast delivery app is. But an app cannot easily copy the credit."
+      }
+    ],
+    "tone_progression": "Wry in the opening picture of a shop as wide as a parked car, plainly explanatory through the trip and the notebook, and lightly amused at the close, where the shop may survive as a small bank that sells rice.",
+    "key_transitions": [
+      "'The puzzle disappears once you count everything a customer pays.' (opening of paragraph 2): the puzzle becomes an explanation.",
+      "'He sells one more thing, the hardest of all to copy.' (opening of paragraph 3): the explanation gains its third and most lasting part.",
+      "'This also shows what Mr Rao has to fear, and a cheaper supermarket is the least of it.' (opening of paragraph 4): the explanation is used to look ahead."
+    ],
+    "misunderstanding": "A hurried reader thinks the passage says small shops survive only because they are near, or that delivery apps will finish them off. The author's answer has three parts, the short trip, small amounts and credit, and the last is the one an app cannot easily copy.",
+    "traps_summary": "The options give one part of the answer as the whole, turn the author's 'would change little' about price cuts into its opposite, push the threat from apps further than the author does, move a condition for lending onto every sale, offer the nearest sense of a word instead of the one the sentence needs, and judge a shop's protection by its prices.",
+    "reading_lesson": "When a passage answers a puzzle, count the parts of the answer as they arrive, and note which part the author ranks highest. Questions on such passages check whether you kept every part, and whether you noticed which one the author says will last.",
+    "real_world": "The same counting explains why people pay more at a late-night chemist, a clinic down the road or a tea stall at the station: the price of a thing includes the trouble of getting it.",
+    "takeaway": "A purchase costs its price plus the trip, and the small shop sells the trip.",
+    "reflection_question": "What do you buy from a small shop near you that you could get more cheaply elsewhere, and what are you really paying for?",
+    "eli10": {
+      "big_idea": "A small shop survives beside a cheaper supermarket because it sells a short trip, small amounts and credit, not just goods.",
+      "story": "Mr Rao has a tiny shop. His prices are a bit higher than the supermarket's. So why is his shop still busy? Because a trip costs something too. It costs time and bus fare. For a big monthly shop, the supermarket is worth the trip. For two eggs at night, it is not. Nobody takes a bus to save a few rupees. Mr Rao also sells tiny amounts, like one egg. And he keeps a notebook of who owes him money. A family short of cash can pay at the end of the month. He can do this because he knows them. The supermarket cannot. It serves thousands of strangers. Lower prices will not hurt him much. A fast delivery app is a bigger danger, because it saves the trip. But an app does not know who will pay later. So it cannot easily copy his notebook.",
+      "paragraphs": [
+        "Sets a puzzle: a small shop charges more than a supermarket, yet stays busy.",
+        "Explains the trip: for two eggs, going to the supermarket costs more than it saves.",
+        "Adds credit: the shopkeeper lends to families because he knows them.",
+        "Looks ahead: lower prices will not hurt him much, but fast delivery might."
+      ],
+      "author_view": "The writer finds the small shop's survival sensible, and thinks its notebook of credit is the hardest thing for a rival to copy."
+    }
+  }
+}

@@ -51,8 +51,9 @@ sentence in the text that settles it. Never a formula. Status is
 - **No gotchas.** A question must not turn on a technicality the
   passage never signals. Hard is fine; unfair is not.
 - **Original.** Every passage, paragraph, sentence set, argument and
-  option is written new. Learn from the *style* of competitive exams,
-  never reproduce a passage or a question.
+  option is written new, except reading passages quoted verbatim from
+  public-domain essays (§4, "Where passages come from"). Learn from the
+  *style* of competitive exams, never reproduce a passage or a question.
 - **British spelling** ("recognise", "colour", "programme"), as the
   existing corpus uses. Curly apostrophes are fine. No em-dash overload:
   at most a couple per paragraph.
@@ -160,9 +161,26 @@ item that names a letter.
 
 ## 4. Reading Comprehension (rc, schema v5)
 
-**Passages.** 120–900 words. Short (120–349), medium (350–599), long
-(600–900) — the corpus needs all three. Vary density, sentence
-complexity, abstraction, tone, structure, number of voices. Choose a
+**Passages are CAT-sized (October 2026).** CAT 2021–2025 sets four
+passages per slot with four questions each; in 2025 they averaged about
+400–450 words, the longest near 650, usually in four paragraphs. A
+beginner who opened a "Foundation" passage of 639 words, six paragraphs
+and six questions is why this is now enforced by the loader
+(`core/learning/journey.js` STAGE_SIZE):
+
+| stage | words | paragraphs | questions |
+|---|---|---|---|
+| foundation | 150–350 | 2–3 | 3 |
+| developing | 180–450 | 2–4 | 3–4 |
+| intermediate | 250–520 | 3–5 | 3–4 |
+| advanced | 280–600 | 3–5 | 3–4 |
+| elite | 300–650 | 3–5 | 3–4 |
+
+Nothing asks more than four questions and nothing runs longer than the
+exam's own longest passage. Foundation is deliberately smaller than the
+exam: three short paragraphs, plain sentences, three questions. Vary
+density, sentence complexity, abstraction, tone, structure, number of
+voices. Choose a
 `structure` from the taxonomy and let it genuinely organise the passage.
 At least one paragraph must do real argumentative work: concede,
 qualify, pivot, adjudicate. Subjects: the thirty genres, weighted toward
@@ -171,8 +189,11 @@ thought, science, ecology, art, literature, linguistics, law, ethics,
 media, institutions, markets, public policy, scientific method,
 intellectual history — never two passages on the same specific idea.
 
-**Question sets.** Two to six questions (four or five is the CAT norm).
-Mix the types: over a batch, the inference family (`inference`,
+**Question sets.** Four questions (three on a passage under about 350
+words, and always three at Foundation): the CAT norm since 2021. A CAT
+set is usually one big-picture question, one or two from the inference
+family, and one of detail, tone, structure or word-in-context, never more
+than one main-idea-family question. Mix the types: over a batch, the inference family (`inference`,
 `implication`, `must_be_true`, `cannot_be_inferred`, `agree_disagree`,
 `comparative`, `application`, `scope`) should be 35–55% of questions,
 with main idea / primary purpose, detail (including `except` and
@@ -204,6 +225,29 @@ paragraph, in order, `role` two to four words), tone progression, one to
 three key transitions (quoted), the misunderstanding a hurried reader
 builds, the traps summary, the one reading lesson, a real-world line, a
 takeaway, and a reflection question ending in `?`.
+
+**`mentor.eli10`: the passage explained to a ten-year-old** (October
+2026, every passage). It leads the Learning Page, behind the "Explain this
+passage simply" button that a rewarded ad will one day open
+(`src/core/ads/rewarded.js`). `big_idea` (one sentence: what the passage
+says, not its topic), `story` (80–150 words in short sentences, average
+twelve words or fewer, everyday words, one picture from ordinary life,
+who thinks what said plainly, the author's limits kept), `paragraphs`
+(one line per paragraph saying what it does) and `author_view` (what the
+writer thinks and how they feel). It must be exactly true to the passage
+and must never make a wrong option look right. The loader fails a story
+over 170 words, sentences averaging over sixteen words, a line count that
+differs from the paragraphs, or an em dash.
+
+**Where passages come from.** Original passages in CAT register, or real
+published prose that is in the public domain (`batch-rc-classics`: James,
+Chesterton, Sapir, Woolf, Tagore, Dewey, Veblen), quoted word for word
+with whole sentences left out to fit, `meta.source` naming the work and
+the licence, and original questions. Never paste a copyrighted essay,
+newspaper article, past CAT paper or coaching mock into the corpus: Aeon
+licenses an essay for USD 650 and only in full, The Conversation charges
+for exam materials, and the IIMs and coaching institutes own their
+papers. Learn from them; do not reproduce them.
 
 **The vocabulary block**: two to four words with `passage_use` being a
 phrase from the passage that contains the word (the context pack is
@@ -298,9 +342,10 @@ beginner.
 **Question surface must match the passage.** Seventeen passages carry
 three questions, and several are among the best ideas in the corpus —
 rc-0057 distinguishes an omission from a standing account in 316 words
-and gets three. If an idea will support five questions, give it the words
-to carry five. A short passage is a legitimate form; a short passage
-*because the author stopped* is a waste of the idea.
+and gets three. A short passage is a legitimate form; a short passage
+*because the author stopped* is a waste of the idea. (Superseded in part,
+October 2026: no passage asks more than four, because CAT asks four. An
+idea that would support six questions now gets the four best.)
 
 **Questions must be answerable from this passage and no other.** A
 question whose stem has to gloss its own key term is testing something

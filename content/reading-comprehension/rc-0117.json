@@ -1,0 +1,333 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0117",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 86,
+    "genre": "intellectual-history",
+    "difficulty": "easy",
+    "difficulty_numeric": 2,
+    "stage": "foundation",
+    "skills": [
+      "main-idea-extraction",
+      "evidence-anchoring",
+      "inference",
+      "concession-tracking"
+    ],
+    "word_count": 315,
+    "question_count": 3,
+    "question_types": [
+      "specific_detail",
+      "inference",
+      "primary_purpose"
+    ],
+    "theme": "the zero mattered to merchants because a mark for an empty place let numbers be written by position, which moved calculation off the counting board, where the working vanished, onto paper, where every step could be checked; the same ease of writing made figures easy to alter, which is why Florence's bankers resisted the new numerals and why a cheque still carries its amount in words",
+    "estimated_time_min": 5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-03",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted."
+    },
+    "date_added": "2026-10-03",
+    "batch_id": "batch-rc-005",
+    "prompt_version": "content engine v1 + CAT-size brief 2026-10",
+    "reviewer_notes": "A history of an idea in the impersonal register, with dates. The usual story of the zero stops at its invention or at Leonardo of Pisa; this passage follows it into the account book and argues that the gain was a written trail of the working rather than speed, and that the bankers' resistance rested on a real cost of the same change. The third paragraph is the adjudication: the resisters are given their due without being made right. Facts kept general and well attested: the place-value mark, Baghdad and North Africa, the book of 1202, the Florentine bankers' ban of 1299.",
+    "vocab_extracted": [
+      "counters",
+      "guild",
+      "forbade"
+    ],
+    "length_class": "short",
+    "structure": "history_of_an_idea",
+    "viewpoints": 2,
+    "tone": "admiring, even-handed, historical",
+    "difficulty_vector": {
+      "lexical": 2,
+      "syntactic": 2,
+      "abstraction": 2,
+      "inference_depth": 2,
+      "distractor_similarity": 2,
+      "reasoning_depth": 2,
+      "structural_ambiguity": 1,
+      "time_pressure": 2
+    },
+    "reasoning_patterns": [
+      "struct.history_of_an_idea",
+      "struct.chronology",
+      "struct.contrast",
+      "comp.explicit_detail",
+      "comp.paraphrase",
+      "comp.purpose",
+      "inf.strongly_supported",
+      "inf.author_vs_reported",
+      "arg.concession",
+      "lang.contrast_marker",
+      "scope.too_narrow",
+      "elim.systematic"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1: the option a strong candidate is drawn to is the one about finishing sums faster, because speed is what anyone expects a better notation to bring; the second paragraph rules it out in the sentence that names the real change, 'not mainly speed... It was the record'. The option about interest and exchange quotes the book's problems correctly and is wrong only because the passage never says merchants could not solve them before. Q2: the finalist is the option making the ban a preference for the counting board; it is built from the passage's own words and reverses them, since the board is where the working vanished. 'The bankers were not being foolish' kills the option about misunderstanding. Q3: the rival is the option saying the bankers were right to ban the numerals; the author grants them a fair reason but records that the numerals 'won anyway', so a defence is not an endorsement.",
+      "blind_solve": null
+    }
+  },
+  "passage": {
+    "title": "Figures in Ink",
+    "reading_time_min": 1.7,
+    "paragraphs": [
+      {
+        "id": "rc-0117-p1",
+        "text": "On a medieval counting board, the number 205 was easy to show: two counters on the hundreds line, none on the tens line, five on the units line. The bare line meant 'nothing here' without any sign at all. Writing the number down was harder. Roman numerals have no places, so a clerk could record the answer as CCV but could hardly work a sum out in them. Indian mathematicians had solved this centuries before by giving the empty place a mark of its own, the zero. By the seventh century they were treating that mark as a number in its own right."
+      },
+      {
+        "id": "rc-0117-p2",
+        "text": "The system travelled west through Baghdad and the ports of North Africa, where a young Italian, Leonardo of Pisa, learned it. In 1202 he published a book that taught the new numerals through merchants' problems: changing money, sharing profits among partners, charging interest. What the numerals changed was not mainly speed, for a skilled clerk on a counting board was quick. It was the record. On the board, the working vanished when the counters were swept away, and only the answer went into the account book. On paper, every step stayed where it was written, so a partner could follow the sum and find where it went wrong."
+      },
+      {
+        "id": "rc-0117-p3",
+        "text": "The new figures had a cost as well. In 1299 the bankers' guild of Florence forbade its members to use the new numerals in their account books. A 0 becomes a 6 with one stroke of a pen, while a number written in words is far harder to alter. The bankers were not being foolish. They had seen that a number which is easy to write is also easy to rewrite. Over the next two centuries the new numerals won anyway, but the worry never quite went away. The amount on a cheque is still written twice, once in figures and once in words."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0117-q1",
+      "type": "specific_detail",
+      "skill": "specific_detail",
+      "patterns": [
+        "comp.explicit_detail",
+        "comp.paraphrase",
+        "lang.contrast_marker"
+      ],
+      "target_mistake": "taking speed, the change everyone expects, for the change the passage names, or turning 'could find' into 'always found'",
+      "prediction_target": null,
+      "difficulty": {
+        "inference_depth": 1,
+        "distractor_similarity": 2,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "logical_structure"
+      ],
+      "stem": "According to the passage, the main change the new numerals brought to a merchant's accounts was that",
+      "options": {
+        "A": "the working of a sum stayed on the page, where others could check it",
+        "B": "a sum could be finished much faster than on a counting board",
+        "C": "merchants could at last work out interest, exchange and shares of profit",
+        "D": "every mistake in a merchant's accounts was soon found and put right"
+      },
+      "correct": "A",
+      "estimated_time_sec": 45,
+      "explanation": {
+        "expert_notice": "The second paragraph answers this in so many words, and it signals the answer with a contrast: 'What the numerals changed was not mainly speed... It was the record.' Whatever the right option says, it must be about the record, not the speed.",
+        "correct_reasoning": "On the board, the working vanished when the counters were swept away; on paper, every step stayed where it was written, so a partner could follow the sum and find where it went wrong. The correct option says exactly this in other words: the working stayed on the page, where others could check it.",
+        "passage_anchor": "rc-0117-p2",
+        "question_type_note": "A detail question has one sentence behind it. Find that sentence before reading the options, and treat any option that sounds sensible but cannot be pointed to as a decoy.",
+        "reading_habit": "Mark every 'not this but that' sentence when you meet it. The 'this' is almost always offered back to you later as a wrong answer.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage rules speed out in the same sentence that names the real change: the change was not mainly speed, for a skilled clerk on a counting board was quick.",
+            "seductive_element": "Faster sums are what most people would expect a better way of writing numbers to bring."
+          },
+          {
+            "option": "C",
+            "trap_type": "fact_right_interpretation_wrong",
+            "why_wrong": "The passage says the book of 1202 taught the numerals through problems of changing money, sharing profits and charging interest. It never says merchants could not solve such problems before; the counting board was already doing their sums.",
+            "seductive_element": "Those problems really are in the passage, attached to the new numerals."
+          },
+          {
+            "option": "D",
+            "trap_type": "possibility_as_certainty",
+            "why_wrong": "The passage says a partner could follow the sum and find where it went wrong. That is a possibility the written record opened up, not a promise that every mistake was found and corrected.",
+            "seductive_element": "It sounds like the natural result of being able to check the working."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0117-q2",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.strongly_supported",
+        "inf.author_vs_reported",
+        "arg.concession"
+      ],
+      "target_mistake": "reading the ban as proof that the bankers were ignorant, or as the end of the story, when the author defends their reason and records that the numerals won anyway",
+      "prediction_target": "The learner should be able to say beforehand: the author thinks the bankers saw a real problem, since figures in the new numerals were easy to alter, even though the numerals won.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 2,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "tone"
+      ],
+      "stem": "It can be inferred that the author regards the Florentine bankers' ban as",
+      "options": {
+        "A": "proof that the bankers had not understood the new system",
+        "B": "a preference for the counting board, which kept the working",
+        "C": "the reason the new numerals stayed out of Italian accounts",
+        "D": "a sensible response to a real weakness in the new numerals"
+      },
+      "correct": "D",
+      "estimated_time_sec": 80,
+      "explanation": {
+        "expert_notice": "The author passes judgement on the bankers in one short sentence: 'The bankers were not being foolish.' The sentences around it give their reason, that a 0 becomes a 6 with one stroke of a pen, and say the worry 'never quite went away'.",
+        "correct_reasoning": "The author explains the ban by a real property of the new numerals, that a number which is easy to write is also easy to rewrite, and says plainly that the bankers were not being foolish. He even follows the worry to the present day, when a cheque carries its amount in words as well as figures. So he treats the ban as a sensible response to a genuine weakness.",
+        "passage_anchor": "rc-0117-p3",
+        "question_type_note": "A question about how the author regards something is an inference about attitude. Find the author's own verdict words, here 'not being foolish', and test each option against them.",
+        "reading_habit": "When a passage reports that some people resisted a change, ask whether the author sides with them, against them, or partly with both. The answer is usually in one short sentence.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The author says the opposite: 'The bankers were not being foolish. They had seen that a number which is easy to write is also easy to rewrite.'",
+            "seductive_element": "The numerals won in the end, so it is tempting to treat the people who resisted them as people who did not understand."
+          },
+          {
+            "option": "B",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "The passage says the working vanished from the counting board when the counters were swept away; it was paper that kept the working. And the bankers' worry was about altered figures, not about the board.",
+            "seductive_element": "It is built from the passage's own words, counting board and working, put back together the wrong way round."
+          },
+          {
+            "option": "C",
+            "trap_type": "temporal_distortion",
+            "why_wrong": "The ban was made in 1299, and over the next two centuries the new numerals won anyway. The option turns a ban made at one moment into a lasting result.",
+            "seductive_element": "A guild forbidding something sounds final, and the passage never describes the ban being lifted."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0117-q3",
+      "type": "primary_purpose",
+      "skill": "author_purpose",
+      "patterns": [
+        "comp.purpose",
+        "struct.history_of_an_idea",
+        "scope.too_narrow"
+      ],
+      "target_mistake": "naming the first paragraph's subject, the invention of the mark, as the whole, or taking the author's defence of the bankers for agreement with them",
+      "prediction_target": "The learner should be able to say beforehand: the author follows the new numerals from India to the merchants and says what they gained, a record of the working, and what it cost, figures that were easy to alter.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 2,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "main_idea"
+      ],
+      "stem": "The passage is primarily concerned with",
+      "options": {
+        "A": "how Indian mathematicians came to treat zero as a number in its own right",
+        "B": "how a new way of writing numbers came to merchants, and what it gave and cost them",
+        "C": "why the bankers who distrusted the new numerals were right to ban them from their books",
+        "D": "why the amount on a cheque ought still to be written out in words as well as figures"
+      },
+      "correct": "B",
+      "estimated_time_sec": 70,
+      "explanation": {
+        "expert_notice": "Each paragraph moves the story one step: the problem and the Indian solution, the journey west and what changed in the account book, then the cost and the resistance. A primary purpose has to name the journey and both sides of the change.",
+        "correct_reasoning": "The correct option names the journey, how a new way of writing numbers came to merchants, and both halves of the result: what it gave them, a record of the working, and what it cost them, figures that were easy to alter. Every paragraph is covered and nothing is added.",
+        "passage_anchor": "rc-0117-p1, rc-0117-p2, rc-0117-p3",
+        "question_type_note": "A primary-purpose question asks for the job the whole passage does. Give it a verb and an object before you read the options, here 'traces' and 'how the numerals reached the account book'.",
+        "reading_habit": "In a history passage, note where the story starts and where it ends. The purpose usually spans exactly that distance, not just the most interesting stop along the way.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "too_narrow",
+            "why_wrong": "This is the first paragraph only. The passage spends its other two paragraphs on the journey to the merchants and on what the change gave and cost them.",
+            "seductive_element": "The invention is the most famous part of the story, and it comes first."
+          },
+          {
+            "option": "C",
+            "trap_type": "concession_as_position",
+            "why_wrong": "The author grants that the bankers were not being foolish, but he never says they were right to ban the numerals; he records that the numerals won anyway and that only the worry survived.",
+            "seductive_element": "The author does defend the bankers, and a defence is easy to mistake for agreement."
+          },
+          {
+            "option": "D",
+            "trap_type": "prescriptive_leap",
+            "why_wrong": "The cheque appears in the last sentence as evidence that the old worry survives. The passage gives no advice about how amounts ought to be written.",
+            "seductive_element": "The passage ends on the cheque, and a final example often sounds like the point."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "counters",
+      "passage_use": "two counters on the hundreds line, none on the tens line",
+      "meaning_here": "small flat pieces moved about on a board to stand for numbers",
+      "difficulty": "easy"
+    },
+    {
+      "word": "guild",
+      "passage_use": "the bankers' guild of Florence forbade its members",
+      "meaning_here": "an association of people in the same trade that set rules for its members",
+      "difficulty": "medium"
+    },
+    {
+      "word": "forbade",
+      "passage_use": "forbade its members to use the new numerals in their account books",
+      "meaning_here": "ordered them not to; the past tense of forbid",
+      "difficulty": "easy"
+    }
+  ],
+  "mentor": {
+    "challenge": "A short history with dates and a twist at the end. Keep track of what the change gave the merchants and what it cost them.",
+    "one_sentence_summary": "A mark for an empty place, worked out by Indian mathematicians, let numbers be written by position, and when it reached Europe's merchants it moved their sums from the counting board onto paper, where the working could be checked, though figures that were easy to write were also easy to alter, which is why Florence's bankers resisted it.",
+    "main_idea": "The real gift of the new numerals to merchants was not faster sums but a written record of the working that anyone could check later. The same change had a cost, since written figures are easy to alter, and the bankers who worried about that were not foolish.",
+    "simple_explanation": "On a counting board, a merchant showed 205 by putting two counters on the hundreds line, none on the tens line and five on the units line. The empty line meant zero without needing any sign. Writing numbers down was the problem. Roman numerals have no places, so you could write an answer in them but hardly do a sum. Indian mathematicians had solved this long before by giving the empty place its own mark, and they later treated that mark as a number.\n\nThe system travelled through Baghdad and North Africa to a young Italian, Leonardo of Pisa, who wrote a book in 1202 teaching it through merchants' problems. The author says the big change was not speed, because good clerks were quick on the board. The change was the record. On the board, the working disappeared when the counters were cleared. On paper, every step stayed, so a partner could check the sum and find the mistake.\n\nThere was a cost. In 1299 the bankers of Florence banned the new numerals in their account books, because a 0 can be turned into a 6 with one stroke. The author says they were not foolish. The numerals won anyway, but the worry lives on: we still write a cheque's amount in both figures and words.",
+    "why_difficult": "The passage is a story, and stories invite the reader to look for heroes and fools. The author refuses both: the new numerals win, but the people who resisted them had a good reason. The questions test whether you kept the two sides of the change, the record gained and the safety lost, together.",
+    "author_intention": "To follow an idea from its origin to the place where it changed ordinary work, and to show that its benefit and its risk came from the same feature.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0117-p1",
+        "role": "Sets out the problem",
+        "note": "A counting board shows an empty place by leaving a line bare, but writing needs a sign for it; Indian mathematicians supplied one."
+      },
+      {
+        "paragraph_id": "rc-0117-p2",
+        "role": "Traces the journey",
+        "note": "The numerals travel west to Leonardo of Pisa, and their real gift to merchants is a written record of the working, not speed."
+      },
+      {
+        "paragraph_id": "rc-0117-p3",
+        "role": "Weighs the cost",
+        "note": "Florence's bankers ban the numerals because figures are easy to alter; the author defends their reason, and the worry survives on cheques."
+      }
+    ],
+    "tone_progression": "Plain and curious in the first paragraph, admiring in the second as the written record is described, and even-handed in the third, where the author takes the resisters' side just far enough to show that they were not foolish.",
+    "key_transitions": [
+      "'What the numerals changed was not mainly speed... It was the record.' (paragraph 2): the passage names the real change.",
+      "'The new figures had a cost as well.' (opening of paragraph 3): the gain is followed by its price.",
+      "'The bankers were not being foolish.' (paragraph 3): the author's verdict on the people who resisted."
+    ],
+    "misunderstanding": "A hurried reader assumes the new numerals won because they made sums faster, and that the bankers who banned them were simply behind the times. The passage says neither: the gain was a record that could be checked, and the bankers had seen a real weakness.",
+    "traps_summary": "The wrong options lean on the story everyone expects: speed as the benefit, the resisters as fools, the ban as the end of the matter. One rebuilds the passage's own words, counting board and working, into the opposite claim, and one turns the author's defence of the bankers into agreement with them.",
+    "reading_lesson": "In a history of an idea, keep two columns as you read: what the change gave and what it cost. Authors who write these histories well usually fill both, and the questions check whether you did.",
+    "real_world": "The same trade-off returns with every new way of keeping records: what makes a record easy to make and check also makes it easy to tamper with, which is why a cheque still carries its amount in words.",
+    "takeaway": "A number that is easy to write is easy to check, and easy to rewrite.",
+    "reflection_question": "Which tool do you use that helps you and creates a new risk through the very same feature?",
+    "eli10": {
+      "big_idea": "Zero let people do sums on paper, so the working could be checked, but paper numbers were also easy to change.",
+      "story": "Merchants once did sums on a counting board. They put counters on lines, and an empty line meant zero. Writing numbers down was the problem. Roman numbers had no places, so sums in them were hard to do. Indian mathematicians had fixed this. They gave the empty place its own mark: our zero. Leonardo of Pisa learned it in North Africa and wrote a book for merchants in 1202. The big change was not speed. It was the record. On a board, the steps vanished when you cleared it. On paper, every step stayed, so a partner could check it. There was a danger. A 0 can become a 6 with one stroke. So in 1299, Florence's bankers banned the new numbers from their account books. The writer says they were not silly. The new numbers won anyway. We still write a cheque's amount in figures and in words.",
+      "paragraphs": [
+        "Sets up a problem: a counting board shows an empty place easily, but writing needs a sign for it.",
+        "Tells the journey: zero reaches merchants, and its gift is sums on paper that can be checked.",
+        "Shows the cost: paper figures are easy to change, so Florence's bankers banned them in 1299."
+      ],
+      "author_view": "The writer admires the new numbers, but thinks the bankers who feared them had a fair point."
+    }
+  }
+}

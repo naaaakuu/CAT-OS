@@ -7,9 +7,9 @@
     "status": "accepted",
     "quality_score": 88,
     "genre": "economics",
-    "difficulty": "easy",
-    "difficulty_numeric": 3,
-    "stage": "developing",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "stage": "intermediate",
     "skills": [
       "main-idea-extraction",
       "argument-tracking",
@@ -17,17 +17,16 @@
       "vocabulary-in-context",
       "trap-recognition"
     ],
-    "word_count": 749,
-    "question_count": 5,
+    "word_count": 512,
+    "question_count": 4,
     "question_types": [
       "implication",
       "inference",
       "main_idea",
-      "phrase_in_context",
       "weaken"
     ],
     "theme": "why the gains-from-trade principle keeps being refused after it has been understood, adjudicated between an account that blames a mistake in arithmetic and an account that blames visible losers, with the author adding that the theorem is stated about countries and met in the form of a job, and holding that the arithmetic is not in dispute but settles nothing about the sharing",
-    "estimated_time_min": 10,
+    "estimated_time_min": 8,
     "source": {
       "publication": "original",
       "url": null,
@@ -38,8 +37,8 @@
     "date_added": "2026-09-13",
     "batch_id": "batch-rc-003",
     "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-05",
-    "reviewer_notes": "An easy passage by vocabulary and sentence length, with a worked numerical example, but the adjudication is real: two explanations are declared answers to different questions rather than rivals, and the author then adds a third consideration of his own. The final paragraph defends the arithmetic and refuses to let it decide a policy, which is the line the inference and implication questions are built on.",
-    "length_class": "long",
+    "reviewer_notes": "An easy passage by vocabulary and sentence length, with a worked numerical example, but the adjudication is real: two explanations are declared answers to different questions rather than rivals, and the author then adds a third consideration of his own. The final paragraph defends the arithmetic and refuses to let it decide a policy, which is the line the inference and implication questions are built on. 2026-10-03 CAT-size pass: 749→512 words, 6→5 paragraphs, 5→4 questions. Dropped the worked-example paragraph (p2) after compressing the boatyards into p1, since both explanations lean on them; tightened the rest; dropped q2 (phrase in context, anchored only to p2); difficulty reset from easy 3 to medium 5 for a real adjudication. The original said the second yard's hull builders lose their work, but on its own figures the slower yard keeps building hulls, so the loser is now the quick yard's hull builders.",
+    "length_class": "medium",
     "structure": "two_views_adjudication",
     "viewpoints": 3,
     "tone": "patient, even-handed, firm at the close",
@@ -80,43 +79,37 @@
     ],
     "quality": {
       "status": "reviewed",
-      "adversarial_review": "Q1's live rival is the option about resistance running strongest where the closures have been heaviest, which a hurried reader takes for a weakener because it is about losers; it is the second explanation's own prediction, so it strengthens the account the stem asks to be weakened. Q2's rival is the option about finishing the work more quickly, which is absolute advantage in other words and is precisely the confusion the third paragraph names; the phrase asks what a yard loses by doing something, and the example measures sails in hulls. Q3's rival is the option saying that better explanation would show the complaint about who pays to be a confusion too, which the fifth paragraph forbids by making the two explanations answers to different questions rather than rivals. Q4's rival is the option about better teaching, which is the first explanation offered as the whole and leaves the last two paragraphs with nothing to do. Q5's rival is the option that anyone who accepts the principle is committed to believing compensation will be paid, which reverses the passage's closing point that the arithmetic says what there is to share and nothing about the sharing.",
+      "adversarial_review": "Q1's live rival is the option about resistance running strongest where the closures have been heaviest, which a hurried reader takes for a weakener because it is about losers; it is the second explanation's own prediction, so it strengthens the account the stem asks to be weakened. Q2's rival is the option about finishing the work more quickly, which is absolute advantage in other words and is precisely the confusion the third paragraph names; the phrase asks what a yard loses by doing something, and the example measures sails in hulls. Q3's rival is the option saying that better explanation would show the complaint about who pays to be a confusion too, which the fifth paragraph forbids by making the two explanations answers to different questions rather than rivals. Q4's rival is the option about better teaching, which is the first explanation offered as the whole and leaves the last two paragraphs with nothing to do. Q5's rival is the option that anyone who accepts the principle is committed to believing compensation will be paid, which reverses the passage's closing point that the arithmetic says what there is to share and nothing about the sharing. (2026-10-03, CAT-size pass: q2 was dropped, so any note above about it no longer applies.)",
       "blind_solve": null
     },
     "vocab_extracted": [
-      "counterintuitive",
       "compensate",
-      "dissolves",
-      "evasion"
+      "dissolves"
     ]
   },
   "passage": {
     "title": "Worse at Everything",
-    "reading_time_min": 4.1,
+    "reading_time_min": 2.8,
     "paragraphs": [
       {
         "id": "rc-0078-p1",
-        "text": "The idea is more than two hundred years old and it is still refused. It says that a country can be worse at producing everything than its neighbour and still gain by trading with it. Not worse at some things. Worse at all of them. The claim is taught in every introductory course, it can be demonstrated on half a page, and people who have followed the demonstration and agreed with it often stop believing it again within a week. That last fact is the interesting one. The question here is not whether the principle is true. It is why being shown that it is true so often settles nothing."
-      },
-      {
-        "id": "rc-0078-p2",
-        "text": "Take two boatyards. The first can build a hull in four weeks and a set of sails in one. The second is slower at both: six weeks for a hull, three for the sails. The first yard is better at everything, so it looks as though it has nothing to gain by dealing with the second. But ask what each yard gives up. When the first yard makes a set of sails, it loses a quarter of a hull. When the second makes a set of sails, it loses half a hull. Sails are therefore cheaper for the first yard to make, measured in hulls, and hulls are cheaper for the second, measured in sails. If each does the work it gives up least to do, and they trade, more hulls and more sails exist at the end of the month than before. Nobody had to become better at anything."
+        "text": "An idea more than two hundred years old, and taught in every introductory course, is still refused: that a country worse than its neighbour at producing everything can still gain by trading with it. Take two boatyards, one quicker than the other at building both hulls and sails. To make a set of sails, the quick yard gives up a quarter of a hull and the slow yard half a hull, so if the quick yard makes sails and the slow yard hulls, between them they make more of both. People follow this, agree, and often stop believing it within a week. The question here is not whether the principle is true but why being shown that it is true so often settles nothing."
       },
       {
         "id": "rc-0078-p3",
-        "text": "The first explanation of the trouble is that people are making a mistake in arithmetic. They hear better at everything and conclude has nothing to gain, because they are comparing the two yards with each other when the comparison that matters is the one inside each yard. It is a real mistake and a common one, and it has a remedy. Work the example through with somebody and they will usually accept it on the spot. On this account the principle is counterintuitive in the way that any unfamiliar calculation is counterintuitive, and the answer to it is better teaching."
+        "text": "The first explanation is that people are making a mistake in arithmetic. They hear 'better at everything' and conclude 'has nothing to gain', because they compare the two yards with each other when the comparison that matters is the one inside each yard. It is a real mistake, and its remedy is better teaching: work the example through with somebody and they will usually accept it on the spot."
       },
       {
         "id": "rc-0078-p4",
-        "text": "The second explanation says that the resistance is not coming from people who failed to follow the argument. It comes from people who followed it perfectly well and can see who pays, because they or their neighbours are the ones paying. The demonstration shows that the two yards together end the month with more. It does not show that the second yard's hull builders end the month with anything, and when a yard stops doing work it used to do, particular people stop being paid for it. The principle is silent about them. The standard reply is that the winners gain enough to compensate the losers and still be ahead. That is true, and the objection to it is short: could is not does."
+        "text": "The second explanation says that the resistance comes from people who followed the argument perfectly well and can see who pays, because they or their neighbours are the ones paying. The demonstration shows that the two yards together end the month with more, not that the quick yard's hull builders, whose work has gone to the other yard, end it with anything. The standard reply is that the winners gain enough to compensate the losers and still be ahead. That is true, and the objection to it is short: could is not does."
       },
       {
         "id": "rc-0078-p5",
-        "text": "The two explanations are usually offered as rivals and they are not. They answer different questions. The first explains why the sentence sounds false the first time anybody hears it, and the evidence for it is that a worked example so often dissolves the disbelief. The second explains why the disbelief comes back, and the evidence for it is that the people who argue hardest against the principle are frequently the ones who can state it correctly. A remedy aimed at the first will do nothing at all about the second, which is roughly the history of the last fifty years of explaining."
+        "text": "The two explanations are usually offered as rivals and they are not. They answer different questions. The first explains why the sentence sounds false the first time anybody hears it, and the evidence for it is that a worked example so often dissolves the disbelief. The second explains why the disbelief comes back, and the evidence for it is that the people who argue hardest against the principle are frequently the ones who can state it correctly. A remedy aimed at the first will do nothing at all about the second, which is roughly the history of fifty years of explaining."
       },
       {
         "id": "rc-0078-p6",
-        "text": "There is a further reason and it belongs to neither account. The principle is stated about countries and it is met in the form of a job. Nobody has ever experienced a national gain. Everybody has experienced, or watched a neighbour experience, a workshop closing and a trade disappearing. What the theorem adds up and what a person feels are not measured in the same units, so the argument and the objection are not really contradicting each other, and each side is free to hear the other as evasion. None of this makes the arithmetic wrong. The arithmetic is not in dispute and does not become so by being unwelcome. What it will not do is settle what ought to be done, because it describes what there is to share and says nothing whatever about the sharing. The useful argument is never about whether the principle holds. It is about whether the compensation arrives, and on that the principle has no opinion."
+        "text": "There is a further reason, and it belongs to neither account. The principle is stated about countries and met in the form of a job: nobody has ever experienced a national gain, and everybody has watched a workshop close. What the theorem adds up and what a person feels are measured in different units, so the argument and the objection do not really contradict each other. None of this makes the arithmetic wrong; it is not in dispute, and does not become so by being unwelcome. But it cannot settle what ought to be done, because it describes what there is to share and nothing about the sharing. The useful argument is about whether the compensation arrives, and on that the principle has no opinion."
       }
     ]
   },
@@ -151,7 +144,7 @@
       "correct": "D",
       "estimated_time_sec": 80,
       "explanation": {
-        "expert_notice": "The second explanation is a causal claim with two parts: the objectors have understood the argument, and they object because they can see who pays. The paragraph's own evidence is that those who argue hardest can state the principle correctly. Anything that weakens it has to cut the link between standing to lose and objecting.",
+        "expert_notice": "The second explanation is a causal claim with two parts: the objectors have understood the argument, and they object because they can see who pays. The passage's evidence for it, given where the two accounts are weighed, is that those who argue hardest can state the principle correctly. Anything that weakens it has to cut the link between standing to lose and objecting.",
         "correct_reasoning": "The correct option cuts exactly that link. If people with nothing at stake object at the same rate as people with everything at stake, then seeing who pays cannot be what is producing the objection, and the explanation loses the mechanism it was built on. It does this without denying anything the passage asserts, which is what a weakener is supposed to do.",
         "passage_anchor": "rc-0078-p4",
         "question_type_note": "A weaken question asks you to break a link, not to contradict a fact. Name the causal step in the account before reading the options, then look for the option that leaves the facts alone and takes the step away.",
@@ -174,63 +167,6 @@
             "trap_type": "out_of_scope",
             "why_wrong": "Nothing in the passage turns on the size of the gain, which is never quantified or discussed. A difficulty in measuring it leaves untouched both the claim that objectors understand the argument and the claim that they can see who pays.",
             "seductive_element": "It sounds like a serious technical objection to the principle, and readers under time accept anything that makes the economists look less certain as damage to an economist's account."
-          }
-        ]
-      }
-    },
-    {
-      "id": "rc-0078-q2",
-      "type": "phrase_in_context",
-      "skill": "vocabulary_in_context",
-      "patterns": [
-        "word.context_clue",
-        "comp.paraphrase",
-        "arg.example"
-      ],
-      "target_mistake": "reading the phrase as a claim about speed, which is the comparison the worked example is designed to set aside",
-      "prediction_target": "The learner should paraphrase the phrase from the sentences above it: the yard should do whatever costs it least of the other job.",
-      "difficulty": {
-        "inference_depth": 2,
-        "distractor_similarity": 4,
-        "reasoning_depth": 2
-      },
-      "secondary_skills": [
-        "specific_detail",
-        "inference"
-      ],
-      "stem": "In the second paragraph, the work a yard gives up least to do is the work that",
-      "options": {
-        "A": "costs it least of the other work it could have been doing instead",
-        "B": "it can complete more quickly than the workshop it trades with can",
-        "C": "it can sell more cheaply than any rival workshop is able to charge",
-        "D": "its whole country is best placed to supply to the rest of the world"
-      },
-      "correct": "A",
-      "estimated_time_sec": 45,
-      "explanation": {
-        "expert_notice": "The two sentences before the phrase define it. Making sails costs the first yard a quarter of a hull and costs the second half a hull, so the comparison being made is between two jobs inside one yard, with one job priced in units of the other.",
-        "correct_reasoning": "The correct option is that definition in ordinary words. Giving up here means forgoing, and what is forgone is the other job the same yard could have been doing with the same weeks. That is why the slower yard can be the cheaper producer of hulls even though it takes longer over them, and why the paragraph ends by saying nobody had to become better at anything.",
-        "passage_anchor": "rc-0078-p2",
-        "question_type_note": "A phrase-in-context question is settled by the sentences that surround the phrase, and an author who has just worked an example has usually planted the definition inside it.",
-        "reading_habit": "When a phrase follows a calculation, put the calculation into the phrase. The numbers above the sentence are the author telling you which of the possible meanings he wants.",
-        "distractors": [
-          {
-            "option": "B",
-            "trap_type": "near_synonym_confusion",
-            "why_wrong": "This is being better at the work, measured against the other yard, which is the comparison the paragraph explicitly sets aside. The first yard is quicker at both jobs and still gains, so speed against a rival cannot be what the phrase picks out.",
-            "seductive_element": "It is the live rival, because it is the natural sense of doing something easily and because the passage has just given the reader two sets of speeds to compare."
-          },
-          {
-            "option": "C",
-            "trap_type": "out_of_scope",
-            "why_wrong": "No prices and no money appear anywhere in the example, which is worked entirely in weeks, hulls and sails. The word cheaper in the paragraph is explicitly measured in hulls and in sails rather than in any currency.",
-            "seductive_element": "The paragraph does use the word cheaper twice, which invites a reader to supply the money that normally goes with it."
-          },
-          {
-            "option": "D",
-            "trap_type": "wrong_population",
-            "why_wrong": "The phrase belongs to a sentence about two yards, and the comparison it makes is between two jobs in one workshop. Countries are the subject of the principle stated in the first paragraph, not of the calculation the phrase summarises.",
-            "seductive_element": "The passage moves between countries and workshops on purpose, and the final paragraph makes a great deal of the difference, which makes the larger unit feel authorised."
           }
         ]
       }
@@ -265,7 +201,7 @@
       "correct": "B",
       "estimated_time_sec": 75,
       "explanation": {
-        "expert_notice": "The fifth paragraph divides the labour between the two explanations and then draws the consequence itself: a remedy aimed at the first will do nothing at all about the second. Better explaining is a remedy aimed at the first, since the third paragraph named better teaching as its answer.",
+        "expert_notice": "The fourth paragraph divides the labour between the two explanations and then draws the consequence itself: a remedy aimed at the first will do nothing at all about the second. Better explaining is a remedy aimed at the first, since the second paragraph named better teaching as its remedy.",
         "correct_reasoning": "The correct option is that sentence applied to the case in the stem. Explanation cures a mistake in arithmetic, which is what the first account describes, and the second account concerns people who have made no such mistake, so nothing that improves understanding can touch them. The passage supplies both the division and the conclusion, and the option adds nothing to either.",
         "passage_anchor": "rc-0078-p5",
         "question_type_note": "An implication question takes the author's claim exactly one step. Where a passage says which remedy fits which cause, the implication is about what the remedy leaves behind.",
@@ -274,8 +210,8 @@
           {
             "option": "A",
             "trap_type": "opposite_direction",
-            "why_wrong": "The fourth paragraph makes these the very people who are not failing to follow the argument, and the fifth says the hardest arguers are often the ones who can state the principle correctly. More explaining is aimed at a mistake they have not made.",
-            "seductive_element": "Explaining things to people who disagree is what most readers take explanation to be for, and the passage's first three paragraphs encourage exactly that hope."
+            "why_wrong": "The third paragraph makes these the very people who followed the argument perfectly well, and the fourth says the hardest arguers are often the ones who can state the principle correctly. More explaining is aimed at a mistake they have not made.",
+            "seductive_element": "Explaining things to people who disagree is what most readers take explanation to be for, and the passage's first two paragraphs encourage exactly that hope."
           },
           {
             "option": "C",
@@ -331,8 +267,8 @@
           {
             "option": "A",
             "trap_type": "reported_view_as_author",
-            "why_wrong": "This is the first of the two explanations, and the passage limits it in the paragraph that follows, saying a remedy aimed at it will do nothing about the second. Offered as the thesis it leaves the last two paragraphs with nothing to say.",
-            "seductive_element": "It is the live rival, because the third paragraph endorses the account for what it covers and nowhere calls it false, and because it is the explanation an economics passage is expected to give."
+            "why_wrong": "This is the first of the two explanations, and the passage limits it in the paragraph that weighs the two, saying a remedy aimed at it will do nothing about the second. Offered as the thesis it leaves the last two paragraphs with nothing to say.",
+            "seductive_element": "It is the live rival, because the second paragraph endorses the account for what it covers and nowhere calls it false, and because it is the explanation an economics passage is expected to give."
           },
           {
             "option": "B",
@@ -388,7 +324,7 @@
           {
             "option": "A",
             "trap_type": "opposite_direction",
-            "why_wrong": "The first paragraph asserts the reverse and the second demonstrates it with numbers, where the quicker yard gains by making sails and buying hulls. The passage treats this belief as the mistake the whole discussion begins from.",
+            "why_wrong": "The first paragraph asserts the reverse and demonstrates it with the two yards, where the quicker yard gains by making sails and leaving hulls to the slower one. The passage treats this belief as the mistake the whole discussion begins from.",
             "seductive_element": "It is the intuition the passage says most people keep returning to, and it is stated in the passage's own words in the paragraph where the mistake is described."
           },
           {
@@ -409,12 +345,6 @@
   ],
   "vocabulary": [
     {
-      "word": "counterintuitive",
-      "passage_use": "the principle is counterintuitive in the way that any unfamiliar calculation is counterintuitive",
-      "meaning_here": "going against what a reader expects before working it out",
-      "difficulty": "medium"
-    },
-    {
       "word": "compensate",
       "passage_use": "the winners gain enough to compensate the losers",
       "meaning_here": "make good the loss of those who are worse off",
@@ -425,31 +355,20 @@
       "passage_use": "a worked example so often dissolves the disbelief",
       "meaning_here": "makes it quietly disappear rather than defeating it in argument",
       "difficulty": "medium"
-    },
-    {
-      "word": "evasion",
-      "passage_use": "each side is free to hear the other as evasion",
-      "meaning_here": "a way of avoiding the point rather than answering it",
-      "difficulty": "medium"
     }
   ],
   "mentor": {
     "challenge": "Two explanations are offered for the same puzzle, and the author does not pick one. Watch for the paragraph where he says why picking one would be a mistake, and for the reason he adds afterwards that belongs to neither.",
     "one_sentence_summary": "The old result that a country worse at producing everything can still gain by trading keeps being refused after it has been demonstrated, and the two usual explanations, a mistake in arithmetic and a clear view of who pays, are answers to different questions rather than rivals, to which the author adds that the theorem is stated about countries and met in the form of a job, so the arithmetic stands while settling nothing about how the gain is shared.",
     "main_idea": "A principle every course teaches is still refused by people who have understood it. One explanation blames a miscalculation, and better teaching cures that. The other blames the plain sight of who loses, and teaching does nothing for it. The author says both are right about different things, and adds a third point: the theorem counts countries and the reader lives in a job. The arithmetic survives all of this, and still cannot say who should be paid what.",
-    "simple_explanation": "Here is a claim that sounds wrong. A country can be worse than its neighbour at making absolutely everything, and it can still gain by trading with that neighbour. Not worse at a few things. Worse at all of them.\n\nThe demonstration is easy. Two boatyards. The first builds a hull in four weeks and sails in one. The second needs six weeks for a hull and three for sails. The first yard is quicker at both, so surely it has nothing to gain. But ask a different question: what does each yard lose by doing a job? For the first yard, a set of sails costs a quarter of a hull. For the second yard, a set of sails costs half a hull. So sails are cheap for the first yard and hulls are cheap for the second, once you measure the cost of a job in terms of the job you did not do. Let each one do its cheap job and swap, and at the end of the month there are more hulls and more sails than there would have been. Nobody got better at anything.\n\nSo why does this keep being rejected? The first answer is that people are simply doing the sum wrong. They compare the two yards with each other, when the comparison that matters is between the two jobs inside one yard. That really is a mistake, and it can be fixed. Show someone the example and they usually agree straight away.\n\nThe second answer says something different. The people who fight hardest against this are not the confused ones. They understood it, and they can see who pays. The demonstration proves that the two yards together end up with more. It says nothing about the people who used to build hulls in the second yard and now do not. Economists reply that the winners gain enough to pay the losers and still come out ahead. That is true. The objection is four words long: could is not does.\n\nThe author then says these two answers are not competitors. The first explains why the claim sounds false when you first hear it. The second explains why the disbelief comes back after you have understood it. Fix the first and you have done nothing about the second. That, he says, is roughly what fifty years of patient explaining has achieved.\n\nAnd he adds one more thing of his own. The principle talks about countries. People meet it in the form of a job. Nobody has ever felt a national gain, but plenty of people have watched a workshop close. The two sides are measuring in different units, so they are not really contradicting each other, and each can hear the other as dodging the question.\n\nNone of which makes the sum wrong. The sum is fine, and being unwelcome does not make it wrong. What it cannot do is decide what to do, because it tells you how much there is to share and nothing at all about the sharing. So the argument worth having is not about whether the principle is true. It is about whether the compensation ever turns up.",
+    "simple_explanation": "Here is a claim that sounds wrong. A country can be worse than its neighbour at making absolutely everything, and it can still gain by trading with that neighbour. Take two boatyards, one quicker than the other at building both hulls and sails. Making a set of sails costs the quick yard a quarter of a hull in lost time, and costs the slow yard half a hull. So sails are cheap for the quick yard and hulls are cheap for the slow one, once you measure each job by the job you did not do. Let each do its cheap job and swap, and between them there are more hulls and more sails at the end of the month. The odd thing is that people follow this, agree, and stop believing it within a week. The question is why.\n\nThe first answer is that people are simply doing the sum wrong. They compare the two yards with each other, when the comparison that matters is between the two jobs inside one yard. That really is a mistake, and better teaching fixes it. Show someone the example and they usually agree straight away.\n\nThe second answer says something different. The people who fight hardest against this are not the confused ones. They understood it, and they can see who pays. The demonstration proves that the two yards together end up with more. It says nothing about the quick yard's hull builders, whose work has gone to the other yard. Economists reply that the winners gain enough to pay the losers and still come out ahead. That is true. The objection is four words long: could is not does.\n\nThe author then says these two answers are not competitors. The first explains why the claim sounds false when you first hear it. The second explains why the disbelief comes back after you have understood it. Fix the first and you have done nothing about the second. That, he says, is roughly what fifty years of patient explaining has achieved.\n\nAnd he adds one more thing of his own. The principle talks about countries. People meet it in the form of a job. Nobody has ever felt a national gain, but plenty of people have watched a workshop close. The two sides are measuring in different units, so they are not really contradicting each other. None of which makes the sum wrong: the sum is not in dispute. What it cannot do is decide what to do, because it tells you how much there is to share and nothing at all about the sharing. So the argument worth having is about whether the compensation ever turns up.",
     "why_difficult": "The passage looks like a defence of the principle and is not; it is an account of why a true thing keeps being refused. Readers who take it as a defence answer the main-idea question with the principle itself. The second difficulty is that both explanations are treated generously, so a reader who expects a winner picks whichever paragraph was more vivid and then cannot account for the paragraph that says they are not rivals. The last paragraph does two opposite-looking things in six sentences, defending the arithmetic and refusing to let it settle a policy, and readers reliably keep only one of the two.",
     "author_intention": "To stop a reader from treating a disagreement about trade as a disagreement about arithmetic, by showing that the calculation and the complaint are about different things and that agreeing with one leaves the other exactly where it was.",
     "paragraph_journey": [
       {
         "paragraph_id": "rc-0078-p1",
         "role": "Sets the puzzle",
-        "note": "An old and easily proved claim keeps being rejected, even by people who followed the proof. The question is why proving it settles so little."
-      },
-      {
-        "paragraph_id": "rc-0078-p2",
-        "role": "Works the example",
-        "note": "Two boatyards, one quicker at both jobs. Measure each job by what it costs in the other job, and both gain from swapping."
+        "note": "An old and easily proved claim, shown working with two boatyards, keeps being rejected even by people who followed the proof. The question is why proving it settles so little."
       },
       {
         "paragraph_id": "rc-0078-p3",
@@ -474,15 +393,27 @@
     ],
     "tone_progression": "It opens briskly, almost impatiently, with a fact it finds interesting; becomes plain and instructional through the worked example; turns even-handed while both explanations are given their due; and closes firmly, defending the arithmetic in one sentence and confining it in the next.",
     "key_transitions": [
-      "'But ask what each yard gives up.' (paragraph 2): the comparison is moved from between the yards to inside each of them, which is the whole of the demonstration.",
-      "'The two explanations are usually offered as rivals and they are not.' (opening of paragraph 5): the adjudication, and the sentence the implication question rests on.",
-      "'None of this makes the arithmetic wrong.' (paragraph 6): the author defends the result he has spent two paragraphs explaining people's resistance to."
+      "'The question here is not whether the principle is true' (paragraph 1): the truth of the principle is set aside, and the puzzle becomes why proving it settles so little.",
+      "'The two explanations are usually offered as rivals and they are not.' (opening of paragraph 4): the adjudication, and the sentence the implication question rests on.",
+      "'None of this makes the arithmetic wrong' (paragraph 5): the author defends the result he has spent two paragraphs explaining people's resistance to."
     ],
     "misunderstanding": "The most common wrong model is that the passage is defending trade and blaming the public for not following the sum. It says the opposite about the loudest objectors: they have followed it. The second wrong model comes from the last paragraph, where readers keep either the defence of the arithmetic or the refusal to let it decide, and answer the inference question from whichever half they kept. Both halves are needed, and the passage's own closing sentence joins them.",
-    "traps_summary": "The set offers one explanation as the whole thesis, the principle itself as the main idea, a confirming fact where a weakener was wanted, absolute advantage in place of the phrase about giving up least, and a policy recommendation the passage refuses to make. Sorting each option into principle, first explanation, second explanation, verdict or limit answers all five.",
+    "traps_summary": "The set offers one explanation as the whole thesis, the principle itself as the main idea, a confirming fact where a weakener was wanted, and a policy recommendation the passage refuses to make. Sorting each option into principle, first explanation, second explanation, verdict or limit answers all four.",
     "reading_lesson": "When a passage sets out two explanations of the same thing, do not assume one of them has to lose. Authors often divide the work instead, giving each explanation a different question to answer, and the sentence that does the dividing is worth more than either explanation on its own. Once you have it, you can predict what a remedy will and will not cure, which is exactly what implication questions on such passages ask.",
     "real_world": "The same split appears in most public arguments where a result is agreed and the policy is not: a road that shortens a journey for thousands and destroys a street for forty, a technology that lowers costs everywhere and ends one trade, a reform that raises a total nobody experiences directly. In each, the calculation and the grievance are measured in different units.",
     "takeaway": "A sum that tells you how much there is to share has not yet said one word about the sharing.",
-    "reflection_question": "When you last won an argument by proving your figures, did the other person actually disagree with the figures?"
+    "reflection_question": "When you last won an argument by proving your figures, did the other person actually disagree with the figures?",
+    "eli10": {
+      "big_idea": "People reject a true trade idea for two separate reasons; better teaching fixes one, and the maths never settles who gets paid.",
+      "story": "A true idea sounds wrong: a country worse at making everything can still gain by trading with its neighbour. Picture two boatyards, one faster at both hulls and sails. If each sticks to the job it gives up least for, and they swap, there are more boats. People agree when shown, then stop believing it. Why? One answer: they get the sum wrong at first. Better teaching fixes that. The other: they understand it perfectly and can see who loses work. The winners could pay the losers, but could is not does. The writer says both are right, about different things. Teaching cures only the first. Also, the idea talks about countries, but people meet it as jobs. Think of a team that wins more after your friend is dropped. The team gains; your friend does not. The sums are right. They cannot say how the gains are shared.",
+      "paragraphs": [
+        "Sets a puzzle: a proven trade idea, shown with two boatyards, keeps being rejected after people accept it.",
+        "Gives the first explanation: people compare the wrong things, and better teaching cures that.",
+        "Gives the second explanation: objectors understand fine but see who loses, and 'could pay' is not 'does pay'.",
+        "Judges between them: not rivals, since each explains a different thing, so teaching cannot fix both.",
+        "Adds a reason and a limit: countries versus jobs, and correct sums still cannot decide the sharing."
+      ],
+      "author_view": "The writer is brisk and fair-minded: he defends the maths firmly but takes the people who lose seriously."
+    }
   }
 }

@@ -78,12 +78,23 @@ try {
   ok(water.length === 5 && water.every((n) => n > 20), `a river reach is still: ${water}`);
   ok(await ev(`(() => { const c = document.querySelectorAll('.cw-water canvas')[2]; return c.getContext('2d').getImageData(205, 25, 1, 1).data[3] === 0; })()`), 'water painted over the wooden dock');
 
-  // Whole-map view works even on a phone; zooming returns to exploration.
-  await ev(`document.querySelector('[data-camera="overview"]').click()`); await sleep(850);
-  ok(await ev(`(() => { const r = document.querySelector('.cw-map').getBoundingClientRect(); return r.width <= innerWidth + 1 && r.height <= innerHeight + 1 && r.left >= -1 && r.top >= -1; })()`), 'overview crops part of the village');
-  const wide = await ev(`document.querySelector('.cw-map').getBoundingClientRect().width`);
-  await ev(`document.querySelector('[data-camera="overview"]').click()`); await sleep(850);
-  ok(await ev(`document.querySelector('.cw-map').getBoundingClientRect().width`) > wide, 'the overview button did not zoom back in');
+  // No zoom (owner, 2026-10-03): on a phone the painting fills the height at full detail and scrolls sideways.
+  ok(await ev(`!document.querySelector('[data-camera="overview"], .cw-overview')`), 'a zoom-out control is back on the map');
+  ok(await ev(`(() => { const r = document.querySelector('.cw-map').getBoundingClientRect(); return Math.abs(r.height - innerHeight) <= 1 && r.width > innerWidth * 2.5; })()`), 'the phone map should fill the height and run about three screens wide');
+  await browser.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ x: 300, y: 420 }, { x: 120, y: 420 }] });
+  await browser.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [{ x: 360, y: 420 }, { x: 60, y: 420 }] });
+  await browser.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+  await sleep(300);
+  ok(await ev(`Math.abs(document.querySelector('.cw-map').getBoundingClientRect().height - innerHeight) <= 1`), 'a pinch changed the zoom');
+  await ev(`document.querySelector('.cw').__village.look(768, 512)`);
+  const xa = await ev(`document.querySelector('.cw-map').getBoundingClientRect().left`);
+  await browser.send('Input.dispatchMouseEvent', { type: 'mouseWheel', x: 200, y: 420, deltaX: 0, deltaY: 240 });
+  await sleep(250);
+  ok(await ev(`document.querySelector('.cw-map').getBoundingClientRect().left`) < xa - 100, 'an ordinary mouse wheel should scroll the village sideways');
+
+  // Every house says its subject, on a sign that is always up.
+  ok(await ev(`(() => { const p = [...document.querySelectorAll('.cw-spot .cw-plate')]; return p.length === 8 && p.every((e) => getComputedStyle(e).opacity === '1' && e.getBoundingClientRect().width > 60 && e.textContent.trim().length > 4); })()`), 'every house needs a visible subject sign');
+  ok(await ev(`['Reading Comprehension', 'Para Jumbles', 'Para Summary', 'Odd One Out', 'Sentence Placement', 'Para Completion', 'Vocabulary'].every((t) => [...document.querySelectorAll('.cw-plate')].some((p) => p.textContent.includes(t)))`), 'a VARC subject has no house');
 
   // Pets choose at random, and every one may idle for a while: wait for any of them to move, up to twenty seconds.
   const p0 = JSON.parse(await positions());
@@ -100,7 +111,7 @@ try {
   ok(await waitFor(`document.querySelector('.cw-overlay').hidden`, 3000), 'Escape did not close the card');
 
   // Who is who, today's three, the village level, the fire, the cottage.
-  for (const [open, sel, n] of [['friends', '.cw-roster li', 6], ['today', '.cw-todo li', 3], ['level', '.cw-road li', 9], ['fire', '.cw-week li', 7], ['cottage', '.cw-toggle', 2]]) {
+  for (const [open, sel, n] of [['friends', '.cw-roster li a[href^="#/"]', 8], ['today', '.cw-todo li', 3], ['level', '.cw-road li', 9], ['fire', '.cw-week li', 7], ['cottage', '.cw-toggle', 2]]) {
     await ev(`document.querySelector('[data-open="${open}"]').focus(); document.querySelector('[data-open="${open}"]').click()`);
     ok(await waitFor(`document.querySelectorAll('.cw-card ${sel}').length === ${n}`), `${open} did not open with ${n} × ${sel}`);
     await key('Escape', 'Escape', 27);
@@ -113,9 +124,13 @@ try {
   ok(await ev(`document.querySelectorAll('.cw-treasure[data-home]').length >= 1`), "no friend's home shows its hearts");
   ok(await ev(`document.querySelectorAll('.pet .rig__foot').length === 12`), 'the friends should walk on two feet each');
 
-  // The clock tower is progress.
+  // The clock tower and the rose cottage are subjects now: Para Completion and Sentence Placement.
   await ev(`document.querySelector('[data-spot="clock"]').click()`);
-  ok(await waitFor(`location.hash === '#/growth'`), 'the clock tower did not open progress');
+  ok(await waitFor(`location.hash === '#/world/place/completion' && /Para completion/i.test(document.querySelector('.place__eyebrow')?.textContent ?? '')`), 'the clock tower did not open Para Completion');
+  await ev(`location.hash = '#/world'`);
+  ok(await waitFor(`!!document.querySelector('[data-spot="cottage"]')`), 'the village did not come back');
+  await ev(`document.querySelector('[data-spot="cottage"]').click()`);
+  ok(await waitFor(`location.hash === '#/world/place/placement' && /Sentence placement/i.test(document.querySelector('.place__eyebrow')?.textContent ?? '')`), 'the rose cottage did not open Sentence Placement');
 
   // Night: the pets go home to sleep.
   await ev(`localStorage.setItem('catos:hour', 'night')`);

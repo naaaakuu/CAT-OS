@@ -7,9 +7,9 @@
     "status": "accepted",
     "quality_score": 90,
     "genre": "scientific-method",
-    "difficulty": "medium",
-    "difficulty_numeric": 6,
-    "stage": "intermediate",
+    "difficulty": "hard",
+    "difficulty_numeric": 7,
+    "stage": "advanced",
     "skills": [
       "argument-tracking",
       "application",
@@ -17,17 +17,16 @@
       "evidence-anchoring",
       "scope-control"
     ],
-    "word_count": 656,
-    "question_count": 5,
+    "word_count": 582,
+    "question_count": 4,
     "question_types": [
-      "main_idea",
-      "not_true",
-      "weaken",
       "application",
-      "inference"
+      "inference",
+      "main_idea",
+      "weaken"
     ],
     "theme": "randomisation defined as a property of the assigning procedure rather than of the groups it produces, so that the guarantee is that the allocation carried no information about the units, which licenses the one sentence a trial exists to produce, and which explains why an imbalance in a baseline table is not a fault, why adjusting after seeing the data or redrawing an untidy list destroys the guarantee, why concealment matters more than the randomness of a list, and why a small trial and a large one warrant identical confidence in the method and different confidence in the comparison",
-    "estimated_time_min": 11,
+    "estimated_time_min": 9,
     "source": {
       "publication": "original",
       "url": null,
@@ -38,8 +37,8 @@
     "date_added": "2026-09-13",
     "batch_id": "batch-rc-003",
     "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-07",
-    "reviewer_notes": "The misconception the passage attacks is the one nearly every reader arrives holding, so it is stated in the first paragraph in the warmest possible terms and then denied, which makes it the strongest distractor in three of the five questions. The three applications are deliberately unequal in obviousness, and the redrawing case is written so that the tempting answer, that both lists came from the same device, is true about the device and wrong about the procedure.",
-    "length_class": "long",
+    "reviewer_notes": "The misconception the passage attacks is the one nearly every reader arrives holding, so it is stated in the first paragraph in the warmest possible terms and then denied, which makes it the strongest distractor in three of the five questions. The three applications are deliberately unequal in obviousness, and the redrawing case is written so that the tempting answer, that both lists came from the same device, is true about the device and wrong about the procedure. 2026-10-03 CAT-size pass: 656→582 words, 5→5 paragraphs, 5→4 questions. No paragraph dropped, since the refusal, the definition and its four applications are each load-bearing; tightened each. Dropped q2 (NOT question, which leaks the passage). Difficulty raised to hard (7): the passage's own vector (reasoning 5, distractor similarity 5) sits with the corpus's 7s, so it now ends at advanced size.",
+    "length_class": "medium",
     "structure": "definition_application",
     "viewpoints": 2,
     "tone": "precise, corrective, patient with the reader",
@@ -78,7 +77,7 @@
     ],
     "quality": {
       "status": "reviewed",
-      "adversarial_review": "Q1's live rival is the option about checking balance and adjusting where it is lacking, which is the practice the third paragraph names as the one response the definition forbids, since the variable would have been chosen by looking at the result. Q2's rival is the option about a guarantee destroyed by an adjustment made after the imbalance is seen, which reads like an overstatement and is in fact the third paragraph's own claim. Q3's rival is the option about trials with concealed allocation reporting smaller effects, which supports the account rather than damaging it, since the whole fourth paragraph is about what concealment protects. Q4's rival is the option that redrawing makes no difference because both lists came from the same device, which is true of the device and false of the procedure, the procedure now being draw, inspect and redraw. Q5's rival is the option that the two trials differ chiefly in the width of the uncertainty attached to them, which is the position the last paragraph opens by refusing when it says they are not the same claim with different margins attached.",
+      "adversarial_review": "Q1's live rival is the option about checking balance and adjusting where it is lacking, which is the practice the third paragraph names as the one response the definition forbids, since the variable would have been chosen by looking at the result. Q2's rival is the option about a guarantee destroyed by an adjustment made after the imbalance is seen, which reads like an overstatement and is in fact the third paragraph's own claim. Q3's rival is the option about trials with concealed allocation reporting smaller effects, which supports the account rather than damaging it, since the whole fourth paragraph is about what concealment protects. Q4's rival is the option that redrawing makes no difference because both lists came from the same device, which is true of the device and false of the procedure, the procedure now being draw, inspect and redraw. Q5's rival is the option that the two trials differ chiefly in the width of the uncertainty attached to them, which is the position the last paragraph opens by refusing when it says they are not the same claim with different margins attached. (2026-10-03, CAT-size pass: q2 was dropped, so any note above about it no longer applies.)",
       "blind_solve": null
     },
     "vocab_extracted": [
@@ -90,27 +89,27 @@
   },
   "passage": {
     "title": "What the Coin Actually Promises",
-    "reading_time_min": 3.7,
+    "reading_time_min": 3.1,
     "paragraphs": [
       {
         "id": "rc-0102-p1",
-        "text": "Ask why a randomised trial is better evidence than an observational study and almost everybody gives the same answer: the coin balances the groups, so that the two arms are alike in everything except the treatment. It is what the textbooks say in their first chapter, it is what is said to patients, and it is not what randomisation does. In any particular trial the draw may put more of the old, more of the sick or more of the eager into one arm than the other, and quite often it does. Nothing prevents that. Nothing was ever meant to prevent it."
+        "text": "Ask why a randomised trial is better evidence than an observational study and almost everybody gives the same answer: the coin balances the groups, so that the two arms are alike in everything except the treatment. It is what the textbooks say in their first chapter, it is what is said to patients, and it is not what randomisation does. In any particular trial the draw may put more of the old or the sick into one arm than the other, and quite often it does. Nothing was ever meant to prevent it."
       },
       {
         "id": "rc-0102-p2",
-        "text": "The definition that survives inspection is narrower and stranger. Randomisation is a property of the procedure that made the assignment, not a property of the groups the assignment produced. What the procedure secures is that the allocation carried no information about the units allocated: not that the arms came out alike, but that whatever difference there is between them was produced by a device whose behaviour is known in advance. That is what permits the one sentence a trial exists to produce, namely a statement of how often a difference of this size would arise if the treatment did nothing at all. The statement is about the procedure. It is true of a trial whose arms came out beautifully matched and equally true of one whose arms did not, and it is the whole of what the design buys."
+        "text": "The definition that survives inspection is narrower and stranger. Randomisation is a property of the procedure that made the assignment, not a property of the groups the assignment produced. What the procedure secures is that the allocation carried no information about the units allocated: not that the arms came out alike, but that whatever difference there is between them was produced by a device whose behaviour is known in advance. That is what permits the one sentence a trial exists to produce: how often a difference of this size would arise if the treatment did nothing at all. The sentence is about the procedure. It is as true of a trial whose arms came out beautifully matched as of one whose arms did not."
       },
       {
         "id": "rc-0102-p3",
-        "text": "Three things follow for anybody reading a trial, and the first concerns the table of baseline characteristics that opens every report. An imbalance in that table is not a sign that something has gone wrong. Imbalances of that size are produced by a fair device at exactly the rate a fair device produces them, and that rate is already inside the calculation the trial will report. The temptation is to repair the estimate by adjusting for whichever variable looks worst, and that is the one response the definition forbids, because the variable has been chosen by looking at the result. A procedure that consults the data before deciding how to analyse them is no longer the procedure whose behaviour was known, and the sentence about how often such a difference would arise no longer applies to it."
+        "text": "Three things follow, and the first concerns the table of baseline characteristics that opens every report. An imbalance in that table is not a sign that something has gone wrong. Imbalances of that size are produced by a fair device at exactly the rate a fair device produces them, and that rate is already inside the calculation the trial will report. The temptation is to adjust for whichever variable looks worst, and that is the one response the definition forbids, because the variable has been chosen by looking at the result. A procedure that consults the data before deciding how to analyse them is no longer the procedure whose behaviour was known, and the trial's sentence no longer applies to it."
       },
       {
         "id": "rc-0102-p4",
-        "text": "The second case is the trialist who dislikes the look of his first allocation and draws again. He has done something worse than nothing. His procedure is now the rule draw, inspect, and redraw if the arms look wrong, and that rule makes the assignment depend on what the units are like after all, which is exactly the dependence he was paying to exclude. The second list looks tidier and is worth less than the first. The third case explains an emphasis that puzzles people new to the subject, which is why trialists care more about concealing the next allocation than about the randomness of the sequence. A sequence can be impeccably random and still be foreseeable, and where it is foreseeable the doctor enrolling patients can decide who comes through the door next. The randomness belongs to the list. The guarantee belongs to how the list was used."
+        "text": "The second case is the trialist who dislikes the look of his first allocation and draws again. His procedure is now the rule draw, inspect, and redraw if the arms look wrong, and that rule makes the assignment depend on what the units are like after all, which is exactly the dependence he was paying to exclude. The second list looks tidier and is worth less than the first. The third case explains an emphasis that puzzles newcomers: why trialists care more about concealing the next allocation than about the randomness of the sequence. A sequence can be impeccably random and still be foreseeable, and where it is foreseeable the doctor enrolling patients can decide who comes through the door next. The randomness belongs to the list. The guarantee belongs to how the list was used."
       },
       {
         "id": "rc-0102-p5",
-        "text": "One consequence is worth stating because it is routinely got wrong. A small randomised trial and a large one are not the same claim with different margins attached. The procedures are equally sound, and the sentence each of them produces is equally true. But a small draw is far likelier to have produced a comparison badly matched in some respect nobody thought to measure, so a reader's confidence in what happened in this particular trial should not be the same in the two cases, even though his confidence in the method is identical. That is the discipline the definition imposes. Ask first what the procedure guaranteed, which is always the same thing; then ask, as a separate question, how much reassurance this particular draw can be expected to give."
+        "text": "One consequence is worth stating because it is routinely got wrong. A small randomised trial and a large one are not the same claim with different margins attached. The procedures are equally sound, and the sentence each produces is equally true. But a small draw is far likelier to be badly matched in some respect nobody thought to measure, so confidence in this particular comparison should differ between the two, even though confidence in the method is identical. That is the discipline the definition imposes: ask first what the procedure guaranteed, which is always the same thing, and then, separately, how much reassurance this particular draw can give."
       }
     ]
   },
@@ -168,62 +167,6 @@
             "trap_type": "too_narrow",
             "why_wrong": "The foreseeable sequence is the third of three applications, introduced to explain an emphasis that puzzles newcomers. It is a consequence drawn from the definition rather than the point, and by itself it accounts for neither the second paragraph nor the fifth.",
             "seductive_element": "It is the most practical-sounding claim in the passage and the only one phrased as a comparison of importance, which makes it read like a thesis."
-          }
-        ]
-      }
-    },
-    {
-      "id": "rc-0102-q2",
-      "type": "not_true",
-      "skill": "specific_detail",
-      "patterns": [
-        "comp.explicit_detail",
-        "comp.paraphrase",
-        "struct.definition"
-      ],
-      "target_mistake": "locating the guarantee in the randomness of the list rather than in the rule under which the list was used",
-      "prediction_target": null,
-      "difficulty": {
-        "inference_depth": 3,
-        "distractor_similarity": 4,
-        "reasoning_depth": 4
-      },
-      "secondary_skills": [
-        "scope"
-      ],
-      "stem": "Which of the following is NOT true of randomisation as the passage describes it?",
-      "options": {
-        "A": "It makes the allocation carry no information about the units that were allocated.",
-        "B": "Its guarantee is destroyed by an adjustment chosen after the imbalance is seen, however sound the reasoning.",
-        "C": "It belongs to the way the units were assigned rather than to the two groups that resulted.",
-        "D": "Its force comes from the randomness of the list rather than from the way the list was used."
-      },
-      "correct": "D",
-      "estimated_time_sec": 65,
-      "explanation": {
-        "expert_notice": "The fourth paragraph separates the two in consecutive sentences: the randomness belongs to the list, and the guarantee belongs to how the list was used. Everything before those sentences, the redrawn allocation and the foreseeable sequence, is there to show that an impeccably random list can be worth nothing.",
-        "correct_reasoning": "The correct option is that separation stated the wrong way round. A sequence can be impeccably random and still foreseeable, and where it is foreseeable the doctor enrolling patients can decide who comes through the door next, which destroys the independence the whole design was bought for. The list's randomness is therefore not where the force lies, and the passage says as much in two short sentences.",
-        "passage_anchor": "rc-0102-p4",
-        "question_type_note": "On a NOT question, find the sentence supporting each option in turn. The answer is the one the passage denies, and a passage that separates two things will usually offer them to you the wrong way round.",
-        "reading_habit": "When an author splits two ideas that ordinary speech runs together, write the split down in his own words. A question will come back offering you the halves reversed.",
-        "distractors": [
-          {
-            "option": "A",
-            "trap_type": "passage_language_shifted",
-            "why_wrong": "This is the second paragraph's own formulation of what the procedure secures, restated with the passive turned round. A reader matching words rather than claims may not recognise it in this form and may take it for an addition.",
-            "seductive_element": "It sounds like a technical statement imported from elsewhere, and options that sound unfamiliar are the ones a hurried reader suspects."
-          },
-          {
-            "option": "C",
-            "trap_type": "fact_right_interpretation_wrong",
-            "why_wrong": "This is the definition on which the whole passage rests, put here in different words from the passage's own. Being the central claim, it cannot be the thing the passage denies.",
-            "seductive_element": "Its abstractness makes it look like an interpretation a reader has supplied rather than a sentence the author wrote, and readers doubt what they think they inferred."
-          },
-          {
-            "option": "B",
-            "trap_type": "true_but_insufficient",
-            "why_wrong": "The third paragraph asserts exactly this, saying that a procedure which consults the data before deciding how to analyse them is no longer the procedure whose behaviour was known. The severity of the claim is the passage's, not the option writer's.",
-            "seductive_element": "It reads as an absolute statement of the kind an option writer adds to make a plausible claim false, so readers test its strength rather than looking for its sentence."
           }
         ]
       }
@@ -427,10 +370,10 @@
     }
   ],
   "mentor": {
-    "challenge": "The first paragraph states the explanation of randomisation you almost certainly believe, and then says it is wrong. Hold on to what replaces it, because all five questions are decided by whether the guarantee belongs to the procedure or to the groups.",
+    "challenge": "The first paragraph states the explanation of randomisation you almost certainly believe, and then says it is wrong. Hold on to what replaces it, because all four questions are decided by whether the guarantee belongs to the procedure or to the groups.",
     "one_sentence_summary": "Randomisation does not make a trial's arms alike, and was never meant to; it is a property of the procedure that made the assignment, securing only that the allocation carried no information about the units, which is what licenses the single statement a trial exists to produce, and from that definition it follows that an imbalance in a baseline table is not a fault, that adjusting after seeing it or redrawing an untidy list destroys the guarantee, that concealment matters more than the randomness of a list, and that a small trial and a large one earn identical confidence in the method and different confidence in the particular comparison.",
     "main_idea": "Everybody explains randomisation by saying the coin balances the groups. It does not, and often visibly fails to. What it actually delivers is a property of the assigning procedure: the allocation carried no information about the units, so the difference between the arms came from a device whose behaviour is known, which is what permits a trial's one statement about chance. Every practical rule in the passage, about baseline tables, redrawing, concealment and trial size, follows from putting the guarantee on the procedure instead of the sample.",
-    "simple_explanation": "Ask almost anyone why a randomised trial beats an ordinary study and you get the same answer: tossing a coin makes the two groups the same, so the only difference left is the treatment. That is in every textbook's first chapter. It is also not true.\n\nIn any particular trial, the draw can easily put more old people, or sicker people, or keener people into one group than the other. Nothing stops that happening. Nothing was ever supposed to stop it.\n\nSo what does randomisation actually give you? Something narrower and rather odd. It is a property of the procedure that made the assignment, not a property of the groups that came out. What the procedure guarantees is that the assignment carried no information about the people being assigned. Not that the groups match, but that whatever difference exists between them was produced by a device whose behaviour we know in advance.\n\nAnd that is what lets a trial say the one sentence it exists to say: how often a difference this big would turn up if the treatment did nothing at all. Notice that this sentence is about the procedure. It is just as true when the groups came out beautifully matched as when they did not. That is the whole of what the design buys you.\n\nThree practical things follow.\n\nFirst, the table at the front of every trial report listing what the two groups looked like at the start. If it shows an imbalance, nothing has gone wrong. A fair device produces imbalances of that size at exactly the rate it produces them, and that rate is already built into the number the trial will report. The tempting fix is to adjust the result for whichever thing looks worst. That is the one thing you must not do, because you picked that variable by looking at the answer. A procedure that peeks at the data before deciding how to analyse them is no longer the procedure whose behaviour we knew, so the sentence about chance no longer applies to it.\n\nSecond, the trialist who does not like the look of his first list and draws a new one. He has made things worse. His procedure is now draw, look, and draw again if it looks wrong, and that rule makes the assignment depend on what the people are like, which is the very thing he was paying to avoid. The second list looks neater and is worth less.\n\nThird, something that puzzles newcomers: why do trialists fuss more about hiding the next allocation than about how random the list is? Because a list can be perfectly random and still predictable, and if the doctor enrolling patients can predict it, he can decide who walks through the door next. The randomness is in the list. The guarantee is in how the list was used.\n\nAnd one consequence people get wrong all the time. A small trial and a big one are not the same claim with different error bars. Both procedures are equally sound and both sentences are equally true. But a small draw is much more likely to have produced a badly matched comparison in some respect nobody measured. So your confidence in what happened in this particular trial should not be the same, even though your confidence in the method is identical. Ask first what the procedure guaranteed, which is always the same thing. Then ask, separately, how much comfort this particular draw gives you.",
+    "simple_explanation": "Ask almost anyone why a randomised trial beats an ordinary study and you get the same answer: tossing a coin makes the two groups the same, so the only difference left is the treatment. That is in every textbook's first chapter. It is also not true.\n\nIn any particular trial, the draw can easily put more old people, or sicker people, into one group than the other. Nothing was ever supposed to stop that.\n\nSo what does randomisation actually give you? Something narrower and rather odd. It is a property of the procedure that made the assignment, not a property of the groups that came out. What the procedure guarantees is that the assignment carried no information about the people being assigned. Not that the groups match, but that whatever difference exists between them was produced by a device whose behaviour we know in advance.\n\nAnd that is what lets a trial say the one sentence it exists to say: how often a difference this big would turn up if the treatment did nothing at all. Notice that this sentence is about the procedure. It is just as true when the groups came out beautifully matched as when they did not.\n\nThree practical things follow.\n\nFirst, the table at the front of every trial report listing what the two groups looked like at the start. If it shows an imbalance, nothing has gone wrong. A fair device produces imbalances of that size at exactly the rate it produces them, and that rate is already built into the number the trial will report. The tempting fix is to adjust the result for whichever thing looks worst. That is the one thing you must not do, because you picked that variable by looking at the answer. A procedure that peeks at the data before deciding how to analyse them is no longer the procedure whose behaviour we knew, so the sentence about chance no longer applies to it.\n\nSecond, the trialist who does not like the look of his first list and draws a new one. He has made things worse. His procedure is now draw, look, and draw again if it looks wrong, and that rule makes the assignment depend on what the people are like, which is the very thing he was paying to avoid. The second list looks neater and is worth less.\n\nThird, something that puzzles newcomers: why do trialists fuss more about hiding the next allocation than about how random the list is? Because a list can be perfectly random and still predictable, and if the doctor enrolling patients can predict it, he can decide who walks through the door next. The randomness is in the list. The guarantee is in how the list was used.\n\nAnd one consequence people get wrong all the time. A small trial and a big one are not the same claim with different error bars. Both procedures are equally sound and both sentences are equally true. But a small draw is much more likely to have produced a badly matched comparison in some respect nobody measured. So your confidence in what happened in this particular trial should not be the same, even though your confidence in the method is identical. Ask first what the procedure guaranteed, which is always the same thing. Then ask, separately, how much comfort this particular draw gives you.",
     "why_difficult": "The passage denies something the reader has been told all his life and is likely to have repeated, so the rejected explanation stays available through the whole text and is the strongest distractor in three questions. The second difficulty is that the definition is about a rule rather than about anything visible, which means several of the applications turn on a distinction between the object in front of you and the process that produced it. The third is the last paragraph, which asks the reader to hold two different objects of confidence at once and to keep them from collapsing into a single judgement about how much a trial can be trusted.",
     "author_intention": "To move the reader's attention from the groups a trial produced to the rule under which they were produced, so that he stops reading baseline tables for reassurance and starts asking what procedure the reported number is actually a statement about.",
     "paragraph_journey": [
@@ -467,10 +410,22 @@
       "'The randomness belongs to the list. The guarantee belongs to how the list was used.' (end of paragraph 4): the distinction compressed into two sentences."
     ],
     "misunderstanding": "The commonest wrong model is that the passage is undermining randomised trials, since it begins by denying the reason everybody gives for trusting them. It is doing the opposite: it says the sentence a trial produces is true whether the arms matched or not, and that confidence in the method is identical for a small trial and a large one. The second wrong model keeps a weakened version of the balancing story, in which randomisation at least balances the things that matter; the first paragraph forecloses even that. The third treats redrawing as harmless because the same device was used both times, which judges the list and forgets the rule.",
-    "traps_summary": "This set offers the balancing story as a fact about randomisation, an adjustment chosen after the event as good practice, a supportive finding dressed as a weakener, a device-level defence of a procedure-level error, and one scale of reliability where the passage insists on two. Asking whether a claim is about the procedure or about the groups answers all five.",
+    "traps_summary": "This set offers the balancing story as a fact about randomisation, an adjustment chosen after the event as good practice, a supportive finding dressed as a weakener, a device-level defence of a procedure-level error, and one scale of reliability where the passage insists on two. Asking whether a claim is about the procedure or about the groups answers all four.",
     "reading_lesson": "When a passage locates a guarantee in a procedure rather than in a result, carry that distinction to every later case and ask which of the two an option is talking about, because the strongest distractors in such passages are statements that are perfectly true of the result and silent about the rule. The companion habit is to be careful with an author who separates two objects of confidence: an option that offers a single scale has not misread a fact, it has merged two judgements the author took trouble to keep apart.",
     "real_world": "The same distinction decides arguments far outside medicine: whether a hiring shortlist was fairly drawn, whether an audit sample was chosen before or after somebody looked at the accounts, whether a survey's respondents were selected by a rule or by whoever answered. In each case the useful question is not whether the sample in front of you looks representative but what rule produced it, and whether anybody was allowed to look before deciding.",
     "takeaway": "The coin does not promise you matched groups; it promises that nothing about the patients decided which arm they went into.",
-    "reflection_question": "The last time a result was defended to you as fair because the sample looked balanced, what rule had actually chosen it?"
+    "reflection_question": "The last time a result was defended to you as fair because the sample looked balanced, what rule had actually chosen it?",
+    "eli10": {
+      "big_idea": "Randomising a trial does not promise matched groups; it promises that nothing about the patients decided who got which treatment.",
+      "story": "Most people think tossing a coin in a medical trial makes the two groups alike. The writer says it does not. One group may still get more old or sick people. The coin promises something else: nothing about the patients decided their group. Think of a raffle. It is fair because of how tickets are drawn, not because winners are evenly spread. Since a fair coin's behaviour is known, a trial can say how often such a difference arises by chance. That holds whether the groups match or not. Rules follow. Do not adjust for whatever looks most uneven. Do not throw away an untidy draw and toss again. Keep the next allocation secret, so doctors cannot steer patients. A small trial and a big one use an equally sound method. But a small draw is likelier to be lopsided by luck. So trust that comparison less, not the method.",
+      "paragraphs": [
+        "Rejects the usual story: tossing a coin does not make the two groups alike, and often they differ.",
+        "Gives the real promise: nothing about the patients decided their group, which lets a trial measure chance.",
+        "Applies it: an uneven starting table is normal, and adjusting for whatever looks worst breaks the method.",
+        "Applies it twice more: redrawing an untidy list does harm, and hiding the next allocation beats a random list.",
+        "Separates two trusts: small and large trials are equally sound methods, but a small draw is less reassuring."
+      ],
+      "author_view": "The writer is precise and patient: he corrects a common belief to make trials better understood, not to attack them."
+    }
   }
 }

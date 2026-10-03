@@ -46,8 +46,8 @@ export const REGIONS = Object.freeze([
   },
   {
     slug: 'reading-room', name: 'The Reading House', kind: 'learn',
-    line: 'CAT passages against the clock. Read fast, read true, and Ada makes Pages.',
-    verb: 'Read with Ada',
+    line: 'CAT passages against the clock, sized like the exam: four questions each.',
+    verb: 'Read with Chai',
     skill: 'Reading comprehension',
     anchor: { x: 522, y: 404 }, hit: { x: 446, y: 320, w: 160, h: 130 },
     route: '#/world/place/reading-room', color: '#BFB4A2',
@@ -93,6 +93,22 @@ export const REGIONS = Object.freeze([
     route: '#/world/place/bench', color: '#5D7F90',
   },
   {
+    slug: 'placement', name: 'The Rose Cottage', kind: 'learn', inQuarter: true,
+    line: 'Sentence Placement. A paragraph with one sentence lifted out: find the one seat it can take.',
+    verb: 'Step into the cottage',
+    skill: 'Sentence placement',
+    anchor: { x: 452, y: 586 }, hit: { x: 440, y: 576, w: 26, h: 22 },
+    route: '#/world/place/placement', color: '#D98B7A',
+  },
+  {
+    slug: 'completion', name: 'The Clock Tower', kind: 'learn', inQuarter: true,
+    line: 'Para Completion. A paragraph that stops one sentence early: decide what the gap needs.',
+    verb: 'Climb the tower',
+    skill: 'Para completion',
+    anchor: { x: 560, y: 586 }, hit: { x: 550, y: 576, w: 24, h: 22 },
+    route: '#/world/place/completion', color: '#93AED1',
+  },
+  {
     slug: 'wilds', name: 'The Wilds', kind: 'challenge',
     line: 'Beyond the valley: the weekly Gauntlet, timed and mixed, against your own best.',
     verb: 'Take the road out',
@@ -115,7 +131,7 @@ export const QUARTER = Object.freeze({
   skill: 'Verbal reasoning',
   verb: 'Into the Quarter',
   anchor: { x: 508, y: 556 }, hit: { x: 388, y: 500, w: 250, h: 110 },
-  members: ['loom', 'table', 'bench'],
+  members: ['loom', 'table', 'bench', 'placement', 'completion'],
   color: '#8A6C9C',
 });
 

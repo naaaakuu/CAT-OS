@@ -739,6 +739,27 @@ a.list-item:active { transform: scale(var(--press-scale)); }
 }
 .mentor__plain p:last-child { margin-bottom: 0; }
 
+/* "Explained simply" (the eli10 block) leads the page; the expert breakdown folds under it. */
+.mentor__simple { padding: var(--space-5); border-radius: var(--radius-lg); background: var(--color-accent-subtle); }
+.mentor__subhead { font-size: var(--text-sm); font-weight: var(--weight-semibold); margin: var(--space-5) 0 var(--space-3); }
+.mentor__view { margin: var(--space-4) 0 0; font-size: var(--text-sm); line-height: var(--leading-body); color: var(--color-ink-2); }
+.mentor__view b { color: var(--color-ink); }
+.mentor__deeper { margin-bottom: var(--space-7); }
+.mentor__deeper > summary {
+  cursor: pointer; list-style: none; display: flex; align-items: center; gap: var(--space-2);
+  min-height: var(--tap-target); margin-bottom: var(--space-5);
+  font-size: var(--text-sm); font-weight: var(--weight-semibold); color: var(--color-accent);
+}
+.mentor__deeper > summary::-webkit-details-marker { display: none; }
+.mentor__deeper > summary::before {
+  content: ""; flex: none; width: 0.45em; height: 0.45em;
+  border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor;
+  transform: rotate(-45deg); transition: transform var(--duration-fast) var(--ease-out);
+}
+.mentor__deeper[open] > summary::before { transform: rotate(45deg); }
+.mentor__lock { display: grid; gap: var(--space-4); text-align: center; }
+.mentor__lock p { margin: 0; }
+
 /* "The reading lesson" — the one permanent habit, held in a quiet card. */
 .mentor__lesson {
   padding: var(--space-5);

@@ -7,19 +7,19 @@
  * itself is plain anchor hashes handled by the Router.
  *
  * 3.0: three places in the village — the village itself, the clock tower
- * (progress) and your cottage (settings) — drawn as small line marks, so
+ * (progress) and Settings — drawn as small line marks, so
  * the rail matches the village's own cards instead of an older art pack.
  */
 
 const MARKS = {
   village: '<path d="M3.5 11.5 9 7l5.5 4.5M5.5 10v8.5h7V10" /><path d="M13 9.6 16.5 7l4 3.3v8.2H12.5" /><path d="M8 18.5v-3.5h2v3.5" />',
   clock: '<path d="M9 21V8.5L12 4l3 4.5V21z" /><circle cx="12" cy="11.5" r="2.4" /><path d="M12 10.3v1.3l.9.6M10.2 21v-3.4h3.6V21" />',
-  cottage: '<path d="M3.5 11 12 4l8.5 7" /><path d="M6 9.5V20h12V9.5" /><path d="M10 20v-5h4v5M16 6.5V4h2v4.2" />',
+  settings: '<circle cx="12" cy="12" r="3" /><path d="M12 3.5l1.4 2.3 2.6-.7.7 2.6 2.3 1.4-1.2 2.4 1.2 2.4-2.3 1.4-.7 2.6-2.6-.7L12 20.5l-1.4-2.3-2.6.7-.7-2.6-2.3-1.4L6.2 12 5 9.6l2.3-1.4.7-2.6 2.6.7z" />',
 };
 const ITEMS = [
   { path: '/world', label: 'Village', mark: 'village' },
   { path: '/growth', label: 'Progress', mark: 'clock' },
-  { path: '/settings', label: 'Cottage', mark: 'cottage' },
+  { path: '/settings', label: 'Settings', mark: 'settings' },
 ];
 
 class CatNav extends HTMLElement {

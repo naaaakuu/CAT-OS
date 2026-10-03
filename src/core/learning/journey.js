@@ -18,13 +18,41 @@ export const STAGES = Object.freeze([
 /** How each stage introduces itself in the library. One reviewable
  *  place for the journey's voice: inviting, honest, never gatekeeping. */
 export const STAGE_INFO = Object.freeze({
-  foundation:   { label: 'Foundation',   description: 'Begin here. Gentle, concrete passages that build the reading habit.' },
-  developing:   { label: 'Developing',   description: 'One clean argument at a time: learn to follow a writer\'s moves.' },
-  intermediate: { label: 'Intermediate', description: 'Real CAT texture: denser claims, finer distinctions.' },
-  advanced:     { label: 'Advanced',     description: 'Layered arguments with qualifications worth slowing down for.' },
-  elite:        { label: 'Elite',        description: 'The hardest register the exam uses. By now, you are ready for it.' },
+  foundation:   { label: 'Foundation',   description: 'Begin here. About 300 words in three short paragraphs, and three questions.' },
+  developing:   { label: 'Developing',   description: 'Up to about 450 words: follow one clean argument from start to finish.' },
+  intermediate: { label: 'Intermediate', description: 'CAT size: about 450 words, four paragraphs, four questions.' },
+  advanced:     { label: 'Advanced',     description: 'CAT size, harder thinking: arguments that qualify and turn.' },
+  elite:        { label: 'Elite',        description: 'The hardest arguments CAT sets, at its longest: up to 650 words.' },
   unstaged:     { label: 'More passages', description: '' },
 });
+
+/**
+ * How big a passage may be at each stage. CAT 2021–2025 sets four passages
+ * of about 400–450 words (the longest near 650), four questions each, so
+ * nothing past Foundation asks more than four, and nothing anywhere runs
+ * longer than the exam's own longest passage. Foundation is deliberately
+ * smaller than the exam: a first passage is three short paragraphs.
+ * The loader's consistency check holds every passage to its stage.
+ */
+export const STAGE_SIZE = Object.freeze({
+  foundation:   { words: [150, 350], paras: [2, 3], qs: [3, 3] },
+  developing:   { words: [180, 450], paras: [2, 4], qs: [3, 4] },
+  intermediate: { words: [250, 520], paras: [3, 5], qs: [3, 4] },
+  advanced:     { words: [280, 600], paras: [3, 5], qs: [3, 4] },
+  elite:        { words: [300, 650], paras: [3, 5], qs: [3, 4] },
+});
+
+/** What makes a passage the wrong size for its stage, in words (empty when it fits). */
+export function stageSizeIssues(stage, { words, paras, qs }) {
+  const s = STAGE_SIZE[stage];
+  if (!s) return [];
+  const out = [];
+  const [w0, w1] = s.words, [p0, p1] = s.paras, [q0, q1] = s.qs;
+  if (words < w0 || words > w1) out.push(`${stage} passages run ${w0}–${w1} words; this has ${words}`);
+  if (paras < p0 || paras > p1) out.push(`${stage} passages have ${p0}–${p1} paragraphs; this has ${paras}`);
+  if (qs < q0 || qs > q1) out.push(`${stage} passages ask ${q0 === q1 ? q0 : `${q0}–${q1}`} questions; this asks ${qs}`);
+  return out;
+}
 
 export function stageIndex(stage) {
   const i = STAGES.indexOf(stage);

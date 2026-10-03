@@ -62,7 +62,7 @@ export async function renderPlace(outlet, { storage }, params) {
 
   outlet.innerHTML = `
     <section class="place place--page" aria-label="${escapeHTML(region.name)}">
-      <div class="place__hero place__hero--short place__hero--painted" style="${backdropStyle(host)}">
+      <div class="place__hero place__hero--short place__hero--painted" style="${backdropStyle(SECOND_HOUSE[region.slug] ?? host)}">
         <a class="place__back" href="#/world" id="back">← Village</a>
         <div class="place__hero-stat" id="hero-stat"></div>
         <span class="place__pet place__pet--door place__pet--${host}" aria-hidden="true">${petSprite(host, { size: 104, frame: FRAME.happy })}</span>
@@ -223,11 +223,11 @@ export async function renderPlace(outlet, { storage }, params) {
           ${[...weakness.byType.entries()].filter(([, e]) => e.n >= 2).sort((a, b) => a[1].acc - b[1].acc).slice(0, 5)
             .map(([t, e]) => `<div class="weak__row"><span>${escapeHTML(typeName(t))}</span><span class="weak__bar"><i style="width:${Math.round(e.acc * 100)}%" class="${e.acc < 0.6 ? 'is-low' : e.acc > 0.85 ? 'is-high' : ''}"></i></span><b>${Math.round(e.acc * 100)}%</b></div>`).join('')}
         </div>`) : ''}
-      ${section('The shelves', `${rd.passages} passages, foundation to elite. Three stars means three quarters right inside the passage’s own time: the pace CAT asks for.`, groups.map((g) => `
+      ${section('The shelves', `${rd.passages} passages, foundation to elite, every one the size CAT sets: never more than four questions, never longer than the exam’s longest passage. Three stars means three quarters right inside the passage’s own time: the pace CAT asks for.`, groups.map((g) => `
         <h3 class="shelf">${escapeHTML(STAGE_INFO[g.stage]?.label ?? g.stage)}</h3>
         <p class="sub">${escapeHTML(STAGE_INFO[g.stage]?.description ?? '')}</p>
         <div class="g-list">
-          ${g.items.map((it, i) => { const b = rd.best.get(it.id); return `<a class="g-row ${rec?.item.id === it.id ? 'g-row--next' : ''}" href="#/rc/session/${it.id}"><span class="g-row__num">${i + 1}</span><span class="g-row__lead"><span class="g-row__title">${escapeHTML(it.title)}</span><span class="g-row__meta">${escapeHTML(it.genre)} · ${it.difficulty} · ~${it.estimated_time_min} min · ${it.question_count} Q${b ? ` · best ${Math.round(b.accuracy * 100)}%${b.flawless ? ' · flawless' : ''}` : ''}</span></span><span class="g-row__stars" aria-label="${b?.stars ?? 0} stars">${starHTML(b?.stars ?? 0)}</span></a>`; }).join('')}
+          ${g.items.map((it, i) => { const b = rd.best.get(it.id); return `<a class="g-row ${rec?.item.id === it.id ? 'g-row--next' : ''}" href="#/rc/session/${it.id}"><span class="g-row__num">${i + 1}</span><span class="g-row__lead"><span class="g-row__title">${escapeHTML(it.title)}</span><span class="g-row__meta">${it.real_source ? `Real essay by ${escapeHTML(it.real_source.split(',')[0])} · ` : ''}${escapeHTML(it.genre)} · ${it.difficulty} · ~${it.estimated_time_min} min · ${it.question_count} Q${b ? ` · best ${Math.round(b.accuracy * 100)}%${b.flawless ? ' · flawless' : ''}` : ''}</span></span><span class="g-row__stars" aria-label="${b?.stars ?? 0} stars">${starHTML(b?.stars ?? 0)}</span></a>`; }).join('')}
         </div>`).join(''))}
       ${bankBundleList('cr', content.cr, state, 'Arguments', 'Short arguments in the CAT register: find the assumption, weaken the link, name the flaw. Five at a time, unsolved first.')}`;
     /* Hold the button in a const. `e.currentTarget` is null after the first
@@ -293,11 +293,28 @@ export async function renderPlace(outlet, { storage }, params) {
         ${tiers.map((t) => { const inTier = items.filter((it) => it.tier === t.id); const s = inTier.filter((it) => solved.has(it.id)).length; const done = inTier.length > 0 && s === inTier.length; return `<a class="tile ${rec && rec.item.tier === t.id ? 'tile--next' : ''} ${done ? 'tile--done' : ''}" href="#/${prefix}/session/${t.id}"><p class="tile__name">${escapeHTML(t.label)}</p><p class="tile__meta">${s} of ${inTier.length} ${unit}</p><div class="tile__bar ${done ? 'tile__bar--gold' : ''}"><i style="width:${inTier.length ? Math.round((s / inTier.length) * 100) : 0}%"></i></div></a>`; }).join('')}
       </div>
       <p class="sub" style="margin-top:14px"><a href="#/${prefix}/about">How this craft works</a> · <a href="#/${prefix}">The full journey</a></p>`)
-      + (kind === 'loom' ? bankTierTiles('sp', content.sp, state, 'Sentence placement', 'A paragraph with one sentence taken out. Find the one seat it can take: the pronoun that needs an owner, the “but” that needs something to push against. Six at a time, unsolved first.') : '')
-      + (kind === 'table' ? bankTierTiles('pc', content.pc, state, 'Paragraph completion', 'A paragraph that stops one sentence early. Decide what the gap needs, a reason, an example, a turn, a landing, before you read the options. Six at a time, unsolved first.') : '');
+      + (kind === 'bench' ? '' : section(`${hostDef.name}'s other house`, '', `<a class="g-btn" href="#/world/place/${kind === 'loom' ? 'placement' : 'completion'}">${kind === 'loom' ? 'Sentence Placement, in the rose cottage' : 'Para Completion, in the clock tower'} →</a>`));
+    return;
+  }
+
+  /* ================= The rose cottage and the clock tower: a bank each ================= */
+  if (region.slug === 'placement' || region.slug === 'completion') {
+    const type = region.slug === 'placement' ? 'sp' : 'pc';
+    const rows = content[type] ?? [], b = state.banks?.[type] ?? {};
+    const solved = b.solved ?? 0, total = b.total ?? rows.length;
+    heroStat.innerHTML = pill(`✓ ${solved} / ${total}`);
+    head({ pct: total ? solved / total : 0, label: `${solved} / ${total} solved` },
+      rows.length ? { href: `#/bank/session/${type}/next`, label: solved ? 'Six more, unsolved first' : 'Begin with six', sub: `${region.skill} · about 5 minutes` } : null,
+      type === 'sp'
+        ? 'CAT gives you a paragraph with one sentence lifted out and asks where it goes. The pronoun that needs an owner and the “but” that needs something to push against will tell you.'
+        : 'A paragraph that stops one sentence early. Decide what the gap needs, a reason, an example, a turn or a landing, before you read the options.');
+    more.innerHTML = bankTierTiles(type, rows, state, 'Every tier', 'Six at a time, unsolved first. Each tier is harder than the last.');
     return;
   }
 }
+
+/** The two subjects that live in a friend's second house paint that house, not the friend's first one. */
+const SECOND_HOUSE = { placement: 'cottage', completion: 'clock' };
 
 /* ---- The content engine's banks, as shelves inside the places ---- */
 

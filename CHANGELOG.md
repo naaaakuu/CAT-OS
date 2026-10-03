@@ -4,6 +4,88 @@
 > Versions here are app releases; they map onto the capability milestones in
 > `PROJECT_ROADMAP.md` (0.x releases build toward Roadmap V1.0).
 
+## 3.2.0: Every house a VARC subject, every passage CAT-sized (2026-10-03)
+
+The owner, playing 3.1.0: the zoomed-out village does not look good; only
+reading (Chai) seemed selectable; DILR and quant have no place here, every
+house should hold a VARC subject; a beginner's "Foundation" passage on cause
+and effect ran six paragraphs; the whole-passage explanation should sit
+behind a button, explained as you would to a ten-year-old, and one day cost a
+rewarded ad (no AdMob yet: prepare for it); take passages from where CAT takes
+them; think like a setter, a 99th-percentile aspirant and a struggling one.
+
+### The village: no zoom, and every house says what it teaches
+
+- **No zoom.** The painting always fills the screen at full detail. On a
+  phone it fills the height and you scroll left and right; a mouse wheel
+  scrolls it sideways. The whole-village button, pinch zoom, ctrl+wheel and
+  the +/- keys are gone. Desktop opens at the same detail instead of a
+  shrunken overview.
+- **Why "only Chai" worked:** every other subject was reachable, but each
+  house's name plate showed only on mouse hover, so on a phone no building
+  said what it held and the one visible action was "Help Chai". Every house
+  now carries a sign with its subject and its friend's face, always up and
+  always tappable.
+- **Every house is a VARC subject**: Reading Comprehension (library), Para
+  Jumbles (workshop), Para Summary (archery cabin), Odd One Out
+  (observatory), **Sentence Placement (the rose cottage, Ginger's second
+  house)**, **Para Completion (the clock tower, Mochi's second house)**,
+  Vocabulary (greenhouse), and the Gauntlet at Toffee's notice board.
+  Settings and Progress moved behind a gear in the top bar and the bottom
+  bar. No DILR, no quant.
+- **Every subject in one list**: the top bar's grid button lists all eight,
+  each a tap from its next round. Toffee's welcome now says that each house
+  holds one part of CAT English and its sign says which.
+- A drag no longer swallows a later keyboard click on a house.
+
+### Reading: CAT-sized passages, and a passage explained simply
+
+- **Checked against the exam:** CAT 2025 set four passages of about
+  400–450 words with four questions each (the longest near 650 words). The
+  corpus had 47 passages asking five or six questions and 25 running past
+  600 words, including "Foundation" passages of 640 words.
+- **Sizes are now enforced by the loader** (`core/learning/journey.js`
+  STAGE_SIZE): Foundation 150–350 words, three paragraphs, three
+  questions; nothing anywhere asks more than four questions or runs past
+  650 words. Long passages were cut by a setter's rules (drop the
+  paragraph the argument can lose, never the turn or the concession; keep
+  the four questions that make a CAT set; repair every explanation that
+  pointed at a moved paragraph), and every passage was re-staged to fit.
+- **The corpus now:** 146 passages and 551 questions, averaging 451 words;
+  Foundation 18, Developing 32, Intermediate 44, Advanced 34, Elite 18.
+  25 passages were trimmed, 22 cut from five or six questions to four, and
+  the first passage a new learner meets is chosen by hand (rc-0116, a queue
+  that felt like an hour).
+- **New beginner shelf:** 24 new passages (rc-0116–rc-0139), 16 Foundation
+  and 8 Developing, written for a first week of reading: three short
+  paragraphs, plain sentences, a real argument with a turn, three CAT-style
+  questions.
+- **Real essays:** a classics shelf of public-domain essays quoted word for
+  word (William James, Chesterton, Sapir, Woolf, Tagore, Dewey, Veblen),
+  with original CAT questions; the briefing and the Learning Page name the
+  source.
+- **Explain this passage simply.** After a passage, one button opens the
+  passage told the way you would tell a ten-year-old: the big idea, the
+  story in short sentences with an everyday picture, one line per
+  paragraph, and what the writer thinks. The expert Learning Page folds
+  underneath ("Go deeper"). Every passage has one (`mentor.eli10`, checked
+  by the loader: a line per paragraph, short sentences, no em dashes).
+- **Rewarded-ad seam, no ads:** `src/core/ads/rewarded.js` is the one door.
+  Today it is open. When a native shell defines
+  `window.CatOSAds.showRewarded()`, the explanation asks for one short video
+  and stays unlocked on that device. `localStorage 'catos:ads' = 'test'`
+  previews the locked path with a three-second stand-in.
+
+### Sources, honestly
+
+Aeon licenses an essay for USD 650 and only in full; The Conversation
+charges for exam materials; past CAT papers belong to the IIMs and coaching
+mocks to their institutes. None of them is pasted into an app that will
+carry ads. Passages are original, written to CAT's measured shape, or
+public domain. Fill-in-the-blanks, grammar and standalone vocabulary
+questions have not appeared in CAT since about 2014, so vocabulary stays
+where CAT uses it: inside sentences.
+
 ## 3.1.0: The helping village (2026-10-03)
 
 The owner, playing 3.0.1: it is too complex, nobody knows how anyone relates

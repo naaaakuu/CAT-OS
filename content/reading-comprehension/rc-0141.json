@@ -1,0 +1,425 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0141",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "human-behaviour",
+    "difficulty": "medium",
+    "difficulty_numeric": 6,
+    "stage": "advanced",
+    "skills": [
+      "tone-detection",
+      "vocabulary-in-context",
+      "concession-tracking",
+      "qualifier-tracking",
+      "inference"
+    ],
+    "word_count": 580,
+    "question_count": 4,
+    "question_types": [
+      "agree_disagree",
+      "inference",
+      "tone",
+      "vocabulary_in_context"
+    ],
+    "theme": "most everyday annoyances are inconveniences of the mind rather than real pain, so the same situation becomes a nuisance or an adventure according to the point of view brought to it; real pain, which can be endured but not enjoyed, is the stated exception that bounds the claim, and the floods can be enjoyed only because they fall inside it",
+    "estimated_time_min": 8,
+    "source": {
+      "publication": "G. K. Chesterton, All Things Considered (1908), \"On Running After One's Hat\"",
+      "url": "https://www.gutenberg.org/ebooks/11505",
+      "author": "G. K. Chesterton",
+      "date_accessed": "2026-10-03",
+      "usage_note": "Public domain: G. K. Chesterton died in 1936 and the work was first published in 1908. The passage is the author's own words, with some sentences left out to fit CAT length; the questions, explanations and notes are original to CAT OS."
+    },
+    "date_added": "2026-10-03",
+    "batch_id": "batch-rc-006",
+    "prompt_version": "content engine v1 + CAT-size brief 2026-10",
+    "reviewer_notes": "Cut from the whole essay, in its order: the opening fancy of flooded Battersea (source paragraph 2, five of its eight sentences), the claim and its one limit (the first six sentences of paragraph 3), the railway station (the rest of paragraph 3 without the signal lamps, the purple hours at Clapham Junction and the meditations), the hat (paragraph 4 without 'The same people run much faster in games and sports'), and the first four sentences of the conclusion (paragraph 7). Left out: the hat-hunting fantasy, the fly in the milk, the jammed drawer and the closing joke about wine and water. The author's dashes are written as spaced en dashes. The set is built on the limit the essay sets once and quietly: the vocabulary question asks what 'positive' means in the sentence that sets it, and the agreement question asks the reader to carry it to the floods in the last paragraph. 'Making love' is the author's 1908 word for courting; no question turns on it.",
+    "length_class": "medium",
+    "structure": "thesis_support",
+    "viewpoints": 2,
+    "tone": "whimsical, paradoxical, genial",
+    "difficulty_vector": {
+      "lexical": 3,
+      "syntactic": 3,
+      "abstraction": 2,
+      "inference_depth": 3,
+      "distractor_similarity": 3,
+      "reasoning_depth": 3,
+      "structural_ambiguity": 4,
+      "time_pressure": 3
+    },
+    "reasoning_patterns": [
+      "struct.claim_evidence",
+      "struct.example",
+      "struct.contrast",
+      "comp.intent",
+      "arg.example",
+      "arg.qualification",
+      "arg.concession",
+      "inf.directly_implied",
+      "inf.author_view_application",
+      "scope.condition",
+      "lang.tone_shift",
+      "lang.concession_marker",
+      "word.context_clue",
+      "word.polysemy",
+      "elim.near_tie"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1's live rival is the scornful reading, because the Ratepayer is mocked and the comparisons are sharp; but the author's model of the right attitude is himself ('I myself am of little boys’ habit in this matter') and his aim is to change a point of view, not to condemn anyone. The solemn option attracts readers who hear 'pious' and the Milton line as devotion, and it fails because endurance is reserved for real pain. Q2's rival is 'hopeful in outlook', since the optimist has just been praised; but the word describes the pain, and pain is the one thing the optimist cannot enjoy, so the sense must be the older one, real in itself, set against 'things altogether of the mind'. Q3's near-tie keeps the author's concession ('It certainly is comic') and adds the conclusion he refuses ('the most comic things of all are exactly the things that are most worth doing'); the tiredness option repeats a fact the passage states and then dismisses with 'Not merely'. Q4's strongest rival is the toothache option, which the closing epigram seems to license; the second paragraph's 'can be supported, but scarcely enjoyed' rules it out, and the same limit is what makes the key follow from 'Nothing beyond inconvenience seems really to have been caused by them'. The absence option is killed by the 'almost savage envy' of the first sentence.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "archipelago",
+      "ratepayer",
+      "supported",
+      "pious"
+    ]
+  },
+  "passage": {
+    "title": "On Running After One's Hat",
+    "reading_time_min": 3.1,
+    "paragraphs": [
+      {
+        "id": "rc-0141-p1",
+        "text": "I feel an almost savage envy on hearing that London has been flooded in my absence, while I am in the mere country. My own Battersea has been, I understand, particularly favoured as a meeting of the waters. Battersea must be a vision of Venice. The boat that brought the meat from the butcher’s must have shot along those lanes of rippling silver with the strange smoothness of the gondola. There is nothing so perfectly poetical as an island; and when a district is flooded it becomes an archipelago."
+      },
+      {
+        "id": "rc-0141-p2",
+        "text": "Some consider such romantic views of flood or fire slightly lacking in reality. But really this romantic view of such inconveniences is quite as practical as the other. The true optimist who sees in such things an opportunity for enjoyment is quite as logical and much more sensible than the ordinary “Indignant Ratepayer” who sees in them an opportunity for grumbling. Real pain, as in the case of being burnt at Smithfield or having a toothache, is a positive thing; it can be supported, but scarcely enjoyed. But, after all, our toothaches are the exception, and as for being burnt at Smithfield, it only happens to us at the very longest intervals. And most of the inconveniences that make men swear or women cry are really sentimental or imaginative inconveniences – things altogether of the mind."
+      },
+      {
+        "id": "rc-0141-p3",
+        "text": "For instance, we often hear grown-up people complaining of having to hang about a railway station and wait for a train. Did you ever hear a small boy complain of having to hang about a railway station and wait for a train? No; for to him to be inside a railway station is to be inside a cavern of wonder and a palace of poetical pleasures. I myself am of little boys’ habit in this matter. They also serve who only stand and wait for the two fifteen. But in the case of all such annoyances, as I have said, everything depends upon the emotional point of view. You can safely apply the test to almost every one of the things that are currently talked of as the typical nuisance of daily life."
+      },
+      {
+        "id": "rc-0141-p4",
+        "text": "For instance, there is a current impression that it is unpleasant to have to run after one’s hat. Why should it be unpleasant to the well-ordered and pious mind? Not merely because it is running, and running exhausts one. The same people run much more eagerly after an uninteresting little leather ball than they will after a nice silk hat. There is an idea that it is humiliating to run after one’s hat; and when people say it is humiliating they mean that it is comic. It certainly is comic; but man is a very comic creature, and most of the things he does are comic – eating, for instance. And the most comic things of all are exactly the things that are most worth doing – such as making love. A man running after a hat is not half so ridiculous as a man running after a wife."
+      },
+      {
+        "id": "rc-0141-p5",
+        "text": "So I do not think that it is altogether fanciful or incredible to suppose that even the floods in London may be accepted and enjoyed poetically. Nothing beyond inconvenience seems really to have been caused by them; and inconvenience, as I have said, is only one aspect, and that the most unimaginative and accidental aspect of a really romantic situation. An adventure is only an inconvenience rightly considered. An inconvenience is only an adventure wrongly considered."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0141-q1",
+      "type": "tone",
+      "skill": "tone",
+      "patterns": [
+        "lang.tone_shift",
+        "comp.intent",
+        "arg.qualification"
+      ],
+      "target_mistake": "hearing the comedy as the whole message, or pitching the author's teasing of grumblers as contempt and his talk of standing and waiting as devotion",
+      "prediction_target": "The learner should be able to say: the passage jokes all the way through, but the jokes carry a serious claim, and the claim even has a stated limit.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "author_purpose",
+        "main_idea"
+      ],
+      "stem": "The tone of the passage is best described as",
+      "options": {
+        "A": "bitterly scornful of people who make a fuss about their small misfortunes",
+        "B": "whimsical in its exaggerations but serious about the point it argues",
+        "C": "wistful, regretting a capacity for wonder that adults have lost",
+        "D": "solemn and devout, commending the patient endurance of hardship"
+      },
+      "correct": "B",
+      "estimated_time_sec": 55,
+      "explanation": {
+        "expert_notice": "Everything in the passage is exaggerated: the 'savage envy' of a flood, Battersea as Venice, the butcher's boat as a gondola, a hat chased like a wife. Yet each joke is attached to a claim that is stated plainly and held to the end: most inconveniences are 'things altogether of the mind', and 'everything depends upon the emotional point of view'.",
+        "correct_reasoning": "The correct option holds both registers at once, which is the essay's method: the comedy carries an argument. The argument even has a limit, 'Real pain... can be supported, but scarcely enjoyed', and an author who takes the trouble to fence his claim in that way is not merely joking.",
+        "passage_anchor": "rc-0141-p2, rc-0141-p3",
+        "question_type_note": "Tone questions on a comic essay usually turn on whether the humour is the point or the vehicle. Look for plain sentences of argument among the jokes; if they are there, the tone is not only playful.",
+        "reading_habit": "Separate how a sentence is said from what it claims. Underline the claims in a humorous passage; if they make an argument, the humour is serving it.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "over_intense_tone",
+            "why_wrong": "The 'Indignant Ratepayer' is teased, not savaged, and the author's model of the right attitude is himself: 'I myself am of little boys’ habit in this matter'. He wants to change a point of view, not to condemn the people who hold the other one.",
+            "seductive_element": "The passage does mock grumblers, and its comparisons are sharp enough to be mistaken for contempt."
+          },
+          {
+            "option": "C",
+            "trap_type": "wrong_valence_tone",
+            "why_wrong": "Nothing is mourned. The author says he still shares the small boy's habit, and the boy at the station is offered as a model to follow, not as a lost past to regret.",
+            "seductive_element": "Grown-ups complaining while a small boy marvels can read like a lament for lost childhood."
+          },
+          {
+            "option": "D",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "Endurance is what the passage reserves for real pain ('it can be supported, but scarcely enjoyed'). For the inconveniences it discusses, the author recommends enjoyment, and he recommends it with jokes, not with solemnity.",
+            "seductive_element": "Words such as 'pious', and the line 'They also serve who only stand and wait', have a religious ring."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0141-q2",
+      "type": "vocabulary_in_context",
+      "skill": "vocabulary_in_context",
+      "patterns": [
+        "word.context_clue",
+        "word.polysemy",
+        "struct.contrast"
+      ],
+      "target_mistake": "reading 'positive' in its modern sense of good or hopeful instead of the older sense fixed by the contrast with 'things altogether of the mind'",
+      "prediction_target": "The learner should be able to say: 'positive' names what real pain has and the imaginary inconveniences lack, an existence that does not depend on how it is regarded.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "specific_detail"
+      ],
+      "stem": "In the second paragraph, the word 'positive' (in 'is a positive thing; it can be supported, but scarcely enjoyed') most nearly means",
+      "options": {
+        "A": "good for the one who suffers it, in the long run",
+        "B": "hopeful in outlook, as the true optimist is",
+        "C": "confidently asserted, as by someone sure of a fact",
+        "D": "having a real existence of its own"
+      },
+      "correct": "D",
+      "estimated_time_sec": 45,
+      "explanation": {
+        "expert_notice": "The word sits inside a contrast that runs across the paragraph: real pain on one side, and on the other 'sentimental or imaginative inconveniences – things altogether of the mind'. Whatever 'positive' means, it must name what real pain has and the mind-made inconveniences lack.",
+        "correct_reasoning": "What the inconveniences lack is an existence apart from the point of view: they depend on how they are regarded. Real pain does not; a toothache is there however one looks at it, which is why it 'can be supported, but scarcely enjoyed'. That is the older sense of positive, actually existing, as opposed to existing only in the way a thing is regarded.",
+        "passage_anchor": "rc-0141-p2",
+        "question_type_note": "On older prose a vocabulary question often tests a sense that has faded from everyday use. Find what the word is being contrasted with in its paragraph; the contrast works as a definition.",
+        "reading_habit": "If the everyday meaning of a word makes the author say something absurd, here that pain is good for us or hopeful, assume an older sense and look for the contrast that fixes it.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "common_knowledge_intrusion",
+            "why_wrong": "Today's commonest sense would make the author call pain good for us, which his own sentence denies at once: it 'can be supported, but scarcely enjoyed'.",
+            "seductive_element": "It is the sense of the word that almost every reader meets first."
+          },
+          {
+            "option": "B",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "Optimism belongs to the person in the previous sentence who 'sees in such things an opportunity for enjoyment'. Here the word describes the pain itself, and pain is the one thing the optimist cannot enjoy.",
+            "seductive_element": "The optimist has just been praised, and positive thinking is the modern name for his attitude."
+          },
+          {
+            "option": "C",
+            "trap_type": "near_synonym_confusion",
+            "why_wrong": "Being sure is a state of the person who speaks. The sentence describes a property of the pain, the fact that it exists apart from anyone's view of it.",
+            "seductive_element": "In everyday speech positive does mean sure, and real pain is something nobody is in doubt about."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0141-q3",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.directly_implied",
+        "arg.concession",
+        "lang.concession_marker",
+        "elim.near_tie"
+      ],
+      "target_mistake": "taking the author's concession that the chase is comic for agreement that it is therefore to be avoided, or taking the tiredness he mentions for the cause he sets aside",
+      "prediction_target": "The learner should be able to say: the chase is unpleasant only because it looks comic, and the author denies that looking comic is any reason not to do a thing.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "argument",
+        "logical_structure"
+      ],
+      "stem": "It can be inferred from the author's discussion of running after one's hat that he regards the unpleasantness of the chase as",
+      "options": {
+        "A": "coming from a sense of looking comic, which he does not count as a reason for avoiding a thing",
+        "B": "coming from the tiredness of running, which the same people would much rather spend on their games",
+        "C": "the proper response of a well-ordered and pious mind to so undignified a position",
+        "D": "a sensible response to being made ridiculous, since whatever is comic is best avoided"
+      },
+      "correct": "A",
+      "estimated_time_sec": 90,
+      "explanation": {
+        "expert_notice": "The paragraph runs like a small proof. It rules out the obvious cause ('Not merely because it is running'), gives evidence (the same people run more eagerly after a leather ball), names the real cause ('when people say it is humiliating they mean that it is comic'), and then disarms it ('the most comic things of all are exactly the things that are most worth doing').",
+        "correct_reasoning": "On this account the unpleasantness lies in looking comic, and the author grants the fact while denying its force: 'It certainly is comic; but man is a very comic creature'. If eating and courting are comic too, being comic cannot be a reason for avoiding something, which is what the correct option says.",
+        "passage_anchor": "rc-0141-p4",
+        "question_type_note": "When an author grants a fact and denies its consequence, an inference question will offer the fact with the consequence put back. Keep the two apart: what he admits, and what he refuses to conclude from it.",
+        "reading_habit": "Watch for 'certainly... but'. The clause before the 'but' is conceded; the clause after it is the author's own position.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "true_but_insufficient",
+            "why_wrong": "The passage allows that 'running exhausts one' but says the unpleasantness is 'Not merely' that, and shows why: the same people run much more eagerly after a leather ball. Tiredness cannot explain a reluctance that games do not produce.",
+            "seductive_element": "It repeats a fact that the passage itself states."
+          },
+          {
+            "option": "C",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "The question 'Why should it be unpleasant to the well-ordered and pious mind?' expects the answer that it should not be. The option turns the author's challenge into his endorsement.",
+            "seductive_element": "The phrase comes straight from the passage and sounds like the author's own standard of good sense."
+          },
+          {
+            "option": "D",
+            "trap_type": "concession_as_position",
+            "why_wrong": "The author concedes that the chase is comic ('It certainly is comic') but rejects the conclusion that comic things are best avoided: 'the most comic things of all are exactly the things that are most worth doing'.",
+            "seductive_element": "It starts from something the author really says, and the next step feels like ordinary good sense."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0141-q4",
+      "type": "agree_disagree",
+      "skill": "inference",
+      "patterns": [
+        "inf.author_view_application",
+        "arg.qualification",
+        "scope.condition"
+      ],
+      "target_mistake": "letting the closing epigram sweep away the limit set in the second paragraph, so that real pain too becomes an adventure, or crediting the author with denying the inconvenience he grants",
+      "prediction_target": "The learner should be able to say: the floods can be enjoyed only because they caused inconvenience and no real pain, since real pain can be borne but not enjoyed.",
+      "difficulty": {
+        "inference_depth": 4,
+        "distractor_similarity": 3,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "scope",
+        "logical_structure"
+      ],
+      "stem": "With which of the following statements would the author most likely agree?",
+      "options": {
+        "A": "A toothache, if it is only rightly considered, can be made as enjoyable as any other adventure.",
+        "B": "The Indignant Ratepayer is quite wrong to think that the floods caused any inconvenience at all.",
+        "C": "Had the floods caused real pain rather than inconvenience, his reason for enjoying them would fail.",
+        "D": "His pleasure in the floods depends largely on his having been safely away in the country at the time."
+      },
+      "correct": "C",
+      "estimated_time_sec": 90,
+      "explanation": {
+        "expert_notice": "The last paragraph does not say that floods are always to be enjoyed. It says that these floods may be, and gives the reason: 'Nothing beyond inconvenience seems really to have been caused by them'. That reason only works because of the limit set in the second paragraph, where real pain 'can be supported, but scarcely enjoyed'.",
+        "correct_reasoning": "Put the two together. The author's licence to enjoy the floods rests on their having caused only inconvenience, and real pain is the one thing he has said cannot be enjoyed. If the floods had caused real pain, the reason he gives would no longer hold, which is what the correct option says.",
+        "passage_anchor": "rc-0141-p2, rc-0141-p5",
+        "question_type_note": "Agreement questions often hinge on a limit that an author sets early and relies on late. When a conclusion arrives with a reason attached ('Nothing beyond inconvenience...'), ask what would follow if the reason were false.",
+        "reading_habit": "When an author fences off an exception, as here with toothaches and Smithfield, carry it with you to the end. The final claim is usually made inside that fence.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "overstatement",
+            "why_wrong": "This removes the passage's one limit. A toothache is the author's own example of 'Real pain', which 'can be supported, but scarcely enjoyed'; it is exactly what an adventure is not.",
+            "seductive_element": "The closing epigram, 'An adventure is only an inconvenience rightly considered', sounds as though it applied to every misfortune."
+          },
+          {
+            "option": "B",
+            "trap_type": "fact_right_interpretation_wrong",
+            "why_wrong": "The author grants the inconvenience; what he denies is that it is the whole of the situation. It is 'only one aspect, and that the most unimaginative and accidental aspect' of something romantic.",
+            "seductive_element": "He plainly disagrees with the Ratepayer, so it is easy to assume that he disputes the Ratepayer's facts as well."
+          },
+          {
+            "option": "D",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "Absence is what he regrets, not what he relies on: he feels 'an almost savage envy' of those who were there, and his case for enjoying the floods rests on what they caused, not on where he was.",
+            "seductive_element": "He was in fact away, and romance about a flood is easier at a distance."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "archipelago",
+      "passage_use": "when a district is flooded it becomes an archipelago",
+      "meaning_here": "a group of islands scattered across a stretch of water",
+      "difficulty": "medium"
+    },
+    {
+      "word": "ratepayer",
+      "passage_use": "the ordinary “Indignant Ratepayer” who sees in them an opportunity for grumbling",
+      "meaning_here": "a householder who pays the local tax on property; here the stock figure of the citizen who writes in to complain",
+      "difficulty": "medium"
+    },
+    {
+      "word": "supported",
+      "passage_use": "it can be supported, but scarcely enjoyed",
+      "meaning_here": "borne or endured, an older sense of support",
+      "difficulty": "medium"
+    },
+    {
+      "word": "pious",
+      "passage_use": "the well-ordered and pious mind",
+      "meaning_here": "devout and dutiful; here, a sensible, right-thinking mind",
+      "difficulty": "easy"
+    }
+  ],
+  "mentor": {
+    "challenge": "Nearly every sentence here is a joke. Your task is to find the argument the jokes are carrying, and the one limit the author quietly sets on it.",
+    "one_sentence_summary": "Most of the annoyances people complain of are inconveniences of the mind rather than real pain, so the same situation, a flood, a wait for a train, a chase after a hat, can be a nuisance or an adventure according to the point of view brought to it; only real pain, which can be endured but not enjoyed, lies outside the claim.",
+    "main_idea": "Apart from real pain, which is rare, our everyday annoyances are made by the way we look at them. Seen rightly, a flood, a wait or a chase after a hat is an adventure; seen wrongly, an adventure is only an inconvenience.",
+    "simple_explanation": "Chesterton is away in the country when London floods, and he says he is jealous. He imagines his own district, Battersea, turned into Venice, with the butcher's boat gliding along like a gondola.\n\nHe knows this sounds silly, so he argues for it. Seeing a flood as an adventure is just as practical as grumbling about it, and more sensible. He makes one exception: real pain, like a toothache or being burnt at the stake, is really there; you can bear it, but you cannot enjoy it. But real pain is rare. Most of what makes people swear or cry is in the mind.\n\nHis proof is a railway station. Grown-ups hate waiting there; a small boy thinks it is a palace of wonders. Same station, different eyes. So everything depends on the point of view, and he says the test can be applied to almost every everyday nuisance.\n\nHe applies it to a hat blown off in the wind. Why do people hate running after it? Not because running is tiring, since the same people run eagerly after a leather ball in a game. It is because they feel they look comic. Chesterton agrees that they do, but says that most of what we do is comic, and the most comic things, such as courting, are the ones most worth doing.\n\nHe ends where he began. The floods caused nothing worse than inconvenience, so they can be enjoyed. An adventure, he says, is only an inconvenience rightly considered, and an inconvenience is only an adventure wrongly considered.",
+    "why_difficult": "Almost nothing here is said plainly, and much of it is meant to be absurd: a flood as Venice, a hat compared with a wife. The reader has to separate the comedy from the claims, and then notice that the claims include a limit, set early and quietly, which decides what the conclusion covers. Old usages add a layer: 'positive' and 'supported' do not mean here what they mean today.",
+    "author_intention": "To persuade the reader, by comic exaggeration, that most daily annoyances are made by the mind and can become adventures with a change of view, while admitting that real pain cannot.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0141-p1",
+        "role": "Sets the comic scene",
+        "note": "Away in the country, the author envies flooded London and imagines Battersea as Venice and a flooded district as an archipelago."
+      },
+      {
+        "paragraph_id": "rc-0141-p2",
+        "role": "States claim and limit",
+        "note": "The romantic view is as practical as grumbling. Real pain can be borne but not enjoyed; most inconveniences, though, are things of the mind."
+      },
+      {
+        "paragraph_id": "rc-0141-p3",
+        "role": "Gives the proof case",
+        "note": "Adults hate waiting at a station; a small boy finds it a cavern of wonder. Everything depends on the emotional point of view."
+      },
+      {
+        "paragraph_id": "rc-0141-p4",
+        "role": "Applies the test",
+        "note": "Chasing a hat is not unpleasant because of the running but because it is comic, and the most comic things are the most worth doing."
+      },
+      {
+        "paragraph_id": "rc-0141-p5",
+        "role": "Returns to the floods",
+        "note": "The floods caused only inconvenience, so they may be enjoyed. An adventure is only an inconvenience rightly considered."
+      }
+    ],
+    "tone_progression": "Mock-extravagant at the start, briefly sober while the claim and its exception are stated, playful again through the station and the hat, and finally neat and epigrammatic, closing on two sentences that mirror each other.",
+    "key_transitions": [
+      "'Real pain, as in the case of being burnt at Smithfield or having a toothache, is a positive thing; it can be supported, but scarcely enjoyed.' (second paragraph): the one limit on the argument.",
+      "'But in the case of all such annoyances, as I have said, everything depends upon the emotional point of view.' (third paragraph): the example becomes a principle.",
+      "'Nothing beyond inconvenience seems really to have been caused by them' (last paragraph): the conclusion is placed inside the limit."
+    ],
+    "misunderstanding": "Because the passage is funny throughout, hurried readers either dismiss it as a joke or take it as a promise that any misfortune can be enjoyed. It is neither. It argues seriously, and it exempts real pain in so many words: a toothache 'can be supported, but scarcely enjoyed'. The floods qualify for enjoyment only because they caused 'Nothing beyond inconvenience'.",
+    "traps_summary": "The wrong options lean on a tone pitched too hot, too sad or too solemn, on modern senses of an old word ('positive' as good or hopeful), on a concession read as the author's position ('It certainly is comic'), and on removing the limit that keeps real pain outside the argument.",
+    "reading_lesson": "In a comic essay, list the plain claims separately from the jokes. Then look for the claim that limits the others, usually stated once and briefly. Questions on such passages test whether you kept the limit when the jokes tried to sweep it away.",
+    "real_world": "G. K. Chesterton, the English essayist and novelist who died in 1936, wrote this for a newspaper column collected in 1908. Psychologists now have a name for his move, reappraisal: the same delay or setback is felt quite differently depending on how one describes it to oneself.",
+    "takeaway": "The same event can be a nuisance or an adventure; only real pain refuses to be reframed.",
+    "reflection_question": "Which of the annoyances you complained about this week would a ten-year-old have enjoyed?",
+    "eli10": {
+      "big_idea": "Most small troubles feel bad because of how we look at them; real pain is different, but it is rare.",
+      "story": "Chesterton is away when London floods. He is jealous! He pictures his part of London as Venice. People say this is silly. He says it is sensible. Real pain, like a toothache, is different. It is really there. You can bear it, but you cannot enjoy it. But real pain is rare. Most troubles are in the mind. Grown-ups hate waiting for a train. A small boy loves the station. It is the same station, seen with different eyes. Now think of a hat blown off by the wind. People hate chasing it. Not because running is hard: they run gladly after a ball in a game. They hate it because they look funny. Chesterton says looking funny is fine. The things most worth doing are often the funniest. The floods caused only bother, not pain. So they can be enjoyed. A trouble seen rightly is an adventure.",
+      "paragraphs": [
+        "Sets a funny scene: the writer envies flooded London and imagines his district as Venice.",
+        "States the claim: most troubles are in the mind, though real pain can only be endured.",
+        "Proves it with a station: grown-ups are bored there, while a small boy is delighted.",
+        "Tests it on a hat: the trouble is looking comic, and comic things are often worth doing.",
+        "Returns to the floods: they caused only bother, so seen rightly they are an adventure."
+      ],
+      "author_view": "Chesterton is cheerful and teasing, but he means it: look at a nuisance the right way and it becomes an adventure."
+    }
+  }
+}

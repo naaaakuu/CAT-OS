@@ -1,0 +1,332 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0130",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 86,
+    "genre": "institutions",
+    "difficulty": "easy",
+    "difficulty_numeric": 2,
+    "stage": "foundation",
+    "skills": [
+      "main-idea-extraction",
+      "inference",
+      "vocabulary-in-context",
+      "scope-control"
+    ],
+    "word_count": 305,
+    "question_count": 3,
+    "question_types": [
+      "primary_purpose",
+      "inference",
+      "vocabulary_in_context"
+    ],
+    "theme": "a search can only work from the words a person brings to it, so it serves best someone who already knows what to ask; a library adds what lies outside those words, a librarian who asks what the question is for and shelves arranged by subject that put unknown books beside the one wanted, so its particular value is help before a person knows what to ask, not a larger store of facts, and for a question already known a search is quicker and just as good",
+    "estimated_time_min": 5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-03",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted."
+    },
+    "date_added": "2026-10-03",
+    "batch_id": "batch-rc-005",
+    "prompt_version": "content engine v1 + CAT-size brief 2026-10",
+    "reviewer_notes": "A first-person foundation item built as a scene that becomes an argument: a boy's question at a library desk, the distinction it shows (a search works only from the words it is given; a library adds what is not in them, a librarian's question back and shelves arranged by subject), and a third paragraph that limits the claim (a library holds far less, and a search is better for a question already known). Defences of libraries usually rest on free access or quiet space; this one rests on a single mechanism, help before the question exists, and concedes everything else. The set's near-tie is the purpose option that reverses whom the library serves.",
+    "length_class": "short",
+    "structure": "narrative_reflection",
+    "viewpoints": 1,
+    "tone": "personal, warm, measured",
+    "difficulty_vector": {
+      "lexical": 1,
+      "syntactic": 2,
+      "abstraction": 2,
+      "inference_depth": 2,
+      "distractor_similarity": 2,
+      "reasoning_depth": 2,
+      "structural_ambiguity": 1,
+      "time_pressure": 2
+    },
+    "reasoning_patterns": [
+      "struct.specific_to_general",
+      "struct.example",
+      "struct.qualification",
+      "comp.purpose",
+      "comp.supporting_idea",
+      "arg.causal_claim",
+      "arg.concession",
+      "inf.strongly_supported",
+      "inf.vs_speculation",
+      "word.context_clue",
+      "word.polysemy",
+      "lang.concession_marker",
+      "elim.near_tie"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1: a strong candidate might argue for the option that the passage shows a library serving best the people who already know what they need, since it and the key are both about whom a library serves; 'That serves you perfectly when you already know what you need' gives that group to the search, and the library's help comes 'before you know what to ask'. The story option is answered by the second and third paragraphs, which turn the story into a claim. Q2: the live rival is the ranking option, which quotes the passage; but ranking describes how a search orders what it finds, and the passage's reason for the failure is the word itself: a search 'can only work from the words you give it', and the boy left with books he 'would not have known to ask for'. Q3: the near-tie is 'written for young readers', which a reader supplies from the boy's age; the word describes the book's size, and nothing says who the history was written for.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "plainly",
+      "ranked",
+      "district"
+    ]
+  },
+  "passage": {
+    "title": "Anything on Volcanoes?",
+    "reading_time_min": 1.6,
+    "paragraphs": [
+      {
+        "id": "rc-0130-p1",
+        "text": "'Have you got anything on volcanoes?' The boy ahead of me at the library desk on Saturday was about twelve. He had plainly tried the internet first, because he already looked tired of volcanoes. The librarian did not point him to a shelf. She asked what the book was for. It was for a school project on the hill behind his town, which his grandfather said had once been a volcano. Ten minutes later he left with a slim local history and a guide to the rocks of the district. He would not have known to ask for either."
+      },
+      {
+        "id": "rc-0130-p2",
+        "text": "A search engine is a marvellous tool with one limit built into it: it can only work from the words you give it. Type 'volcanoes' and it will find a million pages about volcanoes, ranked partly by how many other people wanted them. That serves you perfectly when you already know what you need, such as a train time or the year a war ended. It serves you badly when you do not yet know what your question is. That is where most people stand when they begin to learn something. A library adds what is not in your words. A librarian asks what the question is for, and a shelf arranged by subject puts the books you did not know about beside the one you came for."
+      },
+      {
+        "id": "rc-0130-p3",
+        "text": "A library does not know more than the internet. It holds far less, and for the boy's next question, how high the hill is, a search would be quicker and just as good. What a library offers is help at the point where help is hardest to ask for, before you know what to ask. It offers that free, to anyone who walks in. A search box waits for you to type. The librarian, that Saturday, asked first."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0130-q1",
+      "type": "primary_purpose",
+      "skill": "author_purpose",
+      "patterns": [
+        "comp.purpose",
+        "struct.specific_to_general",
+        "elim.near_tie"
+      ],
+      "target_mistake": "taking the opening story for the point, or turning the author's limited claim for libraries into a claim that they serve everyone better than search",
+      "prediction_target": "The learner should be able to say beforehand: the author wants to show what a library does that a search cannot, which is help people who do not yet know what to ask.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "main_idea"
+      ],
+      "stem": "The primary purpose of the passage is to",
+      "options": {
+        "A": "show that a library serves best the people who already know what they need",
+        "B": "describe how a librarian helped one boy with his school project on a hill",
+        "C": "persuade readers to stop searching online and to use their libraries instead",
+        "D": "explain what a library offers people who do not yet know what to ask"
+      },
+      "correct": "D",
+      "estimated_time_sec": 70,
+      "explanation": {
+        "expert_notice": "The scene in the first paragraph becomes an argument in the second: a search 'can only work from the words you give it', and 'A library adds what is not in your words'. The third paragraph limits the claim, 'A library does not know more than the internet', and names what a library does offer: help 'before you know what to ask'.",
+        "correct_reasoning": "Everything in the passage serves one point. A library helps at the stage before a person knows what to ask, which is where a search, working only from the words typed, helps least. The boy's visit shows it, the second paragraph explains it, and the third separates it from the bigger claim that libraries know more. The correct option names that purpose.",
+        "passage_anchor": "rc-0130-p2, rc-0130-p3",
+        "question_type_note": "A primary-purpose question asks what the whole passage is for. When a passage opens with a story, the purpose is usually the point the story is used to make, not the story itself.",
+        "reading_habit": "When a passage begins with a scene, read on until you find the sentence that says what the scene shows. That sentence, not the scene, is usually the passage's purpose.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage says the reverse. A search serves you 'perfectly when you already know what you need'; the library's help comes 'before you know what to ask'.",
+            "seductive_element": "It differs from the correct purpose by a single phrase, and it is also about whom a library serves."
+          },
+          {
+            "option": "B",
+            "trap_type": "example_as_thesis",
+            "why_wrong": "The boy's visit is the example that opens the passage. The second and third paragraphs turn it into a claim about what a search and a library can each do, and a purpose that stops at the story leaves that out.",
+            "seductive_element": "The story is the most vivid part of the passage and fills the whole first paragraph."
+          },
+          {
+            "option": "C",
+            "trap_type": "prescriptive_leap",
+            "why_wrong": "The author never tells readers to stop searching. A search is called 'a marvellous tool', and for the boy's next question it 'would be quicker and just as good'.",
+            "seductive_element": "A passage that praises libraries can read as a call to use them instead of the internet."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0130-q2",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.strongly_supported",
+        "arg.causal_claim",
+        "comp.supporting_idea"
+      ],
+      "target_mistake": "blaming the boy's failure on how much the internet holds, on how results are ranked, or on search in general, instead of on the gap between his word and his question",
+      "prediction_target": "The learner should be able to say beforehand: he searched for volcanoes when what he needed was the story of one hill, and a search can only answer the words it is given.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 2,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "specific_detail"
+      ],
+      "stem": "It can be inferred from the passage that the boy's searches before he came to the library failed mainly because",
+      "options": {
+        "A": "the internet holds less than a library does about any one district",
+        "B": "the pages he found were ranked partly by how many other people wanted them",
+        "C": "the word he typed was not the question he actually needed answered",
+        "D": "a search engine cannot help anyone who is beginning to learn a subject"
+      },
+      "correct": "C",
+      "estimated_time_sec": 80,
+      "explanation": {
+        "expert_notice": "The first paragraph gives the boy's word, volcanoes, and his real need, the story of the hill behind his town. The second gives the rule that joins them: a search 'can only work from the words you give it'.",
+        "correct_reasoning": "The boy searched for volcanoes, but what he needed was the history and rocks of one hill, which he did not know how to ask for. Since a search works only from the words it is given, it answered the word he typed rather than the question behind it. The passage confirms the gap: he left with two books he 'would not have known to ask for'.",
+        "passage_anchor": "rc-0130-p1, rc-0130-p2",
+        "question_type_note": "This inference joins a fact from the story to a rule from the argument. When a passage states a general rule, test whether it explains the particular case the passage began with.",
+        "reading_habit": "When a passage moves from a story to a general claim, go back and apply the claim to the story. The question will often ask you to make exactly that link.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "comparison_distortion",
+            "why_wrong": "The passage makes the opposite comparison: a library 'does not know more than the internet' and 'holds far less'. The boy's problem was not a shortage of pages.",
+            "seductive_element": "Local history sounds like the kind of thing a library would have and the internet would not."
+          },
+          {
+            "option": "B",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "The passage uses these words to describe how a search orders what it finds, not to explain why the boy failed. The reason it gives comes earlier, in the word itself: a search 'can only work from the words you give it'.",
+            "seductive_element": "It quotes the passage almost word for word, and a million popular pages about volcanoes could well bury one small hill."
+          },
+          {
+            "option": "D",
+            "trap_type": "overstatement",
+            "why_wrong": "The passage says a search serves such a person 'badly', not that it cannot help at all; the option turns a weakness into an impossibility.",
+            "seductive_element": "It sounds like the passage's own conclusion, only stated more firmly."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0130-q3",
+      "type": "vocabulary_in_context",
+      "skill": "vocabulary_in_context",
+      "patterns": [
+        "word.context_clue",
+        "word.polysemy"
+      ],
+      "target_mistake": "choosing a common sense of the word that does not fit a book, or reading a judgement into a word that only describes size",
+      "prediction_target": "The learner should be able to say beforehand: a slim book is a thin one, with not many pages.",
+      "difficulty": {
+        "inference_depth": 1,
+        "distractor_similarity": 2,
+        "reasoning_depth": 1
+      },
+      "secondary_skills": [
+        "specific_detail"
+      ],
+      "stem": "As it is used in the passage, the word 'slim' (in 'a slim local history') most nearly means",
+      "options": {
+        "A": "unlikely, as in a slim chance",
+        "B": "thin, with few pages",
+        "C": "of little value",
+        "D": "written for young readers"
+      },
+      "correct": "B",
+      "estimated_time_sec": 40,
+      "explanation": {
+        "expert_notice": "The word describes a book the boy carried out of the library, one of two that answered his real question. Used of a book, slim describes its size.",
+        "correct_reasoning": "A slim book is a thin one. Nothing in the sentence judges the book's worth; it is one of the two books that gave the boy what he needed. The correct option gives the physical sense, the only one that fits an object carried out of a library.",
+        "passage_anchor": "rc-0130-p1",
+        "question_type_note": "A word-in-context question asks for the meaning in this sentence, not the most common meaning. Put each option back into the sentence and keep the one that still makes sense.",
+        "reading_habit": "When a familiar word has several meanings, look at what it is describing. The same word used of an object, a chance or a person can mean three different things.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "near_synonym_confusion",
+            "why_wrong": "Slim does mean unlikely in 'a slim chance', but a history book is not a chance. That meaning belongs to a different kind of sentence.",
+            "seductive_element": "It is a real and common meaning of the word."
+          },
+          {
+            "option": "C",
+            "trap_type": "wrong_valence_tone",
+            "why_wrong": "The passage presents the book as just what the boy needed. Reading slim as worthless gives the sentence an attitude it does not have.",
+            "seductive_element": "Slim can suggest 'not much', and a thin book can sound like a lesser one."
+          },
+          {
+            "option": "D",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "Nothing says the history was written for children. The reader supplies that from the boy's age; the word itself is about the book's size.",
+            "seductive_element": "The book was chosen for a twelve-year-old, so a children's book seems likely."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "plainly",
+      "passage_use": "He had plainly tried the internet first",
+      "meaning_here": "clearly; it was easy to see",
+      "difficulty": "easy"
+    },
+    {
+      "word": "ranked",
+      "passage_use": "ranked partly by how many other people wanted them",
+      "meaning_here": "put in order, with the ones judged most wanted at the top",
+      "difficulty": "easy"
+    },
+    {
+      "word": "district",
+      "passage_use": "a guide to the rocks of the district",
+      "meaning_here": "the area around a town",
+      "difficulty": "easy"
+    }
+  ],
+  "mentor": {
+    "challenge": "A short passage that starts with a boy at a library desk and turns into an argument. Watch for the sentence where the author limits the claim.",
+    "one_sentence_summary": "A boy who had searched online for volcanoes found what he needed only when a librarian asked what his question was for, because a search can only work from the words it is given, while a library, through a librarian's questions and shelves arranged by subject, helps people before they know what to ask, though it holds far less than the internet.",
+    "main_idea": "A search engine answers the words you type, so it is excellent when you know what you need and poor when you do not. A library's particular value is helping people at that earlier stage, by asking what the question is for and by putting related books side by side, not knowing more than the internet.",
+    "simple_explanation": "The writer watched a boy of about twelve ask a librarian for something on volcanoes. He had clearly tried the internet already. Instead of pointing at a shelf, the librarian asked what the book was for. It was for a school project on the hill behind his town, which his grandfather said had once been a volcano. Ten minutes later he left with a local history and a guide to the rocks of the area, two books he would never have thought to ask for.\n\nThe writer explains why this happened. A search engine is a wonderful tool, but it can only use the words you give it. Type 'volcanoes' and you get a million pages on volcanoes. That is perfect when you already know what you need, like a train time. It is poor when you do not yet know what your question is, which is how most learning starts. A library adds what is not in your words: a person who asks what the question is for, and shelves where related books sit together, so you find the ones you did not know about.\n\nThen the writer is careful. This does not mean a library knows more. It holds far less than the internet, and for the boy's next question, how high the hill is, a search would be faster and just as good. A library's gift is help before you know what to ask, given free to anyone. A search box waits for you to type; the librarian asked first.",
+    "why_difficult": "Nothing in the language is hard. The difficulty is that the passage praises libraries and then refuses to say they are better than search. Readers who stop at the praise choose options that make the library the winner, or that tell people to stop searching online.",
+    "author_intention": "To use one small scene to show the kind of help a library gives that a search cannot, and to be honest about how narrow that claim is.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0130-p1",
+        "role": "Tells a scene",
+        "note": "A boy asks for something on volcanoes; the librarian asks what it is for, and he leaves with two books he would not have known to ask for."
+      },
+      {
+        "paragraph_id": "rc-0130-p2",
+        "role": "Draws the distinction",
+        "note": "A search works only from the words you give it, which is perfect when you know what you need and poor when you do not; a library adds what is not in your words."
+      },
+      {
+        "paragraph_id": "rc-0130-p3",
+        "role": "Limits the claim",
+        "note": "A library does not know more, and for a plain fact a search is better; its value is help before you know what to ask, offered free to anyone."
+      }
+    ],
+    "tone_progression": "Observant and gently amused in the opening scene, clear and even-handed in the middle, and warm but careful at the close, where the author praises the library without overclaiming for it.",
+    "key_transitions": [
+      "'A search engine is a marvellous tool with one limit built into it' (opening of paragraph 2): the scene becomes an argument.",
+      "'A library does not know more than the internet.' (opening of paragraph 3): the author limits the claim."
+    ],
+    "misunderstanding": "A hurried reader takes the passage as a contest that the library wins, or as advice to stop using the internet. The author says neither: a search is better for questions you already know how to ask, and a library helps with the ones you do not.",
+    "traps_summary": "The options reverse whom the library serves, offer the opening story as the purpose, turn praise into advice, blame the internet's size or its ranking instead of the word typed, and read a judgement into a word that only describes a book's size.",
+    "reading_lesson": "When a passage makes a case for something, look for the sentence where the author says what the case does not mean. That limit tells you exactly how strong the claim is, and many wrong options are built by ignoring it.",
+    "real_world": "The same difference appears whenever you start something new, a hobby, an illness, a legal problem: the hardest part is often finding the right question, and that is where a good teacher, doctor or librarian helps most.",
+    "takeaway": "A search answers the question you can already ask; a good library helps you find the one you cannot.",
+    "reflection_question": "When did someone last help you by asking what your question was for?",
+    "eli10": {
+      "big_idea": "A search only finds the words you type, but a library can help you before you know what to ask.",
+      "story": "A boy asked a librarian for something on volcanoes. He had already searched online. The librarian asked what it was for. It was for a school project about a hill near his town. His grandpa said it was once a volcano. He left with a local history book and a guide to the rocks nearby. He did not know to ask for those. A search can only use the words you type. Type 'volcanoes' and you get a million pages on volcanoes. That is great when you know what you need. It is poor when you do not know your real question yet. A library adds a person who asks what your question is for. It also puts books on the same subject side by side. But the writer is fair. The internet holds far more than a library. For a plain fact, a search is quicker.",
+      "paragraphs": [
+        "Tells a scene: a boy asks for something on volcanoes, and the librarian asks what it is for.",
+        "Explains why: a search only uses your words, while a library helps you find the right question.",
+        "Limits the claim: a library does not know more, but it helps before you know what to ask."
+      ],
+      "author_view": "The writer loves what the library did for the boy, but is careful not to claim that libraries are better than search."
+    }
+  }
+}

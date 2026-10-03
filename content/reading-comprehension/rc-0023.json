@@ -17,17 +17,16 @@
       "structure-mapping",
       "trap-recognition"
     ],
-    "word_count": 566,
-    "question_count": 5,
+    "word_count": 535,
+    "question_count": 4,
     "question_types": [
-      "main_idea",
       "inference",
-      "author_purpose",
       "logical_structure",
+      "main_idea",
       "vocabulary_in_context"
     ],
     "theme": "the paradox of moral luck and the limits of the control principle",
-    "estimated_time_min": 9.5,
+    "estimated_time_min": 9,
     "source": {
       "publication": "original",
       "url": null,
@@ -38,7 +37,7 @@
     "date_added": "2026-07-06",
     "batch_id": "batch-rc-004",
     "prompt_version": "in-repo authored (Premium Reading Library milestone); RC_MASTER_GENERATION_PROMPT.v1 + CAT_VARC_BIBLE craft rules applied",
-    "reviewer_notes": "Hard philosophy: a paradox the author leaves unresolved. The main trap is to read a resolution the author declines to offer; tone must catch the deliberate discomfort. Owner review pending.",
+    "reviewer_notes": "Hard philosophy: a paradox the author leaves unresolved. The main trap is to read a resolution the author declines to offer; tone must catch the deliberate discomfort. Owner review pending. 2026-10-03 CAT-size pass: 535→535 words, 5→5 paragraphs, 5→4 questions. Dropped q3 (author_purpose on p4: a second big-picture type beside main-idea q1); traps_summary no longer cites its distractor; two anchors rewritten as lists.",
     "vocab_extracted": [
       "culpable",
       "arbitrary",
@@ -48,7 +47,7 @@
   },
   "passage": {
     "title": "The Fortunes of the Guilty",
-    "reading_time_min": 2.8,
+    "reading_time_min": 2.9,
     "paragraphs": [
       {
         "id": "rc-0023-p1",
@@ -126,7 +125,7 @@
       "estimated_time_sec": 95,
       "explanation": {
         "correct_reasoning": "The two drivers will the same thing; the only difference is 'a fact wholly outside the control of either man', yet we judge them very differently. The case is built to demonstrate that our actual judgements are swayed by uncontrolled outcomes, option D, which then collides with the control principle in paragraph 2.",
-        "passage_anchor": "rc-0023-p1 and rc-0023-p2",
+        "passage_anchor": "rc-0023-p1, rc-0023-p2",
         "question_type_note": "The inference reads the case's function: it exhibits luck influencing blame, setting up the paradox.",
         "reading_habit": "Ask what a case is engineered to prove; here the identical wills and differing verdicts are designed to expose luck's grip on judgement.",
         "distractors": [
@@ -152,45 +151,6 @@
       }
     },
     {
-      "id": "rc-0023-q3",
-      "type": "author_purpose",
-      "stem": "The fourth paragraph, which extends luck to temperament, upbringing, and the situations one happens to face, functions to",
-      "options": {
-        "A": "shift the enquiry from moral philosophy to the psychology of how character is formed",
-        "B": "deepen the problem: strip away the luck and almost no self is left to hold responsible",
-        "C": "concede that the control principle was never really plausible once its reach is examined",
-        "D": "offer a way out by locating a core of the will that fortune has never reached"
-      },
-      "correct": "B",
-      "estimated_time_sec": 100,
-      "explanation": {
-        "correct_reasoning": "Paragraph 4 says what makes the problem 'genuinely hard' is that luck 'does not stay politely at the edges' but 'reaches everywhere'; stripping away all a person did not control makes 'the self that remains… shrink toward a vanishing point.' Its function is to deepen the paradox by threatening the very self the control principle relies on: option B.",
-        "passage_anchor": "rc-0023-p4",
-        "question_type_note": "Structure/purpose questions ask what a paragraph does; this one escalates the problem rather than resolving it.",
-        "reading_habit": "When an author says a move shows the problem is 'genuinely hard, rather than a puzzle awaiting a solution', expect that paragraph to widen the difficulty, not close it.",
-        "distractors": [
-          {
-            "option": "D",
-            "trap_type": "opposite_direction",
-            "why_wrong": "The search runs the other way: the pure will to which responsibility was supposed to attach 'seems to shrink toward a vanishing point', so the paragraph dissolves the luck-proof core rather than finding it.",
-            "seductive_element": "The paragraph does go looking for what is left after luck is stripped away, and a reader wanting rescue reads the search as a discovery."
-          },
-          {
-            "option": "C",
-            "trap_type": "half_right",
-            "why_wrong": "The principle survives the paragraph as one of two 'indispensable' commitments; what is shown is that honouring it fully costs us the self it was meant to hold, which is trouble for the principle rather than a verdict against it.",
-            "seductive_element": "A principle pushed to a vanishing point looks discredited, and the passage really is showing how far it fails."
-          },
-          {
-            "option": "A",
-            "trap_type": "out_of_scope",
-            "why_wrong": "Temperament and upbringing are named as sources of fortune bearing on responsibility, which keeps the question a moral one; no claim is made about how character actually forms, only about who can be held to account for it.",
-            "seductive_element": "Upbringing and temperament are the psychologist's subjects, and the paragraph spends its examples on them."
-          }
-        ]
-      }
-    },
-    {
       "id": "rc-0023-q4",
       "type": "logical_structure",
       "stem": "Which of the following best describes how the passage is organized?",
@@ -204,7 +164,7 @@
       "estimated_time_sec": 95,
       "explanation": {
         "correct_reasoning": "The structure is: an everyday practice of outcome-based judgement (p1), the opposing control principle (p2), the demonstration that we cannot surrender either (p3), the widening of luck to everything (p4), and the recognition that the tension is irresolvable (p5). That is 'two commitments set against each other, the conflict widened, no resolution': option D.",
-        "passage_anchor": "rc-0023-p3 and rc-0023-p5",
+        "passage_anchor": "rc-0023-p3, rc-0023-p5",
         "question_type_note": "This maps the whole architecture; the passage is a collision of two principles, not a thesis-and-defence.",
         "reading_habit": "Track a passage's shape by asking whether it is building to a claim or staging a conflict; the 'both compelling, both non-negotiable' pattern signals the latter.",
         "distractors": [
@@ -336,10 +296,22 @@
       "'The honest conclusion is not a resolution but a recognition.' (start of paragraph 5): the author explicitly declines to solve the problem."
     ],
     "misunderstanding": "Readers try to make the passage pick a side, either 'outcomes should count, punish the killer more' or 'only control matters, so judge them alike'. The passage refuses both; it holds the two in unresolved tension. The other slip is to read paragraph 4 as finding a luck-proof self, when it does the opposite: dissolving the self toward a vanishing point.",
-    "traps_summary": "Every distractor here offers a resolution the author withholds: endorse outcome-based punishment, defend the control principle, abandon one side, or locate a rescued self. The passage's whole discipline is to hold the paradox open. Answer for the tension, not for either horn of it, and read the closing tone as humility rather than victory.",
+    "traps_summary": "Every distractor here offers a resolution the author withholds: endorse outcome-based punishment, defend the control principle, abandon one side, or describe the passage as reaching a verdict it never reaches. The passage's whole discipline is to hold the paradox open. Answer for the tension, not for either horn of it, and read the closing tone as humility rather than victory.",
     "reading_lesson": "Some passages present a problem they deliberately do not solve, and the reader's job is to resist resolving it for them. When the text says its conclusion is 'not a resolution but a recognition', treat every option that picks a side or supplies an answer as a trap: the correct answers describe and preserve the unresolved conflict. Notice when an author is staging a paradox rather than defending a thesis, and let your answers honour the openness the author intends.",
     "real_world": "Moral luck runs under everyday life: the same texting-while-driving is a private embarrassment or a manslaughter charge depending on who was crossing; the reckless founder is a visionary or a fraud depending on whether the market turned; we admire people who were never tested and condemn those who were. Noticing luck's hand is not an excuse for anyone, but it is a genuine reason for humility in how we judge others, and ourselves.",
     "takeaway": "Much of what we confidently praise and blame rests on fortune we did not control: a reason less for excuse than for humility.",
-    "reflection_question": "Whom have you judged harshly for an outcome that, but for luck, could just as easily have been yours?"
+    "reflection_question": "Whom have you judged harshly for an outcome that, but for luck, could just as easily have been yours?",
+    "eli10": {
+      "big_idea": "We judge people partly by luck, yet believe only what they control should count; both beliefs are firm, and they cannot be fitted together.",
+      "story": "Two drivers leave a party equally drunk. Both take the same corner too fast. On one road a child is crossing, and she is killed. On the other, nobody is there. We call the first driver a killer and the second merely reckless. Yet the only difference was luck. We also hold another belief: people should be judged only for what they control. By that rule, the two drivers are equally to blame. But we cannot truly believe that. The first driver did kill someone. So we are stuck with two firm beliefs that clash. It gets worse. Luck shapes almost everything: our nature, our upbringing, the tests life happens to set us. Take away all the luck and almost no 'self' seems left to blame. The writer does not pretend to solve this. The lesson is humility about our judgements of others, and of ourselves.",
+      "paragraphs": [
+        "Starts with a case: two equally drunk drivers, only one kills a child, and we judge them very differently.",
+        "Sets up the clash: we believe people should be blamed only for what they control.",
+        "Shows the deadlock: we can give up neither the rule nor our sense that killing makes a difference.",
+        "Widens the problem: luck shapes nearly everything, so the self we blame almost disappears.",
+        "Ends without a solution: both beliefs stay, and the lesson is humility about our judgements."
+      ],
+      "author_view": "Troubled but honest: the writer faces a hard puzzle, refuses a neat answer, and asks for humility."
+    }
   }
 }

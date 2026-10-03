@@ -8,12 +8,13 @@
  *            big Help button, everything you can do with them, their story
  *   fire     Toffee's fire: the days in a row, the week, spare logs, the Gauntlet
  *   level    the village level: stars, and what each level puts on the map
- *   friends  who is who: six friends, what each teaches, who is best friends
+ *   friends  every subject: one row per house, each a tap from its next round
  *   today    today's three friends and their gift
- *   cottage  your village's name, sound, the other rooms
+ *   cottage  settings: your village's name, sound, progress (the HUD gear; the
+ *            rose cottage on the map is Ginger's Sentence Placement house)
  */
 
-import { PETS, PET_BY_ID, STORIES, HOME_GIFTS, FRIENDSHIPS, friendshipOf, lineFor } from '../pets/pets.js';
+import { PETS, PET_BY_ID, HOUSES, STORIES, HOME_GIFTS, FRIENDSHIPS, friendshipOf, lineFor } from '../pets/pets.js';
 import { DAILY_GIFT } from '../pets/economy.js';
 import { nextFor, cornersOf, noticeFor } from '../pets/next.js';
 import { petSprite, petPortrait, backdropStyle, FRAME } from '../pets/sprite.js';
@@ -171,21 +172,22 @@ function levelCard(card, api) {
 /* Who is who                                                          */
 /* ------------------------------------------------------------------ */
 
+/** Every subject in one list, each one tap from its next round (the map's signs say the same thing). */
 function friendsCard(card, api) {
   const P = api.pets;
+  const start = (h) => (h.place === 'placement' || h.place === 'completion'
+    ? `#/bank/session/${h.place === 'placement' ? 'sp' : 'pc'}/next`
+    : nextFor(h.pet, api.world, { first: P.pets.find((p) => p.id === h.pet)?.isNew })?.href ?? `#/world/place/${h.place}`);
   card.innerHTML = `
     ${close}
-    <p class="cw-eyebrow">Who is who</p>
-    <h2 class="cw-card__name">Your six friends</h2>
-    <p class="cw-sub">Each friend teaches one part of CAT English. Every round you play with a friend helps them, and the whole village grows.</p>
-    <ul class="cw-roster">${PETS.map((def) => {
-      const p = P.pets.find((x) => x.id === def.id);
-      return `<li><button data-friend="${def.id}">${petPortrait(def.id, 48, { mood: p.isNew ? 0.3 : p.mood })}<span class="cw-roster__who"><b>${esc(def.name)}</b><small>${esc(def.teaches)}</small></span><span class="cw-roster__side"><span class="cw-moodchip cw-moodchip--${p.word}">${MOOD_LABEL[p.word]}</span><span class="cw-roster__hearts" aria-label="${p.hearts} of 5 hearts">${'♥'.repeat(p.hearts)}<i>${'♡'.repeat(5 - p.hearts)}</i></span></span></button></li>`;
-    }).join('')}</ul>
+    <p class="cw-eyebrow">CAT VARC</p>
+    <h2 class="cw-card__name">Every subject</h2>
+    <p class="cw-sub">Each house in the village holds one part of the VARC section, and its sign on the map says which. Start any of them: every round helps that friend and grows the village.</p>
+    <ul class="cw-roster">${HOUSES.map((h) => `<li><a href="${esc(start(h))}" data-go>${petPortrait(h.pet, 44)}<span class="cw-roster__who"><b>${esc(h.subject)}</b><small>${esc(h.ask)} · with ${esc(PET_BY_ID.get(h.pet).name)}</small></span><i class="cw-roster__go" aria-hidden="true">▶</i></a></li>`).join('')}</ul>
     <h3 class="cw-h3">Best friends</h3>
     <ul class="cw-pairs">${FRIENDSHIPS.map((f) => `<li><span class="cw-pairs__faces">${petPortrait(f.a, 30)}${petPortrait(f.b, 30)}</span><span>${esc(f.line)}</span></li>`).join('')}</ul>
     <p class="cw-sub">And you? You are the new friend everyone has been waiting for.</p>`;
-  for (const b of card.querySelectorAll('[data-friend]')) b.addEventListener('click', () => { api.play('tap'); api.close(); api.showPet(b.dataset.friend); });
+  for (const a of card.querySelectorAll('[data-go]')) a.addEventListener('click', () => api.play('open'));
 }
 
 /* ------------------------------------------------------------------ */
@@ -207,7 +209,7 @@ function todayCard(card, api) {
 }
 
 /* ------------------------------------------------------------------ */
-/* The cottage: your name, sound, the other rooms                       */
+/* Settings: your name, sound, the other rooms                         */
 /* ------------------------------------------------------------------ */
 
 function cottageCard(card, api) {
@@ -216,8 +218,7 @@ function cottageCard(card, api) {
   const named = !!api.valley?.name;
   card.innerHTML = `
     ${close}
-    <div class="cw-card__hero cw-card__hero--cottage" style="${backdropStyle('cottage')}" aria-hidden="true"></div>
-    <p class="cw-eyebrow">Your cottage</p>
+    <p class="cw-eyebrow">Settings</p>
     <h2 class="cw-card__name">${esc(name)}</h2>
     <form class="cw-name" data-name>
       <label for="cw-name-in">${named ? 'Rename your village' : 'Give your village a name'}</label>
@@ -229,7 +230,7 @@ function cottageCard(card, api) {
       <button class="cw-toggle" data-sfx aria-pressed="${prefs.sfx}"><span>Sounds and voices</span><i aria-hidden="true"></i></button>
     </div>
     <nav class="cw-rooms" aria-label="The other rooms">
-      <a href="#/growth"><b>The clock tower</b><small>How far you have come, subject by subject</small><i aria-hidden="true">›</i></a>
+      <a href="#/growth"><b>Your progress</b><small>How far you have come, subject by subject</small><i aria-hidden="true">›</i></a>
       <a href="#/world/place/hearth"><b>Records</b><small>Your days, stars and friends</small><i aria-hidden="true">›</i></a>
       <a href="#/settings"><b>Settings</b><small>Reading size, theme, motion, backup and restore</small><i aria-hidden="true">›</i></a>
     </nav>

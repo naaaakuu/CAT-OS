@@ -18,6 +18,7 @@
  */
 
 import { validate } from './validator.js';
+import { stageSizeIssues } from '../learning/journey.js';
 import {
   RC_TYPE_SKILL, RC_PREDICTION_TYPES, WB_KIND_SKILL, CR_KIND_SKILL, TIER_RANGE,
   lengthClassOf, difficultyLabel,
@@ -976,6 +977,22 @@ export function consistencyIssues(id, item) {
     journeyIds.forEach((jid, i) => {
       if (jid !== paraIds[i]) issues.push(`mentor journey[${i}] is ${jid}, expected ${paraIds[i]}`);
     });
+  }
+  // CAT-sized for its stage (core/learning/journey.js STAGE_SIZE): a
+  // beginner is never handed a six-paragraph passage again.
+  if (item.meta.stage) {
+    const words = item.passage.paragraphs.reduce((n, p) => n + p.text.trim().split(/\s+/).length, 0);
+    issues.push(...stageSizeIssues(item.meta.stage, { words, paras: item.passage.paragraphs.length, qs: item.questions.length }));
+  }
+  // The passage explained simply: a line for every paragraph, short
+  // sentences a ten-year-old can follow, and no em dashes anywhere.
+  const kid = item.mentor?.eli10;
+  if (kid) {
+    if (kid.paragraphs.length !== item.passage.paragraphs.length) issues.push(`eli10 has ${kid.paragraphs.length} paragraph lines for ${item.passage.paragraphs.length} paragraphs`);
+    if (/—/.test([kid.big_idea, kid.story, ...kid.paragraphs, kid.author_view].join(' '))) issues.push('eli10 uses an em dash');
+    const said = kid.story.trim().split(/\s+/).length, sentences = kid.story.split(/[.!?]+(?:\s|$)/).filter((s) => s.trim()).length;
+    if (said > 170) issues.push(`eli10 story is ${said} words; keep it under 170`);
+    if (said / Math.max(1, sentences) > 16) issues.push(`eli10 story sentences average ${(said / Math.max(1, sentences)).toFixed(1)} words; keep them to 16 or fewer`);
   }
   // v5: the pattern layer. Every fact the curator and the ledger will read
   // off this file has to be true of the file.

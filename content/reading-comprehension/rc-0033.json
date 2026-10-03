@@ -17,17 +17,16 @@
       "concession-tracking",
       "trap-recognition"
     ],
-    "word_count": 395,
-    "question_count": 5,
+    "word_count": 389,
+    "question_count": 4,
     "question_types": [
       "inference",
       "main_idea",
       "paragraph_function",
-      "phrase_in_context",
       "weaken"
     ],
     "theme": "unexplained organisational rules as the residue of forgotten failures, and the discipline of reconstructing a rule's purpose before removing it",
-    "estimated_time_min": 8.5,
+    "estimated_time_min": 8,
     "source": {
       "publication": "original",
       "url": null,
@@ -38,7 +37,7 @@
     "date_added": "2026-09-12",
     "batch_id": "batch-rc-002",
     "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); authored as the v5 exemplar",
-    "reviewer_notes": "The exemplar for the pattern layer: a claim that is then qualified, so that both the confident reformer and the reverent traditionalist are traps. The near-tie is in the weaken question.",
+    "reviewer_notes": "The exemplar for the pattern layer: a claim that is then qualified, so that both the confident reformer and the reverent traditionalist are traps. The near-tie is in the weaken question. 2026-10-03 CAT-size pass: 389→389 words, 4→4 paragraphs, 5→4 questions. Dropped q4 (phrase_in_context on 'scar tissue', the lightest of the five; the inference, function and weaken questions carry the argument).",
     "length_class": "medium",
     "structure": "claim_qualification",
     "viewpoints": 2,
@@ -69,8 +68,8 @@
       "arg.evidence_vs_conclusion"
     ],
     "quality": {
-      "status": "verified",
-      "adversarial_review": "Q1: a strong candidate argues for the option that says organisations remember what members forget and such rules should be kept, it is the passage's most quotable sentence. It loses on p4, which names reverence as an error, and on p3's 'not a licence', which asks for inquiry, not retention. Q5: the option about rigidly followed rules causing most failures is the near-tie; it bears on the cost of keeping rules in general, but the burden-of-proof claim rests on the presumption that unexplained rules encode live lessons, and only the large-study option attacks that presumption directly. Q2: 'evidence the lesson is lost' is tempting because p2 says the origin is lost; but p2 also says the rule keeps doing its work, the lesson lives in the rule, not in anyone's memory.",
+      "status": "reviewed",
+      "adversarial_review": "Q1: a strong candidate argues for the option that says organisations remember what members forget and such rules should be kept, it is the passage's most quotable sentence. It loses on p4, which names reverence as an error, and on p3's 'not a licence', which asks for inquiry, not retention. Q5: the option about rigidly followed rules causing most failures is the near-tie; it bears on the cost of keeping rules in general, but the burden-of-proof claim rests on the presumption that unexplained rules encode live lessons, and only the large-study option attacks that presumption directly. Q2: 'evidence the lesson is lost' is tempting because p2 says the origin is lost; but p2 also says the rule keeps doing its work, the lesson lives in the rule, not in anyone's memory. (2026-10-03, CAT-size pass: q4 was dropped, so any note above about it no longer applies.)",
       "blind_solve": {
         "solver": "blind reviewer (fresh session, no key)",
         "agreed": 5,
@@ -86,7 +85,7 @@
   },
   "passage": {
     "title": "The Rule Nobody Can Explain",
-    "reading_time_min": 2.2,
+    "reading_time_min": 2.1,
     "paragraphs": [
       {
         "id": "rc-0033-p1",
@@ -277,59 +276,6 @@
       }
     },
     {
-      "id": "rc-0033-q4",
-      "type": "phrase_in_context",
-      "skill": "vocabulary_in_context",
-      "patterns": [
-        "word.context_clue",
-        "comp.paraphrase"
-      ],
-      "target_mistake": "reading the metaphor's vehicle (scar, injury) instead of its tenor in this sentence (a protective residue of a lesson)",
-      "prediction_target": "The learner should paraphrase from the sentence itself: the rule is what a past harm left behind, protecting against its recurrence.",
-      "difficulty": {
-        "inference_depth": 2,
-        "distractor_similarity": 3,
-        "reasoning_depth": 2
-      },
-      "secondary_skills": [],
-      "stem": "In the second paragraph, the phrase \"the scar tissue of a lesson learned\" most nearly refers to",
-      "options": {
-        "A": "a permanent injury the organisation sustained and never fully recovered from",
-        "B": "a lasting protective adaptation that formed in response to a past harm",
-        "C": "a visible reminder that those who made the original mistake have since moved on",
-        "D": "an imperfection that ought to be removed once the harm beneath it has healed"
-      },
-      "correct": "B",
-      "estimated_time_sec": 50,
-      "explanation": {
-        "expert_notice": "The sentence contrasts two views of the same rule: 'from inside' it looks like friction; 'from the vantage of the failure' it looks like scar tissue. The scar is the good view, the one that sees the rule as what the failure produced: a check that keeps 'doing its work silently'.",
-        "correct_reasoning": "In context the phrase names the residue a past failure leaves behind: a check that was added because something went wrong and that goes on protecting against it. 'Lasting protective adaptation formed in response to a past harm' is that residue, read the way the sentence intends: as the mark of a lesson, not of a wound.",
-        "passage_anchor": "rc-0033-p2",
-        "question_type_note": "Phrase-in-context questions on a metaphor are settled by the sentence's own contrast, not by the dictionary meaning of the image; here the surrounding sentence says what the scar stands for.",
-        "reading_habit": "For any metaphor, ask what job the image is doing in its sentence, praising, warning, explaining, before you translate it. The dictionary sense of the image is the standard trap.",
-        "distractors": [
-          {
-            "option": "A",
-            "trap_type": "near_synonym_confusion",
-            "why_wrong": "This takes the literal sense of scarring as damage; the sentence uses the scar as evidence of healing and protection, the mark of a lesson rather than an unrecovered loss.",
-            "seductive_element": "Scars really are injuries, and 'permanent' sounds like 'the check remained'."
-          },
-          {
-            "option": "C",
-            "trap_type": "passage_language_shifted",
-            "why_wrong": "The people moving on is a fact from the same paragraph, but the scar is a figure for the rule's protective function, not a reminder of anyone's departure.",
-            "seductive_element": "It reuses the paragraph's own detail ('moved on') beside the phrase in question."
-          },
-          {
-            "option": "D",
-            "trap_type": "prescriptive_leap",
-            "why_wrong": "Nothing in the sentence recommends removal; the metaphor belongs to the view that sees the rule as valuable, and the passage's own advice is reconstruction before any decision.",
-            "seductive_element": "It reads like the reformer's instinct from p1, which the passage has just described sympathetically."
-          }
-        ]
-      }
-    },
-    {
       "id": "rc-0033-q5",
       "type": "weaken",
       "skill": "strengthen_weaken",
@@ -446,6 +392,17 @@
     "reading_lesson": "When an author says 'the lesson is not…' or 'the argument has a limit', the thesis is being narrowed in front of you. Carry the narrowed version, not the vivid earlier one, into every question: the exam will offer you the vivid version as a distractor.",
     "real_world": "Every time you inherit a process at work, a family custom, or a line in a contract that nobody can explain, you face exactly this choice, and the quick answer in either direction is the expensive one.",
     "takeaway": "Not knowing why a rule exists is a reason to find out, not a reason to act.",
-    "reflection_question": "Which rule in your own life have you kept or dropped without ever learning what it was for?"
+    "reflection_question": "Which rule in your own life have you kept or dropped without ever learning what it was for?",
+    "eli10": {
+      "big_idea": "Neither worship nor scrap a rule nobody can explain: first find out what it was for, then decide.",
+      "story": "Every workplace has rules nobody can explain, like a form signed twice. The obvious move is to scrap them. The writer says that instinct is reasonable but rests on a guess: no visible reason means no reason. Most rules were not planned. People added them after something went wrong, like a payment sent twice. Those people left, and nobody wrote down why. The rule may still be quietly stopping that old mistake. It is like brushing your teeth: the holes it prevents never appear. Scrap such a rule and nothing goes wrong at first. The trouble may return years later, and nobody links the two. So whoever wants a rule gone should say what would break without it. If nobody can, find out first. Still, some rules really are dead, and worshipping every rule makes an organisation stiff. The answer: learn what a rule was for, then decide.",
+      "paragraphs": [
+        "Names the reformer's instinct, scrap rules nobody can justify, and questions its hidden guess.",
+        "Explains where rules come from: past failures leave checks behind, and their reasons get forgotten.",
+        "Draws the lesson: the harm returns late, so a rule's remover must first say what it prevents.",
+        "Admits a limit: some rules are dead, so neither worship nor scrap them; find out, then decide."
+      ],
+      "author_view": "Fair-minded and practical: the writer sympathises with reformers but asks for the slow job of finding out first."
+    }
   }
 }

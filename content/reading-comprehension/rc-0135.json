@@ -1,0 +1,407 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0135",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 86,
+    "genre": "ethics",
+    "difficulty": "medium",
+    "difficulty_numeric": 4,
+    "stage": "developing",
+    "skills": [
+      "main-idea-extraction",
+      "argument-tracking",
+      "evidence-anchoring",
+      "tone-detection",
+      "application"
+    ],
+    "word_count": 382,
+    "question_count": 4,
+    "question_types": [
+      "primary_purpose",
+      "specific_detail",
+      "tone",
+      "application"
+    ],
+    "theme": "the case for keeping objects taken under colonial rule answers where they are best seen and cared for, while the case for returning them answers whom they belong to; where an object was taken by force the question of ownership comes first, as no thief may keep a painting by hanging it well, so looted objects should go back, with the keeping side's worries shaping how they go back, while objects that were bought or given need their histories checked one by one, since a sale made under an occupying army may not have been free",
+    "estimated_time_min": 6.5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-03",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted."
+    },
+    "date_added": "2026-10-03",
+    "batch_id": "batch-rc-005",
+    "prompt_version": "content engine v1 + CAT-size brief 2026-10",
+    "reviewer_notes": "An impersonal developing item built as two views weighed and then decided. The restitution debate is familiar; what this adds is the adjudication: the two sides answer different questions (where objects are best kept, whom they belong to), ownership comes first for objects taken by force, the keeping side's worries become questions of how to return rather than whether, and objects bought or given are left to case-by-case history. The palace is left unnamed and described only as far as the argument needs; no question depends on outside knowledge. Four questions: purpose, a detail tied to the passage's phrase 'hard questions', attitude to the keeping case, and an application whose near-tie is a sale made under occupation.",
+    "length_class": "medium",
+    "structure": "two_views_adjudication",
+    "viewpoints": 3,
+    "tone": "even-handed, grave, decided",
+    "difficulty_vector": {
+      "lexical": 2,
+      "syntactic": 2,
+      "abstraction": 3,
+      "inference_depth": 2,
+      "distractor_similarity": 3,
+      "reasoning_depth": 3,
+      "structural_ambiguity": 2,
+      "time_pressure": 2
+    },
+    "reasoning_patterns": [
+      "struct.two_views_adjudication",
+      "struct.claim_counterclaim",
+      "comp.purpose",
+      "comp.explicit_detail",
+      "comp.reference_tracking",
+      "arg.concession",
+      "arg.counterargument",
+      "arg.principle",
+      "arg.analogy",
+      "inf.author_vs_reported",
+      "inf.author_view_application",
+      "scope.condition",
+      "lang.some_vs_all",
+      "lang.may_vs_must",
+      "word.tone_of_word",
+      "elim.near_tie"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1: the near-tie is the option to return every object acquired under colonial rule; the verdict is limited to objects 'taken by force', and objects 'that were bought or given are harder'. The museum option is the reported keeping case. Q2: a strong candidate might argue for the lost free entry, which sits in the same paragraph; but 'Returning them also raises hard questions' introduces something additional, and the next two sentences say what it is, so free entry is a reason for keeping and not one of the hard questions. The passing-of-years option turns a claim from the case for return into a question. Q3: the rival is 'detached', which mistakes a fair hearing for no verdict; 'that question comes first' and 'looted objects should go back' are a verdict. Q4: the near-tie is the statue sold while an army held the town, which the author says 'may not have been a free one', a reason to check its history rather than a settled case; the figure seized by soldiers meets the condition exactly.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "descendants",
+      "likeness",
+      "looted"
+    ]
+  },
+  "passage": {
+    "title": "Bought, Given or Taken",
+    "reading_time_min": 2.1,
+    "paragraphs": [
+      {
+        "id": "rc-0135-p1",
+        "text": "In the late 1890s, soldiers of a European army attacked a royal palace in West Africa and carried off thousands of objects. Among them were brass heads of former kings, carved ivory tusks and plaques showing life at court. Many are now in museums in Europe, where millions of people see them every year. The descendants of the palace's kings, and the country where it stands, have asked for them back. Similar requests now reach museums about many objects taken under colonial rule, and two serious positions have formed."
+      },
+      {
+        "id": "rc-0135-p2",
+        "text": "The case for keeping them is not simply greed. A great museum in a capital city shows the art of many peoples side by side, often free of charge, to visitors who will never travel to West Africa. Many of the objects have been carefully looked after for more than a century. Returning them also raises hard questions. The kingdom they were taken from is now part of a modern state. A royal family, a national government and a new regional museum may each claim to be the rightful owner."
+      },
+      {
+        "id": "rc-0135-p3",
+        "text": "The case for return starts somewhere else. These objects were not bought or given; they were taken by force. The passing of years does not usually turn stolen property into owned property, and the people asking for them are not strangers to them. To a visitor in Europe, a brass head is one fine object among thousands. To the family it was taken from, it may be the likeness of an ancestor, and part of a history that was never written down."
+      },
+      {
+        "id": "rc-0135-p4",
+        "text": "Each side is answering a real question, but not the same one. The case for keeping asks where the objects are best seen and cared for. The case for return asks whom they belong to, and when an object was taken by force, that question comes first. Nobody thinks a thief may keep a stolen painting because he hangs it in good light. So looted objects should go back, and the other side's worries should shape how they go back: to whom, and with what help to look after them. Objects that were bought or given are harder, and each needs its own history checked. A sale made while an army held the town may not have been a free one."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0135-q1",
+      "type": "primary_purpose",
+      "skill": "author_purpose",
+      "patterns": [
+        "comp.purpose",
+        "struct.two_views_adjudication",
+        "lang.some_vs_all",
+        "elim.near_tie"
+      ],
+      "target_mistake": "stretching a verdict about looted objects to everything acquired under colonial rule, or taking the fairly reported keeping case for the author's own",
+      "prediction_target": "The learner should be able to say beforehand: the author weighs both cases and decides that, for objects taken by force, who owns them matters first.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "main_idea"
+      ],
+      "stem": "The author's primary purpose in the passage is to",
+      "options": {
+        "A": "argue that museums should return every object acquired under colonial rule",
+        "B": "weigh both sides and argue that, for looted objects, ownership comes first",
+        "C": "defend great museums as the places where most people can see the world's art",
+        "D": "recount the looting of a royal palace in West Africa in the 1890s"
+      },
+      "correct": "B",
+      "estimated_time_sec": 70,
+      "explanation": {
+        "expert_notice": "Two paragraphs set out the two cases, each in its strongest form, and the last paragraph begins 'Each side is answering a real question, but not the same one.' The purpose has to include both the weighing and the verdict that follows it.",
+        "correct_reasoning": "The author gives the case for keeping its due ('not simply greed') and the case for return its due, then judges between them: when an object was taken by force, the question of whom it belongs to 'comes first', so 'looted objects should go back'. The correct option names both moves, the weighing and the judgement, and limits the judgement to looted objects, as the passage does.",
+        "passage_anchor": "rc-0135-p4",
+        "question_type_note": "A primary-purpose question asks what the author is doing with the whole passage. When a passage weighs two views and then decides, the purpose is to decide, and the right option says how far the decision reaches.",
+        "reading_habit": "In a two-sides passage, notice where the author's own voice begins, and then notice the limits the author puts on the verdict. Wrong options often keep the verdict and drop the limits.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "overstatement",
+            "why_wrong": "The verdict covers objects 'taken by force'. Objects 'that were bought or given are harder, and each needs its own history checked', so the author does not call for returning everything acquired under colonial rule.",
+            "seductive_element": "The author does conclude that looted objects should go back, and this option sounds like that conclusion."
+          },
+          {
+            "option": "C",
+            "trap_type": "reported_view_as_author",
+            "why_wrong": "This is the case for keeping, which the author sets out fairly and then answers: it is about 'where the objects are best seen and cared for', and for looted objects that is not the question that comes first.",
+            "seductive_element": "The author praises what great museums do and calls the keeping case 'not simply greed'."
+          },
+          {
+            "option": "D",
+            "trap_type": "example_as_thesis",
+            "why_wrong": "The looting is the case that opens the passage. The passage's work is to weigh what should now be done about such objects, which this option leaves out.",
+            "seductive_element": "It is the most vivid event in the passage, and it comes first."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0135-q2",
+      "type": "specific_detail",
+      "skill": "specific_detail",
+      "patterns": [
+        "comp.explicit_detail",
+        "comp.reference_tracking"
+      ],
+      "target_mistake": "counting a reason for keeping, or a point from the case for return, among the 'hard questions' that the passage says returning raises",
+      "prediction_target": null,
+      "difficulty": {
+        "inference_depth": 1,
+        "distractor_similarity": 3,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "logical_structure"
+      ],
+      "stem": "According to the passage, which of the following is one of the 'hard questions' that returning the objects raises?",
+      "options": {
+        "A": "Whether the objects would be safe in the country they came from",
+        "B": "Whether the passing of years has made the objects the museums' own",
+        "C": "How many visitors would no longer see them free of charge",
+        "D": "Who, in the modern state, should receive them"
+      },
+      "correct": "D",
+      "estimated_time_sec": 45,
+      "explanation": {
+        "expert_notice": "The phrase 'hard questions' is followed at once by what they are: the kingdom 'is now part of a modern state', and 'A royal family, a national government and a new regional museum may each claim to be the rightful owner.'",
+        "correct_reasoning": "The hard question the passage names is one of ownership today: the old kingdom no longer stands on its own, and three parties may each claim the objects. The correct option states that question. The author comes back to it in the last paragraph, as one of the worries that should shape how looted objects go back: 'to whom'.",
+        "passage_anchor": "rc-0135-p2",
+        "question_type_note": "A detail question asks for what the passage actually says at one point. When the stem quotes a phrase, find the phrase and read the sentences that follow it before looking at the options.",
+        "reading_habit": "When a writer announces a list, such as 'hard questions' or 'two reasons', check exactly what goes into it. Questions are often built on points that sit near the list but are not part of it.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "common_knowledge_intrusion",
+            "why_wrong": "The passage never says the objects would be unsafe if returned. It says only that they 'have been carefully looked after' in Europe; the worry about safety comes from outside the passage.",
+            "seductive_element": "It is one of the arguments most often heard in real debates about returning objects."
+          },
+          {
+            "option": "B",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "The passing of years belongs to the case for return, and there it is a claim, not a question: it 'does not usually turn stolen property into owned property'. The option turns the claim into one of the hard questions.",
+            "seductive_element": "It repeats the passage's own phrase about the passing of years."
+          },
+          {
+            "option": "C",
+            "trap_type": "true_but_irrelevant",
+            "why_wrong": "Free entry is part of the case for keeping, given before the hard questions are raised: 'Returning them also raises hard questions' adds something new. It is a reason to keep the objects, not one of the questions about returning them.",
+            "seductive_element": "It is in the same paragraph, and losing visitors does sound like a difficulty of return."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0135-q3",
+      "type": "tone",
+      "skill": "tone",
+      "patterns": [
+        "word.tone_of_word",
+        "inf.author_vs_reported",
+        "arg.concession"
+      ],
+      "target_mistake": "reading the author's fair hearing of the keeping case as scorn, as agreement, or as a refusal to judge",
+      "prediction_target": "The learner should be able to say beforehand: the author respects the keeping case's concerns but does not let them decide who owns looted objects.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "author_purpose"
+      ],
+      "stem": "The author's attitude towards the case for keeping the objects is best described as",
+      "options": {
+        "A": "scornful, treating it as greed dressed up as public service",
+        "B": "respectful, but unconvinced that it settles who owns them",
+        "C": "persuaded by it in the end, since the objects are well cared for",
+        "D": "detached, declining to judge between it and the case for return"
+      },
+      "correct": "B",
+      "estimated_time_sec": 50,
+      "explanation": {
+        "expert_notice": "Two phrases carry the attitude. The second paragraph opens 'The case for keeping them is not simply greed', and the last says that the keeping side's worries 'should shape how they go back'. Respect for the concerns, and a refusal to let them decide ownership.",
+        "correct_reasoning": "The author takes the keeping case seriously and gives it its strongest points: free entry for visitors, a century of care, a real question about who should receive the objects. But the author also says it answers a different question from ownership, and that for looted objects ownership 'comes first'. Respectful, and unconvinced on the point that matters: that is the correct option.",
+        "passage_anchor": "rc-0135-p2, rc-0135-p4",
+        "question_type_note": "An attitude question needs two decisions: which way the author leans, and how strongly. Here the author leans against the keeping case on ownership, without any scorn.",
+        "reading_habit": "Find the sentence where the author first describes a view and the sentence where the author finally places it. The attitude lies between the two.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "over_intense_tone",
+            "why_wrong": "The author says the opposite: 'The case for keeping them is not simply greed.' Nothing in the passage is scornful.",
+            "seductive_element": "The author does reject the keeping case for looted objects, and the comparison with a thief sounds sharp."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The author grants the care but concludes that 'looted objects should go back'. Good care does not make keeping right: a thief may not keep a painting 'because he hangs it in good light'.",
+            "seductive_element": "The author does accept that the objects have been 'carefully looked after'."
+          },
+          {
+            "option": "D",
+            "trap_type": "weakened_version",
+            "why_wrong": "The author does judge, in the last paragraph: ownership 'comes first' and looted objects 'should go back'. The fair hearing comes before a verdict, not instead of one.",
+            "seductive_element": "Two paragraphs give each side a fair hearing, which can look like a refusal to choose."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0135-q4",
+      "type": "application",
+      "skill": "application",
+      "patterns": [
+        "inf.author_view_application",
+        "scope.condition",
+        "lang.may_vs_must",
+        "elim.near_tie"
+      ],
+      "target_mistake": "treating a doubtful sale as if it were settled, or deciding a case by how well an object has been kept",
+      "prediction_target": "The learner should be able to say beforehand: the clearest case is an object plainly taken by force, since only there does the author say ownership comes first.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 3,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "inference",
+        "scope"
+      ],
+      "stem": "Which of the following would the author's reasoning treat as most clearly calling for return?",
+      "options": {
+        "A": "A mask that a chief gave to a visiting governor as a gift",
+        "B": "A statue sold to an officer while the officer's army held the town",
+        "C": "A figure seized from a shrine by soldiers during a war of conquest",
+        "D": "A drum that a museum has cared for better than its makers could have"
+      },
+      "correct": "C",
+      "estimated_time_sec": 90,
+      "explanation": {
+        "expert_notice": "The verdict comes with a condition: 'when an object was taken by force, that question comes first.' Objects 'bought or given are harder', and a sale made while an army held the town 'may not have been a free one'. The option to look for is the one that plainly meets the condition.",
+        "correct_reasoning": "A figure seized by soldiers during a war was taken by force, which is the case the author decides: ownership comes first, and 'looted objects should go back'. No history needs checking, because the taking is part of the description. The other cases are either harder by the author's own account or are decided by a fact the author says does not come first.",
+        "passage_anchor": "rc-0135-p4",
+        "question_type_note": "An application question asks you to sort new cases by the author's rule. When the author gives a clear case and a harder one, the answer to 'most clearly' is the clear case.",
+        "reading_habit": "When an author draws a line, such as taken versus bought, note which side each later example falls on. Questions often offer a case sitting right on the line.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "wrong_condition",
+            "why_wrong": "A gift is one of the cases the author calls 'harder', needing its own history checked. It does not meet the condition, taken by force, under which the author says ownership comes first.",
+            "seductive_element": "It passed to a colonial official, which sounds close enough to the looted objects."
+          },
+          {
+            "option": "B",
+            "trap_type": "possibility_as_certainty",
+            "why_wrong": "The author says such a sale 'may not have been a free one', which is a reason to check its history, not a finding that it was taken by force. It may call for return, but not most clearly.",
+            "seductive_element": "It is the author's own example of a doubtful sale, so it can seem already settled."
+          },
+          {
+            "option": "D",
+            "trap_type": "true_but_irrelevant",
+            "why_wrong": "Care answers the question of where an object is best kept, which the author says does not come first. Whether the drum should go back depends on how it was acquired, and the option does not say.",
+            "seductive_element": "The passage praises the care museums have given, and the option makes care the deciding fact."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "descendants",
+      "passage_use": "The descendants of the palace's kings",
+      "meaning_here": "people born later in the same family line",
+      "difficulty": "easy"
+    },
+    {
+      "word": "likeness",
+      "passage_use": "it may be the likeness of an ancestor",
+      "meaning_here": "a picture or figure made to look like a particular person",
+      "difficulty": "medium"
+    },
+    {
+      "word": "looted",
+      "passage_use": "So looted objects should go back",
+      "meaning_here": "stolen by force, especially by soldiers in a war",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "A passage that gives each side of a hard dispute its strongest case before deciding. Keep the two cases apart from the author's own verdict, and notice exactly how far that verdict reaches.",
+    "one_sentence_summary": "Objects looted from a West African palace in the 1890s, and many others taken under colonial rule, are claimed by the people they were taken from; the case for keeping them is about where they are best seen and cared for, the case for return is about whom they belong to, and since ownership comes first for objects taken by force, the author concludes that looted objects should go back, with the keeping side's worries shaping how, while objects bought or given need their histories checked.",
+    "main_idea": "The two sides of the debate about returning objects taken under colonial rule answer different questions: where the objects are best kept, and whom they belong to. The author judges that for objects taken by force the question of ownership comes first, so they should be returned, while objects that were bought or given must be judged case by case.",
+    "simple_explanation": "In the 1890s a European army attacked a royal palace in West Africa and took thousands of objects: brass heads of old kings, carved ivory tusks and plaques showing life at court. Many are now in European museums, where millions of people see them. The kings' descendants and the country where the palace stands want them back, and similar requests now reach museums about many objects taken under colonial rule.\n\nThe writer first gives the case for keeping them, and says it is not just greed. Big museums show the art of many peoples together, often for free, to people who will never visit West Africa. The objects have been well looked after for over a century. And returning them is complicated: the old kingdom is now part of a modern country, and a royal family, a national government and a new museum might each say the objects belong to them.\n\nThen the writer gives the case for return. These objects were not bought or given; they were taken by force. Time does not usually make stolen things belong to whoever took them, and the people asking are not strangers to the objects. To a visitor, a brass head is one fine object among thousands; to the family it came from, it may be the face of an ancestor and part of its history.\n\nFinally the writer judges. The two sides are answering different questions: where the objects are best kept, and who owns them. When something was taken by force, ownership comes first, just as a thief cannot keep a painting because he hangs it nicely. So looted objects should go back, and the other side's worries should guide how they go back. Objects that were bought or given are harder and need their histories checked, because a sale made while an army held the town may not have been free.",
+    "why_difficult": "The author gives both sides generous room, so a reader can mistake fairness for agreement with one side, or for a refusal to decide. The verdict comes only in the last paragraph, and it has a limit that is easy to miss: it covers objects taken by force, not everything acquired under colonial rule.",
+    "author_intention": "To give a hard dispute a fair hearing, to show that the two sides are answering different questions, and to reach a firm but limited verdict.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0135-p1",
+        "role": "Sets out the dispute",
+        "note": "Soldiers looted a West African palace in the 1890s; the objects are in European museums, and the descendants want them back."
+      },
+      {
+        "paragraph_id": "rc-0135-p2",
+        "role": "Gives the case for keeping",
+        "note": "Museums show many cultures to millions and have cared for the objects, and returning them raises a hard question about who should receive them."
+      },
+      {
+        "paragraph_id": "rc-0135-p3",
+        "role": "Gives the case for return",
+        "note": "The objects were taken by force; time does not make stolen things owned, and they mean far more to the people they came from."
+      },
+      {
+        "paragraph_id": "rc-0135-p4",
+        "role": "Delivers the verdict",
+        "note": "The sides answer different questions. For looted objects ownership comes first, so they should go back; bought or given objects need checking."
+      }
+    ],
+    "tone_progression": "Plain and factual in the opening history, generous in setting out each case, and firm in the last paragraph, where the author reaches a verdict and then carefully limits it.",
+    "key_transitions": [
+      "'The case for keeping them is not simply greed.' (opening of paragraph 2): the author gives the keeping side a fair hearing.",
+      "'The case for return starts somewhere else.' (opening of paragraph 3): the second case begins from a different question.",
+      "'Each side is answering a real question, but not the same one.' (opening of paragraph 4): the author starts to judge."
+    ],
+    "misunderstanding": "A hurried reader either thinks the author sides with the museums, because their case is put so warmly, or that the author wants every object from colonial times returned. The verdict is narrower: objects taken by force should go back, and the rest need their histories checked.",
+    "traps_summary": "The options stretch the verdict to every object, hand the keeping case to the author, take the opening example for the subject, bring in a familiar argument the passage never makes, turn a claim into a question, mistake fairness for fence-sitting, and treat a sale that 'may not have been' free as certainly unfree.",
+    "reading_lesson": "In a passage that weighs two sides, read for three things: each side's best point, the author's verdict, and the limit on that verdict. Most wrong options keep the verdict and drop the limit.",
+    "real_world": "The same distinction helps in many disputes, from family heirlooms to land and archives: who owns a thing and who can look after it best are different questions, and the first usually has to be settled before the second.",
+    "takeaway": "Where something was taken by force, who owns it comes before who keeps it best.",
+    "reflection_question": "Can you think of another dispute in which the two sides are really answering different questions?",
+    "eli10": {
+      "big_idea": "Objects taken by force in colonial times should go back, because who owns them matters before who looks after them best.",
+      "story": "Soldiers once raided a palace in West Africa. They took thousands of beautiful objects. Many now sit in museums in Europe. The families of the old kings want them back. Some people say the museums should keep them. Big museums show them to millions, often for free, and look after them well. It is not clear who should get them back. Other people say the objects were stolen. Time does not usually make stolen things belong to the thief. To the families, an object may show an ancestor's face. The writer says the two sides answer different questions. One is about who can look after things best. The other is about who owns them. Imagine someone took your bicycle. Polishing it would not make it theirs. So objects taken by force should go back. Bought or given objects need checking one by one.",
+      "paragraphs": [
+        "Tells the story: soldiers took objects from an African palace, and now people want them back.",
+        "Gives one side: museums show the objects to millions and have cared for them well.",
+        "Gives the other side: the objects were taken by force and mean most to their families.",
+        "Gives the verdict: ownership comes first, so stolen objects should go back; others need checking."
+      ],
+      "author_view": "The writer is fair to both sides but firmly believes that objects taken by force should be returned."
+    }
+  }
+}

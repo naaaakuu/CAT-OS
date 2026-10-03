@@ -17,14 +17,13 @@
       "trap-recognition",
       "evidence-anchoring"
     ],
-    "word_count": 574,
-    "question_count": 5,
+    "word_count": 542,
+    "question_count": 4,
     "question_types": [
-      "main_idea",
       "inference",
       "logical_structure",
-      "strengthen_weaken",
-      "vocabulary_in_context"
+      "main_idea",
+      "strengthen_weaken"
     ],
     "theme": "how asymmetric information can unravel a market entirely",
     "estimated_time_min": 9.5,
@@ -38,7 +37,7 @@
     "date_added": "2026-07-06",
     "batch_id": "batch-rc-004",
     "prompt_version": "in-repo authored (Premium Reading Library milestone); RC_MASTER_GENERATION_PROMPT.v1 + CAT_VARC_BIBLE craft rules applied",
-    "reviewer_notes": "Hard economics with a self-reinforcing mechanism (adverse selection) the reader must track step by step; includes a strengthen/weaken item on the load-bearing information assumption. Owner review pending.",
+    "reviewer_notes": "Hard economics with a self-reinforcing mechanism (adverse selection) the reader must track step by step; includes a strengthen/weaken item on the load-bearing information assumption. Owner review pending. 2026-10-03 CAT-size pass: 542→542 words, 5→5 paragraphs, 5→4 questions. Dropped q5 (vocabulary_in_context on 'load-bearing walls', which the same paragraph glosses; the weakest of the five); two anchors rewritten as lists.",
     "vocab_extracted": [
       "asymmetry",
       "unravel",
@@ -87,7 +86,7 @@
       "estimated_time_sec": 100,
       "explanation": {
         "correct_reasoning": "The passage traces how a gap in information (p1) leads, through a spiral of individually sensible choices (p2-p3), to a market that can hollow out (p3), with no dishonesty involved (p4), which is why institutions exist to bridge the gap (p5). Option C states this whole arc: asymmetric information, rational unravelling, and the institutions that counter it.",
-        "passage_anchor": "rc-0021-p3 and rc-0021-p5",
+        "passage_anchor": "rc-0021-p3, rc-0021-p5",
         "question_type_note": "The main idea must span the mechanism and its consequence, including the institutional coda, not just the car example.",
         "reading_habit": "For a passage that runs an example into a general principle, put the principle, not the example, at the centre of your one-sentence summary.",
         "distractors": [
@@ -204,7 +203,7 @@
       "estimated_time_sec": 110,
       "explanation": {
         "correct_reasoning": "The unravelling depends on one load-bearing premise: the buyer CANNOT tell good cars from bad and so offers only an average price (p1-p2). If buyers could cheaply and reliably verify quality, they would pay each car its true worth, good cars would not be underpriced, and the spiral would never begin. Option B removes the informational asymmetry that drives the whole result.",
-        "passage_anchor": "rc-0021-p1 and rc-0021-p2",
+        "passage_anchor": "rc-0021-p1, rc-0021-p2",
         "question_type_note": "The weakener must strike the argument's load-bearing assumption: here, the buyer's inability to verify quality.",
         "reading_habit": "To weaken a mechanism, find the single premise that starts the chain and ask what would remove it, not what merely adds a minor exception.",
         "distractors": [
@@ -225,45 +224,6 @@
             "trap_type": "half_right",
             "why_wrong": "The spiral runs on the price the typical buyer offers, since it is the average offer that insults the sound car; occasional buyers paying more leave that average, and therefore the sorting, exactly where it was.",
             "seductive_element": "A higher price is what the good car's owner wanted, so it looks like the thing that would keep him in the market."
-          }
-        ]
-      }
-    },
-    {
-      "id": "rc-0021-q5",
-      "type": "vocabulary_in_context",
-      "stem": "As used in the final paragraph, 'load-bearing walls' most nearly describes institutions that",
-      "options": {
-        "A": "add weight and cost to an otherwise smooth exchange",
-        "B": "are structurally essential to the market's very existence",
-        "C": "are ornaments that a confident market could shed without harm",
-        "D": "shield the goods themselves from damage while in transit"
-      },
-      "correct": "B",
-      "estimated_time_sec": 70,
-      "explanation": {
-        "correct_reasoning": "The paragraph contrasts 'ornaments on the market' with 'load-bearing walls', then says warranties and certifications 'let certain markets exist at all' and are not 'frictions' but 'costly machinery'. 'Load-bearing walls' therefore means structurally essential: remove them and the market collapses. Option B matches this architectural metaphor.",
-        "passage_anchor": "rc-0021-p5",
-        "question_type_note": "Vocabulary-in-context turns on the explicit contrast the paragraph draws: ornament (removable) versus load-bearing (essential).",
-        "reading_habit": "Read a metaphor through the contrast it is set against: 'load-bearing' is defined here precisely by its opposition to 'ornaments'.",
-        "distractors": [
-          {
-            "option": "A",
-            "trap_type": "opposite_direction",
-            "why_wrong": "The paragraph denies this in terms: these devices are 'not frictions added to an otherwise smooth market' but the machinery that lets the market exist, so their cost buys the trade rather than burdening it.",
-            "seductive_element": "Warranties and certifications genuinely are costly, and the passage says so, which makes the burden reading feel textual."
-          },
-          {
-            "option": "C",
-            "trap_type": "opposite_direction",
-            "why_wrong": "Ornament is the term the paragraph raises only to reject, and a wall that could be shed without harm is not load-bearing; remove these and the theory predicts a market thin or absent.",
-            "seductive_element": "It uses the paragraph's own word, which is the half of the contrast a skimming eye lands on first."
-          },
-          {
-            "option": "D",
-            "trap_type": "near_synonym_confusion",
-            "why_wrong": "The figure is architectural rather than protective: what the walls hold up is the market, and what warranties and certifications guard against is not damage but the gap in information.",
-            "seductive_element": "Walls suggest physical shelter, and goods in trade do need protecting."
           }
         ]
       }
@@ -340,6 +300,18 @@
     "reading_lesson": "In a passage that builds a mechanism, identify the single premise the whole chain rests on: here, 'the buyer cannot verify quality'. That premise is where strengthen/weaken questions live, and naming it also protects you from moral or causal distractors that the topic invites but the argument excludes. Track the machine, find the first domino, and answer from the structure rather than from the story the subject matter tempts you to tell.",
     "real_world": "This explains why used goods sell at a discount, why 'certified pre-owned', star ratings, escrow, insurance underwriting, and professional licences exist, and why brand-new markets (early online sales, novel financial products) struggle until trust machinery is built. It also warns that where quality can't be verified, some insurance and credit markets, good options can be priced out entirely, leaving everyone worse off.",
     "takeaway": "A market can eat itself with nobody misbehaving: all it takes is for one side to know more than the other.",
-    "reflection_question": "Where in your own choices do you pay an 'average price' because you can't tell the good option from the bad, and what would let you tell them apart?"
+    "reflection_question": "Where in your own choices do you pay an 'average price' because you can't tell the good option from the bad, and what would let you tell them apart?",
+    "eli10": {
+      "big_idea": "When sellers know more than buyers, honest, sensible choices can empty a market, so things like warranties hold markets up.",
+      "story": "Think about buying a used car. The seller knows if it is good or a dud. You cannot be sure, and the seller cannot prove it. So you offer an in-between price, fair for an average car. Now watch. Owners of good cars find that price too low, so they leave. Owners of duds find it generous, so they rush in. And it does not stop there. With the good cars gone, the average car is worse, so you lower your offer. Then the middling cars leave too. Down and down it goes. In the end only the worst cars may remain, or nobody trades at all. Here is the surprise: nobody cheated or acted foolishly. The trouble is simply that one side knows more. That is why warranties, trusted brands and a mechanic's check matter. They hold up some markets that could not exist otherwise.",
+      "paragraphs": [
+        "Sets up the problem: the seller knows the car's quality, the buyer cannot, and this gap can empty markets.",
+        "Shows the first sorting: an average price drives good cars out and pulls bad ones in.",
+        "Turns it into a spiral: each lower offer drives out the next-best cars, until trade may stop.",
+        "Gives the surprise: nobody is foolish or dishonest; the failure comes from the knowledge gap alone.",
+        "Draws the lesson: warranties, brands and inspections are not extras; they let such markets exist."
+      ],
+      "author_view": "Coolly fascinated: the writer enjoys showing how honest, sensible people can still bring a market down."
+    }
   }
 }

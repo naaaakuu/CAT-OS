@@ -17,18 +17,16 @@
       "evidence-anchoring",
       "trap-recognition"
     ],
-    "word_count": 663,
-    "question_count": 6,
+    "word_count": 500,
+    "question_count": 4,
     "question_types": [
       "agree_disagree",
-      "except",
       "inference",
       "main_idea",
-      "relationship",
-      "specific_detail"
+      "relationship"
     ],
     "theme": "applying trial evidence to an individual patient: the average is an estimate for whoever resembles the enrolled, so the real judgement is about resemblance, and an unnamed difference is not a reason to depart from the result",
-    "estimated_time_min": 11,
+    "estimated_time_min": 8.5,
     "source": {
       "publication": "original",
       "url": null,
@@ -39,8 +37,8 @@
     "date_added": "2026-09-12",
     "batch_id": "batch-rc-003",
     "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-02",
-    "reviewer_notes": "The passage refuses both familiar positions, which is what the relationship and agreement questions are built on. The fourth paragraph rejects the sceptic and the fifth refuses to let the manualist collect the winnings, and readers who stop after the fourth carry away half the argument.",
-    "length_class": "long",
+    "reviewer_notes": "The passage refuses both familiar positions, which is what the relationship and agreement questions are built on. The fourth paragraph rejects the sceptic and the fifth refuses to let the manualist collect the winnings, and readers who stop after the fourth carry away half the argument. 2026-10-03 CAT-size pass: 663→500 words, 5→5 paragraphs, 6→4 questions. Every paragraph is a step in a two-sided adjudication and the kept relationship question reads the fourth against the fifth, so none was dropped; tightened all five. Kept main idea, relationship, inference and agreement; dropped the detail question and the EXCEPT question.",
+    "length_class": "medium",
     "structure": "question_answer",
     "viewpoints": 3,
     "tone": "measured, insistent",
@@ -75,8 +73,8 @@
       "elim.near_tie"
     ],
     "quality": {
-      "status": "verified",
-      "adversarial_review": "Q1's live rival is the decision rule that says a named difference removes the patient from the result: it reads like the passage's own advice and is half of it, but the fifth paragraph says the estimate becomes uncertain rather than inapplicable, and the option's closing clause claims the stronger thing. Q3's rival is the option that a trial reports what a treatment will do in a resembling patient; the second paragraph separates estimate from prediction in one sentence and says an average does not say how benefit was distributed inside the group. Q5's rival is the option calling the sceptic's reasoning sound, which is exactly the inference the fourth paragraph declares empty because it would excuse a doctor from every result ever obtained. Q6's rival is the option about a treatment working in most patients who receive it, which trades an average for a majority; the passage forbids the trade in the sentence that defines an average as a property of a group. Q4's rival is the reading of the fifth paragraph as a conceded objection, which mistakes the author's own second verdict for a surrender.",
+      "status": "reviewed",
+      "adversarial_review": "Q1's live rival is the decision rule that says a named difference removes the patient from the result: it reads like the passage's own advice and is half of it, but the fifth paragraph says the estimate becomes uncertain rather than inapplicable, and the option's closing clause claims the stronger thing. Q3's rival is the option that a trial reports what a treatment will do in a resembling patient; the second paragraph separates estimate from prediction in one sentence and says an average does not say how benefit was distributed inside the group. Q5's rival is the option calling the sceptic's reasoning sound, which is exactly the inference the fourth paragraph declares empty because it would excuse a doctor from every result ever obtained. Q6's rival is the option about a treatment working in most patients who receive it, which trades an average for a majority; the passage forbids the trade in the sentence that defines an average as a property of a group. Q4's rival is the reading of the fifth paragraph as a conceded objection, which mistakes the author's own second verdict for a surrender. (2026-10-03, CAT-size pass: q2, q3 were dropped, so any note above about them no longer applies.)",
       "blind_solve": {
         "solver": "blind reviewer (fresh session, no key)",
         "agreed": 6,
@@ -92,27 +90,27 @@
   },
   "passage": {
     "title": "The Second Judgement",
-    "reading_time_min": 3.4,
+    "reading_time_min": 2.7,
     "paragraphs": [
       {
         "id": "rc-0047-p1",
-        "text": "A trial reports that a drug lowers the rate of a serious event by about a fifth. The patient in the consulting room is eighty-one, takes four other medicines, and has a second illness that would have kept her out of the study altogether. Does the result apply to her? Two answers are usually offered, and they have hardened into positions. The first says that the evidence is what we have, and that departing from it is how medicine returned to anecdote the last time it was tried. The second says that trials describe populations while doctors treat persons, and that an average tells you nothing about the woman in front of you. Both answers are confident, and both are answers to a question that has been badly put."
+        "text": "A trial reports that a drug lowers the rate of a serious event by about a fifth. The patient in the consulting room is eighty-one, with a second illness that would have kept her out of the study. Does the result apply to her? Two answers are usually offered. The first says the evidence is what we have, and that departing from it is how medicine returned to anecdote the last time it was tried. The second says trials describe populations while doctors treat persons, so an average tells you nothing about the woman in front of you. Both answers are confident, and both answer a badly put question."
       },
       {
         "id": "rc-0047-p2",
-        "text": "Begin with what a trial result is. It is an average taken over the people who were enrolled, and an average is a property of a group: it does not say how the benefit was distributed inside that group, and it does not forecast what any particular member of it will experience. So the second answer is right that the number is not a claim about a single person. It is wrong about what follows from that. For anyone who resembles those enrolled, the average remains the best available estimate of what the treatment will do, and a considerably better one than a clinician's recollection of the last dozen patients he treated, which is a sample of twelve assembled by memory. An estimate is not a forecast. It is also not silence."
+        "text": "A trial result is an average taken over the people who were enrolled, and an average is a property of a group: it does not say how the benefit was distributed inside that group, or forecast what any one member will experience. So the second answer is right that the number is not a claim about a single person, but wrong about what follows. For anyone who resembles those enrolled, it remains the best available estimate. An estimate is not a forecast. It is also not silence."
       },
       {
         "id": "rc-0047-p3",
-        "text": "That puts the whole weight on resemblance, and on resemblance in which respects. Patients differ from trial populations in countless ways, and almost none of the ways matter. A difference matters only if it bears on the mechanism by which the treatment produces its benefit, or on the balance of harms that the benefit has to outweigh. Being eighty-one is not, in itself, such a difference; it is a number attached to a person rather than a fact about a drug. A decline in the organ that clears the drug is such a difference, because it alters how much of the drug reaches the tissue and therefore moves both sides of the ledger at once. Applying evidence is the work of telling the first sort of difference from the second."
+        "text": "That puts the whole weight on resemblance, and on resemblance in which respects. A difference matters only if it bears on the mechanism by which the treatment produces its benefit, or on the harms the benefit must outweigh. Being eighty-one is not, in itself, such a difference; it is a number attached to a person rather than a fact about a drug. A decline in the organ that clears the drug is, because it alters how much drug reaches the tissue and so moves both sides of the ledger at once."
       },
       {
         "id": "rc-0047-p4",
-        "text": "Once that is seen, the sceptic's move collapses. From the observation that this patient is not the average patient nothing whatever follows, because no patient is the average patient, and the objection would therefore excuse the doctor from every result ever obtained. What is wanted is not a feeling of difference but a named one, carrying a direction: this feature, working in this way, makes the benefit smaller or the harm larger. Uniqueness that cannot be specified is not evidence about the patient. It is the absence of evidence wearing the clothes of evidence, and it leaves the clinician exactly where he would have stood if no trial had ever been run."
+        "text": "Once that is seen, the sceptic's move collapses. That this patient is not the average patient proves nothing, because no patient is, and the objection would excuse the doctor from every result ever obtained. What is wanted is not a feeling of difference but a named one, carrying a direction: this feature, working in this way, makes the benefit smaller or the harm larger. Uniqueness that cannot be specified is not evidence about the patient but the absence of evidence wearing the clothes of evidence."
       },
       {
         "id": "rc-0047-p5",
-        "text": "None of which hands the victory to the other side. Suppose the difference is named, and named well, and suppose the trial excluded patients who had it. The honest conclusion is not that the estimate stands unchanged; it is that the estimate has become uncertain, by an amount nobody can state. The decision then has to be made out of weaker materials: what is known about the mechanism, whatever smaller studies exist, and the patient's own ranking of the harms she is being asked to accept. That is a judgement, and it cannot be abolished. What the discipline of evidence did was not to remove clinical judgement but to move it, from the question whether the treatment works to the question whether this patient belongs with the people in whom it was shown to work. The second question can be argued about, taught, and got wrong in public. Calling it the art of medicine keeps it none of those things."
+        "text": "None of which hands the victory to the other side. Suppose the difference is named and the trial excluded patients who had it: the estimate does not stand unchanged, but becomes uncertain by an amount nobody can state. The decision must then be made from weaker materials: the mechanism, smaller studies, and the patient's own ranking of the harms. That is a judgement, and it cannot be abolished. The discipline of evidence did not remove clinical judgement but moved it, from the question whether the treatment works to the question whether this patient belongs with those in whom it was shown to work. The second question can be argued about, taught, and got wrong in public. Calling it the art of medicine keeps it none of those things."
       }
     ]
   },
@@ -170,118 +168,6 @@
             "trap_type": "sophisticated_sounding",
             "why_wrong": "The passage does dismiss the art of medicine as a label, but for a different reason: the phrase hides a judgement that could be stated, taught and disputed. It never says that science and art are both required in every decision.",
             "seductive_element": "It borrows the essay's last phrase and dresses it as the balanced conclusion a piece on this subject is expected to reach."
-          }
-        ]
-      }
-    },
-    {
-      "id": "rc-0047-q2",
-      "type": "specific_detail",
-      "skill": "specific_detail",
-      "patterns": [
-        "comp.explicit_detail",
-        "comp.paraphrase",
-        "scope.condition"
-      ],
-      "target_mistake": "taking the passage's own illustration of an irrelevant difference, age, for the criterion by which differences are judged",
-      "prediction_target": null,
-      "difficulty": {
-        "inference_depth": 1,
-        "distractor_similarity": 3,
-        "reasoning_depth": 2
-      },
-      "secondary_skills": [
-        "scope"
-      ],
-      "stem": "According to the passage, a difference between a patient and a trial population matters only when it",
-      "options": {
-        "A": "was large enough for the trial's investigators to exclude patients who had it",
-        "B": "concerns the patient's age, the commonest reason for setting a trial result aside",
-        "C": "bears on how the treatment produces its benefit or on the balance of its harms",
-        "D": "can be shown to be present in a large proportion of the patients seen in practice"
-      },
-      "correct": "C",
-      "estimated_time_sec": 50,
-      "explanation": {
-        "expert_notice": "The third paragraph states the criterion in a single sentence and then supplies one case on each side of it. The criterion is about mechanism and the balance of harms; age is offered as the example of a difference that fails it, and impaired clearance as the example that passes.",
-        "correct_reasoning": "The correct option is the criterion itself, in the passage's own terms. Everything else in the paragraph is arranged around it: eighty-one is rejected because it is a number attached to a person rather than a fact about a drug, and impaired clearance qualifies because it changes how much drug reaches the tissue and so moves both sides of the ledger.",
-        "passage_anchor": "rc-0047-p3",
-        "question_type_note": "A detail question about a stated criterion is answered from the sentence that states it. The reliable decoys are the examples the author used to show the criterion working.",
-        "reading_habit": "When a paragraph gives a rule and then two examples, mark the rule. Examples are what questions are built out of, but rules are what they are answered from.",
-        "distractors": [
-          {
-            "option": "A",
-            "trap_type": "fact_right_interpretation_wrong",
-            "why_wrong": "Exclusion from a trial appears in the fifth paragraph as a circumstance that makes an estimate uncertain, not as the test of whether a difference counts; a difference qualifies by what it does to the drug's working, whether or not any investigator noticed it.",
-            "seductive_element": "The opening patient is one the study would have excluded, so exclusion is on the reader's mind as the mark of a relevant difference."
-          },
-          {
-            "option": "B",
-            "trap_type": "opposite_direction",
-            "why_wrong": "The passage uses age as its example of a difference that does not matter, calling eighty-one a number attached to a person rather than a fact about a drug; the relevant difference in the same paragraph is the failing organ, not the years.",
-            "seductive_element": "Age is the most conspicuous fact about the patient in the first paragraph, and it is the feature a clinician would name first."
-          },
-          {
-            "option": "D",
-            "trap_type": "out_of_scope",
-            "why_wrong": "How common a difference is never enters the passage's test; a rare difference that alters the mechanism counts and a universal one that does not is irrelevant.",
-            "seductive_element": "Prevalence sounds like the sort of thing an evidence-minded author would insist on, and the passage is elsewhere concerned with populations."
-          }
-        ]
-      }
-    },
-    {
-      "id": "rc-0047-q3",
-      "type": "except",
-      "skill": "specific_detail",
-      "patterns": [
-        "comp.explicit_detail",
-        "comp.paraphrase",
-        "lang.absolute_vs_qualified"
-      ],
-      "target_mistake": "collapsing the passage's distinction between an estimate for a resembling patient and a forecast of what that patient will experience",
-      "prediction_target": null,
-      "difficulty": {
-        "inference_depth": 2,
-        "distractor_similarity": 4,
-        "reasoning_depth": 3
-      },
-      "secondary_skills": [
-        "inference"
-      ],
-      "stem": "According to the passage, each of the following is true of a trial result EXCEPT:",
-      "options": {
-        "A": "It is an average taken over the people who were entered into the study.",
-        "B": "It reports what the treatment will do in any patient who resembles those enrolled.",
-        "C": "It is not, taken by itself, a claim about any single person.",
-        "D": "It beats one clinician's memory of recent cases as a starting estimate."
-      },
-      "correct": "B",
-      "estimated_time_sec": 60,
-      "explanation": {
-        "expert_notice": "The second paragraph is built out of careful distinctions and marks them with short sentences. An average does not say how benefit was distributed inside the group and does not forecast what a member will experience; for a resembling patient it is the best available estimate; and then, flatly, an estimate is not a forecast.",
-        "correct_reasoning": "The correct option converts the estimate back into the forecast the paragraph has just separated from it. The passage allows that the average is the best thing we have for a resembling patient, which is a claim about what to believe; it refuses to say that the treatment will do that in any such patient, which is a claim about what will happen. The word that fails is the verb, not the resemblance.",
-        "passage_anchor": "rc-0047-p2",
-        "question_type_note": "In an EXCEPT question three options are the passage rephrased and one has been strengthened or weakened somewhere. Compare verbs and modals rather than topics.",
-        "reading_habit": "Watch for authors who write a two-word sentence in the middle of a paragraph. A sentence that short is almost always the distinction on which the paragraph turns, and questions are built on the side of it readers forget.",
-        "distractors": [
-          {
-            "option": "A",
-            "trap_type": "passage_language_shifted",
-            "why_wrong": "This restates the paragraph's opening definition, with entered into the study standing in for enrolled. A reader matching words rather than claims may treat the substitution as a change of meaning.",
-            "seductive_element": "None of the passage's own vocabulary survives, which makes an exact paraphrase look like an alteration."
-          },
-          {
-            "option": "C",
-            "trap_type": "true_but_insufficient",
-            "why_wrong": "The passage says exactly this and then adds that it is not silence either; stating only the first half is incomplete, but incompleteness is not falsehood, and the sentence as written is one the author supplies.",
-            "seductive_element": "A reader who has taken the point that the average does bear on the individual may read this as the sceptic's error and reject it on sight."
-          },
-          {
-            "option": "D",
-            "trap_type": "comparison_distortion",
-            "why_wrong": "The comparison is the passage's own: the average is a considerably better estimate than a clinician's recollection of the last dozen patients, which it calls a sample of twelve assembled by memory.",
-            "seductive_element": "The essay is otherwise so careful about what a trial cannot do that a confident ranking of trial over experience can look like an addition."
           }
         ]
       }
@@ -482,7 +368,7 @@
     "challenge": "Two familiar positions are set up in the first paragraph and both are refused. Watch which paragraph disposes of which, and do not settle the author's view before the last one.",
     "one_sentence_summary": "A trial result is an average over the people enrolled, which makes it the best available estimate for anyone who resembles them, so the clinician's real task is not to decide whether the treatment works but to judge whether this patient resembles that group in the respects that bear on benefit and harm.",
     "main_idea": "The quarrel between following the evidence and treating the individual rests on a badly put question. A trial gives an estimate, good for whoever resembles the people studied. So the judgement that matters is about resemblance, and only differences that touch the mechanism or the harms count. Saying the patient is unique is not such a difference, and naming a real one makes the estimate uncertain rather than void.",
-    "simple_explanation": "A study says a drug cuts serious events by about a fifth. In front of the doctor sits a woman of eighty-one on four other medicines, who would never have been allowed into the study. Does the number mean anything for her?\n\nPeople usually give one of two answers. Follow the evidence, or else you are back to guessing from stories. Or: studies are about crowds, doctors treat people, so the number tells you nothing about her. The writer says both answers are answering the wrong question.\n\nStart with what the number is. It is an average over the people who took part. An average belongs to a group. It does not tell you how the benefit was spread among them, and it does not predict what any one person will get. So yes, it is not a statement about her. But that does not make it useless. For anyone who is like the people in the study, it is the best guess available, and much better than a doctor's memory of the last twelve patients he happened to see.\n\nSo everything now depends on one word: like. Like in what way? Patients differ from study groups in a thousand ways and almost none of them matter. A difference matters only if it changes how the drug does its work, or changes the harms that the good has to outweigh. Being eighty-one is not that. It is a number about a person, not a fact about a drug. A kidney that no longer clears the drug is that, because it changes how much of the drug arrives.\n\nSo saying 'my patient is not average' proves nothing, because nobody is average, and if that were a reason the doctor could ignore every study ever done. You have to name the difference and say which way it pushes: this thing, working this way, makes the good smaller or the harm bigger.\n\nAnd then the last turn. Suppose you do name it, and the study left such patients out. That does not mean the estimate still holds. It means the estimate is now shaky, by an amount nobody can measure. You have to decide anyway, using weaker things: what is known about how the drug works, smaller studies, and what the patient herself minds most. That is judgement. Evidence did not get rid of it; it moved it. It used to be a judgement about the treatment. Now it is a judgement about whether this patient belongs with those people. And that question, unlike 'the art of medicine', is one you can argue about and be shown to have got wrong.",
+    "simple_explanation": "A study says a drug cuts serious events by about a fifth. In front of the doctor sits a woman of eighty-one with a second illness, who would never have been allowed into the study. Does the number mean anything for her?\n\nPeople usually give one of two answers. Follow the evidence, or else you are back to guessing from stories. Or: studies are about crowds, doctors treat people, so the number tells you nothing about her. The writer says both answers are answering the wrong question.\n\nStart with what the number is. It is an average over the people who took part. An average belongs to a group. It does not tell you how the benefit was spread among them, and it does not predict what any one person will get. So yes, it is not a statement about her. But that does not make it useless. For anyone who is like the people in the study, it is the best guess available. A guess is not a promise, but it is not silence either.\n\nSo everything now depends on one word: like. Like in what way? A difference matters only if it changes how the drug does its work, or changes the harms that the good has to outweigh. Being eighty-one is not that. It is a number about a person, not a fact about a drug. An organ that no longer clears the drug properly is that, because it changes how much of the drug arrives.\n\nSo saying 'my patient is not average' proves nothing, because nobody is average, and if that were a reason the doctor could ignore every study ever done. You have to name the difference and say which way it pushes: this thing, working this way, makes the good smaller or the harm bigger.\n\nAnd then the last turn. Suppose you do name it, and the study left such patients out. That does not mean the estimate still holds. It means the estimate is now shaky, by an amount nobody can measure. You have to decide anyway, using weaker things: what is known about how the drug works, smaller studies, and what the patient herself minds most. That is judgement. Evidence did not get rid of it; it moved it. It used to be a judgement about the treatment. Now it is a judgement about whether this patient belongs with those people. And that question, unlike 'the art of medicine', is one you can argue about and be shown to have got wrong.",
     "why_difficult": "The difficulty is not in the words but in holding two refusals at once. The fourth paragraph destroys the sceptic so thoroughly that readers finish it believing the passage is a defence of following the evidence, and then the fifth paragraph takes most of that back. The other trouble is a pair of distinctions drawn quickly: estimate against forecast, and difference against relevant difference. Both are stated once, in short sentences, and both decide questions later.",
     "author_intention": "To dissolve a familiar quarrel by showing that the two sides are answering a question nobody should have asked, and then to name the judgement that is actually being made so that it can be examined instead of admired.",
     "paragraph_journey": [
@@ -494,7 +380,7 @@
       {
         "paragraph_id": "rc-0047-p2",
         "role": "Says what a result is",
-        "note": "An average over the people enrolled. Not a prediction about anybody, but still the best estimate for someone like them, and better than a doctor's memory of recent cases."
+        "note": "An average over the people enrolled. Not a prediction about anybody, but still the best estimate for someone like them: an estimate is not a forecast, and it is not silence either."
       },
       {
         "paragraph_id": "rc-0047-p3",
@@ -514,15 +400,27 @@
     ],
     "tone_progression": "Even-handed while the two positions are laid out, brisk and slightly impatient when the sceptic's move is taken apart, and then careful again, ending on a quiet reproach aimed at a phrase rather than at any person.",
     "key_transitions": [
-      "'Both answers are confident, and both are answers to a question that has been badly put.' (paragraph 1): the quarrel is set aside rather than joined.",
+      "'Both answers are confident, and both answer a badly put question.' (paragraph 1): the quarrel is set aside rather than joined.",
       "'That puts the whole weight on resemblance, and on resemblance in which respects.' (paragraph 3): the passage names what the judgement is actually about.",
       "'None of which hands the victory to the other side.' (paragraph 5): the second half of the adjudication begins."
     ],
-    "misunderstanding": "Readers who stop mentally at the fourth paragraph file this as a defence of trial evidence against sentimental clinicians, and every question that turns on the fifth paragraph then goes wrong. The other frequent misreading is smaller and just as costly: treating the average as a promise. The passage says an average does not show how benefit was distributed inside the group, which means a fifth fewer events is not a claim that most patients will benefit, and options that make the trade look like plain restatement.",
+    "misunderstanding": "Readers who stop mentally at the fourth paragraph file this as a defence of trial evidence against sentimental clinicians, and every question that turns on the fifth paragraph then goes wrong. The other frequent misreading is smaller and just as costly: treating the average as a promise. The passage says an average does not show how benefit was distributed inside the group, which means a fifth fewer events is not a claim that most patients will benefit, however much an option making that trade looks like plain restatement.",
     "traps_summary": "The distractors here do four things. They hand the author one of the two positions he opened by refusing. They convert an estimate into a forecast, or an average into a majority. They turn a qualification in the author's own voice into a conceded objection. And they take the passage's example of an irrelevant difference, the patient's age, and offer it back as the criterion.",
     "reading_lesson": "When a passage opens by naming two positions, keep a line for each and do not close either until the passage has. Writers who adjudicate almost always deal with one side at a time, and the paragraph that finishes the first side reads like a conclusion although it is only half of one. The habit is cheap: count the positions, and refuse to state the thesis while one of them is still standing untouched.",
     "real_world": "Anyone who has been handed a statistic about people like them, a survival rate, a default rate, a pass rate, faces the same two questions in order: what group is this an average over, and do I differ from that group in a way that touches the mechanism rather than merely in a way that is true of me.",
     "takeaway": "An average is not silence and not a promise; it is the best estimate for whoever resembles the people it was taken over.",
-    "reflection_question": "When a figure about people like you last felt inapplicable, could you have named the difference and said which way it cut?"
+    "reflection_question": "When a figure about people like you last felt inapplicable, could you have named the difference and said which way it cut?",
+    "eli10": {
+      "big_idea": "A study's average is the best guess for patients like those studied, so judgement moves to whether this patient really is like them.",
+      "story": "A study finds a medicine makes a serious problem a fifth less common. But this patient is eighty-one, with an illness that would have kept her out of the study. Some say: follow the study. Others say: a study is about crowds, not her. The writer says both miss the real question. The number is a group average, not a promise about one person. For anyone like the people studied, it is the best guess, as a class average is for a typical pupil. So the question is whether she is like them in ways that matter. Her age alone is not one. A body that clears the drug slowly is. Saying 'she is special' proves nothing, because everyone is. You must name the difference and say which way it pushes. If the study left out such people, the guess gets shaky, and the doctor must judge in the open.",
+      "paragraphs": [
+        "Poses the puzzle of an excluded patient, and says both usual answers misread the question.",
+        "Explains what a result is: a group average, no promise to anyone, but the best estimate for similar patients.",
+        "Sets the real test: only differences that touch how the drug works or its harms count.",
+        "Rejects the sceptic: 'every patient is different' proves nothing unless a difference is named with a direction.",
+        "Refuses the other side victory too: judgement remains, moved to whether this patient resembles those studied."
+      ],
+      "author_view": "The writer is even-handed but firm, impatient with empty objections, and wants the doctor's real judgement stated openly rather than called an art."
+    }
   }
 }

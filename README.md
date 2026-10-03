@@ -9,19 +9,26 @@ CAT English, and each is only as happy as your practice of that part.
 Leave a subject alone and its friend misses you; help them and the whole
 village comes back to life.
 
-| Pet | What it looks after | Lives in |
+Every house in the village holds one part of CAT VARC, and its sign on the
+map says which (nothing else lives there: no DILR, no quant):
+
+| House (sign) | Friend | What you practise |
 |---|---|---|
-| **Toffee**, a flame | CAT pace: the weekly Gauntlet. Also keeps the village fire | the campfire and notice board |
-| **Chai**, an owl | Reading: passages, the second look, arguments | the library |
-| **Matcha**, a sprout | Vocabulary: word rounds, roots, word parts, the word bank | the greenhouse |
-| **Mochi**, a pebble | Para summary and paragraph completion | the archery cabin |
-| **Ginger**, a fox | Para jumbles and sentence placement | the workshop |
-| **Mallow**, a cloud | Odd one out | the observatory |
+| the library (**Reading Comprehension**) | **Chai**, an owl | CAT-sized passages, the second look, arguments |
+| the workshop (**Para Jumbles**) | **Ginger**, a fox | four sentences into the author's order |
+| the archery cabin (**Para Summary**) | **Mochi**, a pebble | the summary that keeps the point |
+| the observatory (**Odd One Out**) | **Mallow**, a cloud | the sentence that does not belong |
+| the rose cottage (**Sentence Placement**) | **Ginger** | the one place a sentence fits |
+| the clock tower (**Para Completion**) | **Mochi** | the sentence that finishes the paragraph |
+| the greenhouse (**Vocabulary**) | **Matcha**, a sprout | word rounds, roots, word parts, words in context |
+| the notice board (**The Gauntlet**) | **Toffee**, a flame | the weekly timed mix; Toffee also keeps the daily fire |
 
 The learning underneath is serious CAT preparation:
 
 - **Content:** an engine of authored, taxonomy-tagged, blind-solved items:
-  - 115 passages
+  - 146 passages, every one the size CAT sets (average 451 words, never
+    more than four questions; seven are real public-domain essays), each
+    with an "explain it simply" version
   - 76 jumbles
   - 77 summaries
   - 81 odd-ones-out
@@ -73,12 +80,15 @@ waiting.
 ## The village
 
 **One painting** (`assets/art/home-world-v1.png`, 1536 × 1024) fills the
-screen. You pan by drag, wheel or arrow keys and zoom by pinch or
-ctrl+wheel; one button toggles the whole-village view.
+screen at full detail and never zooms: on a phone it fills the height and
+you scroll left and right (drag, wheel or arrow keys) to see the rest.
+Every house carries a sign with its subject, always visible; tap the sign or
+the house to go in.
 
 **On top of it, only this:**
-- the top bar: Toffee's fire, the village level and its stars, your friends
-  (who is who), your cottage (sound, settings, records);
+- the top bar: Toffee's fire, the village level and its stars, **every
+  subject** (one list, each a tap from its next round) and the settings gear
+  (sound, your village's name, progress, records);
 - the bottom: today's three friends and their gift, and the big button.
 
 **The friends live there.** Each one walks the painted paths on its own two
@@ -109,8 +119,13 @@ backup carries the whole village and nothing can drift from the truth.
 - A place screen shows the host at its own door.
 - Results show the friend celebrating, "You helped Chai!" with the stars
   counted up, the level bar, any new heart and its story line, and today's three.
-- Progress is the clock tower and Settings is your cottage. Records are kept
-  by Toffee.
+- Progress and Settings sit behind the gear and in the bottom bar; the clock
+  tower and the rose cottage are subject houses. Records are kept by Toffee.
+- After a passage, **Explain this passage simply** opens the passage told
+  the way you would tell a ten-year-old (the big idea, the story, one line
+  per paragraph, what the writer thinks), with the full expert breakdown
+  folded underneath. It is the extra a rewarded ad will one day open
+  (`src/core/ads/rewarded.js`); no ads are wired, so it is free.
 
 ## What the game knows about you
 
@@ -224,7 +239,7 @@ pretend to have passed.
 | `src/pets/` | **The pets**, see below |
 | `src/home/` | **The village screen** at `#/world`, see below |
 | `src/world/` | **The rooms around the village**, see below |
-| `src/shell/` | Progress (the clock tower), Settings (your cottage), preferences |
+| `src/shell/` | Progress, Settings, preferences |
 | `src/core/` | Logic with no UI: storage adapter, router, content loader and validator, session engines, scoring, the skill ledger, engagement, the mentors |
 | `src/modules/` | The learning rooms: `reading-comprehension/`, `para-jumbles/`, `para-summary/`, `odd-one-out/`, `word-dna/`, `language-garden/` (the Rootwood's six-beat sessions), `verbal-bank/` (placement, completion, the word bank, arguments) |
 | `src/ui/` | Design tokens and styles, plus Web Components. The styles are `home.css` (the village and the pets), `rewards.css` (results), `world.css` and `game.css` (the rooms) |
@@ -246,7 +261,7 @@ pretend to have passed.
 - `village.js`: the camera, the top bar, the big button, today's three, celebrations, the welcome.
 - `life.js`: the friends' gaits, chores, greetings and voices, and the ambient canvas.
 - `motion.js` and `motion-atlas.js`: the living painting.
-- `cards.js`: the friend, fire, level, who-is-who, today and cottage cards, and the decorations on the map.
+- `cards.js`: the friend, fire, level, every-subject, today and settings cards, and the decorations on the map.
 
 **`src/world/`:**
 - `state.js`: learning derived from records, with `state.pets`.

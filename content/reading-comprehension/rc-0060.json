@@ -17,16 +17,15 @@
       "scope-control"
     ],
     "word_count": 464,
-    "question_count": 5,
+    "question_count": 4,
     "question_types": [
       "inference",
       "main_idea",
-      "not_true",
       "paragraph_function",
       "scope"
     ],
     "theme": "meetings judged by information transfer, the one thing they do worst: borrowing the anthropological sense of ritual to show that a meeting distributes responsibility before witnesses, while insisting that naming a function settles nothing about whether a particular meeting is worth its cost",
-    "estimated_time_min": 9,
+    "estimated_time_min": 8,
     "source": {
       "publication": "original",
       "url": null,
@@ -37,7 +36,7 @@
     "date_added": "2026-09-12",
     "batch_id": "batch-rc-003",
     "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-03",
-    "reviewer_notes": "A definition is borrowed, applied to three familiar complaints, and then explicitly refused the status of a defence. The fourth paragraph is the whole difficulty of the set: readers who have enjoyed the reframing read it as decoration and answer four of the five questions as though the passage were defending meetings.",
+    "reviewer_notes": "A definition is borrowed, applied to three familiar complaints, and then explicitly refused the status of a defence. The fourth paragraph is the whole difficulty of the set: readers who have enjoyed the reframing read it as decoration and answer four of the five questions as though the passage were defending meetings. 2026-10-03 CAT-size pass: 464→464 words, 5→5 paragraphs, 5→4 questions. Dropped q3 (not_true reversing p3's last sentence, a contrast inference q2 already tests through its email option); why_difficult no longer counts five questions.",
     "length_class": "medium",
     "structure": "definition_application",
     "viewpoints": 2,
@@ -79,7 +78,7 @@
     ],
     "quality": {
       "status": "reviewed",
-      "adversarial_review": "The whole set is built on the seam between the third paragraph, which explains what meetings do, and the fourth, which denies that the explanation defends any of them. Q1's live rival is the option making the fourth paragraph introduce the closing test, which is the fifth paragraph's job; the fourth introduces nothing and instead withdraws a defence it says should not be mistaken for one. Q2's rival is the option that a written notice distributes responsibility more cheaply, which inverts the passage's own contrast between a notice that leaves no trace of who read it and a room in which everyone sees who heard. Q3's false statement is the claim that a meeting distributes responsibility poorly, which the third paragraph asserts in the opposite direction. Q4's rival is the option that complaints about meetings mistake a social form for an administrative failure, which is true of the third paragraph and cannot survive the fourth, where an organisation that found a function for every meeting is said to have discovered nothing about their worth. Q5's rival is the condition about decisions taken elsewhere, which is one of three applications rather than a limit on the account.",
+      "adversarial_review": "The whole set is built on the seam between the third paragraph, which explains what meetings do, and the fourth, which denies that the explanation defends any of them. Q1's live rival is the option making the fourth paragraph introduce the closing test, which is the fifth paragraph's job; the fourth introduces nothing and instead withdraws a defence it says should not be mistaken for one. Q2's rival is the option that a written notice distributes responsibility more cheaply, which inverts the passage's own contrast between a notice that leaves no trace of who read it and a room in which everyone sees who heard. Q3's false statement is the claim that a meeting distributes responsibility poorly, which the third paragraph asserts in the opposite direction. Q4's rival is the option that complaints about meetings mistake a social form for an administrative failure, which is true of the third paragraph and cannot survive the fourth, where an organisation that found a function for every meeting is said to have discovered nothing about their worth. Q5's rival is the condition about decisions taken elsewhere, which is one of three applications rather than a limit on the account. (2026-10-03, CAT-size pass: q3 was dropped, so any note above about it no longer applies.)",
       "blind_solve": null
     },
     "vocab_extracted": [
@@ -230,62 +229,6 @@
       }
     },
     {
-      "id": "rc-0060-q3",
-      "type": "not_true",
-      "skill": "specific_detail",
-      "patterns": [
-        "comp.explicit_detail",
-        "comp.paraphrase",
-        "struct.definition"
-      ],
-      "target_mistake": "reading a claim about responsibility backwards because the surrounding paragraph is busy conceding what meetings cannot do",
-      "prediction_target": null,
-      "difficulty": {
-        "inference_depth": 2,
-        "distractor_similarity": 4,
-        "reasoning_depth": 3
-      },
-      "secondary_skills": [
-        "logical_structure"
-      ],
-      "stem": "Which of the following is NOT true, according to the passage?",
-      "options": {
-        "A": "A meeting distributes responsibility poorly, since nobody present need commit himself.",
-        "B": "The content of a ritual may be familiar to everyone taking part without that counting against it.",
-        "C": "Identifying what a meeting is for does not settle whether it is worth what it costs.",
-        "D": "A written message reaches people without recording which of them have read it."
-      },
-      "correct": "A",
-      "estimated_time_sec": 55,
-      "explanation": {
-        "expert_notice": "The third paragraph ends on the sentence this question is built from, and it is emphatic: a room distributes responsibility, because everybody in it can see who else heard. Three of the options restate the passage; one reverses that sentence and adds a reason the passage never gives.",
-        "correct_reasoning": "The correct answer is the reversal. The passage makes the distribution of responsibility the thing a meeting does best and an email cannot do at all, and it explains why in the same breath, by the mutual visibility of everyone in the room. A statement that meetings distribute responsibility poorly contradicts the sentence in which the passage's central contrast lands.",
-        "passage_anchor": "rc-0060-p3",
-        "question_type_note": "In a NOT-true question the false option usually keeps the passage's topic and flips its direction. Compare the verb and its direction, not the nouns, since the nouns will match in every option.",
-        "reading_habit": "For each option in a NOT-true set, find the sentence it came from and check whether the option points the same way. An option that names the right sentence and reverses it is the commonest answer in this form.",
-        "distractors": [
-          {
-            "option": "B",
-            "trap_type": "passage_language_shifted",
-            "why_wrong": "The second paragraph says the content of a ritual is often known already to everyone in the room and that this is not a defect in it, then proves the point with a wedding and its invitation. The claim is the passage's, in different words.",
-            "seductive_element": "Rewritten without the wedding, the sentence loses the image a reader filed it under, so a faithful paraphrase looks unfamiliar."
-          },
-          {
-            "option": "C",
-            "trap_type": "true_but_irrelevant",
-            "why_wrong": "This is the fourth paragraph's closing claim, which separates the question of function from the question of worth and calls the second a separate and harder one. Being an aside does not make it unsaid.",
-            "seductive_element": "It sits in the paragraph readers treat as a qualification rather than as content, and qualifications are the sentences most often forgotten when a stem asks what the passage states."
-          },
-          {
-            "option": "D",
-            "trap_type": "comparison_distortion",
-            "why_wrong": "The third paragraph says exactly this of a written notice, that it distributes information and leaves no trace of who has read it. It is half of the passage's own comparison rather than an invented one.",
-            "seductive_element": "The comparison is made in a subordinate clause and in passing, so a reader remembers the conclusion about responsibility and not the premise about traces."
-          }
-        ]
-      }
-    },
-    {
       "id": "rc-0060-q4",
       "type": "main_idea",
       "skill": "main_idea",
@@ -425,7 +368,7 @@
     "one_sentence_summary": "Meetings are condemned for failing at information transfer, which is the one thing they do worst; borrowing the anthropologist's sense of ritual shows that what a meeting actually produces is a record made before witnesses, though naming that function settles nothing about whether any particular meeting is worth its cost.",
     "main_idea": "The usual complaints judge a meeting by what it tells people. A ritual, in the anthropological sense, works by being performed in front of the people concerned, and its content may be known to all of them already. Read that way, the ratifying meeting, the uncancellable weekly meeting and the meeting that might have been an email are all distributing responsibility rather than information. That explains what they do; it does not show that any of them is worth holding, which the author treats as a separate and harder question.",
     "simple_explanation": "People complain about three kinds of meeting. The one that should have been an email. The one every Tuesday that nobody is allowed to cancel. And the one held to decide something two people already decided in a corridor. All three get the same verdict: waste.\n\nThe author borrows a word from anthropology. A ritual is something whose whole point is that it is done, in front of the people it concerns. It does not have to tell anyone anything. A wedding does not inform the guests; they knew from the invitation. What it produces is a shared record that a thing was done, and that everyone saw it done.\n\nNow look at the three complaints again. The meeting that confirms a decision turns a private agreement into a public one, and afterwards people can be held to it in a way a corridor chat does not allow. The Tuesday meeting is a standing proof that the group still exists and still answers to itself; stop it for three months and see what has to be rebuilt. And the meeting that could have been an email is doing the thing an email cannot: an email hands out information and leaves no sign of who read it, while a room hands out responsibility, because everyone in it can see who else was there.\n\nThen the author stops you. This is not a defence of meetings. Rituals can be done badly. Too long, too often, in front of the wrong people, or long after whatever they marked has stopped mattering. Finding a purpose for every meeting on the calendar tells you nothing about whether those meetings are worth their cost.\n\nSo the real change is the question. Asking could this have been an email measures a meeting by its worst skill, and the answer is nearly always yes, which is why the complaint feels so good and does so little. The better question is: what has to be witnessed here, by whom, and how often? That has real answers, and plenty of them are that nothing needs witnessing, or that four people are enough rather than fourteen.",
-    "why_difficult": "The passage performs a reversal that is genuinely pleasurable, and pleasure makes readers stop early. Three despised things are shown to be doing serious work, and the natural next thought is that they have been vindicated. The fourth paragraph blocks exactly that thought, in flat sentences and without repeating itself, and the fifth then shows that the reframing produces negative answers as easily as positive ones. A reader who keeps only the reversal will find that four of the five questions have an option written for him.",
+    "why_difficult": "The passage performs a reversal that is genuinely pleasurable, and pleasure makes readers stop early. Three despised things are shown to be doing serious work, and the natural next thought is that they have been vindicated. The fourth paragraph blocks exactly that thought, in flat sentences and without repeating itself, and the fifth then shows that the reframing produces negative answers as easily as positive ones. A reader who keeps only the reversal will find an option written for him in nearly every question.",
     "author_intention": "To replace a satisfying complaint with a question that can actually be answered, while refusing the reader the comfort of concluding either that meetings are a waste or that they are all justified.",
     "paragraph_journey": [
       {
@@ -465,6 +408,18 @@
     "reading_lesson": "When an author explains why a criticised practice exists, watch for the paragraph in which he denies that the explanation is a justification, and treat that denial as part of the thesis rather than as modesty. Almost every wrong option in a passage of this shape is the explanation with the denial removed. The habit transfers to any passage that answers what is this for before answering whether it is worth it, which is the commonest shape in writing about institutions.",
     "real_world": "The same question applies to a quarterly review, a family dinner, a signing ceremony or a court hearing: not what was communicated, but who needed to see it happen, and whether that number is smaller than the number invited.",
     "takeaway": "Knowing what something is for is not the same as knowing that it is worth doing.",
-    "reflection_question": "For a meeting you attend regularly, who actually needs to see it happen, and would the answer embarrass anyone?"
+    "reflection_question": "For a meeting you attend regularly, who actually needs to see it happen, and would the answer embarrass anyone?",
+    "eli10": {
+      "big_idea": "Meetings do their work by being witnessed, not by sharing news, yet that does not prove any meeting is worth its cost.",
+      "story": "People moan about three kinds of meeting. One could have been an email. One happens every Tuesday and nobody can cancel it. One 'decides' what two people already settled in a corridor. All get called waste. The writer borrows the idea of a ritual. A ritual matters because it is done in front of the people it concerns. At a wedding, the guests learn nothing new. But now they have all seen it happen. These meetings work the same way. Agreeing in a room makes people answerable. The Tuesday meeting shows the team still exists. An email shares facts, not who read them. A room shares responsibility, because everyone sees who heard. But knowing what a meeting is for does not prove it is worth its cost. So ask what needs witnessing, by whom, and how often. Often the answer is nobody, or four people, not fourteen.",
+      "paragraphs": [
+        "Lists three complaints about meetings and the one verdict on all of them: waste.",
+        "Borrows a definition: a ritual's point is being done before witnesses, not telling anyone anything new.",
+        "Applies it: each hated meeting does real work, and a room shares responsibility as an email cannot.",
+        "Blocks the excuse: finding a meeting's purpose says nothing about whether it is worth its cost.",
+        "Changes the question: what must be witnessed, by whom and how often? Often: nobody, or fewer people."
+      ],
+      "author_view": "Wry and strict: the writer enjoys showing what meetings really do, then refuses to let that excuse them."
+    }
   }
 }

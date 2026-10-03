@@ -47,7 +47,7 @@
             ]
           }
         },
-        "word_count": { "type": "integer", "minimum": 400, "maximum": 700 },
+        "word_count": { "type": "integer", "minimum": 120, "maximum": 700 },
         "question_count": { "type": "integer", "minimum": 3, "maximum": 5 },
         "question_types": {
           "type": "array",
@@ -235,7 +235,15 @@
         "real_world": { "type": "string", "minLength": 30,
           "description": "Where the reader will meet this idea outside the exam." },
         "takeaway": { "type": "string", "minLength": 20,
-          "description": "One memorable sentence to keep." }
+          "description": "One memorable sentence to keep." },
+        "eli10": { "type": "object", "required": ["big_idea", "story", "paragraphs", "author_view"], "additionalProperties": false,
+          "description": "The passage explained as you would to a ten-year-old: the big idea, the story in short plain sentences, one line per paragraph, and what the writer thinks. Shown behind the Explain it simply button.",
+          "properties": {
+            "big_idea": { "type": "string", "minLength": 20, "maxLength": 240 },
+            "story": { "type": "string", "minLength": 200, "maxLength": 1100 },
+            "paragraphs": { "type": "array", "minItems": 2, "maxItems": 6, "items": { "type": "string", "minLength": 10, "maxLength": 220 } },
+            "author_view": { "type": "string", "minLength": 10, "maxLength": 260 }
+          } }
       }
     }
   }

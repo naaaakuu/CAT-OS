@@ -17,17 +17,16 @@
       "vocabulary-in-context",
       "trap-recognition"
     ],
-    "word_count": 492,
-    "question_count": 5,
+    "word_count": 491,
+    "question_count": 4,
     "question_types": [
       "inference",
       "must_be_true",
       "primary_purpose",
-      "tone",
-      "vocabulary_in_context"
+      "tone"
     ],
     "theme": "food prohibitions versus food procedures as boundary markers: the first is kept alone and portable, the second requires co-performers, so dispersal dissolves a shared practice into a stated identity without anyone abandoning anything",
-    "estimated_time_min": 8.5,
+    "estimated_time_min": 8,
     "source": {
       "publication": "original",
       "url": null,
@@ -38,7 +37,7 @@
     "date_added": "2026-09-12",
     "batch_id": "batch-rc-003",
     "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-01",
-    "reviewer_notes": "A contrast passage whose two terms are easy to state and hard to keep apart under pressure. The set turns on cost: abstention is paid by one person, coordination by a group, and almost every distractor is built by forgetting which is which.",
+    "reviewer_notes": "A contrast passage whose two terms are easy to state and hard to keep apart under pressure. The set turns on cost: abstention is paid by one person, coordination by a group, and almost every distractor is built by forgetting which is which. 2026-10-03 CAT-size pass: 491→491 words, 4→4 paragraphs, 5→4 questions. Dropped q5 (vocabulary_in_context on 'portable': the least CAT-like of five distinct types, anchored in p2 where must_be_true q4 already sits), so the kept four cover all four paragraphs; reading_lesson no longer cites a word-meaning question.",
     "length_class": "medium",
     "structure": "comparison_contrast",
     "viewpoints": 2,
@@ -73,7 +72,7 @@
     ],
     "quality": {
       "status": "reviewed",
-      "adversarial_review": "Three readings of the passage now compete in every question. The shadow reading is the elegy: dispersal empties a shared life, what survives is a shell kept up out of habit, so a tradition that still looks intact has already died and the prohibitions must follow. It holds an option in each question (Q1 'empties a shared life', Q2 'elegiac', Q3 'has already stopped organising anyone's day', Q4 the belief condition, Q5 'outlast the shared life') and it dies on two sentences in the last paragraph: 'What has happened is not a loss of belief but a change in what the rules are for', and 'Nothing is renounced, nobody is persuaded of anything'. The second rival makes the outsider's gaze the cause, what survives is what outsiders can see and ask about, and it reverses the passage's own order: prohibitions are 'the part of a tradition most visible from outside' because they are portable, not portable because they are visible, and the third paragraph explains a procedure's failure by shifts and distances with no outsider in it. The third rival takes the opening concession for the thesis and keeps the classificatory account whole; the second sentence limits it by name, saying it 'has been asked to go further than it can'. Q2's live rival remains the elegiac option, since the closing cadence has the rhythm of a lament, and it is settled by what the author calls the event: a change, an assimilation needing no convert, a wall that comes down 'by the ordinary operation of timetables'. Q5's key is now a definition of the word rather than a restatement of the argument, and the three distractors carry the argument instead, so that a reader looking for the thesis in the vocabulary item is led away from the answer rather than towards it. Strength parity was imposed across the set afterwards: no distractor in this file is quantified more strongly than its key, because a single overreaching option was found to condemn the whole reading it belonged to without the passage being read.",
+      "adversarial_review": "Three readings of the passage now compete in every question. The shadow reading is the elegy: dispersal empties a shared life, what survives is a shell kept up out of habit, so a tradition that still looks intact has already died and the prohibitions must follow. It holds an option in each question (Q1 'empties a shared life', Q2 'elegiac', Q3 'has already stopped organising anyone's day', Q4 the belief condition, Q5 'outlast the shared life') and it dies on two sentences in the last paragraph: 'What has happened is not a loss of belief but a change in what the rules are for', and 'Nothing is renounced, nobody is persuaded of anything'. The second rival makes the outsider's gaze the cause, what survives is what outsiders can see and ask about, and it reverses the passage's own order: prohibitions are 'the part of a tradition most visible from outside' because they are portable, not portable because they are visible, and the third paragraph explains a procedure's failure by shifts and distances with no outsider in it. The third rival takes the opening concession for the thesis and keeps the classificatory account whole; the second sentence limits it by name, saying it 'has been asked to go further than it can'. Q2's live rival remains the elegiac option, since the closing cadence has the rhythm of a lament, and it is settled by what the author calls the event: a change, an assimilation needing no convert, a wall that comes down 'by the ordinary operation of timetables'. Q5's key is now a definition of the word rather than a restatement of the argument, and the three distractors carry the argument instead, so that a reader looking for the thesis in the vocabulary item is led away from the answer rather than towards it. Strength parity was imposed across the set afterwards: no distractor in this file is quantified more strongly than its key, because a single overreaching option was found to condemn the whole reading it belonged to without the passage being read. (2026-10-03, CAT-size pass: q5 was dropped, so any note above about it no longer applies.)",
       "blind_solve": {
         "solver": "blind reviewer (fresh session, no key)",
         "agreed": 5,
@@ -89,7 +88,7 @@
   },
   "passage": {
     "title": "What Travels and What Does Not",
-    "reading_time_min": 2.6,
+    "reading_time_min": 2.7,
     "paragraphs": [
       {
         "id": "rc-0038-p1",
@@ -335,62 +334,6 @@
           }
         ]
       }
-    },
-    {
-      "id": "rc-0038-q5",
-      "type": "vocabulary_in_context",
-      "skill": "vocabulary_in_context",
-      "patterns": [
-        "word.context_clue",
-        "word.polysemy",
-        "comp.paraphrase"
-      ],
-      "target_mistake": "answering the vocabulary question with the passage's argument instead of with the word's meaning in its sentence, or taking a consequence of portability for the thing the word names",
-      "prediction_target": "The learner should paraphrase the word from the sentence after it, which spells out what portability consists of: no demand on the surroundings and none on other people.",
-      "difficulty": {
-        "inference_depth": 2,
-        "distractor_similarity": 3,
-        "reasoning_depth": 2
-      },
-      "secondary_skills": [
-        "specific_detail"
-      ],
-      "stem": "In the second paragraph, \"portable\" most nearly means",
-      "options": {
-        "A": "able to outlast the shared life that once gave the rule its point",
-        "B": "easily stated to outsiders, and so easily carried from one place to another",
-        "C": "expressing a classification that holds good wherever in the world the keeper happens to be",
-        "D": "unaffected by where it is kept, since it makes no demand on its setting"
-      },
-      "correct": "D",
-      "estimated_time_sec": 50,
-      "explanation": {
-        "expert_notice": "The word is defined by the sentence that follows it, which names two demands a prohibition does not make: 'It asks nothing of the keeper's surroundings and nothing of anybody else.' The word portable answers to the first of those.",
-        "correct_reasoning": "The correct option is the first half of that definition put back into the word. Portability here is indifference to place: because the rule requires no particular setting, it can be observed in a canteen, in a foreign city, at a table where nobody knows what is being done. What a prohibition asks of other people is a separate clause and a separate matter, and the passage keeps the two apart because a procedure fails on the second while remaining innocent of the first.",
-        "passage_anchor": "rc-0038-p2",
-        "question_type_note": "A word-in-context question is decided by the sentence that surrounds the word. Where a passage has a thesis, the standard decoy is the thesis in the word's clothes: an option that would be a good summary of the argument is usually a bad definition of the term.",
-        "reading_habit": "When a familiar word appears in an argument, read the next sentence before you translate it, and take only the part of that sentence the word is doing. Authors who use a plain word narrowly explain the narrowing immediately, and the explanation is usually smaller than the argument it goes on to support.",
-        "distractors": [
-          {
-            "option": "A",
-            "trap_type": "passage_language_shifted",
-            "why_wrong": "Portability is a property the rule has from the outset, and the sentence after the word says what it consists of: the rule 'asks nothing of the keeper's surroundings and nothing of anybody else'. Outlasting a shared life is something a portable rule turns out to do, four paragraphs later, and it is not what the word is being used to mean.",
-            "seductive_element": "It is the passage's own story compressed into a definition, and a reader who has grasped the argument will recognise it before reading the sentence the word sits in."
-          },
-          {
-            "option": "B",
-            "trap_type": "reversed_causation",
-            "why_wrong": "The paragraph puts these the other way round: because a prohibition asks nothing of its setting, it is 'the part of a tradition most visible from outside and the part most easily described'. Being easy to state is a consequence the passage derives from portability, so it cannot be what portability means.",
-            "seductive_element": "It is the near-tie, and it borrows the paragraph's own image of a list that can be carried anywhere, which sits two sentences from the word."
-          },
-          {
-            "option": "C",
-            "trap_type": "wrong_abstraction_level",
-            "why_wrong": "The word is applied to what a rule demands, not to what it asserts. A procedure expresses a classification too, and travels no better for it; what the passage says of the prohibition is that one person can keep it wherever they are, which is a fact about cost and setting rather than about the reach of a classification.",
-            "seductive_element": "The passage does open on the claim that rules of eating are rules of classification, so an option in that vocabulary sounds like the author's own account of the word."
-          }
-        ]
-      }
     }
   ],
   "vocabulary": [
@@ -450,9 +393,20 @@
     ],
     "misunderstanding": "The commonest wrong picture is that this is a passage about a tradition weakening because people believe in it less, with the food rules as evidence of the decline. The passage says the opposite about the cause: nothing is renounced and nobody is persuaded of anything. The second wrong picture reverses the asymmetry, because the paragraph on prohibitions emphasises how misunderstood and visible they are and a reader converts visibility into vulnerability. Both misreadings survive a first pass because every element of them really does appear somewhere in the text.",
     "traps_summary": "The set is built from three moves. Swapping the two sides of a contrast, since both are in the passage and only the axis tells them apart. Supplying a cause the author has explicitly excluded, here belief. And widening a claim from food procedures to all collective practice, or from 'outlasts procedures' to 'survives anything'. Before choosing, check which half of the contrast the option is about and what it has added to the text's own strength.",
-    "reading_lesson": "In a passage built on a contrast, find the single property the author uses to separate the two terms and write it in the margin: here it is who pays the cost. Every later question, on inference, on entailment, even on a word's meaning, is decided by that property rather than by which term sounds more important. When an option feels right but you cannot say which side of the axis it sits on, it is usually the trap.",
+    "reading_lesson": "In a passage built on a contrast, find the single property the author uses to separate the two terms and write it in the margin: here it is who pays the cost. Every later question, on inference and on entailment, is decided by that property rather than by which term sounds more important. When an option feels right but you cannot say which side of the axis it sits on, it is usually the trap.",
     "real_world": "The same asymmetry governs languages, festivals and family customs anywhere people move for work: the parts that one person can keep alone survive the move, the parts that need a room full of people do not, and the survivors are mistaken for the whole.",
     "takeaway": "A rule you can keep alone tells you about a person; a rule you cannot tells you whether the group is still there.",
-    "reflection_question": "Which of the practices you inherited could you keep entirely by yourself, and which would end the moment nobody turned up?"
+    "reflection_question": "Which of the practices you inherited could you keep entirely by yourself, and which would end the moment nobody turned up?",
+    "eli10": {
+      "big_idea": "When a community scatters, the food bans one person can keep survive, while customs needing a group fade, though nobody stops believing.",
+      "story": "Experts say food rules are a group's way of sorting the world. The writer agrees, but says this treats two different kinds of rule as one. A ban says what you must not eat. You can keep a ban anywhere, alone, because it only costs going without. A custom says how food is made, served and shared, and with whom. You cannot keep that alone. You need people who know the steps, the right pots and time together. Think of a family's festival lunch. One person can refuse a dish, but nobody can hold the lunch alone. So when a community scatters, the customs stop first. Nobody stops believing; people are just on other shifts or far away. The bans stay, and bans are what outsiders ask about. So the tradition can still look whole. But it is now something each person says, not something people do together.",
+      "paragraphs": [
+        "Grants the usual view, then splits food rules in two: bans on what is eaten, and customs on how.",
+        "Describes bans: one person can keep them anywhere, so outsiders notice them and take them for the whole.",
+        "Describes customs: they need a group, so they can fail with no change of belief at all.",
+        "Draws the result: customs go, bans stay, the tradition can look whole, and nobody gives anything up."
+      ],
+      "author_view": "Calm and clear-eyed: the writer explains how the change happens rather than grieving over it."
+    }
   }
 }

@@ -1,0 +1,333 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0128",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 86,
+    "genre": "media",
+    "difficulty": "easy",
+    "difficulty_numeric": 1,
+    "stage": "foundation",
+    "skills": [
+      "main-idea-extraction",
+      "causal-reasoning",
+      "inference",
+      "structure-mapping"
+    ],
+    "word_count": 306,
+    "question_count": 3,
+    "question_types": [
+      "main_idea",
+      "inference",
+      "role_of_detail"
+    ],
+    "theme": "a rumour outruns its correction because the rumour gives each person who receives it a task and a kindness to pass on, being wrong by forwarding it costs little while ignoring a true warning costs a lot, and a bare correction reports only that nothing will happen and asks the people who spread the rumour to admit they were fooled; a correction keeps pace when it is a story in its own right, such as how the mistake began, because then it too gives people something new to pass on",
+    "estimated_time_min": 5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-03",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted."
+    },
+    "date_added": "2026-10-03",
+    "batch_id": "batch-rc-005",
+    "prompt_version": "content engine v1 + CAT-size brief 2026-10",
+    "reviewer_notes": "An impersonal foundation item built as a puzzle explained: one morning's false warning, the mechanism that let it outrun an accurate notice (a task, a kindness, the lopsided cost of being wrong, and the embarrassment of the people best placed to correct it), and a third paragraph that limits the mechanism with a correction that did keep pace because it was a story. The familiar line that a lie outruns the truth stops at the first half; what this adds is that a correction competes on the same terms as the rumour, so a bare denial loses and a correction with news in it need not. The set's near-ties are the main-idea option that stops before 'Some corrections do keep pace, though' and the role-of-detail option that reads the old notice for its content rather than its job.",
+    "length_class": "short",
+    "structure": "phenomenon_explanation",
+    "viewpoints": 1,
+    "tone": "brisk, observant, wry",
+    "difficulty_vector": {
+      "lexical": 1,
+      "syntactic": 2,
+      "abstraction": 2,
+      "inference_depth": 2,
+      "distractor_similarity": 2,
+      "reasoning_depth": 2,
+      "structural_ambiguity": 1,
+      "time_pressure": 1
+    },
+    "reasoning_patterns": [
+      "struct.phenomenon_explanation",
+      "struct.cause_effect",
+      "struct.qualification",
+      "struct.example",
+      "comp.central_idea",
+      "comp.function_over_words",
+      "arg.causal_claim",
+      "arg.example",
+      "arg.qualification",
+      "inf.author_view_application",
+      "inf.strongly_supported",
+      "lang.contrast_marker",
+      "elim.near_tie"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1: the live rival is the option saying a correction will always trail a rumour because all it can report is that nothing is going to happen. It is the second paragraph put faithfully, and it loses to the third: 'Some corrections do keep pace, though', with the discovery about the old notice that 'spread almost as fast as the warning had'. The trust option is answered by the notice being 'accurate and official' and losing anyway. Q2: a strong candidate might argue that a second notice would travel as far as the discovery about the old notice, since both told people there was no cut; the passage credits the discovery's spread to its being a story, 'new' and 'a little funny', which a repeated notice is not. The option handing the second notice to the people who forwarded the warning is reversed by 'for whom forwarding it meant admitting they had been taken in'. Q3: the near-tie is that the detail explains where the warning came from. It does, but the paragraph introduces it as the case of a correction that kept pace and goes straight on to how fast 'That discovery spread', which is the job the detail does.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "fraction",
+      "main",
+      "taken in"
+    ]
+  },
+  "passage": {
+    "title": "Fill Every Bucket",
+    "reading_time_min": 1.7,
+    "paragraphs": [
+      {
+        "id": "rc-0128-p1",
+        "text": "'Water supply cut for three days from tomorrow. Fill every bucket. Please forward.' The message appeared in a housing society's group chat at seven one morning, and by nine it had reached half the neighbourhood. At noon the city's water board posted a notice saying that no cut was planned. The notice was accurate and official, and it travelled a fraction as far. That evening people were still filling buckets and still warning their relatives."
+      },
+      {
+        "id": "rc-0128-p2",
+        "text": "The warning won because it gave everyone who received it something to do and something to give. It told them to fill their buckets, and passing it on felt like a kindness to friends who might otherwise go dry. The two ways of being wrong were not equal, either. If the warning was false, forwarding it cost a few buckets of water; if it was true and you kept quiet, your neighbours went dry for three days. So the most careful people were among the quickest to send it on. The notice offered none of this. Nobody picks up a phone to report that nothing will happen. And the people best placed to spread it were the ones who had spread the warning, for whom forwarding it meant admitting they had been taken in."
+      },
+      {
+        "id": "rc-0128-p3",
+        "text": "Some corrections do keep pace, though, and they tend to be stories in their own right. The next morning someone noticed that the warning was a notice from two years earlier, when a main had burst, forwarded without its date. That discovery spread almost as fast as the warning had. It was new, it was a little funny, and passing it on made the sender the one who knew what had really happened, not one of the people taken in. The water board's notice had been just as true, but it gave nobody a story to tell."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0128-q1",
+      "type": "main_idea",
+      "skill": "main_idea",
+      "patterns": [
+        "comp.central_idea",
+        "struct.qualification",
+        "elim.near_tie"
+      ],
+      "target_mistake": "stopping at the second paragraph's reasons and concluding that a correction can never keep up, or bringing in the familiar explanation that people trust neighbours more than officials",
+      "prediction_target": "The learner should be able to say beforehand: the warning won because it gave people something to do and pass on, and a correction can keep pace when it is a story too.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "logical_structure"
+      ],
+      "stem": "Which of the following best expresses the main idea of the passage?",
+      "options": {
+        "A": "Warnings outrun corrections because people trust a message from a neighbour far more than an official notice.",
+        "B": "A rumour beats a bare denial by giving people something to pass on, but a correction with a story can keep up.",
+        "C": "A correction will always trail a rumour, because all it can ever report is that nothing at all is going to happen.",
+        "D": "People pass on rumours because they enjoy alarming their friends, and a correction offers them no such thrill."
+      },
+      "correct": "B",
+      "estimated_time_sec": 70,
+      "explanation": {
+        "expert_notice": "The second paragraph explains why the warning won, and the third opens with 'Some corrections do keep pace, though'. A main idea has to carry both the explanation and the exception.",
+        "correct_reasoning": "The second paragraph says the warning won because it gave people 'something to do and something to give', while the notice only reported that nothing would happen. The third says corrections that are 'stories in their own right' can keep pace, as the discovery about the old notice did. The correct option holds both halves and adds nothing of its own.",
+        "passage_anchor": "rc-0128-p2, rc-0128-p3",
+        "question_type_note": "A main-idea answer has to need every paragraph. When the last paragraph begins with a 'though', the option that stops before it is usually the strongest wrong answer.",
+        "reading_habit": "Before reading the options, say the passage in one sentence that includes its exception: this happens because of that, except when something else. Then choose the option that keeps the exception.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "common_knowledge_intrusion",
+            "why_wrong": "Trust is never the passage's explanation. The water board's notice is called 'accurate and official', and it still lost; the reasons given are what each message offered the people passing it on.",
+            "seductive_element": "It is the most familiar explanation of why rumours spread, and the passage does set a neighbour's message against an official one."
+          },
+          {
+            "option": "C",
+            "trap_type": "too_narrow",
+            "why_wrong": "This is the second paragraph's case without the third. 'Some corrections do keep pace, though': the discovery about the old notice was a correction, and it spread almost as fast as the warning.",
+            "seductive_element": "Every reason in the second paragraph points this way, and the notice really did report only that nothing would happen."
+          },
+          {
+            "option": "D",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage gives the opposite motive: passing the warning on 'felt like a kindness to friends who might otherwise go dry'. Nobody in it is trying to alarm anyone.",
+            "seductive_element": "Rumours are often blamed on people who like a stir, and this warning did alarm a whole neighbourhood."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0128-q2",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.author_view_application",
+        "inf.strongly_supported",
+        "arg.causal_claim"
+      ],
+      "target_mistake": "thinking that repeating a correction would help it spread, when the passage places the problem in what a bare denial offers the people who might pass it on",
+      "prediction_target": "The learner should be able to say beforehand: a second notice would still say only that nothing will happen, so it would travel about as poorly as the first.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 2,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "application"
+      ],
+      "stem": "It can be inferred from the passage that a second notice from the water board, repeating that no cut was planned, would most likely",
+      "options": {
+        "A": "spread further than the first, since people would by then have heard the same news twice",
+        "B": "be passed on mainly by the people who had forwarded the warning earlier that morning",
+        "C": "travel as far as the discovery about the old notice, since both said no cut was planned",
+        "D": "travel about as poorly as the first, since it would offer nothing new to tell"
+      },
+      "correct": "D",
+      "estimated_time_sec": 80,
+      "explanation": {
+        "expert_notice": "The passage says why the first notice failed, and the reason is not its timing or its source: 'Nobody picks up a phone to report that nothing will happen.' A second notice saying the same thing meets the same obstacle.",
+        "correct_reasoning": "A repeated notice would still offer no task, no kindness and no story, and the people best placed to share it would still be the ones who had been taken in. Nothing that held back the first notice would have changed, so the second would most likely travel about as poorly. Only the discovery about the old notice, which was new and 'a little funny', kept pace.",
+        "passage_anchor": "rc-0128-p2, rc-0128-p3",
+        "question_type_note": "This inference asks you to apply the passage's explanation to a new case. Find the reasons the passage gives, then check whether the new case removes any of them.",
+        "reading_habit": "When a passage explains a failure, list its reasons before you predict anything. A change that touches none of the reasons will not change the result.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "Nothing in the passage says that hearing a denial twice makes people keener to forward it. Every reason the first notice failed would apply to the second as well.",
+            "seductive_element": "Repetition sounds as if it ought to help a message spread."
+          },
+          {
+            "option": "B",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage says those people were the least willing to forward a correction, because for them 'forwarding it meant admitting they had been taken in'.",
+            "seductive_element": "The passage calls them the people 'best placed to spread it', so it seems natural that they would."
+          },
+          {
+            "option": "C",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "Both messages told people there would be no cut, but the passage says the discovery spread because it was a story: 'It was new, it was a little funny', and it made the sender the one who knew. A repeated notice has none of that.",
+            "seductive_element": "It uses the passage's own words, and both messages were corrections of the same warning."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0128-q3",
+      "type": "role_of_detail",
+      "skill": "paragraph_function",
+      "patterns": [
+        "comp.function_over_words",
+        "arg.example",
+        "struct.example"
+      ],
+      "target_mistake": "reading a detail for what it says rather than for the job it does, here taking the old notice as an account of where the warning came from",
+      "prediction_target": "The learner should be able to say beforehand: the old notice is the example of a correction that kept pace, which is what the first sentence of the third paragraph promises.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "logical_structure"
+      ],
+      "stem": "The author mentions that the warning was 'a notice from two years earlier, when a main had burst' primarily in order to",
+      "options": {
+        "A": "give an example of a correction that kept pace with a rumour",
+        "B": "show that the warning had been invented to frighten people",
+        "C": "explain where the false warning had come from in the first place",
+        "D": "suggest that most false warnings are old notices sent round again"
+      },
+      "correct": "A",
+      "estimated_time_sec": 60,
+      "explanation": {
+        "expert_notice": "The detail comes straight after the claim 'Some corrections do keep pace, though, and they tend to be stories in their own right', and straight before 'That discovery spread almost as fast as the warning had'. It sits between a claim and the proof of it.",
+        "correct_reasoning": "The discovery about the old notice is a correction: it told people the warning was wrong. The passage mentions it because it spread almost as fast as the warning, which is the exception the third paragraph announces. The correct option names that job.",
+        "passage_anchor": "rc-0128-p3",
+        "question_type_note": "A role-of-detail question asks why the author put something in, not what it says. Read the sentence before the detail and the sentence after it; together they usually state the job.",
+        "reading_habit": "When an example appears, ask which claim it is proving. The claim is usually in the sentence just before it.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "out_of_scope",
+            "why_wrong": "Nobody invented anything. The notice was real, and it was 'forwarded without its date', which is a slip, not a plan to frighten anyone.",
+            "seductive_element": "False warnings are often assumed to be deliberate, and this one did frighten people."
+          },
+          {
+            "option": "C",
+            "trap_type": "wrong_structural_role",
+            "why_wrong": "The detail does tell us where the warning came from, but that is its content, not its job. The paragraph introduces it as a correction that kept pace and goes straight on to how fast it spread.",
+            "seductive_element": "It is an accurate description of what the detail says."
+          },
+          {
+            "option": "D",
+            "trap_type": "too_broad",
+            "why_wrong": "The passage describes one warning with this origin and makes no claim about where most false warnings come from.",
+            "seductive_element": "A message that has lost its date sounds like a common kind of mistake."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "fraction",
+      "passage_use": "it travelled a fraction as far",
+      "meaning_here": "only a small part of the distance",
+      "difficulty": "easy"
+    },
+    {
+      "word": "main",
+      "passage_use": "when a main had burst",
+      "meaning_here": "a large underground pipe that carries water to many buildings",
+      "difficulty": "medium"
+    },
+    {
+      "word": "taken in",
+      "passage_use": "forwarding it meant admitting they had been taken in",
+      "meaning_here": "fooled into believing something that was not true",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "A short passage that explains a race between a rumour and its correction, then shows a correction that kept up. Keep track of what each message gave the people who passed it on.",
+    "one_sentence_summary": "A false warning about a water cut outran the water board's accurate notice because it gave people a task and a kindness to pass on, because a false warning costs little and an ignored true one a lot, and because forwarding the notice meant admitting one had been fooled; a correction that was itself a story, how the warning had begun, kept pace.",
+    "main_idea": "Rumours travel further than corrections because they give the people who pass them on something to do, something to give and little to lose, while a bare correction says only that nothing will happen. A correction that carries a story of its own can keep up.",
+    "simple_explanation": "One morning a message went round a neighbourhood: the water will be cut for three days, so fill every bucket and pass this on. At noon the water board said there would be no cut. Its notice was true and official, but it reached far fewer people, and that evening people were still filling buckets.\n\nThe writer explains why the warning won. It gave people something to do, fill the buckets, and passing it on felt like a kindness. Being wrong also cost different amounts: a false warning wastes a few buckets of water, but ignoring a true one leaves your neighbours dry for three days. So careful people sent it on quickly. The notice gave nobody anything to do, and nobody rings a friend to say that nothing will happen. Worse, the people best placed to pass on the notice were the ones who had passed on the warning, and doing so meant admitting they had been fooled.\n\nThen the writer adds an exception. Some corrections do spread, when they are stories in themselves. The next day someone found that the warning was an old notice from two years before, sent round without its date. That news spread almost as fast as the warning, because it was new, a little funny, and made the person sharing it the one who knew the truth rather than one of the people who had been fooled.",
+    "why_difficult": "The language is easy and the example is familiar, so the risk is stopping too soon. The second paragraph gives so many reasons for the correction losing that a reader decides corrections always lose. The third paragraph says otherwise, and the main-idea question is built on whether you kept it.",
+    "author_intention": "To explain, through one ordinary morning, why a rumour outruns the truth, and then to show the kind of correction that does not lose the race.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0128-p1",
+        "role": "Tells the race",
+        "note": "A false warning about a water cut crosses a neighbourhood in two hours; the true notice that follows travels a fraction as far."
+      },
+      {
+        "paragraph_id": "rc-0128-p2",
+        "role": "Explains the win",
+        "note": "The warning gave people a task and a kindness to pass on, and being wrong cost little; the notice offered nothing and embarrassed the people who would have to share it."
+      },
+      {
+        "paragraph_id": "rc-0128-p3",
+        "role": "Shows an exception",
+        "note": "A correction that is a story, the discovery that the warning was an old notice, spreads almost as fast, because it is new and lets the sender be the one who knew."
+      }
+    ],
+    "tone_progression": "Brisk and factual in the opening scene, patiently explanatory in the second paragraph, and lightly amused in the third, where the old notice turns the morning's alarm into a story worth telling.",
+    "key_transitions": [
+      "'The warning won because it gave everyone who received it something to do and something to give.' (opening of paragraph 2): the scene becomes an explanation.",
+      "'Some corrections do keep pace, though' (opening of paragraph 3): the explanation meets its exception."
+    ],
+    "misunderstanding": "A hurried reader takes the passage to say that the truth can never catch a rumour, or that people simply believe neighbours over officials. The passage says neither: the notice was official and still lost, and a correction with a story of its own kept pace.",
+    "traps_summary": "The options offer a popular explanation the passage never gives (trust), a summary that stops before the third paragraph, a motive turned upside down (alarming friends instead of helping them), and a detail read for its content rather than its job.",
+    "reading_lesson": "When a passage explains why something happens, look for the case it admits does not fit. Words such as 'though' and 'some' usually mark it, and the best summary keeps both the rule and the exception.",
+    "real_world": "Every false alarm in a family group, every market rumour and every health scare that goes round follows this pattern; the corrections that work are usually the ones that explain how the mistake happened.",
+    "takeaway": "A correction competes on the same terms as a rumour: it has to give people something to pass on.",
+    "reflection_question": "When did you last forward a correction, and what made it worth forwarding?",
+    "eli10": {
+      "big_idea": "A rumour spreads faster than its correction because it gives people something to pass on, unless the correction is a story too.",
+      "story": "One morning a message went round: no water for three days, fill every bucket, pass it on. By noon the water board said it was not true. But far fewer people passed that on. Why? The warning gave people a job. Fill the buckets! Sending it felt kind, like looking after your friends. Being wrong did not cost much either. A few extra buckets is no disaster. A dry house for three days is. The true notice gave people nothing to do. Nobody rings a friend to say nothing will happen. And sharing it meant admitting you had been fooled. The next day, someone found out the warning was an old notice from two years ago. That news spread fast. It was new and a bit funny. Sharing it made you the one who knew. So the truth can keep up, if it tells a story too.",
+      "paragraphs": [
+        "Tells a story: a false warning about water spreads fast, and the true notice after it hardly spreads.",
+        "Explains why: the warning gave people a job and a kind thing to do, and the notice gave nothing.",
+        "Adds an exception: a correction that tells a story, like the old notice, can spread almost as fast."
+      ],
+      "author_view": "The writer finds this easy to explain and a little funny, and thinks a correction has to give people something worth sharing."
+    }
+  }
+}

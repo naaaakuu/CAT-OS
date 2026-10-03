@@ -9,7 +9,7 @@
     "genre": "technology-ethics",
     "difficulty": "hard",
     "difficulty_numeric": 8,
-    "stage": "advanced",
+    "stage": "elite",
     "skills": [
       "inference",
       "scope-control",
@@ -17,16 +17,15 @@
       "tone-detection"
     ],
     "word_count": 649,
-    "question_count": 5,
+    "question_count": 4,
     "question_types": [
       "agree_disagree",
       "author_attitude",
       "best_characterization",
-      "inference",
-      "not_true"
+      "inference"
     ],
     "theme": "why a medium that copies perfectly preserves worst: what fails is the apparatus that interprets a file rather than the material it sits on, so preservation becomes a recurring decision taken by whoever is currently employed, which ends the old property that neglect was survivable, while the author refuses to call the change a net loss and locates the remedy in institutional continuity rather than in any medium",
-    "estimated_time_min": 10.5,
+    "estimated_time_min": 9.5,
     "source": {
       "publication": "original",
       "url": null,
@@ -37,7 +36,7 @@
     "date_added": "2026-09-13",
     "batch_id": "batch-rc-003",
     "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-04",
-    "reviewer_notes": "The opening comparison is deliberately unfair and the author says so, which sets up the final paragraph's refusal to deliver the verdict the opening invites. Four of the five questions are decided by holding the fifth paragraph against the first, and the attitude question is built on the concession about completeness, which is the passage's most quotable sentence and belongs to the other side of the ledger.",
+    "reviewer_notes": "The opening comparison is deliberately unfair and the author says so, which sets up the final paragraph's refusal to deliver the verdict the opening invites. Four of the five questions are decided by holding the fifth paragraph against the first, and the attitude question is built on the concession about completeness, which is the passage's most quotable sentence and belongs to the other side of the ledger. 2026-10-03 CAT-size pass: 649→649 words, 5→5 paragraphs, 5→4 questions. Dropped q2 (not_true on p2; its material-versus-reader split is still tested by inference q1's first option and by q5's reasoning); why_difficult no longer says the wrong thesis runs through four questions.",
     "length_class": "long",
     "structure": "phenomenon_explanation",
     "viewpoints": 1,
@@ -78,7 +77,7 @@
     ],
     "quality": {
       "status": "reviewed",
-      "adversarial_review": "Q1's live rival is the option that digital records are lost at a greater rate overall, which the opening paragraph does everything to invite and the last paragraph refuses in one sentence: what has altered is the distribution of loss rather than its quantity. The key survives because the second and third paragraphs together make the manuscript's survival passive and the file's survival dependent on a decision retaken by somebody currently employed, so an unstaffed generation separates them. Q2's rival is the statement about documents nobody was looking after, which sounds like a general remark about history rather than a sentence of the passage; the fourth paragraph states it with the tax receipts and the box nobody troubled to empty. Q3's rival is the option calling the passage a comparison decided in favour of the older medium, which the fifth paragraph forecloses by declining the verdict and by crediting the digital record with a completeness no earlier age could have imagined. Q4's rival is the reassured reading, built from that same completeness clause; it is a concession inside a sentence whose main verb is a refusal to settle the bargain. Q5's rival is the option about archives recording what their age found interesting, which is true of the present the passage describes and false of the past it contrasts, since indifference used to preserve exactly the material nobody valued.",
+      "adversarial_review": "Q1's live rival is the option that digital records are lost at a greater rate overall, which the opening paragraph does everything to invite and the last paragraph refuses in one sentence: what has altered is the distribution of loss rather than its quantity. The key survives because the second and third paragraphs together make the manuscript's survival passive and the file's survival dependent on a decision retaken by somebody currently employed, so an unstaffed generation separates them. Q2's rival is the statement about documents nobody was looking after, which sounds like a general remark about history rather than a sentence of the passage; the fourth paragraph states it with the tax receipts and the box nobody troubled to empty. Q3's rival is the option calling the passage a comparison decided in favour of the older medium, which the fifth paragraph forecloses by declining the verdict and by crediting the digital record with a completeness no earlier age could have imagined. Q4's rival is the reassured reading, built from that same completeness clause; it is a concession inside a sentence whose main verb is a refusal to settle the bargain. Q5's rival is the option about archives recording what their age found interesting, which is true of the present the passage describes and false of the past it contrasts, since indifference used to preserve exactly the material nobody valued. (2026-10-03, CAT-size pass: q2 was dropped, so any note above about it no longer applies.)",
       "blind_solve": null
     },
     "vocab_extracted": [
@@ -168,62 +167,6 @@
             "trap_type": "out_of_scope",
             "why_wrong": "The passage never ranks institutions by longevity or by spending. It says the survival of a file depends on institutional continuity, which is a claim about what records need rather than about what makes an institution last.",
             "seductive_element": "Institutional continuity is the passage's closing term, and the option recycles the vocabulary of endurance that surrounds it."
-          }
-        ]
-      }
-    },
-    {
-      "id": "rc-0067-q2",
-      "type": "not_true",
-      "skill": "specific_detail",
-      "patterns": [
-        "comp.explicit_detail",
-        "comp.paraphrase",
-        "comp.attention_span"
-      ],
-      "target_mistake": "accepting that a digital object fails because its storage medium has deteriorated, which is the one account the passage sets aside",
-      "prediction_target": null,
-      "difficulty": {
-        "inference_depth": 2,
-        "distractor_similarity": 4,
-        "reasoning_depth": 3
-      },
-      "secondary_skills": [
-        "scope"
-      ],
-      "stem": "Which of the following is NOT true, according to the passage?",
-      "options": {
-        "A": "The failure of a digital object is usually a failure of the material it was stored on.",
-        "B": "Much of what has reached us from the past came through documents that nobody was looking after.",
-        "C": "Keeping a digital record needs a decision that is taken again at intervals shorter than a career.",
-        "D": "The digital record keeps widely wanted material more completely than any earlier age managed to."
-      },
-      "correct": "A",
-      "estimated_time_sec": 60,
-      "explanation": {
-        "expert_notice": "The second paragraph separates two things a hurried reader merges: the bits, which do not fail, and the stack of format, software and machine, which stops interpreting them. Its last two sentences state the separation flatly, one clause each.",
-        "correct_reasoning": "The correct option puts the failure back into the material, which is the account the passage exists to replace. The passage says the bits are as indifferent to time as anything humans make, that the material is intact, and that what has gone is the reader; a file becomes unopenable because nothing now made will open it, not because anything in it has perished.",
-        "passage_anchor": "rc-0067-p2",
-        "question_type_note": "In a NOT-true question three options restate the passage and the fourth swaps a term. The swap is usually the everyday explanation the author has just taken trouble to exclude.",
-        "reading_habit": "When a passage says what did not fail, underline it. That sentence is worth more than the sentence saying what did, because it is the one the wrong options are built out of.",
-        "distractors": [
-          {
-            "option": "B",
-            "trap_type": "passage_language_shifted",
-            "why_wrong": "The fourth paragraph states this and gives it in examples: tax receipts, laundry lists and the letters of people of no importance, which reached us because they sat in a box nobody troubled to empty.",
-            "seductive_element": "It sounds like a general remark about history rather than a sentence of this passage, so a reader searching for matching words does not find them."
-          },
-          {
-            "option": "C",
-            "trap_type": "unsupported_inference",
-            "why_wrong": "The third paragraph states the interval as shorter than a working life and then says the decision is retaken every few years by somebody currently employed, which is what this option restates in other terms.",
-            "seductive_element": "The option's abstraction is one notch above the passage's own wording, which makes a faithful paraphrase look like an addition."
-          },
-          {
-            "option": "D",
-            "trap_type": "comparison_distortion",
-            "why_wrong": "The fifth paragraph makes this comparison itself, saying the digital record keeps the celebrated with a completeness no earlier age could have imagined. It is the concession the author sets against the loss of the obscure.",
-            "seductive_element": "It flatters the medium the passage seems to be criticising, so a reader who has fixed the author's position as hostile rejects it on tone alone."
           }
         ]
       }
@@ -431,7 +374,7 @@
     "one_sentence_summary": "Digital records fail not because their material perishes but because the apparatus that interprets them stops being maintained, which turns preservation from a single decision into one retaken every few years by whoever is currently employed, so that neglect, which used to preserve, now destroys, though the author refuses to say the change leaves us with less and locates the remedy in institutional continuity rather than in any medium.",
     "main_idea": "A perfectly copying medium preserves worst, because what fails is not the bits but the stack of format, software and machine that interprets them, and that stack is renewed for commercial reasons of its own. Preservation therefore becomes a recurring decision funded out of a current budget, which reverses the old fact that neglected things survived. The author will not say the digital record is poorer; he says loss has been redistributed, and that the remedy is institutional rather than technical.",
     "simple_explanation": "You would expect that the better a technology is at making copies, the better it would be at keeping things. The opposite happens.\n\nA paper letter left in a drawer for three centuries can still be read. A file from fifteen years ago may be unopenable. And the reason is not that the disc rotted.\n\nHere is the real reason. A digital file is not really an object. It is a set of instructions that only mean something to a machine that knows how to follow them. You need the format, the software that reads the format, the operating system that runs the software, and the computer that runs that. Every one of those is kept going by some company for its own commercial reasons, and none of those reasons has anything to do with your file. So the file lasts exactly as long as that chain keeps working. The bits are fine. What has disappeared is anything able to read them.\n\nThat changes what preserving something means. To preserve a manuscript you put it in a dry room and leave it there; somebody decided that once, maybe hundreds of years ago, and nothing more is needed. To preserve a file you must copy it forward and convert it into whatever the current systems can read, again and again, every few years. So the decision has to be made again and again, by someone who currently has a job and a budget, and that budget has to be argued for this year against things that are easier to point at.\n\nNow the strange consequence. Most of what we have from the past survived by accident. Old tax receipts, shopping lists, letters from nobodies: nobody was looking after them, and that is exactly why they lasted, because nobody threw the box away either. Being ignored used to be a way of surviving. It no longer is. Anything not deliberately carried forward has a date on it. And since carrying it forward costs money that must be justified, what survives is what somebody today can name a reason for, which is a picture of what we find interesting, not of what the future will.\n\nFinally, the author refuses to say this is worse. The amount lost may not have changed; what changed is who loses. Paper lost famous and obscure things alike, at random. Digital keeps the famous things more perfectly than any age could before, and loses the obscure on a timetable. Which of those is the worse deal depends on what the future will want, and nobody has ever known that. What he will say is that calling the fix technical is wrong. No format solves it. Every promise of a durable medium is really a promise about how often a person will have to look after it, and the thing that actually decides the outcome is whether institutions keep going, which nobody knows how to build or buy.",
-    "why_difficult": "The first paragraph is written to provoke a verdict and the last paragraph withholds it, so a reader who forms his conclusion early carries the wrong thesis through four questions. The explanation also asks the reader to hold a distinction that is easy to collapse, between the material, which does not fail, and the apparatus, which stops. And the fourth paragraph's inversion runs against a habit of mind: we assume care preserves and neglect destroys, and the paragraph says that until recently the opposite was true, which readers reliably flatten back into the familiar version.",
+    "why_difficult": "The first paragraph is written to provoke a verdict and the last paragraph withholds it, so a reader who forms his conclusion early carries the wrong thesis through most of the set. The explanation also asks the reader to hold a distinction that is easy to collapse, between the material, which does not fail, and the apparatus, which stops. And the fourth paragraph's inversion runs against a habit of mind: we assume care preserves and neglect destroys, and the paragraph says that until recently the opposite was true, which readers reliably flatten back into the familiar version.",
     "author_intention": "To replace a story about fragile materials with a story about maintained institutions, and then to stop the reader turning that into a lament, by showing that what has changed is which things get lost rather than how much is lost.",
     "paragraph_journey": [
       {
@@ -471,6 +414,18 @@
     "reading_lesson": "When an author opens with a comparison and then says the comparison is unfair, treat that admission as a promise: somewhere near the end he will decline to draw the obvious conclusion, and the questions will be built on the difference between the conclusion you formed and the one he allowed. Read the final paragraph of such a passage before answering anything about attitude, characterisation or agreement, and check which of your beliefs about the author came from his evidence rather than from his verdict.",
     "real_world": "The same structure governs anything that survives by maintenance rather than by substance: a language kept alive by speakers, a building kept up by a trust, a codebase that runs only while someone still understands it, and any organisation whose knowledge lives in people who are currently employed.",
     "takeaway": "Some things are kept by being left alone, and some only by being picked up again every few years; the second kind dies of a quiet budget meeting.",
-    "reflection_question": "Which of the records you rely on would still be readable if nobody made a decision about them for the next twenty years?"
+    "reflection_question": "Which of the records you rely on would still be readable if nobody made a decision about them for the next twenty years?",
+    "eli10": {
+      "big_idea": "Digital files are lost when nothing can read them, so keeping them needs repeated human choices; the writer will not call this worse.",
+      "story": "You might expect perfect copies to last best. The opposite is true. A letter ignored for 300 years can still be read. A 15-year-old file may not open, though the disc is fine. It is like a DVD in a house with no DVD player. A file needs a format, software and a machine, all run by companies for their own reasons. When they move on, the file goes dead. So paper is saved once, by leaving it in a dry room. A file must be copied forward every few years by someone with a job and a budget. Old papers often survived because nobody bothered to throw them out. Now, being ignored means being lost. Still, the writer will not say we lose more. Famous things are kept better than ever; little-known things vanish on a timetable. The fix is not a better disc but offices that keep going.",
+      "paragraphs": [
+        "Starts with a puzzle: perfect copies last worst; paper fades slowly, but files work, then suddenly do not.",
+        "Explains it: the bits survive, but the software and machines needed to read them move on.",
+        "Draws the result: paper is saved by one old decision; a file needs a fresh decision every few years.",
+        "Names a reversal: neglect once kept things safe; now it dooms them, and only what today values survives.",
+        "Refuses a verdict: what changed is which things are lost, not how much; the fix is institutions that last."
+      ],
+      "author_view": "Thoughtful and uneasy: the writer is troubled by the change but carefully refuses to call it a disaster."
+    }
   }
 }

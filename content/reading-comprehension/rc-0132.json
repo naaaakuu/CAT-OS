@@ -1,0 +1,407 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0132",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 86,
+    "genre": "urban-studies",
+    "difficulty": "easy",
+    "difficulty_numeric": 3,
+    "stage": "developing",
+    "skills": [
+      "main-idea-extraction",
+      "inference",
+      "application",
+      "concession-tracking",
+      "structure-mapping"
+    ],
+    "word_count": 395,
+    "question_count": 4,
+    "question_types": [
+      "primary_purpose",
+      "inference",
+      "application",
+      "role_of_detail"
+    ],
+    "theme": "a desire path is better evidence than any survey of where walkers want to go and how far round they will go, so a planner can wait and pave the lines people wear; but the path records a destination and a budget of time, not a good route, so a track worn across a railway line calls for a footbridge in a better place, close enough to be used, rather than for paving the track",
+    "estimated_time_min": 7,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-03",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted."
+    },
+    "date_added": "2026-10-03",
+    "batch_id": "batch-rc-005",
+    "prompt_version": "content engine v1 + CAT-size brief 2026-10",
+    "reviewer_notes": "An impersonal developing item built as a claim with its limit. The familiar campus story (wait, then pave the worn lines) is told as the lesson; what this adds is a precise statement of what the evidence is evidence of, a destination and a budget of time rather than a route, so that a track across a railway calls for a better-placed footbridge rather than paving. The fourth paragraph turns the limit into a working rule. Four questions: purpose, a one-step inference about the waiting planners, an application whose scenario mirrors the railway case, and a role-of-detail question on the concession inside the second paragraph. The set's near-tie is the application option that would pave the track.",
+    "length_class": "medium",
+    "structure": "claim_qualification",
+    "viewpoints": 1,
+    "tone": "observant, practical, even-handed",
+    "difficulty_vector": {
+      "lexical": 2,
+      "syntactic": 2,
+      "abstraction": 2,
+      "inference_depth": 2,
+      "distractor_similarity": 3,
+      "reasoning_depth": 3,
+      "structural_ambiguity": 2,
+      "time_pressure": 2
+    },
+    "reasoning_patterns": [
+      "struct.claim_evidence",
+      "struct.qualification",
+      "struct.example",
+      "comp.purpose",
+      "comp.supporting_idea",
+      "comp.function_over_words",
+      "arg.evidence",
+      "arg.principle",
+      "arg.concession",
+      "arg.qualification",
+      "inf.strongly_supported",
+      "inf.author_view_application",
+      "scope.condition",
+      "scope.too_narrow",
+      "lang.concession_marker",
+      "elim.near_tie"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1: the live rival is the option that walkers' feet are a better guide than planners' designs. It is the second paragraph's lesson, and the third paragraph's 'It does not show that the line they wore is a good way to get there' denies that the lesson is the whole story. The asking option is reversed by 'Asked where they would like a path, people guess'. Q2: a strong candidate might argue that the waiting planners want tidy paths, but 'rarely beautiful from the air' says the reverse; the asking option borrows the passage's words for the evidence these planners avoid. Q3: the near-tie is to pave the track, which follows the second paragraph and ignores the third, where paving a track across a railway 'would obey the evidence and miss its meaning'; waiting a term or two is the new-building method, useless where the evidence already exists and the route is dangerous. Q4: the near-tie is the option that admits the untidiness and adds that the lawns suffer; the sentence ends 'and the lawns survive'.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "politely",
+      "currency",
+      "budget"
+    ]
+  },
+  "passage": {
+    "title": "Where the Grass Gives Up",
+    "reading_time_min": 2.1,
+    "paragraphs": [
+      {
+        "id": "rc-0132-p1",
+        "text": "Within a year of opening, almost any new campus, hospital or housing estate has a brown line worn across one of its lawns. The paved path runs politely round the edge of the grass and turns a neat right angle at the corner. The brown line cuts straight across, from the bus stop to the main door. Planners call such lines desire paths, and nobody in particular makes them. Each walker saves a few seconds, the grass gives up where feet fall most often, and the next walker follows the bare earth because it is already there."
+      },
+      {
+        "id": "rc-0132-p2",
+        "text": "To a planner, a desire path is evidence of a kind no survey can match. Asked where they would like a path, people guess, or say what sounds sensible. Their feet report what they actually do, every day and in all weathers. And they report it in the one currency walkers really care about, which is time. Some planners have used this on purpose. They open a new building with nothing but grass around it, wait a term or two, and then pave the lines that people have worn. The paths that result are rarely beautiful from the air, but they are used, and the lawns survive."
+      },
+      {
+        "id": "rc-0132-p3",
+        "text": "The lesson has a limit, and it lies in what the evidence can report. A desire path records where people want to go and how much they mind the long way round. It does not show that the line they wore is a good way to get there. A track worn across a railway line, through a gap in the fence, is as honest as any other. It is telling the planner that the footbridge is in the wrong place. Paving that track would obey the evidence and miss its meaning."
+      },
+      {
+        "id": "rc-0132-p4",
+        "text": "So a planner reading a worn path should not stop at where people walked. The question is where they were going, and how far round they will go to get there. The answer to where they walked is a route. The answer to where they were going is a destination and a budget of time, and it leaves the route to be designed. Sometimes the worn line is the best route, and paving it is the whole job. Sometimes the right response is a new footbridge a short walk from the track, close enough that people will actually use it."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0132-q1",
+      "type": "primary_purpose",
+      "skill": "author_purpose",
+      "patterns": [
+        "comp.purpose",
+        "struct.qualification",
+        "scope.too_narrow"
+      ],
+      "target_mistake": "describing the passage by its lesson alone, without the limit the third paragraph sets, or by one of its examples",
+      "prediction_target": "The learner should be able to say beforehand: the author shows what desire paths can teach a planner and where that lesson stops.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "main_idea"
+      ],
+      "stem": "The author's primary purpose in the passage is to",
+      "options": {
+        "A": "argue that walkers' feet are a better guide to where paths should go than planners' designs",
+        "B": "show what worn shortcuts can tell a planner, and what they cannot",
+        "C": "criticise planners who lay paths without first asking people where they want them",
+        "D": "warn that more and more people are cutting across railway lines to save time"
+      },
+      "correct": "B",
+      "estimated_time_sec": 70,
+      "explanation": {
+        "expert_notice": "The passage has a clear hinge at the start of the third paragraph: 'The lesson has a limit'. Before it, the author says what desire paths teach; after it, what they do not. A purpose has to cover both sides of that hinge.",
+        "correct_reasoning": "The second paragraph gives the lesson: a desire path is evidence 'no survey can match', and some planners pave the lines people wear. The third and fourth give the limit: the path records where people are going and how much they mind the long way round, not 'a good way to get there'. The correct option holds both.",
+        "passage_anchor": "rc-0132-p2, rc-0132-p3",
+        "question_type_note": "A primary-purpose question asks what the whole passage sets out to do. When a passage says 'The lesson has a limit', the purpose almost always includes the limit.",
+        "reading_habit": "Mark the sentence where a passage turns from what something shows to what it does not show. The purpose of the passage usually spans that turn.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "too_narrow",
+            "why_wrong": "This is the second paragraph's lesson without the limit. The third paragraph says a worn line does not show 'a good way to get there', and the fourth that the route is still 'to be designed'.",
+            "seductive_element": "It is true to the second paragraph, which praises walkers' evidence over surveys."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage says asking is the weaker method: 'Asked where they would like a path, people guess, or say what sounds sensible.' It prefers watching feet to asking people.",
+            "seductive_element": "Consulting the people who will use a path sounds like the sensible advice an essay on planning would give."
+          },
+          {
+            "option": "D",
+            "trap_type": "out_of_scope",
+            "why_wrong": "The railway track is a single example used to show the limit of the lesson. The passage says nothing about how often people cross railway lines, or whether that is growing.",
+            "seductive_element": "The railway is the passage's most alarming image, so it can seem to be the warning the passage exists to give."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0132-q2",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.strongly_supported",
+        "comp.supporting_idea",
+        "arg.evidence"
+      ],
+      "target_mistake": "explaining the wait by cost, tidiness or consultation, when the passage presents it as a deliberate use of walkers' evidence",
+      "prediction_target": "The learner should be able to say beforehand: they wait because they expect people's walking to show where the paths should go.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 2,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "specific_detail"
+      ],
+      "stem": "It can be inferred from the passage that the planners who wait a term or two before paving",
+      "options": {
+        "A": "expect people's walking to show where the paths ought to go",
+        "B": "expect the lines people wear to look tidier from the air",
+        "C": "cannot afford to pave paths when a building first opens",
+        "D": "ask the people using a building where they would like the paths"
+      },
+      "correct": "A",
+      "estimated_time_sec": 75,
+      "explanation": {
+        "expert_notice": "The second paragraph sets feet against surveys, and then describes planners who open a building 'with nothing but grass around it' and pave only after people have walked. Waiting is a choice about which evidence to trust.",
+        "correct_reasoning": "A planner who leaves a building with no paths, waits, and then paves 'the lines that people have worn' is letting walkers' habits decide where the paths go. That follows from the paragraph's claim that feet report 'what they actually do'. The correct option states that expectation.",
+        "passage_anchor": "rc-0132-p2",
+        "question_type_note": "An inference about why people act asks you to connect their action to the reason the passage gives just before it. Here the reason comes in the sentences that precede 'Some planners have used this on purpose'.",
+        "reading_habit": "When a passage says someone did something 'on purpose', look back for the purpose. It is usually in the sentence or two before.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage says the resulting paths 'are rarely beautiful from the air'. These planners accept untidy lines because people use them.",
+            "seductive_element": "Planners are often pictured working from an aerial plan, and the passage mentions the view from the air."
+          },
+          {
+            "option": "C",
+            "trap_type": "out_of_scope",
+            "why_wrong": "Money is never mentioned. The passage presents the wait as deliberate: 'Some planners have used this on purpose.'",
+            "seductive_element": "Leaving a new building without paths could look like a way of saving money."
+          },
+          {
+            "option": "D",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "Asking is what the passage says gives poor evidence: 'Asked where they would like a path, people guess'. These planners watch where people walk instead.",
+            "seductive_element": "It repeats the passage's own words about asking people where they would like a path."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0132-q3",
+      "type": "application",
+      "skill": "application",
+      "patterns": [
+        "inf.author_view_application",
+        "arg.principle",
+        "scope.condition",
+        "elim.near_tie"
+      ],
+      "target_mistake": "applying the lesson without its limit and paving a dangerous route, or throwing the evidence away altogether",
+      "prediction_target": "The learner should be able to say beforehand: keep the destination and the short distance, change the route, so put a crossing near where the track meets the road.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 3,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "inference",
+        "scope"
+      ],
+      "stem": "A council finds a track worn through a hedge, from a housing estate to a bus stop on a fast road, some way from the nearest crossing. Which response best fits the passage's argument?",
+      "options": {
+        "A": "Pave the track and leave the road as it is, since the track shows where people walk",
+        "B": "Mend the hedge, since walkers ought to use the crossing that has been provided",
+        "C": "Wait a term or two to see whether people keep using the track before doing anything",
+        "D": "Build a crossing near the gap, so that people can keep their short route safely"
+      },
+      "correct": "D",
+      "estimated_time_sec": 90,
+      "explanation": {
+        "expert_notice": "The scenario matches the passage's railway case in every way that matters: an honest track, a dangerous route, a crossing in the wrong place. The last paragraph says what to do in such a case: provide 'a new footbridge a short walk from the track, close enough that people will actually use it'.",
+        "correct_reasoning": "The track tells the council where people are going, from the estate to the bus stop, and how little they will go out of their way. The route itself crosses a fast road. Following the passage, the council should keep the destination and the short distance and change the route, and a crossing near the gap does both.",
+        "passage_anchor": "rc-0132-p3, rc-0132-p4",
+        "question_type_note": "An application question gives a new case and asks which response the author's reasoning supports. Match the case to the passage's own example first, then apply what the author said about that example.",
+        "reading_habit": "When a passage states a lesson and then a limit, check every new case against the limit before applying the lesson.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "wrong_condition",
+            "why_wrong": "The passage paves a worn line only when it is a good way to get there: 'Sometimes the worn line is the best route, and paving it is the whole job.' A route onto a fast road with no crossing is the case where paving 'would obey the evidence and miss its meaning'.",
+            "seductive_element": "The second paragraph praises planners who pave the lines people wear."
+          },
+          {
+            "option": "B",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The author treats a track like this as honest evidence, as with the railway, that the existing crossing is 'in the wrong place'. Mending the hedge throws the evidence away and leaves people still needing to reach the bus stop.",
+            "seductive_element": "Insisting that people use the crossing provided sounds like the safe and responsible choice."
+          },
+          {
+            "option": "C",
+            "trap_type": "true_but_insufficient",
+            "why_wrong": "Waiting is the passage's method for a new building, where there is no evidence yet. Here the track already exists, and the route it records is dangerous, so waiting adds nothing but risk.",
+            "seductive_element": "It is the passage's own method for learning from walkers."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0132-q4",
+      "type": "role_of_detail",
+      "skill": "paragraph_function",
+      "patterns": [
+        "comp.function_over_words",
+        "arg.concession",
+        "lang.concession_marker"
+      ],
+      "target_mistake": "reading a concession inside the second paragraph as the start of the limit, or as a complaint about planners",
+      "prediction_target": "The learner should be able to say beforehand: the author admits the paths look untidy and then says they work, so the remark concedes a cost without giving up the method.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "logical_structure"
+      ],
+      "stem": "The author remarks that the paths that result 'are rarely beautiful from the air' in order to",
+      "options": {
+        "A": "suggest that planners care more about how paths look than how they are used",
+        "B": "prepare the reader for the limit set out in the next paragraph",
+        "C": "admit a cost of the method while insisting that it works",
+        "D": "admit that such paths look untidy and that the lawns suffer for it"
+      },
+      "correct": "C",
+      "estimated_time_sec": 60,
+      "explanation": {
+        "expert_notice": "The sentence has two halves joined by 'but': the paths 'are rarely beautiful from the air, but they are used, and the lawns survive'. The first half gives something away; the second says why it does not matter.",
+        "correct_reasoning": "Untidy paths are a real cost of letting walkers decide, and the author admits it. The 'but' then sets that cost against two gains, paths that are used and lawns that survive, so the sentence concedes a weakness without giving up the method. The correct option describes that move.",
+        "passage_anchor": "rc-0132-p2",
+        "question_type_note": "A role-of-detail question asks why the author included something. When a remark is followed by 'but', its job is usually to concede a point that the rest of the sentence outweighs.",
+        "reading_habit": "Read a concession and its 'but' as one unit. The author is not changing sides; the author is showing that the cost has been weighed.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "Nothing in the sentence blames planners for caring about looks. It simply admits that paths shaped by walking are untidy, and then says they work.",
+            "seductive_element": "Mentioning the view from the air can suggest a planner admiring a neat drawing."
+          },
+          {
+            "option": "B",
+            "trap_type": "wrong_structural_role",
+            "why_wrong": "The limit in the next paragraph is a different point: a worn line may be a dangerous route. The remark about looks is a small concession inside the second paragraph, and the paragraph ends by defending the method.",
+            "seductive_element": "It is the first note of doubt in the passage, so it can look like the start of the limit."
+          },
+          {
+            "option": "D",
+            "trap_type": "half_right",
+            "why_wrong": "The first half is right and the second is the reverse of the text: 'the lawns survive'. Paving the worn lines is what saves the grass around them.",
+            "seductive_element": "It begins with the same admission as the correct option, and worn earth on a lawn sounds like damage."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "politely",
+      "passage_use": "The paved path runs politely round the edge of the grass",
+      "meaning_here": "keeping carefully to the edge, as if not wanting to intrude; said with gentle humour",
+      "difficulty": "medium"
+    },
+    {
+      "word": "currency",
+      "passage_use": "the one currency walkers really care about, which is time",
+      "meaning_here": "the thing used to measure what something costs; here, time saved or lost",
+      "difficulty": "medium"
+    },
+    {
+      "word": "budget",
+      "passage_use": "a destination and a budget of time",
+      "meaning_here": "a limited amount that can be spent; here, the extra time people are willing to give up",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "A passage that teaches a lesson and then sets a limit on it. Keep the lesson and the limit apart, and notice what a worn path can and cannot tell a planner.",
+    "one_sentence_summary": "The shortcuts that walkers wear across lawns are better evidence than any survey of where people want to go and how far round they will go, so some planners wait and pave the worn lines; but a path records a destination and a budget of time, not a good route, so a track across a railway calls for a better-placed footbridge rather than paving.",
+    "main_idea": "Desire paths show a planner where people really want to go and how much they mind going the long way round, which makes them better evidence than asking people. But they do not show that the line people wore is a good route, so the planner should keep the destination and design the route, as with a footbridge near a track worn across a railway.",
+    "simple_explanation": "Soon after a new campus, hospital or housing estate opens, a brown line appears across a lawn. The paved path goes neatly round the edge; the brown line goes straight from the bus stop to the door. These lines are called desire paths. Nobody plans them: each person saves a few seconds, the grass wears away where most feet fall, and the next person follows the bare earth.\n\nThe writer says these paths are better evidence than any survey. If you ask people where they want a path, they guess or say what sounds sensible. Their feet show what they really do, every day, and they measure it in time, which is what walkers care about. Some planners use this on purpose: they open a building with only grass around it, wait a term or two, and then pave the lines people have worn. The paths look untidy from above, but people use them and the lawns survive.\n\nThen the writer sets a limit. A desire path shows where people want to go and how much they hate the long way round. It does not show that the line they wore is a good way to get there. A track worn through a fence across a railway line is honest too: it tells the planner the footbridge is in the wrong place. Paving that track would follow the evidence and miss its point.\n\nSo a planner should ask where people were going, and how far round they will go, rather than simply where they walked. Sometimes the worn line is the best route and should simply be paved. Sometimes the answer is a new footbridge near the track, close enough that people will really use it.",
+    "why_difficult": "The passage praises desire paths warmly before limiting them, so a reader who stops early takes the lesson as 'always pave where people walk'. The limit is quiet: it does not deny the evidence, it says what the evidence is evidence of. Telling 'where people are going' apart from 'the route they took' is the whole difficulty.",
+    "author_intention": "To show planners how much they can learn from the shortcuts people wear, and to stop them learning the wrong thing from those shortcuts.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0132-p1",
+        "role": "Describes the paths",
+        "note": "Within a year a brown line cuts across a new lawn, from bus stop to door; nobody plans it, and each walker follows the last."
+      },
+      {
+        "paragraph_id": "rc-0132-p2",
+        "role": "States the lesson",
+        "note": "Feet are better evidence than surveys, measured in time; some planners wait and pave the lines people wear, and the paths are untidy but used."
+      },
+      {
+        "paragraph_id": "rc-0132-p3",
+        "role": "Sets the limit",
+        "note": "A desire path shows where people want to go, not a good way to get there; paving a track across a railway would miss the point."
+      },
+      {
+        "paragraph_id": "rc-0132-p4",
+        "role": "Draws the rule",
+        "note": "Ask where people were going and how far round they will go; sometimes pave the worn line, sometimes build a footbridge close enough to be used."
+      }
+    ],
+    "tone_progression": "Wry and observant in the opening description, approving in the second paragraph, sober in the third, where the railway enters, and practical at the close.",
+    "key_transitions": [
+      "'To a planner, a desire path is evidence of a kind no survey can match.' (opening of paragraph 2): the description becomes a lesson.",
+      "'The lesson has a limit, and it lies in what the evidence can report.' (opening of paragraph 3): the author turns from what the paths teach to what they do not.",
+      "'So a planner reading a worn path should not stop at where people walked.' (opening of paragraph 4): the limit becomes a working rule."
+    ],
+    "misunderstanding": "A hurried reader thinks the passage says planners should pave wherever people walk, or that it is a warning about people crossing railways. It says that a worn path is honest evidence of where people are going and how far they will detour, and that the route itself still has to be designed.",
+    "traps_summary": "The options keep the lesson and drop the limit, recommend the asking the passage distrusts, inflate one example into a warning, explain a deliberate wait by money or looks, pave a dangerous track, and read a small concession as the start of the limit.",
+    "reading_lesson": "When a passage offers a lesson and then says 'the lesson has a limit', ask what kind of evidence is being limited: here, evidence of a want, not of a method. Most questions on such passages test whether you kept the two apart.",
+    "real_world": "The same distinction applies to complaints, queues and workarounds of every kind: people's behaviour tells you honestly what they want, but not always the best way to give it to them.",
+    "takeaway": "A worn path tells you where people are going; finding them a good way there is still the planner's job.",
+    "reflection_question": "Which shortcut do you take every day, and what would it tell a planner who looked at it?",
+    "eli10": {
+      "big_idea": "Worn paths across grass show where people want to go, but not always the best way to get there.",
+      "story": "Picture a new lawn outside a hospital. Soon a brown line appears across it. The paved path goes round the edge. The brown line goes straight from the bus stop to the door. Nobody plans it. Each person saves a few seconds, and the next person follows the bare earth. The writer says these paths are great clues for planners. Ask people where they want a path, and they guess. Their feet show what they really do. Some planners wait a while, then pave the lines people have worn. But there is a limit. A path shows where people want to go. It does not show a good way to get there. Imagine a path worn across a railway line. It means the bridge is in the wrong place. Paving it would be wrong. Sometimes the answer is a new bridge, close enough that people will use it.",
+      "paragraphs": [
+        "Describes a scene: a brown line worn straight across a lawn, which nobody planned.",
+        "Gives the lesson: worn paths show what people really do, so some planners pave them.",
+        "Sets a limit: a path shows where people want to go, not a good way there.",
+        "Draws a rule: ask where people are going; sometimes pave their path, sometimes build a nearby bridge."
+      ],
+      "author_view": "The writer admires what worn paths reveal, but warns planners not to copy them without thinking."
+    }
+  }
+}

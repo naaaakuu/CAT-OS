@@ -9,7 +9,7 @@
     "genre": "institutions",
     "difficulty": "hard",
     "difficulty_numeric": 8,
-    "stage": "advanced",
+    "stage": "elite",
     "skills": [
       "argument-tracking",
       "inference",
@@ -17,18 +17,16 @@
       "scope-control",
       "evidence-anchoring"
     ],
-    "word_count": 775,
-    "question_count": 6,
+    "word_count": 611,
+    "question_count": 4,
     "question_types": [
       "application",
-      "except",
       "inference",
       "main_idea",
-      "paragraph_function",
-      "specific_detail"
+      "paragraph_function"
     ],
     "theme": "the efficiency defence of bureaucracy refused on historical grounds and replaced by a moral one: a written procedure makes what a person receives independent of whether an official knows or likes them, which turns a favour into an entitlement, makes the familiar vices the same property seen from the other side, and secures equality of treatment without any claim about the content of the rule",
-    "estimated_time_min": 12,
+    "estimated_time_min": 9.5,
     "source": {
       "publication": "original",
       "url": null,
@@ -39,7 +37,7 @@
     "date_added": "2026-09-13",
     "batch_id": "batch-rc-003",
     "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-08",
-    "reviewer_notes": "Predictability is the nearest rival to the author's account and is separated from it by a single planted case, the clerk who invariably serves his cousins first: perfectly predictable and not impartial. Scale is removed explicitly so that the efficiency reading cannot be rescued, and the closing paragraph concedes the real injury done to whoever needed an exception, which keeps the rules-over-discretion reading from being the author's.",
+    "reviewer_notes": "Predictability is the nearest rival to the author's account and is separated from it by a single planted case, the clerk who invariably serves his cousins first: perfectly predictable and not impartial. Scale is removed explicitly so that the efficiency reading cannot be rescued, and the closing paragraph concedes the real injury done to whoever needed an exception, which keeps the rules-over-discretion reading from being the author's. 2026-10-03 CAT-size pass: 775→611 words, 5→5 paragraphs, 6→4 questions. No paragraph dropped, since the apology, its refutation, the replacement, the vices redescribed and the two limits are each one move; tightened each, cutting the forms-and-rules gloss, the competitor sentence and the guarantee clause. Dropped q4 (EXCEPT, which leaks the passage) and q5 (detail lifted from the paragraph q2 already tests).",
     "length_class": "long",
     "structure": "view_critique_replacement",
     "viewpoints": 3,
@@ -81,7 +79,7 @@
         "total": 6,
         "notes": "full agreement"
       },
-      "adversarial_review": "Three rivals hold one option in all six questions. The first is the received view: impersonality is the price of scale, a cost rather than a good. The passage removes it twice, with procedure being slower and dearer than what it replaced and with the sentence that none of this has to do with how many people an office deals with, the smallest parish charity being able to run either way. The second, and the live rival throughout, is predictability: rules are valuable because people can plan. It is killed by the clerk who invariably serves his cousins first, who is perfectly predictable and not indifferent between them and you; every question therefore contains an option that is true of predictability and not of impartiality. The third is the reforming view that discretion should be eliminated: the closing paragraph refuses it by conceding that the grievance of the person refused an exception is real and by limiting the achievement to equality of treatment, which says nothing about whether the rule deserved to be written. The EXCEPT item keys on that limit, since the claim that a decision by rule is more likely to be right is the one thing the passage explicitly declines to say."
+      "adversarial_review": "Three rivals hold one option in all six questions. The first is the received view: impersonality is the price of scale, a cost rather than a good. The passage removes it twice, with procedure being slower and dearer than what it replaced and with the sentence that none of this has to do with how many people an office deals with, the smallest parish charity being able to run either way. The second, and the live rival throughout, is predictability: rules are valuable because people can plan. It is killed by the clerk who invariably serves his cousins first, who is perfectly predictable and not indifferent between them and you; every question therefore contains an option that is true of predictability and not of impartiality. The third is the reforming view that discretion should be eliminated: the closing paragraph refuses it by conceding that the grievance of the person refused an exception is real and by limiting the achievement to equality of treatment, which says nothing about whether the rule deserved to be written. The EXCEPT item keys on that limit, since the claim that a decision by rule is more likely to be right is the one thing the passage explicitly declines to say. (2026-10-03, CAT-size pass: q4, q5 were dropped, so any note above about them no longer applies.)"
     },
     "vocab_extracted": [
       "discretion",
@@ -91,27 +89,27 @@
   },
   "passage": {
     "title": "The Officer Who Cannot Help You",
-    "reading_time_min": 4,
+    "reading_time_min": 3.3,
     "paragraphs": [
       {
         "id": "rc-0114-p1",
-        "text": "The standard defence of bureaucracy is an apology. Impersonal procedure, on that account, is what any organisation is driven to once it outgrows the size at which people can know one another: forms exist because there are too many cases to remember, rules exist because there are too many officers to supervise, and the coldness everybody complains of is the price of working at scale. The complaint and the defence agree about the facts. Nobody enjoys the queue, the reference number and the officer who says she is not able to help you with that, and both sides treat these as the running costs of a machine that is otherwise doing something useful."
+        "text": "The standard defence of bureaucracy is an apology. On that account, impersonal procedure is what an organisation is driven to once it grows too large for people to know one another, and its coldness is the price of scale. The complaint and the defence agree about the facts. Nobody enjoys the queue, the reference number and the officer who cannot help you, and both sides treat these as the running costs of a useful machine."
       },
       {
         "id": "rc-0114-p2",
-        "text": "The difficulty with the efficiency story is that it has the history the wrong way round. Written procedure is usually slower than the personal dealing it displaced and almost always dearer: a decision one man could make in a morning now takes three weeks, a file and two signatures. Organisations have adopted it where no competitor was forcing their hand and have kept it through long periods when its costs were plain to everyone. More telling still is where the pressure came from. The demand for written rules and recorded decisions came, again and again, from below, from people who found that what they were owed arrived only if an official happened to know them, or to know their family, or to think well of them that morning. They were not asking for speed. They were asking for something else."
+        "text": "The difficulty with the efficiency story is that it has the history the wrong way round. Written procedure is usually slower than the personal dealing it displaced and almost always dearer: a decision one man could make in a morning now takes three weeks, a file and two signatures. More telling still, the demand for written rules came again and again from below, from people whose dues arrived only if an official happened to know them, or their family, or to think well of them that morning. They were not asking for speed."
       },
       {
         "id": "rc-0114-p3",
-        "text": "What they were asking for is what a file supplies. Once a claim has been written down in the form the rule requires, it becomes a thing that can be handed to a second official and produce the same answer. That is the whole of the trick and it is not a small one, because it takes the question of whether you are liked out of the question of what you receive. A favour becomes an entitlement, which is a change in kind rather than in degree: a favour is something the giver may withhold, and an entitlement is something you can demand. This is not the same as predictability, which is the virtue usually claimed for rules. A clerk who invariably serves his cousins first is perfectly predictable, and everybody who deals with him can plan around it; what he is not is indifferent between them and you. Nor does any of it turn on how many people an office deals with. The smallest parish charity can be run either way."
+        "text": "What they were asking for is what a file supplies. A claim written down in the form the rule requires can be handed to a second official and produce the same answer. That is the whole of the trick, and it takes the question of whether you are liked out of the question of what you receive. A favour becomes an entitlement, a change in kind rather than in degree: a favour is something the giver may withhold, an entitlement something you can demand. This is not the same as predictability, which is the virtue usually claimed for rules. A clerk who invariably serves his cousins first is perfectly predictable, and everybody can plan around him; what he is not is indifferent between them and you. Nor does any of it turn on how many people an office deals with: the smallest parish charity can be run either way."
       },
       {
         "id": "rc-0114-p4",
-        "text": "Seen from there, the familiar vices stop looking like faults in the machinery and begin to look like the machinery itself. Delay is what it costs to write a thing down in a form that somebody else can check. The form is the shape a claim has to take if a stranger is to be able to test it, which is also why it asks questions that appear to have nothing to do with your situation: it is not asking about your situation, it is asking about the conditions named in the rule. Because the decision then sits on a record, it can be examined again by somebody who was not there, which is the only ground an appeal has ever had. The refusal to make an exception is the hardest of the vices and the most important. The people who obtain exceptions are the people who can ask for them: the confident, the connected, the articulate, those who know which office to telephone. A rule that bends for them has quietly returned to the arrangement it replaced. The grievance of the person refused is real, and so is the interest, which nobody ever sees, of the person who was never obliged to plead."
+        "text": "Seen from there, the familiar vices stop looking like faults in the machinery and begin to look like the machinery itself. Delay is what it costs to write a thing down in a form that somebody else can check. The form asks about the conditions named in the rule rather than about your situation, because that is what a stranger can test. Because the decision sits on a record, somebody who was not there can examine it again, which is the only ground an appeal has ever had. The refusal to make an exception is the hardest of the vices and the most important. The people who obtain exceptions are the people who can ask for them: the confident, the connected, those who know which office to telephone. A rule that bends for them has quietly returned to the arrangement it replaced. The grievance of the person refused is real, and so is the unseen interest of the person who was never obliged to plead."
       },
       {
         "id": "rc-0114-p5",
-        "text": "Two limits keep this from being a celebration. The first is that what has been achieved is equality of treatment and nothing beyond it. A rule can be stupid or cruel, and will then be applied stupidly or cruelly to everybody alike; the machinery guarantees that you will get what the rule says and is silent about whether the rule deserved to be written. The second is a fragility. Every reform that hands discretion back in the name of humanity, every officer permitted to waive a requirement in a deserving case, removes the record on which an appeal would have stood, and the cost falls on whoever has no advocate and no telephone. That is a real loss set against a real gain, which is the most that can be said for any institution, and a good deal more than is usually said for this one."
+        "text": "Two limits keep this from being a celebration. The first is that what has been achieved is equality of treatment and nothing beyond it. A stupid or cruel rule will be applied stupidly or cruelly to everybody alike; the machinery is silent about whether the rule deserved to be written. The second is a fragility. Every reform that hands discretion back in the name of humanity, every officer permitted to waive a requirement in a deserving case, removes the record on which an appeal would have stood, and the cost falls on whoever has no advocate and no telephone. That is a real loss set against a real gain, which is the most that can be said for any institution, and more than is usually said for this one."
       }
     ]
   },
@@ -155,7 +153,7 @@
           {
             "option": "A",
             "trap_type": "concession_as_position",
-            "why_wrong": "This is the account the second paragraph dismantles: procedure is usually slower and dearer than what it displaced, it has been adopted without competitive pressure, and the passage adds that none of it turns on how many people an office deals with, since the smallest parish charity can be run either way.",
+            "why_wrong": "This is the account the second paragraph dismantles: procedure is usually slower and dearer than what it displaced, and the demand for it came from below rather than from administrators; the passage adds that none of it turns on how many people an office deals with, since the smallest parish charity can be run either way.",
             "seductive_element": "It is stated first, stated fairly, and is the explanation nearly every reader arrives holding, which makes the rest of the passage read as elaboration rather than as refutation."
           },
           {
@@ -288,118 +286,6 @@
       }
     },
     {
-      "id": "rc-0114-q4",
-      "type": "except",
-      "skill": "specific_detail",
-      "patterns": [
-        "comp.explicit_detail",
-        "comp.paraphrase",
-        "arg.premise"
-      ],
-      "target_mistake": "crediting the author with the claim that rules produce better decisions, when the argument is confined to how decisions are distributed",
-      "prediction_target": null,
-      "difficulty": {
-        "inference_depth": 3,
-        "distractor_similarity": 5,
-        "reasoning_depth": 4
-      },
-      "secondary_skills": [
-        "scope",
-        "inference"
-      ],
-      "stem": "According to the passage, each of the following is true of the case made for written procedure EXCEPT:",
-      "options": {
-        "A": "The arrangement it displaced could be both quicker and cheaper than the arrangement that replaced it.",
-        "B": "It shows that a decision reached by rule is more likely than one reached personally to be right.",
-        "C": "A decision recorded on a file can be examined again by somebody who was not present at it.",
-        "D": "A clerk who always favours the same people can be predictable without being impartial at all."
-      },
-      "correct": "B",
-      "estimated_time_sec": 80,
-      "explanation": {
-        "expert_notice": "The fifth paragraph draws the boundary in terms: what has been achieved is 'equality of treatment and nothing beyond it', and a rule that is stupid or cruel 'will then be applied stupidly or cruelly to everybody alike'. An author who writes that has refused the claim about better decisions.",
-        "correct_reasoning": "The correct answer is the one claim the passage declines to make. Its case is about the distribution of decisions, not their quality: the machinery guarantees that you will get what the rule says and is silent on whether the rule deserved to be written. The other three statements appear in the passage almost in its own words, in the second, fourth and third paragraphs respectively.",
-        "passage_anchor": "rc-0114-p5",
-        "question_type_note": "In an EXCEPT item the wrong options are true and the right one is not. Find the passage's own statement of what it does not claim, and you have usually found the answer.",
-        "reading_habit": "Whenever an author says a virtue is formal, or is about treatment rather than content, expect a question offering the substantive claim that was carefully avoided.",
-        "distractors": [
-          {
-            "option": "A",
-            "trap_type": "passage_language_shifted",
-            "why_wrong": "The second paragraph states it as part of the case rather than against it: procedure is usually slower and almost always dearer, which is exactly why the efficiency explanation fails and a different one is needed.",
-            "seductive_element": "It sounds like a criticism of procedure, so a reader looking for what the author would not say may seize on the least flattering statement available."
-          },
-          {
-            "option": "C",
-            "trap_type": "true_but_insufficient",
-            "why_wrong": "The fourth paragraph says it plainly: because the decision sits on a record it can be examined again by somebody who was not there, 'which is the only ground an appeal has ever had'. It is a stated part of the case.",
-            "seductive_element": "The claim about appeals is brief and arrives in the middle of a paragraph about vices, so it is easily remembered as something the passage merely mentions."
-          },
-          {
-            "option": "D",
-            "trap_type": "fact_right_interpretation_wrong",
-            "why_wrong": "This is the passage's own example, introduced to separate its argument from the usual one about planning: the clerk who invariably serves his cousins first is perfectly predictable, and what he is not is indifferent between them and you.",
-            "seductive_element": "It is about a corrupt clerk, and a reader who associates the passage with a defence of officialdom may assume the author would resist it."
-          }
-        ]
-      }
-    },
-    {
-      "id": "rc-0114-q5",
-      "type": "specific_detail",
-      "skill": "specific_detail",
-      "patterns": [
-        "comp.explicit_detail",
-        "arg.evidence"
-      ],
-      "target_mistake": "attributing the demand for written procedure to administrators or to reformers, because those are the parties an efficiency story or a moral crusade would require",
-      "prediction_target": null,
-      "difficulty": {
-        "inference_depth": 2,
-        "distractor_similarity": 4,
-        "reasoning_depth": 3
-      },
-      "secondary_skills": [
-        "argument"
-      ],
-      "stem": "According to the passage, the pressure for written rules and recorded decisions came chiefly from",
-      "options": {
-        "A": "administrators who had found that personal dealing could not be sustained once an office grew",
-        "B": "people whose entitlements arrived only when an official happened to know them or their family",
-        "C": "those who wished to know in advance what an office was going to decide before approaching it",
-        "D": "reformers holding that official discretion is a standing invitation to corruption and abuse"
-      },
-      "correct": "B",
-      "estimated_time_sec": 55,
-      "explanation": {
-        "expert_notice": "The second paragraph marks the sentence as its strongest evidence, 'More telling still is where the pressure came from', and then names the party: people who found that what they were owed arrived only if an official knew them, or knew their family, or thought well of them that morning.",
-        "correct_reasoning": "The correct option restates that sentence. The direction of the demand is what breaks the efficiency story, since the people asking were not the ones paying for the office's time, and the paragraph closes by saying what they were not asking for: 'They were not asking for speed.'",
-        "passage_anchor": "rc-0114-p2",
-        "question_type_note": "A detail question about the source of a demand is answered from the sentence naming it. Distractors will name the parties that a rival explanation would require.",
-        "reading_habit": "When an author says where a pressure came from, treat the sentence as load-bearing. Who wanted a thing is often the evidence that decides between two explanations of why it exists.",
-        "distractors": [
-          {
-            "option": "A",
-            "trap_type": "misattributed_view",
-            "why_wrong": "This is the party the efficiency story needs, and the paragraph is written to show that story failing. Organisations adopted procedure where no competitor forced them and kept it when its costs were plain, which is not the behaviour of administrators driven by the burden of numbers.",
-            "seductive_element": "It is the origin everybody assumes, and the first paragraph has just described growth and supervision as the reason such systems exist."
-          },
-          {
-            "option": "C",
-            "trap_type": "true_but_insufficient",
-            "why_wrong": "Foresight belongs to the rival account the next paragraph sets aside, and nothing in the passage reports anybody demanding it. What is reported is a demand that entitlements should not depend on acquaintance.",
-            "seductive_element": "Wanting to know what an office will do is a reasonable thing to want, and the passage does discuss predictability a few lines later."
-          },
-          {
-            "option": "D",
-            "trap_type": "unsupported_inference",
-            "why_wrong": "No reformers appear in the passage, and the complaint it records is not about corruption but about dependence on being known: an official thinking well of you that morning is not accused of taking anything. The demand comes from the people affected rather than from a party arguing on principle.",
-            "seductive_element": "It is the familiar history of administrative reform, and the passage's subject makes a campaign against abuse feel like the obvious source."
-          }
-        ]
-      }
-    },
-    {
       "id": "rc-0114-q6",
       "type": "inference",
       "skill": "inference",
@@ -450,7 +336,7 @@
           {
             "option": "D",
             "trap_type": "too_broad",
-            "why_wrong": "The closing paragraph concedes that the grievance of the person refused an exception is real and describes the trade as a real loss against a real gain. What the passage claims is that a particular cost of discretion is invisible, not that discretion leaves everybody worse off.",
+            "why_wrong": "The fourth paragraph concedes that the grievance of the person refused an exception is real, and the closing paragraph describes the trade as a real loss against a real gain. What the passage claims is that a particular cost of discretion is invisible, not that discretion leaves everybody worse off.",
             "seductive_element": "The fourth paragraph is severe about exceptions and about the people who secure them, which reads as a blanket verdict against leaving officials any latitude."
           }
         ]
@@ -481,7 +367,7 @@
     "challenge": "The passage defends the thing everyone in the queue is complaining about. Watch for the moment it stops explaining why the queue is necessary and starts explaining what the queue is.",
     "one_sentence_summary": "Written procedure exists not because it is cheaper but because it takes the question of whether an official likes you out of the question of what you receive, which turns a favour into an entitlement and makes delay, forms and the refusal of exceptions the same property seen from the side of whoever wanted an exception.",
     "main_idea": "The usual defence of bureaucracy says it is the price of scale. That cannot be right, since procedure is slower and dearer than personal dealing and was demanded by the people it governed rather than by their administrators. What it supplies is impartiality: a written claim produces the same answer in any official's hands. The vices follow from that, and the achievement stops at equality of treatment, saying nothing about whether the rule is any good.",
-    "simple_explanation": "Everyone knows the standard excuse for bureaucracy: organisations get big, nobody can remember every case, so you get forms and rules and an officer who says she cannot help you. The coldness is the price of size.\n\nThe author says that story cannot be right. Written procedure is usually slower than letting one person decide, and it usually costs more. Organisations have kept it even when the costs were obvious and nobody was forcing them. And, most tellingly, the demand for it came from ordinary people, not from managers. What those people complained about was that they got what they were owed only if the official happened to know them, or their family, or was in a good mood.\n\nSo what does a file actually do? Once your claim is written in the form the rule asks for, it can be handed to a different official and come back with the same answer. That takes 'does he like me' out of 'what do I get'. A favour becomes a right: a favour can be withheld, a right can be demanded.\n\nThe author is careful here. This is not the same as being predictable. A clerk who always serves his cousins first is perfectly predictable; you can plan around him. He is simply not neutral between his cousins and you. And it has nothing to do with size: a tiny parish charity can be run either way.\n\nNow the complaints make sense. Delay is the cost of writing things down so a stranger can check them. The form asks odd questions because it is asking about the rule's conditions, not about you. And because the decision sits on a record, somebody who was not there can look at it again, which is the only thing an appeal has ever stood on.\n\nThe refusal to bend is the hard one. The people who get exceptions are the ones who can ask: confident, connected, knowing which number to ring. A rule that bends for them has gone back to the old system. The person refused really is wronged. So is the person who never had to beg, though nobody sees them.\n\nTwo limits. First, all this guarantees is that everyone is treated the same. A cruel rule will be applied cruelly to everybody. Second, every reform that gives officials the power to make exceptions removes the record an appeal needs, and the loss falls on whoever has no advocate.",
+    "simple_explanation": "Everyone knows the standard excuse for bureaucracy: organisations get big, nobody can know everybody, so you get forms and rules and an officer who says she cannot help you. The coldness is the price of size. Even the people who complain about it agree about the facts.\n\nThe author says that story has the history backwards. Written procedure is usually slower than letting one person decide, and it usually costs more: what one man could decide in a morning now takes three weeks, a file and two signatures. And, most tellingly, the demand for it came from ordinary people, not from managers. What those people complained about was that they got what they were owed only if the official happened to know them, or their family, or was in a good mood. They were not asking for speed.\n\nSo what does a file actually do? Once your claim is written in the form the rule asks for, it can be handed to a different official and come back with the same answer. That takes 'does he like me' out of 'what do I get'. A favour becomes a right: a favour can be withheld, a right can be demanded.\n\nThe author is careful here. This is not the same as being predictable. A clerk who always serves his cousins first is perfectly predictable; you can plan around him. He is simply not neutral between his cousins and you. And it has nothing to do with size: a tiny parish charity can be run either way.\n\nNow the complaints make sense. Delay is the cost of writing things down so a stranger can check them. The form asks odd questions because it is asking about the rule's conditions, not about you. And because the decision sits on a record, somebody who was not there can look at it again, which is the only thing an appeal has ever stood on.\n\nThe refusal to bend is the hard one. The people who get exceptions are the ones who can ask: confident, connected, knowing which office to ring. A rule that bends for them has gone back to the old system. The person refused has a real grievance. But the person who never had to beg also has a real interest, though nobody sees it.\n\nTwo limits. First, all this guarantees is that everyone is treated the same. A cruel rule will be applied cruelly to everybody. Second, every reform that lets officials make exceptions in deserving cases removes the record an appeal needs, and the loss falls on whoever has no advocate and no telephone. That is a real loss against a real gain, which is the most you can say for any institution.",
     "why_difficult": "The passage defends an unpopular institution without ever denying the experience that makes it unpopular, which readers find disorienting: the queue, the form and the unhelpful officer are all accepted and then re-described. Its central claim also sits a hair's breadth from a more familiar one. Predictability and impartiality are both consequences of rules, they are easily confused, and the passage separates them with a single example. Finally, the closing paragraph gives away two things at once, which a reader who has taken the piece for advocacy will read as inconsistency rather than as limitation.",
     "author_intention": "To replace an apology with a defence: to show that the thing being apologised for is the achievement, and then to say precisely how small and how fragile the achievement is.",
     "paragraph_journey": [
@@ -522,6 +408,18 @@
     "reading_lesson": "When a passage separates its thesis from a close relative, impartiality from predictability, explanation from excuse, equality of treatment from justice, mark the sentence that does the separating, because the wrong answers will be built from the relative. The test to apply is the author's own counter-example: find the case that satisfies the neighbour and fails the thesis, and check each option against it.",
     "real_world": "The same argument runs through admissions procedures, insurance claims, complaints systems and algorithmic decisions: whenever somebody proposes a humane exception, the question is who loses the record they would have appealed on.",
     "takeaway": "The form that will not bend for you is the reason a stranger got what you got.",
-    "reflection_question": "When you last asked somebody to make an exception for you, who was standing behind you in the queue, and what did your exception cost them?"
+    "reflection_question": "When you last asked somebody to make an exception for you, who was standing behind you in the queue, and what did your exception cost them?",
+    "eli10": {
+      "big_idea": "Rules and forms exist not to save time but so that what you get does not depend on whether an official likes you.",
+      "story": "People excuse rules and forms as the price of being big, but the writer disagrees. Written rules are slower and dearer than one person deciding. And ordinary people asked for them. Before, you got your due only if the official knew or liked you. A written claim gets the same answer from any official. So a favour becomes a right you can demand. It is not mere predictability: a clerk who always serves his cousins first is predictable, yet unfair to you. Think of a canteen cook who gives friends extra food; a fixed portion rule protects the shy child at the back. Seen this way, delays, odd forms and refusing to bend are part of that fairness. Exceptions go to people who know how to ask. The writer admits two limits. A cruel rule is applied cruelly to everyone. And every kindly exception removes the record others need to appeal.",
+      "paragraphs": [
+        "States the usual excuse: rules and forms are the cold price of running a big organisation.",
+        "Rejects it: rules are slower and dearer, and ordinary people demanded them to stop favouritism.",
+        "Gives the real point: a written claim gets the same answer from anyone, so a favour becomes a right.",
+        "Recasts the complaints: delay, forms and refusing exceptions are that fairness, since exceptions go to those who ask.",
+        "Admits two limits: rules guarantee only equal treatment, and every kindly exception removes a record someone needed."
+      ],
+      "author_view": "The writer is cool and unsentimental: he defends rules firmly but counts their costs honestly instead of celebrating them."
+    }
   }
 }

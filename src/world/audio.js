@@ -276,7 +276,7 @@ const TWINKLE = [3, 7];
 /** Which friend's instrument plays the tune in each place. */
 const LEAD_OF = {
   world: 'marimba', 'reading-room': 'flute', meadow: 'kalimba', pond: 'kalimba', thicket: 'kalimba', rootwood: 'kalimba', terraces: 'kalimba',
-  table: 'clarinet', loom: 'pizzicato', bench: 'bells', wilds: 'banjo', hearth: 'banjo',
+  table: 'clarinet', loom: 'pizzicato', bench: 'bells', wilds: 'banjo', hearth: 'banjo', placement: 'pizzicato', completion: 'clarinet',
 };
 
 function lead(kind, t, f, dur, v, dest) {
