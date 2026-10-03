@@ -3,7 +3,7 @@
  * against the clock, end to end.
  *
  *   BRIEFING  the passage's shape (stage, genre, questions, its own target
- *             time) and what three stars ask for.
+ *             time); what three stars ask for waits behind the ⓘ.
  *   READING   the passage on a book-width surface, a pace ring counting
  *             down the target time (amber past it, never red, never a
  *             flash), a scroll hairline and "minutes left".
@@ -44,6 +44,7 @@ import { hostChip } from '../../../pets/sprite.js';
 import { newlyFinished } from '../../../world/collections.js';
 import { play, silenceWorld } from '../../../world/audio.js';
 import { isUnlocked } from '../../../core/ads/rewarded.js';
+import { infoButton } from '../../../ui/info.js';
 import '../../../ui/components/cat-passage.js';
 import '../../../ui/components/cat-question-card.js';
 import '../../../ui/components/cat-explanation.js';
@@ -99,20 +100,21 @@ export async function renderSession(outlet, { storage }, params) {
       </div>
       <div class="run__body">
         <div class="brief">
-          <p class="brief__eyebrow">${escapeHTML(stage)} · ${escapeHTML(m.genre ?? '')}</p>
+          <p class="brief__eyebrow">${escapeHTML(stage)} · ${escapeHTML(m.genre ?? '')}${infoButton('rc', {
+            moreTitle: 'This passage',
+            more: [
+              'What it argues is for you to find. Read it the way the exam reads it: once, closely, then answer from the text.',
+              '★★★ three quarters right, inside the target',
+              '★★ three quarters right, over time',
+              '★ half right',
+            ] })}</p>
           <h1 class="brief__title">${escapeHTML(displayTitle(passage))}</h1>
           ${realSource ? `<p class="brief__source">A real essay: ${escapeHTML(realSource)}</p>` : ''}
-          <p class="brief__line">What it argues is for you to find. Read it the way the exam reads it: once, closely, then answer from the text.</p>
           <div class="brief__facts">
             <span class="brief__fact">${m.word_count ?? ''} words</span>
             <span class="brief__fact">${passage.questions.length} questions</span>
             <span class="brief__fact">${formatClock(targetMs)} target</span>
             <span class="brief__fact">${escapeHTML(m.difficulty ?? '')}</span>
-          </div>
-          <div class="brief__stars">
-            <span><b>★★★</b> three quarters right, inside the target</span>
-            <span><b>★★</b> three quarters right, over time</span>
-            <span><b>★</b> half right</span>
           </div>
           <div id="recall-slot"></div>
           <button class="g-cta" id="begin">Begin reading<small>The clock starts on the first line</small><span class="arrow" aria-hidden="true">→</span></button>

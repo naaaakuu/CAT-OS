@@ -24,6 +24,8 @@ const ev = (x) => browser.evaluate(x);
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const waitFor = async (expr, ms = 12000) => { const end = Date.now() + ms; while (Date.now() < end) { if (await ev(expr)) return true; await sleep(150); } return false; };
 const key = (k, code, vk) => browser.send('Input.dispatchKeyEvent', { type: 'keyDown', key: k, code, windowsVirtualKeyCode: vk });
+// A tap that cannot land on a house or a friend: the intro listens for any pointerdown on the village.
+const nudge = (sel = '.cw') => ev(`document.querySelector('${sel}').dispatchEvent(new PointerEvent('pointerdown', { bubbles: true })); 1`);
 const positions = () => ev(`JSON.stringify([...document.querySelectorAll('.pet')].map((e) => e.style.transform))`);
 
 /* A learner some days in: Chai and Mallow recent, Matcha fading, Mochi
@@ -47,7 +49,7 @@ const SEED = `(async () => {
 try {
   await browser.open(`${server.url}#/settings`, 2500);
   ok(await ev(SEED) === 'seeded', 'could not seed the learner');
-  await ev(`localStorage.setItem('catos:hour', 'afternoon')`);
+  await ev(`localStorage.setItem('catos:hour', 'afternoon'); localStorage.setItem('catos:met-gang', '1')`);
   await browser.open(`${server.url}#/world`, 1500);
   ok(await waitFor(`document.querySelectorAll('.cw .pet').length === 6 && !!document.querySelector('.cw-art')?.naturalWidth`), 'the village did not draw six pets on the painting');
   ok(await ev(`!!document.querySelector('.cw h1')`), 'the village needs a heading');
@@ -124,6 +126,19 @@ try {
   ok(await ev(`document.querySelectorAll('.cw-treasure[data-home]').length >= 1`), "no friend's home shows its hearts");
   ok(await ev(`document.querySelectorAll('.pet .rig__foot').length === 12`), 'the friends should walk on two feet each');
 
+  // Each friend grows with their subject and wears it: this learner's Chai has questions right, so is past stage 1.
+  ok(await ev(`[...document.querySelectorAll('.pet')].every((e) => /^\\d+$/.test(e.dataset.stage ?? ''))`), 'every friend should carry its growth stage');
+  ok(await ev(`Number(document.querySelector('.pet[data-pet="chai"]').dataset.stage) >= 1 && !!document.querySelector('.pet[data-pet="chai"] .pet-body .gear')`), 'Chai has grown and should be wearing it');
+
+  // A set just finished: every friend runs to the plaza and cheers round the one helped.
+  await ev(`(async () => { const s = await import('/src/core/storage/indexeddb-adapter.js'); const st = new s.IndexedDBAdapter(); await st.init(); await st.put('sessions', { id: 'cv-party', module: 'ooo', started_at: new Date(Date.now() - 2e5).toISOString(), finished_at: new Date().toISOString(), duration_ms: 18e4, score: { correct: 3, total: 3, accuracy: 1 }, item_ids: [], target_sec: 300, answers: [] }); sessionStorage.removeItem('world:toasted'); return 1; })()`);
+  await ev(`location.hash = '#/settings'`);
+  await sleep(900);
+  await ev(`location.hash = '#/world'`);
+  const pc = JSON.parse(await ev(`import('/src/pets/paths.js').then((m) => JSON.stringify(m.NODES.pc))`));
+  ok(await waitFor(`(() => { const v = document.querySelector('.cw')?.__village; return !!v && ['toffee', 'chai', 'matcha', 'mochi', 'ginger', 'mallow'].filter((id) => { const p = v.positionOf(id); return Math.hypot(p.x - ${pc.x}, p.y + 40 - ${pc.y}) < 210; }).length >= 5; })()`, 15000), 'the friends did not gather in the plaza after a finished set');
+  ok(await waitFor(`document.querySelectorAll('.pet[data-state="cheer"]').length >= 4`, 8000), 'the friends in the plaza are not cheering');
+
   // The clock tower and the rose cottage are subjects now: Para Completion and Sentence Placement.
   await ev(`document.querySelector('[data-spot="clock"]').click()`);
   ok(await waitFor(`location.hash === '#/world/place/completion' && /Para completion/i.test(document.querySelector('.place__eyebrow')?.textContent ?? '')`), 'the clock tower did not open Para Completion');
@@ -140,7 +155,7 @@ try {
 
   // Reduced motion: nobody walks.
   await ev(`(async () => { const s = await import('/src/core/storage/indexeddb-adapter.js'); const st = new s.IndexedDBAdapter(); await st.init(); await st.put('settings', { id: 'motion', value: 'reduced' }); return 1; })()`);
-  await ev(`localStorage.setItem('catos:hour', 'afternoon')`);
+  await ev(`localStorage.setItem('catos:hour', 'afternoon'); localStorage.setItem('catos:met-gang', '1')`);
   await browser.open(`${server.url}#/world`, 2500);
   const r0 = await positions(); await sleep(4000); const r1 = await positions();
   ok(r0 === r1, 'pets walked with reduced motion on');
@@ -149,6 +164,20 @@ try {
   ok(await ev(`!document.querySelector('.pet .prop')`), 'a friend started a chore with reduced motion on');
   ok(await ev(`document.documentElement.scrollWidth <= innerWidth`), 'the phone village scrolls sideways');
   ok(await ev(`window.__catos.errors.length === 0`), 'browser errors: ' + await ev(`JSON.stringify(window.__catos.errors)`));
+
+  // The first visit: Toffee, then each friend says who they are with a card naming their subject; Skip jumps to Chai.
+  await ev(`(async () => { const s = await import('/src/core/storage/indexeddb-adapter.js'); const st = new s.IndexedDBAdapter(); await st.init(); await st.delete('settings', 'valley'); await st.put('settings', { id: 'motion', value: 'full' }); return 1; })()`);
+  await browser.open(`${server.url}#/world`, 1500);
+  ok(await waitFor(`document.querySelector('.cw')?.classList.contains('is-intro')`), 'a first visit should open on the introductions');
+  await sleep(1400);
+  await nudge();
+  ok(await waitFor(`!document.querySelector('.cw-meet').hidden && /Toffee/.test(document.querySelector('.cw-meet h2')?.textContent ?? '') && /Gauntlet/.test(document.querySelector('.cw-meet__keeps')?.textContent ?? '')`, 6000), "Toffee's meet card did not name Toffee and the Gauntlet");
+  await sleep(500);
+  await nudge('[data-skip]');
+  ok(await waitFor(`document.querySelector('.cw').classList.contains('is-pointing') && document.querySelector('.cw-meet').hidden`, 6000), 'Skip did not jump to Chai calling you to the big button');
+  await sleep(500);
+  await nudge();
+  ok(await waitFor(`!document.querySelector('.cw').classList.contains('is-intro')`, 6000), 'the introductions did not end');
 
   // A wide screen: the card sits on the right, clear of the map's centre.
   await browser.send('Emulation.setDeviceMetricsOverride', { width: 1440, height: 900, deviceScaleFactor: 1, mobile: false });

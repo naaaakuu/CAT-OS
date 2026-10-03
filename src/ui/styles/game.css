@@ -516,6 +516,10 @@
 :root[data-room] .moment { background: var(--g-paper-2); border-radius: var(--g-radius-lg); padding: 22px 20px; border: 1px solid var(--g-line); }
 :root[data-room] .list-item { border-radius: 16px; border: 1px solid var(--g-line); background: var(--g-paper-2); }
 :root[data-room] .screen__eyebrow { color: var(--g-ink-3); }
+/* A journey page opens straight onto the painted stage now (3.3: no introduction page first), so its quiet text stands on the painting, not on paper: one step darker ink keeps it at AA. */
+:root[data-room] .journey-head .screen__eyebrow, :root[data-room] .journey-head__sub, :root[data-room] .stage-head__count { color: var(--g-ink); }
+:root[data-room] .stage-desc { color: var(--g-ink-2); }
+:root[data-room] .stage-desc a, :root[data-room] .hint a, :root[data-room] .ps-skill { color: var(--g-accent-deep); }
 :root[data-room] cat-nav { background: var(--g-glass); border-top: 1px solid var(--g-line); }
 /* The active label reads against a tinted chip, so it needs the deeper end of
    the accent, not the mid-tone that reads well on paper. */

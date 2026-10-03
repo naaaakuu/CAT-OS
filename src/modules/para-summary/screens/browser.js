@@ -10,13 +10,14 @@ import { listPSItems } from '../../../core/content-loader/loader.js';
 import { groupByTier, recommendNextPS, tierInfo } from '../logic/tiers.js';
 import { latestByItem } from '../logic/store.js';
 import { escapeHTML } from '../../../core/utils/format.js';
+import { infoButton } from '../../../ui/info.js';
 
 export async function renderPSBrowser(outlet, { storage }) {
   outlet.innerHTML = `
     <section class="screen">
       <header class="journey-head">
         <p class="screen__eyebrow">Practice · Para Summary</p>
-        <h1>Your summary journey</h1>
+        <h1>Your summary journey${infoButton('ps', { guide: '#/ps/about' })}</h1>
       </header>
       <div id="ps-list" aria-busy="true">
         <div class="skeleton skeleton--line" style="width: 40%"></div>
@@ -63,9 +64,7 @@ export async function renderPSBrowser(outlet, { storage }) {
       : `${solvedIds.size} of ${items.length} paragraphs summarised`}</p>
     <div class="journey-track" aria-hidden="true">
       <div class="journey-track__fill" style="width: ${Math.round((solvedIds.size / items.length) * 100)}%"></div>
-    </div>
-    <p class="hint" style="margin: 0 0 var(--space-3)">
-      <a href="#/ps/about">How this journey works</a></p>`;
+    </div>`;
 
   const itemHTML = (item) => {
     const a = latest.get(item.id);

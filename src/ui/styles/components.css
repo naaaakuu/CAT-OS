@@ -189,6 +189,9 @@
   text-transform: uppercase;
   color: var(--color-ink-3);
   margin-bottom: var(--space-1);
+  /* A session's eyebrow is its one instruction now, and it wraps on a
+     phone: two even lines, not one word and the ⓘ left alone on the second. */
+  text-wrap: balance;
 }
 
 .greeting {
@@ -1053,16 +1056,6 @@ a.list-item:active { transform: scale(var(--press-scale)); }
 }
 
 /* ---------- The solving surface ---------- */
-.ps-challenge,
-.pj-challenge,
-.ooo-challenge {
-  font-family: var(--font-reading);
-  font-size: var(--text-sm);
-  line-height: var(--leading-body);
-  border-left: 2px solid var(--color-accent);
-  padding-left: var(--space-3);
-  margin: 0 0 var(--space-3);
-}
 .pj-readback, .ooo-readback {
   margin: var(--space-4) 0 var(--space-2);
   padding: var(--space-4) var(--space-5);
@@ -1262,35 +1255,6 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   font-weight: var(--weight-semibold);
   color: var(--color-accent);
   margin: 0 0 var(--space-1);
-}
-
-/* ---------- Today's Mission: a small vow before reading ---------- */
-.ps-mission, .ooo-mission {
-  padding: var(--space-4) var(--space-5);
-  border-radius: var(--radius-lg);
-  background: var(--color-accent-subtle);
-  margin-bottom: var(--space-4);
-  animation: explanation-in var(--duration-slow) var(--ease-out) both;
-}
-.ps-mission__eyebrow, .ooo-mission__eyebrow {
-  font-size: var(--text-2xs);
-  font-weight: var(--weight-bold);
-  letter-spacing: var(--tracking-wide);
-  text-transform: uppercase;
-  color: var(--color-accent);
-  margin: 0 0 var(--space-1);
-}
-.ps-mission__title, .ooo-mission__title {
-  font-family: var(--font-display);
-  font-size: var(--text-lg);
-  font-weight: var(--weight-display);
-  letter-spacing: var(--tracking-tight);
-  margin: 0 0 var(--space-1);
-}
-.ps-mission__line, .ooo-mission__line {
-  font-size: var(--text-xs);
-  color: var(--color-ink-2);
-  margin: 0;
 }
 
 /* ---------- The paragraph: a true reading surface ---------- */
@@ -1647,8 +1611,8 @@ a.list-item:active { transform: scale(var(--press-scale)); }
 
 /* ============================================================
    Odd One Out (0.12.0) — the detection journey.
-   Shares the intro, mission, Think and teaching language above
-   (.ooo-intro, .ooo-mission, .ooo-think, .oox); below are the
+   Shares the intro, Think and teaching language above
+   (.ooo-intro, .ooo-think, .oox); below are the
    surfaces only this module has.
    ============================================================ */
 
@@ -4505,3 +4469,109 @@ summary { min-height: var(--tap-target); display: flex; align-items: center; }
    for a track nobody reads is the wrong trade. */
 .srow__control .range { width: min(140px, 36vw); }
 .srow__label { text-wrap: pretty; }
+
+/* ============================================================
+   The ⓘ (3.2): an explanation behind a small round button in the
+   section it explains (src/ui/info.js), never in the way of play.
+   ============================================================ */
+.info-btn {
+  /* 44px to hit (the reach gate's minimum for a control outside prose),
+     22px to see: the negative margins hand the difference back to the
+     line, so an eyebrow or a title does not grow to make room for it. */
+  position: relative;
+  isolation: isolate;
+  display: inline-grid;
+  place-items: center;
+  width: var(--tap-target);
+  height: var(--tap-target);
+  min-height: 0;
+  margin: -11px -11px -11px -5px;
+  padding: 0;
+  vertical-align: middle;
+  border-radius: var(--radius-full);
+  font: italic 700 var(--text-xs)/1 var(--font-display);
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--color-ink-3);
+}
+.info-btn::before {
+  content: "";
+  position: absolute;
+  inset: 11px;
+  z-index: -1;
+  border-radius: var(--radius-full);
+  border: 1.5px solid currentColor;
+  background: var(--color-surface);
+  transition: transform var(--duration-fast) var(--ease-out),
+              background-color var(--duration-fast) var(--ease-out);
+}
+@media (hover: hover) {
+  .info-btn:hover::before { background: var(--color-surface-2); }
+}
+.info-btn:active::before { transform: scale(0.9); }
+
+/* The panel. The UA already centres a popover in the viewport and hides
+   it while closed, so `display` is never set here. It inherits from
+   wherever the button sits (an uppercase eyebrow, a display title), so
+   every inherited thing that shows is set again. */
+.info-pop {
+  width: min(360px, calc(100vw - 2 * var(--space-4)));
+  max-height: calc(100dvh - 2 * var(--space-6));
+  margin: auto;
+  padding: var(--space-5);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-xl);
+  background: var(--color-surface);
+  color: var(--color-ink);
+  box-shadow: var(--shadow-2);
+  font: 400 var(--text-sm)/var(--leading-body) var(--font-ui);
+  letter-spacing: normal;
+  text-transform: none;
+  text-align: left;
+  text-wrap: pretty;
+  white-space: normal;
+}
+.info-pop::backdrop { background: rgba(0, 0, 0, 0.28); }
+.info-pop:popover-open { animation: info-in var(--duration) var(--ease-out) both; }
+@keyframes info-in { from { opacity: 0; transform: translateY(8px) scale(0.98); } }
+.info-pop__title {
+  display: block;
+  margin: 0 0 var(--space-2);
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-display);
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--leading-tight);
+}
+.info-pop__line { display: block; margin: 0 0 var(--space-2); }
+.info-pop__tip {
+  display: block;
+  margin: var(--space-3) 0 0;
+  padding-left: var(--space-3);
+  border-left: 2px solid var(--color-accent);
+  font-family: var(--font-reading);
+  font-style: italic;
+  color: var(--color-ink-2);
+}
+.info-pop__head {
+  display: block;
+  margin: var(--space-4) 0 var(--space-1);
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-ink-3);
+}
+.info-pop__guide {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap-target);
+  font-weight: var(--weight-semibold);
+}
+.info-pop__close { margin-top: var(--space-3); }
+/* No Popover API: the text simply sits where it is, and the two buttons
+   that would do nothing are not shown. */
+@supports not selector(:popover-open) {
+  .info-btn, .info-pop__close { display: none; }
+  .info-pop { display: block; width: auto; margin: var(--space-2) 0; box-shadow: none; }
+}

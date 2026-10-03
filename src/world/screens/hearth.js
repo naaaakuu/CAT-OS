@@ -13,7 +13,7 @@ import { loadWorld } from '../state.js';
 import { standing as standingLines, readingWeakness } from '../curator.js';
 import { play, unlock, startMusic, startAmbience } from '../audio.js';
 import { escapeHTML } from '../../core/utils/format.js';
-import { PETS, PET_BY_ID } from '../../pets/pets.js';
+import { PETS, PET_BY_ID, stageTitle } from '../../pets/pets.js';
 import { petPortrait, backdropStyle, petSprite, FRAME } from '../../pets/sprite.js';
 
 const MOOD_LABEL = { glowing: 'Very happy', happy: 'Happy', missing: 'Misses you', sleepy: 'Sleepy', wilting: 'Lonely', new: 'New friend' };
@@ -78,7 +78,7 @@ export async function renderHearth(outlet, { storage }) {
         return `<a class="friend friend--${p.word}" href="${def.places[0] === 'hearth' ? '#/world/place/wilds' : `#/world/place/${def.places[0]}`}">
           ${petPortrait(def.id, 44, { mood: p.isNew ? 0.3 : p.mood })}
           <span class="friend__lead"><b>${escapeHTML(def.name)}</b><small>${escapeHTML(def.subject)}</small></span>
-          <span class="friend__side"><span class="friend__hearts" role="img" aria-label="${p.hearts} of 5 hearts">${'♥'.repeat(p.hearts)}<i>${'♡'.repeat(5 - p.hearts)}</i></span><small>${MOOD_LABEL[p.word]} · ${p.visits} ${p.visits === 1 ? 'visit' : 'visits'}</small></span>
+          <span class="friend__side"><span class="friend__stage">${p.stage ? `Stage ${p.stage} · ${escapeHTML(stageTitle(def.id, p.stage))}` : 'Not grown yet'}</span><small>${MOOD_LABEL[p.word]} · ${p.visits} ${p.visits === 1 ? 'visit' : 'visits'}</small></span>
         </a>`;
       }).join('')}
     </div>

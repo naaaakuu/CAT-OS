@@ -8,8 +8,9 @@
  * else knows this module exists.
  *
  * Routes owned by this module:
- *   /pj              — the ordering journey (first visit: the introduction)
- *   /pj/about        — the introduction, revisitable any time
+ *   /pj              — the ordering journey
+ *   /pj/about        — the full guide, linked from the ⓘ beside the
+ *                      journey's title
  *   /pj/session/:set — practice a tier (set = tier id) or one jumble
  *                      (set = pj-NNNN)
  *   /pj/learn/:id    — a jumble's Learning Page (the full walkthrough)
@@ -26,28 +27,19 @@
  */
 
 export function registerPJ(router, context) {
-  const intro = (outlet, opts) => import('./screens/intro.js').then((s) => s.renderPJIntro(outlet, context, opts));
-  const browser = (outlet) => import('./screens/browser.js').then((s) => s.renderPJBrowser(outlet, context));
   router
     .register({
       path: '/pj',
       title: 'Para Jumbles',
-      render: async (outlet) => {
-        // The first open shows the introduction, not questions — the
-        // journey begins with understanding, and only then with solving.
-        let seen = true;
-        try {
-          const store = await import('./logic/store.js');
-          seen = await store.hasSeenPJIntro(context.storage);
-        } catch { /* storage down: browse */ }
-        if (!seen) await intro(outlet, { firstTime: true, onBegin: () => browser(outlet) });
-        else await browser(outlet);
-      },
+      // Always the journey (3.2). A first visit used to open the whole
+      // introduction before anything could be tapped; now it waits behind
+      // the ⓘ beside the title, for whoever asks.
+      render: (outlet) => import('./screens/browser.js').then((s) => s.renderPJBrowser(outlet, context)),
     })
     .register({
       path: '/pj/about',
       title: 'About Para Jumbles',
-      render: (outlet) => intro(outlet, { firstTime: false }),
+      render: (outlet) => import('./screens/intro.js').then((s) => s.renderPJIntro(outlet, context, { firstTime: false })),
     })
     .register({
       path: '/pj/session/:set',

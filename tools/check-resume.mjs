@@ -80,7 +80,7 @@ export async function checkResume({ width = 390, height = 844 } = {}) {
   try {
     await goto('#/settings');
     await b.evaluate(SEED);
-    await b.evaluate(`localStorage.setItem('catos:hour','morning')`);
+    await b.evaluate(`localStorage.setItem('catos:hour','morning'); localStorage.setItem('catos:met-gang','1')`);
 
     /* ---- Para Jumbles ---- */
     {
@@ -190,8 +190,8 @@ export async function checkResume({ width = 390, height = 844 } = {}) {
     }
 
     /* ---- The village: coming back from a run ----
-       The run just finished is what the village shows first: its pet hops,
-       the stars it earned are named, and the camera is at that pet's home. */
+       The run just finished is what the village shows first: its pet beams,
+       the stars it earned are named, and every friend runs to the plaza for a party. */
     {
       const tag = 'village';
       await b.evaluate(`(async () => { const s = await import('/src/core/storage/indexeddb-adapter.js'); const st = new s.IndexedDBAdapter(); await st.init();

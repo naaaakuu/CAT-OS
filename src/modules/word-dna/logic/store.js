@@ -40,20 +40,11 @@ export async function latestByItem(storage) {
   return map;
 }
 
-/* ---------------- First-time introduction ----------------
-   One settings flag: the introduction shows once, then lives one tap
-   away ("How this journey works") forever. Settings can reset it. */
-
-export async function hasSeenWDIntro(storage) {
-  const record = await storage.get(STORES.SETTINGS, 'wd:intro-seen');
-  return record?.value === true;
-}
+/* ---------------- The introduction ----------------
+   Since 3.2 nothing gates on this flag: /wd always opens the Tree and the
+   introduction is the full guide behind the ⓘ. The guide still marks
+   itself read on the way out, which is all that is left of it. */
 
 export function markWDIntroSeen(storage) {
   return storage.put(STORES.SETTINGS, { id: 'wd:intro-seen', value: true });
-}
-
-/** Settings: show the introduction again on the next visit to /wd. */
-export function resetWDIntro(storage) {
-  return storage.put(STORES.SETTINGS, { id: 'wd:intro-seen', value: false });
 }

@@ -12,9 +12,9 @@
 import { verbalStars } from './economy.js';
 import { play } from './audio.js';
 import { loadWorld, deriveWorldState, petChangeLine } from './state.js';
-import { PET_BY_ID, STORIES, HOME_GIFTS, petForModule, lineFor } from '../pets/pets.js';
+import { PET_BY_ID, STORIES, HOME_GIFTS, petForModule, lineFor, stageTitle, stageGift } from '../pets/pets.js';
 import { starsFor } from '../pets/economy.js';
-import { petSprite, FRAME } from '../pets/sprite.js';
+import { petFigure, FRAME } from '../pets/sprite.js';
 import { motionReduced } from '../core/engagement/feedback.js';
 import { escapeHTML } from '../core/utils/format.js';
 
@@ -28,7 +28,7 @@ export function baseGifts(pet, stars, flawless) {
 
 /**
  * The friend block.
- * @param {{pet, earned?, heart?, hearts?, levelUp?, level?, decor?, gift?, doneCount?}} c
+ * @param {{pet, earned?, grew?, stage?, chapter?, hearts?, levelUp?, level?, decor?, gift?, doneCount?}} c
  * @param {{compact?: boolean, lead?: string}} o  lead: html placed above the star line (the strip's stars)
  */
 export function petBlock(c, { compact = false, lead = '' } = {}) {
@@ -36,7 +36,7 @@ export function petBlock(c, { compact = false, lead = '' } = {}) {
   if (!p) return '';
   return `
     <div class="pvwin ${compact ? 'pvwin--compact' : ''}" data-pet="${p.id}">
-      <div class="pvwin__pet">${petSprite(p.id, { frame: FRAME.happy, size: compact ? 66 : 96 })}</div>
+      <div class="pvwin__pet">${petFigure(p.id, { frame: FRAME.happy, size: compact ? 66 : 96, stage: c.stage ?? 0 })}</div>
       <div class="pvwin__body">${lead}<div class="pvwin__gifts" data-gifts>${giftLines(c)}</div></div>
     </div>`;
 }
@@ -51,7 +51,8 @@ export function giftLines(c) {
     <p class="pvwin__thanks">“${escapeHTML(lineFor(p.id, 'thanks', String(c.earned) + (c.hearts ?? '')))}”</p>
     ${L ? `<p class="pvwin__level"><span>Village level ${L.level}</span><span class="pvwin__bar" aria-hidden="true"><i style="width:${Math.round(L.pct * 100)}%"></i></span><span>${L.need} more ${L.need === 1 ? 'star' : 'stars'} to level ${L.level + 1}</span></p>` : ''}
     ${c.levelUp ? `<p class="pvwin__heart pvwin__big">The village reached level ${L.level}!${c.decor ? ` New on the map: ${escapeHTML(c.decor.name.toLowerCase())}.` : ''}</p>` : ''}
-    ${c.heart ? `<p class="pvwin__heart"><span aria-hidden="true">♥</span> A new heart with ${p.name}! ${escapeHTML(HOME_GIFTS[(c.hearts ?? 1) - 1] ?? '')} appears at ${escapeHTML(p.home)}.</p>${STORIES[p.id]?.[c.hearts - 1] ? `<p class="pvwin__story"><i>${escapeHTML(STORIES[p.id][c.hearts - 1])}</i></p>` : ''}` : ''}
+    ${c.grew ? `<p class="pvwin__heart pvwin__big"><span aria-hidden="true">✦</span> ${p.name} grew to stage ${c.stage}: ${escapeHTML(stageTitle(p.id, c.stage))}! New: ${escapeHTML(stageGift(p.id, c.stage))}.</p>` : ''}
+    ${c.chapter ? `<p class="pvwin__heart">${escapeHTML(HOME_GIFTS[(c.hearts ?? 1) - 1] ?? '')} appears at ${escapeHTML(p.home)}.</p>${STORIES[p.id]?.[c.hearts - 1] ? `<p class="pvwin__story"><i>${escapeHTML(STORIES[p.id][c.hearts - 1])}</i></p>` : ''}` : ''}
     ${typeof c.doneCount === 'number' ? `<p class="pvwin__today">${c.gift ? `All three of today's friends helped: <b>+5 bonus stars</b>. See you tomorrow!` : c.doneCount >= 3 ? 'Today\'s gift is already yours. Every extra round still helps the village.' : c.doneCount ? `Today: ${c.doneCount} of 3 friends helped. ${3 - c.doneCount} more for today's gift.` : 'Help today\'s three friends for a bonus gift.'}</p>` : ''}`;
 }
 

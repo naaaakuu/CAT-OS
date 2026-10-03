@@ -20,7 +20,7 @@ const load = (rel) => import(pathToFileURL(join(ROOT, rel)).href);
 
 const ORDER = ['toffee', 'chai', 'matcha', 'mochi', 'ginger', 'mallow'];
 const NAMES = ['Toffee', 'Chai', 'Matcha', 'Mochi', 'Ginger', 'Mallow'];
-const FIELDS = ['id', 'name', 'creature', 'subject', 'teaches', 'home', 'icon', 'colour', 'frame', 'places', 'modules', 'bff', 'trouble', 'blurb'];
+const FIELDS = ['id', 'name', 'creature', 'subject', 'tag', 'item', 'charm', 'teaches', 'home', 'icon', 'colour', 'frame', 'places', 'modules', 'bff', 'trouble', 'blurb'];
 const MODULES = ['rc', 'rc2', 'cr', 'lex', 'garden', 'wd', 'wb', 'ps', 'pc', 'pj', 'sp', 'ooo', 'gauntlet'];
 const MOOD_WORDS = ['glowing', 'happy', 'missing', 'sleepy', 'wilting', 'new'];
 const KINDS = ['hello', 'missed', 'meet', 'thanks', 'tap'];
@@ -103,6 +103,21 @@ export async function checkPets() {
     for (const t of g) if (!t.includes('{name}')) bad(`gossip.${w}: "${t}" has no {name}`);
   }
   if (L.intro?.length !== 4) bad(`LINES.intro has ${L.intro?.length} lines, wants Toffee's 4`);
+  for (const id of ORDER) {
+    // The first visit says both meet lines in order: who they are, then why that is their subject.
+    if ((L.meet?.[id] ?? []).length !== 2) bad(`${id} has ${(L.meet?.[id] ?? []).length} meet lines, wants 2`);
+    if ((L.muse?.[id] ?? []).length < 5) bad(`${id} has ${(L.muse?.[id] ?? []).length} muse lines, wants 5+`);
+    for (const k of ['cheer', 'grow']) if ((L[k]?.[id] ?? []).length < 2) bad(`${id} has ${(L[k]?.[id] ?? []).length} ${k} lines, wants 2+`);
+  }
+
+  /* ---- Ten stages each: a name per stage, and what each one puts on the friend ---- */
+  for (const id of ORDER) {
+    const t = P.STAGE_TITLES?.[id] ?? [];
+    if (t.length !== 10 || new Set(t).size !== 10 || !t.every((s) => typeof s === 'string' && s.trim())) bad(`${id} needs 10 distinct stage titles, has ${t.length}`);
+    if (P.stageTitle(id, 0) !== '' || P.stageTitle(id, 1) !== t[0] || P.stageTitle(id, 10) !== t[9]) bad(`stageTitle(${id}) is not stage-numbered from 1`);
+    for (let s = 1; s <= 10; s += 1) { const g = P.stageGift(id, s); if (!g || /\{\w+\}/.test(g)) bad(`stageGift(${id}, ${s}) is "${g}"`); }
+    if (P.stageGift(id, 0) !== '' || P.stageGift(id, 11) !== '') bad(`stageGift(${id}) gives something outside stages 1 to 10`);
+  }
 
   /* ---- Every string a friend can say, gossip filled with every name ---- */
   const lines = [];
@@ -119,7 +134,9 @@ export async function checkPets() {
   walk('STORIES', P.STORIES);
   walk('HOME_GIFTS', P.HOME_GIFTS);
   F.forEach((f, i) => add(`FRIENDSHIPS[${i}].line`, f.line));
-  for (const p of P.PETS ?? []) { add(`${p.id}.trouble`, p.trouble); add(`${p.id}.blurb`, p.blurb); }
+  for (const p of P.PETS ?? []) { add(`${p.id}.trouble`, p.trouble); add(`${p.id}.blurb`, p.blurb); add(`${p.id}.tag`, p.tag); }
+  walk('STAGE_TITLES', P.STAGE_TITLES);
+  for (const id of ORDER) for (let s = 1; s <= 10; s += 1) add(`stageGift(${id}, ${s})`, P.stageGift(id, s));
 
   for (const [where, s] of lines) {
     if (typeof s !== 'string' || !s.trim()) { bad(`${where} is empty`); continue; }
@@ -130,7 +147,8 @@ export async function checkPets() {
     if (/\{\w+\}/.test(s)) bad(`${where} has an unfilled slot: ${s}`);
   }
   const seen = new Map();
-  for (const [where, s] of lines) if (!where.startsWith('LINES.gossip')) { if (seen.has(s)) bad(`duplicate line in ${where} and ${seen.get(s)}: ${s}`); seen.set(s, where); }
+  // Gossip templates and the stage gifts (a ring of light is a ring of light on anyone) repeat on purpose.
+  for (const [where, s] of lines) if (!where.startsWith('LINES.gossip') && !where.startsWith('stageGift')) { if (seen.has(s)) bad(`duplicate line in ${where} and ${seen.get(s)}: ${s}`); seen.set(s, where); }
 
   /* ---- Picks are deterministic and come from the right pool ---- */
   const a = P.lineFor('chai', 'hello', 'd1');

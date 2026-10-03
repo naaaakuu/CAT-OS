@@ -141,8 +141,16 @@ export function deriveWorldState(content, records, now = Date.now()) {
     if (!prev || res.stars > prev.stars || (res.stars === prev.stars && res.flawless && !prev.flawless)) rcBest.set(s.passage_id, { ...res, session: s });
   }
   const rcStarTotal = [...rcBest.values()].reduce((n, r) => n + r.stars, 0);
+  // Every question answered right at least once, in a passage or its second look: how far Chai has grown.
+  const qSolved = new Set();
+  for (const s of sessions) {
+    if (s.module ? s.module !== 'rc2' : !rcById.has(s.passage_id)) continue;
+    for (const a of (Array.isArray(s.answers) ? s.answers : [])) if (a?.is_correct === true && a.question_id) qSolved.add(a.question_id);
+  }
   const reading = {
     passages: content.rc.length,
+    qSolved: qSolved.size,
+    qTotal: content.rc.reduce((n, i) => n + (Number(i.question_count) || 0), 0),
     read: rcBest.size,
     attempts: rcSessions.length,
     stars: rcStarTotal,

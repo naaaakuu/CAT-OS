@@ -9,13 +9,14 @@ import { listPJItems } from '../../../core/content-loader/loader.js';
 import { groupByTier, recommendNextPJ, tierInfo } from '../logic/tiers.js';
 import { latestByItem } from '../logic/store.js';
 import { escapeHTML } from '../../../core/utils/format.js';
+import { infoButton } from '../../../ui/info.js';
 
 export async function renderPJBrowser(outlet, { storage }) {
   outlet.innerHTML = `
     <section class="screen">
       <header class="journey-head">
         <p class="screen__eyebrow">Practice · Para Jumbles</p>
-        <h1>Your ordering journey</h1>
+        <h1>Your ordering journey${infoButton('pj', { guide: '#/pj/about' })}</h1>
       </header>
       <div id="pj-list" aria-busy="true">
         <div class="skeleton skeleton--line" style="width: 40%"></div>
@@ -62,9 +63,7 @@ export async function renderPJBrowser(outlet, { storage }) {
       : `${solvedIds.size} of ${items.length} jumbles solved`}</p>
     <div class="journey-track" aria-hidden="true">
       <div class="journey-track__fill" style="width: ${Math.round((solvedIds.size / items.length) * 100)}%"></div>
-    </div>
-    <p class="hint" style="margin: 0 0 var(--space-3)">
-      <a href="#/pj/about">How this journey works</a></p>`;
+    </div>`;
 
   const itemHTML = (item) => {
     const a = latest.get(item.id);

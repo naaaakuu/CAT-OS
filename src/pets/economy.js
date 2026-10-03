@@ -6,9 +6,11 @@
  * Every finished run is a VISIT to the friend who teaches that subject.
  * A visit earns 1 to 3 stars, plus 1 for a flawless run. Stars add up to
  * the village level, and each level puts something new on the map. Visits
- * also grow friendship (five hearts, each a chapter of the friend's story
- * and a gift for their home) and keep the friend happy (a mood that fades
- * with a 36-hour half-life, so a subject left alone is a friend missing you).
+ * keep the friend happy (a mood that fades with a 36-hour half-life, so a
+ * subject left alone is a friend missing you). The friend GROWS with how
+ * much of their subject is done: ten stages, the last one only when every
+ * question is (stageOf); every second stage is a chapter of their story and
+ * a gift for their home.
  *
  * Every day the village picks three friends who need you most. Help all
  * three and the day's gift pays 5 more stars. Toffee keeps the fire: the
@@ -24,8 +26,9 @@ import { dayKey, shiftDay } from '../core/engagement/streaks.js';
 
 const HALF_LIFE = 36 * 3600e3;
 const NEW_MOOD = 0.3;
-const HEARTS = [0, 3, 8, 16, 28, 45];
 export const DAILY_GIFT = 5;
+/** Days of the fire it takes Toffee to grow all the way: Toffee's subject is coming back. */
+export const TOFFEE_DAYS = 60;
 const freeze = (o) => Object.freeze(o);
 
 /** Stars needed for each village level; past the last, every level costs 36 more. */
@@ -56,6 +59,43 @@ export function levelOf(stars) {
     from = top + (level - LEVELS.length) * 36; to = from + 36;
   }
   return { level, from, to, into: s - from, need: to - s, pct: (s - from) / (to - from) };
+}
+
+/* ------------------------------------------------------------------ */
+/* Growing up                                                          */
+/* ------------------------------------------------------------------ */
+
+/**
+ * The growth stage, 0 to 10, that `done` of `total` reaches (owner,
+ * 2026-10-03: "at least 10 upgrades, improving every time; fully upgraded
+ * when all the questions of that subject are done"). Stage r needs
+ * total * (r/10)^k with k = log10(total), so stage 1 is the very first one
+ * done, stage 10 is every one, and the early stages come quickly while the
+ * last few take real work, whatever the subject's size.
+ * @returns {{stage:number, nextAt:number, toNext:number}}
+ */
+export function stageOf(done, total) {
+  const T = Math.max(0, Math.floor(Number(total) || 0));
+  const d = Math.max(0, Math.min(T, Math.floor(Number(done) || 0)));
+  if (!T) return { stage: 0, nextAt: 0, toNext: 0 };
+  const k = Math.max(0.5, Math.log10(T));
+  const at = (r) => Math.min(T, Math.max(r, Math.ceil(T * (r / 10) ** k - 1e-9)));
+  let stage = 0;
+  while (stage < 10 && d >= at(stage + 1)) stage += 1;
+  return { stage, nextAt: stage < 10 ? at(stage + 1) : T, toNext: stage < 10 ? at(stage + 1) - d : 0 };
+}
+
+const sum = (...xs) => xs.reduce((n, x) => n + (Number.isFinite(x) ? x : 0), 0);
+
+/** How much of a friend's subject is done: questions answered right at least once, words in memory, or (Toffee) days. */
+function progressOf(id, state, days) {
+  const s = state ?? {}, b = s.banks ?? {};
+  if (id === 'chai') return { done: sum(s.reading?.qSolved, b.cr?.solved), total: sum(s.reading?.qTotal, b.cr?.total), unit: 'questions' };
+  if (id === 'matcha') return { done: sum(s.meadow?.known, s.pond?.known, s.thicket?.known, s.rootwood?.metCount, s.terraces?.done, b.wb?.solved), total: sum(s.meadow?.total, s.pond?.total, s.thicket?.total, s.rootwood?.total, s.terraces?.total, b.wb?.total), unit: 'words' };
+  if (id === 'mochi') return { done: sum(s.table?.solved, b.pc?.solved), total: sum(s.table?.total, b.pc?.total), unit: 'questions' };
+  if (id === 'ginger') return { done: sum(s.loom?.solved, b.sp?.solved), total: sum(s.loom?.total, b.sp?.total), unit: 'questions' };
+  if (id === 'mallow') return { done: sum(s.bench?.solved), total: sum(s.bench?.total), unit: 'questions' };
+  return { done: days, total: TOFFEE_DAYS, unit: 'days' };
 }
 
 /* ------------------------------------------------------------------ */
@@ -238,19 +278,20 @@ export function derivePets(state, records, content, now = Date.now()) {
   const level = levelOf(stars);
   const decor = DECOR.map((d) => ({ ...d, made: level.level >= d.level }));
 
-  /* ---- Each friend ---- */
+  /* ---- Each friend: grown by how much of their subject is done ---- */
   const pets = PETS.map((p) => {
     const list = byPet.get(p.id);
     const fresh = isNew(p.id);
     const mood = moodNow[p.id];
-    const xp = list.reduce((n, v) => n + 1 + (v.daily ? 1 : v.stars), 0);
-    let hearts = 0;
-    while (hearts < 5 && xp >= HEARTS[hearts + 1]) hearts += 1;
+    const prog = progressOf(p.id, state, dayRuns.size);
+    const g = stageOf(prog.done, prog.total);
+    // Every second stage is a chapter of their story and a gift for their home.
+    const hearts = Math.floor(g.stage / 2);
     const word = moodWord(mood, fresh);
     const real = list.filter((v) => !v.daily);
     return {
       id: p.id, name: p.name, mood, word, isNew: fresh,
-      hearts, xp, toNext: hearts < 5 ? Math.max(1, Math.ceil((HEARTS[hearts + 1] - xp) / 3)) : 0,
+      stage: g.stage, toNext: g.toNext, done: Math.min(prog.done, prog.total), total: prog.total, unit: prog.unit, hearts,
       earned: earnedBy[p.id], visits: real.length,
       lastAt: list.length ? list[list.length - 1].at : null,
       story: hearts ? STORIES[p.id][hearts - 1] : null,
@@ -291,7 +332,8 @@ export function changeBetween(before, after) {
     pet,
     // The run's own stars; the day's gift, if this run opened it, is said on its own line.
     earned: fresh ? after.last.earned : 0,
-    heart: !!(a && b && a.hearts > b.hearts), hearts: a?.hearts ?? 0,
+    grew: !!(a && b && a.stage > b.stage), stage: a?.stage ?? 0,
+    chapter: !!(a && b && a.hearts > b.hearts), hearts: a?.hearts ?? 0,
     levelUp: (after?.level?.level ?? 1) > (before?.level?.level ?? 1), level: after?.level ?? levelOf(0),
     decor: (after?.decor ?? []).find((d) => d.made && !madeBefore.has(d.id)) ?? null,
     gift,

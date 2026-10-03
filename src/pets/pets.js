@@ -17,9 +17,14 @@ import { rng } from '../world/engine/palette.js';
 
 const freeze = (o) => Object.freeze(o);
 
+/* Each friend IS their subject (owner, 2026-10-03: "their allotted subject
+   is how they actually are"): the bookworm keeps Reading, the tidy fox keeps
+   Para Jumbles, the one who says it short keeps Para Summary. `tag` is that
+   personality in a breath; `meet` (LINES) is how they say it themselves. */
 export const PETS = freeze([
   freeze({
     id: 'toffee', name: 'Toffee', creature: 'flame spirit', subject: 'Daily streak and the Gauntlet',
+    tag: 'Never misses a day. Ever.', item: 'a party hat', charm: 'spark',
     teaches: 'The daily fire and the weekly Gauntlet', home: 'the campfire', icon: 'sparks', colour: '#E9963A', frame: freeze([0, 350]),
     places: freeze(['wilds', 'hearth']), modules: freeze(['gauntlet']), bff: 'matcha',
     trouble: 'The fire is the heart of the village. It burns as long as you come back each day.',
@@ -27,6 +32,7 @@ export const PETS = freeze([
   }),
   freeze({
     id: 'chai', name: 'Chai', creature: 'owl', subject: 'Reading comprehension',
+    tag: 'Has read every book in the village. Twice.', item: 'a scholar\'s cap', charm: 'book',
     teaches: 'Reading passages and their questions', home: 'the library', icon: 'stories', colour: '#A9825A', frame: freeze([355, 330]),
     places: freeze(['reading-room']), modules: freeze(['rc', 'rc2', 'cr']), bff: 'mochi',
     trouble: 'The pages in her library are going blank. Every passage you read brings words back.',
@@ -34,6 +40,7 @@ export const PETS = freeze([
   }),
   freeze({
     id: 'matcha', name: 'Matcha', creature: 'sprout', subject: 'Vocabulary',
+    tag: 'Collects words the way others collect stickers.', item: 'a flower crown', charm: 'leaf',
     teaches: 'Words, roots and word parts', home: 'the greenhouse', icon: 'leaves', colour: '#7FA65A', frame: freeze([700, 338]),
     places: freeze(['meadow', 'pond', 'thicket', 'rootwood', 'terraces']), modules: freeze(['lex', 'garden', 'wd', 'wb']), bff: 'toffee',
     trouble: 'The word garden is wilting. Every word you learn waters a pot.',
@@ -41,6 +48,7 @@ export const PETS = freeze([
   }),
   freeze({
     id: 'mochi', name: 'Mochi', creature: 'pebble', subject: 'Para summary and completion',
+    tag: 'Says it short. Gets to the point. Finishes your sentences.', item: 'a beret', charm: 'notebook',
     teaches: 'Finding the point of a paragraph', home: 'the cabin', icon: 'notes', colour: '#7D8FA8', frame: freeze([1040, 335]),
     places: freeze(['table', 'completion']), modules: freeze(['ps', 'pc']), bff: 'chai',
     trouble: 'His notebook lost its notes. Every summary you find writes a page back.',
@@ -48,6 +56,7 @@ export const PETS = freeze([
   }),
   freeze({
     id: 'ginger', name: 'Ginger', creature: 'fox', subject: 'Para jumbles and placement',
+    tag: 'Cannot stand a mess. Knows where everything goes.', item: 'workshop goggles', charm: 'map',
     teaches: 'Putting sentences in order', home: 'the workshop', icon: 'maps', colour: '#D2693A', frame: freeze([1380, 397]),
     places: freeze(['loom', 'placement']), modules: freeze(['pj', 'sp']), bff: 'mallow',
     trouble: 'The workshop gears are stuck. Every jumble you put in order turns one again.',
@@ -55,6 +64,7 @@ export const PETS = freeze([
   }),
   freeze({
     id: 'mallow', name: 'Mallow', creature: 'cloud', subject: 'Odd one out',
+    tag: 'Spots the one thing that does not belong. Every time.', item: 'a stargazer\'s hat', charm: 'star',
     teaches: 'Spotting the sentence that does not belong', home: 'the observatory', icon: 'stardust', colour: '#93AED1', frame: freeze([1780, 392]),
     places: freeze(['bench']), modules: freeze(['ooo']), bff: 'ginger',
     trouble: 'The stars went dim. Every odd one out you spot lights one again.',
@@ -206,8 +216,40 @@ export const STORIES = freeze({
   ],
 });
 
-/** What a friend's home gains with each heart, drawn on the map (src/home/cards.js). */
+/** What a friend's home gains with each chapter (every second stage), drawn on the map (src/home/cards.js). */
 export const HOME_GIFTS = freeze(['a lantern by the door', 'flowers by the door', 'bunting over the door', 'warm lights in every window', 'a golden glow: best friends']);
+
+/* ------------------------------------------------------------------ */
+/* Growing up: ten stages per friend                                   */
+/* ------------------------------------------------------------------ */
+
+/**
+ * A friend grows as you work through their subject (economy.js stageOf):
+ * stage 1 is the first question you get right, stage 10 is every question
+ * in the subject. Each stage has a name, and each one shows on the friend
+ * (src/pets/sprite.js petGear), so every stage is something you can see.
+ */
+export const STAGE_TITLES = freeze({
+  toffee: freeze(['Spark', 'Ember', 'Party Flame', 'Campfire', 'Torch', 'Blaze', 'Bonfire', 'Beacon', 'Sunburst', 'Eternal Flame']),
+  chai: freeze(['Page Turner', 'Bookworm', 'Scholar', 'Speed Reader', 'Story Sleuth', 'Professor', 'Wise Owl', 'Head Librarian', 'Grand Sage', 'Keeper of Every Book']),
+  matcha: freeze(['Seedling', 'Sprout', 'First Bloom', 'Word Gardener', 'Word Collector', 'Wordsmith', 'Walking Dictionary', 'Word Wizard', 'Lexicon Legend', 'Master of Words']),
+  mochi: freeze(['Pebble', 'Notetaker', 'Long Story Short', 'Gist Finder', 'Point Maker', 'Editor', 'The Big Picture', 'Five-Word Wonder', 'Grand Summariser', 'Master of the Point']),
+  ginger: freeze(['Tidier', 'Sorter', 'Tinkerer', 'Mapmaker', 'Puzzle Solver', 'Pathfinder', 'Master Builder', 'Navigator', 'Order Keeper', 'Master of Order']),
+  mallow: freeze(['Cloud Watcher', 'Star Spotter', 'Stargazer', 'Sharp Eye', 'Odd Hunter', 'Sky Detective', 'Eagle Eye', 'Night Watcher', 'Star Sage', 'Master Spotter']),
+});
+
+/** What each stage puts on a friend, in order (stage 1 first). */
+const GROWTH = ['a twinkle over {name}\'s head', '{name} grew bigger', '{item}', 'a glowing ring of light', 'a floating {charm}', 'gold trim and a growth spurt', 'a trail of sparkles', 'a second {charm}', 'a golden aura', 'a crown of stars'];
+
+/** The name of a friend's stage ('' before stage 1). */
+export function stageTitle(id, stage) { return STAGE_TITLES[id]?.[stage - 1] ?? ''; }
+
+/** What reaching `stage` gave the friend, in words ("a floating book"). */
+export function stageGift(id, stage) {
+  const p = PET_BY_ID.get(id);
+  const t = GROWTH[stage - 1];
+  return p && t ? fill(t, { name: p.name, item: p.item, charm: p.charm }) : '';
+}
 
 /* ------------------------------------------------------------------ */
 /* The voice                                                           */
@@ -232,14 +274,14 @@ export const LINES = freeze({
     ginger: ['You are back! I chalked a trail to the door for you.', 'Yip yip! I knew you would find your way back.'],
     mallow: ['You came back! I saved the brightest star for you.', 'Oh! I kept watching the path. And here you are!'],
   },
-  /** The very first meeting. */
+  /** The very first meeting: who they are, then why that is their subject (the intro says both, in order). */
   meet: {
-    toffee: ['Hi! I am Toffee. I keep the village fire, and the fire keeps the village.'],
-    chai: ['Oh, a reader! I am Chai, and you are just in time. My library needs you.'],
-    matcha: ['Hi, I am Matcha! I grow words here, and I saved you a seed.'],
-    mochi: ['Hello. I am Mochi. I find the point of things. Nice to meet you.'],
-    ginger: ['Oh, a traveller! I am Ginger. I map how paragraphs go.'],
-    mallow: ['Hello, star-friend! I am Mallow. I find the one that does not belong.'],
+    toffee: ["Hi hi hi! I'm Toffee! I keep the fire going. I haven't missed a day. Not ONE.", "Come back every day and the fire grows. Race me in the Gauntlet too. I always win. Mostly."],
+    chai: ["Hoo! I'm Chai. I've read every book in this village. Twice. Even the cookbook.", "Give me any passage and I'll find what the author really meant. That's Reading!"],
+    matcha: ["Hello hello! I'm Matcha! Some collect stamps. I collect words!", "Today's favourite word is 'serendipity'. Come grow your words with me!"],
+    mochi: ["Mochi. Hi. I keep it short.", "Long paragraph? I find the point. Half a paragraph? I finish it."],
+    ginger: ["I'm Ginger! I sort my socks by colour. Then by mood.", "Shuffled sentences? A sentence with nowhere to go? I know where everything goes!"],
+    mallow: ["Hi! I'm Mallow! See those five clouds? One of them is a sheep.", "I always spot the one that doesn't belong. Five sentences, one stranger. Easy!"],
   },
   /** On coming back from a run: thank you. */
   thanks: {
@@ -251,12 +293,39 @@ export const LINES = freeze({
     mallow: ['A star came back! Thank you!', 'Look up! It is shining again, thanks to you!'],
   },
   tap: {
-    toffee: ['Hehe, that tickles!', 'Crackle crackle!', 'Warm, is it not?', 'Sit with me a while!'],
-    chai: ['Hoo! You found me!', 'Read the question first. Trust me!', 'Hoo hoo!', 'I underline everything. It is a problem.'],
-    matcha: ['Hi hi! I am mostly leaf!', 'Did you bring sunshine?', 'Every word is a seed!', 'Roots first, then flowers!'],
+    toffee: ['Hehe, that tickles!', 'Crackle crackle!', 'Race you to the pond! Go!', "Did you come yesterday? You did! I counted!"],
+    chai: ['Hoo! You found me!', 'Read the question first. Trust me!', "I underline everything. It's a problem.", 'Fun fact: owls have three eyelids. I read that. Twice.'],
+    matcha: ["Hi hi! I'm mostly leaf!", 'Did you bring sunshine?', 'Every word is a seed!', 'Gosh, you look positively radiant today!'],
     mochi: ['Oh! Hello.', 'Gist first. Always.', 'Tea?', 'Hm! Hi.'],
-    ginger: ['This way, this way!', 'Find the opening sentence first!', 'Pronouns point the way!', 'Yip!'],
-    mallow: ['Oh! You startled a star!', 'Soft! I am mostly cloud.', 'One of these is not like the others!', 'Shh. The sky is thinking.'],
+    ginger: ['This way, this way!', 'Find the opening sentence first!', 'Pronouns point the way!', 'Your bag was a mess. I tidied it. You are welcome!'],
+    mallow: ['Oh! You startled a star!', "Soft! I'm mostly cloud.", 'One of these is not like the others!', 'Shh. The sky is thinking.'],
+  },
+  /** Said to nobody in particular while you watch: who they are, out loud (src/home/life.js muse). */
+  muse: {
+    toffee: ['Who wants to race? Anyone? Ready, set... go!', 'Day after day after day! I love days!', 'I counted the sparks. Two hundred and twelve!', "I'm not hot-headed. I'm just a head. Made of fire.", 'Crackle crackle! That means hello in fire.'],
+    chai: ["Plot twist: the butler was nice all along.", 'I just read the back of a jam jar. Twice. Still good.', 'Every author hides one sentence that matters most. I always find it.', "Shh! I'm at the good part.", "Owls can't move their eyes. So I turn my whole head. Very dramatic."],
+    matcha: ["Word of the day: petrichor! It's the smell of rain. Sniff sniff!", "Today's word is ebullient. It means me, right now!", "This flower isn't pretty. It's resplendent!", 'I whisper words to my seeds. They grow faster. Probably.', "Quixotic! I don't know what it means yet. I just like saying it."],
+    mochi: ['Tea. Good.', 'Long day? Short version: nice day.', 'Hm. Clouds. Rain soon.', 'The point is usually small. Like me.', 'Chai read me a whole book. Summary: dragon, friends, happy.'],
+    ginger: ['Who put the spoons with the forks? Fixed it.', 'First the kettle, then the tea, then the cup. Order matters!', 'I sorted the flowers. Daisy, lily, rose. Much better.', "A 'however' always comes after something. Always!", 'Everything has a place. Your place is right here!'],
+    mallow: ['Ooh! One of those birds is flying backwards!', 'Five leaves fell. One was a butterfly!', 'Something is different today. Did the pond move?', 'Spot the odd one: tea, coffee, juice, a sock.', "That cloud looks like a teapot. I look like a sheep. It's fine."],
+  },
+  /** Everyone in the plaza, celebrating a finished set. */
+  cheer: {
+    toffee: ['Woo hoo!', 'Fire party!'],
+    chai: ['Hoo hoo hooray!', 'Bravo, bravo!'],
+    matcha: ['Splendiferous!', 'Yay yay yay!'],
+    mochi: ['Nice.', 'Good job. Really.'],
+    ginger: ['All in order! Yes!', 'Yip yip hooray!'],
+    mallow: ['Wheee!', 'So sparkly!'],
+  },
+  /** A friend who just grew a stage. */
+  grow: {
+    toffee: ['BIGGER FIRE! Look at me!', 'I grew! I am the brightest thing here!'],
+    chai: ['I feel wiser. And taller!', 'Hoo! A new chapter of me!'],
+    matcha: ['I grew! Literally!', 'Look at my leaves! Magnificent!'],
+    mochi: ['Bigger. Good.', 'New look. Same Mochi.'],
+    ginger: ['Upgraded! Neatly!', 'Everything in order, including me!'],
+    mallow: ['I got fluffier! Look!', 'I sparkle now! Like a star!'],
   },
   /** One friend talking about another, by that friend's mood word. */
   gossip: {
@@ -267,12 +336,12 @@ export const LINES = freeze({
     wilting: ['{name} has been quiet lately. A visit would cheer them up!', 'Let us go see {name} soon.'],
     new: ['Have you met {name} yet? So lovely!', '{name} has been hoping to meet you!'],
   },
-  /** Toffee's welcome on the very first visit: the problem, then the purpose. */
+  /** The first visit: Toffee's welcome, then everyone says hello (LINES.meet), then Chai calls you over. */
   intro: [
-    'Hi! You are here! I am Toffee. I keep the village fire.',
+    "You're here! You're really here! I've been waiting all morning. Okay, all week.",
     'Our village is losing its words. Every question you answer brings some of them back.',
-    'Each house holds one part of CAT English, and its sign says which. Tap any sign to go in.',
-    'Hoo! Over here! I need help first. Tap the big button and we will start!',
+    'Everyone here keeps one part of CAT English, and it is who they are. Come and meet them!',
+    "Hoo! Over here! I need help first. Tap the big button and we'll start!",
   ],
 });
 

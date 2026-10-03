@@ -8,8 +8,9 @@
  * else knows this module exists.
  *
  * Routes owned by this module:
- *   /ooo              — the detection journey (first visit: the introduction)
- *   /ooo/about        — the introduction, revisitable any time
+ *   /ooo              — the detection journey
+ *   /ooo/about        — the full guide, linked from the ⓘ beside the
+ *                       journey's title
  *   /ooo/session/:set — practice a tier (set = tier id) or one item
  *                       (set = ooo-NNNN)
  *   /ooo/learn/:id    — an item's Learning Page (the full walkthrough)
@@ -26,28 +27,19 @@
  */
 
 export function registerOOO(router, context) {
-  const intro = (outlet, opts) => import('./screens/intro.js').then((s) => s.renderOOOIntro(outlet, context, opts));
-  const browser = (outlet) => import('./screens/browser.js').then((s) => s.renderOOOBrowser(outlet, context));
   router
     .register({
       path: '/ooo',
       title: 'Odd One Out',
-      render: async (outlet) => {
-        // The first open shows the introduction, not questions — the
-        // journey begins with understanding, and only then with choosing.
-        let seen = true;
-        try {
-          const store = await import('./logic/store.js');
-          seen = await store.hasSeenOOOIntro(context.storage);
-        } catch { /* storage down: browse */ }
-        if (!seen) await intro(outlet, { firstTime: true, onBegin: () => browser(outlet) });
-        else await browser(outlet);
-      },
+      // Always the journey (3.2). A first visit used to open the whole
+      // introduction before anything could be tapped; now it waits behind
+      // the ⓘ beside the title, for whoever asks.
+      render: (outlet) => import('./screens/browser.js').then((s) => s.renderOOOBrowser(outlet, context)),
     })
     .register({
       path: '/ooo/about',
       title: 'About Odd One Out',
-      render: (outlet) => intro(outlet, { firstTime: false }),
+      render: (outlet) => import('./screens/intro.js').then((s) => s.renderOOOIntro(outlet, context, { firstTime: false })),
     })
     .register({
       path: '/ooo/session/:set',

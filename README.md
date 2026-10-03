@@ -57,9 +57,14 @@ with a friend helps them:
 - **The village level.** Stars add up to levels, and every level puts
   something new on the map: lanterns, bunting, flowers, firefly jars, a
   swing, chimes, a kite, lily-pad lights, sky lanterns.
-- **Hearts.** Five per friend. Each heart is a chapter of that friend's story
-  and decorates their home (a lantern, flowers, bunting, lit windows, a
-  golden glow).
+- **Growing up.** Each friend grows through ten stages as you work through
+  their subject: stage 1 is the first question you get right, stage 10 is
+  every question in it. Every stage shows on them (a twinkle, a bigger body,
+  their own hat, a ring of light, a floating charm, gold trim, a sparkle
+  trail, a second charm, a golden aura, a crown of stars) and has a name.
+  Every second stage is a chapter of their story and decorates their home.
+- **A party after every set.** Finish a passage or three questions and every
+  friend runs to the plaza to celebrate the one you helped.
 - **Today's three.** Every day the three friends who miss you most wear a
   "!". Help all three and today's gift opens: 5 bonus stars.
 - **Toffee's fire.** Your days in a row. Seven in a row saves a spare log
@@ -67,14 +72,19 @@ with a friend helps them:
 
 ## The first minutes
 
-The village opens at the campfire. Toffee says hello and tells you what is
-going on in four short lines, then Chai waves from the library and the big
-button at the bottom glows: **Help Chai · Read a passage · 5 min**. One tap
-and you are reading a real CAT passage against the clock.
+The village opens at the campfire. Toffee says hello, then everyone
+introduces themselves, and each one is their subject: Chai has read every
+book in the village twice (Reading), Ginger sorts socks by colour and then
+by mood (Para Jumbles), Mochi keeps it short (Para Summary), Mallow spots
+the sheep among the clouds (Odd One Out), Matcha collects words (Vocabulary).
+Then Chai waves from the library and the big button at the bottom glows:
+**Help Chai · Read a passage · 5 min**. One tap and you are reading a real
+CAT passage against the clock.
 
 When you finish, the result screen counts up your stars ("You helped
-Chai!"), Chai thanks you, and the level bar fills. Back in the village Chai
-jumps for joy, her best friend Mochi cheers, and the next friend's "!" is
+Chai!"), Chai thanks you, and the level bar fills. Back in the village
+every friend runs to the plaza for a party round Chai, and if Chai grew a
+stage you see the new look and the new name. Then the next friend's "!" is
 waiting.
 
 ## The village
@@ -118,7 +128,7 @@ backup carries the whole village and nothing can drift from the truth.
   run, a word round and the Gauntlet show the host's portrait in their bar.
 - A place screen shows the host at its own door.
 - Results show the friend celebrating, "You helped Chai!" with the stars
-  counted up, the level bar, any new heart and its story line, and today's three.
+  counted up, the level bar, any new stage and its story line, and today's three.
 - Progress and Settings sit behind the gear and in the bottom bar; the clock
   tower and the rose cottage are subject houses. Records are kept by Toffee.
 - After a passage, **Explain this passage simply** opens the passage told
@@ -149,7 +159,7 @@ passages.
   and validated against a versioned schema at load time.
 - **Local-first.** Progress lives in IndexedDB on your device. The village
   is derived from your records.
-- **Earned, never bought.** Every star, heart and level comes from
+- **Earned, never bought.** Every star, stage and level comes from
   finished learning. Stars are performance (accuracy, then pace) and are
   never spent.
 
@@ -200,7 +210,7 @@ while the Reading Room rendered its passages at 1.14:1 contrast.
 
 | Section | What it does |
 |---|---|
-| §16 | Derives the friends: stars, village levels and decorations, hearts, mood decay, today's three and the gift, the fire and its spare logs, the welcome (`check-pet-economy.mjs`). Also lints every line a friend can say: 96 characters at most, no em dashes, none of the mentor's banned words (`check-pets.mjs`) |
+| §16 | Derives the friends: stars, village levels and decorations, growth stages, mood decay, today's three and the gift, the fire and its spare logs, the welcome (`check-pet-economy.mjs`). Also lints every line a friend can say: 96 characters at most, no em dashes, none of the mentor's banned words (`check-pets.mjs`) |
 | §17 | Checks that the painting and the six pet sheets are present, and that every place has a line in register |
 | §22 `check-contrast.mjs` | Checks the palette and the village's button colours against WCAG AA |
 | §23 `check-village-data.mjs` | Samples the path graph against the painting's own pixels, and checks the motion atlas still matches its patches |
@@ -250,7 +260,7 @@ pretend to have passed.
 
 **`src/pets/`:**
 - `pets.js`: the roster, best friends, troubles, requests, and the friends' voice and stories.
-- `economy.js`: stars, village levels and decorations, hearts, mood, today's
+- `economy.js`: stars, village levels and decorations, growth stages, mood, today's
   three and the gift, the fire, the welcome, all derived from records.
 - `next.js`: each pet's next activity.
 - `paths.js`: where everything is in the painting.

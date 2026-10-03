@@ -21,11 +21,11 @@
 import { loadWorld, loadWorldRecords, deriveWorldState } from '../world/state.js';
 import { loadValley, saveValley, valleyName } from '../world/companion.js';
 import { derivePets } from '../pets/economy.js';
-import { PETS, PET_BY_ID, HOUSES, LINES, lineFor, petForPlace } from '../pets/pets.js';
+import { PETS, PET_BY_ID, HOUSES, LINES, lineFor, petForPlace, stageTitle, stageGift } from '../pets/pets.js';
 import { MAP, HOMES, PLACES, SIGNS, NODES, LAMPS, WINDOWS, CLOCK, nearestNode } from '../pets/paths.js';
-import { petRig, petPortrait } from '../pets/sprite.js';
+import { petRig, petPortrait, petGear, petRing, petFigure, FRAME } from '../pets/sprite.js';
 import { nextFor } from '../pets/next.js';
-import { createLife, PET_SIZE } from './life.js';
+import { createLife, petSize } from './life.js';
 import { mountMotion } from './motion.js';
 import { renderCard, decorLayer, ACT } from './cards.js';
 import { openModal, closeModal } from '../ui/modal.js';
@@ -92,6 +92,7 @@ export async function renderVillageHome(outlet, ctx) {
         <a class="cw-play" data-play href="#/world"></a>
       </div>
       <button class="cw-edge" hidden></button>
+      <div class="cw-meet" hidden></div>
       <div class="cw-toast" role="status" aria-live="polite"></div>
       <div class="cw-overlay" hidden><div class="cw-scrim" data-close></div><section class="cw-card"></section></div>
       <div class="cw-party" hidden></div>
@@ -241,7 +242,7 @@ export async function renderVillageHome(outlet, ctx) {
   const edge = root.querySelector('.cw-edge');
   let edgeFor = null;
   const placeEdge = () => {
-    const id = openKind || firstVisit ? null : pets.play;
+    const id = openKind || root.classList.contains('is-intro') ? null : pets.play;
     const at = id && life.positionOf(id), s = scale();
     const sx = at ? vw / 2 + (at.x - cam.x) * s : 0, sy = at ? vh / 2 + (at.y - cam.y) * s : 0;
     const off = !!at && (sx < 16 || sx > vw - 16 || sy < 70 || sy > vh - 150);
@@ -284,7 +285,7 @@ export async function renderVillageHome(outlet, ctx) {
       const pp = pets.pets.find((x) => x.id === p.id);
       const el = root.querySelector(`.pet[data-pet="${p.id}"]`);
       el.dataset.word = pp.word;
-      el.setAttribute('aria-label', `${p.name}, ${MOOD_LABEL[pp.word]}. ${p.subject}.${pp.pick && !pp.helpedToday ? ' Needs your help today.' : ''} Open ${p.name}'s card.`);
+      el.setAttribute('aria-label', `${p.name}, ${MOOD_LABEL[pp.word]}. ${p.subject}. ${pp.stage ? `Stage ${pp.stage} of 10, ${stageTitle(p.id, pp.stage)}.` : 'Not grown yet.'}${pp.pick && !pp.helpedToday ? ' Needs your help today.' : ''} Open ${p.name}'s card.`);
     }
     life.setMarks(T.picks.filter((pid, i) => !T.done[i]));
     root.style.setProperty('--harmony', pets.harmony.toFixed(2));
@@ -388,7 +389,23 @@ export async function renderVillageHome(outlet, ctx) {
       later(() => { party.hidden = true; party.innerHTML = ''; c.onDone?.(); nextParty(); }, reduced ? 0 : 260);
     }, { once: true });
   }
-  const checkParties = () => {
+  const stagesNow = () => JSON.stringify(Object.fromEntries(pets.pets.map((p) => [p.id, p.stage])));
+  const checkParties = (afterRun = false) => {
+    /* A friend who grew: their new look, named, before anything else. Only
+       on the way back from a run (that run's friend, and Toffee on a new
+       day): progress that arrives any other way, a restored backup or an
+       old village opening 3.3 for the first time, is remembered quietly,
+       not six cards at once. */
+    let had = null;
+    try { had = JSON.parse(store.get('catos:stages') || 'null'); } catch { /* start over */ }
+    store.set('catos:stages', stagesNow());
+    if (afterRun && had && typeof had === 'object') {
+      // The friend you just helped goes first.
+      for (const p of [...pets.pets].sort((a, b) => (b.id === pets.last?.pet) - (a.id === pets.last?.pet))) {
+        const from = Math.max(0, Math.min(p.stage, Number(had[p.id]) || 0));
+        if (p.stage > from) celebrate(growHTML(p, from), 'grow', () => { life.poke(p.id, { happy: true, quiet: true }); });
+      }
+    }
     const L = pets.level.level, seen = Number(store.get('catos:level-seen'));
     if (!seen) store.set('catos:level-seen', String(L));
     else if (L > seen) {
@@ -407,26 +424,29 @@ export async function renderVillageHome(outlet, ctx) {
 
   /* ---------------- Coming back from a run ---------------- */
   let welcomed = false;
+  // Where every friend stands, remembered from the very first visit, so the first stage anyone reaches gets its card.
+  if (!store.get('catos:stages')) store.set('catos:stages', stagesNow());
   {
     const last = pets.last;
     const seen = sessionStorage.getItem('world:toasted');
     const focusSlug = sessionStorage.getItem('world:focus');
     for (const k of ['world:focus', 'world:changed', 'world:change-line', 'world:earned', 'world:unlocked', 'world:pet', 'world:gifts', 'world:heart']) sessionStorage.removeItem(k);
     if (last && Date.now() - last.at < 20 * 60e3 && seen !== String(last.at)) {
+      /* A set finished: everyone runs to the plaza and throws a party round
+         the friend you helped (owner, 2026-10-03). */
       welcomed = true;
       sessionStorage.setItem('world:toasted', String(last.at));
       const p = PET_BY_ID.get(last.pet);
-      const home = NODES[HOMES[last.pet].node];
-      panTo(home.x, home.y, { ms: 0 });
+      panTo(NODES.pc.x, NODES.pc.y - 20, { ms: 0 });
       later(() => {
         const line = lineFor(last.pet, 'thanks', String(last.at));
-        announce(`${p.name}: ${life.poke(last.pet, { happy: true, line })}`);
-        toast(`${starSVG} <b>+${last.earned}</b> You helped ${p.name}!`);
-        play('unlock');
-        const bff = PET_BY_ID.get(p.bff);
-        if (bff) later(() => life.poke(bff.id, { happy: true, quiet: true }), 900);
-        later(checkParties, 2600);
-      }, reduced ? 50 : 700);
+        life.party(last.pet, { line });
+        announce(`Everyone ran to the plaza to celebrate. ${p.name}: ${line}`);
+        toast(`${starSVG} <b>+${last.earned}</b> You helped ${p.name}! Party in the plaza!`, 5600);
+        play('party');
+        // The cards (a friend who grew, a new level, the day's gift) wait for the party to wind down.
+        later(() => checkParties(true), reduced ? 1200 : 7600);
+      }, reduced ? 50 : 450);
     } else if (focusSlug && petForPlace(focusSlug)) {
       // Back from a place: face its own house (the rose cottage and the clock tower are not their friend's home).
       const spot = HOUSES.find((h) => h.place === focusSlug)?.spot ?? petForPlace(focusSlug);
@@ -435,23 +455,65 @@ export async function renderVillageHome(outlet, ctx) {
     }
   }
 
-  /* ---------------- First visit: Toffee tells you what is going on ---------------- */
-  if (firstVisit) {
+  /* ---------------- First visit: Toffee says hello, then everyone introduces themselves ----------------
+     Each friend IS their subject (owner, 2026-10-03), so meeting them is
+     meeting the exam: the bookworm keeps Reading, the tidy fox keeps Para
+     Jumbles. One tap per friend; "Skip" jumps to Chai's call. A village
+     from before 3.3 never had them introduced, so it gets the round once
+     too (after any party, never over one). */
+  if (firstVisit || (!welcomed && !store.get('catos:met-gang'))) {
     root.classList.add('is-intro');
     // Saved before the first line: leaving mid-welcome (Enter on the big button) must not replay it every visit.
-    saveValley(storage, { awakened_at: new Date().toISOString(), met_at: new Date().toISOString() }).then((v) => { valley = v; }, () => { /* the hello will repeat once */ });
+    store.set('catos:met-gang', '1');
+    if (firstVisit) saveValley(storage, { awakened_at: new Date().toISOString(), met_at: new Date().toISOString() }).then((v) => { valley = v; }, () => { /* the hello will repeat once */ });
+    const meetEl = root.querySelector('.cw-meet');
+    const ORDER = ['toffee', 'chai', 'ginger', 'mochi', 'mallow', 'matcha'];
+    let skipped = false;
+    const keeps = (id) => (id === 'toffee' ? ['The daily fire', 'The Gauntlet'] : HOUSES.filter((h) => h.pet === id).map((h) => h.subject));
+    const meetCard = (id) => {
+      const p = PET_BY_ID.get(id);
+      meetEl.innerHTML = `<p class="cw-meet__dots" aria-hidden="true">${ORDER.map((x) => `<i class="${x === id ? 'is-on' : ''}"></i>`).join('')}</p><h2 class="cw-meet__name">${escapeHTML(p.name)}<small>the ${escapeHTML(p.creature)}</small></h2><p class="cw-meet__keeps">${keeps(id).map((s) => `<b>${escapeHTML(s)}</b>`).join('')}</p><p class="cw-meet__why">${escapeHTML(LINES.meet[id][1])}</p><button class="cw-meet__skip" type="button" data-skip>Skip</button>`;
+      meetEl.hidden = false;
+      meetEl.classList.remove('is-in'); void meetEl.offsetWidth; meetEl.classList.add('is-in');
+    };
+    // On the root, before any line's tap-to-continue listener, so a tap on Skip is a skip by the time the line ends.
+    root.addEventListener('pointerdown', (e) => { if (e.target.closest?.('[data-skip]')) skipped = true; }, true);
+    const pause = (ms) => new Promise((r) => later(r, reduced ? 0 : ms));
+    const say = async (id, line, ms = 9000) => {
+      if (skipped || disposed) return;
+      announce(`${PET_BY_ID.get(id).name}: ${line}`);
+      await life.sayAndWait(id, line, { ms, tapToSkip: true });
+    };
+    /* Bring a friend to the middle, a moment after the tap that got us here:
+       that tap's own pointerdown, still on its way to the map, cancels any
+       pan started inside it. A phone shows the painting's whole height, so
+       the camera cannot lift a friend clear of the card; the card moves to
+       the top instead when the friend stands low. */
+    const visit = (id, ms = 1100) => {
+      const at = life.positionOf(id), s = scale(), hh = vh / 2 / s;
+      const cy = hh * 2 >= MAP.h ? MAP.h / 2 : clamp(at.y, hh, MAP.h - hh);
+      meetEl.classList.toggle('is-top', vh / 2 + (at.y - cy) * s > vh * 0.52);
+      later(() => panTo(at.x, at.y, { ms }), 30);
+    };
     later(async () => {
-      panTo(NODES.f1.x, NODES.f1.y - 60, { ms: 0 });
-      for (const [i, line] of LINES.intro.entries()) {
-        if (disposed) return;
-        announce(`Toffee: ${line}`);
-        const chai = i === LINES.intro.length - 1;
-        if (chai) { panTo(NODES.lib.x + 60, NODES.lib.y + 40, { ms: 1400 }); root.classList.add('is-pointing'); }
-        await life.sayAndWait(chai ? 'chai' : 'toffee', line, { ms: chai ? 9000 : 7000, tapToSkip: true });
-        if (i === 1) panTo(NODES.pc.x, NODES.pc.y, { ms: 1400 });
+      for (const id of ORDER) life.hold(id);
+      visit('toffee', 0);
+      if (firstVisit) await say('toffee', LINES.intro[0]);
+      for (const id of ORDER) {
+        if (skipped || disposed) break;
+        if (id !== 'toffee') { visit(id); await pause(1000); }
+        meetCard(id); play('tap'); life.poke(id, { happy: true, quiet: true });
+        await say(id, LINES.meet[id][0]);
+        if (id === 'toffee') { meetEl.hidden = true; await say('toffee', LINES.intro[1]); await say('toffee', LINES.intro[2]); }
       }
+      meetEl.hidden = true;
+      if (disposed) return;
+      skipped = false;
+      visit('chai', 1400); root.classList.add('is-pointing');
+      await say('chai', LINES.intro[3]);
       if (disposed) return;
       root.classList.remove('is-intro', 'is-pointing');
+      life.release();
     }, reduced ? 100 : 900);
   } else if (!welcomed) {
     /* ---------------- Every other arrival: they wave; after a day away, someone comes to meet you ---------------- */
@@ -481,12 +543,18 @@ export async function renderVillageHome(outlet, ctx) {
     }
   }, 60e3);
 
+  /* ---------------- While you watch, a friend you can see says something very them ---------------- */
+  const museTimer = setInterval(() => {
+    if (openKind || partying || root.classList.contains('is-intro') || document.hidden || Math.random() < 0.35) return;
+    life.muse(PETS.map((p) => p.id).filter((id) => onScreen(id, 30)));
+  }, 8000);
+
   /* ---------------- Cleanup ---------------- */
   const onHash = () => {
     disposed = true;
     window.removeEventListener('hashchange', onHash);
     window.removeEventListener('pointerdown', startSound, { capture: true });
-    clearInterval(tickHour); clearInterval(edgeTimer);
+    clearInterval(tickHour); clearInterval(edgeTimer); clearInterval(museTimer);
     for (const id of timers) clearTimeout(id);
     ro.disconnect(); life.destroy(); motion.destroy();
     if (openKind) closeModal(card);
@@ -516,14 +584,30 @@ function spotsHTML() {
   }).join('');
 }
 
+/** A friend on the map, as big as their stage and wearing what it gave them. */
 function petHTML(p, pets) {
   const pp = pets.pets.find((x) => x.id === p.id);
-  return `<button class="pet pet--${p.id}" data-pet="${p.id}" data-word="${pp.word}" style="--size:${PET_SIZE[p.id]}" aria-label="${p.name}">
+  const size = petSize(p.id, pp.stage);
+  return `<button class="pet pet--${p.id}" data-pet="${p.id}" data-word="${pp.word}" data-stage="${pp.stage}" style="--size:${size}" aria-label="${p.name}">
     <span class="pet-shadow" aria-hidden="true"></span>
-    <span class="pet-body">${petRig(p.id, { size: PET_SIZE[p.id] })}</span>
+    ${petRing(p.id, pp.stage)}
+    <span class="pet-body">${petRig(p.id, { size })}${petGear(p.id, pp.stage)}</span>
     <span class="pet-bubble" aria-hidden="true" hidden></span>
     <span class="pet-mark" aria-hidden="true" hidden>!</span>
   </button>`;
+}
+
+/** The card for a friend who grew: how they look now, their new name, what is new. */
+function growHTML(p, from) {
+  const def = PET_BY_ID.get(p.id);
+  const gifts = Array.from({ length: p.stage - from }, (_, i) => stageGift(p.id, from + i + 1));
+  return `<p class="cw-party__eyebrow">${escapeHTML(def.name)} grew!</p>
+    <span class="cw-party__pet">${petFigure(p.id, { size: 116, stage: p.stage, frame: FRAME.happy })}</span>
+    <h2 id="cw-party-h">${escapeHTML(stageTitle(p.id, p.stage))}</h2>
+    <p class="cw-party__stage"><span class="cw-pips" aria-hidden="true">${Array.from({ length: 10 }, (_, i) => `<i class="${i < p.stage ? 'on' : ''}"></i>`).join('')}</span>Stage ${p.stage} of 10</p>
+    <p class="cw-party__new">New: <b>${escapeHTML(gifts.join(', '))}</b></p>
+    <p class="cw-party__quote">“${escapeHTML(lineFor(p.id, 'grow', String(p.stage)))}”</p>
+    <p class="cw-party__next">${p.stage < 10 ? `${p.toNext} more ${p.toNext === 1 ? p.unit.replace(/s$/, '') : p.unit} to stage ${p.stage + 1}.` : 'Every last one done. A true master!'}</p>`;
 }
 
 function confetti() {

@@ -14,11 +14,11 @@
 
 import { atPlace } from '../companion.js';
 import { petForPlace, PET_BY_ID } from '../../pets/pets.js';
-import { petSprite, petPortrait, backdropStyle, FRAME } from '../../pets/sprite.js';
+import { petFigure, petPortrait, backdropStyle, FRAME } from '../../pets/sprite.js';
 import { regionBySlug } from '../regions.js';
 import { loadWorld } from '../state.js';
 import { starHTML } from './result.js';
-import { nextPassage, nextVerbal, nextFamily, readingWeakness, typeName, missedQuestions, secondLookLine } from '../curator.js';
+import { nextPassage, nextFamily, readingWeakness, typeName, missedQuestions, secondLookLine } from '../curator.js';
 import { play, unlock, startMusic, startAmbience } from '../audio.js';
 import { escapeHTML } from '../../core/utils/format.js';
 import { STAGES } from '../../core/engine/garden-session.js';
@@ -29,6 +29,8 @@ import { OOO_TIERS } from '../../modules/odd-one-out/logic/tiers.js';
 import { renderHearth } from './hearth.js';
 import { renderWilds } from './wilds.js';
 import { STORES } from '../../core/storage/storage-adapter.js';
+import { infoButton } from '../../ui/info.js';
+import { verbalTrio } from '../../pets/next.js';
 
 const STAGE_WORD = { open_ground: 'Unmet', seed: 'A seed', sprout: 'Sprout', young: 'Young', in_leaf: 'In leaf', mature: 'Mature', ancient: 'Ancient' };
 /** A tree's stage, in one typographic mark. Deliberately not emoji: the
@@ -65,7 +67,7 @@ export async function renderPlace(outlet, { storage }, params) {
       <div class="place__hero place__hero--short place__hero--painted" style="${backdropStyle(SECOND_HOUSE[region.slug] ?? host)}">
         <a class="place__back" href="#/world" id="back">← Village</a>
         <div class="place__hero-stat" id="hero-stat"></div>
-        <span class="place__pet place__pet--door place__pet--${host}" aria-hidden="true">${petSprite(host, { size: 104, frame: FRAME.happy })}</span>
+        <span class="place__pet place__pet--door place__pet--${host}" aria-hidden="true">${petFigure(host, { size: 104, frame: FRAME.happy, stage: hostState?.stage ?? 0 })}</span>
       </div>
       <div class="place__body">
         <div class="placewick is-in" id="placewick" hidden>${petPortrait(host, 38)}<p></p></div>
@@ -95,11 +97,12 @@ export async function renderPlace(outlet, { storage }, params) {
   window.addEventListener('hashchange', () => { window.removeEventListener('pointerdown', onDown, { capture: true }); }, { once: true });
 
   /** The top: who this place is, how far it has come, and the one thing
-   *  the curator says to do now. */
-  const head = (progress, cta, note) => {
+   *  the curator says to do now. What the place teaches, and how, waits
+   *  behind the ⓘ beside its name (`info`), never in the way of the button. */
+  const head = (progress, cta, note, info = '') => {
     top.innerHTML = `
       <p class="place__eyebrow">${escapeHTML(region.skill ?? '')} · with ${escapeHTML(hostDef.name)}</p>
-      <h1 class="place__title">${escapeHTML(region.name)}</h1>
+      <h1 class="place__title">${escapeHTML(region.name)}${info}</h1>
       ${progress ? `<div class="place__progress"><div class="bar"><i style="width:${Math.round(progress.pct * 100)}%"></i></div><b>${progress.label}</b></div>` : ''}
       ${cta ? `<a class="g-cta ${cta.gold ? 'g-cta--gold' : ''}" href="${cta.href}" id="cta">${escapeHTML(cta.label)}<small>${escapeHTML(cta.sub ?? '')}</small><span class="arrow" aria-hidden="true">→</span></a>` : ''}
       ${note ? `<p class="place__note">${escapeHTML(note)}</p>` : ''}`;
@@ -126,9 +129,10 @@ export async function renderPlace(outlet, { storage }, params) {
     } : null;
     let selected = rw.groves.find((g) => g.families.some((x) => x.id === f?.id)) ?? rw.groves[0];
     heroStat.innerHTML = pill(`\u2663 ${rw.grownCount} grown`);
+    const info = infoButton('vocab', { moreTitle: 'This place', more: ['Take one root apart and a family of words opens. A family you have met comes back to be walked again before it fades.'] });
     const renderGrove = () => {
       const fams = selected.families;
-      head({ pct: rw.total ? rw.metCount / rw.total : 0, label: `${rw.metCount} / ${rw.total} families` }, cta, pick?.why);
+      head({ pct: rw.total ? rw.metCount / rw.total : 0, label: `${rw.metCount} / ${rw.total} families` }, cta, pick?.why, info);
       more.innerHTML = section('Six groves', 'Roots that share a field of meaning stand together. Choose a grove to walk.', `
         <div class="g-chiprow">${rw.groves.map((g) => `<button class="g-chip" data-grove="${g.slug}" aria-pressed="${g.slug === selected.slug}">${escapeHTML(g.name.replace('The Grove of ', ''))} ${g.grown ? '✦' : `${g.met}/${g.families.length}`}</button>`).join('')}</div>
         <p class="sub"><i>${escapeHTML(selected.line)}</i></p>
@@ -162,15 +166,15 @@ export async function renderPlace(outlet, { storage }, params) {
       sub: r.due >= 5 ? `${r.due} ${unit} are due today` : `Twelve ${unit}, chosen for you · ~2 minutes`,
       gold: r.due >= 5,
     };
-    const note = r.met === 0
-      ? `${r.total.toLocaleString()} ${unit} live here. You will never be shown a list to work through: the village brings you twelve at a time, some of them inside a real sentence, and brings back the ones that fade.`
-      : `${r.known} of ${r.total.toLocaleString()} ${unit} are in memory, ${r.mastered} of them for good.`;
+    // A fact under the button once there is one; how the place works is the ⓘ's.
+    const note = r.met === 0 ? '' : `${r.known} of ${r.total.toLocaleString()} ${unit} are in memory, ${r.mastered} of them for good.`;
+    const info = infoButton('vocab', { moreTitle: 'This place', more: [`${r.total.toLocaleString()} ${unit} live here. You will never be shown a list to work through: the village brings you twelve at a time, some of them inside a real sentence, and brings back the ones that fade.`] });
 
     const groups = [...new Set(fields.map((f) => f.group))];
     let group = groups[0];
     const renderFields = () => {
       const shown = fields.filter((f) => f.group === group);
-      head({ pct: bloomPct, label: `${r.mastered} / ${r.total.toLocaleString()} ${unit}` }, cta, note);
+      head({ pct: bloomPct, label: `${r.mastered} / ${r.total.toLocaleString()} ${unit}` }, cta, note, info);
       more.innerHTML = section(
         region.slug === 'meadow' ? 'The fields' : region.slug === 'pond' ? 'The shoals' : 'The languages',
         region.slug === 'meadow' ? 'Every word you master opens a flower that stays. You can also walk a single field.' : region.slug === 'pond' ? 'Each shoal holds the pairs beginning with one letter. Koi arrive as you tell them apart.' : 'A lantern lights along the path for every language you learn.',
@@ -211,7 +215,11 @@ export async function renderPlace(outlet, { storage }, params) {
     const missed = missedQuestions(world.records.sessions, weakness);
     head({ pct: rd.maxStars ? rd.stars / rd.maxStars : 0, label: `${rd.stars} / ${rd.maxStars} stars` },
       missed.length >= 4 ? { href: '#/rc/second-look', label: 'The second look', sub: `${Math.min(6, missed.length)} questions that got away · the highest-yield run here`, gold: true } : cta,
-      missed.length >= 4 ? secondLookLine(missed, weakness) : note);
+      missed.length >= 4 ? secondLookLine(missed, weakness) : note,
+      infoButton('rc', { moreTitle: 'This place', more: [
+        'Every passage here is the size CAT sets: never more than four questions, never longer than the exam’s longest passage.',
+        'Three stars means three quarters right inside the passage’s own time: the pace CAT asks for.',
+      ] }));
     if (missed.length >= 4 && rec) {
       top.insertAdjacentHTML('beforeend', `<a class="g-btn place__second" href="#/rc/session/${rec.item.id}">Or read a new passage: ${escapeHTML(rec.item.title)}</a>`);
     }
@@ -223,7 +231,7 @@ export async function renderPlace(outlet, { storage }, params) {
           ${[...weakness.byType.entries()].filter(([, e]) => e.n >= 2).sort((a, b) => a[1].acc - b[1].acc).slice(0, 5)
             .map(([t, e]) => `<div class="weak__row"><span>${escapeHTML(typeName(t))}</span><span class="weak__bar"><i style="width:${Math.round(e.acc * 100)}%" class="${e.acc < 0.6 ? 'is-low' : e.acc > 0.85 ? 'is-high' : ''}"></i></span><b>${Math.round(e.acc * 100)}%</b></div>`).join('')}
         </div>`) : ''}
-      ${section('The shelves', `${rd.passages} passages, foundation to elite, every one the size CAT sets: never more than four questions, never longer than the exam’s longest passage. Three stars means three quarters right inside the passage’s own time: the pace CAT asks for.`, groups.map((g) => `
+      ${section('The shelves', `${rd.passages} passages, foundation to elite.`, groups.map((g) => `
         <h3 class="shelf">${escapeHTML(STAGE_INFO[g.stage]?.label ?? g.stage)}</h3>
         <p class="sub">${escapeHTML(STAGE_INFO[g.stage]?.description ?? '')}</p>
         <div class="g-list">
@@ -259,11 +267,16 @@ export async function renderPlace(outlet, { storage }, params) {
     const kinds = [...new Set(content.wd.map((i) => i.kind))];
     const next = content.wd.find((i) => !done.has(i.id)) ?? content.wd[0];
     head({ pct: t.total ? t.done / t.total : 0, label: `${t.done} / ${t.total} families` },
-      next ? { href: `#/wd/session/${next.id}`, label: next.title, sub: `${String(next.kind).replace('_', ' ')} · notice the shared piece, predict it, then apply it to a word never taught` } : null,
-      'Every unit here ends with a word you were never shown. That is the test that matters.');
-    more.innerHTML = section('The vines', 'Prefixes, suffixes, foreign words and CAT vocabulary, learned by pattern: notice, predict, reveal, apply.',
+      next ? { href: `#/wd/session/${next.id}`, label: next.title, sub: [String(next.kind).replace('_', ' '), next.member_count ? `${next.member_count} words` : ''].filter(Boolean).join(' · ') } : null,
+      '',
+      infoButton('vocab', { moreTitle: 'This place', more: [
+        'Every unit here ends with a word you were never shown. That is the test that matters.',
+        'Each one is learned by pattern: notice the shared piece, predict it, then apply it to a word never taught.',
+        'Met a word you have never seen? Take it apart, prefix, root, suffix, and the sentence settles the rest.',
+      ] }));
+    more.innerHTML = section('The vines', 'Prefixes, suffixes, foreign words and CAT vocabulary.',
       kinds.map((k) => `<h3 class="shelf">${escapeHTML(String(k).replace('_', ' '))}</h3><div class="g-list">${content.wd.filter((i) => i.kind === k).map((it) => `<a class="g-row" href="#/wd/session/${it.id}"><span class="g-row__num">${done.has(it.id) ? '✓' : '·'}</span><span class="g-row__lead"><span class="g-row__title">${escapeHTML(it.title)}</span><span class="g-row__meta">${it.member_count ?? ''} words${it.estimated_time_sec ? ` · ~${Math.round(it.estimated_time_sec / 60)} min` : ''}</span></span></a>`).join('')}</div>`).join(''))
-      + bankBundleList('wb', (content.wb ?? []).filter((b) => b.kind === 'decode'), state, 'Words you were never shown', 'A word you have probably never met, its sentence, and four meanings. Take it apart, prefix, root, suffix, and the sentence settles the rest.');
+      + bankBundleList('wb', (content.wb ?? []).filter((b) => b.kind === 'decode'), state, 'Words you were never shown', 'A word you have probably never met, its sentence, and four meanings.');
     return;
   }
 
@@ -272,23 +285,23 @@ export async function renderPlace(outlet, { storage }, params) {
     const v = state[region.slug];
     const kind = region.slug;
     heroStat.innerHTML = pill(`★ ${v.stars}`);
-    const [tiers, items, prefix, unit] = kind === 'loom' ? [PJ_TIERS, content.pj, 'pj', 'jumbles']
-      : kind === 'table' ? [PS_TIERS, content.ps, 'ps', 'summaries'] : [OOO_TIERS, content.ooo, 'ooo', 'sets'];
+    const [tiers, items, prefix, unit, noun] = kind === 'loom' ? [PJ_TIERS, content.pj, 'pj', 'jumbles', ['jumble', 'jumbles']]
+      : kind === 'table' ? [PS_TIERS, content.ps, 'ps', 'summaries', ['summary', 'summaries']] : [OOO_TIERS, content.ooo, 'ooo', 'sets', ['odd one out', 'odd ones out']];
     const sessions = world.records.sessions;
-    const rec = nextVerbal(items, sessions, v.module, `${kind}:${state.today}`);
+    /* The button starts the same three the friend's card offers (pets/next.js
+       verbalTrio, same seed): a set short enough to finish, so the thanks
+       lands at its end. A whole tier is still one tap away, on the tiles. */
+    const trio = verbalTrio(items, sessions, v.module, `${kind}:${state.today}`, state.now);
+    const rec = trio?.recs[0] ?? null;
     const solved = new Set();
     for (const s of sessions.filter((x) => x.module === v.module)) for (const a of s.answers ?? []) if (a.is_correct === true) solved.add(a.item_id ?? a.question_id);
-    /* This screen's own copy two lines down says "Play a whole tier as one
-       timed set" — and the route below does exactly that — so the minutes
-       beside the button have to cost the SET, not the first item in it.
-       Costing one item billed a nine-to-twelve-item timed run as "~1 min". */
-    const inSet = rec ? (rec.item.tier ? items.filter((x) => x.tier === rec.item.tier) : [rec.item]) : [];
-    const setMins = Math.max(1, Math.round(inSet.reduce((s, x) => s + (x.estimated_time_sec ?? 80), 0) / 60));
+    const n = trio?.recs.length ?? 0;
     const tierWord = rec ? String(rec.item.tier ?? '').replace(/-/g, ' ').replace(/^./, (c) => c.toUpperCase()) : '';
     head({ pct: v.total ? v.solved / v.total : 0, label: `${v.solved} / ${v.total} solved` },
-      rec ? { href: `#/${prefix}/session/${rec.item.tier ?? rec.item.id}`, label: rec.item.title, sub: inSet.length > 1 ? `${tierWord} · ${inSet.length} ${unit} · ~${setMins} min` : `${tierWord} · ~${setMins} min`, gold: rec.kind === 'retry' } : null,
-      rec?.why);
-    more.innerHTML = section('Eight tiers', 'Each tier teaches one thing and feels different, not just harder. Play a whole tier as one timed set.', `
+      trio ? { href: trio.href, label: `${['One', 'Two', 'Three'][n - 1]} ${noun[n === 1 ? 0 : 1]}`, sub: `${tierWord ? `${tierWord} · ` : ''}about ${trio.minutes} min`, gold: rec.kind === 'retry' } : null,
+      rec?.why,
+      infoButton(prefix, { moreTitle: 'This place', more: ['Each tier teaches one thing and feels different, not just harder.'] }));
+    more.innerHTML = section('Eight tiers', 'Play a whole tier as one timed set.', `
       <div class="tiles">
         ${tiers.map((t) => { const inTier = items.filter((it) => it.tier === t.id); const s = inTier.filter((it) => solved.has(it.id)).length; const done = inTier.length > 0 && s === inTier.length; return `<a class="tile ${rec && rec.item.tier === t.id ? 'tile--next' : ''} ${done ? 'tile--done' : ''}" href="#/${prefix}/session/${t.id}"><p class="tile__name">${escapeHTML(t.label)}</p><p class="tile__meta">${s} of ${inTier.length} ${unit}</p><div class="tile__bar ${done ? 'tile__bar--gold' : ''}"><i style="width:${inTier.length ? Math.round((s / inTier.length) * 100) : 0}%"></i></div></a>`; }).join('')}
       </div>
@@ -303,12 +316,21 @@ export async function renderPlace(outlet, { storage }, params) {
     const rows = content[type] ?? [], b = state.banks?.[type] ?? {};
     const solved = b.solved ?? 0, total = b.total ?? rows.length;
     heroStat.innerHTML = pill(`✓ ${solved} / ${total}`);
+    /* `next` opens the lowest tier with something unsolved, three at a time
+       (verbal-bank's resolveSet). Say how many that really is: completion's
+       foundation tier holds one paragraph. */
+    const solvedIds = b.solvedIds ?? new Set();
+    const tier = BANK_TIERS.find((t) => rows.some((r) => r.tier === t && !solvedIds.has(r.id))) ?? rows[0]?.tier;
+    const three = rows.filter((r) => r.tier === tier).slice(0, 3);
+    const mins = Math.max(1, Math.round(three.reduce((s, r) => s + (r.estimated_time_sec ?? 80), 0) / 60));
+    const word = ['one', 'two', 'three'][Math.max(1, three.length) - 1];
     head({ pct: total ? solved / total : 0, label: `${solved} / ${total} solved` },
-      rows.length ? { href: `#/bank/session/${type}/next`, label: solved ? 'Six more, unsolved first' : 'Begin with six', sub: `${region.skill} · about 5 minutes` } : null,
-      type === 'sp'
+      rows.length ? { href: `#/bank/session/${type}/next`, label: solved ? `${word[0].toUpperCase()}${word.slice(1)} more, unsolved first` : `Begin with ${word}`, sub: `${region.skill} · about ${mins} minute${mins === 1 ? '' : 's'}` } : null,
+      '',
+      infoButton(type, { moreTitle: 'This place', more: [type === 'sp'
         ? 'CAT gives you a paragraph with one sentence lifted out and asks where it goes. The pronoun that needs an owner and the “but” that needs something to push against will tell you.'
-        : 'A paragraph that stops one sentence early. Decide what the gap needs, a reason, an example, a turn or a landing, before you read the options.');
-    more.innerHTML = bankTierTiles(type, rows, state, 'Every tier', 'Six at a time, unsolved first. Each tier is harder than the last.');
+        : 'A paragraph that stops one sentence early. Decide what the gap needs, a reason, an example, a turn or a landing, before you read the options.'] }));
+    more.innerHTML = bankTierTiles(type, rows, state, 'Every tier', 'Three at a time, unsolved first. Each tier is harder than the last.');
     return;
   }
 }
@@ -329,7 +351,7 @@ const section = (title, sub, html) => `
 const BANK_TIERS = ['foundation', 'easy', 'medium', 'advanced', 'cat', 'cat-plus', 'ninety-nine', 'premium'];
 const WB_REGION_KINDS = { meadow: ['context', 'register', 'connotation', 'synonym_distinction'], pond: ['confusable'], terraces: ['decode'] };
 
-/** Placement / completion: one tile per tier, played six at a time. */
+/** Placement / completion: one tile per tier, played three at a time. */
 function bankTierTiles(type, rows, state, title, lead) {
   if (!rows?.length) return '';
   const solved = state.banks?.[type]?.solvedIds ?? new Set();

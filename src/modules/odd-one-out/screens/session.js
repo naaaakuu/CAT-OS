@@ -20,8 +20,9 @@
  *   this item's mission.
  *
  * Phases per item:
- *  1. solving   — mission + challenge, the five sentences, the build
- *                 (or the exclusion pick), then the read back.
+ *  1. solving   — one instruction (the mission, challenge and hint wait
+ *                 behind the ⓘ), the five sentences, the build (or the
+ *                 exclusion pick), then the read back.
  *  2. revealed  — verdict + the full teaching layer (logic/teach.js):
  *                 the four join, the odd one separates, the violation
  *                 and the trap are named.
@@ -50,15 +51,25 @@ import { OOO_LINES, OOO_MISSIONS } from '../../../core/mentor/ooo-voice.js';
 import { toast } from '../../../ui/components/cat-toast.js';
 import { escapeHTML, formatDuration } from '../../../core/utils/format.js';
 import { hostChip } from '../../../pets/sprite.js';
+import { infoButton } from '../../../ui/info.js';
 import '../../../ui/components/cat-jumble-board.js';
 import '../../../ui/components/cat-progress-bar.js';
 import '../../../ui/components/cat-timer.js';
 import '../../../ui/components/cat-xp-bar.js';
 
-/** Resolve what to practice: one item id, or a tier's items in order. */
+/** Resolve what to practice: one item id, a few ids in order (the
+ *  village's set of three), or a tier's items in order. */
 async function resolveSet(setParam) {
   if (/^ooo-[0-9]{4}$/.test(setParam)) {
     return { setId: setParam, items: [await loadOOOItem(setParam)] };
+  }
+  if (/^ooo-[0-9]{4}(,ooo-[0-9]{4})+$/.test(setParam)) {
+    const ids = [...new Set(setParam.split(','))];
+    const loaded = await loadOOOItems(ids);
+    const items = ids.map((id) => loaded.get(id)).filter(Boolean);
+    if (items.length === 0) throw new Error('Those items could not be loaded.');
+    // The id is the trio itself, so a draft resumes this three and no other.
+    return { setId: `ooo-trio:${ids.join(',')}`, items };
   }
   const registry = await listOOOItems();
   const inTier = oooJourneyOrder(registry.filter((i) => i.tier === setParam));
@@ -124,23 +135,18 @@ export async function renderOOOSession(outlet, { storage }, params) {
         <cat-progress-bar max="${session.total}" value="${session.index}"></cat-progress-bar>
 
         <div class="card">
-          <p class="screen__eyebrow">${mode === 'construct' ? 'Build the paragraph' : 'Find the one that stands apart'}</p>
+          <p class="screen__eyebrow">${mode === 'construct'
+            ? 'Tap four in order, leave the odd one out'
+            : 'Tap the sentence that does not belong'}${infoButton('ooo', {
+            more: [mission && `${mission.title} ${mission.line}`, item.mentor.challenge,
+              mode === 'construct' ? OOO_LINES.constructHint : OOO_LINES.excludeHint],
+            moreTitle: OOO_LINES.missionEyebrow })}</p>
           <div class="briefing-chips">
             <span class="badge">${escapeHTML(tier.label)}</span>
             <span class="badge">${escapeHTML(m.genre)}</span>
             <span class="badge"><span class="dot dot--${escapeHTML(m.difficulty)}"></span>${escapeHTML(m.difficulty)}</span>
             <span class="badge">~${Math.max(1, Math.round(m.estimated_time_sec / 60))} min</span>
           </div>
-
-          <div class="ooo-mission">
-            <p class="ooo-mission__eyebrow">${escapeHTML(OOO_LINES.missionEyebrow)}</p>
-            <p class="ooo-mission__title">${escapeHTML(mission.title)}</p>
-            <p class="ooo-mission__line">${escapeHTML(mission.line)}</p>
-          </div>
-
-          <p class="ooo-challenge">${escapeHTML(item.mentor.challenge)}</p>
-          <p class="hint" style="margin-bottom: var(--space-4)">${escapeHTML(
-            mode === 'construct' ? OOO_LINES.constructHint : OOO_LINES.excludeHint)}</p>
 
           <div id="solve-slot" data-sfx="off"></div>
 

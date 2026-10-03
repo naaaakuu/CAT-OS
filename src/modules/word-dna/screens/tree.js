@@ -11,13 +11,14 @@ import { listWDItems } from '../../../core/content-loader/loader.js';
 import { groupByBranch, recommendNextWD, branchInfo } from '../logic/tree.js';
 import { latestByItem } from '../logic/store.js';
 import { escapeHTML } from '../../../core/utils/format.js';
+import { infoButton } from '../../../ui/info.js';
 
 export async function renderWDTree(outlet, { storage }) {
   outlet.innerHTML = `
     <section class="screen">
       <header class="journey-head">
         <p class="screen__eyebrow">Practice · Word DNA</p>
-        <h1>The Language Tree</h1>
+        <h1>The Language Tree${infoButton('vocab', { guide: '#/wd/about' })}</h1>
       </header>
       <div id="wd-list" aria-busy="true">
         <div class="skeleton skeleton--line" style="width: 40%"></div>
@@ -66,7 +67,6 @@ export async function renderWDTree(outlet, { storage }) {
       <div class="journey-track__fill" style="width: ${Math.round((solvedIds.size / items.length) * 100)}%"></div>
     </div>
     <p class="hint" style="margin: 0 0 var(--space-3)">
-      <a href="#/wd/about">How this journey works</a> ·
       <a href="#/wd/garden">Your Word Garden</a></p>`;
 
   const itemHTML = (item) => {
@@ -113,14 +113,5 @@ export async function renderWDTree(outlet, { storage }) {
         ${group.map(itemHTML).join('')}
       `;
     }).join('')}
-    ${groups.some((g) => g.kind === 'confused') ? '' : `
-      <div class="stage-head">
-        <h2>Frequently Confused Words</h2>
-        <div class="rule"></div>
-      </div>
-      <div class="list-item" aria-disabled="true" style="opacity: var(--opacity-dim)">
-        <div class="list-item__title">Coming later</div>
-        <div class="list-item__meta"><span class="badge">Not built yet</span></div>
-      </div>`}
   `;
 }

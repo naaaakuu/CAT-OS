@@ -17,8 +17,8 @@
  *   item's mission.
  *
  * Phases per item:
- *  1. solving   — mission + challenge, the paragraph, the builder,
- *                 then the four options.
+ *  1. solving   — the paragraph (its mission and challenge wait behind
+ *                 the ⓘ), the builder, then the four options.
  *  2. revealed  — verdict + your sentence against the author's + the
  *                 full teaching layer (logic/teach.js).
  * The set ends with ONE lesson (core/mentor/ps-lesson), never a
@@ -46,15 +46,25 @@ import { PS_LINES, PS_MISSIONS } from '../../../core/mentor/ps-voice.js';
 import { toast } from '../../../ui/components/cat-toast.js';
 import { escapeHTML, formatDuration } from '../../../core/utils/format.js';
 import { hostChip } from '../../../pets/sprite.js';
+import { infoButton } from '../../../ui/info.js';
 import '../../../ui/components/cat-question-card.js';
 import '../../../ui/components/cat-progress-bar.js';
 import '../../../ui/components/cat-timer.js';
 import '../../../ui/components/cat-xp-bar.js';
 
-/** Resolve what to practice: one item id, or a tier's items in order. */
+/** Resolve what to practice: one item id, a few ids in order (the
+ *  village's set of three), or a tier's items in order. */
 async function resolveSet(setParam) {
   if (/^ps-[0-9]{4}$/.test(setParam)) {
     return { setId: setParam, items: [await loadPSItem(setParam)] };
+  }
+  if (/^ps-[0-9]{4}(,ps-[0-9]{4})+$/.test(setParam)) {
+    const ids = [...new Set(setParam.split(','))];
+    const loaded = await loadPSItems(ids);
+    const items = ids.map((id) => loaded.get(id)).filter(Boolean);
+    if (items.length === 0) throw new Error('Those paragraphs could not be loaded.');
+    // The id is the trio itself, so a draft resumes this three and no other.
+    return { setId: `ps-trio:${ids.join(',')}`, items };
   }
   const registry = await listPSItems();
   const inTier = psJourneyOrder(registry.filter((i) => i.tier === setParam));
@@ -117,21 +127,15 @@ export async function renderPSSession(outlet, { storage }, params) {
         <cat-progress-bar max="${session.total}" value="${session.index}"></cat-progress-bar>
 
         <div class="card">
-          <p class="screen__eyebrow">Find the author's point</p>
+          <p class="screen__eyebrow">Find the author's point${infoButton('ps', {
+            more: [mission && `${mission.title} ${mission.line}`, item.mentor.challenge],
+            moreTitle: PS_LINES.missionEyebrow })}</p>
           <div class="briefing-chips">
             <span class="badge">${escapeHTML(tier.label)}</span>
             <span class="badge">${escapeHTML(m.genre)}</span>
             <span class="badge"><span class="dot dot--${escapeHTML(m.difficulty)}"></span>${escapeHTML(m.difficulty)}</span>
             <span class="badge">~${Math.max(1, Math.round(m.estimated_time_sec / 60))} min</span>
           </div>
-
-          <div class="ps-mission">
-            <p class="ps-mission__eyebrow">${escapeHTML(PS_LINES.missionEyebrow)}</p>
-            <p class="ps-mission__title">${escapeHTML(mission.title)}</p>
-            <p class="ps-mission__line">${escapeHTML(mission.line)}</p>
-          </div>
-
-          <p class="ps-challenge">${escapeHTML(item.mentor.challenge)}</p>
 
           <div class="ps-paragraph">
             ${item.paragraph.sentences.map((s) => escapeHTML(s.text)).join(' ')}

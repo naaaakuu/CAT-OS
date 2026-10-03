@@ -4,7 +4,7 @@
  * Synthetic records at fixed local times (never Date.now) through
  * derivePets: a new learner, what a run earns and the level stars reach,
  * visits from every module, Toffee's daily visit, mood decay, harmony,
- * hearts, today's three friends and the day's gift, Toffee's flame and its
+ * growth stages, today's three friends and the day's gift, Toffee's flame and its
  * kindling, decor by level, the welcome after a day away, changeBetween,
  * and hostile rows. Then nextFor and noticeFor against the real content
  * registry read from disk.
@@ -129,14 +129,16 @@ export async function checkPetEconomy() {
     const t0 = D(5);
     const one = derive(recs(run('chai', t0)), t0 + HOUR);
     const tf = pet(one, 'toffee');
-    if (tf.isNew || tf.visits !== 0 || tf.earned !== 0 || tf.xp !== 2 || tf.lastAt !== t0) bad(`4: the day's first run visits Toffee and earns no stars: ${json(tf)}`);
+    if (tf.isNew || tf.visits !== 0 || tf.earned !== 0 || tf.lastAt !== t0) bad(`4: the day's first run visits Toffee and earns no stars: ${json(tf)}`);
+    if (tf.stage !== 1 || tf.unit !== 'days' || tf.done !== 1 || tf.total !== E.TOFFEE_DAYS) bad(`4: Toffee grows by the days you come: ${json({ stage: tf.stage, done: tf.done, unit: tf.unit })}`);
     if (!near(tf.mood, pet(one, 'chai').mood, 1e-12)) bad('4: the daily visit warms Toffee like the run it came with');
     if (one.stars !== 3) bad(`4: the daily visit adds no stars (${one.stars})`);
-    if (pet(derive(recs(run('chai', t0), run('mochi', t0 + HOUR)), t0 + 2 * HOUR), 'toffee').xp !== 2) bad('4: only the first run of a day visits Toffee');
+    if (pet(derive(recs(run('chai', t0), run('mochi', t0 + HOUR)), t0 + 2 * HOUR), 'toffee').lastAt !== t0) bad('4: only the first run of a day visits Toffee');
     const two = pet(derive(recs(run('chai', D(5)), run('chai', D(6))), D(6, 12)), 'toffee');
-    if (two.xp !== 4 || two.hearts !== 1) bad(`4: two days are two visits to Toffee and one heart: ${json({ xp: two.xp, hearts: two.hearts })}`);
+    const want = E.stageOf(2, E.TOFFEE_DAYS);
+    if (two.done !== 2 || two.stage !== want.stage || two.toNext !== want.toNext) bad(`4: two days are two days of Toffee's growth: ${json({ done: two.done, stage: two.stage, toNext: two.toNext })}`);
     const own = pet(derive(recs(run('toffee', t0), run('chai', t0 + HOUR)), t0 + 2 * HOUR), 'toffee');
-    if (own.visits !== 1 || own.earned !== 3 || own.xp !== 4) bad(`4: a Gauntlet first thing is Toffee's own visit, not two: ${json({ visits: own.visits, earned: own.earned, xp: own.xp })}`);
+    if (own.visits !== 1 || own.earned !== 3 || own.done !== 1) bad(`4: a Gauntlet first thing is Toffee's own visit, not two: ${json({ visits: own.visits, earned: own.earned, done: own.done })}`);
   }
 
   /* 5. Mood fades with a 36-hour half-life */
@@ -172,20 +174,34 @@ export async function checkPetEconomy() {
     if (out.neediest !== 'matcha') bad(`6: ties go to the gentlest door first, Chai then Matcha (neediest ${out.neediest})`);
   }
 
-  /* 7. Hearts at 3, 8, 16, 28 and 45 (each visit is one plus its stars) */
+  /* 7. Ten stages: stage 1 is the first one done, stage 10 is every one, each second stage a chapter */
   {
-    const ginger = (stars) => pet(derive(recs(stars.map((s, i) => run('ginger', D(1) + i * HOUR, { stars: s }))), D(2)), 'ginger');
-    const threes = (n) => Array(n).fill(3);
-    for (const [stars, xp, hearts] of [[[1], 2, 0], [[2], 3, 1], [[3, 2], 7, 1], [[3, 3], 8, 2], [[3, 3, 3, 2], 15, 2], [threes(4), 16, 3], [[...threes(6), 2], 27, 3], [threes(7), 28, 4], [threes(11), 44, 4], [[...threes(11), 0], 45, 5]]) {
-      const g = ginger(stars);
-      if (g.xp !== xp || g.hearts !== hearts) bad(`7: visits of ${stars.join('/')} stars are ${g.xp} xp and ${g.hearts} hearts, want ${xp} and ${hearts}`);
+    const S = E.stageOf;
+    for (const T of [1, 2, 3, 7, 52, 128, 580, 5000]) {
+      let prev = 0;
+      for (let d = 0; d <= T; d += Math.max(1, Math.floor(T / 400))) {
+        const g = S(d, T);
+        if (g.stage < prev || (g.stage < 10 && (g.toNext < 1 || g.toNext !== g.nextAt - d))) { bad(`7: stageOf(${d}, ${T}) is ${json(g)} after stage ${prev}`); break; }
+        prev = g.stage;
+      }
+      if (S(1, T).stage < 1 || S(T, T).stage !== 10 || S(T, T).toNext !== 0 || (T > 1 && S(T - 1, T).stage === 10)) bad(`7: of ${T}, the first one done is stage 1 and only all ${T} is stage 10`);
     }
-    const one = ginger([1]);
-    if (one.toNext !== 1 || one.story !== null || one.request !== REQUESTS.ginger[0]) bad(`7: before the first heart: ${json({ toNext: one.toNext, story: one.story })}`);
-    const h1 = ginger([2]);
-    if (h1.toNext !== 2 || h1.story !== STORIES.ginger[0] || h1.request !== REQUESTS.ginger[1]) bad('7: the first heart tells the first story and asks the second request');
-    const full = ginger(threes(12));
-    if (full.hearts !== 5 || full.toNext !== 0 || full.story !== STORIES.ginger[4] || full.request !== BEST_FRIEND_ASK.ginger) bad('7: five hearts tell the last story and ask as best friends');
+    if (new Set(Array.from({ length: 129 }, (_, d) => S(d, 128).stage)).size !== 11) bad('7: a real subject passes through all eleven stages, 0 to 10');
+    if (S(-5, 10).stage !== 0 || S(NaN, 10).stage !== 0 || S(5, 0).stage !== 0 || S(50, 10).stage !== 10) bad('7: stageOf clamps what it is given');
+    const ginger = (solved, spSolved = 0) => pet(derive(recs(), D(2), { loom: { solved, total: 76 }, banks: { sp: { solved: spSolved, total: 52 } } }), 'ginger');
+    const mid = ginger(30, 2), want = S(32, 128);
+    if (mid.stage !== want.stage || mid.done !== 32 || mid.total !== 128 || mid.unit !== 'questions' || mid.toNext !== want.toNext || mid.hearts !== Math.floor(want.stage / 2)) bad(`7: Ginger grows with jumbles and placements solved: ${json(mid)}`);
+    const one = ginger(1);
+    if (one.stage !== 1 || one.hearts !== 0 || one.story !== null || one.request !== REQUESTS.ginger[0]) bad(`7: the first jumble solved is stage 1, before any chapter: ${json({ stage: one.stage, story: one.story })}`);
+    let d2 = 0; while (S(d2, 128).stage < 2) d2 += 1;
+    const two = ginger(d2);
+    if (two.stage !== 2 || two.hearts !== 1 || two.story !== STORIES.ginger[0] || two.request !== REQUESTS.ginger[1]) bad('7: stage 2 tells the first story and asks the second request');
+    const full = ginger(76, 52);
+    if (full.stage !== 10 || full.hearts !== 5 || full.toNext !== 0 || full.story !== STORIES.ginger[4] || full.request !== BEST_FRIEND_ASK.ginger) bad('7: every question done is stage 10: the last story, and best friends');
+    const st = { reading: { qSolved: 4, qTotal: 500 }, banks: { cr: { solved: 0, total: 30 }, pc: { solved: 1, total: 40 }, sp: { solved: 0, total: 52 }, wb: { solved: 0, total: 100 } }, meadow: { known: 12, total: 3000 }, table: { solved: 0, total: 70 }, bench: { solved: 3, total: 60 } };
+    const all = derive(recs(), D(2), st);
+    const wants = { chai: S(4, 530).stage, matcha: S(12, 3100).stage, mochi: S(1, 110).stage, ginger: 0, mallow: S(3, 60).stage, toffee: 0 };
+    for (const [id, s] of Object.entries(wants)) if (pet(all, id).stage !== s) bad(`7: ${id} reads its own subject: stage ${pet(all, id).stage}, want ${s}`);
   }
 
   /* 8. Today's three friends, and the day's gift */
@@ -269,16 +285,18 @@ export async function checkPetEconomy() {
     const c1 = [run('chai', D(5, 9))], c2 = [...c1, run('matcha', D(5, 10), { stars: 2 })], c3 = [...c2, run('mochi', D(5, 11))], c4 = [...c3, run('mochi', D(5, 12), { stars: 1 })];
     const [s0, s1, s2, s3, s4] = [[], c1, c2, c3, c4].map((c) => derive(recs(c), t));
     const first = E.changeBetween(s0, s1);
-    if (first.pet !== 'chai' || first.earned !== 3 || !first.heart || first.hearts !== 1 || first.levelUp || first.decor !== null || first.gift || first.doneCount !== 1) bad(`12: a first passage: ${json(first)}`);
+    if (first.pet !== 'chai' || first.earned !== 3 || first.grew || first.levelUp || first.decor !== null || first.gift || first.doneCount !== 1) bad(`12: a first passage: ${json(first)}`);
+    const grew = E.changeBetween(derive(recs(), t, { reading: { qSolved: 0, qTotal: 100 } }), derive(recs(c1), t, { reading: { qSolved: 3, qTotal: 100 } }));
+    if (!grew.grew || grew.stage !== E.stageOf(3, 100).stage || grew.chapter !== Math.floor(grew.stage / 2) > 0) bad(`12: questions answered right grow the friend: ${json(grew)}`);
     const second = E.changeBetween(s1, s2);
     if (second.pet !== 'matcha' || second.earned !== 2 || !second.levelUp || second.level.level !== 2 || second.decor?.id !== 'lanterns' || second.gift || second.doneCount !== 2) bad(`12: the round that reaches level 2 puts up the lanterns: ${json(second)}`);
     const third = E.changeBetween(s2, s3);
     if (third.pet !== 'mochi' || third.earned !== 3 || !third.gift || third.doneCount !== 3 || !third.levelUp || third.decor?.id !== 'bunting') bad(`12: the run that helps all three earns its own 3 stars; the gift is said apart: ${json(third)}`);
     if (s3.stars - s2.stars !== 3 + E.DAILY_GIFT) bad('12: the gift is still in the total');
     const again = E.changeBetween(s3, s4);
-    if (again.pet !== 'mochi' || again.earned !== 1 || again.heart || again.levelUp || again.decor !== null || again.gift) bad(`12: a quiet run changes only its stars: ${json(again)}`);
+    if (again.pet !== 'mochi' || again.earned !== 1 || again.grew || again.levelUp || again.decor !== null || again.gift) bad(`12: a quiet run changes only its stars: ${json(again)}`);
     const none = E.changeBetween(undefined, undefined);
-    if (none.pet !== null || none.earned !== 0 || none.heart || none.levelUp || none.gift || none.level.level !== 1) bad(`12: nothing before and after is no change: ${json(none)}`);
+    if (none.pet !== null || none.earned !== 0 || none.grew || none.levelUp || none.gift || none.level.level !== 1) bad(`12: nothing before and after is no change: ${json(none)}`);
   }
 
   /* 13. Hostile rows are skipped without throwing */
@@ -364,6 +382,14 @@ export async function checkNextFor() {
     }
     const chai = N.nextFor('chai', world, { first });
     if (first && !chai.href.startsWith('#/rc/session/')) bad(`next: a new learner's first activity with Chai is a passage, got ${chai.href}`);
+    // A set from the village is three things (owner: "1 RC or 3 odd man out"): three distinct items of the friend's own kind.
+    if (first) {
+      for (const [id, mod] of [['ginger', 'pj'], ['mochi', 'ps'], ['mallow', 'ooo']]) {
+        const href = N.nextFor(id, world, { first })?.href ?? '';
+        const m = href.match(new RegExp(`^#/${mod}/session/(${mod}-\\d{4}(?:,${mod}-\\d{4}){2})$`));
+        if (!m || new Set(m[1].split(',')).size !== 3) bad(`next: a new learner's set with ${id} should be three ${mod} items, got ${href}`);
+      }
+    }
     if (N.nextFor('toffee', world).href !== '#/world/place/wilds') bad('next: Toffee runs the Gauntlet');
     if (N.cornersOf('matcha', world).length !== 5) bad('next: Matcha has five corners');
   }
@@ -380,7 +406,7 @@ if (process.argv[1]?.endsWith('check-pet-economy.mjs')) {
   const a = await checkPetEconomy();
   const b = await checkNextFor();
   const problems = [...a.problems, ...b.problems];
-  if (!problems.length) { console.log('✓ pets economy: a new learner, stars + levels, visits from every module, Toffee\'s daily visit, mood decay, harmony, hearts, today\'s three + the gift, flame + kindling, decor, welcome, changeBetween, hostile rows; nextFor + noticeFor for every pet against the real registry'); process.exit(0); }
+  if (!problems.length) { console.log('✓ pets economy: a new learner, stars + levels, visits from every module, Toffee\'s daily visit, mood decay, harmony, ten growth stages, today\'s three + the gift, flame + kindling, decor, welcome, changeBetween, hostile rows; nextFor + noticeFor for every pet against the real registry'); process.exit(0); }
   console.log(`✗ ${problems.length} problem(s):`);
   for (const p of problems) console.log('  ' + p);
   process.exit(1);

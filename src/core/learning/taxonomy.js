@@ -262,10 +262,12 @@ export const PATTERN_FAMILY = Object.freeze(
 
 /** The item banks the verbal-bank module plays, → module key, the place
  *  that hosts them, and the craft they pay. wb bundles are hosted by the
- *  place their KIND belongs to (see WB_KIND_REGION). */
+ *  place their KIND belongs to (see WB_KIND_REGION). Placement and
+ *  completion come three at a time (3.2): a set is something finished in
+ *  one sitting, and the friend's thanks lands after it. */
 export const BANKS = Object.freeze({
-  sp: { module: 'sp', name: 'Sentence placement', region: 'placement', craft: 'thread', setSize: 6, skill: 'placement' },
-  pc: { module: 'pc', name: 'Paragraph completion', region: 'completion', craft: 'thread', setSize: 6, skill: 'completion' },
+  sp: { module: 'sp', name: 'Sentence placement', region: 'placement', craft: 'thread', setSize: 3, skill: 'placement' },
+  pc: { module: 'pc', name: 'Paragraph completion', region: 'completion', craft: 'thread', setSize: 3, skill: 'completion' },
   cr: { module: 'cr', name: 'Arguments', region: 'reading-room', craft: 'ink', setSize: 5, skill: 'argument' },
   wb: { module: 'wb', name: 'Words, asked the CAT way', region: 'meadow', craft: 'amber', setSize: 10, skill: 'vocabulary_in_context' },
 });

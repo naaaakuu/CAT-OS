@@ -8,8 +8,9 @@
  * else knows this module exists.
  *
  * Routes owned by this module:
- *   /wd              — the Language Tree (first visit: the introduction)
- *   /wd/about        — the introduction, revisitable any time
+ *   /wd              — the Language Tree
+ *   /wd/about        — the full guide, linked from the ⓘ beside the
+ *                      Tree's title
  *   /wd/session/:set — meet a branch (set = root|prefix|suffix|foreign|cat_vocab)
  *                      or one family (set = wd-NNNN)
  *   /wd/learn/:id    — a family's Learning Page (the full walkthrough)
@@ -22,28 +23,19 @@
  */
 
 export function registerWD(router, context) {
-  const intro = (outlet, opts) => import('./screens/intro.js').then((m) => m.renderWDIntro(outlet, context, opts));
-  const tree = (outlet) => import('./screens/tree.js').then((m) => m.renderWDTree(outlet, context));
   router
     .register({
       path: '/wd',
       title: 'Word DNA',
-      render: async (outlet) => {
-        // The first open shows the introduction, not words — the
-        // journey begins with understanding, and only then with meeting words.
-        let seen = true;
-        try {
-          const store = await import('./logic/store.js');
-          seen = await store.hasSeenWDIntro(context.storage);
-        } catch { /* storage down: browse */ }
-        if (!seen) await intro(outlet, { firstTime: true, onBegin: () => tree(outlet) });
-        else await tree(outlet);
-      },
+      // Always the Tree (3.2). A first visit used to open the whole
+      // introduction before anything could be tapped; now it waits behind
+      // the ⓘ beside the title, for whoever asks.
+      render: (outlet) => import('./screens/tree.js').then((m) => m.renderWDTree(outlet, context)),
     })
     .register({
       path: '/wd/about',
       title: 'About Word DNA',
-      render: (outlet) => intro(outlet, { firstTime: false }),
+      render: (outlet) => import('./screens/intro.js').then((m) => m.renderWDIntro(outlet, context, { firstTime: false })),
     })
     .register({
       path: '/wd/session/:set',

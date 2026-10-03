@@ -14,10 +14,10 @@
  *            rose cottage on the map is Ginger's Sentence Placement house)
  */
 
-import { PETS, PET_BY_ID, HOUSES, STORIES, HOME_GIFTS, FRIENDSHIPS, friendshipOf, lineFor } from '../pets/pets.js';
+import { PETS, PET_BY_ID, HOUSES, STORIES, HOME_GIFTS, FRIENDSHIPS, friendshipOf, lineFor, stageTitle, stageGift } from '../pets/pets.js';
 import { DAILY_GIFT } from '../pets/economy.js';
 import { nextFor, cornersOf, noticeFor } from '../pets/next.js';
-import { petSprite, petPortrait, backdropStyle, FRAME } from '../pets/sprite.js';
+import { petFigure, petPortrait, backdropStyle, FRAME } from '../pets/sprite.js';
 import { TREASURE_AT, HOMES } from '../pets/paths.js';
 import { saveValley, valleyName, cleanValleyName, nameSuggestions } from '../world/companion.js';
 import { musicEnabled, setMusicEnabled, unlock, startMusic, startAmbience, voice } from '../world/audio.js';
@@ -42,7 +42,17 @@ export function renderCard(card, kind, arg, api) {
 }
 
 const close = '<button class="cw-x" data-close aria-label="Close">×</button>';
-const hearts = (n) => `<span class="cw-hearts__row" aria-hidden="true">${[0, 1, 2, 3, 4].map((i) => (i < n ? '<i class="on">♥</i>' : '<i>♡</i>')).join('')}</span>`;
+const unitOf = (p, n) => (n === 1 ? p.unit.replace(/s$/, '') : p.unit);
+
+/** How far a friend has grown: their stage name, ten pips, and what the next stage takes and gives. */
+function growth(p, def) {
+  const title = stageTitle(p.id, p.stage);
+  return `<div class="cw-grow">
+      <p class="cw-grow__head"><b>${p.stage ? `Stage ${p.stage}: ${esc(title)}` : 'Not grown yet'}</b><span class="cw-pips" aria-hidden="true">${Array.from({ length: 10 }, (_, i) => `<i class="${i < p.stage ? 'on' : ''}"></i>`).join('')}</span></p>
+      <p class="cw-grow__next">${p.stage >= 10 ? `Every last one done. ${esc(def.name)} is a master!` : `${p.toNext} more ${unitOf(p, p.toNext)} to stage ${p.stage + 1}: <b>${esc(stageGift(p.id, p.stage + 1))}</b>`}</p>
+      <p class="sr-only">${p.done} of ${p.total} ${p.unit} done.</p>
+    </div>`;
+}
 
 /** A friend's line, typed out after a moment of "thinking", with their little voice. */
 function typeOut(card, api, id) {
@@ -92,27 +102,28 @@ function petCard(card, id, api) {
   card.innerHTML = `
     ${close}
     <div class="cw-card__hero cw-card__hero--${id}" style="${backdropStyle(id)}">
-      <span class="cw-card__pet">${petSprite(id, { size: 132, frame: p.word === 'sleepy' || p.word === 'wilting' ? FRAME.idle : FRAME.happy })}</span>
+      <span class="cw-card__pet">${petFigure(id, { size: 132, stage: p.stage, frame: p.word === 'sleepy' || p.word === 'wilting' ? FRAME.idle : FRAME.happy })}</span>
     </div>
     <div class="cw-who">
       <h2 class="cw-card__name">${esc(def.name)}</h2>
       <p class="cw-role">${esc(def.subject)}</p>
+      <p class="cw-tag">${esc(def.tag)}</p>
     </div>
     <div class="cw-status">
       <span class="cw-moodchip cw-moodchip--${p.word}">${MOOD_LABEL[p.word]}</span>
-      <span class="cw-hearts"><span class="sr-only">Friendship: ${p.hearts} of 5 hearts.</span>${hearts(p.hearts)}<small>${p.hearts >= 5 ? 'Best friends' : `${p.toNext} more ${p.toNext === 1 ? 'visit' : 'visits'} to the next heart`}</small></span>
     </div>
+    ${growth(p, def)}
     <div class="cw-talk">
       <p class="cw-say" data-type="${esc(`${greet} ${ask}`)}">${esc(`${greet} ${ask}`)}</p>
       ${notice ? `<p class="cw-notice"><span class="cw-notice__spark" aria-hidden="true">✦</span><span data-type="${esc(notice)}">${esc(notice)}</span></p>` : ''}
     </div>
     ${pick && !done ? `<p class="cw-pickline"><b>!</b> One of today's three friends. Help ${esc(def.name)} for today's gift.</p>` : ''}
     ${next ? `<a class="cw-go" href="${esc(next.href)}" data-go><span><b>Help ${esc(def.name)}</b><small>${esc(ACT[id])}: ${esc(next.label)}${next.sub ? ` · ${esc(next.sub)}` : ''}</small></span><i aria-hidden="true">▶</i></a>` : ''}
-    <p class="cw-reward">${STAR}<span>Each round earns <b>1 to 4 stars</b> for the village.${p.hearts < 5 ? ` Next heart: <b>${esc(HOME_GIFTS[p.hearts])}</b> at ${esc(def.home)}.` : ''}</span></p>
+    <p class="cw-reward">${STAR}<span>Each round earns <b>1 to 4 stars</b> for the village.${p.hearts < 5 ? ` At stage ${(p.hearts + 1) * 2}: <b>${esc(HOME_GIFTS[p.hearts])}</b> at ${esc(def.home)}.` : ''}</span></p>
     ${corners.length ? `<h3 class="cw-h3">Everything with ${esc(def.name)}</h3><ul class="cw-list">${corners.map((c) => `<li><a href="${esc(c.href)}"><span><b>${esc(c.label)}</b><small>${esc(c.sub ?? '')}</small></span><i aria-hidden="true">›</i></a></li>`).join('')}</ul>` : ''}
     <h3 class="cw-h3">${esc(def.name)}'s story</h3>
     <p class="cw-sub">${esc(def.trouble)}</p>
-    <ol class="cw-story">${STORIES[id].map((s, i) => (i < p.hearts ? `<li>${esc(s)}</li>` : `<li class="is-locked"><span aria-hidden="true">♡</span> Heart ${i + 1}: help ${esc(def.name)} to hear this part</li>`)).join('')}</ol>
+    <ol class="cw-story">${STORIES[id].map((s, i) => (i < p.hearts ? `<li>${esc(s)}</li>` : `<li class="is-locked"><span aria-hidden="true">♡</span> Stage ${(i + 1) * 2}: grow ${esc(def.name)} to hear this part</li>`)).join('')}</ol>
     ${friendship ? `<div class="cw-bff">${petPortrait(bff.id, 40)}<p><b>Best friend: ${esc(bff.name)}</b><small>${esc(friendship.line)}</small></p></div>` : ''}`;
   card.querySelector('[data-go]')?.addEventListener('click', () => api.play('open'));
   typeOut(card, api, id);
@@ -129,9 +140,11 @@ function fireCard(card, api) {
   const dayName = (key) => new Date(`${key}T12:00:00`).toLocaleDateString(undefined, { weekday: 'narrow' });
   card.innerHTML = `
     ${close}
-    <div class="cw-card__hero cw-card__hero--toffee" style="${backdropStyle('toffee')}"><span class="cw-card__pet">${petSprite('toffee', { size: 118, frame: FRAME.happy })}</span></div>
+    <div class="cw-card__hero cw-card__hero--toffee" style="${backdropStyle('toffee')}"><span class="cw-card__pet">${petFigure('toffee', { size: 118, stage: toffee.stage, frame: FRAME.happy })}</span></div>
     <h2 class="cw-card__name">${f.days ? `${f.days}-day fire` : 'Light your first fire'}</h2>
     <p class="cw-role">Toffee keeps the village fire</p>
+    <p class="cw-tag">${esc(PET_BY_ID.get('toffee').tag)} Toffee grows with every day you come.</p>
+    ${growth(toffee, PET_BY_ID.get('toffee'))}
     <ol class="cw-week" aria-label="This week">${f.week.map((d, i) => `<li class="${d.done ? 'is-done' : ''} ${i === 6 ? 'is-today' : ''}"><span aria-hidden="true">${d.done ? FLAME : ''}</span><small>${i === 6 ? 'Today' : dayName(d.key)}</small><b class="sr-only">${d.done ? 'practised' : 'missed'}</b></li>`).join('')}</ol>
     <div class="cw-talk">
       <p class="cw-say" data-type="${esc(toffee.request)}">${esc(toffee.request)}</p>
@@ -143,7 +156,7 @@ function fireCard(card, api) {
     </ul>
     <a class="cw-go cw-go--gold" href="#/world/place/wilds" data-go><span><b>The Gauntlet</b><small>The weekly challenge: 30 quick questions in 3 minutes. Beat your best.</small></span><i aria-hidden="true">▶</i></a>
     <h3 class="cw-h3">Toffee's story</h3>
-    <ol class="cw-story">${STORIES.toffee.map((s, i) => (i < toffee.hearts ? `<li>${esc(s)}</li>` : `<li class="is-locked"><span aria-hidden="true">♡</span> Heart ${i + 1}: keep the fire going to hear this part</li>`)).join('')}</ol>
+    <ol class="cw-story">${STORIES.toffee.map((s, i) => (i < toffee.hearts ? `<li>${esc(s)}</li>` : `<li class="is-locked"><span aria-hidden="true">♡</span> Stage ${(i + 1) * 2}: keep the fire going to hear this part</li>`)).join('')}</ol>
     <p class="cw-sub"><a href="#/world/place/hearth">Your records</a> · every day, star and friend so far.</p>`;
   typeOut(card, api, 'toffee');
 }
@@ -184,6 +197,8 @@ function friendsCard(card, api) {
     <h2 class="cw-card__name">Every subject</h2>
     <p class="cw-sub">Each house in the village holds one part of the VARC section, and its sign on the map says which. Start any of them: every round helps that friend and grows the village.</p>
     <ul class="cw-roster">${HOUSES.map((h) => `<li><a href="${esc(start(h))}" data-go>${petPortrait(h.pet, 44)}<span class="cw-roster__who"><b>${esc(h.subject)}</b><small>${esc(h.ask)} · with ${esc(PET_BY_ID.get(h.pet).name)}</small></span><i class="cw-roster__go" aria-hidden="true">▶</i></a></li>`).join('')}</ul>
+    <h3 class="cw-h3">Who is who</h3>
+    <ul class="cw-pairs">${PETS.map((def) => { const p = P.pets.find((x) => x.id === def.id); return `<li><span class="cw-pairs__faces">${petPortrait(def.id, 34)}</span><span><b>${esc(def.name)}</b> · ${esc(def.tag)}<small class="cw-pairs__stage">${p?.stage ? `Stage ${p.stage}: ${esc(stageTitle(def.id, p.stage))}` : 'Not grown yet'}</small></span></li>`; }).join('')}</ul>
     <h3 class="cw-h3">Best friends</h3>
     <ul class="cw-pairs">${FRIENDSHIPS.map((f) => `<li><span class="cw-pairs__faces">${petPortrait(f.a, 30)}${petPortrait(f.b, 30)}</span><span>${esc(f.line)}</span></li>`).join('')}</ul>
     <p class="cw-sub">And you? You are the new friend everyone has been waiting for.</p>`;

@@ -23,6 +23,7 @@ import { trapName } from '../../../ui/components/cat-explanation.js';
 import { escapeHTML, formatDuration } from '../../../core/utils/format.js';
 import { hostChip } from '../../../pets/sprite.js';
 import { petForModule } from '../../../pets/pets.js';
+import { infoButton } from '../../../ui/info.js';
 import '../../../ui/components/cat-question-card.js';
 import '../../../ui/components/cat-explanation.js';
 import '../../../ui/components/cat-progress-bar.js';
@@ -33,7 +34,10 @@ const BAND = { core: 0, stretch: 1, elite: 2 };
 const REGION_NAME = {
   loom: 'The Loom', table: 'The Summary Table', bench: 'The Stranger’s Bench', 'reading-room': 'The Reading House',
   meadow: 'The Meadow', pond: 'The Mirror Pond', terraces: 'The Vine Terraces',
+  placement: 'The Rose Cottage', completion: 'The Clock Tower',
 };
+/** Which explanation the ⓘ beside a bank's name opens (ui/info.js). */
+const INFO_KEY = { sp: 'sp', pc: 'pc', wb: 'vocab', cr: 'cr' };
 
 /** Which items the learner has already solved in a bank. */
 function solvedSet(sessions, type) {
@@ -237,14 +241,13 @@ export async function renderBankSession(outlet, { storage }, params) {
         </div>
         <cat-progress-bar max="${session.total}" value="${session.index}"></cat-progress-bar>
         <div class="card">
-          <p class="screen__eyebrow">${escapeHTML(bank.name)}</p>
+          <p class="screen__eyebrow">${escapeHTML(bank.name)}${infoButton(INFO_KEY[type], { more: [it.mentor?.challenge] })}</p>
           <div class="briefing-chips">
             <span class="badge">${escapeHTML(it.label)}</span>
             ${it.tier ? `<span class="badge">${escapeHTML(String(it.tier).replace('-', ' '))}</span>` : it.band ? `<span class="badge">${escapeHTML(it.band)}</span>` : ''}
             ${it.genre ? `<span class="badge">${escapeHTML(it.genre)}</span>` : ''}
             <span class="badge">~${Math.max(20, it.time_sec)} s</span>
           </div>
-          ${it.mentor?.challenge ? `<p class="ps-challenge">${escapeHTML(it.mentor.challenge)}</p>` : ''}
           <div class="bank-body" id="body">${bodyHTML(it)}</div>
           <div id="choose-slot"><cat-question-card></cat-question-card></div>
           <div id="teaching-slot"></div>

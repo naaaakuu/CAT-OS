@@ -6,7 +6,7 @@
  *   the verdict          honest, in the village's voice
  *   the facts            accuracy, pace, time — the CAT numbers
  *   the friend           the host friend hopping, "You helped Chai!" with
- *                        the stars counted up, the level, a new heart
+ *                        the stars counted up, the level, a new stage
  *   the ways onward
  *
  * It stands in the host pet's home: the painted crop of the village
@@ -114,7 +114,7 @@ export function renderResult(outlet, o) {
   // The stars count up, each with a bright tick: the moment the learner
   // sees that thinking helped somebody.
   setTimeout(() => countGifts(outlet.querySelector('.result__pet'), reduce), base + 150);
-  if (o.change?.heart || o.change?.levelUp) setTimeout(() => play(o.change.levelUp ? 'levelup' : 'heart'), base + 2200);
+  if (o.change?.grew || o.change?.levelUp) setTimeout(() => play(o.change.levelUp ? 'levelup' : 'grow'), base + 2200);
 }
 
 function verdictFor(r) {

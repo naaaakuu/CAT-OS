@@ -20,14 +20,17 @@
  */
 
 import { NODES, HOMES, SPOTS, route, nearestNode, FIRE, CHIMNEYS, TEAPOT, POND, CLOCK, TREASURE_AT } from '../pets/paths.js';
-import { FRAME } from '../pets/sprite.js';
+import { FRAME, growOf } from '../pets/sprite.js';
 import { PETS, PET_BY_ID, gossipLine, lineFor } from '../pets/pets.js';
 import { rng } from '../world/engine/palette.js';
 import { voice } from '../world/audio.js';
 import { createWater } from './water.js';
 
-/** Drawn height of each pet, in painting pixels. */
+/** Drawn height of each pet at full size, in painting pixels. */
 export const PET_SIZE = Object.freeze({ toffee: 70, chai: 84, matcha: 78, mochi: 78, ginger: 84, mallow: 80 });
+/** A friend's drawn height at their growth stage: they get bigger as you work through their subject. */
+export const petSize = (id, stage) => Math.round(PET_SIZE[id] * growOf(stage));
+const CONFETTI = ['#F4C443', '#E9963A', '#8FB56A', '#D97A8A', '#93AED1', '#F6EEDB'];
 
 const SPEED = { glowing: 46, happy: 42, missing: 34, sleepy: 26, wilting: 24, new: 38 };
 const AWAKE = new Set(['glowing', 'happy', 'missing', 'new']);
@@ -95,10 +98,11 @@ export function createLife(root, { pets: petsState, atmo, reduced }) {
     const el = root.querySelector(`.pet[data-pet="${p.id}"]`);
     const home = HOMES[p.id].node;
     const n = NODES[home];
+    const stage = pets.pets.find((x) => x.id === p.id)?.stage ?? 0;
     return {
       id: p.id, el, body: el.querySelector('.pet-body'), sprite: el.querySelector('.pet-sprite'),
       bubble: el.querySelector('.pet-bubble'), markEl: el.querySelector('.pet-mark'), shadow: el.querySelector('.pet-shadow'),
-      gait: GAIT[p.id], size: PET_SIZE[p.id],
+      gait: GAIT[p.id], size: petSize(p.id, stage), stage, rush: false, partyUntil: 0,
       x: n.x + (i % 2 ? 6 : -6), y: n.y, node: home, home, path: [], state: 'idle', until: 400 + i * 700,
       next: null, facing: i % 2 ? -1 : 1, hop: 0, frame: 0, blinkAt: rand(800, 4000), blinkUntil: 0,
       talkUntil: 0, sayUntil: 0, happyUntil: 0, reactUntil: 0, partner: null, target: null,
@@ -233,20 +237,44 @@ export function createLife(root, { pets: petsState, atmo, reduced }) {
     }
   };
 
+  /* ---- A finished set: everyone runs to the plaza and cheers ---- */
+  let party = null;
+  function startCheer(a) {
+    const host = a.id === party?.center;
+    a.state = 'cheer'; a.until = a.partyUntil; a.emitAt = now + 250;
+    a.facing = host ? 1 : (NODES.pc.x >= a.x ? 1 : -1);
+    a.reactUntil = now + 700; a.happyUntil = now + 1200;
+    if (!reduced) heart(a);
+    say(a, `<span>${host && party.line ? party.line : lineFor(a.id, 'cheer', `${now | 0}`)}</span>`, host ? 4600 : 1900, { soft: !host });
+  }
+
   /* ---- Each frame, for each friend ---- */
   const stepPet = (a, dt) => {
     if (a.state === 'walk') {
-      let d = SPEED[a.word] * dt;
+      // Running to a party: three times the pace, and the feet keep up.
+      const pace = SPEED[a.word] * (a.rush ? 3.2 : 1);
+      let d = pace * dt;
       while (d > 0 && a.path.length) {
         const t = a.path[0], dx = t.x - a.x, dy = t.y - a.y, dist = Math.hypot(dx, dy);
         if (Math.abs(dx) > 0.5) a.facing = dx > 0 ? 1 : -1;
         if (dist <= d) { a.x = t.x; a.y = t.y; a.path.shift(); d -= dist; } else { a.x += (dx / dist) * d; a.y += (dy / dist) * d; d = 0; }
       }
       const before = Math.floor(a.hop / Math.PI);
-      a.hop += dt * a.gait.cadence * Math.PI * (SPEED[a.word] / 40);
+      a.hop += dt * a.gait.cadence * Math.PI * (pace / 40) * (a.rush ? 0.6 : 1);
       // A little puff of dust at each footfall (not for the cloud).
       if (Math.floor(a.hop / Math.PI) !== before && a.gait.lift && Math.random() < 0.5) emit('dust', a.x + rand(-6, 6), a.y - 1, 0.6);
+      // Stage 7 and up: a trail of sparkles wherever they go.
+      if (a.stage >= 7 && Math.random() < dt * 6) emit('sparkle', a.x + rand(-10, 10), a.y - a.size * rand(0.15, 0.6));
       if (!a.path.length) arrive(a);
+    } else if (a.state === 'cheer') {
+      // The party in the plaza: hop, beam, hearts and sparkles until it is over.
+      if (now > a.until) { decide(a); return; }
+      if (now > a.emitAt) {
+        a.emitAt = now + rand(650, 1150);
+        a.reactUntil = now + 700; a.happyUntil = now + 950;
+        if (Math.random() < 0.55) heart(a);
+        emit('sparkle', a.x + rand(-14, 14), a.y - a.size * rand(0.5, 1));
+      }
     } else if (a.state === 'chore') {
       if (now > a.chore.until) { decide(a); return; }
       if (now > a.emitAt) {
@@ -265,8 +293,9 @@ export function createLife(root, { pets: petsState, atmo, reduced }) {
     a.node = a.target ?? nearestNode({ x: a.x, y: a.y });
     if (a.target) reserved.delete(a.target);
     reserved.add(a.node);
-    a.target = null; a.hop = 0;
+    a.target = null; a.hop = 0; a.rush = false;
     const next = a.next ?? 'idle';
+    if (next === 'cheer') { startCheer(a); return; }
     if (next === 'chore') { if (!startChore(a)) { a.state = 'idle'; a.until = now + 3000; } return; }
     if (next === 'visit') {
       const b = byId.get(PET_BY_ID.get(a.id).bff);
@@ -383,6 +412,7 @@ export function createLife(root, { pets: petsState, atmo, reduced }) {
     else if (kind === 'letter') parts.push({ kind: 'glyph', ch: LETTERS[Math.floor(Math.random() * 26)], color: '#7a5a3a', x, y, vx: rand(-5, 5), vy: rand(-20, -12), life: rand(1.6, 2.2), age: 0, s: rand(9, 12), w: rand(0, 6), serif: true });
     else if (kind === 'steam') parts.push({ kind: 'steam', x, y, vx: rand(-2, 3), vy: rand(-12, -7), life: rand(1.4, 2), age: 0, r: rand(2, 3), w: rand(0, 6) });
     else if (kind === 'sparkle') parts.push({ kind: 'sparkle', x: x + rand(-14, 14), y: y + rand(-10, 10), life: rand(0.6, 1.1), age: 0, r: rand(2.5, 4.5) });
+    else if (kind === 'confetti') parts.push({ kind: 'confetti', x, y, vx: rand(-70, 70), vy: rand(-190, -90), life: rand(1.8, 2.6), age: 0, rot: rand(0, 6), vr: rand(-9, 9), c: pickOf(CONFETTI), w: rand(3, 5), h: rand(5, 8) });
   }
 
   const air = (dt) => {
@@ -447,6 +477,12 @@ export function createLife(root, { pets: petsState, atmo, reduced }) {
           g.globalAlpha = 1;
           break;
         }
+        case 'confetti':
+          p.vy += 230 * dt; p.vx *= 1 - dt * 0.9; p.x += (p.vx + Math.sin(now / 160 + p.rot) * 18) * dt; p.y += p.vy * dt; p.rot += p.vr * dt;
+          g.save(); g.translate(p.x, p.y); g.rotate(p.rot); g.globalAlpha = Math.min(1, (1 - k) * 2.5);
+          g.fillStyle = p.c; g.fillRect(-p.w / 2, -p.h / 2, p.w, p.h * Math.abs(Math.cos(p.rot * 1.7)) + 1);
+          g.restore(); g.globalAlpha = 1;
+          break;
         case 'drop':
           p.vy += 260 * dt; p.x += p.vx * dt; p.y += p.vy * dt;
           g.strokeStyle = `rgba(150,200,240,${(0.95 * (1 - k * 0.6)).toFixed(2)})`; g.lineWidth = 2; g.lineCap = 'round';
@@ -587,6 +623,48 @@ export function createLife(root, { pets: petsState, atmo, reduced }) {
         if (destroyed) { clearInterval(wait); return; }
         if (a.state !== 'walk') { clearInterval(wait); a.reactUntil = now + 700; a.happyUntil = now + 2400; heart(a); say(a, `<span>${line}</span>`, 5200); }
       }, 200);
+    },
+    /**
+     * A finished set (owner: "all pets come together and celebrate in the
+     * middle"): every friend runs to the plaza, makes a ring round `center`,
+     * and they cheer; `center` says `line`. Confetti, then back to their day.
+     */
+    party(center, { line = '', ms = 9000 } = {}) {
+      const c = NODES.pc;
+      party = { center, line };
+      const others = actors.filter((a) => a.id !== center);
+      const spots = [[center, 0, 6], ...others.map((a, i) => { const t = -Math.PI / 2 + ((i + 0.5) / others.length) * Math.PI * 2; return [a.id, Math.cos(t) * 150, Math.sin(t) * 70]; })];
+      for (const [id, dx, dy] of spots) {
+        const a = byId.get(id);
+        if (!a) continue;
+        if (a.partner) { a.partner.partner = null; a.partner = null; }
+        a.partyUntil = now + ms;
+        // They come running already beaming; the friend you helped beams longest.
+        a.happyUntil = now + (id === center ? 5000 : 3000);
+        if (reduced) { say(a, `<span>${id === center && line ? line : lineFor(id, 'cheer', 'r')}</span>`, id === center ? 5200 : 2600, { speak: id === center }); continue; }
+        if (walkTo(a, 'pc', 'cheer', { x: dx, y: dy })) a.rush = true;
+        else { endChore(a); a.x = c.x + dx; a.y = c.y + dy; a.path = []; startCheer(a); }
+      }
+      if (!reduced) for (const at of [1500, 2700, 4200]) setTimeout(() => { if (!destroyed) for (let i = 0; i < 34; i += 1) emit('confetti', c.x + rand(-110, 110), c.y - rand(30, 90)); }, at);
+    },
+    /** Keep a friend standing where they are (the first-visit introductions), until `release`. */
+    hold(id, ms = 3e5) {
+      const a = byId.get(id);
+      if (!a) return;
+      if (a.target) reserved.delete(a.target);
+      if (a.partner) { a.partner.partner = null; a.partner = null; }
+      endChore(a);
+      a.target = null; a.path = []; a.rush = false; a.state = 'idle'; a.until = now + ms;
+    },
+    release() { for (const a of actors) if (a.state === 'idle') a.until = now; },
+    /** One of the friends you can see says something that is very them. */
+    muse(ids) {
+      if (reduced) return '';
+      const a = pickOf(actors.filter((x) => ids.includes(x.id) && !x.sayUntil && !x.partner && x.state !== 'sleep' && x.state !== 'doze' && x.state !== 'cheer'));
+      if (!a) return '';
+      const line = lineFor(a.id, 'muse', `${now | 0}`);
+      say(a, `<span>${line}</span>`, 4400, { soft: true });
+      return line;
     },
     /** The friends who have a "!" over their heads: today's three, until they are helped. */
     setMarks(ids) { const set = new Set(ids); for (const a of actors) a.marked = set.has(a.id); },

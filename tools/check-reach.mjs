@@ -164,7 +164,7 @@ export async function checkReach({ theme = 'light', only = null, width = 390, he
   try {
     await b.open(server.url, 4000);
     await b.evaluate(SEED);
-    await b.evaluate(`localStorage.setItem('catos:hour','morning')`);
+    await b.evaluate(`localStorage.setItem('catos:hour','morning'); localStorage.setItem('catos:met-gang','1')`);
     await b.evaluate(`(async () => { const s = await import('/src/core/storage/indexeddb-adapter.js'); const st = new s.IndexedDBAdapter(); await st.init(); await st.put('settings', { id: 'theme', value: ${JSON.stringify(theme)} }); return 1; })()`);
 
     for (const route of routes) {

@@ -30,26 +30,51 @@ function bankActivity(type, state) {
 }
 
 /**
- * A verbal pet's next set: a whole tier of its module, or — once the module
- * has been tried — its bank when nothing in the bank is solved yet, and
- * every third day after that (meeting a new kind of question beats a fourth
- * set of the same kind; a brand-new learner meets the core type first).
+ * The set a verbal friend hands over: the curator's pick, then the two it
+ * would pick next. Three, not a whole tier of nine to thirteen, because a set
+ * is something you finish in one sitting and the friend's thanks lands at
+ * the end of it (the owner, 3.3: "1 RC or 3 odd man out"). Asking nextVerbal
+ * again with the picked items set aside keeps every rule it already has:
+ * unsolved before solved, fresh before missed, a miss only once it has
+ * rested, the same tier before the next one up the ladder.
+ * The place screen calls this too, so its button and the friend's card
+ * always name the same three.
+ * @returns {{ recs: Array<{ item, kind, why }>, href: string, minutes: number }|null}
+ */
+export function verbalTrio(items, sessions, mod, seed, now) {
+  const recs = [];
+  let pool = items;
+  while (recs.length < 3) {
+    const rec = nextVerbal(pool, sessions, mod, seed, now);
+    // Past the first, only work still to do: a set of new work is never
+    // padded with something already solved.
+    if (!rec || (recs.length && rec.kind === 'again' && recs[0].kind !== 'again')) break;
+    recs.push(rec);
+    pool = pool.filter((x) => x.id !== rec.item.id);
+  }
+  if (!recs.length) return null;
+  // The boot index carries minutes; a loaded item carries seconds.
+  const secs = recs.reduce((n, { item: x }) => n + (x.estimated_time_sec ?? (x.estimated_time_min ? x.estimated_time_min * 60 : 80)), 0);
+  return { recs, href: `#/${mod}/session/${recs.map((r) => r.item.id).join(',')}`, minutes: Math.max(1, Math.round(secs / 60)) };
+}
+
+/**
+ * A verbal pet's next set: three of its module (verbalTrio), or — once the
+ * module has been tried — its bank when nothing in the bank is solved yet,
+ * and every third day after that (meeting a new kind of question beats a
+ * fourth set of the same kind; a brand-new learner meets the core type first).
  */
 function verbalNext(world, mod, slug, unit, bankType, placeLabel) {
   const { content, records, state } = world;
   if (bankType && (content?.[bankType] ?? []).length && (state?.[slug]?.sessions ?? 0) > 0
     && (!(state?.banks?.[bankType]?.solved > 0) || dayN(state) % 3 === 0)) return bankActivity(bankType, state);
-  const items = content?.[mod] ?? [];
-  const rec = nextVerbal(items, sessionsOf(records), mod, `${slug}:${state?.today}`, state?.now);
-  if (!rec) return { href: `#/world/place/${slug}`, label: placeLabel, sub: `Every ${unit.replace(/s$/, '')} in one place`, minutes: 5, kind: 'new' };
-  const it = rec.item;
-  /* `#/<mod>/session/<tier>` plays the WHOLE tier as one timed set, so the
-     minutes cost the set, not one item in it. */
-  const inSet = it.tier ? items.filter((x) => x.tier === it.tier) : [it];
-  const mins = Math.max(1, Math.round(inSet.reduce((s, x) => s + (x.estimated_time_sec ?? 80), 0) / 60));
+  const trio = verbalTrio(content?.[mod] ?? [], sessionsOf(records), mod, `${slug}:${state?.today}`, state?.now);
+  if (!trio) return { href: `#/world/place/${slug}`, label: placeLabel, sub: `Every ${unit.replace(/s$/, '')} in one place`, minutes: 5, kind: 'new' };
+  const [{ item: it, kind, why }] = trio.recs;
+  const n = trio.recs.length;
   const tierWord = String(it.tier ?? '').replace('-', ' ');
-  const sub = inSet.length > 1 ? `${tierWord} · ${inSet.length} ${unit} · about ${mins} min` : `${tierWord} · about ${mins} min`;
-  return { href: `#/${mod}/session/${it.tier ?? it.id}`, label: it.title, sub, minutes: mins, kind: rec.kind, why: rec.why };
+  const sub = n > 1 ? `${tierWord} · ${n} ${unit} · about ${trio.minutes} min` : `${tierWord} · about ${trio.minutes} min`;
+  return { href: trio.href, label: it.title, sub, minutes: trio.minutes, kind, why };
 }
 
 function readingNext(world, opts) {

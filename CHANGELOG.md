@@ -4,6 +4,98 @@
 > Versions here are app releases; they map onto the capability milestones in
 > `PROJECT_ROADMAP.md` (0.x releases build toward Roadmap V1.0).
 
+## 3.3.0: Friends you get attached to (2026-10-03)
+
+The owner, after 3.2.0: people should get hooked on the characters. Introduce
+them properly and fun at the start, each one being their subject (Chai the
+bookworm keeps Reading); stop explaining Para Jumbles and the rest in the
+middle of play, put the explanation behind a small info button instead; after
+a set (one passage, three odd ones out) all the friends should come together
+in the middle and celebrate; the more you work a subject, the more its friend
+grows, at least ten upgrades, fully upgraded only when every question in the
+subject is done; and make the map livelier.
+
+### Each friend is their subject
+
+- **Personalities**: Toffee never misses a day and wants to race you (the
+  daily fire, the Gauntlet); Chai has read every book in the village twice
+  (Reading); Ginger sorts socks by colour, then by mood, and knows where
+  everything goes (Para Jumbles, Sentence Placement); Mochi says it short and
+  finishes your sentences (Para Summary, Para Completion); Mallow always
+  spots the sheep among the clouds (Odd One Out); Matcha collects words like
+  stickers (Vocabulary). `pets.js` gives each a `tag`, two `meet` lines (who
+  they are, then why that is their subject), five `muse` lines, `cheer` and
+  `grow` lines, all through the copy gate.
+- **Meet the gang** on the first visit: Toffee says hello, then the camera
+  goes to each friend in turn; they hop, say who they are, and a card names
+  the subject they keep with one line on why. One tap each, a Skip, then
+  Chai calls you to the big button. Ten taps in all.
+- **They talk while you watch**: every few seconds one friend you can see
+  says something very them ("Plot twist: the butler was nice all along.").
+
+### Ten stages of growing up
+
+- `economy.js stageOf(done, total)`: stage r needs total × (r/10)^k with
+  k = log10(total), so stage 1 is the first question you get right, stage 10
+  is every question in the subject, and the early stages come quickly
+  whatever the subject's size. Chai counts RC questions answered right at
+  least once (`state.reading.qSolved`, second looks included) plus
+  arguments; Ginger counts jumbles and placements solved; Mochi summaries and
+  completions; Mallow odd-one-out sets; Matcha words in memory, root
+  families, word parts and word-bank items; Toffee grows with the days you
+  come (60 for the last stage).
+- **Every stage shows on the friend** (`sprite.js petGear/petRing`): a
+  twinkle, a bigger body (0.92 to 1.2 of full size), their own hat (Chai a
+  scholar's cap, Matcha a flower crown, Mochi a beret, Ginger workshop
+  goggles, Mallow a stargazer's hat, Toffee a party hat), a ring of light,
+  a floating charm, gold trim, a trail of sparkles, a second charm, a golden
+  aura, and at stage 10 a jewel and a crown of stars. Each stage has a name
+  (Chai: Page Turner ... Keeper of Every Book). The gear rides inside the
+  walking rig, so it turns and hops with them, on the map and on every card.
+- **Hearts are retired**: one progression, not two. Every second stage is a
+  chapter of the friend's story and a gift for their home (the old five
+  hearts' lantern, flowers, bunting, warm windows, golden glow). Cards,
+  Records and Progress show the stage; the result screens say "Ginger grew
+  to stage 4: Mapmaker! New: a glowing ring of light."
+- A friend who grew gets their own card on the way home: their new look,
+  their new name, ten pips, what is new, and how much more to the next.
+
+### A party after every set
+
+- Coming back from any finished run, every friend runs to the plaza (three
+  times their walking pace), makes a ring round the friend you helped, and
+  they cheer, hop and throw hearts while confetti goes up three times; the
+  helped friend says thank you in the middle. A new sound (`party`). The
+  cards for growth, a new level or the day's gift wait for it to wind down.
+- **Sets are three things**: the big button, a friend's card and the place
+  pages start three jumbles, three summaries or three odd-ones-out (a
+  comma-separated id list, recorded as `pj-trio:` / `ps-trio:` /
+  `ooo-trio:`), and placement and completion sets are three. A passage is
+  one passage. Whole tiers are still a tap away on the tier tiles.
+
+### Explanations behind an info button
+
+- **`src/ui/info.js`**: one small round ⓘ (a native popover; where a
+  browser has none, the text simply shows) and `SUBJECT_INFO`, a plain
+  explanation per subject (what CAT asks, how it is marked, the one trick).
+  The circle is 22 px; the tap target is 44.
+- **Sessions open on the question.** Para Jumbles' eyebrow is the one
+  instruction ("Tap the sentences in the author's order"); Odd One Out's
+  "Today's mission" box, the item's strategy paragraph and the hints, Para
+  Summary's mission, a bank item's challenge and the reading briefing's
+  explanation and star rules all moved into the ⓘ beside the eyebrow.
+  Teaching after an answer and the end-of-set mentor are untouched.
+- **First visits open on the subject.** `#/pj`, `#/ps`, `#/ooo` and `#/wd`
+  no longer show a full introduction page first; the journey's title has
+  the ⓘ and a link to the full guide (`/about`).
+- **Place pages** keep their notes inside the ⓘ by the title ("This
+  place"), not between the button and the shelves.
+- The journey pages, now reached directly, stood their quiet text on the
+  painted stage at 4.1 to 4.4:1: one step darker ink in rooms clears AA. The
+  Word DNA tree's "Coming later / Not built yet" row is gone (the look-alike
+  words live in Matcha's pond). A bank set's back link names the rose
+  cottage and the clock tower.
+
 ## 3.2.0: Every house a VARC subject, every passage CAT-sized (2026-10-03)
 
 The owner, playing 3.1.0: the zoomed-out village does not look good; only

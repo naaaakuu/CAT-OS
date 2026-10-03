@@ -11,8 +11,9 @@
  * Reading DNA uses it to notice early locking, gently.
  *
  * Phases per jumble:
- *  1. solving   — briefing chips + challenge, the board, then the
- *                 assembled read-back with Lock / rethink.
+ *  1. solving   — one instruction and the briefing chips (the challenge
+ *                 waits behind the ⓘ), the board, then the assembled
+ *                 read-back with Lock / rethink.
  *  2. revealed  — verdict + which joins you had + the full four-layer
  *                 teaching (logic/teach.js).
  * The set ends with ONE lesson (core/mentor/pj-lesson), never a
@@ -39,15 +40,25 @@ import { PJ_LINES } from '../../../core/mentor/pj-voice.js';
 import { toast } from '../../../ui/components/cat-toast.js';
 import { escapeHTML, formatDuration } from '../../../core/utils/format.js';
 import { hostChip } from '../../../pets/sprite.js';
+import { infoButton } from '../../../ui/info.js';
 import '../../../ui/components/cat-jumble-board.js';
 import '../../../ui/components/cat-progress-bar.js';
 import '../../../ui/components/cat-timer.js';
 import '../../../ui/components/cat-xp-bar.js';
 
-/** Resolve what to practice: one item id, or a tier's items in order. */
+/** Resolve what to practice: one item id, a few ids in order (the
+ *  village's set of three), or a tier's items in order. */
 async function resolveSet(setParam) {
   if (/^pj-[0-9]{4}$/.test(setParam)) {
     return { setId: setParam, items: [await loadPJItem(setParam)] };
+  }
+  if (/^pj-[0-9]{4}(,pj-[0-9]{4})+$/.test(setParam)) {
+    const ids = [...new Set(setParam.split(','))];
+    const loaded = await loadPJItems(ids);
+    const items = ids.map((id) => loaded.get(id)).filter(Boolean);
+    if (items.length === 0) throw new Error('Those jumbles could not be loaded.');
+    // The id is the trio itself, so a draft resumes this three and no other.
+    return { setId: `pj-trio:${ids.join(',')}`, items };
   }
   const registry = await listPJItems();
   const inTier = pjJourneyOrder(registry.filter((i) => i.tier === setParam));
@@ -108,16 +119,14 @@ export async function renderPJSession(outlet, { storage }, params) {
         <cat-progress-bar max="${session.total}" value="${session.index}"></cat-progress-bar>
 
         <div class="card">
-          <p class="screen__eyebrow">Rebuild the paragraph</p>
+          <p class="screen__eyebrow">Tap the sentences in the author's order${infoButton('pj', {
+            more: [item.mentor.challenge, 'Tap a sentence again to take it back.'] })}</p>
           <div class="briefing-chips">
             <span class="badge">${escapeHTML(tier.label)}</span>
             <span class="badge">${escapeHTML(m.genre)}</span>
             <span class="badge"><span class="dot dot--${escapeHTML(m.difficulty)}"></span>${escapeHTML(m.difficulty)}</span>
             <span class="badge">~${Math.max(1, Math.round(m.estimated_time_sec / 60))} min</span>
           </div>
-          <p class="pj-challenge">${escapeHTML(item.mentor.challenge)}</p>
-          <p class="hint" style="margin-bottom: var(--space-4)">Tap the sentences
-          in the order the author wrote them. Tap one again to take it back.</p>
 
           <div data-sfx="off">
             <cat-jumble-board></cat-jumble-board>

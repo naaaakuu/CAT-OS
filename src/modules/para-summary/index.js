@@ -8,8 +8,9 @@
  * else knows this module exists.
  *
  * Routes owned by this module:
- *   /ps              — the summary journey (first visit: the introduction)
- *   /ps/about        — the introduction, revisitable any time
+ *   /ps              — the summary journey
+ *   /ps/about        — the full guide, linked from the ⓘ beside the
+ *                      journey's title
  *   /ps/session/:set — practice a tier (set = tier id) or one item
  *                      (set = ps-NNNN)
  *   /ps/learn/:id    — an item's Learning Page (the full walkthrough)
@@ -26,28 +27,19 @@
  */
 
 export function registerPS(router, context) {
-  const intro = (outlet, opts) => import('./screens/intro.js').then((s) => s.renderPSIntro(outlet, context, opts));
-  const browser = (outlet) => import('./screens/browser.js').then((s) => s.renderPSBrowser(outlet, context));
   router
     .register({
       path: '/ps',
       title: 'Para Summary',
-      render: async (outlet) => {
-        // The first open shows the introduction, not questions — the
-        // journey begins with understanding, and only then with choosing.
-        let seen = true;
-        try {
-          const store = await import('./logic/store.js');
-          seen = await store.hasSeenPSIntro(context.storage);
-        } catch { /* storage down: browse */ }
-        if (!seen) await intro(outlet, { firstTime: true, onBegin: () => browser(outlet) });
-        else await browser(outlet);
-      },
+      // Always the journey (3.2). A first visit used to open the whole
+      // introduction before anything could be tapped; now it waits behind
+      // the ⓘ beside the title, for whoever asks.
+      render: (outlet) => import('./screens/browser.js').then((s) => s.renderPSBrowser(outlet, context)),
     })
     .register({
       path: '/ps/about',
       title: 'About Para Summary',
-      render: (outlet) => intro(outlet, { firstTime: false }),
+      render: (outlet) => import('./screens/intro.js').then((s) => s.renderPSIntro(outlet, context, { firstTime: false })),
     })
     .register({
       path: '/ps/session/:set',

@@ -64,20 +64,11 @@ export async function ownSummaryFor(storage, itemId) {
   return record?.kind === 'summary' ? record : null;
 }
 
-/* ---------------- First-time introduction ----------------
-   One settings flag: the introduction shows once, then lives one tap
-   away ("How this journey works") forever. Settings can reset it. */
-
-export async function hasSeenPSIntro(storage) {
-  const record = await storage.get(STORES.SETTINGS, 'ps:intro-seen');
-  return record?.value === true;
-}
+/* ---------------- The introduction ----------------
+   Since 3.2 nothing gates on this flag: /ps always opens the journey and
+   the introduction is the full guide behind the ⓘ. The guide still marks
+   itself read on the way out, which is all that is left of it. */
 
 export function markPSIntroSeen(storage) {
   return storage.put(STORES.SETTINGS, { id: 'ps:intro-seen', value: true });
-}
-
-/** Settings: show the introduction again on the next visit to /ps. */
-export function resetPSIntro(storage) {
-  return storage.put(STORES.SETTINGS, { id: 'ps:intro-seen', value: false });
 }

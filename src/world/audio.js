@@ -183,6 +183,11 @@ const EVENTS = {
     tone(t + 0.32, { freq: 180, type: 'sine', peak: 0.12 * v, a: 0.003, d: 0.15, glide: 2.2 });
     [784, 988, 1175, 1568, 1319, 1760].forEach((f, i) => tone(t + 0.4 + i * 0.06, { freq: f, type: 'sine', peak: 0.06 * v, a: 0.003, d: 0.3, pan: Math.sin(i) * 0.5 }));
   },
+  /* A finished set: the friends come running, a bouncy run up and three pops of confetti. */
+  party:    (t, v) => {
+    [['do', 0], ['mi', 0], ['sol', 0], ['do', 1], ['mi', 1], ['sol', 1]].forEach(([d, o], i) => pluck(t + i * 0.075, pitch(C5, d, o - 1), 0.1 * v, (i % 2 ? 1 : -1) * 0.3));
+    for (const at of [1.5, 2.7, 4.2]) { noiseBurst(t + at, { peak: 0.06 * v, a: 0.004, d: 0.09, filter: 'bandpass', freq: 1400, q: 1.2 }); bell(t + at + 0.04, pitch(C5, 'sol', 1), 0.06 * v, Math.sin(at) * 0.5); }
+  },
   page:     (t, v) => { noiseBurst(t, { peak: 0.05 * v, a: 0.01, d: 0.16, filter: 'highpass', freq: 1500 }); },
   swoosh:   (t, v) => { noiseBurst(t, { peak: 0.06 * v, a: 0.04, d: 0.26, filter: 'bandpass', freq: 900, q: 0.7 }); },
 };

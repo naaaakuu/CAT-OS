@@ -85,9 +85,9 @@
   width: 64%; height: 10px; translate: -50% 0; border-radius: 50%;
   background: radial-gradient(closest-side, rgba(40, 30, 15, 0.3), transparent);
 }
-.pvwin__pet .pet-sprite { transform-origin: 50% 100%; animation: pvwin-hop 0.86s cubic-bezier(0.3, 0.7, 0.4, 1) 0.4s 3 both; }
+.pvwin__pet .pet-fig { transform-origin: 50% 100%; animation: pvwin-hop 0.86s cubic-bezier(0.3, 0.7, 0.4, 1) 0.4s 3 both; }
 /* On the result the block waits to be revealed; the hop waits with it. */
-.result__pet:not(.is-in) .pvwin__pet .pet-sprite { animation: none; }
+.result__pet:not(.is-in) .pvwin__pet .pet-fig { animation: none; }
 @keyframes pvwin-hop {
   0%, 100% { transform: translateY(0) scale(1, 1); }
   16%      { transform: translateY(0) scale(1.07, 0.9); }
@@ -125,10 +125,10 @@
 .pvwin__lead { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 10px; margin: 0 0 6px; }
 
 @media (prefers-reduced-motion: reduce) {
-  :root:not([data-motion="full"]) .pvwin .pet-sprite { animation: none; }
+  :root:not([data-motion="full"]) .pvwin .pet-fig { animation: none; }
   :root:not([data-motion="full"]) .pvwin__chip { transition: none; }
 }
-html[data-reduced-motion] .pvwin .pet-sprite { animation: none; }
+html[data-reduced-motion] .pvwin .pet-fig { animation: none; }
 html[data-reduced-motion] .pvwin__chip { transition: none; }
 
 /* ---------------- The strip at the end of a room ---------------- */
