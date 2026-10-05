@@ -15,6 +15,7 @@ import { saveDraft, loadDraft, clearDraft } from '../../../core/learning/draft.j
 import { BankSession, pickSet } from '../../../core/engine/bank-session.js';
 import { BANKS, WB_KIND_REGION, TRAP_FAMILY, TRAP_FAMILY_LINE } from '../../../core/learning/taxonomy.js';
 import { isRested } from '../../../core/learning/review.js';
+import { byLearner } from '../../../core/learning/order.js';
 import { STORES } from '../../../core/storage/storage-adapter.js';
 import { cue } from '../../../core/engagement/feedback.js';
 import { worldReward } from '../../../world/rewards.js';
@@ -84,7 +85,7 @@ async function resolveSet(type, setParam, storage) {
       const f = await loadBankFile(type, setParam);
       return { setId: setParam, items: [normalizeBankItem(type, f)], region: bank.region, label: f.meta.tier };
     }
-    const order = (a, b) => (TIERS.indexOf(a.tier) - TIERS.indexOf(b.tier)) || ((a.difficulty_numeric ?? 5) - (b.difficulty_numeric ?? 5)) || a.id.localeCompare(b.id);
+    const order = (a, b) => (TIERS.indexOf(a.tier) - TIERS.indexOf(b.tier)) || byLearner(a, b);
     let tier = setParam;
     if (setParam === 'next') tier = TIERS.find((t) => rows.some((r) => r.tier === t && !solved.has(r.id))) ?? rows[0]?.tier ?? 'foundation';
     const pool = rows.filter((r) => r.tier === tier).sort(order);
@@ -105,7 +106,7 @@ async function resolveSet(type, setParam, storage) {
   // The bundle with something left in it, easiest band first — never a
   // finished bundle while an unfinished one is waiting.
   const left = (r) => (r.item_ids ?? []).filter((id) => !solved.has(id)).length;
-  const pick = [...bundles].sort((a, b) => (left(b) > 0) - (left(a) > 0) || (BAND[a.band] ?? 0) - (BAND[b.band] ?? 0) || a.id.localeCompare(b.id))[0];
+  const pick = [...bundles].sort((a, b) => (left(b) > 0) - (left(a) > 0) || (BAND[a.band] ?? 0) - (BAND[b.band] ?? 0) || byLearner(a, b))[0];
   const file = await loadBankFile(type, pick.id);
   const all = file.items.map((it) => normalizeBankItem(type, file, it.id));
   const items = pickSet(all, sessions, type, bank.setSize, rested);

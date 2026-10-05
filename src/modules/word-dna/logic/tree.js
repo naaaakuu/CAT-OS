@@ -9,6 +9,8 @@
  * CAT OS journey.
  */
 
+import { byLearner } from '../../../core/learning/order.js';
+
 export const BRANCHES = Object.freeze([
   { id: 'root',      label: 'Roots',          noun: 'root',     description: 'One ancient idea, and every word built on it.' },
   { id: 'prefix',    label: 'Prefixes',       noun: 'prefix',   description: 'What gets added to the front, and what it changes.' },
@@ -32,7 +34,7 @@ export function branchInfo(kind) {
 /** Registry items in Tree order: branch order, then title. */
 export function wdTreeOrder(items) {
   return [...items].sort((a, b) =>
-    (branchIndex(a.kind) - branchIndex(b.kind)) || a.title.localeCompare(b.title));
+    (branchIndex(a.kind) - branchIndex(b.kind)) || byLearner(a, b));
 }
 
 /** Ordered items grouped by branch → [{kind, items}] for the Tree screen. */

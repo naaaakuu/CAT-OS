@@ -11,6 +11,7 @@
 
 import { nextPassage, nextVerbal, nextFamily, readingWeakness, missedQuestions, typeName } from '../world/curator.js';
 import { STAGE_INFO } from '../core/learning/journey.js';
+import { byLearner } from '../core/learning/order.js';
 
 const BANK = {
   sp: ['sp', 'Sentence placement', 'A paragraph with one sentence taken out. Find the one seat it can take', 5],
@@ -18,7 +19,6 @@ const BANK = {
   cr: ['cr', 'Arguments', 'Find the assumption, weaken the link, name the flaw', 4],
 };
 
-const FIRST_PASSAGE = 'rc-0116';
 const dayN = (state) => Number(String(state?.today ?? '').replace(/\D/g, '').slice(-4)) || 0;
 const sessionsOf = (records) => (Array.isArray(records?.sessions) ? records.sessions : []);
 
@@ -81,9 +81,9 @@ function readingNext(world, opts) {
   const { content, records, state } = world;
   const rd = state?.reading;
   if (opts.first || !rd?.read) {
-    // The very first passage is chosen by hand: short, everyday, with a twist (a queue that felt like an hour).
-    const p = content?.rc?.find((x) => x.id === FIRST_PASSAGE)
-      ?? [...(content?.rc ?? [])].filter((x) => x.stage === 'foundation').sort((a, b) => (a.word_count ?? 999) - (b.word_count ?? 999))[0] ?? content?.rc?.[0];
+    // The very first passage: a foundation one, first in this learner's own order, so
+    // two new learners do not open the same passage (core/learning/order.js).
+    const p = [...(content?.rc ?? [])].filter((x) => x.stage === 'foundation').sort(byLearner)[0] ?? content?.rc?.[0];
     if (!p) return null;
     return { href: `#/rc/session/${p.id}`, label: p.title, sub: `${p.question_count ?? 3} questions · about ${Math.max(3, Math.round(p.estimated_time_min ?? 4))} min`, minutes: Math.round(p.estimated_time_min ?? 4), kind: 'first' };
   }

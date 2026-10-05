@@ -48,7 +48,7 @@ import { readingWeakness, typeName, weaknessLine } from '../world/curator.js';
    previous stage did not have, so each is unmistakable in silhouette at
    thumbnail size. TIERS below already speaks its vocabulary, stage for
    stage. */
-import { PET_BY_ID, stageTitle } from '../pets/pets.js';
+import { PET_BY_ID, stageTitle, ageOf } from '../pets/pets.js';
 import { petPortrait, petSprite, backdropStyle, FRAME } from '../pets/sprite.js';
 import { loadValley, valleyName } from '../world/companion.js';
 import { collections, closest, tally, GROUPS } from '../world/collections.js';
@@ -170,7 +170,7 @@ export async function renderGrowth(outlet, { storage }) {
         <article class="ability petrow petrow--${a.pet?.word ?? 'new'}" data-key="${a.key}">
           <a class="petrow__face" href="${a.href}" aria-label="${escapeHTML(a.name)}: ${escapeHTML(a.cta)}">${petPortrait(a.key, 52, { mood: a.pet ? (a.pet.isNew ? 0.3 : a.pet.mood) : null })}</a>
           <div class="ability__body">
-            <p class="ability__what"><b>${escapeHTML(PET_BY_ID.get(a.key).name)}</b> · ${escapeHTML(a.name)}<span class="petrow__stage">${a.pet?.stage ? `Stage ${a.pet.stage} · ${escapeHTML(stageTitle(a.key, a.pet.stage))}` : 'Not grown yet'}</span></p>
+            <p class="ability__what"><b>${escapeHTML(PET_BY_ID.get(a.key).name)}</b> · ${escapeHTML(a.name)}<span class="petrow__stage">${escapeHTML(ageOf(a.pet?.stage).name)}${a.pet?.stage ? ` · stage ${a.pet.stage} · ${escapeHTML(stageTitle(a.key, a.pet.stage))}` : ''}</span></p>
             <p class="ability__tier">${escapeHTML(a.tier.name)}</p>
             <p class="ability__line">${a.line}</p>
             <p class="ability__pips" aria-label="Stage ${TIERS.findIndex((t) => t.stage === a.tier.stage) + 1} of ${TIERS.length}">${

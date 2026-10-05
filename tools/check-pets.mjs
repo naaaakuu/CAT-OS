@@ -101,7 +101,7 @@ export async function checkPets() {
     if (g.length < 2) bad(`gossip.${w} has ${g.length} templates, wants 2+`);
     for (const t of g) if (!t.includes('{name}')) bad(`gossip.${w}: "${t}" has no {name}`);
   }
-  if (L.intro?.length !== 4) bad(`LINES.intro has ${L.intro?.length} lines, wants Toffee's 4`);
+  if (L.intro?.length !== 5) bad(`LINES.intro has ${L.intro?.length} lines, wants Toffee's four and Chai's call`);
   for (const id of ORDER) {
     // The first visit says both meet lines in order: who they are, then why that is their subject.
     if ((L.meet?.[id] ?? []).length !== 2) bad(`${id} has ${(L.meet?.[id] ?? []).length} meet lines, wants 2`);
@@ -215,6 +215,25 @@ export async function checkPets() {
     }
     if (!(a.goal >= 1) || a.have !== 0 || a.got) bad(`achievement ${a.id} starts at 0 of ${a.goal}`);
   }
+
+  /* Growing up (3.7): baby, growing up, grown up; the look follows the age. */
+  const ages = [0, 2, 3, 6, 7, 10].map((s) => P.ageOf(s).id).join();
+  if (ages !== 'baby,baby,young,young,grown,grown') bad(`ageOf 0,2,3,6,7,10 gives ${ages}`);
+  if (P.grewLine('chai', 1, 2) !== 'Chai grew!' || P.grewLine('chai', 2, 3) !== 'Chai is growing up!' || P.grewLine('chai', 5, 8) !== 'Chai is all grown up!') bad('grewLine names the age a friend just reached');
+  if (P.toGrow(1, 'questions') !== '1 more right answer' || P.toGrow(4, 'words') !== '4 more words') bad('toGrow speaks in the friend\'s unit');
+  const S = await load('src/pets/sprite.js');
+  if (!S.petSprite('chai', { stage: 0 }).includes('pet-chai-baby.png') || !S.petSprite('chai', { stage: 3 }).includes('pet-chai.png') || !S.petSprite('chai').includes('pet-chai.png')) bad('a baby is drawn from the baby sheet, a friend growing up (or with no stage) from the grown one');
+  if (!S.petRig('mochi', { stage: 1 }).includes('pet-mochi-baby.png')) bad('the walking rig draws a baby from the baby sheet too');
+  const sizes = Array.from({ length: 11 }, (_, s) => S.growOf(s));
+  if (sizes[0] > 0.75 || sizes[7] < 0.98 || sizes.some((v, i) => i && v <= sizes[i - 1])) bad(`growOf must start small and grow every stage: ${sizes.join()}`);
+
+  /* Inside a level, this learner's own order: the ladder holds, the ids do not sort. */
+  const { journeyOrder } = await load('src/core/learning/journey.js');
+  const items = ['developing', 'foundation'].flatMap((stage, k) => Array.from({ length: 8 }, (_, i) => ({ id: `rc-${k}${i}`, stage, difficulty_numeric: i })));
+  const o = journeyOrder(items);
+  if (o.slice(0, 8).some((x) => x.stage !== 'foundation')) bad('journeyOrder keeps the stage ladder');
+  if (o.slice(0, 8).map((x) => x.id).join() === o.slice(0, 8).map((x) => x.id).sort().join()) bad('inside a stage the order is the learner\'s own, not by id or difficulty');
+  if (journeyOrder([...items].reverse()).map((x) => x.id).join() !== o.map((x) => x.id).join()) bad('the learner\'s order is stable whatever order the registry lists');
 
   return { problems, lines: lines.length };
 }

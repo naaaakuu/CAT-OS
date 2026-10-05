@@ -13,7 +13,7 @@
  *            rose cottage on the map is Ginger's Sentence Placement house)
  */
 
-import { PETS, PET_BY_ID, HOUSES, STORIES, HOME_GIFTS, FRIENDSHIPS, friendshipOf, lineFor, stageTitle, stageGift } from '../pets/pets.js';
+import { PETS, PET_BY_ID, HOUSES, STORIES, HOME_GIFTS, FRIENDSHIPS, AGES, friendshipOf, lineFor, stageTitle, stageGift, ageOf, toGrow } from '../pets/pets.js';
 import { DAILY_GIFT } from '../pets/economy.js';
 import { GLOW, GLOW_SVG } from '../pets/glow.js';
 import { nextFor, cornersOf, noticeFor } from '../pets/next.js';
@@ -43,30 +43,30 @@ export function renderCard(card, kind, arg, api) {
 }
 
 const close = '<button class="cw-x" data-close aria-label="Close">×</button>';
-const unitOf = (p, n) => (n === 1 ? p.unit.replace(/s$/, '') : p.unit);
-
-/** How far a friend has grown: their stage name, ten pips, and what the next stage takes and gives. */
-function growth(p, def) {
-  const title = stageTitle(p.id, p.stage);
-  return `<div class="cw-grow">
-      <p class="cw-grow__head"><b>${p.stage ? `Stage ${p.stage}: ${esc(title)}` : 'Not grown yet'}</b><span class="cw-pips" aria-hidden="true">${Array.from({ length: 10 }, (_, i) => `<i class="${i < p.stage ? 'on' : ''}"></i>`).join('')}</span></p>
-      <p class="cw-grow__next">${p.stage >= 10 ? `Every last one done. ${esc(def.name)} is a master!` : `${p.toNext} more ${unitOf(p, p.toNext)} to stage ${p.stage + 1}: <b>${esc(stageGift(p.id, p.stage + 1))}</b>`}</p>
-      <p class="sr-only">${p.done} of ${p.total} ${p.unit} done.</p>
-    </div>`;
-}
 
 /* ------------------------------------------------------------------ */
 /* A friend                                                            */
 /* ------------------------------------------------------------------ */
 
-/** Where the student stands in one glance: "Level 2 of 8", the level's name, a segmented bar, and what finishing it takes. */
-function levelBlock(L) {
+/**
+ * The one thing a new player reads on a friend (owner, 2026-10-05: "I
+ * practice, I improve, my character grows, my village develops"): how grown
+ * up they are, ten steps in three ages, and what the next step takes. The
+ * subject's level, where those right answers come from, is the small line
+ * under it.
+ */
+function growBlock(p, L) {
+  const age = ageOf(p.stage), def = PET_BY_ID.get(p.id);
+  const next = p.stage < 10 ? ` ${toGrow(p.toNext, p.unit)} and ${def.name} grows.` : ' Every last one done!';
   return `<div class="cw-level">
-      <p class="cw-level__head"><b>${L.n ? `Level ${L.n} of ${L.of}` : 'Getting started'}</b>${L.n ? `<span>${esc(L.name)}</span>` : ''}</p>
-      <span class="cw-level__segs" aria-hidden="true">${L.segs.map((d, i) => `<i class="${d ? 'is-on' : i === L.n - 1 ? 'is-now' : ''}"></i>`).join('')}</span>
-      <p class="cw-level__line">${esc(L.line)}</p>
+      <p class="cw-level__head"><b>${esc(age.name)}</b><span>Stage ${p.stage} of 10</span></p>
+      <span class="cw-level__segs cw-level__segs--ages" aria-hidden="true">${Array.from({ length: 10 }, (_, i) => `<i class="${i < p.stage ? 'is-on' : i === p.stage ? 'is-now' : ''}${AGES.some((a) => a.from === i) ? ' is-age' : ''}"></i>`).join('')}</span>
+      <p class="cw-level__line">${esc(fill(age.line, def) + next)}</p>
+      ${L.ladder ? `<p class="cw-level__sub">Level ${L.n} of ${L.of}, ${esc(L.name)}. ${esc(L.line)}</p>` : ''}
+      <p class="sr-only">${p.done} of ${p.total} ${p.unit} done.</p>
     </div>`;
 }
+const fill = (t, def) => t.replace('{name}', def.name);
 
 /** The Achievements button, and the panel it opens: one short line each, for the whole of CAT OS. */
 function achievements(id, api) {
@@ -98,7 +98,7 @@ function petCard(card, id, api) {
       <p class="cw-role">Teaches ${esc(def.subject)}</p>
       <p class="cw-tag">${esc(def.tag)}</p>
     </div>
-    ${levelBlock(levelFor(id, api.world, p))}
+    ${growBlock(p, levelFor(id, api.world, p))}
     ${next ? `<a class="cw-go" href="${esc(next.href)}" data-go><span><b>Help ${esc(def.name)}</b><small>${esc(ACT[id])}: ${esc(next.label)}${next.sub ? ` · ${esc(next.sub)}` : ''}</small></span><i aria-hidden="true">▶</i></a>` : ''}
     ${achievements(id, api)}
     <details class="cw-more">
@@ -107,7 +107,7 @@ function petCard(card, id, api) {
       <p class="cw-say">${esc(`${greet} ${p.request}`)}</p>
       ${notice ? `<p class="cw-notice"><span class="cw-notice__spark" aria-hidden="true">✦</span><span>${esc(notice)}</span></p>` : ''}
       ${pick && !done ? `<p class="cw-pickline"><b>!</b> One of today's three friends. Help ${esc(def.name)} for today's gift.</p>` : ''}
-      ${growth(p, def)}
+      ${p.stage < 10 ? `<p class="cw-sub">Next stage: <b>${esc(stageGift(id, p.stage + 1))}</b>${p.stage ? `. Now: ${esc(stageTitle(id, p.stage))}` : ''}.</p>` : ''}
       ${corners.length ? `<h3 class="cw-h3">More ways to practice ${esc(def.subject)}</h3><ul class="cw-list">${corners.map((c) => `<li><a href="${esc(c.href)}"><span><b>${esc(c.label)}</b><small>${esc(c.sub ?? '')}</small></span><i aria-hidden="true">›</i></a></li>`).join('')}</ul>` : ''}
       <p class="cw-reward">${GLOW_SVG}<span>Every question you answer earns <b>Glow</b> for the village.${p.hearts < 5 ? ` At stage ${(p.hearts + 1) * 2}: <b>${esc(HOME_GIFTS[p.hearts])}</b> at ${esc(def.home)}.` : ''}</span></p>
       <h3 class="cw-h3">${esc(def.name)}'s story</h3>
@@ -135,7 +135,7 @@ function fireCard(card, api) {
       <p class="cw-role">Toffee keeps the daily streak and the Gauntlet</p>
       <p class="cw-tag">${esc(PET_BY_ID.get('toffee').tag)}</p>
     </div>
-    ${levelBlock(levelFor('toffee', api.world, toffee))}
+    ${growBlock(toffee, levelFor('toffee', api.world, toffee))}
     <a class="cw-go cw-go--gold" href="#/world/place/wilds" data-go><span><b>The Gauntlet</b><small>The weekly challenge: 30 quick questions in 3 minutes. Beat your best.</small></span><i aria-hidden="true">▶</i></a>
     ${achievements('toffee', api)}
     <details class="cw-more">
@@ -191,7 +191,7 @@ function friendsCard(card, api) {
     <p class="cw-sub">Each house in the village holds one part of the VARC section, and its sign on the map says which. Start any of them: every round helps that friend and grows the village.</p>
     <ul class="cw-roster">${HOUSES.map((h) => `<li><a href="${esc(start(h))}" data-go>${petPortrait(h.pet, 44)}<span class="cw-roster__who"><b>${esc(h.subject)}</b><small>${esc(h.ask)} · with ${esc(PET_BY_ID.get(h.pet).name)}</small></span><i class="cw-roster__go" aria-hidden="true">▶</i></a></li>`).join('')}</ul>
     <h3 class="cw-h3">Who is who</h3>
-    <ul class="cw-pairs">${PETS.map((def) => { const p = P.pets.find((x) => x.id === def.id); return `<li><span class="cw-pairs__faces">${petPortrait(def.id, 34)}</span><span><b>${esc(def.name)}</b> · ${esc(def.tag)}<small class="cw-pairs__stage">${p?.stage ? `Stage ${p.stage}: ${esc(stageTitle(def.id, p.stage))}` : 'Not grown yet'}</small></span></li>`; }).join('')}</ul>
+    <ul class="cw-pairs">${PETS.map((def) => { const p = P.pets.find((x) => x.id === def.id); return `<li><span class="cw-pairs__faces">${petPortrait(def.id, 34)}</span><span><b>${esc(def.name)}</b> · ${esc(def.tag)}<small class="cw-pairs__stage">${esc(ageOf(p?.stage).name)}${p?.stage ? ` · ${esc(stageTitle(def.id, p.stage))}` : ''}</small></span></li>`; }).join('')}</ul>
     <h3 class="cw-h3">Best friends</h3>
     <ul class="cw-pairs">${FRIENDSHIPS.map((f) => `<li><span class="cw-pairs__faces">${petPortrait(f.a, 30)}${petPortrait(f.b, 30)}</span><span>${esc(f.line)}</span></li>`).join('')}</ul>
     <p class="cw-sub">And you? You are the new friend everyone has been waiting for.</p>`;

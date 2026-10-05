@@ -11,6 +11,8 @@
  *   climbing again. Legible rules over clever ones.
  */
 
+import { byLearner } from './order.js';
+
 export const STAGES = Object.freeze([
   'foundation', 'developing', 'intermediate', 'advanced', 'elite',
 ]);
@@ -59,12 +61,11 @@ export function stageIndex(stage) {
   return i === -1 ? STAGES.length : i; // unknown stages sort last, never crash
 }
 
-/** Registry items in journey order: stage ladder, then difficulty, then id. */
+/** Registry items in journey order: the stage ladder, and inside a stage this learner's own order (order.js). */
 export function journeyOrder(items) {
   return [...items].sort((a, b) =>
     (stageIndex(a.stage) - stageIndex(b.stage))
-    || ((a.difficulty_numeric ?? 5) - (b.difficulty_numeric ?? 5))
-    || a.id.localeCompare(b.id));
+    || byLearner(a, b));
 }
 
 /** Group ordered items by stage → [{stage, items}] for the browser. */

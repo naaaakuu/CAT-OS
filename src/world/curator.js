@@ -21,6 +21,7 @@
 
 import { loadLexItem, loadTwinItem, loadLoanItem } from '../core/content-loader/loader.js';
 import { rng } from './engine/palette.js';
+import { byLearner } from '../core/learning/order.js';
 import { isRested, passagesForSkill, passagesForPattern, patternLedger, weakPatterns } from '../core/learning/review.js';
 import { RC_TYPE_SKILL } from '../core/learning/taxonomy.js';
 import { wordStatus, REGION_KIND, ROUND_SIZE } from './lexicon.js';
@@ -213,9 +214,9 @@ export function nextPassage(content, best, weakness, seed = 'rc') {
     }
   }
   if (pool.length) {
-    // Easiest-first within the stage keeps the ladder honest.
-    const sorted = [...pool].sort((a, b) => (a.difficulty_numeric ?? 5) - (b.difficulty_numeric ?? 5) || a.id.localeCompare(b.id));
-    const item = sorted[Math.min(sorted.length - 1, Math.floor(r() * Math.min(2, sorted.length)))];
+    // Inside the stage, this learner's own order (owner, 2026-10-05: no fixed sequence, so
+    // two learners meet different first passages); the stage ladder above stays in order.
+    const item = [...pool].sort(byLearner)[0];
     return { item, kind: 'new', why: whyNew(item, stage, weakness) };
   }
 
@@ -458,7 +459,7 @@ export function nextVerbal(registry, sessions, moduleKey, seed = 'v', now = Date
     const items = byTier.get(t);
     const fresh = items.filter((i) => !tried.has(i.id));
     if (fresh.length) {
-      const it = fresh.sort((a, b) => (a.difficulty_numeric ?? 5) - (b.difficulty_numeric ?? 5) || a.id.localeCompare(b.id))[0];
+      const it = fresh.sort(byLearner)[0]; // this learner's own order inside the tier
       return { item: it, kind: 'new', why: tierLine(t) };
     }
     const missed = items.filter((i) => tried.has(i.id) && !solved.has(i.id) && rested(i.id));
@@ -497,7 +498,7 @@ export function nextFamily(rootwood) {
   const due = rootwood.families.filter((f) => f.due !== 'none')
     .sort((a, b) => String(a.nextReviewAt).localeCompare(String(b.nextReviewAt)));
   if (due.length) return { family: due[0], kind: 'due', why: `${due.length} famil${due.length === 1 ? 'y is' : 'ies are'} ready to revisit. Spacing is where roots hold.` };
-  const fresh = rootwood.families.filter((f) => f.stage === 'open_ground');
+  const fresh = rootwood.families.filter((f) => f.stage === 'open_ground').sort(byLearner);
   if (fresh.length) return { family: fresh[0], kind: 'new', why: 'A root you have not taken apart yet. One root, a whole family of words.' };
   const young = rootwood.families.filter((f) => f.stage !== 'ancient').sort((a, b) => String(a.nextReviewAt ?? '').localeCompare(String(b.nextReviewAt ?? '')));
   return young.length ? { family: young[0], kind: 'grow', why: 'Walk it again and it grows older.' } : null;

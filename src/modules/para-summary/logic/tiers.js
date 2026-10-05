@@ -11,6 +11,8 @@
  * tiers recommend an order; nothing is ever locked.
  */
 
+import { byLearner } from '../../../core/learning/order.js';
+
 export const PS_TIERS = Object.freeze([
   {
     id: 'foundation',
@@ -85,8 +87,7 @@ export function tierInfo(tierId) {
 export function psJourneyOrder(items) {
   return [...items].sort((a, b) =>
     (tierIndex(a.tier) - tierIndex(b.tier))
-    || ((a.difficulty_numeric ?? 5) - (b.difficulty_numeric ?? 5))
-    || a.id.localeCompare(b.id));
+    || byLearner(a, b)); // inside a tier: this learner's own order (core/learning/order.js)
 }
 
 /** Ordered items grouped by tier → [{tier, items}] for the browser. */

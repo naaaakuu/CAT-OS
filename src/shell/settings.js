@@ -7,7 +7,7 @@
  *   AUDIO       music & ambience on/off and volume; sound effects on/off and volume
  *   FEEL        haptics; reduced motion
  *   READING     reading size; theme
- *   YOUR DATA   export, import, storage used
+ *   YOUR DATA   export, import, storage used, start over
  *   ABOUT       the version
  */
 
@@ -117,6 +117,7 @@ export function renderSettings(outlet, { storage, version }) {
         ${row(icon('scroll', { size: 20 }), 'Export all data', 'Saves a .json backup file', '<button class="btn" id="backup-export">Export</button>')}
         ${row(icon('scroll', { size: 20 }), 'Import a backup', 'Merge or replace: you choose', '<button class="btn" id="backup-import">Import</button>')}
         ${row(icon('scales', { size: 20 }), 'Storage used', 'Measuring…', '')}
+        ${row(icon('arrow', { size: 20 }), 'Start over', 'Back to the very first day: baby friends, level 1, nothing read', '<button class="btn btn--danger" id="start-over">Start over</button>')}
         <input type="file" id="backup-file" accept="application/json" hidden />
       </div>
 
@@ -326,6 +327,57 @@ export function renderSettings(outlet, { storage, version }) {
     const rows = Object.entries(d.counts).filter(([, n]) => n > 0)
       .map(([name, n]) => `<li><b>${n}</b> ${escapeHTML(STORE_WORD[name] ?? name)}</li>`).join('');
 
+    const act = await askSheet(`From ${when}`, theirs ? `${theirs}'s backup` : 'A backup', `
+          <ul class="importsheet__what">${rows || '<li>Nothing recognisable</li>'}</ul>
+          ${different ? `<p class="importsheet__warn"><b>This is a different valley.</b> Yours is ${escapeHTML(here)}; the backup is ${escapeHTML(theirs)}. Adding it puts two villages in one place. Your village keeps its own name either way.</p>` : ''}
+          <div class="importsheet__acts">
+            <button class="btn btn--primary" data-do="merge">Add it to this device</button>
+            <button class="btn btn--danger" data-do="replace">Replace everything here</button>
+            <button class="btn btn--quiet" data-close>Do nothing</button>
+          </div>`);
+    return act === null ? null : act === 'replace';
+  }
+
+  /* ---- Start over ----
+     The owner's own ask (2026-10-05): see the game the way a first-time
+     player does. Everything this device holds for CAT OS goes: every run,
+     answer and word, the village and its name, the settings, the friends'
+     growth (all of it is derived from those records), and this browser's
+     small notes (the order a level deals its items in, which cards were
+     seen). Asked twice, and both sheets default to doing nothing. */
+  outlet.querySelector('#start-over').addEventListener('click', async () => {
+    const counts = {};
+    for (const s of Object.values(STORES)) { try { counts[s] = (await storage.getAll(s)).length; } catch { counts[s] = 0; } }
+    const runs = counts[STORES.SESSIONS] ?? 0, answers = counts[STORES.ATTEMPTS] ?? 0;
+    const first = await askSheet('Start over', 'Start from the very beginning?', `
+          <p class="importsheet__warn">Your village goes back to its first day: every friend a baby again, level 1, no Glow, nothing read. You will meet everyone again like a new player.</p>
+          <div class="importsheet__acts">
+            <button class="btn btn--danger" data-do="next">Yes, start over</button>
+            <button class="btn btn--primary" data-close>Keep my village</button>
+          </div>`);
+    if (first !== 'next') return;
+    const sure = await askSheet('Start over', 'Are you sure?', `
+          <p class="importsheet__warn"><b>This deletes everything on this device and cannot be undone</b>: ${runs} finished ${runs === 1 ? 'run' : 'runs'}, ${answers} ${answers === 1 ? 'answer' : 'answers'}, every word you keep, and your village's name. Export a backup first if you might want it back.</p>
+          <div class="importsheet__acts">
+            <button class="btn btn--danger" data-do="wipe">Delete everything and start over</button>
+            <button class="btn btn--primary" data-close>No, keep it</button>
+          </div>`);
+    if (sure !== 'wipe') { toast('Nothing was changed.', 'info', { mute: true }); return; }
+    try {
+      for (const s of Object.values(STORES)) await storage.clear(s);
+      try { localStorage.clear(); sessionStorage.clear(); } catch { /* storage blocked: nothing kept there either */ }
+    } catch (err) { toast(`Could not start over: ${err.message}`, 'error'); return; }
+    // A fresh page: every screen re-reads the now-empty records, and the village opens on its first day.
+    location.hash = '#/world';
+    location.reload();
+  });
+
+  /**
+   * One of the app's own sheets (never a browser confirm): a title, the
+   * body's buttons, and a promise of the `data-do` tapped, or null for
+   * Escape, a tap outside, or any `data-close` button.
+   */
+  function askSheet(eyebrow, title, body) {
     return new Promise((resolve) => {
       const el = document.createElement('div');
       el.className = 'gmenu is-in';
@@ -334,18 +386,11 @@ export function renderSettings(outlet, { storage, version }) {
         <nav class="gmenu__card" role="dialog">
           <div class="gmenu__head">
             <div>
-              <p class="gmenu__eyebrow">From ${escapeHTML(when)}</p>
-              <h2 class="gmenu__name">${escapeHTML(theirs ? `${theirs}'s backup` : 'A backup')}</h2>
+              <p class="gmenu__eyebrow">${escapeHTML(eyebrow)}</p>
+              <h2 class="gmenu__name">${escapeHTML(title)}</h2>
             </div>
             <button class="gmenu__close" data-close aria-label="Close">×</button>
-          </div>
-          <ul class="importsheet__what">${rows || '<li>Nothing recognisable</li>'}</ul>
-          ${different ? `<p class="importsheet__warn"><b>This is a different valley.</b> Yours is ${escapeHTML(here)}; the backup is ${escapeHTML(theirs)}. Adding it puts two villages in one place. Your village keeps its own name either way.</p>` : ''}
-          <div class="importsheet__acts">
-            <button class="btn btn--primary" data-do="merge">Add it to this device</button>
-            <button class="btn btn--danger" data-do="replace">Replace everything here</button>
-            <button class="btn btn--quiet" data-close>Do nothing</button>
-          </div>
+          </div>${body}
         </nav>`;
       document.body.appendChild(el);
       const card = el.querySelector('.gmenu__card');
@@ -360,11 +405,11 @@ export function renderSettings(outlet, { storage, version }) {
       el.addEventListener('click', (e) => {
         if (e.target.closest('[data-close]')) { finish(null); return; }
         const act = e.target.closest('[data-do]');
-        if (act) finish(act.dataset.do === 'replace');
+        if (act) finish(act.dataset.do);
       });
       // Escape, a tap outside, and the quiet button all mean the same thing,
       // and that thing is nothing.
-      openModal(card, () => finish(null), { label: 'Import a backup' });
+      openModal(card, () => finish(null), { label: title });
     });
   }
 

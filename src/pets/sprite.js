@@ -8,18 +8,24 @@
  * by its own scale).
  */
 
-import { SHEETS } from './sheets.js';
+import { SHEETS, BABY_SHEETS } from './sheets.js';
 import { MAP, CROPS, HOMES } from './paths.js';
-import { PET_BY_ID } from './pets.js';
+import { PET_BY_ID, ageOf } from './pets.js';
 
 export const FRAME = Object.freeze({ idle: 0, blink: 1, happy: 2, talk: 3, sleep: 4 });
 
-/** @param {string} id pet id @param {{frame?:number,size?:number,cls?:string,label?:string}} o */
-export function petSprite(id, { frame = 0, size = 96, cls = '', label = '' } = {}) {
-  const s = SHEETS[id];
+/* A friend who has not grown out of babyhood (pets.js AGES) is drawn from
+   the baby sheet: the same painting, bigger eyes, a shorter body. */
+const sheetOf = (id, stage) => (ageOf(stage).id === 'baby'
+  ? { s: BABY_SHEETS[id], src: `./assets/art/pet-${id}-baby.png` }
+  : { s: SHEETS[id], src: `./assets/art/pet-${id}.png` });
+
+/** @param {string} id pet id @param {{frame?:number,size?:number,cls?:string,label?:string,stage?:number}} o  no stage: grown up */
+export function petSprite(id, { frame = 0, size = 96, cls = '', label = '', stage = 10 } = {}) {
+  const { s, src } = sheetOf(id, stage);
   if (!s) return '';
   const aria = label ? ` role="img" aria-label="${label}"` : ' aria-hidden="true"';
-  return `<span class="pet-sprite ${cls}" data-pet-sprite="${id}"${aria} style="--fw:${s.w};--sh:${s.h};--g:${s.gutter};--f:${frame};--size:${size};background-image:url(./assets/art/pet-${id}.png)"></span>`;
+  return `<span class="pet-sprite ${cls}" data-pet-sprite="${id}"${aria} style="--fw:${s.w};--sh:${s.h};--g:${s.gutter};--f:${frame};--size:${size};background-image:url(${src})"></span>`;
 }
 
 /**
@@ -27,13 +33,13 @@ export function petSprite(id, { frame = 0, size = 96, cls = '', label = '' } = {
  * on their own under the body (home.css .rig). At rest the three pieces
  * are exactly the one picture; a lifted foot slides up behind the body.
  */
-export function petRig(id, { frame = 0, size = 96 } = {}) {
-  const s = SHEETS[id];
+export function petRig(id, { frame = 0, size = 96, stage = 10 } = {}) {
+  const { s, src } = sheetOf(id, stage);
   if (!s) return '';
   const f = s.feet ?? { top: s.h, split: Math.round(s.w / 2) };
   // The picture goes on each piece's own style: a url() inside a custom
   // property resolves against the stylesheet that uses it, not the page.
-  const img = `style="background-image:url(./assets/art/pet-${id}.png)"`;
+  const img = `style="background-image:url(${src})"`;
   return `<span class="pet-sprite rig" data-pet-sprite="${id}" aria-hidden="true" style="--fw:${s.w};--sh:${s.h};--g:${s.gutter};--f:${frame};--size:${size};--ft:${f.top};--fs:${f.split}"><i class="rig__foot rig__foot--l" ${img}></i><i class="rig__foot rig__foot--r" ${img}></i><i class="rig__trunk" ${img}></i></span>`;
 }
 
@@ -144,8 +150,8 @@ const CROWN = `<svg viewBox="0 0 60 26">${star5(9, 17, 7, 'gear__gold')}${star5(
 const GEM = '<path d="M0 -3.8L3.2 -1L0 3.8L-3.2 -1Z" fill="#E2546A" stroke="#2c2620" stroke-width=".8" stroke-linejoin="round"/><path d="M-1.3 -1.5L0 -2.8" stroke="#fff" stroke-width=".9" stroke-linecap="round"/>';
 const clampStage = (s) => Math.max(0, Math.min(10, Math.floor(Number(s) || 0)));
 
-/** How much bigger a friend is at `stage`: a little one at 0, a fifth bigger than full size at 10. */
-export function growOf(stage) { return 0.92 + 0.028 * clampStage(stage); }
+/** How big a friend is at `stage`: a baby at 0 (seven tenths of full size), full size once grown up (7), a little more by 10. */
+export function growOf(stage) { return 0.7 + 0.042 * clampStage(stage); }
 
 /**
  * What a friend wears at `stage`, cumulative (pets.js GROWTH names each):
@@ -177,7 +183,7 @@ export function petRing(id, stage) {
 
 /** A friend as they look now, anywhere but the map: sprite, ring and gear. */
 export function petFigure(id, { size = 96, frame = 0, stage = 0, cls = '' } = {}) {
-  return `<span class="pet-fig ${cls}" style="--size:${size}">${petRing(id, stage)}${petSprite(id, { frame, size })}${petGear(id, stage)}</span>`;
+  return `<span class="pet-fig ${cls}" style="--size:${size}">${petRing(id, stage)}${petSprite(id, { frame, size, stage })}${petGear(id, stage)}</span>`;
 }
 
 /** The small host chip: a portrait and a name, for session bars and headers. */

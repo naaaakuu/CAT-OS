@@ -12,7 +12,7 @@
 import { verbalStars } from './economy.js';
 import { play } from './audio.js';
 import { loadWorld, deriveWorldState, petChangeLine } from './state.js';
-import { PET_BY_ID, STORIES, HOME_GIFTS, petForModule, lineFor, stageTitle, stageGift } from '../pets/pets.js';
+import { PET_BY_ID, STORIES, HOME_GIFTS, petForModule, lineFor, stageTitle, stageGift, grewLine } from '../pets/pets.js';
 import { DAILY_GIFT } from '../pets/economy.js';
 import { GLOW_SVG, questionsOf, payVisits, glowWhy } from '../pets/glow.js';
 import { petFigure, FRAME } from '../pets/sprite.js';
@@ -54,7 +54,7 @@ export function giftLines(c) {
     <p class="pvwin__thanks">“${escapeHTML(lineFor(p.id, 'thanks', String(c.earned) + (c.hearts ?? '')))}”</p>
     ${L ? `<p class="pvwin__level"><span>Village level ${L.level}</span><span class="pvwin__bar" aria-hidden="true"><i style="width:${Math.round(L.pct * 100)}%"></i></span><span>${L.need} more Glow to level ${L.level + 1}</span></p>` : ''}
     ${c.levelUp ? `<p class="pvwin__heart pvwin__big">The village reached level ${L.level}!${c.decor ? ` New on the map: ${escapeHTML(c.decor.name.toLowerCase())}.` : ''}</p>` : ''}
-    ${c.grew ? `<p class="pvwin__heart pvwin__big"><span aria-hidden="true">✦</span> ${p.name} grew to stage ${c.stage}: ${escapeHTML(stageTitle(p.id, c.stage))}! New: ${escapeHTML(stageGift(p.id, c.stage))}. <b>+${c.milestone} Glow</b></p>` : ''}
+    ${c.grew ? `<p class="pvwin__heart pvwin__big"><span aria-hidden="true">✦</span> ${escapeHTML(grewLine(p.id, c.from ?? c.stage - 1, c.stage))} Stage ${c.stage}: ${escapeHTML(stageTitle(p.id, c.stage))}. New: ${escapeHTML(stageGift(p.id, c.stage))}. <b>+${c.milestone} Glow</b> for the village.</p>` : ''}
     ${c.chapter ? `<p class="pvwin__heart">${escapeHTML(HOME_GIFTS[(c.hearts ?? 1) - 1] ?? '')} appears at ${escapeHTML(p.home)}.</p>${STORIES[p.id]?.[c.hearts - 1] ? `<p class="pvwin__story"><i>${escapeHTML(STORIES[p.id][c.hearts - 1])}</i></p>` : ''}` : ''}
     ${typeof c.doneCount === 'number' ? `<p class="pvwin__today">${c.gift ? `All three of today's friends helped: <b>+${DAILY_GIFT} bonus Glow</b>. See you tomorrow!` : c.doneCount >= 3 ? 'Today\'s gift is already yours. Every extra round still helps the village.' : c.doneCount ? `Today: ${c.doneCount} of 3 friends helped. ${3 - c.doneCount} more for today's gift.` : 'Help today\'s three friends for a bonus gift.'}</p>` : ''}`;
 }

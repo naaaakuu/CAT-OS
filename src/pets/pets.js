@@ -238,6 +238,32 @@ export const STAGE_TITLES = freeze({
   mallow: freeze(['Cloud Watcher', 'Star Spotter', 'Stargazer', 'Sharp Eye', 'Odd Hunter', 'Sky Detective', 'Eagle Eye', 'Night Watcher', 'Star Sage', 'Master Spotter']),
 });
 
+/**
+ * How grown up a friend is, as a new player reads it (owner, 2026-10-05:
+ * "your understanding of this subject is growing, so your character is
+ * growing too"). A new village is all babies (src/pets/sprite.js draws them
+ * from the baby sheets, small); at stage 3 a friend grows into their own face
+ * and hat, and at stage 7 they are full size. Stages are real work in their
+ * subject (economy.js stageOf), never time.
+ */
+export const AGES = freeze([
+  freeze({ id: 'baby', from: 0, name: 'Baby', line: '{name} is still little.', grew: '{name} grew!' }),
+  freeze({ id: 'young', from: 3, name: 'Growing up', line: '{name} is growing up.', grew: '{name} is growing up!' }),
+  freeze({ id: 'grown', from: 7, name: 'Grown up', line: '{name} is all grown up, thanks to you.', grew: '{name} is all grown up!' }),
+]);
+/** The age a stage falls in. */
+export function ageOf(stage) { return AGES.findLast((a) => (Number(stage) || 0) >= a.from) ?? AGES[0]; }
+/** What to say when a friend grows from stage `from` to `to`: "Chai is growing up!" on the stage that changes their age. */
+export function grewLine(id, from, to) {
+  const a = ageOf(to);
+  return fill(a.id === ageOf(from).id ? AGES[0].grew : a.grew, { name: PET_BY_ID.get(id)?.name ?? '' });
+}
+/** What one more stage takes, in the friend's own unit: "4 more right answers". */
+export function toGrow(n, unit) {
+  const [one, many] = unit === 'words' ? ['word', 'words'] : unit === 'days' ? ['day of practice', 'days of practice'] : ['right answer', 'right answers'];
+  return `${n} more ${n === 1 ? one : many}`;
+}
+
 /** What each stage puts on a friend, in order (stage 1 first). */
 const GROWTH = ['a twinkle over {name}\'s head', '{name} grew bigger', '{item}', 'a glowing ring of light', 'a floating {charm}', 'gold trim and a growth spurt', 'a trail of sparkles', 'a second {charm}', 'a golden aura', 'a crown of stars'];
 
@@ -331,9 +357,10 @@ export const LINES = freeze({
   /** The first visit: Toffee's welcome, then everyone says hello (LINES.meet), then Chai calls you over. */
   intro: [
     "You're here! You're really here! I've been waiting all morning. Okay, all week.",
-    'Our village is losing its words. Every question you answer brings some of them back.',
+    'We are all still little! Every question you get right helps one of us grow.',
+    'And when we grow, the whole village grows with us. Lanterns, flowers, a kite!',
     'Everyone here keeps one part of CAT English, and it is who they are. Come and meet them!',
-    "Hoo! Over here! I need help first. Tap the big button and we'll start!",
+    "Hoo! Over here! I'm still a baby owl. Help me grow? Tap the big button!",
   ],
 });
 

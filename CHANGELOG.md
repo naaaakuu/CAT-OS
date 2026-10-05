@@ -4,6 +4,39 @@
 > Versions here are app releases; they map onto the capability milestones in
 > `PROJECT_ROADMAP.md` (0.x releases build toward Roadmap V1.0).
 
+## 3.7.0: Friends who grow up with you (2026-10-05)
+
+I practise, I improve, my friend grows, my village develops.
+
+- **Every friend starts as a baby.** A new village is six babies: the same
+  painted friends with bigger eyes and a shorter body (baked from the same
+  art, `tools/bake-pets.mjs --baby`), drawn at seven tenths of full size.
+- **They grow with real progress, never with time.** Ten stages as before
+  (questions answered right in their subject, words learned for Matcha), now
+  in three ages: Baby (0 to 2), Growing up (3 to 6, their own face and their
+  hat), Grown up (7 to 10, full size and the rest of their gear). Toffee's
+  days now count only days you really answered questions.
+- **The card says it in one line.** "Chai is still little. 1 more right
+  answer and Chai grows." over ten segments grouped by age; the subject's
+  level is the small line under it.
+- **Growing up is a moment.** Crossing into a new age shows who they were
+  beside who they are now ("Chai is growing up!"), the result screen says
+  the same, and every stage still lights 6 Glow for the village.
+- **The welcome says the loop.** Toffee: "We are all still little! Every
+  question you get right helps one of us grow." Chai: "I'm still a baby owl.
+  Help me grow?"
+- **Achievement:** "Halfway there" became "Growing up": help a friend out of
+  babyhood.
+- **Start over** (Settings, Your data): back to the very first day, asked
+  twice; the second sheet says exactly what goes.
+- **No fixed order inside a level.** Every subject deals the items of a
+  level in this learner's own random order (the first passage too), so two
+  new players meet different passages first. The order is stable for one
+  learner, so the card, the house and the list agree; Start over deals a new
+  one.
+- Hats on cards get a thin cream edge: Chai's slate cap vanished against her
+  blue roof.
+
 ## 3.6.0: Glow, the village's currency (2026-10-05)
 
 Learning to Glow to the village. One resource, paid for learning done and

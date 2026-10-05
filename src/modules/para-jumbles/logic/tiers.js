@@ -13,6 +13,8 @@
  * it trains the same global skill under more pressure.
  */
 
+import { byLearner } from '../../../core/learning/order.js';
+
 export const PJ_TIERS = Object.freeze([
   {
     id: 'beginner',
@@ -79,8 +81,7 @@ export function tierInfo(tierId) {
 export function pjJourneyOrder(items) {
   return [...items].sort((a, b) =>
     (tierIndex(a.tier) - tierIndex(b.tier))
-    || ((a.difficulty_numeric ?? 5) - (b.difficulty_numeric ?? 5))
-    || a.id.localeCompare(b.id));
+    || byLearner(a, b)); // inside a tier: this learner's own order (core/learning/order.js)
 }
 
 /** Ordered items grouped by tier → [{tier, items}] for the browser. */

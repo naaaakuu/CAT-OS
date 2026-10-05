@@ -20,6 +20,8 @@
  * build first protocol stay available throughout.
  */
 
+import { byLearner } from '../../../core/learning/order.js';
+
 export const OOO_TIERS = Object.freeze([
   {
     id: 'foundation',
@@ -107,8 +109,7 @@ export function tierMode(tierId) {
 export function oooJourneyOrder(items) {
   return [...items].sort((a, b) =>
     (tierIndex(a.tier) - tierIndex(b.tier))
-    || ((a.difficulty_numeric ?? 5) - (b.difficulty_numeric ?? 5))
-    || a.id.localeCompare(b.id));
+    || byLearner(a, b)); // inside a tier: this learner's own order (core/learning/order.js)
 }
 
 /** Ordered items grouped by tier → [{tier, items}] for the browser. */

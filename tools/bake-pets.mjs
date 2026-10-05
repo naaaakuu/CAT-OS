@@ -1,7 +1,7 @@
 /**
  * bake-pets.mjs — bake the six five-frame pet sheets from the companion strip.
  *
- *   node tools/bake-pets.mjs [--preview <dir>]
+ *   node tools/bake-pets.mjs [--baby] [--preview <dir>]
  *
  * Reads assets/art/home-companions-v1.png in headless Chrome, finds each
  * pet's eyes and smile (or Chai's beak), paints the blink / happy / talk /
@@ -9,8 +9,10 @@
  * writes assets/art/pet-<id>.png (frames: idle, blink, happy, talk, sleep;
  * 4 px transparent gutter between frames) plus src/pets/sheets.js.
  * --preview <dir> also writes a 3x crop of every face per pet, to eyeball.
+ * --baby bakes the baby sheets instead (assets/art/pet-<id>-baby.png and
+ * BABY_SHEETS): the same frames, the eyes bigger and the body shorter.
  */
-import { writeFileSync, mkdirSync } from 'node:fs';
+import { writeFileSync, mkdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { serveRepo, launchChrome, REPO_ROOT } from './cdp-lite.mjs';
 
@@ -20,9 +22,12 @@ const PETS = [
   ['mochi', 1040, 335], ['ginger', 1380, 397], ['mallow', 1780, 392],
 ];
 const H = 384, GUTTER = 4, FRAMES = 5;
+/* The baby sheets are smaller: a baby is never drawn much bigger than three
+   quarters of the grown size (src/pets/sprite.js growOf). */
+const BABY_H = 288;
 
 /* Runs in the page. Returns [{id, w, sheet, preview, log}]. */
-async function bake(pets, H, GUTTER, wantPreview) {
+async function bake(pets, H, GUTTER, wantPreview, babyMode, BABY_H) {
   const img = new Image();
   img.src = '/assets/art/home-companions-v1.png';
   await img.decode();
@@ -267,34 +272,80 @@ async function bake(pets, H, GUTTER, wantPreview) {
       closed({ sag: 0.1, drop: 0.3, width: 2.5 }),
     ];
 
-    /* 5-6. scale to H tall and assemble the sheet */
-    const w = Math.round(W * H / Hs);
-    const sheet = mk(frames.length * w + (frames.length - 1) * GUTTER, H); const shg = sheet.getContext('2d');
-    shg.imageSmoothingEnabled = true; shg.imageSmoothingQuality = 'high';
-    frames.forEach((f, i) => shg.drawImage(f, i * (w + GUTTER), 0, w, H));
+    /* 5-6. scale to HH tall and assemble the sheet */
+    const assemble = (frs, HH) => {
+      const fw = frs[0].width, fh = frs[0].height;
+      const w = Math.round(fw * HH / fh);
+      const sheet = mk(frs.length * w + (frs.length - 1) * GUTTER, HH); const shg = sheet.getContext('2d');
+      shg.imageSmoothingEnabled = true; shg.imageSmoothingQuality = 'high';
+      frs.forEach((f, i) => shg.drawImage(f, i * (w + GUTTER), 0, w, HH));
 
-    /* 7. the feet, for the walk. Near the bottom of the idle frame, the gap
-       between the two feet is the transparent gap closest to the middle
-       (one foot often sits a pixel lower, and Mallow has a puff of tail);
-       walking up that gap until it closes finds where the body begins. */
-    const idle = mk(w, H); const ig = ctx2(idle); ig.drawImage(frames[0], 0, 0, w, H);
-    const ia = ig.getImageData(0, 0, w, H).data;
-    const solid = (x, y) => ia[(y * w + x) * 4 + 3] >= 128;
-    const runsOf = (y) => { const rs = []; let s = -1; for (let x = 0; x <= w; x++) { const o = x < w && solid(x, y); if (o && s < 0) s = x; if (!o && s >= 0) { if (x - s >= 3) rs.push([s, x]); s = -1; } } return rs; };
-    let bottom = H - 1; while (bottom > 0 && !runsOf(bottom).length) bottom--;
-    let feet = null;
-    for (let y = bottom; y > bottom - 12 && !feet; y--) {
-      const rs = runsOf(y);
-      const gaps = rs.slice(1).map((r, i) => [rs[i][1], r[0]]).sort((a, b) => Math.abs((a[0] + a[1]) / 2 - w / 2) - Math.abs((b[0] + b[1]) / 2 - w / 2));
-      if (!gaps.length) continue;
-      const split = Math.round((gaps[0][0] + gaps[0][1]) / 2);
-      let top = y;
-      while (top > bottom - H * 0.25 && !solid(split, top - 1)) top--;
-      if (bottom - top >= 6) feet = { top, bottom, split };
-    }
+      /* 7. the feet, for the walk. Near the bottom of the idle frame, the gap
+         between the two feet is the transparent gap closest to the middle
+         (one foot often sits a pixel lower, and Mallow has a puff of tail);
+         walking up that gap until it closes finds where the body begins. */
+      const idle = mk(w, HH); const ig = ctx2(idle); ig.drawImage(frs[0], 0, 0, w, HH);
+      const ia = ig.getImageData(0, 0, w, HH).data;
+      const solid = (x, y) => ia[(y * w + x) * 4 + 3] >= 128;
+      const runsOf = (y) => { const rs = []; let s = -1; for (let x = 0; x <= w; x++) { const o = x < w && solid(x, y); if (o && s < 0) s = x; if (!o && s >= 0) { if (x - s >= 3) rs.push([s, x]); s = -1; } } return rs; };
+      let bottom = HH - 1; while (bottom > 0 && !runsOf(bottom).length) bottom--;
+      let feet = null;
+      for (let y = bottom; y > bottom - 12 && !feet; y--) {
+        const rs = runsOf(y);
+        const gaps = rs.slice(1).map((r, i) => [rs[i][1], r[0]]).sort((a, b) => Math.abs((a[0] + a[1]) / 2 - w / 2) - Math.abs((b[0] + b[1]) / 2 - w / 2));
+        if (!gaps.length) continue;
+        const split = Math.round((gaps[0][0] + gaps[0][1]) / 2);
+        let top = y;
+        while (top > bottom - HH * 0.25 && !solid(split, top - 1)) top--;
+        if (bottom - top >= 6) feet = { top, bottom, split };
+      }
+      return { w, sheet, feet };
+    };
+
+    /* 8. the baby (--baby): the same friend before they have grown. A baby
+       reads as a big head on a small body with big eyes, so everything below
+       the mouth is shortened (horizontal size kept, which also makes them
+       rounder) and each eye is magnified from its centre by a smooth bulge
+       that fades to nothing at its rim, so no edge tears. Bilinear, on
+       premultiplied colour so the transparent edge does not darken. */
+    const babyOf = (src) => {
+      const mo = smile ?? beak;
+      const yF = Math.round(mo.bottom + 0.12 * spacing), CB = 0.74;
+      const Hb = yF + Math.round((Hs - yF) * CB);
+      const sd = ctx2(src).getImageData(0, 0, W, Hs).data;
+      const out = new ImageData(W, Hb), o = out.data;
+      const eyes = [L, R].map((e) => ({ x: e.cx, y: e.cy, r: 0.46 * spacing }));
+      const EYE_M = 1.38;
+      const px = (x, y, c) => { x = Math.max(0, Math.min(W - 1, x)); y = Math.max(0, Math.min(Hs - 1, y)); return sd[(y * W + x) * 4 + c]; };
+      for (let y = 0; y < Hb; y++) for (let x = 0; x < W; x++) {
+        let sx = x + 0.5, sy = y + 0.5;
+        for (const e of eyes) {
+          const dx = sx - e.x, dy = sy - e.y, t = Math.hypot(dx, dy) / e.r;
+          if (t < 1) { const g = 1 - (1 - 1 / EYE_M) * (1 - t * t) ** 2; sx = e.x + dx * g; sy = e.y + dy * g; }
+        }
+        if (sy > yF) sy = yF + (sy - yF) / CB;
+        sx -= 0.5; sy -= 0.5;
+        const x0 = Math.floor(sx), y0 = Math.floor(sy), fx = sx - x0, fy = sy - y0;
+        const wts = [(1 - fx) * (1 - fy), fx * (1 - fy), (1 - fx) * fy, fx * fy], pts = [[x0, y0], [x0 + 1, y0], [x0, y0 + 1], [x0 + 1, y0 + 1]];
+        let a = 0, r = 0, g = 0, b = 0;
+        pts.forEach(([qx, qy], k) => { const al = px(qx, qy, 3) * wts[k]; a += al; r += px(qx, qy, 0) * al; g += px(qx, qy, 1) * al; b += px(qx, qy, 2) * al; });
+        const i = (y * W + x) * 4;
+        if (a > 0) { o[i] = r / a; o[i + 1] = g / a; o[i + 2] = b / a; o[i + 3] = a; }
+      }
+      const c = mk(W, Hb); ctx2(c).putImageData(out, 0, 0);
+      return c;
+    };
+
+    const { w, sheet, feet } = assemble(babyMode ? frames.map(babyOf) : frames, babyMode ? BABY_H : H);
 
     let preview = null;
-    if (wantPreview) {
+    if (wantPreview && babyMode) {
+      /* the grown idle frame next to the baby one, both at the sheet's height */
+      const a = assemble([frames[0]], BABY_H), pv = mk(a.w + w + 12, BABY_H), pg = pv.getContext('2d');
+      pg.fillStyle = '#e9dcc0'; pg.fillRect(0, 0, pv.width, pv.height);
+      pg.drawImage(a.sheet, 0, 0); pg.drawImage(sheet, 0, 0, w, BABY_H, a.w + 12, 0, w, BABY_H);
+      preview = pv.toDataURL('image/png');
+    } else if (wantPreview) {
       /* 3x of the face (eyes and mouth), cut from the baked sheet itself */
       const fcx = (L.cx + R.cx) / 2 / k, fcy = eyeCy / k, cw = Math.round(2 * spacing / k), ch = Math.round(1.3 * spacing / k), Z = 3;
       const pv = mk(frames.length * cw * Z + (frames.length - 1) * 8, ch * Z); const pg = pv.getContext('2d');
@@ -306,7 +357,7 @@ async function bake(pets, H, GUTTER, wantPreview) {
     const r1 = (v) => Math.round(v * 10) / 10, m = smile ?? beak;
     out.push({
       id, w, feet, sheet: sheet.toDataURL('image/png'), preview,
-      log: `${id}: src ${W}x${Hs} -> ${w}x${H}; eyes L(${r1(L.cx)},${r1(L.cy)} ${L.bw}x${L.bh}) R(${r1(R.cx)},${r1(R.cy)} ${R.bw}x${R.bh}) of ${blobs.length} blobs; ${smile ? 'smile' : 'beak'} cx ${r1(m.cx)} y ${m.top}-${m.bottom} w ${m.bw}; skin ${skins.map((s) => s.join(',')).join(' ')}; patches from ${fills.join(' ')}`,
+      log: `${id}: src ${W}x${Hs} -> ${w}x${babyMode ? BABY_H : H}; eyes L(${r1(L.cx)},${r1(L.cy)} ${L.bw}x${L.bh}) R(${r1(R.cx)},${r1(R.cy)} ${R.bw}x${R.bh}) of ${blobs.length} blobs; ${smile ? 'smile' : 'beak'} cx ${r1(m.cx)} y ${m.top}-${m.bottom} w ${m.bw}; skin ${skins.map((s) => s.join(',')).join(' ')}; patches from ${fills.join(' ')}`,
     });
   }
   return out;
@@ -318,18 +369,25 @@ const server = await serveRepo();
 const browser = await launchChrome({ width: 800, height: 600 });
 try {
   await browser.open(server.url + 'assets/art/home-companions-v1.png', 600);
-  const res = await browser.evaluate(`(${bake})(${JSON.stringify(PETS)}, ${H}, ${GUTTER}, ${!!previewDir})`);
+  const baby = process.argv.includes('--baby'), suffix = baby ? '-baby' : '';
+  const res = await browser.evaluate(`(${bake})(${JSON.stringify(PETS)}, ${H}, ${GUTTER}, ${!!previewDir}, ${baby}, ${BABY_H})`);
   const png = (url) => Buffer.from(url.split(',')[1], 'base64');
   if (previewDir) mkdirSync(previewDir, { recursive: true });
   for (const r of res) {
-    writeFileSync(join(REPO_ROOT, 'assets/art', `pet-${r.id}.png`), png(r.sheet));
-    if (previewDir) writeFileSync(join(previewDir, `face-${r.id}.png`), png(r.preview));
+    writeFileSync(join(REPO_ROOT, 'assets/art', `pet-${r.id}${suffix}.png`), png(r.sheet));
+    if (previewDir) writeFileSync(join(previewDir, `${baby ? 'baby' : 'face'}-${r.id}.png`), png(r.preview));
     console.log(r.log);
   }
-  const body = res.map((r) => `  ${r.id}: { w: ${r.w}, h: ${H}, gutter: ${GUTTER}, frames: ${FRAMES}, feet: ${r.feet ? `{ top: ${r.feet.top}, bottom: ${r.feet.bottom}, split: ${r.feet.split} }` : 'null'} },`).join('\n');
+  const body = res.map((r) => `  ${r.id}: { w: ${r.w}, h: ${baby ? BABY_H : H}, gutter: ${GUTTER}, frames: ${FRAMES}, feet: ${r.feet ? `{ top: ${r.feet.top}, bottom: ${r.feet.bottom}, split: ${r.feet.split} }` : 'null'} },`).join('\n');
   mkdirSync(join(REPO_ROOT, 'src/pets'), { recursive: true });
-  writeFileSync(join(REPO_ROOT, 'src/pets/sheets.js'),
-    `/* Generated by tools/bake-pets.mjs. Frame i of assets/art/pet-<id>.png sits at\n   x = i * (w + gutter); frames: idle, blink, happy, talk, sleep. \`feet\` is where\n   the two feet are in the idle frame (sheet px): they step on their own when a\n   pet walks (src/pets/sprite.js). */\nexport const SHEETS = {\n${body}\n};\n`);
+  /* One file, two blocks: each mode rewrites its own and keeps the other. */
+  const file = join(REPO_ROOT, 'src/pets/sheets.js');
+  let old = '';
+  try { old = readFileSync(file, 'utf8'); } catch { /* the first bake */ }
+  const keep = (name) => old.match(new RegExp(`export const ${name} = \\{[\\s\\S]*?\\n\\};\\n`))?.[0] ?? '';
+  const mine = `export const ${baby ? 'BABY_SHEETS' : 'SHEETS'} = {\n${body}\n};\n`;
+  writeFileSync(file,
+    `/* Generated by tools/bake-pets.mjs. Frame i of assets/art/pet-<id>.png sits at\n   x = i * (w + gutter); frames: idle, blink, happy, talk, sleep. \`feet\` is where\n   the two feet are in the idle frame (sheet px): they step on their own when a\n   pet walks (src/pets/sprite.js). BABY_SHEETS are pet-<id>-baby.png (--baby). */\n${baby ? keep('SHEETS') : mine}${baby ? mine : keep('BABY_SHEETS')}`);
   console.log(`wrote ${res.length} sheets + src/pets/sheets.js`);
 } finally {
   browser.close();

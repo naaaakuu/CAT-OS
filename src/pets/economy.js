@@ -285,7 +285,8 @@ export function derivePets(state, records, content, now = Date.now()) {
     const list = byPet.get(p.id);
     const fresh = isNew(p.id);
     const mood = moodNow[p.id];
-    const prog = progressOf(p.id, state, dayRuns.size);
+    // Toffee grows by days of real practice: a day counts once a run on it earned Glow (questions answered, not skipped).
+    const prog = progressOf(p.id, state, dayPaid.size);
     const g = stageOf(prog.done, prog.total);
     // Every second stage is a chapter of their story and a gift for their home.
     const hearts = Math.floor(g.stage / 2);
@@ -343,7 +344,7 @@ export function changeBetween(before, after) {
     why: fresh ? after.last.glow ?? null : null,
     // A run that earned nothing was a replay of what already paid today.
     repeat: fresh && after.last.earned === 0,
-    grew: !!(a && b && a.stage > b.stage), stage: a?.stage ?? 0,
+    grew: !!(a && b && a.stage > b.stage), stage: a?.stage ?? 0, from: b?.stage ?? 0,
     milestone: a && b && a.stage > b.stage ? (a.stage - b.stage) * GLOW.STAGE : 0,
     chapter: !!(a && b && a.hearts > b.hearts), hearts: a?.hearts ?? 0,
     levelUp: (after?.level?.level ?? 1) > (before?.level?.level ?? 1), level: after?.level ?? levelOf(0),

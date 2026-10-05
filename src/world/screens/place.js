@@ -23,6 +23,7 @@ import { play, unlock, startMusic, startAmbience } from '../audio.js';
 import { escapeHTML } from '../../core/utils/format.js';
 import { STAGES } from '../../core/engine/garden-session.js';
 import { STAGE_INFO, groupByStage } from '../../core/learning/journey.js';
+import { wdTreeOrder } from '../../modules/word-dna/logic/tree.js';
 import { PJ_TIERS } from '../../modules/para-jumbles/logic/tiers.js';
 import { PS_TIERS } from '../../modules/para-summary/logic/tiers.js';
 import { OOO_TIERS } from '../../modules/odd-one-out/logic/tiers.js';
@@ -265,7 +266,7 @@ export async function renderPlace(outlet, { storage }, params) {
     const wdSessions = world.records.sessions.filter((s) => s.module === 'wd');
     const done = new Set(); for (const s of wdSessions) for (const a of s.answers ?? []) if (a.is_correct === true) done.add(a.item_id ?? a.question_id);
     const kinds = [...new Set(content.wd.map((i) => i.kind))];
-    const next = content.wd.find((i) => !done.has(i.id)) ?? content.wd[0];
+    const next = wdTreeOrder(content.wd).find((i) => !done.has(i.id)) ?? content.wd[0];
     head({ pct: t.total ? t.done / t.total : 0, label: `${t.done} / ${t.total} families` },
       next ? { href: `#/wd/session/${next.id}`, label: next.title, sub: [String(next.kind).replace('_', ' '), next.member_count ? `${next.member_count} words` : ''].filter(Boolean).join(' · ') } : null,
       '',

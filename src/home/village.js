@@ -22,7 +22,7 @@ import { loadWorld, loadWorldRecords, deriveWorldState } from '../world/state.js
 import { loadValley, saveValley, valleyName } from '../world/companion.js';
 import { derivePets, DAILY_GIFT } from '../pets/economy.js';
 import { GLOW_SVG } from '../pets/glow.js';
-import { PETS, PET_BY_ID, HOUSES, LINES, lineFor, petForPlace, stageTitle, stageGift } from '../pets/pets.js';
+import { PETS, PET_BY_ID, HOUSES, LINES, lineFor, petForPlace, stageTitle, stageGift, ageOf, grewLine, toGrow } from '../pets/pets.js';
 import { MAP, HOMES, PLACES, SIGNS, NODES, LAMPS, WINDOWS, CLOCK, nearestNode } from '../pets/paths.js';
 import { petRig, petPortrait, petGear, petRing, petFigure, FRAME } from '../pets/sprite.js';
 import { nextFor } from '../pets/next.js';
@@ -286,7 +286,7 @@ export async function renderVillageHome(outlet, ctx) {
       const pp = pets.pets.find((x) => x.id === p.id);
       const el = root.querySelector(`.pet[data-pet="${p.id}"]`);
       el.dataset.word = pp.word;
-      el.setAttribute('aria-label', `${p.name}, ${MOOD_LABEL[pp.word]}. ${p.subject}. ${pp.stage ? `Stage ${pp.stage} of 10, ${stageTitle(p.id, pp.stage)}.` : 'Not grown yet.'}${pp.pick && !pp.helpedToday ? ' Needs your help today.' : ''} Open ${p.name}'s card.`);
+      el.setAttribute('aria-label', `${p.name}, ${MOOD_LABEL[pp.word]}. ${p.subject}. ${ageOf(pp.stage).name}, stage ${pp.stage} of 10${pp.stage ? `, ${stageTitle(p.id, pp.stage)}` : ''}.${pp.pick && !pp.helpedToday ? ' Needs your help today.' : ''} Open ${p.name}'s card.`);
     }
     life.setMarks(T.picks.filter((pid, i) => !T.done[i]));
     root.style.setProperty('--harmony', pets.harmony.toFixed(2));
@@ -505,13 +505,13 @@ export async function renderVillageHome(outlet, ctx) {
         if (id !== 'toffee') { visit(id); await pause(1000); }
         meetCard(id); play('tap'); life.poke(id, { happy: true, quiet: true });
         await say(id, LINES.meet[id][0]);
-        if (id === 'toffee') { meetEl.hidden = true; await say('toffee', LINES.intro[1]); await say('toffee', LINES.intro[2]); }
+        if (id === 'toffee') { meetEl.hidden = true; for (const line of LINES.intro.slice(1, -1)) await say('toffee', line); }
       }
       meetEl.hidden = true;
       if (disposed) return;
       skipped = false;
       visit('chai', 1400); root.classList.add('is-pointing');
-      await say('chai', LINES.intro[3]);
+      await say('chai', LINES.intro.at(-1));
       if (disposed) return;
       root.classList.remove('is-intro', 'is-pointing');
       life.release();
@@ -592,7 +592,7 @@ function petHTML(p, pets) {
   return `<button class="pet pet--${p.id}" data-pet="${p.id}" data-word="${pp.word}" data-stage="${pp.stage}" style="--size:${size}" aria-label="${p.name}">
     <span class="pet-shadow" aria-hidden="true"></span>
     ${petRing(p.id, pp.stage)}
-    <span class="pet-body">${petRig(p.id, { size })}${petGear(p.id, pp.stage)}</span>
+    <span class="pet-body">${petRig(p.id, { size, stage: pp.stage })}${petGear(p.id, pp.stage)}</span>
     <span class="pet-bubble" aria-hidden="true" hidden></span>
     <span class="pet-mark" aria-hidden="true" hidden>!</span>
   </button>`;
@@ -602,13 +602,15 @@ function petHTML(p, pets) {
 function growHTML(p, from) {
   const def = PET_BY_ID.get(p.id);
   const gifts = Array.from({ length: p.stage - from }, (_, i) => stageGift(p.id, from + i + 1));
-  return `<p class="cw-party__eyebrow">${escapeHTML(def.name)} grew!</p>
-    <span class="cw-party__pet">${petFigure(p.id, { size: 116, stage: p.stage, frame: FRAME.happy })}</span>
+  /* Crossing into a new age shows who they were next to who they are now. */
+  const aged = ageOf(from).id !== ageOf(p.stage).id;
+  return `<p class="cw-party__eyebrow">${escapeHTML(grewLine(p.id, from, p.stage))}</p>
+    <span class="cw-party__pet">${aged ? `<span class="cw-party__was">${petFigure(p.id, { size: 76, stage: from, frame: FRAME.idle })}</span><span class="cw-party__arrow" aria-hidden="true">›</span>` : ''}${petFigure(p.id, { size: 116, stage: p.stage, frame: FRAME.happy })}</span>
     <h2 id="cw-party-h">${escapeHTML(stageTitle(p.id, p.stage))}</h2>
-    <p class="cw-party__stage"><span class="cw-pips" aria-hidden="true">${Array.from({ length: 10 }, (_, i) => `<i class="${i < p.stage ? 'on' : ''}"></i>`).join('')}</span>Stage ${p.stage} of 10</p>
+    <p class="cw-party__stage"><span class="cw-pips" aria-hidden="true">${Array.from({ length: 10 }, (_, i) => `<i class="${i < p.stage ? 'on' : ''}"></i>`).join('')}</span>${escapeHTML(ageOf(p.stage).name)} · stage ${p.stage} of 10</p>
     <p class="cw-party__new">New: <b>${escapeHTML(gifts.join(', '))}</b></p>
     <p class="cw-party__quote">“${escapeHTML(lineFor(p.id, 'grow', String(p.stage)))}”</p>
-    <p class="cw-party__next">${p.stage < 10 ? `${p.toNext} more ${p.toNext === 1 ? p.unit.replace(/s$/, '') : p.unit} to stage ${p.stage + 1}.` : 'Every last one done. A true master!'}</p>`;
+    <p class="cw-party__next">${p.stage < 10 ? `${toGrow(p.toNext, p.unit)} to stage ${p.stage + 1}.` : 'Every last one done. A true master!'}</p>`;
 }
 
 function confetti() {

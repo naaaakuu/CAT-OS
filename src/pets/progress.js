@@ -45,7 +45,7 @@ export function levelFor(petId, world, p) {
   if (!tiers.length) {
     const next = p.stage < 10 ? stageTitle(petId, p.stage + 1) : null;
     return {
-      n: p.stage, of: 10, name: p.stage ? stageTitle(petId, p.stage) : 'Just starting', next, left: p.toNext, unit: p.unit, cleared: 0,
+      ladder: false, n: p.stage, of: 10, name: p.stage ? stageTitle(petId, p.stage) : 'Just starting', next, left: p.toNext, unit: p.unit, cleared: 0,
       segs: Array.from({ length: 10 }, (_, i) => i < p.stage),
       line: next ? `${p.toNext} more ${one(p.toNext, p.unit)} to become ${next}.` : 'Every last one done. A master!',
     };
@@ -59,7 +59,7 @@ export function levelFor(petId, world, p) {
   const cleared = at === -1 ? rows.length : rows.filter((r) => r.left === 0).length;
   const cur = rows[at === -1 ? rows.length - 1 : at], next = rows[at + 1]?.label ?? null;
   return {
-    n: (at === -1 ? rows.length : at + 1), of: rows.length, name: cur.label, next, left: cur.left, unit, cleared,
+    ladder: true, n: (at === -1 ? rows.length : at + 1), of: rows.length, name: cur.label, next, left: cur.left, unit, cleared,
     segs: rows.map((r) => r.left === 0),
     line: at === -1 ? 'Every level cleared. A master!'
       : `Finish ${cur.left} more ${one(cur.left, unit)} to ${next ? `reach ${next}` : 'clear every level'}.`,
@@ -77,7 +77,7 @@ const ACHIEVEMENTS = [
   ['level', 'Level cleared', 'Clear every question of one level.', (m) => m.cleared, 1],
   ['three', 'Explorer', 'Try 3 different subjects.', (m) => m.subjects, 3],
   ['all', 'All-rounder', 'Try all 5 subjects.', (m) => m.subjects, 5],
-  ['half', 'Halfway there', 'Grow a friend to stage 5.', (m) => m.stage, 5],
+  ['growing', 'Growing up', 'Help a friend grow out of babyhood.', (m) => m.stage, 3],
 ];
 
 /**
