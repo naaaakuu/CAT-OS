@@ -10,7 +10,7 @@ records (IndexedDB, via StorageAdapter)
 ```
 
 ## Village (`src/home/`, `src/pets/`)
-- One painting (`assets/art/home-world-v1.png`, 1536x1024), full detail, never zooms; phones scroll sideways.
+- One painting (`assets/art/home-world-v1.png`, 1536x1024), full detail, never zooms; phones scroll sideways. The campfire (down to y 950) must never sit under the bottom button: `lowestCam()` in `village.js` lifts the camera, and `.cw-dock` (home.css) is an overlay with the button low-centre (portrait) or lower-right (landscape).
 - `home/village.js` camera, HUD, big Help button, today's three, party, intro. `home/life.js` gaits, chores, greetings, voices, ambient canvas. `home/cards.js` friend/fire/level/every-subject/settings cards and map decorations. `home/motion.js` + generated `motion-atlas.js` = the living painting (44 baked patches).
 - `pets/pets.js` roster, HOUSES (subject signs), ages, lines, stories, `SIGNATURE` voices, `MODULE_PET`/`PLACE_PET`. `pets/paths.js` coordinates in painting space. `pets/sprite.js` + `sheets.js` baked sprite sheets (adult and baby), hats, rig. `pets/next.js` each friend's next activity.
 - Art is baked by `tools/bake-pets.mjs` (`--baby` for baby sheets) and `tools/bake-motion.mjs`. Change PATCHES → rerun bake-motion + build-precache.

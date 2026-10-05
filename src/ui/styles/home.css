@@ -364,13 +364,12 @@
 .cw-round svg { width: 23px; height: 23px; color: var(--color-ink-2); }
 
 /* ---------------- The bottom: today's three, and the big button ---------------- */
-.cw-dock {
-  position: absolute; z-index: 10; left: 50%; bottom: max(14px, calc(env(safe-area-inset-bottom) + 8px)); translate: -50% 0;
-  width: min(440px, calc(100% - 24px)); display: grid; gap: 8px; justify-items: center; pointer-events: none;
-}
+/* The dock is an overlay: the big button alone sits low (so the campfire above it stays clear) and "today's three" rides under the top bar. */
+.cw-dock { position: absolute; z-index: 10; inset: 0; pointer-events: none; --dock-b: max(14px, calc(env(safe-area-inset-bottom) + 8px)); }
 .cw-dock > * { pointer-events: auto; }
-.cw-today { display: flex; align-items: center; gap: 8px; min-height: 44px; padding: 4px 14px 4px 6px; border-radius: 999px; font: 650 13.5px/1 var(--font-ui); white-space: nowrap; }
+.cw-today { position: absolute; left: 12px; top: calc(max(12px, env(safe-area-inset-top)) + 54px); display: flex; align-items: center; gap: 8px; min-height: 44px; padding: 4px 14px 4px 6px; border-radius: 999px; font: 650 13.5px/1 var(--font-ui); white-space: nowrap; }
 .cw-today__faces { display: flex; }
+.cw-today__text { display: none; }
 .cw-face { position: relative; margin-right: -6px; }
 .cw-face .pet-portrait { padding: 2px; background: var(--color-surface); box-shadow: 0 1px 3px rgba(40, 30, 10, 0.25); }
 .cw-face:not(.is-done) .pet-portrait__disc { filter: saturate(0.8); }
@@ -379,7 +378,8 @@
 .cw-today__gift svg { width: 100%; height: 100%; }
 .cw-today__gift.is-open { filter: none; animation: cw-mark 1.4s ease-in-out infinite; }
 .cw-play {
-  display: flex; align-items: center; gap: 12px; width: 100%; min-height: 66px; padding: 8px 10px 8px 9px; border-radius: 24px;
+  position: absolute; left: 0; right: 0; bottom: var(--dock-b); margin-inline: auto; width: min(440px, calc(100% - 24px));
+  display: flex; align-items: center; gap: 10px; min-height: 66px; padding: 8px 10px 8px 9px; border-radius: 24px;
   background: linear-gradient(180deg, #FFD978 0%, #F2A93B 100%); color: #3b2508 !important; text-decoration: none;
   border: 2px solid #FFF0C2; box-shadow: 0 5px 0 #B9741C, 0 12px 28px rgba(60, 36, 8, 0.38);
   transition: translate 0.1s, box-shadow 0.1s; animation: cw-nudge 4s ease-in-out 2.5s infinite;
@@ -387,14 +387,22 @@
 .cw-play:active { translate: 0 4px; box-shadow: 0 1px 0 #B9741C, 0 6px 16px rgba(60, 36, 8, 0.3); }
 .cw-play .pet-portrait { background: #FFF6DE; padding: 3px; box-shadow: 0 2px 4px rgba(90, 50, 10, 0.25); }
 .cw-play__text { flex: 1; min-width: 0; display: grid; gap: 3px; text-align: left; }
-.cw-play__text b { font: 800 18px/1.15 var(--font-ui); letter-spacing: -0.01em; }
+.cw-play__text b { font: 800 18px/1.15 var(--font-ui); letter-spacing: -0.01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .cw-play__text small { font: 650 13px/1.25 var(--font-ui); color: #5a3a0e; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .cw-play__go { width: 46px; height: 46px; flex: none; display: grid; place-items: center; border-radius: 50%; background: #3b2508; color: #FFD978; box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.3); }
 .cw-play__go svg { width: 24px; height: 24px; margin-left: 3px; }
+/* The campfire sits low and centre in the painting, so a landscape screen puts the dock in the lower-right corner instead of on top of it. */
+@media (min-width: 700px) and (orientation: landscape) {
+  .cw-play { left: auto; right: max(16px, env(safe-area-inset-right)); margin-inline: 0; width: min(360px, calc(100% - 32px)); }
+}
+@media (min-width: 700px) and (min-height: 521px) and (orientation: landscape) {
+  .cw-today { left: auto; top: auto; right: max(16px, env(safe-area-inset-right)); bottom: calc(var(--dock-b) + 80px); }
+  .cw-today__text { display: inline; }
+}
 @keyframes cw-nudge { 0%, 88%, 100% { scale: 1; } 92% { scale: 1.035; } 96% { scale: 0.99; } }
 .cw.is-intro:not(.is-pointing) .cw-dock { opacity: 0.35; pointer-events: none; }
 .cw.is-pointing .cw-play { animation: cw-call 1.1s ease-in-out infinite; }
-.cw.is-pointing .cw-dock::before { content: "▼"; position: absolute; left: 50%; top: -34px; translate: -50% 0; font: 900 24px/1 var(--font-ui); color: #FFE7A0; text-shadow: 0 2px 6px rgba(40, 20, 0, 0.6); animation: cw-mark 0.9s ease-in-out infinite; pointer-events: none; }
+.cw.is-pointing .cw-play::before { content: "▼"; position: absolute; left: 50%; top: -34px; translate: -50% 0; font: 900 24px/1 var(--font-ui); color: #FFE7A0; text-shadow: 0 2px 6px rgba(40, 20, 0, 0.6); animation: cw-mark 0.9s ease-in-out infinite; pointer-events: none; }
 @keyframes cw-call { 0%, 100% { box-shadow: 0 5px 0 #B9741C, 0 0 0 0 rgba(255, 220, 120, 0.8); } 50% { box-shadow: 0 5px 0 #B9741C, 0 0 0 12px rgba(255, 220, 120, 0); } }
 
 .cw-toast {

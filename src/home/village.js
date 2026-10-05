@@ -114,10 +114,13 @@ export async function renderVillageHome(outlet, ctx) {
   const cam = { x: NODES.pc.x, y: NODES.pc.y + 40 };
   let vw = 1, vh = 1, s = 1, tween = null, onCamera = () => {};
   const scale = () => s;
+  /* The camp's foot (y 950) must clear the big button. In a landscape window the button sits in the corner, so only the screen edge matters;
+     otherwise it is a strip along the bottom (66px + margins) and the painting rides up by that much, losing a sliver of the top, which the top bar hides anyway. */
+  const lowestCam = () => 950 - (vh / 2 - (matchMedia('(min-width: 700px) and (orientation: landscape)').matches ? 0 : 84)) / s;
   const apply = () => {
-    const hw = vw / 2 / s, hh = vh / 2 / s;
+    const hw = vw / 2 / s, hh = vh / 2 / s, low = lowestCam();
     cam.x = hw * 2 >= MAP.w ? MAP.w / 2 : clamp(cam.x, hw, MAP.w - hw);
-    cam.y = hh * 2 >= MAP.h ? MAP.h / 2 : clamp(cam.y, hh, MAP.h - hh);
+    cam.y = hh * 2 >= MAP.h ? Math.max(MAP.h / 2, low) : clamp(cam.y, hh, Math.max(MAP.h - hh, low));
     map.style.transform = `translate3d(${(vw / 2 - cam.x * s).toFixed(2)}px,${(vh / 2 - cam.y * s).toFixed(2)}px,0) scale(${s.toFixed(4)})`;
     map.style.setProperty('--inv', (1 / s).toFixed(4));
     onCamera();
@@ -146,6 +149,8 @@ export async function renderVillageHome(outlet, ctx) {
     else panTo(p.x + (0.5 - 0.36) * vw / s, p.y, { ms: 600 });
   };
   const ro = new ResizeObserver(layout); ro.observe(viewport); layout();
+  // The plaza and the campfire cannot both fit a short window; open on the lower view so the camp is in it.
+  cam.y = Math.max(cam.y, lowestCam()); apply();
 
   /* Drag, fling, wheel, keys. A drag never becomes a tap. A second finger
      does nothing: there is no zoom to pinch. */
@@ -255,7 +260,7 @@ export async function renderVillageHome(outlet, ctx) {
       edge.innerHTML = `${petPortrait(id, 32)}<b>!</b><i aria-hidden="true"></i>`;
       edge.setAttribute('aria-label', `${p.name} needs your help. Show ${p.name}.`);
     }
-    const ex = clamp(sx, 34, vw - 34), ey = clamp(sy, 110, vh - 170);
+    const ex = clamp(sx, 34, vw - 34), ey = clamp(sy, 124, vh - 100);
     edge.style.left = `${ex}px`; edge.style.top = `${ey}px`;
     edge.style.setProperty('--turn', `${Math.atan2(sy - ey, sx - ex).toFixed(3)}rad`);
   };

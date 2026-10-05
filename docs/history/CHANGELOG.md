@@ -4,6 +4,13 @@
 > Versions here are app releases; they map onto the capability milestones in
 > `PROJECT_ROADMAP.md` (0.x releases build toward Roadmap V1.0).
 
+## 3.7.0 follow-up: The campfire stays in view (2026-10-05)
+
+The big bottom bar sat on top of Toffee's campfire, so the camp had to be scrolled into sight.
+
+- The dock is now an overlay: the big "Help" button alone along the bottom (lower-right corner on a landscape screen, so the middle stays clear); "today's three" moved under the top bar (above the button, right-aligned, on a roomy landscape screen).
+- The camera opens low enough that the camp (down to y 950) clears the button, on phones, laptops and short windows alike; the plaza stays in view. Painting, scale and life are unchanged.
+
 ## 3.7.0: Friends who grow up with you (2026-10-05)
 
 I practise, I improve, my friend grows, my village develops.
