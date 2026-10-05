@@ -369,12 +369,12 @@ export const LINES = freeze({
  * (pitch 0..2 and rate are Web Speech knobs; `who` only nudges which voice is picked), a babble elsewhere.
  */
 export const SIGNATURE = freeze({
-  toffee: { say: 'Crackle, crackle, whoosh!', pitch: 1.5, rate: 1.25, volume: 1, who: '' },
-  chai: { say: 'Hoo, hoo. Every book. Twice.', pitch: 1.55, rate: 0.8, volume: 0.7, who: 'f' },
-  matcha: { say: "Hi hi! I'm mostly leaf!", pitch: 1.8, rate: 1.1, volume: 0.9, who: 'f' },
+  toffee: { say: 'Crackle!', pitch: 1.5, rate: 1.25, volume: 1, who: '' },
+  chai: { say: 'Hoo, hoo.', pitch: 1.55, rate: 0.8, volume: 0.7, who: 'f' },
+  matcha: { say: 'Hi hi!', pitch: 1.8, rate: 1.1, volume: 0.9, who: 'f' },
   mochi: { say: 'Mochi.', pitch: 0.1, rate: 0.55, volume: 1, who: 'm' },
-  ginger: { say: 'Yip! Everything has a place!', pitch: 1.25, rate: 1.2, volume: 1, who: '' },
-  mallow: { say: "Soft, soft. I'm mostly cloud.", pitch: 1.4, rate: 0.7, volume: 0.65, who: 'f' },
+  ginger: { say: 'Yip!', pitch: 1.25, rate: 1.2, volume: 1, who: '' },
+  mallow: { say: 'Soft, soft.', pitch: 1.4, rate: 0.7, volume: 0.65, who: 'f' },
 });
 
 /* ------------------------------------------------------------------ */

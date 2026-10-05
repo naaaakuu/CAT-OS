@@ -231,7 +231,7 @@ export function createLife(root, { pets: petsState, atmo, reduced }) {
         const about = pickOf(pets.pets.filter((p) => p.id !== c.a.id && p.id !== c.b.id));
         if (about) text = gossipLine(about.id, about.word, `${now | 0}`);
       }
-      say(speaker, `<span>${text}</span>`, text.length > 3 ? 3000 : 1700, { soft: true });
+      say(speaker, `<span>${text}</span>`, text.length > 3 ? 3000 : 1700, { speak: false });
       if (text === '♥') { speaker.happyUntil = now + 900; heart(speaker); }
       c.step += 1; c.at = now + (text.length > 3 ? 3200 : 1900);
     }
@@ -613,7 +613,7 @@ export function createLife(root, { pets: petsState, atmo, reduced }) {
         if (!a || destroyed || a.sayUntil) return;
         a.reactUntil = now + 700; a.happyUntil = now + 1600;
         if (a.state === 'sleep' || a.state === 'doze') { a.state = 'idle'; a.until = now + 2600; }
-        say(a, `<span>${night() && a.id !== 'toffee' ? 'Oh! Hi!' : pickOf(HELLO)}</span>`, 1900);
+        say(a, `<span>${night() && a.id !== 'toffee' ? 'Oh! Hi!' : pickOf(HELLO)}</span>`, 1900, { speak: false });
       }, 500 + i * 420));
     },
     /** A friend comes to meet you at a node and says something. */

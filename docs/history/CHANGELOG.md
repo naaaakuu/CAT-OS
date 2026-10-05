@@ -6,6 +6,8 @@
 
 ## 3.7.0 follow-up: The campfire stays in view (2026-10-05)
 
+- Friends now say only their own word when tapped (Chai "Hoo, hoo.", Toffee "Crackle!", Matcha "Hi hi!", Ginger "Yip!", Mallow "Soft, soft.", Mochi "Mochi."); the blip babble no longer plays under hellos and gossip.
+
 The big bottom bar sat on top of Toffee's campfire, so the camp had to be scrolled into sight.
 
 - The dock is now an overlay: the big "Help" button alone along the bottom (lower-right corner on a landscape screen, so the middle stays clear); "today's three" moved under the top bar (above the button, right-aligned, on a roomy landscape screen).
