@@ -510,13 +510,43 @@
 .cw-bff b { display: block; font-size: 14px; }
 .cw-bff small { display: block; font-size: 12.5px; line-height: 1.4; color: var(--color-ink-2); }
 
-/* Achievements (3.4): a new player sees the one thing to do and their
-   level; the stars, the story and the best friend wait behind this one
-   button, so the card never reads as a wall of game terms. Same native
-   Popover API as the ⓘ buttons (src/ui/info.js): Escape and an outside
-   tap close it, and it renders in the top layer so the scrim cannot trap it. */
-.cw-achieve { display: inline-flex; align-items: center; gap: 6px; margin: 2px 0 4px; padding: 9px 16px; border: 1px solid var(--color-line); border-radius: 999px; background: var(--color-surface-2); font: 700 13px/1 var(--font-ui); color: var(--color-ink-2); }
-.cw-achieve .cw-star { width: 14px; height: 14px; }
+/* Level block (3.5): "Level 2 of 5: Easy" + a segmented bar + one line
+   saying what finishing it takes. Readable in three seconds. */
+.cw-who { margin: 0 0 12px; }
+.cw-who .cw-card__name { margin-top: 24px; }
+.cw-who .cw-tag { margin: 2px 0 0; }
+.cw-level { margin: 0 0 14px; padding: 12px 14px; border-radius: 16px; background: color-mix(in srgb, var(--honey) 14%, var(--color-surface-2)); }
+.cw-level__head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin: 0 0 8px; font: 750 14px/1.3 var(--font-ui); color: var(--color-ink); }
+.cw-level__head span { font: 650 13px/1.3 var(--font-ui); color: var(--honey-ink); text-align: right; }
+.cw-level__segs { display: flex; gap: 4px; margin: 0 0 8px; }
+.cw-level__segs i { flex: 1; height: 8px; border-radius: 4px; background: color-mix(in srgb, var(--color-line-strong) 55%, transparent); }
+.cw-level__segs i.is-on { background: var(--honey); }
+.cw-level__segs i.is-now { background: color-mix(in srgb, var(--honey) 45%, var(--color-surface)); box-shadow: inset 0 0 0 2px var(--honey); }
+.cw-level__line { margin: 0; font: 500 13.5px/1.4 var(--font-ui); color: var(--color-ink-2); }
+
+/* Everything that is not one of the five things lives here, closed. */
+.cw-more { margin: 10px 0 0; }
+.cw-more > summary { display: flex; align-items: center; justify-content: space-between; min-height: 44px; padding: 0 4px; font: 650 13.5px/1 var(--font-ui); color: var(--color-ink-3); cursor: pointer; list-style: none; }
+.cw-more > summary::-webkit-details-marker { display: none; }
+.cw-more > summary::after { content: "▾"; font-size: 14px; transition: rotate 0.2s; }
+.cw-more[open] > summary::after { rotate: 180deg; }
+
+/* Achievements (3.5): one button on the card, one short line each inside.
+   Same native Popover API as the ⓘ buttons (src/ui/info.js): Escape and an
+   outside tap close it, and it renders in the top layer so the scrim cannot trap it. */
+.cw-achieve { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; min-height: 48px; margin: 2px 0 4px; padding: 11px 16px; border: 1px solid var(--color-line); border-radius: 16px; background: var(--color-surface-2); font: 700 14px/1 var(--font-ui); color: var(--color-ink); }
+.cw-achieve small { margin-left: auto; font: 650 12.5px/1 var(--font-ui); color: var(--color-ink-3); }
+.cw-achieve .cw-star { width: 16px; height: 16px; }
+.cw-h3 small { margin-left: 6px; font: 650 13px/1 var(--font-ui); color: var(--color-ink-3); }
+.cw-ach { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.cw-ach li { display: flex; gap: 8px; align-items: flex-start; padding: 10px; border-radius: 14px; background: var(--color-surface-2); opacity: 0.78; }
+.cw-ach li.is-got { opacity: 1; background: color-mix(in srgb, var(--honey) 22%, var(--color-surface)); }
+.cw-ach__mark { flex: none; display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--color-line-strong); font: 900 13px/1 var(--font-ui); color: #4a2c06; }
+.cw-ach li.is-got .cw-ach__mark { background: var(--honey); border-color: var(--honey); }
+.cw-ach b { display: block; font: 750 13.5px/1.25 var(--font-ui); }
+.cw-ach small { display: block; margin-top: 2px; font: 500 12.5px/1.35 var(--font-ui); color: var(--color-ink-2); }
+.cw-ach .cw-ach__n { font-weight: 700; color: var(--honey-ink); }
+@media (max-width: 340px) { .cw-ach { grid-template-columns: 1fr; } }
 .cw-achieve-pop {
   width: min(380px, calc(100vw - 2 * var(--space-4)));
   max-height: calc(100dvh - 2 * var(--space-6));

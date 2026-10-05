@@ -68,7 +68,7 @@ const CONTENT_VERSION = 16;
    ALWAYS lands in a new cache, whether or not anybody remembered to bump the
    number above. Nothing used to enforce that bump, and an installed learner
    could sit on old code forever with no symptom anybody could see. */
-const BUILD_ID = 'cb99197d27';
+const BUILD_ID = '044884c96d';
 const CONTENT_ID = '08c47e8249';
 const SHELL_CACHE = `cat-os-shell-v${CACHE_VERSION}.${BUILD_ID}`;
 const CONTENT_CACHE = `cat-os-content-v${CONTENT_VERSION}.${CONTENT_ID}`;
@@ -141,8 +141,11 @@ const CORE_FILES = [
   './src/modules/language-garden/logic/effort.js',
   './src/modules/language-garden/logic/groves.js',
   './src/modules/odd-one-out/index.js',
+  './src/modules/odd-one-out/logic/tiers.js',
   './src/modules/para-jumbles/index.js',
+  './src/modules/para-jumbles/logic/tiers.js',
   './src/modules/para-summary/index.js',
+  './src/modules/para-summary/logic/tiers.js',
   './src/modules/reading-comprehension/index.js',
   './src/modules/verbal-bank/index.js',
   './src/modules/word-dna/index.js',
@@ -150,6 +153,7 @@ const CORE_FILES = [
   './src/pets/next.js',
   './src/pets/paths.js',
   './src/pets/pets.js',
+  './src/pets/progress.js',
   './src/pets/sheets.js',
   './src/pets/sprite.js',
   './src/shell/prefs.js',
@@ -305,6 +309,7 @@ const SHELL_FILES = [
   './src/pets/next.js',
   './src/pets/paths.js',
   './src/pets/pets.js',
+  './src/pets/progress.js',
   './src/pets/sheets.js',
   './src/pets/sprite.js',
   './src/shell/growth.js',

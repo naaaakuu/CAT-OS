@@ -317,7 +317,7 @@ export async function renderVillageHome(outlet, ctx) {
     setValley: (v) => { valley = v; hud(); },
     celebrate: (id) => life.poke(id, { happy: true }),
     open: (kind, arg, trigger) => openCard(kind, arg, trigger),
-    showPet: (id) => { reveal(life.positionOf(id)); later(() => openCard('pet', id), reduced ? 0 : 260); },
+    showPet: (id) => { life.poke(id); reveal(life.positionOf(id)); later(() => openCard('pet', id), reduced ? 0 : 260); },
   };
   const openCard = (kind, arg, trigger) => {
     const was = openKind;
@@ -350,7 +350,7 @@ export async function renderVillageHome(outlet, ctx) {
       const s = spot.dataset.spot;
       // The rose cottage and the clock tower are a friend's second house: straight to their subject.
       if (!PET_BY_ID.has(s)) { unlock(); play('open'); location.hash = `#/world/place/${HOUSES.find((h) => h.spot === s).place}`; return; }
-      if (s === 'toffee') { reveal(NODES.f1); openCard('fire', null, spot); return; }
+      if (s === 'toffee') { life.poke(s); reveal(NODES.f1); openCard('fire', null, spot); return; }
       life.poke(s); reveal(life.positionOf(s)); openCard('pet', s, spot);
       return;
     }

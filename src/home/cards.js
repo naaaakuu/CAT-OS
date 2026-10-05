@@ -1,11 +1,10 @@
 /**
  * cards.js — the village's cards. One card at a time, a bottom sheet on a
  * phone and a card on the right of a wide screen (home.css). Each card says
- * what is true in plain words, offers the one thing worth doing, and shows
- * everything else openly (no hidden drawers):
+ * what is true in plain words and offers the one thing worth doing:
  *
- *   pet      a friend: what they need, what they noticed about you, the
- *            big Help button, everything you can do with them, their story
+ *   pet      a friend: who they are, what they teach, your level, the big
+ *            Help button, Achievements; the rest sits under "More about"
  *   fire     Toffee's fire: the days in a row, the week, spare logs, the Gauntlet
  *   level    the village level: stars, and what each level puts on the map
  *   friends  every subject: one row per house, each a tap from its next round
@@ -17,10 +16,11 @@
 import { PETS, PET_BY_ID, HOUSES, STORIES, HOME_GIFTS, FRIENDSHIPS, friendshipOf, lineFor, stageTitle, stageGift } from '../pets/pets.js';
 import { DAILY_GIFT } from '../pets/economy.js';
 import { nextFor, cornersOf, noticeFor } from '../pets/next.js';
+import { levelFor, achievementsFor } from '../pets/progress.js';
 import { petFigure, petPortrait, backdropStyle, FRAME } from '../pets/sprite.js';
 import { TREASURE_AT, HOMES } from '../pets/paths.js';
 import { saveValley, valleyName, cleanValleyName, nameSuggestions } from '../world/companion.js';
-import { musicEnabled, setMusicEnabled, unlock, startMusic, startAmbience, voice } from '../world/audio.js';
+import { musicEnabled, setMusicEnabled, unlock, startMusic, startAmbience } from '../world/audio.js';
 import { feedbackPrefs, setFeedbackPref } from '../core/engagement/feedback.js';
 import { escapeHTML } from '../core/utils/format.js';
 
@@ -54,40 +54,29 @@ function growth(p, def) {
     </div>`;
 }
 
-/** A friend's line, typed out after a moment of "thinking", with their little voice. */
-function typeOut(card, api, id) {
-  const els = [...card.querySelectorAll('[data-type]')];
-  if (api.reduced) return;
-  // Closing the card only hides it: a friend stops talking once their card is gone.
-  const open = () => el0.isConnected && card.closest('.cw-overlay')?.classList.contains('is-open') && card.contains(el0);
-  const el0 = els[0];
-  if (!el0) return;
-  let delay = 350;
-  for (const el of els) {
-    const text = el.dataset.type;
-    el.textContent = '';
-    el.classList.add('is-thinking');
-    const start = delay;
-    setTimeout(() => {
-      if (!el.isConnected) return;
-      el.classList.remove('is-thinking');
-      if (open()) voice(id, text);
-      let i = 0;
-      const step = () => {
-        if (!el.isConnected) return;
-        i = Math.min(text.length, i + 2);
-        el.textContent = text.slice(0, i);
-        if (i < text.length) setTimeout(step, 22);
-      };
-      step();
-    }, start);
-    delay += 650 + text.length * 11;
-  }
-}
-
 /* ------------------------------------------------------------------ */
 /* A friend                                                            */
 /* ------------------------------------------------------------------ */
+
+/** Where the student stands in one glance: "Level 2 of 8", the level's name, a segmented bar, and what finishing it takes. */
+function levelBlock(L) {
+  return `<div class="cw-level">
+      <p class="cw-level__head"><b>${L.n ? `Level ${L.n} of ${L.of}` : 'Getting started'}</b>${L.n ? `<span>${esc(L.name)}</span>` : ''}</p>
+      <span class="cw-level__segs" aria-hidden="true">${L.segs.map((d, i) => `<i class="${d ? 'is-on' : i === L.n - 1 ? 'is-now' : ''}"></i>`).join('')}</span>
+      <p class="cw-level__line">${esc(L.line)}</p>
+    </div>`;
+}
+
+/** The Achievements button, and the panel it opens: one short line each, for the whole of CAT OS. */
+function achievements(id, api) {
+  const list = achievementsFor(api.world, api.pets), got = list.filter((a) => a.got).length, pid = `cw-achieve-${id}`;
+  return `<button type="button" class="cw-achieve" popovertarget="${pid}">${STAR} Achievements <small>${got} of ${list.length}</small></button>
+    <span class="cw-achieve-pop" id="${pid}" popover>
+      <h3 class="cw-h3">Achievements <small>${got} of ${list.length}</small></h3>
+      <ul class="cw-ach">${list.map((a) => `<li class="${a.got ? 'is-got' : ''}"><span class="cw-ach__mark" aria-hidden="true">${a.got ? '✓' : ''}</span><span><b>${esc(a.title)}</b><small>${esc(a.line)}</small>${a.got || a.goal < 2 ? '' : `<small class="cw-ach__n">${a.have} / ${a.goal}</small>`}</span></li>`).join('')}</ul>
+      <button type="button" class="btn btn--block cw-achieve-pop__close" popovertarget="${pid}" popovertargetaction="hide">Close</button>
+    </span>`;
+}
 
 function petCard(card, id, api) {
   const def = PET_BY_ID.get(id);
@@ -97,9 +86,7 @@ function petCard(card, id, api) {
   const corners = cornersOf(id, api.world);
   const bff = PET_BY_ID.get(def.bff), friendship = friendshipOf(id);
   const greet = lineFor(id, p.isNew ? 'meet' : p.word, api.pets.today.key);
-  const ask = p.request;
   const today = api.pets.today, pick = today.picks.includes(id), done = today.helped.includes(id);
-  const achieveId = `cw-achieve-${id}`;
   card.innerHTML = `
     ${close}
     <div class="cw-card__hero cw-card__hero--${id}" style="${backdropStyle(id)}">
@@ -110,28 +97,24 @@ function petCard(card, id, api) {
       <p class="cw-role">Teaches ${esc(def.subject)}</p>
       <p class="cw-tag">${esc(def.tag)}</p>
     </div>
-    <div class="cw-status">
-      <span class="cw-moodchip cw-moodchip--${p.word}">${MOOD_LABEL[p.word]}</span>
-    </div>
-    <div class="cw-talk">
-      <p class="cw-say" data-type="${esc(`${greet} ${ask}`)}">${esc(`${greet} ${ask}`)}</p>
-      ${notice ? `<p class="cw-notice"><span class="cw-notice__spark" aria-hidden="true">✦</span><span data-type="${esc(notice)}">${esc(notice)}</span></p>` : ''}
-    </div>
-    ${pick && !done ? `<p class="cw-pickline"><b>!</b> One of today's three friends. Help ${esc(def.name)} for today's gift.</p>` : ''}
+    ${levelBlock(levelFor(id, api.world, p))}
     ${next ? `<a class="cw-go" href="${esc(next.href)}" data-go><span><b>Help ${esc(def.name)}</b><small>${esc(ACT[id])}: ${esc(next.label)}${next.sub ? ` · ${esc(next.sub)}` : ''}</small></span><i aria-hidden="true">▶</i></a>` : ''}
-    ${growth(p, def)}
-    ${corners.length ? `<h3 class="cw-h3">More ways to practice ${esc(def.subject)}</h3><ul class="cw-list">${corners.map((c) => `<li><a href="${esc(c.href)}"><span><b>${esc(c.label)}</b><small>${esc(c.sub ?? '')}</small></span><i aria-hidden="true">›</i></a></li>`).join('')}</ul>` : ''}
-    <button type="button" class="cw-achieve" popovertarget="${achieveId}">${STAR} Achievements</button>
-    <span class="cw-achieve-pop" id="${achieveId}" popover>
+    ${achievements(id, api)}
+    <details class="cw-more">
+      <summary>More about ${esc(def.name)}</summary>
+      <p class="cw-status"><span class="cw-moodchip cw-moodchip--${p.word}">${MOOD_LABEL[p.word]}</span></p>
+      <p class="cw-say">${esc(`${greet} ${p.request}`)}</p>
+      ${notice ? `<p class="cw-notice"><span class="cw-notice__spark" aria-hidden="true">✦</span><span>${esc(notice)}</span></p>` : ''}
+      ${pick && !done ? `<p class="cw-pickline"><b>!</b> One of today's three friends. Help ${esc(def.name)} for today's gift.</p>` : ''}
+      ${growth(p, def)}
+      ${corners.length ? `<h3 class="cw-h3">More ways to practice ${esc(def.subject)}</h3><ul class="cw-list">${corners.map((c) => `<li><a href="${esc(c.href)}"><span><b>${esc(c.label)}</b><small>${esc(c.sub ?? '')}</small></span><i aria-hidden="true">›</i></a></li>`).join('')}</ul>` : ''}
       <p class="cw-reward">${STAR}<span>Each round earns <b>1 to 4 stars</b> for the village.${p.hearts < 5 ? ` At stage ${(p.hearts + 1) * 2}: <b>${esc(HOME_GIFTS[p.hearts])}</b> at ${esc(def.home)}.` : ''}</span></p>
       <h3 class="cw-h3">${esc(def.name)}'s story</h3>
       <p class="cw-sub">${esc(def.trouble)}</p>
       <ol class="cw-story">${STORIES[id].map((s, i) => (i < p.hearts ? `<li>${esc(s)}</li>` : `<li class="is-locked"><span aria-hidden="true">♡</span> Stage ${(i + 1) * 2}: grow ${esc(def.name)} to hear this part</li>`)).join('')}</ol>
       ${friendship ? `<div class="cw-bff">${petPortrait(bff.id, 40)}<p><b>Best friend: ${esc(bff.name)}</b><small>${esc(friendship.line)}</small></p></div>` : ''}
-      <button type="button" class="btn btn--block cw-achieve-pop__close" popovertarget="${achieveId}" popovertargetaction="hide">Close</button>
-    </span>`;
+    </details>`;
   card.querySelector('[data-go]')?.addEventListener('click', () => api.play('open'));
-  typeOut(card, api, id);
 }
 
 /* ------------------------------------------------------------------ */
@@ -146,24 +129,28 @@ function fireCard(card, api) {
   card.innerHTML = `
     ${close}
     <div class="cw-card__hero cw-card__hero--toffee" style="${backdropStyle('toffee')}"><span class="cw-card__pet">${petFigure('toffee', { size: 118, stage: toffee.stage, frame: FRAME.happy })}</span></div>
-    <h2 class="cw-card__name">${f.days ? `${f.days}-day fire` : 'Light your first fire'}</h2>
-    <p class="cw-role">Toffee keeps the village fire</p>
-    <p class="cw-tag">${esc(PET_BY_ID.get('toffee').tag)} Toffee grows with every day you come.</p>
-    ${growth(toffee, PET_BY_ID.get('toffee'))}
-    <ol class="cw-week" aria-label="This week">${f.week.map((d, i) => `<li class="${d.done ? 'is-done' : ''} ${i === 6 ? 'is-today' : ''}"><span aria-hidden="true">${d.done ? FLAME : ''}</span><small>${i === 6 ? 'Today' : dayName(d.key)}</small><b class="sr-only">${d.done ? 'practised' : 'missed'}</b></li>`).join('')}</ol>
-    <div class="cw-talk">
-      <p class="cw-say" data-type="${esc(toffee.request)}">${esc(toffee.request)}</p>
-      ${notice ? `<p class="cw-notice"><span class="cw-notice__spark" aria-hidden="true">✦</span><span data-type="${esc(notice)}">${esc(notice)}</span></p>` : ''}
+    <div class="cw-who">
+      <h2 class="cw-card__name">${f.days ? `${f.days}-day fire` : 'Light your first fire'}</h2>
+      <p class="cw-role">Toffee keeps the daily streak and the Gauntlet</p>
+      <p class="cw-tag">${esc(PET_BY_ID.get('toffee').tag)}</p>
     </div>
-    <ul class="cw-facts">
-      <li><b>How it works</b><span>Help any friend, any day, and the fire grows by one day.</span></li>
-      <li><b>Spare logs: ${f.kindling}</b><span>Every 7 days in a row, Toffee saves a spare log. It keeps the fire alive if you miss one day.</span></li>
-    </ul>
+    ${levelBlock(levelFor('toffee', api.world, toffee))}
     <a class="cw-go cw-go--gold" href="#/world/place/wilds" data-go><span><b>The Gauntlet</b><small>The weekly challenge: 30 quick questions in 3 minutes. Beat your best.</small></span><i aria-hidden="true">▶</i></a>
-    <h3 class="cw-h3">Toffee's story</h3>
-    <ol class="cw-story">${STORIES.toffee.map((s, i) => (i < toffee.hearts ? `<li>${esc(s)}</li>` : `<li class="is-locked"><span aria-hidden="true">♡</span> Stage ${(i + 1) * 2}: keep the fire going to hear this part</li>`)).join('')}</ol>
-    <p class="cw-sub"><a href="#/world/place/hearth">Your records</a> · every day, star and friend so far.</p>`;
-  typeOut(card, api, 'toffee');
+    ${achievements('toffee', api)}
+    <details class="cw-more">
+      <summary>More about Toffee</summary>
+      <ol class="cw-week" aria-label="This week">${f.week.map((d, i) => `<li class="${d.done ? 'is-done' : ''} ${i === 6 ? 'is-today' : ''}"><span aria-hidden="true">${d.done ? FLAME : ''}</span><small>${i === 6 ? 'Today' : dayName(d.key)}</small><b class="sr-only">${d.done ? 'practised' : 'missed'}</b></li>`).join('')}</ol>
+      <p class="cw-say">${esc(toffee.request)}</p>
+      ${notice ? `<p class="cw-notice"><span class="cw-notice__spark" aria-hidden="true">✦</span><span>${esc(notice)}</span></p>` : ''}
+      <ul class="cw-facts">
+        <li><b>How it works</b><span>Help any friend, any day, and the fire grows by one day.</span></li>
+        <li><b>Spare logs: ${f.kindling}</b><span>Every 7 days in a row, Toffee saves a spare log. It keeps the fire alive if you miss one day.</span></li>
+      </ul>
+      <h3 class="cw-h3">Toffee's story</h3>
+      <ol class="cw-story">${STORIES.toffee.map((s, i) => (i < toffee.hearts ? `<li>${esc(s)}</li>` : `<li class="is-locked"><span aria-hidden="true">♡</span> Stage ${(i + 1) * 2}: keep the fire going to hear this part</li>`)).join('')}</ol>
+      <p class="cw-sub"><a href="#/world/place/hearth">Your records</a> · every day, star and friend so far.</p>
+    </details>`;
+  card.querySelector('[data-go]')?.addEventListener('click', () => api.play('open'));
 }
 
 /* ------------------------------------------------------------------ */

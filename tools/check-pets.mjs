@@ -23,7 +23,7 @@ const NAMES = ['Toffee', 'Chai', 'Matcha', 'Mochi', 'Ginger', 'Mallow'];
 const FIELDS = ['id', 'name', 'creature', 'subject', 'tag', 'item', 'charm', 'teaches', 'home', 'icon', 'colour', 'frame', 'places', 'modules', 'bff', 'trouble', 'blurb'];
 const MODULES = ['rc', 'rc2', 'cr', 'lex', 'garden', 'wd', 'wb', 'ps', 'pc', 'pj', 'sp', 'ooo', 'gauntlet'];
 const MOOD_WORDS = ['glowing', 'happy', 'missing', 'sleepy', 'wilting', 'new'];
-const KINDS = ['hello', 'missed', 'meet', 'thanks', 'tap'];
+const KINDS = ['hello', 'missed', 'meet', 'thanks'];
 const BANNED = /\b(wrong|failure|failed|mistake|poor|weak|bad|careless|study|score|xp|level up|unlocked)\b/i;
 
 export async function checkPets() {
@@ -96,7 +96,6 @@ export async function checkPets() {
   for (const kind of KINDS) {
     for (const id of ORDER) if (!Array.isArray(L[kind]?.[id]) || !L[kind][id].length) bad(`${id} has no "${kind}" lines`);
   }
-  for (const id of ORDER) if ((L.tap?.[id] ?? []).length < 4) bad(`${id} has ${(L.tap?.[id] ?? []).length} tap lines, wants 4`);
   for (const w of MOOD_WORDS) {
     const g = L.gossip?.[w] ?? [];
     if (g.length < 2) bad(`gossip.${w} has ${g.length} templates, wants 2+`);
@@ -137,6 +136,18 @@ export async function checkPets() {
   for (const p of P.PETS ?? []) { add(`${p.id}.trouble`, p.trouble); add(`${p.id}.blurb`, p.blurb); add(`${p.id}.tag`, p.tag); }
   walk('STAGE_TITLES', P.STAGE_TITLES);
   for (const id of ORDER) for (let s = 1; s <= 10; s += 1) add(`stageGift(${id}, ${s})`, P.stageGift(id, s));
+  for (const id of ORDER) add(`SIGNATURE.${id}`, P.SIGNATURE?.[id]?.say);
+
+  /* ---- Signature voices: one fixed phrase and tone each, spoken on every tap ---- */
+  if (!sameSet(Object.keys(P.SIGNATURE ?? {}), ORDER)) bad(`SIGNATURE is keyed by ${Object.keys(P.SIGNATURE ?? {}).join()}, not the six pets`);
+  for (const id of ORDER) {
+    const g = P.SIGNATURE?.[id];
+    if (!g) continue;
+    if (!(g.pitch >= 0 && g.pitch <= 2) || !(g.rate >= 0.1 && g.rate <= 10) || !(g.volume > 0 && g.volume <= 1)) bad(`SIGNATURE.${id} tone is out of the speech range`);
+    if (!['', 'f', 'm'].includes(g.who)) bad(`SIGNATURE.${id}.who is "${g.who}"`);
+  }
+  if (new Set(ORDER.map((id) => P.SIGNATURE?.[id]?.say)).size !== 6) bad('every friend has their own signature phrase');
+  if (!(P.SIGNATURE?.mochi?.pitch < 0.5 && P.SIGNATURE.mochi.pitch < P.SIGNATURE.chai?.pitch)) bad('Mochi has the heavy voice, lower than Chai\'s soft one');
 
   for (const [where, s] of lines) {
     if (typeof s !== 'string' || !s.trim()) { bad(`${where} is empty`); continue; }
@@ -153,13 +164,13 @@ export async function checkPets() {
   /* ---- Picks are deterministic and come from the right pool ---- */
   const a = P.lineFor('chai', 'hello', 'd1');
   if (a !== P.lineFor('chai', 'hello', 'd1') || !L.hello?.chai?.includes(a)) bad('lineFor must pick deterministically from the pet\'s own pool');
-  if (!L.tap?.mochi?.includes(P.lineFor('mochi', 'tap', 7))) bad('lineFor(tap) picks a tap line');
+  if (!L.muse?.mochi?.includes(P.lineFor('mochi', 'muse', 7))) bad('lineFor(muse) picks a muse line');
   const poolOf = { new: 'meet', missing: 'missed', sleepy: 'missed', wilting: 'missed', glowing: 'hello', happy: 'hello' };
   for (const [w, kind] of Object.entries(poolOf)) {
     for (const id of ORDER) if (!L[kind]?.[id]?.includes(P.lineFor(id, w, 'x'))) bad(`lineFor(${id}, ${w}) should say a "${kind}" line`);
   }
   if (new Set(Array.from({ length: 40 }, (_, i) => P.lineFor('toffee', 'hello', `s${i}`))).size < 2) bad('lineFor never varies with the seed');
-  if (P.lineFor('nobody', 'tap', 1) !== '') bad('an unknown pet says nothing');
+  if (P.lineFor('nobody', 'muse', 1) !== '') bad('an unknown pet says nothing');
   const gl = P.gossipLine('mochi', 'missing', 3);
   if (!(L.gossip?.missing ?? []).some((t) => t.replaceAll('{name}', 'Mochi') === gl)) bad(`gossipLine fills the name from the mood's own pool: ${gl}`);
   const gu = P.gossipLine('ginger', 'no-such-mood', 1);
@@ -172,6 +183,38 @@ export async function checkPets() {
   }
   if (P.requestFor('chai') !== P.REQUESTS?.chai?.[0] || P.requestFor('chai', -3) !== P.REQUESTS?.chai?.[0]) bad('requestFor starts at the first request');
   if (P.requestFor('nobody', 1) !== '') bad('requestFor knows no strangers');
+
+  /* ---- The level a card shows and the achievements behind its button (progress.js) ---- */
+  const G = await load('src/pets/progress.js');
+  const item = (id, tier) => ({ id, tier });
+  const content = { pj: [item('a', 'beginner'), item('b', 'beginner'), item('c', 'easy'), item('d', 'easy'), item('e', 'medium')], rc: [], ps: [], ooo: [] };
+  const sess = (ids) => ({ module: 'pj', answers: ids.map((i) => ({ item_id: i, is_correct: true })) });
+  const pet = (id, o = {}) => ({ id, stage: 0, toNext: 5, unit: 'questions', done: 0, visits: 0, hearts: 0, ...o });
+  const lv = (ids) => G.levelFor('ginger', { content, records: { sessions: ids.length ? [sess(ids)] : [] }, state: {} }, pet('ginger'));
+  const l0 = lv([]), l1 = lv(['a', 'b', 'c']), l2 = lv(['a', 'b', 'c', 'd', 'e']);
+  if (l0.n !== 1 || l0.of !== 3 || l0.name !== 'Beginner' || l0.left !== 2 || l0.cleared !== 0 || !/Finish 2 more jumbles to reach Easy/.test(l0.line)) bad(`levelFor at the start: ${JSON.stringify(l0)}`);
+  if (l1.n !== 2 || l1.name !== 'Easy' || l1.left !== 1 || l1.cleared !== 1 || l1.segs.join() !== 'true,false,false' || !/Finish 1 more jumble to reach Medium/.test(l1.line)) bad(`levelFor mid-way: ${JSON.stringify(l1)}`);
+  if (l2.n !== 3 || l2.cleared !== 3 || !l2.segs.every(Boolean) || !/Every level cleared/.test(l2.line)) bad(`levelFor when every level is cleared: ${JSON.stringify(l2)}`);
+  const lm = G.levelFor('matcha', { content, records: {}, state: {} }, pet('matcha', { stage: 3, toNext: 12, unit: 'words' }));
+  if (lm.n !== 3 || lm.of !== 10 || lm.segs.filter(Boolean).length !== 3 || !/12 more words to become /.test(lm.line)) bad(`levelFor falls back to growth stages: ${JSON.stringify(lm)}`);
+  for (const l of [l0, l1, l2, lm]) {
+    if (l.line.length > 96 || l.line.includes('—') || BANNED.test(l.line)) bad(`level line breaks the copy rules: ${l.line}`);
+  }
+
+  const cold = G.achievementsFor({ content, records: {}, state: {} }, { pets: ORDER.map((id) => pet(id)), flame: { days: 0 } });
+  const warm = G.achievementsFor(
+    { content, records: { sessions: [sess(['a', 'b', 'c', 'd', 'e'])] }, state: { engagement: { answered: 520, streaks: { best: 7 }, hasPerfectSession: true } } },
+    { pets: ORDER.map((id) => pet(id, { visits: 1, stage: id === 'chai' ? 5 : 1, done: id === 'toffee' ? 4 : 1 })), flame: { days: 2 } },
+  );
+  if (cold.length !== 10 || new Set(cold.map((a) => a.id)).size !== 10) bad(`there are ${cold.length} achievements, wants 10 distinct`);
+  if (cold.some((a) => a.got)) bad('a brand-new student has no achievements yet');
+  if (warm.some((a) => !a.got)) bad(`a well-practised student has them all: missing ${warm.filter((a) => !a.got).map((a) => a.id).join()}`);
+  for (const a of cold) {
+    for (const [where, s] of [[`achievement ${a.id} title`, a.title], [`achievement ${a.id} line`, a.line]]) {
+      if (!s?.trim() || s.length > 40 || s.includes('—') || BANNED.test(s)) bad(`${where} must be short and clean: ${s}`);
+    }
+    if (!(a.goal >= 1) || a.have !== 0 || a.got) bad(`achievement ${a.id} starts at 0 of ${a.goal}`);
+  }
 
   return { problems, lines: lines.length };
 }

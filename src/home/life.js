@@ -21,9 +21,9 @@
 
 import { NODES, HOMES, SPOTS, route, nearestNode, FIRE, CHIMNEYS, TEAPOT, POND, CLOCK, TREASURE_AT } from '../pets/paths.js';
 import { FRAME, growOf } from '../pets/sprite.js';
-import { PETS, PET_BY_ID, gossipLine, lineFor } from '../pets/pets.js';
+import { PETS, PET_BY_ID, SIGNATURE, gossipLine, lineFor } from '../pets/pets.js';
 import { rng } from '../world/engine/palette.js';
-import { voice } from '../world/audio.js';
+import { voice, signature } from '../world/audio.js';
 import { createWater } from './water.js';
 
 /** Drawn height of each pet at full size, in painting pixels. */
@@ -591,7 +591,7 @@ export function createLife(root, { pets: petsState, atmo, reduced }) {
   return {
     ripple: (x, y) => water.ripple(x, y),
     positionOf: (id) => { const a = byId.get(id); return a ? { x: a.x, y: a.y - 40 } : NODES.pc; },
-    /** A tap: the friend jumps, a heart floats up, and it says something (unless `quiet`). Returns what it said. */
+    /** A tap: the friend jumps, a heart floats up, and it says its signature (unless `quiet`). Returns what it said. */
     poke(id, { happy = false, line = null, quiet = false } = {}) {
       const a = byId.get(id); if (!a) return '';
       // A quiet happy poke is the welcome back: the friend beams for as long as the toast names its stars.
@@ -599,8 +599,10 @@ export function createLife(root, { pets: petsState, atmo, reduced }) {
       if (!reduced) { heart(a); if (happy) setTimeout(() => heart(a), 220); }
       if (a.state === 'sleep' || a.state === 'doze') { a.state = 'idle'; a.until = now + 3000; }
       if (quiet) return '';
-      const said = line ?? lineFor(id, 'tap', `${now | 0}`);
-      say(a, `<span>${said}</span>`, line ? 4200 : 2600);
+      const sig = line ? null : SIGNATURE[id];
+      const said = line ?? sig?.say ?? '';
+      say(a, `<span>${said}</span>`, line ? 4200 : 2600, { speak: !!line });
+      if (sig) signature(id, sig);
       return said;
     },
     /** The friends you can see wave hello as you arrive, one after another. */

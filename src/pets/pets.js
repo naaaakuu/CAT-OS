@@ -292,22 +292,14 @@ export const LINES = freeze({
     ginger: ['Click! The gears are turning! Thank you!', 'Yip! The workshop is humming again!'],
     mallow: ['A star came back! Thank you!', 'Look up! It is shining again, thanks to you!'],
   },
-  tap: {
-    toffee: ['Hehe, that tickles!', 'Crackle crackle!', 'Race you to the pond! Go!', "Did you come yesterday? You did! I counted!"],
-    chai: ['Hoo! You found me!', 'Read the question first. Trust me!', "I underline everything. It's a problem.", 'Fun fact: owls have three eyelids. I read that. Twice.'],
-    matcha: ["Hi hi! I'm mostly leaf!", 'Did you bring sunshine?', 'Every word is a seed!', 'Gosh, you look positively radiant today!'],
-    mochi: ['Oh! Hello.', 'Gist first. Always.', 'Tea?', 'Hm! Hi.'],
-    ginger: ['This way, this way!', 'Find the opening sentence first!', 'Pronouns point the way!', 'Your bag was a mess. I tidied it. You are welcome!'],
-    mallow: ['Oh! You startled a star!', "Soft! I'm mostly cloud.", 'One of these is not like the others!', 'Shh. The sky is thinking.'],
-  },
   /** Said to nobody in particular while you watch: who they are, out loud (src/home/life.js muse). */
   muse: {
-    toffee: ['Who wants to race? Anyone? Ready, set... go!', 'Day after day after day! I love days!', 'I counted the sparks. Two hundred and twelve!', "I'm not hot-headed. I'm just a head. Made of fire.", 'Crackle crackle! That means hello in fire.'],
-    chai: ["Plot twist: the butler was nice all along.", 'I just read the back of a jam jar. Twice. Still good.', 'Every author hides one sentence that matters most. I always find it.', "Shh! I'm at the good part.", "Owls can't move their eyes. So I turn my whole head. Very dramatic."],
-    matcha: ["Word of the day: petrichor! It's the smell of rain. Sniff sniff!", "Today's word is ebullient. It means me, right now!", "This flower isn't pretty. It's resplendent!", 'I whisper words to my seeds. They grow faster. Probably.', "Quixotic! I don't know what it means yet. I just like saying it."],
-    mochi: ['Tea. Good.', 'Long day? Short version: nice day.', 'Hm. Clouds. Rain soon.', 'The point is usually small. Like me.', 'Chai read me a whole book. Summary: dragon, friends, happy.'],
-    ginger: ['Who put the spoons with the forks? Fixed it.', 'First the kettle, then the tea, then the cup. Order matters!', 'I sorted the flowers. Daisy, lily, rose. Much better.', "A 'however' always comes after something. Always!", 'Everything has a place. Your place is right here!'],
-    mallow: ['Ooh! One of those birds is flying backwards!', 'Five leaves fell. One was a butterfly!', 'Something is different today. Did the pond move?', 'Spot the odd one: tea, coffee, juice, a sock.', "That cloud looks like a teapot. I look like a sheep. It's fine."],
+    toffee: ['Who wants to race? Anyone? Ready, set... go!', 'Day after day after day! I love days!', 'I counted the sparks. Two hundred and twelve!', "I'm not hot-headed. I'm just a head. Made of fire.", 'Crackle crackle! That means hello in fire.', 'Race you to the pond! Go!', 'Did you come yesterday? You did! I counted!'],
+    chai: ["Plot twist: the butler was nice all along.", 'I just read the back of a jam jar. Twice. Still good.', 'Every author hides one sentence that matters most. I always find it.', "Shh! I'm at the good part.", "Owls can't move their eyes. So I turn my whole head. Very dramatic.", 'Read the question first. Trust me!', "I underline everything. It's a problem.", 'Fun fact: owls have three eyelids. I read that. Twice.'],
+    matcha: ["Word of the day: petrichor! It's the smell of rain. Sniff sniff!", "Today's word is ebullient. It means me, right now!", "This flower isn't pretty. It's resplendent!", 'I whisper words to my seeds. They grow faster. Probably.', "Quixotic! I don't know what it means yet. I just like saying it.", 'Did you bring sunshine?', 'Every word is a seed!', 'Gosh, you look positively radiant today!'],
+    mochi: ['Tea. Good.', 'Long day? Short version: nice day.', 'Hm. Clouds. Rain soon.', 'The point is usually small. Like me.', 'Chai read me a whole book. Summary: dragon, friends, happy.', 'Gist first. Always.', 'Tea?'],
+    ginger: ['Who put the spoons with the forks? Fixed it.', 'First the kettle, then the tea, then the cup. Order matters!', 'I sorted the flowers. Daisy, lily, rose. Much better.', "A 'however' always comes after something. Always!", 'Everything has a place. Your place is right here!', 'Find the opening sentence first!', 'Pronouns point the way!', 'Your bag was a mess. I tidied it. You are welcome!'],
+    mallow: ['Ooh! One of those birds is flying backwards!', 'Five leaves fell. One was a butterfly!', 'Something is different today. Did the pond move?', 'Spot the odd one: tea, coffee, juice, a sock.', "That cloud looks like a teapot. I look like a sheep. It's fine.", 'One of these is not like the others!', 'Shh. The sky is thinking.'],
   },
   /** Everyone in the plaza, celebrating a finished set. */
   cheer: {
@@ -345,6 +337,19 @@ export const LINES = freeze({
   ],
 });
 
+/**
+ * Each friend's catchphrase: the same words every time you tap them, spoken where the browser can
+ * (pitch 0..2 and rate are Web Speech knobs; `who` only nudges which voice is picked), a babble elsewhere.
+ */
+export const SIGNATURE = freeze({
+  toffee: { say: 'Crackle, crackle, whoosh!', pitch: 1.5, rate: 1.25, volume: 1, who: '' },
+  chai: { say: 'Hoo, hoo. Every book. Twice.', pitch: 1.55, rate: 0.8, volume: 0.7, who: 'f' },
+  matcha: { say: "Hi hi! I'm mostly leaf!", pitch: 1.8, rate: 1.1, volume: 0.9, who: 'f' },
+  mochi: { say: 'Mochi.', pitch: 0.1, rate: 0.55, volume: 1, who: 'm' },
+  ginger: { say: 'Yip! Everything has a place!', pitch: 1.25, rate: 1.2, volume: 1, who: '' },
+  mallow: { say: "Soft, soft. I'm mostly cloud.", pitch: 1.4, rate: 0.7, volume: 0.65, who: 'f' },
+});
+
 /* ------------------------------------------------------------------ */
 /* Picking a line                                                      */
 /* ------------------------------------------------------------------ */
@@ -355,7 +360,7 @@ const fill = (t, vars) => t.replace(/\{(\w+)\}/g, (_, k) => vars[k] ?? '');
 /**
  * A deterministic line: the same pet, kind and seed always say the same thing.
  * @param {string} petId
- * @param {string} kind  'tap' | 'hello' | 'missed' | 'meet' | 'thanks', or a mood word
+ * @param {string} kind  'hello' | 'missed' | 'meet' | 'thanks', or a mood word
  */
 export function lineFor(petId, kind, seed = '') {
   const pool = LINES[kind]?.[petId];

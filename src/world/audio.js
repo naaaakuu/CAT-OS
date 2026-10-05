@@ -242,6 +242,25 @@ export function voice(petId, text = '', { soft = false } = {}) {
   } catch { /* a voice is a bonus */ }
 }
 
+const VOICE_WHO = { f: /female|zira|aria|jenny|samantha|susan|hazel|karen|victoria/i, m: /(^|[^a-z])male|david|mark|daniel|george|alex/i };
+
+/** A friend's catchphrase (SIGNATURE): spoken with the browser's voice when it has one, else the babble. */
+export function signature(petId, sig) {
+  try {
+    const v = gain();
+    if (!sig?.say || v <= 0 || document.visibilityState === 'hidden') return;
+    const ss = window.speechSynthesis;
+    const en = ss?.getVoices?.().filter((x) => /^en/i.test(x.lang)) ?? [];
+    if (!ss || !window.SpeechSynthesisUtterance || !en.length) { voice(petId, sig.say); return; }
+    ss.cancel();
+    const u = new SpeechSynthesisUtterance(sig.say);
+    u.voice = en.find((x) => VOICE_WHO[sig.who]?.test(x.name)) ?? en[0];
+    u.lang = u.voice.lang; u.pitch = sig.pitch; u.rate = sig.rate; u.volume = Math.min(1, sig.volume * v);
+    u.onerror = (e) => { if (!/interrupted|canceled/.test(e.error)) voice(petId, sig.say); };
+    ss.speak(u);
+  } catch { /* a voice is a bonus */ }
+}
+
 /* ------------------------------------------------------------------ */
 /* The theme                                                           */
 /* ------------------------------------------------------------------ */

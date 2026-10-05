@@ -4,6 +4,35 @@
 > Versions here are app releases; they map onto the capability milestones in
 > `PROJECT_ROADMAP.md` (0.x releases build toward Roadmap V1.0).
 
+## 3.5.0: Characters that speak, cards you read in five seconds (2026-10-05)
+
+The village art is untouched. What changed is what a tap on a friend gives you.
+
+- **A friend's card shows five things.** Who they are (name, the subject
+  they teach, their rhyme), your level, the big Help button, and an
+  Achievements button. Everything else (mood, what they noticed, stages,
+  other ways in, the story, the best friend) sits under "More about {name}",
+  closed.
+- **Level, said plainly.** "Level 2 of 5: Intermediate", a segmented bar, and
+  one line: "Finish 5 more jumbles to reach Medium." Chai, Mochi, Ginger and
+  Mallow use their real Basic-to-Advanced ladders (`pets/progress.js
+  levelFor`); Matcha and Toffee use their ten growth stages. Nothing is
+  locked; it only says where to practise next.
+- **Achievements for the whole of CAT OS**, not per section: ten, one short
+  line each (first round, 3 days, a 7-day streak, 50 and 500 questions, a
+  spotless round, a level cleared, 3 and all 5 subjects, a friend at stage
+  5). They are read from what is already recorded, so nothing new is stored
+  and no economy number moved.
+- **Signature voices.** Every tap on a friend makes them say the same thing
+  in their own voice, Hodor-style: Chai soft and slow ("Hoo, hoo. Every book.
+  Twice."), Mochi heavy and low ("Mochi."), Matcha bright, Mallow dreamy,
+  Ginger quick, Toffee fast (`SIGNATURE` in `pets/pets.js`, `signature()` in
+  `world/audio.js`). It uses the device's speech voices and falls back to the
+  friend's own blips where there are none. The old tap quips live on in their
+  "muse" lines. Sound off stays silent.
+- `check-pets` now also covers the signatures, `levelFor` and the ten
+  achievements on a synthetic world.
+
 ## 3.4.0: The content, read properly (2026-10-05)
 
 An audit of VARC coverage against the five areas a CAT student expects
