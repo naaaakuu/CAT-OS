@@ -510,6 +510,35 @@
 .cw-bff b { display: block; font-size: 14px; }
 .cw-bff small { display: block; font-size: 12.5px; line-height: 1.4; color: var(--color-ink-2); }
 
+/* Achievements (3.4): a new player sees the one thing to do and their
+   level; the stars, the story and the best friend wait behind this one
+   button, so the card never reads as a wall of game terms. Same native
+   Popover API as the ⓘ buttons (src/ui/info.js): Escape and an outside
+   tap close it, and it renders in the top layer so the scrim cannot trap it. */
+.cw-achieve { display: inline-flex; align-items: center; gap: 6px; margin: 2px 0 4px; padding: 9px 16px; border: 1px solid var(--color-line); border-radius: 999px; background: var(--color-surface-2); font: 700 13px/1 var(--font-ui); color: var(--color-ink-2); }
+.cw-achieve .cw-star { width: 14px; height: 14px; }
+.cw-achieve-pop {
+  width: min(380px, calc(100vw - 2 * var(--space-4)));
+  max-height: calc(100dvh - 2 * var(--space-6));
+  margin: auto;
+  padding: var(--space-5);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-xl);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-2);
+  overflow-y: auto;
+}
+.cw-achieve-pop::backdrop { background: rgba(0, 0, 0, 0.28); }
+.cw-achieve-pop:popover-open { animation: info-in var(--duration) var(--ease-out) both; }
+.cw-achieve-pop .cw-h3:first-of-type { margin-top: 0; }
+.cw-achieve-pop__close { margin-top: var(--space-4); }
+/* No Popover API: the button would do nothing, so the panel shows in
+   place instead (same fallback as .info-pop). */
+@supports not selector(:popover-open) {
+  .cw-achieve, .cw-achieve-pop__close { display: none; }
+  .cw-achieve-pop { display: block; width: auto; margin: 4px 0 0; padding: 0; border: none; box-shadow: none; }
+}
+
 /* The fire card */
 .cw-week { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin: 8px 0 14px; padding: 0; list-style: none; }
 .cw-week li { display: grid; justify-items: center; gap: 3px; padding: 8px 0 6px; border-radius: 12px; background: var(--color-surface-2); }

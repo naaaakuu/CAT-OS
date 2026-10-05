@@ -4,7 +4,9 @@
 > **shipped** (works today) / **building** (in progress) / **designed** (docs only).
 > Update this file with every milestone. Stale status is a bug (Rule 1).
 
-_Last updated: 2026-10-05: 3.3.1, two mechanics that read as what they are. Para Completion's gap is now a visible chip in the paragraph instead of a thin underline, so it no longer reads as a re-skin of Para Summary. Sentence Placement is solved by tapping where the sentence belongs, directly in the numbered paragraph, instead of reading an "After sentence N" option list._
+_Last updated: 2026-10-05: 3.3.2, what to do, first. A friend's card now leads with who they are, what they teach (in CAT's own terms) and the one "Help" button; the stage bar sits just below it. The star/gift explanation, the story chapters and the best friend card moved behind one "Achievements" button (same native-popover pattern as the ⓘ info buttons) instead of sitting above the fold. "Everything with {name}" is now "More ways to practice {subject}". Presentation only — the growth system is unchanged._
+
+_2026-10-05: 3.3.1, two mechanics that read as what they are. Para Completion's gap is now a visible chip in the paragraph instead of a thin underline, so it no longer reads as a re-skin of Para Summary. Sentence Placement is solved by tapping where the sentence belongs, directly in the numbered paragraph, instead of reading an "After sentence N" option list._
 
 _2026-10-03: 3.3.0, friends you get attached to. Each friend is their subject (Chai the bookworm keeps Reading, Ginger the tidy fox keeps Para Jumbles) and introduces themselves on the first visit; they chatter in character while you watch. Each grows through ten visible stages as you work through their subject (stage 10 only when every question is done): a hat of their own, a ring of light, charms, sparkles, a golden aura, a crown of stars. Every finished set ends in a party in the plaza. Sets from the village are three items. Explanations sit behind a small info button instead of in the flow._
 

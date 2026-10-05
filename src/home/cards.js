@@ -99,6 +99,7 @@ function petCard(card, id, api) {
   const greet = lineFor(id, p.isNew ? 'meet' : p.word, api.pets.today.key);
   const ask = p.request;
   const today = api.pets.today, pick = today.picks.includes(id), done = today.helped.includes(id);
+  const achieveId = `cw-achieve-${id}`;
   card.innerHTML = `
     ${close}
     <div class="cw-card__hero cw-card__hero--${id}" style="${backdropStyle(id)}">
@@ -106,25 +107,29 @@ function petCard(card, id, api) {
     </div>
     <div class="cw-who">
       <h2 class="cw-card__name">${esc(def.name)}</h2>
-      <p class="cw-role">${esc(def.subject)}</p>
+      <p class="cw-role">Teaches ${esc(def.subject)}</p>
       <p class="cw-tag">${esc(def.tag)}</p>
     </div>
     <div class="cw-status">
       <span class="cw-moodchip cw-moodchip--${p.word}">${MOOD_LABEL[p.word]}</span>
     </div>
-    ${growth(p, def)}
     <div class="cw-talk">
       <p class="cw-say" data-type="${esc(`${greet} ${ask}`)}">${esc(`${greet} ${ask}`)}</p>
       ${notice ? `<p class="cw-notice"><span class="cw-notice__spark" aria-hidden="true">✦</span><span data-type="${esc(notice)}">${esc(notice)}</span></p>` : ''}
     </div>
     ${pick && !done ? `<p class="cw-pickline"><b>!</b> One of today's three friends. Help ${esc(def.name)} for today's gift.</p>` : ''}
     ${next ? `<a class="cw-go" href="${esc(next.href)}" data-go><span><b>Help ${esc(def.name)}</b><small>${esc(ACT[id])}: ${esc(next.label)}${next.sub ? ` · ${esc(next.sub)}` : ''}</small></span><i aria-hidden="true">▶</i></a>` : ''}
-    <p class="cw-reward">${STAR}<span>Each round earns <b>1 to 4 stars</b> for the village.${p.hearts < 5 ? ` At stage ${(p.hearts + 1) * 2}: <b>${esc(HOME_GIFTS[p.hearts])}</b> at ${esc(def.home)}.` : ''}</span></p>
-    ${corners.length ? `<h3 class="cw-h3">Everything with ${esc(def.name)}</h3><ul class="cw-list">${corners.map((c) => `<li><a href="${esc(c.href)}"><span><b>${esc(c.label)}</b><small>${esc(c.sub ?? '')}</small></span><i aria-hidden="true">›</i></a></li>`).join('')}</ul>` : ''}
-    <h3 class="cw-h3">${esc(def.name)}'s story</h3>
-    <p class="cw-sub">${esc(def.trouble)}</p>
-    <ol class="cw-story">${STORIES[id].map((s, i) => (i < p.hearts ? `<li>${esc(s)}</li>` : `<li class="is-locked"><span aria-hidden="true">♡</span> Stage ${(i + 1) * 2}: grow ${esc(def.name)} to hear this part</li>`)).join('')}</ol>
-    ${friendship ? `<div class="cw-bff">${petPortrait(bff.id, 40)}<p><b>Best friend: ${esc(bff.name)}</b><small>${esc(friendship.line)}</small></p></div>` : ''}`;
+    ${growth(p, def)}
+    ${corners.length ? `<h3 class="cw-h3">More ways to practice ${esc(def.subject)}</h3><ul class="cw-list">${corners.map((c) => `<li><a href="${esc(c.href)}"><span><b>${esc(c.label)}</b><small>${esc(c.sub ?? '')}</small></span><i aria-hidden="true">›</i></a></li>`).join('')}</ul>` : ''}
+    <button type="button" class="cw-achieve" popovertarget="${achieveId}">${STAR} Achievements</button>
+    <span class="cw-achieve-pop" id="${achieveId}" popover>
+      <p class="cw-reward">${STAR}<span>Each round earns <b>1 to 4 stars</b> for the village.${p.hearts < 5 ? ` At stage ${(p.hearts + 1) * 2}: <b>${esc(HOME_GIFTS[p.hearts])}</b> at ${esc(def.home)}.` : ''}</span></p>
+      <h3 class="cw-h3">${esc(def.name)}'s story</h3>
+      <p class="cw-sub">${esc(def.trouble)}</p>
+      <ol class="cw-story">${STORIES[id].map((s, i) => (i < p.hearts ? `<li>${esc(s)}</li>` : `<li class="is-locked"><span aria-hidden="true">♡</span> Stage ${(i + 1) * 2}: grow ${esc(def.name)} to hear this part</li>`)).join('')}</ol>
+      ${friendship ? `<div class="cw-bff">${petPortrait(bff.id, 40)}<p><b>Best friend: ${esc(bff.name)}</b><small>${esc(friendship.line)}</small></p></div>` : ''}
+      <button type="button" class="btn btn--block cw-achieve-pop__close" popovertarget="${achieveId}" popovertargetaction="hide">Close</button>
+    </span>`;
   card.querySelector('[data-go]')?.addEventListener('click', () => api.play('open'));
   typeOut(card, api, id);
 }

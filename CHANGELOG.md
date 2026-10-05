@@ -4,6 +4,24 @@
 > Versions here are app releases; they map onto the capability milestones in
 > `PROJECT_ROADMAP.md` (0.x releases build toward Roadmap V1.0).
 
+## 3.3.2: What to do, first (2026-10-05)
+
+A new player tapping a friend landed on a wall of game state before anything
+else: a mood chip, a stage bar, a stars-and-home-gift paragraph, a locked
+story list and a best-friend card, all above the one button that actually
+starts practice. The card now leads with who the friend is, what they teach
+in CAT's own terms (`cw-role` reads "Teaches Reading Comprehension", not a
+house name), what they are saying, and the single "Help" button; the level
+bar moved just below it. Everything else that was really a game achievement
+— the star/gift explanation, the story chapters, the best friend — now lives
+behind one clearly labelled "Achievements" button, reusing the native-popover
+pattern the ⓘ info buttons already use (Escape and an outside tap close it,
+no script). The "Everything with {name}" list is renamed "More ways to
+practice {subject}" so it reads as practice options, not a completionist
+list (`petCard` in `src/home/cards.js`, `.cw-achieve`/`.cw-achieve-pop` in
+`src/ui/styles/home.css`). The growth system itself (stages, stage titles,
+economy) is unchanged; this is presentation only.
+
 ## 3.3.1: Two mechanics that read as what they are (2026-10-05)
 
 Para Completion read as a re-skin of Para Summary (same plain paragraph,
