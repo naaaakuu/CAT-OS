@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "pc-0030",
+    "type": "pc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 85,
+    "genre": "environment",
+    "difficulty": "easy",
+    "difficulty_numeric": 1,
+    "tier": "foundation",
+    "title": "The Cones That Wait for Fire",
+    "theme": "pine trees whose cones open only in the heat of a forest fire, so that the fire becomes the start of the next forest",
+    "estimated_time_sec": 60,
+    "gap_function": "conclusion",
+    "primary_trap": "attractive_generality",
+    "reasoning_patterns": ["disc.closing_sentence", "disc.function_slot", "struct.cause_effect", "disc.stance_continuity"],
+    "learning_objective": "close a short process description on what the process means for the thing described, not on a moral for all of nature",
+    "difficulty_vector": { "stance_subtlety": 2, "scope_precision": 2, "distractor_closeness": 2, "concept_abstractness": 1, "syntactic_complexity": 1 },
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-10-05", "usage_note": "Original composition in CAT register for CAT OS. A general description of fire-dependent seed release in some pines; no specific text adapted. Personal study only." },
+    "date_added": "2026-10-05",
+    "batch_id": "batch-pc-003",
+    "reviewer_notes": "Three steps of a process: sealed cones, resin that melts in fire, seeds on cleared ground. The conclusion has to name what the steps add up to for these trees: the fire is how they start again.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the line that nature wastes nothing. It is warm, it feels like a lesson, and it is in the spirit of the paragraph; but it leaves these pines behind for all of nature and claims that every disaster serves a purpose, which three sentences about one kind of tree cannot support. The fire-fighting option reverses the paragraph's view of fire, and the restatement repeats the first two sentences.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      "Some pine trees keep their cones shut tight for years, sealed with a hard resin.",
+      "The resin melts only in great heat, such as the heat of a forest fire.",
+      "Once the fire has passed, the cones open and drop their seeds onto ground that has been cleared of other plants and covered in fresh ash."
+    ],
+    "gap_index": 3
+  },
+  "question": {
+    "stem": "Which of the following sentences best completes the paragraph?",
+    "options": {
+      "A": "This is why forest fires must be put out quickly, before they can reach the pines and destroy them.",
+      "B": "So the cones of these pines stay closed until a fire comes along that is hot enough to melt them open.",
+      "C": "For these trees, the fire that ends the old forest is also the way the new forest begins.",
+      "D": "Nature wastes nothing, and in the end every disaster turns out to serve some purpose."
+    },
+    "correct": "C"
+  },
+  "explanation": {
+    "what_the_gap_needs": "The paragraph describes three steps: cones sealed shut, resin that melts only in fire, seeds dropped on cleared ground after the fire. A closing sentence should say what these steps mean for the trees, and it should keep the paragraph's view of fire as part of the trees' life rather than only a danger to them.",
+    "correct_reasoning": "The correct option draws the conclusion the three steps point to: for these pines the fire is not only an ending but also the way a new forest starts. It stays with 'these trees' and keeps the paragraph's calm, describing tone.",
+    "distractors": [
+      {
+        "option": "A",
+        "trap_type": "stance_shift",
+        "why_wrong": "The paragraph shows that these pines depend on fire to release their seeds; telling us fires must be stopped before they reach the pines turns that view upside down.",
+        "seductive_element": "Putting out forest fires sounds sensible and responsible, and readers bring that view with them."
+      },
+      {
+        "option": "B",
+        "trap_type": "redundant_restatement",
+        "why_wrong": "The first two sentences have already said the cones stay sealed until fire melts the resin; repeating it adds nothing and ignores what happens after the fire.",
+        "seductive_element": "It sounds like a careful summary and uses the paragraph's own words."
+      },
+      {
+        "option": "D",
+        "trap_type": "attractive_generality",
+        "why_wrong": "It jumps from one kind of pine to all of nature and claims every disaster serves a purpose, which is far more than three sentences about one tree can support.",
+        "seductive_element": "It is quotable and hopeful, and broad lessons often feel like the natural way to end."
+      }
+    ],
+    "method": "For a paragraph that describes a process, ask what the process adds up to for the thing being described. Keep the ending at the same size as the paragraph: one kind of tree, not all of nature."
+  },
+  "mentor": {
+    "challenge": "Three steps, from sealed cone to seed in the ash. Say what they add up to for these trees, and no more.",
+    "takeaway": "A conclusion stays the size of the paragraph; a lesson for all of nature is bigger than three sentences can carry."
+  }
+}

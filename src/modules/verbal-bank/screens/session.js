@@ -163,7 +163,7 @@ function bodyHTML(it, revealed = false) {
   if (b.kind === 'pc') {
     const gap = revealed
       ? `<mark class="bank-filled">${escapeHTML(it.options[it.correct])}</mark>`
-      : '<span class="bank-blank bank-blank--gap" aria-label="the missing sentence">the paragraph stops here</span>';
+      : `<span class="bank-blank bank-blank--gap" aria-label="the missing sentence">${b.gap_index >= b.sentences.length ? 'the paragraph stops here' : 'a sentence is missing here'}</span>`;
     const parts = [];
     b.sentences.forEach((s, i) => {
       if (i === b.gap_index) parts.push(gap);
@@ -254,8 +254,7 @@ export async function renderBankSession(outlet, { storage }, params) {
         <div class="card">
           <p class="screen__eyebrow">${escapeHTML(bank.name)}${infoButton(INFO_KEY[type], { more: [it.mentor?.challenge] })}</p>
           <div class="briefing-chips">
-            <span class="badge">${escapeHTML(it.label)}</span>
-            ${it.tier ? `<span class="badge">${escapeHTML(String(it.tier).replace('-', ' '))}</span>` : it.band ? `<span class="badge">${escapeHTML(it.band)}</span>` : ''}
+            ${type === 'sp' || type === 'pc' ? '' : `<span class="badge">${escapeHTML(it.label)}</span>`}
             ${it.genre ? `<span class="badge">${escapeHTML(it.genre)}</span>` : ''}
             <span class="badge">~${Math.max(20, it.time_sec)} s</span>
           </div>

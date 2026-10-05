@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "pc-0029",
+    "type": "pc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 86,
+    "genre": "linguistics",
+    "difficulty": "easy",
+    "difficulty_numeric": 1,
+    "tier": "foundation",
+    "title": "Mama in Every Language",
+    "theme": "why unrelated languages share words for mother and father, explained by the sounds babies make first",
+    "estimated_time_sec": 60,
+    "gap_function": "explanation",
+    "primary_trap": "contradicts_neighbour",
+    "reasoning_patterns": ["disc.function_slot", "disc.closing_sentence", "struct.phenomenon_explanation", "disc.rhetorical_pivot"],
+    "learning_objective": "use the 'but' sentence before the gap as the clue to what the explanation must be built from",
+    "difficulty_vector": { "stance_subtlety": 1, "scope_precision": 2, "distractor_closeness": 2, "concept_abstractness": 2, "syntactic_complexity": 1 },
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-10-05", "usage_note": "Original composition in CAT register for CAT OS. A general observation about parental terms across languages and early infant sounds; no specific text adapted. Personal study only." },
+    "date_added": "2026-10-05",
+    "batch_id": "batch-pc-003",
+    "reviewer_notes": "Three plain sentences: a pattern, the two usual explanations ruled out (borrowing, shared ancestry), then a 'but' that hands over the real cause. The gap only has to connect babies' first sounds to the words parents use.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the single-first-language option: it is the explanation most people reach for, and it sounds scholarly. The second sentence has already set it aside by saying most of these languages share no traceable ancestor. The restatement simply repeats the first sentence. The option about babies learning faster than adults misreads the third sentence, which says these sounds come whatever the language, not from it.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      "In a great many languages that are not related to each other, the word for mother begins with an m sound, and the word for father with a p, b or d.",
+      "These languages did not borrow the words from one another, and most of them share no ancestor that anyone can trace.",
+      "But m, p, b and d are among the very first sounds a baby makes, whatever language is spoken around it."
+    ],
+    "gap_index": 3
+  },
+  "question": {
+    "stem": "Which of the following sentences best completes the paragraph?",
+    "options": {
+      "A": "The likeliest story is that parents everywhere heard these early sounds and took them as names for themselves.",
+      "B": "The words must therefore come from a single first language, spoken long before any of the languages we know.",
+      "C": "So the words for mother and father sound alike in languages that otherwise have very little in common.",
+      "D": "This shows that babies pick up the sounds of their own language far faster than adults ever manage to."
+    },
+    "correct": "A"
+  },
+  "explanation": {
+    "what_the_gap_needs": "The paragraph states a pattern, rules out borrowing and shared ancestry, and then, with 'But', offers a fact about babies' first sounds. The last sentence has to join that fact to the pattern: it must say how sounds that babies make came to be the words for mother and father.",
+    "correct_reasoning": "The correct option makes the connection the 'But' sentence invites: babies produce these sounds first, and parents took them as names for themselves. It uses only what the paragraph has given and explains why the pattern appears in languages with no link to each other.",
+    "distractors": [
+      {
+        "option": "B",
+        "trap_type": "contradicts_neighbour",
+        "why_wrong": "The second sentence says most of these languages share no ancestor anyone can trace, so a single first language is the explanation the paragraph has already set aside.",
+        "seductive_element": "It is the explanation most readers would guess before reading, and 'must therefore' sounds like a firm conclusion."
+      },
+      {
+        "option": "C",
+        "trap_type": "redundant_restatement",
+        "why_wrong": "It repeats the first sentence and ignores the fact the third sentence has just supplied, so the paragraph would end without explaining anything.",
+        "seductive_element": "It reads like a summary, and summaries often feel like the right way to close."
+      },
+      {
+        "option": "D",
+        "trap_type": "scope_jump",
+        "why_wrong": "The paragraph compares no one with adults and says these sounds come whatever language is spoken around the baby, so they are not evidence of learning a particular language at all.",
+        "seductive_element": "It is about babies and sounds, the same subject as the sentence before the gap, and it sounds like a known fact."
+      }
+    ],
+    "method": "When a paragraph rules out the usual explanations and then says 'But', the sentence after 'But' is the material for the answer. Pick the option that builds from it, and drop any option that brings back an explanation already ruled out."
+  },
+  "mentor": {
+    "challenge": "Two explanations are crossed out in the second sentence, and the third hands you a clue with 'But'. Build the ending from the clue.",
+    "takeaway": "An explanation the paragraph has already ruled out cannot come back as its conclusion."
+  }
+}

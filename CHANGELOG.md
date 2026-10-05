@@ -4,6 +4,47 @@
 > Versions here are app releases; they map onto the capability milestones in
 > `PROJECT_ROADMAP.md` (0.x releases build toward Roadmap V1.0).
 
+## 3.4.0: The content, read properly (2026-10-05)
+
+An audit of VARC coverage against the five areas a CAT student expects
+(Reading Comprehension, Para Jumbles, Para Summary, Para Completion,
+Vocabulary): all five already had a house, a friend, a sign on the map and a
+row in "Every subject" (Vocabulary is Matcha's Meadow: 2,577 words, some asked
+inside a real sentence, plus the word bank), so no new place was added. What
+made the experience feel unfinished was the reading surface itself and one thin
+subject.
+
+- **RC's scrolling was broken.** A run scrolls its body (`.run__body`), not
+  the window, but the session scrolled and listened on `window`: every
+  question after the first opened scrolled 157 px down with its first line
+  cut off, the reading hairline never moved, and the paragraph numbers that
+  questions cite ("the second paragraph") were clipped on any screen wider
+  than 46rem. All three fixed at the cause (`toTop()` and a body-scroll
+  listener in `reading-comprehension/screens/session.js`; room for the hung
+  numerals in `world.css`).
+- **Passage and question side by side on a wide screen**, the way the exam
+  sets it: passage left, question right, each scrolling on its own; the
+  evidence jump scrolls the passage column. Phones keep the passage one tap
+  away above the question.
+- **The briefing shows the passage's first line**, the best reason to begin;
+  the difficulty chip (repeating the stage) is gone. The reading screen lost
+  its "~N min left" figure, a second clock beside the real one; the passage
+  title continues in the briefing's display face instead of a heavy bold;
+  "I've read it…3 questions" reads "On to the 3 questions". The run's
+  scrollbar sits at the screen edge, not in the middle of a desktop.
+- **Para Completion**: 19 of its 27 paragraphs have the gap in the middle,
+  yet the gap chip said "the paragraph stops here" and five descriptions said
+  "stops one sentence early". The chip now says "a sentence is missing here"
+  for a middle gap, and the copy describes the real task. Bank paragraphs
+  (completion, placement, word bank, arguments) are set in the reading serif
+  like a passage, and the chips that repeated the subject name or showed the
+  tier's internal name are gone; PJ/PS/Odd One Out lose the difficulty dot
+  that repeated their tier.
+- **Nine new Para Completion paragraphs** (pc-0028 to pc-0036, batch-pc-003:
+  three foundation, three easy, three medium, three of them with a middle gap),
+  so a beginner's first visit to the clock tower is no longer one paragraph.
+  36 items; answer key now 9/9/9/9 across A–D.
+
 ## 3.3.2: What to do, first (2026-10-05)
 
 A new player tapping a friend landed on a wall of game state before anything

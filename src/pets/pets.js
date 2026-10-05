@@ -88,7 +88,7 @@ export const HOUSES = freeze([
   freeze({ spot: 'mochi', pet: 'mochi', subject: 'Para Summary', place: 'table', ask: 'Choose the summary that keeps the point' }),
   freeze({ spot: 'mallow', pet: 'mallow', subject: 'Odd One Out', place: 'bench', ask: 'Five sentences: find the one that does not belong' }),
   freeze({ spot: 'cottage', pet: 'ginger', subject: 'Sentence Placement', place: 'placement', ask: 'Find the one place a sentence fits' }),
-  freeze({ spot: 'clock', pet: 'mochi', subject: 'Para Completion', place: 'completion', ask: 'Choose the sentence that finishes the paragraph' }),
+  freeze({ spot: 'clock', pet: 'mochi', subject: 'Para Completion', place: 'completion', ask: 'Choose the sentence the gap in a paragraph needs' }),
   freeze({ spot: 'matcha', pet: 'matcha', subject: 'Vocabulary', place: 'meadow', ask: 'CAT words, many inside a real sentence' }),
   freeze({ spot: 'toffee', pet: 'toffee', subject: 'The Gauntlet', place: 'wilds', ask: 'A weekly timed mix: thirty quick questions' }),
 ]);

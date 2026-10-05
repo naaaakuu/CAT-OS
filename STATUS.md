@@ -4,7 +4,9 @@
 > **shipped** (works today) / **building** (in progress) / **designed** (docs only).
 > Update this file with every milestone. Stale status is a bug (Rule 1).
 
-_Last updated: 2026-10-05: 3.3.2, what to do, first. A friend's card now leads with who they are, what they teach (in CAT's own terms) and the one "Help" button; the stage bar sits just below it. The star/gift explanation, the story chapters and the best friend card moved behind one "Achievements" button (same native-popover pattern as the ⓘ info buttons) instead of sitting above the fold. "Everything with {name}" is now "More ways to practice {subject}". Presentation only — the growth system is unchanged._
+_Last updated: 2026-10-05: 3.4.0, the content, read properly. VARC coverage audited: RC, Para Jumbles, Para Summary, Para Completion and Vocabulary (Matcha's Meadow) each have a house, a sign and a row in "Every subject". RC's run now scrolls correctly (next question opens at its top, the reading hairline moves, paragraph numbers show on wide screens), sets passage and question side by side on a wide screen, and opens with the passage's first line. Para Completion's middle gaps are labelled as such, bank paragraphs read in the serif, and nine new beginner-to-medium completion paragraphs bring it to 36._
+
+_2026-10-05: 3.3.2, what to do, first. A friend's card now leads with who they are, what they teach (in CAT's own terms) and the one "Help" button; the stage bar sits just below it. The star/gift explanation, the story chapters and the best friend card moved behind one "Achievements" button (same native-popover pattern as the ⓘ info buttons) instead of sitting above the fold. "Everything with {name}" is now "More ways to practice {subject}". Presentation only — the growth system is unchanged._
 
 _2026-10-05: 3.3.1, two mechanics that read as what they are. Para Completion's gap is now a visible chip in the paragraph instead of a thin underline, so it no longer reads as a re-skin of Para Summary. Sentence Placement is solved by tapping where the sentence belongs, directly in the numbered paragraph, instead of reading an "After sentence N" option list._
 

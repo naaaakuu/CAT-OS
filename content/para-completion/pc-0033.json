@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "pc-0033",
+    "type": "pc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 87,
+    "genre": "markets",
+    "difficulty": "easy",
+    "difficulty_numeric": 3,
+    "tier": "easy",
+    "title": "Three Sizes of Popcorn",
+    "theme": "how a middle option that nobody buys can change which of the other two options people choose",
+    "estimated_time_sec": 70,
+    "gap_function": "consequence",
+    "primary_trap": "summary_where_development_needed",
+    "reasoning_patterns": ["disc.function_slot", "disc.given_new", "struct.cause_effect", "disc.implicit_transition"],
+    "learning_objective": "fill a mid-paragraph gap by asking what the sentence after it takes for granted",
+    "difficulty_vector": { "stance_subtlety": 2, "scope_precision": 2, "distractor_closeness": 3, "concept_abstractness": 2, "syntactic_complexity": 2 },
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-10-05", "usage_note": "Original composition in CAT register for CAT OS. A general illustration of decoy pricing with invented prices; no specific study or text adapted. Personal study only." },
+    "date_added": "2026-10-05",
+    "batch_id": "batch-pc-003",
+    "reviewer_notes": "The sentence after the gap says the medium was never meant to be bought and made the large look like a bargain. Both claims rest on a result the paragraph has not yet reported: almost nobody bought the medium, and more people bought the large. The gap must report it.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the line about a price meaning little on its own. It is the lesson of the story and sounds like the cleverest option, but placed here it comes before the result that would teach it, and the last sentence would then explain an effect nobody has seen. The 'best-selling medium' option contradicts the last sentence outright. The restaurants and airlines option jumps to other businesses and calls the medium a trick before the paragraph has shown what it does.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      "A cinema sells small popcorn for 150 rupees and a large tub for 300, and most people buy the small.",
+      "Then it adds a medium for 270 rupees.",
+      "The medium was never meant to be bought; its only job was to make the large look like a bargain."
+    ],
+    "gap_index": 2
+  },
+  "question": {
+    "stem": "Which of the following sentences best fills the gap in the paragraph?",
+    "options": {
+      "A": "The medium quickly becomes the cinema's best-selling size, just as the manager had hoped it would.",
+      "B": "Hardly anyone buys the medium, and far more people than before now pay 300 rupees for the large.",
+      "C": "A price, it turns out, means little on its own and a great deal when it sits beside another one.",
+      "D": "Restaurants and airlines play the same game, adding a middle option to steer their customers upward."
+    },
+    "correct": "B"
+  },
+  "explanation": {
+    "what_the_gap_needs": "The last sentence says the medium was never meant to be bought and that it made the large look like a bargain. Both statements assume we already know what happened after the medium was added. The gap has to report that result: few people bought the medium, and more people bought the large.",
+    "correct_reasoning": "The correct option gives exactly the result the last sentence explains: the medium hardly sells, and sales of the large go up. With it in place, the last sentence reads as an explanation of something we have just seen, which is what it is written to be.",
+    "distractors": [
+      {
+        "option": "A",
+        "trap_type": "contradicts_neighbour",
+        "why_wrong": "The sentence after the gap says the medium was never meant to be bought, so a medium that becomes the best seller and fulfils the manager's hopes contradicts it directly.",
+        "seductive_element": "A new middle size becoming popular is what most people would expect, so it reads as a natural next event."
+      },
+      {
+        "option": "C",
+        "trap_type": "summary_where_development_needed",
+        "why_wrong": "This is the lesson of the story, placed before the story has given its result; the next sentence would then explain an effect on the large tub that the paragraph has never reported.",
+        "seductive_element": "It is the smartest-sounding sentence in the set and states the idea a reader can feel the paragraph is heading towards."
+      },
+      {
+        "option": "D",
+        "trap_type": "scope_jump",
+        "why_wrong": "It moves to restaurants and airlines and calls the medium a game before the paragraph has shown what the medium did, so the cinema's own result is never reported.",
+        "seductive_element": "It shows the reader has guessed the trick, and real-world comparisons feel like useful extra knowledge."
+      }
+    ],
+    "method": "For a gap in the middle, read the sentence after it and ask what it takes for granted. Here it explains an effect without stating it, so the gap must state the effect. Options that draw the lesson or widen the scope are usually doing the next sentence's job, or no job at all."
+  },
+  "mentor": {
+    "challenge": "The last sentence explains a result the paragraph never reports. Find the option that reports it.",
+    "takeaway": "A mid-paragraph gap often holds the fact that the next sentence is busy explaining."
+  }
+}

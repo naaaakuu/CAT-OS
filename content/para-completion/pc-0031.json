@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "pc-0031",
+    "type": "pc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 87,
+    "genre": "history",
+    "difficulty": "easy",
+    "difficulty_numeric": 2,
+    "tier": "easy",
+    "title": "When Every Town Kept Its Own Noon",
+    "theme": "how the railway timetable, rather than any scientist, forced towns to give up their local times for a shared one",
+    "estimated_time_sec": 70,
+    "gap_function": "consequence",
+    "primary_trap": "attractive_generality",
+    "reasoning_patterns": ["disc.function_slot", "disc.closing_sentence", "struct.cause_effect", "disc.rhetorical_pivot"],
+    "learning_objective": "follow a 'however' sentence to the consequence it sets up, instead of summarising the situation it turned away from",
+    "difficulty_vector": { "stance_subtlety": 2, "scope_precision": 2, "distractor_closeness": 3, "concept_abstractness": 2, "syntactic_complexity": 2 },
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-10-05", "usage_note": "Original composition in CAT register for CAT OS. A general account of local solar time and railway timekeeping; no specific text adapted. Personal study only." },
+    "date_added": "2026-10-05",
+    "batch_id": "batch-pc-003",
+    "reviewer_notes": "Two sentences establish a world where local time was harmless; the third, with 'however', names the one document that could not live with it. The gap draws the consequence: shared time.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the generality about technology changing how people think of time. It is true of this story and sounds like a historian's close, but it never says what the timetable required or what followed, so the 'however' sentence is left hanging. The travellers option contradicts the second sentence, which says nobody travelled fast enough to notice; the restatement goes back to the world the 'however' has just left.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      "Until the railways came, every town kept its own time, setting its clocks by the moment the sun stood highest over it.",
+      "A town a hundred miles to the west ran several minutes behind its neighbour, and nobody minded, because nobody travelled fast enough to notice.",
+      "A railway timetable, however, has to say when a train leaves one station and when it arrives at the next."
+    ],
+    "gap_index": 3
+  },
+  "question": {
+    "stem": "Which of the following sentences best completes the paragraph?",
+    "options": {
+      "A": "That cannot be done clearly when every station keeps its own hour, so the railways pressed the towns to share one time.",
+      "B": "Travellers of that era simply accepted that their pocket watches would be wrong by a few minutes whenever they reached a new town.",
+      "C": "Before the railways, then, the time of day really did differ by a few minutes from one town to the next.",
+      "D": "Every new technology changes the way people think about time, and usually in ways that its own inventors never planned."
+    },
+    "correct": "A"
+  },
+  "explanation": {
+    "what_the_gap_needs": "The first two sentences describe a world where each town's own time did no harm. The third, with 'however', introduces something that needs times at two different stations to be stated together. The closing sentence must say what follows from that need: the local times become a problem, and something is done about it.",
+    "correct_reasoning": "The correct option names the problem, a timetable cannot be written clearly when every station keeps a different hour, and the result, the railways pushing towns towards one shared time. It is the consequence the 'however' sentence was setting up, and it stays with railways and towns.",
+    "distractors": [
+      {
+        "option": "B",
+        "trap_type": "contradicts_neighbour",
+        "why_wrong": "The second sentence says nobody travelled fast enough to notice the difference, so travellers who knew their watches would be wrong contradict the paragraph's own description of that era.",
+        "seductive_element": "It is a concrete picture of the period, and it seems to show the problem that local time caused."
+      },
+      {
+        "option": "C",
+        "trap_type": "redundant_restatement",
+        "why_wrong": "It repeats what the first two sentences have said and ignores the 'however' sentence, so the paragraph would turn towards the timetable and then turn straight back.",
+        "seductive_element": "'Then' makes it sound like a conclusion, and it is accurate to the paragraph."
+      },
+      {
+        "option": "D",
+        "trap_type": "attractive_generality",
+        "why_wrong": "It moves from railways and towns to every new technology and never says what the timetable demanded, which is the one thing the last sentence was set up to deliver.",
+        "seductive_element": "It is broad and wise-sounding, and this story could be offered as an example of it."
+      }
+    ],
+    "method": "When the sentence before the gap begins with 'however' or 'but', it has changed direction, and the ending must follow the new direction. Ask what the new element demands, then find the option that says what came of that demand."
+  },
+  "mentor": {
+    "challenge": "Two sentences say local time was harmless; the third says 'however'. Follow the 'however' to what it forces.",
+    "takeaway": "After a turn, the ending goes where the turn points, not back to where the paragraph started."
+  }
+}

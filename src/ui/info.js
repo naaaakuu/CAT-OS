@@ -58,7 +58,7 @@ export const SUBJECT_INFO = Object.freeze({
   },
   pc: {
     title: 'Para Completion',
-    lines: ['A paragraph that stops one sentence early. Choose the sentence that ends it best.'],
+    lines: ['A paragraph with one sentence missing, at its end or in its middle. Choose the sentence that fits the gap best.'],
     tip: 'Decide what the gap needs first: a reason, an example, a turn or a landing.',
   },
   vocab: {

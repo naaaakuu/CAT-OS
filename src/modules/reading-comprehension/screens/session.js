@@ -49,6 +49,9 @@ import '../../../ui/components/cat-passage.js';
 import '../../../ui/components/cat-question-card.js';
 import '../../../ui/components/cat-explanation.js';
 
+/** Wide enough to read the passage and answer beside it. */
+const WIDE = matchMedia('(min-width: 64rem)');
+
 export async function renderSession(outlet, { storage }, params) {
   let passage;
   try {
@@ -90,6 +93,13 @@ export async function renderSession(outlet, { storage }, params) {
   const stage = STAGE_INFO[m.stage]?.label ?? m.stage ?? '';
   /* A public-domain essay says whose words these are; an original passage says nothing. */
   const realSource = m.source?.publication && m.source.publication !== 'original' ? m.source.publication : '';
+  /* The passage's own first sentence on the briefing: the best reason to
+     begin reading is the opening line, not a list of facts about it. */
+  const opening = (() => {
+    const t = String(passage.passage.paragraphs?.[0]?.text ?? '').trim();
+    const s = t.match(/^.+?[.!?](?=\s+["“‘(]?[A-Z]|$)/)?.[0] ?? t;
+    return s.length > 240 ? `${s.slice(0, 240).replace(/\s+\S*$/, '')}…` : s;
+  })();
 
   /* ---------------- BRIEFING ---------------- */
   outlet.innerHTML = `
@@ -110,11 +120,11 @@ export async function renderSession(outlet, { storage }, params) {
             ] })}</p>
           <h1 class="brief__title">${escapeHTML(displayTitle(passage))}</h1>
           ${realSource ? `<p class="brief__source">A real essay: ${escapeHTML(realSource)}</p>` : ''}
+          ${opening ? `<p class="brief__opening">${escapeHTML(opening)}</p>` : ''}
           <div class="brief__facts">
             <span class="brief__fact">${m.word_count ?? ''} words</span>
             <span class="brief__fact">${passage.questions.length} questions</span>
-            <span class="brief__fact">${formatClock(targetMs)} target</span>
-            <span class="brief__fact">${escapeHTML(m.difficulty ?? '')}</span>
+            <span class="brief__fact">${Math.round(targetMs / 60000)} min target</span>
           </div>
           <div id="recall-slot"></div>
           <button class="g-cta" id="begin">Begin reading<small>The clock starts on the first line</small><span class="arrow" aria-hidden="true">→</span></button>
@@ -208,48 +218,41 @@ export async function renderSession(outlet, { storage }, params) {
         ${barHTML('Reading')}
         <div class="run__track"><i id="read-fill" style="width:0%"></i></div>
         <div class="run__body">
-          <p class="hint" id="min-left" style="margin:0 0 10px;text-align:right"></p>
           <cat-passage></cat-passage>
           ${realSource ? `<p class="hint brief__source">From ${escapeHTML(realSource)}. Public domain.</p>` : ''}
           <div class="run__actions">
-            <button class="g-btn g-btn--primary" id="to-questions">I've read it…${session.total} questions</button>
+            <button class="g-btn g-btn--primary" id="to-questions">On to the ${session.total} questions</button>
           </div>
         </div>
       </section>`;
     outlet.querySelector('cat-passage').passage = passage.passage;
     requestAnimationFrame(tickClock);
 
-    // Scroll companionship: how far through, roughly how many minutes remain.
+    /* How far through, as the hairline under the bar. The run scrolls its
+       BODY, not the window (world.css .run__body): listening on window left
+       the line frozen where it started, and a "minutes left" figure beside
+       the clock was a second clock nobody needed. */
     {
       const fill = outlet.querySelector('#read-fill');
-      const minLeft = outlet.querySelector('#min-left');
-      const surface = outlet.querySelector('cat-passage');
-      const totalMin = passage.passage.reading_time_min ?? m.estimated_time_min;
-      let ticking = false;
+      const scroller = outlet.querySelector('.run__body');
       const update = () => {
-        ticking = false;
-        if (!fill.isConnected) { window.removeEventListener('scroll', onScroll); return; }
-        const rect = surface.getBoundingClientRect();
-        const viewH = window.innerHeight;
-        const total = Math.max(1, rect.height - viewH * 0.6);
-        const read = Math.min(Math.max(0, viewH * 0.4 - rect.top), total);
-        const p = read / total;
-        fill.style.width = `${Math.round(p * 100)}%`;
-        const left = Math.ceil((1 - p) * totalMin);
-        minLeft.textContent = p >= 0.99 ? 'The end' : `~${left} min left`;
+        const room = scroller.scrollHeight - scroller.clientHeight;
+        fill.style.width = `${room > 0 ? Math.round((scroller.scrollTop / room) * 100) : 100}%`;
       };
-      const onScroll = () => { if (ticking) return; ticking = true; requestAnimationFrame(update); };
-      window.addEventListener('scroll', onScroll, { passive: true });
+      scroller.addEventListener('scroll', () => requestAnimationFrame(update), { passive: true });
       update();
     }
 
-    if (resumed) { session.markQuestionShown(); renderQuestions(); window.scrollTo(0, 0); return; }
+    /** Back to the top of whatever scrolls: the body, and on a wide screen the question column. */
+    const toTop = () => { for (const el of outlet.querySelectorAll('.run__body, .run__qa > .card')) el.scrollTop = 0; };
+
+    if (resumed) { session.markQuestionShown(); renderQuestions(); toTop(); return; }
 
     outlet.querySelector('#to-questions').addEventListener('click', () => {
       session.markQuestionShown();
       play('page');
       renderQuestions();
-      window.scrollTo(0, 0);
+      toTop();
     });
 
     /* ---------------- ANSWERING ---------------- */
@@ -258,13 +261,13 @@ export async function renderSession(outlet, { storage }, params) {
         <section class="run">
           ${barHTML(`Question <b id="q-pos">1</b> of ${session.total}`)}
           <div class="run__track"><i id="q-fill" style="width:0%"></i></div>
-          <div class="run__body">
-            <details class="reread">
+          <div class="run__body run__qa">
+            <details class="reread" ${WIDE.matches ? 'open' : ''}>
               <summary>Re-read the passage</summary>
               <div class="reread__body"><cat-passage></cat-passage></div>
             </details>
             <p class="sr-only" id="run-said" role="status" aria-live="polite"></p>
-            <div class="card" style="margin-top:12px">
+            <div class="card">
               <cat-question-card></cat-question-card>
               <div id="explanation-slot" tabindex="-1"></div>
               <div class="run__actions" id="actions"></div>
@@ -276,6 +279,11 @@ export async function renderSession(outlet, { storage }, params) {
 
       const screenEl = outlet.querySelector('section.run');
       const rereadFold = outlet.querySelector('.reread');
+      /* A wide screen holds the passage open beside the question, the way
+         the exam does; a phone keeps it one tap away above it. */
+      const onWide = (e) => { if (e.matches && rereadFold.isConnected) rereadFold.open = true; };
+      WIDE.addEventListener('change', onWide);
+      window.addEventListener('hashchange', () => WIDE.removeEventListener('change', onWide), { once: true });
       screenEl.addEventListener('click', (e) => {
         const a = e.target.closest('[data-anchor]');
         if (!a) return;
@@ -354,8 +362,8 @@ export async function renderSession(outlet, { storage }, params) {
         // Written again on the way forward, not only on the way in: the draft
         // is taken at answer time, so without this a learner who came back
         // was handed the question they had just finished.
-        if (session.next()) { saveDraft(storage, 'rc', passageId(passage), session.snapshot()); showQuestion(); window.scrollTo(0, 0); }
-        else { stop(); await finishSession(); window.scrollTo(0, 0); }
+        if (session.next()) { saveDraft(storage, 'rc', passageId(passage), session.snapshot()); showQuestion(); toTop(); }
+        else { stop(); await finishSession(); toTop(); }
       }
       showQuestion();
     }

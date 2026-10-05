@@ -78,11 +78,11 @@ export const ROUTES = [
   ] },
   { hash: '#/rc/session/rc-0001', name: 'rc-question', risk: true, enter: [
     { click: 'begin', wait: 900 },
-    { click: 'read it', wait: 1100 },
+    { click: 'on to the', wait: 1100 },
   ] },
   { hash: '#/rc/session/rc-0001', name: 'rc-explained', risk: true, enter: [
     { click: 'begin', wait: 900 },
-    { click: 'read it', wait: 1100 },
+    { click: 'on to the', wait: 1100 },
     { sel: 'cat-option button', wait: 400 },
     { click: 'lock it in', wait: 1100 },
   ] },
@@ -90,7 +90,7 @@ export const ROUTES = [
      the pet with its gifts, the mentor. Four questions set aside gets there. */
   { hash: '#/rc/session/rc-0001', name: 'rc-result', risk: true, enter: [
     { click: 'begin', wait: 900 },
-    { click: 'read it', wait: 1100 },
+    { click: 'on to the', wait: 1100 },
     ...[1, 2, 3].flatMap(() => [{ click: 'set aside', wait: 500 }, { click: 'next question', wait: 700 }]),
     { click: 'set aside', wait: 500 },
     { click: 'see the result', wait: 4200 },

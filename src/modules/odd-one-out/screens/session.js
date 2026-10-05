@@ -144,7 +144,6 @@ export async function renderOOOSession(outlet, { storage }, params) {
           <div class="briefing-chips">
             <span class="badge">${escapeHTML(tier.label)}</span>
             <span class="badge">${escapeHTML(m.genre)}</span>
-            <span class="badge"><span class="dot dot--${escapeHTML(m.difficulty)}"></span>${escapeHTML(m.difficulty)}</span>
             <span class="badge">~${Math.max(1, Math.round(m.estimated_time_sec / 60))} min</span>
           </div>
 

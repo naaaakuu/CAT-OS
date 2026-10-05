@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "pc-0032",
+    "type": "pc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 87,
+    "genre": "arts-culture",
+    "difficulty": "easy",
+    "difficulty_numeric": 3,
+    "tier": "easy",
+    "title": "The Whiteness of Old Statues",
+    "theme": "how the classical ideal of white marble grew out of painted statues whose paint had worn away",
+    "estimated_time_sec": 70,
+    "gap_function": "conclusion",
+    "primary_trap": "redundant_restatement",
+    "reasoning_patterns": ["disc.closing_sentence", "disc.function_slot", "struct.cause_effect", "disc.stance_continuity"],
+    "learning_objective": "close a short history on the irony it has built, joining its first sentence to its last",
+    "difficulty_vector": { "stance_subtlety": 2, "scope_precision": 2, "distractor_closeness": 3, "concept_abstractness": 2, "syntactic_complexity": 2 },
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-10-05", "usage_note": "Original composition in CAT register for CAT OS. A general account of painted ancient sculpture and its later reception; no specific text adapted. Personal study only." },
+    "date_added": "2026-10-05",
+    "batch_id": "batch-pc-003",
+    "reviewer_notes": "Four sentences build an irony: the statues were coloured, the colour wore off, later artists copied the bare stone, and the bare stone became the ideal. The conclusion has to put the two ends together: an ideal made from an accident.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the restatement that the statues once looked more colourful than they do now. It is true and close to the paragraph's words, but it goes back to the first two sentences and drops the ideal the fourth sentence has just introduced. The beauty option takes a side on taste, which the paragraph never does, and the option about the Greeks preferring plain stone contradicts the evidence of paint.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      "The marble statues of ancient Greece were not meant to be seen as bare white stone.",
+      "Traces of paint found on them show that eyes, lips, hair and clothing were once coloured, often brightly.",
+      "Over the centuries the paint wore away, and the artists who rediscovered the statues long afterwards saw only the marble.",
+      "They copied what they saw, and plain white stone came to stand for everything noble and classical."
+    ],
+    "gap_index": 4
+  },
+  "question": {
+    "stem": "Which of the following sentences best completes the paragraph?",
+    "options": {
+      "A": "The Greeks themselves, after all, admired the plain stone and kept their paints for lesser and cheaper works.",
+      "B": "In their own day, the statues would have looked far more colourful than they look in our museums now.",
+      "C": "It is a pity the paint is lost, though many would say the statues are more beautiful without it.",
+      "D": "So an ideal of pure, colourless beauty was built on statues that had simply lost their colour."
+    },
+    "correct": "D"
+  },
+  "explanation": {
+    "what_the_gap_needs": "The paragraph starts with statues that were painted and ends with white stone becoming the ideal of what is classical. The closing sentence has to join these two ends: it should point out that the ideal grew from a loss, and it should do so without judging whether the statues look better painted or bare.",
+    "correct_reasoning": "The correct option puts the first and last sentences side by side: the ideal of colourless beauty rests on statues that had only lost their colour. That is the irony all four sentences have been building, stated once, with no new claim added.",
+    "distractors": [
+      {
+        "option": "A",
+        "trap_type": "contradicts_neighbour",
+        "why_wrong": "The second sentence reports paint on the eyes, lips, hair and clothing of these very statues, so a claim that the Greeks kept paint for lesser works contradicts the paragraph's own evidence.",
+        "seductive_element": "'After all' sounds like a writer settling the matter, and it fits the familiar picture of white Greek statues."
+      },
+      {
+        "option": "B",
+        "trap_type": "redundant_restatement",
+        "why_wrong": "It repeats the point of the first two sentences and leaves out what the last two added, the copying and the ideal, so the paragraph would end where it began.",
+        "seductive_element": "It is true, and it is phrased like a gentle closing remark."
+      },
+      {
+        "option": "C",
+        "trap_type": "stance_shift",
+        "why_wrong": "The paragraph describes how a taste came about and never says which look is more beautiful; a closing judgement about beauty changes the paragraph from history into opinion.",
+        "seductive_element": "It concedes something to both sides, and balanced sentences often feel like the safe answer."
+      }
+    ],
+    "method": "In a short history that ends somewhere surprising, read the first sentence and the last one together. The conclusion is usually the line that connects them, and an option that only repeats the beginning has forgotten the end."
+  },
+  "mentor": {
+    "challenge": "The paragraph begins with painted statues and ends with white stone as the ideal. Join the two ends.",
+    "takeaway": "When a paragraph travels from A to B, the conclusion says something about both, not just about A."
+  }
+}

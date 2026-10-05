@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "pc-0036",
+    "type": "pc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "technology-ethics",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "tier": "medium",
+    "title": "The Password That Changed Every Quarter",
+    "theme": "how a rule forcing frequent password changes produced predictable passwords and so weakened the security it was meant to improve",
+    "estimated_time_sec": 90,
+    "gap_function": "next_step",
+    "primary_trap": "local_fit_global_break",
+    "reasoning_patterns": ["disc.function_slot", "disc.given_new", "struct.cause_effect", "disc.implicit_transition"],
+    "learning_objective": "check a mid-paragraph option against the 'therefore' in the next sentence, not only against the sentence before it",
+    "difficulty_vector": { "stance_subtlety": 3, "scope_precision": 3, "distractor_closeness": 4, "concept_abstractness": 2, "syntactic_complexity": 3 },
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-10-05", "usage_note": "Original composition in CAT register for CAT OS. A general account of forced password expiry and predictable user behaviour; no specific study, guideline or text adapted. Personal study only." },
+    "date_added": "2026-10-05",
+    "batch_id": "batch-pc-003",
+    "reviewer_notes": "The sentence after the gap says an attacker who knew one old password could 'therefore' guess the current one. Only a behaviour that makes each password predictable from the last one can stand behind that 'therefore'. The sticky-note option is real behaviour and fits the sentence before; it breaks on the sentence after.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the sticky-note option. It is exactly what people are known to do, it follows 'did what almost anyone would do' naturally, and it is a security failure; but it gives an attacker the current password directly, so a sentence about guessing it from an old one would no longer follow with 'therefore'. The moral about people evading rules is the paragraph's lesson placed too early, and leaves the 'therefore' unsupported. The longer-and-stranger option contradicts both the guessing and the last sentence.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      "For years, offices made their staff change passwords every ninety days, on the reasonable theory that a stolen password would then be useful for only a short time.",
+      "Staff, asked to invent and remember a fresh secret four times a year, did what almost anyone would do.",
+      "An attacker who had learned one old password could therefore guess the current one in a handful of tries.",
+      "The rule had been written for a user who does not exist: one with an endless supply of new secrets and the memory to keep them all."
+    ],
+    "gap_index": 2
+  },
+  "question": {
+    "stem": "Which of the following sentences best fills the gap in the paragraph?",
+    "options": {
+      "A": "They kept the old password and changed a single character, so that Mango@1 became Mango@2 and then Mango@3.",
+      "B": "They wrote each new password on a slip of paper and stuck it to the edge of the screen, where any visitor could read it.",
+      "C": "They chose longer and stranger passwords every time, which were harder to remember but far harder for anyone to guess.",
+      "D": "People will always find a way round a rule that asks more of them than they are able to give, however sensible it is."
+    },
+    "correct": "A"
+  },
+  "explanation": {
+    "what_the_gap_needs": "The sentence before the gap promises a description of what staff did; the sentence after says that, 'therefore', an old password lets an attacker guess the new one. The missing sentence must describe a habit that makes each password predictable from the one before. Anything that fails that test leaves the 'therefore' with nothing to stand on.",
+    "correct_reasoning": "The correct option describes the habit and shows it: one character changed, Mango@1 to Mango@2 to Mango@3. Anyone who knows an old password can now guess the current one in a few tries, which is exactly what the next sentence concludes, and the last sentence's point about a user with an endless supply of secrets follows naturally.",
+    "distractors": [
+      {
+        "option": "B",
+        "trap_type": "local_fit_global_break",
+        "why_wrong": "It follows the sentence before the gap perfectly, but a password on a note can simply be read; it does not let an attacker guess the new password from an old one, so the 'therefore' in the next sentence no longer follows.",
+        "seductive_element": "It is a real and well-known habit, it is a security failure, and it answers 'did what almost anyone would do' very naturally."
+      },
+      {
+        "option": "C",
+        "trap_type": "contradicts_neighbour",
+        "why_wrong": "Passwords that are longer and stranger each time would be harder to guess, not easier, so the next sentence would contradict it; it also contradicts the last sentence's point that staff could not keep inventing new secrets.",
+        "seductive_element": "It describes what the rule hoped people would do, and 'harder to remember' sounds like an honest cost."
+      },
+      {
+        "option": "D",
+        "trap_type": "premature_conclusion",
+        "why_wrong": "It is the paragraph's lesson, offered before the paragraph has said what staff actually did; without a description of their habit, the next sentence's 'therefore' has no grounds and the last sentence is left repeating the moral.",
+        "seductive_element": "It is true to the paragraph's spirit and reads as a confident general remark, the kind that often wins in completion questions."
+      }
+    ],
+    "method": "In a mid-paragraph gap, test each option against the sentence after it as well as the sentence before. A 'therefore' after the gap tells you the gap must contain the reason for what follows. Options that fit only the earlier sentence are the standard trap."
+  },
+  "mentor": {
+    "challenge": "Two options fit the sentence before the gap. Only one makes the 'therefore' in the sentence after it true.",
+    "takeaway": "A gap in the middle must fit both its neighbours; check the 'therefore' after it, not just the sentence before."
+  }
+}

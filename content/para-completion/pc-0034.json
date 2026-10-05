@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "pc-0034",
+    "type": "pc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "urban-studies",
+    "difficulty": "medium",
+    "difficulty_numeric": 4,
+    "tier": "medium",
+    "title": "The Lanes That Filled Themselves",
+    "theme": "why widening a congested road brings the congestion back, by drawing in journeys that the jam had been preventing",
+    "estimated_time_sec": 85,
+    "gap_function": "next_step",
+    "primary_trap": "premature_conclusion",
+    "reasoning_patterns": ["disc.function_slot", "disc.given_new", "disc.demonstrative", "struct.cause_effect"],
+    "learning_objective": "use a demonstrative phrase after the gap, 'these new drivers', to work out what the missing sentence must introduce",
+    "difficulty_vector": { "stance_subtlety": 3, "scope_precision": 3, "distractor_closeness": 4, "concept_abstractness": 2, "syntactic_complexity": 3 },
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-10-05", "usage_note": "Original composition in CAT register for CAT OS. A general description of induced traffic demand after road widening; no specific study or text adapted. Personal study only." },
+    "date_added": "2026-10-05",
+    "batch_id": "batch-pc-003",
+    "reviewer_notes": "The sentence after the gap begins 'These new drivers', and no one new has appeared before the gap. The gap must bring them in. Each wrong option does something reasonable for a paragraph about traffic and leaves 'these new drivers' pointing at nothing.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the moral that a wider road invites traffic. It is the paragraph's own idea and the line a strong reader predicts, but put here it supplies no drivers for 'these new drivers' to refer to, and it says early what the last sentence says better. The existing-drivers option is the subtle trap: it does introduce drivers, but old ones, and 'new' cannot point back to them. The praise for the planners endorses an improvement the next sentence undoes.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      "When a city's main road is jammed every morning, the obvious remedy is to widen it.",
+      "For a few months after the new lanes open, the journey really is quicker, just as the planners promised.",
+      "These new drivers fill the extra lanes within a couple of years, and the road is as slow as it ever was, only now it carries more cars.",
+      "The jam was never a fixed amount of traffic looking for room; it was a measure of how many people would drive if driving were bearable."
+    ],
+    "gap_index": 2
+  },
+  "question": {
+    "stem": "Which of the following sentences best fills the gap in the paragraph?",
+    "options": {
+      "A": "A wider road, in other words, does not so much make room for the traffic that exists as invite traffic that did not.",
+      "B": "Drivers who were already using the road every morning now save ten or fifteen minutes each way, and say so to anyone who asks.",
+      "C": "Bus riders, early leavers and people who stayed at home notice the quicker journey and start driving at the busy hour too.",
+      "D": "The planners are rightly praised for the improvement, and the council, encouraged, begins drawing up plans to widen the next road."
+    },
+    "correct": "C"
+  },
+  "explanation": {
+    "what_the_gap_needs": "The sentence after the gap opens with 'These new drivers', and nothing before the gap has mentioned any. The missing sentence must introduce people who were not driving on this road at the busy hour and now are, and it must follow from the quicker journey described just before it.",
+    "correct_reasoning": "The correct option names exactly those people, bus riders, early leavers and people who stayed at home, and gives the reason they start driving: the quicker journey. 'These new drivers' then has someone to point to, and the last sentence's idea, that the jam measured how many would drive if driving were bearable, is shown in action before it is stated.",
+    "distractors": [
+      {
+        "option": "A",
+        "trap_type": "premature_conclusion",
+        "why_wrong": "It states the paragraph's lesson before the story has produced it, and it introduces no drivers, so 'these new drivers' in the next sentence refers to nobody; the last sentence would also end up saying the same thing twice.",
+        "seductive_element": "It is the idea the whole paragraph is about, put neatly, and it feels like the sentence a sharp reader would expect."
+      },
+      {
+        "option": "B",
+        "trap_type": "wrong_reference_target",
+        "why_wrong": "It does introduce drivers, but the ones already on the road; 'these new drivers' cannot point back to people who were there all along, and the extra cars the next sentence counts are left unexplained.",
+        "seductive_element": "It continues the 'quicker journey' of the sentence before smoothly, and it puts drivers in place just before a sentence about drivers."
+      },
+      {
+        "option": "D",
+        "trap_type": "stance_shift",
+        "why_wrong": "The paragraph treats the quicker journey as temporary and the widening as a mistaken remedy; praising the planners as 'rightly' credited takes the side the next two sentences overturn, and it supplies no new drivers.",
+        "seductive_element": "It continues the timeline naturally, and the planners were mentioned in the sentence just before the gap."
+      }
+    ],
+    "method": "When the sentence after a gap uses 'these', 'this' or 'such', ask what it points back to. If nothing before the gap fits, the missing sentence must supply it, and the right option is the one that supplies exactly that, not something nearby."
+  },
+  "mentor": {
+    "challenge": "The sentence after the gap talks about 'these new drivers'. Nobody new has arrived yet. Who must the gap bring in?",
+    "takeaway": "A 'these' after the gap is a pointer; the missing sentence is whatever it points at."
+  }
+}

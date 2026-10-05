@@ -329,7 +329,7 @@ export async function renderPlace(outlet, { storage }, params) {
       '',
       infoButton(type, { moreTitle: 'This place', more: [type === 'sp'
         ? 'CAT gives you a paragraph with one sentence lifted out and asks where it goes. The pronoun that needs an owner and the “but” that needs something to push against will tell you.'
-        : 'A paragraph that stops one sentence early. Decide what the gap needs, a reason, an example, a turn or a landing, before you read the options.'] }));
+        : 'A paragraph with one sentence missing, at its end or in its middle. Decide what the gap needs, a reason, an example, a turn or a landing, before you read the options.'] }));
     more.innerHTML = bankTierTiles(type, rows, state, 'Every tier', 'Three at a time, unsolved first. Each tier is harder than the last.');
     return;
   }

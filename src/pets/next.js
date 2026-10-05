@@ -14,7 +14,7 @@ import { STAGE_INFO } from '../core/learning/journey.js';
 
 const BANK = {
   sp: ['sp', 'Sentence placement', 'A paragraph with one sentence taken out. Find the one seat it can take', 5],
-  pc: ['pc', 'Paragraph completion', 'A paragraph that stops one sentence early. Decide what the gap needs', 5],
+  pc: ['pc', 'Paragraph completion', 'A paragraph with one sentence missing. Decide what the gap needs', 5],
   cr: ['cr', 'Arguments', 'Find the assumption, weaken the link, name the flaw', 4],
 };
 

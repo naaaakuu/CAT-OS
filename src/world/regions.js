@@ -102,7 +102,7 @@ export const REGIONS = Object.freeze([
   },
   {
     slug: 'completion', name: 'The Clock Tower', kind: 'learn', inQuarter: true,
-    line: 'Para Completion. A paragraph that stops one sentence early: decide what the gap needs.',
+    line: 'Para Completion. A paragraph with one sentence missing: decide what the gap needs.',
     verb: 'Climb the tower',
     skill: 'Para completion',
     anchor: { x: 560, y: 586 }, hit: { x: 550, y: 576, w: 24, h: 22 },

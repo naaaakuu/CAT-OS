@@ -1770,3 +1770,59 @@
 }
 .importsheet__acts { display: grid; gap: 8px; }
 .importsheet__acts .btn { width: 100%; min-height: 44px; }
+
+/* ============================================================
+   The reading surface (3.4.0)
+
+   The passage is the product. The title carries on from the briefing in
+   the same quiet display face, instead of jumping to a heavy bold; the
+   briefing shows the passage's own first line; and a wide screen reads
+   the way the exam does, passage on the left, question on the right,
+   each scrolling on its own.
+   ============================================================ */
+:root[data-world] cat-passage .p-title { font-family: var(--g-display); font-weight: 400; letter-spacing: -0.015em; }
+
+.brief__opening {
+  font-family: var(--font-reading); font-size: 17px; line-height: 1.6; color: var(--g-ink-2);
+  margin: 4px 0 16px; padding-left: 14px; border-left: 2px solid var(--g-line);
+  text-wrap: pretty;
+}
+
+/* The paragraph numbers hang in the margin on a wider column, and the run
+   body scrolls (overflow clips): give them the margin to hang in, or the
+   numbers every question cites ("in the second paragraph") vanish. */
+@media (min-width: 46rem) {
+  .run cat-passage { box-sizing: border-box; padding-left: 2.25rem; max-width: calc(var(--measure-read) + 2.25rem); }
+}
+
+.run__qa > .card { margin-top: 12px; }
+
+@media (min-width: 64rem) {
+  .run__body.run__qa {
+    max-width: 1280px; padding: 20px 28px 0;
+    display: grid; grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr); grid-template-rows: minmax(0, 1fr);
+    gap: 28px; overflow: hidden;
+  }
+  .run__qa > * { margin: 0 0 20px; }
+  .run__qa > .reread {
+    height: calc(100% - 20px); overflow-y: auto; overscroll-behavior: contain;
+    background: var(--g-paper-2); border: 1px solid var(--g-line); border-radius: var(--g-radius-lg);
+  }
+  .run__qa > .reread > summary { display: none; }
+  .run__qa > .reread .reread__body { padding: 8px 36px 28px 20px; }
+  .run__qa > .card {
+    align-self: start; max-height: calc(100% - 20px); overflow-y: auto; overscroll-behavior: contain;
+    margin: 0 0 20px;
+  }
+  .run__qa > .card .run__actions { bottom: 0; }
+}
+
+/* The paragraph a bank item asks about is content, not interface: set it
+   in the reading serif, the same voice as a passage. */
+.bank-para, .bank-sentence, .bank-argument, .bank-missing p { font-family: var(--font-reading); font-size: var(--text-read); line-height: 1.7; }
+
+/* The run scrolls its body: let the body span the screen and centre the
+   column with padding, so the scrollbar sits at the edge of a desktop
+   screen instead of in the middle of it. */
+.run__body { max-width: none; padding-left: max(18px, calc((100% - 604px) / 2)); padding-right: max(18px, calc((100% - 604px) / 2)); }
+.bank-blank--gap { font-family: var(--font-ui); }

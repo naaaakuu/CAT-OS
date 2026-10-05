@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "pc-0028",
+    "type": "pc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 86,
+    "genre": "psychology",
+    "difficulty": "easy",
+    "difficulty_numeric": 1,
+    "tier": "foundation",
+    "title": "The Shelf You Built Yourself",
+    "theme": "why people value a thing more once they have laboured over it, even when the labour made it no better",
+    "estimated_time_sec": 60,
+    "gap_function": "explanation",
+    "primary_trap": "redundant_restatement",
+    "reasoning_patterns": ["disc.function_slot", "disc.closing_sentence", "struct.phenomenon_explanation"],
+    "learning_objective": "close a paragraph that sets up a puzzle by explaining it, not by describing it again",
+    "difficulty_vector": { "stance_subtlety": 1, "scope_precision": 2, "distractor_closeness": 2, "concept_abstractness": 1, "syntactic_complexity": 1 },
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-10-05", "usage_note": "Original composition in CAT register for CAT OS. A general observation about how effort raises the value people place on what they made; no specific study or text adapted. Personal study only." },
+    "date_added": "2026-10-05",
+    "batch_id": "batch-pc-003",
+    "reviewer_notes": "A foundation item with a plain puzzle: the same shelf, a higher price, and the third sentence removes every material reason for the difference. The gap has to name the one thing that is different, which is the evening spent building it.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the restatement that builders value the shelf more than lookers. It is true, it is in the paragraph's words, and it sounds like a summing-up; but the paragraph has already shown that difference twice and is waiting for a reason. The 'better wood' option offers a reason, which makes it tempting, and the third sentence has removed it in advance. The flat-pack line is on topic and does no work.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      "Ask people what a plain flat-pack bookshelf is worth, and they will name a modest price.",
+      "Ask people who have just spent an evening putting the same shelf together, and the price they name goes up.",
+      "The wood is the same, the screws are the same, and their shelf is, if anything, a little crooked."
+    ],
+    "gap_index": 3
+  },
+  "question": {
+    "stem": "Which of the following sentences best completes the paragraph?",
+    "options": {
+      "A": "The builders, after all, have usually picked out better wood and taken more care over the joints.",
+      "B": "What they are pricing, it seems, is the shelf together with the evening they put into it.",
+      "C": "So the people who built the shelf value it more highly than the people who only looked at it.",
+      "D": "Flat-pack furniture has changed how millions of people furnish their homes, and not only by being cheap."
+    },
+    "correct": "B"
+  },
+  "explanation": {
+    "what_the_gap_needs": "Two groups price the same shelf differently, and the third sentence rules out every reason in the shelf itself: same wood, same screws, worse finish. A closing sentence has to say what the builders are paying for, and the only thing left that differs between the two groups is the work.",
+    "correct_reasoning": "The correct option names the evening of work as the thing being priced, which is exactly what remains once the third sentence has taken the wood and the screws off the table. It explains the higher price without adding any fact the paragraph has not given.",
+    "distractors": [
+      {
+        "option": "A",
+        "trap_type": "contradicts_neighbour",
+        "why_wrong": "The sentence just before the gap says the wood and screws are the same and the shelf is a little crooked, so a claim about better wood and careful joints is contradicted by the line it would follow.",
+        "seductive_element": "It gives a real reason for a higher price, and a reader hunting for an explanation grabs the first one offered."
+      },
+      {
+        "option": "C",
+        "trap_type": "redundant_restatement",
+        "why_wrong": "The first two sentences have already shown that builders name a higher price; saying so again leaves the puzzle exactly where it was instead of explaining it.",
+        "seductive_element": "It sounds like a tidy summary, and its words are close to the paragraph's own."
+      },
+      {
+        "option": "D",
+        "trap_type": "topic_match_function_mismatch",
+        "why_wrong": "It is about flat-pack furniture, so the topic fits, but it says nothing about why the builders price their shelf higher, which is the only job left for the last sentence.",
+        "seductive_element": "It names the paragraph's subject and adds a knowing note, 'not only by being cheap', that feels like a point."
+      }
+    ],
+    "method": "When a paragraph shows a difference and then removes the obvious causes, the gap must name the cause that is left. List what the paragraph has ruled out before you read the options, and the answer is the option that points at what remains."
+  },
+  "mentor": {
+    "challenge": "Same shelf, higher price, and the third sentence takes away every reason in the wood. What is left to explain it?",
+    "takeaway": "When a paragraph rules out the obvious causes, the last sentence names the one it has not ruled out."
+  }
+}

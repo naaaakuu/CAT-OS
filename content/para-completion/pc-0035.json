@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "pc-0035",
+    "type": "pc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "science",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "tier": "medium",
+    "title": "Every Map Chooses Its Error",
+    "theme": "why no flat map of the earth is accurate, and why the useful question is what a map was made to keep true",
+    "estimated_time_sec": 85,
+    "gap_function": "conclusion",
+    "primary_trap": "attractive_generality",
+    "reasoning_patterns": ["disc.closing_sentence", "disc.function_slot", "struct.claim_evidence", "scope.abstraction_level"],
+    "learning_objective": "close on the claim the paragraph's evidence supports, at the right level of generality, without turning it into a recommendation",
+    "difficulty_vector": { "stance_subtlety": 3, "scope_precision": 3, "distractor_closeness": 4, "concept_abstractness": 3, "syntactic_complexity": 3 },
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-10-05", "usage_note": "Original composition in CAT register for CAT OS. A general account of map projection trade-offs; no specific text adapted. Personal study only." },
+    "date_added": "2026-10-05",
+    "batch_id": "batch-pc-003",
+    "reviewer_notes": "The paragraph moves from 'no map can be accurate' to 'none is better in general'. The phrase 'in general' is the clue: maps are better for particular purposes, so the conclusion has to make accuracy relative to purpose.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the line that every picture of the world says as much about its maker as about the world. It is quotable and echoes a familiar criticism of the school atlas, but the paragraph has said nothing about makers' biases; it has described trade-offs forced by geometry. The recommendation to replace the atlas contradicts 'none of them is better than the rest in general'. The restatement repeats the second sentence and loses the point about purpose.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      "No flat map of the whole earth can be accurate, because a sphere cannot be laid flat without being stretched or torn somewhere.",
+      "Every map therefore has to choose what it will get wrong.",
+      "The one in most school atlases keeps angles true, so that a straight line drawn on it is a course a ship can actually steer, and it pays for this by swelling the lands near the poles until Greenland looks as large as Africa.",
+      "Other maps keep areas honest and bend the shapes of the continents instead, and none of them is better than the rest in general."
+    ],
+    "gap_index": 4
+  },
+  "question": {
+    "stem": "Which of the following sentences best completes the paragraph?",
+    "options": {
+      "A": "Each map, then, gets something wrong, but which thing it gets wrong is decided by the people who draw it.",
+      "B": "The sensible question to ask of any map is not whether it is accurate but what it was made to be accurate about.",
+      "C": "Schools should therefore replace the familiar atlas with a map that shows the continents at their true sizes.",
+      "D": "Every picture of the world, in the end, tells us as much about the people who made it as about the world itself."
+    },
+    "correct": "B"
+  },
+  "explanation": {
+    "what_the_gap_needs": "The paragraph argues that every map must give something up, shows one map trading area for angles and others trading shape for area, and ends by saying none is better 'in general'. That phrase invites the conclusion that maps are better or worse only for a purpose. The closing sentence must say so, without picking a winner and without widening into a claim about all pictures of the world.",
+    "correct_reasoning": "The correct option turns the paragraph's evidence into its point: since every map is wrong about something, the useful question is what it was built to keep right. It answers the 'in general' of the sentence before by naming the alternative, judging a map by its purpose, and it stays with maps.",
+    "distractors": [
+      {
+        "option": "A",
+        "trap_type": "redundant_restatement",
+        "why_wrong": "It repeats the second sentence, that every map chooses what to get wrong, and adds only that people make the choice, so the paragraph ends where its second sentence already was.",
+        "seductive_element": "'Then' gives it the sound of a conclusion, and it is accurate to the paragraph."
+      },
+      {
+        "option": "C",
+        "trap_type": "stance_shift",
+        "why_wrong": "The last sentence says no map is better than the rest in general; recommending that schools switch to one kind takes a side the paragraph has just declined to take.",
+        "seductive_element": "The Greenland and Africa example makes the school atlas look misleading, so a call to replace it feels like the obvious next step."
+      },
+      {
+        "option": "D",
+        "trap_type": "attractive_generality",
+        "why_wrong": "The paragraph explains the errors by geometry, not by the makers' outlook, and it is about maps, not every picture of the world; this ending changes both the cause and the scope.",
+        "seductive_element": "It sounds deep, it echoes a well-known criticism of the school atlas, and broad endings often pass for conclusions."
+      }
+    ],
+    "method": "Look for the qualifying phrase in the sentence before the gap. 'In general' tells you the paragraph thinks some maps are better for something; the conclusion is the option that names that 'something' as the real test. Drop options that pick a winner or swap the paragraph's reasons for different ones."
+  },
+  "mentor": {
+    "challenge": "The last sentence says no map is better 'in general'. Ask what that phrase leaves room for.",
+    "takeaway": "A qualifier like 'in general' often points straight at the conclusion: better for what?"
+  }
+}
