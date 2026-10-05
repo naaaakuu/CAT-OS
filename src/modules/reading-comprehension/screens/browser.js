@@ -79,7 +79,7 @@ export async function renderBrowser(outlet, { storage }) {
         <div class="list-item__title">${escapeHTML(displayTitle(item))}</div>
         <div class="list-item__meta">
           <span class="badge"><span class="dot dot--${escapeHTML(item.difficulty)}"></span>${escapeHTML(item.difficulty)}</span>
-          <span class="badge">${escapeHTML(item.genre)}</span>
+          <span class="badge">${escapeHTML(item.genre.replaceAll('-', ' '))}</span>
           <span>~${item.estimated_time_min} min · ${item.word_count} words</span>
           ${status}
         </div>

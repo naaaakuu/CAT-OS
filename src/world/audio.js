@@ -244,11 +244,27 @@ export function voice(petId, text = '', { soft = false } = {}) {
 
 const VOICE_WHO = { f: /female|zira|aria|jenny|samantha|susan|hazel|karen|victoria/i, m: /(^|[^a-z])male|david|mark|daniel|george|alex/i };
 
-/** A friend's catchphrase (SIGNATURE): spoken with the browser's voice when it has one, else the babble. */
+/* A tap on a friend: its own little call, built from tones (no speech engine). */
+const CALLS = {
+  toffee: (t, v, lp) => { for (let i = 0; i < 5; i += 1) { noiseBurst(t + i * 0.045, { peak: 0.05 * v, a: 0.003, d: 0.03, filter: 'bandpass', freq: 3200 + i * 350, q: 4 }); } tone(t + 0.24, { freq: 880, type: 'square', peak: 0.02 * v, a: 0.004, d: 0.1, dest: lp }); },
+  chai: (t, v) => { tone(t, { freq: 420, type: 'sine', peak: 0.1 * v, a: 0.06, hold: 0.1, d: 0.2, glide: 0.82 }); tone(t + 0.5, { freq: 400, type: 'sine', peak: 0.1 * v, a: 0.06, hold: 0.14, d: 0.3, glide: 0.8 }); },
+  matcha: (t, v, lp) => { [0, 4, 7, 12].forEach((s, i) => tone(t + i * 0.06, { freq: 880 * 2 ** (s / 12), type: 'triangle', peak: 0.07 * v, a: 0.004, d: 0.1, dest: lp })); },
+  ginger: (t, v, lp) => { tone(t, { freq: 520, type: 'triangle', peak: 0.09 * v, a: 0.005, d: 0.09, glide: 1.7, dest: lp }); tone(t + 0.12, { freq: 760, type: 'triangle', peak: 0.08 * v, a: 0.005, d: 0.12, glide: 0.7, dest: lp }); },
+  mallow: (t, v) => { [0, 7].forEach((s, i) => pluck(t + i * 0.22, 523.25 * 2 ** (s / 12), 0.07 * v, (i - 0.5) * 0.3)); },
+};
+
+/** A friend's tap sound (SIGNATURE). Mochi says its name in the browser's deep voice; everyone else makes a tone. */
 export function signature(petId, sig) {
   try {
     const v = gain();
     if (!sig?.say || v <= 0 || document.visibilityState === 'hidden') return;
+    if (petId !== 'mochi') {
+      if (!ensure() || state.ctx.state === 'suspended') return;
+      const c = state.ctx, lp = c.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 4200; lp.connect(state.master);
+      CALLS[petId]?.(c.currentTime + 0.01, v, lp);
+      setTimeout(() => { try { lp.disconnect(); } catch { /* gone */ } }, 1500);
+      return;
+    }
     const ss = window.speechSynthesis;
     const en = ss?.getVoices?.().filter((x) => /^en/i.test(x.lang)) ?? [];
     if (!ss || !window.SpeechSynthesisUtterance || !en.length) { voice(petId, sig.say); return; }

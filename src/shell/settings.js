@@ -78,7 +78,20 @@ export function renderSettings(outlet, { storage, version }) {
       <div class="cottage__hero" style="${backdropStyle('cottage')}" aria-hidden="true"></div>
       <p class="screen__eyebrow">Settings</p>
       <h1>Settings</h1>
-      <p class="cottage__line">How the village sounds and moves, how big the words are, and your backup.</p>
+      <p class="cottage__line">Text size, sound, motion and your backup.</p>
+
+      <div class="card">
+        <h2>Reading</h2>
+        ${row(icon('page', { size: 20 }), 'Text size', 'Changes passages, questions and lessons', `
+          <div class="segmented" id="reading-picker" role="group" aria-label="Text size">
+            ${READING_SIZES.map((s, i) => `<button class="segmented__option" data-reading-option="${s}" aria-pressed="false" aria-label="${['Small', 'Default', 'Large', 'Largest'][i]}" style="font-size:${[0.8125, 1, 1.25, 1.5][i]}rem">A</button>`).join('')}
+          </div>`)}
+        <p class="reading-sample">Mathematicians often work on problems chosen for their own sake, with no thought of the physical world at all.</p>
+        ${row(icon('sun', { size: 20 }), 'Theme', 'The rooms follow your device, or not', `
+          <div class="segmented" id="theme-picker" role="group" aria-label="Theme">
+            ${THEMES.map((t) => `<button class="segmented__option" data-theme-option="${t}" aria-pressed="false">${t[0].toUpperCase() + t.slice(1)}</button>`).join('')}
+          </div>`)}
+      </div>
 
       <div class="card">
         <h2>Audio</h2>
@@ -96,18 +109,6 @@ export function renderSettings(outlet, { storage, version }) {
             <button class="segmented__option" data-motion="system" aria-pressed="false">Auto</button>
             <button class="segmented__option" data-motion="full" aria-pressed="false">Full</button>
             <button class="segmented__option" data-motion="reduced" aria-pressed="false">Less</button>
-          </div>`)}
-      </div>
-
-      <div class="card">
-        <h2>Reading</h2>
-        ${row(icon('page', { size: 20 }), 'Reading size', 'Scales passages and lessons only', `
-          <div class="segmented" id="reading-picker" role="group" aria-label="Reading size">
-            ${READING_SIZES.map((s) => `<button class="segmented__option" data-reading-option="${s}" aria-pressed="false">${s.toUpperCase()}</button>`).join('')}
-          </div>`)}
-        ${row(icon('sun', { size: 20 }), 'Theme', 'The rooms follow your device, or not', `
-          <div class="segmented" id="theme-picker" role="group" aria-label="Theme">
-            ${THEMES.map((t) => `<button class="segmented__option" data-theme-option="${t}" aria-pressed="false">${t[0].toUpperCase() + t.slice(1)}</button>`).join('')}
           </div>`)}
       </div>
 

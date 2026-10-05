@@ -4490,7 +4490,19 @@ a.list-item:active { transform: scale(var(--press-scale)); }
    a learner has to parse nor the four options they have to hold in their
    head was one of them. Setting the reading size to XL and watching the
    question stay at 15px is the setting not working. */
-cat-option .body, cat-explanation .verdict + p, .reread__body { font-size: var(--text-read); }
+cat-option .body { font-size: calc(var(--text-read) - 1px); line-height: 1.5; }
+cat-explanation .verdict + p, .reread__body { font-size: var(--text-read); }
+
+/* Live sample under the Text size control: it uses the same variables as a passage. */
+.reading-sample {
+  margin: var(--space-2) 0 var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-left: 3px solid var(--color-line-strong);
+  font-family: var(--font-reading);
+  font-size: var(--text-read);
+  line-height: var(--leading-reading);
+  color: var(--color-ink-2);
+}
 
 /* A <summary> is a button that does not look like one, and was 42px tall. */
 summary { min-height: var(--tap-target); display: flex; align-items: center; }

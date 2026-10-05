@@ -4,6 +4,13 @@
 > Versions here are app releases; they map onto the capability milestones in
 > `PROJECT_ROADMAP.md` (0.x releases build toward Roadmap V1.0).
 
+## 3.7.0 follow-up: Calmer reading, friends that chirp (2026-10-05)
+
+- Tapping a friend no longer plays a synthetic speech voice: Chai hoots like an owl, Toffee crackles, Matcha trills, Ginger yips, Mallow chimes, all built from tones in `world/audio.js`. Mochi is unchanged.
+- Reading type: default passage text 18px to 17px, leading 1.78 to 1.7, paragraph gap 1.35em to 1.1em, column 36rem to 34rem, passage title 34px to about 27px. A paragraph now fits on a phone screen at once. Options are one step smaller with tighter padding and the question card has less side padding, so about three options show without scrolling.
+- Settings: Text size moved to the top, shown as four "A" buttons with a live sample (S/M/L/XL labels were opaque). Sizes are 15, 17, 19, 21px. It scales passages, questions and lessons.
+- Reading list shows genres without hyphens ("mathematics logic").
+
 ## 3.7.0 follow-up: The campfire stays in view (2026-10-05)
 
 - Friends now say only their own word when tapped (Chai "Hoo, hoo.", Toffee "Crackle!", Matcha "Hi hi!", Ginger "Yip!", Mallow "Soft, soft.", Mochi "Mochi."); the blip babble no longer plays under hellos and gossip.

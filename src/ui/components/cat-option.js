@@ -33,7 +33,7 @@ cat-option button {
   gap: var(--space-3);
   width: 100%;
   text-align: left;
-  padding: var(--space-3) var(--space-4);
+  padding: 0.625rem var(--space-3);
   border: 1px solid var(--color-line);
   border-radius: var(--radius-md);
   /* --g-raise, not --color-surface. In dark mode the surface ramp put the

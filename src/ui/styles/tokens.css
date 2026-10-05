@@ -273,7 +273,7 @@
   --text-xs:   0.8125rem;  /* 13 — captions, nav labels, hints */
   --text-sm:   0.9375rem;  /* 15 — secondary text, options */
   --text-base: 1.0625rem;  /* 17 — UI body */
-  --text-read: 1.125rem;   /* 18 — passage body (reading comfort first) */
+  --text-read: 1.0625rem;  /* 17 — passage body: roomy enough for minutes of reading, small enough to see a paragraph at once */
   --text-lg:   1.25rem;    /* 20 — section titles */
   --text-xl:   1.5rem;     /* 24 — screen titles */
   --text-2xl:  1.875rem;   /* 30 — the greeting */
@@ -281,7 +281,7 @@
 
   --leading-tight:   1.2;
   --leading-body:    1.55;
-  --leading-reading: 1.78;
+  --leading-reading: 1.7;
 
   --tracking-tight: -0.01em;  /* serif display */
   --tracking-wide:   0.14em;  /* overlines/eyebrows — small caps, letter-spaced */
@@ -303,7 +303,7 @@
 
   /* Reading rhythm — the vertical breath between paragraphs.
      Scales with the reading size (see data-reading blocks). */
-  --para-space: 1.35em;
+  --para-space: 1.1em;
 
   /* ==================== SHAPE ==================== */
   --radius-xs: 4px;     /* badges, chips */
@@ -336,7 +336,7 @@
 
   /* ==================== LAYOUT ==================== */
   --measure:      42rem;    /* max content width */
-  --measure-read: 36rem;    /* passage column — ~64 characters at 18px serif */
+  --measure-read: 34rem;    /* passage column — ~65 characters at 17px serif */
   --nav-height:   3.5rem;
   --tap-target:   2.75rem;  /* 44px minimum touch target */
 
@@ -455,6 +455,6 @@
    Kindle-style comfort control. Only the reading surface scales;
    the UI around it stays put. Leading loosens slightly as type
    grows — larger text needs more air, not less. */
-:root[data-reading="s"]  { --text-read: 1rem;      --leading-reading: 1.72; }
-:root[data-reading="l"]  { --text-read: 1.25rem;   --leading-reading: 1.82; }
-:root[data-reading="xl"] { --text-read: 1.375rem;  --leading-reading: 1.86; }
+:root[data-reading="s"]  { --text-read: 0.9375rem; --leading-reading: 1.65; }
+:root[data-reading="l"]  { --text-read: 1.1875rem; --leading-reading: 1.74; }
+:root[data-reading="xl"] { --text-read: 1.3125rem; --leading-reading: 1.78; }

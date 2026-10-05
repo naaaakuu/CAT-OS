@@ -44,11 +44,11 @@ class CatPassage extends HTMLElement {
         }
         cat-passage .p-title {
           font-family: var(--font-reading);
-          font-size: clamp(var(--text-xl), 4.5vw + 1rem, var(--text-3xl));
+          font-size: clamp(var(--text-xl), 3.2vw + 0.9rem, var(--text-2xl));
           font-weight: var(--weight-bold);
           letter-spacing: var(--tracking-tight);
           line-height: var(--leading-tight);
-          margin: var(--space-3) 0 var(--space-6);
+          margin: var(--space-2) 0 var(--space-5);
           text-wrap: balance;
         }
         cat-passage .p-body p {

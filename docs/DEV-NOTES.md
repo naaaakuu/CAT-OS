@@ -16,7 +16,7 @@
 - Living painting: a patch is the painting's own pixels (identical at rest); a moving cut must extend past its edge by more than it moves or the static copy ghosts; baked feathered alpha, not CSS masks (36 masks halved frame rate on Intel HD 520); halos use plain alpha, not blend modes. Measure with 600-frame rAF windows.
 - Dialogs go through `ui/modal.js` (pass `returnTo`; iOS taps do not focus buttons). The village onboarding awaits taps inside `render()`, so "render returned" is not "screen ready".
 - A friend's panTo started inside a tap's pointerdown is cancelled by the viewport's handler; defer 30 ms.
-- Voices: `SIGNATURE` (pets.js) per friend, spoken by `world/audio.js signature()` (Web Speech, blip fallback). Friend lines: 96 chars max, no em dashes, none of the mentor's banned words (`check-pets`).
+- Voices: `SIGNATURE` (pets.js) per friend, played by `world/audio.js signature()`: a tone-built call per friend (`CALLS`: Chai's owl hoot, Toffee's crackle, etc.); only Mochi still speaks its name (Web Speech, blip fallback). No other friend uses a speech engine. Friend lines: 96 chars max, no em dashes, none of the mentor's banned words (`check-pets`).
 
 ## Learning core
 - `noticing.js` returns nothing when nothing true can be said; do not force it to speak.
