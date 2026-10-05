@@ -4378,6 +4378,36 @@ a.list-item:active { transform: scale(var(--press-scale)); }
 }
 .bank-para--numbered { list-style: none; padding: 0; }
 .bank-para--numbered li { position: relative; padding-left: 28px; margin-bottom: var(--space-2); }
+.bank-para--numbered li.sp-slot { padding-left: 0; margin-bottom: var(--space-2); }
+.sp-slot__btn {
+  display: block;
+  width: 100%;
+  padding: 6px var(--space-3);
+  border: 1.5px dashed var(--color-line-strong);
+  border-radius: var(--radius-md);
+  background: transparent;
+  font: inherit;
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--color-ink-3);
+  cursor: pointer;
+  transition: border-color var(--duration-fast) var(--ease-out),
+              background-color var(--duration-fast) var(--ease-out),
+              color var(--duration-fast) var(--ease-out);
+}
+@media (hover: hover) {
+  .sp-slot__btn:hover { border-color: var(--color-accent); color: var(--color-accent); }
+}
+.sp-slot__btn:active { transform: scale(var(--press-scale)); }
+.sp-slot__btn.is-selected {
+  border-style: solid;
+  border-color: var(--color-accent);
+  background: var(--color-accent-subtle);
+  color: var(--color-accent);
+}
 .bank-n {
   position: absolute; left: 0; top: 0.15em;
   min-width: 20px; height: 20px; border-radius: 999px;
@@ -4402,6 +4432,24 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   color: transparent; line-height: 1;
 }
 .bank-filled { background: var(--color-correct-subtle, rgba(60,140,80,0.14)); color: inherit; border-radius: 3px; padding: 0 3px; }
+/* Para completion's gap: a paragraph that visibly stops, not a quiet
+   underline — the one thing that must never read like Para Summary's
+   plain, unbroken paragraph. */
+.bank-blank--gap {
+  display: inline-block;
+  border: 1.5px dashed var(--color-accent);
+  border-radius: var(--radius-md);
+  background: var(--color-accent-subtle);
+  color: var(--color-accent);
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  padding: 3px var(--space-2);
+  margin: 0 2px;
+  line-height: 1.4;
+  vertical-align: middle;
+}
 .bank-sentence { margin: 0; font-size: var(--text-lg); line-height: 1.55; }
 .bank-word { font-style: normal; font-weight: var(--weight-bold); text-decoration: underline; text-decoration-color: var(--color-accent); text-underline-offset: 3px; }
 .bank-parts { display: flex; flex-wrap: wrap; gap: 8px; margin-top: var(--space-3); }

@@ -4,6 +4,25 @@
 > Versions here are app releases; they map onto the capability milestones in
 > `PROJECT_ROADMAP.md` (0.x releases build toward Roadmap V1.0).
 
+## 3.3.1: Two mechanics that read as what they are (2026-10-05)
+
+Para Completion read as a re-skin of Para Summary (same plain paragraph,
+same question card), and Sentence Placement asked its gap as a detached
+"After sentence 2" multiple-choice list instead of a CAT-style interaction.
+
+- **Para Completion**: the gap is now a visible dashed chip inline in the
+  paragraph ("the paragraph stops here") instead of a near-invisible
+  underline, and the question is framed as "Complete the paragraph" rather
+  than repeating the bank's name a second time (`bank-blank--gap` in
+  `src/ui/styles/components.css`, `bodyHTML`/`showItem` in
+  `src/modules/verbal-bank/screens/session.js`).
+- **Sentence Placement**: the sentence to place is now placed by tapping a
+  "place it here" slot directly between the numbered sentences it could
+  sit between, not by reading an "After sentence N" option list
+  (`sp-slot__btn`, same two files). Submission and scoring are unchanged;
+  a tapped slot resolves to the same option letter the engine already
+  expects.
+
 ## 3.3.0: Friends you get attached to (2026-10-03)
 
 The owner, after 3.2.0: people should get hooked on the characters. Introduce

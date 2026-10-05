@@ -142,23 +142,34 @@ function markWord(sentence, word) {
 function bodyHTML(it, revealed = false) {
   const b = it.body;
   if (b.kind === 'sp') {
+    // Every position the content offers an option for becomes a tappable
+    // gap right where it sits in the paragraph — the learner builds the
+    // answer by touching the paragraph itself, never by reading a detached
+    // "After sentence N" list (task: feel like Para Jumbles, not a quiz).
+    const letterAtPos = Object.fromEntries(Object.entries(b.positions).map(([letter, p]) => [p, letter]));
     const pos = revealed ? b.positions[it.correct] : -1;
-    const rows = [];
+    const slot = (p) => (revealed || !(p in letterAtPos) ? '' :
+      `<li class="sp-slot"><button type="button" class="sp-slot__btn" data-letter="${letterAtPos[p]}">place it here</button></li>`);
+    const rows = [slot(0)];
     if (pos === 0) rows.push(`<li class="bank-para__placed"><span class="bank-n">•</span>${escapeHTML(b.missing)}</li>`);
     for (const s of b.sentences) {
       rows.push(`<li><span class="bank-n">${s.n}</span>${escapeHTML(s.text)}</li>`);
       if (pos === s.n) rows.push(`<li class="bank-para__placed"><span class="bank-n">•</span>${escapeHTML(b.missing)}</li>`);
+      else rows.push(slot(s.n));
     }
-    return `<ol class="bank-para bank-para--numbered">${rows.join('')}</ol>
-      ${revealed ? '' : `<div class="bank-missing"><p class="psx__label">The sentence to place</p><p>${escapeHTML(b.missing)}</p></div>`}`;
+    return `${revealed ? '' : `<div class="bank-missing"><p class="psx__label">The sentence to place</p><p>${escapeHTML(b.missing)}</p></div>`}
+      <ol class="bank-para bank-para--numbered">${rows.join('')}</ol>`;
   }
   if (b.kind === 'pc') {
+    const gap = revealed
+      ? `<mark class="bank-filled">${escapeHTML(it.options[it.correct])}</mark>`
+      : '<span class="bank-blank bank-blank--gap" aria-label="the missing sentence">the paragraph stops here</span>';
     const parts = [];
     b.sentences.forEach((s, i) => {
-      if (i === b.gap_index) parts.push(revealed ? `<mark class="bank-filled">${escapeHTML(it.options[it.correct])}</mark>` : '<span class="bank-blank" aria-label="the missing sentence">________</span>');
+      if (i === b.gap_index) parts.push(gap);
       parts.push(escapeHTML(s));
     });
-    if (b.gap_index >= b.sentences.length) parts.push(revealed ? `<mark class="bank-filled">${escapeHTML(it.options[it.correct])}</mark>` : '<span class="bank-blank" aria-label="the missing sentence">________</span>');
+    if (b.gap_index >= b.sentences.length) parts.push(gap);
     return `<p class="bank-para">${parts.join(' ')}</p>`;
   }
   if (b.kind === 'wb') {
@@ -249,7 +260,7 @@ export async function renderBankSession(outlet, { storage }, params) {
             <span class="badge">~${Math.max(20, it.time_sec)} s</span>
           </div>
           <div class="bank-body" id="body">${bodyHTML(it)}</div>
-          <div id="choose-slot"><cat-question-card></cat-question-card></div>
+          <div id="choose-slot">${type === 'sp' ? '' : '<cat-question-card></cat-question-card>'}</div>
           <div id="teaching-slot"></div>
           <div class="session-actions" id="actions"></div>
         </div>
@@ -259,11 +270,24 @@ export async function renderBankSession(outlet, { storage }, params) {
     const body = outlet.querySelector('#body');
     const teaching = outlet.querySelector('#teaching-slot');
     const actions = outlet.querySelector('#actions');
-    card.question = { type: it.label, stem: promptFor(it), options: it.options };
     session.markItemShown();
 
     let selected = null;
-    card.addEventListener('cat-option-select', (e) => { selected = e.detail.letter; card.selected = selected; syncChoosing(); });
+    if (type === 'sp') {
+      // Sentence placement: tap the gap in the paragraph itself, never a
+      // disconnected "After sentence N" list (task: feel like Para Jumbles,
+      // not like a generic relationship quiz).
+      body.addEventListener('click', (e) => {
+        const btn = e.target.closest('.sp-slot__btn');
+        if (!btn) return;
+        selected = btn.dataset.letter;
+        for (const el of body.querySelectorAll('.sp-slot__btn')) el.classList.toggle('is-selected', el === btn);
+        syncChoosing();
+      });
+    } else {
+      card.question = { type: type === 'pc' ? 'complete the paragraph' : it.label, stem: promptFor(it), options: it.options };
+      card.addEventListener('cat-option-select', (e) => { selected = e.detail.letter; card.selected = selected; syncChoosing(); });
+    }
     function syncChoosing() {
       actions.innerHTML = `
         <button class="btn" id="skip">Set aside</button>
@@ -272,7 +296,7 @@ export async function renderBankSession(outlet, { storage }, params) {
       actions.querySelector('#skip').addEventListener('click', onSkip);
     }
     function reveal(chosen) {
-      card.reveal = { chosen, correct: it.correct };
+      if (card) card.reveal = { chosen, correct: it.correct };
       body.innerHTML = bodyHTML(it, true);
       const ex = document.createElement('cat-explanation');
       ex.data = { question: it, chosen };
