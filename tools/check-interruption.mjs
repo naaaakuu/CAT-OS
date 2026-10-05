@@ -280,10 +280,10 @@ if (LOUD) console.log('\n2. noticing() against nonsense');
   ok(`${junk.length} nonsense record sets: nothing threw, every sentence is a string`);
 }
 
-/* ---- 3. The village's stars against a running ledger ---- */
-if (LOUD) console.log('\n3. The stars never exceed what was earned, and old treasure records change nothing');
+/* ---- 3. The village's Glow against a running ledger ---- */
+if (LOUD) console.log('\n3. The Glow never exceeds what was earned, and old treasure records change nothing');
 {
-  const { derivePets, starsFor, levelOf, visitsFrom } = await load('src/pets/economy.js');
+  const { derivePets, levelOf, visitsFrom } = await load('src/pets/economy.js');
   const iso = (d) => new Date(Date.now() - d * 864e5).toISOString();
   const sessions = Array.from({ length: 12 }, (_, i) => ({
     id: 's' + i, passage_id: 'rc-000' + ((i % 6) + 1), finished_at: iso(9 - (i % 9)), duration_ms: 300000,
@@ -295,16 +295,17 @@ if (LOUD) console.log('\n3. The stars never exceed what was earned, and old trea
   let pets;
   try { pets = derivePets({}, { sessions, learning: lex }, content, Date.now()); } catch (err) { bad('derivePets threw: ' + err.message); }
   if (pets) {
-    const earned = visitsFrom({ sessions, learning: lex }, content).reduce((n, v) => n + starsFor(v), 0);
-    if (pets.stars < earned || pets.stars > earned + 5 * pets.gifts || pets.gifts > 10) bad(`stars ${pets.stars} do not add up: ${earned} earned + ${pets.gifts} daily gifts`);
-    if (pets.level.level !== levelOf(pets.stars).level) bad('the level must follow the stars');
+    const earned = visitsFrom({ sessions, learning: lex }, content).reduce((n, v) => n + v.glow.total, 0);
+    const { practice, milestones, gifts, fire } = pets.sources;
+    if (practice !== earned || pets.glow !== practice + milestones + gifts + fire || gifts !== 10 * pets.gifts || pets.gifts > 10) bad(`Glow ${pets.glow} does not add up: ${earned} earned + ${milestones} milestones + ${fire} fire + ${pets.gifts} daily gifts`);
+    if (pets.level.level !== levelOf(pets.glow).level) bad('the level must follow the Glow');
     // Records from the retired treasure economy are ignored entirely.
     const made = [...lex, { id: 't1', kind: 'village-treasure', treasure: 'lanterns', at: iso(0.5) }, { id: 't2', kind: 'village-treasure', treasure: 'lanterns', at: iso(0.4) }];
     const after = derivePets({}, { sessions, learning: made }, content, Date.now());
-    if (after.stars !== pets.stars || after.level.level !== pets.level.level) bad('an old treasure record changed the stars or the level');
+    if (after.glow !== pets.glow || after.level.level !== pets.level.level) bad('an old treasure record changed the Glow or the level');
     const empty = derivePets({}, { sessions: [], learning: [{ id: 'g', kind: 'village-treasure', treasure: 'lanterns', at: iso(1) }] }, content, Date.now());
-    if (empty.stars !== 0 || empty.level.level !== 1) bad('a treasure record with nothing earned must leave a level-1 village with no stars');
-    ok(`${pets.stars} stars (level ${pets.level.level}) from ${earned} earned and ${pets.gifts} daily gifts; old treasure records change nothing`);
+    if (empty.glow !== 0 || empty.level.level !== 1) bad('a treasure record with nothing earned must leave a level-1 village with no Glow');
+    ok(`${pets.glow} Glow (level ${pets.level.level}) from ${earned} earned and ${pets.gifts} daily gifts; old treasure records change nothing`);
   }
 }
 

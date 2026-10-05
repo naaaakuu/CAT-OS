@@ -241,6 +241,7 @@ export async function renderRound(outlet, { storage }, params) {
         eyebrow: `${region.name} · ${title}`,
         title: result.stars.stars === 3 ? 'In full bloom' : 'Round complete',
         result: result.stars,
+        record: result.record,
         facts: [
           { label: 'Right', value: `${result.record.score?.correct}/${result.record.score?.total}`, good: result.stars.accuracy >= 0.75 },
           // Inside the pace is only a good number if the answers were right:

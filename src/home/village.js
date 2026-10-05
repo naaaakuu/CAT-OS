@@ -4,7 +4,7 @@
  * The whole game on one screen, in the order a learner reads it:
  *
  *   TOP      Toffee's fire (the days in a row) · the village level and its
- *            stars · every subject · settings (sound, name, progress)
+ *            Glow · every subject · settings (sound, name, progress)
  *   THE MAP  the painting, alive: friends walking, doing chores, waving.
  *            A "!" floats over each of today's three friends.
  *   BOTTOM   today's three friends and their gift, and ONE big button:
@@ -20,7 +20,8 @@
 
 import { loadWorld, loadWorldRecords, deriveWorldState } from '../world/state.js';
 import { loadValley, saveValley, valleyName } from '../world/companion.js';
-import { derivePets } from '../pets/economy.js';
+import { derivePets, DAILY_GIFT } from '../pets/economy.js';
+import { GLOW_SVG } from '../pets/glow.js';
 import { PETS, PET_BY_ID, HOUSES, LINES, lineFor, petForPlace, stageTitle, stageGift } from '../pets/pets.js';
 import { MAP, HOMES, PLACES, SIGNS, NODES, LAMPS, WINDOWS, CLOCK, nearestNode } from '../pets/paths.js';
 import { petRig, petPortrait, petGear, petRing, petFigure, FRAME } from '../pets/sprite.js';
@@ -270,11 +271,11 @@ export async function renderVillageHome(outlet, ctx) {
     fire.setAttribute('aria-label', f.days ? `Toffee's fire: ${f.days} ${f.days === 1 ? 'day' : 'days'} in a row` : "Toffee's fire: help any friend today to light it");
     fire.classList.toggle('is-out', !f.today);
     const lv = root.querySelector('.cw-chip--level');
-    lv.innerHTML = `<span class="cw-lv"><small>Lv</small><b>${L.level}</b></span><span class="cw-lvbar" aria-hidden="true"><i style="width:${Math.round(L.pct * 100)}%"></i></span><span class="cw-starcount">${starSVG}<b>${pets.stars}</b></span>`;
-    lv.setAttribute('aria-label', `Village level ${L.level}. ${pets.stars} stars; ${L.need} more for level ${L.level + 1}.`);
+    lv.innerHTML = `<span class="cw-lv"><small>Lv</small><b>${L.level}</b></span><span class="cw-lvbar" aria-hidden="true"><i style="width:${Math.round(L.pct * 100)}%"></i></span><span class="cw-glowcount">${GLOW_SVG}<b>${pets.glow}</b></span>`;
+    lv.setAttribute('aria-label', `Village level ${L.level}. ${pets.glow} Glow; ${L.need} more for level ${L.level + 1}.`);
     const today = root.querySelector('.cw-today');
     today.innerHTML = `<span class="cw-today__faces">${T.picks.map((id, i) => `<span class="cw-face ${T.done[i] ? 'is-done' : ''}">${petPortrait(id, 30)}${T.done[i] ? '<i aria-hidden="true">✓</i>' : ''}</span>`).join('')}</span><span class="cw-today__gift ${T.gift ? 'is-open' : ''}" aria-hidden="true">${giftSVG}</span><span class="cw-today__text">${T.gift ? 'Today\'s gift is yours!' : `${T.doneCount} of 3 helped`}</span>`;
-    today.setAttribute('aria-label', `Today's three friends: ${T.doneCount} of 3 helped. ${T.gift ? 'Today\'s gift is open.' : 'Help all three for a gift of 5 stars.'}`);
+    today.setAttribute('aria-label', `Today's three friends: ${T.doneCount} of 3 helped. ${T.gift ? 'Today\'s gift is open.' : 'Help all three for a gift of 10 Glow.'}`);
     const id = pets.play, who = PET_BY_ID.get(id), next = nextFor(id, world, { first: pets.pets.find((p) => p.id === id)?.isNew });
     const playEl = root.querySelector('.cw-play');
     playEl.setAttribute('href', next?.href ?? `#/world/place/${who.places[0]}`);
@@ -418,7 +419,7 @@ export async function renderVillageHome(outlet, ctx) {
     }
     if (pets.today.gift && store.get('catos:gift-day') !== pets.today.key) {
       store.set('catos:gift-day', pets.today.key);
-      celebrate(`<p class="cw-party__eyebrow">All three friends helped</p><span class="cw-party__chest" aria-hidden="true">${giftSVG}</span><h2 id="cw-party-h">Today's gift: +5 ${starSVG}</h2><p>Come back tomorrow: three more friends will need you.</p>`, 'chest');
+      celebrate(`<p class="cw-party__eyebrow">All three friends helped</p><span class="cw-party__chest" aria-hidden="true">${giftSVG}</span><h2 id="cw-party-h">Today's gift: +${DAILY_GIFT} ${GLOW_SVG}</h2><p>Come back tomorrow: three more friends will need you.</p>`, 'chest');
     }
   };
 
@@ -442,7 +443,7 @@ export async function renderVillageHome(outlet, ctx) {
         const line = lineFor(last.pet, 'thanks', String(last.at));
         life.party(last.pet, { line });
         announce(`Everyone ran to the plaza to celebrate. ${p.name}: ${line}`);
-        toast(`${starSVG} <b>+${last.earned}</b> You helped ${p.name}! Party in the plaza!`, 5600);
+        toast(`${last.earned > 0 ? `${GLOW_SVG} <b>+${last.earned}</b> ` : ''}You helped ${p.name}! Party in the plaza!`, 5600);
         play('party');
         // The cards (a friend who grew, a new level, the day's gift) wait for the party to wind down.
         later(() => checkParties(true), reduced ? 1200 : 7600);
@@ -622,10 +623,9 @@ function flameSVG(tier) {
   const s = TIER_SCALE[tier] ?? 0.8;
   return `<svg class="cw-flame__svg cw-flame--${tier}" viewBox="0 0 24 24" aria-hidden="true"><g transform="translate(12 22) scale(${s}) translate(-12 -22)"><path d="M12 2.6c2.4 3.3 6.2 6.2 6.2 11a6.2 6.2 0 0 1-12.4 0c0-2.7 1.3-4.5 2.7-6 .2 1.6.9 2.9 2.1 3.5-.5-3.1.3-6 1.4-8.5z" fill="#F2A23C" stroke="#7a4a1e" stroke-width="1.2" stroke-linejoin="round"/><path d="M12 11.4c1.3 1.6 2.6 2.7 2.6 4.6a2.6 2.6 0 0 1-5.2 0c0-1.5.9-2.9 2.6-4.6z" fill="#FFD978"/></g></svg>`;
 }
-const starSVG = '<svg class="cw-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.9 6.1 6.7.8-4.9 4.6 1.3 6.6L12 17.5l-6 3.2 1.3-6.6L2.4 9.5l6.7-.8z" fill="#F4C443" stroke="#B88A12" stroke-width="1.2" stroke-linejoin="round"/></svg>';
 const giftSVG = '<svg viewBox="0 0 32 32" aria-hidden="true"><rect x="4" y="13" width="24" height="15" rx="2.5" fill="#D9603A" stroke="#5a2e1a" stroke-width="1.5"/><rect x="2.5" y="9" width="27" height="6" rx="2" fill="#E9A23B" stroke="#5a2e1a" stroke-width="1.5"/><path d="M16 9v19" stroke="#F6EEDB" stroke-width="3"/><path d="M16 9c-3-6-9-5-8-1 1 3 8 1 8 1zm0 0c3-6 9-5 8-1-1 3-8 1-8 1z" fill="#F4C443" stroke="#5a2e1a" stroke-width="1.3" stroke-linejoin="round"/></svg>';
 const playSVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg>';
 const subjectsSVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><rect x="4" y="4" width="6.5" height="6.5" rx="1.6"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.6"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.6"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.6"/></g></svg>';
 const gearSVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 3.5l1.4 2.3 2.6-.7.7 2.6 2.3 1.4-1.2 2.4 1.2 2.4-2.3 1.4-.7 2.6-2.6-.7L12 20.5l-1.4-2.3-2.6.7-.7-2.6-2.3-1.4L6.2 12 5 9.6l2.3-1.4.7-2.6 2.6.7z"/></g></svg>';
 
-export { MOOD_LABEL, starSVG, giftSVG, flameSVG };
+export { MOOD_LABEL, giftSVG, flameSVG };

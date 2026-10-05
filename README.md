@@ -45,7 +45,7 @@ The game is simple; the learning is not.
 
 ## The game in ten seconds
 
-**Help a friend → earn stars → the village grows.**
+**Learn → earn Glow → the village grows.**
 
 The village is losing its words. Each friend has a trouble only learning can
 fix: Chai's pages are going blank, Matcha's word garden is wilting, Mochi's
@@ -53,11 +53,15 @@ notebook lost its notes, Ginger's gears are stuck, Mallow's stars went dim,
 and Toffee keeps the fire that holds it all together. Every round you finish
 with a friend helps them:
 
-- **Stars.** 1 to 3 for accuracy and pace, plus 1 for a flawless round.
-- **The village level.** Stars add up to levels, and every level puts
+- **Glow.** The village's one resource, paid for learning done: 1 for each
+  question you answer, 1 more when it is right, 2 for finishing a set. Time
+  never counts: slow or fast, a question pays the same, and an open app or a
+  skipped question pays nothing. Each question pays once a day; tomorrow it is
+  review and pays again. You still see 1 to 3 stars for how a run went.
+- **The village level.** Glow adds up to levels, and every level puts
   something new on the map: lanterns, bunting, flowers, firefly jars, a
   swing, chimes, a kite, lily-pad lights, sky lanterns.
-- **Growing up.** Each friend grows through ten stages as you work through
+- **Growing up.** Each friend grows through ten stages (6 Glow each) as you work through
   their subject: stage 1 is the first question you get right, stage 10 is
   every question in it. Every stage shows on them (a twinkle, a bigger body,
   their own hat, a ring of light, a floating charm, gold trim, a sparkle
@@ -66,9 +70,9 @@ with a friend helps them:
 - **A party after every set.** Finish a passage or three questions and every
   friend runs to the plaza to celebrate the one you helped.
 - **Today's three.** Every day the three friends who miss you most wear a
-  "!". Help all three and today's gift opens: 5 bonus stars.
+  "!". Help all three and today's gift opens: 10 bonus Glow.
 - **Toffee's fire.** Your days in a row. Seven in a row saves a spare log
-  that covers one missed day.
+  that covers one missed day, and adds a little Glow on a day that earned.
 
 ## The first minutes
 
@@ -81,7 +85,7 @@ Then Chai waves from the library and the big button at the bottom glows:
 **Help Chai · Read a passage · 5 min**. One tap and you are reading a real
 CAT passage against the clock.
 
-When you finish, the result screen counts up your stars ("You helped
+When you finish, the result screen counts up your Glow ("You helped
 Chai!"), Chai thanks you, and the level bar fills. Back in the village
 every friend runs to the plaza for a party round Chai, and if Chai grew a
 stage you see the new look and the new name. Then the next friend's "!" is

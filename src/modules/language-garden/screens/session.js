@@ -569,7 +569,7 @@ export async function renderGardenSession(outlet, context, params) {
       const slot = clear.querySelector('[data-gifts]');
       if (!slot?.isConnected) return;
       // A walk that could not be saved reads back as no change, and shows none.
-      slot.innerHTML = giftLines(c?.earned > 0 ? c : (record ? baseGifts('matcha', record.clean === true ? 2 : 1, false) : null));
+      slot.innerHTML = giftLines(c?.earned > 0 || c?.repeat ? c : (record ? baseGifts('matcha', record) : null));
       countGifts(slot, reduce);
     };
     // The four movements: anticipation → extension → settle → rest. The

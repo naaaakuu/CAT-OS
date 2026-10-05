@@ -1924,7 +1924,7 @@ console.log('\n16. The world (regions · economy · lexicon rounds · state · a
     const empty = state.deriveWorldState(content, { sessions: [], learning: [] }, Date.parse('2026-09-11T10:00:00Z'));
     if (!empty.isNew || empty.stars !== 0) bad('world state: an empty world is new, with no stars');
     if (empty.pets?.pets?.length !== 6 || !empty.pets.pets.every((x) => x.isNew)) bad('world state: a new learner meets six pets, none of them met yet');
-    if (empty.pets.today?.picks?.length !== 3 || empty.pets.nextDecor?.id !== 'lanterns' || empty.pets.stars !== 0) bad('world state: a new village has three friends to help today, no stars yet, and the lanterns to come first');
+    if (empty.pets.today?.picks?.length !== 3 || empty.pets.nextDecor?.id !== 'lanterns' || empty.pets.glow !== 0) bad('world state: a new village has three friends to help today, no Glow yet, and the lanterns to come first');
     const t0 = Date.parse('2026-09-11T09:00:00Z');
     const M = 60000;
     const rcSession = { id: 's1', passage_id: 'rc-0001', started_at: new Date(t0).toISOString(), finished_at: new Date(t0 + 5 * M).toISOString(), duration_ms: 5 * M, score: { total: 4, correct: 3, attempted: 4, accuracy: 0.75 }, answers: [] };
@@ -1938,14 +1938,14 @@ console.log('\n16. The world (regions · economy · lexicon rounds · state · a
     if (s2.meadow.mastered !== 1 || s2.meadow.stars !== 2) bad('world state: the Meadow counts mastered words and best round stars');
     const chai = s2.pets.pets.find((x) => x.id === 'chai'), matcha = s2.pets.pets.find((x) => x.id === 'matcha');
     if (chai.isNew || matcha.isNew) bad('world state: a passage is a visit to Chai and a word round a visit to Matcha');
-    if (chai.earned !== 3) bad(`world state: a 3/4 passage in time earns Chai three stars (got ${chai.earned})`);
-    if (matcha.earned !== 2) bad(`world state: a two-star word round earns Matcha two (got ${matcha.earned})`);
-    if (s2.pets.stars !== 5 || s2.pets.level?.level !== 2) bad(`world state: three stars and two make village level 2 (got ${s2.pets.stars} stars, level ${s2.pets.level?.level})`);
+    if (chai.earned !== 9) bad(`world state: a 3/4 passage earns Chai 4 + 3 + 2 Glow (got ${chai.earned})`);
+    if (matcha.earned !== 24) bad(`world state: a 10/12 word round earns Matcha 12 + 10 + 2 Glow (got ${matcha.earned})`);
+    if (s2.pets.sources.practice !== 33 || s2.pets.glow < 33 || s2.pets.level?.level < 2) bad(`world state: 33 Glow of practice make at least village level 2 (got ${JSON.stringify(s2.pets.sources)}, level ${s2.pets.level?.level})`);
     if (!s2.hearth.practicedToday) bad('world state: a session today counts as practised today');
     if (s2.stars !== 5) bad(`world state: stars total across places (${s2.stars})`);
     const change = state.petChangeLine(before, s2);
-    if (change?.pet !== 'chai' || change.earned !== 3 || !change.levelUp || change.decor?.id !== 'lanterns') bad(`world state: the change line names the pet, its stars and what the new level put on the map (${JSON.stringify(change)})`);
-    if (problems.length === b0) ok('a new learner meets six pets and three to help today; a passage and a round are visits that earn their own stars; the change line names who, how many, and the lanterns');
+    if (change?.pet !== 'chai' || change.earned !== 9 || change.why?.total !== 9 || change.repeat) bad(`world state: the change line names the pet, its Glow and what it was for (${JSON.stringify(change)})`);
+    if (problems.length === b0) ok('a new learner meets six pets and three to help today; a passage and a round are visits that earn their own Glow; the change line names who, how many, and why');
   }
 
   /* ---- The pets' voice and economy, in full (their own tools) ---- */

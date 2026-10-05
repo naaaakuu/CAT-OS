@@ -203,6 +203,6 @@ export function cornersOf(petId, world) {
   if (petId === 'mochi') return [c('#/world/place/table', 'Para Summary: the archery cabin', 'Every summary, tier by tier'), ...(has('pc') ? [c('#/world/place/completion', 'Para Completion: the clock tower', BANK.pc[2])] : [])];
   if (petId === 'ginger') return [c('#/world/place/loom', 'Para Jumbles: the workshop', 'Every jumble, tier by tier'), ...(has('sp') ? [c('#/world/place/placement', 'Sentence Placement: the rose cottage', BANK.sp[2])] : [])];
   if (petId === 'mallow') return [c('#/world/place/bench', 'The observatory', 'Every odd-one-out set, tier by tier')];
-  if (petId === 'toffee') return [c('#/world/place/wilds', 'The Gauntlet', 'Everything at once, against the clock'), c('#/world/place/hearth', 'Records', 'Your days, your stars, your treasures')];
+  if (petId === 'toffee') return [c('#/world/place/wilds', 'The Gauntlet', 'Everything at once, against the clock'), c('#/world/place/hearth', 'Records', 'Your days, your Glow, your treasures')];
   return [];
 }

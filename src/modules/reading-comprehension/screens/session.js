@@ -427,6 +427,7 @@ export async function renderSession(outlet, { storage }, params) {
         eyebrow: `The Reading House · ${passage.passage.title}`,
         title: res.flawless ? 'Flawless' : res.stars === 3 ? 'CAT pace' : 'Passage complete',
         result: res,
+        record: s,
         facts: [
           { label: 'Right', value: `${s.score.correct}/${s.score.total}`, good: res.accuracy >= 0.75 },
           // Fast and wrong is not a good result (see round.js).

@@ -1,6 +1,6 @@
 /**
  * rewards.js — what a finished run did, drawn the same way at the end of
- * every room: the friend hopping, "You helped Chai!" with the stars counted
+ * every room: the friend hopping, "You helped Chai!" with the Glow counted
  * up, their thank-you, the village level filling, a new heart and what it
  * puts on their home, a new level, and today's three.
  *
@@ -13,23 +13,24 @@ import { verbalStars } from './economy.js';
 import { play } from './audio.js';
 import { loadWorld, deriveWorldState, petChangeLine } from './state.js';
 import { PET_BY_ID, STORIES, HOME_GIFTS, petForModule, lineFor, stageTitle, stageGift } from '../pets/pets.js';
-import { starsFor } from '../pets/economy.js';
+import { DAILY_GIFT } from '../pets/economy.js';
+import { GLOW_SVG, questionsOf, payVisits, glowWhy } from '../pets/glow.js';
 import { petFigure, FRAME } from '../pets/sprite.js';
 import { motionReduced } from '../core/engagement/feedback.js';
 import { escapeHTML } from '../core/utils/format.js';
 
 const REGION_OF = { pj: 'loom', ps: 'table', ooo: 'bench', wd: 'terraces', sp: 'loom', pc: 'table', cr: 'reading-room', wb: 'meadow' };
-const STAR = '<svg class="cw-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.9 6.1 6.7.8-4.9 4.6 1.3 6.6L12 17.5l-6 3.2 1.3-6.6L2.4 9.5l6.7-.8z" fill="#F4C443" stroke="#B88A12" stroke-width="1.2" stroke-linejoin="round"/></svg>';
 
-/** One run's stars when the village could not be read: what the run itself earns. */
-export function baseGifts(pet, stars, flawless) {
-  return { pet, earned: starsFor({ stars: Math.max(0, Math.min(3, stars ?? 0)), flawless: flawless === true }) };
+/** One run's Glow when the village could not be read: what the stored record earns on its own. */
+export function baseGifts(pet, record) {
+  const [v] = payVisits([{ at: Date.parse(record?.finished_at) || Date.now(), qs: questionsOf(record) }]);
+  return { pet, earned: v.glow.total, why: v.glow };
 }
 
 /**
  * The friend block.
  * @param {{pet, earned?, grew?, stage?, chapter?, hearts?, levelUp?, level?, decor?, gift?, doneCount?}} c
- * @param {{compact?: boolean, lead?: string}} o  lead: html placed above the star line (the strip's stars)
+ * @param {{compact?: boolean, lead?: string}} o  lead: html placed above the Glow line (the strip's rating)
  */
 export function petBlock(c, { compact = false, lead = '' } = {}) {
   const p = PET_BY_ID.get(c?.pet);
@@ -41,22 +42,24 @@ export function petBlock(c, { compact = false, lead = '' } = {}) {
     </div>`;
 }
 
-/** The lines beside the friend: the stars, the thanks, the level, a heart, today. */
+/** The lines beside the friend: the Glow and what it was for, the thanks, the level, a heart, today. */
 export function giftLines(c) {
   const p = PET_BY_ID.get(c?.pet);
-  if (!p || !(c.earned > 0)) return '';
+  if (!p) return '';
+  if (!(c.earned > 0)) return c.repeat ? '<p class="pvwin__today">No new Glow this time: these questions already paid today. Tomorrow they count again.</p>' : '';
   const L = c.level;
   return `
-    <p class="pvwin__line"><span class="sr-only">${c.earned} stars. You helped ${p.name}.</span><span class="pvwin__chip" data-to="${c.earned}" aria-hidden="true">${STAR}<b>+<span data-n>0</span></b></span> <span aria-hidden="true">You helped ${p.name}!</span></p>
+    <p class="pvwin__line"><span class="sr-only">${c.earned} Glow. You helped ${p.name}.</span><span class="pvwin__chip" data-to="${c.earned}" aria-hidden="true">${GLOW_SVG}<b>+<span data-n>0</span></b></span> <span aria-hidden="true">You helped ${p.name}!</span></p>
+    ${c.why ? `<p class="pvwin__why">${escapeHTML(glowWhy(c.why))}</p>` : ''}
     <p class="pvwin__thanks">“${escapeHTML(lineFor(p.id, 'thanks', String(c.earned) + (c.hearts ?? '')))}”</p>
-    ${L ? `<p class="pvwin__level"><span>Village level ${L.level}</span><span class="pvwin__bar" aria-hidden="true"><i style="width:${Math.round(L.pct * 100)}%"></i></span><span>${L.need} more ${L.need === 1 ? 'star' : 'stars'} to level ${L.level + 1}</span></p>` : ''}
+    ${L ? `<p class="pvwin__level"><span>Village level ${L.level}</span><span class="pvwin__bar" aria-hidden="true"><i style="width:${Math.round(L.pct * 100)}%"></i></span><span>${L.need} more Glow to level ${L.level + 1}</span></p>` : ''}
     ${c.levelUp ? `<p class="pvwin__heart pvwin__big">The village reached level ${L.level}!${c.decor ? ` New on the map: ${escapeHTML(c.decor.name.toLowerCase())}.` : ''}</p>` : ''}
-    ${c.grew ? `<p class="pvwin__heart pvwin__big"><span aria-hidden="true">✦</span> ${p.name} grew to stage ${c.stage}: ${escapeHTML(stageTitle(p.id, c.stage))}! New: ${escapeHTML(stageGift(p.id, c.stage))}.</p>` : ''}
+    ${c.grew ? `<p class="pvwin__heart pvwin__big"><span aria-hidden="true">✦</span> ${p.name} grew to stage ${c.stage}: ${escapeHTML(stageTitle(p.id, c.stage))}! New: ${escapeHTML(stageGift(p.id, c.stage))}. <b>+${c.milestone} Glow</b></p>` : ''}
     ${c.chapter ? `<p class="pvwin__heart">${escapeHTML(HOME_GIFTS[(c.hearts ?? 1) - 1] ?? '')} appears at ${escapeHTML(p.home)}.</p>${STORIES[p.id]?.[c.hearts - 1] ? `<p class="pvwin__story"><i>${escapeHTML(STORIES[p.id][c.hearts - 1])}</i></p>` : ''}` : ''}
-    ${typeof c.doneCount === 'number' ? `<p class="pvwin__today">${c.gift ? `All three of today's friends helped: <b>+5 bonus stars</b>. See you tomorrow!` : c.doneCount >= 3 ? 'Today\'s gift is already yours. Every extra round still helps the village.' : c.doneCount ? `Today: ${c.doneCount} of 3 friends helped. ${3 - c.doneCount} more for today's gift.` : 'Help today\'s three friends for a bonus gift.'}</p>` : ''}`;
+    ${typeof c.doneCount === 'number' ? `<p class="pvwin__today">${c.gift ? `All three of today's friends helped: <b>+${DAILY_GIFT} bonus Glow</b>. See you tomorrow!` : c.doneCount >= 3 ? 'Today\'s gift is already yours. Every extra round still helps the village.' : c.doneCount ? `Today: ${c.doneCount} of 3 friends helped. ${3 - c.doneCount} more for today's gift.` : 'Help today\'s three friends for a bonus gift.'}</p>` : ''}`;
 }
 
-/** Roll every star chip inside `root` up to its number, a bright tick each. */
+/** Roll every Glow chip inside `root` up to its number, a bright tick each. */
 export function countGifts(root, reduce = motionReduced()) {
   const els = [...(root?.querySelectorAll('.pvwin__chip[data-to]') ?? [])];
   els.forEach((el, i) => setTimeout(() => countUp(el, reduce), reduce ? 0 : i * 240));
@@ -79,7 +82,7 @@ function countUp(el, reduce) {
 
 /**
  * What one saved run did: the world derived with and without the record
- * `id` (a session or a learning record), so the stars, a heart, a level and
+ * `id` (a session or a learning record), so the Glow, a heart, a level and
  * today's three are exactly what the village will show.
  * @returns {Promise<ReturnType<typeof petChangeLine> | null>}
  */
@@ -112,7 +115,7 @@ export function worldReward(session, items = [], { storage = null } = {}) {
       <span class="world-reward__stars" aria-label="${stars} of 3 stars">${'★'.repeat(stars)}<span class="off">${'★'.repeat(3 - stars)}</span></span>
       <span class="world-reward__title">${stars === 3 ? 'Accurate and in time.' : stars === 2 ? 'Accurate, over time.' : stars === 1 ? 'Completed, with a few that got away.' : 'Not yet, but every round helps.'}</span>
     </div>`;
-  const fallback = baseGifts(pet, stars, res.flawless);
+  const fallback = baseGifts(pet, session);
   const html = `
     <div class="world-reward" role="status" id="${key}">
       ${petBlock({ pet }, { compact: true, lead })}
@@ -130,7 +133,7 @@ export function worldReward(session, items = [], { storage = null } = {}) {
   };
   if (storage) {
     petChangeFor(storage, session.id)
-      .then((c) => fill(c && c.pet === pet && c.earned > 0 ? c : fallback))
+      .then((c) => fill(c && c.pet === pet && (c.earned > 0 || c.repeat) ? c : fallback))
       .catch(() => fill(fallback));
   } else fill(fallback);
   return { region, stars, pet, html };

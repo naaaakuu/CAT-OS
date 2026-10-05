@@ -6,7 +6,7 @@
  *   pet      a friend: who they are, what they teach, your level, the big
  *            Help button, Achievements; the rest sits under "More about"
  *   fire     Toffee's fire: the days in a row, the week, spare logs, the Gauntlet
- *   level    the village level: stars, and what each level puts on the map
+ *   level    the village level: Glow, and what each level puts on the map
  *   friends  every subject: one row per house, each a tap from its next round
  *   today    today's three friends and their gift
  *   cottage  settings: your village's name, sound, progress (the HUD gear; the
@@ -15,6 +15,7 @@
 
 import { PETS, PET_BY_ID, HOUSES, STORIES, HOME_GIFTS, FRIENDSHIPS, friendshipOf, lineFor, stageTitle, stageGift } from '../pets/pets.js';
 import { DAILY_GIFT } from '../pets/economy.js';
+import { GLOW, GLOW_SVG } from '../pets/glow.js';
 import { nextFor, cornersOf, noticeFor } from '../pets/next.js';
 import { levelFor, achievementsFor } from '../pets/progress.js';
 import { petFigure, petPortrait, backdropStyle, FRAME } from '../pets/sprite.js';
@@ -29,7 +30,7 @@ const MOOD_LABEL = { glowing: 'Very happy', happy: 'Happy', missing: 'Misses you
 /** What a round with each friend is, in three words. */
 export const ACT = { chai: 'Read a passage', matcha: 'Learn new words', mochi: 'Find the summary', ginger: 'Order the sentences', mallow: 'Spot the odd one out', toffee: 'Weekly Gauntlet' };
 const FLAME = '<svg viewBox="0 0 24 24" width="16" height="16"><path d="M12 2.6c2.4 3.3 6.2 6.2 6.2 11a6.2 6.2 0 0 1-12.4 0c0-2.7 1.3-4.5 2.7-6 .2 1.6.9 2.9 2.1 3.5-.5-3.1.3-6 1.4-8.5z" fill="#F2A23C" stroke="#7a4a1e" stroke-width="1.4" stroke-linejoin="round"/></svg>';
-const STAR = '<svg class="cw-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.9 6.1 6.7.8-4.9 4.6 1.3 6.6L12 17.5l-6 3.2 1.3-6.6L2.4 9.5l6.7-.8z" fill="#F4C443" stroke="#B88A12" stroke-width="1.2" stroke-linejoin="round"/></svg>';
+const STAR = '<svg class="cw-orb" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.9 6.1 6.7.8-4.9 4.6 1.3 6.6L12 17.5l-6 3.2 1.3-6.6L2.4 9.5l6.7-.8z" fill="#F4C443" stroke="#B88A12" stroke-width="1.2" stroke-linejoin="round"/></svg>';
 
 export function renderCard(card, kind, arg, api) {
   if (kind === 'pet') return petCard(card, arg, api);
@@ -108,7 +109,7 @@ function petCard(card, id, api) {
       ${pick && !done ? `<p class="cw-pickline"><b>!</b> One of today's three friends. Help ${esc(def.name)} for today's gift.</p>` : ''}
       ${growth(p, def)}
       ${corners.length ? `<h3 class="cw-h3">More ways to practice ${esc(def.subject)}</h3><ul class="cw-list">${corners.map((c) => `<li><a href="${esc(c.href)}"><span><b>${esc(c.label)}</b><small>${esc(c.sub ?? '')}</small></span><i aria-hidden="true">›</i></a></li>`).join('')}</ul>` : ''}
-      <p class="cw-reward">${STAR}<span>Each round earns <b>1 to 4 stars</b> for the village.${p.hearts < 5 ? ` At stage ${(p.hearts + 1) * 2}: <b>${esc(HOME_GIFTS[p.hearts])}</b> at ${esc(def.home)}.` : ''}</span></p>
+      <p class="cw-reward">${GLOW_SVG}<span>Every question you answer earns <b>Glow</b> for the village.${p.hearts < 5 ? ` At stage ${(p.hearts + 1) * 2}: <b>${esc(HOME_GIFTS[p.hearts])}</b> at ${esc(def.home)}.` : ''}</span></p>
       <h3 class="cw-h3">${esc(def.name)}'s story</h3>
       <p class="cw-sub">${esc(def.trouble)}</p>
       <ol class="cw-story">${STORIES[id].map((s, i) => (i < p.hearts ? `<li>${esc(s)}</li>` : `<li class="is-locked"><span aria-hidden="true">♡</span> Stage ${(i + 1) * 2}: grow ${esc(def.name)} to hear this part</li>`)).join('')}</ol>
@@ -148,7 +149,7 @@ function fireCard(card, api) {
       </ul>
       <h3 class="cw-h3">Toffee's story</h3>
       <ol class="cw-story">${STORIES.toffee.map((s, i) => (i < toffee.hearts ? `<li>${esc(s)}</li>` : `<li class="is-locked"><span aria-hidden="true">♡</span> Stage ${(i + 1) * 2}: keep the fire going to hear this part</li>`)).join('')}</ol>
-      <p class="cw-sub"><a href="#/world/place/hearth">Your records</a> · every day, star and friend so far.</p>
+      <p class="cw-sub"><a href="#/world/place/hearth">Your records</a> · every day, Glow and friend so far.</p>
     </details>`;
   card.querySelector('[data-go]')?.addEventListener('click', () => api.play('open'));
 }
@@ -163,11 +164,11 @@ function levelCard(card, api) {
     ${close}
     <p class="cw-eyebrow">${esc(valleyName(api.valley))}</p>
     <h2 class="cw-card__name">Village level ${L.level}</h2>
-    <div class="cw-levelbar"><span class="cw-levelbar__track"><i style="width:${Math.round(L.pct * 100)}%"></i></span><b>${STAR} ${P.stars - L.from} / ${L.to - L.from}</b></div>
-    <p class="cw-sub"><b>${L.need} more ${L.need === 1 ? 'star' : 'stars'}</b> to level ${L.level + 1}.</p>
+    <div class="cw-levelbar"><span class="cw-levelbar__track"><i style="width:${Math.round(L.pct * 100)}%"></i></span><b>${GLOW_SVG} ${P.glow - L.from} / ${L.to - L.from}</b></div>
+    <p class="cw-sub"><b>${L.need} more Glow</b> to level ${L.level + 1}.</p>
     <ul class="cw-facts">
-      <li><b>Earn stars</b><span>Finish any round with any friend: 1 to 3 stars for how well and how fast, plus 1 for a perfect run inside the time.</span></li>
-      <li><b>Bonus</b><span>Help all of today's three friends and open a gift worth ${DAILY_GIFT} stars.</span></li>
+      <li><b>Learn</b><span>Every question you answer earns Glow, one more when you get it right, and a bonus for finishing a set. Speed never counts, and each question pays once a day.</span></li>
+      <li><b>Grow</b><span>Each time a friend grows a stage, the village glows ${GLOW.STAGE} brighter. Help all of today's three friends for a gift of ${DAILY_GIFT}, and keep the fire for a little more each day.</span></li>
     </ul>
     <h3 class="cw-h3">What each level brings</h3>
     <ol class="cw-road">${P.decor.map((d) => `<li class="${d.made ? 'is-made' : d === P.nextDecor ? 'is-next' : ''}"><span class="cw-road__lv">Lv ${d.level}</span><span><b>${esc(d.name)}</b><small>${esc(d.appears)}</small></span><i aria-hidden="true">${d.made ? '✓' : d === P.nextDecor ? '★' : ''}</i></li>`).join('')}</ol>`;
@@ -207,7 +208,7 @@ function todayCard(card, api) {
     ${close}
     <p class="cw-eyebrow">Today</p>
     <h2 class="cw-card__name">${T.gift ? 'Today\'s gift is yours!' : 'Three friends need you'}</h2>
-    <p class="cw-sub">${T.gift ? `You helped all three. ${DAILY_GIFT} bonus stars went to the village. Come back tomorrow for three more.` : `These friends miss you most today. Help all three and open a gift worth ${DAILY_GIFT} stars.`}</p>
+    <p class="cw-sub">${T.gift ? `You helped all three. ${DAILY_GIFT} bonus Glow went to the village. Come back tomorrow for three more.` : `These friends miss you most today. Help all three and open a gift worth ${DAILY_GIFT} Glow.`}</p>
     <ul class="cw-todo">${T.picks.map((id, i) => {
       const def = PET_BY_ID.get(id), next = nextFor(id, api.world, { first: api.pets.pets.find((p) => p.id === id)?.isNew });
       return `<li class="${T.done[i] ? 'is-done' : ''}">${petPortrait(id, 44)}<span><b>Help ${esc(def.name)}</b><small>${esc(ACT[id])}${next?.minutes ? ` · about ${Math.max(1, Math.round(next.minutes))} min` : ''}</small></span>${T.done[i] ? '<i class="cw-todo__ok" aria-label="done">✓</i>' : `<a href="${esc(next?.href ?? `#/world/place/${def.places[0]}`)}" data-go>Go</a>`}</li>`;
@@ -238,7 +239,7 @@ function cottageCard(card, api) {
     </div>
     <nav class="cw-rooms" aria-label="The other rooms">
       <a href="#/growth"><b>Your progress</b><small>How far you have come, subject by subject</small><i aria-hidden="true">›</i></a>
-      <a href="#/world/place/hearth"><b>Records</b><small>Your days, stars and friends</small><i aria-hidden="true">›</i></a>
+      <a href="#/world/place/hearth"><b>Records</b><small>Your days, Glow and friends</small><i aria-hidden="true">›</i></a>
       <a href="#/settings"><b>Settings</b><small>Reading size, theme, motion, backup and restore</small><i aria-hidden="true">›</i></a>
     </nav>
     <p class="cw-sub">Everything you learn stays on this device, and the village works offline once it has finished downloading.</p>`;

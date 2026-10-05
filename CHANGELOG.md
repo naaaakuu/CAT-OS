@@ -4,6 +4,46 @@
 > Versions here are app releases; they map onto the capability milestones in
 > `PROJECT_ROADMAP.md` (0.x releases build toward Roadmap V1.0).
 
+## 3.6.0: Glow, the village's currency (2026-10-05)
+
+Learning to Glow to the village. One resource, paid for learning done and
+never for time spent.
+
+- **Glow replaces stars as the village currency.** It is a warm light, the
+  same light as the lamps, so it belongs to the village and not to an app. The
+  0 to 3 star rating stays as feedback on a run (accuracy, then pace) and as
+  how glad a friend is to see you; it no longer pays anything.
+- **What pays** (`src/pets/glow.js`, one home for every number): 1 for each
+  question you answer, 1 more when it is right, 2 for finishing a whole set,
+  6 each time a friend grows a stage, 10 when today's three friends are all
+  helped, and a little for the fire (your place in the run of days, up to 5)
+  on a day that earned.
+- **What never pays:** time. A question is worth the same in four seconds or
+  four minutes; an open app, an idle tab and a skipped question pay nothing;
+  an answer faster than a person can read (under a second) is a blind tap and
+  pays nothing. Each question pays once a day for being answered and once for
+  being right, so replaying the same ones earns no more; tomorrow it is
+  review and pays again. A fast learner who gets through more questions earns
+  more, and a slow one is paid the same per question.
+- **Every area counts the same way.** Reading, jumbles, summaries, odd one
+  out, placement, vocabulary and the Gauntlet all pay by their questions. A
+  Word DNA visit is one question per family and kind.
+- **The result says why.** "+9 Glow" with "4 answered, 3 right, set
+  finished", or "No new Glow this time: these questions already paid today.
+  Tomorrow they count again." The village card says it in three lines
+  (Learn, Grow, and that speed never counts).
+- **Levels cost more Glow, so the pace of a village level is about what it
+  was:** 0, 15, 36, 63, 99, 144, 198, 264, 342, 435, then 108 each. Existing
+  villages re-derive their level from their records; nothing is stored.
+- **For later:** `derivePets` returns `glow` and `sources` ({ practice,
+  milestones, gifts, fire }), and each visit carries `glow` ({ tried, right,
+  set, total }), so character growth, achievements and the village can read
+  one number. `changeBetween` adds `why`, `repeat` and `milestone`.
+- A friend's mood is still weighted by the run's star rating (it includes
+  pace). Left alone on purpose; say so if it should follow Glow too.
+- Fixed a class collision: the new Glow icon is `.cw-orb`, because `.cw-glow`
+  is already the lamps' halo.
+
 ## 3.5.0: Characters that speak, cards you read in five seconds (2026-10-05)
 
 The village art is untouched. What changed is what a tap on a friend gives you.

@@ -387,7 +387,7 @@ async function renderNumbers({ s, rcW, sessions, lessons, reflections, items, st
         ['Word parts climbed', `${s.terraces.done} / ${s.terraces.total}`],
         ['Quarter solved', `${s.loom.solved + s.table.solved + s.bench.solved} / ${s.loom.total + s.table.total + s.bench.total}`],
         ['Village level', String(s.pets.level.level)],
-        ['Stars earned', String(s.pets.stars)],
+        ['Village Glow', String(s.pets.glow)],
         ['Days practised', String(s.hearth.activeDays)],
         ['Longest run', `${s.hearth.streak.best} days`],
       ].map(([k, v]) => `<div class="nums__row nums__row--plain"><span>${escapeHTML(k)}</span><b>${escapeHTML(v)}</b></div>`).join('')}

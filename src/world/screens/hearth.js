@@ -40,7 +40,7 @@ export async function renderHearth(outlet, { storage }) {
       <div class="place__body" id="body">
         <p class="place__eyebrow">Records · kept by Toffee</p>
         <h1 class="place__title">${f.days ? `A ${f.days}-day fire` : 'A fresh fire'}</h1>
-        <p class="place__line">Village level ${P.level.level} · ${P.stars} stars · ${state.hearth.activeDays} ${state.hearth.activeDays === 1 ? 'day' : 'days'} in the village · best run ${state.hearth.streak.best} · ${f.kindling} spare ${f.kindling === 1 ? 'log' : 'logs'}.</p>
+        <p class="place__line">Village level ${P.level.level} · ${P.glow} Glow · ${state.hearth.activeDays} ${state.hearth.activeDays === 1 ? 'day' : 'days'} in the village · best run ${state.hearth.streak.best} · ${f.kindling} spare ${f.kindling === 1 ? 'log' : 'logs'}.</p>
         <div id="panel" class="is-in"></div>
       </div>
     </section>`;
@@ -62,7 +62,7 @@ export async function renderHearth(outlet, { storage }) {
     <div class="figures">
       ${[
         ['Passages read', `${state.reading.read}/${state.reading.passages}`],
-        ['Stars', String(P.stars)],
+        ['Glow', String(P.glow)],
         ['Village level', String(P.level.level)],
         ['On the map', `${P.decor.filter((t) => t.made).length}/${P.decor.length}`],
         ['Root families grown', `${state.rootwood.grownCount}/${state.rootwood.total}`],

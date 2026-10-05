@@ -31,7 +31,7 @@
 }
 .pet-portrait__disc .pet-sprite { margin-bottom: -16%; }
 .gift { display: inline-block; vertical-align: middle; flex: none; }
-.cw-star { width: 1em; height: 1em; display: inline-block; vertical-align: -0.12em; flex: none; }
+.cw-orb { width: 1em; height: 1em; display: inline-block; vertical-align: -0.12em; flex: none; }
 
 /* ---------------- The frame ---------------- */
 .cw {
@@ -351,9 +351,9 @@
 .cw-lv b { font: 800 15px/1 var(--font-ui); color: #fff; margin-top: -6px; }
 .cw-lvbar { width: 54px; height: 10px; border-radius: 6px; background: color-mix(in srgb, var(--color-line-strong) 50%, transparent); overflow: hidden; box-shadow: inset 0 1px 2px rgba(40, 30, 10, 0.2); }
 .cw-lvbar i { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #F4C443, #F2A23C); transition: width 0.9s var(--ease-out); }
-.cw-starcount { display: flex; align-items: center; gap: 3px; }
-.cw-starcount .cw-star { width: 19px; height: 19px; }
-.cw-starcount b { font-size: 16px; }
+.cw-glowcount { display: flex; align-items: center; gap: 3px; }
+.cw-glowcount .cw-orb { width: 19px; height: 19px; }
+.cw-glowcount b { font-size: 16px; }
 .cw-round { position: relative; width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; padding: 0; flex: none; }
 .cw-round svg { width: 23px; height: 23px; color: var(--color-ink-2); }
 
@@ -403,7 +403,7 @@
   background: var(--color-surface); color: var(--color-ink); font-size: 15px; line-height: 1.35;
   box-shadow: 0 10px 30px rgba(30, 24, 12, 0.28);
 }
-.cw-toast .cw-star { width: 22px; height: 22px; }
+.cw-toast .cw-orb { width: 22px; height: 22px; }
 
 /* Whoever the big button is for is off the edge of the screen: a chip at that edge, pointing. */
 .cw-edge {
@@ -494,7 +494,7 @@
 .cw-go i { font-style: normal; font-size: 20px; }
 .cw-go--gold { background: linear-gradient(180deg, #FFD978, #F2A93B); color: #3b2508 !important; box-shadow: 0 4px 0 #B9741C, 0 8px 20px rgba(60, 36, 8, 0.25); }
 .cw-reward { display: flex; gap: 8px; align-items: flex-start; margin: 0 0 6px; font-size: 13.5px; line-height: 1.45; color: var(--color-ink-2); }
-.cw-reward .cw-star { width: 18px; height: 18px; margin-top: 1px; }
+.cw-reward .cw-orb { width: 18px; height: 18px; margin-top: 1px; }
 .cw-list { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; }
 .cw-list a { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 11px 14px; border-radius: 14px; background: var(--color-surface-2); text-decoration: none; min-height: 48px; }
 .cw-list b { display: block; font-size: 14.5px; }
@@ -536,7 +536,7 @@
    outside tap close it, and it renders in the top layer so the scrim cannot trap it. */
 .cw-achieve { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; min-height: 48px; margin: 2px 0 4px; padding: 11px 16px; border: 1px solid var(--color-line); border-radius: 16px; background: var(--color-surface-2); font: 700 14px/1 var(--font-ui); color: var(--color-ink); }
 .cw-achieve small { margin-left: auto; font: 650 12.5px/1 var(--font-ui); color: var(--color-ink-3); }
-.cw-achieve .cw-star { width: 16px; height: 16px; }
+.cw-achieve .cw-orb { width: 16px; height: 16px; }
 .cw-h3 small { margin-left: 6px; font: 650 13px/1 var(--font-ui); color: var(--color-ink-3); }
 .cw-ach { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 .cw-ach li { display: flex; gap: 8px; align-items: flex-start; padding: 10px; border-radius: 14px; background: var(--color-surface-2); opacity: 0.78; }
@@ -653,7 +653,7 @@
 .cw-party.is-in .cw-party__card { scale: 1; }
 .cw-party__eyebrow { margin: 0 0 4px; font: 700 12px/1.3 var(--font-ui); letter-spacing: 0.1em; text-transform: uppercase; color: var(--honey-ink); }
 .cw-party h2 { margin: 0 0 8px; font: 400 38px/1.05 var(--font-display); display: flex; align-items: center; justify-content: center; gap: 6px; }
-.cw-party h2 .cw-star { width: 30px; height: 30px; }
+.cw-party h2 .cw-orb { width: 30px; height: 30px; }
 .cw-party p { margin: 0 0 8px; font-size: 15px; line-height: 1.5; color: var(--color-ink-2); }
 .cw-party__new b { color: var(--color-ink); }
 .cw-party__chest { display: block; width: 84px; height: 84px; margin: 4px auto 8px; animation: cw-chest 0.9s ease-in-out; }

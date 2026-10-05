@@ -1,11 +1,13 @@
 /**
  * economy.js — the village's one loop, derived from records.
  *
- *   Help a friend (finish any round)  →  earn stars  →  the village grows.
+ *   Learn (finish any round)  →  earn Glow  →  the village grows.
  *
  * Every finished run is a VISIT to the friend who teaches that subject.
- * A visit earns 1 to 3 stars, plus 1 for a flawless run. Stars add up to
- * the village level, and each level puts something new on the map. Visits
+ * What a visit earns is src/pets/glow.js: Glow for every question genuinely
+ * answered and every one right, a bonus for a whole set, never for time.
+ * Glow adds up to the village level, and each level puts something new on
+ * the map; a friend growing a stage is a milestone worth Glow too. Visits
  * keep the friend happy (a mood that fades with a 36-hour half-life, so a
  * subject left alone is a friend missing you). The friend GROWS with how
  * much of their subject is done: ten stages, the last one only when every
@@ -13,26 +15,28 @@
  * a gift for their home.
  *
  * Every day the village picks three friends who need you most. Help all
- * three and the day's gift pays 5 more stars. Toffee keeps the fire: the
- * days in a row you came, with a spare log for every seventh day that
- * covers one missed day.
+ * three and the day's gift pays more Glow. Toffee keeps the fire: the
+ * days in a row you came (it adds a little Glow on a day that earned),
+ * with a spare log for every seventh day that covers one missed day.
  *
  * Nothing is stored back and nothing reads the clock: `now` is passed in.
  */
 
 import { PETS, petForModule, PET_BY_ID, STORIES, lineFor, requestFor } from './pets.js';
 import { rcStars, verbalStars } from '../world/economy.js';
+import { GLOW, questionsOf, payVisits } from './glow.js';
 import { dayKey, shiftDay } from '../core/engagement/streaks.js';
 
 const HALF_LIFE = 36 * 3600e3;
 const NEW_MOOD = 0.3;
-export const DAILY_GIFT = 5;
+export const DAILY_GIFT = GLOW.GIFT;
 /** Days of the fire it takes Toffee to grow all the way: Toffee's subject is coming back. */
 export const TOFFEE_DAYS = 60;
 const freeze = (o) => Object.freeze(o);
 
-/** Stars needed for each village level; past the last, every level costs 36 more. */
-export const LEVELS = freeze([0, 5, 12, 21, 33, 48, 66, 88, 114, 145]);
+/** Glow needed for each village level; past the last, every level costs LEVEL_STEP more. */
+export const LEVELS = freeze([0, 15, 36, 63, 99, 144, 198, 264, 342, 435]);
+const LEVEL_STEP = 108;
 
 /** What each level puts on the map, in order (drawn by src/home/cards.js). */
 export const DECOR = freeze([
@@ -47,16 +51,16 @@ export const DECOR = freeze([
   { id: 'skylanterns', level: 10, name: 'Sky lanterns', appears: 'Lanterns rise from the plaza on happy nights.' },
 ].map(freeze));
 
-/** The level a star total reaches, and how far into the next. */
-export function levelOf(stars) {
-  const s = Math.max(0, Math.floor(Number(stars) || 0));
+/** The level a Glow total reaches, and how far into the next. */
+export function levelOf(glow) {
+  const s = Math.max(0, Math.floor(Number(glow) || 0));
   let level = 1;
   while (level < LEVELS.length && s >= LEVELS[level]) level += 1;
   let from = LEVELS[level - 1], to = LEVELS[level];
   if (level >= LEVELS.length) {
     const top = LEVELS[LEVELS.length - 1];
-    level = LEVELS.length + Math.floor((s - top) / 36);
-    from = top + (level - LEVELS.length) * 36; to = from + 36;
+    level = LEVELS.length + Math.floor((s - top) / LEVEL_STEP);
+    from = top + (level - LEVELS.length) * LEVEL_STEP; to = from + LEVEL_STEP;
   }
   return { level, from, to, into: s - from, need: to - s, pct: (s - from) / (to - from) };
 }
@@ -108,12 +112,10 @@ const clampStars = (s) => Math.max(0, Math.min(3, Math.round(s)));
 const BANKS = new Set(['sp', 'pc', 'wb', 'cr']);
 const VERBAL = new Set(['pj', 'ps', 'ooo']);
 
-/** What one run earns: at least a star for finishing, a bonus for flawless. */
-export const starsFor = (v) => Math.max(1, Math.min(3, v.stars)) + (v.flawless ? 1 : 0);
-
 /**
- * Every finished run as a visit, sorted by time.
- * @returns {Array<{pet, at, stars, flawless, correct, id}>}
+ * Every finished run as a visit, sorted by time. `stars` (0 to 3) is the
+ * run's rating and only sets the friend's mood; `glow` is what it earned.
+ * @returns {Array<{pet, at, stars, flawless, correct, id, glow}>}
  */
 export function visitsFrom(records, content) {
   const rcById = new Map(arr(content?.rc).map((i) => [i?.id, i]));
@@ -122,7 +124,7 @@ export function visitsFrom(records, content) {
   const push = (x, mod, at, stars, flawless) => {
     const pet = petForModule(mod);
     if (pet && Number.isFinite(at) && Number.isFinite(stars)) {
-      out.push({ pet, at, stars: clampStars(stars), flawless: flawless === true, correct: Math.max(0, num(x.score?.correct) ?? 0), id: x.id ?? null });
+      out.push({ pet, at, stars: clampStars(stars), flawless: flawless === true, correct: Math.max(0, num(x.score?.correct) ?? 0), id: x.id ?? null, qs: questionsOf(x) });
     }
   };
   for (const x of arr(records?.sessions)) {
@@ -156,7 +158,7 @@ export function visitsFrom(records, content) {
     else if (r.kind === 'gauntlet-run') push(r, 'gauntlet', at, num(r.stars), r.flawless);
     else if (r.kind === 'garden-session') push(r, 'garden', at, r.clean === true ? 2 : 1, false);
   }
-  return out.sort((a, b) => a.at - b.at || String(a.id).localeCompare(String(b.id)));
+  return payVisits(out.sort((a, b) => a.at - b.at || String(a.id).localeCompare(String(b.id))));
 }
 
 /* ------------------------------------------------------------------ */
@@ -234,6 +236,9 @@ export function derivePets(state, records, content, now = Date.now()) {
   /* ---- Today's three friends, re-evaluated for every active day ---- */
   const dayRuns = new Map();
   for (const v of runs) { const k = dayKey(v.at); if (!dayRuns.has(k)) dayRuns.set(k, []); dayRuns.get(k).push(v); }
+  /* Only a run that earned Glow helps a friend for the day's gift: replaying what already paid today does not. */
+  const dayPaid = new Map();
+  for (const v of runs) if (v.glow.total > 0) { const k = dayKey(v.at); if (!dayPaid.has(k)) dayPaid.set(k, []); dayPaid.get(k).push(v); }
   const keys = [...new Set([...dayRuns.keys(), today])].sort();
   const walkers = Object.fromEntries(NEED_ORDER.map((id) => [id, careWalker(byPet.get(id), true)]));
   let gifts = 0, picks = [], helped = [];
@@ -242,7 +247,7 @@ export function derivePets(state, records, content, now = Date.now()) {
     const moods = {};
     for (const id of NEED_ORDER) { const c = walkers[id](midnight); moods[id] = c === null ? NEW_MOOD : moodOfCare(c); }
     const p3 = neediest(moods).slice(0, 3).map((x) => x.id);
-    const seen = [...new Set((dayRuns.get(key) ?? []).map((v) => v.pet))];
+    const seen = [...new Set((dayPaid.get(key) ?? []).map((v) => v.pet))];
     if (p3.every((id) => seen.includes(id))) gifts += 1;
     if (key === today) { picks = p3; helped = seen; }
   }
@@ -250,13 +255,14 @@ export function derivePets(state, records, content, now = Date.now()) {
   const doneCount = done.filter(Boolean).length;
 
   /* ---- Toffee's flame: simulated forward over the active days ---- */
-  let run = 0, kindling = 0, prev = null;
+  let run = 0, kindling = 0, prev = null, fire = 0;
   for (const d of [...dayRuns.keys()].sort()) {
     let base = run;
     if (prev && shiftDay(prev, 1) === d) run += 1;
     else if (prev && shiftDay(prev, 2) === d && kindling > 0) { kindling -= 1; run += 2; } // the missing day is bridged
     else { base = 0; run = 1; }
     if (Math.floor(run / 7) > Math.floor(base / 7)) kindling = Math.min(2, kindling + 1); // each 7th day of a run
+    if (dayPaid.has(d)) fire += Math.min(GLOW.FIRE_CAP, run); // the fire adds a little Glow on a day that earned
     prev = d;
   }
   /* Counting back from today (or yesterday): one missing day is bridged by a spare log. */
@@ -266,18 +272,14 @@ export function derivePets(state, records, content, now = Date.now()) {
   const week = Array.from({ length: 7 }, (_, i) => { const k = shiftDay(today, i - 6); return { key: k, done: dayRuns.has(k) }; });
   const flame = { days: flameDays, tier: flameTier(flameDays), kindling, alive: flameDays > 0, today: prev === today, week };
 
-  /* ---- Stars and the village level ---- */
-  let earnedAll = 0, last = null;
+  /* ---- Glow earned by every visit ---- */
+  let practice = 0, last = null;
   const earnedBy = Object.fromEntries(PETS.map((p) => [p.id, 0]));
   for (const v of runs) {
-    const e = starsFor(v);
-    earnedAll += e; earnedBy[v.pet] += e;
-    if (!last || v.at > last.at || (v.at === last.at && String(v.id) > String(last.id))) last = { pet: v.pet, at: v.at, stars: v.stars, flawless: v.flawless, earned: e };
+    const e = v.glow.total;
+    practice += e; earnedBy[v.pet] += e;
+    if (!last || v.at > last.at || (v.at === last.at && String(v.id) > String(last.id))) last = { pet: v.pet, at: v.at, stars: v.stars, flawless: v.flawless, earned: e, glow: v.glow };
   }
-  const stars = earnedAll + gifts * DAILY_GIFT;
-  const level = levelOf(stars);
-  const decor = DECOR.map((d) => ({ ...d, made: level.level >= d.level }));
-
   /* ---- Each friend: grown by how much of their subject is done ---- */
   const pets = PETS.map((p) => {
     const list = byPet.get(p.id);
@@ -301,6 +303,12 @@ export function derivePets(state, records, content, now = Date.now()) {
     };
   });
 
+  /* ---- Glow and the village level ---- */
+  const sources = { practice, milestones: pets.reduce((n, p) => n + p.stage, 0) * GLOW.STAGE, gifts: gifts * GLOW.GIFT, fire };
+  const glow = sources.practice + sources.milestones + sources.gifts + sources.fire;
+  const level = levelOf(glow);
+  const decor = DECOR.map((d) => ({ ...d, made: level.level >= d.level }));
+
   const moods = pets.map((p) => p.mood);
   const harmony = 0.5 * (moods.reduce((a, b) => a + b, 0) / moods.length) + 0.5 * Math.min(...moods);
   const needy = neediest(moodNow)[0].id;
@@ -314,7 +322,7 @@ export function derivePets(state, records, content, now = Date.now()) {
 
   return {
     pets, harmony, neediest: needy, play,
-    stars, level, decor, nextDecor: decor.find((d) => !d.made) ?? null, gifts,
+    glow, sources, level, decor, nextDecor: decor.find((d) => !d.made) ?? null, gifts,
     flame, today: { key: today, picks, done, doneCount, gift: picks.length === 3 && doneCount === 3, helped },
     welcome, awayDays, last,
   };
@@ -326,13 +334,17 @@ export function changeBetween(before, after) {
   const b = before?.pets?.find((p) => p.id === pet), a = after?.pets?.find((p) => p.id === pet);
   const madeBefore = new Set((before?.decor ?? []).filter((d) => d.made).map((d) => d.id));
   const gift = !!after?.today?.gift && !before?.today?.gift;
-  // A run that was never saved leaves `last` where it was: then nothing was earned.
+  // A run that was never saved leaves `last` where it was: then nothing happened at all.
   const fresh = !!after?.last && !(before?.last && before.last.at === after.last.at && before.last.pet === after.last.pet);
   return {
     pet,
-    // The run's own stars; the day's gift, if this run opened it, is said on its own line.
+    // The run's own Glow, and what it was for; the day's gift, if this run opened it, is said on its own line.
     earned: fresh ? after.last.earned : 0,
+    why: fresh ? after.last.glow ?? null : null,
+    // A run that earned nothing was a replay of what already paid today.
+    repeat: fresh && after.last.earned === 0,
     grew: !!(a && b && a.stage > b.stage), stage: a?.stage ?? 0,
+    milestone: a && b && a.stage > b.stage ? (a.stage - b.stage) * GLOW.STAGE : 0,
     chapter: !!(a && b && a.hearts > b.hearts), hearts: a?.hearts ?? 0,
     levelUp: (after?.level?.level ?? 1) > (before?.level?.level ?? 1), level: after?.level ?? levelOf(0),
     decor: (after?.decor ?? []).find((d) => d.made && !madeBefore.has(d.id)) ?? null,

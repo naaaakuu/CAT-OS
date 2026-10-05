@@ -36,6 +36,7 @@ const STAR_SVG = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2
  *   facts        [{ label, value, good }]
  *   pet          the host pet id (defaults to the region's pet)
  *   change       what the run did for the village (economy.js changeBetween)
+ *   record       the saved run, to name its Glow if the village could not be read
  *   setsDone     collections this run finished
  *   extraHTML    optional html placed under the pet (mentor, review)
  *   actions      [{ label, href, primary, quiet, onClick }]
@@ -62,7 +63,7 @@ export function renderResult(outlet, o) {
         <div class="result__facts">
           ${(o.facts ?? []).map((f) => `<div class="result__fact ${f.good ? 'is-good' : ''}"><b>${escapeHTML(String(f.value))}</b><span>${escapeHTML(f.label)}</span></div>`).join('')}
         </div>
-        <div class="late result__pet">${petBlock({ ...(o.change ?? baseGifts(pet, stars, o.result?.flawless)), pet })}</div>
+        <div class="late result__pet">${petBlock({ ...(o.change ?? baseGifts(pet, o.record)), pet })}</div>
         ${(o.setsDone ?? []).length ? `
         <div class="setsdone late">
           <p class="setsdone__eyebrow">${(o.setsDone ?? []).length === 1 ? 'A set finished' : `${o.setsDone.length} sets finished`}</p>

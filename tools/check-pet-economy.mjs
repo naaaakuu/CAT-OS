@@ -2,7 +2,7 @@
  * check-pet-economy.mjs — the village's one loop, derived from records.
  *
  * Synthetic records at fixed local times (never Date.now) through
- * derivePets: a new learner, what a run earns and the level stars reach,
+ * derivePets: a new learner, what a run earns and the level Glow reaches,
  * visits from every module, Toffee's daily visit, mood decay, harmony,
  * growth stages, today's three friends and the day's gift, Toffee's flame and its
  * kindling, decor by level, the welcome after a day away, changeBetween,
@@ -50,6 +50,7 @@ export async function checkPetEconomy() {
   try { E = await load('src/pets/economy.js'); } catch (err) { return { problems: [`src/pets/economy.js does not load: ${err.message}`] }; }
   const { LINES, REQUESTS, STORIES, BEST_FRIEND_ASK } = await load('src/pets/pets.js');
   const { dayKey } = await load('src/core/engagement/streaks.js');
+  const G = await load('src/pets/glow.js');
   const derive = (records, now, state = {}) => E.derivePets(state, records, content, now);
   const pet = (out, id) => out.pets.find((p) => p.id === id);
   const made = (out) => out.decor.filter((d) => d.made).map((d) => d.id).join();
@@ -64,7 +65,7 @@ export async function checkPetEconomy() {
     if (t.picks.join() !== 'chai,matcha,mochi' || t.done.join() !== 'false,false,false' || t.doneCount !== 0 || t.gift || t.helped.length || t.key !== dayKey(D(10))) bad(`1: a new learner's three are Chai, Matcha and Mochi: ${json(t)}`);
     if (out.pets.filter((p) => p.pick).map((p) => p.id).join() !== 'chai,matcha,mochi') bad('1: each pick is flagged on its pet');
     if (out.play !== 'chai' || out.neediest !== 'chai') bad(`1: a new learner is sent to Chai first (play ${out.play}, neediest ${out.neediest})`);
-    if (out.stars !== 0 || out.gifts !== 0 || out.level.level !== 1 || out.level.need !== 5) bad(`1: no stars, level 1: ${json({ stars: out.stars, level: out.level })}`);
+    if (out.glow !== 0 || out.gifts !== 0 || out.level.level !== 1 || out.level.need !== 15) bad(`1: no Glow, level 1: ${json({ glow: out.glow, level: out.level })}`);
     if (made(out) !== '' || out.nextDecor?.id !== 'lanterns') bad('1: nothing made yet; the lanterns come first');
     const f = out.flame;
     if (f.days !== 0 || f.tier !== 'embers' || f.alive || f.today || f.kindling !== 0 || f.week.length !== 7 || f.week.some((d) => d.done) || f.week[6].key !== dayKey(D(10))) bad(`1: empty flame is ${json(f)}`);
@@ -74,18 +75,37 @@ export async function checkPetEconomy() {
 
   /* 2. What a run earns, and the level the stars reach */
   {
-    for (const [v, want] of [[{ stars: 0 }, 1], [{ stars: 1 }, 1], [{ stars: 2 }, 2], [{ stars: 3 }, 3], [{ stars: 3, flawless: true }, 4], [{ stars: 0, flawless: true }, 2], [{ stars: 7 }, 3]]) {
-      if (E.starsFor(v) !== want) bad(`2: starsFor(${json(v)}) is ${E.starsFor(v)}, want ${want}`);
+    const { GLOW, questionsOf, payVisits, glowWhy } = G;
+    const pay = (...vs) => payVisits(vs.map(([at, qs]) => ({ at, qs }))).map((v) => v.glow);
+    const q = (key, tried = true, right = false) => ({ key, tried, right });
+    /* a question pays for being answered, +1 right, +2 for the whole set; time and skips pay nothing */
+    const [g1] = pay([D(5), [q('a', true, true), q('b', true, false), q('c', true, true), q('d', true, true)]]);
+    if (json(g1) !== json({ tried: 4, right: 3, set: GLOW.SET, total: 9 })) bad(`2: 4 answered, 3 right, set finished is 9: ${json(g1)}`);
+    const [g2] = pay([D(5), [q('a', true, true), q('b', false), q('c', true, false)]]);
+    if (g2.total !== 3 || g2.set !== 0) bad(`2: a skipped question pays nothing and the set is not whole: ${json(g2)}`);
+    const [g3, g4] = pay([D(5, 9), [q('a', true, true), q('b', true, false)]], [D(5, 11), [q('a', true, true), q('b', true, false)]]);
+    if (g3.total !== 2 + 1 + 2 || g4.total !== 0 || g4.set !== 0) bad(`2: the same questions the same day pay once: ${json([g3, g4])}`);
+    const [, g5] = pay([D(5, 9), [q('a', true, false)]], [D(5, 11), [q('a', true, true)]]);
+    if (g5.tried !== 0 || g5.right !== 1) bad(`2: getting it right later the same day pays the right once: ${json(g5)}`);
+    const [, g6] = pay([D(5), [q('a', true, true)]], [D(6), [q('a', true, true)]]);
+    if (g6.total !== 1 + 1 + 2) bad(`2: the next day the same question is review and pays again: ${json(g6)}`);
+    if (pay([D(5), []])[0].total !== 0) bad('2: an empty set pays nothing');
+    /* the records: an answer list by key, a blind tap is not an answer, a score counts, a garden visit is one question per family */
+    const aq = questionsOf({ id: 's', answers: [{ item_id: 'x1', is_correct: true, time_ms: 4000 }, { item_id: 'x2', is_correct: false, time_ms: 90000 }, { item_id: 'x3', is_correct: true, time_ms: 120 }, { item_id: 'x4' }] });
+    if (json(aq.map((x) => [x.key, x.tried, x.right])) !== json([['x1', true, true], ['x2', true, false], ['x3', false, false], ['x4', false, false]])) bad(`2: answers pay by key, not by time (a very slow answer pays the same, a blind tap pays nothing): ${json(aq)}`);
+    if (questionsOf({ id: 'p', score: { correct: 3, total: 4 } }).filter((x) => x.right).length !== 3 || questionsOf({ id: 'p', score: { correct: 3, total: 400 } }).length !== 60) bad('2: a score counts its questions, capped at 60');
+    if (questionsOf({ id: 'g1', family_id: 'f', session_type: 'grow' })[0].key !== 'f:grow') bad('2: a garden visit is one question per family and kind');
+    for (const junk of [undefined, null, 7, { answers: 'x' }]) if (!Array.isArray(questionsOf(junk))) bad(`2: questionsOf(${json(junk)}) must be a list`);
+    if (glowWhy(g1) !== '4 answered, 3 right, set finished' || glowWhy({ total: 0 }) !== '') bad(`2: glowWhy: ${glowWhy(g1)}`);
+    if (E.LEVELS.join() !== '0,15,36,63,99,144,198,264,342,435') bad(`2: LEVELS are ${E.LEVELS.join()}`);
+    for (const [s, want] of [[0, 1], [14, 1], [15, 2], [35, 2], [36, 3], [434, 9], [435, 10], [542, 10], [543, 11], [651, 12]]) {
+      if (E.levelOf(s).level !== want) bad(`2: ${s} Glow is level ${E.levelOf(s).level}, want ${want}`);
     }
-    if (E.LEVELS.join() !== '0,5,12,21,33,48,66,88,114,145') bad(`2: LEVELS are ${E.LEVELS.join()}`);
-    for (const [s, want] of [[0, 1], [4, 1], [5, 2], [11, 2], [12, 3], [144, 9], [145, 10], [180, 10], [181, 11], [217, 12]]) {
-      if (E.levelOf(s).level !== want) bad(`2: ${s} stars is level ${E.levelOf(s).level}, want ${want}`);
-    }
-    const l4 = E.levelOf(4);
-    if (l4.from !== 0 || l4.to !== 5 || l4.into !== 4 || l4.need !== 1 || !near(l4.pct, 0.8, 1e-9)) bad(`2: levelOf(4) is ${json(l4)}`);
-    const l180 = E.levelOf(180), l181 = E.levelOf(181);
-    if (l180.from !== 145 || l180.to !== 181 || l180.need !== 1 || l181.from !== 181 || l181.to !== 217 || l181.into !== 0) bad(`2: past the last level every level costs 36: ${json([l180, l181])}`);
-    for (const junk of [-5, 'x', null, undefined, NaN]) if (E.levelOf(junk).level !== 1 || E.levelOf(junk).into !== 0) bad(`2: levelOf(${String(junk)}) must read as no stars`);
+    const l14 = E.levelOf(14);
+    if (l14.from !== 0 || l14.to !== 15 || l14.into !== 14 || l14.need !== 1 || !near(l14.pct, 14 / 15, 1e-9)) bad(`2: levelOf(14) is ${json(l14)}`);
+    const l542 = E.levelOf(542), l543 = E.levelOf(543);
+    if (l542.from !== 435 || l542.to !== 543 || l542.need !== 1 || l543.from !== 543 || l543.to !== 651 || l543.into !== 0) bad(`2: past the last level every level costs 108: ${json([l542, l543])}`);
+    for (const junk of [-5, 'x', null, undefined, NaN]) if (E.levelOf(junk).level !== 1 || E.levelOf(junk).into !== 0) bad(`2: levelOf(${String(junk)}) must read as no Glow`);
   }
 
   /* 3. A passage and a word round are visits to Chai and Matcha; every module reaches its friend */
@@ -97,13 +117,13 @@ export async function checkPetEconomy() {
     const out = derive(r, t0 + 2 * HOUR);
     const chai = pet(out, 'chai'), matcha = pet(out, 'matcha');
     if (chai.isNew || matcha.isNew || chai.visits !== 1 || matcha.visits !== 1) bad('3: Chai and Matcha are met, one visit each');
-    if (chai.earned !== 3 || matcha.earned !== 2) bad(`3: Chai earns 3 and Matcha 2, got ${chai.earned} and ${matcha.earned}`);
-    if (out.stars !== 5 || out.level.level !== 2 || made(out) !== 'lanterns' || out.nextDecor?.id !== 'bunting') bad(`3: five stars is level 2 and the lanterns: ${json({ stars: out.stars, level: out.level.level, made: made(out) })}`);
-    if (json(out.last) !== json({ pet: 'chai', at: t0 + HOUR, stars: 3, flawless: false, earned: 3 })) bad(`3: the last run is the passage: ${json(out.last)}`);
+    if (chai.earned !== 9 || matcha.earned !== 9) bad(`3: a 3-of-4 set is 4 answered + 3 right + 2 for the set = 9 Glow, in time or not: Chai ${chai.earned}, Matcha ${matcha.earned}`);
+    if (json(out.sources) !== json({ practice: 18, milestones: 6, gifts: 0, fire: 1 }) || out.glow !== 25 || out.level.level !== 2 || made(out) !== 'lanterns' || out.nextDecor?.id !== 'bunting') bad(`3: 18 for the sets, 6 for Toffee's first stage, 1 for the fire is level 2 and the lanterns: ${json({ sources: out.sources, glow: out.glow, level: out.level.level, made: made(out) })}`);
+    if (json(out.last) !== json({ pet: 'chai', at: t0 + HOUR, stars: 3, flawless: false, earned: 9, glow: { tried: 4, right: 3, set: 2, total: 9 } })) bad(`3: the last run is the passage: ${json(out.last)}`);
     const fl = derive(recs(run('chai', t0, { flawless: true })), t0 + HOUR);
-    if (pet(fl, 'chai').earned !== 4 || !fl.last.flawless) bad(`3: a flawless passage earns 3 + 1, got ${pet(fl, 'chai').earned}`);
-    if (pet(derive(recs(run('chai', t0, { stars: 2 })), t0 + HOUR), 'chai').earned !== 2) bad('3: a slow 3/4 passage earns 2');
-    if (pet(derive(recs(run('chai', t0, { stars: 0 })), t0 + HOUR), 'chai').earned !== 1) bad('3: a finished run always earns at least one star');
+    if (pet(fl, 'chai').earned !== 10 || !fl.last.flawless) bad(`3: 4 of 4 is 4 + 4 + 2 = 10, got ${pet(fl, 'chai').earned}`);
+    if (pet(derive(recs(run('chai', t0, { stars: 2 })), t0 + HOUR), 'chai').earned !== 9) bad('3: a slow 3/4 passage earns the same as a quick one: time never counts');
+    if (pet(derive(recs(run('chai', t0, { stars: 0 })), t0 + HOUR), 'chai').earned !== 7) bad('3: 1 of 4 right still earns 4 + 1 + 2: the effort counts');
     const at = iso(t0);
     const mods = {
       sessions: [
@@ -129,16 +149,16 @@ export async function checkPetEconomy() {
     const t0 = D(5);
     const one = derive(recs(run('chai', t0)), t0 + HOUR);
     const tf = pet(one, 'toffee');
-    if (tf.isNew || tf.visits !== 0 || tf.earned !== 0 || tf.lastAt !== t0) bad(`4: the day's first run visits Toffee and earns no stars: ${json(tf)}`);
+    if (tf.isNew || tf.visits !== 0 || tf.earned !== 0 || tf.lastAt !== t0) bad(`4: the day's first run visits Toffee and earns no Glow of its own: ${json(tf)}`);
     if (tf.stage !== 1 || tf.unit !== 'days' || tf.done !== 1 || tf.total !== E.TOFFEE_DAYS) bad(`4: Toffee grows by the days you come: ${json({ stage: tf.stage, done: tf.done, unit: tf.unit })}`);
     if (!near(tf.mood, pet(one, 'chai').mood, 1e-12)) bad('4: the daily visit warms Toffee like the run it came with');
-    if (one.stars !== 3) bad(`4: the daily visit adds no stars (${one.stars})`);
+    if (one.sources.practice !== 9) bad(`4: the daily visit adds no practice Glow (${one.sources.practice})`);
     if (pet(derive(recs(run('chai', t0), run('mochi', t0 + HOUR)), t0 + 2 * HOUR), 'toffee').lastAt !== t0) bad('4: only the first run of a day visits Toffee');
     const two = pet(derive(recs(run('chai', D(5)), run('chai', D(6))), D(6, 12)), 'toffee');
     const want = E.stageOf(2, E.TOFFEE_DAYS);
     if (two.done !== 2 || two.stage !== want.stage || two.toNext !== want.toNext) bad(`4: two days are two days of Toffee's growth: ${json({ done: two.done, stage: two.stage, toNext: two.toNext })}`);
     const own = pet(derive(recs(run('toffee', t0), run('chai', t0 + HOUR)), t0 + 2 * HOUR), 'toffee');
-    if (own.visits !== 1 || own.earned !== 3 || own.done !== 1) bad(`4: a Gauntlet first thing is Toffee's own visit, not two: ${json({ visits: own.visits, earned: own.earned, done: own.done })}`);
+    if (own.visits !== 1 || own.earned !== 9 || own.done !== 1) bad(`4: a Gauntlet first thing is Toffee's own visit, not two: ${json({ visits: own.visits, earned: own.earned, done: own.done })}`);
   }
 
   /* 5. Mood fades with a 36-hour half-life */
@@ -202,6 +222,7 @@ export async function checkPetEconomy() {
     const all = derive(recs(), D(2), st);
     const wants = { chai: S(4, 530).stage, matcha: S(12, 3100).stage, mochi: S(1, 110).stage, ginger: 0, mallow: S(3, 60).stage, toffee: 0 };
     for (const [id, s] of Object.entries(wants)) if (pet(all, id).stage !== s) bad(`7: ${id} reads its own subject: stage ${pet(all, id).stage}, want ${s}`);
+    if (all.sources.milestones !== all.pets.reduce((n, p) => n + p.stage, 0) * G.GLOW.STAGE || all.sources.milestones <= 0) bad(`7: each stage grown is ${G.GLOW.STAGE} Glow: ${json(all.sources)}`);
   }
 
   /* 8. Today's three friends, and the day's gift */
@@ -212,19 +233,24 @@ export async function checkPetEconomy() {
     if (two.play !== 'mochi') bad(`8: play is the first pick not yet helped (${two.play})`);
     const all = derive(recs(d5), D(5, 20));
     if (!all.today.gift || all.today.doneCount !== 3 || all.gifts !== 1) bad(`8: all three is the day's gift: ${json(all.today)}`);
-    if (E.DAILY_GIFT !== 5 || all.stars !== 9 + E.DAILY_GIFT) bad(`8: three 3-star visits and the gift are 14 stars, got ${all.stars}`);
-    if (pet(all, 'chai').earned !== 3) bad('8: the gift is the village\'s, not one friend\'s');
+    if (E.DAILY_GIFT !== 10 || all.sources.gifts !== 10 || all.glow !== 27 + 6 + 1 + E.DAILY_GIFT) bad(`8: three sets (27), Toffee's stage (6), the fire (1) and the gift (10) are 44 Glow: ${json(all.sources)}`);
+    if (pet(all, 'chai').earned !== 9) bad('8: the gift is the village\'s, not one friend\'s');
     if (all.play !== all.neediest) bad('8: with the three helped, play is whoever needs you most');
     /* The next morning, picked at midnight: new friends first, then whoever was helped longest ago. */
     const next = derive(recs(d5), D(6, 8));
     if (next.today.picks.join() !== 'ginger,mallow,chai' || next.play !== 'ginger') bad(`8: the next day's three are ${next.today.picks}, play ${next.play}`);
-    if (next.gifts !== 1 || next.stars !== 14 || next.today.gift || next.today.doneCount !== 0) bad('8: yesterday\'s gift still counts; today starts fresh');
+    if (next.gifts !== 1 || next.glow !== 44 || next.today.gift || next.today.doneCount !== 0) bad('8: yesterday\'s gift still counts; today starts fresh');
     const helped = derive(recs(d5, run('ginger', D(6, 9))), D(6, 12));
     if (helped.today.picks.join() !== 'ginger,mallow,chai' || helped.today.done.join() !== 'true,false,false' || helped.play !== 'mallow') bad(`8: a visit today does not move today's picks: ${json(helped.today)}`);
     if (!pet(helped, 'ginger').pick || !pet(helped, 'ginger').helpedToday || pet(helped, 'mallow').helpedToday || pet(helped, 'mochi').pick) bad('8: pick and helpedToday are flagged on each pet');
     const d6 = [run('ginger', D(6, 9)), run('mallow', D(6, 10)), run('chai', D(6, 11))];
     const both = derive(recs(d5, d6), D(7, 12));
-    if (both.gifts !== 2 || both.stars !== 18 + 2 * E.DAILY_GIFT) bad(`8: two complete days are two gifts: ${both.gifts} gifts, ${both.stars} stars`);
+    if (both.gifts !== 2 || both.glow !== 54 + 6 * E.stageOf(2, E.TOFFEE_DAYS).stage + 3 + 2 * E.DAILY_GIFT) bad(`8: two complete days are two gifts: ${both.gifts} gifts, ${json(both.sources)}`);
+    /* answers faster than a person can read pay nothing, so they help nobody for the gift */
+    const blind = { S: { id: 'blind', module: 'ps', item_ids: ['b1', 'b2'], finished_at: iso(D(5, 11)), duration_ms: 3000, score: { correct: 2, total: 2 }, answers: [{ item_id: 'b1', is_correct: true, time_ms: 150 }, { item_id: 'b2', is_correct: true, time_ms: 200 }] } };
+    const tapped = derive(recs(d5.slice(0, 2), blind), D(5, 20));
+    if (tapped.today.doneCount !== 2 || tapped.today.gift || pet(tapped, 'mochi').earned !== 0 || tapped.sources.practice !== 18) bad(`8: blind taps earn nothing and do not help a friend: ${json({ today: tapped.today, sources: tapped.sources })}`);
+    if (!E.changeBetween(derive(recs(d5.slice(0, 2)), D(5, 20)), tapped).repeat) bad('8: a run that earned nothing says so (repeat)');
     const gauntlet = derive(recs(run('toffee', D(5))), D(5, 12));
     if (gauntlet.today.picks.includes('toffee') || gauntlet.today.doneCount !== 0) bad('8: Toffee is never one of the three, and a Gauntlet helps none of them');
   }
@@ -251,6 +277,7 @@ export async function checkPetEconomy() {
     if (cold.days !== 0 || cold.alive || cold.tier !== 'embers') bad(`9: two days missed with no spare log puts the fire out: ${json(cold)}`);
     const cap = derive(days(Array.from({ length: 28 }, (_, i) => i + 1)), D(28, 20)).flame;
     if (cap.kindling !== 2 || cap.days !== 28 || cap.tier !== 'bonfire') bad(`9: spare logs are capped at 2: ${json(cap)}`);
+    if (derive(days([1, 2, 3, 4, 5, 6, 7]), D(8, 9)).sources.fire !== 1 + 2 + 3 + 4 + 5 + 5 + 5) bad('9: each day that earned adds its place in the run to the Glow, up to 5');
     const tiers = [0, 1, 2, 3, 6, 7, 13, 14].map((n) => E.flameTier(n)).join();
     if (tiers !== 'embers,small,small,steady,steady,tall,tall,bonfire') bad(`9: flame tiers ${tiers}`);
   }
@@ -259,12 +286,12 @@ export async function checkPetEconomy() {
   {
     if (E.DECOR.map((d) => d.id).join() !== DECOR_IDS || E.DECOR.map((d) => d.level).join() !== '2,3,4,5,6,7,8,9,10') bad('10: nine decorations, levels 2 to 10, in order');
     if (!E.DECOR.every((d) => d.name && d.appears)) bad('10: every decoration has a name and says how it appears');
-    const at4 = derive(recs(run('chai', D(5), { stars: 2 }), run('matcha', D(5, 11), { stars: 2 })), D(5, 12));
-    if (at4.stars !== 4 || made(at4) !== '' || at4.nextDecor?.id !== 'lanterns') bad(`10: four stars make nothing yet: ${made(at4)}`);
+    const at10 = derive(recs({ L: { id: 'g1', kind: 'garden-session', finished_at: iso(D(5)) } }), D(5, 12));
+    if (at10.glow !== 3 + 6 + 1 || made(at10) !== '' || at10.nextDecor?.id !== 'lanterns') bad(`10: ten Glow make nothing yet: ${at10.glow} ${made(at10)}`);
     const at14 = derive(recs(run('chai', D(5, 9)), run('matcha', D(5, 10)), run('mochi', D(5, 11))), D(5, 20));
-    if (at14.level.level !== 3 || made(at14) !== 'lanterns,bunting' || at14.nextDecor?.id !== 'flowers') bad(`10: fourteen stars (level 3) make the lanterns and the bunting: ${made(at14)}`);
-    const lots = derive(recs(Array.from({ length: 37 }, (_, i) => run('chai', D(5) + i * 60e3, { flawless: true }))), D(6));
-    if (lots.stars !== 148 || lots.level.level !== 10 || made(lots) !== DECOR_IDS || lots.nextDecor !== null) bad(`10: level 10 makes everything: ${json({ stars: lots.stars, level: lots.level.level, next: lots.nextDecor })}`);
+    if (at14.level.level !== 3 || made(at14) !== 'lanterns,bunting' || at14.nextDecor?.id !== 'flowers') bad(`10: forty-four Glow (level 3) make the lanterns and the bunting: ${made(at14)}`);
+    const lots = derive(recs(Array.from({ length: 45 }, (_, i) => run('chai', D(5) + i * 60e3, { flawless: true }))), D(6));
+    if (lots.glow !== 450 + 6 + 1 || lots.level.level !== 10 || made(lots) !== DECOR_IDS || lots.nextDecor !== null) bad(`10: level 10 makes everything: ${json({ glow: lots.glow, level: lots.level.level, next: lots.nextDecor })}`);
   }
 
   /* 11. After a day or more away, the friend who missed you most says hello */
@@ -285,16 +312,16 @@ export async function checkPetEconomy() {
     const c1 = [run('chai', D(5, 9))], c2 = [...c1, run('matcha', D(5, 10), { stars: 2 })], c3 = [...c2, run('mochi', D(5, 11))], c4 = [...c3, run('mochi', D(5, 12), { stars: 1 })];
     const [s0, s1, s2, s3, s4] = [[], c1, c2, c3, c4].map((c) => derive(recs(c), t));
     const first = E.changeBetween(s0, s1);
-    if (first.pet !== 'chai' || first.earned !== 3 || first.grew || first.levelUp || first.decor !== null || first.gift || first.doneCount !== 1) bad(`12: a first passage: ${json(first)}`);
+    if (first.pet !== 'chai' || first.earned !== 9 || json(first.why) !== json({ tried: 4, right: 3, set: 2, total: 9 }) || first.repeat || first.grew || !first.levelUp || first.decor?.id !== 'lanterns' || first.gift || first.doneCount !== 1) bad(`12: a first passage is 9 Glow, and with Toffee's first day it is level 2: ${json(first)}`);
     const grew = E.changeBetween(derive(recs(), t, { reading: { qSolved: 0, qTotal: 100 } }), derive(recs(c1), t, { reading: { qSolved: 3, qTotal: 100 } }));
-    if (!grew.grew || grew.stage !== E.stageOf(3, 100).stage || grew.chapter !== Math.floor(grew.stage / 2) > 0) bad(`12: questions answered right grow the friend: ${json(grew)}`);
+    if (!grew.grew || grew.milestone !== grew.stage * G.GLOW.STAGE || grew.stage !== E.stageOf(3, 100).stage || grew.chapter !== Math.floor(grew.stage / 2) > 0) bad(`12: questions answered right grow the friend: ${json(grew)}`);
     const second = E.changeBetween(s1, s2);
-    if (second.pet !== 'matcha' || second.earned !== 2 || !second.levelUp || second.level.level !== 2 || second.decor?.id !== 'lanterns' || second.gift || second.doneCount !== 2) bad(`12: the round that reaches level 2 puts up the lanterns: ${json(second)}`);
+    if (second.pet !== 'matcha' || second.earned !== 9 || second.levelUp || second.level.level !== 2 || second.decor !== null || second.gift || second.doneCount !== 2) bad(`12: a second round earns its own 9 and stays at level 2: ${json(second)}`);
     const third = E.changeBetween(s2, s3);
-    if (third.pet !== 'mochi' || third.earned !== 3 || !third.gift || third.doneCount !== 3 || !third.levelUp || third.decor?.id !== 'bunting') bad(`12: the run that helps all three earns its own 3 stars; the gift is said apart: ${json(third)}`);
-    if (s3.stars - s2.stars !== 3 + E.DAILY_GIFT) bad('12: the gift is still in the total');
+    if (third.pet !== 'mochi' || third.earned !== 9 || !third.gift || third.doneCount !== 3 || !third.levelUp || third.decor?.id !== 'bunting') bad(`12: the run that helps all three earns its own 9; the gift is said apart: ${json(third)}`);
+    if (s3.glow - s2.glow !== 9 + E.DAILY_GIFT) bad('12: the gift is still in the total');
     const again = E.changeBetween(s3, s4);
-    if (again.pet !== 'mochi' || again.earned !== 1 || again.grew || again.levelUp || again.decor !== null || again.gift) bad(`12: a quiet run changes only its stars: ${json(again)}`);
+    if (again.pet !== 'mochi' || again.earned !== 8 || again.grew || again.levelUp || again.decor !== null || again.gift) bad(`12: a quiet run changes only its Glow: ${json(again)}`);
     const none = E.changeBetween(undefined, undefined);
     if (none.pet !== null || none.earned !== 0 || none.grew || none.levelUp || none.gift || none.level.level !== 1) bad(`12: nothing before and after is no change: ${json(none)}`);
   }
@@ -330,8 +357,9 @@ export async function checkPetEconomy() {
       const v = E.visitsFrom(hostile, content).map((x) => `${x.id}:${x.stars}`).join();
       if (v !== 'h3:0,h4:0,h7:2,l5:3,l6:0') bad(`13: only real runs become visits, their stars clamped: ${v}`);
       const out = derive(hostile, D(6));
-      if (out.stars !== 8 || out.level.level !== 2) bad(`13: the real runs still add up to 1 + 1 + 2 + 3 + 1 = 8 stars: ${out.stars}`);
-      if (!Number.isFinite(out.harmony) || !out.pets.every((p) => p.mood >= 0 && p.mood <= 1 && Number.isInteger(p.hearts) && Number.isFinite(p.earned))) bad('13: hostile rows leave finite moods, hearts and stars');
+      const paid = E.visitsFrom(hostile, content).reduce((n, x) => n + x.glow.total, 0);
+      if (!Number.isInteger(out.glow) || out.sources.practice !== paid || out.glow !== out.sources.practice + out.sources.milestones + out.sources.gifts + out.sources.fire) bad(`13: the real runs still add up to whole Glow: ${json(out.sources)} paid ${paid}`);
+      if (!Number.isFinite(out.harmony) || !out.pets.every((p) => p.mood >= 0 && p.mood <= 1 && Number.isInteger(p.hearts) && Number.isFinite(p.earned))) bad('13: hostile rows leave finite moods, hearts and Glow');
       const real = recs(run('chai', D(5)), run('matcha', D(5, 11)));
       const old = { sessions: real.sessions, learning: [...real.learning, ...hostile.learning.slice(6, 9), { id: 't1', kind: 'village-treasure', treasure: 'lanterns', at }] };
       if (json(derive(old, D(6))) !== json(derive(real, D(6)))) bad('13: village-treasure and village-build records change nothing');
@@ -406,7 +434,7 @@ if (process.argv[1]?.endsWith('check-pet-economy.mjs')) {
   const a = await checkPetEconomy();
   const b = await checkNextFor();
   const problems = [...a.problems, ...b.problems];
-  if (!problems.length) { console.log('✓ pets economy: a new learner, stars + levels, visits from every module, Toffee\'s daily visit, mood decay, harmony, ten growth stages, today\'s three + the gift, flame + kindling, decor, welcome, changeBetween, hostile rows; nextFor + noticeFor for every pet against the real registry'); process.exit(0); }
+  if (!problems.length) { console.log('✓ pets economy: a new learner, Glow per question + levels, visits from every module, Toffee\'s daily visit, mood decay, harmony, ten growth stages, today\'s three + the gift, flame + kindling, decor, welcome, changeBetween, hostile rows; nextFor + noticeFor for every pet against the real registry'); process.exit(0); }
   console.log(`✗ ${problems.length} problem(s):`);
   for (const p of problems) console.log('  ' + p);
   process.exit(1);

@@ -114,7 +114,7 @@ export async function checkHostileRecords() {
       if (!Number.isInteger(pet.hearts) || pet.hearts < 0 || pet.hearts > 5 || !Number.isFinite(pet.earned) || pet.earned < 0) problems.push(`${pet.id} has hearts ${pet.hearts}, earned ${pet.earned}`);
     }
     if (!Number.isFinite(p?.harmony)) problems.push(`harmony is ${p?.harmony}`);
-    if (!Number.isFinite(p?.stars) || p.stars < 0) problems.push(`the village has ${p?.stars} stars, which the satchel would print`);
+    if (!Number.isFinite(p?.glow) || p.glow < 0) problems.push(`the village has ${p?.glow} Glow, which the satchel would print`);
     if (!Number.isInteger(p?.level?.level) || p.level.level < 1 || !Number.isFinite(p.level.pct)) problems.push(`the village level is ${JSON.stringify(p?.level)}`);
     if (p?.decor?.length !== 9 || p.decor.some((d) => typeof d.made !== 'boolean')) problems.push('the decor did not derive');
     if (p?.today?.picks?.length !== 3 || !(p.today.doneCount >= 0 && p.today.doneCount <= 3)) problems.push(`today has ${p?.today?.picks?.length} friends to help, not three`);
@@ -122,7 +122,7 @@ export async function checkHostileRecords() {
     if (!Number.isFinite(s.stars) || s.stars < 0) problems.push(`stars is ${s.stars}`);
     // The retired treasure and build rows are ignored entirely: on their own they meet nobody and earn nothing.
     const old = deriveWorldState(empty, retired, 1789000000000).pets;
-    if (old.stars !== 0 || old.decor.some((d) => d.made) || !old.pets.every((x) => x.isNew)) problems.push('a retired village-* record was counted');
+    if (old.glow !== 0 || old.decor.some((d) => d.made) || !old.pets.every((x) => x.isNew)) problems.push('a retired village-* record was counted');
   } catch { /* already reported above */ }
 
   return { problems, cases: cases.length, records: records.sessions.length + records.learning.length };
