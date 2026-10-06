@@ -54,7 +54,7 @@ import { loadValley, valleyName } from '../world/companion.js';
 import { collections, closest, tally, GROUPS } from '../world/collections.js';
 import { icon, craftIcon } from '../world/icons.js';
 
-const SUBJECT = { chai: 'Reading', matcha: 'Vocabulary', mochi: 'Para summary', ginger: 'Para jumbles', mallow: 'Odd one out', toffee: 'CAT pace' };
+const SUBJECT = { chai: 'Reading', matcha: 'Vocabulary', mochi: 'Para summary', ginger: 'Para jumbles', mallow: 'Odd one out', sesame: 'Para completion', toffee: 'CAT pace' };
 
 /** The six stages a tree can stand at, and what each one is called when
  *  the thing growing is an ability rather than an oak. */
@@ -127,10 +127,10 @@ export async function renderGrowth(outlet, { storage }) {
     body.innerHTML = `
       <div class="reach__empty">
         <div class="tower__hero" style="${backdropStyle('clock')}" aria-hidden="true"></div>
-        <h1>Six friends, six subjects</h1>
+        <h1>Seven friends, seven subjects</h1>
         <p>Each friend in the village looks after one part of CAT English. Visit any of them and the clock tower starts keeping time.</p>
         <div class="tower__seedlings">
-          ${['chai', 'matcha', 'mochi', 'ginger', 'mallow', 'toffee'].map((id) => `
+          ${['chai', 'matcha', 'mochi', 'ginger', 'mallow', 'sesame', 'toffee'].map((id) => `
             <div class="tower__seed">${petPortrait(id, 54)}<b>${escapeHTML(PET_BY_ID.get(id).name)}</b><span>${escapeHTML(SUBJECT[id])}</span></div>`).join('')}
         </div>
         <a class="g-cta" href="#/world">Into the village<span class="arrow" aria-hidden="true">→</span></a>
@@ -280,11 +280,12 @@ function measure(s, rcW) {
     + s.rootwood.total * 6 + s.terraces.total * 8);
   const vocab = clamp01(vocabHeld / vocabAll);
 
-  /* THE THREE VERBAL BENCHES — each its own friend now: solved, plus the
-     bank that lives with it (placement with the jumbles, completion with
-     the summaries). */
+  /* THE VERBAL BENCHES — each its own friend: solved, plus the bank that
+     lives with it (placement with the jumbles). Completion is Sesame's own. */
   const bench = (v, bank) => clamp01((v.solved + (bank?.solved ?? 0)) / Math.max(1, v.total + (bank?.total ?? 0)));
-  const jumbles = bench(s.loom, s.banks?.sp), summary = bench(s.table, s.banks?.pc), odd = bench(s.bench);
+  const jumbles = bench(s.loom, s.banks?.sp), summary = bench(s.table), odd = bench(s.bench);
+  const pcBank = s.banks?.pc ?? { solved: 0, total: 0 };
+  const completion = clamp01(pcBank.solved / Math.max(1, pcBank.total));
 
   /* PACE — the Gauntlet is everything at once against the clock: its best
      run, and whether it has become a habit. */
@@ -313,7 +314,7 @@ function measure(s, rcW) {
     },
     {
       key: 'mochi', pet: petOf('mochi'), name: 'Para summary', craft: 'thread', p: summary, tier: tierFor(summary), stars: starsFor(summary),
-      line: `<b>${s.table.solved + (s.banks?.pc?.solved ?? 0)}</b> of ${s.table.total + (s.banks?.pc?.total ?? 0)} summaries and completions`,
+      line: `<b>${s.table.solved}</b> of ${s.table.total} summaries`,
       advice: 'Say the paragraph in one line before you read the options. The gist first, then the choice.',
       href: '#/world/place/table', cta: 'Find the gist with Mochi',
     },
@@ -328,6 +329,12 @@ function measure(s, rcW) {
       line: `<b>${s.bench.solved}</b> of ${s.bench.total} sets`,
       advice: 'Build the paragraph the other four sentences make. The one left over is the stranger.',
       href: '#/world/place/bench', cta: 'Spot the odd one with Mallow',
+    },
+    {
+      key: 'sesame', pet: petOf('sesame'), name: 'Para completion', craft: 'thread', p: completion, tier: tierFor(completion), stars: starsFor(completion),
+      line: `<b>${pcBank.solved}</b> of ${pcBank.total} completions`,
+      advice: 'Read the sentence before the gap and the one after it. Decide what the gap must do before you look at the options.',
+      href: '#/world/place/completion', cta: 'Fill a gap with Sesame',
     },
     {
       key: 'toffee', pet: petOf('toffee'), name: 'CAT pace', craft: 'ember', p: pace, tier: tierFor(pace), stars: starsFor(pace),

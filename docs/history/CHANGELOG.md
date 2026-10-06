@@ -4,6 +4,13 @@
 > Versions here are app releases; they map onto the capability milestones in
 > `PROJECT_ROADMAP.md` (0.x releases build toward Roadmap V1.0).
 
+## 3.8.0: Houses that grow, and Sesame (2026-10-06)
+
+- A seventh friend: **Sesame**, a mouse who finishes your sentences, keeps Para Completion in the clock tower (it was Mochi's second house). Painted in the companions' own manner by `tools/paint-sesame.mjs` (grain lifted from the strip), baked with `bake-pets --only sesame`; own lines, story, stages, hat, puzzle-piece charm, squeak, gait and chores. Mochi keeps Para Summary only. Sesame adores Mochi next door (Mochi's best friend is still Chai). Progress page, place screen, bank sessions and gates follow.
+- **Every house grows with its own section** (`economy.js houseStages`, 0-10; the workshop with jumbles, the rose cottage with placements). Faded and dark-windowed at 0; smoke and a lit lamp at 1 (the workshop gear only turns, the telescope only pans and the clock only ticks once its house wakes); lit windows and flowers; a keepsake; a garland; a first wonder (floating pages, windmill, orrery, sunflowers, arrows finding the bullseye, the bell, rose petals, camp lanterns); birds; a second wonder (words rising from the lectern, a balloon, a night constellation, sprinkler and giant pumpkins, a weathervane, pigeons, dock lanterns, fireworks); golden dust; a halo; a crown of light. The painting round each house warms from faded to rich as it goes. Still things are baked into a graded copy of the painting (`home/houses.js`, `home/paint.js`); moving things are drawn on the scene canvas. Friend cards, results and bank places say what the house gains next; a house that grew gets its own moment back in the village.
+- More life: fish jump in the pond, dragonflies hover over it, butterflies and fireflies gather at grown houses.
+- Faster: the scene canvas is the screen's size (not the map's), moved with the camera and culled; glows are stamped sprites (no per-frame gradients); text is sprite-stamped; particles are removed in O(1); the loop never runs faster than 60 (120 Hz screens do half the work) and drops to 30 on a device that cannot keep up; off-screen pets write no styles; off-screen painting patches, halos and water pause; lamp halos breathe only after dusk. Measured in headless Chrome at 4x CPU throttle, phone view: about 20 ms of main-thread work per frame instead of about 37 ms, and about 63 elements restyled per frame instead of about 96.
+
 ## 3.7.0 follow-up: Calmer reading, friends that chirp (2026-10-05)
 
 - Tapping a friend no longer plays a synthetic speech voice: Chai hoots like an owl, Toffee crackles, Matcha trills, Ginger yips, Mallow chimes, all built from tones in `world/audio.js`. Mochi is unchanged.

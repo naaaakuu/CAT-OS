@@ -1,9 +1,10 @@
 /**
- * bake-pets.mjs — bake the six five-frame pet sheets from the companion strip.
+ * bake-pets.mjs — bake the five-frame pet sheets from their paintings.
  *
- *   node tools/bake-pets.mjs [--baby] [--preview <dir>]
+ *   node tools/bake-pets.mjs [--baby] [--only <id>[,<id>]] [--preview <dir>]
  *
- * Reads assets/art/home-companions-v1.png in headless Chrome, finds each
+ * Reads assets/art/home-companions-v1.png (or a pet's own painting, the 4th
+ * field of PETS: Sesame's is tools/paint-sesame.mjs) in headless Chrome, finds each
  * pet's eyes and smile (or Chai's beak), paints the blink / happy / talk /
  * sleep faces over the painted ones, scales every frame to 384 px tall and
  * writes assets/art/pet-<id>.png (frames: idle, blink, happy, talk, sleep;
@@ -11,15 +12,18 @@
  * --preview <dir> also writes a 3x crop of every face per pet, to eyeball.
  * --baby bakes the baby sheets instead (assets/art/pet-<id>-baby.png and
  * BABY_SHEETS): the same frames, the eyes bigger and the body shorter.
+ * --only bakes just those pets: every other sheet and line is left alone.
  */
 import { writeFileSync, mkdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { serveRepo, launchChrome, REPO_ROOT } from './cdp-lite.mjs';
 
-/* Strip order, [id, x, width] in source px. */
+/* [id, x, width] in source px of the strip, or of the pet's own painting. */
+const STRIP = '/assets/art/home-companions-v1.png';
 const PETS = [
   ['toffee', 0, 350], ['chai', 355, 330], ['matcha', 700, 338],
   ['mochi', 1040, 335], ['ginger', 1380, 397], ['mallow', 1780, 392],
+  ['sesame', 0, 416, '/assets/art/home-companion-sesame.png'],
 ];
 const H = 384, GUTTER = 4, FRAMES = 5;
 /* The baby sheets are smaller: a baby is never drawn much bigger than three
@@ -27,10 +31,12 @@ const H = 384, GUTTER = 4, FRAMES = 5;
 const BABY_H = 288;
 
 /* Runs in the page. Returns [{id, w, sheet, preview, log}]. */
-async function bake(pets, H, GUTTER, wantPreview, babyMode, BABY_H) {
-  const img = new Image();
-  img.src = '/assets/art/home-companions-v1.png';
-  await img.decode();
+async function bake(pets, H, GUTTER, wantPreview, babyMode, BABY_H, STRIP) {
+  const imgs = new Map();
+  for (const [, , , src = STRIP] of pets) {
+    if (imgs.has(src)) continue;
+    const im = new Image(); im.src = src; await im.decode(); imgs.set(src, im);
+  }
   const mk = (w, h) => { const c = document.createElement('canvas'); c.width = w; c.height = h; return c; };
   const ctx2 = (c) => c.getContext('2d', { willReadFrequently: true });
   const INK = '#3a2a22', MOUTH = '#7a2e2e', TONGUE = '#c45a55';
@@ -41,7 +47,8 @@ async function bake(pets, H, GUTTER, wantPreview, babyMode, BABY_H) {
   const INK_GROW = 5;   // same, around the smile
   const out = [];
 
-  for (const [id, fx, fw] of pets) {
+  for (const [id, fx, fw, src = STRIP] of pets) {
+    const img = imgs.get(src);
     /* 1. crop + trim alpha margins, keep a 6 px pad */
     const strip = mk(fw, img.height); const sg = ctx2(strip); sg.drawImage(img, -fx, 0);
     const sd = sg.getImageData(0, 0, fw, img.height).data;
@@ -365,12 +372,16 @@ async function bake(pets, H, GUTTER, wantPreview, babyMode, BABY_H) {
 
 const pi = process.argv.indexOf('--preview');
 const previewDir = pi > 0 ? process.argv[pi + 1] : null;
+const oi = process.argv.indexOf('--only');
+const only = oi > 0 ? process.argv[oi + 1].split(',') : null;
+const pets = only ? PETS.filter(([id]) => only.includes(id)) : PETS;
+if (only && pets.length !== only.length) throw new Error(`--only: unknown pet in ${only.join(',')}`);
 const server = await serveRepo();
 const browser = await launchChrome({ width: 800, height: 600 });
 try {
-  await browser.open(server.url + 'assets/art/home-companions-v1.png', 600);
+  await browser.open(server.url + STRIP.slice(1), 600);
   const baby = process.argv.includes('--baby'), suffix = baby ? '-baby' : '';
-  const res = await browser.evaluate(`(${bake})(${JSON.stringify(PETS)}, ${H}, ${GUTTER}, ${!!previewDir}, ${baby}, ${BABY_H})`);
+  const res = await browser.evaluate(`(${bake})(${JSON.stringify(pets)}, ${H}, ${GUTTER}, ${!!previewDir}, ${baby}, ${BABY_H}, ${JSON.stringify(STRIP)})`);
   const png = (url) => Buffer.from(url.split(',')[1], 'base64');
   if (previewDir) mkdirSync(previewDir, { recursive: true });
   for (const r of res) {
@@ -378,14 +389,18 @@ try {
     if (previewDir) writeFileSync(join(previewDir, `${baby ? 'baby' : 'face'}-${r.id}.png`), png(r.preview));
     console.log(r.log);
   }
-  const body = res.map((r) => `  ${r.id}: { w: ${r.w}, h: ${baby ? BABY_H : H}, gutter: ${GUTTER}, frames: ${FRAMES}, feet: ${r.feet ? `{ top: ${r.feet.top}, bottom: ${r.feet.bottom}, split: ${r.feet.split} }` : 'null'} },`).join('\n');
   mkdirSync(join(REPO_ROOT, 'src/pets'), { recursive: true });
-  /* One file, two blocks: each mode rewrites its own and keeps the other. */
+  /* One file, two blocks: each mode rewrites its own and keeps the other;
+     in its own, a pet not baked this time (--only) keeps its line. */
   const file = join(REPO_ROOT, 'src/pets/sheets.js');
   let old = '';
   try { old = readFileSync(file, 'utf8'); } catch { /* the first bake */ }
   const keep = (name) => old.match(new RegExp(`export const ${name} = \\{[\\s\\S]*?\\n\\};\\n`))?.[0] ?? '';
-  const mine = `export const ${baby ? 'BABY_SHEETS' : 'SHEETS'} = {\n${body}\n};\n`;
+  const name = baby ? 'BABY_SHEETS' : 'SHEETS';
+  const lines = new Map((keep(name).match(/^ {2}[a-z]+: .*$/gm) ?? []).map((l) => [l.trim().split(':')[0], l]));
+  for (const r of res) lines.set(r.id, `  ${r.id}: { w: ${r.w}, h: ${baby ? BABY_H : H}, gutter: ${GUTTER}, frames: ${FRAMES}, feet: ${r.feet ? `{ top: ${r.feet.top}, bottom: ${r.feet.bottom}, split: ${r.feet.split} }` : 'null'} },`);
+  const body = PETS.map(([id]) => lines.get(id)).filter(Boolean).join('\n');
+  const mine = `export const ${name} = {\n${body}\n};\n`;
   writeFileSync(file,
     `/* Generated by tools/bake-pets.mjs. Frame i of assets/art/pet-<id>.png sits at\n   x = i * (w + gutter); frames: idle, blink, happy, talk, sleep. \`feet\` is where\n   the two feet are in the idle frame (sheet px): they step on their own when a\n   pet walks (src/pets/sprite.js). BABY_SHEETS are pet-<id>-baby.png (--baby). */\n${baby ? keep('SHEETS') : mine}${baby ? mine : keep('BABY_SHEETS')}`);
   console.log(`wrote ${res.length} sheets + src/pets/sheets.js`);

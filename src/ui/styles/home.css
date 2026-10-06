@@ -51,6 +51,10 @@
 .cw-viewport.is-dragging { cursor: grabbing; }
 .cw-map { position: absolute; left: 0; top: 0; transform-origin: 0 0; will-change: transform; contain: layout style; }
 .cw-art { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; -webkit-user-drag: none; }
+/* The painting as this learner has grown it (src/home/houses.js bakeVillage), laid over the original once ready. */
+.cw-base { left: 0; top: 0; width: 100%; height: 100%; pointer-events: none; opacity: 0; transition: opacity 0.6s ease; }
+.cw-base.is-in { opacity: 1; }
+html[data-reduced-motion] .cw-base { transition: none; }
 .cw-map > * { position: absolute; }
 .cw-motion, .cw-water, .cw-sunlight, .cw-tint, .cw-glows, .cw-clouds, .cw-treasures, .cw-life, .cw-spots, .cw-pets { left: 0; top: 0; width: 100%; height: 100%; }
 .cw-motion, .cw-water, .cw-sunlight, .cw-tint, .cw-glows, .cw-clouds, .cw-life, .cw-treasures { pointer-events: none; }
@@ -58,7 +62,8 @@
 .cw-sunlight { background: linear-gradient(118deg, transparent 20%, rgba(255,237,175,.09) 26%, transparent 32%, transparent 47%, rgba(255,237,175,.07) 52%, transparent 59%); transform-origin: 50% 0; animation: cw-sunlight 18s ease-in-out infinite alternate; }
 .cw[data-hour="night"] .cw-sunlight, .cw[data-weather="rain"] .cw-sunlight, .cw[data-weather="fog"] .cw-sunlight { display: none; }
 @keyframes cw-sunlight { from { opacity: .35; transform: skewX(-3deg); } to { opacity: .85; transform: skewX(3deg); } }
-.cw-life { image-rendering: auto; }
+/* The scene canvas covers only the screen (plus a margin) and is moved with the camera: life.js sizes it inline. */
+.cw-life { image-rendering: auto; transform-origin: 0 0; }
 .cw-pets { pointer-events: none; }
 .cw-map::after { content: ""; position: absolute; inset: 0; pointer-events: none; box-shadow: inset 0 0 95px rgba(28, 40, 30, 0.24); }
 
@@ -84,8 +89,15 @@
 .cw-glow::before {
   content: ""; position: absolute; inset: 0; border-radius: 50%;
   background: radial-gradient(circle, rgba(255, 226, 160, 0.86) 0 9%, rgba(255, 186, 100, 0.34) 30%, rgba(255, 160, 80, 0.12) 52%, rgba(255, 150, 70, 0) 70%);
-  animation: cw-breath 5.2s ease-in-out var(--bd, 0s) infinite;
 }
+/* They breathe only when they show: by day a still halo costs nothing, and an animated one is restyled every frame. */
+.cw[data-hour="dawn"] .cw-glow--lamp::before, .cw[data-hour="dusk"] .cw-glow--lamp::before, .cw[data-hour="night"] .cw-glow--lamp::before { animation: cw-breath 5.2s ease-in-out var(--bd, 0s) infinite; }
+/* A house's own lamps and windows stay dark until it grows (lamps at stage 1, windows at 2). */
+.cw-glow.is-off { display: none; }
+/* Stage 9 (src/home/houses.js): a still golden halo round the whole house. Plain alpha, never animated. */
+.cw-aura { position: absolute; display: none; width: calc(var(--r) * 2); height: calc(var(--r) * 1.6); margin: calc(var(--r) * -0.8) 0 0 calc(var(--r) * -1); border-radius: 50%; pointer-events: none; opacity: 0.55; background: radial-gradient(closest-side, rgba(255, 214, 130, 0.42), rgba(255, 200, 110, 0.16) 55%, rgba(255, 190, 100, 0) 100%); }
+.cw-aura.is-on { display: block; }
+.cw[data-hour="dusk"] .cw-aura, .cw[data-hour="night"] .cw-aura { opacity: 0.9; }
 .cw-glow--win::before { background: radial-gradient(circle, rgba(255, 214, 140, 0.78) 0 16%, rgba(255, 170, 80, 0.26) 44%, rgba(255, 150, 60, 0) 72%); animation: none; }
 .cw-glow--lamp { opacity: 0.26; }
 .cw[data-hour="dawn"] .cw-glow--lamp { opacity: 0.5; }
@@ -104,6 +116,8 @@
 .cw-motion[data-weather="rain"] { --wind: 1.7; }
 .mo { position: absolute; }
 .mo > b { position: absolute; inset: 0; background-repeat: no-repeat; will-change: transform; }
+/* Off screen (motion.js setView, village.js): paused, so the page does not restyle what nobody sees. */
+.mo[data-off] > b, .cw-glow[data-off]::before { animation-play-state: paused; }
 .mo--spin > b { animation: mo-spin var(--t) linear infinite; }
 .mo--flow > b { animation: mo-flow var(--t) linear infinite; }
 .mo--flow > b + b { opacity: 0; animation: mo-flow var(--t) linear calc(var(--t) * -0.5) infinite, mo-fade var(--t) linear calc(var(--t) * -0.5) infinite; }
@@ -264,6 +278,8 @@
 .prop--book { width: calc(var(--size) * 0.56px); height: calc(var(--size) * 0.37px); left: calc(var(--size) * -0.28px); bottom: calc(var(--size) * 0.26px); }
 .prop--book .prop__page { transform-origin: 18px 50%; animation: prop-page 3.4s ease-in-out infinite; }
 .prop--stick { width: calc(var(--size) * 0.66px); height: calc(var(--size) * 0.2px); left: calc(var(--size) * 0.12px); bottom: calc(var(--size) * 0.1px); transform-origin: 0 80%; animation: prop-poke 0.84s ease-in-out infinite; }
+.prop--key { width: calc(var(--size) * 0.4px); height: calc(var(--size) * 0.28px); left: calc(var(--size) * 0.2px); bottom: calc(var(--size) * 0.3px); transform-origin: 8% 50%; animation: prop-wind 1.1s ease-in-out infinite; }
+@keyframes prop-wind { 0%, 100% { scale: 1 1; } 50% { scale: 0.25 1; } }
 .prop--raincloud { width: calc(var(--size) * 0.62px); height: calc(var(--size) * 0.38px); left: calc(var(--size) * 0.2px); bottom: calc(var(--size) * 0.86px); animation: prop-float 2.2s ease-in-out infinite; }
 @keyframes prop-pour { 0%, 100% { rotate: 0deg; } 30%, 70% { rotate: 28deg; } }
 @keyframes prop-sweep { 0%, 100% { rotate: -22deg; translate: -2px 0; } 50% { rotate: 22deg; translate: 2px 0; } }
@@ -505,6 +521,10 @@
 .cw-go--gold { background: linear-gradient(180deg, #FFD978, #F2A93B); color: #3b2508 !important; box-shadow: 0 4px 0 #B9741C, 0 8px 20px rgba(60, 36, 8, 0.25); }
 .cw-reward { display: flex; gap: 8px; align-items: flex-start; margin: 0 0 6px; font-size: 13.5px; line-height: 1.45; color: var(--color-ink-2); }
 .cw-reward .cw-orb { width: 18px; height: 18px; margin-top: 1px; }
+.cw-home { display: flex; flex-direction: column; gap: 5px; margin: 0 0 8px; font-size: 13.5px; line-height: 1.45; color: var(--color-ink-2); }
+.cw-home__pips { display: flex; gap: 3px; }
+.cw-home__pips i { flex: 1; height: 5px; border-radius: 3px; background: color-mix(in srgb, var(--honey) 22%, transparent); }
+.cw-home__pips i.is-on { background: var(--honey); }
 .cw-list { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; }
 .cw-list a { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 11px 14px; border-radius: 14px; background: var(--color-surface-2); text-decoration: none; min-height: 48px; }
 .cw-list b { display: block; font-size: 14.5px; }
@@ -804,6 +824,7 @@ html[data-reduced-motion] .place__pet { animation: none; }
 .petrow[data-key="mochi"] { --tone: var(--pet-mochi); }
 .petrow[data-key="ginger"] { --tone: var(--pet-ginger); }
 .petrow[data-key="mallow"] { --tone: var(--pet-mallow); }
+.petrow[data-key="sesame"] { --tone: var(--pet-sesame); }
 .petrow[data-key="toffee"] { --tone: var(--pet-toffee); }
 
 /* Settings, as your cottage. */

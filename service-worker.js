@@ -68,7 +68,7 @@ const CONTENT_VERSION = 16;
    ALWAYS lands in a new cache, whether or not anybody remembered to bump the
    number above. Nothing used to enforce that bump, and an installed learner
    could sit on old code forever with no symptom anybody could see. */
-const BUILD_ID = 'fe6d856cb2';
+const BUILD_ID = '762bb38252';
 const CONTENT_ID = '08c47e8249';
 const SHELL_CACHE = `cat-os-shell-v${CACHE_VERSION}.${BUILD_ID}`;
 const CONTENT_CACHE = `cat-os-content-v${CONTENT_VERSION}.${CONTENT_ID}`;
@@ -110,6 +110,7 @@ const CORE_FILES = [
   './assets/art/pet-mallow.png',
   './assets/art/pet-matcha.png',
   './assets/art/pet-mochi.png',
+  './assets/art/pet-sesame.png',
   './assets/art/pet-toffee.png',
   './content/boot-index.json',
   './assets/icons/icon-192.png',
@@ -133,9 +134,11 @@ const CORE_FILES = [
   './src/core/storage/storage-adapter.js',
   './src/core/utils/format.js',
   './src/home/cards.js',
+  './src/home/houses.js',
   './src/home/life.js',
   './src/home/motion-atlas.js',
   './src/home/motion.js',
+  './src/home/paint.js',
   './src/home/village.js',
   './src/home/water.js',
   './src/modules/language-garden/index.js',
@@ -190,6 +193,8 @@ const SHELL_FILES = [
   './assets/art/pet-matcha.png',
   './assets/art/pet-mochi-baby.png',
   './assets/art/pet-mochi.png',
+  './assets/art/pet-sesame-baby.png',
+  './assets/art/pet-sesame.png',
   './assets/art/pet-toffee-baby.png',
   './assets/art/pet-toffee.png',
   './assets/art/planter.png',
@@ -254,9 +259,11 @@ const SHELL_FILES = [
   './src/core/storage/storage-adapter.js',
   './src/core/utils/format.js',
   './src/home/cards.js',
+  './src/home/houses.js',
   './src/home/life.js',
   './src/home/motion-atlas.js',
   './src/home/motion.js',
+  './src/home/paint.js',
   './src/home/village.js',
   './src/home/water.js',
   './src/modules/language-garden/index.js',

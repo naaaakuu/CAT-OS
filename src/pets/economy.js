@@ -22,7 +22,7 @@
  * Nothing is stored back and nothing reads the clock: `now` is passed in.
  */
 
-import { PETS, petForModule, PET_BY_ID, STORIES, lineFor, requestFor } from './pets.js';
+import { PETS, HOUSES, petForModule, PET_BY_ID, STORIES, lineFor, requestFor } from './pets.js';
 import { rcStars, verbalStars } from '../world/economy.js';
 import { GLOW, questionsOf, payVisits } from './glow.js';
 import { dayKey, shiftDay } from '../core/engagement/streaks.js';
@@ -96,10 +96,24 @@ function progressOf(id, state, days) {
   const s = state ?? {}, b = s.banks ?? {};
   if (id === 'chai') return { done: sum(s.reading?.qSolved, b.cr?.solved), total: sum(s.reading?.qTotal, b.cr?.total), unit: 'questions' };
   if (id === 'matcha') return { done: sum(s.meadow?.known, s.pond?.known, s.thicket?.known, s.rootwood?.metCount, s.terraces?.done, b.wb?.solved), total: sum(s.meadow?.total, s.pond?.total, s.thicket?.total, s.rootwood?.total, s.terraces?.total, b.wb?.total), unit: 'words' };
-  if (id === 'mochi') return { done: sum(s.table?.solved, b.pc?.solved), total: sum(s.table?.total, b.pc?.total), unit: 'questions' };
+  if (id === 'mochi') return { done: sum(s.table?.solved), total: sum(s.table?.total), unit: 'questions' };
+  if (id === 'sesame') return { done: sum(b.pc?.solved), total: sum(b.pc?.total), unit: 'questions' };
   if (id === 'ginger') return { done: sum(s.loom?.solved, b.sp?.solved), total: sum(s.loom?.total, b.sp?.total), unit: 'questions' };
   if (id === 'mallow') return { done: sum(s.bench?.solved), total: sum(s.bench?.total), unit: 'questions' };
   return { done: days, total: TOFFEE_DAYS, unit: 'days' };
+}
+
+/**
+ * How far each HOUSE has come, 0 to 10, by its own subject: the house grows
+ * with the section it holds (owner, 2026-10-06: "when a player improves in a
+ * section, that house area should improve too"). A house that is a friend's
+ * only subject grows with the friend; Ginger's two houses each grow with
+ * their own half (the workshop with jumbles, the rose cottage with placement).
+ */
+function houseStages(state, pets) {
+  const s = state ?? {}, b = s.banks ?? {};
+  const own = { ginger: stageOf(s.loom?.solved, s.loom?.total).stage, cottage: stageOf(b.sp?.solved, b.sp?.total).stage };
+  return Object.fromEntries(HOUSES.map((h) => [h.spot, own[h.spot] ?? pets.find((p) => p.id === h.pet)?.stage ?? 0]));
 }
 
 /* ------------------------------------------------------------------ */
@@ -203,7 +217,7 @@ export function flameTier(days) {
 
 const midnightOf = (key) => { const [y, m, d] = key.split('-').map(Number); return new Date(y, m - 1, d).getTime(); };
 /* Ties go to the gentlest door first: a new learner is sent to Chai, as Toffee's hello says. */
-const NEED_ORDER = ['chai', 'matcha', 'mochi', 'ginger', 'mallow'];
+const NEED_ORDER = ['chai', 'matcha', 'mochi', 'ginger', 'mallow', 'sesame'];
 const neediest = (moods) => NEED_ORDER.map((id, i) => ({ id, i, mood: moods[id] })).sort((a, b) => a.mood - b.mood || a.i - b.i);
 
 /**
@@ -322,7 +336,7 @@ export function derivePets(state, records, content, now = Date.now()) {
   const welcome = awayDays >= 1 && met.length ? { pet: met[0].id, days: awayDays } : null;
 
   return {
-    pets, harmony, neediest: needy, play,
+    pets, houses: houseStages(state, pets), harmony, neediest: needy, play,
     glow, sources, level, decor, nextDecor: decor.find((d) => !d.made) ?? null, gifts,
     flame, today: { key: today, picks, done, doneCount, gift: picks.length === 3 && doneCount === 3, helped },
     welcome, awayDays, last,
@@ -347,6 +361,8 @@ export function changeBetween(before, after) {
     grew: !!(a && b && a.stage > b.stage), stage: a?.stage ?? 0, from: b?.stage ?? 0,
     milestone: a && b && a.stage > b.stage ? (a.stage - b.stage) * GLOW.STAGE : 0,
     chapter: !!(a && b && a.hearts > b.hearts), hearts: a?.hearts ?? 0,
+    // Houses that grew with this run (each grows with its own section): [{ spot, from, stage }].
+    houses: fresh ? Object.entries(after?.houses ?? {}).filter(([k, s]) => before?.houses && s > (before.houses[k] ?? s)).map(([spot, stage]) => ({ spot, from: before.houses[spot], stage })) : [],
     levelUp: (after?.level?.level ?? 1) > (before?.level?.level ?? 1), level: after?.level ?? levelOf(0),
     decor: (after?.decor ?? []).find((d) => d.made && !madeBefore.has(d.id)) ?? null,
     gift,

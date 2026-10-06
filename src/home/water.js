@@ -62,7 +62,7 @@ function prepare(img, spec, index) {
 }
 
 export function createWater(map, { reduced = false } = {}) {
-  const noop = { paint() {}, ripple() {}, destroy() {} };
+  const noop = { paint() {}, ripple() {}, setSource() {}, destroy() {} };
   const img = map.querySelector('.cw-art');
   if (reduced || !img) return noop;
   const canvas = document.createElement('div');
@@ -71,15 +71,19 @@ export function createWater(map, { reduced = false } = {}) {
   map.insertBefore(canvas, map.querySelector('.cw-clouds'));
   let reaches = [], disposed = false, last = -Infinity, clock = 0;
   const ripples = [];
-  img.decode().then(() => {
+  /** Cut the water from `src` (the painting, or the village's grown copy of it). */
+  const from = (src) => {
     if (disposed) return;
-    reaches = REACHES.map((s, i) => prepare(img, s, i));
+    const next = REACHES.map((s, i) => prepare(src, s, i));
+    for (const r of reaches) r.surface.remove();
+    reaches = next;
     canvas.append(...reaches.map((r) => r.surface));
     canvas.dataset.ready = 'true';
-  }).catch(() => { canvas.remove(); });
+  };
+  img.decode().then(() => { if (!reaches.length) from(img); }).catch(() => { canvas.remove(); });
 
   return {
-    paint(ms, weather = '') {
+    paint(ms, weather = '', view = null) {
       clock = ms / 1000;
       // Water runs at 30 fps; pets and camera remain at the display's rate.
       if (!reaches.length || ms - last < 32) return;
@@ -88,6 +92,8 @@ export function createWater(map, { reduced = false } = {}) {
       while (ripples.length && clock - ripples[0].time > 2.4) ripples.shift();
       for (const reach of reaches) {
         const [x, y, w, h] = reach.box, c = reach.g;
+        // A reach off screen keeps its last picture: nobody is looking at it.
+        if (view && (x > view.x + view.w || x + w < view.x || y > view.y + view.h || y + h < view.y)) continue;
         c.setTransform(reach.surface.width / w, 0, 0, reach.surface.height / h, 0, 0);
         c.clearRect(0, 0, w, h);
         // Refract the actual painting in narrow bands. The mask stays fixed.
@@ -133,6 +139,8 @@ export function createWater(map, { reduced = false } = {}) {
       if (ripples.length >= 8) ripples.shift();
       ripples.push({ x, y, time: clock });
     },
+    /** The painting changed under the water (a house grew): cut it again from the new picture. */
+    setSource(src) { try { from(src); } catch { /* keep the old water */ } },
     destroy() { disposed = true; reaches = []; ripples.length = 0; canvas.remove(); },
   };
 }

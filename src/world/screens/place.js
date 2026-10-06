@@ -13,7 +13,7 @@
  */
 
 import { atPlace } from '../companion.js';
-import { petForPlace, PET_BY_ID } from '../../pets/pets.js';
+import { petForPlace, PET_BY_ID, HOUSES, houseGift } from '../../pets/pets.js';
 import { petFigure, petPortrait, backdropStyle, FRAME } from '../../pets/sprite.js';
 import { regionBySlug } from '../regions.js';
 import { loadWorld } from '../state.js';
@@ -307,7 +307,7 @@ export async function renderPlace(outlet, { storage }, params) {
         ${tiers.map((t) => { const inTier = items.filter((it) => it.tier === t.id); const s = inTier.filter((it) => solved.has(it.id)).length; const done = inTier.length > 0 && s === inTier.length; return `<a class="tile ${rec && rec.item.tier === t.id ? 'tile--next' : ''} ${done ? 'tile--done' : ''}" href="#/${prefix}/session/${t.id}"><p class="tile__name">${escapeHTML(t.label)}</p><p class="tile__meta">${s} of ${inTier.length} ${unit}</p><div class="tile__bar ${done ? 'tile__bar--gold' : ''}"><i style="width:${inTier.length ? Math.round((s / inTier.length) * 100) : 0}%"></i></div></a>`; }).join('')}
       </div>
       <p class="sub" style="margin-top:14px"><a href="#/${prefix}/about">How this craft works</a> · <a href="#/${prefix}">The full journey</a></p>`)
-      + (kind === 'bench' ? '' : section(`${hostDef.name}'s other house`, '', `<a class="g-btn" href="#/world/place/${kind === 'loom' ? 'placement' : 'completion'}">${kind === 'loom' ? 'Sentence Placement, in the rose cottage' : 'Para Completion, in the clock tower'} →</a>`));
+      + (kind === 'loom' ? section(`${hostDef.name}'s other house`, '', '<a class="g-btn" href="#/world/place/placement">Sentence Placement, in the rose cottage →</a>') : '');
     return;
   }
 
@@ -325,9 +325,11 @@ export async function renderPlace(outlet, { storage }, params) {
     const three = rows.filter((r) => r.tier === tier).slice(0, 3);
     const mins = Math.max(1, Math.round(three.reduce((s, r) => s + (r.estimated_time_sec ?? 80), 0) / 60));
     const word = ['one', 'two', 'three'][Math.max(1, three.length) - 1];
+    // The house this subject lives in grows with it (src/home/houses.js): say what it gains next.
+    const H = HOUSES.find((h) => h.place === region.slug), hs = state.pets?.houses?.[H?.spot] ?? 0, gift = H ? houseGift(H.spot, hs + 1) : '';
     head({ pct: total ? solved / total : 0, label: `${solved} / ${total} solved` },
       rows.length ? { href: `#/bank/session/${type}/next`, label: solved ? `${word[0].toUpperCase()}${word.slice(1)} more, unsolved first` : `Begin with ${word}`, sub: `${region.skill} · about ${mins} minute${mins === 1 ? '' : 's'}` } : null,
-      '',
+      H ? (gift ? `${H.home.replace(/^the/, 'The')} grows with every one you get right. Next: ${gift}.` : `${H.home.replace(/^the/, 'The')} is all grown, crown and all.`) : '',
       infoButton(type, { moreTitle: 'This place', more: [type === 'sp'
         ? 'CAT gives you a paragraph with one sentence lifted out and asks where it goes. The pronoun that needs an owner and the “but” that needs something to push against will tell you.'
         : 'A paragraph with one sentence missing, at its end or in its middle. Decide what the gap needs, a reason, an example, a turn or a landing, before you read the options.'] }));
@@ -336,8 +338,8 @@ export async function renderPlace(outlet, { storage }, params) {
   }
 }
 
-/** The two subjects that live in a friend's second house paint that house, not the friend's first one. */
-const SECOND_HOUSE = { placement: 'cottage', completion: 'clock' };
+/** The subject that lives in a friend's second house paints that house, not the friend's first one. */
+const SECOND_HOUSE = { placement: 'cottage' };
 
 /* ---- The content engine's banks, as shelves inside the places ---- */
 

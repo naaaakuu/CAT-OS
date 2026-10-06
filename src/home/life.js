@@ -3,31 +3,40 @@
  *
  * Two halves on one animation frame:
  *
- *   THE FRIENDS  six small state machines. A friend walks the painted paths
+ *   THE FRIENDS  seven small state machines. A friend walks the painted paths
  *                on its own two feet (an owl waddles, a pebble plods, a fox
  *                trots, a flame bounces, a cloud floats), does chores round
  *                its home with a prop in hand (watering, sweeping, reading,
  *                hammering, sipping tea, raining on the flowers), visits its
  *                best friend, chats on the plaza, greets you when you arrive
  *                and goes home to sleep at night.
- *   THE AIR      one half-resolution canvas: fire sparks, chimney smoke,
- *                fireflies, butterflies, falling leaves, birds, rain, motes,
+ *   THE AIR      one canvas the size of the screen (plus a margin), moved
+ *                with the camera and drawn at the screen's own sharpness:
+ *                what each house has grown (src/home/houses.js), fire
+ *                sparks, chimney smoke, fireflies, butterflies, dragonflies
+ *                and fish on the pond, falling leaves, birds, rain, motes,
  *                and the little things chores throw up: water drops, dust,
- *                music notes, letters, sparkles.
+ *                music notes, letters, sparkles. Only what is on screen is
+ *                drawn; glows are stamped sprites, never per-frame gradients.
+ *
+ * One loop drives both, paced: never faster than 60 a second (a 120 Hz
+ * phone does half the work), and 30 on a device that cannot keep up.
  *
  * Everything is in painting pixels (src/pets/paths.js). Reduced motion
  * leaves the friends standing at home, awake, and the canvas still.
  */
 
-import { NODES, HOMES, SPOTS, route, nearestNode, FIRE, CHIMNEYS, TEAPOT, POND, CLOCK, TREASURE_AT } from '../pets/paths.js';
+import { NODES, HOMES, SPOTS, route, nearestNode, FIRE, CHIMNEYS, TEAPOT, POND, CLOCK, TREASURE_AT, MAP } from '../pets/paths.js';
 import { FRAME, growOf } from '../pets/sprite.js';
 import { PETS, PET_BY_ID, SIGNATURE, gossipLine, lineFor } from '../pets/pets.js';
 import { rng } from '../world/engine/palette.js';
 import { voice, signature } from '../world/audio.js';
 import { createWater } from './water.js';
+import { glow, twinkle, glyphSprite, stamp } from './paint.js';
+import { HOUSE_ART } from './houses.js';
 
 /** Drawn height of each pet at full size, in painting pixels. */
-export const PET_SIZE = Object.freeze({ toffee: 70, chai: 84, matcha: 78, mochi: 78, ginger: 84, mallow: 80 });
+export const PET_SIZE = Object.freeze({ toffee: 70, chai: 84, matcha: 78, mochi: 78, ginger: 84, mallow: 80, sesame: 70 });
 /** A friend's drawn height at their growth stage: they get bigger as you work through their subject. */
 export const petSize = (id, stage) => Math.round(PET_SIZE[id] * growOf(stage));
 const CONFETTI = ['#F4C443', '#E9963A', '#8FB56A', '#D97A8A', '#93AED1', '#F6EEDB'];
@@ -47,6 +56,7 @@ const GAIT = {
   mochi: { hop: 1.5, waddle: 6.5, cadence: 1.9, lift: 0.6 },
   ginger: { hop: 4.5, waddle: 3, cadence: 3, lift: 0.75 },
   mallow: { hop: 0, waddle: 3, cadence: 1.4, lift: 0, float: 5 },
+  sesame: { hop: 3.5, waddle: 3.5, cadence: 3.6, lift: 0.85 },
 };
 
 /** Chores round each home: the prop in hand, how long, and what it throws into the air. */
@@ -57,14 +67,15 @@ const CHORES = {
   mochi: [{ kind: 'tea', prop: 'cup', ms: [6000, 9000], emit: 'steam', every: 500 }, { kind: 'sweep', prop: 'broom', ms: [5000, 8000], emit: 'dust', every: 600 }],
   ginger: [{ kind: 'hammer', prop: 'hammer', ms: [4500, 7500], emit: 'spark', every: 640 }, { kind: 'sing', ms: [3500, 5500], emit: 'note', every: 650 }],
   mallow: [{ kind: 'rain', prop: 'raincloud', ms: [5500, 8500], emit: 'drop', every: 110 }, { kind: 'sprinkle', ms: [4000, 6500], emit: 'sparkle', every: 220 }],
+  sesame: [{ kind: 'wind', prop: 'key', ms: [4500, 7500], emit: 'sparkle', every: 520 }, { kind: 'read', prop: 'book', ms: [5000, 8000], emit: 'letter', every: 760 }],
 };
 /** Where on the body a chore's particles come from, as a fraction of the pet's size (x toward its facing). */
 const EMIT_AT = {
-  spark: [0, -0.55], stick: [0.74, -0.18], hammer: [0.58, -0.3], letter: [0.1, -0.62], dust: [0.5, -0.02], drop: [0.66, -0.36],
+  spark: [0, -0.55], stick: [0.74, -0.18], hammer: [0.58, -0.3], key: [0.62, -0.42], letter: [0.1, -0.62], dust: [0.5, -0.02], drop: [0.66, -0.36],
   note: [0.15, -0.95], steam: [0.42, -0.6], sparkle: [0.3, -0.5], raindrop: [0.5, -0.9],
 };
 /** Chores happen beside the door, on the path, never on the roof. */
-const YARD = { chai: ['lib', 'l1'], matcha: ['green', 'g1'], mochi: ['cabin', 'a1'], ginger: ['shop', 'w1'], mallow: ['obs', 'o1'], toffee: ['f1', 'f2'] };
+const YARD = { chai: ['lib', 'l1'], matcha: ['green', 'g1'], mochi: ['cabin', 'a1'], ginger: ['shop', 'w1'], mallow: ['obs', 'o1'], toffee: ['f1', 'f2'], sesame: ['clock', 't4'] };
 
 const PROPS = {
   can: '<svg viewBox="0 0 40 30"><path d="M8 11h17l-2 15H10z" fill="#7FA9A0" stroke="#3f3a30" stroke-width="1.6" stroke-linejoin="round"/><path d="M24 15l11-7 2 3-11 8" fill="#7FA9A0" stroke="#3f3a30" stroke-width="1.6" stroke-linejoin="round"/><path d="M10 11c0-6 13-6 13 0" fill="none" stroke="#3f3a30" stroke-width="1.8"/><circle cx="36" cy="9" r="2.4" fill="#5d8a80" stroke="#3f3a30" stroke-width="1.2"/></svg>',
@@ -73,14 +84,17 @@ const PROPS = {
   cup: '<svg viewBox="0 0 30 22"><ellipse cx="14" cy="18" rx="12" ry="3" fill="#F4EAD5" stroke="#5a4130" stroke-width="1.3"/><path d="M5 6h18l-2 10a3 3 0 0 1-3 2H10a3 3 0 0 1-3-2z" fill="#F6EEDC" stroke="#5a4130" stroke-width="1.4" stroke-linejoin="round"/><path d="M23 8a4 4 0 0 1 0 7" fill="none" stroke="#5a4130" stroke-width="1.4"/><path d="M7 9h14" stroke="#C2643F" stroke-width="1.6"/></svg>',
   book: '<svg viewBox="0 0 36 24"><path d="M2 5c5-3 11-3 16 0v17c-5-3-11-3-16 0z" fill="#FBF3E0" stroke="#5a4130" stroke-width="1.4" stroke-linejoin="round"/><path d="M34 5c-5-3-11-3-16 0v17c5-3 11-3 16 0z" fill="#FBF3E0" stroke="#5a4130" stroke-width="1.4" stroke-linejoin="round"/><path d="M5 9h9M5 12h9M5 15h7M22 9h9M22 12h9M22 15h7" stroke="#b39a78" stroke-width="1"/><path class="prop__page" d="M18 5c3-2 7-2.6 11-1.6v16.4c-4-1-8-.4-11 1.6z" fill="#fffaf0" stroke="#5a4130" stroke-width="1.2"/></svg>',
   stick: '<svg viewBox="0 0 40 12"><path d="M2 9L37 3" stroke="#7a4e2a" stroke-width="3" stroke-linecap="round"/><circle cx="37" cy="3" r="2.5" fill="#F2A23C"/></svg>',
+  key: '<svg viewBox="0 0 34 24"><path d="M2 12h17" stroke="#8a6a2a" stroke-width="3.2" stroke-linecap="round"/><path d="M5 12v4M9 12v3" stroke="#8a6a2a" stroke-width="2" stroke-linecap="round"/><path d="M19 12c0-6 4-9 7-9s6 3 6 9-3 9-6 9-7-3-7-9z" fill="#E3B04B" stroke="#5a4020" stroke-width="1.5"/><circle cx="26" cy="12" r="2.6" fill="#fff6d8" stroke="#5a4020" stroke-width="1.1"/></svg>',
   raincloud: '<svg viewBox="0 0 50 30"><path d="M12 24h26a8 8 0 0 0 0-16 11 11 0 0 0-21-3 9 9 0 0 0-5 19z" fill="#E8EEF6" stroke="#6a7a90" stroke-width="1.6" stroke-linejoin="round"/></svg>',
 };
 
 /**
  * @param {HTMLElement} root  the .cw section
- * @param {{pets, atmo, reduced}} o
+ * @param {{pets, atmo, reduced, view, houses}} o
+ *   view()  the part of the painting on screen: { x, y, w, h, s } (painting px, and the camera's scale)
+ *   houses  src/home/houses.js createHouseLife(), or null
  */
-export function createLife(root, { pets: petsState, atmo, reduced }) {
+export function createLife(root, { pets: petsState, atmo, reduced, view = null, houses = null }) {
   const map = root.querySelector('.cw-map');
   const canvas = root.querySelector('.cw-life');
   const g = canvas.getContext('2d');
@@ -92,6 +106,9 @@ export function createLife(root, { pets: petsState, atmo, reduced }) {
   let destroyed = false, raf = 0, last = performance.now(), now = 0;
   const reserved = new Set();
   const parts = [];
+
+  /** The part of the painting on screen this frame (pets off it write nothing). */
+  let viewNow = view ? view() : { x: 0, y: 0, w: MAP.w, h: MAP.h, s: 1 };
 
   /* ================= The friends ================= */
   const actors = PETS.map((p, i) => {
@@ -106,7 +123,8 @@ export function createLife(root, { pets: petsState, atmo, reduced }) {
       x: n.x + (i % 2 ? 6 : -6), y: n.y, node: home, home, path: [], state: 'idle', until: 400 + i * 700,
       next: null, facing: i % 2 ? -1 : 1, hop: 0, frame: 0, blinkAt: rand(800, 4000), blinkUntil: 0,
       talkUntil: 0, sayUntil: 0, happyUntil: 0, reactUntil: 0, partner: null, target: null,
-      word: 'happy', lastWrite: '', lastFeet: '', marked: false, chore: null, emitAt: 0, walked: 0,
+      word: 'happy', lastPos: '', lastBody: '', lastShadow: '', lastZ: -1, lastState: '', lastFeet: '', marked: false, chore: null, emitAt: 0, walked: 0,
+      footL: el.querySelector('.rig__foot--l'), footR: el.querySelector('.rig__foot--r'),
     };
   });
   const byId = new Map(actors.map((a) => [a.id, a]));
@@ -196,7 +214,7 @@ export function createLife(root, { pets: petsState, atmo, reduced }) {
     if (r < 0.55 && w !== 'missing') { const bff = PET_BY_ID.get(a.id).bff; if (byId.has(bff) && !reserved.has(HOMES[bff].node)) { walkTo(a, HOMES[bff].node, 'visit', { x: (Math.random() < 0.5 ? -1 : 1) * 34, y: 4 }); return; } }
     if (r < 0.68) { const n = freeNode(SPOTS.plaza); if (n) { walkTo(a, n, 'idle'); return; } }
     if (r < 0.74) { const n = freeNode(SPOTS.bench); if (n) { walkTo(a, n, 'sit'); return; } }
-    if (r < 0.78 && (a.id === 'matcha' || a.id === 'mallow' || a.id === 'mochi') && !reserved.has('dock')) { walkTo(a, 'dock', 'idle'); return; }
+    if (r < 0.78 && (a.id === 'matcha' || a.id === 'mallow' || a.id === 'mochi' || a.id === 'sesame') && !reserved.has('dock')) { walkTo(a, 'dock', 'idle'); return; }
     if (r < 0.84) { const n = freeNode(SPOTS.fire); if (n) { walkTo(a, n, 'sit'); return; } }
     if (r < 0.92 && startChat(a)) return;
     if (a.node !== a.home) { walkTo(a, a.home, 'idle'); return; }
@@ -319,7 +337,7 @@ export function createLife(root, { pets: petsState, atmo, reduced }) {
     setTimeout(() => h.remove(), 1400);
   };
 
-  /** Paint one friend: position, depth, gait, facing, frame, feet. Writes only on change. */
+  /** Paint one friend: position, depth, gait, facing, frame, feet. Each style is written only when it changes. */
   const paintPet = (a) => {
     let frame = FRAME.idle, lift = 0, sx = 1, sy = 1, tilt = 0, ll = 0, lr = 0, lx = 0, rx = 0;
     const G = a.gait;
@@ -359,34 +377,64 @@ export function createLife(root, { pets: petsState, atmo, reduced }) {
     if (a.sayUntil && now > a.sayUntil) { a.sayUntil = 0; a.bubble.classList.add('is-out'); setTimeout(() => { if (!a.sayUntil) a.bubble.hidden = true; }, 260); }
     const showMark = a.marked && !a.sayUntil && a.state !== 'sleep';
     if (a.markEl && a.markEl.hidden === showMark) a.markEl.hidden = !showMark;
+    // The state changes seldom and says what the friend is doing (asleep, cheering): always true in the DOM.
+    if (a.state !== a.lastState) { a.lastState = a.state; a.el.dataset.state = a.state; }
+    if (a.frame !== frame) { a.frame = frame; a.sprite.style.setProperty('--f', frame); }
+    // Off screen, a friend keeps living but writes no styles (a phone sees a third of the village);
+    // the margin is wide enough that they are back in place before they come into view.
+    if (view && !reduced) { const v = viewNow; if (a.x < v.x - 160 || a.x > v.x + v.w + 160 || a.y < v.y - 60 || a.y > v.y + v.h + 200) return; }
     const pos = `translate3d(${a.x.toFixed(1)}px,${a.y.toFixed(1)}px,0)`;
+    if (pos !== a.lastPos) { a.lastPos = pos; a.el.style.transform = pos; }
+    const z = Math.round(a.y);
+    if (z !== a.lastZ) { a.lastZ = z; a.el.style.zIndex = String(z); }
     const body = `translateY(${(-lift).toFixed(1)}px) rotate(${tilt.toFixed(2)}deg) scale(${(a.facing * sx).toFixed(3)},${sy.toFixed(3)})`;
-    const key = pos + body + frame + a.state;
-    if (key !== a.lastWrite) {
-      a.lastWrite = key;
-      a.el.style.transform = pos;
-      a.el.style.zIndex = String(Math.round(a.y));
-      a.body.style.transform = body;
-      a.shadow.style.transform = `scale(${(1 - lift / 40).toFixed(3)})`;
-      if (a.frame !== frame) { a.frame = frame; a.sprite.style.setProperty('--f', frame); }
-      a.el.dataset.state = a.state;
-    }
-    const feet = `${ll.toFixed(2)},${lr.toFixed(2)},${lx.toFixed(2)},${rx.toFixed(2)}`;
-    if (feet !== a.lastFeet) {
+    if (body !== a.lastBody) { a.lastBody = body; a.body.style.transform = body; }
+    const shadow = (1 - lift / 40).toFixed(2);
+    if (shadow !== a.lastShadow) { a.lastShadow = shadow; a.shadow.style.transform = `scale(${shadow})`; }
+    // The feet step on their own: a transform on each foot, not a variable on the rig (which would restyle all three pieces).
+    const feet = `${ll.toFixed(1)},${lr.toFixed(1)},${lx.toFixed(1)},${rx.toFixed(1)}`;
+    if (feet !== a.lastFeet && a.footL) {
       a.lastFeet = feet;
-      const st = a.sprite.style;
-      st.setProperty('--ll', ll.toFixed(2)); st.setProperty('--lr', lr.toFixed(2));
-      st.setProperty('--lx', `${lx.toFixed(2)}px`); st.setProperty('--rx', `${rx.toFixed(2)}px`);
+      a.footL.style.transform = `translate(${lx.toFixed(1)}px,${(-ll).toFixed(1)}px)`;
+      a.footR.style.transform = `translate(${rx.toFixed(1)}px,${(-lr).toFixed(1)}px)`;
     }
   };
 
   /* ================= The air ================= */
+  /* The scene canvas covers the part of the painting on screen plus a
+     margin, at the screen's own sharpness (capped: the painting itself is no
+     sharper). It moves with the camera; whatever is off screen is updated
+     but never drawn. */
   const R = (seed) => rng(seed);
+  const MARGIN = 72;
+  let K = 1, cw = 0, ch = 0, ox = -1, oy = -1;
+  const fit = () => {
+    const v = view ? view() : { x: 0, y: 0, w: MAP.w, h: MAP.h, s: 0.5 };
+    // Never finer than the painting itself (1 canvas px per painting px): sharper costs pixels, not detail.
+    const k = Math.round(Math.min(1, Math.max(0.5, v.s * (window.devicePixelRatio || 1))) * 8) / 8;
+    const W = Math.min(MAP.w, Math.ceil(v.w + MARGIN * 2)), H = Math.min(MAP.h, Math.ceil(v.h + MARGIN * 2));
+    if (k !== K || W !== cw || H !== ch) {
+      K = k; cw = W; ch = H;
+      canvas.width = Math.round(W * k); canvas.height = Math.round(H * k);
+      canvas.style.width = `${W}px`; canvas.style.height = `${H}px`;
+      ox = -1;
+    }
+    const nx = Math.round(Math.max(0, Math.min(MAP.w - W, v.x - MARGIN))), ny = Math.round(Math.max(0, Math.min(MAP.h - H, v.y - MARGIN)));
+    // Re-centre only when the screen nears the canvas edge: a move is a style write, so not every frame of a drag.
+    if (ox < 0 || v.x < ox + 8 || v.y < oy + 8 || v.x + v.w > ox + W - 8 || v.y + v.h > oy + H - 8) {
+      if (nx !== ox || ny !== oy) { ox = nx; oy = ny; canvas.style.transform = `translate(${ox}px,${oy}px)`; }
+    }
+    return { x: ox, y: oy, w: W, h: H };
+  };
+  const inView = (r, x, y, pad = 12) => x > r.x - pad && x < r.x + r.w + pad && y > r.y - pad && y < r.y + r.h + pad;
+
   const flameRate = { embers: 2, small: 4, steady: 6, tall: 9, bonfire: 13 };
   let isAutumn = season === 'autumn', isSpring = season === 'spring', isWinter = season === 'winter';
   const made = (id) => pets.decor?.find((t) => t.id === id)?.made;
-  const fireflyCount = () => (dark() ? Math.round(8 + pets.harmony * 22 + (made('fireflies') ? 26 : 0)) : 0);
-  const butterflyCount = () => (!dark() && hour !== 'dawn' && weather !== 'rain' ? 6 + (made('flowers') ? 4 : 0) : 0);
+  const grown = (n) => Object.entries(pets.houses ?? {}).filter(([, s]) => s >= n).map(([id]) => id);
+  // ponytail: a flat cap of 48, so a fully grown village at night stays cheap; spread per house if it ever reads as too few.
+  const fireflyCount = () => (dark() ? Math.min(48, Math.round(8 + pets.harmony * 22 + (made('fireflies') ? 26 : 0) + grown(6).length * 3)) : 0);
+  const butterflyCount = () => (!dark() && hour !== 'dawn' && weather !== 'rain' ? 6 + (made('flowers') ? 4 : 0) + grown(2).length : 0);
   // One soft puff per light, drawn once and stamped for every wisp of smoke and steam.
   const puffOf = (rgb) => {
     const c = document.createElement('canvas'); c.width = c.height = 64;
@@ -396,67 +444,95 @@ export function createLife(root, { pets: petsState, atmo, reduced }) {
     return c;
   };
   const puffs = { day: puffOf('246,242,234'), dark: puffOf('150,152,166'), dust: puffOf('196,170,120') };
-  let sparkAcc = 0, smokeAcc = 0, steamAcc = 0, rippleAt = 2000, birdsAt = rand(2500, 6000), lanternAcc = 0;
+  let sparkAcc = 0, smokeAcc = 0, steamAcc = 0, rippleAt = 2000, birdsAt = rand(2500, 6000), lanternAcc = 0, fishAt = rand(6000, 14000);
   const glints = Array.from({ length: 16 }, (_, i) => { const r = R(`glint${i}`); const t = r() * Math.PI * 2, d = Math.sqrt(r()); return { x: POND.x + Math.cos(t) * POND.rx * d * 0.85, y: POND.y + Math.sin(t) * POND.ry * d * 0.8, p: r() * 6 }; });
-  const ensure = (kind, n, make) => { const have = parts.filter((p) => p.kind === kind).length; for (let i = have; i < n; i += 1) parts.push(make(i)); };
+  /* Particles live in one array, removed by swapping with the last; a count per kind replaces a scan per frame. */
+  const count = Object.create(null);
+  const add = (p) => { parts.push(p); count[p.kind] = (count[p.kind] ?? 0) + 1; };
+  const drop = (i) => { const p = parts[i]; count[p.kind] -= 1; parts[i] = parts[parts.length - 1]; parts.pop(); };
+  const ensure = (kind, n, make) => { for (let i = count[kind] ?? 0; i < n; i += 1) add(make(i)); };
   const lilies = (TREASURE_AT.lilylights ?? []);
   const LETTERS = 'abcdefghijklmnopqrstuvwxyz';
+  const FIREFLY_AT = [[620, 540], [940, 540], [330, 520], [1200, 520], [400, 820], [800, 660], [1100, 760], [770, 420]];
+  const BUTTERFLY_AT = [[300, 470], [460, 700], [1250, 480], [560, 640], [980, 640], [450, 300], [940, 330]];
+  const houseAt = (id) => { const m = HOUSE_ART[id]?.mask; return m ? [m[0], m[1] + m[3] * 0.35] : [770, 492]; };
 
   /** A chore's particle, thrown into the air at painting point (x, y). */
   function emit(kind, x, y, scale = 1, dir = 1) {
     if (reduced || parts.length > 420) return;
-    if (kind === 'drop') parts.push({ kind: 'drop', x, y, vx: dir * rand(8, 22), vy: rand(10, 30), life: rand(0.5, 0.8), age: 0 });
-    else if (kind === 'dust') parts.push({ kind: 'dust', x, y, vx: rand(-8, 8), vy: rand(-6, -2), life: rand(0.5, 0.9), age: 0, r: rand(3, 5) * scale });
-    else if (kind === 'spark') parts.push({ kind: 'spark', x, y, vx: rand(-14, 14), vy: rand(-55, -30), life: rand(0.6, 1.2), age: 0, r: rand(1.2, 2.2) });
-    else if (kind === 'note') parts.push({ kind: 'glyph', ch: pickOf(['♪', '♫', '♪']), color: '#5a4130', x, y, vx: rand(-6, 6), vy: rand(-26, -18), life: rand(1.4, 2), age: 0, s: rand(11, 14), w: rand(0, 6) });
-    else if (kind === 'letter') parts.push({ kind: 'glyph', ch: LETTERS[Math.floor(Math.random() * 26)], color: '#7a5a3a', x, y, vx: rand(-5, 5), vy: rand(-20, -12), life: rand(1.6, 2.2), age: 0, s: rand(9, 12), w: rand(0, 6), serif: true });
-    else if (kind === 'steam') parts.push({ kind: 'steam', x, y, vx: rand(-2, 3), vy: rand(-12, -7), life: rand(1.4, 2), age: 0, r: rand(2, 3), w: rand(0, 6) });
-    else if (kind === 'sparkle') parts.push({ kind: 'sparkle', x: x + rand(-14, 14), y: y + rand(-10, 10), life: rand(0.6, 1.1), age: 0, r: rand(2.5, 4.5) });
-    else if (kind === 'confetti') parts.push({ kind: 'confetti', x, y, vx: rand(-70, 70), vy: rand(-190, -90), life: rand(1.8, 2.6), age: 0, rot: rand(0, 6), vr: rand(-9, 9), c: pickOf(CONFETTI), w: rand(3, 5), h: rand(5, 8) });
+    if (kind === 'drop') add({ kind: 'drop', x, y, vx: dir * rand(8, 22), vy: rand(10, 30), life: rand(0.5, 0.8), age: 0 });
+    else if (kind === 'dust') add({ kind: 'dust', x, y, vx: rand(-8, 8), vy: rand(-6, -2), life: rand(0.5, 0.9), age: 0, r: rand(3, 5) * scale });
+    else if (kind === 'spark') add({ kind: 'spark', x, y, vx: rand(-14, 14), vy: rand(-55, -30), life: rand(0.6, 1.2), age: 0, r: rand(1.2, 2.2) });
+    else if (kind === 'note') add({ kind: 'glyph', ch: pickOf(['♪', '♫', '♪']), color: '#5a4130', x, y, vx: rand(-6, 6), vy: rand(-26, -18), life: rand(1.4, 2), age: 0, s: Math.round(rand(11, 14)), w: rand(0, 6) });
+    else if (kind === 'letter') add({ kind: 'glyph', ch: LETTERS[Math.floor(Math.random() * 26)], color: '#7a5a3a', x, y, vx: rand(-5, 5), vy: rand(-20, -12), life: rand(1.6, 2.2), age: 0, s: Math.round(rand(9, 12)), w: rand(0, 6), serif: true });
+    else if (kind === 'steam') add({ kind: 'steam', x, y, vx: rand(-2, 3), vy: rand(-12, -7), life: rand(1.4, 2), age: 0, r: rand(2, 3), w: rand(0, 6) });
+    else if (kind === 'sparkle') add({ kind: 'sparkle', x: x + rand(-14, 14), y: y + rand(-10, 10), life: rand(0.6, 1.1), age: 0, r: rand(2.5, 4.5) });
+    else if (kind === 'confetti') add({ kind: 'confetti', x, y, vx: rand(-70, 70), vy: rand(-190, -90), life: rand(1.8, 2.6), age: 0, rot: rand(0, 6), vr: rand(-9, 9), c: pickOf(CONFETTI), w: rand(3, 5), h: rand(5, 8) });
   }
 
+  /** The hour's colour for plain paint on the canvas (the painting gets it from the tint layer, which the canvas sits above). */
+  const TINT = { night: 'rgba(28,36,78,.58)', dusk: 'rgba(120,52,34,.26)', dawn: 'rgba(196,120,112,.14)' };
+
   const air = (dt) => {
+    const r = fit();
     // spawners
-    sparkAcc += dt * (flameRate[pets.flame.tier] ?? 4) * (0.6 + pets.harmony * 0.6);
-    while (sparkAcc > 1) { sparkAcc -= 1; parts.push({ kind: 'spark', x: FIRE.x + rand(-12, 12), y: FIRE.y - 10, vx: rand(-10, 10), vy: rand(-62, -34), life: rand(1.1, 2.2), age: 0, r: rand(1.2, 2.6) }); }
-    smokeAcc += dt;
-    if (smokeAcc > 0.34) { smokeAcc = 0; for (const c of CHIMNEYS) parts.push({ kind: 'smoke', x: c.x + rand(-2, 2), y: c.y, vx: rand(5, 11) * (weather === 'rain' ? 1.8 : 1), vy: rand(-22, -15), life: rand(4.5, 6.5), age: 0, r: rand(5, 7), w: rand(0, 6) }); }
-    steamAcc += dt;
-    if (steamAcc > 0.55) { steamAcc = 0; parts.push({ kind: 'steam', x: TEAPOT.x + rand(-2, 2), y: TEAPOT.y, vx: rand(-2, 4), vy: rand(-11, -7), life: rand(1.8, 2.6), age: 0, r: rand(2, 3), w: rand(0, 6) }); }
-    ensure('firefly', fireflyCount(), (i) => { const r = R(`ff${i}${now | 0}`); const anchors = [[620, 540], [940, 540], [330, 520], [1200, 520], [400, 820], [800, 660], [1100, 760], [770, 420]]; const [ax, ay] = anchors[i % anchors.length]; return { kind: 'firefly', ax: ax + (r() - 0.5) * 160, ay: ay + (r() - 0.5) * 90, x: ax, y: ay, t: r() * 100, sp: 0.3 + r() * 0.5 }; });
-    ensure('butterfly', butterflyCount(), (i) => { const r = R(`bf${i}${now | 0}`); const anchors = [[300, 470], [460, 700], [1250, 480], [560, 640], [980, 640], [450, 300], [940, 330]]; const [ax, ay] = anchors[i % anchors.length]; return { kind: 'butterfly', ax, ay, x: ax, y: ay, t: r() * 100, c: ['#FFF6E0', '#F7D774', '#A9C8F0', '#F4B6C2'][i % 4] }; });
-    if (isAutumn || isSpring) ensure('leaf', weather === 'rain' ? 4 : 9, () => ({ kind: 'leaf', x: rand(0, 1536), y: rand(-200, 900), vx: rand(6, 18), vy: rand(14, 26), rot: rand(0, 6), vr: rand(-1.5, 1.5), sway: rand(0, 6), c: isSpring ? pickOf(['#F6C9D2', '#FBE3E8', '#F2B4C3']) : pickOf(['#D9822B', '#E6A23C', '#C4602D', '#E9C46A']) }));
-    if (weather === 'rain') ensure('rain', 140, () => ({ kind: 'rain', x: rand(-100, 1536), y: rand(-100, 1024), v: rand(520, 700) }));
-    if (weather === 'snow' || isWinter) ensure('snow', weather === 'snow' ? 90 : 0, () => ({ kind: 'snow', x: rand(0, 1536), y: rand(-50, 1024), v: rand(14, 30), s: rand(0, 6), r: rand(1.2, 2.6) }));
-    if (hour === 'afternoon' || hour === 'morning') ensure('mote', 12, (i) => ({ kind: 'mote', x: rand(400, 1150), y: rand(250, 800), t: i * 1.7 }));
-    if (now > rippleAt) { rippleAt = now + rand(weather === 'rain' ? 600 : 3500, weather === 'rain' ? 1400 : 8000); const r = R(`rip${now | 0}`); const t = r() * Math.PI * 2, d = Math.sqrt(r()) * 0.8; parts.push({ kind: 'ripple', x: POND.x + Math.cos(t) * POND.rx * d, y: POND.y + Math.sin(t) * POND.ry * d, age: 0, life: 2.6 }); }
-    if (!dark() && weather !== 'rain' && now > birdsAt) {
-      birdsAt = now + rand(22e3, 42e3);
-      const ltr = Math.random() < 0.5, y0 = rand(50, 200), n = 3 + Math.floor(Math.random() * 3);
-      for (let i = 0; i < n; i += 1) parts.push({ kind: 'bird', x: ltr ? -40 - i * 26 : 1576 + i * 26, y: y0 + (i % 2) * 14 + i * 4, vx: ltr ? rand(70, 85) : -rand(70, 85), t: Math.random() * 6, age: 0, life: 30 });
+    if (dt) {
+      sparkAcc += dt * (flameRate[pets.flame.tier] ?? 4) * (0.6 + pets.harmony * 0.6);
+      while (sparkAcc > 1) { sparkAcc -= 1; add({ kind: 'spark', x: FIRE.x + rand(-12, 12), y: FIRE.y - 10, vx: rand(-10, 10), vy: rand(-62, -34), life: rand(1.1, 2.2), age: 0, r: rand(1.2, 2.6) }); }
+      smokeAcc += dt;
+      if (smokeAcc > 0.34) {
+        smokeAcc = 0;
+        // A chimney smokes once its house is awake (houses.js stage 1).
+        for (const c of houses ? houses.chimneys() : CHIMNEYS) add({ kind: 'smoke', x: c.x + rand(-2, 2), y: c.y, vx: rand(5, 11) * (weather === 'rain' ? 1.8 : 1), vy: rand(-22, -15), life: rand(4.5, 6.5), age: 0, r: rand(5, 7), w: rand(0, 6) });
+      }
+      steamAcc += dt;
+      if (steamAcc > 0.55 && (!houses || houses.stageOf('cottage') >= 1)) { steamAcc = 0; add({ kind: 'steam', x: TEAPOT.x + rand(-2, 2), y: TEAPOT.y, vx: rand(-2, 4), vy: rand(-11, -7), life: rand(1.8, 2.6), age: 0, r: rand(2, 3), w: rand(0, 6) }); }
+      const grownSix = grown(6), grownTwo = grown(2);
+      ensure('firefly', fireflyCount(), (i) => { const q = R(`ff${i}${now | 0}`); const [ax, ay] = i % 3 === 2 && grownSix.length ? houseAt(grownSix[i % grownSix.length]) : FIREFLY_AT[i % FIREFLY_AT.length]; return { kind: 'firefly', ax: ax + (q() - 0.5) * 160, ay: ay + (q() - 0.5) * 90, x: ax, y: ay, t: q() * 100, sp: 0.3 + q() * 0.5 }; });
+      ensure('butterfly', butterflyCount(), (i) => { const q = R(`bf${i}${now | 0}`); const [ax, ay] = i % 3 === 2 && grownTwo.length ? houseAt(grownTwo[i % grownTwo.length]) : BUTTERFLY_AT[i % BUTTERFLY_AT.length]; return { kind: 'butterfly', ax, ay, x: ax, y: ay, t: q() * 100, c: ['#FFF6E0', '#F7D774', '#A9C8F0', '#F4B6C2'][i % 4] }; });
+      if (isAutumn || isSpring) ensure('leaf', weather === 'rain' ? 4 : 9, () => ({ kind: 'leaf', x: rand(0, 1536), y: rand(-200, 900), vx: rand(6, 18), vy: rand(14, 26), rot: rand(0, 6), vr: rand(-1.5, 1.5), sway: rand(0, 6), c: isSpring ? pickOf(['#F6C9D2', '#FBE3E8', '#F2B4C3']) : pickOf(['#D9822B', '#E6A23C', '#C4602D', '#E9C46A']) }));
+      if (weather === 'rain') ensure('rain', 140, () => ({ kind: 'rain', x: rand(-100, 1536), y: rand(-100, 1024), v: rand(520, 700) }));
+      if (weather === 'snow' || isWinter) ensure('snow', weather === 'snow' ? 90 : 0, () => ({ kind: 'snow', x: rand(0, 1536), y: rand(-50, 1024), v: rand(14, 30), s: rand(0, 6), r: rand(1.2, 2.6) }));
+      if (hour === 'afternoon' || hour === 'morning') ensure('mote', 12, (i) => ({ kind: 'mote', x: rand(400, 1150), y: rand(250, 800), t: i * 1.7 }));
+      // Two dragonflies over the pond by day.
+      ensure('dragonfly', !dark() && weather !== 'rain' ? 2 : 0, (i) => ({ kind: 'dragonfly', ax: POND.x - 80 + i * 150, ay: POND.y - 30, x: POND.x, y: POND.y, t: rand(0, 50), dart: 0 }));
+      if (now > rippleAt) { rippleAt = now + rand(weather === 'rain' ? 600 : 3500, weather === 'rain' ? 1400 : 8000); const q = R(`rip${now | 0}`); const t = q() * Math.PI * 2, d = Math.sqrt(q()) * 0.8; add({ kind: 'ripple', x: POND.x + Math.cos(t) * POND.rx * d, y: POND.y + Math.sin(t) * POND.ry * d, age: 0, life: 2.6 }); }
+      // Now and then a fish jumps in the pond.
+      if (now > fishAt && weather !== 'rain') { fishAt = now + rand(9000, 20000); const t = rand(0, Math.PI * 2), d = rand(0.2, 0.7); add({ kind: 'fish', x: POND.x + Math.cos(t) * POND.rx * d, y: POND.y + Math.sin(t) * POND.ry * d, dir: Math.random() < 0.5 ? -1 : 1, age: 0, life: 0.9 }); }
+      if (!dark() && weather !== 'rain' && now > birdsAt) {
+        birdsAt = now + rand(22e3, 42e3);
+        const ltr = Math.random() < 0.5, y0 = rand(50, 200), n = 3 + Math.floor(Math.random() * 3);
+        for (let i = 0; i < n; i += 1) add({ kind: 'bird', x: ltr ? -40 - i * 26 : 1576 + i * 26, y: y0 + (i % 2) * 14 + i * 4, vx: ltr ? rand(70, 85) : -rand(70, 85), t: Math.random() * 6, age: 0, life: 30 });
+      }
+      if (night() && made('skylanterns') && pets.harmony >= 0.5) { lanternAcc += dt * 0.5; while (lanternAcc > 1) { lanternAcc -= 1; add({ kind: 'lantern', x: rand(640, 900), y: rand(440, 560), vy: rand(-14, -9), age: 0, life: 40, t: Math.random() * 6 }); } }
     }
-    if (night() && made('skylanterns') && pets.harmony >= 0.5) { lanternAcc += dt * 0.5; while (lanternAcc > 1) { lanternAcc -= 1; parts.push({ kind: 'lantern', x: rand(640, 900), y: rand(440, 560), vy: rand(-14, -9), age: 0, life: 40, t: Math.random() * 6 }); } }
 
     // draw
-    g.setTransform(0.5, 0, 0, 0.5, 0, 0);
-    g.clearRect(0, 0, 1536, 1024);
+    g.setTransform(K, 0, 0, K, -r.x * K, -r.y * K);
+    g.clearRect(r.x, r.y, r.w, r.h);
+    // what the houses have grown, under the air
+    houses?.draw(g, reduced ? 0 : now, dt, r, { dark: dark(), night: night(), hour, weather, tint: TINT[hour] ?? '' });
     // the fire's own light
-    const flick = 0.85 + Math.sin(now / 90) * 0.06 + Math.sin(now / 37) * 0.05;
-    const fr = (dark() ? 120 : 70) * (0.7 + pets.harmony * 0.4) * flick;
-    const fg = g.createRadialGradient(FIRE.x, FIRE.y - 6, 4, FIRE.x, FIRE.y - 6, fr);
-    fg.addColorStop(0, `rgba(255,190,90,${dark() ? 0.55 : 0.28})`); fg.addColorStop(1, 'rgba(255,150,60,0)');
-    g.globalCompositeOperation = 'lighter'; g.fillStyle = fg; g.beginPath(); g.arc(FIRE.x, FIRE.y - 6, fr, 0, 7); g.fill();
+    g.globalCompositeOperation = 'lighter';
+    if (inView(r, FIRE.x, FIRE.y, 140)) {
+      const flick = 0.85 + Math.sin(now / 90) * 0.06 + Math.sin(now / 37) * 0.05;
+      const fr = (dark() ? 120 : 70) * (0.7 + pets.harmony * 0.4) * flick;
+      glow(g, '255,176,80', FIRE.x, FIRE.y - 6, fr, dark() ? 0.75 : 0.4);
+    }
     // glints on the pond
-    for (const s of glints) { const a = Math.max(0, Math.sin(now / 700 + s.p)) ** 6; if (a < 0.05) continue; g.fillStyle = `rgba(255,255,240,${(a * (dark() ? 0.35 : 0.8)).toFixed(3)})`; star4(s.x, s.y, 2.6 + a * 2); }
-    if (made('lilylights') && dark()) for (const [i, l] of lilies.entries()) { const a = 0.6 + Math.sin(now / 800 + i) * 0.2; glowDot(l.x, l.y + Math.sin(now / 1200 + i) * 2, 16, `rgba(255,214,140,${a.toFixed(2)})`); }
+    if (inView(r, POND.x, POND.y, POND.rx)) {
+      for (const s of glints) { const a = Math.max(0, Math.sin(now / 700 + s.p)) ** 6; if (a < 0.05) continue; g.fillStyle = `rgba(255,255,240,${(a * (dark() ? 0.35 : 0.8)).toFixed(3)})`; twinkle(g, s.x, s.y, 2.6 + a * 2); }
+      if (made('lilylights') && dark()) for (const [i, l] of lilies.entries()) glow(g, '255,214,140', l.x, l.y + Math.sin(now / 1200 + i) * 2, 16, 0.6 + Math.sin(now / 800 + i) * 0.2);
+    }
     g.globalCompositeOperation = 'source-over';
     for (let i = parts.length - 1; i >= 0; i -= 1) {
       const p = parts[i];
-      if (p.life !== undefined) { p.age += dt; if (p.age > p.life) { parts.splice(i, 1); continue; } }
+      if (p.life !== undefined) { p.age += dt; if (p.age > p.life) { drop(i); continue; } }
       const k = p.life ? p.age / p.life : 0;
       switch (p.kind) {
         case 'spark':
           p.x += (p.vx + Math.sin(now / 200 + i) * 8) * dt; p.y += p.vy * dt;
+          if (!inView(r, p.x, p.y)) break;
           g.globalCompositeOperation = 'lighter'; g.fillStyle = `rgba(255,${180 - k * 90 | 0},70,${(1 - k).toFixed(2)})`; g.beginPath(); g.arc(p.x, p.y, p.r * (1 - k * 0.5), 0, 7); g.fill(); g.globalCompositeOperation = 'source-over';
           break;
         case 'smoke':
@@ -464,14 +540,15 @@ export function createLife(root, { pets: petsState, atmo, reduced }) {
           // Rises, slows, spreads and leans with the wind; fades in, then out.
           p.x += (p.vx + Math.sin(now / 700 + p.w) * 4) * dt; p.y += p.vy * dt; p.vy *= 1 - dt * 0.12;
           p.r += dt * (p.kind === 'smoke' ? 6 : 3.2);
-          const a = (p.kind === 'smoke' ? (dark() ? 0.3 : 0.5) : (dark() ? 0.3 : 0.55)) * Math.min(1, k / 0.12) * (1 - k);
-          g.globalAlpha = a;
+          if (!inView(r, p.x, p.y, p.r)) break;
+          g.globalAlpha = (p.kind === 'smoke' ? (dark() ? 0.3 : 0.5) : (dark() ? 0.3 : 0.55)) * Math.min(1, k / 0.12) * (1 - k);
           g.drawImage(dark() ? puffs.dark : puffs.day, p.x - p.r, p.y - p.r, p.r * 2, p.r * 2);
           g.globalAlpha = 1;
           break;
         }
         case 'dust': {
           p.x += p.vx * dt; p.y += p.vy * dt; p.r += dt * 9;
+          if (!inView(r, p.x, p.y)) break;
           g.globalAlpha = 0.5 * (1 - k);
           g.drawImage(puffs.dust, p.x - p.r, p.y - p.r, p.r * 2, p.r * 2);
           g.globalAlpha = 1;
@@ -479,71 +556,103 @@ export function createLife(root, { pets: petsState, atmo, reduced }) {
         }
         case 'confetti':
           p.vy += 230 * dt; p.vx *= 1 - dt * 0.9; p.x += (p.vx + Math.sin(now / 160 + p.rot) * 18) * dt; p.y += p.vy * dt; p.rot += p.vr * dt;
+          if (!inView(r, p.x, p.y)) break;
           g.save(); g.translate(p.x, p.y); g.rotate(p.rot); g.globalAlpha = Math.min(1, (1 - k) * 2.5);
           g.fillStyle = p.c; g.fillRect(-p.w / 2, -p.h / 2, p.w, p.h * Math.abs(Math.cos(p.rot * 1.7)) + 1);
           g.restore(); g.globalAlpha = 1;
           break;
         case 'drop':
           p.vy += 260 * dt; p.x += p.vx * dt; p.y += p.vy * dt;
+          if (!inView(r, p.x, p.y)) break;
           g.strokeStyle = `rgba(150,200,240,${(0.95 * (1 - k * 0.6)).toFixed(2)})`; g.lineWidth = 2; g.lineCap = 'round';
           g.beginPath(); g.moveTo(p.x, p.y); g.lineTo(p.x - p.vx * 0.02, p.y - p.vy * 0.025); g.stroke();
           break;
         case 'glyph': {
           p.x += (p.vx + Math.sin(now / 400 + p.w) * 10) * dt; p.y += p.vy * dt;
-          g.globalAlpha = Math.min(1, k / 0.15) * (1 - k);
-          g.fillStyle = p.color; g.font = `${p.serif ? 'italic ' : ''}700 ${p.s}px ${p.serif ? 'Georgia, serif' : 'system-ui, sans-serif'}`;
-          g.fillText(p.ch, p.x, p.y);
-          g.globalAlpha = 1;
+          if (!inView(r, p.x, p.y)) break;
+          stamp(g, glyphSprite(p.ch, p.s, p.serif, p.color), p.x, p.y, { alpha: Math.min(1, k / 0.15) * (1 - k) });
           break;
         }
         case 'sparkle': {
+          if (!inView(r, p.x, p.y)) break;
           const a = Math.sin(k * Math.PI);
-          g.globalCompositeOperation = 'lighter'; g.fillStyle = `rgba(255,246,200,${a.toFixed(2)})`; star4(p.x, p.y, p.r * (0.5 + a)); g.globalCompositeOperation = 'source-over';
+          g.globalCompositeOperation = 'lighter'; g.fillStyle = `rgba(255,246,200,${a.toFixed(2)})`; twinkle(g, p.x, p.y, p.r * (0.5 + a)); g.globalCompositeOperation = 'source-over';
           break;
         }
         case 'firefly': {
-          if (!dark()) { parts.splice(i, 1); break; }
+          if (!dark()) { drop(i); break; }
           p.t += dt * p.sp; p.x = p.ax + Math.sin(p.t * 1.3) * 40 + Math.sin(p.t * 0.7) * 30; p.y = p.ay + Math.cos(p.t * 1.1) * 26;
           const a = Math.max(0, Math.sin(p.t * 3 + p.ax)) ** 2 * (hour === 'dusk' ? 0.6 : 1);
-          if (a > 0.04) { g.globalCompositeOperation = 'lighter'; glowDot(p.x, p.y, 9, `rgba(230,255,140,${(a * 0.9).toFixed(2)})`); g.globalCompositeOperation = 'source-over'; }
+          if (a > 0.04 && inView(r, p.x, p.y)) { g.globalCompositeOperation = 'lighter'; glow(g, '230,255,140', p.x, p.y, 9, a * 0.9); g.globalCompositeOperation = 'source-over'; }
           break;
         }
         case 'butterfly': {
-          if (!butterflyCount()) { parts.splice(i, 1); break; }
+          if (!butterflyCount()) { drop(i); break; }
           p.t += dt; const px = p.x; p.x = p.ax + Math.sin(p.t * 0.6) * 60 + Math.sin(p.t * 1.7) * 14; p.y = p.ay + Math.cos(p.t * 0.9) * 30 + Math.sin(p.t * 2.3) * 8;
+          if (!inView(r, p.x, p.y)) break;
           const flap = Math.abs(Math.sin(p.t * 14)) * 4 + 1, dir = p.x > px ? 1 : -1;
           g.fillStyle = p.c; g.strokeStyle = 'rgba(60,40,30,.6)'; g.lineWidth = 0.8;
           g.beginPath(); g.ellipse(p.x - flap * 0.7 * dir, p.y - 2, flap, 3.2, -0.5 * dir, 0, 7); g.fill(); g.stroke();
           g.beginPath(); g.ellipse(p.x + flap * 0.5 * dir, p.y - 2, flap * 0.8, 2.8, 0.5 * dir, 0, 7); g.fill(); g.stroke();
           break;
         }
+        case 'dragonfly': {
+          if (dark() || weather === 'rain') { drop(i); break; }
+          // Hovers, then darts somewhere new.
+          p.t += dt;
+          if (p.t > p.dart) { p.dart = p.t + rand(1.2, 3.2); p.tx = p.ax + rand(-90, 90); p.ty = p.ay + rand(-40, 40); }
+          p.x += ((p.tx ?? p.x) - p.x) * Math.min(1, dt * 5); p.y += ((p.ty ?? p.y) - p.y) * Math.min(1, dt * 5) + Math.sin(p.t * 9) * 0.3;
+          if (!inView(r, p.x, p.y)) break;
+          g.strokeStyle = '#2E6E7A'; g.lineWidth = 1.4; g.lineCap = 'round'; g.beginPath(); g.moveTo(p.x - 5, p.y); g.lineTo(p.x + 3, p.y); g.stroke();
+          g.fillStyle = 'rgba(220,240,255,.55)'; const w = 1.4 + Math.abs(Math.sin(p.t * 60)) * 1.2;
+          g.beginPath(); g.ellipse(p.x, p.y - w, 3.6, w, 0, 0, 7); g.ellipse(p.x, p.y + w, 3.6, w, 0, 0, 7); g.fill();
+          break;
+        }
+        case 'fish': {
+          if (!inView(r, p.x, p.y, 30)) break;
+          const t = k, jx = p.x + p.dir * (t - 0.5) * 22, jy = p.y - Math.sin(t * Math.PI) * 16;
+          if (t < 0.92) {
+            g.save(); g.translate(jx, jy); g.rotate(p.dir * (t - 0.5) * 2.4); g.scale(p.dir, 1);
+            g.fillStyle = '#E9A23B'; g.strokeStyle = '#5a3a20'; g.lineWidth = 0.6;
+            g.beginPath(); g.ellipse(0, 0, 4.4, 1.9, 0, 0, 7); g.fill(); g.stroke();
+            g.beginPath(); g.moveTo(-4, 0); g.lineTo(-6.6, -2); g.lineTo(-6.6, 2); g.closePath(); g.fill(); g.stroke();
+            g.restore();
+          }
+          for (const at of [0.04, 0.96]) { const d = t - at; if (d > 0 && d < 0.5) { g.strokeStyle = `rgba(235,245,255,${(0.7 * (1 - d * 2)).toFixed(2)})`; g.lineWidth = 1.1; g.beginPath(); g.ellipse(p.x + p.dir * (at - 0.5) * 22, p.y, 3 + d * 20, 1 + d * 7, 0, 0, 7); g.stroke(); } }
+          break;
+        }
         case 'leaf':
           p.x += (p.vx + Math.sin(now / 900 + p.sway) * 14) * dt; p.y += p.vy * dt; p.rot += p.vr * dt;
           if (p.y > 1040 || p.x > 1560) { p.x = rand(-40, 1400); p.y = rand(-60, -10); }
+          if (!inView(r, p.x, p.y)) break;
           g.save(); g.translate(p.x, p.y); g.rotate(p.rot); g.fillStyle = p.c; g.beginPath(); g.ellipse(0, 0, 4.4, 2.2, 0, 0, 7); g.fill(); g.restore();
           break;
         case 'rain':
           p.y += p.v * dt; p.x += p.v * 0.18 * dt;
           if (p.y > 1030) { p.y = rand(-60, -10); p.x = rand(-200, 1536); }
+          if (!inView(r, p.x, p.y)) break;
           g.strokeStyle = 'rgba(220,230,245,.32)'; g.lineWidth = 1.2; g.beginPath(); g.moveTo(p.x, p.y); g.lineTo(p.x - 3, p.y - 15); g.stroke();
           break;
         case 'snow':
           p.y += p.v * dt; p.x += Math.sin(now / 1000 + p.s) * 10 * dt;
           if (p.y > 1030) { p.y = -10; p.x = rand(0, 1536); }
+          if (!inView(r, p.x, p.y)) break;
           g.fillStyle = 'rgba(255,255,255,.85)'; g.beginPath(); g.arc(p.x, p.y, p.r, 0, 7); g.fill();
           break;
         case 'mote': {
-          if (dark()) { parts.splice(i, 1); break; }
+          if (dark()) { drop(i); break; }
           p.t += dt * 0.25; const x = p.x + Math.sin(p.t) * 30, y = p.y + Math.cos(p.t * 0.8) * 20 - (p.t * 6) % 40;
-          const a = (Math.sin(p.t * 2.2) + 1) / 2 * 0.5;
-          g.globalCompositeOperation = 'lighter'; glowDot(x, y, 5, `rgba(255,236,170,${a.toFixed(2)})`); g.globalCompositeOperation = 'source-over';
+          if (!inView(r, x, y)) break;
+          g.globalCompositeOperation = 'lighter'; glow(g, '255,236,170', x, y, 5, (Math.sin(p.t * 2.2) + 1) / 2 * 0.5); g.globalCompositeOperation = 'source-over';
           break;
         }
         case 'ripple':
+          if (!inView(r, p.x, p.y, 30)) break;
           g.strokeStyle = `rgba(235,245,255,${(0.5 * (1 - k)).toFixed(2)})`; g.lineWidth = 1.4; g.beginPath(); g.ellipse(p.x, p.y, 4 + k * 26, 2 + k * 10, 0, 0, 7); g.stroke();
           break;
         case 'bird': {
-          p.x += p.vx * dt; p.t += dt * 9; if (p.x < -80 || p.x > 1620) { parts.splice(i, 1); break; }
+          p.x += p.vx * dt; p.t += dt * 9; if (p.x < -80 || p.x > 1620) { drop(i); break; }
+          if (!inView(r, p.x, p.y)) break;
           const w = Math.sin(p.t) * 4;
           g.strokeStyle = 'rgba(52,48,44,.7)'; g.lineWidth = 1.8; g.lineCap = 'round';
           g.beginPath(); g.moveTo(p.x - 7, p.y - w); g.quadraticCurveTo(p.x - 3, p.y - 3, p.x, p.y); g.quadraticCurveTo(p.x + 3, p.y - 3, p.x + 7, p.y - w); g.stroke();
@@ -551,7 +660,8 @@ export function createLife(root, { pets: petsState, atmo, reduced }) {
         }
         case 'lantern':
           p.y += p.vy * dt; p.x += Math.sin(now / 1400 + p.t) * 6 * dt;
-          g.globalCompositeOperation = 'lighter'; glowDot(p.x, p.y, 18, `rgba(255,190,110,${(0.7 * (1 - k)).toFixed(2)})`); g.globalCompositeOperation = 'source-over';
+          if (!inView(r, p.x, p.y, 20)) break;
+          g.globalCompositeOperation = 'lighter'; glow(g, '255,190,110', p.x, p.y, 18, 0.7 * (1 - k)); g.globalCompositeOperation = 'source-over';
           g.fillStyle = `rgba(240,140,70,${(1 - k).toFixed(2)})`; g.fillRect(p.x - 4, p.y - 6, 8, 10);
           break;
         default: break;
@@ -559,12 +669,15 @@ export function createLife(root, { pets: petsState, atmo, reduced }) {
     }
     g.globalCompositeOperation = 'source-over';
   };
-  function star4(x, y, r) { g.beginPath(); g.moveTo(x, y - r); g.lineTo(x + r * 0.28, y - r * 0.28); g.lineTo(x + r, y); g.lineTo(x + r * 0.28, y + r * 0.28); g.lineTo(x, y + r); g.lineTo(x - r * 0.28, y + r * 0.28); g.lineTo(x - r, y); g.lineTo(x - r * 0.28, y - r * 0.28); g.closePath(); g.fill(); }
-  function glowDot(x, y, r, c) { const gr = g.createRadialGradient(x, y, 0, x, y, r); gr.addColorStop(0, c); gr.addColorStop(1, 'rgba(0,0,0,0)'); g.fillStyle = gr; g.beginPath(); g.arc(x, y, r, 0, 7); g.fill(); }
 
-  /* ================= The clock tower keeps real time ================= */
+  /* ================= The clock tower keeps real time (once Sesame has a cog back) ================= */
   const hourHand = root.querySelector('.cw-clock__h'), minHand = root.querySelector('.cw-clock__m');
-  const setClock = () => { const d = new Date(); const m = d.getMinutes(), h = (d.getHours() % 12) + m / 60; hourHand?.setAttribute('transform', `rotate(${h * 30})`); minHand?.setAttribute('transform', `rotate(${m * 6})`); };
+  const setClock = () => {
+    // Stopped at twenty to five until the first gap is filled (Sesame's story); then the real time.
+    const stopped = houses && houses.stageOf('sesame') < 1;
+    const d = new Date(), m = stopped ? 40 : d.getMinutes(), h = stopped ? 4 + 40 / 60 : (d.getHours() % 12) + m / 60;
+    hourHand?.setAttribute('transform', `rotate(${h * 30})`); minHand?.setAttribute('transform', `rotate(${m * 6})`);
+  };
   setClock();
   const clockTimer = setInterval(setClock, 20e3);
 
@@ -572,10 +685,40 @@ export function createLife(root, { pets: petsState, atmo, reduced }) {
   for (const a of actors) { reserved.add(a.node); paintPet(a); }
   if (reduced) { for (const a of actors) { a.state = night() ? 'doze' : 'idle'; a.until = 1e12; paintPet(a); } air(0); }
 
+  /* Pacing. A frame of work at most every `step` ms: 16.7 normally, which a
+     120 Hz screen reaches by waiting out every other refresh on a timer (a
+     skipped requestAnimationFrame would still wake the page to restyle every
+     CSS animation); 33.3 once this device shows it cannot keep 60. */
+  let step = 1000 / 60, fast = null, intervals = [], lastT = 0, slowWindows = 0, mode30At = 0, retry = 20000;
+  const schedule = (t0) => {
+    if (destroyed) return;
+    const spent = performance.now() - t0, wait = step - spent - 4;
+    if ((fast || step > 20) && wait > 2) setTimeout(() => { if (!destroyed) raf = requestAnimationFrame(frame); }, wait);
+    else raf = requestAnimationFrame(frame);
+  };
+  const pace = (t) => {
+    if (lastT) intervals.push(t - lastT);
+    lastT = t;
+    if (intervals.length < 60) return;
+    const sorted = [...intervals].sort((a, b) => a - b), median = sorted[30], mean = intervals.reduce((a, b) => a + b, 0) / intervals.length;
+    intervals = [];
+    if (fast === null && step < 20) fast = median < 12; // a screen faster than 60 Hz
+    if (step < 20) {
+      // Three slow windows in a row (and not while the village is still setting up): drop to 30.
+      slowWindows = mean > 23 && now > 4000 ? slowWindows + 1 : 0;
+      if (slowWindows >= 3) { step = 1000 / 30; slowWindows = 0; mode30At = now; }
+    } else if (now - mode30At > retry) {
+      // Try 60 again after a while (longer each time); if it struggles it comes back down.
+      step = 1000 / 60; mode30At = now; retry = Math.min(retry * 2, 320000);
+    }
+  };
+
   const frame = (t) => {
     if (destroyed) return;
-    raf = requestAnimationFrame(frame);
-    if (document.hidden) { last = t; return; }
+    if (document.hidden) { last = t; lastT = 0; setTimeout(() => { if (!destroyed) raf = requestAnimationFrame(frame); }, 250); return; }
+    const t0 = performance.now();
+    pace(t);
+    if (view) viewNow = view();
     const dt = Math.min(0.05, (t - last) / 1000); last = t; now += dt * 1000;
     if (!reduced) {
       for (const a of actors) stepPet(a, dt);
@@ -583,9 +726,15 @@ export function createLife(root, { pets: petsState, atmo, reduced }) {
     }
     for (const a of actors) paintPet(a);
     if (!reduced) air(dt);
-    if (!reduced) water.paint(now, weather);
+    if (!reduced) water.paint(now, weather, viewNow);
+    schedule(t0);
   };
-  raf = requestAnimationFrame(frame);
+  if (!reduced) raf = requestAnimationFrame(frame);
+  // With less motion nothing moves, but bubbles, marks and wake-ups still need their timers to run out and show.
+  const stillTick = reduced ? setInterval(() => { if (destroyed) return; now += 250; for (const a of actors) paintPet(a); }, 250) : 0;
+  /* With less motion nothing loops: the canvas is redrawn only when the camera moves. */
+  let redrawPending = false;
+  const redraw = () => { if (!reduced || redrawPending || destroyed) return; redrawPending = true; requestAnimationFrame(() => { redrawPending = false; if (!destroyed) air(0); }); };
 
   /* ================= What the screen can ask of it ================= */
   return {
@@ -683,12 +832,20 @@ export function createLife(root, { pets: petsState, atmo, reduced }) {
         if (tapToSkip) setTimeout(() => root.addEventListener('pointerdown', finish, true), 350);
       });
     },
+    /** The camera moved: with less motion, redraw the still canvas for the new view. */
+    redraw,
+    /** The houses grew (or the records changed): the clock may start, the canvas may need a fresh still frame. */
+    housesChanged() { setClock(); redraw(); },
+    /** The village's grown copy of the painting is ready: the water refracts that one. */
+    setPainting(c) { water.setSource(c); },
     update(next) {
       pets = next;
       for (const a of actors) { const w = wordOf(a.id); if (w !== a.word) { a.word = w; if (a.state !== 'walk' && a.state !== 'chore') a.until = now; } }
     },
     setAtmo(at) { hour = at.hour; weather = at.weather; season = at.season; isAutumn = season === 'autumn'; isSpring = season === 'spring'; isWinter = season === 'winter'; for (const a of actors) if (a.state !== 'walk') a.until = now; },
-    destroy() { destroyed = true; cancelAnimationFrame(raf); clearInterval(clockTimer); water.destroy(); },
+    destroy() { destroyed = true; cancelAnimationFrame(raf); clearInterval(clockTimer); clearInterval(stillTick); water.destroy(); },
+    /** For the browser gates: frames are paced (60, or 30 on a slow device). */
+    get pace() { return Math.round(1000 / step); },
   };
 }
 

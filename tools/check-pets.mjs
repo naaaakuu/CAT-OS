@@ -1,9 +1,9 @@
 /**
- * check-pets.mjs — the six friends, their friendships and their voice.
+ * check-pets.mjs — the seven friends, their friendships and their voice.
  *
  * Asserts the roster (ids, order, names, frames, frozen), that every friend
- * has every field, that best friends are each other's and agree with
- * FRIENDSHIPS, that every place and module has a friend, that each friend
+ * has every field, that each best friendship is one FRIENDSHIPS tells (the
+ * three pairs are each other's; Sesame, the newest, adores Mochi), that every place and module has a friend, that each friend
  * has five requests, five stories and one best-friend ask, and that every
  * line a friend can say obeys the copy rules: at most 96 characters, no em
  * dash, none of the banned words, templates filled with every name they can
@@ -18,8 +18,8 @@ import { join, dirname } from 'node:path';
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const load = (rel) => import(pathToFileURL(join(ROOT, rel)).href);
 
-const ORDER = ['toffee', 'chai', 'matcha', 'mochi', 'ginger', 'mallow'];
-const NAMES = ['Toffee', 'Chai', 'Matcha', 'Mochi', 'Ginger', 'Mallow'];
+const ORDER = ['toffee', 'chai', 'matcha', 'mochi', 'ginger', 'mallow', 'sesame'];
+const NAMES = ['Toffee', 'Chai', 'Matcha', 'Mochi', 'Ginger', 'Mallow', 'Sesame'];
 const FIELDS = ['id', 'name', 'creature', 'subject', 'tag', 'item', 'charm', 'teaches', 'home', 'icon', 'colour', 'frame', 'places', 'modules', 'bff', 'trouble', 'blurb'];
 const MODULES = ['rc', 'rc2', 'cr', 'lex', 'garden', 'wd', 'wb', 'ps', 'pc', 'pj', 'sp', 'ooo', 'gauntlet'];
 const MOOD_WORDS = ['glowing', 'happy', 'missing', 'sleepy', 'wilting', 'new'];
@@ -35,7 +35,7 @@ export async function checkPets() {
   const sameSet = (a, b) => [...a].sort().join() === [...b].sort().join();
 
   /* ---- Roster ---- */
-  if (P.PETS?.length !== 6) bad(`there are ${P.PETS?.length} pets, not 6`);
+  if (P.PETS?.length !== 7) bad(`there are ${P.PETS?.length} pets, not 7`);
   if (P.PETS?.map((p) => p.id).join() !== ORDER.join()) bad(`pet order is ${P.PETS?.map((p) => p.id).join()}`);
   if (P.PETS?.map((p) => p.name).join() !== NAMES.join()) bad('pet names do not match the roster');
   if (!Object.isFrozen(P.PETS) || !P.PETS.every(Object.isFrozen)) bad('PETS and every pet in it must be frozen');
@@ -46,22 +46,25 @@ export async function checkPets() {
     if (P.PET_BY_ID.get(p.id) !== p) bad(`PET_BY_ID does not hold ${p.id}`);
     if (!/^#[0-9A-F]{6}$/i.test(p.colour)) bad(`${p.id} colour ${p.colour}`);
   }
-  const frames = (P.PETS ?? []).map((p) => p.frame.join(':')).join(' ');
+  // The six are cut from the companion strip; Sesame has a painting of its own (tools/paint-sesame.mjs).
+  const frames = (P.PETS ?? []).slice(0, 6).map((p) => p.frame.join(':')).join(' ');
   if (frames !== '0:350 355:330 700:338 1040:335 1380:397 1780:392') bad(`frames are ${frames}`);
+  const sf = P.PET_BY_ID.get('sesame')?.frame;
+  if (!sf || sf[0] !== 0 || !(sf[1] > 200)) bad(`sesame's frame is ${sf}`);
   if (P.MOOD_WORDS?.join() !== MOOD_WORDS.join()) bad(`MOOD_WORDS are ${P.MOOD_WORDS?.join()}`);
 
-  /* ---- Best friends: each other's, and the same three pairs FRIENDSHIPS tells ---- */
+  /* ---- Best friends: the three pairs are each other's; Sesame adores Mochi ---- */
   const F = P.FRIENDSHIPS ?? [];
   const pairs = F.map((f) => [f.a, f.b].sort().join('-')).sort().join();
-  if (pairs !== 'chai-mochi,ginger-mallow,matcha-toffee') bad(`FRIENDSHIPS are ${pairs}`);
+  if (pairs !== 'chai-mochi,ginger-mallow,matcha-toffee,mochi-sesame') bad(`FRIENDSHIPS are ${pairs}`);
   for (const f of F) {
     const [na, nb] = [P.PET_BY_ID.get(f.a)?.name, P.PET_BY_ID.get(f.b)?.name];
     if (!na || !nb || !f.line?.includes(na) || !f.line.includes(nb)) bad(`the ${f.a}-${f.b} friendship line must name both friends: ${f.line}`);
   }
   for (const p of P.PETS ?? []) {
     if (p.bff === p.id || !P.PET_BY_ID.has(p.bff)) bad(`${p.id}'s best friend "${p.bff}" is not another pet`);
-    else if (P.PET_BY_ID.get(p.bff).bff !== p.id) bad(`${p.id} → ${p.bff} is not returned (${p.bff} → ${P.PET_BY_ID.get(p.bff).bff})`);
-    if (F.filter((f) => f.a === p.id || f.b === p.id).length !== 1) bad(`${p.id} is not in exactly one friendship`);
+    else if (p.id !== 'sesame' && P.PET_BY_ID.get(p.bff).bff !== p.id) bad(`${p.id} → ${p.bff} is not returned (${p.bff} → ${P.PET_BY_ID.get(p.bff).bff})`);
+    if (!F.some((f) => sameSet([f.a, f.b], [p.id, p.bff]))) bad(`${p.id} and ${p.bff} have no friendship line`);
     const f = P.friendshipOf(p.id);
     if (!f || !sameSet([f.a, f.b], [p.id, p.bff])) bad(`friendshipOf(${p.id}) is not ${p.id} and ${p.bff}`);
   }
@@ -69,10 +72,10 @@ export async function checkPets() {
 
   /* ---- Places and modules ---- */
   for (const r of REGIONS) if (!ORDER.includes(P.petForPlace(r.slug))) bad(`place ${r.slug} has no pet`);
-  const placeWant = { 'reading-room': 'chai', meadow: 'matcha', pond: 'matcha', thicket: 'matcha', rootwood: 'matcha', terraces: 'matcha', table: 'mochi', loom: 'ginger', bench: 'mallow', wilds: 'toffee', hearth: 'toffee' };
+  const placeWant = { 'reading-room': 'chai', meadow: 'matcha', pond: 'matcha', thicket: 'matcha', rootwood: 'matcha', terraces: 'matcha', table: 'mochi', loom: 'ginger', placement: 'ginger', bench: 'mallow', completion: 'sesame', wilds: 'toffee', hearth: 'toffee' };
   for (const [slug, id] of Object.entries(placeWant)) if (P.petForPlace(slug) !== id) bad(`place ${slug} → ${P.petForPlace(slug)}, want ${id}`);
   for (const m of MODULES) if (!ORDER.includes(P.petForModule(m))) bad(`module ${m} has no pet`);
-  const modWant = { rc: 'chai', rc2: 'chai', cr: 'chai', lex: 'matcha', garden: 'matcha', wd: 'matcha', wb: 'matcha', ps: 'mochi', pc: 'mochi', pj: 'ginger', sp: 'ginger', ooo: 'mallow', gauntlet: 'toffee' };
+  const modWant = { rc: 'chai', rc2: 'chai', cr: 'chai', lex: 'matcha', garden: 'matcha', wd: 'matcha', wb: 'matcha', ps: 'mochi', pc: 'sesame', pj: 'ginger', sp: 'ginger', ooo: 'mallow', gauntlet: 'toffee' };
   for (const [m, id] of Object.entries(modWant)) if (P.petForModule(m) !== id) bad(`module ${m} → ${P.petForModule(m)}, want ${id}`);
   if (P.petForModule('nonsense') !== null || P.petForPlace('nowhere') !== null) bad('unknown modules and places map to null');
   for (const p of P.PETS ?? []) {
@@ -82,14 +85,20 @@ export async function checkPets() {
 
   /* ---- The story: five requests, five stories, one best-friend ask, five home gifts ---- */
   for (const [name, table] of [['REQUESTS', P.REQUESTS], ['STORIES', P.STORIES], ['BEST_FRIEND_ASK', P.BEST_FRIEND_ASK]]) {
-    if (!sameSet(Object.keys(table ?? {}), ORDER)) bad(`${name} is keyed by ${Object.keys(table ?? {}).join()}, not the six pets`);
+    if (!sameSet(Object.keys(table ?? {}), ORDER)) bad(`${name} is keyed by ${Object.keys(table ?? {}).join()}, not the seven pets`);
   }
   for (const id of ORDER) {
     if (P.REQUESTS?.[id]?.length !== 5) bad(`${id} has ${P.REQUESTS?.[id]?.length} requests, wants exactly 5`);
     if (P.STORIES?.[id]?.length !== 5) bad(`${id} has ${P.STORIES?.[id]?.length} stories, wants exactly 5`);
     if (typeof P.BEST_FRIEND_ASK?.[id] !== 'string') bad(`${id} has no best-friend ask`);
   }
-  if (P.HOME_GIFTS?.length !== 5) bad(`there are ${P.HOME_GIFTS?.length} home gifts, wants exactly 5`);
+  /* Every house grows with its own section: ten things, one per stage (src/home/houses.js draws them). */
+  if (!sameSet(Object.keys(P.HOUSE_GROWTH ?? {}), (P.HOUSES ?? []).map((h) => h.spot))) bad(`HOUSE_GROWTH is keyed by ${Object.keys(P.HOUSE_GROWTH ?? {}).join()}, not the houses`);
+  for (const [spot, list] of Object.entries(P.HOUSE_GROWTH ?? {})) {
+    if (list.length !== 10 || new Set(list).size !== 10) bad(`${spot} needs 10 distinct house stages, has ${list.length}`);
+    if (P.houseGift(spot, 1) !== list[0] || P.houseGift(spot, 10) !== list[9] || P.houseGift(spot, 0) !== '' || P.houseGift(spot, 11) !== '') bad(`houseGift(${spot}) is not stage-numbered from 1`);
+  }
+  for (const h of P.HOUSES ?? []) if (!/^the /.test(h.home ?? '')) bad(`house ${h.spot} has no home name`);
 
   /* ---- The shape of the voice ---- */
   const L = P.LINES ?? {};
@@ -131,7 +140,7 @@ export async function checkPets() {
   walk('REQUESTS', P.REQUESTS);
   walk('BEST_FRIEND_ASK', P.BEST_FRIEND_ASK);
   walk('STORIES', P.STORIES);
-  walk('HOME_GIFTS', P.HOME_GIFTS);
+  walk('HOUSE_GROWTH', P.HOUSE_GROWTH);
   F.forEach((f, i) => add(`FRIENDSHIPS[${i}].line`, f.line));
   for (const p of P.PETS ?? []) { add(`${p.id}.trouble`, p.trouble); add(`${p.id}.blurb`, p.blurb); add(`${p.id}.tag`, p.tag); }
   walk('STAGE_TITLES', P.STAGE_TITLES);
@@ -139,14 +148,15 @@ export async function checkPets() {
   for (const id of ORDER) add(`SIGNATURE.${id}`, P.SIGNATURE?.[id]?.say);
 
   /* ---- Signature voices: one fixed phrase and tone each, spoken on every tap ---- */
-  if (!sameSet(Object.keys(P.SIGNATURE ?? {}), ORDER)) bad(`SIGNATURE is keyed by ${Object.keys(P.SIGNATURE ?? {}).join()}, not the six pets`);
+  if (!sameSet(Object.keys(P.SIGNATURE ?? {}), ORDER)) bad(`SIGNATURE is keyed by ${Object.keys(P.SIGNATURE ?? {}).join()}, not the seven pets`);
   for (const id of ORDER) {
     const g = P.SIGNATURE?.[id];
     if (!g) continue;
     if (!(g.pitch >= 0 && g.pitch <= 2) || !(g.rate >= 0.1 && g.rate <= 10) || !(g.volume > 0 && g.volume <= 1)) bad(`SIGNATURE.${id} tone is out of the speech range`);
     if (!['', 'f', 'm'].includes(g.who)) bad(`SIGNATURE.${id}.who is "${g.who}"`);
   }
-  if (new Set(ORDER.map((id) => P.SIGNATURE?.[id]?.say)).size !== 6) bad('every friend has their own signature phrase');
+  if (new Set(ORDER.map((id) => P.SIGNATURE?.[id]?.say)).size !== ORDER.length) bad('every friend has their own signature phrase');
+  if (P.HOUSES?.find((h) => h.place === 'completion')?.pet !== 'sesame' || P.HOUSES.some((h) => h.pet === 'mochi' && h.place !== 'table')) bad('Para Completion is the house of Sesame; Mochi keeps only Para Summary');
   if (!(P.SIGNATURE?.mochi?.pitch < 0.5 && P.SIGNATURE.mochi.pitch < P.SIGNATURE.chai?.pitch)) bad('Mochi has the heavy voice, lower than Chai\'s soft one');
 
   for (const [where, s] of lines) {
@@ -158,8 +168,8 @@ export async function checkPets() {
     if (/\{\w+\}/.test(s)) bad(`${where} has an unfilled slot: ${s}`);
   }
   const seen = new Map();
-  // Gossip templates and the stage gifts (a ring of light is a ring of light on anyone) repeat on purpose.
-  for (const [where, s] of lines) if (!where.startsWith('LINES.gossip') && !where.startsWith('stageGift')) { if (seen.has(s)) bad(`duplicate line in ${where} and ${seen.get(s)}: ${s}`); seen.set(s, where); }
+  // Gossip templates, the stage gifts (a ring of light is a ring of light on anyone) and the houses' golden stages repeat on purpose.
+  for (const [where, s] of lines) if (!where.startsWith('LINES.gossip') && !where.startsWith('stageGift') && !where.startsWith('HOUSE_GROWTH')) { if (seen.has(s)) bad(`duplicate line in ${where} and ${seen.get(s)}: ${s}`); seen.set(s, where); }
 
   /* ---- Picks are deterministic and come from the right pool ---- */
   const a = P.lineFor('chai', 'hello', 'd1');
@@ -240,7 +250,7 @@ export async function checkPets() {
 
 if (process.argv[1]?.endsWith('check-pets.mjs')) {
   const { problems, lines } = await checkPets();
-  if (!problems.length) { console.log(`✓ six friends, three friendships, ${lines} lines in voice (≤ 96 chars, no em dash, no banned words), five requests and five stories each`); process.exit(0); }
+  if (!problems.length) { console.log(`✓ seven friends, four friendships, ten house stages each, ${lines} lines in voice (≤ 96 chars, no em dash, no banned words), five requests and five stories each`); process.exit(0); }
   console.log(`✗ ${problems.length} problem(s):`);
   for (const p of problems) console.log('  ' + p);
   process.exit(1);

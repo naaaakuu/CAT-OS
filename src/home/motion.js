@@ -45,17 +45,18 @@ import { MAP } from '../pets/paths.js';
 /** k, rect (an ellipse fills it) or poly, then what the kind needs. Painting pixels throughout. */
 export const PATCHES = [
   /* --- the workshop: the gear on the gable, the two wheels under the lean-to --- */
-  { k: 'spin', x: 801, y: 91, w: 64, h: 60, cx: 832.8, cy: 120.8, sx: 1, sy: 0.93, t: 46 },
-  { k: 'spin', x: 636, y: 166, w: 36, h: 46, cx: 654.4, cy: 188.8, sx: 0.77, sy: 1, t: 17 },
-  { k: 'spin', x: 663, y: 189, w: 30, h: 44, cx: 678.5, cy: 211, sx: 0.69, sy: 1, t: 13 },
+  /* `house` + `from`: still until that house reaches that stage (src/home/houses.js): the stuck gears turn again. */
+  { k: 'spin', x: 801, y: 91, w: 64, h: 60, cx: 832.8, cy: 120.8, sx: 1, sy: 0.93, t: 46, house: 'ginger', from: 1 },
+  { k: 'spin', x: 636, y: 166, w: 36, h: 46, cx: 654.4, cy: 188.8, sx: 0.77, sy: 1, t: 17, house: 'ginger', from: 3 },
+  { k: 'spin', x: 663, y: 189, w: 30, h: 44, cx: 678.5, cy: 211, sx: 0.69, sy: 1, t: 13, house: 'ginger', from: 3 },
 
   /* --- the observatory --- */
-  { k: 'pan', poly: [[1310, 86], [1386, 35], [1413, 77], [1332, 122]], blur: 2, cx: 1342, cy: 106, t: 26 },
-  { k: 'turn', x: 1432, y: 178, w: 60, h: 58, cx: 1462, cy: 207, t: 7.5 },
+  { k: 'pan', poly: [[1310, 86], [1386, 35], [1413, 77], [1332, 122]], blur: 2, cx: 1342, cy: 106, t: 26, house: 'mallow', from: 1 },
+  { k: 'turn', x: 1432, y: 178, w: 60, h: 58, cx: 1462, cy: 207, t: 7.5, house: 'mallow', from: 3 },
 
   /* --- fire and smoke --- */
   { k: 'flame', x: 805, y: 834, w: 36, h: 62, cx: 823, cy: 893, t: 1.7 },
-  { k: 'flow', x: 212, y: 520, w: 46, h: 58, dx: 2, dy: -6, t: 2.8 },
+  { k: 'flow', x: 212, y: 520, w: 46, h: 58, dx: 2, dy: -6, t: 2.8, house: 'cottage', from: 1 },
 
   /* --- water: the falls at the left edge, the pond's outflow, the stream under the clock-tower bridge, the pond --- */
   { k: 'flow', poly: [[0, 506], [28, 504], [46, 528], [44, 551], [18, 549], [0, 541]], blur: 2.5, dx: 2, dy: 5, t: 1.4 },
@@ -74,12 +75,12 @@ export const PATCHES = [
   { k: 'bob', x: 423, y: 884, w: 34, h: 14, a: 0.7, r: -1.5, t: 5.6, dl: -0.9 },
 
   /* --- cloth --- */
-  { k: 'flag', poly: [[1198, 664], [1235, 664], [1235, 729], [1217, 754], [1198, 729]], blur: 2, cx: 1216.5, cy: 667, t: 4.6, dl: 0 },
-  { k: 'flag', poly: [[1300, 669], [1342, 669], [1342, 736], [1321, 757], [1300, 736]], blur: 2, cx: 1321, cy: 672, t: 5.2, dl: -1.7 },
+  { k: 'flag', poly: [[1198, 664], [1235, 664], [1235, 729], [1217, 754], [1198, 729]], blur: 2, cx: 1216.5, cy: 667, t: 4.6, dl: 0, house: 'sesame', from: 1 },
+  { k: 'flag', poly: [[1300, 669], [1342, 669], [1342, 736], [1321, 757], [1300, 736]], blur: 2, cx: 1321, cy: 672, t: 5.2, dl: -1.7, house: 'sesame', from: 1 },
   { k: 'sway', poly: [[394, 363], [444, 365], [444, 395], [394, 393]], blur: 2, cx: 419, cy: 366, a: 2.4, t: 3.2, dl: -0.6 },
   { k: 'flap', poly: [[892, 128], [905, 117], [970, 135], [980, 149], [963, 165], [930, 171], [903, 165], [889, 148]], blur: 2, cx: 900, cy: 120, t: 3.4, dl: 0 },
   { k: 'flap', poly: [[1073, 367], [1165, 355], [1191, 380], [1128, 399], [1074, 386]], blur: 2, cx: 1120, cy: 362, t: 3.9, dl: -1.3 },
-  { k: 'wobble', x: 430, y: 660, w: 58, h: 30, cx: 458, cy: 708, a: 1.4, t: 5.4 },
+  { k: 'wobble', x: 430, y: 660, w: 58, h: 30, cx: 458, cy: 708, a: 1.4, t: 5.4, house: 'cottage', from: 1 },
 
   /* --- trees: canopy ellipses, swaying about the trunk below them --- */
   ...[
@@ -126,27 +127,39 @@ export function maskOf(p, r = rectOf(p)) {
 
 /**
  * @param {HTMLElement} map  the .cw-map layer (painting pixels, 1536×1024)
- * @param {{atmo: {hour, weather, season}, reduced: boolean}} o
+ * @param {{atmo: {hour, weather, season}, reduced: boolean, stages?: object, atlas?: string}} o
+ *   stages  each house's stage (economy.js houseStages): a patch with `house`/`from` stays still below it
+ *   atlas   a URL for the atlas graded to match the grown painting (houses.js gradeAtlas), else the baked one
  * @returns {{ setAtmo(atmo): void, destroy(): void }}
  */
-export function mountMotion(map, { atmo, reduced } = {}) {
+export function mountMotion(map, { atmo, reduced, stages = null, atlas = null } = {}) {
   const art = map?.querySelector('.cw-art');
   // At rest every patch IS the painting, so with less motion there is nothing
   // to add; and nothing at all from an atlas cut from another painting.
-  if (reduced || !art || !ATLAS.at.length || ATLAS.painting !== MAP.src) return { setAtmo() {}, destroy() {} };
-  const src = `url("${new URL(ATLAS.src, document.baseURI).href}")`;
+  if (reduced || !art || !ATLAS.at.length || ATLAS.painting !== MAP.src) return { setAtmo() {}, setView() {}, destroy() {} };
+  const src = `url("${atlas ?? new URL(ATLAS.src, document.baseURI).href}")`;
   const box = document.createElement('div');
   box.className = 'cw-motion';
   box.setAttribute('aria-hidden', 'true');
   PATCHES.forEach((p, i) => {
     const r = rectOf(p), a = ATLAS.at[i];
+    // A machine whose house has not woken up yet keeps still: the painting under it is the same picture.
+    if (p.house && stages && (stages[p.house] ?? 0) < p.from) return;
     // A stale bake would show the wrong piece of the painting; leave it still instead.
     if (a && a[0] === r.x && a[1] === r.y && a[2] === r.w && a[3] === r.h) box.appendChild(patch(p, r, a[4], a[5], src));
   });
-  art.after(box);
+  ([...map.querySelectorAll('.cw-base')].at(-1) ?? art).after(box);
   const setAtmo = (at = {}) => { box.dataset.weather = at.weather ?? ''; };
   setAtmo(atmo);
-  return { setAtmo, destroy: () => box.remove() };
+  /* A patch off screen is paused: a running CSS animation is restyled every frame the page draws, seen or not. */
+  const items = [...box.children].map((el) => ({ el, x0: parseFloat(el.style.left), y0: parseFloat(el.style.top), x1: parseFloat(el.style.left) + parseFloat(el.style.width), y1: parseFloat(el.style.top) + parseFloat(el.style.height), off: false }));
+  const setView = (v) => {
+    for (const it of items) {
+      const off = it.x1 < v.x - 40 || it.x0 > v.x + v.w + 40 || it.y1 < v.y - 40 || it.y0 > v.y + v.h + 40;
+      if (off !== it.off) { it.off = off; it.el.toggleAttribute('data-off', off); }
+    }
+  };
+  return { setAtmo, setView, destroy: () => box.remove() };
 }
 
 function patch(p, { x, y, w, h }, ax, ay, src) {

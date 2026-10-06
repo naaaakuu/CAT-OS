@@ -2,11 +2,11 @@
 
 Read for UX, copy, game-design or product-fit tasks. Not needed for engineering tasks.
 
-**A painted village where every CAT English question you answer helps one of six small friends.**
+**A painted village where every CAT English question you answer helps one of seven small friends.**
 
 CAT OS is an offline-first Progressive Web App for the VARC section of India's
 Common Admission Test. It is not a study app with a game on top. It is one
-painted village, and six pets live in it. Each pet looks after one part of
+painted village, and seven pets live in it. Each pet looks after one part of
 CAT English, and each is only as happy as your practice of that part.
 Leave a subject alone and its friend misses you; help them and the whole
 village comes back to life.
@@ -21,7 +21,7 @@ map says which (nothing else lives there: no DILR, no quant):
 | the archery cabin (**Para Summary**) | **Mochi**, a pebble | the summary that keeps the point |
 | the observatory (**Odd One Out**) | **Mallow**, a cloud | the sentence that does not belong |
 | the rose cottage (**Sentence Placement**) | **Ginger** | the one place a sentence fits |
-| the clock tower (**Para Completion**) | **Mochi** | the sentence that finishes the paragraph |
+| the clock tower (**Para Completion**) | **Sesame**, a mouse | the sentence the gap in a paragraph needs |
 | the greenhouse (**Vocabulary**) | **Matcha**, a sprout | word rounds, roots, word parts, words in context |
 | the notice board (**The Gauntlet**) | **Toffee**, a flame | the weekly timed mix; Toffee also keeps the daily fire |
 
@@ -52,7 +52,8 @@ The game is simple; the learning is not.
 The village is losing its words. Each friend has a trouble only learning can
 fix: Chai's pages are going blank, Matcha's word garden is wilting, Mochi's
 notebook lost its notes, Ginger's gears are stuck, Mallow's stars went dim,
-and Toffee keeps the fire that holds it all together. Every round you finish
+Sesame's clock tower stopped ticking, and Toffee keeps the fire that holds it
+all together. Every round you finish
 with a friend helps them:
 
 - **Glow.** The village's one resource, paid for learning done: 1 for each
@@ -68,7 +69,18 @@ with a friend helps them:
   every question in it. Every stage shows on them (a twinkle, a bigger body,
   their own hat, a ring of light, a floating charm, gold trim, a sparkle
   trail, a second charm, a golden aura, a crown of stars) and has a name.
-  Every second stage is a chapter of their story and decorates their home.
+  Every second stage is a chapter of their story.
+- **Houses that grow.** Every house grows with its own section (the workshop
+  with jumbles, the rose cottage with placements, and so on), ten steps from
+  faded and dark-windowed to rich, golden and crowned: smoke and a lit lamp,
+  lit windows and flowers, a keepsake by the door, a garland, two wonders of
+  its own (floating pages and words rising from the library's book, a
+  windmill and a balloon at the workshop, an orrery and a night constellation
+  at the observatory, arrows finding the bullseye at Mochi's cabin, the clock
+  tower's bell and pigeons, and more), birds on the roof, golden dust, a halo,
+  a crown of light. At night you can see at a glance which subjects you have
+  worked at: their windows are lit. A house that grew gets its own moment
+  when you come back from a set.
 - **A party after every set.** Finish a passage or three questions and every
   friend runs to the plaza to celebrate the one you helped.
 - **Today's three.** Every day the three friends who miss you most wear a
@@ -81,8 +93,9 @@ with a friend helps them:
 The village opens at the campfire. Toffee says hello, then everyone
 introduces themselves, and each one is their subject: Chai has read every
 book in the village twice (Reading), Ginger sorts socks by colour and then
-by mood (Para Jumbles), Mochi keeps it short (Para Summary), Mallow spots
-the sheep among the clouds (Odd One Out), Matcha collects words (Vocabulary).
+by mood (Para Jumbles), Mochi keeps it short (Para Summary), Sesame finishes
+your sentences (Para Completion), Mallow spots the sheep among the clouds
+(Odd One Out), Matcha collects words (Vocabulary).
 Then Chai waves from the library and the big button at the bottom glows:
 **Help Chai · Read a passage · 5 min**. One tap and you are reading a real
 CAT passage against the clock.
@@ -108,8 +121,8 @@ the house to go in.
 - the bottom: today's three friends and their gift, and the big button.
 
 **The friends live there.** Each one walks the painted paths on its own two
-feet with its own gait (Chai waddles, Mochi plods, Ginger trots, Matcha
-bounces, Toffee hops, Mallow floats), does chores round its home with a prop
+feet with its own gait (Chai waddles, Mochi plods, Ginger trots, Sesame
+scurries, Matcha bounces, Toffee hops, Mallow floats), does chores round its home with a prop
 in hand, visits its best friend, chats on the plaza, waves when you arrive,
 and goes home to sleep at night. Every line comes with a little voice. Tap a
 friend for their card: what they need, what they noticed about your answers,
@@ -118,8 +131,10 @@ the big Help button, everything you can do with them, and their story.
 **The painting moves.** Forty-four pieces of the painting are cut out with
 feathered edges and animated in place (the workshop gear, waterfalls and
 streams, lily pads, banners, eleven trees and eight flower beds in the wind,
-the campfire, the telescope). Five river reaches flow with refracted water.
-Lamps breathe, chimneys smoke, fireflies come out at night.
+the campfire, the telescope); a house's own machines wait for it to wake (the
+gear is stuck until the first jumble, the clock stopped until the first gap is
+filled). Five river reaches flow with refracted water, fish jump and
+dragonflies hover. Lamps breathe, chimneys smoke, fireflies come out at night.
 
 **Sound is always on**, at full volume, until you turn it off: a composed
 village theme that each friend plays on their own instrument, a quiet focus
@@ -135,8 +150,8 @@ backup carries the whole village and nothing can drift from the truth.
 - A place screen shows the host at its own door.
 - Results show the friend celebrating, "You helped Chai!" with the stars
   counted up, the level bar, any new stage and its story line, and today's three.
-- Progress and Settings sit behind the gear and in the bottom bar; the clock
-  tower and the rose cottage are subject houses. Records are kept by Toffee.
+- Progress and Settings sit behind the gear and in the bottom bar; the rose
+  cottage is Ginger's second subject house. Records are kept by Toffee.
 - After a passage, **Explain this passage simply** opens the passage told
   the way you would tell a ten-year-old (the big idea, the story, one line
   per paragraph, what the writer thinks), with the full expert breakdown

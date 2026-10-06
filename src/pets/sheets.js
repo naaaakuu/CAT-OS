@@ -9,6 +9,7 @@ export const SHEETS = {
   mochi: { w: 348, h: 384, gutter: 4, frames: 5, feet: { top: 352, bottom: 376, split: 184 } },
   ginger: { w: 351, h: 384, gutter: 4, frames: 5, feet: { top: 358, bottom: 376, split: 150 } },
   mallow: { w: 329, h: 384, gutter: 4, frames: 5, feet: { top: 359, bottom: 377, split: 131 } },
+  sesame: { w: 334, h: 384, gutter: 4, frames: 5, feet: { top: 355, bottom: 376, split: 135 } },
 };
 export const BABY_SHEETS = {
   toffee: { w: 206, h: 288, gutter: 4, frames: 5, feet: { top: 274, bottom: 284, split: 121 } },
@@ -17,4 +18,5 @@ export const BABY_SHEETS = {
   mochi: { w: 301, h: 288, gutter: 4, frames: 5, feet: { top: 268, bottom: 283, split: 159 } },
   ginger: { w: 303, h: 288, gutter: 4, frames: 5, feet: { top: 272, bottom: 283, split: 130 } },
   mallow: { w: 277, h: 288, gutter: 4, frames: 5, feet: { top: 272, bottom: 283, split: 110 } },
+  sesame: { w: 284, h: 288, gutter: 4, frames: 5, feet: { top: 270, bottom: 283, split: 115 } },
 };

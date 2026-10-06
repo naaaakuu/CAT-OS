@@ -13,13 +13,13 @@
  *            rose cottage on the map is Ginger's Sentence Placement house)
  */
 
-import { PETS, PET_BY_ID, HOUSES, STORIES, HOME_GIFTS, FRIENDSHIPS, AGES, friendshipOf, lineFor, stageTitle, stageGift, ageOf, toGrow } from '../pets/pets.js';
+import { PETS, PET_BY_ID, HOUSES, STORIES, FRIENDSHIPS, AGES, friendshipOf, lineFor, stageTitle, stageGift, ageOf, toGrow, houseGift } from '../pets/pets.js';
 import { DAILY_GIFT } from '../pets/economy.js';
 import { GLOW, GLOW_SVG } from '../pets/glow.js';
 import { nextFor, cornersOf, noticeFor } from '../pets/next.js';
 import { levelFor, achievementsFor } from '../pets/progress.js';
 import { petFigure, petPortrait, backdropStyle, FRAME } from '../pets/sprite.js';
-import { TREASURE_AT, HOMES } from '../pets/paths.js';
+import { TREASURE_AT } from '../pets/paths.js';
 import { saveValley, valleyName, cleanValleyName, nameSuggestions } from '../world/companion.js';
 import { musicEnabled, setMusicEnabled, unlock, startMusic, startAmbience } from '../world/audio.js';
 import { feedbackPrefs, setFeedbackPref } from '../core/engagement/feedback.js';
@@ -28,7 +28,7 @@ import { escapeHTML } from '../core/utils/format.js';
 const esc = escapeHTML;
 const MOOD_LABEL = { glowing: 'Very happy', happy: 'Happy', missing: 'Misses you', sleepy: 'Sleepy', wilting: 'Lonely', new: 'New friend' };
 /** What a round with each friend is, in three words. */
-export const ACT = { chai: 'Read a passage', matcha: 'Learn new words', mochi: 'Find the summary', ginger: 'Order the sentences', mallow: 'Spot the odd one out', toffee: 'Weekly Gauntlet' };
+export const ACT = { chai: 'Read a passage', matcha: 'Learn new words', mochi: 'Find the summary', ginger: 'Order the sentences', mallow: 'Spot the odd one out', sesame: 'Fill the missing sentence', toffee: 'Weekly Gauntlet' };
 const FLAME = '<svg viewBox="0 0 24 24" width="16" height="16"><path d="M12 2.6c2.4 3.3 6.2 6.2 6.2 11a6.2 6.2 0 0 1-12.4 0c0-2.7 1.3-4.5 2.7-6 .2 1.6.9 2.9 2.1 3.5-.5-3.1.3-6 1.4-8.5z" fill="#F2A23C" stroke="#7a4a1e" stroke-width="1.4" stroke-linejoin="round"/></svg>';
 const STAR = '<svg class="cw-orb" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.9 6.1 6.7.8-4.9 4.6 1.3 6.6L12 17.5l-6 3.2 1.3-6.6L2.4 9.5l6.7-.8z" fill="#F4C443" stroke="#B88A12" stroke-width="1.2" stroke-linejoin="round"/></svg>';
 
@@ -67,6 +67,15 @@ function growBlock(p, L) {
     </div>`;
 }
 const fill = (t, def) => t.replace('{name}', def.name);
+
+/** How a friend's house (or houses) has grown with its section, and what it gains next (src/home/houses.js). */
+function homeLine(id, api) {
+  return HOUSES.filter((h) => h.pet === id).map((h) => {
+    const s = api.pets.houses?.[h.spot] ?? 0, next = houseGift(h.spot, s + 1);
+    const Home = h.home.replace(/^the/, 'The');
+    return `<p class="cw-home"><span class="cw-home__pips" aria-hidden="true">${Array.from({ length: 10 }, (_, i) => `<i class="${i < s ? 'is-on' : ''}"></i>`).join('')}</span><span><b>${esc(Home)}</b> grows with every ${esc(h.subject)} question you get right${next ? `. Next: <b>${esc(next)}</b>.` : ': it is all grown, crown and all!'}</span></p>`;
+  }).join('');
+}
 
 /** The Achievements button, and the panel it opens: one short line each, for the whole of CAT OS. */
 function achievements(id, api) {
@@ -109,7 +118,8 @@ function petCard(card, id, api) {
       ${pick && !done ? `<p class="cw-pickline"><b>!</b> One of today's three friends. Help ${esc(def.name)} for today's gift.</p>` : ''}
       ${p.stage < 10 ? `<p class="cw-sub">Next stage: <b>${esc(stageGift(id, p.stage + 1))}</b>${p.stage ? `. Now: ${esc(stageTitle(id, p.stage))}` : ''}.</p>` : ''}
       ${corners.length ? `<h3 class="cw-h3">More ways to practice ${esc(def.subject)}</h3><ul class="cw-list">${corners.map((c) => `<li><a href="${esc(c.href)}"><span><b>${esc(c.label)}</b><small>${esc(c.sub ?? '')}</small></span><i aria-hidden="true">›</i></a></li>`).join('')}</ul>` : ''}
-      <p class="cw-reward">${GLOW_SVG}<span>Every question you answer earns <b>Glow</b> for the village.${p.hearts < 5 ? ` At stage ${(p.hearts + 1) * 2}: <b>${esc(HOME_GIFTS[p.hearts])}</b> at ${esc(def.home)}.` : ''}</span></p>
+      <p class="cw-reward">${GLOW_SVG}<span>Every question you answer earns <b>Glow</b> for the village.</span></p>
+      ${homeLine(id, api)}
       <h3 class="cw-h3">${esc(def.name)}'s story</h3>
       <p class="cw-sub">${esc(def.trouble)}</p>
       <ol class="cw-story">${STORIES[id].map((s, i) => (i < p.hearts ? `<li>${esc(s)}</li>` : `<li class="is-locked"><span aria-hidden="true">♡</span> Stage ${(i + 1) * 2}: grow ${esc(def.name)} to hear this part</li>`)).join('')}</ol>
@@ -290,17 +300,7 @@ const buntingSVG = (w, sag = 30, n = 11) => {
   return `<svg viewBox="0 0 ${w} 60" width="${w}" height="60"><path d="M0 4 Q ${w / 2} ${4 + 2 * sag} ${w} 4" fill="none" stroke="#5a4130" stroke-width="1.4"/>${flags}</svg>`;
 };
 
-/** Where each friend's home gifts go, around its door (painting px). */
-const HOME_SPOTS = {
-  chai: { lantern: [40, -20], flowers: [[-62, 14], [52, 18]], bunting: [-58, -58, 116] },
-  ginger: { lantern: [44, -18], flowers: [[-64, 18], [58, 20]], bunting: [-60, -54, 120] },
-  mallow: { lantern: [-46, -12], flowers: [[-70, 16], [44, 20]], bunting: [-56, -58, 112] },
-  matcha: { lantern: [44, -16], flowers: [[-66, 14], [50, 22]], bunting: [-60, -48, 120] },
-  mochi: { lantern: [-48, -16], flowers: [[-74, 16], [40, 22]], bunting: [-60, -50, 116] },
-  toffee: { lantern: [-92, -30], flowers: [[-110, 40], [96, 44]], bunting: [-80, -70, 160] },
-};
-
-/** The decorations as markup for .cw-treasures (painting pixels): the village's, by level; each home's, by hearts. */
+/** The village's decorations, by level, as markup for .cw-treasures (painting pixels). Each house grows by its own section: src/home/houses.js. */
 export function decorLayer(pets) {
   const made = new Set((pets.decor ?? []).filter((t) => t.made).map((t) => t.id));
   const T = TREASURE_AT;
@@ -325,16 +325,6 @@ export function decorLayer(pets) {
   if (made.has('kite')) {
     const p = T.kite;
     html += wrap('kite', `<svg class="cw-kite" viewBox="0 0 120 170" width="120" height="170"><path d="M60 52 C 30 90, 20 130, -200 300" fill="none" stroke="rgba(70,50,35,.5)" stroke-width="1"/><g class="cw-kite__body"><path d="M60 4 L84 30 L60 56 L36 30 Z" fill="#D97A8A" stroke="#4a3626" stroke-width="1.4" stroke-linejoin="round"/><path d="M60 4 L60 56 M36 30 L84 30" stroke="#4a3626" stroke-width="1"/><path d="M60 4 L84 30 L60 30 Z" fill="#EDBE66"/><path class="cw-kite__tail" d="M60 56 q 8 10 0 20 q -8 10 0 20 q 8 10 0 20" fill="none" stroke="#4a3626" stroke-width="1.2"/>${[66, 86, 106].map((y, k) => `<path d="M${54 + (k % 2) * 4} ${y} l6 4 l-6 4 z" fill="${FLAGS[k]}"/>`).join('')}</g></svg>`, p.x - 60, p.y - 10, 120, 170);
-  }
-  /* Each friend's home shows how far your friendship has come. */
-  for (const p of pets.pets ?? []) {
-    const door = HOMES[p.id]?.door, S = HOME_SPOTS[p.id];
-    if (!door || !S || !p.hearts) continue;
-    if (p.hearts >= 1) html += wrap('home-lantern', lanternSVG(LANTERN[PETS.findIndex((x) => x.id === p.id) % 4]), door.x + S.lantern[0] - 15, door.y + S.lantern[1] - 23, 30, 46, ` data-home="${p.id}"`);
-    if (p.hearts >= 2) S.flowers.forEach(([dx, dy], i) => { html += wrap('home-flowers', flowersSVG(i + 3), door.x + dx - 24, door.y + dy - 17, 48, 34, ` data-home="${p.id}"`); });
-    if (p.hearts >= 3) { const [dx, dy, w] = S.bunting; html += wrap('home-bunting', buntingSVG(w, 14, 8), door.x + dx, door.y + dy, w, 60, ` data-home="${p.id}"`); }
-    if (p.hearts >= 4) html += wrap('home-glow', '', door.x - 70, door.y - 70, 140, 120, ` data-home="${p.id}"`);
-    if (p.hearts >= 5) html += wrap('home-heart', '<svg viewBox="0 0 24 24" width="26" height="26"><path d="M12 20.5s-7.5-4.6-7.5-10A4.2 4.2 0 0 1 12 8a4.2 4.2 0 0 1 7.5 2.5c0 5.4-7.5 10-7.5 10z" fill="#F4C443" stroke="#9a6a12" stroke-width="1.3" stroke-linejoin="round"/></svg>', door.x - 13, door.y - 120, 26, 26, ` data-home="${p.id}"`);
   }
   return html;
 }

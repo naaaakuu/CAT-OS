@@ -1,5 +1,5 @@
 /**
- * village.js (screen) — #/world, the painted village where the six friends live.
+ * village.js (screen) — #/world, the painted village where the seven friends live.
  *
  * The whole game on one screen, in the order a learner reads it:
  *
@@ -22,12 +22,14 @@ import { loadWorld, loadWorldRecords, deriveWorldState } from '../world/state.js
 import { loadValley, saveValley, valleyName } from '../world/companion.js';
 import { derivePets, DAILY_GIFT } from '../pets/economy.js';
 import { GLOW_SVG } from '../pets/glow.js';
-import { PETS, PET_BY_ID, HOUSES, LINES, lineFor, petForPlace, stageTitle, stageGift, ageOf, grewLine, toGrow } from '../pets/pets.js';
+import { PETS, PET_BY_ID, HOUSES, LINES, lineFor, petForPlace, stageTitle, stageGift, ageOf, grewLine, toGrow, houseGift } from '../pets/pets.js';
 import { MAP, HOMES, PLACES, SIGNS, NODES, LAMPS, WINDOWS, CLOCK, nearestNode } from '../pets/paths.js';
 import { petRig, petPortrait, petGear, petRing, petFigure, FRAME } from '../pets/sprite.js';
 import { nextFor } from '../pets/next.js';
 import { createLife, petSize } from './life.js';
 import { mountMotion } from './motion.js';
+import { ATLAS } from './motion-atlas.js';
+import { createHouseLife, bakeVillage, gradeAtlas, LAMP_HOUSE, WINDOW_HOUSE, HOUSE_ART } from './houses.js';
 import { renderCard, decorLayer, ACT } from './cards.js';
 import { openModal, closeModal } from '../ui/modal.js';
 import { play, unlock, startMusic, startAmbience } from '../world/audio.js';
@@ -70,7 +72,7 @@ export async function renderVillageHome(outlet, ctx) {
           <div class="cw-clouds" aria-hidden="true"><i></i><i></i><i></i></div>
           <div class="cw-tint" aria-hidden="true"></div>
           <div class="cw-sunlight" aria-hidden="true"></div>
-          <div class="cw-glows" aria-hidden="true">${[...LAMPS.map((l, i) => glow(l, 'lamp', i)), ...WINDOWS.map((w, i) => glow(w, 'win', i))].join('')}</div>
+          <div class="cw-glows" aria-hidden="true">${[...LAMPS.map((l, i) => glow(l, 'lamp', i)), ...WINDOWS.map((w, i) => glow(w, 'win', i))].join('')}${Object.entries(HOUSE_ART).map(([id, h]) => `<i class="cw-aura" data-house="${id}" style="left:${h.aura[0]}px;top:${h.aura[1]}px;--r:${h.aura[2]}px"></i>`).join('')}</div>
           <div class="cw-treasures" aria-hidden="true"></div>
           <svg class="cw-clock" aria-hidden="true" style="left:${CLOCK.x - CLOCK.r}px;top:${CLOCK.y - CLOCK.r}px" width="${CLOCK.r * 2}" height="${CLOCK.r * 2}" viewBox="-10 -10 20 20"><line class="cw-clock__h" x1="0" y1="0" x2="0" y2="-4.6"/><line class="cw-clock__m" x1="0" y1="0" x2="0" y2="-6.8"/><circle r=".9"/></svg>
           <canvas class="cw-life" width="${MAP.w / 2}" height="${MAP.h / 2}" aria-hidden="true"></canvas>
@@ -219,9 +221,14 @@ export async function renderVillageHome(outlet, ctx) {
   });
 
   /* ---------------- Life ---------------- */
-  const life = createLife(root, { pets, atmo, reduced });
-  // For the browser gates: put the camera somewhere, find a friend.
-  root.__village = { look: (x, y) => panTo(x, y, { ms: 0 }), positionOf: (id) => life.positionOf(id) };
+  /* What each house has grown (src/home/houses.js): the living part on the scene canvas, the still part baked into the painting below. */
+  const houses = createHouseLife({ reduced, stages: pets.houses });
+  const life = createLife(root, { pets, atmo, reduced, houses, view: () => ({ x: cam.x - vw / 2 / s, y: cam.y - vh / 2 / s, w: vw / s, h: vh / s, s }) });
+  // For the browser gates: put the camera somewhere, find a friend, show the houses at given stages (looks only; nothing is saved).
+  root.__village = {
+    look: (x, y) => panTo(x, y, { ms: 0 }), positionOf: (id) => life.positionOf(id),
+    houses: (stages) => showHouses(stages), grown: () => shownStages, get pace() { return life.pace; },
+  };
   viewport.addEventListener('click', (e) => {
     if (e.target.closest('button')) return;
     const bounds = map.getBoundingClientRect(), s = scale();
@@ -229,13 +236,69 @@ export async function renderVillageHome(outlet, ctx) {
   });
   const saidEl = root.querySelector('[data-said]');
   const announce = (text) => { if (text) saidEl.textContent = String(text).replace(/<[^>]*>/g, ''); };
+  /* What is on screen, at most once a frame: off-screen patches and halos pause (motion.js setView). */
+  let viewQueued = false;
+  const viewNow = () => ({ x: cam.x - vw / 2 / s, y: cam.y - vh / 2 / s, w: vw / s, h: vh / s });
+  const glowEls = [...root.querySelectorAll('.cw-glow')].map((el) => ({ el, x: parseFloat(el.style.left), y: parseFloat(el.style.top), off: false }));
+  const syncView = () => {
+    viewQueued = false;
+    if (disposed) return;
+    const v = viewNow();
+    motion.setView(v);
+    for (const g of glowEls) { const off = g.x < v.x - 60 || g.x > v.x + v.w + 60 || g.y < v.y - 60 || g.y > v.y + v.h + 60; if (off !== g.off) { g.off = off; g.el.toggleAttribute('data-off', off); } }
+  };
   // The moving patches wait for the painting: on a first visit the small
   // atlas lands long before the 3.8 MB picture, and fragments of trees and
-  // water would float over an empty green.
-  let motion = { setAtmo() {}, destroy() {} };
+  // water would float over an empty green. Then the painting is grown: a copy
+  // with each house's colour, windows and keepsakes baked in (houses.js),
+  // and the patches cut from an atlas graded to match it.
+  let motion = { setAtmo() {}, setView() {}, destroy() {} };
   const art = map.querySelector('.cw-art');
-  const mountPainting = () => { if (!disposed) motion = mountMotion(map, { atmo: root.dataset.hour ? { ...atmo, hour: root.dataset.hour } : atmo, reduced }); };
-  if (art.complete && art.naturalWidth) mountPainting(); else art.decode().then(mountPainting, mountPainting);
+  let shownStages = null, baking = 0, atlasUrl = null, atlasImg = null;
+  const mountMoving = (stages, atlas) => { motion.destroy(); motion = mountMotion(map, { atmo: root.dataset.hour ? { ...atmo, hour: root.dataset.hour } : atmo, reduced, stages, atlas }); };
+  const growPainting = async (stages) => {
+    const job = ++baking, key = JSON.stringify(stages ?? {});
+    if (key === shownStages) return;
+    const stale = () => disposed || job !== baking;
+    // Not before the painting has decoded: an empty bake would hide it.
+    if (!art.naturalWidth) { try { await art.decode(); } catch { return; } if (stale()) return; }
+    try {
+      const base = await bakeVillage(art, stages, { isAborted: stale });
+      if (!base || stale()) return;
+      let url = null;
+      if (!reduced && ATLAS.at.length) {
+        try {
+          if (!atlasImg) { atlasImg = new Image(); atlasImg.src = ATLAS.src; await atlasImg.decode(); }
+          const c = await gradeAtlas(atlasImg, ATLAS.at, stages, { isAborted: stale });
+          if (c) url = await new Promise((res) => c.toBlob((b) => res(b ? URL.createObjectURL(b) : null)));
+        } catch { url = null; }
+      }
+      if (stale()) { if (url) URL.revokeObjectURL(url); return; }
+      base.className = 'cw-base'; base.setAttribute('aria-hidden', 'true');
+      const old = map.querySelector('.cw-base');
+      (old ?? art).after(base);
+      requestAnimationFrame(() => { base.classList.add('is-in'); later(() => { old?.remove(); art.style.visibility = 'hidden'; }, reduced ? 0 : 700); });
+      mountMoving(stages, url);
+      syncView();
+      if (atlasUrl) URL.revokeObjectURL(atlasUrl);
+      atlasUrl = url;
+      life.setPainting(base);
+      shownStages = key;
+    } catch (err) {
+      console.error('[CAT OS] the village could not grow its painting', err);
+      if (!shownStages) mountMoving(stages, null);
+    }
+  };
+  /** A house's own lamps light at stage 1 and its windows at stage 2; the village's lamps always burn. */
+  const lightHouses = (stages) => {
+    for (const el of root.querySelectorAll('.cw-glow[data-house]')) el.classList.toggle('is-off', (stages?.[el.dataset.house] ?? 0) < (el.classList.contains('cw-glow--lamp') ? 1 : 2));
+    // Stage 9: a golden glow round the whole house.
+    for (const el of root.querySelectorAll('.cw-aura')) el.classList.toggle('is-on', (stages?.[el.dataset.house] ?? 0) >= 9);
+  };
+  const showHouses = (stages) => { houses.setStages(stages); lightHouses(stages); life.housesChanged(); return growPainting(stages); };
+  lightHouses(pets.houses);
+  const startPainting = () => { if (!disposed) growPainting(pets.houses); };
+  if (art.complete && art.naturalWidth) startPainting(); else art.decode().then(startPainting, () => mountMoving(pets.houses, null));
 
   const onScreen = (id, margin = 0) => {
     const at = life.positionOf(id), s = scale();
@@ -264,7 +327,7 @@ export async function renderVillageHome(outlet, ctx) {
     edge.style.left = `${ex}px`; edge.style.top = `${ey}px`;
     edge.style.setProperty('--turn', `${Math.atan2(sy - ey, sx - ex).toFixed(3)}rad`);
   };
-  onCamera = placeEdge;
+  onCamera = () => { placeEdge(); life.redraw(); if (!viewQueued) { viewQueued = true; requestAnimationFrame(syncView); } };
   const edgeTimer = setInterval(placeEdge, 700);
   edge.addEventListener('click', () => { if (edgeFor) { play('tap'); reveal(life.positionOf(edgeFor)); edge.hidden = true; } });
 
@@ -314,8 +377,10 @@ export async function renderVillageHome(outlet, ctx) {
     world = { ...world, records };
     state = deriveWorldState(world.content, records);
     world.state = state;
+    const before = JSON.stringify(pets.houses ?? {});
     pets = state.pets ?? derivePets(state, records, world.content, state.now);
     hud(); life.update(pets);
+    if (JSON.stringify(pets.houses ?? {}) !== before) showHouses(pets.houses);
   };
   const api = {
     storage, close, refresh, toast, play, reduced,
@@ -354,7 +419,7 @@ export async function renderVillageHome(outlet, ctx) {
     const spot = e.target.closest('[data-spot]');
     if (spot) {
       const s = spot.dataset.spot;
-      // The rose cottage and the clock tower are a friend's second house: straight to their subject.
+      // The rose cottage is Ginger's second house: straight to its subject.
       if (!PET_BY_ID.has(s)) { unlock(); play('open'); location.hash = `#/world/place/${HOUSES.find((h) => h.spot === s).place}`; return; }
       if (s === 'toffee') { life.poke(s); reveal(NODES.f1); openCard('fire', null, spot); return; }
       life.poke(s); reveal(life.positionOf(s)); openCard('pet', s, spot);
@@ -422,16 +487,42 @@ export async function renderVillageHome(outlet, ctx) {
         for (const p of PETS) later(() => life.poke(p.id, { happy: true, quiet: true }), 100 + Math.random() * 700);
       });
     }
+    /* A house that grew with this run (each grows with its own section): once the cards are done, the camera goes to it, it lights up, and a toast says what is new. Any other arrival remembers quietly. */
+    let hadH = null;
+    try { hadH = JSON.parse(store.get('catos:houses') || 'null'); } catch { /* start over */ }
+    store.set('catos:houses', JSON.stringify(pets.houses ?? {}));
+    if (afterRun && hadH && typeof hadH === 'object') {
+      const grownNow = HOUSES.filter((h) => (pets.houses?.[h.spot] ?? 0) > (Number(hadH[h.spot]) || 0));
+      if (grownNow.length) whenQuiet(() => showGrown(grownNow));
+    }
     if (pets.today.gift && store.get('catos:gift-day') !== pets.today.key) {
       store.set('catos:gift-day', pets.today.key);
       celebrate(`<p class="cw-party__eyebrow">All three friends helped</p><span class="cw-party__chest" aria-hidden="true">${giftSVG}</span><h2 id="cw-party-h">Today's gift: +${DAILY_GIFT} ${GLOW_SVG}</h2><p>Come back tomorrow: three more friends will need you.</p>`, 'chest');
     }
   };
 
+  /** Wait until no party card and no friend card is up, then run `fn`. */
+  function whenQuiet(fn) { if (disposed) return; if (partying || openKind || queue.length) { later(() => whenQuiet(fn), 600); return; } fn(); }
+  /** Each house that grew, one after another: look at it, a burst of light, and what it gained. */
+  function showGrown(list) {
+    list.forEach((h, i) => later(() => {
+      const [cx, cy] = HOUSE_ART[h.spot]?.mask ?? [NODES.pc.x, NODES.pc.y], stage = pets.houses?.[h.spot] ?? 0;
+      reveal({ x: cx, y: cy });
+      later(() => {
+        houses.burst(h.spot);
+        play('grow');
+        const Home = h.home.replace(/^the/, 'The');
+        toast(`<b>${escapeHTML(Home)} grew!</b> ${escapeHTML(houseGift(h.spot, stage).replace(/^./, (c) => c.toUpperCase()))}.`, 4200);
+        announce(`${Home} grew: ${houseGift(h.spot, stage)}.`);
+      }, reduced ? 0 : 650);
+    }, i * (reduced ? 1500 : 4600)));
+  }
+
   /* ---------------- Coming back from a run ---------------- */
   let welcomed = false;
   // Where every friend stands, remembered from the very first visit, so the first stage anyone reaches gets its card.
   if (!store.get('catos:stages')) store.set('catos:stages', stagesNow());
+  if (!store.get('catos:houses')) store.set('catos:houses', JSON.stringify(pets.houses ?? {}));
   {
     const last = pets.last;
     const seen = sessionStorage.getItem('world:toasted');
@@ -454,7 +545,7 @@ export async function renderVillageHome(outlet, ctx) {
         later(() => checkParties(true), reduced ? 1200 : 7600);
       }, reduced ? 50 : 450);
     } else if (focusSlug && petForPlace(focusSlug)) {
-      // Back from a place: face its own house (the rose cottage and the clock tower are not their friend's home).
+      // Back from a place: face its own house (the rose cottage is not its friend's home).
       const spot = HOUSES.find((h) => h.place === focusSlug)?.spot ?? petForPlace(focusSlug);
       const home = NODES[(HOMES[spot] ?? PLACES[spot]).node];
       panTo(home.x, home.y, { ms: 0 });
@@ -473,7 +564,7 @@ export async function renderVillageHome(outlet, ctx) {
     store.set('catos:met-gang', '1');
     if (firstVisit) saveValley(storage, { awakened_at: new Date().toISOString(), met_at: new Date().toISOString() }).then((v) => { valley = v; }, () => { /* the hello will repeat once */ });
     const meetEl = root.querySelector('.cw-meet');
-    const ORDER = ['toffee', 'chai', 'ginger', 'mochi', 'mallow', 'matcha'];
+    const ORDER = ['toffee', 'chai', 'ginger', 'mochi', 'sesame', 'mallow', 'matcha'];
     let skipped = false;
     const keeps = (id) => (id === 'toffee' ? ['The daily fire', 'The Gauntlet'] : HOUSES.filter((h) => h.pet === id).map((h) => h.subject));
     const meetCard = (id) => {
@@ -561,6 +652,7 @@ export async function renderVillageHome(outlet, ctx) {
     window.removeEventListener('hashchange', onHash);
     window.removeEventListener('pointerdown', startSound, { capture: true });
     clearInterval(tickHour); clearInterval(edgeTimer); clearInterval(museTimer);
+    baking += 1; if (atlasUrl) URL.revokeObjectURL(atlasUrl);
     for (const id of timers) clearTimeout(id);
     ro.disconnect(); life.destroy(); motion.destroy();
     if (openKind) closeModal(card);
@@ -577,9 +669,10 @@ export async function renderVillageHome(outlet, ctx) {
 /* Markup                                                              */
 /* ------------------------------------------------------------------ */
 
-/** A halo over a painted light; each breathes on its own beat. */
+/** A halo over a painted light; each breathes on its own beat. A house's own lights carry its id (lit as it grows). */
 function glow(p, kind, i) {
-  return `<i class="cw-glow cw-glow--${kind}" style="left:${p.x}px;top:${p.y}px;--r:${p.r}px;--bd:-${((i * 1.37) % 5.2).toFixed(2)}s"></i>`;
+  const house = (kind === 'lamp' ? LAMP_HOUSE : WINDOW_HOUSE).get(i);
+  return `<i class="cw-glow cw-glow--${kind}"${house ? ` data-house="${house}"` : ''} style="left:${p.x}px;top:${p.y}px;--r:${p.r}px;--bd:-${((i * 1.37) % 5.2).toFixed(2)}s"></i>`;
 }
 
 /** Every house, with its subject on a sign that is always up: on a phone there is no hover to reveal it. */

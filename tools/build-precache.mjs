@@ -3,7 +3,7 @@
  * tools/build-precache.mjs — rewrite the service worker's CORE_FILES and
  * CONTENT_FILES from what is actually on disk.
  *
- * CORE_FILES is the install stage that must succeed: the HTML, the six
+ * CORE_FILES is the install stage that must succeed: the HTML, the seven
  * stylesheets, the icons, and every JavaScript module a cold open of the
  * village actually imports — derived from the real static import graph
  * (tools/module-graph.mjs), never hand-maintained, because a hand-maintained
@@ -59,7 +59,8 @@ export function shellFiles() {
   return [...out].sort();
 }
 
-const BAKE_ONLY = new Set(['home-companions-v1.png']);
+/* Sources the bake tools read; the app only ever loads what they bake. */
+const BAKE_ONLY = new Set(['home-companions-v1.png', 'home-companion-sesame.png']);
 
 /** Every stylesheet index.html links: each one blocks the first paint, so each one is core. */
 export function linkedStylesheets() {
@@ -68,7 +69,7 @@ export function linkedStylesheets() {
 }
 
 /** Everything a cold open of the village fetches before it can paint: the page, its
- *  stylesheets, its eager modules, the painting and the six pets that live on it. */
+ *  stylesheets, its eager modules, the painting and the seven pets that live on it. */
 export function coreFiles() {
   const { modules } = eagerGraph('src/app.js');
   const js = [...modules.keys()].sort().map((rel) => `./${rel}`);

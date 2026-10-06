@@ -1,5 +1,5 @@
 /**
- * pets.js — the six friends of the village: who they are, what each one
+ * pets.js — the seven friends of the village: who they are, what each one
  * teaches, who their best friend is, what is troubling them, and every
  * line they can say. Pure data and a few lookups; no DOM, no storage.
  *
@@ -19,7 +19,8 @@ const freeze = (o) => Object.freeze(o);
 
 /* Each friend IS their subject (owner, 2026-10-03: "their allotted subject
    is how they actually are"): the bookworm keeps Reading, the tidy fox keeps
-   Para Jumbles, the one who says it short keeps Para Summary. `tag` is that
+   Para Jumbles, the one who says it short keeps Para Summary, the mouse who
+   finishes your sentences keeps Para Completion. `tag` is that
    personality in a breath; `meet` (LINES) is how they say it themselves. */
 export const PETS = freeze([
   freeze({
@@ -47,12 +48,12 @@ export const PETS = freeze([
     blurb: 'Grows words in the greenhouse: word rounds, look-alike twins, borrowed words and roots.',
   }),
   freeze({
-    id: 'mochi', name: 'Mochi', creature: 'pebble', subject: 'Para summary and completion',
-    tag: 'Says it short. Gets to the point. Finishes your sentences.', item: 'a beret', charm: 'notebook',
+    id: 'mochi', name: 'Mochi', creature: 'pebble', subject: 'Para summary',
+    tag: 'Says it short. Gets to the point.', item: 'a beret', charm: 'notebook',
     teaches: 'Finding the point of a paragraph', home: 'the cabin', icon: 'notes', colour: '#7D8FA8', frame: freeze([1040, 335]),
-    places: freeze(['table', 'completion']), modules: freeze(['ps', 'pc']), bff: 'chai',
+    places: freeze(['table']), modules: freeze(['ps']), bff: 'chai',
     trouble: 'His notebook lost its notes. Every summary you find writes a page back.',
-    blurb: 'Finds the gist: summaries, and the sentence a paragraph is missing.',
+    blurb: 'Finds the gist: reads a long paragraph and keeps only the point.',
   }),
   freeze({
     id: 'ginger', name: 'Ginger', creature: 'fox', subject: 'Para jumbles and placement',
@@ -70,6 +71,14 @@ export const PETS = freeze([
     trouble: 'The stars went dim. Every odd one out you spot lights one again.',
     blurb: 'Watches the sky for the star that does not belong: the sentence that is out of place.',
   }),
+  freeze({
+    id: 'sesame', name: 'Sesame', creature: 'mouse', subject: 'Para completion',
+    tag: 'Finishes your sentences. Spots the missing piece.', item: 'a tiny top hat', charm: 'puzzle piece',
+    teaches: 'Finding the sentence a paragraph is missing', home: 'the clock tower', icon: 'pieces', colour: '#9A889E', frame: freeze([0, 416]),
+    places: freeze(['completion']), modules: freeze(['pc']), bff: 'mochi',
+    trouble: 'The clock tower stopped ticking. Every gap you fill puts a missing cog back.',
+    blurb: 'Keeps the clock tower. Finds the sentence a paragraph is missing, and why it fits.',
+  }),
 ]);
 
 export const PET_BY_ID = new Map(PETS.map((p) => [p.id, p]));
@@ -78,28 +87,55 @@ export const PET_BY_ID = new Map(PETS.map((p) => [p.id, p]));
  * Every house in the village holds one CAT VARC subject, and its sign says
  * which (owner, 2026-10-03: "all houses must be filled up with only VARC
  * subjects"). `spot` is the building on the painting (paths.js HOMES and
- * PLACES); `place` is the page it opens. Ginger and Mochi each keep a second
- * house: Sentence Placement in the rose cottage, Para Completion in the clock
- * tower. Ordered as CAT weights them: reading first.
+ * PLACES); `place` is the page it opens. Ginger keeps a second house:
+ * Sentence Placement in the rose cottage. Sesame keeps Para Completion in the
+ * clock tower. Ordered as CAT weights them: reading first.
  */
 export const HOUSES = freeze([
-  freeze({ spot: 'chai', pet: 'chai', subject: 'Reading Comprehension', place: 'reading-room', ask: 'A passage and four questions, as CAT sets them' }),
-  freeze({ spot: 'ginger', pet: 'ginger', subject: 'Para Jumbles', place: 'loom', ask: 'Put four sentences in the order the author wrote' }),
-  freeze({ spot: 'mochi', pet: 'mochi', subject: 'Para Summary', place: 'table', ask: 'Choose the summary that keeps the point' }),
-  freeze({ spot: 'mallow', pet: 'mallow', subject: 'Odd One Out', place: 'bench', ask: 'Five sentences: find the one that does not belong' }),
-  freeze({ spot: 'cottage', pet: 'ginger', subject: 'Sentence Placement', place: 'placement', ask: 'Find the one place a sentence fits' }),
-  freeze({ spot: 'clock', pet: 'mochi', subject: 'Para Completion', place: 'completion', ask: 'Choose the sentence the gap in a paragraph needs' }),
-  freeze({ spot: 'matcha', pet: 'matcha', subject: 'Vocabulary', place: 'meadow', ask: 'CAT words, many inside a real sentence' }),
-  freeze({ spot: 'toffee', pet: 'toffee', subject: 'The Gauntlet', place: 'wilds', ask: 'A weekly timed mix: thirty quick questions' }),
+  freeze({ spot: 'chai', pet: 'chai', subject: 'Reading Comprehension', place: 'reading-room', home: 'the library', ask: 'A passage and four questions, as CAT sets them' }),
+  freeze({ spot: 'ginger', pet: 'ginger', subject: 'Para Jumbles', place: 'loom', home: 'the workshop', ask: 'Put four sentences in the order the author wrote' }),
+  freeze({ spot: 'mochi', pet: 'mochi', subject: 'Para Summary', place: 'table', home: 'the archery cabin', ask: 'Choose the summary that keeps the point' }),
+  freeze({ spot: 'mallow', pet: 'mallow', subject: 'Odd One Out', place: 'bench', home: 'the observatory', ask: 'Five sentences: find the one that does not belong' }),
+  freeze({ spot: 'cottage', pet: 'ginger', subject: 'Sentence Placement', place: 'placement', home: 'the rose cottage', ask: 'Find the one place a sentence fits' }),
+  freeze({ spot: 'sesame', pet: 'sesame', subject: 'Para Completion', place: 'completion', home: 'the clock tower', ask: 'Choose the sentence the gap in a paragraph needs' }),
+  freeze({ spot: 'matcha', pet: 'matcha', subject: 'Vocabulary', place: 'meadow', home: 'the greenhouse', ask: 'CAT words, many inside a real sentence' }),
+  freeze({ spot: 'toffee', pet: 'toffee', subject: 'The Gauntlet', place: 'wilds', home: 'the campfire', ask: 'A weekly timed mix: thirty quick questions' }),
 ]);
 
-/** The three friendships, said the way the village says them. */
+/**
+ * What each house gains at each of its ten stages (src/home/houses.js draws
+ * them): the house grows with its own section, so a learner can see on the
+ * map which parts of VARC they have worked at. Index 0 is stage 1.
+ */
+const TOP3 = (home) => ['golden dust in the air', `a golden glow round ${home}`, 'a crown of light over the roof'];
+export const HOUSE_GROWTH = freeze({
+  chai: freeze(['smoke from the chimney and a lamp by the door', 'lights in every window and the first flowers', 'a stack of books by the steps', 'bunting over the door', 'pages that float out to read', 'birds on the roof', 'words rising from the open book', ...TOP3('the library')]),
+  ginger: freeze(['the big gear turns again', 'lights in the windows and the first flowers', 'a crate of brass cogs, and the wheels turn', 'fairy lights over the door', 'a windmill on the roof', 'birds on the roof', 'a balloon on a long rope', ...TOP3('the workshop')]),
+  mochi: freeze(['smoke from the chimney and a lamp by the door', 'a light in the window and the first flowers', 'tea for two by the door', 'pennants along the fence', 'arrows that find the bullseye', 'birds on the roof', 'a weathervane on the roof', ...TOP3('the cabin')]),
+  mallow: freeze(['the telescope sweeps the sky again', 'lights in the windows and the first flowers', 'a little telescope on the terrace, and the brass globe turns', 'star lanterns on the railing', 'a model of the sky that turns', 'birds on the dome', 'a constellation after dark', ...TOP3('the observatory')]),
+  cottage: freeze(['tea steaming on the patio, smoke from the chimney', 'lights in the windows and more flowers', 'a basket of cut roses', 'fairy lights over the patio', 'rose petals on the breeze', 'birds on the roof', 'lanterns along the dock', ...TOP3('the cottage')]),
+  sesame: freeze(['the clock ticks again and the banners wave', 'lights in the windows and the first flowers', 'a cart of cogs and pots of lavender', 'bunting over the door', 'the bell rings out', 'pigeons on the roof', 'more pigeons, who fly when the bell rings', ...TOP3('the clock tower')]),
+  matcha: freeze(['the stove warms the greenhouse', 'lights in the glass and the first flowers', 'pots of new sprouts', 'fairy lights along the glass', 'sunflowers by the fence', 'birds on the roof', 'bees, a sprinkler and giant pumpkins', ...TOP3('the greenhouse')]),
+  toffee: freeze(['the lanterns by the board light up', 'the first flowers round the camp', 'a log bench by the fire', 'fairy lights over the board', 'lanterns round the camp', 'birds on the board', 'fireworks after dark', ...TOP3('the camp')]),
+});
+/** What stage `stage` puts on house `spot` ('' outside 1 to 10). */
+export function houseGift(spot, stage) { return HOUSE_GROWTH[spot]?.[stage - 1] ?? ''; }
+
+/**
+ * The friendships, said the way the village says them. Three pairs of best
+ * friends, and Sesame, the newest, who adores Mochi next door (Mochi's best
+ * friend is still Chai): friendshipOf finds a friend's own best friendship.
+ */
 export const FRIENDSHIPS = freeze([
   freeze({ a: 'chai', b: 'mochi', line: 'Reading buddies. Chai reads the long ones, Mochi finds the point.' }),
   freeze({ a: 'ginger', b: 'mallow', line: 'Best friends. Ginger draws the maps, Mallow spots what wanders off them.' }),
   freeze({ a: 'matcha', b: 'toffee', line: 'Toffee keeps the greenhouse warm all winter, so Matcha adores Toffee.' }),
+  freeze({ a: 'mochi', b: 'sesame', line: 'Neighbours down the hill. Mochi finds the point, Sesame finds the missing piece.' }),
 ]);
-export function friendshipOf(id) { return FRIENDSHIPS.find((f) => f.a === id || f.b === id) ?? null; }
+export function friendshipOf(id) {
+  const bff = PET_BY_ID.get(id)?.bff;
+  return FRIENDSHIPS.find((f) => (f.a === id && f.b === bff) || (f.b === id && f.a === bff)) ?? null;
+}
 
 const MODULE_PET = new Map(PETS.flatMap((p) => p.modules.map((m) => [m, p.id])));
 const PLACE_PET = new Map(PETS.flatMap((p) => p.places.map((s) => [s, p.id])));
@@ -137,6 +173,13 @@ export const REQUESTS = freeze({
     'Almost half my notebook is back. You are very good at this.',
     'Last chapter of my notes. Finish it with me?',
   ],
+  sesame: [
+    'The clock stopped! Fill one gap in a paragraph and I can put a cog back.',
+    'Tick! One cog turned! Shall we find the next missing piece?',
+    'A paragraph lost its middle sentence. Help me work out what goes in the gap?',
+    'The hands are moving again. A few more gaps and the bell will ring!',
+    'One last cog and the whole tower chimes. Finish it with me?',
+  ],
   ginger: [
     'The workshop gears are stuck! Put a jumbled paragraph in order and one turns again.',
     'Click! A gear turned! Want to try the next trail?',
@@ -167,6 +210,7 @@ export const BEST_FRIEND_ASK = freeze({
   mochi: 'Notebook full. Still love doing this with you. One more?',
   ginger: 'The workshop hums all day now. Shall we chase a tricky trail for fun?',
   mallow: 'The sky is full of stars! Let us find the sneakiest odd one yet.',
+  sesame: 'The tower chimes every hour now. Want to find a sneaky missing piece together?',
   toffee: 'Best fire ever! Keep coming back and it never goes out.',
 });
 
@@ -214,10 +258,15 @@ export const STORIES = freeze({
     'Ginger draws the routes, and I watch for whatever wanders off them.',
     'When I feel small, I remember you. And that the odd star is still a star.',
   ],
+  sesame: [
+    'You found the missing piece! I ran up this clock one day and never came back down.',
+    'Hickory, dickory, dock. That rhyme is about my great-great-grandmother. True story.',
+    'I mend gaps. A missing cog, a missing button, a missing sentence. Same thing, really.',
+    'Mochi finds the point and I find what is missing. Between us, nothing gets lost.',
+    'There is a cog in the big clock with your name on it. It is the one that never stops.',
+  ],
 });
 
-/** What a friend's home gains with each chapter (every second stage), drawn on the map (src/home/cards.js). */
-export const HOME_GIFTS = freeze(['a lantern by the door', 'flowers by the door', 'bunting over the door', 'warm lights in every window', 'a golden glow: best friends']);
 
 /* ------------------------------------------------------------------ */
 /* Growing up: ten stages per friend                                   */
@@ -236,6 +285,7 @@ export const STAGE_TITLES = freeze({
   mochi: freeze(['Pebble', 'Notetaker', 'Long Story Short', 'Gist Finder', 'Point Maker', 'Editor', 'The Big Picture', 'Five-Word Wonder', 'Grand Summariser', 'Master of the Point']),
   ginger: freeze(['Tidier', 'Sorter', 'Tinkerer', 'Mapmaker', 'Puzzle Solver', 'Pathfinder', 'Master Builder', 'Navigator', 'Order Keeper', 'Master of Order']),
   mallow: freeze(['Cloud Watcher', 'Star Spotter', 'Stargazer', 'Sharp Eye', 'Odd Hunter', 'Sky Detective', 'Eagle Eye', 'Night Watcher', 'Star Sage', 'Master Spotter']),
+  sesame: freeze(['Squeaker', 'Gap Spotter', 'Cog Fixer', 'Puzzle Piece', 'Clock Winder', 'Thread Finder', 'Missing Link', 'Bridge Builder', 'Master Mender', 'Keeper of the Clock']),
 });
 
 /**
@@ -290,6 +340,7 @@ export const LINES = freeze({
     mochi: ['Oh! Hello. Glad you came.', 'You! Good. Tea is warm.', 'Hello, friend. I kept your seat.'],
     ginger: ['Yip! You found the workshop!', 'Hey, navigator! I was just thinking about you.', 'You came! Quick, I have a fun one.'],
     mallow: ['Oh! Hello, star-friend!', 'You are here! The sky got brighter just now.', 'Hi! I was watching the path for you.'],
+    sesame: ['Squeak! You came! I was just about to say... you came!', 'Oh, hello hello! Perfect timing. I would know, I keep the clock.', 'You are here! The tower felt a little empty without you.'],
   },
   /** A friend who has not seen you for a while. Glad, never cross. */
   missed: {
@@ -299,15 +350,17 @@ export const LINES = freeze({
     mochi: ['You are back. Good. I missed this.', 'Oh! There you are. Kept your seat.'],
     ginger: ['You are back! I chalked a trail to the door for you.', 'Yip yip! I knew you would find your way back.'],
     mallow: ['You came back! I saved the brightest star for you.', 'Oh! I kept watching the path. And here you are!'],
+    sesame: ['You are back! There was a you-shaped gap in the village.', 'Squeak! I saved your spot. It looked very empty.'],
   },
   /** The very first meeting: who they are, then why that is their subject (the intro says both, in order). */
   meet: {
     toffee: ["Hi hi hi! I'm Toffee! I keep the fire going. I haven't missed a day. Not ONE.", "Come back every day and the fire grows. Race me in the Gauntlet too. I always win. Mostly."],
     chai: ["Hoo! I'm Chai. I've read every book in this village. Twice. Even the cookbook.", "Give me any passage and I'll find what the author really meant. That's Reading!"],
     matcha: ["Hello hello! I'm Matcha! Some collect stamps. I collect words!", "Today's favourite word is 'serendipity'. Come grow your words with me!"],
-    mochi: ["Mochi. Hi. I keep it short.", "Long paragraph? I find the point. Half a paragraph? I finish it."],
+    mochi: ["Mochi. Hi. I keep it short.", "Long paragraph? I find the point. One line. Done. That's Para Summary."],
     ginger: ["I'm Ginger! I sort my socks by colour. Then by mood.", "Shuffled sentences? A sentence with nowhere to go? I know where everything goes!"],
     mallow: ["Hi! I'm Mallow! See those five clouds? One of them is a sheep.", "I always spot the one that doesn't belong. Five sentences, one stranger. Easy!"],
+    sesame: ["Squeak! I'm Sesame! I live up in the clock. You were about to say hello. See? Finished it!", "A paragraph with a hole in it? I know exactly what fits. That's Para Completion!"],
   },
   /** On coming back from a run: thank you. */
   thanks: {
@@ -317,6 +370,7 @@ export const LINES = freeze({
     mochi: ['A page came back. Thank you. Really.', 'Notes! Lovely notes! Thank you.'],
     ginger: ['Click! The gears are turning! Thank you!', 'Yip! The workshop is humming again!'],
     mallow: ['A star came back! Thank you!', 'Look up! It is shining again, thanks to you!'],
+    sesame: ['Tick, tock! The clock is ticking again! Thank you!', 'A missing piece, found! Thank you, thank you!'],
   },
   /** Said to nobody in particular while you watch: who they are, out loud (src/home/life.js muse). */
   muse: {
@@ -326,6 +380,7 @@ export const LINES = freeze({
     mochi: ['Tea. Good.', 'Long day? Short version: nice day.', 'Hm. Clouds. Rain soon.', 'The point is usually small. Like me.', 'Chai read me a whole book. Summary: dragon, friends, happy.', 'Gist first. Always.', 'Tea?'],
     ginger: ['Who put the spoons with the forks? Fixed it.', 'First the kettle, then the tea, then the cup. Order matters!', 'I sorted the flowers. Daisy, lily, rose. Much better.', "A 'however' always comes after something. Always!", 'Everything has a place. Your place is right here!', 'Find the opening sentence first!', 'Pronouns point the way!', 'Your bag was a mess. I tidied it. You are welcome!'],
     mallow: ['Ooh! One of those birds is flying backwards!', 'Five leaves fell. One was a butterfly!', 'Something is different today. Did the pond move?', 'Spot the odd one: tea, coffee, juice, a sock.', "That cloud looks like a teapot. I look like a sheep. It's fine.", 'One of these is not like the others!', 'Shh. The sky is thinking.'],
+    sesame: ['Something is missing here... oh! My other sock.', 'Every gap has one thing that fits. Like a key in a lock.', 'Tick, tock, tick... I count the seconds. For fun.', 'The sentence before the gap and the one after. Both have to agree!', 'Chai started a story and stopped. I know how it ends.', 'Read both sides of the gap first!', 'I found a crumb. Then another. Then a whole cookie!', 'A gap is just a sentence waiting for its friend.'],
   },
   /** Everyone in the plaza, celebrating a finished set. */
   cheer: {
@@ -335,6 +390,7 @@ export const LINES = freeze({
     mochi: ['Nice.', 'Good job. Really.'],
     ginger: ['All in order! Yes!', 'Yip yip hooray!'],
     mallow: ['Wheee!', 'So sparkly!'],
+    sesame: ['Squeak squeak hooray!', 'A perfect fit!'],
   },
   /** A friend who just grew a stage. */
   grow: {
@@ -344,6 +400,7 @@ export const LINES = freeze({
     mochi: ['Bigger. Good.', 'New look. Same Mochi.'],
     ginger: ['Upgraded! Neatly!', 'Everything in order, including me!'],
     mallow: ['I got fluffier! Look!', 'I sparkle now! Like a star!'],
+    sesame: ['I grew! Squeak!', 'Bigger! And my ears grew too!'],
   },
   /** One friend talking about another, by that friend's mood word. */
   gossip: {
@@ -375,6 +432,7 @@ export const SIGNATURE = freeze({
   mochi: { say: 'Mochi.', pitch: 0.1, rate: 0.55, volume: 1, who: 'm' },
   ginger: { say: 'Yip!', pitch: 1.25, rate: 1.2, volume: 1, who: '' },
   mallow: { say: 'Soft, soft.', pitch: 1.4, rate: 0.7, volume: 0.65, who: 'f' },
+  sesame: { say: 'Squeak!', pitch: 2, rate: 1.4, volume: 0.9, who: 'f' },
 });
 
 /* ------------------------------------------------------------------ */
