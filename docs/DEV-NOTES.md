@@ -19,7 +19,7 @@
 - Pet off screen: life.js skips its style writes (a phone sees a third of the map). Text on the canvas goes through `glyphSprite` (per-frame fillText was the top hot spot).
 - Dialogs go through `ui/modal.js` (pass `returnTo`; iOS taps do not focus buttons). The village onboarding awaits taps inside `render()`, so "render returned" is not "screen ready".
 - A friend's panTo started inside a tap's pointerdown is cancelled by the viewport's handler; defer 30 ms.
-- Voices: `SIGNATURE` (pets.js) per friend, played by `world/audio.js signature()`: a tone-built call per friend (`CALLS`: Chai's owl hoot, Toffee's crackle, etc.); only Mochi still speaks its name (Web Speech, blip fallback). No other friend uses a speech engine. Friend lines: 96 chars max, no em dashes, none of the mentor's banned words (`check-pets`).
+- Voices: `SIGNATURE` (pets.js) per friend, played by `world/audio.js signature()`: a tone-built call per friend (`CALLS`: Chai's owl hoot, Toffee's crackle, etc.); only Mochi still speaks its name (Web Speech, blip fallback). No other friend uses a speech engine. Friend lines: 96 chars max (arrive/arriveNight 32, cheer 30: they sit in a 2 second bubble), no em dashes, none of the mentor's banned words, every line unique, and a floor per kind so a daily visitor keeps hearing new ones (`check-pets`). Idle and arrival bubbles are dealt by `dealLine` as a shuffled deck kept on the device (`catos:heard`), so a line does not return until the friend has said them all; add lines freely, never reorder to "fix" a repeat.
 
 ## Learning core
 - `noticing.js` returns nothing when nothing true can be said; do not force it to speak.

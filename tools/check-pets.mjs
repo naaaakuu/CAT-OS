@@ -23,7 +23,10 @@ const NAMES = ['Toffee', 'Chai', 'Matcha', 'Mochi', 'Ginger', 'Mallow', 'Sesame'
 const FIELDS = ['id', 'name', 'creature', 'subject', 'tag', 'item', 'charm', 'teaches', 'home', 'icon', 'colour', 'frame', 'places', 'modules', 'bff', 'trouble', 'blurb'];
 const MODULES = ['rc', 'rc2', 'cr', 'lex', 'garden', 'wd', 'wb', 'ps', 'pc', 'pj', 'sp', 'ooo', 'gauntlet'];
 const MOOD_WORDS = ['glowing', 'happy', 'missing', 'sleepy', 'wilting', 'new'];
-const KINDS = ['hello', 'missed', 'meet', 'thanks'];
+const KINDS = ['hello', 'missed', 'meet', 'thanks', 'arrive', 'arriveNight'];
+// Fewest lines per friend, so a regular visitor keeps hearing new ones; the short kinds also have a shorter cap (a 2 second bubble).
+const FLOOR = { muse: 30, hello: 6, missed: 4, thanks: 5, cheer: 4, grow: 3, arrive: 8, arriveNight: 4 };
+const SHORT = { arrive: 32, arriveNight: 32, cheer: 30 };
 const BANNED = /\b(wrong|failure|failed|mistake|poor|weak|bad|careless|study|score|xp|level up|unlocked)\b/i;
 
 export async function checkPets() {
@@ -114,8 +117,7 @@ export async function checkPets() {
   for (const id of ORDER) {
     // The first visit says both meet lines in order: who they are, then why that is their subject.
     if ((L.meet?.[id] ?? []).length !== 2) bad(`${id} has ${(L.meet?.[id] ?? []).length} meet lines, wants 2`);
-    if ((L.muse?.[id] ?? []).length < 5) bad(`${id} has ${(L.muse?.[id] ?? []).length} muse lines, wants 5+`);
-    for (const k of ['cheer', 'grow']) if ((L[k]?.[id] ?? []).length < 2) bad(`${id} has ${(L[k]?.[id] ?? []).length} ${k} lines, wants 2+`);
+    for (const [k, n] of Object.entries(FLOOR)) if ((L[k]?.[id] ?? []).length < n) bad(`${id} has ${(L[k]?.[id] ?? []).length} ${k} lines, wants ${n}+`);
   }
 
   /* ---- Ten stages each: a name per stage, and what each one puts on the friend ---- */
@@ -162,6 +164,8 @@ export async function checkPets() {
   for (const [where, s] of lines) {
     if (typeof s !== 'string' || !s.trim()) { bad(`${where} is empty`); continue; }
     if (s.length > 96) bad(`${where} is ${s.length} chars: ${s}`);
+    const cap = SHORT[where.split('.')[1]];
+    if (where.startsWith('LINES.') && cap && s.length > cap) bad(`${where} is ${s.length} chars, a short bubble holds ${cap}: ${s}`);
     if (s.includes('—')) bad(`${where} has an em dash: ${s}`);
     const m = s.match(BANNED);
     if (m) bad(`${where} uses "${m[0]}": ${s}`);
@@ -181,6 +185,20 @@ export async function checkPets() {
   }
   if (new Set(Array.from({ length: 40 }, (_, i) => P.lineFor('toffee', 'hello', `s${i}`))).size < 2) bad('lineFor never varies with the seed');
   if (P.lineFor('nobody', 'muse', 1) !== '') bad('an unknown pet says nothing');
+
+  /* ---- The deck: every line once before any repeats, and never the one just said ---- */
+  for (const kind of ['muse', 'arrive', 'arriveNight']) {
+    for (const id of ORDER) {
+      const n = L[kind][id].length;
+      let heard = [];
+      const said = [];
+      for (let i = 0; i < n * 2; i += 1) { const r = P.dealLine(id, kind, heard); said.push(r.line); heard = r.heard; }
+      if (new Set(said.slice(0, n)).size !== n) bad(`dealLine(${id}, ${kind}) repeated a line before the whole deck was said`);
+      if (new Set(said.slice(n)).size !== n) bad(`dealLine(${id}, ${kind}) repeated a line inside the second deck`);
+      if (said.some((s, i) => i && s === said[i - 1])) bad(`dealLine(${id}, ${kind}) said one line twice in a row`);
+    }
+  }
+  if (P.dealLine('nobody', 'muse', []).line !== '') bad('an unknown pet deals nothing');
   const gl = P.gossipLine('mochi', 'missing', 3);
   if (!(L.gossip?.missing ?? []).some((t) => t.replaceAll('{name}', 'Mochi') === gl)) bad(`gossipLine fills the name from the mood's own pool: ${gl}`);
   const gu = P.gossipLine('ginger', 'no-such-mood', 1);

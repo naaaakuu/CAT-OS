@@ -28,7 +28,7 @@
 
 import { NODES, HOMES, SPOTS, route, nearestNode, FIRE, CHIMNEYS, TEAPOT, POND, CLOCK, TREASURE_AT, MAP } from '../pets/paths.js';
 import { FRAME, growOf } from '../pets/sprite.js';
-import { PETS, PET_BY_ID, SIGNATURE, gossipLine, lineFor } from '../pets/pets.js';
+import { PETS, PET_BY_ID, SIGNATURE, gossipLine, lineFor, dealLine } from '../pets/pets.js';
 import { rng } from '../world/engine/palette.js';
 import { voice, signature } from '../world/audio.js';
 import { createWater } from './water.js';
@@ -44,7 +44,6 @@ const CONFETTI = ['#F4C443', '#E9963A', '#8FB56A', '#D97A8A', '#93AED1', '#F6EED
 const SPEED = { glowing: 46, happy: 42, missing: 34, sleepy: 26, wilting: 24, new: 38 };
 const AWAKE = new Set(['glowing', 'happy', 'missing', 'new']);
 const CHAT_ICONS = ['♥', '♪', '☺', '♫', '✿'];
-const HELLO = ['Hi!', 'Hello!', 'Yay, you came!', 'Hiii!', '♥', 'You are here!'];
 const rand = (a, b) => a + Math.random() * (b - a);
 const pickOf = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
@@ -90,11 +89,12 @@ const PROPS = {
 
 /**
  * @param {HTMLElement} root  the .cw section
- * @param {{pets, atmo, reduced, view, houses}} o
+ * @param {{pets, atmo, reduced, view, houses, memory}} o
  *   view()  the part of the painting on screen: { x, y, w, h, s } (painting px, and the camera's scale)
  *   houses  src/home/houses.js createHouseLife(), or null
+ *   memory  { get, set } on this device's small store: which lines each friend has already said, so none comes round again early
  */
-export function createLife(root, { pets: petsState, atmo, reduced, view = null, houses = null }) {
+export function createLife(root, { pets: petsState, atmo, reduced, view = null, houses = null, memory = null }) {
   const map = root.querySelector('.cw-map');
   const canvas = root.querySelector('.cw-life');
   const g = canvas.getContext('2d');
@@ -147,6 +147,16 @@ export function createLife(root, { pets: petsState, atmo, reduced, view = null, 
   const freeNode = (list) => {
     const free = list.filter((n) => !reserved.has(n));
     return free.length ? pickOf(free) : null;
+  };
+
+  /** The next line a friend has not said lately (a shuffled deck, kept across visits). */
+  const dealt = (() => { try { return JSON.parse(memory?.get('catos:heard') || '{}') ?? {}; } catch { return {}; } })();
+  const deal = (id, kind) => {
+    const key = `${id}.${kind}`;
+    const r = dealLine(id, kind, Array.isArray(dealt[key]) ? dealt[key] : []);
+    dealt[key] = r.heard;
+    memory?.set('catos:heard', JSON.stringify(dealt));
+    return r.line;
   };
 
   const say = (a, html, ms = 2600, { talk = true, speak = true, soft = false } = {}) => {
@@ -762,7 +772,7 @@ export function createLife(root, { pets: petsState, atmo, reduced, view = null, 
         if (!a || destroyed || a.sayUntil) return;
         a.reactUntil = now + 700; a.happyUntil = now + 1600;
         if (a.state === 'sleep' || a.state === 'doze') { a.state = 'idle'; a.until = now + 2600; }
-        say(a, `<span>${night() && a.id !== 'toffee' ? 'Oh! Hi!' : pickOf(HELLO)}</span>`, 1900, { speak: false });
+        say(a, `<span>${deal(a.id, night() ? 'arriveNight' : 'arrive')}</span>`, 2400, { speak: false });
       }, 500 + i * 420));
     },
     /** A friend comes to meet you at a node and says something. */
@@ -813,7 +823,7 @@ export function createLife(root, { pets: petsState, atmo, reduced, view = null, 
       if (reduced) return '';
       const a = pickOf(actors.filter((x) => ids.includes(x.id) && !x.sayUntil && !x.partner && x.state !== 'sleep' && x.state !== 'doze' && x.state !== 'cheer'));
       if (!a) return '';
-      const line = lineFor(a.id, 'muse', `${now | 0}`);
+      const line = deal(a.id, 'muse');
       say(a, `<span>${line}</span>`, 4400, { soft: true });
       return line;
     },

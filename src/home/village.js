@@ -223,7 +223,7 @@ export async function renderVillageHome(outlet, ctx) {
   /* ---------------- Life ---------------- */
   /* What each house has grown (src/home/houses.js): the living part on the scene canvas, the still part baked into the painting below. */
   const houses = createHouseLife({ reduced, stages: pets.houses });
-  const life = createLife(root, { pets, atmo, reduced, houses, view: () => ({ x: cam.x - vw / 2 / s, y: cam.y - vh / 2 / s, w: vw / s, h: vh / s, s }) });
+  const life = createLife(root, { pets, atmo, reduced, houses, memory: store, view: () => ({ x: cam.x - vw / 2 / s, y: cam.y - vh / 2 / s, w: vw / s, h: vh / s, s }) });
   // For the browser gates: put the camera somewhere, find a friend, show the houses at given stages (looks only; nothing is saved).
   root.__village = {
     look: (x, y) => panTo(x, y, { ms: 0 }), positionOf: (id) => life.positionOf(id),

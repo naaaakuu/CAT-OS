@@ -4,6 +4,12 @@
 > Versions here are app releases; they map onto the capability milestones in
 > `PROJECT_ROADMAP.md` (0.x releases build toward Roadmap V1.0).
 
+## 3.8.1: A reason to open the village every day (2026-10-06)
+
+- Every friend has far more to say, at the same charm: about 50 idle thoughts each (was 8), a greeting of their own when you arrive (10 by day, 5 or 6 at night; it used to be one shared set of six), and more hellos, welcome-backs, thanks, cheers and growth lines. Voice stays per friend: Toffee's fire puns and tiny CAT tips, Chai's bookish dramatics, Matcha's word origins, Mochi's one-line summaries, Ginger's tidy jumble tips, Mallow's odd-one-out riddles, Sesame's finished sentences and crumbs. Many carry a true, small tip for their subject, and friends tease each other.
+- No quick repeats: idle thoughts and arrival greetings are dealt as a shuffled deck kept on the device (`catos:heard`, `pets.js dealLine`). A line cannot come back until the friend has said all of theirs, and never twice in a row across a reshuffle. Toffee's old night exemption is gone; his night greetings are awake.
+- `check-pets` now has floors per kind, shorter caps for bubble lines (greetings 32 characters, cheers 30) and a deck self-check.
+
 ## 3.8.0: Houses that grow, and Sesame (2026-10-06)
 
 - A seventh friend: **Sesame**, a mouse who finishes your sentences, keeps Para Completion in the clock tower (it was Mochi's second house). Painted in the companions' own manner by `tools/paint-sesame.mjs` (grain lifted from the strip), baked with `bake-pets --only sesame`; own lines, story, stages, hat, puzzle-piece charm, squeak, gait and chores. Mochi keeps Para Summary only. Sesame adores Mochi next door (Mochi's best friend is still Chai). Progress page, place screen, bank sessions and gates follow.
