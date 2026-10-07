@@ -1,0 +1,191 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ps-0079",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 89,
+    "genre": "institutions",
+    "difficulty": "hard",
+    "difficulty_numeric": 8,
+    "tier": "cat-plus",
+    "bible_level": "cat",
+    "title": "Minutes Without Reasons",
+    "theme": "why a committee's minutes record decisions and not reasons: a minuted reason binds the body next time, a bare decision can be departed from without anyone having been wrong, so the omission keeps the future free",
+    "estimated_time_sec": 125,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-10: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "concession_turn_thesis",
+    "apex": {
+      "claim": "Committee minutes record decisions without reasons because a minuted reason binds the body when the same reason next applies, while a bare decision can be departed from without anyone having been wrong; the omission is designed to keep the future free, not to hide the past, so the reasons survive only with those who were present.",
+      "scope": "Minutes of a deciding body; the claim is about what the omission of reasons does for the body's future, not a verdict on whether that is good for readers.",
+      "certainty": "asserted",
+      "stance": "corrective"
+    },
+    "turn": {
+      "present": true,
+      "marker": "But"
+    },
+    "difficulty_dials": {
+      "abstraction": 4,
+      "syntax": 4,
+      "turn_subtlety": 2,
+      "distractor_closeness": 5,
+      "live_options": 2,
+      "stance_subtlety": 3,
+      "qualifier_density": 3,
+      "domain_load": 2
+    },
+    "load_bearing": [
+      "binds the body to it",
+      "without anyone having to say that last year was a mistake",
+      "to keep the future free",
+      "not to hide the past"
+    ],
+    "separating_element": "The correct option says the omission keeps the future free; the nearest rival says it protects the past from scrutiny, which the thesis sentence rules out in so many words: 'to keep the future free, not to hide the past'.",
+    "dna_traits": [
+      "main_idea_detection",
+      "language_precision",
+      "author_intent",
+      "evidence_vs_thesis"
+    ],
+    "mission": "watch_the_turn",
+    "learning_objective": "hold the exact object a purpose clause names, when a neighbouring object (the past rather than the future) fits the same facts and the same tone of suspicion",
+    "reasoning_patterns": [
+      "sum.stance_kept",
+      "arg.concession",
+      "struct.pivot",
+      "sum.central_vs_supporting",
+      "lang.contrast_marker"
+    ],
+    "quality": {
+      "status": "verified",
+      "adversarial_review": "The two finalists agree that reasons are left out on purpose and that a bare decision carries no debt. The rival says the purpose is to protect the past from later readers, which the opening concession about concealment makes feel like the paragraph's own suspicion confirmed. The thesis sentence is built to separate them: minutes are written 'to keep the future free, not to hide the past', and the mechanism is forward-looking in every clause, 'the next time the same reason applies', 'can be departed from next year'. The concession option is accurate and stops before the turn. The recommendation to minute reasons before they are lost is the opposite of what the paragraph says the omission is for.",
+      "blind_solve": {
+        "solver": "sonnet blind reader 2026-10-07",
+        "agreed": 1,
+        "total": 1,
+        "notes": "full agreement"
+      }
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-07",
+      "usage_note": "Original composition in CAT register for CAT OS. General reflection on why committee minutes record decisions rather than reasons; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-10-07",
+    "batch_id": "batch-ps-004",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ps-004",
+    "reviewer_notes": "Distinct from ps-0050, which is about where deliberation goes when proceedings must be published; this is about why the record itself omits reasons. The near miss swaps the object of the purpose clause (past for future) and is killed by the thesis sentence. Families: language, structure, addition."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "It is easy to read the thinness of a committee's minutes as laziness or as concealment: page after page of what was decided, and not a line of why.",
+        "role": "concession"
+      },
+      {
+        "text": "The reader who wants the reasons has a fair grievance, since a decision without them is a bare fact that explains nothing.",
+        "role": "concession"
+      },
+      {
+        "text": "But the omission is doing work, because a reason, once minuted, binds the body to it: when the same reason next applies, the committee must either decide the same way or explain why it will not, and somebody will have been wrong.",
+        "role": "support"
+      },
+      {
+        "text": "A bare decision carries no such debt; it can be departed from next year without anyone having to say that last year was a mistake.",
+        "role": "support"
+      },
+      {
+        "text": "Minutes are written as they are to keep the future free, not to hide the past.",
+        "role": "thesis"
+      },
+      {
+        "text": "The reader who wants to know why must ask someone who was in the room, and that is not a defect of the record but its design.",
+        "role": "conclusion"
+      }
+    ]
+  },
+  "ideal_summary": "Minutes leave out reasons because a recorded reason binds the body the next time it applies, while a bare decision can be departed from without anyone having been wrong; the omission is designed to keep the future free, not to hide the past.",
+  "builder": {
+    "prompt": "In one sentence: why, according to the paragraph, do minutes record decisions and not reasons, and what is the omission for?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence say a recorded reason binds the body next time, while a bare decision does not?",
+        "kept": "Good. That asymmetry is the mechanism; without it the omission is just thinness, which is the reading the paragraph opens by setting aside.",
+        "drifted": "If your sentence explains the omission by laziness, secrecy or the difficulty of writing reasons down, it has stayed with the concession and missed the turn."
+      },
+      {
+        "id": "scope",
+        "ask": "Does your sentence say the omission keeps the future free, or that it hides the past?",
+        "kept": "Exactly the point. Every clause of the mechanism looks forward: 'the next time', 'next year'. The past is named only to be ruled out.",
+        "drifted": "The thesis sentence says 'to keep the future free, not to hide the past'. A summary that protects the past has swapped the object of the purpose."
+      },
+      {
+        "id": "stance",
+        "ask": "Does your sentence keep the author's view that this is design rather than defect?",
+        "kept": "Right. The reader's grievance is granted and then placed: the omission is 'not a defect of the record but its design'.",
+        "drifted": "If your sentence treats the thin record as a failing to be fixed, it has kept the concession's stance and dropped the author's."
+      },
+      {
+        "id": "addition",
+        "ask": "Have you recommended that reasons be minuted, or that readers be given them some other way?",
+        "kept": "Well held. The paragraph says only that the reasons live with those who were there; it does not say they should be written down.",
+        "drifted": "A recommendation to record reasons runs against the paragraph's point, which is that not recording them is what keeps the body free."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "Minutes omit reasons because a recorded reason binds the body next time, while a bare decision can be departed from without anyone having been wrong; the omission keeps the future free rather than hiding the past.",
+      "B": "Minutes omit reasons because a recorded reason would expose the body's past judgements to anyone who reads them later, while a bare decision reveals nothing; the omission protects the past from scrutiny by those who come after.",
+      "C": "The thinness of a committee's minutes, which record what was decided and nothing of why, leaves the reader who wants the reasons with a fair grievance, since a decision without them is a bare fact that explains nothing.",
+      "D": "Because the reasons for a decision survive only in the memory of those who were in the room, committees should minute them before they are lost to everyone who comes after."
+    },
+    "correct": "A",
+    "explanation": {
+      "paragraph_meaning": "Minutes usually say what a committee decided and never why, and it is tempting to call that lazy or secretive; a reader who wants the reasons has a point. But the gap is deliberate. If a reason is written down, the committee is tied to it: next time the same reason comes up, it must decide the same way or admit that someone was wrong. A decision with no reason attached carries no such burden; it can simply be changed later. So minutes are thin in order to keep the committee's future open, not to bury its past, and anyone who wants the reasons has to ask a person who was there. That is how the record is meant to work.",
+      "correct_reasoning": "The correct option keeps the mechanism, that a recorded reason binds the body next time while a bare decision can be departed from 'without anyone having been wrong', and keeps the exact object of the purpose clause: the future is kept free, and the past is not what is being hidden. Scope, stance and the central contrast are all preserved.",
+      "distractors": [
+        {
+          "option": "B",
+          "archetype": "stance_flip",
+          "secondary_archetype": null,
+          "why_wrong": "The mechanism is kept and its purpose is reversed. The paragraph says minutes are written 'to keep the future free, not to hide the past', and every clause of its reasoning looks forward: 'when the same reason next applies', 'departed from next year'. Protecting the past is the reading the thesis sentence names in order to deny.",
+          "seductive_element": "It shares its first half with the key, it agrees that the omission is deliberate, and the opening sentence's word 'concealment' makes a past-protecting motive feel like the author's own suspicion confirmed.",
+          "thinking_mistake": "Accepting the suspicious reading the concession raised, instead of checking what object the thesis sentence actually gives the purpose."
+        },
+        {
+          "option": "C",
+          "archetype": "concession_as_thesis",
+          "secondary_archetype": null,
+          "why_wrong": "This is the grievance the paragraph grants before the turn. It is accurate, and the sentence after it begins 'But the omission is doing work', which is where the paragraph's own claim starts.",
+          "seductive_element": "It is faithful to two whole sentences, and its complaint is the one most readers of minutes already share.",
+          "thinking_mistake": "Stopping at the position the author sets up to move past, because it is stated first and stated fairly."
+        },
+        {
+          "option": "D",
+          "archetype": "prescriptive_swap",
+          "secondary_archetype": null,
+          "why_wrong": "The paragraph recommends nothing, and the recommendation offered runs against its point: the reasons are left out to keep the body free, and the fact that they live only with those who were there is called 'its design', not a loss to be prevented.",
+          "seductive_element": "It takes the closing sentence's picture of reasons living in memory and draws the practical conclusion a careful administrator would draw.",
+          "thinking_mistake": "Turning the paragraph's final observation into advice, and advising the opposite of what the paragraph says the practice is for."
+        }
+      ],
+      "reading_habit": "When a thesis sentence says 'X, not Y', an option built on Y is not a paraphrase but the denial. Find the 'not' and keep it."
+    }
+  },
+  "mentor": {
+    "challenge": "Pages of decisions and not a line of why. Two readings agree the omission is deliberate and disagree about what it is protecting.",
+    "takeaway": "A reason written down is a promise about next time; a bare decision is a door left open."
+  }
+}

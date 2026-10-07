@@ -1,0 +1,407 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0158",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 91,
+    "genre": "markets",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "stage": "intermediate",
+    "skills": [
+      "evidence-anchoring",
+      "inference",
+      "application",
+      "argument-tracking"
+    ],
+    "word_count": 495,
+    "question_count": 4,
+    "question_types": [
+      "application",
+      "assumption",
+      "inference",
+      "specific_detail"
+    ],
+    "theme": "a fare restriction is a sorting device: buyers choose a price by whether they can bear the condition, and a condition sorts only if it costs the high-value buyer more than the low-value one",
+    "estimated_time_min": 8,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-07",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted."
+    },
+    "date_added": "2026-10-07",
+    "batch_id": "batch-rc-008",
+    "prompt_version": "content engine v1 + CAT paper patterns 2026-10; batch-rc-008",
+    "reviewer_notes": "The idea the standard account of price discrimination lacks is the twist in paragraph three: a fence does not work by being hard, it works by being unequally hard, so the seller is looking for restrictions that bite one side and not the other, and would withdraw a restriction for being too fair. The near-tie is in the assumption question, where the finalist says every weekend-bound passenger would have paid full fare and the key says only that those who most want to be home are broadly those who would pay most. The voice is impersonal and dry; the amusement is the refund rule withdrawn \"for being too fair\". The application stem is thin and all the conditions are in the options; one option sorts in the wrong direction, which tests whether the reader kept the direction of the inequality. The move is an exposition carrying a twist that corrects the obvious reading of the mechanism, kept in an impersonal, dry voice.",
+    "length_class": "medium",
+    "structure": "phenomenon_explanation",
+    "viewpoints": 1,
+    "tone": "dry, exact, lightly amused",
+    "difficulty_vector": {
+      "lexical": 3,
+      "syntactic": 3,
+      "abstraction": 3,
+      "inference_depth": 3,
+      "distractor_similarity": 3,
+      "reasoning_depth": 3,
+      "structural_ambiguity": 3,
+      "time_pressure": 3
+    },
+    "reasoning_patterns": [
+      "struct.phenomenon_explanation",
+      "struct.cause_effect",
+      "comp.explicit_detail",
+      "comp.reference_tracking",
+      "arg.principle",
+      "arg.assumption",
+      "arg.evidence",
+      "inf.strongly_supported",
+      "inf.vs_speculation",
+      "inf.author_view_application",
+      "inf.logical_gap",
+      "lang.contrast_marker",
+      "lang.absolute_vs_qualified",
+      "lang.comparative",
+      "lang.some_vs_all"
+    ],
+    "quality": {
+      "status": "verified",
+      "adversarial_review": "Q1: The strong case is for the consultant walking through to the cheap fare, which the passage really says; it says it as the second arm of \"either both passengers refuse it ... or both accept it\", so the answer must cover both arms, and only the shared-choice option does. Q2: The case for the student’s maximum price rests on \"charge every passenger the most that passenger would pay\"; the verb is \"would like to\", and no sentence says the fenced fare reaches it, while \"the consultant has walked through to the cheap fare\" settles that the fare is open to anyone who accepts the fence. Q3: The holiday blackout is the real rival, since it is a restriction that bites; the direction kills it, \"it must cost the high-value passenger more than it costs the low-value one\", and the student is the one who travels on a holiday weekend for a wedding. Q4: The \"every passenger\" version is the near-tie; deny it and the argument survives on \"a particular kind of person\", which is a type, so it was not assumed, while denying the \"broadly\" version makes the rule sort nobody or sort backwards.",
+      "blind_solve": {
+        "solver": "sonnet blind reader 2026-10-07 (batch rc-008)",
+        "agreed": 4,
+        "total": 4,
+        "notes": "full agreement"
+      }
+    },
+    "vocab_extracted": [
+      "fence",
+      "headline fare",
+      "bite"
+    ]
+  },
+  "passage": {
+    "title": "One Seat, Several Fares",
+    "reading_time_min": 2.7,
+    "paragraphs": [
+      {
+        "id": "rc-0158-p1",
+        "text": "The seat is the same seat. It is the same width, leaves at the same minute and lands in the same city, and in the hour before departure the people in row fourteen have paid for it anything from a quarter of the headline fare to the headline fare itself. Nothing about the seat explains the spread; the seller's problem does. An airline would like to charge every passenger the most that passenger would pay, and its passengers differ widely in that figure: a consultant who must be in a meeting on Tuesday will pay a great deal, a student visiting a cousin will pay a little, and either of them, asked outright what the trip is worth, will answer with the student's number."
+      },
+      {
+        "id": "rc-0158-p2",
+        "text": "Since the seller cannot ask, it must arrange for passengers to tell it without being asked. It does this with fences. A fence is a condition attached to a lower price: buy three weeks ahead, stay over a Saturday night, accept that the ticket cannot be changed or refunded. Each fence is cheap to the passenger who was going to meet it anyway and expensive to the passenger who was not. The student knows the date of the cousin's wedding months ahead and would rather stay the weekend. The consultant learns of the meeting on Friday, needs to be home by Saturday, and may have to move the flight. Faced with the same price list, the two sort themselves: the student takes the fenced fare, the consultant pays the full one, and nobody has been asked anything."
+      },
+      {
+        "id": "rc-0158-p3",
+        "text": "It is worth being exact about what makes a fence work, because the obvious account, that a fence works by being hard to climb, gets it wrong. A fence that is equally hard for everyone sorts nobody, since either both passengers refuse it, and the seller has fenced off its own discount, or both accept it, and the consultant has walked through to the cheap fare. What a fence needs is not height but a difference in height: it must cost the high-value passenger more than it costs the low-value one. The Saturday night rule is a fine example because it is, for a great many people, no burden at all, and for a particular kind of person a weekend lost. The rule is not there to be difficult. It is there to be unequally difficult."
+      },
+      {
+        "id": "rc-0158-p4",
+        "text": "A passenger reading the fine print rarely draws the consequence. The restrictions in a fare table are not safety margins or administrative conveniences; the airline has gone to some trouble to find restrictions that bite one side harder than the other. A refund rule written so that nobody minds it would be withdrawn, not for being too harsh but for being too fair. The discount is not generosity to students. It is the price of the information the student handed over by accepting the fence, and the full fare is the price the consultant pays for refusing to."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0158-q1",
+      "type": "specific_detail",
+      "skill": "specific_detail",
+      "patterns": [
+        "comp.explicit_detail",
+        "lang.contrast_marker",
+        "comp.reference_tracking"
+      ],
+      "target_mistake": "taking one branch of an \"either ... or\" as the whole outcome",
+      "prediction_target": null,
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 3,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "logical_structure"
+      ],
+      "stem": "According to the passage, what happens when a fence is equally hard for every passenger to meet?",
+      "options": {
+        "A": "The seller withdraws the discount, since both kinds of passenger have refused it.",
+        "B": "The consultant accepts the condition and reaches the discounted fare.",
+        "C": "Both passengers make the same choice, so the price list learns nothing.",
+        "D": "The seller raises the condition until only the student still accepts it."
+      },
+      "correct": "C",
+      "estimated_time_sec": 50,
+      "explanation": {
+        "expert_notice": "The third paragraph answers the question in one sentence built on \"either ... or\": \"either both passengers refuse it, and the seller has fenced off its own discount, or both accept it, and the consultant has walked through to the cheap fare.\" The shared feature of both branches is that the two passengers do the same thing.",
+        "correct_reasoning": "The text says \"A fence that is equally hard for everyone sorts nobody\", and then gives the two ways that happens: both refuse, or both accept. Whichever branch occurs, the passengers have made the same choice and the seller has learned nothing from the price list. The correct option states the shared result rather than one branch. Each of the single-branch options is possible but is not what the passage says happens; the passage says it is one or the other. Nothing is said about withdrawing the discount or raising the condition.",
+        "passage_anchor": "rc-0158-p3",
+        "question_type_note": "Detail questions on an \"either ... or\" sentence test whether you kept both arms. The answer is usually the sentence’s own summary, not one arm of it.",
+        "reading_habit": "When a passage says \"either X or Y\", the safe paraphrase is \"one of X and Y, not a sorting\", never \"X\".",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "possibility_as_certainty",
+            "why_wrong": "Both refusing is one branch of \"either both passengers refuse it ... or both accept it\"; the text never says the seller then withdraws anything, nor that this branch is the one that happens.",
+            "seductive_element": "The phrase \"fenced off its own discount\" sounds like a withdrawal."
+          },
+          {
+            "option": "B",
+            "trap_type": "half_right",
+            "why_wrong": "The consultant walking \"through to the cheap fare\" is the other branch, and only \"or both accept it\"; the option also leaves out the student, so the sorting failure is lost.",
+            "seductive_element": "It quotes the passage's own picture of the consultant on the cheap fare."
+          },
+          {
+            "option": "D",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "No sentence has the seller raising a condition; the passage’s remedy is \"a difference in height\", not more height, and it says \"What a fence needs is not height\".",
+            "seductive_element": "A fence that fails to sort seems to invite a taller fence."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0158-q2",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.strongly_supported",
+        "inf.vs_speculation",
+        "lang.absolute_vs_qualified"
+      ],
+      "target_mistake": "reading the seller’s wish (\"would like to charge every passenger the most\") as an achieved price, or forgetting that the seller never learns who anyone is",
+      "prediction_target": "the fare is not tied to who the buyer is; it is tied to whether the buyer accepts the fence, so a consultant who accepted the fence would get it",
+      "difficulty": {
+        "inference_depth": 4,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "scope"
+      ],
+      "stem": "Which of the following can be inferred about the discounted fare described in the passage?",
+      "options": {
+        "A": "It is set below the amount the seller would need to cover the cost of the seat.",
+        "B": "It is withdrawn as soon as the seller discovers which of its passengers are students.",
+        "C": "It is set at exactly the most that the student would have been willing to pay.",
+        "D": "Any passenger who meets its conditions may buy it, whatever the reason for travel."
+      },
+      "correct": "D",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "Two sentences far apart settle what the fare is attached to. The seller \"cannot ask\", so \"nobody has been asked anything\"; and in the failure case \"both accept it, and the consultant has walked through to the cheap fare\". The discount is attached to the condition, not to the person.",
+        "correct_reasoning": "If the consultant can walk \"through to the cheap fare\" by accepting the fence, then the fare is available to anyone who accepts it; the seller never checks reasons, because \"nobody has been asked anything\". So the correct option follows from the text. The seat’s cost is never mentioned, so nothing can be inferred about the fare lying below it. The seller never \"discovers\" who is a student; the whole mechanism exists because it cannot ask. And the passage says only that the seller \"would like\" to charge each passenger the most that passenger would pay; it never says the discount hits that figure exactly.",
+        "passage_anchor": "rc-0158-p2, rc-0158-p3",
+        "question_type_note": "An inference question asks what the text commits you to, not what the topic suggests. Find the sentence that forces the option; if you can only find a sentence that is compatible with it, it is speculation.",
+        "reading_habit": "Separate what a party \"would like\" from what it does. Wishes in a passage are not outcomes.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "out_of_scope",
+            "why_wrong": "The cost of providing the seat appears nowhere; the passage is about what passengers \"would pay\", not what the seat costs.",
+            "seductive_element": "Discounts are often loss leaders, and common knowledge supplies the thought."
+          },
+          {
+            "option": "B",
+            "trap_type": "opposite_direction",
+            "why_wrong": "Since the seller \"cannot ask\", the seller never discovers who is a student; the discount is not withdrawn from anyone, it is taken or refused.",
+            "seductive_element": "The passage calls the discount \"the price of the information the student handed over\", which sounds like the seller now knows."
+          },
+          {
+            "option": "C",
+            "trap_type": "possibility_as_certainty",
+            "why_wrong": "The seller \"would like to charge every passenger the most that passenger would pay\"; that is the aim, and the text never says the fenced fare equals the student’s maximum.",
+            "seductive_element": "The first paragraph's statement of the ideal reads like a description of the price list."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0158-q3",
+      "type": "application",
+      "skill": "application",
+      "patterns": [
+        "inf.author_view_application",
+        "arg.principle",
+        "lang.comparative"
+      ],
+      "target_mistake": "choosing a condition that is costly to everyone, or one that is costly in the wrong direction",
+      "prediction_target": "a condition that is cheap for the low-value passenger (who plans ahead and has time) and costly for the high-value passenger (who decides late and must be flexible)",
+      "difficulty": {
+        "inference_depth": 4,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "inference"
+      ],
+      "stem": "Which of the following conditions attached to a cheaper ticket would the author expect to sort passengers most effectively?",
+      "options": {
+        "A": "A fee that every passenger must pay to collect a boarding pass at the airport.",
+        "B": "A requirement that the ticket be bought at least a fortnight before the flight.",
+        "C": "A lower price for passengers who agree to say, in a short survey, why they are travelling.",
+        "D": "A rule that the cheaper ticket cannot be used over the busiest holiday weekends."
+      },
+      "correct": "B",
+      "estimated_time_sec": 90,
+      "explanation": {
+        "expert_notice": "The rule is in paragraph three: a fence \"must cost the high-value passenger more than it costs the low-value one\". Paragraph two gives the profile of each: the student knows the date \"months ahead\"; the consultant \"learns of the meeting on Friday\". So the test for any option is: who does this hurt, and is it the consultant?",
+        "correct_reasoning": "Buying a fortnight ahead is nothing to the student, who knows the date months in advance, and a real cost to the consultant, who learns of the meeting on Friday. It costs the high-value passenger more, so it sorts. The airport fee costs everyone the same, and \"A fence that is equally hard for everyone sorts nobody\". The survey asks, and the first paragraph says asking fails: either passenger \"will answer with the student’s number\". The holiday rule hurts the leisure traveller, who travels on holidays, more than the consultant, who travels on a Tuesday; it costs the low-value passenger more, which is the inequality the wrong way round.",
+        "passage_anchor": "rc-0158-p2, rc-0158-p3",
+        "question_type_note": "Application questions hand you new cases; your job is to run the passage's rule on each. Write the rule down first, including its direction, and test every option against it.",
+        "reading_habit": "When a passage’s rule is an inequality (\"more than\", \"harder on\"), check each case for direction, not just for size.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "wrong_condition",
+            "why_wrong": "The fee is the same for everyone, and the passage is explicit: \"A fence that is equally hard for everyone sorts nobody.\"",
+            "seductive_element": "A fee is a cost, and the obvious account the passage rejects says fences work by being costly."
+          },
+          {
+            "option": "C",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "The seller \"cannot ask\", because either passenger \"asked outright what the trip is worth, will answer with the student’s number\"; a survey is asking, and the discount makes the low answer more attractive still.",
+            "seductive_element": "It seems to get the information directly, which is what the seller wants."
+          },
+          {
+            "option": "D",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The condition must \"cost the high-value passenger more than it costs the low-value one\"; a holiday blackout costs the student the wedding weekend and costs the Tuesday consultant nothing, so it sorts the wrong way.",
+            "seductive_element": "It is a real restriction that bites, and the passage praises restrictions that bite."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0158-q4",
+      "type": "assumption",
+      "skill": "argument",
+      "patterns": [
+        "arg.assumption",
+        "inf.logical_gap",
+        "lang.some_vs_all"
+      ],
+      "target_mistake": "taking an absolute version of the needed link, or a statement the passage denies, for the assumption",
+      "prediction_target": "the rule sorts only if the people it hurts (those who want the weekend at home) are the people who would pay more; the passage needs the pain and the value to line up",
+      "difficulty": {
+        "inference_depth": 4,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "inference"
+      ],
+      "stem": "The author’s claim that a Saturday night rule sorts passengers depends on which of the following assumptions?",
+      "options": {
+        "A": "Those who most want to be home by the weekend are, broadly, the ones who would pay most.",
+        "B": "Every passenger who needs to be home by Saturday would otherwise have paid the full fare.",
+        "C": "Passengers who accept the rule would have paid the full fare had no discount been offered.",
+        "D": "The rule imposes at least some cost on every passenger who chooses to travel under it."
+      },
+      "correct": "A",
+      "estimated_time_sec": 90,
+      "explanation": {
+        "expert_notice": "The argument runs from \"no burden at all\" for many and \"a weekend lost\" for \"a particular kind of person\" to the conclusion that the rule sorts. That step needs the particular kind of person who loses a weekend to be the kind who would pay most. If the weekend-lovers were the students, the rule would sort the wrong way.",
+        "correct_reasoning": "The passage says a fence works only if \"it must cost the high-value passenger more than it costs the low-value one\". The Saturday rule therefore sorts only if the people for whom it is \"a weekend lost\" are, by and large, the high-value passengers. That is the unstated link the correct option supplies. The absolute version, that every weekend-bound passenger would have paid full fare, is more than the argument needs: \"broadly\" is enough, and the consultant is offered as a type, not a census. The passage denies that accepting passengers would otherwise pay full fare: the student \"will pay a little\". And it denies that the rule costs everyone something: it is \"for a great many people, no burden at all\".",
+        "passage_anchor": "rc-0158-p2, rc-0158-p3",
+        "question_type_note": "An assumption is the smallest bridge from the stated evidence to the conclusion. Test a candidate by denying it: if the argument falls, it was assumed. Absolute versions usually fail the test because the argument still stands on the weaker version.",
+        "reading_habit": "When two options differ only by \"every\" against \"broadly\", deny each. The argument that survives the denial of \"every\" did not assume it.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "extreme_language",
+            "why_wrong": "The argument needs only that the weekend-bound are \"broadly\" the high payers; deny \"every\" and the sorting still works, since the consultant is \"a particular kind of person\", a type and not a rule without exceptions.",
+            "seductive_element": "It is the key's claim with the hedge removed, and sounds firmer."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage says the student \"will pay a little\" and takes the fenced fare because it is cheap; if accepting passengers would pay full fare anyway, the discount would be a pure loss, which is the opposite of the passage’s \"price of the information\".",
+            "seductive_element": "It sounds like a condition for the discount to be worth offering."
+          },
+          {
+            "option": "D",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "The text says the rule is \"for a great many people, no burden at all\"; the argument depends on the rule costing some people nothing, not on it costing everyone something.",
+            "seductive_element": "\"Unequally difficult\" is misread as \"difficult for all, more for some\"."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "fence",
+      "passage_use": "It does this with fences",
+      "meaning_here": "a condition attached to a lower price that buyers must accept to get it",
+      "difficulty": "medium"
+    },
+    {
+      "word": "headline fare",
+      "passage_use": "the headline fare itself",
+      "meaning_here": "the full advertised price before any discount",
+      "difficulty": "easy"
+    },
+    {
+      "word": "bite",
+      "passage_use": "restrictions that bite one side harder",
+      "meaning_here": "impose a real cost on",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "Everyone in row fourteen is flying to the same city in the same kind of seat. They paid five different prices. Nobody was asked what they could afford.",
+    "one_sentence_summary": "An airline cannot ask passengers what they would pay, so it attaches conditions called fences to its cheaper fares, and a fence only sorts high-value from low-value passengers when it costs the high-value passenger more than it costs the low-value one.",
+    "main_idea": "A price list uses conditions, not questions, to sort buyers by how much they would pay, and a condition works only when it is harder on the buyer who would pay more than on the buyer who would pay less.",
+    "simple_explanation": "Imagine a row of airline seats, all the same, all going to the same place. The people sitting in them paid very different prices. That is not about the seat. It is about a problem the airline has: it would like to charge each passenger the most that passenger would pay, but it cannot simply ask, because everyone would claim they could only pay the cheapest price.\n\nSo the airline uses conditions instead of questions. These conditions are called fences: book three weeks ahead, stay over a Saturday night, accept that the ticket cannot be changed. A student who already knows her travel dates finds these conditions easy. A consultant who might need to change plans at the last minute finds them hard. Without anyone being asked anything, the student ends up on the cheap fare and the consultant on the full one.\n\nHere is the part people usually get wrong. A fence does not work just because it is difficult. If a condition is equally hard for everyone, it sorts nobody: either everybody refuses it, or everybody accepts it, and either way the airline learns nothing. What a fence needs is to be harder on the passenger who would pay more than on the passenger who would pay less. A rule about staying the weekend is a good fence exactly because it is no trouble for most people and a real cost for a particular kind of traveller.\n\nSo the small print in a fare table is not there to be fair, and it is not a safety rule. The airline has deliberately looked for conditions that hurt one kind of passenger more than another. A refund rule that bothered nobody would be dropped, not for being too strict but for being too fair to sort anyone. The discount is really the price the student pays in information, by showing she is the kind of passenger who can accept the condition, and the full fare is what the consultant pays for being unable to.",
+    "why_difficult": "The standard explanation of airline pricing stops at a condition sorts buyers, which sounds complete but misses the direction the condition has to cut: readers tend to miss that a fence which is simply hard, rather than unevenly hard, sorts nobody at all.",
+    "author_intention": "To correct a plausible but wrong account of how a price fence works, by showing that difficulty alone does nothing and only an unequal cost, falling more heavily on the high-value buyer, can sort one kind of passenger from another.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0158-p1",
+        "role": "States the puzzle",
+        "note": "Passengers in the same row, in the same seat, pay very different prices, and the reason is not the seat itself but a problem the seller has: it cannot ask each passenger what they would pay."
+      },
+      {
+        "paragraph_id": "rc-0158-p2",
+        "role": "Introduces the fence",
+        "note": "The seller uses conditions called fences, like booking early or staying a Saturday night, which are cheap for one kind of passenger and costly for another, so passengers sort themselves without being asked."
+      },
+      {
+        "paragraph_id": "rc-0158-p3",
+        "role": "Corrects the obvious view",
+        "note": "A fence does not work by being hard for everyone. It works only if it is harder for the high-value passenger than for the low-value one; an equally hard fence sorts nobody."
+      },
+      {
+        "paragraph_id": "rc-0158-p4",
+        "role": "Draws the conclusion",
+        "note": "Fare restrictions are not safety rules or kindness to one group; they are deliberately unequal, and a restriction nobody minds would be removed for being too fair."
+      }
+    ],
+    "tone_progression": "The voice stays impersonal and dry throughout, with one moment of dry amusement at the idea of a refund rule being dropped for being too fair.",
+    "key_transitions": [
+      "‘It is worth being exact about what makes a fence work, because the obvious account ... gets it wrong.’ (opening of paragraph 3): the passage turns from describing fences to correcting how they are usually explained.",
+      "‘A refund rule written so that nobody minds it would be withdrawn, not for being too harsh but for being too fair.’ (paragraph 4): states the passage's conclusion in its driest line."
+    ],
+    "misunderstanding": "A hurried reader assumes any inconvenient condition sorts buyers, missing that the passage's whole point is the direction of the inequality: a fence must cost the high-value buyer more, not simply cost everyone something.",
+    "traps_summary": "The options offer a condition that is equally hard for everyone, a condition that asks for information directly instead of inferring it, and a condition that is harder on the low-value buyer, which sorts in exactly the wrong direction.",
+    "reading_lesson": "When a passage’s rule is stated as an inequality, such as \"more than\" or \"harder on one side than the other\", test every later case for direction as well as size; a case can be costly and still fail the rule if it is costly to the wrong person.",
+    "real_world": "Any price list with a catch, a loyalty requirement, or a waiting period is probably sorting its buyers the same way, by finding a condition that only bites the buyer willing to pay more.",
+    "takeaway": "A condition sorts buyers only when it costs the high-value buyer more than it costs the low-value one.",
+    "reflection_question": "Where else have you seen a rule that looks like a hassle but is really a way of sorting people by what they would pay?",
+    "eli10": {
+      "big_idea": "A seller cannot ask buyers what they would pay, so it uses conditions, called fences, that are easy for one kind of buyer and hard for another, and that is how it sorts them without asking.",
+      "story": "Imagine a plane seat. Five people sit in the same kind of seat. They paid five different prices. The seat did not change. The seller just cannot ask each person what they could pay. Everyone would say the cheap price. So the seller uses conditions instead of questions. These are called fences. One fence says book three weeks early. Another says stay over a Saturday night. A student already knows her travel dates. These rules cost her nothing. A busy worker might need to change plans fast. These same rules cost him a lot. Without any question being asked, the student gets the cheap seat and the worker pays full price. Here is the part people miss. A fence does not work just by being hard. If it is hard for everyone, nobody is sorted. It only works if it is harder on the one who would pay more. A rule that bothered nobody would be dropped at once, since it would sort nobody at all.",
+      "paragraphs": [
+        "People in the same airline seat pay very different prices, and the seller cannot simply ask them why.",
+        "The seller attaches conditions, called fences, that are easy for one traveller and hard for another, so buyers sort themselves.",
+        "A fence only works if it is harder on the buyer who would pay more than on the buyer who would pay less.",
+        "The rules in the small print are built to be unfair in one direction on purpose, not to be safe or kind."
+      ],
+      "author_view": "The writer is dry and a little amused, and wants readers to see that a seller's small print is a deliberate tool, not an accident or a kindness."
+    }
+  }
+}

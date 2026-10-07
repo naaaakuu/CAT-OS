@@ -1,0 +1,407 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0157",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 90,
+    "genre": "architecture",
+    "difficulty": "easy",
+    "difficulty_numeric": 3,
+    "stage": "developing",
+    "skills": [
+      "evidence-anchoring",
+      "inference",
+      "application",
+      "vocabulary-in-context",
+      "trap-recognition"
+    ],
+    "word_count": 439,
+    "question_count": 4,
+    "question_types": [
+      "application",
+      "except",
+      "must_be_true",
+      "vocabulary_in_context"
+    ],
+    "theme": "a vault pushes outward as well as down; the flying buttress carries that push over the aisle to an outer pier, so the wall can be glass, and the pinnacle's weight keeps the pier's load vertical",
+    "estimated_time_min": 7,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-07",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted."
+    },
+    "date_added": "2026-10-07",
+    "batch_id": "batch-rc-008",
+    "prompt_version": "content engine v1 + CAT paper patterns 2026-10; batch-rc-008",
+    "reviewer_notes": "This is the sustained-description form the audit asked for: no received view is corrected, the reward is the building itself, and every paragraph adds one more link in the path of the load. The near-tie is in the must_be_true question, where a finalist says the piers would fall at once and the text says only that a pushed pier \"wants to tip\". The voice walks the reader in, out and round, in present tense, and ends on the two-sights-one-decision line rather than a clipped relocation. The EXCEPT item is built on the one place the text separates the downward from the outward push, so a reader who kept that distinction cannot be caught. The move is a sustained exposition with no rival account to correct, and the voice is a second-person, present-tense guided walk.",
+    "length_class": "medium",
+    "structure": "phenomenon_explanation",
+    "viewpoints": 1,
+    "tone": "admiring, patient, exact",
+    "difficulty_vector": {
+      "lexical": 2,
+      "syntactic": 2,
+      "abstraction": 2,
+      "inference_depth": 3,
+      "distractor_similarity": 3,
+      "reasoning_depth": 3,
+      "structural_ambiguity": 2,
+      "time_pressure": 2
+    },
+    "reasoning_patterns": [
+      "struct.phenomenon_explanation",
+      "struct.cause_effect",
+      "struct.definition",
+      "comp.explicit_detail",
+      "comp.paraphrase",
+      "arg.principle",
+      "arg.causal_claim",
+      "arg.evidence",
+      "inf.necessary",
+      "inf.author_view_application",
+      "lang.causal_wording",
+      "lang.contrast_marker",
+      "lang.may_vs_must",
+      "elim.systematic"
+    ],
+    "quality": {
+      "status": "verified",
+      "adversarial_review": "Q1: A strong candidate argues for the half-arch meeting the wall \"where the vault's push arrives\" as the odd one out, remembering the buttress as landing on the pier; the text settles it: \"to land on the wall exactly where the vault's push arrives\". The downward push option is killed by \"partly downward, which a wall can take\" and \"takes the outward push\". Q2: The case for the piers falling is that the passage calls the pinnacle necessary; \"wants to tip outward\" is a tendency and no sentence says a pier falls, so the only forced consequence is the force running \"less nearly\" down the body. Q3: The thick-walled hall is the real contender, since the passage grants \"That works\"; but the stem asks for the principle by which the cathedral stands, and the text puts that principle in the buttress and the final sentence, \"put the weight where it can be carried, and leave the rest open\", which the thick wall does not do. Q4: The case for \"intended by its builders\" rests on paragraph three; the stem's sentence is about the view \"from inside\", and \"so thin that\" makes the phrase an impression caused by thinness, which \"appears to the eye\" alone preserves.",
+      "blind_solve": {
+        "solver": "sonnet blind reader 2026-10-07 (batch rc-008)",
+        "agreed": 4,
+        "total": 4,
+        "notes": "full agreement"
+      }
+    },
+    "vocab_extracted": [
+      "pier",
+      "arcade",
+      "ornament"
+    ]
+  },
+  "passage": {
+    "title": "Beneath the Vault",
+    "reading_time_min": 2.4,
+    "paragraphs": [
+      {
+        "id": "rc-0157-p1",
+        "text": "You come in by the west door and look up, because the building is made to make you. Far above, stone ribs cross and meet, and the pale vault between them hangs there as if held up by habit. Between each pair of piers there is hardly any wall at all: tall windows run from the top of the arcade almost to the vault, and the stone between them is so thin that from inside it reads as a frame around glass. A heavy stone roof is resting on walls that are mostly air. Something is carrying it, and you cannot see it from here."
+      },
+      {
+        "id": "rc-0157-p2",
+        "text": "A vault is a curved sheet of stone, and a curve under load does not press down alone. Each stone leans on the next, and the lean turns part of the weight sideways, so that at the top of the wall the push arrives at an angle: partly downward, which a wall can take, and partly outward, which a tall thin wall cannot. Push outward on the top of a garden wall and you have the problem exactly. Earlier builders answered it by making the wall thick enough to swallow the outward push in its own mass. That works, and it costs them the windows."
+      },
+      {
+        "id": "rc-0157-p3",
+        "text": "Now go outside. Well clear of the wall, opposite each pier, stands a second pier, and from its top a half-arch leaps over the roof of the aisle to land on the wall exactly where the vault's push arrives. That half-arch is the flying buttress. It takes the outward push at the top of the wall and carries it over the aisle to the outer pier, which is heavy enough and far enough out to send it into the ground. The wall between the piers now carries little but itself, and a wall that carries nothing can be glass. The windows are not a luxury added once the structure was safe; they are what it left empty."
+      },
+      {
+        "id": "rc-0157-p4",
+        "text": "One thing remains, and you will have walked past it as ornament. On top of each outer pier stands a pinnacle, a small spire of carved stone, and it has a job. The push the buttress delivers arrives at an angle, and a pier pushed at an angle wants to tip outward in its turn. The pinnacle is weight placed on top, and it pulls the combined force back towards the vertical, so the load runs down through the pier's body instead of out through its face. The glass wall and the stone spire are one decision seen twice: put the weight where it can be carried, and leave the rest open."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0157-q1",
+      "type": "except",
+      "skill": "specific_detail",
+      "patterns": [
+        "comp.explicit_detail",
+        "lang.causal_wording",
+        "elim.systematic"
+      ],
+      "target_mistake": "collapsing the two components of the push into one, so that \"takes the push\" is read as taking all of it",
+      "prediction_target": null,
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "inference"
+      ],
+      "stem": "All of the following are stated in the passage about the flying buttress or the outer pier EXCEPT:",
+      "options": {
+        "A": "The half-arch meets the wall at the point where the vault’s push arrives.",
+        "B": "The outer pier stands at a distance from the wall it serves.",
+        "C": "The outer pier is heavy enough to carry the push down into the ground.",
+        "D": "The half-arch relieves the wall of the downward part of the push."
+      },
+      "correct": "D",
+      "estimated_time_sec": 55,
+      "explanation": {
+        "expert_notice": "The second paragraph splits the push into two parts and says which one the wall can take: \"partly downward, which a wall can take, and partly outward, which a tall thin wall cannot\". Everything the buttress does is about the outward part.",
+        "correct_reasoning": "The third paragraph says the buttress \"takes the outward push at the top of the wall and carries it over the aisle\". The downward part was never a problem: the wall \"can take\" it. So the claim that the half-arch relieves the wall of the downward push is not stated, and is in fact the opposite of the division the text draws. The other three statements are each in the third paragraph: the half-arch lands \"exactly where the vault's push arrives\", the outer pier stands \"well clear of the wall\", and it is \"heavy enough and far enough out to send it into the ground\".",
+        "passage_anchor": "rc-0157-p2, rc-0157-p3",
+        "question_type_note": "An EXCEPT question hands you three true statements and one that is not. Check each against the text; the odd one out is usually a true sentence with one word changed.",
+        "reading_habit": "When a passage divides a thing into parts, write the parts down. The question will test which part went where.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "Stated: the half-arch leaps \"to land on the wall exactly where the vault's push arrives\". A reader who remembers only that it lands on the outer pier doubts this.",
+            "seductive_element": "The buttress is described as carrying the push to the pier, so the wall end of it is easy to forget."
+          },
+          {
+            "option": "B",
+            "trap_type": "wrong_condition",
+            "why_wrong": "Stated: the outer pier stands \"well clear of the wall\". A reader who pictures a buttress as leaning against the wall thinks the distance is wrong.",
+            "seductive_element": "Ordinary buttresses do sit against walls; the passage's point is that this one does not."
+          },
+          {
+            "option": "C",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "Stated: the pier is \"heavy enough and far enough out to send it into the ground\". The reader who recalls only the pinnacle paragraph thinks the pier needs help.",
+            "seductive_element": "The fourth paragraph says the pier \"wants to tip\", which sounds as if it cannot carry the push alone."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0157-q2",
+      "type": "must_be_true",
+      "skill": "inference",
+      "patterns": [
+        "inf.necessary",
+        "lang.may_vs_must",
+        "struct.cause_effect"
+      ],
+      "target_mistake": "turning \"wants to tip\" into \"falls\", or moving the pinnacle’s effect from the pier to the vault or the wall",
+      "prediction_target": "without the pinnacle's weight, the force in the pier would lean further from the vertical, towards the pier's face",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 3,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "scope"
+      ],
+      "stem": "If the pinnacles were removed from the outer piers, which of the following must be true, according to the passage?",
+      "options": {
+        "A": "The outer piers would fall outward as soon as the vault was loaded.",
+        "B": "The vault's push would reach the top of the wall at a steeper angle.",
+        "C": "The load in each outer pier would run less nearly down its own body.",
+        "D": "The wall between the piers would again have to be thick enough to take the push."
+      },
+      "correct": "C",
+      "estimated_time_sec": 90,
+      "explanation": {
+        "expert_notice": "The fourth paragraph gives the pinnacle one job: its weight \"pulls the combined force back towards the vertical, so the load runs down through the pier's body instead of out through its face\". Remove the weight, and the only thing that must change is the direction of that force.",
+        "correct_reasoning": "The text makes the pinnacle's weight the reason \"the load runs down through the pier's body\". Take the weight away and the combined force is no longer pulled \"back towards the vertical\", so it must run less nearly down the pier's body. That is all the text forces. It does not say the pier falls; it says a pier pushed at an angle \"wants to tip\", which is a tendency, not an event. The pinnacle acts on the pier alone; the vault's push on the wall and the wall's thickness are settled in the earlier paragraphs and do not depend on it.",
+        "passage_anchor": "rc-0157-p4",
+        "question_type_note": "Must-be-true asks for the smallest change the text compels. The right option is often the least dramatic one: a direction shifts, a tendency grows. Anything that adds an event or moves to another part of the structure has gone past the evidence.",
+        "reading_habit": "Underline tendency words (\"wants to\", \"tends to\", \"is inclined to\"). They never license \"will\".",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "possibility_as_certainty",
+            "why_wrong": "The text says a pushed pier \"wants to tip outward\", a tendency; it never says a pier without a pinnacle falls, let alone \"as soon as the vault was loaded\".",
+            "seductive_element": "The passage treats the pinnacle as necessary, so removing it feels like removing the pier's support."
+          },
+          {
+            "option": "B",
+            "trap_type": "wrong_condition",
+            "why_wrong": "The pinnacle acts on the pier after the buttress has delivered the push; the angle at which the vault’s push \"arrives\" at the wall is fixed in the second paragraph by the vault’s own curve.",
+            "seductive_element": "Angles are mentioned twice, and a hurried reader joins them."
+          },
+          {
+            "option": "D",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "The buttress still \"carries it over the aisle to the outer pier\", pinnacle or no pinnacle; the wall is relieved by the buttress, not by the spire.",
+            "seductive_element": "The passage links glass walls and pinnacles as \"one decision seen twice\", so undoing one seems to undo the other."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0157-q3",
+      "type": "application",
+      "skill": "application",
+      "patterns": [
+        "inf.author_view_application",
+        "arg.principle",
+        "struct.phenomenon_explanation"
+      ],
+      "target_mistake": "taking the rejected alternative (thick walls), or a case that removes the push instead of relocating it, for the principle",
+      "prediction_target": "the load is carried away from the wall to a support that can take it, and the wall is then free to be opened",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 3,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "inference"
+      ],
+      "stem": "Which of the following buildings most closely applies the principle by which the cathedral in the passage stands?",
+      "options": {
+        "A": "A hall whose roof load is led to supports outside the walls, which are then free to be opened.",
+        "B": "A hall whose thick walls take the roof's push inside their own mass and admit light through small openings.",
+        "C": "A hall whose roof is built so light that it exerts no sideways push on the walls below.",
+        "D": "A hall whose walls are crowned with carved spires placed so as to make the building look taller."
+      },
+      "correct": "A",
+      "estimated_time_sec": 90,
+      "explanation": {
+        "expert_notice": "The last sentence states the principle in a form that can be carried to any building: \"put the weight where it can be carried, and leave the rest open\". The push is relocated, not removed, and the opening is what relocation leaves behind.",
+        "correct_reasoning": "The cathedral stands because the outward push is carried \"over the aisle to the outer pier\", so that the wall \"carries little but itself, and a wall that carries nothing can be glass\". The correct option has both halves: the load is led to supports outside the walls, and the walls are thereby free to open. The thick-walled hall is the alternative the second paragraph describes and sets aside (\"That works, and it costs them the windows\"). The light roof removes the push rather than carrying it elsewhere, so there is nothing to relocate. The spires placed for height are ornament, which the fourth paragraph says the pinnacle is not.",
+        "passage_anchor": "rc-0157-p3, rc-0157-p4",
+        "question_type_note": "Application questions ask which new case runs on the passage's mechanism. State the mechanism in one line first, then test each option against both halves of it; a case that matches the outcome but not the means is a decoy.",
+        "reading_habit": "When a passage ends on a general rule, check whether a tempting option satisfies the rule's cause or only its effect.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "opposite_direction",
+            "why_wrong": "This is the earlier builders’ answer, which the text sets aside: \"thick enough to swallow the outward push in its own mass. That works, and it costs them the windows.\"",
+            "seductive_element": "It is a real way to hold a vault, and the passage says it works."
+          },
+          {
+            "option": "C",
+            "trap_type": "wrong_condition",
+            "why_wrong": "The principle is to put the weight \"where it can be carried\", not to abolish it; a roof with no sideways push has nothing for a buttress to do, so the mechanism is absent.",
+            "seductive_element": "It ends with open walls, which is the result the passage admires."
+          },
+          {
+            "option": "D",
+            "trap_type": "wrong_structural_role",
+            "why_wrong": "The pinnacle \"has a job\": its weight keeps the load inside the pier. Spires placed \"to make the building look taller\" are exactly the ornament the passage says the pinnacle is not.",
+            "seductive_element": "The passage does describe spires on top of piers, and a skim remembers the spire and not its reason."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0157-q4",
+      "type": "vocabulary_in_context",
+      "skill": "vocabulary_in_context",
+      "patterns": [
+        "comp.paraphrase",
+        "lang.contrast_marker"
+      ],
+      "target_mistake": "taking \"reads\" literally as reading a text, or importing a claim about intention from later in the passage",
+      "prediction_target": "\"reads as\" here should mean looks like to the eye, since the sentence is describing what the wall appears to be from inside, not a record, an intention or a measurement",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 2,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "specific_detail"
+      ],
+      "stem": "In the sentence \"the stone between them is so thin that from inside it reads as a frame around glass\", the phrase \"reads as\" most nearly means",
+      "options": {
+        "A": "is recorded by historians as",
+        "B": "appears to the eye to be",
+        "C": "was intended by its builders to be",
+        "D": "has been measured to be"
+      },
+      "correct": "B",
+      "estimated_time_sec": 45,
+      "explanation": {
+        "expert_notice": "The sentence is about what you see \"from inside\": the wall is \"so thin that\" it looks like something other than a wall. \"Reads as\" here describes a visual impression, not a document or a measurement.",
+        "correct_reasoning": "The sentence contrasts what the wall is (stone) with what it looks like from the nave (a frame around glass), and attributes the impression to the viewer’s position, \"from inside\". \"Appears to the eye to be\" keeps that sense exactly. Historians, intention and measurement all belong to other sentences or to none; the first paragraph is doing nothing but describing what the visitor sees.",
+        "passage_anchor": "rc-0157-p1",
+        "question_type_note": "Vocabulary in context is answered from the sentence the word sits in, not from the passage's argument. Replace the phrase with each option and see which keeps the sentence's own point.",
+        "reading_habit": "Common words used in uncommon ways (\"reads\", \"wants\", \"takes\") are the usual targets. Ask what the sentence needs the word to do.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "near_synonym_confusion",
+            "why_wrong": "\"Reads\" is the eye’s reading of a surface; nothing in the sentence or the paragraph mentions a record or a historian.",
+            "seductive_element": "The verb \"read\" suggests documents."
+          },
+          {
+            "option": "C",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "The sentence is about appearance \"from inside\"; the builders’ intentions come up only in the third paragraph, and even there the windows are \"what it left empty\", not a stated aim.",
+            "seductive_element": "The passage later explains why the walls are glass, and a reader reads that explanation back into the verb."
+          },
+          {
+            "option": "D",
+            "trap_type": "wrong_abstraction_level",
+            "why_wrong": "\"So thin that ... it reads as\" describes an impression caused by thinness, not a measurement of it; no figure or instrument appears anywhere.",
+            "seductive_element": "\"Thin\" sounds like a measured property."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "pier",
+      "passage_use": "between each pair of piers",
+      "meaning_here": "an upright mass of stone built to carry load",
+      "difficulty": "medium"
+    },
+    {
+      "word": "arcade",
+      "passage_use": "from the top of the arcade",
+      "meaning_here": "a row of arches carried on piers",
+      "difficulty": "medium"
+    },
+    {
+      "word": "ornament",
+      "passage_use": "walked past it as ornament",
+      "meaning_here": "decoration with no structural purpose",
+      "difficulty": "easy"
+    }
+  ],
+  "mentor": {
+    "challenge": "Stone roofs weigh hundreds of tonnes, yet the walls under this one are mostly glass. Walk in, look up, then go outside and see what is holding it.",
+    "one_sentence_summary": "A Gothic vault pushes sideways as well as down, and the flying buttress carries that sideways push over the aisle to an outer pier, so the wall between the piers can be glass, while the pinnacle's weight keeps that pier's load running straight down.",
+    "main_idea": "A stone vault pushes outward as well as down, and a flying buttress carries that outward push to an outer pier, which is why the wall can be glass; the pinnacle on top of the pier is weight that keeps the load running straight down, not decoration.",
+    "simple_explanation": "You walk into the building through the west door and look up. Far above, a stone roof curves between the piers, and there is hardly any wall at all between them: mostly tall glass windows. A heavy stone roof is sitting on walls that are mostly air, and you cannot yet see what is holding it up.\n\nA curved stone roof does not just push straight down. Part of its weight pushes sideways too, the same way a loaded garden wall gets pushed sideways at the top. A thin wall can take the downward part of that push but not the sideways part. Builders used to solve this by making the wall thick enough to swallow the sideways push, but that meant no windows.\n\nNow look outside. A second, separate pier stands away from the wall, and a stone half-arch leaps from its top, over the roof of the side aisle, to land on the wall exactly where the sideways push arrives. That half-arch is the flying buttress. It carries the sideways push away to the outer pier, which is heavy and far enough out to send the push safely into the ground. Because the wall between the piers now carries almost nothing, it can be glass.\n\nOne more piece matters: the small stone spire on top of each outer pier, which looks like decoration but is not. The push arriving from the buttress comes in at an angle, and that angle would tip the pier outward over time. The spire is extra weight sitting on top of the pier, and that weight pulls the combined force back towards straight down, so the load runs safely through the middle of the pier instead of pushing out through its outer face. The glass wall and the stone spire are really the same idea, used twice: put the weight where it can be carried safely, and leave everything else open.",
+    "why_difficult": "Readers tend to see the buttress and the pinnacle as separate, decorative features rather than as two parts of one single load path, and the EXCEPT question specifically tests whether a reader kept the downward push and the outward push apart as two different things the wall and the buttress each handle.",
+    "author_intention": "To walk a reader through a real structural mechanism step by step, so that the glass wall and the stone spire are understood as one decision about where weight goes, seen twice, rather than as two separate design choices.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0157-p1",
+        "role": "Sets the puzzle",
+        "note": "You walk into the building and look up: the roof is heavy stone, but the walls are mostly glass, and something you cannot see is holding the roof up."
+      },
+      {
+        "paragraph_id": "rc-0157-p2",
+        "role": "Explains the push",
+        "note": "A curved stone roof does not just press straight down. Part of its weight pushes sideways on the top of the wall, and a thin wall cannot take that sideways push alone."
+      },
+      {
+        "paragraph_id": "rc-0157-p3",
+        "role": "Introduces the buttress",
+        "note": "Outside, a second pier stands apart from the wall, and a stone half-arch carries the sideways push across the aisle to that pier, so the wall itself carries almost nothing and can be glass."
+      },
+      {
+        "paragraph_id": "rc-0157-p4",
+        "role": "Explains the pinnacle",
+        "note": "The small stone spire on top of the outer pier is not decoration. Its weight pushes the load straight down through the pier instead of letting the pier tip outward."
+      }
+    ],
+    "tone_progression": "The voice stays admiring, patient and exact throughout, moving the reader physically from inside the building to outside it and finally up to the pinnacle, without ever breaking into argument or correcting a rival view.",
+    "key_transitions": [
+      "‘Something is carrying it, and you cannot see it from here.’ (end of paragraph 1): sets the puzzle the rest of the passage answers.",
+      "‘Now go outside.’ (opening of paragraph 3): the passage moves the reader from the inside of the building to the mechanism holding it up.",
+      "‘The glass wall and the stone spire are one decision seen twice.’ (closing of paragraph 4): ties the wall and the pinnacle together as the same principle."
+    ],
+    "misunderstanding": "A hurried reader treats the flying buttress as carrying the vault's whole weight, including the part the wall was always able to take on its own, which is exactly the EXCEPT question's trap.",
+    "traps_summary": "The options reuse the passage's own sentences but move one detail to the wrong part, swap a tendency for an event, or take the alternative method the passage sets aside and dress it up as the mechanism being tested.",
+    "reading_lesson": "When a passage splits one force into two parts and says which part each element of the structure handles, write the split down. Questions will test whether you kept the parts separate rather than letting one element take credit for both.",
+    "real_world": "Any structure that looks delicate is usually carrying its real load somewhere else on purpose, from a cantilevered shelf to a suspension bridge's cables.",
+    "takeaway": "A wall that carries nothing can be made of glass, because the weight was always going somewhere else.",
+    "reflection_question": "Where else have you mistaken a decorative-looking part of something for its real support?",
+    "eli10": {
+      "big_idea": "A heavy stone roof pushes sideways as well as down, and a stone bridge outside carries that sideways push away so the wall underneath can be made of glass.",
+      "story": "A big stone church has a heavy stone roof. A curved roof does not only push down. It also pushes sideways, like a loaded shelf. A thin wall cannot take that alone. Old builders just made the wall thick. That worked, but it blocked the light. This church does something else. Outside the wall stands a second stone post, set apart from it. A stone half-arch runs from that post to the wall. It catches the sideways push right there. Then it carries that push to the outer post, which sends it into the ground. Because the wall carries almost nothing now, it can be glass. On top of the post sits a small stone spire. It looks like decoration, but it is not. Its weight pushes the load straight down the post, so the post does not tip outward. The glass wall and the little spire are the same trick, used twice.",
+      "paragraphs": [
+        "The church has a heavy stone roof, and you cannot yet see what is holding it up.",
+        "A curved roof pushes sideways as well as down, and a thin wall cannot take the sideways push alone.",
+        "A stone bridge outside carries that sideways push over to a strong post, so the wall itself can be glass.",
+        "A small stone spire on top of the post is not decoration. Its weight keeps the post from tipping outward."
+      ],
+      "author_view": "The writer is admiring and exact, walking the reader step by step through a real piece of engineering rather than arguing a point, and treats the glass wall and the stone spire as one clever idea used twice."
+    }
+  }
+}

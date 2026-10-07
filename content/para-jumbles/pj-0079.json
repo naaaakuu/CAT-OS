@@ -1,0 +1,203 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "pj-0079",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 90,
+    "genre": "medicine-health",
+    "difficulty": "hard",
+    "difficulty_numeric": 8,
+    "tier": "cat-plus",
+    "title": "A Quarter of the Dose",
+    "theme": "why a dose scaled from adults by weight can poison a child, since the organs that clear a drug mature on separate schedules, and why a withdrawn rule taught the end of fractions, not a better one",
+    "estimated_time_sec": 200,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-10: five-sentence TITA jumble, a form set in official papers alongside the four-sentence default; re-verify against each new official paper"
+    },
+    "macro_pattern": "general_to_specific",
+    "cohesion_signals": [
+      "demonstrative",
+      "connective_explicit",
+      "article_given_new",
+      "lexical_repetition"
+    ],
+    "primary_trap": "anchor_pair",
+    "secondary_traps": [
+      "competing_opener",
+      "misleading_connective"
+    ],
+    "dna_traits": [
+      "surface_matching",
+      "opener_heuristic",
+      "wm_long_chain"
+    ],
+    "difficulty_vector": {
+      "vocabulary_load": 4,
+      "inference_load": 4,
+      "syntactic_complexity": 5,
+      "reference_density": 4,
+      "concept_abstractness": 3,
+      "dependency_chain_length": 4,
+      "transition_ambiguity": 4,
+      "competing_openings": 4,
+      "competing_endings": 4,
+      "lexical_decoys": 5,
+      "topic_unfamiliarity": 3,
+      "plausible_orderings": 4
+    },
+    "num_plausible_orderings": 4,
+    "heuristic_adversarial": true,
+    "nucleus": "C",
+    "learning_objective": "place an example after the mechanism it instances rather than after the rule it restates, by finding the demonstrative in the example that names the mechanism",
+    "reasoning_patterns": [
+      "disc.general_to_specific",
+      "disc.example_after_claim",
+      "disc.demonstrative",
+      "disc.contrast",
+      "disc.competing_opener"
+    ],
+    "quality": {
+      "status": "verified",
+      "adversarial_review": "The live rival puts the withdrawn rule directly after the temptation to scale by weight, because 'a share of the adult dose in proportion to their weight' is that rule in other words, and then reads the organs sentence as the explanation of the failure and the last sentence as the moral. It is refused by 'a poisoning by exactly that mismatch', which has no mismatch to collect until the organs sentence has set the immature organ against the mature one, and by 'But a dose is cleared, not merely carried', which contradicts the arithmetic of the temptation sentence and contradicts nothing when placed after a failure that has already been reported. A second rival opens on 'The temptation is to treat a child as a small adult', a self-contained thesis, and lets the tested-on-adults sentence follow as the reply; it is refused by 'the dose', a definite with no drug before it, and by 'But', whose contrast would then fall on a sentence that already denies the arithmetic. A third rival ends on the poisoning, moving the fractions sentence forward; 'What the withdrawal taught' then precedes any withdrawal, and 'One rule of exactly this kind' would point at the right practice rather than the wrong one.",
+      "blind_solve": {
+        "solver": "sonnet blind reader 2026-10-07",
+        "agreed": 1,
+        "total": 1,
+        "notes": "full agreement"
+      }
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-07",
+      "usage_note": "Original composition in CAT register for CAT OS. General pharmacology of paediatric dosing and organ maturation; the withdrawn weight-scaled rule is left unnamed and no specific drug, case or text is adapted. Personal study only."
+    },
+    "date_added": "2026-10-07",
+    "batch_id": "batch-pj-004",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-pj-004",
+    "reviewer_notes": "A cat-plus five-sentence general-to-specific item whose trap is an example that restates the rule it is an example of. The withdrawn rule 'gave infants a share of the adult dose in proportion to their weight', which is the temptation sentence's rule in other words, so the example wants to follow the rule; the paragraph places the mechanism between them and gives the example a demonstrative, 'that mismatch', that only the mechanism can satisfy. The 'But' sentence is the nucleus and the one place the contrast fits. The temptation sentence is a credible opener and is blocked only by a definite article."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "The temptation is to treat a child as a small adult and to scale the dose by weight, so that a child of a quarter the mass receives a quarter the amount.",
+      "role": "development"
+    },
+    {
+      "label": "B",
+      "text": "What the withdrawal taught was not a better fraction but the end of fractions: a dose for a child has to be found in children, organ by organ and age by age, because the body it enters is not a reduced copy of the body the trial measured.",
+      "role": "conclusion"
+    },
+    {
+      "label": "C",
+      "text": "But a dose is cleared, not merely carried, and the organs that clear it, chiefly the liver and the kidneys, mature on their own separate schedules, so that a weight-scaled dose can be too much for the organ that is still immature and too little for the one already working at adult pace.",
+      "role": "cause_effect"
+    },
+    {
+      "label": "D",
+      "text": "A drug that has been tested on adults has been tested on adults, and the step from there to children is not a matter of arithmetic.",
+      "role": "topic"
+    },
+    {
+      "label": "E",
+      "text": "One rule of exactly this kind, which gave infants a share of the adult dose in proportion to their weight, was withdrawn after infants proved unable to clear the drug their livers were being asked to handle, and the dose that had been correct by the arithmetic turned out to be a poisoning by exactly that mismatch.",
+      "role": "example"
+    }
+  ],
+  "correct_order": [
+    "D",
+    "A",
+    "C",
+    "E",
+    "B"
+  ],
+  "links": [
+    {
+      "from": "D",
+      "to": "A",
+      "device": "given_new_flow",
+      "reliability": "medium",
+      "explanation": "'The dose' is a definite that needs a drug already in play, and the opening sentence has put one there. 'Arithmetic' in the first sentence is what 'a quarter the mass receives a quarter the amount' spells out."
+    },
+    {
+      "from": "A",
+      "to": "C",
+      "device": "contrast_signal",
+      "reliability": "high",
+      "explanation": "'But a dose is cleared, not merely carried' contradicts the picture of a dose as a quantity to be divided by weight, which is the picture the temptation sentence has just drawn. Nowhere else in the set is there an arithmetic for the 'But' to push against."
+    },
+    {
+      "from": "C",
+      "to": "E",
+      "device": "demonstrative_reference",
+      "reliability": "high",
+      "explanation": "'One rule of exactly this kind' is a weight-scaled rule, and 'a poisoning by exactly that mismatch' collects the too-much-for-one-organ, too-little-for-another that the mechanism sentence has just described. The mismatch exists nowhere else."
+    },
+    {
+      "from": "E",
+      "to": "B",
+      "device": "given_new_flow",
+      "reliability": "high",
+      "explanation": "'What the withdrawal taught' treats the withdrawal as given, and only the example sentence has withdrawn anything. 'Not a better fraction' answers the 'share ... in proportion to their weight' of the rule just described."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "A general claim that adults are not children, the tempting arithmetic, the mechanism that defeats the arithmetic, a specific rule that was defeated by it, and the lesson drawn from the specific. The example is written so that it restates the rule it illustrates, which is what makes it want to sit beside the rule; the demonstrative 'that mismatch' is what sends it after the mechanism instead.",
+    "movement": [
+      {
+        "label": "D",
+        "why_here": "The general claim and the only sentence with nothing to collect: it introduces a drug, adults, children, and the word 'arithmetic' that the next sentence spells out and the fourth sentence returns to."
+      },
+      {
+        "label": "A",
+        "why_here": "It states the arithmetic the paragraph will defeat. 'The dose' needs the drug just introduced, and the sentence is thesis-shaped enough to tempt a solver to open with it."
+      },
+      {
+        "label": "C",
+        "why_here": "The nucleus. 'But' contradicts the arithmetic immediately before it and supplies the mechanism: organs clear a dose on their own schedules, so one scaled dose can be both too much and too little. 'That mismatch' in the next sentence is this."
+      },
+      {
+        "label": "E",
+        "why_here": "The specific. 'One rule of exactly this kind' is a weight-scaled rule, and 'exactly that mismatch' is the mechanism just described. It ends on the sharpest line in the set, which is the ending trap."
+      },
+      {
+        "label": "B",
+        "why_here": "The lesson. 'What the withdrawal taught' collects the withdrawal just reported, and the paragraph ends by returning to the general claim: the child's body is not a reduced copy of the adult's."
+      }
+    ],
+    "tempting_orders": [
+      {
+        "order": "DAECB",
+        "trap_type": "anchor_pair",
+        "why_tempting": "'A share of the adult dose in proportion to their weight' is the temptation sentence's rule in other words, so the withdrawn rule reads as the immediate instance of the rule just stated. The organs sentence then looks like the explanation of why it failed, and the lesson follows the explanation.",
+        "where_it_breaks": "'A poisoning by exactly that mismatch' has no mismatch to collect: the immature organ against the mature one exists only once the organs sentence has described it, and here that sentence comes afterwards. 'But a dose is cleared, not merely carried' would also follow a failure already reported, contradicting nothing, where after the arithmetic it contradicts exactly that."
+      },
+      {
+        "order": "ADCEB",
+        "trap_type": "competing_opener",
+        "why_tempting": "'The temptation is to treat a child as a small adult' is self-contained and thesis-shaped, and the tested-on-adults sentence reads naturally after it as the author's reply.",
+        "where_it_breaks": "'The dose' is a definite article with nothing to be definite about: no drug is in play until the tested-on-adults sentence supplies one. And 'But', pushing against an arithmetic, would then have the reply sentence between it and the arithmetic, a sentence that already denies what 'But' is denying."
+      },
+      {
+        "order": "DACBE",
+        "trap_type": "competing_ending",
+        "why_tempting": "'A poisoning by exactly that mismatch' is the sharpest line in the set and reads like a last word, while the fractions sentence after the mechanism reads as a general conclusion that an example could then illustrate.",
+        "where_it_breaks": "'What the withdrawal taught' precedes any withdrawal, and 'One rule of exactly this kind' would follow a sentence about finding doses in children, so 'this kind' would point at the right practice instead of the wrong one."
+      }
+    ],
+    "trap_named": "The trap is an example that restates its rule. The withdrawn rule is described in the very words of the temptation, 'a share of the adult dose in proportion to their weight', so it looks like the rule's own next sentence, and in a five-sentence set a confident pair in the middle seems to settle the rest. But the example also says 'exactly that mismatch', and a demonstrative outranks a paraphrase: the mismatch between an immature organ and a mature one is in the mechanism sentence, which must therefore stand between the rule and its instance.",
+    "solving_habit": "When an example seems to repeat a claim, read the example to its end before placing it. The clause that names what it is an example of is often the last one, and it may name the mechanism rather than the rule."
+  },
+  "mentor": {
+    "challenge": "A quarter of the weight, a quarter of the dose: the arithmetic is flawless. Somewhere in these five sentences it is overruled, and one word marks the spot.",
+    "paragraph_plain": "A drug tested on adults has been tested on adults, and getting from there to children is not a matter of arithmetic. The tempting thing is to treat a child as a small adult and scale the dose by weight, so that a child a quarter the size gets a quarter the amount. But a dose is not just carried around the body; it is cleared out of it, and the organs that do the clearing, mainly the liver and the kidneys, mature at their own separate rates. So a dose scaled by weight can be too much for the organ that is still immature and too little for the one already working at adult speed. One rule of exactly this kind, which gave infants a share of the adult dose in proportion to their weight, was withdrawn after infants turned out to be unable to clear the drug their livers were being asked to deal with; a dose that was right by the arithmetic was a poisoning by the physiology. What the withdrawal taught was not a better fraction but the end of fractions: a child's dose has to be found in children, organ by organ and age by age, because the body it goes into is not a scaled-down copy of the body the trial measured.",
+    "takeaway": "An example follows the sentence it points at, not the sentence it resembles."
+  }
+}

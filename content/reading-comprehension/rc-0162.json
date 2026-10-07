@@ -1,0 +1,412 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0162",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 90,
+    "genre": "urban-studies",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "stage": "intermediate",
+    "skills": [
+      "evidence-anchoring",
+      "inference",
+      "application",
+      "vocabulary-in-context",
+      "qualifier-tracking"
+    ],
+    "word_count": 496,
+    "question_count": 4,
+    "question_types": [
+      "not_true",
+      "inference",
+      "application",
+      "phrase_in_context"
+    ],
+    "theme": "a vendor ban transfers custom and livelihood from the poor who ate and sold on the pavement to the shops behind them, and an objection justifies removal only where removal is its sole remedy",
+    "estimated_time_min": 7.5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-07",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted."
+    },
+    "date_added": "2026-10-07",
+    "batch_id": "batch-rc-008",
+    "prompt_version": "content engine v1 + CAT paper patterns 2026-10; batch-rc-008",
+    "reviewer_notes": "The corpus had no passage arguing an unpopular position with heat; this one does it in the second person with direct questions, and narrows its own claim in the last paragraph without cooling. The reward is a usable test (is removal the only remedy?) rather than a mood. The near-tie is in the inference question, where a distractor turns the author's conditional (\"if licensing would meet the complaint\") into an absolute. The NOT-true key splits the two objections, hygiene and obstruction, which the text answers in the same way. Sentence rhythm is deliberately uneven: one-word questions beside long lists. The move is an unpopular position argued with heat, then narrowed, carried in a heated, second-person voice that puts direct questions to the reader and names no city.",
+    "length_class": "medium",
+    "structure": "claim_qualification",
+    "viewpoints": 2,
+    "tone": "angry, direct",
+    "difficulty_vector": {
+      "lexical": 2,
+      "syntactic": 3,
+      "abstraction": 3,
+      "inference_depth": 3,
+      "distractor_similarity": 4,
+      "reasoning_depth": 4,
+      "structural_ambiguity": 2,
+      "time_pressure": 3
+    },
+    "reasoning_patterns": [
+      "comp.explicit_detail",
+      "lang.implicit_negation",
+      "elim.systematic",
+      "inf.strongly_supported",
+      "lang.absolute_vs_qualified",
+      "scope.condition",
+      "inf.author_view_application",
+      "arg.principle",
+      "arg.necessary_vs_sufficient",
+      "comp.paraphrase",
+      "comp.function_over_words",
+      "lang.causal_wording",
+      "struct.qualification",
+      "arg.concession",
+      "arg.rebuttal",
+      "struct.pivot"
+    ],
+    "quality": {
+      "status": "verified",
+      "adversarial_review": "Q1: A strong candidate argues for the option on the shops' prices, saying \"a much higher price\" is not what the text says. But \"three times the price\" is a much higher price; the option is weaker, not false. The key is settled by \"Mark out a pitch and license it\" and \"the rule is a width\", which answer obstruction by licensing, not removal. Q2: The fight is between the key and \"never the real reason ... inspection can always meet the complaint\". The text's sentence begins \"If licensing would meet the complaint\"; the condition is in the text, and the absolute is not. Q3: The strongest rival is the unsafe-temperature case, because the inspection has already failed. The author's own words, \"you do not shut the restaurant because kitchens can be dirty\", give the remedy as inspection and correction, so removal is not the only remedy. The noise case is killed by \"The vendor who leaves a lane has met every objection the clearance ever named\". Q4: A candidate may argue for the literal reading, that the city owns the pitches. The next three sentences each begin \"Nobody\", which is the author's own gloss: the city provided nothing, so it owns nothing in the literal sense.",
+      "blind_solve": {
+        "solver": "sonnet blind reader 2026-10-07 (batch rc-008)",
+        "agreed": 4,
+        "total": 4,
+        "notes": "full agreement"
+      }
+    },
+    "vocab_extracted": [
+      "intolerable",
+      "remedy",
+      "concede"
+    ]
+  },
+  "passage": {
+    "title": "Hot Rice at Six",
+    "reading_time_min": 2.7,
+    "paragraphs": [
+      {
+        "id": "rc-0162-p1",
+        "text": "Walk down any street that has just been \"cleared\" and ask what was actually removed. Not dirt: the pavement is the same pavement, and it is swept by the same people. What has gone is the woman who sold hot rice at six in the morning to the men who sweep it, the tea stall that was the only light on the corner at eleven at night, and the cobbler who mended a strap for less than a bus fare. The notice called it an improvement. For whom? A vendor is the cheapest public infrastructure a city will ever own. Nobody built her a canteen, so she is the canteen. Nobody paid for a night patrol, so her lamp and her customers are the patrol. Nobody lent her capital, because a trade you can enter with a basket and a stool needs none. Remove her and all three services stop, and nothing replaces them."
+      },
+      {
+        "id": "rc-0162-p2",
+        "text": "So who gains? It was not the men who ate the rice. It was the shops behind the carts, which sell the same goods at three times the price, and which found the competition on their doorstep intolerable. A \"clean\" street is not a neutral good enjoyed by everyone. It is a transfer: the custom of the poor who ate there, and the livelihood of the poor who sold there, handed to the shops that wanted them gone. You may think that a fair outcome. Then say so. Do not call it hygiene."
+      },
+      {
+        "id": "rc-0162-p3",
+        "text": "Hygiene is the usual word, and obstruction is the other, and both are objections to how vending is done, not to whether it is done. Is the food unsafe? Inspect it, as you inspect the restaurant kitchen; you do not shut the restaurant because kitchens can be dirty. Does the cart take too much of the footway? Mark out a pitch and license it. The honest test of any objection is whether removal is the only remedy for it. If licensing would meet the complaint, then the complaint was never the reason for the ban. It was the excuse, and the reason was the transfer."
+      },
+      {
+        "id": "rc-0162-p4",
+        "text": "I will concede the one cost that is real. A pavement is for walking on, and a row of carts can close it, so that an old man with a stick or a woman with a pram is pushed into the road. That harm falls on exactly the people vending is supposed to serve. But notice what the concession permits. It permits a rule, and the rule is a width: leave a walking lane, measured in metres and not in vendors. The vendor who leaves a lane has met every objection the clearance ever named. The claim I am defending is therefore narrower than the one I began with, and I hold it with the same heat. For her, a ban has no remaining argument, and a council that bans her anyway should be made to say in whose favour the pavement was cleared."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0162-q1",
+      "type": "not_true",
+      "skill": "specific_detail",
+      "patterns": [
+        "comp.explicit_detail",
+        "lang.implicit_negation",
+        "elim.systematic"
+      ],
+      "target_mistake": "splitting the two objections and assuming the author treats them differently, when the text answers both by licensing and a width rule",
+      "prediction_target": null,
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "inference",
+        "scope"
+      ],
+      "stem": "Which of the following is NOT true according to the passage?",
+      "options": {
+        "A": "The author grants that a row of carts can push a person with a stick or a pram out into the road.",
+        "B": "The author holds that licensing meets the hygiene objection but that obstruction calls for removal.",
+        "C": "The author claims that a trade one can enter with a basket and a stool requires no capital at all.",
+        "D": "The author says the shops behind the carts sell the same goods at a much higher price than the carts."
+      },
+      "correct": "B",
+      "estimated_time_sec": 55,
+      "explanation": {
+        "expert_notice": "Three of these four are things the author plainly said, so the job is to find the one that bends the text. The third paragraph treats hygiene and obstruction together (\"both are objections to how vending is done\") and gives each a licensing remedy: inspect the food, mark out a pitch. The fourth paragraph turns the one real obstruction cost into \"a rule, and the rule is a width\", not into a ban.",
+        "correct_reasoning": "The option that is not true says obstruction \"calls for removal\". The passage says the opposite twice: \"Mark out a pitch and license it\" for the cart that takes too much footway, and, in the concession, \"It permits a rule, and the rule is a width: leave a walking lane\". The author never says obstruction justifies removal; he says a vendor who leaves a lane \"has met every objection the clearance ever named\". The hygiene half of the option is right, which is what makes it tempting.",
+        "passage_anchor": "rc-0162-p1, rc-0162-p3, rc-0162-p4",
+        "question_type_note": "A NOT-true question hands you three true statements and one bent one. Do not hunt for the false statement first; confirm each true one against the text, and the survivor is your answer. The bent option is usually half right.",
+        "reading_habit": "When an author pairs two objections (\"Hygiene is the usual word, and obstruction is the other\"), check whether they are answered the same way or differently before accepting any option that splits them.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "concession_as_position",
+            "why_wrong": "This is true: \"an old man with a stick or a woman with a pram is pushed into the road\" is the cost the author concedes in the fourth paragraph, and granting it is exactly what he does.",
+            "seductive_element": "It sits in a paragraph that begins \"I will concede\", and some readers treat conceded points as somebody else's claims rather than the author's."
+          },
+          {
+            "option": "C",
+            "trap_type": "near_synonym_confusion",
+            "why_wrong": "True: \"a trade you can enter with a basket and a stool needs none\", where \"none\" means no capital. The option swaps \"needs none\" for \"requires no capital\", which is the same claim.",
+            "seductive_element": "The pronoun \"none\" has to be traced back to \"capital\" in the same sentence, and a hurried reader may not make the link."
+          },
+          {
+            "option": "D",
+            "trap_type": "weakened_version",
+            "why_wrong": "True: the shops \"sell the same goods at three times the price\". The option says \"a much higher price\", which is weaker than the text but not false.",
+            "seductive_element": "The option drops the figure, and a reader hunting for exact matches may think the softening makes it untrue."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0162-q2",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.strongly_supported",
+        "lang.absolute_vs_qualified",
+        "scope.condition"
+      ],
+      "target_mistake": "turning the author's conditional test (\"If licensing would meet the complaint\") into an unconditional claim that hygiene is always a pretext",
+      "prediction_target": "the author treats hygiene as a complaint about how vending is done, which inspection or licensing can meet, so it justifies a ban only if removal is the sole remedy",
+      "difficulty": {
+        "inference_depth": 4,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "scope",
+        "argument"
+      ],
+      "stem": "Which of the following can be inferred about the author's view of \"hygiene\" as a ground for clearing vendors?",
+      "options": {
+        "A": "It is a real concern that removal addresses more fully than inspection ever could.",
+        "B": "It is legitimate, in the author's eyes, only when raised by the people who eat at the stalls.",
+        "C": "It objects to how vending is done, so a ban answers it only where no lesser remedy would.",
+        "D": "It is never the real reason for a ban, since inspection can always meet the complaint."
+      },
+      "correct": "C",
+      "estimated_time_sec": 90,
+      "explanation": {
+        "expert_notice": "Before reading the options, fix what the third paragraph commits to. It calls hygiene an objection \"to how vending is done, not to whether it is done\", offers inspection as the remedy, and then states a conditional test: \"If licensing would meet the complaint, then the complaint was never the reason for the ban.\" The test is conditional. The author does not say licensing always meets it.",
+        "correct_reasoning": "The correct option keeps both halves of the text: hygiene is about how vending is done, and a ban is justified only where no lesser remedy exists, which is the author's \"honest test of any objection is whether removal is the only remedy for it\". It stays inside the conditional. The near-tie, \"never the real reason ... since inspection can always meet the complaint\", is what the author would say of a particular case where licensing works, not a rule for every case; the \"if\" in \"If licensing would meet the complaint\" is the deciding word.",
+        "passage_anchor": "rc-0162-p3",
+        "question_type_note": "Inference questions reward the option that goes exactly as far as the text and no further. When the author writes a conditional, the inference must keep the condition; an option that drops the \"if\" has made a new claim.",
+        "reading_habit": "Underline every \"if\" and \"only\" in an argumentative paragraph. Options that convert them into \"always\" and \"never\" are the standard trap.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The author says \"Inspect it, as you inspect the restaurant kitchen\"; inspection is the remedy he proposes, and removal is what he argues against. The option reverses which of the two addresses the concern.",
+            "seductive_element": "It sounds like the cautious, safety-first position, and a reader who thinks the author is being reckless may assume he must grant it somewhere."
+          },
+          {
+            "option": "B",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "Nothing in the text limits who may raise the hygiene objection; the author answers it the same way whoever raises it: \"Is the food unsafe? Inspect it\". The point about \"the men who ate the rice\" is about who asked for the clearance, not about who may object.",
+            "seductive_element": "The second paragraph's contrast between eaters and shops is vivid, and a reader may carry it into the third paragraph, where it does not apply."
+          },
+          {
+            "option": "D",
+            "trap_type": "extreme_language",
+            "why_wrong": "The text says \"If licensing would meet the complaint, then the complaint was never the reason\". The \"if\" makes it conditional; \"never\" and \"always\" turn one case into every case, which the author does not claim.",
+            "seductive_element": "It is the near-tie: it uses the author's own word \"never\", his own remedy, and matches his heat."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0162-q3",
+      "type": "application",
+      "skill": "application",
+      "patterns": [
+        "inf.author_view_application",
+        "arg.principle",
+        "arg.necessary_vs_sufficient"
+      ],
+      "target_mistake": "treating any genuine complaint as grounds for removal, instead of asking whether removal is the only remedy for it",
+      "prediction_target": "removal is justified only where no lesser remedy (inspection, a licensed pitch, a width rule) would meet the complaint; the one case the author grants is a footway that cannot keep a walking lane",
+      "difficulty": {
+        "inference_depth": 4,
+        "distractor_similarity": 3,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "inference",
+        "argument"
+      ],
+      "stem": "By the test the author proposes, which of the following objections would justify removing a particular vendor?",
+      "options": {
+        "A": "Her cart leaves a walking lane, but residents complain that her customers are noisy late at night.",
+        "B": "Her stall sells food that an inspection has found to be stored at an unsafe temperature.",
+        "C": "Her pitch is directly in front of a shop that sells the same goods and has lost trade to her.",
+        "D": "Her cart stands on a footway so narrow that no placing of it leaves a lane for walking."
+      },
+      "correct": "D",
+      "estimated_time_sec": 95,
+      "explanation": {
+        "expert_notice": "The author's test is stated in one sentence: \"whether removal is the only remedy for it\". He then concedes exactly one cost that can pass it, a blocked pavement, and converts even that into a width rule: \"leave a walking lane\". So the expert looks for the scenario in which the width rule itself cannot be satisfied.",
+        "correct_reasoning": "On a footway \"so narrow that no placing of it leaves a lane for walking\", the rule the author permits cannot be met, so removal is the only remedy and the test is passed. The other three each have a lesser remedy in the passage: inspection for unsafe food, a pitch or a closing time for nuisance, and the shop's lost trade is the very \"transfer\" the author condemns.",
+        "passage_anchor": "rc-0162-p3, rc-0162-p4",
+        "question_type_note": "An application question asks you to run the author's rule on new facts. State the rule in your own words first (here: remove only when nothing short of removal would do), then test each option against the rule, not against your sympathy for the vendor.",
+        "reading_habit": "When a passage concedes one case, note precisely what the concession permits. Here it permits \"a rule, and the rule is a width\"; the scenario that passes is the one in which that rule cannot be kept.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "wrong_condition",
+            "why_wrong": "The author says \"The vendor who leaves a lane has met every objection the clearance ever named\", and noise is a complaint with an obvious lesser remedy, trading hours, so removal is not the only remedy.",
+            "seductive_element": "The complaint is real and comes from residents rather than shops, so it does not look like the transfer the author attacks."
+          },
+          {
+            "option": "B",
+            "trap_type": "true_but_insufficient",
+            "why_wrong": "The author's remedy for unsafe food is inspection: \"Inspect it, as you inspect the restaurant kitchen; you do not shut the restaurant because kitchens can be dirty.\" A failed inspection calls for the fault to be put right, not for a ban.",
+            "seductive_element": "The inspection has actually found a problem, so the option feels stronger than a mere worry about hygiene."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "This is the case the author names as the real motive for clearance: the shops \"found the competition on their doorstep intolerable\", and he calls the result \"a transfer\". It is the objection he rejects outright.",
+            "seductive_element": "Lost trade is a concrete, measurable grievance, and a reader may count any concrete harm as passing the test."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0162-q4",
+      "type": "phrase_in_context",
+      "skill": "vocabulary_in_context",
+      "patterns": [
+        "comp.paraphrase",
+        "comp.function_over_words",
+        "lang.causal_wording"
+      ],
+      "target_mistake": "reading \"infrastructure\" and \"own\" literally, as if the city possessed or paid for the stalls, instead of reading the three examples that explain the phrase",
+      "prediction_target": "the phrase is explained by the three sentences that follow it: a service the city would otherwise have to provide (a canteen, a night patrol, credit) is instead supplied by the vendor for nothing, which is what 'cheapest' and 'infrastructure' together mean",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 3,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "inference"
+      ],
+      "stem": "In the passage, the phrase \"the cheapest public infrastructure a city will ever own\" is used to convey that",
+      "options": {
+        "A": "vendors supply services the city would otherwise have to build and staff, at no cost to it.",
+        "B": "vendors are the poorest of a city's residents and deserve protection on that ground.",
+        "C": "the city has acquired the vendors' pitches cheaply and should maintain them as it does roads.",
+        "D": "vendors can undercut the shops because the city subsidises the ground they trade on."
+      },
+      "correct": "A",
+      "estimated_time_sec": 50,
+      "explanation": {
+        "expert_notice": "A phrase question is answered by the sentences around the phrase. Here the next three sentences are the gloss: \"Nobody built her a canteen, so she is the canteen. Nobody paid for a night patrol, so her lamp and her customers are the patrol. Nobody lent her capital\". Each names a public service the city did not provide and the vendor does.",
+        "correct_reasoning": "The three sentences that follow the phrase each say the same thing: a service the city would have had to pay for (a canteen, a patrol, credit) is supplied by the vendor for nothing. The word \"cheapest\" means the city paid nothing, and \"infrastructure\" means a service the public relies on. The correct option says exactly that and no more.",
+        "passage_anchor": "rc-0162-p1",
+        "question_type_note": "A phrase-in-context question asks what the phrase means in its sentence, not what the passage argues. Read the sentence before and the sentences after; the author almost always explains his own figure on the spot.",
+        "reading_habit": "When a writer uses a surprising phrase, look for the explanatory sentences next to it before deciding what it means; metaphors in argumentative prose are usually unpacked immediately.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "out_of_scope",
+            "why_wrong": "The phrase is about what vendors provide, not about how poor they are; the passage's case rests on \"all three services stop\", not on sympathy. Deserving protection is not what \"infrastructure\" means.",
+            "seductive_element": "The passage's anger on behalf of the poor makes a sympathy reading feel in keeping with its tone."
+          },
+          {
+            "option": "C",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "The word \"own\" is figurative: the next sentences say \"Nobody built her a canteen\" and \"Nobody lent her capital\", so the city has acquired and maintains nothing. The option takes the author's word literally.",
+            "seductive_element": "It reuses \"own\" and \"infrastructure\" and turns them into a tidy policy proposal."
+          },
+          {
+            "option": "D",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage says the opposite about the city's contribution: \"Nobody lent her capital\", and the trade \"needs none\". No subsidy is mentioned; the point is that nothing was provided.",
+            "seductive_element": "Low prices are in the passage, and a reader may supply the familiar explanation that cheap sellers must be subsidised."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "intolerable",
+      "passage_use": "found the competition on their doorstep intolerable",
+      "meaning_here": "not to be put up with; unbearable to those complaining",
+      "difficulty": "easy"
+    },
+    {
+      "word": "remedy",
+      "passage_use": "whether removal is the only remedy for it",
+      "meaning_here": "a way of putting a complaint or a fault right",
+      "difficulty": "medium"
+    },
+    {
+      "word": "concede",
+      "passage_use": "I will concede the one cost that is real",
+      "meaning_here": "to admit a point that counts against one's own argument",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "A street is \"cleared\" overnight. The pavement is the same pavement, swept by the same people. So what, exactly, was removed, and who asked for it to go?",
+    "one_sentence_summary": "An angry essay argues that clearing street vendors from a pavement does not clean anything, since it only transfers trade from the poor who sold and ate there to the shops that wanted them gone, and the only honest ground for removing a vendor is a blocked walking lane that no width rule can fix.",
+    "main_idea": "Street vendors cheaply supply food, light and credit that a city would otherwise have to pay for, so clearing them away does not solve a hygiene or obstruction problem, it simply hands their trade to the shops that complained. The writer concedes only one real harm, a pavement too narrow to leave a walking lane, and narrows his claim to exactly that case.",
+    "simple_explanation": "When a street is 'cleared' of vendors, the writer asks what was actually taken away. Not dirt, because the pavement is swept by the same people as before. What disappears is the woman selling hot rice at six in the morning, the tea stall lit at night, and the cobbler who mends straps cheaply. The writer says a vendor is like free public infrastructure: she is the canteen nobody built, the night patrol nobody paid for, and the credit nobody lent, because her trade needs no capital. Take her away and none of that is replaced.\n\nSo who actually benefits from the clearance? Not the people who ate the rice, but the shops behind the carts, who sell the same things for three times the price and hated the competition. A clean-looking street is really a transfer: the poor who bought and sold there lose out, and the shops that wanted them gone gain. The writer says if you think that is a fair outcome, say so plainly, but do not dress it up as hygiene.\n\nHygiene and obstruction are the two usual complaints, but both are only about how vending is done, not about whether it should happen at all. Unsafe food should be inspected, the way a restaurant kitchen is, not shut down. A cart blocking the footway should be given a licensed pitch. The writer's test is simple: removal is only justified when nothing less drastic would fix the problem. If licensing would have worked, then the complaint was never the real reason for banning the vendor; the real reason was to transfer her trade to someone else.\n\nThe writer then grants the one cost that is genuine: a row of carts can leave no room to walk, which hurts exactly the old or disabled people vending is meant to help. But even this only justifies a rule about width, a walking lane measured in metres, not a ban. A vendor who leaves that lane has answered every complaint ever made against her. The writer's claim is now narrower, limited to carts that truly cannot leave a lane, but he holds it just as fiercely, and asks any council that bans her anyway to say honestly who the clearance was really for.",
+    "why_difficult": "Readers tend to accept 'hygiene' or 'obstruction' as self-evidently sufficient reasons to remove a vendor, without separating the complaint from the remedy; the passage's central test, that removal is justified only when it is the sole fix, is stated as a conditional ('if licensing would meet the complaint'), and a hurried reader turns that conditional into a blanket rule either for or against removal. The concession in the final paragraph is also easy to misread as a retreat, when it is really a narrowing that keeps the same heat.",
+    "author_intention": "To make the reader see that clearing street vendors removes trade and services rather than dirt, and to hand the reader a test, whether removal is the only remedy for the objection raised, that exposes most clearance orders as a transfer of custom dressed up as hygiene.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0162-p1",
+        "role": "Names what is lost",
+        "note": "A vendor supplies food, light and credit for free, so clearing her away removes real services, not dirt."
+      },
+      {
+        "paragraph_id": "rc-0162-p2",
+        "role": "Names who gains",
+        "note": "The real winners are the shops that faced her competition and wanted it gone; a clean street is really a transfer of trade."
+      },
+      {
+        "paragraph_id": "rc-0162-p3",
+        "role": "States the test",
+        "note": "Hygiene and obstruction only object to how vending is done; removal is justified only if nothing less drastic, like inspection or licensing, would fix it."
+      },
+      {
+        "paragraph_id": "rc-0162-p4",
+        "role": "Concedes and narrows",
+        "note": "The writer grants that a blocked walking lane is a real harm, but turns it into a width rule rather than a ban, and holds his narrowed claim with the same anger."
+      }
+    ],
+    "tone_progression": "The voice is angry and direct from the first sentence, firing short questions at the reader; it stays hot through the second paragraph's challenge, turns into a patient, test-giving register in the third, and in the fourth paragraph cools into a concession without losing its heat, ending on a demand rather than a retreat.",
+    "key_transitions": [
+      "'So who gains?' (opening of the second paragraph): the question turns from what was lost to who benefits from the clearance.",
+      "'I will concede the one cost that is real.' (opening of the fourth paragraph): the argument narrows from a general defence of vendors to the one case that can justify removal."
+    ],
+    "misunderstanding": "A hurried reader treats hygiene and obstruction as two different kinds of objection, assuming the text answers them differently, when the third and fourth paragraphs answer both the same way, with a lesser remedy short of removal. A reader may also read the final concession as the writer backing down, when he says he holds the narrowed claim 'with the same heat'.",
+    "traps_summary": "The wrong options give the two real-world objections a removal remedy the text explicitly denies them, convert the writer's conditional test into an absolute rule, treat a real complaint as automatically sufficient for removal, and mistake the writer's concession for a retreat from his anger.",
+    "reading_lesson": "When a writer states a test as a conditional, 'if X would meet the complaint, then Y', keep the condition attached to any inference you draw from it; converting a working test into an always-or-never rule is the single most common way an argument gets misread.",
+    "real_world": "The same test, whether a lesser remedy would meet the stated objection, applies to any rule justified by safety or order, from a curfew to a licence requirement, and is worth asking before accepting that a ban is really about what it claims to be about.",
+    "takeaway": "A ban aimed at how something is done, not at whether it should be done at all, is only honest when nothing short of the ban would meet the objection.",
+    "reflection_question": "Think of a rule you have seen justified by safety or cleanliness: would a lesser fix, like inspection or a licence, have met the stated objection just as well?",
+    "eli10": {
+      "big_idea": "Clearing street sellers off a pavement does not make it clean, it just moves their customers and trade to the shops that wanted them gone.",
+      "story": "Every morning a woman sold hot rice on a street corner. One night the city 'cleared' the street. The pavement looked the same. But the rice seller was gone, and so was the tea stall, and so was the cobbler who fixed shoes cheaply. The writer says these sellers gave free things to the street: food, light at night, and small loans of trust. Nobody paid for those things. The sellers just gave them. So who wanted the sellers gone? Not the people who bought from them. It was the shops nearby, who sold the same things for much more money. The writer says a ban should only happen if nothing smaller could fix the real problem. If a seller blocks the path badly, give her a smaller spot, do not throw her out.",
+      "paragraphs": [
+        "The street sellers quietly gave the area food, light at night, and small trust to borrow against, all for free.",
+        "The real winners of the clearance are the shops that disliked the competition, not the people who used to eat there.",
+        "The writer's rule is simple: only ban a seller if nothing smaller, like an inspection or a licence, would fix the real complaint.",
+        "The writer admits one true problem, a blocked path, but says the fix is a rule about width, not a total ban."
+      ],
+      "author_view": "The writer is angry on behalf of the street sellers and argues hard for them, but he is careful and fair: he gives the one real complaint its due and only asks that the punishment match it."
+    }
+  }
+}

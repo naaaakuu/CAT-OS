@@ -1,0 +1,205 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "pj-0080",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 91,
+    "genre": "law",
+    "difficulty": "hard",
+    "difficulty_numeric": 9,
+    "tier": "ninety-nine",
+    "title": "When the Quarrel Is Over",
+    "theme": "why a court declines a quarrel that has resolved itself, since a ruling with no dispute behind it is advice, and why it makes an exception for disputes that end before any court could reach them",
+    "estimated_time_sec": 220,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-10: five-sentence TITA jumble, a form set in official papers alongside the four-sentence default; re-verify against each new official paper"
+    },
+    "macro_pattern": "argumentative",
+    "cohesion_signals": [
+      "article_given_new",
+      "connective_explicit",
+      "demonstrative",
+      "lexical_repetition",
+      "stance_continuity"
+    ],
+    "primary_trap": "competing_ending",
+    "secondary_traps": [
+      "competing_opener",
+      "misleading_connective"
+    ],
+    "dna_traits": [
+      "ending_judgement",
+      "opener_heuristic",
+      "global_tracking",
+      "wm_long_chain"
+    ],
+    "difficulty_vector": {
+      "vocabulary_load": 4,
+      "inference_load": 5,
+      "syntactic_complexity": 5,
+      "reference_density": 4,
+      "concept_abstractness": 4,
+      "dependency_chain_length": 5,
+      "transition_ambiguity": 4,
+      "competing_openings": 4,
+      "competing_endings": 5,
+      "lexical_decoys": 3,
+      "topic_unfamiliarity": 3,
+      "plausible_orderings": 5
+    },
+    "num_plausible_orderings": 5,
+    "heuristic_adversarial": true,
+    "nucleus": "B",
+    "learning_objective": "keep a concession after the rule it concedes, even when the concession attaches cleanly to the opening and the rule's consequence makes a better last line",
+    "reasoning_patterns": [
+      "disc.concession",
+      "disc.given_new",
+      "disc.competing_ending",
+      "disc.competing_opener",
+      "struct.claim_counterclaim"
+    ],
+    "quality": {
+      "status": "verified",
+      "adversarial_review": "The live rival runs opener, concession, exception, rule, consequence: 'however' attaches cleanly to the refusal in the opening sentence, 'For those' follows the class of dispute, and the paragraph ends on 'the next real dispute inherits a ruling that nobody contested', the most final line in the set. It is refused twice. 'The reason is that a court decides disputes, not questions' would then follow the exception sentence and be offered as the reason for hearing a finished quarrel, which it flatly contradicts; and the exception's 'anyway' and 'not because the parties still need an answer' presuppose the rule about two parties needing an answer, which only the reason sentence states. A second rival opens on the aphorism 'a court decides disputes, not questions' and lets the demolished-building sentence follow as the application; 'The reason is that' in the first seat has nothing to explain, and 'nothing any longer turns on the answer' presupposes a quarrel that has resolved itself, which only the opening sentence describes. A third rival places the advice sentence directly after the opener, as the reason for the refusal; 'Advice' is new in the reason sentence ('what the court would be issuing is advice') and given in the sentence that begins with it, and nothing before the reason sentence has connected a finished quarrel to advice.",
+      "blind_solve": {
+        "solver": "sonnet blind reader 2026-10-07",
+        "agreed": 1,
+        "total": 1,
+        "notes": "full agreement"
+      }
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-07",
+      "usage_note": "Original composition in CAT register for CAT OS. General reasoning about mootness and the exception for disputes capable of repetition yet evading review, stated without jurisdiction, case or doctrine named; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-10-07",
+    "batch_id": "batch-pj-004",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-pj-004",
+    "reviewer_notes": "A ninety-nine five-sentence argumentative item with a concession, whose trap is a consequence sentence that makes a better last line than the real ending. The concession attaches to the opening refusal as cleanly as to the rule, so the paragraph can be rebuilt as rule, exception, reasons; what forbids it is that the exception's 'anyway' and 'not because the parties still need an answer' presuppose the rule, and that 'The reason is that' placed after the exception would be the reason for the opposite of what it explains. The rule sentence is aphoristic enough to tempt an opener and is blocked only by its first four words."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "For those the court makes an exception and hears the finished quarrel anyway, not because the parties still need an answer but because, if it did not, the question would be one that no court could ever decide.",
+      "role": "conclusion"
+    },
+    {
+      "label": "B",
+      "text": "The reason is that a court decides disputes, not questions: its authority comes from two parties who need an answer and will be bound by it, and when nothing any longer turns on the answer, what the court would be issuing is advice.",
+      "role": "development"
+    },
+    {
+      "label": "C",
+      "text": "There is a class of dispute, however, that ends by its own nature before any court could reach it: a detention of a few days, an order that expires at the end of a term, a condition that has passed before a hearing can be listed.",
+      "role": "concession"
+    },
+    {
+      "label": "D",
+      "text": "A court asked to rule on a quarrel that has already resolved itself, because the building was demolished before the appeal or the licence expired before the hearing, will usually decline, and the refusal is not a technicality.",
+      "role": "topic"
+    },
+    {
+      "label": "E",
+      "text": "Advice from a court is worse than useless, because it carries the weight of a judgement without having been tested by anyone with a reason to fight it, and the next real dispute inherits a ruling that nobody contested.",
+      "role": "development"
+    }
+  ],
+  "correct_order": [
+    "D",
+    "B",
+    "E",
+    "C",
+    "A"
+  ],
+  "links": [
+    {
+      "from": "D",
+      "to": "B",
+      "device": "logical_connector",
+      "reliability": "high",
+      "explanation": "'The reason is that' explains something just asserted, and 'the refusal is not a technicality' is an assertion that calls for a reason. 'Nothing any longer turns on the answer' is the resolved quarrel of the opening sentence restated."
+    },
+    {
+      "from": "B",
+      "to": "E",
+      "device": "given_new_flow",
+      "reliability": "high",
+      "explanation": "'Advice' arrives as new information at the end of the reason sentence ('what the court would be issuing is advice') and is picked up as given at the start of the next ('Advice from a court'). The order of new and given cannot run the other way."
+    },
+    {
+      "from": "E",
+      "to": "C",
+      "device": "contrast_signal",
+      "reliability": "medium",
+      "explanation": "'However' concedes against the rule just completed: having said why advice is worse than useless, the paragraph admits a class of dispute the rule would silence. The connective would also attach to the opening sentence, which is the trap; what fixes it here is the exception sentence that follows."
+    },
+    {
+      "from": "C",
+      "to": "A",
+      "device": "demonstrative_reference",
+      "reliability": "high",
+      "explanation": "'For those' collects the class just listed, the detention, the expiring order, the passing condition. 'Anyway' and 'not because the parties still need an answer' concede the rule stated in the reason sentence, so this pair must come after it."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "A refusal, the reason for it, the consequence that makes the reason bite, a concession that names the disputes the rule would silence, and the exception that resolves the concession. The concession can attach to the refusal as well as to the rule, which is the item's whole difficulty; the exception sentence, with 'anyway' and 'not because the parties still need an answer', is what decides that the rule has already been stated.",
+    "movement": [
+      {
+        "label": "D",
+        "why_here": "The concrete opening: a quarrel that resolved itself, the court's refusal, and the claim that the refusal is not a technicality, which is what the next sentence explains. It collects nothing from anywhere."
+      },
+      {
+        "label": "B",
+        "why_here": "The nucleus. 'The reason is that' answers the opening claim, and the sentence states the rule: disputes, not questions; two parties who need an answer; otherwise advice. It introduces 'advice' as new."
+      },
+      {
+        "label": "E",
+        "why_here": "'Advice from a court' takes the new word as given and says why it is worse than useless. Its last clause is the most final-sounding line in the set, which is the trap."
+      },
+      {
+        "label": "C",
+        "why_here": "'However' concedes against the rule now complete: some disputes end before any court could reach them. The list of examples is what 'For those' will collect."
+      },
+      {
+        "label": "A",
+        "why_here": "'For those' collects the list, and 'anyway' and 'not because the parties still need an answer' concede the rule by name. The paragraph ends on the exception, not on the rule's consequence."
+      }
+    ],
+    "tempting_orders": [
+      {
+        "order": "DCABE",
+        "trap_type": "competing_ending",
+        "why_tempting": "'However' attaches as cleanly to the refusal in the opening sentence as to anything else, 'For those' follows the list it belongs to, and 'the next real dispute inherits a ruling that nobody contested' is the most final line in the set, so rule, exception, reasons feels like a shape a writer might choose.",
+        "where_it_breaks": "'The reason is that a court decides disputes, not questions' would follow the exception and be read as the reason for hearing a finished quarrel, which it contradicts. And the exception's 'anyway' and 'not because the parties still need an answer' presuppose the rule about two parties needing an answer, which in this order has not yet been stated."
+      },
+      {
+        "order": "BEDCA",
+        "trap_type": "competing_opener",
+        "why_tempting": "'A court decides disputes, not questions' is an aphorism of the kind paragraphs open with, and the demolished building then reads as the rule applied to a case.",
+        "where_it_breaks": "'The reason is that' in the first seat has nothing to be the reason for. 'Nothing any longer turns on the answer' presupposes a quarrel that has resolved itself, and only the opening sentence describes one."
+      },
+      {
+        "order": "DEBCA",
+        "trap_type": "lexical_decoy",
+        "why_tempting": "'Advice from a court is worse than useless' looks like the direct explanation of why the refusal is not a technicality, and the reason sentence then reads as elaboration.",
+        "where_it_breaks": "'Advice' is introduced as new at the end of the reason sentence and treated as given at the start of the advice sentence; the order of given and new cannot be reversed. Before the reason sentence, nothing has connected a resolved quarrel to the giving of advice."
+      }
+    ],
+    "trap_named": "The trap is a concession that fits in two places and a consequence that makes a better last line than the ending. 'However' can follow the refusal or the rule, and 'the next real dispute inherits a ruling that nobody contested' sounds like a paragraph's final sentence, so the set can be rebuilt as rule, exception, reasons. What forbids it is the exception sentence itself: 'anyway' and 'not because the parties still need an answer' are concessions to a rule, and a rule has to be on the page before it can be conceded to.",
+    "solving_habit": "When a concession can attach to two sentences, read the sentence that resolves the concession and ask what it presupposes. 'Anyway' and 'not because' name the thing being set aside, and that thing must already have been said."
+  },
+  "mentor": {
+    "challenge": "The building has been demolished; the appeal about it is still listed. The court will not hear it, and then, for cases exactly like it, it will.",
+    "paragraph_plain": "A court asked to rule on a quarrel that has already settled itself, because the building was pulled down before the appeal or the licence ran out before the hearing, will usually refuse, and the refusal is not a technicality. The reason is that a court decides disputes, not questions. Its authority comes from two parties who need an answer and will be bound by it, and when nothing turns on the answer any more, what the court would be handing out is advice. Advice from a court is worse than useless, because it carries the weight of a judgement without having been tested by anyone with a reason to fight it, and the next real dispute inherits a ruling that nobody contested. There is, however, a class of dispute that ends by its own nature before any court could reach it: a detention of a few days, an order that expires at the end of a term, a condition that has passed before a hearing can be listed. For those the court makes an exception and hears the finished quarrel anyway, not because the parties still need an answer but because, if it did not, the question would be one that no court could ever decide.",
+    "takeaway": "A concession presupposes its rule. Find the word that concedes ('anyway', 'still', 'not because') and the rule must sit before it."
+  }
+}

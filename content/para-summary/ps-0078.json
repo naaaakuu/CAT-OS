@@ -1,0 +1,184 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ps-0078",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "contemporary-society",
+    "difficulty": "hard",
+    "difficulty_numeric": 7,
+    "tier": "cat",
+    "bible_level": "cat",
+    "title": "Marking the Driver",
+    "theme": "why a rating given to a named person measures the customer's nerve rather than the service, so that the scale crowds its top and the information sits in the rare lower score",
+    "estimated_time_sec": 120,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-10: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "cause_effect_conclusion",
+    "apex": {
+      "claim": "A rating given after a transaction measures the customer's willingness to punish a named person rather than the service; because most people will not, scores pile at the top and the only information is in the rare lower score, which the systems accordingly treat as a complaint.",
+      "scope": "Ratings of named individuals collected after a transaction; the claim is about what the score measures and where its information lies, not about whether such systems should exist.",
+      "certainty": "asserted",
+      "stance": "corrective"
+    },
+    "turn": {
+      "present": false,
+      "marker": null
+    },
+    "difficulty_dials": {
+      "abstraction": 3,
+      "syntax": 3,
+      "turn_subtlety": 2,
+      "distractor_closeness": 4,
+      "live_options": 2,
+      "stance_subtlety": 3,
+      "qualifier_density": 2,
+      "domain_load": 1
+    },
+    "load_bearing": [
+      "willingness to punish a named person",
+      "most people",
+      "rare score below that",
+      "anything short of the top"
+    ],
+    "separating_element": null,
+    "dna_traits": [
+      "main_idea_detection",
+      "evidence_vs_thesis",
+      "inference_control"
+    ],
+    "mission": "find_the_thesis",
+    "learning_objective": "keep the direction of a causal chain when a summary offers the same links in the opposite order",
+    "reasoning_patterns": [
+      "sum.central_vs_supporting",
+      "arg.causal_claim",
+      "struct.cause_effect",
+      "sum.no_addition",
+      "lang.causal_wording"
+    ],
+    "quality": {
+      "status": "verified",
+      "adversarial_review": "A strong candidate argues for the reversed chain, in which the systems' habit of reading a four as a complaint is what makes customers reluctant to mark anyone down. The paragraph runs the other way: reluctance comes first, from being shown a name and asked whether this person should lose something, and the systems 'have learned where the information is', which is a response to the crowding, not its cause. The four-star option is accurate about what systems do and invents the reason, since the paragraph locates the information in the act of will a low score took, not in four being the lowest mark people will give. The recommendation to remove the name is a sensible thought the paragraph never has.",
+      "blind_solve": {
+        "solver": "sonnet blind reader 2026-10-07",
+        "agreed": 1,
+        "total": 1,
+        "notes": "full agreement"
+      }
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-07",
+      "usage_note": "Original composition in CAT register for CAT OS. General observation about post-transaction ratings of named service workers; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-10-07",
+    "batch_id": "batch-ps-004",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ps-004",
+    "reviewer_notes": "A cause-and-effect chain with the information claim as its apex. The live rival reverses the chain; the other two take the closing detail as the whole and add a recommendation. Families: logic, scope, addition."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "Every service now ends with the same request: a row of stars for the driver, the cleaner, the person who brought the food, each of them named on the screen.",
+        "role": "setup"
+      },
+      {
+        "text": "The score is presented as a measure of the service, and it measures something else: the customer's willingness to punish a named person.",
+        "role": "thesis"
+      },
+      {
+        "text": "Most people, shown a name and asked in effect whether this person should lose something, will not do it, whatever the service was like.",
+        "role": "support"
+      },
+      {
+        "text": "So the scale collapses towards its top: nearly everyone gives the highest mark, whatever happened, because it is the one mark that costs nobody anything.",
+        "role": "support"
+      },
+      {
+        "text": "What information the scale holds sits in the rare score below that, which took an act of will to give.",
+        "role": "qualification"
+      },
+      {
+        "text": "The systems that collect these scores have learned where the information is, and treat anything short of the top as a complaint.",
+        "role": "conclusion"
+      }
+    ]
+  },
+  "ideal_summary": "A rating of a named person measures the customer's willingness to punish, which most people lack, so scores crowd the top of the scale and the only information is in the rare lower score, which the systems therefore treat as a complaint.",
+  "builder": {
+    "prompt": "In one sentence: what does the paragraph say the rating really measures, and what follows from that for how the scores are read?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence say the score measures the customer's willingness to punish a named person, rather than the service?",
+        "kept": "Good. That substitution is the paragraph's whole move; everything about crowded scales and complaints follows from it.",
+        "drifted": "If your sentence keeps the score as a measure of the service, you have summarised the claim the paragraph exists to replace."
+      },
+      {
+        "id": "scope",
+        "ask": "Does your sentence run the chain in the paragraph's order: reluctance first, crowding second, the systems' reading last?",
+        "kept": "Right. The systems 'have learned where the information is'; their reading is a response to the crowding, not its cause.",
+        "drifted": "Putting the systems' habit first turns a consequence into a cause. The paragraph starts from people who will not punish a named face."
+      },
+      {
+        "id": "addition",
+        "ask": "Have you added a view about whether the name should be shown, or what services should do?",
+        "kept": "Well held. The paragraph describes what the score measures and says nothing about what anyone ought to change.",
+        "drifted": "A recommendation about hiding the name is a reasonable thought, but it is yours. The paragraph explains and does not prescribe."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "Because rating systems treat any score below the top as a complaint, customers are reluctant to mark down a person whose name they have been shown, and the scores pile up at the top of the scale.",
+      "B": "Services should stop showing customers the name of the person being rated, so that the score measures the service again rather than the customer's reluctance to punish somebody they have just seen.",
+      "C": "The rating measures a customer's willingness to punish a named person, which most lack, so scores crowd the top and the rare lower score is the only information, which systems read as a complaint.",
+      "D": "Rating systems treat a four-star score as a complaint because, on a scale where nearly everyone gives the top mark, a four is the lowest score that most customers are prepared to give."
+    },
+    "correct": "C",
+    "explanation": {
+      "paragraph_meaning": "After every service you are asked to give stars to a named person. The paragraph says the stars do not measure the service; they measure whether you are willing to hurt that person. Most people are not, so nearly everyone gives top marks whatever happened, because the top mark is the only one that costs nobody anything. The scale still holds some information, but it is in the rare low score, since giving one took an act of will. The companies collecting the scores know this, which is why they treat anything below the top as a complaint.",
+      "correct_reasoning": "The correct option keeps the substitution at the apex, that the score measures willingness to punish a named person, and then keeps the chain in the paragraph's order: most people lack that willingness, so scores crowd the top, so the rare lower score is where the information is, so systems read it as a complaint. Scope, direction and the qualification about where information sits are all preserved.",
+      "distractors": [
+        {
+          "option": "A",
+          "archetype": "cause_effect_reversal",
+          "secondary_archetype": null,
+          "why_wrong": "The paragraph starts from customers who 'will not do it' when shown a name, and ends with systems that 'have learned where the information is'. The systems' reading is the last link, a response to the crowding. This option makes it the first link and the cause of the reluctance.",
+          "seductive_element": "Every element is in the paragraph, and reading a four as a complaint sounds like the kind of pressure that would make people cautious.",
+          "thinking_mistake": "Keeping the links of a causal chain and letting go of their order, so that the conclusion is read back as the cause."
+        },
+        {
+          "option": "B",
+          "archetype": "prescriptive_swap",
+          "secondary_archetype": null,
+          "why_wrong": "The paragraph recommends nothing. It explains what the score measures and where its information lies; whether services should hide the name is a question it never raises.",
+          "seductive_element": "It diagnoses the problem exactly as the paragraph does, and the fix follows so naturally that it feels like the paragraph's own last step.",
+          "thinking_mistake": "Turning an explanation into advice, and crediting the author with the remedy the reader thought of."
+        },
+        {
+          "option": "D",
+          "archetype": "scope_narrowing",
+          "secondary_archetype": null,
+          "why_wrong": "The closing detail is taken for the whole, and its reason is invented. The paragraph puts the information in the rare low score because it 'took an act of will to give', not because four is the lowest mark most people will give; and the central claim about what the score measures is missing.",
+          "seductive_element": "It is the most concrete sentence available, it states what systems do correctly, and it supplies a reason that sounds like arithmetic.",
+          "thinking_mistake": "Summarising the paragraph's final consequence and supplying a mechanism of one's own for it."
+        }
+      ],
+      "reading_habit": "When a paragraph is a chain, write the arrows before the options: who acts first, what follows, who responds. Then reject any option whose arrows point the other way, however familiar its parts."
+    }
+  },
+  "mentor": {
+    "challenge": "A row of stars, a name on the screen, and almost everyone taps the top one. The paragraph says where the information went and who has worked that out.",
+    "takeaway": "A score given to a named face measures the giver's nerve before it measures the service."
+  }
+}

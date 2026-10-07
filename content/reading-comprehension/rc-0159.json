@@ -1,0 +1,407 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0159",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 92,
+    "genre": "scientific-method",
+    "difficulty": "hard",
+    "difficulty_numeric": 8,
+    "stage": "advanced",
+    "skills": [
+      "evidence-anchoring",
+      "inference",
+      "structure-mapping",
+      "argument-tracking",
+      "qualifier-tracking"
+    ],
+    "word_count": 556,
+    "question_count": 4,
+    "question_types": [
+      "comparative",
+      "inference",
+      "specific_detail",
+      "weaken"
+    ],
+    "theme": "an error bar sums the errors the experimenter knows how to estimate; the history of a constant's repeated measurement is the record of the unknown errors arriving, and the drift is towards agreement",
+    "estimated_time_min": 8.5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-07",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted."
+    },
+    "date_added": "2026-10-07",
+    "batch_id": "batch-rc-008",
+    "prompt_version": "content engine v1 + CAT paper patterns 2026-10; batch-rc-008",
+    "reviewer_notes": "Adds to the familiar \"scientists are overconfident\" story the distinction the story lacks: the bar is defined as a sum of known errors, so the pattern follows from the definition rather than from character, yet the complaint survives as a complaint about what readers were told. The author then bounds the point twice (convergence; widen, do not dismiss), which is what makes the weaken question possible without the EXCEPT problem. The near-tie is in the comparative question, where a finalist attributes the author's point about readers to the second account. Sentences are long throughout (mean above 24 words) and the voice stays cold; there is no \"I\" and no scene. The dated example is kept general, as instructed. The move is two accounts adjudicated with the author bounding the conclusion, in a cold, exact, judicial voice.",
+    "length_class": "medium",
+    "structure": "two_views_adjudication",
+    "viewpoints": 2,
+    "tone": "cold, precise, judicial",
+    "difficulty_vector": {
+      "lexical": 4,
+      "syntactic": 5,
+      "abstraction": 4,
+      "inference_depth": 4,
+      "distractor_similarity": 4,
+      "reasoning_depth": 4,
+      "structural_ambiguity": 3,
+      "time_pressure": 4
+    },
+    "reasoning_patterns": [
+      "struct.two_views_adjudication",
+      "struct.pivot",
+      "struct.claim_evidence",
+      "comp.explicit_detail",
+      "comp.attention_span",
+      "comp.reference_tracking",
+      "arg.qualification",
+      "arg.evidence_vs_conclusion",
+      "arg.evidence",
+      "arg.causal_claim",
+      "inf.author_vs_reported",
+      "inf.strongly_supported",
+      "lang.comparative",
+      "lang.temporal_qualifier"
+    ],
+    "quality": {
+      "status": "verified",
+      "adversarial_review": "Q1: A strong candidate argues for the values having moved apart, reading \"fell outside\" as drift; the review's sentence ends \"far more often than an uncertainty read as a probability would allow\", a claim about frequency against bars, and the fourth paragraph says \"successive values approach one another\". Q2: The real contender is the option about readers, because it is the most memorable claim in the passage; \"The second account denies that character is in play at all\" and \"by the definition of the bar, not through anyone's vanity\" fix the second account's axis, and the reader point is introduced as \"The first account's complaint, stripped of its remarks on character\", which is the author speaking. Q3: The case for the direction-of-failure option is that only the first account was credited with fitting the direction; the author's sole reservation is \"it answers a question the first account did not quite ask\", followed at once by what that question was, \"readers took the bar for a statement of how far the truth might lie from the number, and were never told\", which settles the reason. Q4: The shrinking-bars option is the trap, since smaller bars sound like a way for more values to fall outside; the bound says \"the bars shrink, and ... a new value lands inside the old bar far more often\", so shrinking is a premise, and only the option denying the late-against-early difference touches the claim.",
+      "blind_solve": {
+        "solver": "sonnet blind reader 2026-10-07 (batch rc-008)",
+        "agreed": 4,
+        "total": 4,
+        "notes": "full agreement"
+      }
+    },
+    "vocab_extracted": [
+      "propagated",
+      "systematic",
+      "licenses"
+    ]
+  },
+  "passage": {
+    "title": "Decades of One Number",
+    "reading_time_min": 3,
+    "paragraphs": [
+      {
+        "id": "rc-0159-p1",
+        "text": "A physical constant is measured and published with an error bar; years later it is measured again by a better method, and the new value, more often than the arithmetic of error bars permits, lies outside the old one. The pattern has been documented: a review published in the 1980s went back through the recommended values of several constants over some decades and found that successive values fell outside the previous stated uncertainty far more often than an uncertainty read as a probability would allow, and did so for constant after constant, in laboratories with no contact with one another."
+      },
+      {
+        "id": "rc-0159-p2",
+        "text": "The first account of the pattern is psychological and unflattering. Experimenters, on this reading, are overconfident in the way that everyone who estimates anything is overconfident: asked how sure they are, they report a range too narrow for their real ignorance, and the quoted uncertainty is that bias written in numbers. The account fits the direction of the failure, since nobody has ever complained that physicists quote uncertainties too large. The second account denies that character is in play at all. An error bar, it says, is not a probability that the truth lies within a range; it is the sum of the contributions from the sources of error the experimenter has identified and knows how to estimate. When the next experiment finds a systematic shift the previous one had not known to look for, the old value moves outside its bar by the definition of the bar, not through anyone's vanity."
+      },
+      {
+        "id": "rc-0159-p3",
+        "text": "The second account is right about what an error bar is; nobody who has propagated one by hand would dispute it, since the procedure has no line for errors not yet known. But it answers a question the first account did not quite ask. The first account's complaint, stripped of its remarks on character, is that readers took the bar for a statement of how far the truth might lie from the number, and were never told it was a statement of something narrower, namely how far the number might wander under the errors so far understood. The history of a constant is then the record of the unknown errors arriving one at a time, each explaining in retrospect why an earlier bar was too small, and that record was there for anyone who read it as such, though it was never what the bars were taken to say."
+      },
+      {
+        "id": "rc-0159-p4",
+        "text": "Two bounds belong on the point. First, the drift in these histories is towards agreement and not away from it: successive values approach one another, the bars shrink, and in the later decades of a constant's history a new value lands inside the old bar far more often than it did in the early ones, so that the understatement is real but diminishing, and the record is of a method converging rather than failing. Second, nothing here licenses the conclusion that a stated uncertainty is worthless; a bar that understates by a factor of two or three remains a far better guide to the truth than no bar at all, and the correction a careful reader owes it is a widening, not a dismissal. What the history teaches is a definition: the bar states the errors that were known, and the sequence of bars is the only published record of the errors that were not."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0159-q1",
+      "type": "specific_detail",
+      "skill": "specific_detail",
+      "patterns": [
+        "comp.explicit_detail",
+        "lang.comparative",
+        "comp.attention_span"
+      ],
+      "target_mistake": "importing the final paragraph's convergence claim, or its mirror image, into a question about what the review found",
+      "prediction_target": null,
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 3,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "scope"
+      ],
+      "stem": "According to the passage, the review published in the 1980s found that",
+      "options": {
+        "A": "later values fell outside the earlier stated uncertainty more often than that figure allowed.",
+        "B": "the recommended values of several constants had moved apart from one another over the decades.",
+        "C": "laboratories with no contact with one another had arrived at the same stated uncertainty.",
+        "D": "experimenters in the later decades had begun to quote uncertainties that were too large."
+      },
+      "correct": "A",
+      "estimated_time_sec": 50,
+      "explanation": {
+        "expert_notice": "The finding is in one sentence of the first paragraph: \"successive values fell outside the previous stated uncertainty far more often than an uncertainty read as a probability would allow\". The other details in that sentence (\"constant after constant\", \"no contact with one another\") describe how widespread the finding was, not what it was.",
+        "correct_reasoning": "The review found that later values fell outside the earlier bar \"far more often than\" the bar, read as a probability, \"would allow\". That is what the correct option says. The values moving apart is the opposite of the fourth paragraph’s \"successive values approach one another\", and in any case belongs to the author’s bound, not to the review. The laboratories are mentioned to show the pattern was independent, not that they agreed on an uncertainty. Nobody in the passage quotes uncertainties \"too large\"; the text says the opposite complaint has never been made.",
+        "passage_anchor": "rc-0159-p1",
+        "question_type_note": "A detail question about a named source asks what that source found. Locate the source, read its sentence to the end, and discard everything the author adds later.",
+        "reading_habit": "When a sentence lists a finding and then its spread (\"for constant after constant, in laboratories ...\"), keep the finding and the spread apart.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The fourth paragraph says \"successive values approach one another\"; nothing says they moved apart, and the review’s finding concerns bars, not the distance between values.",
+            "seductive_element": "\"Fell outside\" is read as \"drifted away\"."
+          },
+          {
+            "option": "C",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "\"Laboratories with no contact with one another\" is the passage’s phrase for the independence of the pattern; the review found they shared the pattern, not an uncertainty.",
+            "seductive_element": "It reuses the passage’s words about laboratories in a sentence that sounds like a finding."
+          },
+          {
+            "option": "D",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "The passage says \"nobody has ever complained that physicists quote uncertainties too large\", and the later-decade improvement in the fourth paragraph is that values land inside old bars more often, not that bars grew.",
+            "seductive_element": "The convergence claim is misremembered as experimenters over-correcting."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0159-q2",
+      "type": "comparative",
+      "skill": "inference",
+      "patterns": [
+        "inf.author_vs_reported",
+        "struct.two_views_adjudication",
+        "comp.reference_tracking"
+      ],
+      "target_mistake": "assigning the author's own point about readers, or the first account's features, to the second account",
+      "prediction_target": "the first account blames a trait of experimenters; the second says the bar is defined so that unknown errors cannot be in it, so the pattern follows from the definition",
+      "difficulty": {
+        "inference_depth": 4,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "logical_structure"
+      ],
+      "stem": "Compared with the first account of the pattern, the second account",
+      "options": {
+        "A": "draws more heavily on a wider literature about how people estimate their own ignorance.",
+        "B": "lays the blame on readers who took the bar for something it never claimed to be.",
+        "C": "places the cause in the way the bar is built rather than in the person who reports it.",
+        "D": "treats a value landing outside an earlier bar as rarer than the first account does."
+      },
+      "correct": "C",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "The second paragraph marks the contrast in one sentence: \"The second account denies that character is in play at all.\" What it puts in character’s place is the definition of the bar: \"the sum of the contributions from the sources of error the experimenter has identified\". Everything the first account locates in the experimenter, the second locates in the procedure.",
+        "correct_reasoning": "The first account says experimenters \"are overconfident\"; the second says the old value moves outside its bar \"by the definition of the bar, not through anyone’s vanity\". So the second account moves the cause from the person who reports the bar to the way the bar is constructed, which the correct option states. The claim about readers being misled is the author’s, in the third paragraph, and even there nobody is blamed: readers \"were never told\". The wider literature about estimating one’s own ignorance belongs to the first account, which the passage describes as fitting \"the way that everyone who estimates anything is overconfident\". Neither account disputes how often values fall outside bars; both start from the same documented pattern.",
+        "passage_anchor": "rc-0159-p2",
+        "question_type_note": "A comparative question about two accounts asks for the axis on which they differ. Find the sentence where the passage introduces the second account against the first; the difference is usually stated there in one clause.",
+        "reading_habit": "In a two-account passage, keep three columns: what account one says, what account two says, what the author says. Options that move a claim between columns are the usual distractors.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "misattributed_view",
+            "why_wrong": "It is the first account that likens experimenters to \"everyone who estimates anything\"; the second account \"denies that character is in play at all\" and borrows nothing from that literature.",
+            "seductive_element": "The option describes something that is in the passage, and the reader forgets which account owns it."
+          },
+          {
+            "option": "B",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "The second account blames nobody; it says the pattern follows \"by the definition of the bar\". The point about readers is the author’s, in the third paragraph, and there readers \"were never told\", which is not blame.",
+            "seductive_element": "The third paragraph’s reader-centred complaint is memorable, and it is placed near the author’s endorsement of the second account."
+          },
+          {
+            "option": "D",
+            "trap_type": "comparison_distortion",
+            "why_wrong": "Both accounts explain the same documented frequency; the second account says the old value \"moves outside its bar by the definition of the bar\", which makes the pattern expected, not rare.",
+            "seductive_element": "A definition-based explanation sounds as if it should make the pattern less common."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0159-q3",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.strongly_supported",
+        "struct.pivot",
+        "arg.qualification"
+      ],
+      "target_mistake": "mistaking the first account's evidence for the reason the author keeps part of it, or inventing a gap in the second account",
+      "prediction_target": "the author keeps the first account's complaint in a reduced form, as a complaint about readers being told nothing about what the bar means, which the second account does not address",
+      "difficulty": {
+        "inference_depth": 4,
+        "distractor_similarity": 5,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "argument"
+      ],
+      "stem": "It can be inferred that, in the author's view, the first account's complaint survives the second account's correction because",
+      "options": {
+        "A": "the second account leaves the one-way direction of the failure without an explanation.",
+        "B": "the procedure for building a bar does in fact allow a term for errors not yet known.",
+        "C": "nobody has ever complained that physicists quote uncertainties that are too large.",
+        "D": "the complaint, stripped of its remarks on character, concerns what readers were told."
+      },
+      "correct": "D",
+      "estimated_time_sec": 90,
+      "explanation": {
+        "expert_notice": "The pivot is \"But it answers a question the first account did not quite ask.\" The next sentence says what the first account’s complaint becomes once \"stripped of its remarks on character\": readers took the bar for one thing \"and were never told it was a statement of something narrower\". The survival of the complaint is a matter of what it is about, not of any defect in the second account’s definition.",
+        "correct_reasoning": "The author grants that the second account \"is right about what an error bar is\". What remains of the first account is its complaint about readers: they \"were never told\". The complaint survives because, so reduced, it concerns something the second account never speaks to, which is what the correct option says. The author never says the second account fails to explain the direction of the failure; a definition that admits only known errors explains a one-way failure perfectly well. The procedure \"has no line for errors not yet known\", so the option claiming it does contradicts the text. And the absence of complaints about over-large uncertainties is evidence the first account used, not the author’s reason for keeping part of it.",
+        "passage_anchor": "rc-0159-p3",
+        "question_type_note": "An inference about why the author keeps or drops a view must be tied to the sentence where the author does it. Find the pivot word (\"But\") and read the sentence after it; the reason is there.",
+        "reading_habit": "When an author says a view is \"right\" and then says \"But\", what follows is the exact size of the concession. Measure it before choosing.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "The author’s only reservation about the second account is that \"it answers a question the first account did not quite ask\"; no sentence says it leaves the direction unexplained, and its definition explains a one-way failure directly.",
+            "seductive_element": "The first account was credited with fitting \"the direction of the failure\", so a reader assumes the second account does not."
+          },
+          {
+            "option": "B",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The text says the procedure \"has no line for errors not yet known\"; that is the second account’s whole point, and the author endorses it.",
+            "seductive_element": "It sounds like a technical objection an author might raise against a definition."
+          },
+          {
+            "option": "C",
+            "trap_type": "true_but_irrelevant",
+            "why_wrong": "This is the first account's supporting evidence in the second paragraph; the author's reason for keeping the complaint is in the third paragraph and concerns readers, not the direction of errors.",
+            "seductive_element": "It is true, it is in the passage, and it favours the first account."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0159-q4",
+      "type": "weaken",
+      "skill": "strengthen_weaken",
+      "patterns": [
+        "arg.evidence_vs_conclusion",
+        "arg.qualification",
+        "lang.temporal_qualifier"
+      ],
+      "target_mistake": "attacking the wrong bound, or mistaking a premise of the bound for a threat to it",
+      "prediction_target": "the first bound claims that later values land inside old bars more often than early ones did; the strongest attack says that frequency did not fall",
+      "difficulty": {
+        "inference_depth": 4,
+        "distractor_similarity": 4,
+        "reasoning_depth": 5
+      },
+      "secondary_skills": [
+        "argument"
+      ],
+      "stem": "Which of the following, if true, would most weaken the first of the two bounds the author sets in the final paragraph?",
+      "options": {
+        "A": "The 1980s review covered only constants that had been measured by several unrelated methods.",
+        "B": "In each history the share of new values landing outside the old bar was no lower late than early.",
+        "C": "Experimenters in the later decades quoted markedly smaller uncertainties than their predecessors.",
+        "D": "Several of the systematic errors found late had been suspected earlier but could not be estimated."
+      },
+      "correct": "B",
+      "estimated_time_sec": 90,
+      "explanation": {
+        "expert_notice": "The first bound has a factual core: \"in the later decades of a constant’s history a new value lands inside the old bar far more often than it did in the early ones\", which is what makes the understatement \"diminishing\". Anything that denies that late-versus-early difference attacks the bound at its base. Shrinking bars are part of the bound, not against it.",
+        "correct_reasoning": "The bound says the understatement is \"real but diminishing\" because late values land inside old bars \"far more often\" than early ones did. If the share of values landing outside was \"no lower late than early\", the understatement did not diminish and the claim of a method \"converging rather than failing\" loses its evidence. That is the correct option. Smaller later uncertainties are already in the bound (\"the bars shrink\") and cut neither way on their own. What the review covered says nothing about the late-versus-early comparison. Errors suspected but not estimable bear on the second account’s definition of a bar, not on whether the drift is towards agreement.",
+        "passage_anchor": "rc-0159-p4",
+        "question_type_note": "To weaken a bounded claim, first isolate the claim's factual core, then look for the option that denies exactly that. Options that restate a premise, or attack a neighbouring claim, are built to look like attacks.",
+        "reading_habit": "When a passage sets two bounds, write each as one line before reading the options; a weaken question names one, and half the options aim at the other.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "out_of_scope",
+            "why_wrong": "The scope of the review concerns the first paragraph’s finding; the bound is about the shape of each history (\"later decades\" against \"early ones\"), which the review’s coverage does not touch.",
+            "seductive_element": "Limiting the data behind a passage feels like weakening whatever the passage concludes."
+          },
+          {
+            "option": "C",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "\"The bars shrink\" is part of the bound itself; smaller later uncertainties are what the author expects, and they say nothing about how often values land inside them.",
+            "seductive_element": "It takes the passage’s own words and presents them as a threat, which is the signature trap."
+          },
+          {
+            "option": "D",
+            "trap_type": "true_but_irrelevant",
+            "why_wrong": "Suspected-but-unestimable errors bear on what an error bar can contain, the second account’s point; the first bound is about whether the drift is \"towards agreement\", which such errors do not address.",
+            "seductive_element": "It sounds like a complication for error bars in general."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "propagated",
+      "passage_use": "nobody who has propagated one by hand",
+      "meaning_here": "carried through a calculation step by step from its inputs",
+      "difficulty": "hard"
+    },
+    {
+      "word": "systematic",
+      "passage_use": "a systematic shift",
+      "meaning_here": "an error that pushes every reading the same way rather than scattering them",
+      "difficulty": "medium"
+    },
+    {
+      "word": "licenses",
+      "passage_use": "nothing here licenses the conclusion",
+      "meaning_here": "permits or justifies",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "Measure a constant, publish the error bar, wait twenty years. The next value lands outside it, again and again. Who, or what, got it wrong?",
+    "one_sentence_summary": "Repeated measurements of a physical constant keep landing outside earlier error bars because a bar only sums the errors known about at the time, so the pattern is the record of unknown errors becoming known, and the trend over the decades is towards agreement, not failure.",
+    "main_idea": "An error bar states only the errors an experimenter has identified, so a later measurement landing outside an older bar is not evidence of overconfidence but of an error nobody could yet estimate; across a constant's whole history, the pattern is one of closing in on the true value, not getting it wrong.",
+    "simple_explanation": "Scientists measure a basic constant of nature and publish a number with an error bar, a kind of margin for how wrong they might be. Years later, someone measures it again with a better method, and the new number often lands outside the old margin, more often than it should if the margin had been a fair guess. A review done decades ago checked this across several constants and found the same pattern again and again, in laboratories that had nothing to do with each other.\n\nThere are two ways to explain this. The first says scientists are simply too confident, the same way most people are too confident when asked to guess a range. The second says that is not needed at all: an error bar is just the sum of the mistakes a scientist already knows how to measure. When a later experiment finds a brand new kind of mistake nobody had thought to look for, the old number falls outside its old margin because of what the margin always meant, not because anyone was vain.\n\nThe writer agrees the second explanation is correct about what an error bar actually is. But it does not fully answer the complaint. The real complaint, once you take away the talk of overconfidence, is that readers were told a margin and never told it only covered the mistakes already known about, not every possible mistake. The history of a measured number is really the record of unknown mistakes being found one at a time, and that was always there to be read, even though nobody read the margin that way.\n\nTwo limits matter here. First, this problem gets smaller over time: later measurements land inside the old margins more often than early ones did, so the gap is shrinking, not staying the same or growing. Second, none of this means a margin is useless. A margin that is too small by two or three times is still far better than no margin at all, so the right response is to treat it as wider than stated, not to throw it away. What the whole history really teaches is simply what a margin means: it states the mistakes that were known, and the string of later margins is the only record we get of the mistakes that were not.",
+    "why_difficult": "The passage credits one explanation as technically correct and then keeps part of a rival explanation alive in a narrower form, which is easy to misread as the author contradicting themselves rather than carefully separating what a definition explains from what it leaves out.",
+    "author_intention": "To settle a dispute between two explanations of a documented pattern by showing both are partly right, the second about what an error bar is and the first about what readers were never told, while adding two limits so the conclusion is not overstated in either direction.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0159-p1",
+        "role": "States the pattern",
+        "note": "A constant is measured, published with an error bar, and later measurements keep landing outside that bar far more often than the maths of error bars should allow, across many unrelated constants and labs."
+      },
+      {
+        "paragraph_id": "rc-0159-p2",
+        "role": "Gives two explanations",
+        "note": "One explanation blames the experimenters for being overconfident; the other says an error bar is only ever a sum of the errors known about at the time, so new unknown errors will always push old values outside it."
+      },
+      {
+        "paragraph_id": "rc-0159-p3",
+        "role": "Narrows the complaint",
+        "note": "The author agrees the second explanation is right about what an error bar is, but says the first explanation survives in a reduced form: readers were never told the bar meant something narrower than they assumed."
+      },
+      {
+        "paragraph_id": "rc-0159-p4",
+        "role": "Bounds the conclusion",
+        "note": "The author adds two limits: the pattern is actually improving over time, and none of this means error bars are worthless, only that they should be read as wider than stated, not dismissed."
+      }
+    ],
+    "tone_progression": "The voice is cold, exact and judicial throughout, weighing two accounts against each other and then bounding its own conclusion twice rather than ending on a strong claim.",
+    "key_transitions": [
+      "‘But it answers a question the first account did not quite ask.’ (opening of paragraph 3): the author grants the second account is correct and then narrows what it fails to cover.",
+      "‘Two bounds belong on the point.’ (opening of paragraph 4): the author stops the argument from running further than the evidence allows."
+    ],
+    "misunderstanding": "A hurried reader assumes the author picks one explanation and discards the other, missing that the author keeps a reduced version of the first account alive precisely because it is about readers, not about the mechanics of the bar.",
+    "traps_summary": "The options misread a frequency finding as a drift between values, hand the author's own point about readers to the wrong account, mistake supporting evidence for the reason a view survives, and treat a premise of a bound as an attack on it.",
+    "reading_lesson": "When an author concedes that a rival view is correct and then says \"but\", read the very next sentence closely: it marks exactly how much of the original complaint survives, and the answer is almost always smaller and more specific than the original complaint sounded.",
+    "real_world": "Any time an estimate turns out wrong later, ask whether the mistake was in the estimator's confidence or in the definition of what the estimate was ever claiming to cover.",
+    "takeaway": "An error bar only ever states the mistakes already known about, so later measurements landing outside it are the record of mistakes becoming known, not of anyone's vanity.",
+    "reflection_question": "Where else have you confused a stated margin for a complete account of how wrong something could be?",
+    "eli10": {
+      "big_idea": "A measurement's error bar only covers the mistakes already known about, so later measurements landing outside it are not proof of overconfidence, and the gap has actually been shrinking over time.",
+      "story": "Scientists measure a basic number in nature. They publish it with a margin, like plus or minus a small amount. Years later, someone measures it again, better this time. Often the new number lands outside the old margin. This keeps happening, for many numbers, in labs that never talk to each other. One answer says scientists guess margins too small, the way most people are too sure of themselves. Another says that is not needed. A margin only adds up mistakes a scientist already knows about. When a new kind of mistake is found later, the old number falls outside the old margin. The writer agrees the second answer is correct. But readers were told a margin and never told it only covered known mistakes. The real story is unknown mistakes being found one at a time. Here is good news. This problem shrinks over time. Later measurements land inside old margins more often than early ones did. A margin is still useful, even when too small.",
+      "paragraphs": [
+        "Scientists keep measuring the same number, and new measurements often land outside the old safety margin.",
+        "One explanation blames overconfidence; the other says the margin only ever covered mistakes already known about.",
+        "The second explanation is right, but readers were never told the margin left out mistakes nobody had found yet.",
+        "The gap is actually shrinking over time, and a margin is still useful even when it was too small."
+      ],
+      "author_view": "The writer is cold and careful, weighing both explanations fairly and refusing to let the conclusion run further than the evidence allows."
+    }
+  }
+}

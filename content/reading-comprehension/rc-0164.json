@@ -1,0 +1,407 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0164",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 89,
+    "genre": "medicine-health",
+    "difficulty": "medium",
+    "difficulty_numeric": 6,
+    "stage": "intermediate",
+    "skills": [
+      "evidence-anchoring",
+      "inference",
+      "structure-mapping",
+      "trap-recognition"
+    ],
+    "word_count": 498,
+    "question_count": 4,
+    "question_types": [
+      "specific_detail",
+      "inference",
+      "cannot_be_inferred",
+      "role_of_detail"
+    ],
+    "theme": "a handover form moves states (a dose, a result, an allergy) reliably and drops direction (getting quieter since four); a trend put in a box becomes a state, so the two kinds need two carriers",
+    "estimated_time_min": 8,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-07",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted."
+    },
+    "date_added": "2026-10-07",
+    "batch_id": "batch-rc-008",
+    "prompt_version": "content engine v1 + CAT paper patterns 2026-10; batch-rc-008",
+    "reviewer_notes": "The corpus's medicine passages are about judgement and triage; this one is about the transfer of knowledge between people, and it is carried first by a scene in the present tense (the coat at the door) before any claim is made. The mechanism is that a box can hold a level but not a change, so that the remedy for a lost fact makes a lost trend more likely. The near-tie is in the inference question, where a distractor says a fall between two sheets does carry the trend; the text answers it with what a pair of scores leaves out. The date in the scene (the second of January) is scene-setting, not a factual claim. The move is a narrative in which a scene carries the argument before any argument begins, carried in a voice that opens at a ward handover in the present tense and then turns to impersonal analysis.",
+    "length_class": "medium",
+    "structure": "narrative_reflection",
+    "viewpoints": 1,
+    "tone": "observant, then measured",
+    "difficulty_vector": {
+      "lexical": 2,
+      "syntactic": 3,
+      "abstraction": 3,
+      "inference_depth": 3,
+      "distractor_similarity": 4,
+      "reasoning_depth": 4,
+      "structural_ambiguity": 2,
+      "time_pressure": 3
+    },
+    "reasoning_patterns": [
+      "comp.explicit_detail",
+      "struct.problem_solution",
+      "comp.reference_tracking",
+      "inf.strongly_supported",
+      "struct.qualification",
+      "scope.condition",
+      "inf.vs_speculation",
+      "inf.directly_implied",
+      "elim.systematic",
+      "comp.function_over_words",
+      "struct.example",
+      "comp.intent",
+      "struct.contrast",
+      "struct.specific_to_general"
+    ],
+    "quality": {
+      "status": "verified",
+      "adversarial_review": "Q1: The strongest rival is the option on recording change during the night, because the scene is about a lost change. \"What the form drops is not a fact but a direction\" settles it: the sheet was never for that, and \"A handover told from memory dropped things: the allergy, the result ... the dose\" names what it was for. Q2: The near-tie is the \"sound carrier of direction\" option, argued from \"so that a fall from one sheet to the next would show\" and from the author's concession that a comparison is \"something\". It is killed by \"not when the change began, nor whether it has been steady or sudden, nor that the person who watched it is worried\" and by \"Put a trend in a box and what you get is a point\". Q3: A candidate argues that the day nurse must have examined the patient, since the remark was \"the most important thing\"; nothing in the text reports any response, and the day nurse is last seen when she \"writes\". The option on keeping the sheet is argued to be a concession rather than the author's view; \"the form should be kept, because the losses it was built to stop were real\" is in the author's own voice. Q4: A candidate argues for carelessness; \"the most important thing anyone will say on this ward before lunch\" and \"There is no box for that\" put the fault in the form, and \"before the coat goes on\" in the last paragraph fixes the coat as the marker of the sheet's end.",
+      "blind_solve": {
+        "solver": "sonnet blind reader 2026-10-07 (batch rc-008)",
+        "agreed": 4,
+        "total": 4,
+        "notes": "full agreement"
+      }
+    },
+    "vocab_extracted": [
+      "handover",
+      "afterthought",
+      "carriers"
+    ]
+  },
+  "passage": {
+    "title": "Handover at Seven",
+    "reading_time_min": 2.7,
+    "paragraphs": [
+      {
+        "id": "rc-0164-p1",
+        "text": "Seven in the morning on the second of January, and the night nurse is reading from a sheet. Bed four: eighty-one, pneumonia, antibiotics started yesterday, oxygen at two litres, allergic to penicillin, observations stable. The day nurse writes. Each bed takes about forty seconds, and the sheet has a box for each thing that is said. At the door, with her coat already on, the night nurse turns back. \"Four has been getting quieter since about four o'clock. She was chatty at midnight.\" There is no box for that. It is said in the tone of an afterthought. It is also the most important thing anyone will say on this ward before lunch."
+      },
+      {
+        "id": "rc-0164-p2",
+        "text": "The sheet exists because of what used to happen without it. A handover told from memory dropped things: the allergy, the result that came back at three, the dose that was changed at five. The remedy was a form with a fixed order of items, and it worked, in the sense that the things it was built to carry now arrive. A dose is a state. An allergy is a state. A result is a state. The form moves states reliably, because a state can be written in a box, read from the box and checked against it later."
+      },
+      {
+        "id": "rc-0164-p3",
+        "text": "What the form drops is not a fact but a direction. \"She has been getting quieter since four\" is not the condition of the patient at seven; it is the shape of the last three hours, and it points somewhere. That sentence was built from comparisons with the night nurse's own earlier impressions, which are not on the sheet either. You could add a box for it. Hospitals have tried: a score for alertness, written at every handover, so that a fall from one sheet to the next would show. But the score is a state again. It records that she is quiet at seven, which the day nurse could see for herself. Set beside last night's score it says that she is quieter than she was, which is something, but not when the change began, nor whether it has been steady or sudden, nor that the person who watched it is worried. Put a trend in a box and what you get is a point."
+      },
+      {
+        "id": "rc-0164-p4",
+        "text": "So a handover carries two kinds of knowledge, and they need two carriers. States travel well in a form, and the form should be kept, because the losses it was built to stop were real. Direction travels only in a sentence, spoken by the person who watched the change, and the sentence has to be given room: a blank line at the end of the sheet, and a habit of asking for it before the coat goes on. The temptation, whenever a sentence is found to have been missed, is to give it a box. Resist it. A box would not have carried that sentence. It would have carried a number, and the number at seven would have looked fine."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0164-q1",
+      "type": "specific_detail",
+      "skill": "specific_detail",
+      "patterns": [
+        "comp.explicit_detail",
+        "struct.problem_solution",
+        "comp.reference_tracking"
+      ],
+      "target_mistake": "reading the sheet's purpose from the scene (speed, the score) rather than from the sentence that states why it exists",
+      "prediction_target": null,
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 3,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "logical_structure"
+      ],
+      "stem": "According to the passage, the handover sheet was introduced in order to",
+      "options": {
+        "A": "give the day nurse a written record of how each patient had changed during the night.",
+        "B": "shorten the time spent on each bed at a handover to about forty seconds per patient.",
+        "C": "replace the night nurse's spoken impressions with a written score for alertness.",
+        "D": "keep facts like an allergy or a changed dose from being lost at a spoken handover."
+      },
+      "correct": "D",
+      "estimated_time_sec": 50,
+      "explanation": {
+        "expert_notice": "The second paragraph opens \"The sheet exists because of what used to happen without it\" and then lists what used to happen: \"A handover told from memory dropped things: the allergy, the result that came back at three, the dose that was changed at five.\" That list is the purpose. The forty seconds and the alertness score are elsewhere and do different jobs.",
+        "correct_reasoning": "The text gives the reason directly: handovers \"told from memory dropped things\", and \"The remedy was a form with a fixed order of items\". The correct option names the dropped things the text names (an allergy, a changed dose) and the mechanism (a spoken handover losing them). It is a paraphrase of the second paragraph's first three sentences.",
+        "passage_anchor": "rc-0164-p2",
+        "question_type_note": "A detail question about purpose is answered by the sentence containing \"because\" or \"so that\" or \"The remedy was\", not by the most vivid sentence. Find the causal sentence and match it.",
+        "reading_habit": "When a passage describes something and then explains why it exists, the explanation is usually one sentence with a causal word; locate that sentence first and read the options against it alone.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "Change during the night is exactly what the sheet fails to carry: \"What the form drops is not a fact but a direction.\" The sheet was built to carry states, not change.",
+            "seductive_element": "The scene makes the lost change the dramatic centre, so a reader may assume the sheet was meant to capture it."
+          },
+          {
+            "option": "B",
+            "trap_type": "fact_right_interpretation_wrong",
+            "why_wrong": "\"Each bed takes about forty seconds\" describes how the handover runs, not why the sheet was introduced; no sentence connects the sheet to saving time.",
+            "seductive_element": "The number is in the first paragraph beside the sheet, and forms are commonly assumed to exist for speed."
+          },
+          {
+            "option": "C",
+            "trap_type": "wrong_structural_role",
+            "why_wrong": "The alertness score is a separate, later attempt (\"You could add a box for it. Hospitals have tried\"), introduced to carry direction, not the reason the sheet itself exists.",
+            "seductive_element": "Both the sheet and the score are written records, so they blur together as one reform."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0164-q2",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.strongly_supported",
+        "struct.qualification",
+        "scope.condition"
+      ],
+      "target_mistake": "taking \"so that a fall from one sheet to the next would show\" as the author's verdict, when it is the hope the author then qualifies",
+      "prediction_target": "the score was added to carry direction, but the author says \"the score is a state again\": it gives a level, and even two levels leave out when and how the change happened and who is worried",
+      "difficulty": {
+        "inference_depth": 4,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "scope",
+        "logical_structure"
+      ],
+      "stem": "It can be inferred that the author regards the alertness score written at each handover as",
+      "options": {
+        "A": "a failure because it is taken too seldom for a fall between readings to show.",
+        "B": "an attempt to carry direction that carries a state, since a reading records only a level.",
+        "C": "a sound carrier of direction, because a fall between two sheets shows what the night nurse saw.",
+        "D": "a reason to drop the spoken sentence, since the score now holds what the sentence did."
+      },
+      "correct": "B",
+      "estimated_time_sec": 90,
+      "explanation": {
+        "expert_notice": "The alertness score is introduced with its intention (\"so that a fall from one sheet to the next would show\") and then judged: \"But the score is a state again.\" The expert reads past the \"But\" and collects what a pair of scores omits: \"not when the change began, nor whether it has been steady or sudden, nor that the person who watched it is worried\".",
+        "correct_reasoning": "The text says the score \"records that she is quiet at seven\", and that even \"Set beside last night's score\" it gives \"something, but not when the change began, nor whether it has been steady or sudden\". The author's summary is \"Put a trend in a box and what you get is a point\". So the score, intended to carry direction, carries a level: a state. The correct option says that and gives the author's reason, that a reading records a level at a moment.",
+        "passage_anchor": "rc-0164-p3",
+        "question_type_note": "Inference about an author's view of a device means reading the sentence after the \"But\", not the sentence that introduces the device. The introduction states the hope; the qualification states the verdict.",
+        "reading_habit": "When a passage says \"X was tried, so that Y would show. But ...\", the author's view is in the \"But\" clause. Mark it before looking at the options.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "wrong_condition",
+            "why_wrong": "Frequency is not the complaint; the score is written \"at every handover\", and the fault the author names is what any reading leaves out, not how many readings there are.",
+            "seductive_element": "More frequent measurement is the usual fix for a missed trend, and the option borrows that common sense."
+          },
+          {
+            "option": "C",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "This is the near-tie. \"so that a fall ... would show\" is the intention, and the author grants that a pair of scores says \"she is quieter than she was\". But the text then lists what the pair does not say: \"not when the change began, nor whether it has been steady or sudden, nor that the person who watched it is worried\". The night nurse's sentence carried those; the score does not.",
+            "seductive_element": "It reuses the passage's own words about the fall showing, and the author does concede that a comparison of two scores is \"something\"."
+          },
+          {
+            "option": "D",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The fourth paragraph says the opposite: \"the sentence has to be given room\", and the final warning is that \"A box would not have carried that sentence.\" The score is no replacement for it.",
+            "seductive_element": "If the score carries the trend, the sentence seems redundant; the option follows that logic one step past the text."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0164-q3",
+      "type": "cannot_be_inferred",
+      "skill": "inference",
+      "patterns": [
+        "inf.vs_speculation",
+        "inf.directly_implied",
+        "elim.systematic"
+      ],
+      "target_mistake": "inferring an outcome the scene never reports, because the passage calls the remark the most important thing said before lunch",
+      "prediction_target": "the passage never says what the day nurse did with the remark or what happened to the patient; anything about the outcome is beyond the text",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 3,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "scope"
+      ],
+      "stem": "Which of the following CANNOT be inferred from the passage?",
+      "options": {
+        "A": "The night nurse's remark rested on comparisons with impressions she had formed earlier in the night.",
+        "B": "Before the sheet was introduced, some handovers omitted items that the sheet now reliably carries.",
+        "C": "The day nurse acted on the remark about bed four and examined the patient before lunch.",
+        "D": "The author thinks the sheet should be kept even though it fails to carry direction."
+      },
+      "correct": "C",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "Three of these are stated or directly implied; the fourth adds an event. The scene ends with the night nurse's remark and the author's comment on its importance; nothing follows about the day nurse's response, the patient's course, or anyone's examination. The expert notices that the passage is about what gets transmitted, not about what was done.",
+        "correct_reasoning": "The passage says the remark \"is the most important thing anyone will say on this ward before lunch\", but it never says anyone acted on it. The day nurse \"writes\" during the handover and nothing more is reported of her. Whether she examined the patient is simply not in the text, so it cannot be inferred. The other three options are each anchored: \"comparisons with the night nurse's own earlier impressions\", \"A handover told from memory dropped things\", and \"the form should be kept\".",
+        "passage_anchor": "rc-0164-p1, rc-0164-p2, rc-0164-p3, rc-0164-p4",
+        "question_type_note": "A cannot-be-inferred question is three inference questions and one trap. Confirm the three that are supported by pointing to their sentences; the one you cannot point to is the answer. The trap is usually a plausible next event the story never narrates.",
+        "reading_habit": "Separate what a narrative passage reports from what it makes you expect. \"the most important thing anyone will say\" tells you the remark mattered, not that anyone heard it.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "near_synonym_confusion",
+            "why_wrong": "Directly stated: \"That sentence was built from comparisons with the night nurse's own earlier impressions\". The option says \"rested on\" and \"formed earlier in the night\", which is the same claim in other words.",
+            "seductive_element": "The option's wording differs from the text's, and a reader may take a paraphrase for an addition."
+          },
+          {
+            "option": "B",
+            "trap_type": "weakened_version",
+            "why_wrong": "Stated in the second paragraph: \"A handover told from memory dropped things ... the things it was built to carry now arrive.\" \"some handovers omitted items\" is a cautious restatement of that.",
+            "seductive_element": "\"some\" is softer than the text, and a reader may suspect that the softening was invented."
+          },
+          {
+            "option": "D",
+            "trap_type": "concession_as_position",
+            "why_wrong": "The author's own view, stated plainly: \"the form should be kept, because the losses it was built to stop were real\". It is a position, not a concession to an opponent.",
+            "seductive_element": "The passage is critical of the form, so a reader may doubt that the author would keep it and read the sentence as grudging."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0164-q4",
+      "type": "role_of_detail",
+      "skill": "paragraph_function",
+      "patterns": [
+        "comp.function_over_words",
+        "struct.example",
+        "comp.intent"
+      ],
+      "target_mistake": "reading a scene detail as a judgement on the nurse, instead of as the illustration of a claim made later about the form",
+      "prediction_target": "the coat marks the moment as after the handover proper; the remark comes once the sheet is done, which is what the passage later says happens to direction: it has no box and arrives only if room is left for it",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 3,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "inference"
+      ],
+      "stem": "Why does the author mention that the night nurse spoke \"with her coat already on\"?",
+      "options": {
+        "A": "to place the remark outside the sheet, as an afterthought for which the form had no box.",
+        "B": "to suggest that the night nurse was careless to leave the most important thing to the end.",
+        "C": "to show that each handover is rushed because every bed is allotted only forty seconds.",
+        "D": "to imply that spoken remarks are less reliable than written ones because they are hurried."
+      },
+      "correct": "A",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "A detail in an opening scene is usually cashed out later. The coat reappears in the fourth paragraph: the sentence needs \"a habit of asking for it before the coat goes on\". So the coat marks the point at which the sheet has finished and the unboxed remark is nearly lost. The detail dramatises \"There is no box for that\".",
+        "correct_reasoning": "The sentence after the remark says \"There is no box for that. It is said in the tone of an afterthought\", and the final paragraph asks for the sentence to be sought \"before the coat goes on\". The coat therefore marks the remark as arriving after the form has done its work, as an afterthought the form could not hold. That is the role of the detail. It is not a judgement on the nurse, whose remark the author calls the most important thing said that morning.",
+        "passage_anchor": "rc-0164-p1, rc-0164-p4",
+        "question_type_note": "A role-of-detail question asks what work a detail does for the argument. Find where the passage returns to the detail or to what it stands for; the return tells you the function.",
+        "reading_habit": "In a passage that opens with a scene, list the scene's concrete details and watch for which of them the analysis later picks up. Those are the ones a question will ask about.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "wrong_valence_tone",
+            "why_wrong": "The author's judgement on the remark is that it is \"the most important thing anyone will say on this ward before lunch\"; the fault is placed on the form (\"There is no box for that\"), not on the nurse.",
+            "seductive_element": "Leaving the vital thing to last looks like carelessness, and the coat makes her look halfway out of the door."
+          },
+          {
+            "option": "C",
+            "trap_type": "wrong_structural_role",
+            "why_wrong": "The forty seconds describes the pace of the boxed items; the coat marks what happens after the boxes are done. The passage never says the handover is rushed, and the remedy it proposes is a blank line and a habit, not more time.",
+            "seductive_element": "Both details are in the same paragraph, and \"coat already on\" does feel like hurry."
+          },
+          {
+            "option": "D",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The fourth paragraph says direction \"travels only in a sentence, spoken by the person who watched the change\"; the spoken remark is the reliable carrier of the trend, not the unreliable one.",
+            "seductive_element": "The passage praises the written form for reliability, and a reader may extend that praise into a contrast with speech."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "handover",
+      "passage_use": "A handover told from memory dropped things",
+      "meaning_here": "the passing of patients and their information from one shift to the next",
+      "difficulty": "easy"
+    },
+    {
+      "word": "afterthought",
+      "passage_use": "said in the tone of an afterthought",
+      "meaning_here": "something added later, as if of minor importance",
+      "difficulty": "easy"
+    },
+    {
+      "word": "carriers",
+      "passage_use": "they need two carriers",
+      "meaning_here": "the means by which something is conveyed from one person to another",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "Seven in the morning. The night shift reads from a sheet, box by box, and gets every item right. Then, at the door, she says the one thing that matters most.",
+    "one_sentence_summary": "A hospital handover scene shows that a written form reliably transfers facts like a dose or an allergy because each is a fixed state that fits in a box, but it loses a trend like a patient quietly worsening because a trend is a direction, not a point, and boxing it, even as a repeated score, only turns it back into a state.",
+    "main_idea": "A handover form is good at carrying facts that do not change, such as a dose or an allergy, but bad at carrying a change over time, because the form can only hold a value at a moment; adding more boxes, such as a repeated alertness score, does not fix this, since a box can only ever report a level, never the shape, speed or worry behind a trend, which has to travel in a spoken sentence instead.",
+    "simple_explanation": "It is seven in the morning, and the night nurse is handing over her patients to the day nurse using a printed sheet. For each bed she reads out fixed facts: the illness, the medicine, the oxygen level, any allergy. The day nurse writes each one down in its own box, and it only takes about forty seconds a bed. Then, right at the door, with her coat already on, the night nurse adds something not on the sheet: the patient in bed four has been getting quieter since about four in the morning, though she was chatty at midnight. There is no box for that remark, and it turns out to be the most important thing said all morning.\n\nThe sheet exists for a good reason. Before it, handovers were done from memory, and memory lost things: a missed allergy, a result that came back at three in the morning, a dose changed at five. The fixed form fixed that problem. A dose, an allergy and a test result are all facts that stay the same until someone changes them, called states here, and a state fits neatly into a box, gets read back out of it, and can be checked later. The form is good at this and should be trusted for it.\n\nWhat the form cannot carry is a direction, a sense of where something is heading. 'Getting quieter since four' is not a fact about right now, it is a comparison with how the patient seemed hours earlier, built from the night nurse's own memory of watching her. You could try adding a box for this, and hospitals have: a score for how alert the patient is, written at every handover, so a drop between two scores would show up. But a score is still just a state, a single number for right now. Even putting two scores side by side only tells you the patient got quieter, not when it started, whether it happened suddenly or little by little, or that the nurse who watched it happen is worried. Squeeze a trend into a box and all you get out is a point.\n\nSo a handover really carries two different kinds of knowledge, and each needs its own way of travelling. States travel well in the form, and the form earns its place because it stopped real, serious losses. A direction only travels properly in a spoken sentence from the person who actually watched the change happen, so handovers need to leave room for that sentence, a blank line on the sheet and a habit of asking for it before anyone's coat goes on. It is tempting, whenever an important sentence nearly gets missed, to try turning it into another box. That temptation should be resisted, because a box could never have carried that sentence, only a number, and the number would have looked perfectly fine.",
+    "why_difficult": "The passage opens as a small, concrete scene and only becomes an argument in the second paragraph, so a reader can finish it remembering the coat and the quiet patient without registering the distinction the passage is actually building, between a state that a box can hold and a direction that a box cannot; the alertness score in the third paragraph is easy to mistake for the passage's solution when it is actually the passage's clearest proof of the problem.",
+    "author_intention": "To show, through one ordinary scene, that a checklist which reliably carries facts can still reliably lose the thing that matters most, a sense of where a patient is heading, and to argue that the fix is not a better box but a kept habit of asking for a sentence.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0164-p1",
+        "role": "Opens the scene",
+        "note": "A boxed handover goes smoothly, and then an unboxed remark at the door turns out to matter more than everything written down."
+      },
+      {
+        "paragraph_id": "rc-0164-p2",
+        "role": "Explains the form's purpose",
+        "note": "The sheet exists because handovers told from memory used to lose facts like an allergy or a changed dose, and a fixed form carries those states reliably."
+      },
+      {
+        "paragraph_id": "rc-0164-p3",
+        "role": "Names what the form drops",
+        "note": "A trend, like getting quieter since four, is a direction, not a state, and even a repeated alertness score only ever reports a level, not the shape of the change."
+      },
+      {
+        "paragraph_id": "rc-0164-p4",
+        "role": "States the fix",
+        "note": "States belong in the form, which should be kept, but a direction only travels in a spoken sentence, so a handover needs room left for that sentence."
+      }
+    ],
+    "tone_progression": "The passage opens inside a scene, observant and present-tense, following the night nurse's exact words and gestures; once the argument starts it turns measured and explanatory, and stays level even while making its strongest claim, that a box would never have carried the one sentence that mattered.",
+    "key_transitions": [
+      "'The sheet exists because of what used to happen without it.' (opening of the second paragraph): the scene gives way to the reason the form was built.",
+      "'What the form drops is not a fact but a direction.' (opening of the third paragraph): the passage names the precise gap the form leaves."
+    ],
+    "misunderstanding": "A reader can take the alertness score as the passage's proposed fix for the missing trend, since it is introduced as an attempt to solve the exact problem the night nurse's remark raises; the passage instead uses it to show that any box, however well meant, still only reports a state, which is why the real fix has to be a sentence, not a score.",
+    "traps_summary": "The wrong options credit the sheet with carrying the very thing it drops, treat the later alertness score as the sheet's original purpose or as a genuine fix for direction, invent an outcome the scene never narrates, and mistake the writer's praise for the form as a grudging concession rather than a stated position.",
+    "reading_lesson": "When a passage introduces a device 'so that' some problem would be solved and then says 'But', read the sentence after the 'But' as the writer's real verdict on the device, not the sentence that states its hopeful intention.",
+    "real_world": "The same gap appears whenever a form, dashboard or checklist is built to prevent one kind of lost information, a missed step, a missed fact, and ends up reliably hiding a different kind, a worsening trend that nobody with the full picture gets the chance to say out loud.",
+    "takeaway": "A checklist can carry a fact perfectly and a trend not at all, because a box can only ever hold a point, never a direction.",
+    "reflection_question": "Think of a form or checklist you rely on: what kind of change might it be quietly failing to carry, because it was only ever built to hold fixed facts?",
+    "eli10": {
+      "big_idea": "A hospital checklist is great at passing on facts that stay the same, like an allergy, but bad at passing on a change over time, like a patient slowly getting worse.",
+      "story": "Every morning, nurses hand over patients using a sheet with boxes. Each box holds one fact: the illness, the medicine, the oxygen level. It works well and takes about forty seconds per patient. One morning, a night nurse finishes the sheet, then pauses at the door. She says a patient has been getting quieter since four in the morning. There is no box for that. But it is the most important thing she says all day. The sheet was built because old handovers, done from memory, lost facts like allergies. Boxes fix that. But a box can only hold one fact at one moment. It cannot hold a slow change. Even a repeated score just gives a number each time, not the story behind it. So facts belong in boxes. Changes belong in sentences, spoken by the person who watched them happen.",
+      "paragraphs": [
+        "A night nurse finishes the boxed handover, then adds an unboxed remark at the door that turns out to matter most.",
+        "The boxed sheet was built because old handovers from memory used to lose facts, and it carries facts well.",
+        "A box, even a repeated score, can only hold one number at a time, never the shape of a slow change.",
+        "Facts should stay in the form, but a changing trend needs a spoken sentence, with room left to say it."
+      ],
+      "author_view": "The writer respects the checklist and does not want it scrapped, but insists calmly that it has one real blind spot, and that the fix is a kept habit of listening, not a better box."
+    }
+  }
+}

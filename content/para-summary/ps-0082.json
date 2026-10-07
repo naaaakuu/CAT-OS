@@ -1,0 +1,181 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ps-0082",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 91,
+    "genre": "markets",
+    "difficulty": "hard",
+    "difficulty_numeric": 10,
+    "tier": "premium",
+    "bible_level": "elite",
+    "title": "The Mango and the Motorway",
+    "theme": "why a brand is worth most where checking is hardest and nothing where goods can be inspected on the spot: its value is the checking it spares the buyer, which lives in a gap the buyer can sometimes close for free",
+    "estimated_time_sec": 135,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-10: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "claim_support_restatement",
+    "apex": {
+      "claim": "A brand is a promise that the next unit will be like the last, and its value is the cost of checking it spares the buyer, so it is worth most where checking is hardest and least where the goods can be inspected on the spot; the value lies in the gap between what the buyer needs to know and can find out, not in the name.",
+      "scope": "What a brand's premium is paid for and where it will and will not appear; the claim is about the source of the value, not about whether brands are good or bad for buyers.",
+      "certainty": "asserted",
+      "stance": "neutral"
+    },
+    "turn": {
+      "present": false,
+      "marker": null
+    },
+    "difficulty_dials": {
+      "abstraction": 5,
+      "syntax": 4,
+      "turn_subtlety": 2,
+      "distractor_closeness": 5,
+      "live_options": 2,
+      "stance_subtlety": 2,
+      "qualifier_density": 3,
+      "domain_load": 2
+    },
+    "load_bearing": [
+      "the cost of checking that the buyer is thereby spared",
+      "where checking is hardest",
+      "can be inspected on the spot",
+      "not a property of the name but of the gap"
+    ],
+    "separating_element": "The correct option measures a brand's value by the checking it spares; the nearest rival measures it by the quality it guarantees, and the street market separates them: quality matters there as much as anywhere, the mango can be squeezed, and the premium is nil.",
+    "dna_traits": [
+      "language_precision",
+      "main_idea_detection",
+      "inference_control",
+      "evidence_vs_thesis"
+    ],
+    "mission": "match_ideas_not_words",
+    "learning_objective": "hold a definition to the exact quantity it names, when a neighbouring and more familiar quantity fits most of the same cases",
+    "reasoning_patterns": [
+      "struct.definition",
+      "sum.central_vs_supporting",
+      "arg.principle",
+      "sum.example_vs_claim",
+      "elim.near_tie"
+    ],
+    "quality": {
+      "status": "verified",
+      "adversarial_review": "The two finalists agree on the definition, a promise that the next unit will be like the last, and part on what the premium pays for. The rival says quality, which fits the unknown hotel and the untestable dose as well as the key does. The street market is in the paragraph to separate them: the quality of a mango matters as much as the quality of a room, but the mango can be squeezed, and the name 'commands none'. So the premium tracks the checking the buyer cannot do, not the quality the buyer wants. The motorway-and-mango option is that separating case offered as the whole. The recommendation that sellers resist inspection is a conclusion the paragraph does not draw and would not, since it describes where value lies and gives no advice.",
+      "blind_solve": {
+        "solver": "sonnet blind reader 2026-10-07",
+        "agreed": 1,
+        "total": 1,
+        "notes": "full agreement"
+      }
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-07",
+      "usage_note": "Original composition in CAT register for CAT OS. General economic reasoning about what a brand's premium pays for; no specific text or firm adapted. Personal study only."
+    },
+    "date_added": "2026-10-07",
+    "batch_id": "batch-ps-004",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ps-004",
+    "reviewer_notes": "An elite definition-then-application item whose near miss is the adjacent quantity, quality guaranteed rather than checking spared, and whose separating case is the squeezable mango. Distinct from ps-0028 and ps-0058, which are about price stickiness and thin-market valuation. Families: language, structure, addition."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "A brand is a promise that the next unit will be like the last, and what the buyer pays for the name is the cost of checking that the buyer is thereby spared.",
+        "role": "thesis"
+      },
+      {
+        "text": "It follows that the promise is worth most where checking is hardest: a hotel in a city you do not know, a drug whose dose you cannot test, a service whose quality you learn only after you have paid.",
+        "role": "support"
+      },
+      {
+        "text": "Where the goods can be inspected on the spot, the promise is worth little, since the buyer can see for nothing what the name was offering to guarantee.",
+        "role": "support"
+      },
+      {
+        "text": "The same name that commands a premium beside a motorway, where the traveller has one evening and no second chance, commands none in a street market where every mango can be squeezed.",
+        "role": "example"
+      },
+      {
+        "text": "A brand's value is therefore not a property of the name but of the gap between what the buyer needs to know and what the buyer can find out; close the gap and the premium goes with it.",
+        "role": "restatement"
+      }
+    ]
+  },
+  "ideal_summary": "A brand is a promise that the next unit will be like the last, and its value is the checking it spares the buyer, so it is worth most where checking is hardest and little where the goods can be inspected on the spot; the value is in the gap, not the name.",
+  "builder": {
+    "prompt": "In one sentence: what does the paragraph say a brand is, and what does it say the premium on the name actually pays for?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence say the premium pays for the checking the buyer is spared, rather than for quality?",
+        "kept": "Exactly right, and this is the item. Quality fits the hotel and the drug; the mango is in the paragraph to show that quality alone buys the name nothing.",
+        "drifted": "A mango matters as much as a hotel room and the name earns nothing in the market, because the mango can be squeezed. The premium tracks what cannot be checked, not what matters."
+      },
+      {
+        "id": "scope",
+        "ask": "Does your sentence keep both ends: worth most where checking is hardest, and little where goods can be inspected on the spot?",
+        "kept": "Good. The paragraph is a rule with two ends, and the closing sentence, 'close the gap and the premium goes with it', is the second end stated generally.",
+        "drifted": "A summary with only the motorway end says where brands work and not why they stop working, which is half the rule."
+      },
+      {
+        "id": "addition",
+        "ask": "Have you drawn advice for sellers, or a judgement about whether brands serve buyers well?",
+        "kept": "Well held. The paragraph says where value lies and nothing about what anyone should do with that.",
+        "drifted": "Telling sellers to resist inspection, or buyers to distrust names, is a further step the paragraph does not take."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "A hotel name that commands a premium beside a motorway, where the traveller has one evening and no second chance, commands none in a street market where every mango can be squeezed before it is bought.",
+      "B": "A brand is a promise that the next unit will be like the last, and its value is the quality that promise guarantees, so it commands a premium wherever quality matters most to the buyer and little where it matters least.",
+      "C": "A brand is a promise that the next unit will be like the last, and its value is the checking it spares the buyer, so it is worth most where checking is hardest and little where goods can be inspected on the spot.",
+      "D": "Since a brand's premium rests on what the buyer cannot check for free, sellers should resist anything that makes their goods easier to inspect, or the premium will close along with the gap that earned it."
+    },
+    "correct": "C",
+    "explanation": {
+      "paragraph_meaning": "A brand is a promise: the next one you buy will be like the last one. What you pay extra for the name is the trouble you are saved of checking for yourself. So the name is worth most when checking is hard: a hotel in a strange city, a pill you cannot test, a service you only judge after paying. Where you can inspect the goods on the spot, the name is worth little, because you can see for free what it was promising. The same hotel name earns a premium on the motorway, where you have one night and no second try, and nothing in a market where you can squeeze every mango. The value is not in the name itself but in the gap between what you need to know and what you can find out; close the gap and the premium disappears.",
+      "correct_reasoning": "The correct option keeps the definition and the exact quantity the premium pays for, the checking the buyer is spared, and then keeps both ends of the rule that follows: worth most where checking is hardest, little where the goods can be inspected on the spot. That is the paragraph's claim at its own scope, with the example left as an example.",
+      "distractors": [
+        {
+          "option": "A",
+          "archetype": "example_as_thesis",
+          "secondary_archetype": null,
+          "why_wrong": "The motorway and the market are the case the paragraph uses to show its rule at both ends. The rule itself, that the premium pays for checking spared and vanishes where checking is free, is not stated, and neither is the definition it rests on.",
+          "seductive_element": "It is the only scene in the paragraph, it contains both ends of the contrast, and it is accurate in every detail.",
+          "thinking_mistake": "Keeping the case that made the principle vivid and dropping the principle."
+        },
+        {
+          "option": "B",
+          "archetype": "near_miss",
+          "secondary_archetype": "category_shift",
+          "why_wrong": "The definition is kept and the quantity is changed. The paragraph says the buyer pays for 'the cost of checking that the buyer is thereby spared', and the street market is built to separate that from quality: the mango's quality matters as much as the room's, the mango can be squeezed, and the name 'commands none'.",
+          "seductive_element": "Quality is what most readers already think a brand promises, it fits the hotel and the drug perfectly, and the option differs from the key by a handful of words in the middle.",
+          "thinking_mistake": "Accepting a familiar quantity that agrees with the first examples, instead of testing it against the one example the author added to break it."
+        },
+        {
+          "option": "D",
+          "archetype": "prescriptive_swap",
+          "secondary_archetype": null,
+          "why_wrong": "The paragraph gives no advice to sellers. It says where a brand's value lies and that closing the gap removes the premium; what a seller should do about that is a question it never raises.",
+          "seductive_element": "It takes the closing clause, 'close the gap and the premium goes with it', and draws the strategic conclusion a seller would draw from it.",
+          "thinking_mistake": "Turning an account of where value comes from into a recommendation about how to protect it."
+        }
+      ],
+      "reading_habit": "When two options share a definition and differ in one noun, find the example the author added that the familiar noun cannot explain. That example is the author telling you which noun they meant."
+    }
+  },
+  "mentor": {
+    "challenge": "The same name on the sign is worth a premium at one roadside and nothing in the next town's market. The paragraph says what the premium was ever paying for.",
+    "takeaway": "You pay the brand for the checking you did not have to do."
+  }
+}

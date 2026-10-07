@@ -1,0 +1,408 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0165",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "arts-culture",
+    "difficulty": "medium",
+    "difficulty_numeric": 4,
+    "stage": "developing",
+    "skills": [
+      "evidence-anchoring",
+      "inference",
+      "tone-detection",
+      "structure-mapping"
+    ],
+    "word_count": 439,
+    "question_count": 4,
+    "question_types": [
+      "except",
+      "comparative",
+      "inference",
+      "author_attitude"
+    ],
+    "theme": "a gallery is an argument made by leaving things out, and a storeroom on show is the evidence it was built from, but once shown the storeroom is curated too, so its claim to be uncurated is unearned",
+    "estimated_time_min": 7.5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-07",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted."
+    },
+    "date_added": "2026-10-07",
+    "batch_id": "batch-rc-008",
+    "prompt_version": "content engine v1 + CAT paper patterns 2026-10; batch-rc-008",
+    "reviewer_notes": "The corpus has no review; this is one, in the first person, amused, with a scene (the man looking for the famous teapot) and a verdict in two halves that the reviewer names as such. The mechanism underneath is selection: a gallery argues by leaving things out, and the storeroom is the record of what was left out, until it too is lit and arranged. The near-tie is in the comparative question, where \"makes no argument at all\" is the museum's own claim and the reviewer's half-granted first impression, overturned by \"Somebody has chosen here too\". No museum is named and no date is given, so nothing is checkable. The move is a review, carried in a first-person voice that opens in a scene, turns amused, and ends with a two-part verdict.",
+    "length_class": "medium",
+    "structure": "claim_qualification",
+    "viewpoints": 2,
+    "tone": "amused, admiring, then precise",
+    "difficulty_vector": {
+      "lexical": 2,
+      "syntactic": 2,
+      "abstraction": 2,
+      "inference_depth": 2,
+      "distractor_similarity": 3,
+      "reasoning_depth": 3,
+      "structural_ambiguity": 1,
+      "time_pressure": 2
+    },
+    "reasoning_patterns": [
+      "comp.explicit_detail",
+      "comp.attention_span",
+      "elim.systematic",
+      "lang.comparative",
+      "inf.strongly_supported",
+      "struct.contrast",
+      "inf.reasonable_implication",
+      "arg.analogy",
+      "arg.evidence",
+      "lang.tone_shift",
+      "comp.intent",
+      "arg.qualification",
+      "struct.conclusion",
+      "arg.concession"
+    ],
+    "quality": {
+      "status": "verified",
+      "adversarial_review": "Q1: A strong candidate argues that the ironwork option is true because the reviewer walked \"straight to the ironwork\", which sounds like a main route. The text places it \"three aisles back\" and contrasts it with \"a rack of ceramics on the main route\", which settles the placement. Q2: The near-tie is \"makes no argument at all\"; it is argued from \"Downstairs you are handed the evidence\" and the museum's own label. It is killed by \"Somebody has chosen here too\" and \"a display of a storeroom, with the choosing moved out of sight rather than removed\". Q3: The candidate's rival is the claim that the paragraph is wrong; the reviewer's words are \"conclusion\" and \"how much had to be left out to make it\", never \"wrong\", and \"you read the conclusion differently\" is not \"you reject it\". Q4: The sceptical option is argued from \"suspiciously handsome\" and \"an argument it has not earned\"; it is killed by \"I do not think this spoils the thing\" and the reviewer's second visit. The unreserved option is killed by \"I will make it precisely\".",
+      "blind_solve": {
+        "solver": "sonnet blind reader 2026-10-07 (batch rc-008)",
+        "agreed": 4,
+        "total": 4,
+        "notes": "full agreement"
+      }
+    },
+    "vocab_extracted": [
+      "candid",
+      "plinth",
+      "novelty"
+    ]
+  },
+  "passage": {
+    "title": "Downstairs at the Museum",
+    "reading_time_min": 2.4,
+    "paragraphs": [
+      {
+        "id": "rc-0165-p1",
+        "text": "I went downstairs expecting a corridor and found a cathedral of shelving. The museum has opened its storerooms to anyone with a ticket, and the first thing you meet is thirty chairs on a steel rack, where the gallery upstairs shows one chair on a plinth with a paragraph beside it. The labels down here say a number. Nothing else. A man in front of me studied a rack of teapots with the look of someone trying to work out which was the famous one, and I am happy to report that there was no way to tell."
+      },
+      {
+        "id": "rc-0165-p2",
+        "text": "It took me a second aisle to see why this is more than a novelty. A gallery is an argument. Somebody chose that one chair out of thirty and wrote the paragraph that tells you what it means, and the twenty-nine not chosen are the paragraph's missing footnotes. Upstairs you are handed a conclusion. Downstairs you are handed the evidence it was built from, and having seen the evidence you read the conclusion differently, because you now know how much had to be left out to make it. The gallery shows the museum's taste. The storeroom shows its buying, which is the more candid record: what it acquired in a hurry, what it acquired twice, and what it has owned for a century without once thinking it worth a plinth."
+      },
+      {
+        "id": "rc-0165-p3",
+        "text": "That is the first half of the verdict, and it is warm. Go. Take a child, who will like the forklift. The second half is a complaint, and I will make it precisely. The racks nearest the door are suspiciously handsome. The chairs are the good chairs, the teapots are arranged by colour, and a rack of ceramics on the main route has been lit, while a rack of agricultural ironwork three aisles back has not been lit at all. Somebody has chosen here too. The storeroom on show is not the storeroom; it is a display of a storeroom, with the choosing moved out of sight rather than removed."
+      },
+      {
+        "id": "rc-0165-p4",
+        "text": "I do not think this spoils the thing. Nothing can be shown without choosing how to show it, and a well-lit rack is still a rack of thirty. But it means that the museum's claim, printed by the stairs, that down here \"nothing is curated\" is the one label in the building making an argument it has not earned. Say instead that the choosing has been made smaller, point to the ironwork at the back, and I will believe you. I went twice. The second time I went straight to the ironwork, and it was wonderful, and nobody else was there."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0165-q1",
+      "type": "except",
+      "skill": "specific_detail",
+      "patterns": [
+        "comp.explicit_detail",
+        "comp.attention_span",
+        "elim.systematic"
+      ],
+      "target_mistake": "misplacing a detail from the third paragraph, where the lit rack on the main route is ceramics and the ironwork is three aisles back",
+      "prediction_target": null,
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "logical_structure"
+      ],
+      "stem": "According to the passage, all of the following are true of the storeroom display EXCEPT that",
+      "options": {
+        "A": "its labels carry a number and nothing more.",
+        "B": "its rack of ironwork stands on the main route.",
+        "C": "it holds objects the museum has owned for a century.",
+        "D": "anyone with a ticket to the museum may enter it."
+      },
+      "correct": "B",
+      "estimated_time_sec": 50,
+      "explanation": {
+        "expert_notice": "Four small facts, scattered across three paragraphs. The expert checks each against its sentence rather than against memory: the labels \"say a number. Nothing else\"; \"opened its storerooms to anyone with a ticket\"; \"owned for a century\"; and the third paragraph's geography, where \"a rack of ceramics on the main route has been lit\" while \"agricultural ironwork three aisles back has not\".",
+        "correct_reasoning": "The passage places the ironwork \"three aisles back\", away from the lit main route, and the reviewer later goes \"straight to the ironwork\", where \"nobody else was there\". What stands on the main route is the lit ceramics. So the statement about the ironwork's position is the one the passage contradicts; the other three are stated in so many words.",
+        "passage_anchor": "rc-0165-p1, rc-0165-p2, rc-0165-p3",
+        "question_type_note": "An EXCEPT question with four concrete details is a placement test. The wrong-by-design option usually swaps two things the passage sets side by side. Check positions, not just nouns.",
+        "reading_habit": "When a paragraph contrasts two items (\"ceramics on the main route ... ironwork three aisles back\"), note which attribute goes with which; EXCEPT questions love to swap them.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "near_synonym_confusion",
+            "why_wrong": "True: \"The labels down here say a number. Nothing else.\" The option's \"carry a number and nothing more\" is the same fact in different words.",
+            "seductive_element": "The option rewords the text, and a reader matching words rather than facts may not find it."
+          },
+          {
+            "option": "C",
+            "trap_type": "temporal_distortion",
+            "why_wrong": "True: the storeroom holds \"what it has owned for a century without once thinking it worth a plinth\".",
+            "seductive_element": "\"a century\" sounds like an exaggeration a reviewer might make, and a reader may doubt that it is in the text."
+          },
+          {
+            "option": "D",
+            "trap_type": "common_knowledge_intrusion",
+            "why_wrong": "True: \"The museum has opened its storerooms to anyone with a ticket\".",
+            "seductive_element": "Storerooms are usually closed to the public, and a reader may assume the reviewer had special access."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0165-q2",
+      "type": "comparative",
+      "skill": "inference",
+      "patterns": [
+        "lang.comparative",
+        "inf.strongly_supported",
+        "struct.contrast"
+      ],
+      "target_mistake": "accepting the storeroom's own claim to be uncurated, which the reviewer first half-grants and then overturns in the third paragraph",
+      "prediction_target": null,
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 3,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "main_idea",
+        "logical_structure"
+      ],
+      "stem": "According to the reviewer, how does the storeroom differ from the gallery upstairs?",
+      "options": {
+        "A": "The storeroom records what the museum bought, while the gallery records what it chose to say.",
+        "B": "The storeroom makes no argument at all, while the gallery exists in order to make one.",
+        "C": "The storeroom holds the lesser objects, while the gallery shows the best of each kind.",
+        "D": "The storeroom is lit from end to end, while the gallery lights only the one chair on its plinth."
+      },
+      "correct": "A",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "The second paragraph states the contrast in two short sentences: \"The gallery shows the museum's taste. The storeroom shows its buying\". The third paragraph then limits how far the contrast runs: \"Somebody has chosen here too.\" A good reader keeps both and rejects any option that only the first paragraph of praise would support.",
+        "correct_reasoning": "The correct option is the reviewer's own pairing: the gallery \"shows the museum's taste\" through \"the paragraph that tells you what it means\", and the storeroom \"shows its buying\". The near-tie, that the storeroom \"makes no argument at all\", is what the museum prints by the stairs (\"nothing is curated\"), and the reviewer calls that \"the one label in the building making an argument it has not earned\". The deciding words are \"Somebody has chosen here too.\"",
+        "passage_anchor": "rc-0165-p2, rc-0165-p3",
+        "question_type_note": "Comparative questions ask for the difference the author actually draws, at the strength the author draws it. A difference the author half-grants and then qualifies is not the difference you may report.",
+        "reading_habit": "When a review praises and then complains, test every comparative option against the complaint as well as the praise. The complaint is where the author's precise view lives.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "The reviewer says the storeroom's choosing has been \"moved out of sight rather than removed\" and that \"Somebody has chosen here too\". \"no argument at all\" is the museum's label in other words, and the reviewer rejects it.",
+            "seductive_element": "It is the natural summary of the second paragraph (\"Upstairs you are handed a conclusion. Downstairs ... the evidence\") before the third paragraph qualifies it."
+          },
+          {
+            "option": "C",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "The passage says \"The chairs are the good chairs\" and the ironwork \"was wonderful\"; nothing ranks the storeroom's objects below the gallery's.",
+            "seductive_element": "Storerooms are assumed to hold second-rate things, and the one chair on a plinth looks like the pick of the thirty."
+          },
+          {
+            "option": "D",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The storeroom is not lit from end to end: \"a rack of agricultural ironwork three aisles back has not been lit at all\". The lighting is the reviewer's complaint, not a feature of the whole store.",
+            "seductive_element": "The lit ceramics are vivid, and a reader may generalise the lighting to the whole floor."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0165-q3",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.reasonable_implication",
+        "arg.analogy",
+        "arg.evidence"
+      ],
+      "target_mistake": "reading the figure as a complaint about the gallery's honesty or accuracy, rather than as a point about evidence left unshown",
+      "prediction_target": "a footnote is support for a claim that sits out of the main text; calling the unchosen chairs missing footnotes means the chosen chair's paragraph rests on them without showing them",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 2,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "vocabulary_in_context",
+        "argument"
+      ],
+      "stem": "The reviewer's description of the twenty-nine unchosen chairs as \"the paragraph's missing footnotes\" suggests that",
+      "options": {
+        "A": "the gallery's paragraph would persuade more if the twenty-nine stood beside the chosen chair.",
+        "B": "the paragraph beside the chosen chair is mistaken about what that chair actually means.",
+        "C": "the gallery's paragraph was written without any knowledge of the chairs left in store.",
+        "D": "the unchosen chairs support the gallery's claim about the one chair, though they are not shown."
+      },
+      "correct": "D",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "The figure sits between two sentences that explain it: \"A gallery is an argument\" before it, and \"Downstairs you are handed the evidence it was built from\" after it. Footnotes are the evidence an argument cites without displaying. The expert reads the figure through those two sentences.",
+        "correct_reasoning": "A footnote supports a claim from outside the main text. The reviewer has just said \"A gallery is an argument\", and goes on to say that the storeroom is \"the evidence it was built from\". So the twenty-nine chairs are support for the gallery's claim about the one chair, support that the gallery does not display: \"how much had to be left out to make it\". The correct option says exactly that and stops.",
+        "passage_anchor": "rc-0165-p2",
+        "question_type_note": "When a question quotes a figure of speech, the answer is the plain claim the figure stands for in its paragraph. Find the literal sentences on either side; do not add a judgement the figure does not carry.",
+        "reading_habit": "Translate every metaphor in an argumentative paragraph into the plain sentence nearest to it before touching the options; the options will offer you stronger and weaker versions of that sentence.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "The reviewer never says the gallery would persuade more with the twenty-nine beside the one; he says you \"read the conclusion differently\", which is not the same as being more persuaded.",
+            "seductive_element": "Showing the evidence sounds as if it should strengthen the case, and the reviewer admires the storeroom."
+          },
+          {
+            "option": "B",
+            "trap_type": "overstatement",
+            "why_wrong": "The reviewer calls the paragraph a \"conclusion\" built by leaving things out; he never says it is wrong or mistaken. A conclusion with hidden footnotes can still be right.",
+            "seductive_element": "A paragraph with \"missing footnotes\" sounds unsupported, and unsupported sounds like wrong."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The text says \"Somebody chose that one chair out of thirty\", so the choice was made with the other twenty-nine in view, not in ignorance of them.",
+            "seductive_element": "\"missing\" could be misread as unknown to the writer rather than left out by the writer."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0165-q4",
+      "type": "author_attitude",
+      "skill": "tone",
+      "patterns": [
+        "lang.tone_shift",
+        "comp.intent",
+        "arg.qualification"
+      ],
+      "target_mistake": "letting either half of a two-part verdict stand for the whole",
+      "prediction_target": "the reviewer is warm (\"Go\"), names one precise complaint (the storeroom is curated too) and says it does not spoil the thing, so the attitude is admiration with a single stated reservation",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "inference"
+      ],
+      "stem": "The reviewer's attitude towards the museum's opening of its storeroom is best described as",
+      "options": {
+        "A": "sceptical, since the display conceals its choices as fully as the gallery does.",
+        "B": "enthusiastic without reservation, the lighting being treated as a trivial matter.",
+        "C": "admiring, with one objection to a claim the display makes on its own behalf.",
+        "D": "detached from the display itself, though impressed by the objects it holds."
+      },
+      "correct": "C",
+      "estimated_time_sec": 75,
+      "explanation": {
+        "expert_notice": "The reviewer announces the shape of the verdict: \"the first half of the verdict, and it is warm\", then \"The second half is a complaint\". The fourth paragraph weighs them: \"I do not think this spoils the thing.\" Then the complaint is narrowed to one label, \"nothing is curated\", which is \"making an argument it has not earned\". That is admiration with one reservation about a claim.",
+        "correct_reasoning": "The warmth is explicit (\"Go\", \"wonderful\", \"I went twice\"). The complaint is explicit, precise, and aimed at the museum's own claim that \"nothing is curated\". The reviewer says the complaint does not spoil the thing. So the attitude is admiring with one objection to a claim the display makes about itself. The option that says the lighting is treated as trivial ignores that the reviewer promises to make the complaint \"precisely\" and does; the sceptical option ignores \"I do not think this spoils the thing\" and \"the choosing has been made smaller\".",
+        "passage_anchor": "rc-0165-p3, rc-0165-p4",
+        "question_type_note": "Attitude questions on a review are won by weighing the praise against the complaint at the proportions the author gives them. Look for sentences where the author tells you how much the complaint matters.",
+        "reading_habit": "When an author says \"I do not think this spoils the thing\", the attitude option must keep both the praise and the reservation; options that drop either are wrong by degree.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "wrong_valence_tone",
+            "why_wrong": "The reviewer says the storeroom's choosing \"has been made smaller\" and that \"a well-lit rack is still a rack of thirty\", so it conceals less than the gallery, not \"as fully\". The sceptical reading drops the praise.",
+            "seductive_element": "The third paragraph's complaint is sharp, and a reader who weights it heavily may miss the fourth paragraph's balance."
+          },
+          {
+            "option": "B",
+            "trap_type": "overstatement",
+            "why_wrong": "The reviewer makes the complaint \"precisely\" and says the display's claim is \"the one label in the building making an argument it has not earned\". That is a reservation, not a trivial matter.",
+            "seductive_element": "\"Go\" and \"wonderful\" are strong, and a reader may take the warmth as the whole verdict."
+          },
+          {
+            "option": "D",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The reviewer is engaged with the display as a display: he explains why \"this is more than a novelty\" and goes twice. Detachment is the opposite of what the text shows.",
+            "seductive_element": "The passage does praise objects (the ironwork \"was wonderful\"), and a reader may split the objects from the display."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "candid",
+      "passage_use": "the more candid record",
+      "meaning_here": "frank and open, hiding nothing",
+      "difficulty": "medium"
+    },
+    {
+      "word": "plinth",
+      "passage_use": "one chair on a plinth",
+      "meaning_here": "a heavy base on which an object is set for display",
+      "difficulty": "medium"
+    },
+    {
+      "word": "novelty",
+      "passage_use": "more than a novelty",
+      "meaning_here": "something new and amusing but of little lasting worth",
+      "difficulty": "easy"
+    }
+  ],
+  "mentor": {
+    "challenge": "Thirty chairs on a rack, a number for a label, a forklift in the aisle. The museum has put its storeroom on show. Why would anyone pay to see a cupboard?",
+    "one_sentence_summary": "A reviewer visits a museum's newly opened storeroom and argues that while a gallery is an argument made by choosing one object out of many, the storeroom reveals the choosing a gallery hides, except that the storeroom itself turns out to be lit and arranged too, so its claim to show 'nothing curated' is the one unearned argument in the building.",
+    "main_idea": "The reviewer finds the museum's open storeroom more than a novelty because it shows the raw stock a gallery's single chosen object and its explanatory paragraph are built from, and is warmly admiring of this, but also objects precisely that the storeroom's own best-lit, best-arranged racks prove that somebody has chosen there too, so the claim that nothing downstairs is curated has not been earned.",
+    "simple_explanation": "The reviewer went downstairs expecting a plain corridor and instead found a huge room full of shelving. The museum now lets anyone with a ticket into its storerooms, and the first sight is thirty chairs lined up on a steel rack, labelled only with a number, compared with the one chair upstairs that sits on its own plinth with a paragraph explaining it. A man nearby was trying to guess which of a rack of teapots was the famous one, and there was simply no way to tell.\n\nIt took the reviewer a second aisle to see why this matters. A gallery, the reviewer says, is an argument: someone chose one chair out of thirty and wrote the paragraph telling you what it means, and the other twenty-nine are like the footnotes that argument leaves out. Upstairs you are only given the conclusion. Downstairs you are given the evidence that conclusion was built from, and once you have seen how much had to be left out, you read the chosen chair's paragraph differently. The gallery shows what the museum admires. The storeroom shows what it actually bought, which is a more honest record, including the things bought in a hurry, bought twice, or owned for a hundred years without ever being thought worth displaying.\n\nThat is the warm half of the reviewer's verdict, and it comes with a recommendation: go, and bring a child, who will love the forklift. The second half is a precise complaint. The racks nearest the entrance are suspiciously good-looking: the chairs on show are the best chairs, the teapots are arranged by colour, and a rack of ceramics on the main path is lit up, while a rack of old farm ironwork three aisles further back is not lit at all. Someone has clearly made choices here too. A storeroom put on display, the reviewer says, is not really a storeroom any more, it is a display of one, where the choosing has simply been moved somewhere less visible rather than taken away.\n\nStill, the reviewer does not think this ruins the experience. Nothing can be shown to anyone without some choice about how to show it, and even a well-lit rack is still a rack holding thirty ordinary things. But the museum's own sign on the stairs, claiming that nothing down here is curated, is, in the reviewer's eyes, the one label in the whole building making a claim it has not earned. The reviewer suggests the museum say instead that the choosing has simply been made smaller, and point visitors towards the ironwork at the back. Having gone twice, and gone straight to the ironwork the second time, the reviewer found it wonderful, and had it entirely to themselves.",
+    "why_difficult": "The passage praises the storeroom warmly for most of its length before turning, in the third paragraph, to a precise complaint that undercuts the storeroom's own claim to be uncurated, and a reader who stops at the praise, or who treats the museum's printed claim at face value, misses the reviewer's actual, two-part verdict; the comparative question also depends on noticing that the reviewer half-grants and then withdraws the idea that the storeroom 'makes no argument at all'.",
+    "author_intention": "To praise the museum's open storeroom for showing the evidence a gallery's argument hides, while holding it to the same standard as the gallery and showing that its claim to be free of curation is false.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0165-p1",
+        "role": "Sets the scene",
+        "note": "The reviewer finds a huge storeroom of plainly labelled objects, including thirty chairs where the gallery upstairs shows only one."
+      },
+      {
+        "paragraph_id": "rc-0165-p2",
+        "role": "Explains the mechanism",
+        "note": "A gallery argues by choosing one object and explaining it; the storeroom shows the many unchosen objects that argument leaves out, which is a more honest record of what the museum owns."
+      },
+      {
+        "paragraph_id": "rc-0165-p3",
+        "role": "Gives the two-part verdict",
+        "note": "The praise is genuine, but the storeroom's best-lit, best-arranged racks show that someone has chosen here too, so it is not really free of curation."
+      },
+      {
+        "paragraph_id": "rc-0165-p4",
+        "role": "Weighs the complaint",
+        "note": "The choosing does not ruin the experience, but the museum's claim that nothing downstairs is curated is unearned, and the reviewer prefers the quieter, unlit ironwork anyway."
+      }
+    ],
+    "tone_progression": "The review opens amused, almost comic, at the man guessing which teapot is famous, turns admiring and a little excited as the reviewer works out what the storeroom actually shows, and becomes precise and pointed in the third and fourth paragraphs, where the admiration is kept but a specific, carefully stated objection is added.",
+    "key_transitions": [
+      "'A gallery is an argument.' (second paragraph): the review turns from describing the storeroom to explaining why it matters.",
+      "'Somebody has chosen here too.' (third paragraph): the praise is qualified by a complaint about the storeroom's own arrangement."
+    ],
+    "misunderstanding": "A reader who stops reading after the warm second paragraph, or who takes the museum's own sign at face value, concludes that the storeroom makes no argument at all; the third paragraph shows that the best-lit racks are suspiciously handsome and the worst-lit ones are tucked away, which the reviewer reads as choosing, just choosing moved out of sight.",
+    "traps_summary": "The wrong options swap which object sits on the main route, let the museum's own uncurated claim stand as the reviewer's verdict, read the figure of 'missing footnotes' as a complaint about honesty rather than about unshown evidence, and let either half of the two-part verdict, the praise or the objection, stand in for the whole.",
+    "reading_lesson": "When a piece of writing states its verdict in two explicitly separated halves, 'this is the first half, and it is warm' and 'this is the second half, and it is a complaint', test any summary option against both halves, since the exact proportion the writer gives each half is itself part of what is being asked.",
+    "real_world": "The same test applies to any institution that claims transparency, an open data set, an unedited interview, a behind-the-scenes tour: showing more is not the same as showing everything without choices, and the choices simply move to what gets shown first.",
+    "takeaway": "Showing the normally hidden stock does not remove curation, it only moves the choosing somewhere a visitor is less likely to notice it.",
+    "reflection_question": "Think of something you were shown as 'raw' or 'unedited': what choices about order, lighting or arrangement might still have been made before it reached you?",
+    "eli10": {
+      "big_idea": "A museum let visitors see its storeroom to prove nothing there is curated, but the reviewer notices that someone still chose what to light and where to put it.",
+      "story": "A museum opened up its storeroom so anyone with a ticket could walk through it. Upstairs, one chair sits alone with a sign explaining it. Downstairs, thirty plain chairs sit on a shelf with only a number each. The reviewer thought this was brilliant at first. A gallery picks one thing and tells you what it means. A storeroom shows you everything that was not picked, which feels more honest. The reviewer loved it and said everyone should go. But then they noticed something. The chairs near the door are the nicest chairs. The teapots are arranged neatly by colour. One shelf is lit up brightly, while another, full of old farm tools, sits in the dark. So someone did choose, even here. The museum says nothing downstairs is curated. The reviewer says that is not quite true.",
+      "paragraphs": [
+        "The reviewer finds a huge storeroom full of plain, numbered objects, including thirty chairs where the gallery shows only one.",
+        "A gallery argues by picking one thing; the storeroom shows the many things left out, which feels more honest about what the museum owns.",
+        "The reviewer notices the storeroom's best shelves are lit and arranged nicely too, so someone has been choosing here as well.",
+        "Choosing does not ruin the storeroom, but the museum's claim that nothing down here is curated turns out not to be true."
+      ],
+      "author_view": "The reviewer genuinely admires the storeroom and recommends it warmly, while holding firmly to one precise complaint about the one claim the museum makes for itself."
+    }
+  }
+}

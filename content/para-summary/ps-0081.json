@@ -1,0 +1,185 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ps-0081",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 90,
+    "genre": "architecture",
+    "difficulty": "hard",
+    "difficulty_numeric": 9,
+    "tier": "ninety-nine",
+    "bible_level": "elite",
+    "title": "Beam, Bolt, Plaster",
+    "theme": "why exposed structure is a style and not the absence of one, and why honesty, if it applies to buildings at all, belongs to the one whose bones would be the same whether seen or not",
+    "estimated_time_sec": 130,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-10: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "two_views_adjudication",
+    "apex": {
+      "claim": "Exposed structure is a style like any other, because what is left on show has been chosen and finished for showing; if honesty applies to buildings it belongs to the one whose structure would be the same whether seen or not, and such a building may come from either school.",
+      "scope": "The claim concerns what can count as honesty in a building; it does not rank the two schools, and it grants that the honest building may belong to either.",
+      "certainty": "asserted",
+      "stance": "corrective"
+    },
+    "turn": {
+      "present": true,
+      "marker": "But"
+    },
+    "difficulty_dials": {
+      "abstraction": 4,
+      "syntax": 4,
+      "turn_subtlety": 3,
+      "distractor_closeness": 5,
+      "live_options": 2,
+      "stance_subtlety": 4,
+      "qualifier_density": 3,
+      "domain_load": 2
+    },
+    "load_bearing": [
+      "chosen for showing",
+      "a style, with costs and vanities of its own, and not the absence of one",
+      "would be the same whether anyone saw them or not",
+      "may come from either school"
+    ],
+    "separating_element": "The correct option locates honesty in a building whose structure would be the same whether seen or not and allows it to either school; the nearest rival hands honesty to the concealing school, which the closing sentence rules out by saying such a building 'may come from either school'.",
+    "dna_traits": [
+      "author_intent",
+      "main_idea_detection",
+      "language_precision",
+      "inference_control"
+    ],
+    "mission": "hold_the_stance",
+    "learning_objective": "keep an author's adjudication at its real position when the rejection of one view makes the other view look endorsed",
+    "reasoning_patterns": [
+      "struct.two_views_adjudication",
+      "sum.stance_kept",
+      "inf.author_vs_reported",
+      "sum.central_vs_supporting",
+      "lang.contrast_marker"
+    ],
+    "quality": {
+      "status": "verified",
+      "adversarial_review": "The two finalists agree that exposed structure is a style, since the beam on show was chosen for showing, and part on who gets the word honesty. The rival gives it to the school that hides the structure, which is the natural swing once the exposing school's claim has been taken away. The closing sentence is built to stop that swing: the honest building 'may come from either school, and is most likely the one that never claimed the virtue', so honesty is a property of the bones being the same seen or unseen, not of concealment. The option that endorses the exposing school's charge of lying hands the author a view the paragraph reports and then dismantles. The option about sizing, finish and rows of bolts is the evidence that exposed structure is a style, offered without the conclusion it supports.",
+      "blind_solve": {
+        "solver": "sonnet blind reader 2026-10-07",
+        "agreed": 1,
+        "total": 1,
+        "notes": "full agreement"
+      }
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-07",
+      "usage_note": "Original composition in CAT register for CAT OS. General argument about exposed structure and honesty in buildings; no specific text, architect or movement adapted. Personal study only."
+    },
+    "date_added": "2026-10-07",
+    "batch_id": "batch-ps-004",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ps-004",
+    "reviewer_notes": "An elite adjudication whose near miss is the pendulum swing: having denied honesty to the exposing school, the rival awards it to the concealing one. The closing sentence is the separating element. Distinct from ps-0063, which is about why fronts are dressed. Families: language, stance, structure."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "One school of building hides the structure behind the finish: the beam is boxed in plaster, the bolt is nowhere to be seen, and the wall presents a surface that says nothing about what holds it up.",
+        "role": "setup"
+      },
+      {
+        "text": "Another school calls that a lie and leaves the frame, the beam, the bolt and the duct on view, as a kind of honesty.",
+        "role": "setup"
+      },
+      {
+        "text": "But a beam that is left on show has been chosen for showing: it is sized for the eye as well as for the load, specified in a finish nobody would pay for inside a ceiling void, and bolted in rows that no engineer asked for.",
+        "role": "support"
+      },
+      {
+        "text": "Exposed structure is a style, with costs and vanities of its own, and not the absence of one.",
+        "role": "support"
+      },
+      {
+        "text": "If honesty means anything here, it belongs to the building whose bones would be the same whether anyone saw them or not.",
+        "role": "thesis"
+      },
+      {
+        "text": "Such a building may come from either school, and is most likely the one that never claimed the virtue.",
+        "role": "qualification"
+      }
+    ]
+  },
+  "ideal_summary": "Exposed structure is a style like any other, since a beam left on show has been chosen and finished for showing; honesty, if it applies, belongs to the building whose bones would be the same whether seen or not, which may come from either school.",
+  "builder": {
+    "prompt": "In one sentence: what does the paragraph say about the school that exposes its structure, and where does it say honesty belongs?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence say exposed structure is a style because what is shown was chosen for showing?",
+        "kept": "Good. That is the turn: the beam on view was sized, finished and bolted for the eye, so showing it is a choice like any other.",
+        "drifted": "If your sentence treats exposed structure as honesty or as the absence of style, it has kept the second school's claim, which the paragraph takes apart."
+      },
+      {
+        "id": "stance",
+        "ask": "Does your sentence give honesty to the building whose bones would be the same seen or unseen, or to the school that hides them?",
+        "kept": "Exactly the point. Denying the exposing school the word does not hand it to the concealing school; the honest building 'may come from either'.",
+        "drifted": "The closing sentence says the honest building 'may come from either school'. A summary that awards honesty to concealment has swung past the author's position."
+      },
+      {
+        "id": "scope",
+        "ask": "Does your sentence keep the condition 'if honesty means anything here'?",
+        "kept": "Well kept. The author is not sure the word applies to buildings at all, and says where it would belong if it did.",
+        "drifted": "Without the condition, the summary asserts that buildings can be honest, which the paragraph only entertains."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "Exposed structure is a style like any other, since a beam left on show has been chosen and finished for showing; the honest building is therefore the one that hides its structure behind the finish rather than displaying it.",
+      "B": "Exposed structure is a style like any other, since a beam left on show has been chosen and finished for showing; the honest building is the one whose bones would be the same whether seen or not, from either school.",
+      "C": "The school that leaves the frame, the beam and the bolt on view is right to call concealment a lie, since a plastered wall presents a surface that tells the viewer nothing about what holds it up.",
+      "D": "A beam left on show is sized for the eye as well as the load, specified in a finish nobody would pay for inside a ceiling void, and bolted in rows no engineer asked for, so exposed structure has costs and vanities of its own."
+    },
+    "correct": "B",
+    "explanation": {
+      "paragraph_meaning": "Some builders hide how a building stands up, boxing the beams in plaster. Others leave the beams, bolts and ducts on view and call that honest. The paragraph says the second group is kidding itself a little: a beam you are meant to look at has been picked and dressed for looking at, with a finish and a row of bolts nobody would bother with in a hidden ceiling. So showing the structure is a style, not the lack of one. If a building can be honest at all, it is the one whose structure would be built the same way whether anyone saw it or not, and that building could belong to either camp, probably the one that never made a fuss about honesty.",
+      "correct_reasoning": "The correct option keeps the turn, that exposed structure is a style because the beam on show was chosen for showing, and keeps the exact criterion of the thesis, bones that would be the same seen or unseen, together with the closing qualification that such a building may come from either school. Nothing is awarded to either school, which matches the author's adjudication.",
+      "distractors": [
+        {
+          "option": "A",
+          "archetype": "near_miss",
+          "secondary_archetype": "stance_flip",
+          "why_wrong": "The turn is kept and the verdict is swung. The paragraph does not give honesty to concealment; it gives it to a building whose bones 'would be the same whether anyone saw them or not', and says in its last sentence that such a building 'may come from either school'.",
+          "seductive_element": "It shares its entire first half with the key, and once the exposing school has lost its claim to honesty the concealing school seems the only place left for the word to go.",
+          "thinking_mistake": "Treating the rejection of one side of a two-view paragraph as the endorsement of the other, instead of reading where the author actually puts the verdict."
+        },
+        {
+          "option": "C",
+          "archetype": "owner_swap",
+          "secondary_archetype": null,
+          "why_wrong": "The charge that concealment is a lie belongs to the second school, reported in the paragraph's second sentence; the author answers it with 'But' and spends the rest of the paragraph showing that the exposing school is practising a style of its own.",
+          "seductive_element": "It restates the opening scene accurately and adopts the more combative of the two views, which can read as the author's own energy.",
+          "thinking_mistake": "Taking a reported position for the author's because it is stated forcefully, and missing the turn that follows it."
+        },
+        {
+          "option": "D",
+          "archetype": "evidence_as_thesis",
+          "secondary_archetype": null,
+          "why_wrong": "The sizing, the finish and the rows of bolts are the evidence that exposed structure is a style. The conclusion that evidence serves, about where honesty belongs if it belongs anywhere, is not here, and neither is the adjudication between the schools.",
+          "seductive_element": "It is the most detailed and most quotable sentence in the paragraph, and it ends with a conclusion-shaped clause.",
+          "thinking_mistake": "Summarising the paragraph's proof and leaving out what it proved."
+        }
+      ],
+      "reading_habit": "In a two-view paragraph, when the author dismantles one side, check the last sentence before awarding the other side the win. Authors who reject a view often put the verdict somewhere neither side was standing."
+    }
+  },
+  "mentor": {
+    "challenge": "One school boxes the beam in plaster; the other bolts it in full view and calls that honesty. The paragraph takes the word away, and then gives it to somebody.",
+    "takeaway": "A beam on display was chosen for display; honesty is what a building would be when nobody is looking."
+  }
+}

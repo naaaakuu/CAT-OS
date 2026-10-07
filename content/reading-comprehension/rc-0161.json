@@ -1,0 +1,333 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0161",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 89,
+    "genre": "environment",
+    "difficulty": "easy",
+    "difficulty_numeric": 2,
+    "stage": "foundation",
+    "skills": [
+      "evidence-anchoring",
+      "inference",
+      "causal-reasoning"
+    ],
+    "word_count": 322,
+    "question_count": 3,
+    "question_types": [
+      "implication",
+      "inference",
+      "specific_detail"
+    ],
+    "theme": "a kingfisher's beak widens so gradually that water moves aside a little at a time; a train nose drawn on it pushed tunnel air aside the same way, ending the boom and saving power",
+    "estimated_time_min": 5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-07",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted."
+    },
+    "date_added": "2026-10-07",
+    "batch_id": "batch-rc-008",
+    "prompt_version": "content engine v1 + CAT paper patterns 2026-10; batch-rc-008",
+    "reviewer_notes": "An animal fact and a copied design, explained for their own sake with no meta-argument. The mechanism is stated plainly in the second paragraph (water moved \"a bit at a time\" against water that \"has to leap\"), and the third paragraph re-runs it in air. The near-tie is in the implication question, where a finalist says the boom was using up the power; the text makes boom and wasted power two effects of the same squeeze. Sentences average under ten words. The title names the two subjects and gives away neither the mechanism nor any key. The move is an exposition of an animal fact and a design copied from it, told in a plain, curious voice.",
+    "length_class": "short",
+    "structure": "analogy_driven",
+    "viewpoints": 1,
+    "tone": "plain, curious",
+    "difficulty_vector": {
+      "lexical": 1,
+      "syntactic": 1,
+      "abstraction": 2,
+      "inference_depth": 2,
+      "distractor_similarity": 2,
+      "reasoning_depth": 2,
+      "structural_ambiguity": 1,
+      "time_pressure": 1
+    },
+    "reasoning_patterns": [
+      "struct.analogy",
+      "struct.cause_effect",
+      "struct.phenomenon_explanation",
+      "comp.explicit_detail",
+      "arg.analogy",
+      "arg.example",
+      "inf.directly_implied",
+      "inf.reasonable_implication",
+      "lang.causal_wording"
+    ],
+    "quality": {
+      "status": "verified",
+      "adversarial_review": "Q1: A strong candidate argues for the step option, since the passage says the new nose has \"no step\"; that phrase describes the beak and the new nose, and the boom is traced in three sentences from \"the air in front of the nose could not get out of the way\" to \"came out of the far end as a boom\", with no step anywhere. Q2: The impossibility option is the contender, resting on \"hundreds of times denser\"; the passage's blunt object \"arrives all at once, and the water has to leap out of its way\", so it enters, and \"That leap is the splash\" names the consequence. Q3: The boom-consumes-power reading is the near-tie; the text says \"So did a share of the power the train had needed to shove the air out of its way\", which ties the power to shoving air, and the boom is described only as a sound that \"came out of the far end\", so it is a parallel effect and not the consumer.",
+      "blind_solve": {
+        "solver": "sonnet blind reader 2026-10-07 (batch rc-008)",
+        "agreed": 3,
+        "total": 3,
+        "notes": "full agreement"
+      }
+    },
+    "vocab_extracted": [
+      "profile",
+      "blunt",
+      "shoulder"
+    ]
+  },
+  "passage": {
+    "title": "A Bird and a Train",
+    "reading_time_min": 1.7,
+    "paragraphs": [
+      {
+        "id": "rc-0161-p1",
+        "text": "A kingfisher sits on a branch above a stream. It sees a fish. It drops, folds its wings and goes in head first. Watch the water. There is almost no splash. The bird has gone from thin air into something hundreds of times denser, and the surface barely notices. Fish are frightened by splashes. A kingfisher that splashed would go hungry. The bird's shape has been doing a job for a long time."
+      },
+      {
+        "id": "rc-0161-p2",
+        "text": "The job is in the beak. Look at it from the side. It starts at a point and widens very slowly, back to the head. There is no step and no shoulder. When the point enters the water, it pushes aside only a little water. A moment later a slightly wider part follows and pushes aside a little more. The water is never asked to move suddenly. It is moved a bit at a time, over the whole length of the beak. A blunt object does the opposite. It arrives all at once, and the water has to leap out of its way. That leap is the splash."
+      },
+      {
+        "id": "rc-0161-p3",
+        "text": "The same trouble turned up in a train. A fast train entered tunnels with a bang. Inside the tunnel the air in front of the nose could not get out of the way. It was squeezed, like water in front of a diving bird. The squeeze ran down the tunnel and came out of the far end as a boom that rattled windows. The engineers needed a nose that would push the air aside a bit at a time. One of them watched birds. The new nose was drawn on the profile of a kingfisher's beak: a point, widening slowly, with no step. The boom went. So did a share of the power the train had needed to shove the air out of its way. Air and water are different things, but a sudden push is the same problem in both."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0161-q1",
+      "type": "specific_detail",
+      "skill": "specific_detail",
+      "patterns": [
+        "comp.explicit_detail",
+        "struct.cause_effect",
+        "lang.causal_wording"
+      ],
+      "target_mistake": "mixing the boom's cause with its cost, or importing the beak's \"step\" into the train",
+      "prediction_target": null,
+      "difficulty": {
+        "inference_depth": 1,
+        "distractor_similarity": 2,
+        "reasoning_depth": 1
+      },
+      "secondary_skills": [
+        "logical_structure"
+      ],
+      "stem": "According to the passage, the boom at the tunnel came from",
+      "options": {
+        "A": "the nose of the train brushing against the tunnel walls at high speed.",
+        "B": "the extra power the train had to draw to push the air out of its way.",
+        "C": "air squeezed in front of the nose and then let out at the far end.",
+        "D": "a step between the nose and the train's body hitting the air."
+      },
+      "correct": "C",
+      "estimated_time_sec": 50,
+      "explanation": {
+        "expert_notice": "The third paragraph gives the chain in order: the air \"could not get out of the way\", \"It was squeezed\", \"The squeeze ran down the tunnel and came out of the far end as a boom\". Cause, path, effect, in three sentences.",
+        "correct_reasoning": "The text says the air in front of the nose was squeezed, and that \"The squeeze ran down the tunnel and came out of the far end as a boom\". That is the correct option. The train never touches the walls; the trouble is air, not stone. The power the train used is mentioned afterwards as something the new nose saved, a second effect of the squeeze, not the cause of the boom. And \"no step\" describes the new nose and the beak; the passage never says the old nose had a step, only that it made the air move all at once.",
+        "passage_anchor": "rc-0161-p3",
+        "question_type_note": "A detail question about a cause asks you to follow the passage’s own chain. Find the first link and read forward; options that start from a later link, or from a different paragraph, are the traps.",
+        "reading_habit": "In a cause-and-effect paragraph, number the links as you read. The answer to \"came from\" is the earliest link the passage names.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "out_of_scope",
+            "why_wrong": "No sentence has the train touching the tunnel; the problem is that \"the air in front of the nose could not get out of the way\".",
+            "seductive_element": "A bang in a tunnel suggests contact."
+          },
+          {
+            "option": "B",
+            "trap_type": "reversed_causation",
+            "why_wrong": "The power is mentioned after the boom as a second thing the new nose removed (\"So did a share of the power\"); it is an effect of the squeeze, not the source of the boom.",
+            "seductive_element": "Power and boom appear together in the paragraph, so one seems to cause the other."
+          },
+          {
+            "option": "D",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "\"With no step\" describes the new nose, copied from a beak with \"no step and no shoulder\"; the passage never gives the old nose a step, and the boom is traced to squeezed air.",
+            "seductive_element": "It borrows the passage’s own word \"step\" and moves it to the old train."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0161-q2",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.directly_implied",
+        "struct.cause_effect",
+        "inf.reasonable_implication"
+      ],
+      "target_mistake": "overshooting the inference into impossibility, or reversing the mechanism",
+      "prediction_target": "a sudden widening would make the water move all at once at that point, which is a splash, and the first paragraph says splashes frighten fish",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 2,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "scope"
+      ],
+      "stem": "It can be inferred that a kingfisher whose beak widened suddenly near its base would",
+      "options": {
+        "A": "make a splash on entry and frighten the fish it was after.",
+        "B": "lose sight of the fish as it dropped from the branch.",
+        "C": "be unable to break the surface of the water at all.",
+        "D": "push the water aside a little at a time over the whole beak."
+      },
+      "correct": "A",
+      "estimated_time_sec": 80,
+      "explanation": {
+        "expert_notice": "Two sentences do the work. \"A blunt object ... arrives all at once, and the water has to leap out of its way. That leap is the splash.\" And earlier: \"Fish are frightened by splashes.\" A sudden widening is a blunt object arriving at that point.",
+        "correct_reasoning": "The passage says the beak avoids a splash because it \"widens very slowly\" with \"no step and no shoulder\", so the water is \"never asked to move suddenly\". A beak that widened suddenly would ask the water to move suddenly at that point, which is the leap the passage calls \"the splash\". The first paragraph adds that \"Fish are frightened by splashes\". So the correct option follows. Nothing in the passage links the beak to eyesight. The bird would still enter the water; a blunt object does enter, it just splashes. And pushing water aside \"a bit at a time\" is what the gradual beak does, the opposite of a sudden widening.",
+        "passage_anchor": "rc-0161-p1, rc-0161-p2",
+        "question_type_note": "An inference from a mechanism is answered by running the mechanism with one part changed. Change only that part, and stop at the first consequence the passage itself names.",
+        "reading_habit": "When a passage explains why something does not happen, the inference question will remove the reason. Predict the result before reading the options.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "out_of_scope",
+            "why_wrong": "The passage says nothing about the bird’s eyes; the beak’s shape is given one job, in the water, and \"The job is in the beak\".",
+            "seductive_element": "The dive begins with \"It sees a fish\", so sight is in the scene."
+          },
+          {
+            "option": "C",
+            "trap_type": "overstatement",
+            "why_wrong": "A blunt object \"arrives all at once, and the water has to leap out of its way\"; it enters, with a splash. Nothing says a blunt shape is stopped by the surface.",
+            "seductive_element": "The passage says water is \"hundreds of times denser\", which suggests a barrier."
+          },
+          {
+            "option": "D",
+            "trap_type": "opposite_direction",
+            "why_wrong": "Pushing the water aside \"a bit at a time, over the whole length of the beak\" is what the slowly widening beak does; a sudden widening is the case the passage contrasts with it.",
+            "seductive_element": "It is the passage's own description of the beak, and the stem is about a beak."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0161-q3",
+      "type": "implication",
+      "skill": "inference",
+      "patterns": [
+        "inf.reasonable_implication",
+        "struct.cause_effect",
+        "struct.analogy"
+      ],
+      "target_mistake": "inventing a reason the passage never gives, or making the boom the consumer of the power",
+      "prediction_target": "the power went on shoving the air out of the way; the new nose moves the air a bit at a time; so moving it gradually costs less than shoving it all at once",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 2,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "application"
+      ],
+      "stem": "The passage implies that the new nose saved power because",
+      "options": {
+        "A": "the new nose weighed less than the blunt one it replaced on the train.",
+        "B": "the boom had been using up a share of the power that the engines produced.",
+        "C": "the kingfisher is a bird that spends very little energy on each dive.",
+        "D": "moving the air a bit at a time took less effort than moving it at once."
+      },
+      "correct": "D",
+      "estimated_time_sec": 80,
+      "explanation": {
+        "expert_notice": "The last paragraph ties the saving to the shoving: the saved power is \"the power the train had needed to shove the air out of its way\", and the new nose was built to \"push the air aside a bit at a time\". Put the two together and the implication is about how the air is moved.",
+        "correct_reasoning": "The engineers \"needed a nose that would push the air aside a bit at a time\". With that nose, the boom went, and \"So did a share of the power the train had needed to shove the air out of its way\". The passage ties the saving to how the air is moved: gradually rather than all at once. That is the correct option. Weight is never mentioned. The boom was a sound that came out of the tunnel, an effect of the squeeze; the passage does not say it consumed power, and the saved power is tied to shoving air, not to the boom. The kingfisher supplied a shape; nothing is said about the bird’s energy.",
+        "passage_anchor": "rc-0161-p2, rc-0161-p3",
+        "question_type_note": "An implication question asks for the link the passage leaves you to make. The link must be built from sentences in the text; an option that needs a fact from outside is a trap even if the fact is true.",
+        "reading_habit": "When a passage reports a benefit (\"So did a share of the power\"), find the sentence that says what the benefit was spent on. That sentence carries the implication.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "common_knowledge_intrusion",
+            "why_wrong": "Weight is never mentioned; the saved power is tied to \"the power the train had needed to shove the air out of its way\", not to the nose itself.",
+            "seductive_element": "Lighter things need less power, and common knowledge supplies the thought."
+          },
+          {
+            "option": "B",
+            "trap_type": "reversed_causation",
+            "why_wrong": "The boom \"came out of the far end\" as a sound; it was an effect of the squeeze, as the wasted power was, and nothing says the boom consumed power.",
+            "seductive_element": "The boom and the power loss vanish in consecutive sentences, so the first seems to cause the second."
+          },
+          {
+            "option": "C",
+            "trap_type": "example_as_thesis",
+            "why_wrong": "The bird is the source of the shape (\"drawn on the profile of a kingfisher's beak\"); nothing is said about the energy of its dive, and the saving is explained by the air, not the bird.",
+            "seductive_element": "The analogy is vivid, and a reader carries the bird's efficiency over to the train."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "profile",
+      "passage_use": "the profile of a kingfisher's beak",
+      "meaning_here": "the outline of a thing seen from the side",
+      "difficulty": "easy"
+    },
+    {
+      "word": "blunt",
+      "passage_use": "A blunt object does the opposite",
+      "meaning_here": "ending abruptly, without a point",
+      "difficulty": "easy"
+    },
+    {
+      "word": "shoulder",
+      "passage_use": "There is no step and no shoulder",
+      "meaning_here": "a sudden widening in an outline",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "A bird goes from air into water without a splash. A train went into tunnels with a bang. The two problems turned out to be one problem.",
+    "one_sentence_summary": "A kingfisher's beak widens so gradually that it pushes water aside a little at a time instead of all at once, and engineers copied that same shape for a train's nose to stop a tunnel boom and save power, because moving air gradually costs less than shoving it aside suddenly.",
+    "main_idea": "A shape that widens gradually, like a kingfisher's beak, moves the medium around it a little at a time instead of all at once, which avoids both a splash in water and a boom in air, and costs less power too.",
+    "simple_explanation": "A kingfisher sits above a stream, spots a fish, and dives in head first. There is almost no splash. That matters because a splash would scare the fish away. The bird's shape has been built for this for a very long time.\n\nThe trick is in the beak. Seen from the side, it starts as a point and widens very slowly, with no sudden step anywhere. When the point enters the water, it only pushes a little water aside. A moment later, a slightly wider part follows and pushes a little more aside. The water is never asked to move suddenly, just a bit at a time. A blunt shape does the opposite: it arrives all at once, and the water has to leap out of the way fast, and that leap is the splash.\n\nThe same problem showed up with trains. A fast train used to make a loud bang when it went into tunnels, because the air in front of its nose got squeezed and that squeeze came out of the far end as a boom. Engineers needed a nose shape that would push the air aside gradually, just like the beak. So they copied the kingfisher's beak shape for the new train nose: a point, widening slowly, with no sudden step. The boom went away. So did some of the power the train used to need, because pushing air aside gradually takes less effort than shoving it aside all at once.",
+    "why_difficult": "The passage looks like a simple animal fact, so a reader can easily miss that it is actually one single idea, a sudden push against a medium, applied twice, once to water and once to air, and the implication question tests whether the reader can run that one idea on a new case.",
+    "author_intention": "To show that a splash in water and a boom in a tunnel are the same kind of event, a medium forced to move all at once, and that a shape widening gradually solves both problems and saves power while doing it.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0161-p1",
+        "role": "Shows the bird",
+        "note": "A kingfisher dives into water almost without a splash, because its shape has been doing a job for a long time."
+      },
+      {
+        "paragraph_id": "rc-0161-p2",
+        "role": "Explains the beak",
+        "note": "The beak widens very slowly with no sudden step, so it pushes water aside a little at a time instead of all at once, which is why there is no splash."
+      },
+      {
+        "paragraph_id": "rc-0161-p3",
+        "role": "Applies it to a train",
+        "note": "A fast train made a loud boom in tunnels because the air in front of it could not get out of the way gradually, so engineers copied the kingfisher's beak shape for the train's nose, and the boom and wasted power both went away."
+      }
+    ],
+    "tone_progression": "The voice stays plain and curious from beginning to end, moving simply from the bird, to the mechanism in its beak, to the same mechanism at work in a train.",
+    "key_transitions": [
+      "‘The job is in the beak.’ (opening of paragraph 2): the passage moves from what the bird does to why it works.",
+      "‘The same trouble turned up in a train.’ (opening of paragraph 3): the passage moves from the bird to the train, applying the same idea."
+    ],
+    "misunderstanding": "A hurried reader thinks the saved power came from the boom itself somehow using up energy, rather than from the air being pushed aside gradually instead of all at once.",
+    "traps_summary": "The options move the boom's cause to contact with the tunnel wall, swap the saved power for the boom's own supposed cost, and carry the bird's efficiency across to the train without the passage ever saying anything about the bird's own energy use.",
+    "reading_lesson": "When a passage explains a mechanism and then applies it somewhere else, run the same mechanism again in the new case rather than picking up a detail from a different part of the passage.",
+    "real_world": "Many smooth, tapering shapes you see on fast-moving things, like a boat's bow or a swimmer's cap, are solving the exact same problem: moving a medium aside gradually instead of all at once.",
+    "takeaway": "A shape that widens gradually moves whatever is around it a little at a time, and that avoids both a splash and a boom.",
+    "reflection_question": "Where else have you seen a gradual shape used to avoid a sudden, costly push against air or water?",
+    "eli10": {
+      "big_idea": "A shape that widens slowly moves water or air aside a little at a time instead of all at once, and that avoids both a splash and a loud boom.",
+      "story": "A kingfisher sits above a stream and sees a fish. It dives in, head first. There is almost no splash. A splash would scare the fish away. Why no splash? Look at the beak. It starts thin and widens very slowly. There is no sudden step on it. When the point goes into the water, it pushes only a little water aside. A moment later, a wider part follows and pushes a bit more. The water never has to move all at once. A fast train once had a problem too. It made a loud bang going into tunnels. The air in front of its nose got squeezed hard. That squeeze came out the other end as a boom. Engineers needed a nose that would push air aside slowly, the same way. So they copied the kingfisher's beak for the new train nose. The boom went away. The train also used less power. Moving air a bit at a time costs less than shoving it all at once.",
+      "paragraphs": [
+        "A kingfisher dives into water almost without a splash, because of the shape of its beak.",
+        "The beak widens slowly with no sudden step, so it pushes water aside a bit at a time.",
+        "Engineers copied the same beak shape for a train's nose, and it stopped a loud tunnel boom and saved power too."
+      ],
+      "author_view": "The writer is plain and curious, delighted that one simple animal shape solved a real train engineering problem."
+    }
+  }
+}

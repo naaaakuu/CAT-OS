@@ -1,0 +1,205 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "pj-0081",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 92,
+    "genre": "culture",
+    "difficulty": "hard",
+    "difficulty_numeric": 10,
+    "tier": "premium",
+    "title": "The Farmhands' Dish",
+    "theme": "how a regional dish becomes national by passing through the capital, a cookbook and export, and why the country's own cooks then bring the exported version home and correct the original to match it",
+    "estimated_time_sec": 240,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-10: five-sentence TITA jumble, a form set in official papers alongside the four-sentence default; re-verify against each new official paper"
+    },
+    "macro_pattern": "narrative_chronological",
+    "cohesion_signals": [
+      "temporal_sequence",
+      "article_given_new",
+      "demonstrative",
+      "pronoun_ref",
+      "lexical_repetition"
+    ],
+    "primary_trap": "lexical_decoy",
+    "secondary_traps": [
+      "false_pronoun_binding",
+      "competing_ending"
+    ],
+    "dna_traits": [
+      "surface_matching",
+      "wm_long_chain",
+      "ending_judgement",
+      "global_tracking"
+    ],
+    "difficulty_vector": {
+      "vocabulary_load": 3,
+      "inference_load": 5,
+      "syntactic_complexity": 5,
+      "reference_density": 5,
+      "concept_abstractness": 4,
+      "dependency_chain_length": 5,
+      "transition_ambiguity": 5,
+      "competing_openings": 2,
+      "competing_endings": 5,
+      "lexical_decoys": 5,
+      "topic_unfamiliarity": 3,
+      "plausible_orderings": 5
+    },
+    "num_plausible_orderings": 5,
+    "heuristic_adversarial": true,
+    "nucleus": "D",
+    "learning_objective": "follow the definite articles through a chronology rather than the repeated phrase, because 'the restaurant version' and 'its own returning cooks' each name an event that must already have happened",
+    "reasoning_patterns": [
+      "disc.chronology",
+      "disc.given_new",
+      "disc.rhetorical_pivot",
+      "disc.lexical_chain",
+      "disc.competing_ending"
+    ],
+    "quality": {
+      "status": "verified",
+      "adversarial_review": "The live rival puts the cookbook straight after the opening, because the opening ends 'nobody who ate it would have called it the country's' and the cookbook sentence prints the dish 'under the country's own name': the echo reads as the next beat of the story. It is refused by 'the restaurant version', a definite that names a version no restaurant has yet produced, and by 'Then the restaurants of the capital take it up', which, placed after the book, would have the restaurants adopting a dish whose restaurant version is already in print. A second rival binds 'corrected to match it' to 'the dish is exported as the country's' and ends on the cooks bringing the exported version home, which has the shape of a last line; it is refused by 'its own returning cooks', which presupposes cooks who have gone abroad and come back, an event only the turn sentence narrates, and by the 'then' that sequences the correction after the return. A third rival joins the capital's restaurants to the cooks' kitchens abroad as one movement; 'learn the dish from that page' and 'the book is the only authority' name a page and a book that do not yet exist.",
+      "blind_solve": {
+        "solver": "sonnet blind reader 2026-10-07",
+        "agreed": 1,
+        "total": 1,
+        "notes": "full agreement"
+      }
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-07",
+      "usage_note": "Original composition in CAT register for CAT OS. General account of how a regional dish is made national and re-imported; no country, dish, cookbook or text adapted or named. Personal study only."
+    },
+    "date_added": "2026-10-07",
+    "batch_id": "batch-pj-004",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-pj-004",
+    "reviewer_notes": "A premium five-sentence chronological narrative with a pivot, whose trap is a repeated phrase. 'The country's' appears in the opening sentence as a denial and in the cookbook sentence as an assertion, and the two want to be neighbours; between them stands the restaurant sentence, which the cookbook sentence presupposes through a single definite article. The second trap is the ending: the cooks bringing the dish home reads as a last line, and the real last line is anchored only by 'its own returning cooks'. The nucleus is the turn, which is the only sentence that mentions both the page and the region."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "The home version is then corrected to match it, and the region that invented the dish is told, by the capital, by the book and by its own returning cooks, that it has been cooking its own food wrong.",
+      "role": "conclusion"
+    },
+    {
+      "label": "B",
+      "text": "A cookbook follows, written in the capital and sold abroad, in which the restaurant version appears under the country's own name, and from that page the dish is exported as the country's.",
+      "role": "development"
+    },
+    {
+      "label": "C",
+      "text": "Then the restaurants of the capital take it up, refine it for people who did not grow up with it, and give it a name on a menu, which is the first time it is served to anyone who has to be told what it is.",
+      "role": "development"
+    },
+    {
+      "label": "D",
+      "text": "The turn comes when the country's own cooks, trained in kitchens abroad where the book is the only authority, learn the dish from that page rather than from the region, and bring the exported version home with them.",
+      "role": "cause_effect"
+    },
+    {
+      "label": "E",
+      "text": "A dish that is now called national begins as the food of one place or one class, the thing a region's farmhands ate on a particular day or a city's poor ate because the cut was cheap, and nobody who ate it would have called it the country's.",
+      "role": "topic"
+    }
+  ],
+  "correct_order": [
+    "E",
+    "C",
+    "B",
+    "D",
+    "A"
+  ],
+  "links": [
+    {
+      "from": "E",
+      "to": "C",
+      "device": "temporal_marker",
+      "reliability": "medium",
+      "explanation": "'Then' continues a story that has begun, and 'take it up' needs a dish to take up; the opening sentence supplies the dish and the beginning. 'People who did not grow up with it' are the first people outside the one place or one class."
+    },
+    {
+      "from": "C",
+      "to": "B",
+      "device": "given_new_flow",
+      "reliability": "high",
+      "explanation": "'The restaurant version' is a definite that names something already made, and only the sentence about the capital's restaurants makes one. 'A cookbook follows' follows the menu."
+    },
+    {
+      "from": "B",
+      "to": "D",
+      "device": "demonstrative_reference",
+      "reliability": "high",
+      "explanation": "'That page' and 'the book' collect the cookbook just described, and 'the exported version' collects 'the dish is exported as the country's'. Nothing before the cookbook sentence has a page to learn from."
+    },
+    {
+      "from": "D",
+      "to": "A",
+      "device": "pronoun_reference",
+      "reliability": "high",
+      "explanation": "'Corrected to match it' takes the exported version the cooks have just brought home, and 'its own returning cooks' presupposes that cooks have gone abroad and returned, which only the turn sentence narrates. 'Then' sequences the correction after the return."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "A chronology in five steps: origin, the capital's restaurants, the cookbook and export, the turn in which the country's own cooks learn the dish from the export, and the correction of the original to match. The surface clues are temporal ('begins', 'Then', 'follows', 'The turn comes when', 'then'); the structural clues are three definites, 'the restaurant version', 'that page' and 'its own returning cooks', each naming an event that must already have been narrated.",
+    "movement": [
+      {
+        "label": "E",
+        "why_here": "The origin and the only sentence with nothing to collect: a dish, a place or class, and the denial that anyone called it the country's, which the cookbook sentence will reverse."
+      },
+      {
+        "label": "C",
+        "why_here": "'Then' is the first step after the beginning: the capital's restaurants take the dish up and name it. This sentence creates 'the restaurant version' that the next sentence treats as given."
+      },
+      {
+        "label": "B",
+        "why_here": "'The restaurant version' is now on the page, so the cookbook can print it under the country's name and export it. 'That page' is what the turn will learn from."
+      },
+      {
+        "label": "D",
+        "why_here": "The nucleus and the pivot. 'That page' and 'the book' collect the cookbook, and the country's own cooks learn the dish abroad and bring the exported version home. Its last clause sounds like an ending, which is the second trap."
+      },
+      {
+        "label": "A",
+        "why_here": "'Then corrected to match it' follows the return, and 'its own returning cooks' can only be the cooks the turn sentence sent abroad. The paragraph ends on the original being told it was wrong."
+      }
+    ],
+    "tempting_orders": [
+      {
+        "order": "EBCDA",
+        "trap_type": "lexical_decoy",
+        "why_tempting": "The opening ends 'nobody who ate it would have called it the country's' and the cookbook sentence prints it 'under the country's own name': denial, then reversal, is the most natural beat in the set, and the restaurants can then read as the capital's second step before the export.",
+        "where_it_breaks": "'The restaurant version' is a definite article with nothing to be definite about: no restaurant has touched the dish until the sentence beginning 'Then the restaurants of the capital'. Placed after the book, that sentence would have the restaurants adopting a dish whose restaurant version is already in print, which runs the chronology backwards."
+      },
+      {
+        "order": "ECBAD",
+        "trap_type": "false_pronoun_binding",
+        "why_tempting": "'Corrected to match it' binds happily to 'the dish is exported as the country's' at the end of the cookbook sentence, and 'bring the exported version home with them' has the cadence of a last line, so the turn sentence seems to explain how the correction happened.",
+        "where_it_breaks": "'Its own returning cooks' presupposes cooks who have gone abroad and come back, and only the turn sentence sends anyone abroad; the correction's 'then' sequences it after the return, not before. The paragraph would report the homecoming after reporting its effect."
+      },
+      {
+        "order": "ECDBA",
+        "trap_type": "anchor_pair",
+        "why_tempting": "The capital's restaurants and the country's cooks in kitchens abroad are both sentences about professional cooks taking the dish up, and they read as one movement of the trade.",
+        "where_it_breaks": "'Learn the dish from that page' and 'where the book is the only authority' name a page and a book that do not exist until the cookbook sentence has written them. A demonstrative cannot collect from a sentence that follows it."
+      }
+    ],
+    "trap_named": "The trap is a repeated phrase mistaken for a sequence. 'The country's' closes the opening sentence as a denial and sits in the cookbook sentence as an assertion, and a solver who pairs them has a story that moves from 'nobody called it the country's' to 'printed as the country's' in one step. But the cookbook sentence says 'the restaurant version', and a definite article outranks an echo: a version that has to exist already was made in the sentence about the capital's restaurants, which the pairing skipped.",
+    "solving_habit": "In a chronology, track the definite articles rather than the time words. 'The restaurant version', 'that page', 'its own returning cooks': each names an event that must already have been told, and the events, not the connectives, fix the order."
+  },
+  "mentor": {
+    "challenge": "A dish eaten by farmhands on one day of the year ends up on menus abroad under the country's name. Then something stranger happens to it at home.",
+    "paragraph_plain": "A dish that is now called national starts out as the food of one place or one class: the thing a region's farmhands ate on a particular day, or a city's poor ate because the cut was cheap, and nobody who ate it would have called it the country's. Then the restaurants of the capital take it up, refine it for people who did not grow up with it, and give it a name on a menu, which is the first time it is served to anyone who has to be told what it is. A cookbook follows, written in the capital and sold abroad, in which the restaurant version appears under the country's own name, and from that page the dish is exported as the country's. The turn comes when the country's own cooks, trained in kitchens abroad where the book is the only authority, learn the dish from that page rather than from the region, and bring the exported version home with them. The home version is then corrected to match it, and the region that invented the dish is told, by the capital, by the book and by its own returning cooks, that it has been cooking its own food wrong.",
+    "takeaway": "A definite article is a claim that something has already happened. In a story, that claim fixes the order more surely than any 'then'."
+  }
+}

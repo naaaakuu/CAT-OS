@@ -1,0 +1,337 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0166",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 87,
+    "genre": "law",
+    "difficulty": "easy",
+    "difficulty_numeric": 2,
+    "stage": "foundation",
+    "skills": [
+      "evidence-anchoring",
+      "application",
+      "inference",
+      "causal-reasoning"
+    ],
+    "word_count": 329,
+    "question_count": 3,
+    "question_types": [
+      "specific_detail",
+      "application",
+      "implication"
+    ],
+    "theme": "the law enforces exchanges, not promises: consideration, something given in return, shows both sides meant to be bound and keeps generosity out of court; the exception is a promise visibly relied on",
+    "estimated_time_min": 5.5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-07",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted."
+    },
+    "date_added": "2026-10-07",
+    "batch_id": "batch-rc-008",
+    "prompt_version": "content engine v1 + CAT paper patterns 2026-10; batch-rc-008",
+    "reviewer_notes": "The corpus's law passages are all argument against a received view; this is a plain exposition of a doctrine, in second person with short sentences (average well under fifteen words), and the structure is definition then application, with the exception as the application that tests the definition. The reward is a line and two reasons for the line. The near-tie is in the application question, where a promise that was believed and talked about is set against one that was acted on at a cost. The passage never names a jurisdiction or a case, so there is nothing to check; \"in most places\" and \"many courts\" are deliberate hedges. The move is a plain exposition, carried in a plain, second-person voice of short sentences.",
+    "length_class": "short",
+    "structure": "definition_application",
+    "viewpoints": 1,
+    "tone": "plain, patient",
+    "difficulty_vector": {
+      "lexical": 1,
+      "syntactic": 1,
+      "abstraction": 2,
+      "inference_depth": 2,
+      "distractor_similarity": 2,
+      "reasoning_depth": 2,
+      "structural_ambiguity": 1,
+      "time_pressure": 1
+    },
+    "reasoning_patterns": [
+      "comp.explicit_detail",
+      "lang.causal_wording",
+      "struct.definition",
+      "inf.author_view_application",
+      "arg.principle",
+      "scope.condition",
+      "inf.directly_implied",
+      "lang.subtle_negation",
+      "comp.paraphrase",
+      "struct.qualification",
+      "struct.example"
+    ],
+    "quality": {
+      "status": "verified",
+      "adversarial_review": "Q1: A strong candidate argues for the no-loss option, since the exception turns on loss. The general rule's reason is given in the words \"The difference is exchange\" and \"A promise with nothing coming back has no consideration, and the law lets it go\"; loss enters only in the third paragraph's exception. Q2: The near-tie is the lent-car case, argued from \"You have relied on my word\": thanking and telling the family is reliance of a sort. It is killed by \"something was lost, and lost because of me\" and \"you sell your own bicycle because you now expect mine\", which require a cost. The signed note is argued to be binding by its formality; the passage's gift was promised \"in front of witnesses\" and still not enforced, and \"The difference is exchange\" settles that formality is not the test. Q3: The candidate argues for the proof reading of evidence; \"both of them meant to be bound\" fixes evidence as being about intention, and the example's witnesses show that proof of the words is not the issue.",
+      "blind_solve": {
+        "solver": "sonnet blind reader 2026-10-07 (batch rc-008)",
+        "agreed": 3,
+        "total": 3,
+        "notes": "full agreement"
+      }
+    },
+    "vocab_extracted": [
+      "bargain",
+      "consideration",
+      "relied"
+    ]
+  },
+  "passage": {
+    "title": "A Bicycle, Promised",
+    "reading_time_min": 1.8,
+    "paragraphs": [
+      {
+        "id": "rc-0166-p1",
+        "text": "Suppose you promise to pay me a thousand for my bicycle. I hand it over. If you do not pay, a court will make you. Now suppose instead I promise to give you the bicycle for nothing. I say it in front of witnesses. I mean it. Then I change my mind. Can you take me to court? In most places you cannot. The law will enforce the bargain and not the gift, and the reason is not that one promise was serious and the other was not. Both were serious. The difference is exchange."
+      },
+      {
+        "id": "rc-0166-p2",
+        "text": "Lawyers call the thing given in return \"consideration\". Your thousand is the consideration for my bicycle, and the bicycle for your thousand. A promise with nothing coming back has no consideration, and the law lets it go. Why draw the line there? Two reasons. The first is evidence. When each side gives something up, you can be fairly sure both of them meant to be bound; people do not pay for things they do not want. A bare promise proves less. The second is a flood. Generous words are said every day: I will take you to the match, you can have my old desk, I will lend you the car. If every one of them could be sued on, every kindness would come with a court behind it. So the law lets most of them be, and leaves the keeping of them to conscience."
+      },
+      {
+        "id": "rc-0166-p3",
+        "text": "There is one exception. Suppose I promise you the bicycle, you believe me, and you sell your own bicycle because you now expect mine. You have relied on my word, and I could see that you would. Here many courts will hold me to the promise, or at least make me pay for what my broken word cost you. Nothing was exchanged. But something was lost, and lost because of me. The law is still not enforcing generosity. It is refusing to let a promise lead someone into harm."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0166-q1",
+      "type": "specific_detail",
+      "skill": "specific_detail",
+      "patterns": [
+        "comp.explicit_detail",
+        "lang.causal_wording",
+        "struct.definition"
+      ],
+      "target_mistake": "supplying a common-sense reason (seriousness, proof, no loss) in place of the one the passage states, exchange",
+      "prediction_target": null,
+      "difficulty": {
+        "inference_depth": 1,
+        "distractor_similarity": 2,
+        "reasoning_depth": 1
+      },
+      "secondary_skills": [
+        "logical_structure"
+      ],
+      "stem": "According to the passage, the law declines to enforce a promise of a gift because",
+      "options": {
+        "A": "a promise of a gift is usually made less seriously than a bargain is.",
+        "B": "a gift is rarely made in front of witnesses who could confirm it.",
+        "C": "nothing was given back in return for the promise of the gift.",
+        "D": "a promise of a gift creates no loss when it is broken."
+      },
+      "correct": "C",
+      "estimated_time_sec": 45,
+      "explanation": {
+        "expert_notice": "The first paragraph rules one reason out and names the real one in three short sentences: \"the reason is not that one promise was serious and the other was not. Both were serious. The difference is exchange.\" The second paragraph then gives the technical name, consideration, \"the thing given in return\".",
+        "correct_reasoning": "The text says \"The difference is exchange\" and \"A promise with nothing coming back has no consideration, and the law lets it go.\" The correct option restates that: nothing was given back in return. The seriousness option is the reason the author explicitly rejects.",
+        "passage_anchor": "rc-0166-p1, rc-0166-p2",
+        "question_type_note": "A detail question on an explanatory passage is often answered by the sentence that says \"the reason is not X ... it is Y\". Find that sentence, and expect one option to be X.",
+        "reading_habit": "When an author writes \"the reason is not\", mark both what is rejected and what replaces it; the rejected reason will be an option.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage says \"the reason is not that one promise was serious and the other was not. Both were serious.\" The option gives the rejected reason.",
+            "seductive_element": "It is the reason most people would guess, and the passage mentions it first."
+          },
+          {
+            "option": "B",
+            "trap_type": "common_knowledge_intrusion",
+            "why_wrong": "In the example the gift is promised \"in front of witnesses\" and is still not enforced, so witnesses are not what the law is asking for.",
+            "seductive_element": "Proof matters in court, and the second paragraph does talk about evidence."
+          },
+          {
+            "option": "D",
+            "trap_type": "wrong_structural_role",
+            "why_wrong": "Loss is the subject of the third paragraph's exception, where a broken gift promise does cause loss and is enforced. It is not the reason gifts are generally unenforced; that reason is \"exchange\".",
+            "seductive_element": "The third paragraph makes loss decisive, and a reader may carry it back into the general rule."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0166-q2",
+      "type": "application",
+      "skill": "application",
+      "patterns": [
+        "inf.author_view_application",
+        "arg.principle",
+        "scope.condition"
+      ],
+      "target_mistake": "treating belief in a promise as reliance, when the passage's exception requires a loss that the promisor could see coming",
+      "prediction_target": "a bare promise is enforced only where the other person has relied on it at a cost, visibly to the promisor; otherwise the promise must be part of an exchange",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 2,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "inference",
+        "scope"
+      ],
+      "stem": "In which of the following cases would a court, on the passage's account, most likely hold the person to the promise?",
+      "options": {
+        "A": "A woman promises her nephew her car for his birthday, then sells it to a stranger before the day.",
+        "B": "A man promises a neighbour his old desk and, as he can see, she gives away her own to make room.",
+        "C": "A man writes and signs a note promising his colleague his old bicycle, and then changes his mind.",
+        "D": "A friend promises to lend you his car for a trip, and you thank him warmly and tell your family."
+      },
+      "correct": "B",
+      "estimated_time_sec": 90,
+      "explanation": {
+        "expert_notice": "Two routes to enforcement in the passage: an exchange (\"consideration\"), or reliance in which \"something was lost, and lost because of me\" and \"I could see that you would\". The expert checks each case for one of the two, and notes that none of the four is an exchange, so reliance with a visible loss is the test.",
+        "correct_reasoning": "The neighbour gives away her own desk because she expects his, and he can see her do it. That matches the passage's exception in every element: \"you sell your own bicycle because you now expect mine\", \"You have relied on my word, and I could see that you would\", \"something was lost\". The other three are generous words with nothing given back and nothing lost, which the passage says the law \"lets ... be\".",
+        "passage_anchor": "rc-0166-p2, rc-0166-p3",
+        "question_type_note": "An application question gives you new cases and asks which one the passage's rule covers. Write the rule's conditions first (here: exchange, or visible reliance at a cost), then tick the conditions off case by case.",
+        "reading_habit": "When a passage states an exception, list its elements as a checklist before reading any scenario; a scenario that has some elements but not all is the usual trap.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "wrong_condition",
+            "why_wrong": "A promised car with nothing given in return is the passage's gift case, and the nephew has lost nothing of his own; the sale to a stranger is just the promisor changing her mind, as in \"Then I change my mind.\"",
+            "seductive_element": "The promisor's conduct looks bad, and a reader may think a court punishes bad faith rather than enforcing exchange or reliance."
+          },
+          {
+            "option": "C",
+            "trap_type": "common_knowledge_intrusion",
+            "why_wrong": "A signed note is a gift promise with nothing given in return, and the colleague has lost nothing; the passage's own gift was made \"in front of witnesses\" and still \"the law lets it go\", because \"The difference is exchange\", not formality.",
+            "seductive_element": "Writing and signing feel like what makes a promise binding, which is common knowledge the passage never endorses."
+          },
+          {
+            "option": "D",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "Thanking him and telling your family is belief, not reliance in the passage's sense, which requires that \"something was lost, and lost because of me\". Nothing has been given up.",
+            "seductive_element": "\"You have relied on my word\" sounds satisfied by believing and acting on the belief in a small way."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0166-q3",
+      "type": "implication",
+      "skill": "inference",
+      "patterns": [
+        "inf.directly_implied",
+        "lang.subtle_negation",
+        "comp.paraphrase"
+      ],
+      "target_mistake": "reading the law's refusal to enforce as a verdict on the promise's worth, when the passage says the promise was serious and its keeping is left to conscience",
+      "prediction_target": "the refusal is about exchange and about keeping kindnesses out of court, not about the promise mattering less; the passage says both promises were serious and leaves the keeping of gifts to conscience",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 2,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "logical_structure"
+      ],
+      "stem": "The passage implies that when the law refuses to enforce a promise of a gift, it",
+      "options": {
+        "A": "is not thereby judging that the promise was unimportant or lightly made.",
+        "B": "treats a promise made before witnesses as if it had never been made.",
+        "C": "accepts that the breaking of such a promise is a harm it is bound to repair.",
+        "D": "does so because it cannot tell whether the promise was really made."
+      },
+      "correct": "A",
+      "estimated_time_sec": 80,
+      "explanation": {
+        "expert_notice": "Two sentences carry the implication. \"Both were serious\" says that seriousness is not what separates the enforced from the unenforced. \"So the law lets most of them be, and leaves the keeping of them to conscience\" says that a gift promise still ought to be kept; the law simply is not the one to make you. The refusal is a decision about courts, not about the promise.",
+        "correct_reasoning": "The passage states that the gift promise was serious (\"I mean it\", \"Both were serious\") and that the law leaves its keeping \"to conscience\", which presupposes that it should be kept. So refusing to enforce it is not a judgement that it was unimportant or lightly made. The correct option says only that. The option about not being able to tell whether the promise was made mistakes the evidence point, which concerns whether both sides \"meant to be bound\", not whether words were said.",
+        "passage_anchor": "rc-0166-p1, rc-0166-p2",
+        "question_type_note": "An implication question asks what the text commits the author to without saying it outright. The best evidence is a sentence that rules something out (\"the reason is not ...\") or that assigns the thing to somewhere else (\"to conscience\").",
+        "reading_habit": "When a passage says a rule is not about X, an option saying the rule reflects X is wrong, however natural it sounds.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "overstatement",
+            "why_wrong": "The law lets the promise \"be\"; it does not deny the promise was made. Witnesses were present in the example, and the passage never says the promise is treated as non-existent, only as unenforced.",
+            "seductive_element": "Unenforced can feel like void, and the witnesses in the example make the point seem to be about proof."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "Repairing the harm of a broken gift promise is what the law does only in the exception, where there was reliance; in the general case it \"lets most of them be\". The option makes the exception the rule.",
+            "seductive_element": "The third paragraph does say some courts \"make me pay for what my broken word cost you\", and a reader may generalise it."
+          },
+          {
+            "option": "D",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "The evidence reason is that an exchange shows \"both of them meant to be bound\"; it is about intention to be bound, not about whether the promise \"was really made\". The example's promise is made openly and still unenforced.",
+            "seductive_element": "\"evidence\" and \"A bare promise proves less\" invite a reading about proving that the words were said."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "bargain",
+      "passage_use": "The law will enforce the bargain and not the gift",
+      "meaning_here": "an agreement in which each side gives something to the other",
+      "difficulty": "easy"
+    },
+    {
+      "word": "consideration",
+      "passage_use": "Lawyers call the thing given in return \"consideration\"",
+      "meaning_here": "in contract law, what each side gives or promises in exchange for the other's promise",
+      "difficulty": "medium"
+    },
+    {
+      "word": "relied",
+      "passage_use": "You have relied on my word",
+      "meaning_here": "acted in trust of something, counting on it being true",
+      "difficulty": "easy"
+    }
+  ],
+  "mentor": {
+    "challenge": "You promise me a thousand for my bicycle and a court will hold you to it. I promise you the bicycle for nothing, and no court will hold me. Why not?",
+    "one_sentence_summary": "A plain explainer shows that the law enforces an exchange, not a promise by itself, because what each side gives in return, called consideration, is both evidence that both meant to be bound and a limit that keeps ordinary kindnesses out of court, with one exception for a promise someone has visibly relied on at a cost.",
+    "main_idea": "The law will make you keep a bargain but not a gift, not because a gift is less serious, but because only a bargain involves an exchange, and a promise with nothing given in return is left to conscience rather than to the courts, except where the other person has relied on it and lost something because of that reliance.",
+    "simple_explanation": "Suppose you promise to pay a thousand for a bicycle and hand over the bicycle. If the buyer does not pay, a court will make them. Now suppose instead the owner just promises to give the bicycle away for nothing, says it in front of witnesses, and really means it, then changes their mind. In most places, the other person cannot take them to court over it. This is not because the second promise was less serious; both were serious. The real difference is that only the first involved an exchange.\n\nLawyers call the thing given in return consideration. The money is consideration for the bicycle, and the bicycle is consideration for the money. A promise with nothing given back has no consideration, and the law simply lets it go unenforced. There are two reasons the line is drawn there. First, an exchange is evidence that both sides really meant to be bound, since people do not usually pay for things they do not want, while a bare promise proves much less. Second, if every kind word, lending a car, giving away an old desk, could be sued over, every small kindness would come with the threat of a lawsuit attached, so the law leaves most promised gifts to each person's own conscience.\n\nThere is one exception. If someone promises you their bicycle, you believe them, and you sell your own bicycle because you are now expecting theirs, and they could see that you would do this, many courts will hold them to the promise, or at least make them pay for the loss their broken promise caused. Nothing was exchanged in this case, but something real was lost because of the promise. Even here, the law is not forcing anyone to be generous; it is simply refusing to let a promise lead someone into real harm.",
+    "why_difficult": "The obvious, common-sense explanation, that a promise of a gift is simply made less seriously than a bargain, is the exact reason the passage explicitly rules out in its first paragraph, and a reader who supplies that familiar reasoning instead of the stated one, exchange, will answer the detail question wrong even though the passage states its reasoning plainly and early.",
+    "author_intention": "To explain, in the plainest possible terms, why the law enforces bargains but not gifts, to give the two reasons behind that line, and to show the one situation, reliance at a cost, where a bare promise is still enforced.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0166-p1",
+        "role": "Sets up the puzzle",
+        "note": "A paid-for bicycle and a promised-for-free bicycle are both serious promises, but only one can be enforced in court, and the reason is exchange, not seriousness."
+      },
+      {
+        "paragraph_id": "rc-0166-p2",
+        "role": "Names the rule and its reasons",
+        "note": "The thing given back is called consideration; the law requires it both because it proves both sides meant to be bound and because suing over every small kindness would be too much."
+      },
+      {
+        "paragraph_id": "rc-0166-p3",
+        "role": "Gives the exception",
+        "note": "If someone relies on a promise at a real cost, and the promisor could see that they would, the law will still hold the promisor to it, or make them pay for the loss."
+      }
+    ],
+    "tone_progression": "The voice is plain and patient throughout, built from short sentences and a direct 'you', moving steadily from an everyday example, to the technical term and its two reasons, to the one case where the general rule does not hold.",
+    "key_transitions": [
+      "'The difference is exchange.' (end of the first paragraph): the puzzle of why one promise is enforced and the other is not gets its answer.",
+      "'There is one exception.' (opening of the third paragraph): the general rule gives way to the one case where a bare promise is still enforced."
+    ],
+    "misunderstanding": "A reader naturally assumes that a promise is enforced when it was made seriously, or proven by witnesses, or would cause a loss if broken, and the passage uses its own bicycle example to rule out each of those in turn, stating plainly that seriousness, witnesses and even loss outside the reliance exception are not what decides the matter.",
+    "traps_summary": "The wrong options offer the seriousness, the presence of witnesses, or the eventual loss as the reason a gift promise goes unenforced, each a reason the passage explicitly sets aside in favour of exchange, and in the application question they offer belief or formality in place of the one thing the exception actually requires, a cost visibly relied upon.",
+    "reading_lesson": "When an explanatory passage says 'the reason is not X, it is Y', treat X as a trap built from common sense and Y as the one fact every later question will be checked against.",
+    "real_world": "The same distinction, a promise backed by an exchange versus a promise backed only by goodwill, decides everyday situations from a verbal agreement to do work for payment to a casual offer of a favour that the other person should not plan their life around.",
+    "takeaway": "A promise becomes a debt the law will enforce only when something is given back for it, or when someone has visibly been let down after relying on it.",
+    "reflection_question": "Think of a promise someone made you that was never paid for in return: what, if anything, would make it fair for a court to step in?",
+    "eli10": {
+      "big_idea": "Courts make people keep promises that were paid for, but usually let people break promises of a free gift, because what matters is whether something was given back, not how serious the promise sounded.",
+      "story": "Say you promise to pay me a hundred coins for my bike, and I hand it over. If you do not pay, a judge can make you. Now say instead I just promise to give you my bike for free. I really mean it. Then I change my mind. Can you make me go to court? In most places, no. This is not because I was joking the second time. I was serious both times. The real difference is that the first promise had something given back, and the second did not. Lawyers call that something consideration. Without it, courts mostly leave promises to each person's own conscience. But there is one exception. If you believed my promise and sold your own bike because of it, and I could see you would, courts might still make me pay for your loss.",
+      "paragraphs": [
+        "A paid-for bicycle promise can be enforced in court, but a free bicycle promise cannot, even though both were serious.",
+        "The thing given back is called consideration, and the law needs it as proof both sides meant to be bound, and to stop every small kindness from being suable.",
+        "If someone relies on a free promise and loses something because of it, and the promisor could see that coming, the law may still step in."
+      ],
+      "author_view": "The writer is calm and patient, simply explaining a rule rather than arguing for or against it, and clearly thinks the rule, including its one exception, makes sense."
+    }
+  }
+}

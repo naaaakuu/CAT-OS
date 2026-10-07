@@ -4,6 +4,12 @@
 > Versions here are app releases; they map onto the capability milestones in
 > `PROJECT_ROADMAP.md` (0.x releases build toward Roadmap V1.0).
 
+## Content: a second batch, twenty more items (2026-10-07)
+
+- `batch-rc-008`, rc-0157 to rc-0166: ten passages in the shelves still thin after the first batch (architecture, markets, scientific-method, intellectual-history, environment, urban-studies, ethics, medicine-health, arts-culture, law) and the forms the audit still lacked: a sustained description of how a cathedral stands, a second review, a second heated argument, a first-person aporia, a handover told as a scene. Question mix at the exam's weight: inference family 20 of 38, one detail per passage, no main-idea question, tone once. Blind-solved 38 of 38 by a reader with the text; a separate reader without the text scored 34 of 38, at the corpus's documented baseline for this structural leak (AUTHORING §2a), crediting general knowledge of the famous mechanisms; option lengths sit within a 9-character mean spread, so length is no longer a cue either way. Audit rows added (three A, seven B).
+- `batch-ps-004` (ps-0078 to ps-0082): five summaries in the genres that had one or two (contemporary-society, institutions, religion-belief, architecture, markets), cat to premium tiers, blind-solved 5 of 5.
+- `batch-pj-004` (pj-0077 to pj-0081): five five-sentence TITA jumbles in the upper tiers, each with two rival orders written out and broken by quoted words; a blind reader recovered all five orders.
+
 ## Content: thirty items for the thin shelves, and a catalogue (2026-10-07)
 
 - Audit first: the registry and the repo's own audits showed economics, science, psychology and history over-served, contemporary-society empty, medicine-health, architecture, markets, religion-belief, culture and law thin, the main-idea family at 26% of RC questions and tone at 24 questions (the real exam asks tone about once in six years), 61% of passages making the same "correct a received view" move, and Para Completion (36) and Sentence Placement (52) far behind the other VA types. Research on CAT 2020 to 2025 is now `KNOWLEDGE/01_KNOWLEDGE/CAT PAPER PATTERNS 2020-2025.md`.

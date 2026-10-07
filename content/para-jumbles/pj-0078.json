@@ -1,0 +1,203 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "pj-0078",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 89,
+    "genre": "religion-belief",
+    "difficulty": "hard",
+    "difficulty_numeric": 7,
+    "tier": "cat",
+    "title": "A Feast on the Move",
+    "theme": "why a calendar counted by the moon falls eleven days a year behind the sun, why that matters only for a feast tied to a harvest, and what adding a month or not records about a feast",
+    "estimated_time_sec": 180,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-10: five-sentence TITA jumble, a form set in official papers alongside the four-sentence default; re-verify against each new official paper"
+    },
+    "macro_pattern": "problem_solution",
+    "cohesion_signals": [
+      "demonstrative",
+      "former_latter",
+      "connective_explicit",
+      "lexical_repetition"
+    ],
+    "primary_trap": "competing_ending",
+    "secondary_traps": [
+      "false_pronoun_binding",
+      "anchor_pair"
+    ],
+    "dna_traits": [
+      "ending_judgement",
+      "premature_closure",
+      "global_tracking"
+    ],
+    "difficulty_vector": {
+      "vocabulary_load": 3,
+      "inference_load": 4,
+      "syntactic_complexity": 4,
+      "reference_density": 5,
+      "concept_abstractness": 3,
+      "dependency_chain_length": 4,
+      "transition_ambiguity": 3,
+      "competing_openings": 1,
+      "competing_endings": 4,
+      "lexical_decoys": 3,
+      "topic_unfamiliarity": 3,
+      "plausible_orderings": 3
+    },
+    "num_plausible_orderings": 3,
+    "heuristic_adversarial": true,
+    "nucleus": "E",
+    "learning_objective": "distrust a clipped final clause as an ending when the conclusion sentence contains a demonstrative that only that clause's sentence can satisfy",
+    "reasoning_patterns": [
+      "disc.problem_then_solution",
+      "disc.demonstrative",
+      "disc.competing_ending",
+      "disc.transition_word",
+      "struct.problem_solution"
+    ],
+    "quality": {
+      "status": "verified",
+      "adversarial_review": "The live rival ends on 'let the drift run', which is the most clipped clause in the set, and moves the 'So a calendar is a record as well as a clock' sentence to the fourth seat, where its 'So' looks like a conclusion that a last clarifying sentence may follow. It is refused by 'that choice, between a thirteenth month and a feast left to run': no choice and no thirteenth month exist until the sentence about the communities has added one, so the conclusion would be drawn from a practice the paragraph has not yet described. A second rival binds 'That wandering' to 'falls behind the seasons' and places the two-kinds sentence directly after the opener; it is refused by 'such a calendar' in the festival sentence, which then follows a sentence with no calendar in it, and by the festival's wandering being described after its tolerability has already been judged. A third rival places the solution straight after the wandering, as problem and answer; 'the first kind' and 'the second kind' count kinds that only the two-kinds sentence has distinguished.",
+      "blind_solve": {
+        "solver": "sonnet blind reader 2026-10-07",
+        "agreed": 1,
+        "total": 1,
+        "notes": "full agreement"
+      }
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-07",
+      "usage_note": "Original composition in CAT register for CAT OS. General account of lunar calendars, intercalation and seasonal festivals; no specific religion, calendar or text adapted or named. Personal study only."
+    },
+    "date_added": "2026-10-07",
+    "batch_id": "batch-pj-004",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-pj-004",
+    "reviewer_notes": "A cat-tier five-sentence problem-and-solution item whose trap is the ending. The solution sentence closes on three clipped words that sound final, and the real conclusion begins with 'So', which solvers associate with a penultimate summing-up. A demonstrative phrase in the conclusion, 'that choice, between a thirteenth month and a feast left to run', can only be satisfied by the solution sentence, which fixes the order. The arithmetic (354 days, eleven short, eight years to midwinter, a third of a century round) is correct and general."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "The communities that needed the first kind tied the moon back to the sun by adding a thirteenth month every two or three years, so that the drift was paid off before it could carry the feast out of its season, while the communities that kept only the second kind let the drift run.",
+      "role": "development"
+    },
+    {
+      "label": "B",
+      "text": "Twelve months of the moon come to about three hundred and fifty-four days, eleven short of the sun's year, so a calendar that counts by the moon falls behind the seasons by eleven days every year.",
+      "role": "topic"
+    },
+    {
+      "label": "C",
+      "text": "So a calendar is a record as well as a clock: that choice, between a thirteenth month and a feast left to run, tells you which of the two things, the harvest or the story, a people's feasts were originally about.",
+      "role": "conclusion"
+    },
+    {
+      "label": "D",
+      "text": "A festival fixed to such a calendar wanders: held at the start of spring in one year, it is being held in midwinter eight years later, and it comes round to spring again only after about a third of a century.",
+      "role": "cause_effect"
+    },
+    {
+      "label": "E",
+      "text": "That wandering is intolerable for one kind of festival and harmless for another, since a feast that celebrates a harvest has to fall when there is a harvest, while a feast that commemorates an event in a story has nothing in the fields to keep an appointment with.",
+      "role": "contrast"
+    }
+  ],
+  "correct_order": [
+    "B",
+    "D",
+    "E",
+    "A",
+    "C"
+  ],
+  "links": [
+    {
+      "from": "B",
+      "to": "D",
+      "device": "demonstrative_reference",
+      "reliability": "high",
+      "explanation": "'Such a calendar' is a calendar of the kind just described, one that counts by the moon and falls behind the seasons. Only the opening sentence describes a calendar at all."
+    },
+    {
+      "from": "D",
+      "to": "E",
+      "device": "demonstrative_reference",
+      "reliability": "high",
+      "explanation": "'That wandering' collects the verb 'wanders' and the spring-to-midwinter drift just laid out. The opening sentence's 'falls behind' is a rate, not a wandering feast, and the two-kinds sentence needs a feast on the move to judge."
+    },
+    {
+      "from": "E",
+      "to": "A",
+      "device": "former_latter_reference",
+      "reliability": "high",
+      "explanation": "'The first kind' and 'the second kind' count from the two kinds of festival just distinguished, the harvest feast and the story feast. No other sentence offers two kinds."
+    },
+    {
+      "from": "A",
+      "to": "C",
+      "device": "demonstrative_reference",
+      "reliability": "high",
+      "explanation": "'That choice, between a thirteenth month and a feast left to run' names the two courses the communities sentence has just described, and 'So' draws the conclusion from them. Before that sentence there is no thirteenth month and no choice."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "A problem stated as arithmetic, the problem made visible as a festival on the move, the problem sorted into the case where it matters and the case where it does not, the two solutions that follow from the two cases, and a conclusion that reads the solutions backwards as a record. Each sentence collects a count or a demonstrative from the one before it.",
+    "movement": [
+      {
+        "label": "B",
+        "why_here": "The arithmetic and the only sentence with no backward reference: it introduces the moon, the sun and the eleven-day shortfall that everything else presupposes."
+      },
+      {
+        "label": "D",
+        "why_here": "'Such a calendar' takes the calendar just defined and shows what it does to a festival. It converts a rate into a thing on the move, which is what the next sentence judges."
+      },
+      {
+        "label": "E",
+        "why_here": "The nucleus. 'That wandering' is the drift just described, and the sentence sorts festivals into the harvest kind, for which the drift is intolerable, and the story kind, for which it is harmless."
+      },
+      {
+        "label": "A",
+        "why_here": "'The first kind' and 'the second kind' count from the sort just made, and the sentence gives each kind its solution: a thirteenth month, or nothing. Its last three words sound final, which is the trap."
+      },
+      {
+        "label": "C",
+        "why_here": "'So' concludes, and 'that choice, between a thirteenth month and a feast left to run' can only collect from the sentence before it. The paragraph ends by reading the practice as a record of what the feast was for."
+      }
+    ],
+    "tempting_orders": [
+      {
+        "order": "BDECA",
+        "trap_type": "competing_ending",
+        "why_tempting": "'Let the drift run' is the shortest, most clipped clause in the set and has the feel of a last line. 'So a calendar is a record as well as a clock' reads like a summing-up that a final sentence of detail can follow, and the two-kinds sentence hands it 'the harvest or the story' directly.",
+        "where_it_breaks": "'That choice, between a thirteenth month and a feast left to run' has nothing to collect: no thirteenth month has been added and no choice has been made until the communities sentence makes it. The conclusion would be drawn from a practice the paragraph has not yet described."
+      },
+      {
+        "order": "BEDAC",
+        "trap_type": "false_pronoun_binding",
+        "why_tempting": "'That wandering' can be bound to 'falls behind the seasons' in the opening sentence, since falling behind is a kind of drift, so the sorting into two kinds seems to follow the arithmetic directly and the spring-to-midwinter festival reads as a later illustration.",
+        "where_it_breaks": "'A festival fixed to such a calendar' would then follow the two-kinds sentence, which contains no calendar for 'such' to point at. The order would also describe the wandering after it had already been judged intolerable or harmless, which inverts the paragraph's given and new."
+      },
+      {
+        "order": "BDAEC",
+        "trap_type": "anchor_pair",
+        "why_tempting": "A festival that wanders, then the communities that tied the moon back to the sun: problem and solution as immediate neighbours, with the two-kinds sentence read as an afterthought explaining who bothered.",
+        "where_it_breaks": "'The first kind' and 'the second kind' count kinds, and the festival sentence offers none; the kinds exist only once harvest feasts and story feasts have been distinguished. A counting phrase cannot collect from a sentence that follows it."
+      }
+    ],
+    "trap_named": "The trap is a clipped clause mistaken for an ending. 'Let the drift run' sounds like the last thing a writer says, and the true conclusion begins with 'So', which solvers file as a penultimate move. But the conclusion carries a demonstrative, 'that choice, between a thirteenth month and a feast left to run', and a demonstrative outranks a cadence: it must find its referent on the page already, and the thirteenth month exists only in the sentence that seemed to be the ending.",
+    "solving_habit": "When a sentence sounds final, check what the candidate conclusion needs to have read before it. Lay the counting phrases and demonstratives end to end first ('such a calendar', 'that wandering', 'the first kind', 'that choice'); the chain fixes the last seat before any judgement about cadence is needed."
+  },
+  "mentor": {
+    "challenge": "A feast held in spring is, eight years on, being held in midwinter. Nobody moved it. Some communities fix this and some do not, and neither is careless.",
+    "paragraph_plain": "Twelve months of the moon add up to about 354 days, which is eleven days short of the sun's year, so a calendar that counts by the moon slips behind the seasons by eleven days every year. A festival fixed to a calendar like that wanders: held at the start of spring one year, it is being held in midwinter eight years later, and it only comes back round to spring after about a third of a century. That wandering is unbearable for one kind of festival and harmless for another. A feast that celebrates a harvest has to happen when there is a harvest, while a feast that remembers an event in a story has nothing in the fields to keep an appointment with. The communities that needed the harvest kind tied the moon back to the sun by adding a thirteenth month every two or three years, paying off the drift before it could carry the feast out of its season; the communities that kept only the story kind let the drift run. So a calendar is a record as well as a clock: the choice between adding a month and letting a feast wander tells you which of the two, the harvest or the story, a people's feasts were originally about.",
+    "takeaway": "A demonstrative in the conclusion names the sentence that must come before it. Cadence names nothing."
+  }
+}

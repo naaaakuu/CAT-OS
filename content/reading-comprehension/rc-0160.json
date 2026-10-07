@@ -1,0 +1,406 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0160",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 90,
+    "genre": "intellectual-history",
+    "difficulty": "medium",
+    "difficulty_numeric": 6,
+    "stage": "intermediate",
+    "skills": [
+      "evidence-anchoring",
+      "inference",
+      "structure-mapping",
+      "trap-recognition"
+    ],
+    "word_count": 491,
+    "question_count": 4,
+    "question_types": [
+      "cannot_be_inferred",
+      "inference",
+      "not_true",
+      "paragraph_function"
+    ],
+    "theme": "the word scientist was resisted for decades by the people it named because it implied a paid, examinable trade; it won when the work became that trade, so the resistance records who did the work",
+    "estimated_time_min": 8,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-07",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted."
+    },
+    "date_added": "2026-10-07",
+    "batch_id": "batch-rc-008",
+    "prompt_version": "content engine v1 + CAT paper patterns 2026-10; batch-rc-008",
+    "reviewer_notes": "The catalogue has a para-jumble on the coining of \"scientist\" (pj-0044); this passage adds what that item does not have, namely the resistance, who it came from, why \"artist\" and \"dentist\" were the telling comparisons, and the adjudication that the word won by waiting for the profession. The near-tie is in the cannot-be-inferred question, where a reader may argue that modelling the word on \"artist\" shows Whewell meant to mark a trade; the text puts the trade reading in the gentlemen's ears, not in Whewell's intent. The voice is wry and uses \"I\" twice; the passage contains three dates and one direct question. The NOT-true item turns on which word Coleridge objected to. The title takes the objectors' own word for the coinage and gives away no key. The move is a history of an idea with the author adjudicating at the end, told in a wry, first-person-singular voice.",
+    "length_class": "medium",
+    "structure": "history_of_an_idea",
+    "viewpoints": 2,
+    "tone": "wry, affectionate, then firm",
+    "difficulty_vector": {
+      "lexical": 3,
+      "syntactic": 3,
+      "abstraction": 3,
+      "inference_depth": 4,
+      "distractor_similarity": 4,
+      "reasoning_depth": 3,
+      "structural_ambiguity": 3,
+      "time_pressure": 3
+    },
+    "reasoning_patterns": [
+      "struct.history_of_an_idea",
+      "struct.chronology",
+      "struct.pivot",
+      "comp.explicit_detail",
+      "comp.reference_tracking",
+      "comp.function_over_words",
+      "comp.organization",
+      "arg.evidence",
+      "inf.strongly_supported",
+      "inf.author_vs_reported",
+      "inf.vs_speculation",
+      "lang.concession_marker",
+      "scope.population",
+      "elim.systematic"
+    ],
+    "quality": {
+      "status": "verified",
+      "adversarial_review": "Q1: A strong candidate doubts the anonymous printing because the review is not named; the sentence \"published the proposal the following year, anonymously, in a review\" states it outright, while \"objected to 'philosopher'\" settles that no objection to \"savant\" was ever raised. Q2: The sixty-years option is the serious rival; the fourth paragraph gives the cause as the word waiting \"until the people doing the work were the people it described\", and the author's own verdict on the sound complaint is that it \"was ... an objection to the job it described\", so the sound was the form of the objection, not the reason for the delay. Q3: The case for Whewell's intention being inferable runs through \"on the model of 'artist'\" and the author's gloss that \"artist\" named paid people; the gloss is introduced to explain what the word \"implied\" to the gentlemen, and Whewell's motive is given separately as \"liked making words\", so the intention is nowhere in the text. Q4: The concession reading is the near rival, since the paragraph starts with sound; \"is never only a matter of sound\" turns at once from the concession, and the final sentence is a conclusion about the job, which makes the paragraph an explanation.",
+      "blind_solve": {
+        "solver": "sonnet blind reader 2026-10-07 (batch rc-008)",
+        "agreed": 4,
+        "total": 4,
+        "notes": "full agreement"
+      }
+    },
+    "vocab_extracted": [
+      "coinage",
+      "pedigree",
+      "vulgar"
+    ]
+  },
+  "passage": {
+    "title": "A Vulgar Little Word",
+    "reading_time_min": 2.7,
+    "paragraphs": [
+      {
+        "id": "rc-0160-p1",
+        "text": "In the summer of 1833 the British Association for the Advancement of Science met at Cambridge, and the question arose of what to call the people in the room. The poet Coleridge, who was present and had opinions, objected to \"philosopher\": the men assembled were not, in his view, doing anything so elevated. William Whewell, who taught at Trinity and liked making words, offered \"scientist\", on the model of \"artist\", and the room let it drop. He published the proposal the following year, anonymously, in a review, and again in 1840 under his own name, and then waited, as inventors of words do, for the world to catch up, which took about sixty years."
+      },
+      {
+        "id": "rc-0160-p2",
+        "text": "It was not that nobody needed a word. The need was real: \"natural philosopher\" was grand and vague, \"man of science\" was clumsy and left out the women, and \"savant\" was French. So who refused the new word, and on what grounds? The people who declined to be scientists were, overwhelmingly, the people the word was meant for: the gentlemen with private incomes and private laboratories who read one another's papers. They called it vulgar. They said it sounded like \"dentist\", which it does, and they said it was an Americanism, which by the end of the century it partly was, because Americans had adopted it without fuss."
+      },
+      {
+        "id": "rc-0160-p3",
+        "text": "Vulgarity is never only a matter of sound; it is a matter of who else is heard saying the word. \"Artist\" had a respectable pedigree, but it also named people who were paid, by the piece, for a skill. \"Dentist\" named a trade. A word built on that pattern implied that the person it described had a trade too, and did it for money, and could be examined in it, and that was precisely what a gentleman with a private laboratory did not do and did not wish to be taken for doing. He pursued natural philosophy. He did not practise science. The objection to the sound of the word was, I think, an objection to the job it described."
+      },
+      {
+        "id": "rc-0160-p4",
+        "text": "And the job arrived anyway. In the second half of the century the universities built laboratories, set examinations in the sciences and began to pay people to teach and to research; a young man could now train for science, be tested in it and draw a salary from it, and this young man had no private income to protect and no older name to be loyal to. He was, in the exact sense the gentlemen had feared, a scientist. The word did not win an argument about what science was. It waited until the people doing the work were the people it described. That is the trouble with the story in which a good coinage triumphs on its merits. A name is resisted, in my experience, for as long as it describes a job its holders do not want, and adopted the morning there are enough holders who do."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0160-q1",
+      "type": "not_true",
+      "skill": "specific_detail",
+      "patterns": [
+        "comp.explicit_detail",
+        "comp.reference_tracking",
+        "elim.systematic"
+      ],
+      "target_mistake": "confusing the word Coleridge objected to with one of the alternatives listed in the second paragraph",
+      "prediction_target": null,
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 3,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "logical_structure"
+      ],
+      "stem": "Which of the following is NOT stated in the passage about the word \"scientist\"?",
+      "options": {
+        "A": "It was first put forward at a meeting of a scientific association in 1833.",
+        "B": "It appeared in print anonymously before it appeared under Whewell's name.",
+        "C": "It was taken up in America with less fuss than in Britain.",
+        "D": "It was offered in answer to an objection raised against \"savant\"."
+      },
+      "correct": "D",
+      "estimated_time_sec": 55,
+      "explanation": {
+        "expert_notice": "The first paragraph gives the sequence: Coleridge \"objected to 'philosopher'\", and Whewell then \"offered 'scientist'\". The word \"savant\" appears only in the second paragraph, in a list of alternatives that were unsatisfactory for other reasons.",
+        "correct_reasoning": "The objection that prompted the proposal was to \"philosopher\": \"the men assembled were not, in his view, doing anything so elevated.\" \"Savant\" is mentioned later only as a word that \"was French\". So the claim that \"scientist\" answered an objection to \"savant\" is not in the passage. The other three are stated: the 1833 meeting at Cambridge, the proposal \"published the following year, anonymously\" and \"again in 1840 under his own name\", and the Americans who \"adopted it without fuss\" while the British gentlemen \"called it vulgar\".",
+        "passage_anchor": "rc-0160-p1, rc-0160-p2",
+        "question_type_note": "A NOT-stated question hands you three true statements and one that is not. The false one is usually built by swapping one name or word; check the proper nouns and quoted words against the text.",
+        "reading_habit": "When a passage lists several rejected alternatives, note which one carried the objection and which were merely listed.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "temporal_distortion",
+            "why_wrong": "Stated: \"In the summer of 1833 the British Association for the Advancement of Science met at Cambridge\" and the word was \"offered\" there; a reader who recalls only the print dates doubts the meeting.",
+            "seductive_element": "The print dates 1834 and 1840 are easier to remember than the meeting."
+          },
+          {
+            "option": "B",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "Stated: \"published the proposal the following year, anonymously, in a review, and again in 1840 under his own name\"; a reader may doubt \"anonymously\" because the review is not named.",
+            "seductive_element": "The passage does not say where the review appeared, so the detail feels unsupported."
+          },
+          {
+            "option": "C",
+            "trap_type": "misattributed_view",
+            "why_wrong": "Stated: \"Americans had adopted it without fuss\", against the British who \"called it vulgar\"; a reader who takes \"Americanism\" as the objectors’ slur alone misses that the author confirms it.",
+            "seductive_element": "\"Americanism\" is reported as an accusation, so a reader may think the passage leaves it unconfirmed."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0160-q2",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.strongly_supported",
+        "inf.author_vs_reported",
+        "lang.concession_marker"
+      ],
+      "target_mistake": "taking the author’s concession (\"which it does\") as agreement with the objectors’ own account of their objection",
+      "prediction_target": "the author agrees the word does sound like \"dentist\" and then argues that the likeness mattered because \"dentist\" named a paid trade, so the sound complaint was really about the job",
+      "difficulty": {
+        "inference_depth": 4,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "argument"
+      ],
+      "stem": "It can be inferred that the author regards the complaint that \"scientist\" sounded like \"dentist\" as",
+      "options": {
+        "A": "correct about the sound and revealing about something other than sound.",
+        "B": "a mistake about the word's origin that the objectors shared with Whewell.",
+        "C": "the real reason the word took sixty years to be accepted in Britain.",
+        "D": "a complaint that would have applied equally to \"natural philosopher\"."
+      },
+      "correct": "A",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "Two things sit side by side. The concession, \"which it does\", grants the sound. Then the third paragraph reinterprets it: \"Dentist\" named a trade, and \"The objection to the sound of the word was, I think, an objection to the job it described.\" The author accepts the fact and rejects the objectors’ account of why it mattered.",
+        "correct_reasoning": "The author writes that the word sounded like \"dentist\", \"which it does\": the complaint was correct about the sound. The third paragraph then says vulgarity \"is a matter of who else is heard saying the word\", and that \"dentist\" named a trade, so the likeness revealed what the gentlemen feared, a paid and examinable job. The correct option captures both halves. The author does not say the objectors were mistaken about the word’s origin; Whewell’s model was \"artist\", and nothing says the objectors thought otherwise. The reason for the sixty years, in the fourth paragraph, is that the profession had not yet arrived; the sound was the cover, not the cause. And \"natural philosopher\" is treated as \"grand and vague\", not as sounding like a trade.",
+        "passage_anchor": "rc-0160-p2, rc-0160-p3",
+        "question_type_note": "When an author concedes a fact (\"which it does\") and then explains it differently, the inference question is about the explanation, not the fact. Options that stop at the concession or at the objectors’ own account are the traps.",
+        "reading_habit": "Mark every \"which it does\", \"to be fair\" and \"it is true that\". The sentence after a concession is where the author’s view lives.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "Nothing in the passage says the objectors were wrong about the word’s origin or that Whewell shared any mistake; the model was \"artist\", stated once and never disputed.",
+            "seductive_element": "\"Dentist\" and \"artist\" are both mentioned, and a reader supposes a muddle between them."
+          },
+          {
+            "option": "C",
+            "trap_type": "fact_right_interpretation_wrong",
+            "why_wrong": "The fourth paragraph gives the reason the word waited: it \"waited until the people doing the work were the people it described\". The sound was, in the author’s phrase, \"an objection to the job it described\", not the cause of the delay.",
+            "seductive_element": "The sixty years and the sound complaint are both in the passage, and the option joins them."
+          },
+          {
+            "option": "D",
+            "trap_type": "comparison_distortion",
+            "why_wrong": "\"Natural philosopher\" is faulted for being \"grand and vague\", the opposite of a trade name; the dentist comparison bites only on words \"built on that pattern\", like \"artist\".",
+            "seductive_element": "It is one of the alternatives the passage calls unsatisfactory, so any complaint seems to fit it."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0160-q3",
+      "type": "cannot_be_inferred",
+      "skill": "inference",
+      "patterns": [
+        "inf.vs_speculation",
+        "inf.author_vs_reported",
+        "scope.population"
+      ],
+      "target_mistake": "reading the implication the gentlemen heard in the word as Whewell's intention in coining it",
+      "prediction_target": "three of the four follow from the text; the one about Whewell's purpose is nowhere supported, since the passage gives his reason as liking to make words and his model as \"artist\"",
+      "difficulty": {
+        "inference_depth": 4,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "scope"
+      ],
+      "stem": "Which of the following CANNOT be inferred from the passage?",
+      "options": {
+        "A": "The gentlemen who refused the word did not earn their living from their research.",
+        "B": "The word appeared in print well before it came into general use.",
+        "C": "Whewell chose the word in order to mark science as a paid occupation.",
+        "D": "The word was in use in America while it was still resisted in Britain."
+      },
+      "correct": "C",
+      "estimated_time_sec": 90,
+      "explanation": {
+        "expert_notice": "The passage attributes the trade reading to the hearers: a word built on the \"artist\" pattern \"implied that the person it described had a trade\", and that implication is what the gentlemen \"did not wish to be taken for\". Whewell’s own motives are given as taste (\"liked making words\") and analogy (\"on the model of 'artist'\"). Intent and implication are kept apart.",
+        "correct_reasoning": "The gentlemen had \"private incomes and private laboratories\", and doing science \"for money\" was \"precisely what a gentleman with a private laboratory did not do\", so they did not earn their living from research. The word was printed in 1834 and 1840 and general acceptance \"took about sixty years\", so it was in print well before general use. Americans \"adopted it without fuss\" while the British \"called it vulgar\", so it was in use in America during the British resistance. What cannot be inferred is Whewell’s purpose: the passage says he \"liked making words\" and modelled the word on \"artist\"; the trade implication is reported as what the word \"implied\" to its hearers. Nothing connects Whewell to a wish to mark science as paid.",
+        "passage_anchor": "rc-0160-p1, rc-0160-p2, rc-0160-p3",
+        "question_type_note": "A cannot-be-inferred question is three inferences and one leap. Test each option by asking which sentence forces it; the leap is the one with no such sentence, often a claim about someone’s intention.",
+        "reading_habit": "Distinguish what a word implied to its hearers from what its maker intended. Passages about words almost always keep the two apart.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "This follows from \"private incomes and private laboratories\" and from doing science \"for money\" being what a gentleman \"did not do\"; a reader who thinks the passage never discusses their income misses both.",
+            "seductive_element": "Income is mentioned in passing, so the inference feels larger than the text."
+          },
+          {
+            "option": "B",
+            "trap_type": "temporal_distortion",
+            "why_wrong": "The print dates are 1834 and 1840 and acceptance \"took about sixty years\"; the inference is forced, but a reader who muddles the dates doubts it.",
+            "seductive_element": "Three dates in a short passage are easy to confuse."
+          },
+          {
+            "option": "D",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "\"Americanism\" is reported as the objectors’ word, but the author confirms it: \"Americans had adopted it without fuss\"; the inference stands on the author’s sentence, not on the accusation.",
+            "seductive_element": "Because \"Americanism\" is an accusation, a reader may think the passage leaves American usage unconfirmed."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0160-q4",
+      "type": "paragraph_function",
+      "skill": "paragraph_function",
+      "patterns": [
+        "comp.function_over_words",
+        "struct.pivot",
+        "comp.organization"
+      ],
+      "target_mistake": "reading the paragraph as a mere concession, or giving it the job of the paragraph that follows",
+      "prediction_target": "the paragraph takes the \"dentist\" and \"artist\" comparisons and shows what they implied (a paid, examinable trade), turning the sound complaint into a complaint about the job",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 3,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "logical_structure"
+      ],
+      "stem": "Which of the following best describes what the third paragraph does?",
+      "options": {
+        "A": "It concedes that the objectors were right about the sound of the word and leaves it there.",
+        "B": "It explains the objection by drawing out what the word's pattern implied about its holders.",
+        "C": "It describes the arrival, late in the century, of the paid profession the word would name.",
+        "D": "It argues that the objectors' true motive was a dislike of everything that came from America."
+      },
+      "correct": "B",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "The paragraph opens by redefining vulgarity as \"a matter of who else is heard saying the word\" and ends with its conclusion: \"The objection to the sound of the word was, I think, an objection to the job it described.\" Between those two sentences it unpacks what \"artist\" and \"dentist\" implied. That is explanation, not concession and not narrative.",
+        "correct_reasoning": "The third paragraph reasons from the pattern of the word: \"artist\" named people \"paid, by the piece, for a skill\", \"dentist\" named a trade, so a word built on that pattern \"implied that the person it described had a trade too\". It then says why that mattered to a gentleman and concludes that the sound objection was \"an objection to the job it described\". That is what the correct option says. The concession about the sound (\"which it does\") sits in the second paragraph, and the third does not leave it there but reinterprets it. The arrival of the paid profession is the fourth paragraph’s work. The American point is raised in the second paragraph and is never offered as the objectors’ motive.",
+        "passage_anchor": "rc-0160-p3",
+        "question_type_note": "Paragraph-function questions ask what job the paragraph does for the argument. Read its first and last sentences; if the last is a conclusion, the paragraph’s job is to reach it.",
+        "reading_habit": "Before the options, write the paragraph’s job as a verb: concedes, explains, narrates, qualifies. Then match.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "concession_as_position",
+            "why_wrong": "The concession \"which it does\" is in the second paragraph; the third paragraph moves past it at once, since vulgarity \"is never only a matter of sound\", and ends on a conclusion about the job.",
+            "seductive_element": "The paragraph does begin with the sound, so it looks like a concession."
+          },
+          {
+            "option": "C",
+            "trap_type": "wrong_structural_role",
+            "why_wrong": "The universities, examinations and salaries belong to the fourth paragraph (\"And the job arrived anyway\"); the third paragraph is about what the word implied before the job existed.",
+            "seductive_element": "The third paragraph mentions being examined and paid, which are the fourth paragraph’s events."
+          },
+          {
+            "option": "D",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "\"Americanism\" is reported in the second paragraph as one of the objectors’ complaints; the third paragraph never mentions America and locates the motive in the job, \"precisely what a gentleman with a private laboratory did not do\".",
+            "seductive_element": "A national prejudice is a familiar story, and the passage supplies the word."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "coinage",
+      "passage_use": "a good coinage triumphs on its merits",
+      "meaning_here": "a newly invented word",
+      "difficulty": "medium"
+    },
+    {
+      "word": "pedigree",
+      "passage_use": "a respectable pedigree",
+      "meaning_here": "an established and honourable history",
+      "difficulty": "medium"
+    },
+    {
+      "word": "vulgar",
+      "passage_use": "They called it vulgar",
+      "meaning_here": "common, coarse, lacking refinement",
+      "difficulty": "easy"
+    }
+  ],
+  "mentor": {
+    "challenge": "A word was coined in 1833 for the people it described, and for sixty years those very people refused to use it. What exactly were they refusing?",
+    "one_sentence_summary": "The word 'scientist', coined in 1833, was resisted for about sixty years mainly by the gentlemen it was meant to name, because its pattern implied a paid and examinable trade, and it only won once university-trained, salaried scientists became the people actually doing the work.",
+    "main_idea": "A new word for a kind of worker can be resisted for decades not because it sounds wrong but because it correctly implies a change in status, pay or examination that the people currently doing the work do not want to be seen as having, and it is adopted once enough of its holders want the job it names.",
+    "simple_explanation": "In 1833, a group of people met in Cambridge to talk about science, and someone asked what to call them. The poet Coleridge objected to calling them 'philosophers', since he thought they were not doing anything so grand. William Whewell, who taught at Cambridge and liked inventing words, suggested 'scientist', modelled on the word 'artist'. He published the idea the next year without his name on it, and again later under his own name, and then waited about sixty years for people to actually use it.\n\nIt was not that nobody needed a new word. The older options were clumsy: 'natural philosopher' sounded grand but vague, and 'man of science' left out women entirely. So who refused the new word, and why? Mostly it was the very people the word described: gentlemen with their own money and their own private laboratories. They called it vulgar. They said it sounded like 'dentist', which it does, and they said it was an American word, which by the end of the century it partly was, since Americans had taken it up without any fuss.\n\nBeing thought vulgar is not only about how a word sounds. It is about who else uses words like it. 'Artist' named someone paid for a skill, and 'dentist' named a trade outright. A word shaped like those two implied that the person had a trade, did it for money, and could be tested on it, which is exactly what a gentleman with his own laboratory did not want people to think of him. He practised natural philosophy; he was not going to be called a tradesman. The complaint about how the word sounded was really a complaint about the job it described.\n\nAnd then that job actually arrived. Later in the century, universities built laboratories, set exams in the sciences, and started paying people to teach and research in them. A young man could now train in science, be tested on it, and earn a salary from it, with no private income to protect. He was, in exactly the sense the gentlemen had feared, a scientist. The word did not win because it was a better word. It won because it waited until the people doing the work were the people it had always described, and a name like this is resisted only for as long as its holders do not want the job it names.",
+    "why_difficult": "Readers naturally assume a word wins or loses on its sound or its logic, so the passage's actual claim, that the delay was about status and pay rather than about the word itself, is easy to miss unless the reader follows the author's own reasoning past the sound complaint to the job it implied.",
+    "author_intention": "To use the word 'scientist' as a case for a general claim: that resistance to a new name for a kind of worker is really a complaint about the job it describes, and that such resistance ends only once enough of the people doing the work want that job.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0160-p1",
+        "role": "Introduces the coinage",
+        "note": "In 1833 a word was needed for people doing science, Coleridge objected to 'philosopher', and Whewell proposed 'scientist', which then waited about sixty years to be generally accepted."
+      },
+      {
+        "paragraph_id": "rc-0160-p2",
+        "role": "Names the resisters",
+        "note": "The people who refused the word were mostly the gentlemen it was meant to describe, who called it vulgar, said it sounded like 'dentist', and said it was an Americanism."
+      },
+      {
+        "paragraph_id": "rc-0160-p3",
+        "role": "Explains the real objection",
+        "note": "The word's pattern, like 'artist' and 'dentist', implied a paid, examinable trade, which is exactly what a gentleman with a private income did not want to be taken for."
+      },
+      {
+        "paragraph_id": "rc-0160-p4",
+        "role": "Gives the author's verdict",
+        "note": "The word only won once universities created paid, trained, examined scientific jobs, so the name was accepted once enough of the people doing the work wanted the job it described."
+      }
+    ],
+    "tone_progression": "The voice is wry and affectionate through the history and the gentlemen's objections, then turns firm in the final paragraph's verdict about why names are resisted and adopted.",
+    "key_transitions": [
+      "‘Vulgarity is never only a matter of sound; it is a matter of who else is heard saying the word.’ (opening of paragraph 3): the passage turns from reporting the objection to explaining it.",
+      "‘And the job arrived anyway.’ (opening of paragraph 4): the passage turns from the objection to the resolution."
+    ],
+    "misunderstanding": "A hurried reader treats the sixty-year delay as evidence that the word itself was somehow wrong or badly made, missing the author's actual claim that the delay was about who was doing the work, not about the word.",
+    "traps_summary": "The options swap which rejected word Coleridge actually objected to, move the author's reading of a sound complaint onto the wrong cause, treat an implication the word's hearers drew as something its coiner intended, and give a later paragraph's job to an earlier one.",
+    "reading_lesson": "Keep what a word implied to the people who heard it separate from what the person who invented it meant by it; passages about the history of a word usually test exactly that gap.",
+    "real_world": "Any job title that once sounded demeaning, from 'engineer' to 'nurse' to newer titles today, may have been resisted for the same reason: it correctly named a job some people did not want to be seen doing.",
+    "takeaway": "A name is resisted for as long as it names a job its holders do not want, and adopted once enough of them do.",
+    "reflection_question": "What job title have you seen resisted or embraced for reasons that had nothing to do with how the word itself sounded?",
+    "eli10": {
+      "big_idea": "The word 'scientist' was resisted for sixty years by the very people it described, because it implied a paid trade they did not want to be seen as having, and it won once that trade actually existed.",
+      "story": "Long ago, in 1833, some people met to talk about science. Someone asked what to call them. A poet there did not like the word 'philosopher'. A man named Whewell liked making up words. He suggested 'scientist', like the word 'artist'. Almost nobody used it. For about sixty years, the very people it was meant for refused to say it. They called it vulgar. They said it sounded like 'dentist'. And dentist is a trade, a paid job people get tested on. These people had their own money and their own private labs. They did not want to sound like tradesmen. Then something changed. Universities built real science labs. They tested students and paid trained scientists a salary. A new kind of person showed up, with no private money to protect. That person really was a scientist, in exactly the way the old gentlemen had feared. The word won once the job it described finally existed, done by people who wanted to be called by that name.",
+      "paragraphs": [
+        "In 1833, Whewell suggested the word 'scientist', but almost nobody used it for a long time.",
+        "The people who refused the word were mostly the gentlemen it was meant to name, who called it vulgar.",
+        "The word sounded like 'dentist', a trade, and that is exactly what those gentlemen did not want to be.",
+        "Once universities paid and trained real scientists, the word finally fit, and people started using it."
+      ],
+      "author_view": "The writer is wry and fond of the story, but ends firmly on the idea that a word wins once enough people actually want the job it names."
+    }
+  }
+}

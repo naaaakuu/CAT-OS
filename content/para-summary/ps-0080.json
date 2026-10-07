@@ -1,0 +1,183 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ps-0080",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 87,
+    "genre": "religion-belief",
+    "difficulty": "medium",
+    "difficulty_numeric": 4,
+    "tier": "medium",
+    "bible_level": "intermediate",
+    "title": "Going Without",
+    "theme": "why fasting is shared by traditions that agree on nothing else: it costs rich and poor the same, so it is the one discipline a community can require of everyone without the requirement sorting them by wealth",
+    "estimated_time_sec": 105,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-10: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "phenomenon_mechanism_significance",
+    "apex": {
+      "claim": "Fasting is shared by religions that otherwise agree on nothing because it costs rich and poor alike, hunger being something money cannot buy off, so it is the one discipline a community can require of every member without the requirement sorting members by wealth; this explains why it could be asked of everyone, not why any tradition began it.",
+      "scope": "Why the practice could be required of all members once adopted; the paragraph explicitly excludes the question of why any tradition began to fast.",
+      "certainty": "asserted",
+      "stance": "neutral"
+    },
+    "turn": {
+      "present": false,
+      "marker": null
+    },
+    "difficulty_dials": {
+      "abstraction": 3,
+      "syntax": 2,
+      "turn_subtlety": 1,
+      "distractor_closeness": 3,
+      "live_options": 2,
+      "stance_subtlety": 2,
+      "qualifier_density": 3,
+      "domain_load": 1
+    },
+    "load_bearing": [
+      "costs the rich and the poor the same",
+      "cannot be bought off",
+      "without the requirement itself sorting",
+      "does not say why any tradition began to fast"
+    ],
+    "separating_element": null,
+    "dna_traits": [
+      "scope_preservation",
+      "main_idea_detection",
+      "evidence_vs_thesis"
+    ],
+    "mission": "keep_qualifiers",
+    "learning_objective": "carry a closing qualification that limits what the explanation covers, when the explanation itself is the memorable part",
+    "reasoning_patterns": [
+      "sum.qualification_kept",
+      "sum.example_vs_claim",
+      "struct.phenomenon_explanation",
+      "scope.condition"
+    ],
+    "quality": {
+      "status": "verified",
+      "adversarial_review": "A strong candidate argues for the option that has religions take up fasting because it would not sort members by wealth, since that reads as the paragraph's explanation stated in full. The last sentence is written against it: the paragraph 'does not say why any tradition began to fast; it says why, once begun, the practice could be asked of everyone'. The pilgrimage-and-sacrifice option is the comparison that makes the mechanism vivid and stops before the significance, the requirement that does not sort. The recommendation to prefer fasting is advice the paragraph does not give; it describes a property and takes no side.",
+      "blind_solve": {
+        "solver": "sonnet blind reader 2026-10-07",
+        "agreed": 1,
+        "total": 1,
+        "notes": "full agreement"
+      }
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-07",
+      "usage_note": "Original composition in CAT register for CAT OS. General reflection on why fasting recurs across religious traditions; no specific text or tradition adapted. Personal study only."
+    },
+    "date_added": "2026-10-07",
+    "batch_id": "batch-ps-004",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ps-004",
+    "reviewer_notes": "A phenomenon, a mechanism and its significance, closed by a qualification that limits the claim to persistence rather than origin. The live rival drops that qualification. Families: structure, scope, addition."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "Religions that agree on almost nothing agree on fasting: a season, a day or the hours of daylight in which the believer goes without food.",
+        "role": "setup"
+      },
+      {
+        "text": "The explanations the traditions give, purification, penance, the training of the will, differ from one to the next and belong to each.",
+        "role": "setup"
+      },
+      {
+        "text": "What they share is not a theology of hunger but a fact about it: a fast costs the rich and the poor the same, because hunger cannot be bought off, delegated or done in a cheaper form.",
+        "role": "thesis"
+      },
+      {
+        "text": "A pilgrimage can be shortened by money and a sacrifice can be scaled to the purse; an empty stomach has one size.",
+        "role": "example"
+      },
+      {
+        "text": "Fasting is therefore the one discipline a community can require of every member without the requirement itself sorting the members by wealth.",
+        "role": "conclusion"
+      },
+      {
+        "text": "That does not say why any tradition began to fast; it says why, once begun, the practice could be asked of everyone.",
+        "role": "qualification"
+      }
+    ]
+  },
+  "ideal_summary": "Fasting costs the rich and the poor the same, since hunger cannot be bought off, so it is the one discipline a community can require of every member without sorting them by wealth; this explains why it could be asked of all, not why any tradition began it.",
+  "builder": {
+    "prompt": "In one sentence: what does the paragraph say fasting has that other disciplines lack, and what does it say that explains and does not explain?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence say a fast costs the rich and the poor the same, and that this is why it can be required of everyone?",
+        "kept": "Good. The mechanism and its consequence are both there; the comparison with pilgrimage and sacrifice only illustrates the first half.",
+        "drifted": "If your sentence stops at hunger being the same for everyone, it has the mechanism without the point, which is a requirement that does not sort."
+      },
+      {
+        "id": "scope",
+        "ask": "Does your sentence explain why fasting could be asked of everyone, or why religions began to fast?",
+        "kept": "Exactly right. The last sentence draws that line on purpose, and a summary that respects it keeps the claim the size the author made it.",
+        "drifted": "The paragraph says it 'does not say why any tradition began to fast'. A sentence about origins has widened the claim past the author's own limit."
+      },
+      {
+        "id": "addition",
+        "ask": "Have you said that communities should fast, or should prefer fasting to other disciplines?",
+        "kept": "Well held. The paragraph describes a property of fasting and recommends nothing.",
+        "drifted": "Preferring fasting is advice. The paragraph explains why the practice could be required of all; it does not say that it should be."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "Unlike a pilgrimage, which money can shorten, or a sacrifice, which can be scaled to the purse, a fast costs the rich and the poor exactly the same thing, because an empty stomach comes in only one size for everyone.",
+      "B": "Religions that agree on nothing else took up fasting because it was the one discipline that would not sort their members by wealth, hunger being something that money cannot buy off or delegate.",
+      "C": "A community that wants a discipline binding on every one of its members should prefer fasting to pilgrimage or sacrifice, since money can shorten the one and scale the other.",
+      "D": "Fasting costs rich and poor the same, so a community can require it of everyone without the requirement sorting members by wealth; this explains why it could be asked of all, not why any tradition began it."
+    },
+    "correct": "D",
+    "explanation": {
+      "paragraph_meaning": "Religions that share almost nothing all have some form of fasting. Each gives its own reason for it, and the reasons differ. What they have in common is simpler: going hungry costs a rich person exactly what it costs a poor one, because you cannot pay someone else to be hungry for you or buy a cheaper version. A pilgrimage can be shortened with money and a sacrifice can be made smaller, but an empty stomach is the same for everyone. So fasting is the one thing a community can demand of all its members without the demand itself dividing rich from poor. The paragraph adds a limit: this explains why the practice could be asked of everyone, not why any religion started it.",
+      "correct_reasoning": "The correct option keeps the mechanism, equal cost because hunger cannot be bought off, keeps the significance, a requirement that does not sort by wealth, and keeps the closing qualification that the claim concerns why the practice could be asked of everyone and not why it began. Scope and certainty match the paragraph's.",
+      "distractors": [
+        {
+          "option": "A",
+          "archetype": "example_as_thesis",
+          "secondary_archetype": null,
+          "why_wrong": "The comparison with pilgrimage and sacrifice illustrates the mechanism; the claim it serves, that fasting can be required of all 'without the requirement itself sorting the members by wealth', is absent, and so is the qualification.",
+          "seductive_element": "It is the most concrete sentence in the paragraph, it is accurate, and 'an empty stomach has one size' is the line a reader remembers.",
+          "thinking_mistake": "Summarising the illustration that made the point vivid and leaving the point itself behind."
+        },
+        {
+          "option": "B",
+          "archetype": "scope_broadening",
+          "secondary_archetype": null,
+          "why_wrong": "It makes the mechanism the reason religions 'took up' fasting. The last sentence excludes exactly that: the paragraph 'does not say why any tradition began to fast; it says why, once begun, the practice could be asked of everyone'.",
+          "seductive_element": "It states the mechanism and the significance correctly and reads like the explanation given in full, with the hedge removed.",
+          "thinking_mistake": "Dropping a closing qualification because it seems to take something away from an explanation that was going well."
+        },
+        {
+          "option": "C",
+          "archetype": "prescriptive_swap",
+          "secondary_archetype": null,
+          "why_wrong": "The paragraph takes no side between disciplines and advises no community. It explains a property fasting has; whether anyone should make use of it is a question it does not ask.",
+          "seductive_element": "It uses the paragraph's own comparison and draws the practical conclusion that seems to follow from it.",
+          "thinking_mistake": "Turning a description of why something is possible into a recommendation that it be done."
+        }
+      ],
+      "reading_habit": "When the last sentence of a paragraph says what the argument does not show, carry that limit into your summary. An option that explains more than the author claimed has widened the scope, not improved the answer."
+    }
+  },
+  "mentor": {
+    "challenge": "Traditions that share no god, no book and no calendar share an empty stomach. The paragraph gives one reason, and then says what the reason does not cover.",
+    "takeaway": "Hunger is the one price that is the same for every purse."
+  }
+}

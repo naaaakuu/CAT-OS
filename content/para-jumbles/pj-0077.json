@@ -1,0 +1,203 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "pj-0077",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "scientific-method",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "tier": "advanced",
+    "title": "Before the Numbers Come In",
+    "theme": "why a comparison group chosen after the results is a judgement the reader must trust rather than a measurement, and why publishing the choosing rule in advance is the only repair",
+    "estimated_time_sec": 160,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-10: five-sentence TITA jumble, a form set in official papers alongside the four-sentence default; re-verify against each new official paper"
+    },
+    "macro_pattern": "claim_evidence",
+    "cohesion_signals": [
+      "pronoun_ref",
+      "demonstrative",
+      "article_given_new",
+      "lexical_repetition"
+    ],
+    "primary_trap": "anchor_pair",
+    "secondary_traps": [
+      "competing_ending",
+      "lexical_decoy"
+    ],
+    "dna_traits": [
+      "surface_matching",
+      "premature_closure",
+      "ending_judgement"
+    ],
+    "difficulty_vector": {
+      "vocabulary_load": 3,
+      "inference_load": 4,
+      "syntactic_complexity": 4,
+      "reference_density": 4,
+      "concept_abstractness": 3,
+      "dependency_chain_length": 4,
+      "transition_ambiguity": 3,
+      "competing_openings": 2,
+      "competing_endings": 4,
+      "lexical_decoys": 4,
+      "topic_unfamiliarity": 2,
+      "plausible_orderings": 3
+    },
+    "num_plausible_orderings": 3,
+    "heuristic_adversarial": true,
+    "nucleus": "D",
+    "learning_objective": "refuse to pair two sentences that share a phrase when a demonstrative in one of them points at an action the other has not performed",
+    "reasoning_patterns": [
+      "disc.claim_then_evidence",
+      "disc.pronoun_antecedent",
+      "disc.demonstrative",
+      "disc.competing_ending",
+      "struct.claim_evidence"
+    ],
+    "quality": {
+      "status": "verified",
+      "adversarial_review": "The live rival puts the two after-the-fact sentences together, the one that says what happens when the comparison group is chosen after the results and the one that says such a group is read as an argument, and then lets 'Such a group' collect from the second of them, so that the sentence about publishing the rule closes the paragraph on 'nobody could yet profit from it'. It is refused by 'That is the step behind the trials readers believe most': placed straight after the sentence about choosing to flatter, the step behind believed trials would be the flattering, which the same sentence goes on to deny, and 'whose rules were lodged in advance' has no rule to point at until the publishing sentence has supplied one. A second rival keeps the chain intact but ends on the publishing sentence, moving the trials sentence forward to follow 'take out of their hands'; there 'It does so by publishing its rule' loses its subject, since nothing in the trials sentence is a study doing anything. A third rival binds 'Such a group' to 'the untreated one' of the opening sentence; the opening sentence describes no kind of group, only a group's importance, and 'Choose it' would then follow a sentence in which 'it' can only be a judgement.",
+      "blind_solve": {
+        "solver": "sonnet blind reader 2026-10-07",
+        "agreed": 1,
+        "total": 1,
+        "notes": "full agreement"
+      }
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-07",
+      "usage_note": "Original composition in CAT register for CAT OS. General reasoning about control groups and the pre-registration of selection rules; no specific trial, registry or text adapted. Personal study only."
+    },
+    "date_added": "2026-10-07",
+    "batch_id": "batch-pj-004",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-pj-004",
+    "reviewer_notes": "An advanced five-sentence claim-and-evidence item whose trap is a shared phrase. Two sentences speak of a comparison group chosen 'after the results' and 'after the fact', and they read as claim and consequence; the paragraph is built so that the second of them opens with a demonstrative that can only collect the step of publishing a rule, which sits between them. The remedy sentence has a last-line cadence and is not the last line."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "Such a group tells a reader nothing about the treatment and everything about the chooser: what has to be trusted is not the comparison, which is arithmetic, but a judgement made by the people with the most to gain from it, and that judgement is what a good study must take out of their hands.",
+      "role": "development"
+    },
+    {
+      "label": "B",
+      "text": "That is the step behind the trials readers believe most, whose rules were lodged in advance, and it is the reason a comparison group described only after the fact, however reasonable it looks, is read as an argument rather than a measurement.",
+      "role": "evidence"
+    },
+    {
+      "label": "C",
+      "text": "A comparison between a treated group and an untreated one is only as good as the way the untreated one was chosen.",
+      "role": "topic"
+    },
+    {
+      "label": "D",
+      "text": "It does so by publishing its rule for picking the comparison group before it knows what the rule will produce, which fixes the choice at the one moment when nobody could yet profit from it.",
+      "role": "conclusion"
+    },
+    {
+      "label": "E",
+      "text": "Choose it after the results are known and the choosing can be done, consciously or not, to make the treatment look good: the healthiest of the untreated, or the sickest, whichever flatters.",
+      "role": "cause_effect"
+    }
+  ],
+  "correct_order": [
+    "C",
+    "E",
+    "A",
+    "D",
+    "B"
+  ],
+  "links": [
+    {
+      "from": "C",
+      "to": "E",
+      "device": "pronoun_reference",
+      "reliability": "high",
+      "explanation": "'Choose it' has no subject of its own: 'it' is the untreated group whose manner of choosing the opening sentence has just made the measure of the whole comparison. No other sentence offers a group that could be chosen."
+    },
+    {
+      "from": "E",
+      "to": "A",
+      "device": "demonstrative_reference",
+      "reliability": "high",
+      "explanation": "'Such a group' is a group of the kind just described, one picked after the results to flatter the treatment. Only the sentence beginning 'Choose it' describes a kind of group for 'such' to point at."
+    },
+    {
+      "from": "A",
+      "to": "D",
+      "device": "pronoun_reference",
+      "reliability": "high",
+      "explanation": "'It does so by' needs a subject that has just been given something to do. 'A good study must take [that judgement] out of their hands' supplies both the subject and the task, and the publishing is how the task is done."
+    },
+    {
+      "from": "D",
+      "to": "B",
+      "device": "demonstrative_reference",
+      "reliability": "high",
+      "explanation": "'That is the step' collects an action, and the only action in the paragraph is publishing the rule before knowing what it will produce. 'Whose rules were lodged in advance' then names the same step as the trials' own practice."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "A claim about what a comparison depends on, the failure case that shows why, the diagnosis of what the reader is then being asked to trust, the remedy, and the evidence that the remedy is what readers in fact reward. The spine is a pronoun, a demonstrative, a pronoun and a demonstrative, each collecting from the sentence before it, so that the order is recoverable without any appeal to what reads well.",
+    "movement": [
+      {
+        "label": "C",
+        "why_here": "It states the claim in general terms and names the thing everything else will turn on, the way the untreated group was chosen. It points nowhere backwards and is the only sentence that can open."
+      },
+      {
+        "label": "E",
+        "why_here": "It takes the group just named and shows the failure: chosen after the results, the choosing can be bent to flatter. 'Choose it' is an instruction about the group in the first sentence and nothing else."
+      },
+      {
+        "label": "A",
+        "why_here": "'Such a group' is the flattering group just described. The sentence turns the failure into a diagnosis, that the reader is trusting a judgement rather than a comparison, and ends by giving a good study a task."
+      },
+      {
+        "label": "D",
+        "why_here": "The nucleus. 'It does so by' performs the task just set: publish the rule before it can be steered. Its final clause has the cadence of an ending, which is the trap."
+      },
+      {
+        "label": "B",
+        "why_here": "The evidence and the close. 'That is the step' collects the publishing, and the paragraph ends on how readers treat a group described after the fact, which is where it began."
+      }
+    ],
+    "tempting_orders": [
+      {
+        "order": "CEBAD",
+        "trap_type": "anchor_pair",
+        "why_tempting": "Two sentences speak of a comparison group chosen 'after the results are known' and 'described only after the fact', and the second reads like the consequence of the first. Once they are paired, 'Such a group' collects neatly from 'a comparison group described only after the fact', and the publishing sentence, ending on 'nobody could yet profit from it', makes a satisfying last line.",
+        "where_it_breaks": "'That is the step behind the trials readers believe most' would then follow the sentence about choosing to flatter, making the flattering the step behind the most believed trials, which the same sentence immediately denies. And 'whose rules were lodged in advance' has no rule to point at until the publishing sentence has supplied one."
+      },
+      {
+        "order": "CEABD",
+        "trap_type": "competing_ending",
+        "why_tempting": "'The one moment when nobody could yet profit from it' sounds like a paragraph's final words, and 'That is the step' can be bound to 'take out of their hands', so the trials sentence seems to follow the diagnosis as its proof.",
+        "where_it_breaks": "'It does so by publishing its rule' has lost its subject: nothing in the trials sentence is a study doing anything, and 'does so' has no task to perform. The paragraph would also name the step readers reward before saying what the step is."
+      },
+      {
+        "order": "CAEDB",
+        "trap_type": "false_pronoun_binding",
+        "why_tempting": "'Such a group' can be read as pointing at 'the untreated one' in the opening sentence, so that the diagnosis follows the claim directly and the flattering case comes afterwards as illustration.",
+        "where_it_breaks": "The opening sentence describes no kind of group, only how much a group's choosing matters, so 'such' selects nothing. 'Choose it' would then follow a sentence whose only candidate for 'it' is a judgement, and 'It does so' would follow a sentence in which nobody does anything."
+      }
+    ],
+    "trap_named": "The trap is a shared phrase mistaken for a join. 'After the results are known' and 'after the fact' belong to two sentences that look like cause and consequence, and a solver who fixes them as neighbours has the paragraph three-fifths solved. But the second of them opens with 'That is the step', and a demonstrative outranks a resemblance: it needs an action already on the page, and the only action in the set, publishing a rule in advance, sits in the sentence the pairing pushed to the end.",
+    "solving_habit": "Before pairing anything by vocabulary, list every demonstrative and pronoun and write down what each must collect. 'Such a group', 'It does so', 'That is the step': each names the shape of the sentence before it, and three such shapes fix a five-sentence order on their own."
+  },
+  "mentor": {
+    "challenge": "Two of these sentences are about choosing a comparison group after the results are in. Put them side by side and the paragraph quietly contradicts itself.",
+    "paragraph_plain": "A comparison between people who got a treatment and people who did not is only as good as the way the untreated group was picked. Pick it after you know the results and the picking can be done, on purpose or not, to make the treatment look good: take the healthiest of the untreated, or the sickest, whichever flatters. A group like that tells a reader nothing about the treatment and everything about the person who chose it, so what the reader is really being asked to trust is not a comparison, which is arithmetic, but a judgement made by the people with the most to gain from it. A good study takes that judgement out of their hands by publishing its rule for picking the comparison group before it knows what the rule will produce, which fixes the choice at the one moment when nobody could yet profit from it. That is the step behind the trials readers trust most, whose rules were registered in advance, and it is why a comparison group described only after the fact, however reasonable it looks, is read as an argument rather than a measurement.",
+    "takeaway": "A demonstrative needs its referent already on the page. Two sentences that share a phrase only need each other's company."
+  }
+}
