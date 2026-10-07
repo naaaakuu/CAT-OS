@@ -1,0 +1,129 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "sp-0060",
+    "type": "sp",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 89,
+    "genre": "culture",
+    "difficulty": "medium",
+    "difficulty_numeric": 6,
+    "tier": "advanced",
+    "title": "Traditional Since Nobody Noticed",
+    "theme": "a cuisine is made by what it absorbs; 'traditional' marks the moment the absorbing stopped being noticed, not the moment it stopped, so a cuisine that had stopped would be dead, not traditional",
+    "estimated_time_sec": 90,
+    "clue_types": [
+      "lexical_repetition",
+      "synonym_hypernym",
+      "stance_continuity"
+    ],
+    "primary_trap": "topic_match_function_mismatch",
+    "reasoning_patterns": [
+      "disc.lexical_chain",
+      "disc.definition_then_application",
+      "disc.stance_continuity",
+      "disc.rhetorical_pivot",
+      "struct.definition"
+    ],
+    "difficulty_vector": {
+      "reference_density": 3,
+      "transition_ambiguity": 4,
+      "competing_slots": 4,
+      "concept_abstractness": 4,
+      "syntactic_complexity": 3
+    },
+    "learning_objective": "seat a defining sentence after the line that supplies its vocabulary and before the line that relies on its distinction, rejecting slots that match its topic but not its function",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-07",
+      "usage_note": "Original composition in CAT register for CAT OS. A general reflection on national dishes, borrowed ingredients and the word traditional; no specific text adapted."
+    },
+    "date_added": "2026-10-07",
+    "batch_id": "batch-sp-003",
+    "reviewer_notes": "The advanced-tier difficulty is that three slots are lexically plausible: the opening claim shares the subject, the examples share the cases, and the closing sentence shares both key words. The seat is fixed by 'absorbs' and 'forgets' above it and 'really had stopped' below it, with sentence 3's 'This' ruling out the slot after the examples.",
+    "quality": {
+      "status": "verified",
+      "adversarial_review": "The live rival is the end slot, where 'traditional' and 'absorbing' sit beside the same words in sentence 4. Placed there, the closing sentence's 'really had stopped absorbing' contrasts with nothing, since the apparent stopping it is set against is only introduced afterwards. The slot after sentence 1 is argued from topic, and fails because 'absorbing' has not yet been said and the examples would be illustrating the wrong claim. The slot after the examples breaks sentence 3's 'This'.",
+      "blind_solve": {
+        "solver": "sonnet blind reader 2026-10-07",
+        "agreed": 1,
+        "total": 1,
+        "notes": "full agreement"
+      }
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "n": 1,
+        "text": "A national dish is usually younger than the nation, and it is often built on an ingredient that arrived from somewhere else."
+      },
+      {
+        "n": 2,
+        "text": "The chilli that no South Asian kitchen can now do without came across the sea only a few centuries ago, and the tomato reached Italian cooking later still."
+      },
+      {
+        "n": 3,
+        "text": "This is not a scandal to be exposed but the ordinary way a cuisine is made: by what it absorbs, and by how completely it forgets having done so."
+      },
+      {
+        "n": 4,
+        "text": "A cuisine that really had stopped absorbing would not be traditional; it would be dead, and nobody would be cooking it."
+      }
+    ]
+  },
+  "missing": {
+    "text": "The word 'traditional' marks the moment the absorbing stopped being noticed, not the moment it stopped.",
+    "position": 3,
+    "function": "the definition of 'traditional' that turns the forgetting of sentence 3 into a date, and the distinction between noticing and stopping that sentence 4 presses"
+  },
+  "question": {
+    "stem": "Where does the following sentence best fit in the paragraph? \"The word 'traditional' marks the moment the absorbing stopped being noticed, not the moment it stopped.\"",
+    "options": {
+      "A": "After sentence 1",
+      "B": "After sentence 2",
+      "C": "After sentence 3",
+      "D": "After sentence 4"
+    },
+    "option_positions": {
+      "A": 1,
+      "B": 2,
+      "C": 3,
+      "D": 4
+    },
+    "correct": "C"
+  },
+  "explanation": {
+    "correct_reasoning": "The missing sentence defines 'traditional' in terms of absorbing and noticing, and both words come from sentence 3, which says a cuisine is made by what it absorbs and by how completely it forgets having done so. 'Stopped being noticed' is that forgetting, turned into a moment. Sentence 4 then takes the other half of the distinction, a cuisine that 'really had stopped absorbing', and says it would be dead; the 'really' only makes sense if a sentence above has separated stopping from seeming to stop. So the seat is after sentence 3, where the vocabulary is supplied, and before the sentence that presses the distinction.",
+    "clue_before": "Sentence 3 ends on a cuisine that 'forgets having done so'; a sentence that dates 'traditional' to the moment the absorbing 'stopped being noticed' is that forgetting made precise, and it uses sentence 3's word 'absorb'.",
+    "clue_after": "Sentence 4's 'really had stopped absorbing' contrasts with a stopping that is only apparent, which only the missing sentence has distinguished.",
+    "distractors": [
+      {
+        "option": "A",
+        "trap_type": "topic_match_function_mismatch",
+        "why_wrong": "After sentence 1 the sentence matches the topic, a national dish that is younger than it looks, but its job is to define 'traditional' against 'absorbing', a word that has not yet appeared; and sentence 2's two examples would then illustrate a definition rather than the opening claim about ingredients from elsewhere, which is what they actually illustrate.",
+        "seductive_element": "Sentence 1 is about the youth of national dishes and the missing sentence is about when 'traditional' gets applied, so the subjects seem to coincide."
+      },
+      {
+        "option": "B",
+        "trap_type": "wrong_reference_target",
+        "why_wrong": "Sentence 3 begins 'This is not a scandal', and 'This' names the facts about the chilli and the tomato in sentence 2; with the missing sentence between them, 'This' would name a definition of a word, which is not a thing anyone would call a scandal, and 'absorbs' in sentence 3 would then be repeating a word the missing sentence introduced before it had been explained.",
+        "seductive_element": "The examples in sentence 2 are exactly the cases where 'traditional' is used, so a remark about the word seems to follow them naturally."
+      },
+      {
+        "option": "D",
+        "trap_type": "local_fit_global_break",
+        "why_wrong": "After sentence 4 the sentence sits beside another use of 'traditional' and reads smoothly, but sentence 4's 'really had stopped absorbing' would then be contrasting with a merely apparent stopping that nothing above has mentioned; the distinction the closing sentence presses would be introduced only after it has been pressed.",
+        "seductive_element": "Both sentences use 'traditional' and 'absorbing', so the slot looks like the natural home of the vocabulary."
+      }
+    ],
+    "method": "Trace the vocabulary. A sentence that defines a word using 'absorbing' and 'noticed' has to come after the sentence that introduced absorbing and forgetting, and before any sentence that relies on the distinction it draws. Then check each demonstrative on the way: a 'This' that names facts cannot be made to name a definition."
+  },
+  "mentor": {
+    "challenge": "The chilli is foreign to the curry and the tomato to Italy, and both are now 'traditional'. What does that word actually date?",
+    "takeaway": "A sentence that defines a term belongs after the sentence whose idea it names and before the one that leans on it; sharing a topic with an earlier line is not doing a job there."
+  }
+}

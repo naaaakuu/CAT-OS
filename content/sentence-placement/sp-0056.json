@@ -1,0 +1,132 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "sp-0056",
+    "type": "sp",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 89,
+    "genre": "contemporary-society",
+    "difficulty": "medium",
+    "difficulty_numeric": 6,
+    "tier": "advanced",
+    "title": "Being in the Picture",
+    "theme": "why galleries lifted their photography bans: the photograph stopped substituting for looking and became a way of looking, so the gallery's interest moved from protecting the image to being in the picture, at a cost to the people who came to look",
+    "estimated_time_sec": 90,
+    "clue_types": [
+      "parallelism",
+      "lexical_repetition",
+      "article_given_new"
+    ],
+    "primary_trap": "scope_jump",
+    "reasoning_patterns": [
+      "disc.parallelism",
+      "disc.lexical_chain",
+      "disc.cause_effect",
+      "disc.scope_continuity"
+    ],
+    "difficulty_vector": {
+      "reference_density": 4,
+      "transition_ambiguity": 3,
+      "competing_slots": 4,
+      "concept_abstractness": 4,
+      "syntactic_complexity": 4
+    },
+    "learning_objective": "complete a 'While... Once...' pair in the slot the parallel demands, and reject the slot at the end where the paragraph has already narrowed to the visitor and the sentence would jump the scope back to the institution",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-07",
+      "usage_note": "Original composition in CAT register for CAT OS. A general reflection on the lifting of photography bans in galleries and what changed; no specific text adapted."
+    },
+    "date_added": "2026-10-07",
+    "batch_id": "batch-sp-003",
+    "reviewer_notes": "Sentence 3 opens 'While a photograph was a substitute for looking' and the missing sentence opens 'Once the photograph became a way of looking': a before-and-after pair that fixes the slot. Sentence 4 then speaks of 'the reversal' as given, which only the missing sentence's 'reversed' supplies. The slot at the end is the primary trap: by then the paragraph has narrowed to the visitor and the people in the room, and a sentence about the gallery's interest jumps back to the institution after the paragraph has moved past it.",
+    "quality": {
+      "status": "verified",
+      "adversarial_review": "The live rival is the slot after sentence 4, where a reader takes 'the reversal' in sentence 4 to mean the signs coming down in sentence 2 and so feels no gap before it. The words that settle it are the openings of sentence 3 and the missing sentence, 'While a photograph was' and 'Once the photograph became', a pair that reads as one movement only if the second follows the first directly; and 'paid for the reversal' is a bill presented before the reversal has been described if the missing sentence comes after. The end slot is refused because sentence 5 has moved to the attention of the people in the room, and a return to the gallery's interest there widens the scope after the paragraph has narrowed it.",
+      "blind_solve": {
+        "solver": "sonnet blind reader 2026-10-07",
+        "agreed": 1,
+        "total": 1,
+        "notes": "full agreement"
+      }
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "n": 1,
+        "text": "For most of a century the sign at the gallery door said no photography, and the reasons given were the flash, the copyright and the crowd."
+      },
+      {
+        "n": 2,
+        "text": "In the space of a few years the signs came down, and the reasons did not change; what changed was what a photograph was for."
+      },
+      {
+        "n": 3,
+        "text": "While a photograph was a substitute for looking, a cheap copy carried home instead of the memory, the gallery had an interest in forbidding it."
+      },
+      {
+        "n": 4,
+        "text": "The visitor who came only to look paid for the reversal, since the person standing between him and the painting is no longer passing through but composing."
+      },
+      {
+        "n": 5,
+        "text": "A rule that was defended as protection of the image turned out to have been protecting something else, the attention of the people in the room, and nobody had thought to put that on the sign."
+      }
+    ]
+  },
+  "missing": {
+    "text": "Once the photograph became a way of looking, a thing made in front of the picture rather than instead of it, the gallery's interest reversed: it wanted to be in the picture, and the picture was going to be made anyway.",
+    "position": 3,
+    "function": "the second half of the before-and-after pair begun in sentence 3, stating the reversal of the gallery's interest that sentence 4 charges the visitor for"
+  },
+  "question": {
+    "stem": "Where does the following sentence best fit in the paragraph? \"Once the photograph became a way of looking, a thing made in front of the picture rather than instead of it, the gallery's interest reversed: it wanted to be in the picture, and the picture was going to be made anyway.\"",
+    "options": {
+      "A": "After sentence 4",
+      "B": "After sentence 3",
+      "C": "After sentence 5",
+      "D": "After sentence 1"
+    },
+    "option_positions": {
+      "A": 4,
+      "B": 3,
+      "C": 5,
+      "D": 1
+    },
+    "correct": "B"
+  },
+  "explanation": {
+    "correct_reasoning": "Sentence 3 opens 'While a photograph was a substitute for looking' and ends with the gallery's interest in forbidding it. The missing sentence opens 'Once the photograph became a way of looking' and ends with that interest reversed. The two are a matched pair, before and after, and the second must follow the first directly for the parallel to be heard. Sentence 4 then refers to 'the reversal' as something already described and charges the visitor for it, which only works if the reversal has just been stated. So the sentence goes after sentence 3.",
+    "clue_before": "Sentence 3 begins 'While a photograph was a substitute for looking', the first half of a before-and-after pair that 'Once the photograph became a way of looking' completes, and it ends on the interest the missing sentence reverses.",
+    "clue_after": "Sentence 4 says the visitor 'paid for the reversal', treating the reversal as given, and the only sentence in which anything reverses is the missing one.",
+    "distractors": [
+      {
+        "option": "C",
+        "trap_type": "scope_jump",
+        "why_wrong": "By sentence 5 the paragraph has narrowed from the gallery to the visitor and to 'the attention of the people in the room'; a sentence about the gallery's institutional interest placed after it jumps the scope back out to the institution after the paragraph has finished with it, and leaves 'the reversal' in sentence 4 described only after the bill for it has been presented.",
+        "seductive_element": "The missing sentence is the paragraph's central claim, and readers often expect the central claim to be the last word."
+      },
+      {
+        "option": "A",
+        "trap_type": "wrong_reference_target",
+        "why_wrong": "After sentence 4 the reader must take 'the reversal' in sentence 4 to mean the signs coming down in sentence 2, but sentence 4 charges the visitor for a person 'composing' in front of the painting, which is the new way of looking that only the missing sentence introduces; and 'Once the photograph became' would then be separated from the 'While a photograph was' it answers.",
+        "seductive_element": "Sentence 2 does describe a reversal of sorts, the signs coming down, so sentence 4 seems to have its referent without help."
+      },
+      {
+        "option": "D",
+        "trap_type": "right_idea_wrong_position",
+        "why_wrong": "After sentence 1 the gallery's interest 'reversed' before any interest has been stated and before sentence 2 has said what changed; the mechanism would precede the fact it explains, and sentence 3's 'While a photograph was a substitute' would then describe the earlier state after the later one.",
+        "seductive_element": "The sentence explains the lifting of the ban, and sentence 1 is about the ban, so the explanation seems to belong next to it."
+      }
+    ],
+    "method": "Look for a sentence that opens with a paired marker, 'While', 'Once', 'Before', 'After', and find its partner in the paragraph; the pair must be adjacent. Then find any definite noun that reports a change as already known, here 'the reversal', and make sure the sentence that states the change comes before it. Finally, when the end slot tempts you, check the scope of the last given sentence; if the paragraph has narrowed, a sentence at the wider scope has no business after it."
+  },
+  "mentor": {
+    "challenge": "One sentence begins 'While a photograph was'. The sentence to place begins 'Once the photograph became'. How far apart can those two stand?",
+    "takeaway": "Paired markers want adjacent slots, and a sentence at the institution's scope cannot follow a paragraph that has already come down to the people in the room."
+  }
+}

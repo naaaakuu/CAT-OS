@@ -29,10 +29,12 @@
 
 ## Content
 - Pipeline: write files → `check-content` → `build-index` + `build-manifest` → `qc-corpus` / `option-tells` → `verify`. Authoring contract: `content/taxonomy/AUTHORING.md`.
+- `content/CATALOGUE.md` is the corpus gist (one line per item, written by `build-index`): read or grep it to learn what exists before writing; keep every new `meta.theme` under 200 characters so the gist line carries the whole idea.
 - RC v5: `word_count` counted (+-10%); `estimated_time_min` = reading_time + sum(q)/60 (+-25%); question `patterns` subset of `meta.reasoning_patterns`; explanations never name option letters. `batch_id` must match `batch-rc-NNN`; `meta.skills` uses hyphenated skill names. RC size rule `journey.js STAGE_SIZE`: at most 4 questions, 650 words; Foundation 3 paragraphs / 3 questions / 350 words. Every passage has `mentor.eli10`.
 - Sourcing: no Aeon, The Conversation, CAT papers or coaching mocks (copyright). Use originals in CAT register or public domain (author died before ~1956, published before 1931). FITB/grammar are not in CAT.
 - Content agents cost ~400k tokens per 6 passages; max 2 agents at a time (4-core machine).
-- Placement/completion/arguments run dry fast (SP 52, PC 36, CR 6); `confusable` and `decode` word-bank shelves are empty.
+- Placement/completion/arguments run dry fast (SP 62, PC 46, CR 6); `confusable` and `decode` word-bank shelves are empty.
+- Batch recipe that worked (October 2026, rc-007 / pc-004 / sp-003): strong model drafts in a compact author format from a brief that names genre, stage, move, voice and seed per item; Sonnet assembles the JSON and mentor blocks and runs `check-content`; then `option-tells` (the key was the longest option in 37% of fresh questions before repair), `rc-style-audit` (tic phrases), a Sonnet blind solve with and without the text (`blind-solve.mjs strip … --no-text`), and `rc-quality-report` rows. Calibration reference: `KNOWLEDGE/01_KNOWLEDGE/CAT PAPER PATTERNS 2020-2025.md`.
 
 ## Shipping
 - `build-precache.mjs` after any precached change and after every `APP_VERSION` bump (`app.js`). New `src/pets/*.js` files too. `service-worker.js`, `content/index.json`, many src files are CRLF.

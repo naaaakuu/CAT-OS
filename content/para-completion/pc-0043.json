@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "pc-0043",
+    "type": "pc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "anthropology",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "tier": "medium",
+    "title": "Never Quite Even",
+    "theme": "an exact return on a gift closes the account and ends the relationship; a small imbalance keeps someone owing, and the debt is the standing reason for the next visit",
+    "estimated_time_sec": 80,
+    "gap_function": "example",
+    "primary_trap": "scope_jump",
+    "reasoning_patterns": [
+      "disc.function_slot",
+      "disc.example_after_claim",
+      "disc.general_to_specific",
+      "struct.example",
+      "arg.example"
+    ],
+    "learning_objective": "fill an example slot with a case that instantiates the claim just made, at its scope, rather than with a restatement, a contrast or a general reflection",
+    "difficulty_vector": {
+      "stance_subtlety": 3,
+      "scope_precision": 4,
+      "distractor_closeness": 3,
+      "concept_abstractness": 3,
+      "syntactic_complexity": 2
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-07",
+      "usage_note": "Original composition in CAT register for CAT OS. A general reflection on reciprocity and deliberate imbalance in gift exchange between equals; no specific text adapted."
+    },
+    "date_added": "2026-10-07",
+    "batch_id": "batch-pc-004",
+    "reviewer_notes": "The claim is in sentence three and the next sentence's 'none of it' needs cases. The landlord option is the near rival because it is concrete and uses 'exact'; it illustrates the rule's absence, in a relationship the paragraph has excluded by 'among equals'.",
+    "quality": {
+      "status": "verified",
+      "adversarial_review": "A strong candidate argues for the landlord and tenant, since it is a concrete case and a contrast can clarify a rule. It fails on scope: the opening words are 'among equals', and the next sentence returns to a newcomer among equals, so a sentence about unequal parties who want no relationship is a different subject that nothing picks up. The careful-count option is refused by the very next sentence, which calls the person who repays to the penny cold. The generosity line is sentiment where the slot needs instances.",
+      "blind_solve": {
+        "solver": "sonnet blind reader 2026-10-07",
+        "agreed": 1,
+        "total": 1,
+        "notes": "full agreement"
+      }
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      "Among equals, a gift returned exactly is a small insult, and everybody feels it without quite being able to say why.",
+      "An exact return closes the account: nothing is owed, nobody need call again, and what looked like generosity turns out to have been a settlement.",
+      "A slightly unequal return keeps one person in the other's debt, and the debt is the relationship, since it is the standing reason for the next visit.",
+      "None of it is calculated, which is why a newcomer who repays to the penny is thought cold rather than careful."
+    ],
+    "gap_index": 3
+  },
+  "question": {
+    "stem": "Which of the following sentences best fills the gap in the paragraph?",
+    "options": {
+      "A": "So a dinner is answered with a dinner a little grander or plainer, and a lift to the station with a loaf rather than a lift back.",
+      "B": "Generosity, after all, is less about what is given than about the spirit in which the giving is done, and everybody present senses the difference at once.",
+      "C": "This is why friends who keep careful count of what they owe each other tend to have the longest and steadiest friendships.",
+      "D": "Between a landlord and a tenant, by contrast, the rent is meant to be exact, because neither wants a relationship beyond the payment."
+    },
+    "correct": "A"
+  },
+  "explanation": {
+    "what_the_gap_needs": "The first three sentences make a claim and explain it: an exact return ends the relationship, a slightly unequal one keeps it alive. The sentence after the gap says 'none of it is calculated' and returns to a newcomer among equals. The gap wants the claim made particular: a case or two of a return that is deliberately a little off, between the equals the paragraph is about, in the same approving tone. Not a restatement, not a general reflection on giving, and not a different kind of relationship.",
+    "correct_reasoning": "The correct option gives two instances of the rule in sentence three: a dinner returned a little grander or plainer, a lift returned with a loaf rather than a lift. Each is a return that is deliberately not exact, between people on equal footing, and each is the kind of thing a newcomer would get wrong by repaying 'to the penny'. The 'it' of 'none of it is calculated' then has the dinners and loaves to refer to.",
+    "distractors": [
+      {
+        "option": "B",
+        "trap_type": "attractive_generality",
+        "why_wrong": "The paragraph has just explained the mechanism, an unequal return keeps someone owing; a sentence about the spirit of giving replaces that mechanism with a sentiment, and it gives the next sentence nothing particular for 'none of it' to point at.",
+        "seductive_element": "It is warm and quotable, and a paragraph about gifts seems to invite a line about generosity."
+      },
+      {
+        "option": "C",
+        "trap_type": "contradicts_neighbour",
+        "why_wrong": "Keeping careful count is exactly the exact return the paragraph calls a settlement, and the next sentence says the person who repays to the penny is thought cold; a sentence praising careful count contradicts both its neighbours.",
+        "seductive_element": "It begins 'This is why', which promises to apply the claim, and 'what they owe each other' borrows the paragraph's vocabulary of debt."
+      },
+      {
+        "option": "D",
+        "trap_type": "scope_jump",
+        "why_wrong": "The paragraph is about equals, and its next sentence returns to a newcomer among equals; a landlord and a tenant are not equals and their exactness is the opposite case, so the sentence jumps to a relationship the paragraph has set aside and illustrates the rule's absence rather than the rule.",
+        "seductive_element": "It is concrete, it uses 'exact', and a contrast can feel like an illustration."
+      }
+    ],
+    "method": "Name the function of the slot from its neighbours: a claim above, a 'none of it' below that needs particulars. Then test each option against the claim's own terms: the cases must be returns that are slightly unequal, between equals. An option that praises exactness contradicts the claim; one that moves to unequal parties leaves its scope; one that talks about spirit gives the next sentence nothing to point at."
+  },
+  "mentor": {
+    "challenge": "Repay a favour to the penny and the friendship cools. The paragraph says why; what does the rule look like at a dinner table?",
+    "takeaway": "An example slot wants the claim made particular within its own scope; a contrast, a restatement or a reflection fills the space without doing the job."
+  }
+}

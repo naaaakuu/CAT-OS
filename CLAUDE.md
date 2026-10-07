@@ -17,6 +17,7 @@ Offline-first, no-build PWA for CAT VARC prep, presented as a painted village wh
 | Glow, levels, growth stages, ages, achievements | §Economy | `src/pets/glow.js`, `economy.js`, `progress.js`, `pets.js` |
 | A learning room (RC, PJ, PS, OOO, Word DNA, bank, Rootwood) | §Rooms | `src/modules/<room>/`, `src/core/engine/*-session.js`, `src/world/screens/` |
 | What to show next, ledgers, mentor voice, noticing | §Learning core | `src/core/learning/*`, `src/world/curator.js` |
+| What content exists: topics, gaps, balance, what a passage is about | `content/CATALOGUE.md` (generated gist, one line per item; grep a genre or a `## type` section, never open the JSON) + `node tools/qc-corpus.mjs` | `tools/build-index.mjs` (writes it) |
 | Add or change content (passages, items, words) | `content/taxonomy/AUTHORING.md`, `docs/DEV-NOTES.md` §Content | `tools/check-content.mjs`, `build-index.mjs` |
 | Content generation prompts and module Bibles | `KNOWLEDGE/README.md` | (outside the repo's `cat-os/`) |
 | Colour, theme, CSS, dialogs, a11y | §UI | `src/ui/styles/world.css` (palette owner), `src/ui/modal.js` |

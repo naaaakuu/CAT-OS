@@ -4,6 +4,13 @@
 > Versions here are app releases; they map onto the capability milestones in
 > `PROJECT_ROADMAP.md` (0.x releases build toward Roadmap V1.0).
 
+## Content: thirty items for the thin shelves, and a catalogue (2026-10-07)
+
+- Audit first: the registry and the repo's own audits showed economics, science, psychology and history over-served, contemporary-society empty, medicine-health, architecture, markets, religion-belief, culture and law thin, the main-idea family at 26% of RC questions and tone at 24 questions (the real exam asks tone about once in six years), 61% of passages making the same "correct a received view" move, and Para Completion (36) and Sentence Placement (52) far behind the other VA types. Research on CAT 2020 to 2025 is now `KNOWLEDGE/01_KNOWLEDGE/CAT PAPER PATTERNS 2020-2025.md`.
+- `batch-rc-007`, rc-0147 to rc-0156: ten passages in the thin genres (desert ants, triage, a period-instrument review, ignorance of the law argued with heat, cave fish as an aporia, bone chemistry as narrative, nostalgia's career, the used-clothes trade, the friendship paradox, pilgrimage and difficulty), with the exam's question mix (detail and EXCEPT, inference, must-be-true, cannot-be-inferred, weaken, application, function; main idea at most once, tone once) and a curiosity hook in `mentor.challenge`. Blind-solved by a reader who never saw the keys, with and without the text; option lengths rebalanced after `option-tells` found the key longest in 37% of questions; audit rows added (two A, eight B).
+- `batch-pc-004` (pc-0037 to pc-0046) and `batch-sp-003` (sp-0053 to sp-0062): ten completions in the under-used gap functions (example, qualification, contrast turn, restatement, opening, resolution) and ten placements in the genres that had one item.
+- `content/CATALOGUE.md`: one gist line per item, written by `build-index`, so a session learns what the corpus holds without opening a passage. Routed from `CLAUDE.md`; every new `meta.theme` stays under 200 characters so the line carries the idea.
+
 ## 3.8.1: A reason to open the village every day (2026-10-06)
 
 - Every friend has far more to say, at the same charm: about 50 idle thoughts each (was 8), a greeting of their own when you arrive (10 by day, 5 or 6 at night; it used to be one shared set of six), and more hellos, welcome-backs, thanks, cheers and growth lines. Voice stays per friend: Toffee's fire puns and tiny CAT tips, Chai's bookish dramatics, Matcha's word origins, Mochi's one-line summaries, Ginger's tidy jumble tips, Mallow's odd-one-out riddles, Sesame's finished sentences and crumbs. Many carry a true, small tip for their subject, and friends tease each other.

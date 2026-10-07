@@ -1,0 +1,132 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "sp-0055",
+    "type": "sp",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 90,
+    "genre": "architecture",
+    "difficulty": "hard",
+    "difficulty_numeric": 7,
+    "tier": "cat",
+    "title": "Sized by the Leg",
+    "theme": "why staircase proportions have hardly changed while every other part of a building has: the rise and tread are set by the leg that climbs them, so the stair is the one element sized by the user rather than the designer",
+    "estimated_time_sec": 100,
+    "clue_types": [
+      "pronoun_ref",
+      "connective_explicit",
+      "stance_continuity"
+    ],
+    "primary_trap": "premature_conclusion",
+    "reasoning_patterns": [
+      "disc.pronoun_antecedent",
+      "disc.cause_effect",
+      "disc.claim_then_evidence",
+      "disc.rhetorical_pivot"
+    ],
+    "difficulty_vector": {
+      "reference_density": 4,
+      "transition_ambiguity": 4,
+      "competing_slots": 5,
+      "concept_abstractness": 3,
+      "syntactic_complexity": 4
+    },
+    "learning_objective": "bind 'it passes' to the only sentence in which anything passes, and refuse the slot after a 'therefore' sentence, where the reason would arrive after the conclusion drawn from it",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-07",
+      "usage_note": "Original composition in CAT register for CAT OS. A general observation about the stability of staircase proportions across centuries; no specific text adapted."
+    },
+    "date_added": "2026-10-07",
+    "batch_id": "batch-sp-003",
+    "reviewer_notes": "The sentence begins 'The reason it passes', and only sentence 3 has anything passing (an inspector). The cat-tier difficulty is that the sentence reads well in three places: after sentence 2, where it seems to explain why the stair does not announce its date; after sentence 4, where it sits beside the step that is tripped on; and after sentence 5, where it looks like a closing explanation. The last is the primary trap: sentence 5 begins 'therefore' and would be concluding before its reason.",
+    "quality": {
+      "status": "verified",
+      "adversarial_review": "A strong candidate argues for the slot after sentence 5, reading the missing sentence as the explanation that caps the paragraph. The word that settles it is 'therefore' in sentence 5: a conclusion marked that way must have its reason above it, and with the slot at the end the reason comes after the conclusion. 'It passes' also settles the earlier rival after sentence 2, since nothing has passed anything until the inspector in sentence 3. The slot after sentence 4 is the subtlest: the missing sentence sits naturally beside the tripped-on step, but sentence 4 has already given the leg's verdict, so the paragraph would explain the same thing twice, with the general statement after its instance.",
+      "blind_solve": {
+        "solver": "sonnet blind reader 2026-10-07",
+        "agreed": 1,
+        "total": 1,
+        "notes": "full agreement"
+      }
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "n": 1,
+        "text": "Walk through a house of any century and nearly everything in it announces its date: the windows, the doors, the height of the rooms, the way the roof is held up."
+      },
+      {
+        "n": 2,
+        "text": "The staircase does not."
+      },
+      {
+        "n": 3,
+        "text": "A stair of four hundred years ago can be climbed today without thought, and its rise and tread would pass a modern building inspector with little to say."
+      },
+      {
+        "n": 4,
+        "text": "A window can be any size a builder can glaze and a room any height he can heat, so both followed fashion wherever it went; a step too high is a step that is tripped on, and no fashion survives that."
+      },
+      {
+        "n": 5,
+        "text": "The stair is therefore the one element of a building that the user, not the designer, has always specified."
+      }
+    ]
+  },
+  "missing": {
+    "text": "The reason it passes is that a stair is sized by the leg that climbs it, not by the eye that looks at it, and legs have not changed.",
+    "position": 3,
+    "function": "the explanation of why an old stair passes a modern inspection, giving the mechanism (sized by the leg) that sentence 4 contrasts with windows and rooms and sentence 5 concludes from"
+  },
+  "question": {
+    "stem": "Where does the following sentence best fit in the paragraph? \"The reason it passes is that a stair is sized by the leg that climbs it, not by the eye that looks at it, and legs have not changed.\"",
+    "options": {
+      "A": "After sentence 5",
+      "B": "After sentence 2",
+      "C": "After sentence 3",
+      "D": "After sentence 4"
+    },
+    "option_positions": {
+      "A": 5,
+      "B": 2,
+      "C": 3,
+      "D": 4
+    },
+    "correct": "C"
+  },
+  "explanation": {
+    "correct_reasoning": "The sentence opens 'The reason it passes', and 'it passes' needs something that has passed something. Only sentence 3 supplies it: an old stair's rise and tread 'would pass a modern building inspector'. The sentence then gives the mechanism, sized by the leg rather than the eye, which sentence 4 immediately uses as a contrast (windows and rooms sized by what a builder can glaze or heat, the step sized by what a leg can climb) and sentence 5 concludes from with 'therefore'. So the sentence sits after sentence 3: the thing it explains directly above, the contrast and the conclusion below.",
+    "clue_before": "Sentence 3 says the old stair 'would pass a modern building inspector', the only passing in the paragraph and the only antecedent for 'it passes'.",
+    "clue_after": "Sentence 4 contrasts windows and rooms, which followed fashion, with the step that is tripped on, a contrast that needs the leg-sizing mechanism stated just above it; sentence 5's 'therefore' then draws the conclusion from that mechanism.",
+    "distractors": [
+      {
+        "option": "A",
+        "trap_type": "premature_conclusion",
+        "why_wrong": "Sentence 5 begins 'The stair is therefore', which marks it as a conclusion drawn from what stands above it; placing the reason after it leaves the conclusion drawn before its reason has been given, and the paragraph would end by explaining something it has already finished with.",
+        "seductive_element": "An explanation that begins 'The reason' sounds like the kind of sentence a paragraph closes on, and the end slot is where readers expect the pay-off."
+      },
+      {
+        "option": "B",
+        "trap_type": "wrong_reference_target",
+        "why_wrong": "After sentence 2, 'it passes' has nothing to bind to: the staircase has not been said to pass anything, only not to announce its date, and the inspector it passes does not appear until sentence 3.",
+        "seductive_element": "'The staircase does not' is a short claim that seems to call for its explanation at once, and 'The reason' answers that call in form if not in reference."
+      },
+      {
+        "option": "D",
+        "trap_type": "redundant_restatement",
+        "why_wrong": "Sentence 4 has already said that a step too high is tripped on and 'no fashion survives that', which is the leg-sizing mechanism in its applied form; placing the general statement after its instance makes the paragraph explain the same thing twice, and 'it passes' would be two sentences away from the inspector it refers to.",
+        "seductive_element": "The tripped-on step and the leg that climbs are the same idea, so the two sentences feel like a pair."
+      }
+    ],
+    "method": "Start with the pronoun: 'it passes' must have an antecedent that passed something, so list every sentence in which anything passes. Then read for 'therefore' and 'so': a sentence that draws a conclusion must have its reason above it, which rules out any slot below such a sentence. Finally check the remaining rival for redundancy: if the neighbouring sentence already says the same thing in applied form, the general statement belongs above it, not below."
+  },
+  "mentor": {
+    "challenge": "The sentence to place begins 'The reason it passes'. Passes what? Only one sentence in the paragraph has anything passing anything.",
+    "takeaway": "A pronoun fixes the earliest slot and a 'therefore' fixes the latest; the answer lies between them, and the slot that seems to cap the paragraph usually comes after its own conclusion."
+  }
+}

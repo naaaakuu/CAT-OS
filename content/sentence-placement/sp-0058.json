@@ -1,0 +1,129 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "sp-0058",
+    "type": "sp",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "ethics",
+    "difficulty": "medium",
+    "difficulty_numeric": 4,
+    "tier": "medium",
+    "title": "A Page in the Dock",
+    "theme": "an order has a giver who can be made to answer and a rule has only a page, so 'following the rules' passes responsibility to nobody, which is what should trouble anyone who writes them",
+    "estimated_time_sec": 80,
+    "clue_types": [
+      "connective_explicit",
+      "lexical_repetition",
+      "parallelism"
+    ],
+    "primary_trap": "redundant_restatement",
+    "reasoning_patterns": [
+      "disc.transition_word",
+      "disc.lexical_chain",
+      "disc.parallelism",
+      "disc.general_to_specific",
+      "disc.cause_effect"
+    ],
+    "difficulty_vector": {
+      "reference_density": 3,
+      "transition_ambiguity": 3,
+      "competing_slots": 3,
+      "concept_abstractness": 4,
+      "syntactic_complexity": 3
+    },
+    "learning_objective": "place a specific contrast after the general line that announces it and before the 'so' that draws its consequence, and reject the slot where it would make the general line a redundant twin",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-07",
+      "usage_note": "Original composition in CAT register for CAT OS. A general reflection on the difference between following orders and following rules as a defence; no specific text adapted."
+    },
+    "date_added": "2026-10-07",
+    "batch_id": "batch-sp-003",
+    "reviewer_notes": "Two clues fix the seat: the general-to-specific step from 'who can be asked' to the giver and the page, and the 'So' in the next sentence that needs 'no giver at all'. The slot after sentence 1 is the trap: the giver and the page sit naturally beside the orders and the rules, but the general line would then restate what has just been shown.",
+    "quality": {
+      "status": "verified",
+      "adversarial_review": "The live rival is the slot after sentence 1, where the giver and the page follow the orders and the rules directly and read well. Placed there, sentence 2 ('The difference is not in what was done but in who can be asked') becomes a general restatement of the specific contrast above it, and the paragraph says the same thing twice in the wrong order. The slot after sentence 3 is the other candidate and is refused by the 'So', which needs the no-giver premise above it.",
+      "blind_solve": {
+        "solver": "sonnet blind reader 2026-10-07",
+        "agreed": 1,
+        "total": 1,
+        "notes": "full agreement"
+      }
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "n": 1,
+        "text": "A person who says 'I was only following orders' is refused the defence everywhere, and a person who says 'I was only following the rules' is granted it inside institutions every day."
+      },
+      {
+        "n": 2,
+        "text": "The difference is not in what was done but in who can be asked about it afterwards."
+      },
+      {
+        "n": 3,
+        "text": "So the second defence does not pass the responsibility to somebody higher up; it passes it to nobody, which is what makes it so much more comfortable to offer."
+      },
+      {
+        "n": 4,
+        "text": "Anyone who writes rules should therefore write them knowing that whatever the rules permit will one day be done by somebody who feels nothing about it."
+      }
+    ]
+  },
+  "missing": {
+    "text": "An order has a giver, who can be found and made to answer for it; a rule has no giver at all, only a page, and a page cannot be put in the dock.",
+    "position": 2,
+    "function": "the specific contrast that the general 'who can be asked' names, and the 'nobody' that the next sentence's 'so' draws out"
+  },
+  "question": {
+    "stem": "Where does the following sentence best fit in the paragraph? \"An order has a giver, who can be found and made to answer for it; a rule has no giver at all, only a page, and a page cannot be put in the dock.\"",
+    "options": {
+      "A": "After sentence 1",
+      "B": "After sentence 2",
+      "C": "After sentence 3",
+      "D": "After sentence 4"
+    },
+    "option_positions": {
+      "A": 1,
+      "B": 2,
+      "C": 3,
+      "D": 4
+    },
+    "correct": "B"
+  },
+  "explanation": {
+    "correct_reasoning": "Sentence 2 announces a difference in general terms, 'who can be asked about it afterwards', and the missing sentence is that difference made specific: an order has a giver who can be made to answer, a rule has only a page. Sentence 3 then opens with 'So' and says the defence passes responsibility 'to nobody', which is the page that cannot be put in the dock. The slot is fixed from above by the general-to-specific movement and from below by the 'So' that needs 'no giver at all' to follow from.",
+    "clue_before": "Sentence 2 says the difference lies in 'who can be asked about it afterwards' and names nobody; a sentence that supplies the giver and the page is what that general line is waiting for.",
+    "clue_after": "Sentence 3 begins 'So' and says responsibility passes 'to nobody'; only the missing sentence has said that a rule has no giver.",
+    "distractors": [
+      {
+        "option": "A",
+        "trap_type": "redundant_restatement",
+        "why_wrong": "Placed here, the specific contrast comes first and sentence 2 then announces in general terms a difference the reader has just been shown; the general line becomes a redundant twin of the sentence above it, and the paragraph's movement from 'the difference is' to the particulars runs backwards.",
+        "seductive_element": "The slot is beside the two defences the sentence contrasts, so the giver and the page seem to belong right after the orders and the rules."
+      },
+      {
+        "option": "C",
+        "trap_type": "premature_conclusion",
+        "why_wrong": "Sentence 3 begins 'So' and draws the conclusion that responsibility passes to nobody; with the missing sentence after it, the conclusion arrives before the premise that a rule has no giver, and the explanation then trails behind a 'so' that had nothing to follow from.",
+        "seductive_element": "The missing sentence and sentence 3 share 'nobody' and the idea of a giver, so they look like neighbours whichever order they take."
+      },
+      {
+        "option": "D",
+        "trap_type": "right_idea_wrong_position",
+        "why_wrong": "At the end the sentence follows advice to rule-writers and reopens the analysis the paragraph has finished; sentence 4's 'therefore' would then rest on nothing that has yet mentioned a giver, and the closing line of the paragraph would be a definition rather than the consequence the 'therefore' promised.",
+        "seductive_element": "The sentence is explanatory, and a reader who treats the last slot as a place for a summarising explanation may accept it there."
+      }
+    ],
+    "method": "When one sentence states a difference in general terms ('the difference is in who can be asked'), the sentence that spells it out belongs immediately after it, not before. Then read the next sentence's connective: a 'So' that draws out 'nobody' needs the sentence that said there was no giver directly above it. A slot confirmed by both is the slot."
+  },
+  "mentor": {
+    "challenge": "'Only following orders' is refused; 'only following the rules' is accepted every day. The difference is not in the deed. Where does it lie?",
+    "takeaway": "A general line that says 'the difference is X' is followed by the sentence that spells X out; put the specific first and the general line becomes a redundant twin."
+  }
+}

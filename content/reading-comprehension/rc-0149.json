@@ -1,0 +1,408 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0149",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 91,
+    "genre": "arts-culture",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "stage": "intermediate",
+    "skills": [
+      "evidence-anchoring",
+      "inference",
+      "vocabulary-in-context",
+      "tone-detection",
+      "trap-recognition"
+    ],
+    "word_count": 498,
+    "question_count": 4,
+    "question_types": [
+      "author_attitude",
+      "cannot_be_inferred",
+      "phrase_in_context",
+      "specific_detail"
+    ],
+    "theme": "a period-instrument performance rebuilds the composer's instruments but not the listener's ears, so it recovers balance, tempo and the limits the composer wrote around, not the original experience",
+    "estimated_time_min": 7.5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-07",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted."
+    },
+    "date_added": "2026-10-07",
+    "batch_id": "batch-rc-007",
+    "prompt_version": "content engine v1 + CAT paper patterns 2026-10; batch-rc-007",
+    "reviewer_notes": "The corpus had no review; this is one, in the first person, opening in a scene and ending in a verdict with two parts. The argument underneath the scene is a distinction: instruments can be rebuilt, ears cannot, so \"authenticity\" names something unreachable while balance, tempo and constraint are real recoveries. The near-tie is in Q1, where a finalist joins two true facts about gut strings (less sustain, more audible winds) with the wrong causal link; the text keeps sustain with tempo and quietness with balance. The voice is amused (\"I laughed out loud, I am afraid\"), carries one exclamation, and turns unsettled when the reviewer notices that the unrestorable instrument is his own ear. Avoids pc-0032's painted statues entirely. The move is a first-person review that tests a claim inside a remembered scene, carried in an amused voice that turns exact and a little unsettled.",
+    "length_class": "medium",
+    "structure": "narrative_reflection",
+    "viewpoints": 2,
+    "tone": "amused, exact, admiring with a complaint",
+    "difficulty_vector": {
+      "lexical": 3,
+      "syntactic": 3,
+      "abstraction": 3,
+      "inference_depth": 3,
+      "distractor_similarity": 4,
+      "reasoning_depth": 3,
+      "structural_ambiguity": 3,
+      "time_pressure": 3
+    },
+    "reasoning_patterns": [
+      "arg.concession",
+      "comp.explicit_detail",
+      "comp.function_over_words",
+      "comp.intent",
+      "comp.paraphrase",
+      "inf.strongly_supported",
+      "inf.vs_speculation",
+      "lang.causal_wording",
+      "lang.contrast_marker",
+      "lang.tone_shift",
+      "scope.true_but_off_question",
+      "struct.cause_effect",
+      "struct.contrast",
+      "struct.conclusion",
+      "struct.pivot"
+    ],
+    "quality": {
+      "status": "verified",
+      "adversarial_review": "Q1: The near-tie is the sustain option; a strong candidate argues that less sustain leaves space for the winds. The text pairs sustain with tempo (\"will not sustain a slow phrase the way steel will, so the music has to move\") and audible winds with loudness (\"the violins cannot drown the winds\"), so the splice is not the reviewer's claim. Q2: A candidate argues that the familiarity option is too general to be inferred; \"we know where the famous entries come and we wait for them\" is the reviewer stating that knowing the piece shapes hearing, and the option claims no more. The key is settled by the absence of any sentence about what conductors had heard. Q3: The \"pointless\" option tempts because the phrase is dismissive; \"And yet the evening recovered something\" in the next paragraph settles that the dismissal is of the programme's goal, not of the project. Q4: A candidate argues for amused and unconvinced, citing the laugh and \"not worth printing\"; \"this was the revelation\" and \"the best I have heard\" settle that the achievement is admired, and the laugh is at the note.",
+      "blind_solve": {
+        "solver": "sonnet blind reader 2026-10-07",
+        "agreed": 4,
+        "total": 4,
+        "notes": "full agreement"
+      }
+    },
+    "vocab_extracted": [
+      "unconsoling",
+      "flourish",
+      "rumour"
+    ]
+  },
+  "passage": {
+    "title": "Old Horns, New Ears",
+    "reading_time_min": 2.7,
+    "paragraphs": [
+      {
+        "id": "rc-0149-p1",
+        "text": "The oboe gave the A and it was wrong. Not badly wrong: a shade under the pitch I have carried around since school. Then the horns stood to tune and I saw what I had come for: brass coils with no valves, able to play only the notes a length of tube gives and faking the rest with a hand pushed into the bell. The programme note promised that we would hear the Eroica as its first audience in Vienna heard it. I laughed out loud, I am afraid, and the woman beside me moved her coat."
+      },
+      {
+        "id": "rc-0149-p2",
+        "text": "Why laugh? Because the sentence cannot be true, and the note knew it. The instruments can be rebuilt, the bows shortened, the strings strung with gut. The ears cannot. That first audience had never heard a modern horn, so to them a natural horn was simply a horn. They had never heard the Eroica, and nobody in the hall tonight could say that. We have had it on recordings for a century; we know where the famous entries come and we wait for them. Whatever reached us through those old instruments reached a listener Beethoven never wrote for. Authenticity, in the sense the note meant, is a destination with no road to it. The unsettling part: the one instrument nobody can restore was mine."
+      },
+      {
+        "id": "rc-0149-p3",
+        "text": "And yet the evening recovered something, and I want to be exact. First, the balance. With gut strings the violins cannot drown the winds, and lines I had only ever read in the score came through, a bassoon part among them that on a modern orchestra is a rumour. Second, the tempos. A short bow on a gut string will not sustain a slow phrase the way steel will, so the music has to move, and at this speed Beethoven's metronome marks, which conductors have called impossible for a hundred years, stopped being impossible. Third, and this was the revelation, the constraints. A natural horn has holes in its scale. When a horn line leaps where the melody around it steps, the leap is not a flourish but a detour around a note the instrument does not own. On valved horns the detour vanishes into smoothness. Here it was audible: a composer writing against his tools rather than through them."
+      },
+      {
+        "id": "rc-0149-p4",
+        "text": "So what did the performance achieve? A great deal, and less than it claimed. The funeral march was the best I have heard, grim and quick and unconsoling, the timpani struck with hard sticks, each stroke a crack and not a boom. The horns split two notes in the trio of the scherzo and the hall smiled, because the split is the sound of an instrument being asked for something it can barely give, which is exactly what Beethoven asked for! That is worth the ticket. What is not worth printing is the claim on the programme. We did not hear it as they did. We heard, better than they could, how hard it was to write."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0149-q1",
+      "type": "specific_detail",
+      "skill": "specific_detail",
+      "patterns": [
+        "comp.explicit_detail",
+        "struct.cause_effect",
+        "lang.causal_wording"
+      ],
+      "target_mistake": "joining two true facts about gut strings, less sustain and quieter sound, with the wrong consequence",
+      "prediction_target": null,
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "inference"
+      ],
+      "stem": "According to the reviewer, the gut strings mattered to the performance because they",
+      "options": {
+        "A": "sustain a slow phrase better than steel, which let the funeral march breathe",
+        "B": "sustain a slow phrase less well than steel, which is what let the inner wind lines through",
+        "C": "were quieter than the reviewer expected, which made the funeral march harder to hear",
+        "D": "cannot cover the wind instruments, so lines the reviewer had only read became audible"
+      },
+      "correct": "D",
+      "estimated_time_sec": 55,
+      "explanation": {
+        "expert_notice": "The third paragraph lists three recoveries and attaches one fact about the instruments to each. Gut strings appear twice: under balance (\"cannot drown the winds\") and under tempo (\"will not sustain a slow phrase\"). The expert keeps the two pairings separate before reading options.",
+        "correct_reasoning": "Under \"First, the balance\", the text says \"With gut strings the violins cannot drown the winds, and lines I had only ever read in the score came through\". The correct option restates that pairing: quieter strings, audible lines. The sustain point belongs to the second recovery and explains tempo, not balance.",
+        "passage_anchor": "rc-0149-p3",
+        "question_type_note": "A detail question with a causal stem (\"because\") tests whether you kept the author's cause attached to the author's effect. Passages that list several causes and several effects invite options that pair a real cause with the wrong real effect.",
+        "reading_habit": "When an author numbers points (\"First\", \"Second\", \"Third\"), draw a line from each fact to the point it serves. A detail option that moves a fact across one of those lines is wrong even though every word in it appears in the text.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "the text says a gut string \"will not sustain a slow phrase the way steel will\"; it sustains less, not more, and the funeral march is praised for being \"quick\", not for breathing",
+            "seductive_element": "the funeral march is the performance's high point, so a reader may credit the strings with it"
+          },
+          {
+            "option": "B",
+            "trap_type": "half_right",
+            "why_wrong": "both facts are true, but the text attaches the sustain point to tempo (\"so the music has to move\") and the audible winds to loudness (\"cannot drown the winds\"); the causal link in this option is the reviewer's two sentences spliced",
+            "seductive_element": "every element is from the passage, and less sustain sounds like it could leave room for other lines"
+          },
+          {
+            "option": "C",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "the passage never says the strings were quieter than expected or that anything was harder to hear; the funeral march is \"the best I have heard\"",
+            "seductive_element": "the reviewer does describe gut strings as unable to drown the winds, which a reader may extend into a complaint about audibility"
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0149-q2",
+      "type": "cannot_be_inferred",
+      "skill": "inference",
+      "patterns": [
+        "inf.vs_speculation",
+        "inf.strongly_supported",
+        "scope.true_but_off_question"
+      ],
+      "target_mistake": "treating a plausible explanation the reviewer never offers (why conductors found the marks impossible) as something the passage supports",
+      "prediction_target": "the passage supports claims about familiarity, the note's honesty and what a split note means; it says nothing about what conductors had or had not heard",
+      "difficulty": {
+        "inference_depth": 4,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "specific_detail"
+      ],
+      "stem": "Which of the following CANNOT be inferred from the passage?",
+      "options": {
+        "A": "The reviewer believes that knowing a piece well changes how a listener hears it.",
+        "B": "The reviewer thinks conductors who called the metronome marks impossible had never heard period instruments.",
+        "C": "The reviewer treats a split note on a natural horn as evidence of what the instrument was being asked to do by the score.",
+        "D": "The reviewer thinks the programme note made a claim its writers knew to be untrue."
+      },
+      "correct": "B",
+      "estimated_time_sec": 95,
+      "explanation": {
+        "expert_notice": "Three options restate sentences in the text. The fourth adds a fact about other people, the conductors, that the text never mentions. The expert checks each option for a sentence that carries it, and the conductor option has none: the text says only that the marks \"stopped being impossible\" at this speed.",
+        "correct_reasoning": "The passage says the metronome marks \"which conductors have called impossible for a hundred years, stopped being impossible\" at the tempo the instruments forced. That tells us the marks are playable on these instruments. It says nothing about what those conductors had heard, and a conductor could know period instruments well and still call the marks impossible on a modern orchestra. The claim about their experience is the one the text cannot support. The other three options are each carried by a sentence: \"we know where the famous entries come and we wait for them\", \"the split is the sound of an instrument being asked for something it can barely give\", and \"the note knew it\".",
+        "passage_anchor": "rc-0149-p2, rc-0149-p3, rc-0149-p4",
+        "question_type_note": "A cannot-be-inferred question hands you three supported statements and one that goes beyond the text. The unsupported one usually attributes knowledge, motive or history to a person the passage mentions only in passing; look for the option that needs a fact about someone the author never describes.",
+        "reading_habit": "For each option, find the sentence that would have to be in the passage for it to follow. If you cannot point to one, that option is the answer, however reasonable it sounds.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "inferable, so not the answer: \"we know where the famous entries come and we wait for them\" is the reviewer explaining how familiarity changes listening",
+            "seductive_element": "the sentence is about this audience and the Eroica, so a reader may think the general claim about familiarity goes beyond it"
+          },
+          {
+            "option": "C",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "inferable, so not the answer: \"the split is the sound of an instrument being asked for something it can barely give, which is exactly what Beethoven asked for\"",
+            "seductive_element": "the split is reported as a mistake the hall smiled at, so a reader may take it as a flaw the reviewer forgave rather than as evidence"
+          },
+          {
+            "option": "D",
+            "trap_type": "half_right",
+            "why_wrong": "inferable, so not the answer: \"the sentence cannot be true, and the note knew it\" attributes knowledge of the falsehood to the note's writers",
+            "seductive_element": "\"the note knew it\" is a figure of speech, and a reader may hesitate to turn it into a claim about the writers"
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0149-q3",
+      "type": "phrase_in_context",
+      "skill": "vocabulary_in_context",
+      "patterns": [
+        "comp.paraphrase",
+        "comp.function_over_words",
+        "lang.contrast_marker"
+      ],
+      "target_mistake": "taking the phrase as a verdict on the orchestra or on the project rather than as a description of the goal the programme note named",
+      "prediction_target": "the learner should be able to say beforehand: the phrase names a goal, hearing the piece as its first audience did, that no modern performance can reach, because only the instruments can be rebuilt and not the listener's ears",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 3,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "inference"
+      ],
+      "stem": "In the second paragraph, the reviewer calls authenticity \"a destination with no road to it\" in order to say that",
+      "options": {
+        "A": "the orchestra had not rehearsed enough to reach the performance it was aiming at",
+        "B": "rebuilding old instruments is pointless because nobody can check what they sounded like",
+        "C": "the original experience of the music is a goal that no method of performance can reach",
+        "D": "modern listeners are no longer able to judge whether a performance is good"
+      },
+      "correct": "C",
+      "estimated_time_sec": 50,
+      "explanation": {
+        "expert_notice": "The phrase follows a chain: instruments can be rebuilt, ears cannot, the listener is one Beethoven never wrote for. \"Authenticity, in the sense the note meant\" is the destination; the missing road is any way of getting a modern listener back to the first hearing. The expert reads the qualifier \"in the sense the note meant\" as limiting the claim to the note's promise.",
+        "correct_reasoning": "The sentence names the goal (\"Authenticity, in the sense the note meant\") and says there is no way to it. The paragraph has just explained why: the audience's ears cannot be rebuilt. So the phrase means that the original experience is unreachable by any performance, which is what the correct option says. It is a claim about the goal, not about this orchestra's effort or the worth of the instruments, which the next paragraph praises.",
+        "passage_anchor": "rc-0149-p2",
+        "question_type_note": "A phrase-in-context question asks what a figure of speech means where it stands. Replace the figure with plain words that fit the surrounding sentences; an option that would contradict the next paragraph is not what the figure meant.",
+        "reading_habit": "When a metaphor is preceded by a qualifier (\"in the sense the note meant\"), the qualifier tells you what the metaphor is about. Keep it in your paraphrase and most distractors fall away.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "out_of_scope",
+            "why_wrong": "the passage never mentions rehearsal, and the paragraph is about listeners' ears, not the players' preparation",
+            "seductive_element": "\"no road to it\" sounds like a failure to arrive, which a reader may pin on the performers"
+          },
+          {
+            "option": "B",
+            "trap_type": "overstatement",
+            "why_wrong": "the next paragraph begins \"And yet the evening recovered something\", listing three things the rebuilt instruments made audible; the project is not called pointless, and the problem is ears, not verification",
+            "seductive_element": "the phrase is dismissive in tone, and a reader may extend the dismissal from the programme's claim to the whole enterprise"
+          },
+          {
+            "option": "D",
+            "trap_type": "too_broad",
+            "why_wrong": "the reviewer judges the performance confidently in the final paragraph (\"the best I have heard\"); the phrase is about recovering a first hearing, not about the capacity to judge",
+            "seductive_element": "\"The ears cannot\" can be misread as a general loss of competence rather than a loss of innocence about the piece"
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0149-q4",
+      "type": "author_attitude",
+      "skill": "tone",
+      "patterns": [
+        "comp.intent",
+        "lang.tone_shift",
+        "arg.concession"
+      ],
+      "target_mistake": "letting the opening laugh and the closing rebuke colour the whole review, and missing the paragraph of exact praise between them",
+      "prediction_target": "the reviewer praises the performance (balance, tempo, constraints, the funeral march) and rejects the programme's claim; the two judgements sit side by side",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "inference"
+      ],
+      "stem": "The reviewer's attitude towards the performance is best described as",
+      "options": {
+        "A": "admiring of what it achieved and dismissive of what was claimed for it",
+        "B": "amused by its pretensions and unconvinced that it achieved anything a modern orchestra could not",
+        "C": "respectful of its research but disappointed by the quality of the playing",
+        "D": "enthusiastic about every aspect of the evening, including the programme's framing of it"
+      },
+      "correct": "A",
+      "estimated_time_sec": 80,
+      "explanation": {
+        "expert_notice": "The final paragraph answers its own question in two halves: \"A great deal, and less than it claimed.\" An attitude option has to carry both halves. The expert also notes that the laugh in the first paragraph is aimed at the note, not at the playing.",
+        "correct_reasoning": "The third paragraph is sustained praise (\"this was the revelation\"), and the fourth calls the funeral march \"the best I have heard\" and the split horn notes \"worth the ticket\". The same paragraph says the programme's claim is \"not worth printing\". Admiration for the achievement and dismissal of the claim is exactly the split the correct option names.",
+        "passage_anchor": "rc-0149-p1, rc-0149-p3, rc-0149-p4",
+        "question_type_note": "An attitude question asks for the author's stance towards a specific object, here the performance. Separate the objects the author judges (the playing, the instruments, the programme note) and match the option to the stance taken on the one the stem names, not to the loudest sentence in the passage.",
+        "reading_habit": "When a review ends with a two-part verdict (\"a great deal, and less than it claimed\"), the attitude answer must preserve both parts; options that keep one part and drop the other are the standard traps.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "wrong_valence_tone",
+            "why_wrong": "the reviewer says the evening \"recovered something\" a modern orchestra hides, since on valved horns \"the detour vanishes into smoothness\"; the amusement is real but the verdict on achievement is positive",
+            "seductive_element": "the laugh in the first paragraph and the rebuke in the last frame the review, so a reader who weighs the frame over the middle hears only mockery"
+          },
+          {
+            "option": "C",
+            "trap_type": "half_right",
+            "why_wrong": "the playing is praised, not criticised: the funeral march is \"the best I have heard\" and the split notes are welcomed as \"exactly what Beethoven asked for\"",
+            "seductive_element": "split notes and flat tuning are normally faults, so a reader who did not see the reviewer reinterpret them assumes disappointment"
+          },
+          {
+            "option": "D",
+            "trap_type": "extreme_language",
+            "why_wrong": "the programme's claim is \"not worth printing\"; \"every aspect\" cannot include the framing the reviewer rejects",
+            "seductive_element": "the praise in the middle paragraphs is strong enough that a hurried reader forgets the complaint that opens and closes the review"
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "unconsoling",
+      "passage_use": "grim and quick and unconsoling",
+      "meaning_here": "offering no comfort",
+      "difficulty": "medium"
+    },
+    {
+      "word": "flourish",
+      "passage_use": "the leap is not a flourish but a detour",
+      "meaning_here": "a showy decoration added for effect",
+      "difficulty": "medium"
+    },
+    {
+      "word": "rumour",
+      "passage_use": "on a modern orchestra is a rumour",
+      "meaning_here": "here, something heard only faintly, as if second-hand",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "The orchestra tuned flat on purpose and the horns had no valves. I went to hear Beethoven as his first audience did. I heard something else.",
+    "one_sentence_summary": "A reviewer who goes to a period-instrument performance of Beethoven's Eroica, promised a chance to hear it as its first audience did, concludes that the claim is impossible because only the instruments can be rebuilt, not the listener's ears, even though the evening genuinely recovers the balance, tempo and constraints Beethoven actually composed around.",
+    "main_idea": "A concert review argues that a period-instrument performance cannot really recreate how Beethoven's first audience heard the Eroica, because a modern listener's ears, shaped by a century of recordings, cannot be unmade. What the performance does achieve, and achieve honestly, is a recovery of the balance between instruments, the tempos the composer wrote at, and the physical limits he composed around.",
+    "simple_explanation": "The reviewer sits down to hear an orchestra tune, and the note from the oboe sounds a little flat, which is normal for old-style instruments. Then the horns stand up to tune, and they are valveless brass tubes that can only play certain notes and have to fake the rest. The programme claims that tonight's audience will hear Beethoven's Eroica symphony exactly as its very first listeners heard it in Vienna. The reviewer laughs out loud at the claim, loudly enough that the person next to him moves away.\n\nThe reviewer explains the laugh: the claim cannot be true, and he thinks the programme writers knew it could not be true. You can rebuild old instruments, restring a violin with gut instead of steel, but you cannot rebuild a listener's ears. That first Viennese audience had never heard a modern valved horn, so to them a valveless horn was just a horn, nothing unusual. Nobody in tonight's hall is hearing the symphony for the first time the way they did; we already know the piece from a century of recordings, and we wait for the famous moments to arrive. So whatever reaches tonight's audience reaches ears Beethoven never wrote for. 'Authenticity', in the sense the programme meant it, is a goal with no way to reach it. The one thing nobody in the hall can restore, the reviewer realises, is his own way of hearing.\n\nAnd yet, the reviewer insists, the evening did recover real things. First, balance: with gut strings instead of steel, the violins cannot drown out the other instruments, so inner lines that are usually buried, including a bassoon part, could actually be heard. Second, tempo: a gut string cannot sustain a long note the way a steel string can, so the music has to keep moving, and at that faster speed, Beethoven's own tempo markings, which conductors have called impossibly fast for a century, suddenly worked. Third, and most strikingly, the limits of the instruments themselves: a valveless horn cannot play every note smoothly, so when a horn line has to leap awkwardly, you can actually hear the composer writing around what his instrument could not do, instead of that difficulty being smoothed away by a modern horn.\n\nSo the reviewer asks what the performance really achieved, and answers: a great deal, and less than it claimed. The funeral march was the best he has ever heard, grim and quick, with hard-stick timpani strokes that crack rather than boom. The horns fluffed two notes in the symphony's scherzo, and the audience smiled, because that fluff is exactly the sound of an instrument being pushed to its limit, which is exactly what Beethoven was writing for. That part of the evening was worth the ticket price. What was not worth printing was the programme's claim. Tonight's audience did not hear the symphony as its first audience did. They heard, better than that first audience could have, just how difficult the piece was to write.",
+    "why_difficult": "The review holds two judgements at once, admiration for what the performance achieved and rejection of what it claimed, and a reader who only notices the opening laugh or the closing rebuke will miss the long middle paragraph of real praise. The passage also uses one metaphor, 'a destination with no road to it', to carry a precise argument about ears versus instruments, and a reader has to unpack it rather than take it as general scepticism.",
+    "author_intention": "To test the claim that a period-instrument concert recreates the original experience of hearing a piece, reject that specific claim on the grounds that a listener's ears cannot be rebuilt, and still give full, exact credit to what the performance genuinely recovered.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0149-p1",
+        "role": "Opens in the hall",
+        "note": "The reviewer hears the old-style instruments tune and laughs out loud at the programme's promise to recreate the first audience's experience."
+      },
+      {
+        "paragraph_id": "rc-0149-p2",
+        "role": "Explains the laugh",
+        "note": "Instruments can be rebuilt but ears cannot, so no modern listener can truly hear the piece as its first audience did; the reviewer calls that kind of authenticity an unreachable destination."
+      },
+      {
+        "paragraph_id": "rc-0149-p3",
+        "role": "Lists what was recovered",
+        "note": "The reviewer sets out three genuine gains from the old instruments: better balance between parts, tempos Beethoven actually wrote, and the audible strain of the composer writing around his instruments' limits."
+      },
+      {
+        "paragraph_id": "rc-0149-p4",
+        "role": "Gives the final verdict",
+        "note": "The reviewer praises specific moments as the best he has heard, but repeats that the programme's claim to recreate the original hearing was not true and not worth printing."
+      }
+    ],
+    "tone_progression": "Amused and a little theatrical at the start, turning quietly unsettled in the middle when the reviewer realises his own ears are what cannot be restored, then exact and admiring through the praise, before closing on the same firm rejection of the programme's claim that opened the review.",
+    "key_transitions": [
+      "'Authenticity, in the sense the note meant, is a destination with no road to it.' (paragraph 2): the laugh is explained as a precise objection, not mere mockery.",
+      "'And yet the evening recovered something, and I want to be exact.' (opening of paragraph 3): the review turns from rejecting the claim to crediting the performance."
+    ],
+    "misunderstanding": "A hurried reader takes the opening laugh and the closing line about the programme as the whole verdict, and concludes the reviewer thought the concert was a failure or a fraud. The middle paragraph of specific, enthusiastic praise is easy to skip past, but it is there that the reviewer explains exactly what the old instruments did achieve.",
+    "traps_summary": "The options swap which fact about gut strings causes which recovery, invent a comparison the reviewer never makes between conductors and period-instrument knowledge, treat the 'no road to it' phrase as a verdict on the whole project rather than on one claim, and let the opening laugh or closing rebuke stand in for the reviewer's full attitude.",
+    "reading_lesson": "When a review, or any passage, ends on a two-part verdict such as 'a great deal, and less than it claimed', treat both halves as permanent: any later question about the author's view that keeps only one half is wrong, however strongly that half was expressed.",
+    "real_world": "The same split applies to many claims of 'authentic' experience, from a historical re-enactment to a restored building: the materials and methods can be rebuilt, but the person experiencing them brings a modern mind that cannot be unlearned.",
+    "takeaway": "A performance can recover real things, balance, tempo, the shape of a composer's limits, while still failing to recreate an experience that depends on ears nobody alive still has.",
+    "reflection_question": "Have you ever praised something for what it genuinely achieved while still rejecting the bigger claim made on its behalf?",
+    "eli10": {
+      "big_idea": "A reviewer says a concert played on old instruments cannot really sound like it did to its first audience, because modern ears cannot be unlearned, even though the old instruments did bring back some real things.",
+      "story": "A man goes to hear old music played on very old-style instruments. The programme says he will hear it exactly like the first audience did, long ago. He laughs, because that cannot be true. Instruments can be rebuilt. Ears cannot. He already knows the music from recordings. The first audience did not. So he cannot hear it with fresh ears like they did. But the old instruments still do something real. The strings are quieter, so he can hear parts usually hidden. The music moves faster, matching the speed the composer wanted. The old horns cannot play every note smoothly, so you can hear the music strain against them, just as the composer meant. In the end, he loved parts of the concert. But he still says the programme's big claim, that this was just like being there, was not true.",
+      "paragraphs": [
+        "Opens in the concert hall as the old instruments tune and the reviewer laughs at a bold claim.",
+        "Explains why: instruments can be rebuilt, but a listener's ears cannot be made new again.",
+        "Lists three real things the old instruments brought back: balance, correct speed and audible strain.",
+        "Gives the final verdict: real praise for the music, but the big claim was still not true."
+      ],
+      "author_view": "The reviewer is amused and exact: he genuinely admires what the old instruments achieved, but firmly rejects the claim that anyone could hear the piece as its first audience did."
+    }
+  }
+}

@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "pc-0046",
+    "type": "pc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 87,
+    "genre": "urban-studies",
+    "difficulty": "easy",
+    "difficulty_numeric": 3,
+    "tier": "easy",
+    "title": "Who Could Override Whom",
+    "theme": "the bends of an old street record the footpaths, boundaries and streams a builder had to respect, and a straight street is the sign of someone able to override all three",
+    "estimated_time_sec": 70,
+    "gap_function": "explanation",
+    "primary_trap": "attractive_generality",
+    "reasoning_patterns": [
+      "disc.function_slot",
+      "disc.cause_effect",
+      "disc.claim_then_evidence",
+      "struct.phenomenon_explanation",
+      "arg.causal_claim"
+    ],
+    "learning_objective": "fill an explanation slot with the cause of the thing just observed, in enough detail for the next sentence to build on, rather than with a verdict on the observation or a generality about it",
+    "difficulty_vector": {
+      "stance_subtlety": 2,
+      "scope_precision": 3,
+      "distractor_closeness": 3,
+      "concept_abstractness": 2,
+      "syntactic_complexity": 2
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-07",
+      "usage_note": "Original composition in CAT register for CAT OS. A general account of why the streets of old cities wind; no specific text adapted."
+    },
+    "date_added": "2026-10-07",
+    "batch_id": "batch-pc-004",
+    "reviewer_notes": "The counting phrase 'all three' in the next sentence is the engineered clue: only the correct option names three obstacles. The generality is the near rival because it uses 'record'; it names nothing to count.",
+    "quality": {
+      "status": "verified",
+      "adversarial_review": "A strong candidate argues for the generality that a city is a record of its builders, since it uses 'record' and sounds like the paragraph's thesis. It fails on 'all three' in the next sentence, which has to count obstacles the gap has named, and on the next sentence's 'opposite record', which needs a record of specific things to be opposite to. The agreeing verdict contradicts the final sentence's 'map of who could override whom'; the charm sentence is picked up by nothing.",
+      "blind_solve": {
+        "solver": "sonnet blind reader 2026-10-07",
+        "agreed": 1,
+        "total": 1,
+        "notes": "full agreement"
+      }
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      "The streets of an old city wind and jog and narrow for no reason a visitor can see, and the usual verdict is that nobody planned them.",
+      "A straight street is the opposite record, the sign of somebody with the power to cut through all three at once.",
+      "So the plan of a city is a map of who could override whom, and the winding quarters are the ones where nobody could."
+    ],
+    "gap_index": 1
+  },
+  "question": {
+    "stem": "Which of the following sentences best fills the gap in the paragraph?",
+    "options": {
+      "A": "The verdict is fair, since a city that grew without a plan could hardly have ended up any other way than this.",
+      "B": "Every city is in the end a record of the people who built it, and that record is written more plainly in its streets than in any of its buildings.",
+      "C": "Visitors tend to find the winding quarters charming, so the oldest parts of a city are usually the most photographed of all.",
+      "D": "In fact each bend records something a builder had to go round: a footpath already worn, a neighbour's boundary, a stream that could not be moved."
+    },
+    "correct": "D"
+  },
+  "explanation": {
+    "what_the_gap_needs": "The first sentence reports an observation and a verdict, that nobody planned the streets. The sentence after the gap calls a straight street 'the opposite record' and speaks of cutting through 'all three at once'. So the gap must explain the bends as a record of something, and it must name three somethings for 'all three' to count. Its stance corrects the verdict without dismissing the observation.",
+    "correct_reasoning": "The correct option does the explaining and supplies the three: a worn footpath, a neighbour's boundary, a stream. Each is a thing a builder without power over it had to go round, so each bend is a record of a constraint, which is what lets the next sentence call a straight street 'the opposite record' and count 'all three'. 'In fact' marks the correction of the verdict that the first sentence reported.",
+    "distractors": [
+      {
+        "option": "A",
+        "trap_type": "contradicts_neighbour",
+        "why_wrong": "It endorses the verdict that nobody planned the streets, and the paragraph goes on to say the bends are a record and the plan 'a map of who could override whom'; a sentence agreeing that there was no plan sits against both its neighbours.",
+        "seductive_element": "It follows the first sentence agreeably, and the explanation it offers, growth without a plan, is the common one."
+      },
+      {
+        "option": "B",
+        "trap_type": "attractive_generality",
+        "why_wrong": "It is true of every city and explains no bend; the next sentence needs 'all three' to have something to count, and a record 'written in its streets' names nothing a builder went round.",
+        "seductive_element": "It borrows the word 'record' that the paragraph will use, and it has the ring of a conclusion."
+      },
+      {
+        "option": "C",
+        "trap_type": "new_topic_introduced",
+        "why_wrong": "Charm and photographs are a new subject that nothing after the gap picks up; the next sentence is about power and straight streets, and 'all three' is left counting nothing.",
+        "seductive_element": "It is pleasant and plausible, and a visitor was mentioned in the first sentence."
+      }
+    ],
+    "method": "Read the sentence after an explanation gap for a number, a demonstrative or a definite phrase that counts on something already said: here 'the opposite record' and 'all three'. The gap must supply the record and the three. Options that agree with the verdict, generalise about cities or change the subject leave those words with nothing to point at."
+  },
+  "mentor": {
+    "challenge": "Old streets wind and nobody knows why. The paragraph says every bend is a record of something. A record of what?",
+    "takeaway": "When the sentence after a gap counts 'all three' or names 'the opposite', the gap must have supplied the three and the original; check the option delivers them."
+  }
+}

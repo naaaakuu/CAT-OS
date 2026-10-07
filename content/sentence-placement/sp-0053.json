@@ -1,0 +1,132 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "sp-0053",
+    "type": "sp",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 87,
+    "genre": "urban-studies",
+    "difficulty": "easy",
+    "difficulty_numeric": 3,
+    "tier": "easy",
+    "title": "All the Goldsmiths in One Lane",
+    "theme": "why sellers of one good cluster in one street: buyers go where they can compare, so the lone seller loses the comparing customer, and the street of rivals is what brings the trade in",
+    "estimated_time_sec": 70,
+    "clue_types": [
+      "connective_explicit",
+      "article_given_new",
+      "pronoun_ref"
+    ],
+    "primary_trap": "wrong_reference_target",
+    "reasoning_patterns": [
+      "disc.transition_word",
+      "disc.given_new",
+      "disc.demonstrative",
+      "disc.problem_then_solution"
+    ],
+    "difficulty_vector": {
+      "reference_density": 3,
+      "transition_ambiguity": 2,
+      "competing_slots": 3,
+      "concept_abstractness": 2,
+      "syntactic_complexity": 2
+    },
+    "learning_objective": "place a 'But' sentence after the claim it pushes against, and check that a demonstrative in the neighbouring sentence still names what it was written to name",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-07",
+      "usage_note": "Original composition in CAT register for CAT OS. A general observation about the clustering of similar shops in old markets; no specific text adapted."
+    },
+    "date_added": "2026-10-07",
+    "batch_id": "batch-sp-003",
+    "reviewer_notes": "Two clues fix the slot. 'But' needs the newcomer's verdict to push against, and 'the customers he hoped to keep, the ones who were going to look at several' in the next sentence needs the comparing buyer introduced above it. The slot after the opening description is the trap: there 'this' in the second sentence would name the buyer's behaviour rather than the arrangement of the market.",
+    "quality": {
+      "status": "verified",
+      "adversarial_review": "A strong candidate argues for the slot after the first sentence, reading the buyer's habit as the natural second thing to say about a market. It fails because sentence 2 then begins 'To a newcomer this looks like the worst possible arrangement for the sellers', and 'this' would name a buyer walking past a lone shop, which is not an arrangement and not bad for the sellers. The slot after sentence 3 is the other candidate; there 'But' has nothing to oppose, since sentence 3 already agrees with the missing sentence, and the comparing customers in sentence 3 arrive before the sentence that introduces them.",
+      "blind_solve": {
+        "solver": "sonnet blind reader 2026-10-07",
+        "agreed": 1,
+        "total": 1,
+        "notes": "full agreement"
+      }
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "n": 1,
+        "text": "In an old market the sellers of one kind of good are found in one street: the goldsmiths in one lane, the cloth merchants in the next, the spice sellers at the end."
+      },
+      {
+        "n": 2,
+        "text": "To a newcomer this looks like the worst possible arrangement for the sellers, since each has put himself beside the people most able to take his customers."
+      },
+      {
+        "n": 3,
+        "text": "The seller who moves to a street of his own loses exactly the customers he hoped to keep, the ones who were going to look at several before buying."
+      },
+      {
+        "n": 4,
+        "text": "The street full of rivals, then, is not competition at its most ruinous but the device that brings the customers in at all."
+      },
+      {
+        "n": 5,
+        "text": "A market spread out evenly is quieter for every stall in it."
+      }
+    ]
+  },
+  "missing": {
+    "text": "But a buyer with money for one purchase goes where she can compare before she commits, and she will walk past a shop that stands alone.",
+    "position": 2,
+    "function": "the counter to the newcomer's verdict, introducing the comparing buyer whom the next sentence calls the customers who were going to look at several"
+  },
+  "question": {
+    "stem": "Where does the following sentence best fit in the paragraph? \"But a buyer with money for one purchase goes where she can compare before she commits, and she will walk past a shop that stands alone.\"",
+    "options": {
+      "A": "After sentence 3",
+      "B": "After sentence 1",
+      "C": "After sentence 4",
+      "D": "After sentence 2"
+    },
+    "option_positions": {
+      "A": 3,
+      "B": 1,
+      "C": 4,
+      "D": 2
+    },
+    "correct": "D"
+  },
+  "explanation": {
+    "correct_reasoning": "The sentence begins 'But', so it must follow a claim it pushes against, and the only claim in the paragraph that it opposes is the newcomer's verdict in sentence 2 that clustering is the worst possible arrangement. It also introduces 'a buyer' who compares before committing, and sentence 3 then speaks of 'the customers he hoped to keep, the ones who were going to look at several before buying', a definite phrase that needs that buyer already on the page. So the sentence sits after sentence 2: the verdict above it, the customers it has introduced below it.",
+    "clue_before": "Sentence 2 delivers the newcomer's verdict that clustering is the worst arrangement for sellers; a sentence beginning 'But' needs exactly that verdict to oppose.",
+    "clue_after": "Sentence 3 refers to 'the customers he hoped to keep, the ones who were going to look at several before buying', which only reads as given information if the comparing buyer has just been introduced.",
+    "distractors": [
+      {
+        "option": "B",
+        "trap_type": "wrong_reference_target",
+        "why_wrong": "Placed after sentence 1, the sentence makes 'this' in sentence 2 name the buyer's habit of walking past a lone shop, but sentence 2 calls 'this' an 'arrangement for the sellers', which only the layout of the market can be; and 'But' would oppose a description that has made no claim.",
+        "seductive_element": "Describing the market and then the buyer who uses it feels like a natural order of exposition."
+      },
+      {
+        "option": "A",
+        "trap_type": "wrong_connective",
+        "why_wrong": "After sentence 3 the 'But' has nothing to oppose, since sentence 3 already says the lone seller loses the comparing customers; the sentences agree, and the comparing customers would be referred to as given in sentence 3 before the sentence that introduces them.",
+        "seductive_element": "The two sentences share the comparing customer, so they look like neighbours, and a reader checks the shared noun before checking the connective."
+      },
+      {
+        "option": "C",
+        "trap_type": "right_idea_wrong_position",
+        "why_wrong": "Sentence 4 has already drawn the conclusion with 'then', so the reason for it arrives after the conclusion it supports, and sentence 3 is left referring to comparing customers nobody has introduced.",
+        "seductive_element": "The last two sentences are both about what the clustering does for sellers, so an explanation seems to belong among them."
+      }
+    ],
+    "method": "A sentence that begins 'But' goes after the claim it opposes, so find the paragraph's claims and ask which one it answers. Then check the next sentence down for a definite phrase, 'the customers', 'the ones who', that reports something as already known, and make sure the missing sentence is what made it known. Finally read the sentence above the slot you are rejecting: a 'this' or 'that' there will often be pointing at the wrong thing."
+  },
+  "mentor": {
+    "challenge": "Sentence 3 talks about 'the ones who were going to look at several before buying' as if you already knew them. Who introduced them?",
+    "takeaway": "A 'But' needs a claim above it and a definite phrase needs its introduction above it; the slot that gives both is the slot."
+  }
+}

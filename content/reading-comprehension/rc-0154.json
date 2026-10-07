@@ -1,0 +1,409 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0154",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 87,
+    "genre": "contemporary-society",
+    "difficulty": "easy",
+    "difficulty_numeric": 3,
+    "stage": "developing",
+    "skills": [
+      "inference",
+      "evidence-anchoring",
+      "structure-mapping",
+      "argument-tracking",
+      "qualifier-tracking"
+    ],
+    "word_count": 436,
+    "question_count": 4,
+    "question_types": [
+      "agree_disagree",
+      "inference",
+      "not_true",
+      "relationship"
+    ],
+    "theme": "two accounts of the used-clothes trade answer different questions, producers and consumers; the test of the causal claim is what happened when the bales were banned, and the mills did not return",
+    "estimated_time_min": 7.5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-07",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted."
+    },
+    "date_added": "2026-10-07",
+    "batch_id": "batch-rc-007",
+    "prompt_version": "content engine v1 + CAT paper patterns 2026-10; batch-rc-007",
+    "reviewer_notes": "The corpus has no contemporary-society passage; this one is reportage with an adjudication underneath, and its two rewards are both method: a dispute split into two questions, and a cause tested by its removal, with the limits of that test stated. The near-tie is in Q4, between \"removing the bales is not enough to revive the mills\" (the author's bounded claim) and \"the bales never did any harm\" (the unbounded one the author explicitly refuses). The voice is present tense with a concrete scene at both ends, no first person, and the author's own position arrives only in paragraph three. The bans paragraph is the argumentative work: concession, test, and a conclusion cut down to size. The move is adjudication, and the voice is present-tense reportage with no first person, framed by a concrete market scene at both ends.",
+    "length_class": "medium",
+    "structure": "two_views_adjudication",
+    "viewpoints": 2,
+    "tone": "observant, even-handed",
+    "difficulty_vector": {
+      "lexical": 2,
+      "syntactic": 2,
+      "abstraction": 2,
+      "inference_depth": 2,
+      "distractor_similarity": 3,
+      "reasoning_depth": 2,
+      "structural_ambiguity": 2,
+      "time_pressure": 2
+    },
+    "reasoning_patterns": [
+      "comp.explicit_detail",
+      "comp.attention_span",
+      "elim.systematic",
+      "inf.directly_implied",
+      "lang.causal_wording",
+      "arg.premise",
+      "struct.two_views_adjudication",
+      "comp.central_idea",
+      "inf.author_vs_reported",
+      "inf.author_view_application",
+      "arg.evidence_vs_conclusion",
+      "lang.absolute_vs_qualified",
+      "struct.claim_counterclaim",
+      "arg.concession",
+      "struct.qualification"
+    ],
+    "quality": {
+      "status": "verified",
+      "adversarial_review": "Q1: A strong candidate argues the first-grade option is true because tailors and the kilo are both in the stall; \"The first-grade pieces are on hangers at the front\" and \"a tailor takes the last by the kilo\" keep the two groups apart. Q2: The guarantee option is argued from the logic of grading; \"because nobody knows\" is incompatible with any guarantee about contents. Q3: The contradiction option is argued from \"they sound incompatible\"; \"they stop contradicting each other\" in the next paragraph is the author's actual verdict, and the bans \"settle less than it seems\". Q4: The counterfactual option is the strongest wrong case, since the author does mention \"years when the mills still stood\"; but that sentence says only what the bans \"do not show\", and nothing in the passage says an earlier ban would have worked, whereas \"removing them is no policy for reviving an industry\" is stated outright.",
+      "blind_solve": {
+        "solver": "sonnet blind reader 2026-10-07",
+        "agreed": 4,
+        "total": 4,
+        "notes": "full agreement"
+      }
+    },
+    "vocab_extracted": [
+      "bale",
+      "grade",
+      "tariffs"
+    ]
+  },
+  "passage": {
+    "title": "Cutting Open the Bale",
+    "reading_time_min": 2.4,
+    "paragraphs": [
+      {
+        "id": "rc-0154-p1",
+        "text": "The bale is forty-five kilos of pressed cloth, and the trader has paid for it before anyone cuts the strap. She paid by the grade printed on the side and the country it came from, not by what is inside, because nobody knows. Now the strap goes and the bale breathes out: a child's coat, T-shirts from a fun run abroad, jeans. The first-grade pieces are on hangers at the front of the stall by seven. The rest lie in heaps that fall in price through the day until a tailor takes the last by the kilo to cut down into something else."
+      },
+      {
+        "id": "rc-0154-p2",
+        "text": "Two accounts of this trade have been told for decades, and they sound incompatible. The first says the bales buried a continent's textile industry: no mill paying wages and power bills can sell a shirt for less than one that was given away. Mills that had grown up behind tariffs closed within a generation of the bales arriving. The second says the trade dresses whole populations for a few coins, and that sorting, carrying, washing, mending and re-cutting employ tens of thousands, many of them women. The first counts factories; the second counts people in clothes and people in work."
+      },
+      {
+        "id": "rc-0154-p3",
+        "text": "Set out like that, they stop contradicting each other, because they answer different questions. One asks what became of the producers of cloth; the other what became of its consumers and of the trade itself. A country can lose its mills and gain a market, and both accounts can be accurate about the same decades. What the second cannot do is excuse the first, and what the first cannot do is prove that the bales were the cause. The mills closed in the years that tariffs fell, subsidies ended, power failed and Asian cloth arrived, so the bales had company."
+      },
+      {
+        "id": "rc-0154-p4",
+        "text": "There is a way to test a cause, which is to take it away and watch. Governments have tried, banning the bales or taxing them out of reach. Where that happened the mills did not come back: new cloth from abroad took the space, the power problems remained, and the traders moved to smuggled bales. That settles less than it seems to. It shows that the bales were not the only thing keeping the mills shut, and that removing them is no policy for reviving an industry. It does not show that the bales did no harm when they first arrived, in years when the mills still stood and other pressures were lighter. And it says nothing about the second account, whose people are in the market at seven o'clock, cutting the strap."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0154-q1",
+      "type": "not_true",
+      "skill": "specific_detail",
+      "patterns": [
+        "comp.explicit_detail",
+        "comp.attention_span",
+        "elim.systematic"
+      ],
+      "target_mistake": "merging two sentences about the stall, the hangers at the front and the kilo sale at the end, into one",
+      "prediction_target": null,
+      "difficulty": {
+        "inference_depth": 1,
+        "distractor_similarity": 2,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "scope"
+      ],
+      "stem": "Which of the following is NOT true of the market as the passage describes it?",
+      "options": {
+        "A": "A trader has already paid for a bale before she knows what it contains.",
+        "B": "The price of the lower grades keeps falling as the day goes on.",
+        "C": "Some of the clothes end up re-cut by tailors into other garments.",
+        "D": "The first-grade pieces go to a tailor by the kilo at the day's end."
+      },
+      "correct": "D",
+      "estimated_time_sec": 55,
+      "explanation": {
+        "expert_notice": "Paragraph one gives the bale's contents two fates in two sentences: \"The first-grade pieces are on hangers at the front of the stall by seven\" and \"The rest lie in heaps that fall in price through the day until a tailor takes the last by the kilo\". The kilo belongs to \"the last\" of the rest, not to the first grade.",
+        "correct_reasoning": "The option about first-grade pieces going by the kilo joins the subject of one sentence to the predicate of another. The passage puts first-grade pieces on hangers and sells the last of the heaps by the kilo. The other three are each stated: paid \"before anyone cuts the strap\" and \"nobody knows\"; heaps \"fall in price through the day\"; a tailor cuts the last \"down into something else\".",
+        "passage_anchor": "rc-0154-p1",
+        "question_type_note": "A NOT-true question is usually broken by one option that splices two true sentences into a false one. Check the subject of each option against the subject of the sentence it comes from.",
+        "reading_habit": "When a scene sorts things into groups (first grade, the rest), keep the groups apart in your notes. Detail questions on reportage passages live in the boundary between them.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "\"the trader has paid for it before anyone cuts the strap\" and \"nobody knows\" state it in other words",
+            "seductive_element": "the paraphrase \"before she knows what it contains\" is not the passage's wording, so it is doubted"
+          },
+          {
+            "option": "B",
+            "trap_type": "opposite_direction",
+            "why_wrong": "\"heaps that fall in price through the day\" is explicit",
+            "seductive_element": "a reader who assumes prices rise as stock runs low reverses the direction"
+          },
+          {
+            "option": "C",
+            "trap_type": "too_narrow",
+            "why_wrong": "\"a tailor takes the last by the kilo to cut down into something else\" says exactly this",
+            "seductive_element": "a reader who took the tailor as a buyer of rags misses that the rags are re-cut"
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0154-q2",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.directly_implied",
+        "lang.causal_wording",
+        "arg.premise"
+      ],
+      "target_mistake": "inventing a source for the labels, or hardening a likely signal into a guarantee",
+      "prediction_target": "the grade and country are used because the contents are unknown until the strap is cut; they are the best available proxy for what is inside",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 2,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "specific_detail"
+      ],
+      "stem": "It can be inferred that traders price a bale by its grade and country of origin because",
+      "options": {
+        "A": "those labels are set by the authorities of the countries that permit the trade",
+        "B": "those labels stand in for contents that cannot be inspected before purchase",
+        "C": "a higher grade guarantees that more of the pieces will sell at the front of the stall",
+        "D": "the price of a bale is fixed by the market rather than by what it contains"
+      },
+      "correct": "B",
+      "estimated_time_sec": 80,
+      "explanation": {
+        "expert_notice": "The sentence carries its own \"because\": \"She paid by the grade printed on the side and the country it came from, not by what is inside, because nobody knows.\" The reason for using the labels is that the one thing a buyer would rather use, the contents, is unavailable.",
+        "correct_reasoning": "The correct option says the labels stand in for contents that cannot be inspected, which is the inference the \"because\" licenses: if nobody knows what is inside, the price must rest on what is known. It adds no guarantee and no authority.",
+        "passage_anchor": "rc-0154-p1",
+        "question_type_note": "An inference from a causal sentence should stay as close to the sentence as the option set allows. The right answer here is one step from the text; the wrong answers are two steps away, or a step in another direction.",
+        "reading_habit": "When a sentence contains \"because\", the inference you are allowed is the one that connects its two halves. Resist options that explain where the labels come from or promise what they deliver.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "out_of_scope",
+            "why_wrong": "the passage never says who sets the grade or the country label; \"printed on the side\" is all it gives",
+            "seductive_element": "labels suggest regulation, and the bans later in the passage put governments in the reader's mind"
+          },
+          {
+            "option": "C",
+            "trap_type": "possibility_as_certainty",
+            "why_wrong": "the trader pays by grade because \"nobody knows\" what is inside; a guarantee about contents would contradict that",
+            "seductive_element": "grade and first-grade pieces are both in paragraph one, so a reader links them as promise and delivery"
+          },
+          {
+            "option": "D",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "\"not by what is inside\" is in the text, but the price is tied to grade and country, not left to \"the market\"",
+            "seductive_element": "it reuses the passage's phrase about the contents and attaches a different claim to it"
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0154-q3",
+      "type": "relationship",
+      "skill": "logical_structure",
+      "patterns": [
+        "struct.two_views_adjudication",
+        "comp.central_idea",
+        "inf.author_vs_reported"
+      ],
+      "target_mistake": "hearing \"they sound incompatible\" as the author's verdict rather than the appearance the author then dissolves",
+      "prediction_target": "the author's claim is that the accounts stop contradicting each other because they answer different questions, producers in one and consumers and trade in the other, and that both can be accurate",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "main_idea"
+      ],
+      "stem": "According to the author, the relationship between the two accounts is best described as follows:",
+      "options": {
+        "A": "They contradict each other, and the record of the bans shows that the second is correct.",
+        "B": "The second explains the first, because the jobs the trade created drew workers away from the mills.",
+        "C": "They answer different questions, and both can be accurate about the same decades.",
+        "D": "They are one account told twice, once from the mills' side and once from the market's."
+      },
+      "correct": "C",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "Paragraph two ends with \"they sound incompatible\", and paragraph three opens by taking the sound away: \"Set out like that, they stop contradicting each other, because they answer different questions.\" Then the two questions are named, and \"both accounts can be accurate about the same decades\".",
+        "correct_reasoning": "The correct option is that sentence in other words. It keeps both halves: different questions, both accurate. The author does not choose between the accounts and does not merge them.",
+        "passage_anchor": "rc-0154-p2, rc-0154-p3",
+        "question_type_note": "A relationship question asks how the author sees two things standing to each other. Look for the sentence where the author says \"they\" and a verb: contradict, explain, answer, confirm. That verb is the answer.",
+        "reading_habit": "When a passage says two views \"sound\" or \"seem\" a certain way, expect the next paragraph to say how they actually are. The question will test whether you stopped at the seeming.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "\"they stop contradicting each other\" denies the contradiction, and the bans \"settle less than it seems\", proving neither account",
+            "seductive_element": "\"they sound incompatible\" is in the text, and the bans paragraph reads like a verdict"
+          },
+          {
+            "option": "B",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "nothing in the passage says the trade's jobs drew workers from the mills; the mills closed because of give-away prices, falling tariffs, failing power and Asian cloth",
+            "seductive_element": "the two accounts are side by side, so a reader builds a causal bridge between them"
+          },
+          {
+            "option": "D",
+            "trap_type": "near_synonym_confusion",
+            "why_wrong": "\"different questions\" is not one question seen from two sides; \"the first counts factories; the second counts people\" names different objects",
+            "seductive_element": "\"both can be accurate\" sounds like two angles on one truth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0154-q4",
+      "type": "agree_disagree",
+      "skill": "inference",
+      "patterns": [
+        "inf.author_view_application",
+        "arg.evidence_vs_conclusion",
+        "lang.absolute_vs_qualified"
+      ],
+      "target_mistake": "taking the bounded conclusion (\"not the only thing\") for the unbounded one (\"did no harm\"), or filling the gap the author leaves open with a confident counterfactual",
+      "prediction_target": "the bans show the bales were not the only thing keeping the mills shut and that removing them is no revival policy; they do not show the bales did no harm at first, and they say nothing about the second account",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 3,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "argument"
+      ],
+      "stem": "The author would most likely agree with which of the following statements about the bans?",
+      "options": {
+        "A": "They show that removing the bales is not, by itself, enough to revive the mills.",
+        "B": "They prove that the bales were never a cause of the mills' closure, in any period.",
+        "C": "They show that the real obstacle to the mills is the traders who turned to smuggled bales.",
+        "D": "They would have revived the mills if they had been imposed while the mills still stood."
+      },
+      "correct": "A",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "Paragraph four states the conclusion and its limits in three sentences: \"It shows that the bales were not the only thing keeping the mills shut, and that removing them is no policy for reviving an industry. It does not show that the bales did no harm when they first arrived ... And it says nothing about the second account.\" Each option must be checked against all three.",
+        "correct_reasoning": "The correct option is the first of those sentences restated: removing the bales is not enough to revive the mills. It keeps the author's qualifier \"by itself\" and claims nothing about the early years.",
+        "passage_anchor": "rc-0154-p4",
+        "question_type_note": "An agree-disagree question on a passage that bounds its own conclusion is a test of qualifiers. The author says what the evidence shows and what it does not; the right option stays inside the first, the wrong ones step into the second.",
+        "reading_habit": "When an author writes \"it shows X; it does not show Y\", any option asserting Y, or asserting the opposite of Y with the same confidence, is wrong. Mark the \"does not show\" sentence as carefully as the \"shows\" sentence.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "overstatement",
+            "why_wrong": "\"It does not show that the bales did no harm when they first arrived\" is the author's own refusal of this claim",
+            "seductive_element": "the bans paragraph is evidence against the first account, so a reader extends it to a full acquittal"
+          },
+          {
+            "option": "C",
+            "trap_type": "example_as_thesis",
+            "why_wrong": "the smuggled bales are one of three things listed about what happened after the bans; the author draws no conclusion about traders being the obstacle",
+            "seductive_element": "smuggling is the most vivid detail in the paragraph and looks like blame"
+          },
+          {
+            "option": "D",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "the author says the bans do not show the bales did no harm early on; that is a gap left open, not a claim that an early ban would have worked",
+            "seductive_element": "the clause about \"years when the mills still stood\" invites a reader to fill in what might have been"
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "bale",
+      "passage_use": "The bale is forty-five kilos of pressed cloth",
+      "meaning_here": "a large bundle of goods pressed tight and tied for transport",
+      "difficulty": "easy"
+    },
+    {
+      "word": "grade",
+      "passage_use": "by the grade printed on the side",
+      "meaning_here": "a class of quality assigned to the goods",
+      "difficulty": "easy"
+    },
+    {
+      "word": "tariffs",
+      "passage_use": "Mills that had grown up behind tariffs",
+      "meaning_here": "taxes on imports that shelter local producers from foreign competition",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "A bale of strangers' clothes is slit open at dawn. One story says it ruined the country's mills; another says it dressed the country. Which is it?",
+    "one_sentence_summary": "A used-clothes market scene opens the passage, which then shows that the claim the trade destroyed local mills and the claim it dressed and employed whole populations are both true at once because they answer different questions, and that even the evidence of failed bans only proves the bales were not the mills' only problem, not that they did no harm.",
+    "main_idea": "Reports that the global used-clothes trade both ruined textile mills and dressed and employed whole populations are not really in conflict, since one is about producers and the other about consumers and traders, and the fact that banning the bales never revived the mills shows only that the bales were not the sole cause of their closure, not that the trade was harmless.",
+    "simple_explanation": "At a market stall, a forty-five kilogram bale of used clothes is cut open at dawn. The trader has already paid for it based only on its printed grade and country of origin, since nobody can know what is actually inside until the strap is cut. Out tumble a child's coat, foreign T-shirts and jeans. The best pieces go straight onto hangers at the front of the stall, while the rest get cheaper through the day until a tailor buys the last of it by weight to cut into something new.\n\nTwo stories about this trade have circulated for decades, and they can sound like they contradict each other. The first blames the bales for killing off a country's textile mills, since no factory paying wages and power bills can compete with clothes that were given away for free, and many tariff-protected mills shut within a generation of the bales arriving. The second says the trade clothes whole populations cheaply and gives tens of thousands of people, many of them women, work sorting, carrying, washing, mending and re-cutting the clothes. The first story counts factories, the second counts people and jobs.\n\nLooked at this way, the two stories stop actually contradicting each other, because they are really answering different questions: one about what happened to the people who made the cloth, the other about what happened to the people who buy and trade it. A country can lose its mills and still gain a market, and both stories can be true of the same years. But the consumer story does not excuse the harm to producers, and the producer story does not prove the bales alone caused it, since the mills closed in years when tariffs were also falling, subsidies ending, power failing and cheap Asian cloth arriving too.\n\nThere is a standard way to test whether something is a cause: remove it and see what happens. Several governments have banned or heavily taxed the bales, and in each case the mills still did not come back; new foreign cloth filled the gap, the power problems stayed, and traders simply switched to smuggled bales. That result proves less than it looks like it does. It shows the bales were not the only thing keeping the mills shut, and that banning them is no real policy for reviving an industry. But it does not show the bales caused no harm back when the mills still stood and other pressures were lighter, and it says nothing at all about the people still cutting open bales at seven in the morning.",
+    "why_difficult": "Readers expect one account of the used-clothes trade to be right and the other wrong, when the passage's real point is that both can be true at once because they answer different questions, and that the evidence from failed bans proves a narrower claim than it first appears to.",
+    "author_intention": "To show that two apparently clashing accounts of a trade are both accurate because they describe different groups, and to demonstrate, through the test of banning the bales, exactly what a causal claim can and cannot be shown to prove.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0154-p1",
+        "role": "Opens the scene",
+        "note": "A bale of used clothes is cut open at a market stall at dawn, and its contents are sorted and sold at different prices through the day."
+      },
+      {
+        "paragraph_id": "rc-0154-p2",
+        "role": "States two accounts",
+        "note": "One account says the bales destroyed local textile mills, and the other says the trade dresses and employs whole populations."
+      },
+      {
+        "paragraph_id": "rc-0154-p3",
+        "role": "Reconciles the two",
+        "note": "The two accounts stop clashing once you see they answer different questions, about producers and about consumers and traders, though neither excuses or fully explains the other."
+      },
+      {
+        "paragraph_id": "rc-0154-p4",
+        "role": "Tests the cause",
+        "note": "Banning the bales did not revive the mills, which shows they were not the only cause of closure, but not that they did no harm when they first arrived."
+      }
+    ],
+    "tone_progression": "The voice stays even-handed and observant throughout, opening on a concrete market scene and staying in the present tense even as it moves into the careful weighing of evidence in the final two paragraphs.",
+    "key_transitions": [
+      "'Set out like that, they stop contradicting each other, because they answer different questions.' (opening of paragraph 3): the two accounts are reconciled.",
+      "'There is a way to test a cause, which is to take it away and watch.' (opening of paragraph 4): the passage turns from description to a method of proof.",
+      "'It does not show that the bales did no harm when they first arrived...' (paragraph 4): states the limit of what the test of banning the bales actually proves."
+    ],
+    "misunderstanding": "A hurried reader picks one account as correct and the other as propaganda, missing that the passage's point is that both can be true together because they answer different questions, and also missing that the test of banning the bales proves a smaller claim than a full acquittal.",
+    "traps_summary": "The wrong options merge two separate sentences about the stall into one false claim, promise a guarantee the passage explicitly denies, read a stated contradiction as the author's own verdict, or stretch what the bans show into a claim the passage goes out of its way to say it does not show.",
+    "reading_lesson": "When an author writes that evidence 'shows X' and then adds what it 'does not show', treat the second half as just as binding as the first, and check every option against both halves before choosing.",
+    "real_world": "The same pattern shows up whenever a single policy change is blamed, or credited, for a complex outcome, such as a tax cut and a factory closing, since removing one factor and watching what happens tests only whether it was necessary, not whether it ever did harm.",
+    "takeaway": "Two accounts that look like they contradict each other may really be answering different questions about different groups.",
+    "reflection_question": "Can you think of a debate you have heard where two sides seemed to disagree but were actually answering different questions?",
+    "eli10": {
+      "big_idea": "Two stories about old clothes sold cheaply, one saying they ruined local factories and one saying they give people cheap clothes and jobs, can both be true because they are about different people.",
+      "story": "Every morning, a trader cuts open a big bag of used clothes from other countries. She sells the best pieces fast and the rest cheaper through the day. People tell two stories about this trade. One story says it closed down local clothing factories. The other story says it gives people cheap clothes and lots of jobs. At first these stories sound like they disagree. But they do not really disagree, because they are about different people. One story is about factory workers. The other is about shoppers and traders. Some countries banned the used clothes to help their factories. The factories still did not come back. That shows banning the clothes was not enough on its own. It does not prove the clothes never hurt the factories at all.",
+      "paragraphs": [
+        "A trader cuts open a bale of used clothes each morning and sells it at falling prices through the day.",
+        "One story blames the bales for closing local mills, and another says the trade clothes and employs whole populations.",
+        "The two stories stop disagreeing once you see they answer different questions, about makers and about buyers and traders.",
+        "Banning the bales did not bring the mills back, which proves a smaller point than that the bales never did harm."
+      ],
+      "author_view": "The writer stays balanced and refuses to pick a side, insisting that both accounts can be true and that the evidence proves less than it first seems to."
+    }
+  }
+}

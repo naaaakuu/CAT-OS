@@ -1,0 +1,411 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0152",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 89,
+    "genre": "history",
+    "difficulty": "medium",
+    "difficulty_numeric": 4,
+    "stage": "developing",
+    "skills": [
+      "inference",
+      "evidence-anchoring",
+      "application",
+      "structure-mapping",
+      "causal-reasoning"
+    ],
+    "word_count": 436,
+    "question_count": 4,
+    "question_types": [
+      "application",
+      "cannot_be_inferred",
+      "role_of_detail",
+      "specific_detail"
+    ],
+    "theme": "collagen records where a decade's protein came from; a vanished marine signal is evidence only because earlier bones and shell middens show what its presence would look like",
+    "estimated_time_min": 7.5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-07",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted."
+    },
+    "date_added": "2026-10-07",
+    "batch_id": "batch-rc-007",
+    "prompt_version": "content engine v1 + CAT paper patterns 2026-10; batch-rc-007",
+    "reviewer_notes": "The corpus has \"gaps in the record are evidence\" as a four-sentence jumble (pj-0018); this passage adds the mechanism (two isotopes, a ten-year average, source not quantity) and the two conditions that make an absence count, each tied to a named piece of evidence. The near-tie is in Q3, where the middens and the earlier bones each satisfy one condition and the closing sentence assigns them; the wrong option hands the shells the bones' job. The voice is a first-person scene at a lab bench, past tense narrative that turns to analysis in paragraph two, with a date (4000 BC) in paragraph three. Sentence mean is middling by design; the foundation passage in this batch is the short-sentence one. The move is narrative, and the voice is first person, past tense, opening in a scene and turning to analysis, with one date marking the turn to history.",
+    "length_class": "medium",
+    "structure": "narrative_reflection",
+    "viewpoints": 1,
+    "tone": "quiet, exact, faintly wondering",
+    "difficulty_vector": {
+      "lexical": 2,
+      "syntactic": 2,
+      "abstraction": 3,
+      "inference_depth": 3,
+      "distractor_similarity": 3,
+      "reasoning_depth": 3,
+      "structural_ambiguity": 2,
+      "time_pressure": 2
+    },
+    "reasoning_patterns": [
+      "comp.explicit_detail",
+      "lang.causal_wording",
+      "scope.time_period",
+      "inf.vs_speculation",
+      "inf.directly_implied",
+      "elim.systematic",
+      "comp.purpose",
+      "struct.claim_evidence",
+      "arg.evidence",
+      "inf.author_view_application",
+      "arg.principle",
+      "scope.condition",
+      "struct.chronology",
+      "struct.cause_effect",
+      "struct.pivot",
+      "struct.qualification"
+    ],
+    "quality": {
+      "status": "verified",
+      "adversarial_review": "Q1: A strong candidate argues for the feast-and-lean-winter option because both examples are in the passage; \"leaves no mark\" settles it, since the option says the opposite. Q2: The fight is over the newcomers option, which a candidate reads as contradicting \"nor is it, by itself, a migration\"; but \"the signature would be identical whether newcomers brought inland habits or the old fishing families took up the new food\" says the method cannot decide, which is what the option says, so it is inferable, while \"the rib will not say\" leaves the plenty option with no sentence at all. Q3: The method-can-detect option is the real contest; \"The earlier bones supplied the first, and the shells on the beach the second\" assigns detection to the bones and availability to the shells. Q4: The never-recovered option tempts as \"the method is consistent\"; \"a method that finds nothing may simply be a method that cannot find\" is the sentence written against it, and the rejected-crop option fails \"there to be had\" because the crop was never within reach.",
+      "blind_solve": {
+        "solver": "sonnet blind reader 2026-10-07",
+        "agreed": 4,
+        "total": 4,
+        "notes": "full agreement"
+      }
+    },
+    "vocab_extracted": [
+      "midden",
+      "collagen",
+      "signature"
+    ]
+  },
+  "passage": {
+    "title": "Bones Above the Shore",
+    "reading_time_min": 2.3,
+    "paragraphs": [
+      {
+        "id": "rc-0152-p1",
+        "text": "The box came up from the store on a Tuesday, smelling of dust and old paper. Inside lay the ribs of eleven people buried on a headland above the Atlantic some six thousand years ago. From each rib I drilled a sliver, dissolved the mineral away and kept the collagen, the protein that bone is built on. A week later the spectrometer gave me two numbers for each of them. The sea lay a short walk below the graves. Nobody in the box had eaten from it in years."
+      },
+      {
+        "id": "rc-0152-p2",
+        "text": "Collagen can say this because it is made from the protein a person eats, and carbon and nitrogen each come in a lighter and a heavier form. The heavier forms are commoner in the sea than on land, and the heavier nitrogen grows commoner with every step up a food chain, and the sea's food chains are long. A body fed on fish and seal therefore carries more of them than one fed on grain and beef. Bone renews itself slowly, so an adult rib averages roughly the last ten years of eating: a single feast or one lean winter leaves no mark, but a way of life does. The ratio records where the protein came from, not how much of it there was."
+      },
+      {
+        "id": "rc-0152-p3",
+        "text": "Around the coasts of Britain farming arrived about 4000 BC, and in coastal ribs the marine signal fades within a few generations. The sea had not moved, and the middens of shells left by earlier fishers show that it was full. An absence is dangerous evidence; a method that finds nothing may simply be a method that cannot find. But the ribs of people buried on the same coasts before the change carry the marine signal plainly. The instrument can see fish. It stopped seeing them because they stopped being eaten."
+      },
+      {
+        "id": "rc-0152-p4",
+        "text": "The absence is not a famine: a hungry farming community and a well-fed one read much the same. Nor is it, by itself, a migration. Collagen records what a body ate, not who its grandparents were, and the signature would be identical whether newcomers brought inland habits or the old fishing families took up the new food. What the absence does show is a choice, held generation after generation, to eat from the land while the sea lay in sight. Why they chose it, taste or status or belief, the rib will not say. An absence becomes evidence only when you know what presence would have looked like and that the thing absent was there to be had. The earlier bones supplied the first, and the shells on the beach the second."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0152-q1",
+      "type": "specific_detail",
+      "skill": "specific_detail",
+      "patterns": [
+        "comp.explicit_detail",
+        "lang.causal_wording",
+        "scope.time_period"
+      ],
+      "target_mistake": "taking \"averages roughly the last ten years\" as a record of quantity or of a whole life, or missing that slowness is what makes the record useful",
+      "prediction_target": null,
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 2,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "scope"
+      ],
+      "stem": "According to the passage, the collagen in an adult rib is useful to the author because it",
+      "options": {
+        "A": "records how much protein a person ate, averaged over the whole of a lifetime",
+        "B": "changes fast enough that a single feast or one lean winter leaves a mark",
+        "C": "averages about ten years of eating, so a way of life shows and one season does not",
+        "D": "holds the heavier forms of carbon and nitrogen more readily than any other tissue in the body"
+      },
+      "correct": "C",
+      "estimated_time_sec": 50,
+      "explanation": {
+        "expert_notice": "The sentence that answers is built as cause and effect: \"Bone renews itself slowly, so an adult rib averages roughly the last ten years of eating\", and the colon after it says what that buys, \"a single feast or one lean winter leaves no mark, but a way of life does\". The next sentence adds a limit: \"where the protein came from, not how much of it there was\".",
+        "correct_reasoning": "The correct option restates that cause and effect in order: about ten years of averaging, so a way of life registers and a single season does not. Both halves are in the text, and the second half is exactly what the author means by useful.",
+        "passage_anchor": "rc-0152-p2",
+        "question_type_note": "A detail question asks you to find one sentence and read its qualifiers as carefully as its nouns. Here the qualifiers are \"roughly the last ten years\", \"no mark\" and \"not how much\". Each wrong option breaks one of them.",
+        "reading_habit": "When a passage explains why a method works, underline the \"so\" or \"because\" and the sentence after it. The question will test the direction and the limit of that mechanism, not the topic.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "the passage says the ratio records \"where the protein came from, not how much of it there was\", and the window is \"roughly the last ten years\", not a lifetime",
+            "seductive_element": "it keeps the words \"averages\" and \"protein\" from the right sentence and quietly swaps the thing measured"
+          },
+          {
+            "option": "B",
+            "trap_type": "opposite_direction",
+            "why_wrong": "the text says a feast or a lean winter \"leaves no mark\"; the rib is useful because it is slow, not fast",
+            "seductive_element": "it reuses the passage's own examples, the feast and the lean winter, and reverses what they show"
+          },
+          {
+            "option": "D",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "the passage compares sea diets with land diets; it never compares the rib with other tissues, and ranks nothing",
+            "seductive_element": "the heavier forms are genuinely in the text, so the option reads like something you remember"
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0152-q2",
+      "type": "cannot_be_inferred",
+      "skill": "inference",
+      "patterns": [
+        "inf.vs_speculation",
+        "inf.directly_implied",
+        "elim.systematic"
+      ],
+      "target_mistake": "treating a plausible reason for the change as something the passage supports, when the author lists the reason among the things \"the rib will not say\"",
+      "prediction_target": "the author refuses to say why the community chose land food (\"taste or status or belief, the rib will not say\"); any option that supplies a reason is beyond the evidence, while options about what the method can and cannot see are inside it",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 3,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "specific_detail",
+        "scope"
+      ],
+      "stem": "Which of the following CANNOT be inferred from the passage?",
+      "options": {
+        "A": "The communities that gave up seafood did so because the new foods were more plentiful.",
+        "B": "Before farming reached these coasts, the people living on them ate from the sea.",
+        "C": "A person who gave up fish a year before death would still carry some of the marine signal.",
+        "D": "The method cannot, by itself, tell newcomers to the coast from descendants of the fishers."
+      },
+      "correct": "A",
+      "estimated_time_sec": 90,
+      "explanation": {
+        "expert_notice": "The last paragraph draws a line. The absence shows \"a choice\", and \"why they chose it, taste or status or belief, the rib will not say\". Everything before that line is about what the chemistry can see; everything after it is what it cannot. A strong reader marks that line before touching the options.",
+        "correct_reasoning": "The correct option gives a reason for the choice: plenty. The passage names no reason and says explicitly that the rib cannot supply one. The option is not shown to be false; it is simply unsupported, which is what \"cannot be inferred\" means. The other three each sit on a sentence. Earlier ribs \"carry the marine signal plainly\" and the fishers left middens. The rib \"averages roughly the last ten years of eating\", so one year of abstinence leaves most of the window full of fish. And the signature \"would be identical whether newcomers brought inland habits or the old fishing families took up the new food\".",
+        "passage_anchor": "rc-0152-p2, rc-0152-p3, rc-0152-p4",
+        "question_type_note": "A cannot-be-inferred question hands you three statements the text supports and one it does not. The unsupported one is usually a sensible-sounding explanation, because explanations feel like inferences. Test each option by asking which sentence licenses it; the one with no sentence is the answer.",
+        "reading_habit": "When an author says what the evidence will not tell you, treat that sentence as a fence. Any option that steps over it is unsupported, however reasonable it sounds.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "the passage never says the earlier people \"ate from the sea\" in those words, but \"the ribs of people buried on the same coasts before the change carry the marine signal plainly\" and \"the middens of shells left by earlier fishers\" say exactly that",
+            "seductive_element": "a reader hunting for the option's words does not find them and concludes the claim is unsupported"
+          },
+          {
+            "option": "C",
+            "trap_type": "temporal_distortion",
+            "why_wrong": "\"an adult rib averages roughly the last ten years of eating\"; a diet given up one year before death still fills most of that window",
+            "seductive_element": "a reader who takes the rib as a record of recent eating thinks a year away from fish would erase the signal"
+          },
+          {
+            "option": "D",
+            "trap_type": "opposite_direction",
+            "why_wrong": "\"the signature would be identical whether newcomers brought inland habits or the old fishing families took up the new food\" says the method cannot tell them apart; the option restates this rather than contradicting it",
+            "seductive_element": "\"nor is it, by itself, a migration\" is misread as the author ruling migration out, so an option saying the method cannot decide seems to go against the text"
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0152-q3",
+      "type": "role_of_detail",
+      "skill": "paragraph_function",
+      "patterns": [
+        "comp.purpose",
+        "struct.claim_evidence",
+        "arg.evidence"
+      ],
+      "target_mistake": "giving the shells the job the earlier bones do (proving the method can see fish) rather than the job the final sentence assigns them (proving the sea was there to be had)",
+      "prediction_target": "the shells answer \"was there still fish to eat?\"; the final sentence pairs them with the second of the author's two conditions, \"that the thing absent was there to be had\"",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "logical_structure"
+      ],
+      "stem": "Why does the author mention the middens of shells left by earlier fishers?",
+      "options": {
+        "A": "to show that the diet of the coastal people before farming was poor and monotonous",
+        "B": "to show that the method can detect seafood whenever seafood has been eaten",
+        "C": "to suggest that the fishers who left them were the ancestors of the farmers",
+        "D": "to establish that the sea was still a source of food when the signal disappeared"
+      },
+      "correct": "D",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "The middens appear in \"The sea had not moved, and the middens of shells left by earlier fishers show that it was full\", and they return in the last sentence, where the author sorts the evidence into two jobs: \"The earlier bones supplied the first, and the shells on the beach the second.\" The first condition is knowing what presence looks like; the second is knowing the thing absent was available. The shells are the second.",
+        "correct_reasoning": "The correct option names that second job: the sea was still a source of food. That is what \"show that it was full\" means in context, and the closing sentence confirms the pairing.",
+        "passage_anchor": "rc-0152-p3, rc-0152-p4",
+        "question_type_note": "A role-of-detail question asks what work a detail does in the argument, not what it says. Find where the detail is introduced and where it is used again; the second place usually tells you its job.",
+        "reading_habit": "When an author lists two conditions and then assigns the evidence to them, match each piece of evidence to its condition explicitly. Questions about \"why mention X\" are usually answered by that matching.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "nothing in the passage judges the earlier diet as poor or monotonous; the shells show the sea \"was full\", a fact about supply, not about quality",
+            "seductive_element": "middens are refuse, and refuse suggests a thin diet to a reader filling in from outside the text"
+          },
+          {
+            "option": "B",
+            "trap_type": "wrong_structural_role",
+            "why_wrong": "the job of showing the method can see fish is given to \"the ribs of people buried on the same coasts before the change\", and the final sentence says \"the earlier bones supplied the first\"",
+            "seductive_element": "this is the near miss: it names a real condition in the argument, but hands it to the wrong piece of evidence"
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "the author says the signature \"would be identical\" whether the farmers were newcomers or the old families, and that who they were the rib \"will not say\"",
+            "seductive_element": "the fishers and the farmers lived on the same coast, so a reader supplies the continuity the author withholds"
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0152-q4",
+      "type": "application",
+      "skill": "application",
+      "patterns": [
+        "inf.author_view_application",
+        "arg.principle",
+        "scope.condition"
+      ],
+      "target_mistake": "accepting an absence as evidence when only one of the two conditions holds, or when nothing is absent at all",
+      "prediction_target": "both of the author's conditions must hold: the method has shown the thing elsewhere, so presence is known to be visible, and the thing was available to be found",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 3,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "inference"
+      ],
+      "stem": "A botanist finds no pollen of a certain crop in one layer of mud from a lake bed. On the author's reasoning, she can treat that absence as evidence in which of the following cases?",
+      "options": {
+        "A": "Her coring method has never recovered that crop's pollen from any layer, anywhere.",
+        "B": "Deeper layers from the same lake hold the pollen clearly, and the crop grew nearby throughout.",
+        "C": "The crop was never grown within reach of the lake, so the empty layer confirms that it was rejected.",
+        "D": "The pollen appears faintly in the layer, which she takes to show the crop was grown but rarely."
+      },
+      "correct": "B",
+      "estimated_time_sec": 90,
+      "explanation": {
+        "expert_notice": "The principle is stated in one sentence: \"An absence becomes evidence only when you know what presence would have looked like and that the thing absent was there to be had.\" Two conditions, joined by \"and\". The next sentence shows them being met: earlier bones for the first, shells for the second.",
+        "correct_reasoning": "Only the correct option meets both conditions. Deeper layers holding the pollen clearly are the botanist's \"earlier bones\": the method can see this pollen in this lake. The crop growing nearby throughout is her \"shells on the beach\": it was there to be had. With both in place, the empty layer records something that happened, not something the method missed.",
+        "passage_anchor": "rc-0152-p3, rc-0152-p4",
+        "question_type_note": "An application question gives you a new case and asks which version of it the author's rule accepts. Write the rule down as conditions first, then check each option against every condition. The distractors usually satisfy one condition each, or none.",
+        "reading_habit": "When a passage says \"only when X and Y\", treat any option with X but not Y, or Y but not X, as failing, however sensible the rest of the scenario sounds.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "wrong_condition",
+            "why_wrong": "the method has never shown the pollen anywhere, so she does not \"know what presence would have looked like\"; \"a method that finds nothing may simply be a method that cannot find\"",
+            "seductive_element": "a method that has always found nothing feels consistent, which is mistaken for reliable"
+          },
+          {
+            "option": "C",
+            "trap_type": "fact_right_interpretation_wrong",
+            "why_wrong": "the crop was not \"there to be had\", so the absence cannot show rejection; the author's own case needed the sea to be \"full\"",
+            "seductive_element": "the conclusion, rejection, is the one the passage draws, so the option sounds like the author's reasoning applied"
+          },
+          {
+            "option": "D",
+            "trap_type": "out_of_scope",
+            "why_wrong": "nothing is absent here; the passage's rule is about \"an absence\", and faint presence is a different kind of evidence that the passage never discusses",
+            "seductive_element": "it looks like careful reading of a weak signal, which is the mood of the passage"
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "midden",
+      "passage_use": "the middens of shells left by earlier fishers",
+      "meaning_here": "a heap of discarded refuse, here of shells, left by people who lived there before",
+      "difficulty": "medium"
+    },
+    {
+      "word": "collagen",
+      "passage_use": "kept the collagen, the protein that bone is built on",
+      "meaning_here": "the protein framework of bone that survives when the mineral is dissolved away",
+      "difficulty": "medium"
+    },
+    {
+      "word": "signature",
+      "passage_use": "the signature would be identical",
+      "meaning_here": "the characteristic pattern a diet leaves in the chemistry of bone",
+      "difficulty": "easy"
+    }
+  ],
+  "mentor": {
+    "challenge": "A rib keeps about ten years of its owner's meals. On one coast, six thousand years ago, the record stops mentioning the sea. The sea had not gone anywhere.",
+    "one_sentence_summary": "A scientist explains how the chemistry in six-thousand-year-old ribs shows that early British farmers stopped eating from the sea, and why a missing signal like this only counts as evidence once you already know the method could have seen the thing and that the thing was there to be found.",
+    "main_idea": "Bone chemistry records where a person's protein came from over roughly the last ten years of their life, not how much they ate. When the sea-food signal fades from the ribs of early British farmers, that absence only becomes evidence once you know the method could have detected fish and that fish was still available to eat.",
+    "simple_explanation": "A box of old bones arrives at a lab. Inside are the ribs of eleven people who were buried on a cliff above the sea about six thousand years ago. The scientist drills a sliver from each rib, dissolves away the mineral, and keeps the protein inside, called collagen. A machine gives two chemical numbers for each person. The sea sits close by, but nobody in this group seems to have eaten from it for years.\n\nHere is why that works. Collagen is built from the protein a person eats, and the carbon and nitrogen in it come in a lighter and a heavier type. Sea food carries more of the heavier types than land food, and carries even more the higher up a food chain you eat. Because bone rebuilds itself slowly, an adult rib holds roughly a ten-year average of eating. One big feast or one hard winter leaves no trace, but a steady way of eating does. The ratio tells you where the food came from, not how much of it there was.\n\nAround 4000 BC, farming reached the coasts of Britain, and soon after, the sea-food signal in people's ribs fades. But the sea had not gone anywhere, and old heaps of shells left by earlier fishing people show it was still full of food. Finding nothing in bones is tricky evidence by itself, because a method that always finds nothing might simply be a method that cannot find. The proof that this method does work is that ribs from people buried on the same coast before farming do show the sea-food signal clearly. So the instrument really can see fish in bone. It only stops seeing fish once people stop eating them.\n\nThat disappearing signal is not a sign of hunger, since a well-fed farmer and a hungry one would look the same in this test. It is not proof of new people moving in either, because the bones would look identical whether newcomers brought farming habits or the old fishing families switched to farming themselves. What the change shows is that, generation after generation, people chose to eat from the land while still living in sight of the sea. The bones cannot say why, whether it was taste, status or belief. The lesson is that an absence only becomes real evidence once you know two things: what its presence would have looked like, and that the thing really was there to be had. The earlier bones prove the first point, and the old shell heaps prove the second.",
+    "why_difficult": "The passage asks you to hold two separate conditions in mind for when an absence counts as evidence, and to match each condition to a different piece of evidence, the earlier bones and the shell middens, rather than letting one detail do both jobs at once.",
+    "author_intention": "To show, through one scientist's own analysis, that a slow chemical average can turn a missing signal into solid evidence, but only once two separate conditions about what is known and what was available are both satisfied.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0152-p1",
+        "role": "Opens the scene",
+        "note": "A box of ancient ribs arrives at the lab, and the scientist tests their bone protein for two chemical numbers."
+      },
+      {
+        "paragraph_id": "rc-0152-p2",
+        "role": "Explains the method",
+        "note": "Bone protein gives a slow, roughly ten-year average of diet, and heavier carbon and nitrogen point to food from the sea."
+      },
+      {
+        "paragraph_id": "rc-0152-p3",
+        "role": "Applies it to history",
+        "note": "After farming reaches the coast, the sea-food signal fades, even though the sea was still there and still full of fish."
+      },
+      {
+        "paragraph_id": "rc-0152-p4",
+        "role": "States the limit",
+        "note": "The vanishing signal shows a chosen change in diet, not hunger or new arrivals, and the passage names the two conditions that let an absence count as evidence."
+      }
+    ],
+    "tone_progression": "The voice stays quiet and exact throughout, moving from a first-person lab scene to a careful explanation of method, and ending on a faintly wondering note about what an absence can and cannot prove.",
+    "key_transitions": [
+      "'Collagen can say this because it is made from the protein a person eats...' (opening of paragraph 2): the scene gives way to the mechanism.",
+      "'The ratio records where the protein came from, not how much of it there was.' (closing paragraph 2): states the limit the rest of the passage depends on.",
+      "'An absence becomes evidence only when you know what presence would have looked like and that the thing absent was there to be had.' (closing paragraph 4): states the rule the whole passage has been building toward."
+    ],
+    "misunderstanding": "A hurried reader treats the vanishing sea-food signal as proof by itself, missing that the passage spends two paragraphs showing the two separate things that must be true before an absence can count as evidence at all.",
+    "traps_summary": "The wrong options take a true detail from one place in the passage and attach it to the wrong job: a feast or lean winter undoing the average, the wrong piece of evidence proving detection instead of availability, or a new scenario that is missing one of the two required conditions.",
+    "reading_lesson": "When a passage explains that something works because of a mechanism, read the limit sentence right after it just as carefully. The questions will test what the mechanism can show, and just as often, what it cannot.",
+    "real_world": "The same caution applies whenever silence is read as proof, such as a clean inspection record, an empty complaints file, or a species missing from a survey; absence only means something once you know the method could have caught it and the thing was there to be caught.",
+    "takeaway": "An absence is only evidence once you know what its presence would have looked like and that the thing was there to be found.",
+    "reflection_question": "Can you think of a time you treated silence or absence as proof of something, without checking whether it could have been detected in the first place?",
+    "eli10": {
+      "big_idea": "A missing chemical signal in old bones only proves a change in diet once you know the test could have spotted it and that the food was really there to eat.",
+      "story": "A scientist tests old bones from people who lived by the sea long ago. Bone holds a chemical record of what a person ate for about the last ten years of their life. Sea food leaves a different mark than land food does. In older bones, that sea mark shows up clearly. Then farming arrived on the coast, and in newer bones the sea mark disappears. But the sea was still right there, full of fish, since old piles of shells prove it. So why does the mark vanish? The scientist says people simply chose to eat land food instead. The test cannot say why they chose that. The scientist's lesson is simple. A missing sign only proves something once you know the test can see it, and the thing was really there.",
+      "paragraphs": [
+        "A box of ancient ribs arrives at the lab for testing.",
+        "Bone protein holds a slow, roughly ten-year average of diet, pointing to where food came from.",
+        "After farming reaches the coast, the sea-food signal fades, even though the sea was still there and still full of fish.",
+        "The vanishing signal shows a chosen change in diet, and only counts as evidence once two conditions are both met."
+      ],
+      "author_view": "The writer finds this quietly fascinating: a tiny chemical trace can speak for people who left no other record, as long as you are careful about what its silence can and cannot prove."
+    }
+  }
+}

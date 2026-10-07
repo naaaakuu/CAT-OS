@@ -1,0 +1,406 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0151",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 92,
+    "genre": "science",
+    "difficulty": "hard",
+    "difficulty_numeric": 8,
+    "stage": "advanced",
+    "skills": [
+      "inference",
+      "main-idea-extraction",
+      "vocabulary-in-context",
+      "trap-recognition",
+      "evidence-anchoring"
+    ],
+    "word_count": 556,
+    "question_count": 4,
+    "question_types": [
+      "except",
+      "inference",
+      "main_idea",
+      "vocabulary_in_context"
+    ],
+    "theme": "cave fish lose their eyes under three kinds of explanation, cost, neglect and trade-off; the evidence fits more than one, and the loss may be better seen as the absence of a reason to keep the eye",
+    "estimated_time_min": 7.5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-07",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted."
+    },
+    "date_added": "2026-10-07",
+    "batch_id": "batch-rc-007",
+    "prompt_version": "content engine v1 + CAT paper patterns 2026-10; batch-rc-007",
+    "reviewer_notes": "An aporia in the cold register: three accounts, each with its predictions, each fitting the evidence in part, and a last paragraph that questions the question rather than answering it. What this adds to the familiar cave-fish story is the typing of the accounts (pushed, drifting, bartered) and the observation that selection maintains as much as it builds, so a loss can begin as a release. The near-tie is in Q3, where a finalist turns the author's \"perhaps because all three operated\" into a certainty. Sentences average above twenty-four words, the longest rhythm in the batch, and the author is never amused or angry, only exact. The 2025 exam set a cave-fish passage; this one is original and takes the aporia shape rather than reporting a finding. The move is an aporia holding three accounts without resolving them, carried in an impersonal, cold, exact voice.",
+    "length_class": "medium",
+    "structure": "dialectic",
+    "viewpoints": 3,
+    "tone": "cold, exact, unresolved",
+    "difficulty_vector": {
+      "lexical": 3,
+      "syntactic": 4,
+      "abstraction": 5,
+      "inference_depth": 5,
+      "distractor_similarity": 4,
+      "reasoning_depth": 4,
+      "structural_ambiguity": 4,
+      "time_pressure": 3
+    },
+    "reasoning_patterns": [
+      "arg.assumption",
+      "arg.conclusion",
+      "arg.evidence_vs_conclusion",
+      "comp.attention_span",
+      "comp.central_idea",
+      "comp.explicit_detail",
+      "comp.function_over_words",
+      "comp.paraphrase",
+      "inf.directly_implied",
+      "lang.may_vs_must",
+      "lang.subtle_negation",
+      "struct.claim_counterclaim",
+      "struct.conclusion",
+      "struct.question_answer"
+    ],
+    "quality": {
+      "status": "verified",
+      "adversarial_review": "Q1: A strong candidate argues that the embryo is an observation rather than a prediction and picks it; the stem says \"predicts or explains\", and the text says the embryo \"fits trade-off\" and \"also cost\", which is explanation. The key is settled by the absence of any sentence joining jaw size to food supply. Q2: The strongest rival says repeated loss contradicts neglect; \"fits neglect if an eye is an easy thing to break\" settles that it does not. The key rests on \"nothing eats the blind fish faster than the sighted one\", a denial of penalty and not an assertion of advantage. Q3: The near-tie is the option that says all three must have operated; \"perhaps because all three operated, perhaps because the question assumes a single road\" shows the author offering it as one guess of two. Q4: A candidate argues for \"proof\", since the accounts are being compared; \"should show the signature\" makes it a predicted pattern to look for, and the colon after \"the opposite signature\" lists a pattern, not a verdict.",
+      "blind_solve": {
+        "solver": "sonnet blind reader 2026-10-07",
+        "agreed": 4,
+        "total": 4,
+        "notes": "full agreement"
+      }
+    },
+    "vocab_extracted": [
+      "demolition",
+      "bartered",
+      "midline"
+    ]
+  },
+  "passage": {
+    "title": "Nothing Keeps the Eye",
+    "reading_time_min": 3,
+    "paragraphs": [
+      {
+        "id": "rc-0151-p1",
+        "text": "Caves in north-eastern Mexico hold a small fish that matches the river fish outside except that, where the eyes should be, it has two sunken pits under skin. The forms interbreed, so the cave fish is not a species but an experiment that has run many times: the loss has happened separately in cave after cave, and the cave embryo still begins to build an eye before the lens dies and the rest collapses. The question looks simple, why did they lose their eyes, and three answers of three different kinds are on the table."
+      },
+      {
+        "id": "rc-0151-p2",
+        "text": "The first is cost. An eye is expensive to build and to run, since the retina and the brain behind it burn energy out of proportion to their size, and where little food arrives a fish that spends nothing on sight has more for everything else. Under this account selection pushed the eye out, and it predicts that loss should be fastest where food is scarcest and that the genes which built the eye should show the signature of having been selected against. The second is neglect. Mutations arrive in every generation and most of them break things; in the river a mutation that spoils the eye is removed because its carrier is eaten, but in the dark nothing eats the blind fish faster than the sighted one, so breakages accumulate until the eye is gone. This predicts the opposite signature: no direction in the mutations, different genes broken in different caves, a decay rather than a demolition."
+      },
+      {
+        "id": "rc-0151-p3",
+        "text": "The third is that the eye was not lost on its own account. The signal that lays out the midline of the embryo's head controls both the eye and the jaw, and in cave fish it is expanded, so that the eye shrinks while the jaw and the taste organs, useful in the dark, enlarge. There was selection, but for the jaw, and the eye went as the price of the bargain. The evidence, though, will not choose. Repeated loss in cave after cave fits cost, since the same pressure gives the same result, fits trade-off, since the same bargain pays everywhere, and fits neglect if an eye is an easy thing to break. The embryo that starts an eye and abandons it fits trade-off, since a signal does the abandoning, but also cost, since killing the lens early is the cheapest way to switch an organ off. Nearly every observation sits in two of the three houses."
+      },
+      {
+        "id": "rc-0151-p4",
+        "text": "It may be that the question is badly put. To ask why they lost their eyes treats the loss as an event with a cause. But an organ is not kept by default; it is kept because something, every generation, removes the fish that lack it, and in the river that something is the predator a blind fish cannot see. In the cave that pressure stopped, and nothing remained to hold the eye in place. Cost, neglect and trade-off are three descriptions of what happens to an unheld thing: it is pushed, it drifts, or it is bartered away. The honest answer is that the evidence does not say which, perhaps because all three operated, perhaps because the question assumes a single road down a slope that has several. What is certain is only the first step, which was not a loss but a release."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0151-q1",
+      "type": "except",
+      "skill": "specific_detail",
+      "patterns": [
+        "comp.explicit_detail",
+        "comp.attention_span",
+        "arg.evidence_vs_conclusion"
+      ],
+      "target_mistake": "blending the cost account's food prediction with the trade-off account's jaw mechanism into a prediction nobody in the passage makes",
+      "prediction_target": null,
+      "difficulty": {
+        "inference_depth": 4,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "argument"
+      ],
+      "stem": "The passage presents each of the following as something one of the three accounts predicts or explains, EXCEPT:",
+      "options": {
+        "A": "that the largest jaws are found in the caves with the least food",
+        "B": "that different genes would be found broken in different caves rather than the same ones",
+        "C": "that eyes would be lost fastest where food is scarcest",
+        "D": "that the embryo begins to build an eye and then abandons it"
+      },
+      "correct": "A",
+      "estimated_time_sec": 60,
+      "explanation": {
+        "expert_notice": "Each account comes with its own predictions: cost predicts speed where food is scarce and a selected-against signature; neglect predicts undirected mutations and different genes in different caves; trade-off explains the embryo's abandoned eye and the enlarged jaw. The expert lists these before reading options and looks for the statement on no list.",
+        "correct_reasoning": "Three options are on the page. \"Loss should be fastest where food is scarcest\" is the cost account's prediction; \"different genes broken in different caves\" is the neglect account's; the embryo that \"starts an eye and abandons it\" is said to fit trade-off and cost. No account links jaw size to food supply: the jaw belongs to trade-off, food to cost, and the passage never joins them. The option that joins them is the exception.",
+        "passage_anchor": "rc-0151-p2, rc-0151-p3",
+        "question_type_note": "An EXCEPT question with three accounts in play tests whether you kept each prediction with its own account. The wrong-looking option is usually a splice of two true details from different accounts; the splice is not in the passage even though every word of it is.",
+        "reading_habit": "When a passage sets out rival accounts, make a two-column list, account and what it predicts. An option that pairs a prediction with the wrong account, or pairs two accounts' details, is not something the passage says.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "stated, so not the exception: neglect \"predicts the opposite signature: no direction in the mutations, different genes broken in different caves\"",
+            "seductive_element": "a reader who took \"signature\" to mean a single pattern may not have registered the list that follows it"
+          },
+          {
+            "option": "C",
+            "trap_type": "wrong_condition",
+            "why_wrong": "stated, so not the exception: the cost account \"predicts that loss should be fastest where food is scarcest\"",
+            "seductive_element": "scarcity of food is mentioned under cost, but a reader who associated food with the feeding jaw of the trade-off account may think no account predicts this"
+          },
+          {
+            "option": "D",
+            "trap_type": "true_but_irrelevant",
+            "why_wrong": "stated, so not the exception: the embryo \"that starts an eye and abandons it fits trade-off\" and \"also cost\"",
+            "seductive_element": "the embryo is an observation rather than a prediction, so a reader may think it does not count, but the stem asks what the accounts predict or explain"
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0151-q2",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.directly_implied",
+        "arg.assumption",
+        "lang.subtle_negation"
+      ],
+      "target_mistake": "reading the neglect account as a selection account in disguise, with blindness favoured, when it needs only that blindness go unpunished",
+      "prediction_target": "the neglect account needs only that blindness not be punished in the dark; it says nothing about blindness being an advantage",
+      "difficulty": {
+        "inference_depth": 4,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "argument"
+      ],
+      "stem": "Which of the following can be inferred about the neglect account as the passage describes it?",
+      "options": {
+        "A": "It predicts that eyes would be lost more quickly than the cost account predicts.",
+        "B": "It is contradicted by the repeated loss of eyes in separate caves.",
+        "C": "It does not require that a blind fish do better in the cave than a sighted one.",
+        "D": "It assumes that mutations which damage the eye arise more often in the cave than in the river."
+      },
+      "correct": "C",
+      "estimated_time_sec": 95,
+      "explanation": {
+        "expert_notice": "The neglect sentence is built on a negative: \"nothing eats the blind fish faster than the sighted one\". That is a statement that blindness is not punished, not that it is rewarded. The expert also notes that mutations \"arrive in every generation\" in both habitats; what differs is removal.",
+        "correct_reasoning": "Under neglect, mutations that spoil the eye are removed in the river \"because its carrier is eaten\", and in the dark they accumulate because \"nothing eats the blind fish faster than the sighted one\". The account turns entirely on the absence of a penalty. It never needs a blind fish to be better off; it needs only that it be no worse off. So the correct option follows: the account does not require blind fish to do better.",
+        "passage_anchor": "rc-0151-p2, rc-0151-p3",
+        "question_type_note": "An inference about an account asks what that account needs and what it does not. Separate the account's claims from the claims of its rivals; the trap options here borrow the direction of the cost account (blindness pays) or invent a comparison the passage never makes.",
+        "reading_habit": "When a mechanism is described with \"nothing\" or \"no longer\", ask whether it depends on a positive advantage or merely on the removal of a disadvantage. The two feel alike and are not.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "comparison_distortion",
+            "why_wrong": "the passage never compares the speeds of the accounts; the only speed claim is the cost account's, about scarce food, and the passage never sets it against neglect",
+            "seductive_element": "cost is described as a push and neglect as accumulation, and a reader may infer a race the passage does not run"
+          },
+          {
+            "option": "B",
+            "trap_type": "opposite_direction",
+            "why_wrong": "the passage says the repeated loss \"fits neglect if an eye is an easy thing to break\"; it is compatible, not contradicted",
+            "seductive_element": "repeated identical outcomes sound like selection, so a reader assumes an undirected process cannot produce them"
+          },
+          {
+            "option": "D",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "mutations \"arrive in every generation\" in both habitats; the difference the passage names is that in the river they are \"removed\", not that they arrive less often",
+            "seductive_element": "\"breakages accumulate\" in the cave can be misread as more breakages arising rather than fewer being removed"
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0151-q3",
+      "type": "main_idea",
+      "skill": "main_idea",
+      "patterns": [
+        "comp.central_idea",
+        "arg.conclusion",
+        "lang.may_vs_must"
+      ],
+      "target_mistake": "promoting one of the three accounts to the thesis, or hardening the author's \"perhaps\" into a settled conclusion that all three operated",
+      "prediction_target": "three accounts fit the evidence, none can be chosen, and the author suspects the question itself treats a release as an event",
+      "difficulty": {
+        "inference_depth": 5,
+        "distractor_similarity": 5,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "inference"
+      ],
+      "stem": "Which of the following best states the main point of the passage?",
+      "options": {
+        "A": "The cave fish lost their eyes because the developmental signal that enlarges the jaw and the taste organs also shrinks the eye.",
+        "B": "Three kinds of explanation for the eye loss each fit much of the evidence, and asking which is right may treat the loss as an event with a single cause.",
+        "C": "The evidence from cave fish shows that it is selection against a costly organ, not unchecked mutation, that removes organs no longer in use.",
+        "D": "The three accounts fit the evidence equally well, which shows that all three must have operated together, in the same way, in every cave that lost its fish's eyes."
+      },
+      "correct": "B",
+      "estimated_time_sec": 80,
+      "explanation": {
+        "expert_notice": "The author never chooses. The third paragraph ends \"Nearly every observation sits in two of the three houses\", and the fourth opens \"It may be that the question is badly put\" and closes on \"perhaps... perhaps\". A main-idea option must keep both the unresolved evidence and the doubt about the question, and must keep the author's hedges.",
+        "correct_reasoning": "The passage sets out three accounts, shows in the third paragraph that each observation fits more than one, and in the fourth suggests that \"why did they lose their eyes\" treats a loss as \"an event\" with \"a cause\" when the first step was \"a release\". The correct option contains both halves and keeps \"may\", which matches the author's \"It may be\" and \"perhaps\".",
+        "passage_anchor": "rc-0151-p3, rc-0151-p4",
+        "question_type_note": "A main-idea question on an unresolved passage is answered by the option that reports the lack of resolution accurately. Options that resolve the passage, in any direction, are too strong; options that name one account are too narrow.",
+        "reading_habit": "Count the author's hedges in the last paragraph (\"may\", \"perhaps\", \"the evidence does not say\"). The main-idea option must carry the same weight of doubt; any option that says \"shows\" or \"must\" has added a certainty the author withheld.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "too_narrow",
+            "why_wrong": "this is the third account alone; the passage gives it as one of three and says the evidence \"will not choose\"",
+            "seductive_element": "the trade-off account is the most detailed and arrives last, where a thesis usually sits"
+          },
+          {
+            "option": "C",
+            "trap_type": "misattributed_view",
+            "why_wrong": "the passage never ranks cost above neglect; the cost account's predicted \"signature\" is stated, not confirmed, and the last paragraph says \"the evidence does not say\"",
+            "seductive_element": "cost is presented first and in the most familiar terms, so a reader may take it as the author's own view"
+          },
+          {
+            "option": "D",
+            "trap_type": "possibility_as_certainty",
+            "why_wrong": "the author says \"perhaps because all three operated\", one of two guesses offered side by side; \"must have\" and \"in every cave\" are the option's additions",
+            "seductive_element": "the near-tie: it begins with the passage's own claim that the accounts fit the evidence and then draws the conclusion the author declines to draw"
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0151-q4",
+      "type": "vocabulary_in_context",
+      "skill": "vocabulary_in_context",
+      "patterns": [
+        "comp.paraphrase",
+        "comp.function_over_words"
+      ],
+      "target_mistake": "taking the word in its everyday sense, or inflating a predicted pattern into proof",
+      "prediction_target": "the word is glossed by what follows the colon after its second use, a pattern mutations leave behind, directed for the cost account and undirected for neglect, not a proof that either account is correct",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 3,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "specific_detail"
+      ],
+      "stem": "In the second paragraph, the word \"signature\", as in \"the opposite signature\", most nearly means",
+      "options": {
+        "A": "a written mark of approval",
+        "B": "the proof that an account is correct",
+        "C": "the energy cost that an organ imposes",
+        "D": "a recognisable pattern left behind by a process"
+      },
+      "correct": "D",
+      "estimated_time_sec": 45,
+      "explanation": {
+        "expert_notice": "The word is used twice: the genes \"should show the signature of having been selected against\", and neglect \"predicts the opposite signature: no direction in the mutations, different genes broken in different caves\". The colon after the second use lists what the signature consists of, a pattern in the genes.",
+        "correct_reasoning": "Both uses attach the word to a pattern that a process would leave in the genes: a direction in the mutations for selection, no direction for neglect. The second use is followed by a colon and a description of that pattern. So the word means a recognisable pattern left by a process, which is what the correct option says.",
+        "passage_anchor": "rc-0151-p2",
+        "question_type_note": "A vocabulary-in-context question asks for the sense the word has in its sentence, not its commonest sense. Look at what the word is attached to and whether the author glosses it nearby; here the colon supplies the gloss.",
+        "reading_habit": "When a word is followed by a colon and a list, the list is the author's definition. Use it before considering the dictionary.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "common_knowledge_intrusion",
+            "why_wrong": "the everyday sense; nothing is signed, and the word is attached to mutations and genes",
+            "seductive_element": "it is the first meaning a reader reaches for"
+          },
+          {
+            "option": "B",
+            "trap_type": "overstatement",
+            "why_wrong": "a signature is what an account \"predicts\" the genes \"should show\"; it is evidence to look for, not proof that the account is right, and the passage says the evidence \"does not say\"",
+            "seductive_element": "the accounts are being tested, so a reader may hear \"signature\" as the test's verdict"
+          },
+          {
+            "option": "C",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "energy cost is the content of the cost account's premise, not the meaning of the word; the \"opposite signature\" of neglect is a pattern in genes, not an amount of energy",
+            "seductive_element": "the word first appears a few lines after the sentence about energy, so the ideas sit close together"
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "demolition",
+      "passage_use": "a decay rather than a demolition",
+      "meaning_here": "the deliberate pulling down of something",
+      "difficulty": "medium"
+    },
+    {
+      "word": "bartered",
+      "passage_use": "it is bartered away",
+      "meaning_here": "given up in exchange for something else",
+      "difficulty": "medium"
+    },
+    {
+      "word": "midline",
+      "passage_use": "lays out the midline of the embryo's head",
+      "meaning_here": "the central line that divides a body into left and right",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "In a Mexican cave the fish are blind and have been for a very long time. Ask why, and three good answers appear, and they refuse to take turns.",
+    "one_sentence_summary": "Blind cave fish that lost their eyes independently in many caves can be explained by three different mechanisms, cost, neglect and trade-off, each of which fits much of the evidence, and the author suggests the question itself may be wrong to treat the loss as a single event with one cause.",
+    "main_idea": "Cave fish have lost their eyes repeatedly and independently, and three distinct kinds of explanation, that eyes are costly, that mutations go unpunished in the dark, and that a developmental signal trades the eye for the jaw, each predict and fit much of the same evidence. The author concludes that the evidence cannot choose between them, and suggests the loss might be better understood as a release, the removal of the pressure that had been holding the eye in place, rather than as an event with a single cause.",
+    "simple_explanation": "In caves in north-eastern Mexico lives a small fish that looks just like the river fish outside, except that where its eyes should be there are only two sunken pits. Because cave fish and river fish can still breed together, the cave fish is not really a separate species, and the loss of eyes has happened again and again, separately, in cave after cave. Even stranger, the cave fish embryo starts to grow an eye before the lens dies and the eye collapses. The simple-looking question, why did they lose their eyes, actually has three different kinds of answer on offer.\n\nThe first answer is cost: eyes and the brain tissue behind them use a lot of energy, so in a food-poor cave a fish that spends nothing on sight has more energy for everything else, and natural selection would push the eye out. This idea predicts that eye loss should happen fastest where food is scarcest, and that the genes for building an eye should show clear signs of having been selected against. The second answer is neglect: harmful mutations appear every generation, and in the river a mutation that damages the eye gets removed because the fish carrying it gets eaten, but in the dark nothing eats a blind fish any faster than a sighted one, so damaging mutations simply pile up until the eye is gone. This predicts the opposite pattern: no particular direction to the mutations, and different genes broken in different caves, more a slow decay than a targeted demolition.\n\nThe third answer is that the eye was not lost for its own sake at all. A single signal that lays out the middle line of the embryo's head controls both the eye and the jaw, and in cave fish this signal is turned up, shrinking the eye while enlarging the jaw and taste organs that are actually useful in the dark. Here selection did happen, but for the jaw, with the eye lost merely as the price of that bargain. The trouble, the author points out, is that almost every piece of evidence fits more than one of these three answers at once: repeated loss in many caves fits all three, and the embryo that starts an eye and then abandons it fits both the trade-off and the cost explanations.\n\nThe author then suggests the question itself might be badly framed. Asking why the fish lost their eyes treats the loss as a single event with a single cause, but an organ is not kept by default; it survives only because something, generation after generation, removes the individuals that lack it, and in the river that something is a predator the blind fish cannot see. Once that pressure disappeared in the cave, nothing was left holding the eye in place. Cost, neglect and trade-off are simply three different descriptions of what happens to something no longer held in place: it is pushed, it drifts, or it is bartered away. The honest answer, the author says, is that the evidence does not tell us which explanation is right, perhaps because all three were at work together, or perhaps because the question itself assumes there is only one path when there are several. What is certain is only that the first step was not really a loss at all, but a release.",
+    "why_difficult": "The passage holds three competing explanations open at once and refuses, deliberately, to choose between them, which is unusual for a passage and uncomfortable for a reader used to passages that build to a single answer. The final paragraph's hedged language, 'may', 'perhaps', 'the evidence does not say', has to be read as the author's actual position, not as a dodge, and any question that resolves the tension in one direction is going further than the passage allows.",
+    "author_intention": "To lay out three genuinely different kinds of explanation for the same biological loss, show that the evidence does not decide between them, and suggest that the question 'why was the eye lost' may itself rest on a mistaken assumption, that losing an organ is an event rather than simply what happens once nothing holds it in place.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0151-p1",
+        "role": "Introduces the puzzle",
+        "note": "Cave fish have lost their eyes independently many times, and even start building an eye before abandoning it, so a simple question hides three kinds of possible answer."
+      },
+      {
+        "paragraph_id": "rc-0151-p2",
+        "role": "Gives cost and neglect",
+        "note": "Cost says eyes are too expensive to keep in a food-poor cave; neglect says harmful mutations simply go unpunished in the dark and pile up until the eye is gone."
+      },
+      {
+        "paragraph_id": "rc-0151-p3",
+        "role": "Gives trade-off, then the problem",
+        "note": "A single developmental signal may shrink the eye while enlarging the jaw, but nearly every observation fits more than one of the three explanations, so the evidence cannot choose between them."
+      },
+      {
+        "paragraph_id": "rc-0151-p4",
+        "role": "Questions the question itself",
+        "note": "The author suggests an organ survives only because something keeps removing those without it, and once that pressure stops, the eye is not so much lost as released, with no way to tell cost, neglect and trade-off apart."
+      }
+    ],
+    "tone_progression": "Cold and exact throughout, laying out each account in matching, careful language, and ending not in resolution but in an equally exact admission that the evidence does not decide the question, and that the question itself may be the wrong one.",
+    "key_transitions": [
+      "'The evidence, though, will not choose.' (paragraph 3): the passage turns from presenting three accounts to showing that none can be ruled out.",
+      "'It may be that the question is badly put.' (opening of paragraph 4): the passage turns from the three accounts to questioning the question itself."
+    ],
+    "misunderstanding": "A hurried reader expects the passage to end by picking a winner among cost, neglect and trade-off, or assumes that because trade-off is discussed last and in the most mechanistic detail, it must be the author's preferred answer. The passage's actual position is that the evidence does not decide, and that even the question of a single cause may be mistaken.",
+    "traps_summary": "The options blend a true detail from one account with a mechanism that belongs to a different account, promote one of the three explanations to the status of the main idea, and harden the author's paired guesses, 'perhaps... perhaps', into a stated certainty that all three operated together.",
+    "reading_lesson": "When a passage lays out several rival explanations for the same fact, list each one with what it specifically predicts before reading the questions, and treat any option that upgrades the author's hedged language, 'may', 'perhaps', 'it is possible', into a flat certainty as automatically too strong, regardless of how reasonable it sounds.",
+    "real_world": "The same difficulty shows up whenever several plausible causes could explain one outcome, a species' decline, a company's failure, a historical shift, and the honest answer is often that the evidence fits more than one explanation and cannot be forced to pick a single winner.",
+    "takeaway": "An organ, like a habit or an institution, is not kept by nothing; it is kept because something keeps removing what lacks it, and once that pressure stops, its loss can look like several different things at once.",
+    "reflection_question": "Can you think of something you assumed had one clear cause, which on closer thought might actually fit two or three different explanations equally well?",
+    "eli10": {
+      "big_idea": "Blind cave fish lost their eyes, and scientists have three different good explanations for why, but the evidence fits more than one explanation, so nobody can say for certain which is right.",
+      "story": "In a dark cave in Mexico lives a small fish with no eyes. Outside, in the river, the same fish has eyes that work fine. Scientists want to know why. They have three ideas. The first is cost. Eyes use a lot of energy, so in a cave with little food, a fish that saves that energy might do better. The second is neglect. Harmful gene changes happen every generation. In the river, a fish with bad eyes gets eaten, so the bad genes get removed. In the dark, nothing eats the blind fish any faster, so bad eye genes simply pile up over time. The third idea is a trade. One signal builds both the eye and the jaw. In the cave, that signal grows stronger, making a bigger jaw but a smaller eye. The trouble is that the facts fit more than one idea at once. So the scientists admit something honest: they are not sure which idea is right, and maybe all three happened together.",
+      "paragraphs": [
+        "Introduces the puzzle: cave fish lost their eyes many times, for reasons nobody is fully sure of.",
+        "Explains cost and neglect: eyes are expensive to run, and in the dark bad eye genes are never punished.",
+        "Explains the trade-off idea, then shows that the facts fit more than one idea at once.",
+        "Admits the evidence cannot pick a winner, and wonders if losing an eye is really one single event."
+      ],
+      "author_view": "The writer stays cool and careful the whole way through, refusing to pick a favourite explanation, and ends by wondering if the very question assumes something that is not quite true."
+    }
+  }
+}

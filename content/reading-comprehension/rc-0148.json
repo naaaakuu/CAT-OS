@@ -1,0 +1,407 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0148",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 89,
+    "genre": "medicine-health",
+    "difficulty": "medium",
+    "difficulty_numeric": 4,
+    "stage": "developing",
+    "skills": [
+      "evidence-anchoring",
+      "causal-reasoning",
+      "structure-mapping",
+      "application",
+      "scope-control"
+    ],
+    "word_count": 433,
+    "question_count": 4,
+    "question_types": [
+      "application",
+      "inference",
+      "not_true",
+      "paragraph_function"
+    ],
+    "theme": "triage began as a battlefield rule ranking the wounded by severity regardless of rank or arrival, and became a rule ranking by what treatment now would change, which is not the same measure",
+    "estimated_time_min": 7.5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-07",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted."
+    },
+    "date_added": "2026-10-07",
+    "batch_id": "batch-rc-007",
+    "prompt_version": "content engine v1 + CAT paper patterns 2026-10; batch-rc-007",
+    "reviewer_notes": "A history of an idea told in three stages (the 1790s, the First World War, the peacetime ward) with the author stepping in only in the last paragraph to say what each stage contributed. What it adds to the familiar story is the distinction between severity and benefit as two measures that agree in the middle and part at the ends, which is the passage's mechanism. The near-tie is in Q2, where \"broke on numbers\" settles whether the third class came from the volume of wounded or from the wounds themselves. The voice is impersonal and carries dates; the sentences run longer than in rc-0147 but stay plain. The existing ooo-0079 is about what a triage tag does for staff; this passage is about where the ranking principle came from, a different idea. The move is a history of an idea told in three stages with the author stepping in only at the end, carried in an impersonal, dated, measured voice.",
+    "length_class": "medium",
+    "structure": "history_of_an_idea",
+    "viewpoints": 2,
+    "tone": "measured, historical",
+    "difficulty_vector": {
+      "lexical": 3,
+      "syntactic": 3,
+      "abstraction": 2,
+      "inference_depth": 2,
+      "distractor_similarity": 3,
+      "reasoning_depth": 2,
+      "structural_ambiguity": 2,
+      "time_pressure": 2
+    },
+    "reasoning_patterns": [
+      "arg.principle",
+      "arg.qualification",
+      "comp.attention_span",
+      "comp.explicit_detail",
+      "comp.purpose",
+      "inf.author_view_application",
+      "inf.strongly_supported",
+      "lang.causal_wording",
+      "scope.condition",
+      "scope.time_period",
+      "struct.cause_effect",
+      "struct.chronology",
+      "struct.conclusion",
+      "struct.history_of_an_idea"
+    ],
+    "quality": {
+      "status": "verified",
+      "adversarial_review": "Q1: A strong candidate doubts the wool-and-coffee statement, taking the opening as a flourish; \"merchants spoke of the triage of wool and coffee\" states it as fact, so it is true and not the answer. The key is settled by \"one measure in their place: how badly the body was hurt\", which is Larrey's rule, and by the second paragraph dating the benefit measure to the First World War. Q2: The strongest rival says wounds became \"more severe than surgeons could treat\"; the sentence is \"hundreds of casualties in an hour, more than its surgeons could treat\", a count of men and not a degree of injury, and \"broke on numbers\" names the cause. Q3: A candidate argues for the summary reading because all three eras are named; \"It is better seen as\" introduces a new claim, and \"They part at the ends of the scale\" is new matter. Q4: The severity clinic is the near-tie; \"whatever that patient's outlook\" is the deciding phrase, since the modern rule is \"what treatment now would change\", and the final paragraph says the patient beyond help ranks \"lowest by benefit\".",
+      "blind_solve": {
+        "solver": "sonnet blind reader 2026-10-07",
+        "agreed": 4,
+        "total": 4,
+        "notes": "full agreement"
+      }
+    },
+    "vocab_extracted": [
+      "distinction",
+      "casualties",
+      "inherited"
+    ]
+  },
+  "passage": {
+    "title": "Sorting the Wounded",
+    "reading_time_min": 2.3,
+    "paragraphs": [
+      {
+        "id": "rc-0148-p1",
+        "text": "The word is older than the practice. Trier is French for to sort, and merchants spoke of the triage of wool and coffee long before a surgeon borrowed it. Dominique-Jean Larrey, chief surgeon to Napoleon's armies, had watched the wounded lie on the field until the fighting stopped, then be collected in the order found, officers first. In the 1790s he built light wagons to bring them out during the battle, and he gave the surgeons receiving them a rule: treat the most dangerously wounded first, without regard to rank or distinction. The rule struck out two orderings, status and arrival, and put one measure in their place: how badly the body was hurt."
+      },
+      {
+        "id": "rc-0148-p2",
+        "text": "That measure held for a century and then broke on numbers. In the First World War a field station might receive hundreds of casualties in an hour, more than its surgeons could treat before some of them died. Taking the worst wounded first now meant spending the surgeon's hour on a man who would die regardless, while three men who could have been saved bled to death waiting. So the sorting gained a third class: those who would not survive whatever was done, set aside, kept comfortable and not operated on. The rule had quietly changed its measure. It no longer asked how badly a man was hurt. It asked what treatment now would change."
+      },
+      {
+        "id": "rc-0148-p3",
+        "text": "The emergency room inherited the system in peacetime, and what it kept is visible from the door: a nurse who sees every arrival before any doctor does, and a bench where people with minor injuries wait while someone who came in after them is taken straight through. Rank is gone, as Larrey wanted. Arrival order is gone too. But the question at the desk is the war's question, not Larrey's. It is not who is sickest. It is who will be worse in an hour if nothing is done."
+      },
+      {
+        "id": "rc-0148-p4",
+        "text": "Histories of medicine sometimes present the modern rule as Larrey's rule, completed. It is better seen as Larrey's rule with its measure replaced. He ranked by severity; the ward ranks by what acting now would gain. The two agree in most cases, and the agreement hides the difference. They part at the ends of the scale. The patient beyond help ranks highest by severity and lowest by benefit, and the patient with the quietly worsening condition ranks low by present severity and high by benefit. What survives of the 1790s is the refusal to let rank or arrival decide. What was added is the admission that damage alone is not yet a reason to act."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0148-q1",
+      "type": "not_true",
+      "skill": "specific_detail",
+      "patterns": [
+        "comp.explicit_detail",
+        "scope.time_period",
+        "comp.attention_span"
+      ],
+      "target_mistake": "reading the modern measure (benefit) back into Larrey's rule, which the passage explicitly ties to severity",
+      "prediction_target": null,
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "scope"
+      ],
+      "stem": "Which of the following statements is NOT true according to the passage?",
+      "options": {
+        "A": "The word triage was used for sorting goods before surgeons adopted it.",
+        "B": "Larrey's rule ranked the wounded by how much a surgeon's attention would improve their chances.",
+        "C": "In the First World War, some casualties were deliberately not operated on.",
+        "D": "In an emergency room, a patient may be seen before someone who arrived earlier."
+      },
+      "correct": "B",
+      "estimated_time_sec": 60,
+      "explanation": {
+        "expert_notice": "The passage distinguishes two measures and dates them: Larrey's was \"how badly the body was hurt\"; the benefit measure arrived in the First World War. Any statement that gives Larrey the later measure is false, and the expert checks each option against its paragraph rather than against a general impression.",
+        "correct_reasoning": "The first paragraph says Larrey's rule put \"one measure\" in place of rank and arrival: \"how badly the body was hurt\". The second paragraph says the measure changed only in the First World War, when the question became \"what treatment now would change\". So the statement that Larrey ranked by improvement in chances is not true. The other three statements are each made in the text: the word was used for wool and coffee, some casualties were \"set aside\" and \"not operated on\", and in the ward someone \"who came in after them is taken straight through\".",
+        "passage_anchor": "rc-0148-p1, rc-0148-p2, rc-0148-p3",
+        "question_type_note": "A NOT-true question gives three statements the passage makes and one it does not. The quick method is to locate each option's paragraph and confirm it; the one that cannot be confirmed, or that the text contradicts, is the answer. Beware of statements that are true of the passage's subject in general but attached to the wrong era or the wrong person.",
+        "reading_habit": "When a passage tells a history in stages, write one line per stage with its measure or rule; a NOT-true option often takes a later stage's rule and pins it on an earlier name.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "true, so not the answer: \"merchants spoke of the triage of wool and coffee long before a surgeon borrowed it\"",
+            "seductive_element": "a reader who skimmed the opening as a flourish may think the wool and coffee were a figure of speech"
+          },
+          {
+            "option": "C",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "true, so not the answer: the third class was \"set aside, kept comfortable and not operated on\"",
+            "seductive_element": "\"not operated on\" sounds harsh, and a reader may doubt the passage really said it"
+          },
+          {
+            "option": "D",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "true, so not the answer: \"someone who came in after them is taken straight through\" and \"Arrival order is gone too\"",
+            "seductive_element": "\"arrival order is gone\" can be misread as meaning the passage never discusses arrival, when it discusses it twice"
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0148-q2",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.strongly_supported",
+        "struct.cause_effect",
+        "lang.causal_wording"
+      ],
+      "target_mistake": "locating the cause of the third class in the wounds rather than in the ratio of wounded to surgeons",
+      "prediction_target": "the third class was a response to scarcity: more casualties than surgeons could treat, so the old measure produced avoidable deaths",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 3,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "specific_detail"
+      ],
+      "stem": "It can be inferred from the passage that the third class of casualties added in the First World War",
+      "options": {
+        "A": "arose because wounds had become more severe than surgeons could treat",
+        "B": "contained casualties whose wounds were less severe than those in the other two classes",
+        "C": "was Larrey's own addition, made after he saw the wounded lying on the field",
+        "D": "arose because the number of wounded outran the surgeons' time, not because wounds had changed"
+      },
+      "correct": "D",
+      "estimated_time_sec": 90,
+      "explanation": {
+        "expert_notice": "The second paragraph opens with the cause: the measure \"broke on numbers\". The next sentence spells out the numbers: \"more than its surgeons could treat before some of them died\". The word \"So\" then introduces the third class as the consequence. Cause and effect are both on the page.",
+        "correct_reasoning": "The passage says the old measure \"held for a century and then broke on numbers\", explains the numbers as casualties arriving faster than surgeons could treat them, and then says \"So the sorting gained a third class\". The chain runs from volume to the new class. Nothing in the paragraph says the wounds themselves had changed; the men in the third class are defined by outcome (\"would not survive whatever was done\"), not by a new kind of injury. The correct option names the shortage of surgical time and denies the change in wounds, which is exactly what the text supports.",
+        "passage_anchor": "rc-0148-p2",
+        "question_type_note": "An inference question asks for what the passage supports but does not state in those words. The test is whether the option can be built from sentences in the text, with the connectives the author used; here the connective is \"So\", which marks the third class as an effect of the numbers.",
+        "reading_habit": "When you see \"so\", \"therefore\" or \"then\" after a description, write the cause and effect as a pair. Inference options often keep the effect and swap in a cause the author never gave.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "the text says \"more than its surgeons could treat\", where \"more\" counts casualties, not the severity of wounds; the measure \"broke on numbers\", not on injuries",
+            "seductive_element": "it reuses \"could treat\" from the passage and makes it sound like a limit of skill rather than of time"
+          },
+          {
+            "option": "B",
+            "trap_type": "opposite_direction",
+            "why_wrong": "the third class held men who \"would not survive whatever was done\", the most gravely hurt, not the least; the passage says taking the worst wounded first wasted the hour on these men",
+            "seductive_element": "being \"set aside\" sounds like being judged less urgent, so a reader may rank the class low in severity as well as in priority"
+          },
+          {
+            "option": "C",
+            "trap_type": "temporal_distortion",
+            "why_wrong": "the third class appears \"in the First World War\", a century after Larrey; the passage credits him with two things only, the wagons and the rule to treat the most dangerously wounded first",
+            "seductive_element": "Larrey is the passage's named reformer, so later reforms are easily credited to him"
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0148-q3",
+      "type": "paragraph_function",
+      "skill": "paragraph_function",
+      "patterns": [
+        "comp.purpose",
+        "struct.conclusion",
+        "arg.qualification"
+      ],
+      "target_mistake": "reading the closing paragraph as a recap, and missing the correction it makes to \"Larrey's rule, completed\"",
+      "prediction_target": "the final paragraph adjudicates: it says the modern rule is not Larrey's rule finished but Larrey's rule with a different measure, and separates what each stage gave",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 2,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "argument"
+      ],
+      "stem": "Which of the following best describes what the final paragraph does?",
+      "options": {
+        "A": "It rejects one account of how the modern rule relates to Larrey's and says what each era gave.",
+        "B": "It summarises the three earlier paragraphs in order without adding any claim of its own.",
+        "C": "It argues that emergency rooms should return to ranking patients by severity alone.",
+        "D": "It concedes that the modern rule is less humane than Larrey's and defends it on grounds of cost."
+      },
+      "correct": "A",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "The paragraph begins by quoting a view it then replaces: \"sometimes present the modern rule as Larrey's rule, completed. It is better seen as...\". That shape, a view and a correction, is the author stepping in for the first time. The expert also notices the two closing sentences assign one contribution to the 1790s and one to the war.",
+        "correct_reasoning": "The first two sentences of the paragraph set aside the description \"Larrey's rule, completed\" in favour of \"Larrey's rule with its measure replaced\". The paragraph then explains where the two measures part and ends by naming what \"survives of the 1790s\" and \"what was added\". That is a correction plus an allocation, which the correct option describes.",
+        "passage_anchor": "rc-0148-p4",
+        "question_type_note": "A paragraph-function question asks what the paragraph does for the passage, not what it says. Look for its first move (agree, correct, concede, illustrate) and its last (conclude, qualify, prescribe), and match the option that names both without adding a move the paragraph never makes.",
+        "reading_habit": "In a history-of-an-idea passage, expect the author to stay out of sight until the end; when a paragraph opens with \"sometimes present as\" or \"is often described as\", the author is about to disagree, and that disagreement is the paragraph's function.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "wrong_structural_role",
+            "why_wrong": "the paragraph adds the claim that the modern rule is \"better seen as Larrey's rule with its measure replaced\" and the new observation that the measures \"part at the ends of the scale\"; neither appears earlier",
+            "seductive_element": "a closing paragraph often recaps, and this one mentions all three eras, so it looks like a summary"
+          },
+          {
+            "option": "C",
+            "trap_type": "prescriptive_leap",
+            "why_wrong": "the author says the two measures agree \"in most cases\" and calls the modern addition an \"admission\", approving language; nothing recommends a return to severity",
+            "seductive_element": "the paragraph praises what \"survives of the 1790s\", and a reader may hear praise of Larrey as a call to restore his measure"
+          },
+          {
+            "option": "D",
+            "trap_type": "misattributed_view",
+            "why_wrong": "the passage never calls either rule more humane, and cost is never mentioned; the benefit measure is defended by the deaths of \"three men who could have been saved\", not by money",
+            "seductive_element": "setting aside the dying sounds like a hard-headed economy, so a reader may supply the concession the author never makes"
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0148-q4",
+      "type": "application",
+      "skill": "application",
+      "patterns": [
+        "inf.author_view_application",
+        "arg.principle",
+        "scope.condition"
+      ],
+      "target_mistake": "applying Larrey's severity measure, which the passage describes as superseded, in place of the benefit-from-acting-now measure",
+      "prediction_target": "the modern rule ranks by what treatment now would change, so the clinic that fits it treats first the patient for whom delay costs most",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 3,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "scope"
+      ],
+      "stem": "Which of the following clinics is following the modern rule as the passage describes it?",
+      "options": {
+        "A": "A clinic sees patients in the order they signed in, but lets a doctor's colleague go first.",
+        "B": "A clinic sees first the patient with the most serious injury in the room, whatever that patient's outlook.",
+        "C": "A clinic sees first the patient whose condition will worsen most if treatment is delayed.",
+        "D": "A clinic sees first the patient whose treatment will take the least of the doctor's time."
+      },
+      "correct": "C",
+      "estimated_time_sec": 90,
+      "explanation": {
+        "expert_notice": "Before reading options, the expert writes the modern rule in one line from the text: \"who will be worse in an hour if nothing is done\", with rank and arrival excluded. Each option is then a test of that line, and the severity rule from the first paragraph is the trap to watch for.",
+        "correct_reasoning": "The passage states the modern question twice: \"what treatment now would change\" and \"who will be worse in an hour if nothing is done\". The clinic that sees first the patient whose condition \"will worsen most if treatment is delayed\" is asking that question. The correct option also ignores rank, arrival and present severity, which is what the final paragraph says the modern rule does.",
+        "passage_anchor": "rc-0148-p2, rc-0148-p3, rc-0148-p4",
+        "question_type_note": "An application question gives new cases and asks which one the passage's principle would produce. Reduce the principle to a single sentence first, then check each case against it; the most common trap is a case that fits an earlier or rejected version of the principle.",
+        "reading_habit": "When a passage describes a rule that changed over time, label each version with its measure before answering an application question; the old measure will appear among the options wearing the new rule's vocabulary.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "wrong_condition",
+            "why_wrong": "the passage says \"Rank is gone\" and \"Arrival order is gone too\"; this clinic uses both, which is the practice Larrey struck out",
+            "seductive_element": "signing in looks like fairness, and favouring a colleague looks like a small exception rather than a return to rank"
+          },
+          {
+            "option": "B",
+            "trap_type": "half_right",
+            "why_wrong": "this is Larrey's measure, \"how badly the body was hurt\", which the passage says the ward replaced; \"whatever that patient's outlook\" is precisely what the benefit measure refuses to ignore",
+            "seductive_element": "severity is the measure most readers expect of triage, and it is the one the passage spends its first paragraph praising"
+          },
+          {
+            "option": "D",
+            "trap_type": "out_of_scope",
+            "why_wrong": "the passage never ranks by the length of treatment; the measure is what acting now would gain for the patient, not how much of the doctor's time it costs",
+            "seductive_element": "efficiency sounds like the spirit of a system built to cope with \"hundreds of casualties in an hour\""
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "distinction",
+      "passage_use": "without regard to rank or distinction",
+      "meaning_here": "social standing or honour",
+      "difficulty": "medium"
+    },
+    {
+      "word": "casualties",
+      "passage_use": "hundreds of casualties in an hour",
+      "meaning_here": "people killed or wounded",
+      "difficulty": "easy"
+    },
+    {
+      "word": "inherited",
+      "passage_use": "The emergency room inherited the system",
+      "meaning_here": "took over from an earlier user",
+      "difficulty": "easy"
+    }
+  ],
+  "mentor": {
+    "challenge": "A surgeon in Napoleon's army ruled that a general with a scratch would wait behind a private with a shattered leg. The rule outlived him. Its measure did not.",
+    "one_sentence_summary": "Triage began as the surgeon Larrey's rule to treat the most severely wounded first regardless of rank, but the First World War forced a change to a different measure, treating first whoever would benefit most from treatment right now, and that newer measure, not Larrey's, is what hospitals still use.",
+    "main_idea": "A battlefield rule that ranked the wounded by how badly they were hurt, created to replace rank and arrival order, was quietly replaced a century later by a rule that ranks by what treatment now would change. The two measures agree most of the time but part at the extremes, and it is the newer measure, not Larrey's original one, that modern emergency rooms actually use.",
+    "simple_explanation": "The word triage is older than its use in medicine; merchants used it for sorting wool and coffee long before doctors did. A surgeon named Larrey, who worked for Napoleon's armies, noticed that wounded soldiers used to be left on the battlefield until the fighting stopped and then picked up in whatever order they were found, with officers collected first. In the 1790s he built light wagons to bring the wounded out during the fighting, and he told the surgeons receiving them to treat the worst-hurt first, no matter who they were. This threw out rank and arrival order and put one single measure in their place: how badly the person was hurt.\n\nThat measure worked for about a hundred years, until the First World War brought in more wounded than surgeons could treat in time. Spending an hour on the most badly hurt soldier, who might die anyway, meant letting three soldiers who could have been saved bleed to death while they waited. So doctors added a third group: soldiers who would not survive no matter what was done, who were made comfortable but not operated on. Without anyone announcing it, the measure for sorting patients had quietly changed from how badly hurt someone was to what treating them right now would actually achieve.\n\nModern emergency rooms inherited this system. A nurse checks every patient as they arrive, before any doctor sees them, and a patient with a minor injury might wait on a bench while someone who arrived later is rushed straight through. Larrey's idea that rank should not matter has survived, and so has the idea that arrival order should not matter either. But the question being asked at the front desk today is the one from the First World War, not Larrey's question: not who is sickest, but who will get worse in the next hour if nothing is done.\n\nSome tellings of this history treat the modern hospital rule as simply Larrey's rule, carried on unchanged. The writer disagrees: it is Larrey's rule with a different measure inside it. Larrey ranked by how bad the injury was; the modern system ranks by how much treating it now would help. Most of the time these two give the same answer, which hides how different they are, but they disagree at the extremes: a patient beyond saving ranks worst by benefit even though they look worst by severity, and a patient quietly getting worse ranks high by benefit even though they do not look urgent yet. What survives from the 1790s is the refusal to let rank or arrival decide. What was added later is the idea that being badly hurt is not, by itself, a reason to treat someone first.",
+    "why_difficult": "The passage changes its measuring stick without announcing the change in so many words, and the final paragraph corrects a common way of telling this history rather than simply summarising it. Readers who do not notice the shift from 'how badly hurt' to 'what treatment now would change' will treat the two measures as the same rule, and will miss both the NOT-true question's careful dating and the paragraph-function question's correction.",
+    "author_intention": "To trace triage from Larrey's battlefield rule to the modern emergency room, and to correct the common story that the modern rule is simply Larrey's rule unchanged, by showing that its measure, not just its scale, was replaced under the pressure of numbers.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0148-p1",
+        "role": "Introduces Larrey's rule",
+        "note": "A word used for sorting goods becomes a surgeon's rule: treat the worst-hurt first, ignoring rank and the order people arrived in."
+      },
+      {
+        "paragraph_id": "rc-0148-p2",
+        "role": "Shows the measure change",
+        "note": "Facing more wounded than surgeons could treat, the First World War added a third group and quietly swapped the measure from severity to what treatment now would achieve."
+      },
+      {
+        "paragraph_id": "rc-0148-p3",
+        "role": "Brings the rule to today",
+        "note": "The emergency room keeps rank and arrival out of the decision, but the question it asks is the war's question about benefit, not Larrey's question about severity."
+      },
+      {
+        "paragraph_id": "rc-0148-p4",
+        "role": "Corrects the common story",
+        "note": "The writer rejects the idea that the modern rule is just Larrey's rule finished, and instead names what each era contributed: Larrey's refusal of rank and arrival, and the war's attention to what acting now would gain."
+      }
+    ],
+    "tone_progression": "Measured and historical throughout, moving briskly through two centuries of dates and places before settling, in the final paragraph, into the author's own corrective voice.",
+    "key_transitions": [
+      "'That measure held for a century and then broke on numbers.' (opening of paragraph 2): the story turns from Larrey's rule to the pressure that changed it.",
+      "'It is better seen as Larrey's rule with its measure replaced.' (paragraph 4): the author steps in to correct a common way of telling the history."
+    ],
+    "misunderstanding": "A hurried reader treats 'rank and arrival do not matter' as the whole of the rule and assumes the modern system is Larrey's system, unchanged. The passage's point is narrower and sharper: what Larrey threw out survived, but what he measured by did not, and a different measure, benefit from acting now, quietly took its place in the First World War.",
+    "traps_summary": "The options give Larrey the later measure he never used, blame the third class on worse wounds rather than on too many wounded, read the closing paragraph as a plain summary instead of a correction, and credit the modern rule with motives, like cost or a lack of humanity, the passage never raises.",
+    "reading_lesson": "When a passage tells a history in stages, write one line per stage naming its rule or its measure, and watch for the sentence where the author says a common account is wrong. That sentence, not the stage before it, usually carries the passage's real claim.",
+    "real_world": "The same shift from 'how bad is it' to 'what would acting now achieve' shows up in other kinds of triage too: a teacher deciding which struggling student to help first, or a call centre ranking tickets by impact rather than by how upset the caller sounds.",
+    "takeaway": "A rule can keep its name and its fairness while quietly changing what it measures, and the measure matters more than the name.",
+    "reflection_question": "Where else have you seen a rule survive while the thing it actually measures changed underneath it?",
+    "eli10": {
+      "big_idea": "Doctors once sorted wounded soldiers by how badly hurt they were, but later changed to sorting them by how much treating them right now would help, and hospitals still use that second rule.",
+      "story": "Long ago, wounded soldiers were picked up after a battle in whatever order they were found. A doctor named Larrey changed that. He said: treat the worst hurt first, no matter who they are. That rule worked for a long time. Then came a huge war with far more wounded than doctors could treat. Spending time on one very hurt soldier who might die anyway meant other soldiers died waiting. So doctors added a new group: people too hurt to be saved, who were kept comfortable instead. Without saying so, doctors had changed their rule. They no longer asked who was hurt the most. They asked who treatment could still help right now. Hospitals today still use this second rule. A nurse checks everyone first. Rank and waiting in line do not matter. What matters is who will get worse soonest if nobody helps.",
+      "paragraphs": [
+        "Introduces Larrey's rule: treat the worst-hurt soldier first, whoever they are.",
+        "Shows how a huge war forced a change: the rule began asking what treatment now could achieve instead.",
+        "Brings the rule into today's hospitals, where it still ignores rank and arrival order.",
+        "Says the modern rule is Larrey's idea with a different measure inside it, not his rule unchanged."
+      ],
+      "author_view": "The writer respects Larrey's fairness but wants readers to see that the measure changed later, and thinks that change, not Larrey's original rule, is what still runs in hospitals today."
+    }
+  }
+}

@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "pc-0039",
+    "type": "pc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 89,
+    "genre": "history",
+    "difficulty": "medium",
+    "difficulty_numeric": 6,
+    "tier": "advanced",
+    "title": "Priced Like a Manuscript",
+    "theme": "why the first printed books imitated manuscripts: not conservatism but a sales strategy, since a buyer paying a manuscript's price wanted a manuscript, and the page changed only when the price did",
+    "estimated_time_sec": 90,
+    "gap_function": "contrast_turn",
+    "primary_trap": "attractive_generality",
+    "reasoning_patterns": [
+      "disc.rhetorical_pivot",
+      "disc.contrast",
+      "disc.function_slot",
+      "disc.given_new"
+    ],
+    "learning_objective": "find the turn a paragraph has set up, by reading the sentence after the gap for the new agent it assumes, and refuse the generality that fits the shape of a turn without supplying that agent",
+    "difficulty_vector": {
+      "stance_subtlety": 4,
+      "scope_precision": 4,
+      "distractor_closeness": 4,
+      "concept_abstractness": 3,
+      "syntactic_complexity": 3
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-07",
+      "usage_note": "Original composition in CAT register for CAT OS. A general account of early printed books resembling manuscripts; no specific text adapted."
+    },
+    "date_added": "2026-10-07",
+    "batch_id": "batch-pc-004",
+    "reviewer_notes": "The sentence after the gap begins 'The buyer, not the printer, set the look', which assumes a buyer has been introduced and a contrast with the printer has been drawn. Only the key introduces the buyer. The generality about new technologies is the live rival because it has the shape of a turn and is true; it leaves 'The buyer' without an antecedent and says nothing about price.",
+    "quality": {
+      "status": "verified",
+      "adversarial_review": "A strong candidate argues for the generality about every new technology imitating its predecessor, since it turns the paragraph away from the historians' reading and the motor car and the photograph make it feel authoritative. It fails on the sentence after the gap: 'The buyer, not the printer, set the look' needs a buyer above it and a reason the buyer wanted a manuscript's look, and the generality supplies neither. The option conceding that the reading is not wrong keeps the printer as the agent, which the next sentence then denies. The option about the page finding its own shape within two generations states the development the last sentence is about to give, and gives it without the price.",
+      "blind_solve": {
+        "solver": "sonnet blind reader 2026-10-07",
+        "agreed": 1,
+        "total": 1,
+        "notes": "full agreement"
+      }
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      "The first printed books did not look printed.",
+      "Their type copied the hand of the scribes letter for letter, they kept the abbreviations a scribe used to save his time, and they left spaces for initials to be painted in by hand.",
+      "Historians long read this as the conservatism of a new trade, craftsmen who could imagine no page but the one they had grown up with.",
+      "The buyer, not the printer, set the look: the page found its own shape only when print became cheap enough to reach people who had never owned a manuscript and had nothing to compare it with."
+    ],
+    "gap_index": 3
+  },
+  "question": {
+    "stem": "Which of the following sentences best fills the gap in the paragraph?",
+    "options": {
+      "A": "Every new technology begins by imitating the one it replaces and only later finds the forms that are its own, as the motor car kept the carriage's shape for a generation and the early photograph posed like a painting.",
+      "B": "The reading is not wrong, since the first printers had been trained as scribes or worked beside them, and a craftsman's hand reproduces what it already knows before it learns anything new.",
+      "C": "Within two generations the printed page had found its own shape, with roman type, running heads and a title page, none of which a scribe had ever needed or a reader had ever asked for.",
+      "D": "But the imitation was a sales strategy, not a habit: a book priced like a manuscript was sold to a buyer who wanted a manuscript, and a page that looked printed would have looked cheap."
+    },
+    "correct": "D"
+  },
+  "explanation": {
+    "what_the_gap_needs": "Three sentences describe the imitation and the reading of it as conservatism. The sentence after the gap opens 'The buyer, not the printer, set the look', a contrast that only makes sense if the gap has introduced the buyer and taken the explanation away from the printers. The gap is therefore the turn: a sentence that rejects the conservatism reading, names the buyer and ties the look to the price, so that the last sentence's 'only when print became cheap' follows.",
+    "correct_reasoning": "The correct option turns the paragraph with 'But' and replaces the historians' explanation with a different one: the imitation was a sales strategy, because a book priced like a manuscript was being sold to a buyer who wanted a manuscript. That introduces the buyer the next sentence contrasts with the printer, and it ties the look to the price, which is what makes the last sentence's claim, that the page changed only when print became cheap, a consequence rather than a new assertion.",
+    "distractors": [
+      {
+        "option": "A",
+        "trap_type": "attractive_generality",
+        "why_wrong": "A law about every new technology does not introduce a buyer or mention price, so 'The buyer, not the printer' in the next sentence has nothing to refer back to, and 'only when print became cheap' hangs on a cause the generality never gave.",
+        "seductive_element": "It has the shape of a turn, moves away from the historians' reading, and the motor car and the photograph make it sound like settled knowledge."
+      },
+      {
+        "option": "B",
+        "trap_type": "contradicts_neighbour",
+        "why_wrong": "It endorses the printers' habits as the explanation, and the sentence immediately after the gap says 'The buyer, not the printer, set the look'; the paragraph would assert one agent and then deny it in the next breath.",
+        "seductive_element": "Conceding that the historians are 'not wrong' sounds judicious, and the detail about printers trained as scribes is plausible and specific."
+      },
+      {
+        "option": "C",
+        "trap_type": "premature_conclusion",
+        "why_wrong": "It reports the page finding its own shape before the paragraph has explained why it was held back, and the last sentence then says the same thing again with the cause attached; it also leaves the buyer unintroduced.",
+        "seductive_element": "Roman type, running heads and the title page are the concrete details a reader expects next, and the sentence feels like progress."
+      }
+    ],
+    "method": "At a mid-paragraph gap, read the sentence after it for anything it treats as already known: a definite noun ('The buyer'), a contrast ('not the printer'), a consequence ('only when'). The gap must have supplied all of them. Then test the attractive generality: it often has the right shape and the wrong content, true in general and useless to the next sentence."
+  },
+  "mentor": {
+    "challenge": "The sentence after the gap says 'The buyer, not the printer'. Nobody above it has mentioned a buyer. Who brings one in?",
+    "takeaway": "A definite noun after a gap is an order: the missing sentence must have introduced it, and the option that does is the turn."
+  }
+}

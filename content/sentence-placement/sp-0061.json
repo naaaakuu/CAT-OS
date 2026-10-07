@@ -1,0 +1,133 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "sp-0061",
+    "type": "sp",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 90,
+    "genre": "environment",
+    "difficulty": "hard",
+    "difficulty_numeric": 7,
+    "tier": "cat",
+    "title": "One Voice in the Chorus",
+    "theme": "the chain from returned wolves to a river that moved is real at every link, but each link is weaker and slower than the telling, and the river had other reasons to move; test a chain link by link",
+    "estimated_time_sec": 100,
+    "clue_types": [
+      "connective_explicit",
+      "lexical_repetition",
+      "stance_continuity"
+    ],
+    "primary_trap": "stance_shift",
+    "reasoning_patterns": [
+      "disc.transition_word",
+      "disc.concession",
+      "disc.stance_continuity",
+      "disc.lexical_chain",
+      "arg.qualification"
+    ],
+    "difficulty_vector": {
+      "reference_density": 3,
+      "transition_ambiguity": 4,
+      "competing_slots": 4,
+      "concept_abstractness": 4,
+      "syntactic_complexity": 4
+    },
+    "learning_objective": "seat a restatement directly after the sentence it compresses and on the same side of the paragraph's turn, rejecting the slot where it would change the stance before the 'but'",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-07",
+      "usage_note": "Original composition in CAT register for CAT OS. A general reflection on the popular account of a reintroduced predator changing a river, and its qualifications; no specific text adapted."
+    },
+    "date_added": "2026-10-07",
+    "batch_id": "batch-sp-003",
+    "reviewer_notes": "The cat-tier difficulty is that the paragraph has one turn ('But', sentence 3) and the missing sentence shares its stance with everything after it, so two slots after the turn compete. 'In other words' settles it: only sentence 4 has the three qualifications it compresses. The stance-shift slot before the 'But' is the trap for a reader who has anticipated the paragraph's direction.",
+    "quality": {
+      "status": "verified",
+      "adversarial_review": "The live rival is the slot after sentence 3, which is already past the turn and already about weak links. It fails on 'in other words', which must compress what is directly above it: sentence 3 is a general claim about chains, and the river's 'other reasons' are the drought, the decades and the beavers of sentence 4, which would then come after the sentence that summarises them. The slot after sentence 2 is the second candidate and is refused because it demotes the wolves before the paragraph's 'But' has turned.",
+      "blind_solve": {
+        "solver": "sonnet blind reader 2026-10-07",
+        "agreed": 1,
+        "total": 1,
+        "notes": "full agreement"
+      }
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "n": 1,
+        "text": "The story of the reintroduced predator has been told so often that it has the shape of a parable: the wolves return, the deer stop loitering in the valleys, the saplings they had been eating grow into trees, the roots hold the banks, and the river itself changes course."
+      },
+      {
+        "n": 2,
+        "text": "Every link in that chain has been observed, and none of it is invented."
+      },
+      {
+        "n": 3,
+        "text": "But a chain is only as strong as its weakest link, and the links here are weaker and slower than the telling allows."
+      },
+      {
+        "n": 4,
+        "text": "The deer did move, but drought and hunting moved them too; the trees did come back, but patchily and over decades; and the banks were steadied by beavers as much as by roots."
+      },
+      {
+        "n": 5,
+        "text": "The chain is not false for that; it is a chain, which is a thing to be tested link by link rather than recited."
+      }
+    ]
+  },
+  "missing": {
+    "text": "The river, in other words, had other reasons to move, and the wolves were one voice in a chorus rather than the hand on the tiller.",
+    "position": 4,
+    "function": "the restatement that gathers sentence 4's three qualifications into the claim about the river, before the closing sentence restores the chain as a chain"
+  },
+  "question": {
+    "stem": "Where does the following sentence best fit in the paragraph? \"The river, in other words, had other reasons to move, and the wolves were one voice in a chorus rather than the hand on the tiller.\"",
+    "options": {
+      "A": "After sentence 1",
+      "B": "After sentence 2",
+      "C": "After sentence 3",
+      "D": "After sentence 4"
+    },
+    "option_positions": {
+      "A": 1,
+      "B": 2,
+      "C": 3,
+      "D": 4
+    },
+    "correct": "D"
+  },
+  "explanation": {
+    "correct_reasoning": "'In other words' announces a restatement, so the sentence must sit directly after the thing it restates, and the thing it restates is sentence 4: three links, each granted and each given other causes, which is what 'other reasons to move' compresses. It cannot sit earlier, because before sentence 3's 'But' the paragraph is still granting the story, and a sentence that demotes the wolves to one voice in a chorus would change sides a sentence too soon. Sentence 5 then begins 'The chain is not false for that', and 'that' is the demotion the missing sentence has just made. The seat is fixed by the connective looking back and the demonstrative in the closing sentence looking back to it.",
+    "clue_before": "Sentence 4 lists three links and gives each a second cause; a sentence beginning 'in other words' and summing them as the river's 'other reasons to move' is its restatement.",
+    "clue_after": "Sentence 5 says the chain 'is not false for that', and 'that' needs the demotion of the wolves to one voice among many to be directly above it.",
+    "distractors": [
+      {
+        "option": "B",
+        "trap_type": "stance_shift",
+        "why_wrong": "Sentence 2 grants that every link has been observed, and sentence 3's 'But' is the paragraph's single turn against the story; a sentence demoting the wolves to one voice in a chorus placed between them turns against the story before the 'But', so the paragraph changes sides and then announces the change a sentence late, and 'in other words' would be claiming to restate a sentence that says the opposite.",
+        "seductive_element": "Sentence 2's 'none of it is invented' seems to invite an immediate 'but the wolves were not the whole cause', and a reader who has already guessed the paragraph's direction hears the qualification as due."
+      },
+      {
+        "option": "C",
+        "trap_type": "premature_conclusion",
+        "why_wrong": "After sentence 3 the sentence would sum up qualifications that sentence 4 has not yet made; 'in other words' would be restating a general claim about weak links with a specific verdict about the river, and the evidence for that verdict, the drought, the decades and the beavers, would arrive after the conclusion it supports.",
+        "seductive_element": "Sentence 3 has already turned, so the stance matches, and 'weaker and slower than the telling allows' seems to be what 'other reasons to move' puts in other words."
+      },
+      {
+        "option": "A",
+        "trap_type": "wrong_connective",
+        "why_wrong": "After the parable, 'in other words' would claim to restate a story that makes the wolves the whole cause with a sentence that makes them one voice among many; the connective promises equivalence and delivers a contradiction, and sentence 2's 'that chain' would then refer back across the demotion to the parable.",
+        "seductive_element": "The missing sentence names the river and the wolves, which are the parable's first and last links, so it looks like a comment on the story itself."
+      }
+    ],
+    "method": "'In other words' is a restatement marker: the sentence belongs immediately after the sentence it compresses, and nowhere else. Find the sentence whose content it compresses, check that the stance on both sides of the slot is the same (a demotion of the wolves cannot come before the paragraph's 'But'), and read the following sentence for a 'that' that needs the restatement above it."
+  },
+  "mentor": {
+    "challenge": "Wolves come back and a river changes course: a famous story, and every link in it is real. So what is wrong with it?",
+    "takeaway": "A sentence that opens 'in other words' sits directly after the sentence it compresses; if the stance on either side of a slot differs, it is the wrong slot."
+  }
+}

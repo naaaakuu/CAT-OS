@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "pc-0038",
+    "type": "pc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 90,
+    "genre": "literature-theory",
+    "difficulty": "hard",
+    "difficulty_numeric": 7,
+    "tier": "cat",
+    "title": "Lies Need Furniture",
+    "theme": "an unreliable narrator is detectable only against what the text keeps stable, so the unreliability must be partial; distort everything and the reader has no measure, and the book is a fantasy",
+    "estimated_time_sec": 100,
+    "gap_function": "qualification",
+    "primary_trap": "summary_where_development_needed",
+    "reasoning_patterns": [
+      "disc.function_slot",
+      "disc.closing_sentence",
+      "disc.concession",
+      "disc.scope_continuity"
+    ],
+    "learning_objective": "deliver the limit a paragraph has announced instead of a tidy summary of what it has already said, and reject the closing line that contradicts the mechanism two sentences above it",
+    "difficulty_vector": {
+      "stance_subtlety": 4,
+      "scope_precision": 4,
+      "distractor_closeness": 5,
+      "concept_abstractness": 4,
+      "syntactic_complexity": 4
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-07",
+      "usage_note": "Original composition in CAT register for CAT OS. A general point about unreliable narration and the stable elements it depends on; no specific text adapted."
+    },
+    "date_added": "2026-10-07",
+    "batch_id": "batch-pc-004",
+    "reviewer_notes": "The fourth sentence promises 'a limit the term itself hides', so the last sentence must state a limit. The summary about collaboration is the live rival: it is true to the paragraph and closes gracefully, but it names no limit. The option about daring novels contradicts the third sentence's mechanism, and the historians option moves the whole paragraph to another discipline.",
+    "quality": {
+      "status": "verified",
+      "adversarial_review": "A strong candidate argues for the collaboration summary, since it gathers the author, the reader and the fixed points into one closing sentence and sounds like a conclusion. The words that settle it are in the sentence before the gap: 'that dependence sets a limit the term itself hides'. A paragraph that has just promised a limit cannot end on a summary that states none. The daring-novels option is refused by 'a reader detects a distortion only by measuring it against something the book has refused to distort'; dispensing with fixed points is exactly what that sentence rules out.",
+      "blind_solve": {
+        "solver": "sonnet blind reader 2026-10-07",
+        "agreed": 1,
+        "total": 1,
+        "notes": "full agreement"
+      }
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      "A narrator is called unreliable when the reader comes to see past the telling to a story the narrator has got wrong, through vanity, innocence or design.",
+      "Seeing past requires something to see with: a date that does not match, a letter quoted in full that says what the narrator says it does not, another character's reaction that fits a different account.",
+      "These are the fixed points, and the text must keep them fixed, since a reader detects a distortion only by measuring it against something the book has refused to distort.",
+      "The device therefore depends on a reliable world, and that dependence sets a limit the term itself hides."
+    ],
+    "gap_index": 4
+  },
+  "question": {
+    "stem": "Which of the following sentences best completes the paragraph?",
+    "options": {
+      "A": "Unreliable narration, then, is best understood as a collaboration between the author who plants the fixed points and the reader who finds them, with the narrator as the thing they work around.",
+      "B": "A narrator can be unreliable about only so much at once, since a text that distorts everything leaves the reader no measure, and what results is not unreliable narration but fantasy.",
+      "C": "The boldest novels therefore dispense with fixed points altogether, trusting the reader to enjoy the distortion without needing anything to measure it against, and treating the search for a stable fact as a failure of nerve.",
+      "D": "The same holds for historians, whose sources are unreliable narrators of a kind, and who likewise need a document the source did not write before they can say where the source has bent the record."
+    },
+    "correct": "B"
+  },
+  "explanation": {
+    "what_the_gap_needs": "The paragraph has built a mechanism (distortion is detected against fixed points) and the last given sentence announces that this dependence 'sets a limit the term itself hides'. The final sentence must state that limit: a restriction on how far unreliability can go, at the scope of narrators and texts, in the same explanatory stance. It should not summarise, not reverse the mechanism, and not move to another field.",
+    "correct_reasoning": "The correct option states the limit the previous sentence promised. If detection needs stable points, then a narrator can be unreliable about only so much at once; distort everything and there is no measure, so the reader can no longer detect anything and the book stops being unreliable narration and becomes fantasy. That follows directly from 'measuring it against something the book has refused to distort', and it is the limit 'the term itself hides', since the word unreliable suggests no ceiling.",
+    "distractors": [
+      {
+        "option": "A",
+        "trap_type": "summary_where_development_needed",
+        "why_wrong": "It gathers up what the paragraph has said about fixed points and readers, but the sentence before the gap has promised 'a limit', and this option states none; it closes the paragraph without delivering what was announced.",
+        "seductive_element": "It is faithful to everything above it, uses the paragraph's own vocabulary, and has the cadence of a last sentence."
+      },
+      {
+        "option": "C",
+        "trap_type": "contradicts_neighbour",
+        "why_wrong": "The third sentence says a reader detects distortion 'only by measuring it against something the book has refused to distort'; a novel that dispenses with fixed points gives the reader nothing to measure with, so this option asserts the opposite of the mechanism the paragraph has just established.",
+        "seductive_element": "'therefore' makes it sound like a consequence, and praise for bold novels flatters the reader who wants the paragraph to end on something daring."
+      },
+      {
+        "option": "D",
+        "trap_type": "scope_jump",
+        "why_wrong": "The paragraph is about narrators in fiction and the limit it promised is a limit on narrators; a sentence about historians and their sources widens the scope to another discipline and leaves the promised limit unstated.",
+        "seductive_element": "The analogy is sound and the sentence applies the mechanism correctly, so it feels like an extension the author might well have made."
+      }
+    ],
+    "method": "Read the sentence before the gap for a promise: 'sets a limit', 'raises a question', 'has a cost'. The last sentence must pay the promise. Then check each option against the mechanism in the middle of the paragraph; an option that would make that mechanism false is out, however bold it sounds, and an option that is merely true of the paragraph is out if it leaves the promise unpaid."
+  },
+  "mentor": {
+    "challenge": "The paragraph says its own key term hides a limit. Find the sentence that says what the limit is, not the one that sums up what you already know.",
+    "takeaway": "When a paragraph announces a limit, a question or a cost, the gap is the payment; a summary, however elegant, is a debt left unpaid."
+  }
+}

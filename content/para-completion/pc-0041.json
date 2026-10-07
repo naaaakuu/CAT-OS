@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "pc-0041",
+    "type": "pc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 86,
+    "genre": "science",
+    "difficulty": "easy",
+    "difficulty_numeric": 2,
+    "tier": "foundation",
+    "title": "Air Off the Wingtip",
+    "theme": "a bird in a V formation rides the rising air off the wingtip of the bird ahead, so the leader works hardest, tires first and drops back, and the birds change places",
+    "estimated_time_sec": 60,
+    "gap_function": "opening",
+    "primary_trap": "premature_conclusion",
+    "reasoning_patterns": [
+      "disc.opening_sentence",
+      "disc.question_then_answer",
+      "disc.competing_opener",
+      "disc.function_slot"
+    ],
+    "learning_objective": "choose the opening that poses the question a paragraph answers, by reading the second sentence for what it treats as already asked, and reject the opener that gives the answer away or asks a different question",
+    "difficulty_vector": {
+      "stance_subtlety": 1,
+      "scope_precision": 2,
+      "distractor_closeness": 3,
+      "concept_abstractness": 2,
+      "syntactic_complexity": 2
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-07",
+      "usage_note": "Original composition in CAT register for CAT OS. A plain account of why large birds fly in a V formation and rotate the lead; no specific text adapted."
+    },
+    "date_added": "2026-10-07",
+    "batch_id": "batch-pc-004",
+    "reviewer_notes": "The second sentence is 'The answer is in the air behind a wing', so the opener must be a question, and the paragraph answers two things, the V and the changing leader, so the question must ask both. The opener that states the answer is the live rival for a beginner: it is true and on topic, and it makes the second sentence redundant.",
+    "quality": {
+      "status": "verified",
+      "adversarial_review": "A strong candidate argues for the opener that explains the V by the rising air behind the wingtip, since it is correct and sounds like a topic sentence. The second sentence settles it: 'The answer is in the air behind a wing' is only an answer if something has been asked, and it would repeat the opener word for word. The night-flying question is a question, which is the right function, but nothing after it mentions night or day; the teamwork opener asks nothing and the last sentence's changing of places is left unexplained by it.",
+      "blind_solve": {
+        "solver": "sonnet blind reader 2026-10-07",
+        "agreed": 1,
+        "total": 1,
+        "notes": "full agreement"
+      }
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      "The answer is in the air behind a wing.",
+      "As a wing pushes down on the air, the air rolls up and over the wingtip, leaving a column of rising air just behind and to the side of each bird.",
+      "A bird flying a little behind and to one side can ride that rising air and flap less, which is what the V arranges for every bird except the one at the front.",
+      "The leader rides nobody's air, tires first and drops back, so the formation keeps its shape while the birds keep changing places inside it."
+    ],
+    "gap_index": 0
+  },
+  "question": {
+    "stem": "Which of the following sentences best opens the paragraph?",
+    "options": {
+      "A": "Large birds fly in a V because each one is riding the rising air that spills off the wingtip of the bird in front of it.",
+      "B": "Why do large birds on a long flight fly in a V, and why does the bird at the front keep changing?",
+      "C": "Animals that travel in groups have found, over long ages, that cooperation costs each member less than going alone would.",
+      "D": "Why do migrating birds so often fly at night rather than by day, when the air is cooler and there are fewer hunters about?"
+    },
+    "correct": "B"
+  },
+  "explanation": {
+    "what_the_gap_needs": "The first given sentence is 'The answer is in the air behind a wing', so the opener must ask a question. The rest of the paragraph answers two things: why the V (sentences two and three) and why the leader changes (the last sentence). So the opener should ask both, about birds in a V, in a plain explanatory voice, without giving the answer away.",
+    "correct_reasoning": "The correct option asks exactly the two questions the paragraph goes on to answer: why the V, and why the bird at the front keeps changing. 'The answer is in the air behind a wing' then has something to answer, the next two sentences explain the V, and the last sentence explains the changing leader. Nothing is given away in advance, and nothing is asked that the paragraph does not take up.",
+    "distractors": [
+      {
+        "option": "A",
+        "trap_type": "premature_conclusion",
+        "why_wrong": "It states the answer before the question has been asked, so the next sentence, 'The answer is in the air behind a wing', repeats it and answers nothing; it also says nothing about the changing leader, which the paragraph treats as part of what it set out to explain.",
+        "seductive_element": "It is true, it is on topic, and it reads like the kind of confident first sentence a paragraph is supposed to have."
+      },
+      {
+        "option": "C",
+        "trap_type": "attractive_generality",
+        "why_wrong": "It asks nothing, so 'The answer' in the next sentence has no question to answer, and it is about animals in general where the paragraph is about one arrangement of birds and the air behind a wing.",
+        "seductive_element": "Cooperation is the lesson a reader expects from a paragraph about flying together, and a broad opening line feels like the proper way to begin."
+      },
+      {
+        "option": "D",
+        "trap_type": "new_topic_introduced",
+        "why_wrong": "It is a question, which is the right function, but it asks about night and day, and nothing after it mentions either; the air behind a wing is not an answer to when birds fly.",
+        "seductive_element": "It has the question shape the slot wants and is about migrating birds, so a reader who checks form but not content accepts it."
+      }
+    ],
+    "method": "For an opening gap, read the second sentence for what it assumes has already happened. 'The answer is' assumes a question, so the opener must ask one. Then read to the end to see how many things the paragraph answers, and choose the question that asks all of them and nothing else. An opener that gives the answer, or asks about something the paragraph never returns to, fails that test."
+  },
+  "mentor": {
+    "challenge": "The paragraph's first given line is 'The answer is in the air behind a wing'. An answer to what, exactly, and to how many things?",
+    "takeaway": "When the second sentence says 'the answer', the opener is the question, and it must ask everything the paragraph goes on to answer."
+  }
+}

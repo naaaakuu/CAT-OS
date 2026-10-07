@@ -1,0 +1,133 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "sp-0054",
+    "type": "sp",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 89,
+    "genre": "linguistics",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "tier": "medium",
+    "title": "Named by Nobody Alive",
+    "theme": "why place names outlast the languages that made them: a name is a label used by people who need not know what it means, so it passes through conquests untranslated, and rivers and hills are the last words of a dead language",
+    "estimated_time_sec": 85,
+    "clue_types": [
+      "connective_implicit",
+      "lexical_repetition",
+      "article_given_new",
+      "demonstrative"
+    ],
+    "primary_trap": "local_fit_global_break",
+    "reasoning_patterns": [
+      "disc.question_then_answer",
+      "disc.lexical_chain",
+      "disc.cause_effect",
+      "disc.scope_continuity"
+    ],
+    "difficulty_vector": {
+      "reference_density": 3,
+      "transition_ambiguity": 4,
+      "competing_slots": 4,
+      "concept_abstractness": 3,
+      "syntactic_complexity": 3
+    },
+    "learning_objective": "place an explanation directly after the puzzle it answers, and reject the slot where it fits both neighbours but breaks the sentence that begins 'The result'",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-07",
+      "usage_note": "Original composition in CAT register for CAT OS. A general reflection on the survival of river and hill names from vanished languages; no specific text adapted."
+    },
+    "date_added": "2026-10-07",
+    "batch_id": "batch-sp-003",
+    "reviewer_notes": "The missing sentence answers the puzzle in sentence 2 ('nobody can say what they meant') with the mechanism (the people who use a name need not know what it means). The slot after sentence 3 is the trap at this tier: the mechanism reads well beside the conquerors who keep the river's name, but sentence 4's 'The result is a map with two layers' then follows the general mechanism rather than the two-sided practice that actually produces two layers.",
+    "quality": {
+      "status": "verified",
+      "adversarial_review": "A strong candidate argues for the slot after sentence 3, because the label mechanism explains why conquerors keep the river's name and the two sentences share 'name' and 'language'. It fails on both sides, and a blind reader chose it before the paragraph was tightened: sentence 3 now opens 'That is how conquerors come to keep them', and 'That' has nothing to name in this slot but the puzzle in sentence 2; and 'The result is a map with two layers' needs the renaming of towns and the keeping of rivers immediately above it, since that two-sided practice is what makes two layers, while a general principle about labels produces no layers at all. The slot after sentence 1 is the second candidate, and it is refused because the explanation would precede the puzzle, leaving sentence 2's 'nobody can say what they meant' as a fresh observation after its cause had been given.",
+      "blind_solve": {
+        "solver": "sonnet blind reader 2 2026-10-07",
+        "agreed": 1,
+        "total": 1,
+        "notes": "full agreement"
+      }
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "n": 1,
+        "text": "A language can vanish entirely and leave its rivers behind."
+      },
+      {
+        "n": 2,
+        "text": "Across much of Europe the names of the larger rivers belong to no language now spoken, and nobody can say what they meant."
+      },
+      {
+        "n": 3,
+        "text": "That is how conquerors come to keep them: they rename the towns they build and the roads they lay, but take the river's name from whoever was already there, because they need a word for it before they have a word of their own."
+      },
+      {
+        "n": 4,
+        "text": "The result is a map with two layers: the younger language in the streets and fields, and the older one in the water and the hills."
+      },
+      {
+        "n": 5,
+        "text": "Where the older names cluster, a historian can sometimes draw the edge of a people no record describes."
+      }
+    ]
+  },
+  "missing": {
+    "text": "A name survives because the people who use it do not need to know what it means; it is a label, not a sentence, and a label passes from one language to the next without being translated.",
+    "position": 2,
+    "function": "the explanation of the puzzle in sentence 2, giving the mechanism (a label needs no meaning) that sentence 3 then shows at work in conquest"
+  },
+  "question": {
+    "stem": "Where does the following sentence best fit in the paragraph? \"A name survives because the people who use it do not need to know what it means; it is a label, not a sentence, and a label passes from one language to the next without being translated.\"",
+    "options": {
+      "A": "After sentence 2",
+      "B": "After sentence 3",
+      "C": "After sentence 1",
+      "D": "After sentence 4"
+    },
+    "option_positions": {
+      "A": 2,
+      "B": 3,
+      "C": 1,
+      "D": 4
+    },
+    "correct": "A"
+  },
+  "explanation": {
+    "correct_reasoning": "Sentence 2 ends on a puzzle: the river names belong to no living language and 'nobody can say what they meant'. The missing sentence answers it directly, 'A name survives because the people who use it do not need to know what it means', picking up 'meant' with 'means'. Sentence 3 then opens 'That is how conquerors come to keep them', and 'That' can only name the mechanism the missing sentence has just given, so the instance of conquest follows the explanation; sentence 4 draws 'The result' from that case. So the explanation goes after the puzzle and before the illustration, after sentence 2.",
+    "clue_before": "Sentence 2 says 'nobody can say what they meant', the puzzle that a sentence beginning 'A name survives because the people who use it do not need to know what it means' is written to answer.",
+    "clue_after": "Sentence 3 opens 'That is how conquerors come to keep them', a demonstrative that needs the mechanism directly above it; and sentence 4's 'The result' must follow that instance directly.",
+    "distractors": [
+      {
+        "option": "B",
+        "trap_type": "local_fit_global_break",
+        "why_wrong": "Beside sentence 3 the label mechanism reads as a comfortable gloss on why conquerors keep a river's name, but sentence 3 opens 'That is how conquerors come to keep them', and in this slot 'That' has nothing above it but the puzzle in sentence 2, which explains nothing; and sentence 4 then says 'The result is a map with two layers', which only the two-sided practice in sentence 3, renaming towns and keeping rivers, produces, and it would no longer be the sentence above.",
+        "seductive_element": "The two sentences share 'name' and 'language', and an explanation placed after its example feels like a summing-up."
+      },
+      {
+        "option": "C",
+        "trap_type": "right_idea_wrong_position",
+        "why_wrong": "After sentence 1 the explanation arrives before the puzzle it explains, so sentence 2's 'nobody can say what they meant' reads as a new observation after its cause has already been given, and the question-then-answer shape of the opening is reversed.",
+        "seductive_element": "Sentence 1 mentions rivers left behind, and the missing sentence says why, so they look like a pair."
+      },
+      {
+        "option": "D",
+        "trap_type": "topic_match_function_mismatch",
+        "why_wrong": "After sentence 4 the paragraph has moved from mechanism to result to what a historian can do with it; an explanation of why names survive, arriving after its own example and after the result it explains, does the wrong job in that slot and separates 'the older names' in sentence 5 from 'the older one in the water and the hills' that it refers back to.",
+        "seductive_element": "The sentence is about names surviving and the last two sentences are about surviving names, so the topic matches."
+      }
+    ],
+    "method": "Find the puzzle the paragraph poses and put the explanation straight after it, before the example that applies it. Then test the tempting slot after the example by reading one sentence further: a sentence beginning 'The result' or 'So' takes its cause from the sentence directly above, and if your placement moves the cause away, the fit was local only."
+  },
+  "mentor": {
+    "challenge": "One sentence says nobody knows what the river names meant. Another says the result is a map with two layers. Where does the explanation go so that both still make sense?",
+    "takeaway": "A slot that fits its two neighbours can still be wrong; read one sentence further, because 'The result' takes its cause from the line directly above it."
+  }
+}

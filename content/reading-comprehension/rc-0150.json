@@ -1,0 +1,405 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0150",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 90,
+    "genre": "law",
+    "difficulty": "medium",
+    "difficulty_numeric": 6,
+    "stage": "intermediate",
+    "skills": [
+      "evidence-anchoring",
+      "inference",
+      "argument-tracking",
+      "scope-control"
+    ],
+    "word_count": 496,
+    "question_count": 4,
+    "question_types": [
+      "agree_disagree",
+      "scope",
+      "specific_detail",
+      "weaken"
+    ],
+    "theme": "ignorance of the law is no excuse because an excuse of ignorance would be bought by those who can afford not to know and would remove everyone's reason to find out; it holds for knowable rules",
+    "estimated_time_min": 8,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-07",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted."
+    },
+    "date_added": "2026-10-07",
+    "batch_id": "batch-rc-007",
+    "prompt_version": "content engine v1 + CAT paper patterns 2026-10; batch-rc-007",
+    "reviewer_notes": "The corpus had no passage that argues an unpopular position with heat; this one does, in the second person, with four direct questions and sentences averaging above twenty-two words. The mechanism is the market in ignorance: once not knowing pays, it is bought, and by the wrong people. The last paragraph concedes the unknowable rule and narrows the defence to knowable rules, which is where the scope question lives. The near-tie is in Q4, where a finalist says the defence covers rules the defendant had actually been told about, against the text's \"knowable\" and \"the demand that you find out\". Compared with rc-0072 (legal fictions as instructions) and rc-0050 (intent as imputation), this passage is about a different rule and a different mechanism, and it takes a side. The move is an unpopular position argued with heat and narrowed at the end, carried in a combative voice that addresses the reader directly before turning candid.",
+    "length_class": "medium",
+    "structure": "claim_qualification",
+    "viewpoints": 2,
+    "tone": "combative, then candid",
+    "difficulty_vector": {
+      "lexical": 3,
+      "syntactic": 4,
+      "abstraction": 3,
+      "inference_depth": 3,
+      "distractor_similarity": 4,
+      "reasoning_depth": 3,
+      "structural_ambiguity": 3,
+      "time_pressure": 3
+    },
+    "reasoning_patterns": [
+      "arg.causal_claim",
+      "arg.counterargument",
+      "arg.evidence_vs_conclusion",
+      "arg.example",
+      "arg.qualification",
+      "comp.explicit_detail",
+      "inf.author_view_application",
+      "lang.absolute_vs_qualified",
+      "scope.condition",
+      "scope.population",
+      "struct.conclusion",
+      "struct.contrast",
+      "struct.qualification"
+    ],
+    "quality": {
+      "status": "verified",
+      "adversarial_review": "Q1: A candidate argues for the poor, on the ground that unknown rules fall hardest on them; \"will not even know that the excuse exists\" rules them out as claimants. Q2: The reasonableness option is the strong rival, since the final test includes \"a person in your position\"; but the third paragraph attacks binding people by what they \"could reasonably have known\", and the fourth paragraph's test limits which rules count, not whom the law binds. Q3: The company-meetings option attracts candidates who recognise the paragraph's example; it confirms the author's fear rather than blocking it. The key is settled by \"whoever could afford to arrange not to know\": if arranged ignorance counts as knowledge, that claimant gets nothing. Q4: The near-tie is \"actually been told about\"; \"rules that were knowable\" and \"the demand that you find out\" settle that the defence rests on what could have been found, not on what was received.",
+      "blind_solve": {
+        "solver": "sonnet blind reader 2026-10-07",
+        "agreed": 4,
+        "total": 4,
+        "notes": "full agreement"
+      }
+    },
+    "vocab_extracted": [
+      "egalitarian",
+      "diligence",
+      "perverse"
+    ]
+  },
+  "passage": {
+    "title": "The Fairest Fiction",
+    "reading_time_min": 2.7,
+    "paragraphs": [
+      {
+        "id": "rc-0150-p1",
+        "text": "You have heard the joke and probably made it: nobody can know all the law, there are more regulations than any lawyer has read, and yet the courts go on pretending that each of us knew the rule we broke. Ignorance of the law is no excuse, the maxim says, and everyone calls it a fiction, a convenient lie. I want to say something that will sound perverse: the maxim is not a fiction about what you know but a rule about what you owe, and the most egalitarian rule the system has."
+      },
+      {
+        "id": "rc-0150-p2",
+        "text": "Suppose we abolished it and let ignorance excuse. Ask yourself who would claim the excuse. Not the man who could not afford a lawyer, who will not even know that the excuse exists. The excuse would be claimed by whoever could afford to arrange not to know: the company that keeps its directors out of the meeting where the awkward rule is mentioned, the executive whose compliance department briefs everyone but him. Ignorance, once it pays, becomes a thing you buy, and the people who can buy it are the people you least want to have it. The maxim closes that market. It says the price of not knowing is the same for everyone, which is that not knowing will not help you."
+      },
+      {
+        "id": "rc-0150-p3",
+        "text": "Consider next the law's reach. If what binds you depended on what you could reasonably have known, then the law would bind the educated more than the ignorant and the reader more than the person who cannot read, and the same act would count as a crime for one neighbour and a misfortune for the other. Is that the equality you want? And consider, last, the incentive. The maxim is the only reason anyone has to find out what the rules are before acting; take it away, and finding out becomes a cost that carries a penalty, since to learn the rule is to lose the excuse, and the sensible course for everyone is to stay carefully uninformed. A rule that rewards you for not asking is a rule designed to be broken."
+      },
+      {
+        "id": "rc-0150-p4",
+        "text": "There is a hard case, and I will not pretend it away. A regulation published nowhere, a rule changed on the morning it was applied: when the law could not have been found by anyone who looked, the maxim stops being a rule about diligence and becomes the fiction its critics describe. So I narrow the defence to what it can carry. The maxim is justified for rules that were knowable: in force, published, and of the kind a person in your position would be expected to meet. For those, and they are nearly all of the law you will ever meet, the demand that you find out is not a pretence about your mind. It is the single burden the law places on every shoulder at the same weight, and the people who want it lifted are the ones who could best afford to carry it."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0150-q1",
+      "type": "specific_detail",
+      "skill": "specific_detail",
+      "patterns": [
+        "comp.explicit_detail",
+        "arg.example",
+        "scope.population"
+      ],
+      "target_mistake": "assuming the excuse would go to the people who are in fact most ignorant, when the author says it would go to those who can arrange ignorance",
+      "prediction_target": null,
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 3,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "scope"
+      ],
+      "stem": "According to the author, if ignorance of the law were allowed as an excuse, it would be claimed mainly by",
+      "options": {
+        "A": "those who could not afford a lawyer and so never learned the rules",
+        "B": "those with the means to arrange that awkward rules never reached them",
+        "C": "the students and judges who already call the maxim a fiction",
+        "D": "companies, since only a corporation can keep records of what its directors knew"
+      },
+      "correct": "B",
+      "estimated_time_sec": 50,
+      "explanation": {
+        "expert_notice": "The second paragraph asks \"who would claim the excuse\" and answers in one sentence: \"whoever could afford to arrange not to know\". The two examples that follow (the company, the executive) both illustrate arranging. The expert also notes the man without a lawyer is explicitly excluded.",
+        "correct_reasoning": "The text says the excuse \"would be claimed by whoever could afford to arrange not to know\", and gives two examples of people with money arranging for a rule not to reach them. The correct option restates that population. The man \"who could not afford a lawyer\" is named as someone who \"will not even know that the excuse exists\".",
+        "passage_anchor": "rc-0150-p2",
+        "question_type_note": "A detail question about a population asks who, exactly, the author says something about. Find the sentence that names the group, then check that the option keeps the author's defining feature (here, the ability to arrange ignorance) rather than a feature the reader supplies.",
+        "reading_habit": "When an author asks a question and answers it in the next sentence, the answer sentence is the one the detail question will be built on; copy its key phrase before reading options.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "the text excludes this group in so many words: the man who could not afford a lawyer \"will not even know that the excuse exists\"",
+            "seductive_element": "the poor are the most plausible victims of unknown rules, so a reader expects them to benefit from an excuse"
+          },
+          {
+            "option": "C",
+            "trap_type": "wrong_structural_role",
+            "why_wrong": "students and judges are mentioned only as people who \"call it a fiction\"; nothing says they would claim the excuse",
+            "seductive_element": "they appear in the same opening paragraph as the maxim, so a hurried reader attaches them to the later question"
+          },
+          {
+            "option": "D",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "the company is one of two examples, and records are never mentioned; the executive in the same sentence is an individual",
+            "seductive_element": "the company example is the most concrete, and record-keeping sounds like the sort of legal detail that would matter"
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0150-q2",
+      "type": "agree_disagree",
+      "skill": "inference",
+      "patterns": [
+        "inf.author_view_application",
+        "arg.qualification",
+        "lang.absolute_vs_qualified"
+      ],
+      "target_mistake": "taking the heat of the first three paragraphs as the author's final position and missing the narrowing in the fourth",
+      "prediction_target": "the author defends the maxim for rules that were knowable, so someone who could have found a rule and did not is exactly the person the maxim is for",
+      "difficulty": {
+        "inference_depth": 4,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "argument"
+      ],
+      "stem": "With which of the following statements would the author most likely agree?",
+      "options": {
+        "A": "The maxim should apply to every rule in force, whether or not the rule was published.",
+        "B": "The law should bind each person only to the extent of what that person could reasonably have known at the time.",
+        "C": "Ignorance of the law is more common among the wealthy than among the poor.",
+        "D": "A person who could have found a rule by looking, and did not, has no complaint when it is applied to him."
+      },
+      "correct": "D",
+      "estimated_time_sec": 90,
+      "explanation": {
+        "expert_notice": "The fourth paragraph is the author's own statement of the position after the heat: the maxim is justified \"for rules that were knowable\" and the demand is \"that you find out\". An agree option must sit inside that narrowed claim, not outside it on either side.",
+        "correct_reasoning": "The author says the maxim is justified for rules \"in force, published, and of the kind a person in your position would be expected to meet\", and describes the maxim as \"the demand that you find out\". A person who could have found the rule by looking and did not has failed that demand for a knowable rule, which is precisely the case the author defends. The author would agree.",
+        "passage_anchor": "rc-0150-p3, rc-0150-p4",
+        "question_type_note": "An agree-disagree question asks for the author's considered view, which in a heated passage is often stated only after a concession. Locate the sentence where the author narrows or restates the claim, and test each option against that sentence rather than against the strongest rhetoric.",
+        "reading_habit": "When a passage ends with \"So I narrow\" or \"I will not pretend it away\", the sentences after it outrank everything before them for questions about what the author believes.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "extreme_language",
+            "why_wrong": "the author concedes \"a regulation published nowhere\" as a case where the maxim \"becomes the fiction its critics describe\", and limits the defence to rules \"published\"",
+            "seductive_element": "the first three paragraphs defend the maxim so fiercely that a reader expects no exceptions"
+          },
+          {
+            "option": "B",
+            "trap_type": "opposite_direction",
+            "why_wrong": "this is the alternative the author attacks in the third paragraph: if what binds you depended on what you \"could reasonably have known\", the law would \"bind the educated more than the ignorant\"",
+            "seductive_element": "the fourth paragraph's \"of the kind a person in your position would be expected to meet\" sounds like a reasonableness test, but it limits which rules count, not whom the law binds"
+          },
+          {
+            "option": "C",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "the author says the wealthy could \"arrange not to know\", that is, buy ignorance when it pays; nothing says they are now more often ignorant",
+            "seductive_element": "the second paragraph's examples are all rich people being ignorant, which a reader may turn into a claim about frequency"
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0150-q3",
+      "type": "weaken",
+      "skill": "strengthen_weaken",
+      "patterns": [
+        "arg.causal_claim",
+        "arg.counterargument",
+        "arg.evidence_vs_conclusion"
+      ],
+      "target_mistake": "choosing a statement that is about the law in general rather than one that blocks the specific mechanism, arranged ignorance being rewarded",
+      "prediction_target": "the second paragraph says the excuse would go to people who arrange not to know; a weakener shows that arranged ignorance would not get the excuse",
+      "difficulty": {
+        "inference_depth": 4,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "argument"
+      ],
+      "stem": "Which of the following, if true, would most weaken the argument of the second paragraph?",
+      "options": {
+        "A": "Courts that allow ignorance of the law as a defence treat deliberate avoidance of knowledge as knowledge.",
+        "B": "The number of regulations in force has grown faster than the number of lawyers able to explain them.",
+        "C": "Companies have been found to schedule discussions of legal risk for meetings their senior officers do not attend.",
+        "D": "In most legal systems, a mistake about the facts, unlike a mistake about the law, is already a defence."
+      },
+      "correct": "A",
+      "estimated_time_sec": 95,
+      "explanation": {
+        "expert_notice": "The paragraph's argument has one moving part: if ignorance excuses, ignorance will be bought by those who can afford to arrange it. The expert looks for the option that stops the arranged kind of ignorance from counting, because that is the only way the market the author fears fails to open.",
+        "correct_reasoning": "The author's fear is that abolishing the maxim would reward \"whoever could afford to arrange not to know\". If courts that allow the defence treat deliberate avoidance as knowledge, then the person who arranges not to know is treated as knowing and gets no excuse. The market the author describes would not open, so the paragraph's prediction fails. That is a direct weakening of its argument.",
+        "passage_anchor": "rc-0150-p2",
+        "question_type_note": "A weaken question asks which new fact, if true, makes the author's conclusion less likely to follow. The best weakener attacks the link between premise and conclusion, here the link between \"ignorance excuses\" and \"the rich will buy ignorance\", rather than adding a fact about the surrounding subject.",
+        "reading_habit": "Write the paragraph's argument as \"if X then Y because Z\" before reading options; the weakener is the option that makes Z false or that gives a reason Y would not follow from X.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "true_but_irrelevant",
+            "why_wrong": "this restates the joke in the first paragraph, \"more regulations than any lawyer has read\"; it says nothing about who would claim an excuse or how",
+            "seductive_element": "it is the fact everyone cites against the maxim, so it feels like ammunition"
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "this is the author's own example made real: \"the company that keeps its directors out of the meeting\"; it strengthens the claim that ignorance would be arranged",
+            "seductive_element": "a reader scanning for options about companies and meetings finds the paragraph's words and forgets to check the direction"
+          },
+          {
+            "option": "D",
+            "trap_type": "out_of_scope",
+            "why_wrong": "the paragraph is about ignorance of the law; a defence for mistakes of fact changes nothing about who would buy ignorance of a rule",
+            "seductive_element": "it sounds like an existing exception that already lets some ignorance excuse, and so seems to show the author's fears are overdone"
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0150-q4",
+      "type": "scope",
+      "skill": "scope",
+      "patterns": [
+        "scope.condition",
+        "arg.qualification",
+        "lang.absolute_vs_qualified"
+      ],
+      "target_mistake": "replacing \"knowable\" with \"known\", which turns the author's demand that you find out into a requirement that someone had told you",
+      "prediction_target": "the defence covers knowable rules: in force, published, and of the kind a person in that position would be expected to meet",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "inference"
+      ],
+      "stem": "The author's defence of the maxim, as finally stated, covers",
+      "options": {
+        "A": "rules that nobody could have known, which the author concedes are the fiction the critics describe",
+        "B": "rules that a person in the defendant's position had actually been told about",
+        "C": "rules in force and published that a person in the defendant's position would be expected to meet",
+        "D": "rules whose breach the author regards as serious enough to deserve punishment"
+      },
+      "correct": "C",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "The fourth paragraph says \"So I narrow the defence to what it can carry\" and then gives a three-part test: \"in force, published, and of the kind a person in your position would be expected to meet\". The expert copies the test and checks every option against all three parts.",
+        "correct_reasoning": "The author's final statement is explicit: \"The maxim is justified for rules that were knowable: in force, published, and of the kind a person in your position would be expected to meet.\" The correct option repeats those three conditions. The author also says these are \"nearly all of the law you will ever meet\", so the scope is wide but not total.",
+        "passage_anchor": "rc-0150-p4",
+        "question_type_note": "A scope question asks how far a claim reaches after the author has qualified it. Find the qualifying sentence, note each condition it sets, and reject options that add a condition the author never set or remove one the author did.",
+        "reading_habit": "\"Knowable\" and \"known\" are one letter apart and a world apart in a legal argument; whenever an author rests a claim on what could have been found out, watch for an option that quietly changes it to what was found out.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "these are the rules the author excludes: when \"the law could not have been found by anyone who looked, the maxim stops being a rule about diligence\" and becomes \"the fiction its critics describe\"",
+            "seductive_element": "the option quotes the passage accurately; it just describes the hard case instead of the defended case"
+          },
+          {
+            "option": "B",
+            "trap_type": "too_narrow",
+            "why_wrong": "the author defends the maxim for rules \"that were knowable\" and calls it \"the demand that you find out\"; nothing requires that the defendant was told",
+            "seductive_element": "\"of the kind a person in your position would be expected to meet\" can be misread as \"had been warned about\", and actual knowledge feels like the fair standard"
+          },
+          {
+            "option": "D",
+            "trap_type": "out_of_scope",
+            "why_wrong": "the seriousness of the breach is never mentioned; the test is about whether the rule could have been known, not about how bad breaking it was",
+            "seductive_element": "a reader supplies the common-sense idea that pretending knowledge is tolerable only for serious offences"
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "egalitarian",
+      "passage_use": "the most egalitarian rule the system has",
+      "meaning_here": "treating everyone as equal",
+      "difficulty": "medium"
+    },
+    {
+      "word": "diligence",
+      "passage_use": "a rule about diligence",
+      "meaning_here": "careful effort to do what one should",
+      "difficulty": "medium"
+    },
+    {
+      "word": "perverse",
+      "passage_use": "something that will sound perverse",
+      "meaning_here": "deliberately contrary to what is expected or reasonable",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "Everyone agrees nobody can know all the law, and everyone agrees the law pretends otherwise. What if the pretence is the most equal thing about it?",
+    "one_sentence_summary": "The author defends 'ignorance of the law is no excuse' not as a dishonest fiction about what people actually know, but as a fair rule about what everyone owes, because letting ignorance excuse would let the rich buy their way out of knowing while removing everyone else's reason to find out, and the defence only covers rules that could actually have been found.",
+    "main_idea": "Against the common complaint that the legal maxim 'ignorance of the law is no excuse' is a convenient lie, the author argues it is really an egalitarian rule about obligation: if ignorance could excuse, it would be bought by those who can afford to arrange not to know, and nobody would have any reason to learn the rules. The defence is then narrowed to rules that were genuinely knowable, not ones that could not have been found.",
+    "simple_explanation": "Everyone makes the same joke: nobody can really know every law, yet courts still act as though you knew the rule you broke. People call this a convenient lie. The author disagrees, and says something that sounds strange at first: the rule is not really about what you know, it is about what you owe, and it is actually the fairest rule the legal system has.\n\nImagine the rule were scrapped and not knowing the law could excuse you. Who would actually use that excuse? Not a poor person who cannot even afford a lawyer and does not know such an excuse exists. It would be used by people rich enough to arrange not to know, like a company that keeps its own directors out of an awkward meeting. Once not knowing becomes something you can buy, the people who buy it are exactly the people you would not want to have it. The current rule shuts that option down: it makes the price of not knowing the same for everyone, which is that it never helps you.\n\nThink about fairness too. If what the law expected of you depended only on what you could reasonably have known, educated people and those who can read would be bound more tightly than everyone else, and the very same act could be a crime for one neighbour and just bad luck for another. And think about incentives: the current rule is the only reason anyone bothers to learn the rules before acting. Remove it, and learning a rule only costs you your excuse, so the sensible thing becomes staying deliberately uninformed, which is exactly backwards.\n\nThe author admits there is a genuinely hard case: a rule that was never published anywhere, or changed the morning it was used, which nobody could have found by looking. There, the rule really does become the fiction its critics describe. So the author narrows the defence: it holds only for rules that were knowable, meaning in force, published, and the kind of rule someone in your position would be expected to meet. For almost everything you will ever encounter, that is true, and the demand that you find out is not a pretence about your mind. It is a burden placed equally on everyone, and the people who most want it removed are the ones who could most easily carry it.",
+    "why_difficult": "The passage argues an unpopular position with real heat for three paragraphs before quietly conceding a limit in the fourth, and a reader who stops at the heat misses that the author's actual, defended position is the narrower one: the maxim is justified only for rules that could have been found, not for every rule whatsoever.",
+    "author_intention": "To defend an unpopular legal maxim by reframing it as a rule about fairness and incentive rather than a lie about knowledge, while honestly admitting the one kind of case where the defence does not hold.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0150-p1",
+        "role": "States the paradox",
+        "note": "Everyone jokes that nobody can know all the law, yet the author claims the rule that ignores this is actually the system's fairest rule."
+      },
+      {
+        "paragraph_id": "rc-0150-p2",
+        "role": "Shows who would gain",
+        "note": "If ignorance excused you, only people rich enough to arrange not to know would benefit, so the current rule stops ignorance from becoming something only the wealthy can buy."
+      },
+      {
+        "paragraph_id": "rc-0150-p3",
+        "role": "Argues fairness and incentive",
+        "note": "Letting knowledge decide the law's reach would bind the educated more than the ignorant, and removing the rule would reward everyone for staying uninformed."
+      },
+      {
+        "paragraph_id": "rc-0150-p4",
+        "role": "Concedes and narrows",
+        "note": "The author admits a genuinely unknowable rule breaks the defence, then limits the whole argument to rules that were knowable, in force, published and expected."
+      }
+    ],
+    "tone_progression": "Combative and direct through the first three paragraphs, addressing the reader with pointed questions, before turning candid and precise in the final paragraph as the author concedes a limit and restates the defended claim more narrowly.",
+    "key_transitions": [
+      "'Suppose we abolished it and let ignorance excuse.' (opening of paragraph 2): the argument turns from stating the position to testing it against a hypothetical.",
+      "'There is a hard case, and I will not pretend it away.' (opening of paragraph 4): the heated defence gives way to a concession and a narrower, final claim."
+    ],
+    "misunderstanding": "A hurried reader treats the first three paragraphs, where the maxim is defended without qualification, as the author's whole position, and misses that the fourth paragraph narrows the defence to rules that were knowable. The maxim the author actually defends is not 'ignorance never excuses you' but 'ignorance never excuses you for a rule you could have found'.",
+    "traps_summary": "The options credit the poor, rather than the well-off, with claiming the excuse, confuse a reasonableness test for what rules count with a test for whom the law binds, offer a fact that confirms the author's fear about arranged ignorance instead of blocking it, and quietly swap 'knowable' for 'actually known'.",
+    "reading_lesson": "In a passage that argues a position with heat and then narrows it at the end, treat the narrowed, final statement as the author's real claim, and test every option against that statement rather than against the strongest-sounding sentence from earlier.",
+    "real_world": "The same structure appears in other rules that sound harsh until you ask who would benefit from an exception: a strict deadline, a no-refund policy, or a rule that ignorance of a contract's terms does not excuse you from it.",
+    "takeaway": "A rule that looks like a fiction about what you know can really be a fair rule about what you owe, as long as it only ever asks you to have found what could be found.",
+    "reflection_question": "Can you think of another rule that looks unfair on the surface but turns out to protect the people with the least power to arrange around it?",
+    "eli10": {
+      "big_idea": "A law that says not knowing the law is no excuse sounds unfair, but the writer argues it is actually the fairest rule, because letting people claim ignorance would mostly help rich people who can arrange not to know.",
+      "story": "Nobody can know every law. Courts still say you should have known the rule you broke. People call this unfair. The writer disagrees. Imagine ignorance could excuse you. A poor person would not even know that excuse existed. But a rich company could arrange for its bosses to never hear about an awkward rule. So the excuse would mostly help people who can afford to stay ignorant on purpose. That is not fair at all. The current rule stops this. It says not knowing never helps you, no matter who you are. It also gives everyone a reason to learn the rules, not a reason to avoid them. The writer admits one fair exception. If a rule was never published anywhere, nobody could have found it, so the old defence makes no sense there. But for almost every other rule, the writer says the demand to find out is simply fair.",
+      "paragraphs": [
+        "States the puzzle: everyone knows nobody can know all the law, yet the writer calls the rule fair.",
+        "Shows that letting ignorance excuse you would mostly help rich people who can arrange to stay ignorant.",
+        "Argues the rule is fair and gives everyone a reason to learn the rules.",
+        "Admits one real exception, then limits the defence to rules that could actually have been found."
+      ],
+      "author_view": "The writer argues with real heat that the rule is fair, but is honest enough to admit one case where it breaks down, and narrows the claim instead of overselling it."
+    }
+  }
+}

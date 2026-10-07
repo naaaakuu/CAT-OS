@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "sp-0057",
+    "type": "sp",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 91,
+    "genre": "public-policy",
+    "difficulty": "hard",
+    "difficulty_numeric": 8,
+    "tier": "cat-plus",
+    "title": "Dies Unless Renewed",
+    "theme": "a sunset clause changes what a law is by moving the burden from repeal to renewal, so inertia works against the law; but where renewal is a formality, the clause changes only who has to turn up",
+    "estimated_time_sec": 105,
+    "clue_types": [
+      "former_latter",
+      "demonstrative",
+      "lexical_repetition",
+      "stance_continuity"
+    ],
+    "primary_trap": "wrong_reference_target",
+    "reasoning_patterns": [
+      "disc.demonstrative",
+      "disc.lexical_chain",
+      "disc.cause_effect",
+      "disc.concession",
+      "disc.stance_continuity"
+    ],
+    "difficulty_vector": {
+      "reference_density": 4,
+      "transition_ambiguity": 4,
+      "competing_slots": 5,
+      "concept_abstractness": 4,
+      "syntactic_complexity": 4
+    },
+    "learning_objective": "bind a counting phrase ('the first of those') to the only sentence that offers two things to count, and let it outrank a time word ('now') that fits more than one slot",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-07",
+      "usage_note": "Original composition in CAT register for CAT OS. A general analysis of sunset clauses and the burden of renewal; no specific text adapted."
+    },
+    "date_added": "2026-10-07",
+    "batch_id": "batch-sp-003",
+    "reviewer_notes": "Sentence 4 makes two claims in one breath, that inertia has changed sides and that the law has become a renewable arrangement. The missing sentence opens 'The first of those is the easier to see' and unpacks the first claim in the terms of sentence 1, with the sides swapped; sentence 5 then turns to 'The renewable half of that'. The cat-plus difficulty is the slot after sentence 3, where the 'now' in the missing sentence sits naturally after the burden moves and before inertia is said to have changed sides; placed there, 'those' has nothing to count. The item was rebuilt after two blind readers placed the earlier version after sentence 4 against a key of after sentence 3; both orders were coherent, so the counting phrase was added to make one of them impossible.",
+    "quality": {
+      "status": "verified",
+      "adversarial_review": "A strong candidate argues for the slot after sentence 3, because 'now' reports the state after a change and the change is the clause moving the burden, and because sentence 4's 'Inertia has changed sides' reads like a conclusion drawn from the swapped burden. The words that settle it are the first four of the missing sentence: 'The first of those' needs two things directly above it to count from, and sentence 3 offers none, only one burden moving from one side to the other; sentence 4 offers exactly two, 'Inertia has changed sides, and the clause has changed what the law is'. Sentence 5 then confirms the slot from below, since 'The renewable half of that' is the second of the two once the first has been dealt with. The slot after sentence 5 is the other candidate, where the sentence reads as a return to the main point after the concession; it is refused because a sentence saying the law's friends 'must find the majority and the time' cannot follow 'a renewal vote is often a formality... taken in a minute' without the paragraph contradicting itself, and 'those' has nothing to count there either.",
+      "blind_solve": {
+        "solver": "sonnet blind reader 3 2026-10-07",
+        "agreed": 1,
+        "total": 1,
+        "notes": "full agreement"
+      }
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "n": 1,
+        "text": "A law ordinarily lasts until somebody goes to the trouble of repealing it, and the trouble is considerable: a majority has to be found, time has to be taken from other business, and the people who benefit from the law have every reason to be in the room."
+      },
+      {
+        "n": 2,
+        "text": "Inertia, in other words, is on the law's side."
+      },
+      {
+        "n": 3,
+        "text": "A sunset clause, which lets a law expire on a fixed date unless it is renewed, moves the burden from one side to the other."
+      },
+      {
+        "n": 4,
+        "text": "Inertia has changed sides, and the clause has changed what the law is: a standing arrangement has become a renewable one."
+      },
+      {
+        "n": 5,
+        "text": "The renewable half of that should not be pushed too far, since a renewal vote is often a formality, scheduled by the same majority that passed the law and taken in a minute."
+      },
+      {
+        "n": 6,
+        "text": "Where that is so, the clause changes not whether the law survives but only who has to turn up to keep it alive."
+      }
+    ]
+  },
+  "missing": {
+    "text": "The first of those is the easier to see: now the people who want the law must find the majority and the time, and the people who merely dislike it need do nothing but wait.",
+    "position": 4,
+    "function": "the unpacking of the first of sentence 4's two claims, inertia changing sides, in the terms sentence 1 used for the old burden, so that sentence 5 can turn to the second half"
+  },
+  "question": {
+    "stem": "Where does the following sentence best fit in the paragraph? \"The first of those is the easier to see: now the people who want the law must find the majority and the time, and the people who merely dislike it need do nothing but wait.\"",
+    "options": {
+      "A": "After sentence 5",
+      "B": "After sentence 6",
+      "C": "After sentence 4",
+      "D": "After sentence 3"
+    },
+    "option_positions": {
+      "A": 5,
+      "B": 6,
+      "C": 4,
+      "D": 3
+    },
+    "correct": "C"
+  },
+  "explanation": {
+    "correct_reasoning": "The sentence opens 'The first of those', so the sentence above it must offer two things to count from, and only sentence 4 does: 'Inertia has changed sides, and the clause has changed what the law is'. The missing sentence then unpacks the first of the two, saying who now bears the burden in the very terms sentence 1 used for the old burden, 'the majority and the time', with the sides swapped. Sentence 5 confirms the slot from below: 'The renewable half of that' is the second of sentence 4's two claims, taken up once the first has been dealt with. So the sentence sits after sentence 4, between the pair it counts from and the half it leaves for the next line.",
+    "clue_before": "Sentence 4 states two claims joined by 'and', which is what 'The first of those' needs directly above it; no other sentence in the paragraph offers a pair.",
+    "clue_after": "Sentence 5 opens 'The renewable half of that', taking up the second of sentence 4's two claims; that turn makes sense only once the first half has been spelled out, which is what the missing sentence does.",
+    "distractors": [
+      {
+        "option": "D",
+        "trap_type": "wrong_reference_target",
+        "why_wrong": "After sentence 3, 'those' has nothing to count: sentence 3 describes one burden moving 'from one side to the other', not two claims, so 'the first of those' would have to mean the first of two sides, which is not what the sentence goes on to describe. The 'now' fits here, since the burden has just moved, but a counting phrase outranks a time word, and sentence 4's pair would then come after the sentence that counts from it.",
+        "seductive_element": "'Now' reports the state after a change, the change is in sentence 3, and sentence 4's 'Inertia has changed sides' reads like a conclusion the missing sentence could support."
+      },
+      {
+        "option": "A",
+        "trap_type": "contradicts_neighbour",
+        "why_wrong": "Sentence 5 says a renewal vote 'is often a formality... taken in a minute'; a sentence placed straight after it saying the law's friends 'must find the majority and the time' asserts a burden the line above has just called nominal, 'those' has no pair in sentence 5 to count from, and sentence 6's 'Where that is so' would then bind to the burden rather than to the formality it qualifies.",
+        "seductive_element": "After a concession, readers expect the author to return to the main claim, and the sentence sounds like that return."
+      },
+      {
+        "option": "B",
+        "trap_type": "right_idea_wrong_position",
+        "why_wrong": "Sentence 6 has already bounded the claim to 'only who has to turn up', so a sentence reasserting the full burden after it undoes the qualification the paragraph closed on, and 'the first of those' would be counting from a pair stated two sentences earlier and already split by sentence 5.",
+        "seductive_element": "The sentence states the paragraph's central mechanism, and the end slot is where a central mechanism is often expected."
+      }
+    ],
+    "method": "When the sentence to place opens with a counting phrase ('the first of those', 'the second'), find the one sentence that lists exactly that many things and put the sentence straight after it; a time word like 'now' will fit more than one slot and cannot decide. Then confirm from below: the next sentence should take up what the counting phrase left over. Finally test the slot after a concession by reading the concession's exact words; if the sentence you are placing asserts what the concession has just denied, the two cannot be neighbours."
+  },
+  "mentor": {
+    "challenge": "The sentence to place starts 'The first of those'. Which sentence hands it two things to count, and does the line after the slot still make sense?",
+    "takeaway": "A counting phrase outranks a time word: 'the first of those' fixes the slot where the pair is, and 'now' would have fitted two slots."
+  }
+}

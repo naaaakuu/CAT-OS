@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "pc-0037",
+    "type": "pc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "media",
+    "difficulty": "medium",
+    "difficulty_numeric": 4,
+    "tier": "medium",
+    "title": "Same Box, Same Page",
+    "theme": "why a newspaper keeps its corrections in one fixed box: the place is a promise that errors will be owned where a reader can find them without being told to look",
+    "estimated_time_sec": 80,
+    "gap_function": "example",
+    "primary_trap": "attractive_generality",
+    "reasoning_patterns": [
+      "disc.example_after_claim",
+      "disc.contrast",
+      "disc.function_slot",
+      "disc.transition_word"
+    ],
+    "learning_objective": "supply the contrasting case a claim needs when the next sentence opens with 'Against that', instead of a quotable generality or a restatement of what follows",
+    "difficulty_vector": {
+      "stance_subtlety": 3,
+      "scope_precision": 3,
+      "distractor_closeness": 4,
+      "concept_abstractness": 3,
+      "syntactic_complexity": 3
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-07",
+      "usage_note": "Original composition in CAT register for CAT OS. A general reflection on the placement of newspaper corrections; no specific text adapted."
+    },
+    "date_added": "2026-10-07",
+    "batch_id": "batch-pc-004",
+    "reviewer_notes": "The sentence after the gap begins 'Against that', so the gap must supply a practice for the box to be set against. The claim in the second sentence is about what the box says; the example that illustrates it is the contrasting practice and what it says instead. The generality about trust is the live rival because it sounds like the paragraph's moral; it leaves 'Against that' with nothing to oppose.",
+    "quality": {
+      "status": "verified",
+      "adversarial_review": "A strong candidate argues for the line about trust resting on how an institution behaves when shown to be wrong, because it reads as the lesson the paragraph is heading for. It fails on the next sentence: 'Against that, the box gives up prominence and buys predictability' needs a rival practice above it, and a generality about institutions is not a practice. The option about size mattering less than position restates the sentence that follows the gap and leaves the same connective hanging. The broadcasting option changes subject to a medium nothing later picks up.",
+      "blind_solve": {
+        "solver": "sonnet blind reader 2026-10-07",
+        "agreed": 1,
+        "total": 1,
+        "notes": "full agreement"
+      }
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      "Most serious newspapers print their corrections in the same small box, on the same page, every day, whatever the day's news.",
+      "The habit looks like modesty, but the fixed box is a statement about the paper's relation to its own past: a promise that errors will be owned in a place a reader can find without being told to look.",
+      "Against that, the box gives up prominence and buys predictability, which is the thing a reader suspicious of a report actually needs.",
+      "A paper is judged less by how many corrections it prints than by whether a reader could say in advance where they would be."
+    ],
+    "gap_index": 2
+  },
+  "question": {
+    "stem": "Which of the following sentences best fills the gap in the paragraph?",
+    "options": {
+      "A": "Trust in any institution rests, in the end, less on how often it turns out to be right than on how it behaves on the day it is shown to be wrong.",
+      "B": "So the size of the box matters less than its position, which is what a reader who has begun to doubt a report has actually been given.",
+      "C": "A correction folded into a later story on the same subject says something else: the error is the paper's to manage and noticing it is the reader's job.",
+      "D": "Broadcasters face the harder problem, since a bulletin has no fixed page and a spoken correction vanishes with the programme that carried it."
+    },
+    "correct": "C"
+  },
+  "explanation": {
+    "what_the_gap_needs": "The second sentence makes a claim about what the fixed box says. The sentence after the gap opens 'Against that', so the gap must supply something the box can be set against: a rival way of handling a correction, described at the same scope (one newspaper practice) and judged from the same side (the box is the better promise). The gap is the example that shows the claim by contrast, not the paragraph's moral and not its next step.",
+    "correct_reasoning": "The correct option gives the contrasting practice, a correction folded into a later story, and says what that practice tells the reader: the error is the paper's to manage and noticing it is the reader's job. That is the mirror image of the promise in the second sentence, so it illustrates the claim by showing what the alternative would say instead. It also gives 'Against that' its referent, and the following sentence's trade of prominence for predictability is then a comparison between two named practices rather than a remark in the air.",
+    "distractors": [
+      {
+        "option": "A",
+        "trap_type": "attractive_generality",
+        "why_wrong": "A line about trust in any institution is wider than the paragraph, which is about one practice in one trade, nor is it something the box can be set 'Against'; placed in the gap it leaves the next sentence's connective with nothing to oppose.",
+        "seductive_element": "It sounds like the lesson the paragraph is building towards, and a quotable generality about being wrong feels like the natural thing to say after a sentence about owning errors."
+      },
+      {
+        "option": "B",
+        "trap_type": "redundant_restatement",
+        "why_wrong": "It says in advance what the sentence after the gap says, that position buys what a doubting reader needs; the paragraph would then make the same point twice in a row, and 'Against that' would be set against the box's own virtue.",
+        "seductive_element": "It uses the paragraph's own terms, box, position and reader, and 'So' makes it sound like a conclusion being properly drawn."
+      },
+      {
+        "option": "D",
+        "trap_type": "new_topic_introduced",
+        "why_wrong": "Broadcasting is a new medium that nothing afterwards picks up; the following sentences return to the box and the page, and a bulletin cannot be what the box is set 'Against', since the paragraph is comparing ways of printing a correction.",
+        "seductive_element": "It stays on the subject of corrections and offers a genuine contrast, which is the shape the gap wants, only with the wrong partner."
+      }
+    ],
+    "method": "When the sentence after a gap opens with a connective of opposition, 'against that', 'by contrast', 'whereas', the gap must contain the thing being opposed, and it must be the same kind of thing as what follows. Here what follows is a practice (the box), so the gap is a practice too. Rule out the moral, the restatement and the change of medium on that test alone."
+  },
+  "mentor": {
+    "challenge": "The sentence after the gap begins 'Against that'. Something has to be standing there to be argued against. What kind of thing is it?",
+    "takeaway": "A connective of contrast after a gap tells you the gap's job: supply the rival, at the same scope, before the paragraph takes sides."
+  }
+}

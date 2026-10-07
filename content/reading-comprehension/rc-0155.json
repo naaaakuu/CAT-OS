@@ -1,0 +1,335 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0155",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "mathematics-logic",
+    "difficulty": "easy",
+    "difficulty_numeric": 2,
+    "stage": "foundation",
+    "skills": [
+      "evidence-anchoring",
+      "causal-reasoning",
+      "inference",
+      "application"
+    ],
+    "word_count": 324,
+    "question_count": 3,
+    "question_types": [
+      "application",
+      "inference",
+      "specific_detail"
+    ],
+    "theme": "the average over friends is pulled upwards because a well-connected person is counted once on every list that names them; the same pull finds hubs without a map and gives early warning of an outbreak",
+    "estimated_time_min": 5.5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-07",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted."
+    },
+    "date_added": "2026-10-07",
+    "batch_id": "batch-rc-007",
+    "prompt_version": "content engine v1 + CAT paper patterns 2026-10; batch-rc-007",
+    "reviewer_notes": "The corpus's mathematics-logic passages are about proof, averages and the gambler's fallacy; none is about sampling bias in networks. What this passage adds to the familiar \"friendship paradox\" headline is the arithmetic done in the open with four named people, so the learner can see the repeated count, plus two uses of the pull (finding hubs without a map, early warning of an outbreak) that follow from the same count. The near-tie is in Q1, between \"counted three times\" (the cause) and \"more answers than people\" (a true fact about the arithmetic that is not the cause). The voice is second person, short sentences, a direct \"Why?\" to the reader; the sentence mean is the lowest in the batch by design. The move is exposition, and the voice is second person, plain and short-sentenced, with a direct question put straight to the reader.",
+    "length_class": "short",
+    "structure": "phenomenon_explanation",
+    "viewpoints": 1,
+    "tone": "plain, friendly",
+    "difficulty_vector": {
+      "lexical": 1,
+      "syntactic": 1,
+      "abstraction": 2,
+      "inference_depth": 2,
+      "distractor_similarity": 2,
+      "reasoning_depth": 2,
+      "structural_ambiguity": 1,
+      "time_pressure": 1
+    },
+    "reasoning_patterns": [
+      "comp.explicit_detail",
+      "lang.causal_wording",
+      "arg.example",
+      "inf.author_view_application",
+      "inf.reasonable_implication",
+      "arg.principle",
+      "scope.condition",
+      "struct.phenomenon_explanation",
+      "struct.cause_effect",
+      "struct.example"
+    ],
+    "quality": {
+      "status": "verified",
+      "adversarial_review": "Q1: A strong candidate argues for \"more answers than people\" because six answers against four people is true; but the author's \"Why?\" is answered by \"Ana was counted three times\", and the answer count is a consequence of the same repetition, not the reason given. Q2: The close-friends option is argued as a way of removing the bias; \"unless everyone has exactly the same number of friends, it always will\" says no subset of friends removes it, and \"it says nothing about you\" settles the rest. Q3: The full-survey option is the real contest because it would find the same hubs; \"You have found the hubs without a map\" is the passage's effect, and a plan that draws the map first is not using it.",
+      "blind_solve": {
+        "solver": "sonnet blind reader 2026-10-07",
+        "agreed": 3,
+        "total": 3,
+        "notes": "full agreement"
+      }
+    },
+    "vocab_extracted": [
+      "lean",
+      "hubs",
+      "well-connected"
+    ]
+  },
+  "passage": {
+    "title": "On Everybody's List",
+    "reading_time_min": 1.8,
+    "paragraphs": [
+      {
+        "id": "rc-0155-p1",
+        "text": "Count your friends. Now ask each of them to count theirs, add up their answers and divide. The number you get will usually be bigger than yours. Do not take it personally. The same is true for most of your friends, and for most of theirs. On average, your friends have more friends than you do. It says nothing about you. It is about how an average is taken."
+      },
+      {
+        "id": "rc-0155-p2",
+        "text": "Take four people. Ana knows Ben, Chen and Dev. Ben, Chen and Dev each know only Ana. Ana has three friends; the others have one each. Average over the four people: six divided by four, one and a half. Now average over friends instead. Ben's friend is Ana, who has three. So is Chen's. So is Dev's. Ana's three friends have one each. Six answers, adding to twelve, and twelve over six is two. Two beats one and a half. Why? Ana was counted three times, once for each friend who named her. Ben was counted once. A person with many friends sits on many lists. A person with few sits on few. The average over lists leans towards the well-connected. Unless everyone has exactly the same number of friends, it always will."
+      },
+      {
+        "id": "rc-0155-p3",
+        "text": "You can use this lean. Suppose you want the well-connected people in a town and have no map of who knows whom. Ask people at random to name one friend. The friends they name will, on average, have more friends than the people you asked. You have found the hubs without a map. Now suppose an illness is spreading. It reaches well-connected people early, because more paths lead to them. So the friends of random people fall ill sooner than random people do. Watch the friends and you see the outbreak coming. Vaccinate them and each dose does more work. Nothing here needed anyone to be popular; it needed only that each person be counted once for every list they sat on."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0155-q1",
+      "type": "specific_detail",
+      "skill": "specific_detail",
+      "patterns": [
+        "comp.explicit_detail",
+        "lang.causal_wording",
+        "arg.example"
+      ],
+      "target_mistake": "mistaking the number of answers for the cause, or thinking the people with one friend are dropped rather than counted once",
+      "prediction_target": null,
+      "difficulty": {
+        "inference_depth": 1,
+        "distractor_similarity": 2,
+        "reasoning_depth": 1
+      },
+      "secondary_skills": [
+        "inference"
+      ],
+      "stem": "In the author's example of four people, the average over friends is higher than the average over people because",
+      "options": {
+        "A": "Ana is counted three times, once for each friend who names her",
+        "B": "Ana's three friends each have more friends than Ana has herself",
+        "C": "the three people with one friend each are left out of the second count",
+        "D": "there are more answers in the second count than there are people in the group"
+      },
+      "correct": "A",
+      "estimated_time_sec": 50,
+      "explanation": {
+        "expert_notice": "The author asks \"Why?\" and answers in the next two sentences: \"Ana was counted three times, once for each friend who named her. Ben was counted once.\" The general version follows: a person with many friends \"sits on many lists\".",
+        "correct_reasoning": "The correct option is the author's answer in substance. Ana appears on three lists, so her three is added three times, while each one is added once; the average tilts towards her.",
+        "passage_anchor": "rc-0155-p2",
+        "question_type_note": "When a passage asks its own question and answers it, a detail question will ask for that answer. Find the \"Why?\" and read the sentence after it.",
+        "reading_habit": "In a worked example, note which item is counted more than once. That repetition is usually the whole mechanism, and the distractors will describe the arithmetic around it instead.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "opposite_direction",
+            "why_wrong": "Ana's friends \"have one each\" and Ana \"has three\"; the option reverses who has more",
+            "seductive_element": "it keeps the shape \"friends have more friends\", which is the headline claim, and misplaces it"
+          },
+          {
+            "option": "C",
+            "trap_type": "comparison_distortion",
+            "why_wrong": "\"Ben was counted once\": the people with one friend are in the second count, each once; they are outweighed, not omitted",
+            "seductive_element": "they do count for less, and \"left out\" feels like a stronger way of saying so"
+          },
+          {
+            "option": "D",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "\"six answers\" and \"four people\" are the passage's own numbers, but the author's \"Why?\" is answered by who is counted how often, not by how many answers there are",
+            "seductive_element": "it is built from the passage's own arithmetic, so it reads like the explanation"
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0155-q2",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.author_view_application",
+        "lang.causal_wording",
+        "inf.reasonable_implication"
+      ],
+      "target_mistake": "reading a fact about sampling as a fact about the person",
+      "prediction_target": "the author says \"do not take it personally\" and \"it says nothing about you\"; the result is produced by counting well-connected people many times, so it tells her nothing about herself",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 2,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "specific_detail"
+      ],
+      "stem": "The author would most likely say that a person who finds her friends have more friends than she does should conclude that",
+      "options": {
+        "A": "she is, on this evidence, less sociable than most people in her circle",
+        "B": "the result would disappear if she counted only her close friends",
+        "C": "nothing about herself follows, since the result comes from how the average was taken",
+        "D": "she should befriend the best-connected of her friends in order to even things out"
+      },
+      "correct": "C",
+      "estimated_time_sec": 80,
+      "explanation": {
+        "expert_notice": "The first paragraph answers before the question is asked: \"Do not take it personally.\" \"It says nothing about you. It is about how an average is taken.\" The second paragraph shows the mechanism and ends: unless everyone has the same number of friends, \"it always will\".",
+        "correct_reasoning": "The correct option is the author's instruction restated: the result follows from the way the average over friends is built, so no conclusion about her follows. The author's whole point is that the paradox is a property of the counting, not of any person.",
+        "passage_anchor": "rc-0155-p1, rc-0155-p2",
+        "question_type_note": "An inference about what a person \"should conclude\" is answered by the author's own warnings. Find where the author tells the reader what not to think; the right option is usually that warning in positive form.",
+        "reading_habit": "When a passage says \"it says nothing about you\", any option that says something about you is wrong, however mild.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "fact_right_interpretation_wrong",
+            "why_wrong": "the fact is right (her friends do have more friends) but \"Do not take it personally\" and \"It says nothing about you\" rule out the reading of it as a verdict on her sociability",
+            "seductive_element": "the result sounds like a verdict on the person, and the passage opens by inviting her to count"
+          },
+          {
+            "option": "B",
+            "trap_type": "wrong_condition",
+            "why_wrong": "the lean holds \"unless everyone has exactly the same number of friends\"; nothing about close friends changes who sits on many lists",
+            "seductive_element": "narrowing the count sounds like a fix, and the passage is about how counting is done"
+          },
+          {
+            "option": "D",
+            "trap_type": "prescriptive_leap",
+            "why_wrong": "the passage advises nothing; it explains why the number comes out as it does",
+            "seductive_element": "the \"well-connected\" people in paragraph three sound like people worth knowing"
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0155-q3",
+      "type": "application",
+      "skill": "application",
+      "patterns": [
+        "inf.author_view_application",
+        "arg.principle",
+        "scope.condition"
+      ],
+      "target_mistake": "choosing a plan that finds well-connected people by other means, or one that has no pull at all",
+      "prediction_target": "the lean is that the friends of random people are better connected than random people and fall ill sooner; a plan uses it only if it moves from random people to their named friends, without a map",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 2,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "inference"
+      ],
+      "stem": "A clinic wants early warning of a flu outbreak in a town. Which of the following plans uses the lean the passage describes?",
+      "options": {
+        "A": "Watch a random sample of residents and record the day each of them falls ill.",
+        "B": "Ask a random sample of residents each to name a friend, and watch the friends.",
+        "C": "Survey every household for its contacts, and watch the residents with the most.",
+        "D": "Watch the residents who report having the fewest friends, since they are reached last."
+      },
+      "correct": "B",
+      "estimated_time_sec": 90,
+      "explanation": {
+        "expert_notice": "Paragraph three gives the recipe twice. \"Ask people at random to name one friend. The friends they name will, on average, have more friends.\" And \"the friends of random people fall ill sooner than random people do. Watch the friends.\" The step from random person to named friend is the lean (\"You can use this lean\"); a full map is exactly what it lets you skip.",
+        "correct_reasoning": "The correct option is that recipe: random residents, each naming a friend, and the friends watched. It uses the pull and needs no map.",
+        "passage_anchor": "rc-0155-p3",
+        "question_type_note": "An application question gives a thin scenario and puts the conditions in the options. Turn the passage's mechanism into a short checklist (random start, name a friend, watch the friend) and keep only the option that ticks every box.",
+        "reading_habit": "When a passage says a method works \"without a map\", an option that builds the map first may reach the same people, but it is not using the passage's lean, and the question asked which plan uses it.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "true_but_insufficient",
+            "why_wrong": "a random sample is where the passage starts, not where it ends; \"the friends of random people fall ill sooner than random people do\"",
+            "seductive_element": "sampling at random sounds like good practice, and the passage does begin with random people"
+          },
+          {
+            "option": "C",
+            "trap_type": "wrong_condition",
+            "why_wrong": "the passage's point is to find the hubs \"without a map\"; a survey of every household is the map the lean lets you skip, so the plan reaches the hubs by a different route",
+            "seductive_element": "it would find the well-connected, so it looks like the same plan done thoroughly"
+          },
+          {
+            "option": "D",
+            "trap_type": "opposite_direction",
+            "why_wrong": "the illness reaches \"well-connected people early\"; those with fewest friends are the last place to look for a warning",
+            "seductive_element": "\"reached last\" is in the spirit of the passage, so the option sounds like the mechanism applied"
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "lean",
+      "passage_use": "You can use this lean",
+      "meaning_here": "a tilt or bias in one direction",
+      "difficulty": "easy"
+    },
+    {
+      "word": "hubs",
+      "passage_use": "You have found the hubs without a map",
+      "meaning_here": "the most connected people in a network",
+      "difficulty": "medium"
+    },
+    {
+      "word": "well-connected",
+      "passage_use": "leans towards the well-connected",
+      "meaning_here": "having many friends or links to others",
+      "difficulty": "easy"
+    }
+  ],
+  "mentor": {
+    "challenge": "Your friends have, on average, more friends than you do. So do mine. So does almost everyone's. How can that be true of nearly everybody at once?",
+    "one_sentence_summary": "A short worked example with four people shows that the average number of friends counted over everyone's friends is always pulled above the average number of friends people actually have, because a well-connected person gets counted once on every list that names them, and the same pull can find highly connected people or warn of an outbreak early without ever drawing a map.",
+    "main_idea": "When you average the number of friends your friends have, instead of the number of friends people have, well-connected people get counted again on every list that names them, which pulls that second average above the first. The same pull lets you find well-connected people, or spot an outbreak of illness early, without ever needing a map of who knows whom.",
+    "simple_explanation": "Count your own friends, then ask each of them to count theirs, add those numbers together and divide by how many friends you have. The number you get back is usually bigger than your own friend count. This is not a comment on you personally, and it is true for almost everyone you know too. On average, a person's friends have more friends than that person does, and the reason has nothing to do with any one person. It is about the way the average itself is taken.\n\nHere is why, using four made-up people. Ana knows Ben, Chen and Dev, and each of them knows only Ana. So Ana has three friends, while the other three each have one friend. Averaged over the four people, that is one and a half friends each. But average it a different way, over friends instead of over people: Ben's one friend is Ana, who has three; the same is true for Chen and for Dev; and Ana's three friends each have only one. Add those six numbers together and divide by six, and you get two, which beats one and a half. The reason is that Ana gets counted three times, once by each friend who names her, while Ben, Chen and Dev each get counted only once. Someone with many friends sits on many lists, and someone with few friends sits on few, so this kind of average always leans towards the well-connected person, unless every single person happens to have exactly the same number of friends.\n\nThis lean is actually useful. If you want to find the best-connected people in a town but have no map of who knows whom, ask random people to each name one friend; on average, the friends they name will be better connected than the people you asked, so you have found well-connected people without any map at all. The same trick works for catching an illness early, since it reaches well-connected people first simply because more paths lead to them. So the friends of random people tend to fall ill before those random people do, which means watching the friends can show you an outbreak coming before it is widespread, and vaccinating those friends does extra good per dose. None of this needs anyone to be popular in any special sense; it only needs each person to be counted once for every list they happen to sit on.",
+    "why_difficult": "The puzzle feels like it must be about you personally, so readers look for something wrong with their own friendships, when the passage's whole point is that the gap comes purely from how the average over friends counts well-connected people more than once.",
+    "author_intention": "To explain, with a fully worked small example, why the average over friends is always at least as high as the average over people, and to show two uses that follow from the same counting trick.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0155-p1",
+        "role": "States the puzzle",
+        "note": "Your friends seem to have more friends than you do, on average, and the passage promises this is about counting, not about you."
+      },
+      {
+        "paragraph_id": "rc-0155-p2",
+        "role": "Works the example",
+        "note": "Four made-up people show exactly why counting over friends gives a bigger average than counting over people: a popular person gets counted on every list that names them."
+      },
+      {
+        "paragraph_id": "rc-0155-p3",
+        "role": "Applies the trick",
+        "note": "The same counting lean can find well-connected people without a map, or give early warning of a spreading illness by watching people's named friends."
+      }
+    ],
+    "tone_progression": "The voice is plain and friendly throughout, speaking directly to the reader with short sentences and a single direct question, and never becomes technical even while working through the arithmetic.",
+    "key_transitions": [
+      "'Why? Ana was counted three times, once for each friend who named her.' (paragraph 2): the passage answers its own question with the mechanism.",
+      "'You can use this lean.' (opening of paragraph 3): the passage turns from explaining the puzzle to applying it."
+    ],
+    "misunderstanding": "A hurried reader treats the gap between the two averages as a fact about having too few or too unpopular friends, missing that the passage says explicitly that the result says nothing about any individual person and comes only from how the counting is done.",
+    "traps_summary": "The wrong options confuse the number of answers in the count with the reason for the gap, claim that people with few friends are left out rather than simply outweighed, or reverse who in the worked example has more friends than whom.",
+    "reading_lesson": "When a passage works through a small example with specific numbers, track which item gets counted more than once rather than just the final totals; that repetition is usually the whole explanation, and distractors describe the surrounding arithmetic instead.",
+    "real_world": "The same counting trick helps in surveys and outbreak tracking generally: asking people to name a contact and then studying the contact, rather than the person first asked, tends to find more central, more exposed or more informed people without ever mapping the whole network.",
+    "takeaway": "Averaging over friends instead of over people always leans towards whoever is best connected, simply because they get counted more than once.",
+    "reflection_question": "Can you think of another situation where the way something is counted, rather than anything true about the people counted, decides the answer?",
+    "eli10": {
+      "big_idea": "Your friends seem to have more friends than you because popular people get counted again and again on everyone's list of friends, not because anything is wrong with you.",
+      "story": "You count your friends. Then you ask each friend to count their own friends. You add up their numbers and divide. The answer is almost always bigger than your own friend count. Do not worry, this happens to nearly everyone. Here is why, using four pretend people. Ana has three friends. Her three friends each have only one friend, Ana. If you average over the four people, you get one and a half friends each. But if you average over friends instead, Ana gets counted three times, once by each of her friends. That makes the average jump up to two. Popular people get counted again and again this way. You can even use this trick. Ask strangers to name one friend, and that friend is often more popular than the stranger. Watching those named friends can also warn you early if an illness is spreading, since popular people tend to catch it first.",
+      "paragraphs": [
+        "The author sets up a strange fact: your friends seem to have more friends than you do, almost always.",
+        "Four pretend people show why: a popular person gets counted again on every friend's list, which pulls the average up.",
+        "The same counting trick can find popular people without a map, or warn you early about a spreading illness."
+      ],
+      "author_view": "The writer finds this a fun, surprising fact and wants to reassure the reader that it says nothing bad about them personally, only about how counting works."
+    }
+  }
+}

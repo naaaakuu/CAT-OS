@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "pc-0040",
+    "type": "pc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 87,
+    "genre": "sociology",
+    "difficulty": "easy",
+    "difficulty_numeric": 3,
+    "tier": "easy",
+    "title": "Held From Behind",
+    "theme": "a queue keeps its shape with nobody in charge because each place is held by the people behind, whose own places depend on the order; the queue is enforced from the back, not the front",
+    "estimated_time_sec": 70,
+    "gap_function": "restatement",
+    "primary_trap": "contradicts_neighbour",
+    "reasoning_patterns": [
+      "disc.function_slot",
+      "disc.repeated_noun",
+      "disc.cause_effect",
+      "disc.transition_word"
+    ],
+    "learning_objective": "recognise a restatement slot, where the paragraph says its mechanism again in sharper words before using it, and reject the option that changes the mechanism while keeping the vocabulary",
+    "difficulty_vector": {
+      "stance_subtlety": 2,
+      "scope_precision": 3,
+      "distractor_closeness": 3,
+      "concept_abstractness": 2,
+      "syntactic_complexity": 2
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-07",
+      "usage_note": "Original composition in CAT register for CAT OS. A general observation about how queues keep their order without enforcement; no specific text adapted."
+    },
+    "date_added": "2026-10-07",
+    "batch_id": "batch-pc-004",
+    "reviewer_notes": "The third sentence gives the mechanism and the last sentence applies it to the queue-jumper, who is challenged by those 'just behind'. The gap restates the mechanism as a direction, from the back, so that 'So' in the last sentence has a general statement to follow from. The good-manners option keeps 'in other words' and swaps the mechanism, which is the trap an easy-tier learner most needs to see.",
+    "quality": {
+      "status": "verified",
+      "adversarial_review": "A strong candidate argues for the good-manners option because it begins 'In other words' and a restatement is what the slot wants. It fails on the sentence above it, which says each place is held by people 'whose own places depend on the order being kept': the mechanism is interest, and manners extended 'even when nothing is at stake' is the opposite claim. The option about longer queues is a new claim nothing supports, and the option about any unenforced rule leaves the queue for rules in general just before the paragraph returns to one queue-jumper.",
+      "blind_solve": {
+        "solver": "sonnet blind reader 2026-10-07",
+        "agreed": 1,
+        "total": 1,
+        "notes": "full agreement"
+      }
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      "A queue has no official.",
+      "Nobody is paid to keep it, there is no rope in most of them, and the person at the front has every reason to be gone before any dispute starts.",
+      "Yet it keeps its shape, because each person's place is held by the people behind, whose own places depend on the order being kept.",
+      "So the queue-jumper is challenged by the people just behind the point where he slipped in, and almost never by those ahead of it, who have lost nothing."
+    ],
+    "gap_index": 3
+  },
+  "question": {
+    "stem": "Which of the following sentences best fills the gap in the paragraph?",
+    "options": {
+      "A": "A queue, in other words, is enforced from the back, by the people with something to lose.",
+      "B": "In other words, the queue survives on good manners, which most people extend even when nothing is at stake.",
+      "C": "The same is true of any rule that nobody is paid to enforce: it lasts exactly as long as the people under it happen to agree with it.",
+      "D": "The longer the queue, the more places there are to protect, and the more firmly the order holds against anyone who tests it."
+    },
+    "correct": "A"
+  },
+  "explanation": {
+    "what_the_gap_needs": "The third sentence has given the mechanism: a place is held by the people behind, who have an interest in the order. The last sentence begins 'So' and applies the mechanism to a queue-jumper, who is challenged from just behind. The gap sits between a mechanism and its application, so it should say the mechanism again in the form the application uses: a direction, from the back. Same scope (one queue), same stance (explaining, not praising).",
+    "correct_reasoning": "The correct option restates the third sentence in other words, turning 'held by the people behind, whose own places depend on the order' into 'enforced from the back, by the people with something to lose'. That is the same mechanism, now stated as a direction, and the last sentence's 'So' then draws the consequence: the challenge comes from just behind the point of entry, where the people with something to lose are standing.",
+    "distractors": [
+      {
+        "option": "B",
+        "trap_type": "contradicts_neighbour",
+        "why_wrong": "The sentence above says places are held by people 'whose own places depend on the order being kept', that is, by interest; manners extended 'even when nothing is at stake' replaces interest with its opposite, and the last sentence's point that those ahead 'have lost nothing' and stay silent then makes no sense.",
+        "seductive_element": "'In other words' is exactly the signal a restatement slot gives, and good manners is the explanation most people would offer for a queue."
+      },
+      {
+        "option": "C",
+        "trap_type": "attractive_generality",
+        "why_wrong": "It widens the paragraph from one queue to 'any rule that nobody is paid to enforce', and the next sentence comes straight back to a single queue-jumper; the generality is also a different mechanism, agreement rather than interest.",
+        "seductive_element": "Generalising feels like the mature move, and the line is quotable."
+      },
+      {
+        "option": "D",
+        "trap_type": "new_topic_introduced",
+        "why_wrong": "Nothing in the paragraph says anything about the length of a queue, and nothing after the gap uses it; the sentence adds a claim rather than restating the one the last sentence's 'So' depends on.",
+        "seductive_element": "It sounds like a consequence of the mechanism and keeps the vocabulary of places and order."
+      }
+    ],
+    "method": "When a gap sits between a mechanism and a sentence beginning 'So', ask what form the mechanism needs to take for the 'So' to follow. Here the consequence is about where the challenge comes from, so the gap should state the mechanism as a direction. Then check every 'in other words' option against the sentence it claims to restate: the words can match while the mechanism is swapped."
+  },
+  "mentor": {
+    "challenge": "Nobody runs the queue, yet the queue-jumper is always caught by the same people. Which sentence says who, and why them?",
+    "takeaway": "A restatement must keep the mechanism, not just the vocabulary; 'in other words' is a promise that the words changed and the claim did not."
+  }
+}

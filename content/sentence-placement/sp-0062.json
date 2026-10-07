@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "sp-0062",
+    "type": "sp",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 87,
+    "genre": "sociology",
+    "difficulty": "easy",
+    "difficulty_numeric": 3,
+    "tier": "easy",
+    "title": "Every Chair Goes to Somebody",
+    "theme": "a seating plan is the host's statement of who stands where and the one document of the day that cannot be vague, which is why it is hardest to write and most closely read",
+    "estimated_time_sec": 70,
+    "clue_types": [
+      "pronoun_ref",
+      "connective_explicit",
+      "lexical_repetition"
+    ],
+    "primary_trap": "new_topic_introduced",
+    "reasoning_patterns": [
+      "disc.pronoun_antecedent",
+      "disc.transition_word",
+      "disc.given_new",
+      "disc.cause_effect"
+    ],
+    "difficulty_vector": {
+      "reference_density": 3,
+      "transition_ambiguity": 2,
+      "competing_slots": 2,
+      "concept_abstractness": 2,
+      "syntactic_complexity": 2
+    },
+    "learning_objective": "bind 'it' and 'also' to the sentence that names the thing and gives its first property, and reject the slot where the sentence would introduce a document nothing has named",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-07",
+      "usage_note": "Original composition in CAT register for CAT OS. A general reflection on the wedding seating plan as a social document; no specific text adapted."
+    },
+    "date_added": "2026-10-07",
+    "batch_id": "batch-sp-003",
+    "reviewer_notes": "Easy tier: the pronoun and 'also' fix the seat, and 'That is why' confirms it from below. The trap is the slot after sentence 1, where 'told where to sit' seems to lead to 'every chair has to be given to somebody' before any plan or document has been named.",
+    "quality": {
+      "status": "verified",
+      "adversarial_review": "The live rival is the slot after sentence 1, argued from 'told where to sit' leading to 'every chair has to be given to somebody'. It fails because 'It' has no document to name and 'also' no first property to add to, and because sentence 2 would then introduce the seating plan after it had been discussed. The slot after sentence 3 puts the reason after the 'That is why' that depends on it.",
+      "blind_solve": {
+        "solver": "sonnet blind reader 2026-10-07",
+        "agreed": 1,
+        "total": 1,
+        "notes": "full agreement"
+      }
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "n": 1,
+        "text": "At most parties the guests sit where they like; at a wedding they are told where to sit."
+      },
+      {
+        "n": 2,
+        "text": "The seating plan is the host's statement about who stands where: which cousins count as close, which friends have become family, which old quarrel is to be kept two tables apart."
+      },
+      {
+        "n": 3,
+        "text": "That is why it is the hardest thing the hosts write, and the thing the guests read most closely."
+      },
+      {
+        "n": 4,
+        "text": "A guest who finds his name by the door learns something the speeches were careful not to say."
+      }
+    ]
+  },
+  "missing": {
+    "text": "It is also the one document of the day that cannot be vague, because every chair has to be given to somebody.",
+    "position": 2,
+    "function": "the second property of the plan, after the statement of standing, that 'That is why' gathers: a document that cannot be vague"
+  },
+  "question": {
+    "stem": "Where does the following sentence best fit in the paragraph? \"It is also the one document of the day that cannot be vague, because every chair has to be given to somebody.\"",
+    "options": {
+      "A": "After sentence 1",
+      "B": "After sentence 2",
+      "C": "After sentence 3",
+      "D": "After sentence 4"
+    },
+    "option_positions": {
+      "A": 1,
+      "B": 2,
+      "C": 3,
+      "D": 4
+    },
+    "correct": "B"
+  },
+  "explanation": {
+    "correct_reasoning": "The missing sentence begins 'It is also the one document', so 'It' needs a document already named and 'also' needs a first property already given. Sentence 2 supplies both: the seating plan, and its first property, that it is the host's statement about who stands where. The missing sentence adds the second property, that the plan cannot be vague. Sentence 3 then begins 'That is why' and gives two consequences, hardest to write and read most closely, which answer to the two properties above it. The seat is fixed by the pronoun and the 'also' looking back, and by the 'That is why' looking back at both.",
+    "clue_before": "Sentence 2 names the seating plan and gives it one property; 'It is also the one document' needs that noun for its 'It' and that property for its 'also'.",
+    "clue_after": "Sentence 3's 'That is why' draws two consequences, hardest to write and read most closely; the second property, that the plan cannot be vague, is what makes the writing hard.",
+    "distractors": [
+      {
+        "option": "A",
+        "trap_type": "new_topic_introduced",
+        "why_wrong": "After sentence 1 nothing has been called a document or a plan; 'It' has only 'a wedding' or 'where to sit' to bind to, and 'also' adds a property to nothing, so the sentence introduces a document the paragraph has not yet put on the table, and sentence 2 then names the plan as if for the first time after it has already been discussed.",
+        "seductive_element": "Sentence 1 ends on being told where to sit, and a sentence about every chair being given to somebody seems to follow that directly."
+      },
+      {
+        "option": "C",
+        "trap_type": "premature_conclusion",
+        "why_wrong": "Sentence 3's 'That is why' draws the consequence that the plan is hardest to write; placed after it, the reason it is hard, that it cannot be vague, arrives after the conclusion it supports, and the 'also' then adds a property after the properties have already been summed up.",
+        "seductive_element": "The sentence explains why the plan is hard, and an explanation can seem to belong right after the claim it explains."
+      },
+      {
+        "option": "D",
+        "trap_type": "wrong_reference_target",
+        "why_wrong": "At the end, 'It' follows a sentence whose subjects are a guest, his name and the speeches, and would bind to the speeches or to the 'something' he learns; and 'also' would be adding a property to a sentence that states none.",
+        "seductive_element": "The closing sentence is about what the plan reveals, so a remark about the plan's precision seems to belong beside it."
+      }
+    ],
+    "method": "A sentence that opens 'It is also' makes two demands: a noun above for 'It' and a first property above for 'also'. Find the sentence that supplies both and seat the missing sentence after it; then read the next sentence's 'That is why' and confirm that it gathers both properties."
+  },
+  "mentor": {
+    "challenge": "The speeches are careful. The seating plan cannot be. Why is one sheet of paper the most closely read thing at a wedding?",
+    "takeaway": "'It is also' needs a named thing and a first property above it; a slot that shares a subject but has named nothing is not the slot."
+  }
+}

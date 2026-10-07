@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "pc-0045",
+    "type": "pc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "ethics",
+    "difficulty": "medium",
+    "difficulty_numeric": 6,
+    "tier": "advanced",
+    "title": "Discretion, Not Complicity",
+    "theme": "a promise of secrecy was a promise of discretion, which has the limits the friend would have granted, so breaking the silence can keep faith with the trust if the friend is told first",
+    "estimated_time_sec": 90,
+    "gap_function": "resolution",
+    "primary_trap": "premature_conclusion",
+    "reasoning_patterns": [
+      "disc.function_slot",
+      "disc.problem_then_solution",
+      "disc.rhetorical_pivot",
+      "struct.problem_solution",
+      "arg.qualification"
+    ],
+    "learning_objective": "fill a resolution slot with the sentence that re-describes one of two conflicting duties so that they no longer collide and that licenses the practical step the next sentence takes, rather than with a verdict for one side",
+    "difficulty_vector": {
+      "stance_subtlety": 4,
+      "scope_precision": 4,
+      "distractor_closeness": 4,
+      "concept_abstractness": 4,
+      "syntactic_complexity": 3
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-07",
+      "usage_note": "Original composition in CAT register for CAT OS. A general reflection on a promise of secrecy that comes to conflict with preventing a harm; no specific text adapted."
+    },
+    "date_added": "2026-10-07",
+    "batch_id": "batch-pc-004",
+    "reviewer_notes": "Distinct from pc-0003 (a promise to the dead, where the question is what the obligation was fixed to): here the question is the scope of a promise of discretion and the practical consequence of honouring the trust while breaking the silence. The next sentence's 'keeps faith with the trust even as it breaks the silence' is the test every option fails except the one that separates the trust from the content.",
+    "quality": {
+      "status": "verified",
+      "adversarial_review": "The live rival is the weighing option, since it ends the silence as the paragraph does. It fails on 'whatever the friend may think', which the next sentence refuses by keeping faith with the trust, and on 'so', which needs a dissolution of the deadlock rather than a decision within it. The maxim is refused by the paragraph's own next step. The overheard-or-asked distinction is a new topic that the next sentence, which tells the friend first in every case, never uses.",
+      "blind_solve": {
+        "solver": "sonnet blind reader 2026-10-07",
+        "agreed": 1,
+        "total": 1,
+        "notes": "full agreement"
+      }
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      "You promised a friend to keep a secret, and the secret has turned out to be the kind that will hurt somebody if it is kept.",
+      "Two duties now face each other: the promise, which was made to the friend and not to the world, and the duty to prevent a harm, which was promised to nobody and binds you anyway.",
+      "Stated like that they look equal in weight, and whichever you choose you will have broken something.",
+      "So the honest course is to tell the friend first that the silence is over, which keeps faith with the trust even as it breaks the silence."
+    ],
+    "gap_index": 3
+  },
+  "question": {
+    "stem": "Which of the following sentences best fills the gap in the paragraph?",
+    "options": {
+      "A": "A promise is a promise, and a person who keeps only the convenient ones has not really made any promises at all, only predictions about their own future comfort.",
+      "B": "But the promise was for discretion, not for the content, and discretion has limits the friend would have granted; nobody asks a friend to promise that a third person may be hurt.",
+      "C": "The harm is the heavier weight, then, and the secret must be told at once, whatever the friend may think of you afterwards.",
+      "D": "Much depends, of course, on how the secret came to you in the first place, since a confidence that was merely overheard binds less than one that was asked for and freely given."
+    },
+    "correct": "B"
+  },
+  "explanation": {
+    "what_the_gap_needs": "Three sentences have built a deadlock: two duties, equal in weight, and a loss whichever way you go. The sentence after the gap begins 'so' and takes a practical step that both breaks the silence and keeps faith with the trust. A step that does both is only possible if the deadlock has been dissolved rather than decided, so the gap must re-describe one of the duties, most likely the promise, in a way that shows it never reached this case. Stance: a resolution, not a verdict; scope: this promise, this friend.",
+    "correct_reasoning": "The correct option re-describes the promise. What was promised was discretion, and discretion has the limits the friend would have granted, since nobody asks a friend to promise that a third person may be hurt. On that description the promise does not cover the present case, so breaking the silence breaks no promise; and because the promise was a matter of trust between two people, the way to honour what remains of it is to tell the friend first. That is exactly the step the next sentence takes and the reason it gives, 'keeps faith with the trust'.",
+    "distractors": [
+      {
+        "option": "A",
+        "trap_type": "attractive_generality",
+        "why_wrong": "A maxim that a promise is a promise does not dissolve the deadlock, it takes the promise's side, and the next sentence then ends the silence against it; a sentence the paragraph proceeds to contradict cannot be what 'so' follows from.",
+        "seductive_element": "It is firm and quotable, and it voices the loyalty a reader feels towards the friend."
+      },
+      {
+        "option": "C",
+        "trap_type": "premature_conclusion",
+        "why_wrong": "It decides by weighing, which the third sentence has said cannot be done without breaking something, and it adds 'whatever the friend may think', where the next sentence is built to keep faith with the friend; it reaches the right action by the wrong route and so cannot license 'tell the friend first'.",
+        "seductive_element": "It ends the silence, as the paragraph does, and 'then' makes it sound like the resolution."
+      },
+      {
+        "option": "D",
+        "trap_type": "new_topic_introduced",
+        "why_wrong": "How the secret was received is a new consideration that nothing in the paragraph picks up; the next sentence does not distinguish overheard from asked-for confidences, it tells the friend first in every case, so the sentence leaves the deadlock standing and opens a question nobody answers.",
+        "seductive_element": "Drawing a distinction feels like careful moral reasoning, and 'of course' gives it the tone of a point everyone has missed."
+      }
+    ],
+    "method": "When two duties are set against each other and the next sentence acts with a 'so', ask which duty the acting sentence still honours. Here it keeps faith with the trust, so the gap must have shown that the promise, properly described, does not forbid the act. Rule out any option that picks the heavier side: a verdict leaves one duty broken, and the next sentence says nothing is."
+  },
+  "mentor": {
+    "challenge": "You promised to keep a secret. Keeping it will now hurt someone. The paragraph says you can break the silence without breaking faith. How?",
+    "takeaway": "A resolution re-describes one of the two duties so that they no longer collide; an option that merely picks the heavier side is a verdict, and the next sentence will show which you needed."
+  }
+}

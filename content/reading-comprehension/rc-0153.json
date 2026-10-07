@@ -1,0 +1,416 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0153",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 90,
+    "genre": "culture",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "stage": "intermediate",
+    "skills": [
+      "inference",
+      "vocabulary-in-context",
+      "structure-mapping",
+      "evidence-anchoring",
+      "causal-reasoning"
+    ],
+    "word_count": 492,
+    "question_count": 4,
+    "question_types": [
+      "except",
+      "inference",
+      "logical_structure",
+      "vocabulary_in_context"
+    ],
+    "theme": "nostalgia was a diagnosis before it was a feeling; it changed because its object moved from a place you can return to, which allows a cure, to a time nobody can reach, which leaves only a sentiment",
+    "estimated_time_min": 7.5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-07",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted."
+    },
+    "date_added": "2026-10-07",
+    "batch_id": "batch-rc-007",
+    "prompt_version": "content engine v1 + CAT paper patterns 2026-10; batch-rc-007",
+    "reviewer_notes": "The catalogue's culture entry rc-0127 treats fashion revivals and says they are not nostalgia; this passage is about the word's own career and keeps the commercial stage to two sentences without the \"too young to remember\" point. What it adds to the familiar \"nostalgia used to be a disease\" anecdote is the mechanism of the change: a place can be reached, so the longing has a remedy and can be a disease; a time cannot, so the longing can only be a sentiment, and the world's places changing faster than the people who left them is what moved the object. The near-tie is in Q1, between agreement about the cure (stated) and agreement about the cause (denied). The voice is wry first person plural, with the date 1688 in the first sentence and a biscuit tin in the second paragraph; the author adjudicates only in paragraphs three and four. The move is a history of an idea, and the voice is wry, first person plural, dated 1688 in its opening sentence.",
+    "length_class": "medium",
+    "structure": "history_of_an_idea",
+    "viewpoints": 2,
+    "tone": "amused, then thoughtful",
+    "difficulty_vector": {
+      "lexical": 3,
+      "syntactic": 3,
+      "abstraction": 3,
+      "inference_depth": 3,
+      "distractor_similarity": 3,
+      "reasoning_depth": 3,
+      "structural_ambiguity": 3,
+      "time_pressure": 2
+    },
+    "reasoning_patterns": [
+      "comp.explicit_detail",
+      "lang.some_vs_all",
+      "elim.systematic",
+      "inf.strongly_supported",
+      "arg.causal_claim",
+      "struct.cause_effect",
+      "comp.function_over_words",
+      "comp.paraphrase",
+      "comp.reference_tracking",
+      "comp.organization",
+      "struct.history_of_an_idea",
+      "struct.question_answer",
+      "struct.chronology",
+      "struct.pivot",
+      "arg.concession"
+    ],
+    "quality": {
+      "status": "verified",
+      "adversarial_review": "Q1: A strong candidate argues that \"everyone agreed\" covers the cause as well as the cure; \"Hofer put the trouble in the brain\" followed by \"Other doctors blamed the heavy lowland air\" settles it, and \"everyone agreed on the cure\" names what the agreement was about. Q2: The commerce option attracts because it is the last stage; \"by the middle of the century it was not a diagnosis at all\" comes before \"by the end of the century the mood had been noticed by people who sell things\", so the order of events rules it out. Q3: The lament option is the trap for a reader who answers from the passage's theme; \"beside dysentery and fever\" fixes the sense as an illness in a surgeon's list. Q4: The double-rejection option is argued from \"the same thing renamed, or two things that happen to share a word\"; \"is half of it. The other half is\" shows the author accepts part of the first answer and adds a distinction, rejecting neither.",
+      "blind_solve": {
+        "solver": "sonnet blind reader 2026-10-07",
+        "agreed": 4,
+        "total": 4,
+        "notes": "full agreement"
+      }
+    },
+    "vocab_extracted": [
+      "wasted",
+      "prescription",
+      "melancholia",
+      "posting"
+    ]
+  },
+  "passage": {
+    "title": "A Fatal Longing",
+    "reading_time_min": 2.7,
+    "paragraphs": [
+      {
+        "id": "rc-0153-p1",
+        "text": "Nostalgia began its career as a disease, and a fatal one. In 1688 a young physician in Basel, Johannes Hofer, joined nostos, the return home, to algos, pain, for a condition he saw in Swiss soldiers and servants far from their mountains. The patients lost their appetite, then their interest in anything but the valley they came from; they ran fevers, wasted, and sometimes died. Hofer put the trouble in the brain, where the animal spirits had worn a groove by travelling too often along the road home. Other doctors blamed the heavy lowland air on lungs made for Alpine thinness. Everyone agreed on the cure, which is the one prescription in old medicine we would all still accept: send the patient home."
+      },
+      {
+        "id": "rc-0153-p2",
+        "text": "For two centuries the diagnosis held. Army surgeons on both sides of the Atlantic listed the complaint beside dysentery and fever, and in the nineteenth century were still recording deaths from it. Then, without any discovery to end it, nostalgia walked out of the clinic. By the early twentieth century it had been filed under melancholia; by the middle of the century it was not a diagnosis at all but a mood, felt about an old song rather than caught from a new posting. By the end of the century the mood had been noticed by people who sell things. A typeface, a biscuit tin with a sepia farm on the lid: the word that once sent soldiers to the infirmary now sends us to the till, and we can feel it for a decade we never lived in."
+      },
+      {
+        "id": "rc-0153-p3",
+        "text": "We might ask whether the soldier's disease and the shopper's mood are the same thing renamed, or two things that happen to share a word. The obvious answer, that doctors simply stopped calling an emotion an illness, is half of it. The other half is that the object of the longing moved. Hofer's patients longed for a place, and the place was still there. So the cure could work: the valley was a few days' march from the barracks, and a man who reached it recovered. What the modern nostalgic longs for is a time, and no march leads there, because the place where it happened still exists and has gone on without us."
+      },
+      {
+        "id": "rc-0153-p4",
+        "text": "Seen this way, the end of the diagnosis looks less like a change of fashion among doctors than a change in the world. In Hofer's century a village stayed much as you left it, so going back returned you to what you missed. Afterwards places began to change faster than the people who left them, and the returning soldier found the valley there but the valley he missed gone. A longing for a place has a remedy and can therefore be a disease. A longing for a time has none and can only be a sentiment, which is why we can afford to enjoy it, and why somebody can sell it to us in a tin."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0153-q1",
+      "type": "except",
+      "skill": "specific_detail",
+      "patterns": [
+        "comp.explicit_detail",
+        "lang.some_vs_all",
+        "elim.systematic"
+      ],
+      "target_mistake": "reading \"everyone agreed on the cure\" as agreement about the cause",
+      "prediction_target": null,
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "scope"
+      ],
+      "stem": "According to the passage, all of the following were true of nostalgia in the period when it was treated as a disease EXCEPT:",
+      "options": {
+        "A": "Its sufferers were expected to recover if they were returned to the place they came from.",
+        "B": "Physicians of the time agreed that the seat of the trouble was in the brain.",
+        "C": "It was still being recorded by military surgeons as a cause of death in the nineteenth century.",
+        "D": "At least one physician explained it as the effect of lowland air on lungs made for the mountains."
+      },
+      "correct": "B",
+      "estimated_time_sec": 60,
+      "explanation": {
+        "expert_notice": "Paragraph one gives two causes and one cure, and it marks the difference in agreement: Hofer \"put the trouble in the brain\", \"other doctors blamed the heavy lowland air\", and \"everyone agreed on the cure\". The agreement is on the remedy, not on the mechanism.",
+        "correct_reasoning": "The statement that physicians agreed the seat was the brain is the one the passage denies: the brain was Hofer's view, and the air was somebody else's. The other three each have a sentence: \"send the patient home\" and \"a man who reached it recovered\"; surgeons \"in the nineteenth century were still recording deaths from it\"; \"other doctors blamed the heavy lowland air on lungs made for Alpine thinness\".",
+        "passage_anchor": "rc-0153-p1, rc-0153-p2",
+        "question_type_note": "An EXCEPT question is three true statements and one false one, and the false one is usually built by moving a word of agreement or degree from where the passage put it to where it did not. Check each option against its sentence rather than against your memory of the paragraph.",
+        "reading_habit": "When a passage says \"everyone agreed on X\", ask what they disagreed about. The disagreement is where the EXCEPT option will be hiding.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "\"send the patient home\" and \"a man who reached it recovered\" state the expectation in different words from the option",
+            "seductive_element": "the option's \"returned to the place\" is a paraphrase, and a reader hunting for the passage's words cannot find them and doubts the claim"
+          },
+          {
+            "option": "C",
+            "trap_type": "temporal_distortion",
+            "why_wrong": "\"in the nineteenth century were still recording deaths from it\" places the deaths two centuries after Hofer, so the option's date is right",
+            "seductive_element": "a reader who ties the deaths to Hofer's own patients in the 1680s thinks the later date is an error"
+          },
+          {
+            "option": "D",
+            "trap_type": "misattributed_view",
+            "why_wrong": "the air explanation belongs to \"other doctors\", not Hofer, so \"at least one physician\" is exactly right",
+            "seductive_element": "a reader who remembers only Hofer's brain theory thinks the air theory was never stated"
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0153-q2",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.strongly_supported",
+        "arg.causal_claim",
+        "struct.cause_effect"
+      ],
+      "target_mistake": "assuming a diagnosis ends with a medical discovery, when the passage says it ended \"without any discovery\" and locates the change in the object of the longing",
+      "prediction_target": "the longing's object moved from a place, which can be reached and so cured, to a time, which cannot; the world changed so that going back no longer returned you to what you missed",
+      "difficulty": {
+        "inference_depth": 4,
+        "distractor_similarity": 3,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "logical_structure"
+      ],
+      "stem": "Which of the following best captures the author's explanation of why nostalgia stopped being a diagnosis?",
+      "options": {
+        "A": "Doctors established, by careful examination, that the condition had no physical basis in the body.",
+        "B": "Patients stopped longing for their homes once travel between distant places became cheap and easy.",
+        "C": "Commerce took the word over for its own purposes, which left medicine no reason to keep it.",
+        "D": "Its object had become something no journey could reach, which left a cure nothing to do."
+      },
+      "correct": "D",
+      "estimated_time_sec": 90,
+      "explanation": {
+        "expert_notice": "Two sentences do the explaining. \"Then, without any discovery to end it, nostalgia walked out of the clinic\" rules out the medical answer. \"A longing for a place has a remedy and can therefore be a disease. A longing for a time has none and can only be a sentiment\" gives the author's own. The cause of the shift is in paragraph four: places \"began to change faster than the people who left them\".",
+        "correct_reasoning": "The correct option puts the author's mechanism in other words: the object became unreachable by any journey, so there was no remedy, and a condition with no remedy \"can only be a sentiment\". That follows the author's \"therefore\" exactly.",
+        "passage_anchor": "rc-0153-p2, rc-0153-p3, rc-0153-p4",
+        "question_type_note": "An inference question about an explanation asks for the author's cause, not the most familiar cause. Find the sentence with \"therefore\" or \"so\" and the sentence that rules out the obvious alternative; the answer sits between them.",
+        "reading_habit": "When a passage says a change happened \"without any discovery\", cross out every option that supplies a discovery, and look for what the author offers instead.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "\"without any discovery to end it\" is the sentence; the passage attributes no finding to doctors",
+            "seductive_element": "diagnoses usually end with findings, so the option supplies the familiar story"
+          },
+          {
+            "option": "B",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "the passage says the place \"was still there\" and that the soldier \"found the valley there\"; nothing says the longing stopped, only that its object moved",
+            "seductive_element": "easy travel is in the background of the passage, so a reader builds a cause from it"
+          },
+          {
+            "option": "C",
+            "trap_type": "temporal_distortion",
+            "why_wrong": "the mood \"had been noticed by people who sell things\" only \"by the end of the century\", after it had already stopped being a diagnosis \"by the middle of the century\"",
+            "seductive_element": "commerce is the last stage in the history and the most vivid, so it gets promoted to cause"
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0153-q3",
+      "type": "vocabulary_in_context",
+      "skill": "vocabulary_in_context",
+      "patterns": [
+        "comp.function_over_words",
+        "comp.paraphrase",
+        "comp.reference_tracking"
+      ],
+      "target_mistake": "taking the everyday sense of \"complaint\" (a grievance) or a sense that restates the passage's theme (a lament for home)",
+      "prediction_target": "the word sits in a list kept by army surgeons, beside dysentery and fever, so it should carry its plain medical sense, an illness a patient presents with, and nothing about grievances or feelings",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "specific_detail"
+      ],
+      "stem": "In the passage, the word \"complaint\" in \"listed the complaint beside dysentery and fever\" most nearly means",
+      "options": {
+        "A": "an ailment, as a doctor would record one",
+        "B": "a grievance put to a superior officer",
+        "C": "a lament for the home that was left behind",
+        "D": "an objection raised against a new posting"
+      },
+      "correct": "A",
+      "estimated_time_sec": 45,
+      "explanation": {
+        "expert_notice": "The word sits in a list, \"beside dysentery and fever\", kept by \"army surgeons\". A thing listed beside two diseases by surgeons is a disease. The sentence's company fixes the sense.",
+        "correct_reasoning": "In medical use a complaint is an illness a patient presents with, and the sentence treats it as one: listed by surgeons, beside dysentery and fever, with deaths recorded \"from it\". The correct option gives that sense and nothing more.",
+        "passage_anchor": "rc-0153-p2",
+        "question_type_note": "Vocabulary in context asks for the sense that fits the sentence, not the sense you know best and not the passage's thesis in miniature. Read the words on either side of the target; the neighbours decide.",
+        "reading_habit": "For a word with a common meaning and a technical one, look at who is using it and what it is listed with. Surgeons listing a complaint beside fever are not recording grievances.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "common_knowledge_intrusion",
+            "why_wrong": "nothing in the sentence involves an officer or a protest; the word's neighbours are \"dysentery and fever\"",
+            "seductive_element": "this is the word's everyday meaning, and soldiers do have grievances"
+          },
+          {
+            "option": "C",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "the sentence is about how surgeons listed the condition, not about what the soldiers felt; \"beside dysentery and fever\" rules out a feeling",
+            "seductive_element": "it restates the passage's theme, longing for home, so it feels like the deep answer"
+          },
+          {
+            "option": "D",
+            "trap_type": "true_but_irrelevant",
+            "why_wrong": "soldiers may well object to postings, but \"posting\" belongs to a later sentence and the surgeons' list records illnesses, not objections",
+            "seductive_element": "it borrows a word from elsewhere in the paragraph and a sense close to grievance"
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0153-q4",
+      "type": "logical_structure",
+      "skill": "logical_structure",
+      "patterns": [
+        "comp.organization",
+        "struct.history_of_an_idea",
+        "struct.question_answer"
+      ],
+      "target_mistake": "reading the amused description of the biscuit tin as condemnation, or the history as an argument against Hofer",
+      "prediction_target": "paragraphs one and two are a chronology (disease, then mood, then merchandise); paragraph three poses the question of sameness and splits the answer; paragraph four draws the consequence",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "main_idea"
+      ],
+      "stem": "Which of the following best describes how the passage is organised?",
+      "options": {
+        "A": "A medical theory is stated, tested against evidence, and rejected in favour of a modern one.",
+        "B": "Two rival definitions of a word are set out, and the author shows that both are mistaken.",
+        "C": "A word's history is traced in stages, and a question the history raises is answered with a distinction.",
+        "D": "A familiar feeling is described, its commercial use is condemned, and a return to the old meaning is urged."
+      },
+      "correct": "C",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "Each paragraph has a different job, and the joints are visible: \"For two centuries the diagnosis held\" and \"By the end of the century\" carry the chronology; \"We might ask whether\" turns the history into a question; \"The other half is that the object of the longing moved\" is the distinction; \"Seen this way\" draws it out.",
+        "correct_reasoning": "The correct option names all three movements: stages of a history, a question raised by it, and a distinction as the answer. No evidence tests Hofer's theory, no definition is refuted, and nothing is urged.",
+        "passage_anchor": "rc-0153-p1, rc-0153-p2, rc-0153-p3, rc-0153-p4",
+        "question_type_note": "A structure question is answered by the paragraph joints, not by the content. Write one phrase per paragraph for what it does (narrates, asks, distinguishes, concludes), then find the option that matches the sequence.",
+        "reading_habit": "Mark the sentence where a passage stops telling and starts asking. In a history-of-an-idea passage the author's own view usually begins there, and structure questions turn on where that sentence falls.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "wrong_structural_role",
+            "why_wrong": "Hofer's theory is reported, never tested; the passage says the diagnosis ended \"without any discovery to end it\"",
+            "seductive_element": "the first paragraph is full of medical theory, so a reader expects the rest to be its trial"
+          },
+          {
+            "option": "B",
+            "trap_type": "half_right",
+            "why_wrong": "the passage does ask whether the disease and the mood are \"the same thing renamed\", but the author answers with a distinction, not a double rejection; the obvious answer is \"half of it\"",
+            "seductive_element": "there is a question about two senses of one word, which is close to two definitions"
+          },
+          {
+            "option": "D",
+            "trap_type": "prescriptive_leap",
+            "why_wrong": "the biscuit tin is treated with amusement (\"sends us to the till\") and the final sentence says \"we can afford to enjoy it\"; nothing is urged",
+            "seductive_element": "the commercial stage comes last and sounds like a decline, so a reader supplies the sermon"
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "wasted",
+      "passage_use": "they ran fevers, wasted, and sometimes died",
+      "meaning_here": "grew thin and weak from illness",
+      "difficulty": "medium"
+    },
+    {
+      "word": "prescription",
+      "passage_use": "the one prescription in old medicine we would all still accept",
+      "meaning_here": "a treatment ordered by a doctor",
+      "difficulty": "easy"
+    },
+    {
+      "word": "melancholia",
+      "passage_use": "it had been filed under melancholia",
+      "meaning_here": "an older medical name for deep and lasting low spirits",
+      "difficulty": "medium"
+    },
+    {
+      "word": "posting",
+      "passage_use": "caught from a new posting",
+      "meaning_here": "an assignment to serve at a particular place",
+      "difficulty": "easy"
+    }
+  ],
+  "mentor": {
+    "challenge": "In 1688 a Swiss doctor named a disease that was killing soldiers who missed home. We now buy the same word on a biscuit tin. What happened in between?",
+    "one_sentence_summary": "Nostalgia began as a fatal disease soldiers caught from missing a place they could still physically return to, and it became a mere sentiment once what people longed for turned into a vanished time that no journey could ever reach again.",
+    "main_idea": "Nostalgia was once treated as a real, sometimes fatal illness with a known cure, going home. It stopped being a diagnosis not because doctors disproved it but because what people longed for shifted from a place, which could be reached, to a time, which cannot, leaving only a feeling nobody can cure.",
+    "simple_explanation": "In 1688, a young doctor in Basel named Johannes Hofer gave a name to an illness he saw in homesick Swiss soldiers and servants far from their mountains. He joined two Greek words meaning return and pain to make the word nostalgia. His patients stopped eating, grew fixed on the valley they had left, ran fevers, wasted away, and sometimes died. Hofer blamed the brain, worn into a groove by travelling the same road home too often. Other doctors blamed the heavy air of the lowlands on lungs built for thin mountain air. Whatever the cause, everyone agreed on one cure: send the patient home.\n\nFor two hundred years, doctors kept this diagnosis. Army surgeons listed it beside dysentery and fever, and were still recording deaths from it in the nineteenth century. Then, with no new discovery to explain the change, nostalgia quietly stopped being treated as a disease. By the early twentieth century it had been reclassified as melancholia, and by the middle of the century it was no longer a diagnosis at all, just a mood people felt about an old song rather than caught from a new posting. By the end of the century, people selling things had noticed that mood too, a typeface here, a biscuit tin with a sepia farm there, and the word that once sent soldiers to the hospital now sends us to the shop till, letting us feel nostalgic for decades we never lived through.\n\nThe author asks whether the old disease and the modern mood are really the same thing under one name, or two different things that just happen to share a word. The easy answer, that doctors simply stopped treating a feeling as an illness, is only half right. The rest of the answer is that what people longed for changed. Hofer's soldiers longed for an actual place, and that place still existed, so a cure was possible: march home for a few days and you got better. What today's nostalgic person longs for is a time, and no road leads back to a time, because the place where it happened still exists, just changed, and has carried on without us.\n\nSeen this way, the disease did not disappear because doctors changed their fashions; the world itself changed. In Hofer's century, a village stayed much the same as you left it, so going back really did return you to what you had missed. Later, places began changing faster than the people who left them did, so a soldier could return to find the valley there but the valley he remembered gone. A longing for a place can be cured, and so can count as a disease. A longing for a time has no cure and can only ever be a feeling, which is exactly why we can enjoy it rather than suffer from it, and why someone can sell it back to us in a tin.",
+    "why_difficult": "The passage's turn is easy to miss: readers expect a story about doctors simply changing their minds, but the author's real claim is that the object of the longing itself moved, from a reachable place to an unreachable time, and that move is what changed a disease into a sentiment.",
+    "author_intention": "To trace nostalgia's career from a named, fatal disease to a marketable feeling, and to argue that the real cause of the change was not medical fashion but a shift in what people were longing for.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0153-p1",
+        "role": "Introduces the diagnosis",
+        "note": "A Basel doctor in 1688 names nostalgia as a disease in homesick soldiers, gives two rival causes, and names the one cure everybody accepted: going home."
+      },
+      {
+        "paragraph_id": "rc-0153-p2",
+        "role": "Traces its decline",
+        "note": "For two centuries doctors keep the diagnosis, then it quietly stops being one, turns into an ordinary mood, and finally becomes something sold in shops."
+      },
+      {
+        "paragraph_id": "rc-0153-p3",
+        "role": "Poses the real question",
+        "note": "The author asks whether the old disease and the new mood are the same thing, and answers that doctors changing their minds is only half the story."
+      },
+      {
+        "paragraph_id": "rc-0153-p4",
+        "role": "States the deeper cause",
+        "note": "The real cause was that the object of longing moved from a place, which has a cure, to a time, which does not, as the world began changing faster than memory."
+      }
+    ],
+    "tone_progression": "The voice opens wry and amused at the odd history of a word now sold on biscuit tins, then turns thoughtful as the author works out what actually changed between the disease and the feeling.",
+    "key_transitions": [
+      "'We might ask whether the soldier's disease and the shopper's mood are the same thing renamed...' (opening of paragraph 3): the history turns into a question.",
+      "'The other half is that the object of the longing moved.' (paragraph 3): names the real cause the author is building toward.",
+      "'A longing for a place has a remedy and can therefore be a disease. A longing for a time has none and can only be a sentiment.' (closing paragraph 4): states the rule the whole passage has been proving."
+    ],
+    "misunderstanding": "A hurried reader assumes the passage is simply the familiar story that nostalgia used to be a disease and now is not, missing that the author is answering a harder question: why the change happened, which turns on what people were longing for, not on anything doctors discovered.",
+    "traps_summary": "The wrong options move a word of agreement to the wrong claim, as with the brain theory, promote the most memorable stage of the history, the biscuit tin, into its cause, or supply a sense of a word that fits the passage's theme rather than the sentence it actually sits in.",
+    "reading_lesson": "When a passage says two things 'sound' alike, expect the next paragraph to tell you how they actually differ, and read for the sentence that draws that distinction rather than settling for the first impression.",
+    "real_world": "Many words drift this way, keeping their old shape while the thing they name changes underneath them, as with words for addiction, trauma or burnout, which also began as narrow medical terms before becoming everyday feelings.",
+    "takeaway": "A disease can become a mere sentiment once the thing a person longs for can no longer be reached by any journey at all.",
+    "reflection_question": "Is there a feeling you have that is really about a vanished time rather than a place you could still go back to?",
+    "eli10": {
+      "big_idea": "Nostalgia used to be a real illness doctors could cure by sending a patient home, but it became just a feeling once people started missing times instead of places, since no trip can reach a time.",
+      "story": "Long ago, a doctor named a sickness after homesick soldiers. They missed their mountain villages so much that they got sick and sometimes died. The doctor said going home was the cure. For years, doctors agreed this sickness was real. Then, slowly, doctors stopped calling it a disease. It became just a feeling people had about old songs. Later, shops began selling that feeling too, on biscuit tins and old-style fonts. Why did the sickness disappear? The writer says the thing people missed changed. Soldiers missed a place, and a place can be reached again. Now people miss a time, and no road leads back to a time. That is why the sickness became only a feeling.",
+      "paragraphs": [
+        "A Basel doctor in 1688 names a disease in homesick soldiers and states the one cure everyone agrees on.",
+        "For two centuries doctors keep the diagnosis, then it quietly becomes just a mood, and later something sold in shops.",
+        "The author asks if the old disease and new mood are the same thing, and says doctors changing their minds is only half the answer.",
+        "The deeper cause is that longing moved from a place, which can be cured, to a time, which cannot."
+      ],
+      "author_view": "The writer is amused by how an old diagnosis ended up on a biscuit tin, but takes the question seriously, working out exactly what changed rather than just laughing at it."
+    }
+  }
+}

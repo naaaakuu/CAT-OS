@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "pc-0044",
+    "type": "pc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 91,
+    "genre": "law",
+    "difficulty": "hard",
+    "difficulty_numeric": 9,
+    "tier": "ninety-nine",
+    "title": "Weighing the Room",
+    "theme": "a confession is trusted because the speaker had every reason not to make it; that warrant assumes a free weighing of costs, which an interrogation room prevents, so the weight lives in the room",
+    "estimated_time_sec": 110,
+    "gap_function": "contrast_turn",
+    "primary_trap": "topic_match_function_mismatch",
+    "reasoning_patterns": [
+      "disc.function_slot",
+      "disc.rhetorical_pivot",
+      "disc.transition_word",
+      "arg.assumption",
+      "struct.pivot"
+    ],
+    "learning_objective": "fill a contrast-turn slot with the sentence that exposes the assumption the previous reasoning rests on and supplies the premise the next sentence's 'therefore' needs, rather than a restatement, a verdict or a stray fact wearing 'but'",
+    "difficulty_vector": {
+      "stance_subtlety": 5,
+      "scope_precision": 4,
+      "distractor_closeness": 5,
+      "concept_abstractness": 5,
+      "syntactic_complexity": 4
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-07",
+      "usage_note": "Original composition in CAT register for CAT OS. A general reflection on why confessions are weighted as evidence and what that weighting assumes; no specific text adapted."
+    },
+    "date_added": "2026-10-07",
+    "batch_id": "batch-pc-004",
+    "reviewer_notes": "The ninety-nine difficulty is that three options begin with a contrastive or consequential connective and all are on topic. The next sentence's 'the room' and 'therefore' settle it: only the correct option puts a room and a weighing of costs in view. The innocent-confess option is the live rival because it names the same worry.",
+    "quality": {
+      "status": "verified",
+      "adversarial_review": "The live rival is the sentence about courts knowing the innocent sometimes confess: it opens with 'Yet', it is true, and it gestures at the same doubt. It fails because the next sentence treats 'the room' as already introduced and draws its conclusion with 'therefore'; a historical observation introduces no room and licenses no conclusion about where weight lives. The restatement is refused by 'in other words' at a slot that needs a turn, and the admissibility rule is a policy before the analysis.",
+      "blind_solve": {
+        "solver": "sonnet blind reader 2026-10-07",
+        "agreed": 1,
+        "total": 1,
+        "notes": "full agreement"
+      }
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      "A confession has always ranked as the strongest evidence a court can hear, and the reasoning behind the rank is simple.",
+      "People do not say things that will cost them their liberty unless those things are true; a statement against the speaker's own interest carries its own warrant, because the speaker had every reason not to make it.",
+      "The weight of a confession is therefore a fact about the room in which it was made and not about the sentence that came out of it, and a court that hears only the sentence is weighing the wrong thing."
+    ],
+    "gap_index": 2
+  },
+  "question": {
+    "stem": "Which of the following sentences best fills the gap in the paragraph?",
+    "options": {
+      "A": "Confessions should therefore be admitted only where they are corroborated by evidence that the speaker could not have invented, been fed or guessed at.",
+      "B": "In other words, a confession is believed because nobody would make a false one, since the whole cost of a false confession falls on the person who makes it and on nobody else.",
+      "C": "Yet courts have known for centuries that the innocent sometimes confess, and the law has never treated the fact as a scandal or even as a surprise.",
+      "D": "But the reasoning assumes the speaker weighed the cost freely, which is exactly what is in doubt after hours in an interrogation room, where silence can be made to cost more."
+    },
+    "correct": "D"
+  },
+  "explanation": {
+    "what_the_gap_needs": "The second sentence gives the reasoning behind the rank: a speaker with every reason not to speak must be telling the truth. The sentence after the gap begins 'therefore' and relocates the weight of a confession from the words to the room. So the gap must turn against the reasoning, not against the rank, and it must do so by naming what the reasoning takes for granted and where that assumption fails; it must introduce the room. The stance is a qualification by exposure of an assumption, not a policy, not a repetition, and not a fact about history.",
+    "correct_reasoning": "The correct option names the assumption: that the speaker weighed the cost freely. It then names where the assumption fails, in an interrogation room after hours, where the cost of silence can be made larger than the cost of speaking. That is the premise the next sentence needs. If the free weighing is what is in doubt, then whether the warrant is present depends on the circumstances of speaking, which is what 'a fact about the room' means, and a court that hears only the words is indeed weighing the wrong thing.",
+    "distractors": [
+      {
+        "option": "A",
+        "trap_type": "premature_conclusion",
+        "why_wrong": "It leaps to a rule of admission before the paragraph has said what is wrong with the reasoning, and the next sentence's 'therefore' is left to follow from a policy rather than from an analysis; the room, which the next sentence treats as already in view, never appears.",
+        "seductive_element": "It sounds like the practical upshot of doubting confessions, and 'therefore' gives it the air of a conclusion earned."
+      },
+      {
+        "option": "B",
+        "trap_type": "redundant_restatement",
+        "why_wrong": "It repeats the second sentence in other words; after it the paragraph has said the same thing twice and then says 'therefore' the weight lies in the room, which nothing has introduced. 'In other words' announces a restatement where the slot needs a turn.",
+        "seductive_element": "It is accurate, it is on the paragraph's subject, and a restatement feels like consolidation before a conclusion."
+      },
+      {
+        "option": "C",
+        "trap_type": "topic_match_function_mismatch",
+        "why_wrong": "It contrasts, and it is about confessions, but its job is to report a historical fact about courts, not to expose the assumption in the reasoning; nothing in it puts a room, hours or a weighing of costs in view, so the next sentence's 'fact about the room' has no antecedent and its 'therefore' nothing to follow from.",
+        "seductive_element": "It opens with 'Yet', it is true, and it points at the same worry the correct option names, that confessions can be false."
+      }
+    ],
+    "method": "At a contrast turn, read the sentence after the gap for the noun it treats as already present, here 'the room', and for the connective it uses, 'therefore'. The gap must introduce that noun and supply that premise. An option that merely contrasts, restates or prescribes will wear the right connective and do none of the work; test it by asking whether the next sentence could follow from it."
+  },
+  "mentor": {
+    "challenge": "A confession outranks all other evidence because nobody would make one unless it were true. The paragraph ends by weighing the room instead. Why?",
+    "takeaway": "A contrast turn attacks the assumption the previous sentence rests on and hands the next sentence its premise; a restatement, a verdict or a stray fact can wear 'but' without doing either."
+  }
+}

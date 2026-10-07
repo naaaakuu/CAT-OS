@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "pc-0042",
+    "type": "pc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 90,
+    "genre": "economics",
+    "difficulty": "hard",
+    "difficulty_numeric": 8,
+    "tier": "cat-plus",
+    "title": "Charged at the Quay",
+    "theme": "private lighthouses were paid for by dues collected where ships had to stop, so the case shows where a charge can be collected rather than what kind of good a light is",
+    "estimated_time_sec": 105,
+    "gap_function": "qualification",
+    "primary_trap": "attractive_generality",
+    "reasoning_patterns": [
+      "disc.function_slot",
+      "disc.concession",
+      "disc.transition_word",
+      "struct.qualification",
+      "arg.qualification"
+    ],
+    "learning_objective": "fill a qualification slot with a sentence that keeps the facts on both sides and shrinks the claim the next sentence's 'therefore' draws, instead of a verdict for either side",
+    "difficulty_vector": {
+      "stance_subtlety": 5,
+      "scope_precision": 5,
+      "distractor_closeness": 4,
+      "concept_abstractness": 4,
+      "syntactic_complexity": 4
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-07",
+      "usage_note": "Original composition in CAT register for CAT OS. A general account of privately financed lighthouses and the public-goods argument; no specific text adapted."
+    },
+    "date_added": "2026-10-07",
+    "batch_id": "batch-pc-004",
+    "reviewer_notes": "The next sentence's 'therefore' and its phrase 'where a charge can be collected' fix the gap's job: supply a place. 'Narrower than either side wants' kills the two options that take a side. The generality is the live rival because it reads as a worldly conclusion; it fails on 'narrower'.",
+    "quality": {
+      "status": "verified",
+      "adversarial_review": "The live rival is the generality that people who stand to gain will find a way to be paid: it sounds like the moral of the second sentence and it costs the reader nothing. It fails on the next sentence, which calls the lesson narrower than either side wants and makes it a lesson about where a charge is collected, a place the generality never names. The retelling-is-right option is the second candidate and fails on the same word, 'either'. The government option is fluent and historical, and nothing after the gap picks up a takeover or a tax.",
+      "blind_solve": {
+        "solver": "sonnet blind reader 2026-10-07",
+        "agreed": 1,
+        "total": 1,
+        "notes": "full agreement"
+      }
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      "The lighthouse was for a long time the textbook case of a good that no private party would supply: a ship cannot be stopped from seeing the light, so nobody who built one could make the ships that used it pay.",
+      "Yet for centuries the lights on busy coasts were built by private owners and paid for handsomely, out of dues collected from every ship that put in at the nearest port.",
+      "The example is now told the other way, as proof that the textbook was wrong and that a market will find a way to charge for what it appears unable to charge for.",
+      "The lesson is therefore about where a charge can be collected, not about the nature of the good, and it is a narrower lesson than either side of the argument wants."
+    ],
+    "gap_index": 3
+  },
+  "question": {
+    "stem": "Which of the following sentences best fills the gap in the paragraph?",
+    "options": {
+      "A": "Whatever the textbook says, people who stand to gain from a thing will usually find some way of being paid for it, and the owners of the lights were simply no exception to that rule.",
+      "B": "The retelling is right, then: a good that private builders supplied at a profit for centuries cannot have been one that private parties would refuse to supply.",
+      "C": "But the charge was never for the light; it was levied at the harbour, where a ship must stop and can be made to pay, and a light serving no port found no builder.",
+      "D": "Governments took most of the lights over in the nineteenth century, after shipping interests complained that the dues had grown into a private tax on trade."
+    },
+    "correct": "C"
+  },
+  "explanation": {
+    "what_the_gap_needs": "Three sentences have set up a quarrel: the textbook says the light cannot be charged for, the facts say the owners were paid, and the retelling says the textbook was wrong. The sentence after the gap begins 'therefore' and draws a lesson about where a charge can be collected, which it calls narrower than either side wants. The gap must therefore supply the 'where': a sentence that keeps the owners' profits, denies that the light itself was ever charged for, and so cuts the retelling down without restoring the textbook. Its stance is a qualification of both, not a verdict for one.",
+    "correct_reasoning": "The correct option locates the charge: not on the light but at the harbour, where a ship has to stop and can be made to pay. That keeps the facts of the second sentence, since the owners were indeed paid, and limits the third, since the market did not find a way to charge for the light; it found a port. The closing clause, that a light serving no port found no builder, is what makes the next sentence's 'where a charge can be collected' follow, and it is why the lesson is narrower than either the textbook or the retelling: the good was never charged for, and the owners were paid anyway.",
+    "distractors": [
+      {
+        "option": "A",
+        "trap_type": "attractive_generality",
+        "why_wrong": "A general claim that people find a way to be paid is the retelling's own thesis stated more broadly, and the next sentence calls the lesson 'narrower than either side of the argument wants'; a sentence that widens the claim cannot be what 'therefore' rests on, and it says nothing about where the charge was collected.",
+        "seductive_element": "It is quotable, it fits the mood of the third sentence, and it sounds like a conclusion drawn from the facts."
+      },
+      {
+        "option": "B",
+        "trap_type": "stance_shift",
+        "why_wrong": "It declares the retelling right, and the paragraph's next move is to say the lesson is narrower than 'either side' wants; the paragraph does not take the retelling's side, it trims it. It also leaves 'where a charge can be collected' with no antecedent, since it never says where the owners were paid.",
+        "seductive_element": "It follows the third sentence smoothly and uses its own logic, and the facts of the second sentence do seem to support it."
+      },
+      {
+        "option": "D",
+        "trap_type": "new_topic_introduced",
+        "why_wrong": "A sentence about governments taking over the lights opens a history that nothing after the gap picks up; the next sentence draws a lesson about charging, and a complaint about dues as a tax is a new subject, told in the narrative past where the paragraph has been reasoning in the present.",
+        "seductive_element": "It mentions the dues, it sounds like a known fact, and a qualification is often introduced by what happened next."
+      }
+    ],
+    "method": "When the sentence after a gap begins 'therefore' and names its conclusion, read the conclusion for the noun it needs: here 'where a charge can be collected' needs a place. Then read the paragraph's stance: 'narrower than either side wants' rules out any option that hands victory to the textbook or to the retelling. The sentence that survives both tests supplies the place and shrinks the claim."
+  },
+  "mentor": {
+    "challenge": "Nobody can stop a ship seeing a light, yet private owners made lighthouses pay for centuries. Where was the money actually collected?",
+    "takeaway": "A qualification keeps the facts on both sides and shrinks the claim; an option that declares a winner is a verdict wearing the wrong clothes."
+  }
+}

@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "sp-0059",
+    "type": "sp",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 86,
+    "genre": "education",
+    "difficulty": "easy",
+    "difficulty_numeric": 2,
+    "tier": "foundation",
+    "title": "The Ear Runs Ahead",
+    "theme": "a child's ear carries longer sentences than her eye can for years, so reading aloud to a child who can already read stores sentence shapes her eye will grow into",
+    "estimated_time_sec": 60,
+    "clue_types": [
+      "connective_explicit",
+      "demonstrative",
+      "lexical_repetition"
+    ],
+    "primary_trap": "wrong_connective",
+    "reasoning_patterns": [
+      "disc.transition_word",
+      "disc.demonstrative",
+      "disc.cause_effect",
+      "disc.given_new"
+    ],
+    "difficulty_vector": {
+      "reference_density": 2,
+      "transition_ambiguity": 2,
+      "competing_slots": 2,
+      "concept_abstractness": 2,
+      "syntactic_complexity": 2
+    },
+    "learning_objective": "place a consequence sentence after the claim its 'so' follows from, and check that a demonstrative in the next sentence points back at it",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-07",
+      "usage_note": "Original composition in CAT register for CAT OS. A general reflection on reading aloud to children who can already read; no specific text adapted."
+    },
+    "date_added": "2026-10-07",
+    "batch_id": "batch-sp-003",
+    "reviewer_notes": "Foundation tier: one explicit connective ('So') and one demonstrative ('that length') fix the seat. The trap is the lexical match between sentence 1's 'read alone' and the missing sentence's 'reads alone', which puts the consequence before its cause.",
+    "quality": {
+      "status": "verified",
+      "adversarial_review": "The live rival is the slot after sentence 1, chosen by word-matching: 'read alone' and 'reads alone'. Placed there the 'So' follows from parents stopping, which is not a cause of anything the sentence says, and sentence 2's 'It is not' loses its antecedent. The slot after sentence 3 is refused by 'three times that length', which would then point forward to a length not yet given.",
+      "blind_solve": {
+        "solver": "sonnet blind reader 2026-10-07",
+        "agreed": 1,
+        "total": 1,
+        "notes": "full agreement"
+      }
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "n": 1,
+        "text": "Parents often stop reading aloud to a child once the child can read alone, as if the job were finished."
+      },
+      {
+        "n": 2,
+        "text": "It is not, because the ear runs ahead of the eye for years."
+      },
+      {
+        "n": 3,
+        "text": "Read to, she hears sentences three times that length, with clauses folded inside clauses, and follows them without effort."
+      },
+      {
+        "n": 4,
+        "text": "When her eye catches up, the shapes of those sentences are already there waiting for it."
+      }
+    ]
+  },
+  "missing": {
+    "text": "So a child who reads alone is held to the sentences her eye can carry, and at seven that is not many.",
+    "position": 2,
+    "function": "the consequence of the ear running ahead of the eye, and the short sentences that 'three times that length' is measured against"
+  },
+  "question": {
+    "stem": "Where does the following sentence best fit in the paragraph? \"So a child who reads alone is held to the sentences her eye can carry, and at seven that is not many.\"",
+    "options": {
+      "A": "After sentence 2",
+      "B": "After sentence 1",
+      "C": "After sentence 3",
+      "D": "After sentence 4"
+    },
+    "option_positions": {
+      "A": 2,
+      "B": 1,
+      "C": 3,
+      "D": 4
+    },
+    "correct": "A"
+  },
+  "explanation": {
+    "correct_reasoning": "The missing sentence opens with 'So', which means it must follow from something, and the only thing it can follow from is sentence 2: if the ear runs ahead of the eye, a child reading with her eye alone is held to what the eye can carry. Sentence 3 then measures what she hears against 'that length', and the only length in the paragraph is the one the missing sentence has just set. The slot is fixed from above by the connective and from below by the demonstrative.",
+    "clue_before": "Sentence 2 says the ear runs ahead of the eye; a sentence beginning 'So' and describing what the eye alone can carry is the consequence that claim calls for.",
+    "clue_after": "Sentence 3 says she hears sentences 'three times that length'; the length has to have been set by the sentence above, and only the missing sentence sets one.",
+    "distractors": [
+      {
+        "option": "B",
+        "trap_type": "wrong_connective",
+        "why_wrong": "After sentence 1 the 'So' would draw a consequence from parents stopping, and nothing about a parent stopping makes a child's eye carry fewer sentences; the connective has no claim to follow from, and sentence 2's 'It is not' would then be separated from 'the job were finished', which is what 'It' refers to.",
+        "seductive_element": "Sentence 1 mentions a child who can read alone and the missing sentence is about a child who reads alone, so the words match."
+      },
+      {
+        "option": "C",
+        "trap_type": "wrong_reference_target",
+        "why_wrong": "Sentence 3's 'three times that length' would then come before the length it refers to, and the missing sentence's 'So' would follow a sentence about hearing long sentences with the claim that the child is held to short ones, which is not a consequence of it but a contrast.",
+        "seductive_element": "The two sentences are about the same child and the same sentences, so they look like a pair whichever comes first."
+      },
+      {
+        "option": "D",
+        "trap_type": "right_idea_wrong_position",
+        "why_wrong": "At the end, after the eye has caught up and the shapes are 'already there waiting', a sentence saying the child is held to what her eye can carry takes the paragraph back to the problem it has just solved, and its 'So' follows from nothing in the closing line.",
+        "seductive_element": "The sentence is short and plain and could pass for a closing remark to a reader not tracking the 'So'."
+      }
+    ],
+    "method": "A sentence that begins with 'so' states a consequence; find the claim it is a consequence of and put it directly after that claim. Then read the following sentence for a demonstrative like 'that length' and make sure the thing it points at is above it. Matching words between two sentences is not a reason to make them neighbours."
+  },
+  "mentor": {
+    "challenge": "Your child can read alone now, so why keep reading aloud? The paragraph gives a reason that has to do with ears and eyes.",
+    "takeaway": "A 'so' sentence follows the claim it follows from; a slot that merely shares its words, like 'read alone', is not the slot."
+  }
+}

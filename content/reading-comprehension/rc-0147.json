@@ -1,0 +1,336 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0147",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "environment",
+    "difficulty": "easy",
+    "difficulty_numeric": 2,
+    "stage": "foundation",
+    "skills": [
+      "inference",
+      "evidence-anchoring",
+      "causal-reasoning",
+      "structure-mapping"
+    ],
+    "word_count": 330,
+    "question_count": 3,
+    "question_types": [
+      "must_be_true",
+      "role_of_detail",
+      "specific_detail"
+    ],
+    "theme": "desert ants measure the way home by counting strides: lengthen or shorten their legs after the outward walk and they overshoot or undershoot the nest by predictable amounts",
+    "estimated_time_min": 5.5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-10-07",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted."
+    },
+    "date_added": "2026-10-07",
+    "batch_id": "batch-rc-007",
+    "prompt_version": "content engine v1 + CAT paper patterns 2026-10; batch-rc-007",
+    "reviewer_notes": "Pure exposition with no rival account and no method argument, which the corpus lacks. The mechanism (a stride count that is trusted to stay constant) carries the passage; the three best sentences can be removed and the experiment still explains itself. The near-tie is in Q1, where the finalist says the control ants overshot by a small amount and the text says they found the nest \"as well as ever\". Sentences average about eleven words, the shortest rhythm in the batch, and the passage is the batch's exposition of a scientific finding with nothing meta attached. The move is a plain exposition of a scientific finding, carried in an impersonal, curious voice built from short sentences.",
+    "length_class": "short",
+    "structure": "phenomenon_explanation",
+    "viewpoints": 1,
+    "tone": "plain, curious",
+    "difficulty_vector": {
+      "lexical": 2,
+      "syntactic": 2,
+      "abstraction": 1,
+      "inference_depth": 2,
+      "distractor_similarity": 2,
+      "reasoning_depth": 2,
+      "structural_ambiguity": 1,
+      "time_pressure": 1
+    },
+    "reasoning_patterns": [
+      "arg.evidence",
+      "comp.explicit_detail",
+      "comp.purpose",
+      "inf.directly_implied",
+      "inf.necessary",
+      "lang.absolute_vs_qualified",
+      "lang.comparative",
+      "scope.condition",
+      "struct.cause_effect",
+      "struct.claim_evidence",
+      "struct.phenomenon_explanation"
+    ],
+    "quality": {
+      "status": "verified",
+      "adversarial_review": "Q1: A strong candidate argues for the small overshoot, reasoning that stilts must have some effect. The text settles it: \"These ants found the nest as well as ever.\" No error is reported for this group. Q2: The effort option draws candidates who remember the word from the passage; but the sentence is \"A memory of effort, or of time spent walking, does not\", which names effort as the account that fails the control. Q3: The cancellation option is argued by candidates who assume each ant had both stilts and stumps; \"fitted with stilts or stumps\" and \"on the same legs\" show one alteration per ant, kept for both halves of the trip.",
+      "blind_solve": {
+        "solver": "sonnet blind reader 2026-10-07",
+        "agreed": 3,
+        "total": 3,
+        "notes": "full agreement"
+      }
+    },
+    "vocab_extracted": [
+      "salt pan",
+      "overshot",
+      "stride"
+    ]
+  },
+  "passage": {
+    "title": "Home by Number",
+    "reading_time_min": 1.8,
+    "paragraphs": [
+      {
+        "id": "rc-0147-p1",
+        "text": "A Saharan desert ant leaves its nest to hunt. It wanders across a salt pan. There are no landmarks, and the hot ground holds no scent trail. Yet when the ant finds a dead insect, it turns and walks straight home. It does not retrace its wandering. It takes the direct line and stops almost exactly at the nest. It must know two things: the direction of home, and the distance. The direction comes from the sky, where the ant reads the sun. Something in the ant keeps a running total of the way out."
+      },
+      {
+        "id": "rc-0147-p2",
+        "text": "One answer is steps. An ant that counts its strides on the way out can count them back. In 2006, a team working in Tunisia tested the idea. They let ants walk from the nest to a feeder ten metres away. At the feeder they caught the ants and altered their legs. Some were given stilts: pig bristles glued to each leg, making every stride longer. Others had the lower part of each leg cut away, making every stride shorter. The ants on stilts overshot. They marched past the nest. The ants on stumps stopped short. Each group missed by roughly the amount a step counter would predict. Longer legs cover more ground in the same number of steps, so the count ran out beyond the nest."
+      },
+      {
+        "id": "rc-0147-p3",
+        "text": "One control matters most. Some ants were fitted with stilts or stumps before they left the nest. They walked out on the new legs and home on the same legs. These ants found the nest as well as ever. Their count was taken and spent on the same stride, so it stayed true. A step counter predicts exactly that. A memory of effort, or of time spent walking, does not. The ant knows distance in strides, not in metres, and it trusts the stride to stay the same. Change the stride between the two halves of the journey, and the trust fails in a direction you can predict."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0147-q1",
+      "type": "specific_detail",
+      "skill": "specific_detail",
+      "patterns": [
+        "comp.explicit_detail",
+        "scope.condition",
+        "lang.comparative"
+      ],
+      "target_mistake": "carrying the overshoot result from the feeder group onto the control group, whose condition (altered before the outward trip) was different",
+      "prediction_target": null,
+      "difficulty": {
+        "inference_depth": 1,
+        "distractor_similarity": 2,
+        "reasoning_depth": 1
+      },
+      "secondary_skills": [
+        "scope"
+      ],
+      "stem": "According to the passage, the ants that were fitted with stilts or stumps before leaving the nest",
+      "options": {
+        "A": "found the nest, but only after overshooting it by a small amount",
+        "B": "lost the direction of home because the new stride no longer matched the sun",
+        "C": "found the nest about as well as they had before their legs were altered",
+        "D": "stopped short of the nest because the operation slowed their walking"
+      },
+      "correct": "C",
+      "estimated_time_sec": 50,
+      "explanation": {
+        "expert_notice": "There are two groups with altered legs, and they differ in when the legs were altered. The stem asks about the group altered before leaving. The expert goes to the third paragraph, finds \"found the nest as well as ever\", and holds that phrase against every option.",
+        "correct_reasoning": "The third paragraph says these ants \"walked out on the new legs and home on the same legs\" and \"found the nest as well as ever\". The correct option restates that: they did about as well as before. Nothing in the text gives them any error at all.",
+        "passage_anchor": "rc-0147-p3",
+        "question_type_note": "A detail question asks what the text says about one specified case. The work is to find the right case, since the passage often describes a similar case nearby with a different result, and then to match the result word for word rather than from memory.",
+        "reading_habit": "When a passage has two groups that differ by one condition, write the condition and the result for each before reading options; the question will almost always ask about one group and offer the other group's result as a trap.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "comparison_distortion",
+            "why_wrong": "the text says they found the nest \"as well as ever\", which gives them no overshoot at all; a \"small amount\" is a result the passage never reports for this group",
+            "seductive_element": "overshooting is the headline result of the experiment, so a small overshoot sounds like a safe, moderate version of it"
+          },
+          {
+            "option": "B",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "direction \"comes from the sky\", and the passage never connects the stride to the sun; the alteration changes distance, not direction",
+            "seductive_element": "it reuses two real elements of the passage, the sun and the stride, and joins them into a mechanism the passage never states"
+          },
+          {
+            "option": "D",
+            "trap_type": "out_of_scope",
+            "why_wrong": "the passage says nothing about walking speed; the stump result it does report (\"stopped short\") belongs to the feeder group, not this one",
+            "seductive_element": "a cut leg plausibly slows an animal, and \"stopped short\" is a phrase from the passage, so the option borrows the authority of both"
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0147-q2",
+      "type": "must_be_true",
+      "skill": "inference",
+      "patterns": [
+        "inf.necessary",
+        "inf.directly_implied",
+        "lang.absolute_vs_qualified"
+      ],
+      "target_mistake": "picking the account the passage mentions in order to reject it (effort), or stretching one ant's mechanism into a law for all animals",
+      "prediction_target": "the ant's distance measure works only if the stride stays constant between the outward and return journeys; change the stride and the measure fails",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 2,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "specific_detail"
+      ],
+      "stem": "If the passage's account of the experiment is accurate, which of the following must be true?",
+      "options": {
+        "A": "An ant's distance estimate holds only while its stride is the same out and back.",
+        "B": "An ant's sense of how far it has walked depends on how much effort the walk cost it, not on its steps.",
+        "C": "An ant that has lost count can still reach the nest by retracing its outward path.",
+        "D": "Any animal that crosses featureless ground must find its way by counting steps."
+      },
+      "correct": "A",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "The last paragraph states the condition in plain words: the ant \"trusts the stride to stay the same\", and changing the stride \"between the two halves of the journey\" makes the trust fail. A must-be-true answer will be a restatement of that condition, not an extension of it.",
+        "correct_reasoning": "The feeder group had the stride changed between the two halves and missed the nest; the control group had the same stride for both halves and found it. The only thing that differs between the groups is whether the stride matched, so the estimate holds only while it matches. The correct option says exactly this and nothing more.",
+        "passage_anchor": "rc-0147-p2, rc-0147-p3",
+        "question_type_note": "A must-be-true question rewards the option that cannot be false if the passage is true. Options that are merely plausible, or that extend the finding to new cases, are not forced by the text and fail even when they sound reasonable.",
+        "reading_habit": "For must-be-true, look for the sentence where the author states a condition or a limit, and prefer the option that repeats it in other words over any option that goes one step further.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "the text names \"a memory of effort\" as the account that \"does not\" predict the control result; effort is the rejected idea, not the finding",
+            "seductive_element": "the passage uses the word effort, and effort feels like a natural way an animal might judge distance"
+          },
+          {
+            "option": "C",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "the first paragraph says the ant \"does not retrace its wandering\"; the passage never says it could, and the ant's method is the direct line",
+            "seductive_element": "the first paragraph mentions the wandering path, so retracing it seems like a backup the ant would have available"
+          },
+          {
+            "option": "D",
+            "trap_type": "too_broad",
+            "why_wrong": "the passage reports one ant on one kind of ground; \"any animal\" and \"must\" turn a finding into a law the passage never states",
+            "seductive_element": "the opening paragraph makes featureless ground sound like a general problem, so a general rule seems to follow"
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0147-q3",
+      "type": "role_of_detail",
+      "skill": "paragraph_function",
+      "patterns": [
+        "comp.purpose",
+        "arg.evidence",
+        "struct.claim_evidence"
+      ],
+      "target_mistake": "reading the control group as a new finding about ants rather than as a check on the first result",
+      "prediction_target": "the control group separates two possible causes of the overshoot and undershoot: being operated on, and having a different stride on the way back",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 2,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "argument"
+      ],
+      "stem": "The author describes the ants whose legs were altered before they left the nest primarily in order to",
+      "options": {
+        "A": "show that stilts and stumps cancel each other out over a full round trip",
+        "B": "prove that ants can learn a new stride length if given enough practice",
+        "C": "explain why ants prefer the direct line home to retracing their outward path",
+        "D": "show that the error comes from a changed stride and not from the operation itself"
+      },
+      "correct": "D",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "The paragraph opens with \"One control matters most\". A control exists to rule something out. The expert asks what the first result could have been blamed on other than the stride, and finds the answer: the operation itself.",
+        "correct_reasoning": "The control ants were operated on too, yet \"found the nest as well as ever\". So the operation alone does not cause the error. What the control ants lacked was a change of stride between the two halves of the journey. The detail therefore isolates the stride change as the cause, which is what the correct option says.",
+        "passage_anchor": "rc-0147-p3",
+        "question_type_note": "A role-of-detail question asks what job a detail does for the argument, not what it says. The answer names the function (ruling out, illustrating, qualifying), and the best check is to remove the detail and ask what the argument would then be unable to claim.",
+        "reading_habit": "When an author calls something a control or a check, ask \"what rival explanation would survive without it?\" The answer to that question is the role of the detail.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "fact_right_interpretation_wrong",
+            "why_wrong": "each control ant had either stilts or stumps, not both; nothing cancelled, the stride was simply the same both ways, as \"on the same legs\" states",
+            "seductive_element": "both stilts and stumps appear in the sentence, so a reader can picture one undoing the other"
+          },
+          {
+            "option": "B",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "the passage says nothing about practice or learning; the control ants succeeded on their first trip out and back on the new legs",
+            "seductive_element": "learning a new stride is a plausible explanation of success, but the text gives a different one: the count was \"taken and spent on the same stride\""
+          },
+          {
+            "option": "C",
+            "trap_type": "wrong_structural_role",
+            "why_wrong": "the direct line is established in the first paragraph as the phenomenon to be explained; the control group in the third paragraph does different work",
+            "seductive_element": "the direct line is the passage's opening image, so a reader may attach every later detail to it"
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "salt pan",
+      "passage_use": "It wanders across a salt pan",
+      "meaning_here": "a flat stretch of bare ground left where salty water has dried away",
+      "difficulty": "medium"
+    },
+    {
+      "word": "overshot",
+      "passage_use": "The ants on stilts overshot",
+      "meaning_here": "went past the target",
+      "difficulty": "easy"
+    },
+    {
+      "word": "stride",
+      "passage_use": "making every stride longer",
+      "meaning_here": "the length of one step",
+      "difficulty": "easy"
+    }
+  ],
+  "mentor": {
+    "challenge": "Glue stilts to an ant's legs and it walks straight past its own front door. The mistake is the clue.",
+    "one_sentence_summary": "Desert ants track distance home by counting their strides, so lengthening or shortening their legs after they set out makes them walk straight past the nest or stop short of it by an amount a step count would predict.",
+    "main_idea": "A Saharan desert ant finds its way home by counting its steps on the way out and counting them back. An experiment that changed the ants' stride length after they had already set out proved this, because it made them overshoot or undershoot the nest by exactly the amount a step counter would predict.",
+    "simple_explanation": "A desert ant in the Sahara wanders a long way from its nest while hunting, over flat salty ground with no landmarks and no smell to follow. Yet when it finds food, it turns around and walks straight back, stopping almost exactly at the nest. To do that it needs to know which way home is and how far away it is. It gets the direction from the sun. Something inside it also keeps count of how far it has gone.\n\nOne idea is that the ant counts its steps. Scientists tested this in 2006 by training ants to walk ten metres to a feeding spot. There they changed the ants' legs: some got stilts made from bristles, which made each step longer, and some had part of each leg cut off, which made each step shorter. The ants on stilts walked straight past the nest, and the ants with shorter legs stopped short of it, both by about the amount you would expect if they were simply counting steps.\n\nThe most important check used ants that had their legs changed before they even left the nest, so they walked out and back on the same new legs. These ants found the nest just as well as normal ants did, because their step count still matched their actual stride. This shows the ant is not remembering how tired it feels or how long it walked. It is counting strides, trusting that each stride stays the same size, and if you change that size partway through the trip, the ant's count leads it wrong by a predictable amount.",
+    "why_difficult": "The passage describes two groups of ants with altered legs, and it is easy to mix up which group is which: one group's legs were changed only at the midpoint, and the other's were changed before the ants even set out. Questions turn on keeping those two conditions and their two different results apart, and on resisting the pull of the word 'control', which sounds minor but carries the proof.",
+    "author_intention": "To show, through a stride-counting mechanism and the experiment that tests it, that an animal can measure distance by counting its own steps, and that deliberately making the count wrong is what proves it.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0147-p1",
+        "role": "Poses the puzzle",
+        "note": "The ant crosses featureless ground with no scent trail, yet still walks a straight line home, so it must be measuring both direction and distance somehow."
+      },
+      {
+        "paragraph_id": "rc-0147-p2",
+        "role": "Describes the experiment",
+        "note": "Scientists changed the ants' leg length after they had already walked out, and the ants overshot or undershot the nest by the amount a step count predicts."
+      },
+      {
+        "paragraph_id": "rc-0147-p3",
+        "role": "Gives the proof",
+        "note": "Ants whose legs were changed before they set out walked both halves on the same stride and found the nest perfectly, which shows the trust is in the stride staying constant, not in effort or memory."
+      }
+    ],
+    "tone_progression": "Plain and curious throughout, moving from a puzzle stated in short sentences to an experiment reported step by step, and settling into a quietly confident explanation once the control group proves the mechanism.",
+    "key_transitions": [
+      "'One answer is steps.' (opening of paragraph 2): the puzzle gets its first candidate explanation.",
+      "'One control matters most.' (opening of paragraph 3): the passage moves from the result that needs checking to the experiment that checks it."
+    ],
+    "misunderstanding": "A hurried reader remembers only that changed legs made ants miss the nest, and forgets that one group of ants with changed legs found the nest perfectly fine. That group is not an exception to the rule; it is the proof of it, because its stride never changed between the outward and return trip.",
+    "traps_summary": "The options borrow the overshoot result from the wrong group of ants, invent a link between stride and the sun's direction, extend the finding into a law for every animal, or credit the control ants' success to practice rather than to an unchanged stride.",
+    "reading_lesson": "When an experiment has two groups that differ by a single changed condition, write down the condition and the result for each group separately before you look at the options. A question will often ask about one group while offering the other group's result as the wrong answer.",
+    "real_world": "The same logic appears whenever you test a measuring instrument by deliberately feeding it a wrong input: a scale, a pedometer, or a clock, to see whether the error it produces matches what the mechanism predicts.",
+    "takeaway": "An animal that measures distance in steps will be wrong by exactly the amount its steps are wrong, which is also how you prove it is counting steps at all.",
+    "reflection_question": "Can you think of another measurement you rely on every day that would fail in a predictable way if one of its assumptions were quietly changed?",
+    "eli10": {
+      "big_idea": "A desert ant finds its way home by counting its own steps, and scientists proved this by changing the ants' leg length to make the count go wrong on purpose.",
+      "story": "A little desert ant walks far from its nest to look for food. The ground is flat and hot, with no signs to follow. But when the ant finds food, it turns and walks straight home. How does it know the way? It watches the sun for direction. For distance, it seems to count its own steps. Scientists tested this idea. They glued tiny stilts to some ants' legs, making each step longer. They cut other ants' legs short, making each step shorter. The ants with longer steps walked right past their nest. The ants with shorter steps stopped too soon. But ants that had their legs changed before they even left home did just fine. Their steps matched all the way there and back. This showed that the ant trusts its step count, and if the step size changes partway, the ant gets fooled in a way you can predict.",
+      "paragraphs": [
+        "Sets up the puzzle: the ant crosses ground with no clues, yet still walks straight home.",
+        "Describes the test: changing the ants' leg length after they set out made them miss the nest in a predictable way.",
+        "Gives the proof: ants whose legs were changed before they set out walked home just fine, because their step size never changed."
+      ],
+      "author_view": "The writer finds this a neat piece of science: a strange mistake, the overshooting ant, turns out to be exactly the clue that proves how the ant measures its world."
+    }
+  }
+}
