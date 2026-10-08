@@ -142,14 +142,27 @@ function ensureGraph() {
 }
 
 /**
- * Resume the context inside a user gesture (autoplay policy) and play
- * any queued opening chime. Safe to call on every early gesture.
+ * True when a sound can be scheduled right now. Otherwise ask the browser to
+ * run the context (it may start late, refuse a touch, or have been suspended
+ * by the page going to the background) and say no: sounds are skipped, never
+ * queued on a frozen clock to burst out late. A refusal is fine, the next
+ * gesture asks again; the opening chime plays the moment the context runs.
+ */
+function ready() {
+  if (!ensureGraph()) return false;
+  if (state.ctx.state !== 'running') {
+    try { Promise.resolve(state.ctx.resume()).then(() => { if (state.ctx.state === 'running') unlockAudio(); }, () => { /* refused */ }); } catch { /* fine */ }
+  }
+  return state.ctx.state === 'running';
+}
+
+/**
+ * Wake the context on a gesture or on coming back to the page (autoplay
+ * policy) and play any queued opening chime. Safe to call as often as you like.
  */
 export function unlockAudio() {
   try {
-    if (!state.enabled) return;
-    if (!ensureGraph()) return;
-    if (state.ctx.state === 'suspended') state.ctx.resume();
+    if (!state.enabled || !ready()) return;
     if (state.welcomePending) {
       state.welcomePending = false;
       // A touch of air after the gesture so the chime feels like a reply.
@@ -434,8 +447,7 @@ export function playSound(name, opts = {}) {
     if (typeof document !== 'undefined' && document.hidden) return; // polite: no background noise
     const fn = SOUNDS[name];
     if (!fn) return;
-    if (!ensureGraph()) return;
-    if (state.ctx.state === 'suspended') state.ctx.resume();
+    if (!ready()) return;
     const t = state.ctx.currentTime + Math.max(0, opts.delay ?? 0);
     fn(t, opts.gain ?? 1);
   } catch {
@@ -454,8 +466,7 @@ export function xpTick(step) {
   try {
     if (!state.enabled || state.volume <= 0) return;
     if (typeof document !== 'undefined' && document.hidden) return;
-    if (!ensureGraph()) return;
-    if (state.ctx.state === 'suspended') state.ctx.resume();
+    if (!ready()) return;
     const i = Math.max(0, Math.min(XP_LADDER.length - 1, step | 0));
     const t = state.ctx.currentTime;
     tone(t, { freq: XP_LADDER[i], type: 'sine', peak: 0.026, a: 0.003, d: 0.09 });

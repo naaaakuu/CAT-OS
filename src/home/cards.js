@@ -305,9 +305,10 @@ export function decorLayer(pets) {
   const made = new Set((pets.decor ?? []).filter((t) => t.made).map((t) => t.id));
   const T = TREASURE_AT;
   let html = '';
-  const wrap = (id, inner, x, y, w, h, extra = '') => `<div class="cw-treasure cw-treasure--${id}" data-t="${id}"${extra} style="left:${x}px;top:${y}px;width:${w}px;height:${h}px">${inner}</div>`;
-  if (made.has('bunting')) for (const [a, b] of T.bunting) html += wrap('bunting', buntingSVG(b.x - a.x), a.x, a.y - 4, b.x - a.x, 60);
-  if (made.has('lanterns')) T.lanterns.forEach((p, i) => { html += wrap('lanterns', lanternSVG(LANTERN[i % 4]), p.x - 15, p.y - 4, 30, 46); });
+  // `ground` (a post's foot, painting y) joins the friends' own z-index scale (life.js: z = foot y), so a friend behind the post walks behind the string and lantern. Without it a treasure stays under every friend.
+  const wrap = (id, inner, x, y, w, h, extra = '', ground = null) => `<div class="cw-treasure cw-treasure--${id}" data-t="${id}"${extra} style="left:${x}px;top:${y}px;width:${w}px;height:${h}px${ground == null ? '' : `;z-index:${ground}`}">${inner}</div>`;
+  if (made.has('bunting')) for (const [a, b] of T.bunting) html += wrap('bunting', buntingSVG(b.x - a.x), a.x, a.y - 4, b.x - a.x, 60, '', a.ground);
+  if (made.has('lanterns')) T.lanterns.forEach((p, i) => { html += wrap('lanterns', lanternSVG(LANTERN[i % 4]), p.x - 15, p.y - 4, 30, 46, '', p.ground); });
   if (made.has('flowers')) T.flowers.forEach((p, i) => { html += wrap('flowers', flowersSVG(i), p.x - 24, p.y - 20, 48, 34); });
   if (made.has('fireflies')) {
     T.fireflies.forEach((p) => {

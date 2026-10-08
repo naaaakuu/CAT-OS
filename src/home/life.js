@@ -113,12 +113,13 @@ export function createLife(root, { pets: petsState, atmo, reduced, view = null, 
   /* ================= The friends ================= */
   const actors = PETS.map((p, i) => {
     const el = root.querySelector(`.pet[data-pet="${p.id}"]`);
+    const top = root.querySelector(`.pet-top[data-pet="${p.id}"]`);
     const home = HOMES[p.id].node;
     const n = NODES[home];
     const stage = pets.pets.find((x) => x.id === p.id)?.stage ?? 0;
     return {
       id: p.id, el, body: el.querySelector('.pet-body'), sprite: el.querySelector('.pet-sprite'),
-      bubble: el.querySelector('.pet-bubble'), markEl: el.querySelector('.pet-mark'), shadow: el.querySelector('.pet-shadow'),
+      top, bubble: top.querySelector('.pet-bubble'), markEl: top.querySelector('.pet-mark'), shadow: el.querySelector('.pet-shadow'),
       gait: GAIT[p.id], size: petSize(p.id, stage), stage, rush: false, partyUntil: 0,
       x: n.x + (i % 2 ? 6 : -6), y: n.y, node: home, home, path: [], state: 'idle', until: 400 + i * 700,
       next: null, facing: i % 2 ? -1 : 1, hop: 0, frame: 0, blinkAt: rand(800, 4000), blinkUntil: 0,
@@ -394,9 +395,9 @@ export function createLife(root, { pets: petsState, atmo, reduced, view = null, 
     // the margin is wide enough that they are back in place before they come into view.
     if (view && !reduced) { const v = viewNow; if (a.x < v.x - 160 || a.x > v.x + v.w + 160 || a.y < v.y - 60 || a.y > v.y + v.h + 200) return; }
     const pos = `translate3d(${a.x.toFixed(1)}px,${a.y.toFixed(1)}px,0)`;
-    if (pos !== a.lastPos) { a.lastPos = pos; a.el.style.transform = pos; }
+    if (pos !== a.lastPos) { a.lastPos = pos; a.el.style.transform = pos; a.top.style.transform = pos; }
     const z = Math.round(a.y);
-    if (z !== a.lastZ) { a.lastZ = z; a.el.style.zIndex = String(z); }
+    if (z !== a.lastZ) { a.lastZ = z; a.el.style.zIndex = String(z); a.top.style.zIndex = String(z); }
     const body = `translateY(${(-lift).toFixed(1)}px) rotate(${tilt.toFixed(2)}deg) scale(${(a.facing * sx).toFixed(3)},${sy.toFixed(3)})`;
     if (body !== a.lastBody) { a.lastBody = body; a.body.style.transform = body; }
     const shadow = (1 - lift / 40).toFixed(2);

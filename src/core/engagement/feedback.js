@@ -167,10 +167,16 @@ export function installGlobalFeedback() {
   if (state.installed || typeof document === 'undefined') return;
   state.installed = true;
 
-  // First gesture: unlock the AudioContext (autoplay policy) + welcome.
+  // Every gesture, and every return to the page, wakes the AudioContext
+  // (autoplay policy) and plays the welcome once it runs. Never one-shot: a
+  // touch pointerdown or a swipe does not count as a gesture, and a context
+  // suspended in the background needs asking again.
   const unlock = () => unlockAudio();
-  window.addEventListener('pointerdown', unlock, { capture: true });
-  window.addEventListener('keydown', unlock, { capture: true });
+  for (const t of ['pointerdown', 'pointerup', 'touchend', 'click', 'keydown']) window.addEventListener(t, unlock, { capture: true, passive: true });
+  const back = () => { if (document.visibilityState !== 'hidden') unlockAudio(); };
+  document.addEventListener('visibilitychange', back);
+  window.addEventListener('pageshow', back);
+  window.addEventListener('focus', back);
 
   // Press / toggle micro-feedback for interactive elements.
   document.addEventListener('click', (e) => {

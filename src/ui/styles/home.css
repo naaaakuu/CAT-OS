@@ -56,8 +56,11 @@
 .cw-base.is-in { opacity: 1; }
 html[data-reduced-motion] .cw-base { transition: none; }
 .cw-map > * { position: absolute; }
-.cw-motion, .cw-water, .cw-sunlight, .cw-tint, .cw-glows, .cw-clouds, .cw-treasures, .cw-life, .cw-spots, .cw-pets { left: 0; top: 0; width: 100%; height: 100%; }
-.cw-motion, .cw-water, .cw-sunlight, .cw-tint, .cw-glows, .cw-clouds, .cw-life, .cw-treasures { pointer-events: none; }
+.cw-motion, .cw-water, .cw-sunlight, .cw-tint, .cw-glows, .cw-clouds, .cw-treasures, .cw-life, .cw-spots, .cw-pets, .cw-says { left: 0; top: 0; width: 100%; height: 100%; }
+.cw-motion, .cw-water, .cw-sunlight, .cw-tint, .cw-glows, .cw-clouds, .cw-life, .cw-treasures, .cw-says { pointer-events: none; }
+/* Speech and "!" sit above every friend and the plaza bunting (whose z-index is its ground y, like a friend's). */
+.cw-says { z-index: 2000; }
+.pet-top { position: absolute; left: 0; top: 0; width: 0; height: 0; }
 .cw-water { image-rendering: auto; }
 .cw-sunlight { background: linear-gradient(118deg, transparent 20%, rgba(255,237,175,.09) 26%, transparent 32%, transparent 47%, rgba(255,237,175,.07) 52%, transparent 59%); transform-origin: 50% 0; animation: cw-sunlight 18s ease-in-out infinite alternate; }
 .cw[data-hour="night"] .cw-sunlight, .cw[data-weather="rain"] .cw-sunlight, .cw[data-weather="fog"] .cw-sunlight { display: none; }

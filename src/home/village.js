@@ -78,6 +78,7 @@ export async function renderVillageHome(outlet, ctx) {
           <canvas class="cw-life" width="${MAP.w / 2}" height="${MAP.h / 2}" aria-hidden="true"></canvas>
           <div class="cw-spots">${spotsHTML()}</div>
           <div class="cw-pets">${PETS.map((p) => petHTML(p, pets)).join('')}</div>
+          <div class="cw-says" aria-hidden="true">${PETS.map((p) => saysHTML(p, pets)).join('')}</div>
         </div>
       </div>
       <header class="cw-hud">
@@ -691,9 +692,12 @@ function petHTML(p, pets) {
     <span class="pet-shadow" aria-hidden="true"></span>
     ${petRing(p.id, pp.stage)}
     <span class="pet-body">${petRig(p.id, { size, stage: pp.stage })}${petGear(p.id, pp.stage)}</span>
-    <span class="pet-bubble" aria-hidden="true" hidden></span>
-    <span class="pet-mark" aria-hidden="true" hidden>!</span>
   </button>`;
+}
+
+/** A friend's speech bubble and "!": a layer above every friend and the plaza bunting (a friend can walk behind the flags, their words never do), moved with the friend by life.js. */
+function saysHTML(p, pets) {
+  return `<span class="pet-top" data-pet="${p.id}" style="--size:${petSize(p.id, pets.pets.find((x) => x.id === p.id).stage)}"><span class="pet-bubble" hidden></span><span class="pet-mark" hidden>!</span></span>`;
 }
 
 /** The card for a friend who grew: how they look now, their new name, what is new. */

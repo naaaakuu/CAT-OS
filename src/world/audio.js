@@ -23,7 +23,8 @@
  * The reward sounds quote the hook, so a star, a heart and a new level all
  * sound like the village. Music and sound are on, at full volume, until
  * the learner turns them off. Nothing sounds before the first gesture
- * (the browser's rule); app.js calls unlock() on the first touch anywhere.
+ * (the browser's rule); this module wakes the context itself on every touch,
+ * key and return to the page (see wake()), so sound always comes back.
  */
 
 import { feedbackPrefs, setFeedbackPref, onFeedbackChange } from '../core/engagement/feedback.js';
@@ -38,8 +39,7 @@ const hz = (midi) => 440 * 2 ** ((midi - 69) / 12);
 const state = {
   ctx: null, master: null, noise: null,
   music: { on: true, playing: false, region: 'world', hour: 'morning', warmth: 0, gain: null, timer: 0, slot: 0, next: 0 },
-  amb: { nodes: [], gain: null, region: null, timers: [], key: null },
-  unlocked: false,
+  amb: { nodes: [], gain: null, region: null, timers: [], key: null, want: null },
   storage: null,
 };
 
@@ -70,18 +70,44 @@ function ensure() {
     b0 = 0.99765 * b0 + w * 0.099; b1 = 0.963 * b1 + w * 0.2965; b2 = 0.57 * b2 + w * 1.0526;
     d[i] = (b0 + b1 + b2 + w * 0.1848) * 0.12;
   }
+  ctx.onstatechange = () => { if (live()) onLive(); };
   state.ctx = ctx; state.master = master; state.noise = buf;
   return true;
 }
 
-export function unlock() {
+/**
+ * The browser may start the context late or refuse it (a touch pointerdown is
+ * not a gesture, a swipe never is, a backgrounded tab suspends it), so nothing
+ * here trusts one unlock. wake() asks again on every gesture and every return
+ * to the page; once the context is really running, onLive() starts the music
+ * (if it is on) and the last ambience asked for. Sounds that find it still
+ * asleep are skipped, never queued to burst out late.
+ */
+const live = () => state.ctx?.state === 'running';
+function wake() {
   try {
     if (!ensure()) return;
-    if (state.ctx.state === 'suspended') state.ctx.resume();
-    state.unlocked = true;
-    if (state.music.on && !state.music.playing) startMusic(state.music.region, { hour: state.music.hour, warmth: state.music.warmth });
+    if (live()) { onLive(); return; }
+    Promise.resolve(state.ctx.resume()).then(() => { if (live()) onLive(); }, () => { /* refused: the next gesture asks again */ });
   } catch { /* audio is a bonus */ }
 }
+const ready = () => { if (!live()) wake(); return live(); };
+function onLive() {
+  const m = state.music, w = state.amb.want;
+  if (m.on && !m.playing) startMusic(m.region, { hour: m.hour, warmth: m.warmth });
+  if (w) startAmbience(w.region, w);
+}
+function arm() {
+  if (typeof window === 'undefined' || typeof document === 'undefined') return;
+  for (const t of ['pointerdown', 'pointerup', 'touchend', 'click', 'keydown']) window.addEventListener(t, wake, { capture: true, passive: true });
+  const back = () => { if (state.ctx && document.visibilityState !== 'hidden') wake(); };
+  document.addEventListener('visibilitychange', back);
+  window.addEventListener('pageshow', back);
+  window.addEventListener('focus', back);
+}
+arm();
+
+export function unlock() { wake(); }
 
 export async function initWorldAudio(storage) {
   state.storage = storage;
@@ -91,7 +117,7 @@ export async function initWorldAudio(storage) {
     state.music.on = p.music;
     if (!p.music) { stopMusic(); stopAmbience(); return; }
     if (state.music.playing) { try { state.music.gain?.gain.setTargetAtTime(Math.max(0.0001, musicGain() * MUSIC_LEVEL), state.ctx.currentTime, 0.05); state.amb.gain?.gain.setTargetAtTime(Math.max(0.0001, musicGain()), state.ctx.currentTime, 0.05); } catch { /* fine */ } }
-    else if (state.unlocked) startMusic(state.music.region, { hour: state.music.hour, warmth: state.music.warmth });
+    else wake(); // music back on: starts now if the context runs, else the moment it does
   });
 }
 
@@ -99,7 +125,7 @@ export function musicEnabled() { return feedbackPrefs().music; }
 export async function setMusicEnabled(on) {
   state.music.on = !!on;
   try { if (state.storage) await setFeedbackPref(state.storage, 'music', !!on); } catch { /* non-fatal */ }
-  if (!on) { stopMusic(); stopAmbience(); } else startMusic(state.music.region, { hour: state.music.hour, warmth: state.music.warmth });
+  if (!on) { stopMusic(); stopAmbience(); } else wake();
 }
 
 /* ------------------------------------------------------------------ */
@@ -197,8 +223,7 @@ export const WORLD_SOUND_NAMES = Object.freeze(Object.keys(EVENTS));
 export function play(name, { delay = 0 } = {}) {
   try {
     const v = gain();
-    if (v <= 0 || !ensure() || document.visibilityState === 'hidden') return;
-    if (state.ctx.state === 'suspended') return;
+    if (v <= 0 || document.visibilityState === 'hidden' || !ready()) return;
     const fn = EVENTS[name];
     if (!fn) return;
     fn(state.ctx.currentTime + delay, v);
@@ -226,7 +251,7 @@ export function voice(petId, text = '', { soft = false } = {}) {
   try {
     const v = gain() * (soft ? 0.45 : 1);
     const V = VOICE[petId];
-    if (!V || v <= 0 || !ensure() || document.visibilityState === 'hidden' || state.ctx.state === 'suspended') return;
+    if (!V || v <= 0 || document.visibilityState === 'hidden' || !ready()) return;
     const c = state.ctx;
     const t0 = Math.max(c.currentTime + 0.01, soft ? voiceUntil : c.currentTime + 0.01);
     const letters = String(text).replace(/[^a-z]/gi, '').length;
@@ -262,7 +287,7 @@ export function signature(petId, sig) {
     const v = gain();
     if (!sig?.say || v <= 0 || document.visibilityState === 'hidden') return;
     if (petId !== 'mochi') {
-      if (!ensure() || state.ctx.state === 'suspended') return;
+      if (!ready()) return;
       const c = state.ctx, lp = c.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 4200; lp.connect(state.master);
       CALLS[petId]?.(c.currentTime + 0.01, v, lp);
       setTimeout(() => { try { lp.disconnect(); } catch { /* gone */ } }, 1500);
@@ -408,8 +433,7 @@ function playSlot(slot, t, eighth, dest) {
 export function startMusic(region = 'world', { hour = state.music.hour ?? 'morning', warmth = 0 } = {}) {
   const m = state.music;
   m.region = region; m.hour = hour; m.warmth = Math.max(0, Math.min(1, warmth));
-  if (!m.on || !state.unlocked || musicGain() <= 0 || !ensure()) return;
-  if (m.playing) return;
+  if (!m.on || musicGain() <= 0 || !ready() || m.playing) return; // not running yet: onLive() starts it
   const c = state.ctx;
   const bus = c.createGain();
   bus.gain.setValueAtTime(0.0001, c.currentTime);
@@ -450,7 +474,8 @@ export function stopMusic(fade = 0.6) {
  * the pond, birds by day, crickets at night, rain by weather.
  */
 export function startAmbience(region = 'world', { hour = 'morning', weather = 'clear', season = 'summer' } = {}) {
-  if (musicGain() <= 0 || !ensure() || !state.unlocked) { state.amb.region = region; return; }
+  state.amb.want = { region, hour, weather, season }; // replayed by onLive() until silenceWorld()
+  if (musicGain() <= 0 || !ready()) return;
   const key = `${region}|${hour}|${weather}|${season}`;
   if (state.amb.key === key) return;
   stopAmbience(0.8);
@@ -466,11 +491,11 @@ export function startAmbience(region = 'world', { hour = 'morning', weather = 'c
   if (weather === 'rain') { const src = c.createBufferSource(); src.buffer = state.noise; src.loop = true; const hp = c.createBiquadFilter(); hp.type = 'highpass'; hp.frequency.value = 2200; const wg = c.createGain(); wg.gain.value = 0.07; src.connect(hp).connect(wg).connect(g); src.start(); nodes.push(src); }
   const green = ['world', 'hearth', 'rootwood', 'meadow', 'pond', 'thicket', 'terraces'].includes(region);
   if (green && !night && weather !== 'rain' && season !== 'winter') {
-    const chirp = () => { if (state.amb.key !== key) return; const base = 2200 + Math.random() * 1400; const n = 2 + Math.floor(Math.random() * 4); const pan = Math.random() * 1.6 - 0.8; for (let i = 0; i < n; i += 1) { const t = c.currentTime + i * (0.07 + Math.random() * 0.06); tone(t, { freq: base * (1 + (Math.random() - 0.5) * 0.18), type: 'sine', peak: 0.014, a: 0.01, d: 0.07, pan, dest: g }); } timers.push(setTimeout(chirp, 3500 + Math.random() * 8000)); };
+    const chirp = () => { if (state.amb.key !== key) return; if (!live()) { timers.push(setTimeout(chirp, 4000)); return; } const base = 2200 + Math.random() * 1400; const n = 2 + Math.floor(Math.random() * 4); const pan = Math.random() * 1.6 - 0.8; for (let i = 0; i < n; i += 1) { const t = c.currentTime + i * (0.07 + Math.random() * 0.06); tone(t, { freq: base * (1 + (Math.random() - 0.5) * 0.18), type: 'sine', peak: 0.014, a: 0.01, d: 0.07, pan, dest: g }); } timers.push(setTimeout(chirp, 3500 + Math.random() * 8000)); };
     timers.push(setTimeout(chirp, 1500 + Math.random() * 3000));
   }
   if (green && night && season !== 'winter') {
-    const cricket = () => { if (state.amb.key !== key) return; const pan = Math.random() * 1.4 - 0.7; for (let i = 0; i < 6; i += 1) tone(c.currentTime + i * 0.055, { freq: 4200, type: 'sine', peak: 0.006, a: 0.004, d: 0.03, pan, dest: g }); timers.push(setTimeout(cricket, 900 + Math.random() * 2400)); };
+    const cricket = () => { if (state.amb.key !== key) return; if (!live()) { timers.push(setTimeout(cricket, 4000)); return; } const pan = Math.random() * 1.4 - 0.7; for (let i = 0; i < 6; i += 1) tone(c.currentTime + i * 0.055, { freq: 4200, type: 'sine', peak: 0.006, a: 0.004, d: 0.03, pan, dest: g }); timers.push(setTimeout(cricket, 900 + Math.random() * 2400)); };
     timers.push(setTimeout(cricket, 800));
   }
   state.amb.nodes = nodes; state.amb.gain = g; state.amb.timers = timers;
@@ -488,4 +513,4 @@ export function stopAmbience(fade = 0.6) {
 }
 
 /** Leaving the village for a screen with no place of its own: the birds go quiet, the song plays on. */
-export function silenceWorld() { stopAmbience(0.5); }
+export function silenceWorld() { state.amb.want = null; stopAmbience(0.5); }

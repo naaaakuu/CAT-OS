@@ -150,8 +150,9 @@ export const FIRE = Object.freeze({ x: 822, y: 878 });
 
 /** Where each treasure draws itself. */
 export const TREASURE_AT = Object.freeze({
-  lanterns: [{ x: 552, y: 330 }, { x: 966, y: 330 }, { x: 520, y: 462 }, { x: 980, y: 464 }],
-  bunting: [[{ x: 552, y: 340 }, { x: 966, y: 340 }], [{ x: 520, y: 470 }, { x: 980, y: 472 }]],
+  /* `ground` is the painting y where the lamp post stands (the foot of its stone base, or of the iron post for the south pair). A friend whose feet are above it walks BEHIND the lantern or string, below it IN FRONT (life.js sets each friend's z-index to its foot y; cards.js gives these the same scale). */
+  lanterns: [{ x: 552, y: 330, ground: 450 }, { x: 966, y: 330, ground: 450 }, { x: 520, y: 462, ground: 555 }, { x: 980, y: 464, ground: 555 }],
+  bunting: [[{ x: 552, y: 340, ground: 450 }, { x: 966, y: 340 }], [{ x: 520, y: 470, ground: 555 }, { x: 980, y: 472 }]],
   flowers: [{ x: 452, y: 300 }, { x: 600, y: 360 }, { x: 940, y: 330 }, { x: 1040, y: 560 }, { x: 560, y: 640 }, { x: 980, y: 640 }],
   fireflies: [{ x: 600, y: 540 }, { x: 948, y: 540 }],
   swing: { x: 700, y: 330 },

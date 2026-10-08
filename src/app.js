@@ -19,7 +19,7 @@ import { registerBank } from './modules/verbal-bank/index.js';
 import { startLibrarySync } from './core/content-loader/library-sync.js';
 import { registerWorld, isWorldRoute } from './world/index.js';
 import { syncStage } from './world/stage.js';
-import { silenceWorld, unlock as unlockWorldAudio, startMusic } from './world/audio.js';
+import { silenceWorld, startMusic } from './world/audio.js';
 import { hourWord } from './world/engine/palette.js';
 import { initFeedback, installGlobalFeedback } from './core/engagement/feedback.js';
 import { loadTheme, applyTheme, loadReadingSize, applyReadingSize, applyMotion } from './shell/prefs.js';
@@ -190,11 +190,13 @@ async function boot() {
     return h.match(/^#\/world\/place\/([\w-]+)/)?.[1] ?? 'world';
   };
   const retune = () => startMusic(sceneFor(location.hash), { hour: hourWord(new Date()) });
+  /* Only the scene is chosen here, once. Waking the audio is not one-shot: world/audio.js
+     wakes itself on every gesture and every return to the page, because a touch
+     pointerdown or a swipe may not unlock it and a backgrounded tab suspends it. */
   const firstTouch = () => {
     window.removeEventListener('pointerdown', firstTouch, true);
     window.removeEventListener('keydown', firstTouch, true);
     retune();
-    unlockWorldAudio();
   };
   window.addEventListener('pointerdown', firstTouch, true);
   window.addEventListener('keydown', firstTouch, true);
@@ -232,10 +234,13 @@ async function boot() {
   // engagement code about a specific module. Deliberately NOT {once:true}:
   // the first gesture may land before sound is even turned on in Settings,
   // and unlockGardenAudio() is a cheap no-op once the context is running.
-  window.addEventListener('pointerdown', () => {
+  const wakeGarden = () => {
     if (!gardenAudioLoaded) return;                      // never entered the Rootwood
     gardenAudio().then((m) => m.unlockGardenAudio()).catch(() => { /* no sound */ });
-  }, { capture: true });
+  };
+  // Not only pointerdown: a touch pointerdown may not unlock audio, pointerup/touchend/click do.
+  for (const t of ['pointerdown', 'pointerup', 'touchend', 'click']) window.addEventListener(t, wakeGarden, { capture: true, passive: true });
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState !== 'hidden') wakeGarden(); });
 
   // 3. Service worker — relative path so it works from a GitHub Pages
   //    subpath. Registration failure is non-fatal (e.g. plain HTTP).

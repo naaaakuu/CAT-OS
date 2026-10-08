@@ -207,11 +207,12 @@ export function renderSettings(outlet, { storage, version }) {
     const b = e.target.closest('[data-music]');
     if (!b) return;
     const on = b.dataset.music === 'true';
+    if (on) unlock(); // inside the tap, before the storage await: Safari drops the gesture across it
     await setFeedbackPref(storage, 'music', on);
     syncAudio();
     cue('toggle');
     // Hear it now: a few bars of the village, so the toggle is honest.
-    if (on) { unlock(); startMusic('world', { hour: 'morning' }); startAmbience('world', { hour: 'morning' }); }
+    if (on) { startMusic('world', { hour: 'morning' }); startAmbience('world', { hour: 'morning' }); }
   });
   let musicPreview = 0;
   musicVol.addEventListener('input', async () => {

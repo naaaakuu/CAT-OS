@@ -166,11 +166,18 @@ function ensureGraph() {
   return true;
 }
 
+/** Ask the browser to run the context (it may start late, refuse a touch, or
+ *  have been suspended in the background). A refusal is fine: the next gesture
+ *  asks again. Never throws, never leaves a rejected promise behind. */
+function wake() {
+  try { if (state.ctx.state !== 'running') Promise.resolve(state.ctx.resume()).catch(() => { /* refused */ }); } catch { /* fine */ }
+}
+
 export function unlockGardenAudio() {
   try {
     if (!feedbackPrefs().sounds) return;
     if (!ensureGraph()) return;
-    if (state.ctx.state === 'suspended') state.ctx.resume();
+    wake();
     // 0.16.0: the valley is the home, so the app can open straight onto the
     // Overlook with no gesture behind it — and the browser lets nothing
     // sound until there is one. The first touch of the world pays the
@@ -474,7 +481,9 @@ export function playGardenSound(name, opts = {}) {
     const fn = SOUNDS[name];
     if (!fn) return;
     if (!ensureGraph()) return;
-    if (state.ctx.state === 'suspended') state.ctx.resume();
+    // Asleep: ask again, and skip the sound rather than queue it on a frozen
+    // clock to burst out late. Only the arrival swell waits, by design (above).
+    if (state.ctx.state !== 'running') { wake(); if (name !== 'arrival') return; }
     fn(state.ctx.currentTime + Math.max(0, opts.delay ?? 0), m, opts);
   } catch { /* feedback is never worth an error */ }
 }
@@ -557,7 +566,7 @@ export function startGardenAmbience(streamLevel = 1, opts = {}) {
     state.landmarkSong = !!opts.landmark;
     if (state.ambienceOn || gardenGain() <= 0) return;
     if (!ensureGraph()) return;
-    if (state.ctx.state === 'suspended') state.ctx.resume();
+    wake();
     const c = state.ctx;
 
     const src = c.createBufferSource();
