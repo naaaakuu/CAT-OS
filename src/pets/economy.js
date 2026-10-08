@@ -98,7 +98,8 @@ function progressOf(id, state, days) {
   if (id === 'matcha') return { done: sum(s.meadow?.known, s.pond?.known, s.thicket?.known, s.rootwood?.metCount, s.terraces?.done, b.wb?.solved), total: sum(s.meadow?.total, s.pond?.total, s.thicket?.total, s.rootwood?.total, s.terraces?.total, b.wb?.total), unit: 'words' };
   if (id === 'mochi') return { done: sum(s.table?.solved), total: sum(s.table?.total), unit: 'questions' };
   if (id === 'sesame') return { done: sum(b.pc?.solved), total: sum(b.pc?.total), unit: 'questions' };
-  if (id === 'ginger') return { done: sum(s.loom?.solved, b.sp?.solved), total: sum(s.loom?.total, b.sp?.total), unit: 'questions' };
+  if (id === 'biscuit') return { done: sum(b.sp?.solved), total: sum(b.sp?.total), unit: 'questions' };
+  if (id === 'ginger') return { done: sum(s.loom?.solved), total: sum(s.loom?.total), unit: 'questions' };
   if (id === 'mallow') return { done: sum(s.bench?.solved), total: sum(s.bench?.total), unit: 'questions' };
   return { done: days, total: TOFFEE_DAYS, unit: 'days' };
 }
@@ -106,14 +107,11 @@ function progressOf(id, state, days) {
 /**
  * How far each HOUSE has come, 0 to 10, by its own subject: the house grows
  * with the section it holds (owner, 2026-10-06: "when a player improves in a
- * section, that house area should improve too"). A house that is a friend's
- * only subject grows with the friend; Ginger's two houses each grow with
- * their own half (the workshop with jumbles, the rose cottage with placement).
+ * section, that house area should improve too"). Every house is one
+ * friend's one subject, so it grows with its friend.
  */
-function houseStages(state, pets) {
-  const s = state ?? {}, b = s.banks ?? {};
-  const own = { ginger: stageOf(s.loom?.solved, s.loom?.total).stage, cottage: stageOf(b.sp?.solved, b.sp?.total).stage };
-  return Object.fromEntries(HOUSES.map((h) => [h.spot, own[h.spot] ?? pets.find((p) => p.id === h.pet)?.stage ?? 0]));
+function houseStages(pets) {
+  return Object.fromEntries(HOUSES.map((h) => [h.spot, pets.find((p) => p.id === h.pet)?.stage ?? 0]));
 }
 
 /* ------------------------------------------------------------------ */
@@ -217,7 +215,7 @@ export function flameTier(days) {
 
 const midnightOf = (key) => { const [y, m, d] = key.split('-').map(Number); return new Date(y, m - 1, d).getTime(); };
 /* Ties go to the gentlest door first: a new learner is sent to Chai, as Toffee's hello says. */
-const NEED_ORDER = ['chai', 'matcha', 'mochi', 'ginger', 'mallow', 'sesame'];
+const NEED_ORDER = ['chai', 'matcha', 'mochi', 'ginger', 'mallow', 'sesame', 'biscuit'];
 const neediest = (moods) => NEED_ORDER.map((id, i) => ({ id, i, mood: moods[id] })).sort((a, b) => a.mood - b.mood || a.i - b.i);
 
 /**
@@ -336,7 +334,7 @@ export function derivePets(state, records, content, now = Date.now()) {
   const welcome = awayDays >= 1 && met.length ? { pet: met[0].id, days: awayDays } : null;
 
   return {
-    pets, houses: houseStages(state, pets), harmony, neediest: needy, play,
+    pets, houses: houseStages(pets), harmony, neediest: needy, play,
     glow, sources, level, decor, nextDecor: decor.find((d) => !d.made) ?? null, gifts,
     flame, today: { key: today, picks, done, doneCount, gift: picks.length === 3 && doneCount === 3, helped },
     welcome, awayDays, last,

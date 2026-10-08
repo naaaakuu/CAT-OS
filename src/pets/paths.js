@@ -74,11 +74,11 @@ export const HOMES = Object.freeze({
   mochi: { node: 'cabin', door: { x: 1225, y: 420 }, hit: { x: 1100, y: 280, w: 300, h: 170 }, label: 'The archery cabin' },
   toffee: { node: 'f1', door: { x: 806, y: 760 }, hit: { x: 720, y: 680, w: 180, h: 130 }, label: 'The campfire' },
   sesame: { node: 'clock', door: { x: 1256, y: 772 }, hit: { x: 1170, y: 520, w: 230, h: 280 }, label: 'The clock tower' },
+  biscuit: { node: 'cottage', door: { x: 272, y: 716 }, hit: { x: 170, y: 560, w: 270, h: 180 }, label: 'The rose cottage' },
 });
 
-/** Buildings that are not a pet's own home: Ginger's rose cottage (Sentence Placement), and the fire. */
+/** Places that are not a pet's own home: the fire. */
 export const PLACES = Object.freeze({
-  cottage: { node: 'cottage', door: { x: 272, y: 716 }, hit: { x: 170, y: 560, w: 270, h: 180 }, label: 'The rose cottage' },
   fire: { node: 'f1', hit: { x: 740, y: 836, w: 170, h: 90 }, label: 'The fire' },
 });
 
@@ -93,7 +93,7 @@ export const SIGNS = Object.freeze({
   mallow: { x: 1286, y: 166 },
   matcha: { x: 262, y: 352 },
   mochi: { x: 1246, y: 340 },
-  cottage: { x: 300, y: 610 },
+  biscuit: { x: 300, y: 610 },
   sesame: { x: 1240, y: 668 },
   toffee: { x: 808, y: 704 },
 });
@@ -171,6 +171,7 @@ export const CROPS = Object.freeze({
   mochi: { x: 1040, y: 260, w: 496, h: 280 },
   toffee: { x: 600, y: 660, w: 440, h: 330 },
   cottage: { x: 80, y: 520, w: 460, h: 330 },
+  biscuit: { x: 80, y: 520, w: 460, h: 330 },
   clock: { x: 1060, y: 500, w: 420, h: 380 },
   sesame: { x: 1060, y: 500, w: 420, h: 380 },
   plaza: { x: 520, y: 300, w: 520, h: 380 },

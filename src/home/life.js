@@ -36,7 +36,7 @@ import { glow, twinkle, glyphSprite, stamp } from './paint.js';
 import { HOUSE_ART } from './houses.js';
 
 /** Drawn height of each pet at full size, in painting pixels. */
-export const PET_SIZE = Object.freeze({ toffee: 70, chai: 84, matcha: 78, mochi: 78, ginger: 84, mallow: 80, sesame: 70 });
+export const PET_SIZE = Object.freeze({ toffee: 70, chai: 84, matcha: 78, mochi: 78, ginger: 84, mallow: 80, sesame: 70, biscuit: 78 });
 /** A friend's drawn height at their growth stage: they get bigger as you work through their subject. */
 export const petSize = (id, stage) => Math.round(PET_SIZE[id] * growOf(stage));
 const CONFETTI = ['#F4C443', '#E9963A', '#8FB56A', '#D97A8A', '#93AED1', '#F6EEDB'];
@@ -56,6 +56,7 @@ const GAIT = {
   ginger: { hop: 4.5, waddle: 3, cadence: 3, lift: 0.75 },
   mallow: { hop: 0, waddle: 3, cadence: 1.4, lift: 0, float: 5 },
   sesame: { hop: 3.5, waddle: 3.5, cadence: 3.6, lift: 0.85 },
+  biscuit: { hop: 1.8, waddle: 2.2, cadence: 3.1, lift: 0.8 },   // a cat's soft prowl: low, level, light-footed
 };
 
 /** Chores round each home: the prop in hand, how long, and what it throws into the air. */
@@ -67,6 +68,8 @@ const CHORES = {
   ginger: [{ kind: 'hammer', prop: 'hammer', ms: [4500, 7500], emit: 'spark', every: 640 }, { kind: 'sing', ms: [3500, 5500], emit: 'note', every: 650 }],
   mallow: [{ kind: 'rain', prop: 'raincloud', ms: [5500, 8500], emit: 'drop', every: 110 }, { kind: 'sprinkle', ms: [4000, 6500], emit: 'sparkle', every: 220 }],
   sesame: [{ kind: 'wind', prop: 'key', ms: [4500, 7500], emit: 'sparkle', every: 520 }, { kind: 'read', prop: 'book', ms: [5000, 8000], emit: 'letter', every: 760 }],
+  // Kneading the cushion he holds ("making biscuits"), purring; tea on the cottage patio.
+  biscuit: [{ kind: 'knead', ms: [5000, 8500], emit: 'note', every: 820 }, { kind: 'tea', prop: 'cup', ms: [6000, 9000], emit: 'steam', every: 520 }],
 };
 /** Where on the body a chore's particles come from, as a fraction of the pet's size (x toward its facing). */
 const EMIT_AT = {
@@ -74,7 +77,7 @@ const EMIT_AT = {
   note: [0.15, -0.95], steam: [0.42, -0.6], sparkle: [0.3, -0.5], raindrop: [0.5, -0.9],
 };
 /** Chores happen beside the door, on the path, never on the roof. */
-const YARD = { chai: ['lib', 'l1'], matcha: ['green', 'g1'], mochi: ['cabin', 'a1'], ginger: ['shop', 'w1'], mallow: ['obs', 'o1'], toffee: ['f1', 'f2'], sesame: ['clock', 't4'] };
+const YARD = { chai: ['lib', 'l1'], matcha: ['green', 'g1'], mochi: ['cabin', 'a1'], ginger: ['shop', 'w1'], mallow: ['obs', 'o1'], toffee: ['f1', 'f2'], sesame: ['clock', 't4'], biscuit: ['cottage', 'c1'] };
 
 const PROPS = {
   can: '<svg viewBox="0 0 40 30"><path d="M8 11h17l-2 15H10z" fill="#7FA9A0" stroke="#3f3a30" stroke-width="1.6" stroke-linejoin="round"/><path d="M24 15l11-7 2 3-11 8" fill="#7FA9A0" stroke="#3f3a30" stroke-width="1.6" stroke-linejoin="round"/><path d="M10 11c0-6 13-6 13 0" fill="none" stroke="#3f3a30" stroke-width="1.8"/><circle cx="36" cy="9" r="2.4" fill="#5d8a80" stroke="#3f3a30" stroke-width="1.2"/></svg>',
@@ -225,7 +228,7 @@ export function createLife(root, { pets: petsState, atmo, reduced, view = null, 
     if (r < 0.55 && w !== 'missing') { const bff = PET_BY_ID.get(a.id).bff; if (byId.has(bff) && !reserved.has(HOMES[bff].node)) { walkTo(a, HOMES[bff].node, 'visit', { x: (Math.random() < 0.5 ? -1 : 1) * 34, y: 4 }); return; } }
     if (r < 0.68) { const n = freeNode(SPOTS.plaza); if (n) { walkTo(a, n, 'idle'); return; } }
     if (r < 0.74) { const n = freeNode(SPOTS.bench); if (n) { walkTo(a, n, 'sit'); return; } }
-    if (r < 0.78 && (a.id === 'matcha' || a.id === 'mallow' || a.id === 'mochi' || a.id === 'sesame') && !reserved.has('dock')) { walkTo(a, 'dock', 'idle'); return; }
+    if (r < 0.78 && (a.id === 'matcha' || a.id === 'mallow' || a.id === 'mochi' || a.id === 'sesame' || a.id === 'biscuit') && !reserved.has('dock')) { walkTo(a, 'dock', 'idle'); return; }
     if (r < 0.84) { const n = freeNode(SPOTS.fire); if (n) { walkTo(a, n, 'sit'); return; } }
     if (r < 0.92 && startChat(a)) return;
     if (a.node !== a.home) { walkTo(a, a.home, 'idle'); return; }
@@ -374,6 +377,7 @@ export function createLife(root, { pets: petsState, atmo, reduced, view = null, 
         else if (c === 'hammer') { const p = (now % 640) / 640; tilt = p < 0.2 ? -p * 30 : p < 0.3 ? 6 : 0; sy *= p > 0.2 && p < 0.32 ? 0.95 : 1; }
         else if (c === 'dance') { tilt = Math.sin(now / 140) * 10; lift = Math.abs(Math.sin(now / 280)) * 7; }
         else if (c === 'sing' || c === 'sprinkle') tilt = Math.sin(now / 300) * 5;
+        else if (c === 'knead') { const k = Math.sin(now / 170); tilt = k * 3; sy *= 1 - Math.abs(k) * 0.025; }   // paw, paw: a rock and a squish
         else if (c === 'water' || c === 'rain') tilt = a.facing * 3;
       }
     }
@@ -383,6 +387,7 @@ export function createLife(root, { pets: petsState, atmo, reduced, view = null, 
     if (now < a.happyUntil) frame = FRAME.happy;
     else if (now < a.talkUntil && !reduced) frame = Math.floor(now / 140) % 2 ? FRAME.talk : FRAME.idle;
     else if (a.state === 'chore' && a.chore?.kind === 'sing') frame = Math.floor(now / 300) % 3 ? FRAME.happy : FRAME.talk;
+    else if (a.state === 'chore' && a.chore?.kind === 'knead') frame = FRAME.happy;   // eyes shut, content
     else if (frame === FRAME.idle && now < a.blinkUntil) frame = FRAME.blink;
     if (frame === FRAME.idle && now > a.blinkAt && !reduced) { a.blinkUntil = now + 130; a.blinkAt = now + rand(2600, 6200); }
     if (a.sayUntil && now > a.sayUntil) { a.sayUntil = 0; a.bubble.classList.add('is-out'); setTimeout(() => { if (!a.sayUntil) a.bubble.hidden = true; }, 260); }
@@ -497,7 +502,7 @@ export function createLife(root, { pets: petsState, atmo, reduced, view = null, 
         for (const c of houses ? houses.chimneys() : CHIMNEYS) add({ kind: 'smoke', x: c.x + rand(-2, 2), y: c.y, vx: rand(5, 11) * (weather === 'rain' ? 1.8 : 1), vy: rand(-22, -15), life: rand(4.5, 6.5), age: 0, r: rand(5, 7), w: rand(0, 6) });
       }
       steamAcc += dt;
-      if (steamAcc > 0.55 && (!houses || houses.stageOf('cottage') >= 1)) { steamAcc = 0; add({ kind: 'steam', x: TEAPOT.x + rand(-2, 2), y: TEAPOT.y, vx: rand(-2, 4), vy: rand(-11, -7), life: rand(1.8, 2.6), age: 0, r: rand(2, 3), w: rand(0, 6) }); }
+      if (steamAcc > 0.55 && (!houses || houses.stageOf('biscuit') >= 1)) { steamAcc = 0; add({ kind: 'steam', x: TEAPOT.x + rand(-2, 2), y: TEAPOT.y, vx: rand(-2, 4), vy: rand(-11, -7), life: rand(1.8, 2.6), age: 0, r: rand(2, 3), w: rand(0, 6) }); }
       const grownSix = grown(6), grownTwo = grown(2);
       ensure('firefly', fireflyCount(), (i) => { const q = R(`ff${i}${now | 0}`); const [ax, ay] = i % 3 === 2 && grownSix.length ? houseAt(grownSix[i % grownSix.length]) : FIREFLY_AT[i % FIREFLY_AT.length]; return { kind: 'firefly', ax: ax + (q() - 0.5) * 160, ay: ay + (q() - 0.5) * 90, x: ax, y: ay, t: q() * 100, sp: 0.3 + q() * 0.5 }; });
       ensure('butterfly', butterflyCount(), (i) => { const q = R(`bf${i}${now | 0}`); const [ax, ay] = i % 3 === 2 && grownTwo.length ? houseAt(grownTwo[i % grownTwo.length]) : BUTTERFLY_AT[i % BUTTERFLY_AT.length]; return { kind: 'butterfly', ax, ay, x: ax, y: ay, t: q() * 100, c: ['#FFF6E0', '#F7D774', '#A9C8F0', '#F4B6C2'][i % 4] }; });

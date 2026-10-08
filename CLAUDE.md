@@ -1,6 +1,6 @@
 # CAT OS
 
-Offline-first, no-build PWA for CAT VARC prep, presented as a painted village where six pet friends (one per subject) grow as the learner answers real CAT questions. Vanilla JS ES modules, IndexedDB, static JSON content. Current app version: `APP_VERSION` in `src/app.js`.
+Offline-first, no-build PWA for CAT VARC prep, presented as a painted village where eight pet friends (one per subject) grow as the learner answers real CAT questions. Vanilla JS ES modules, IndexedDB, static JSON content. Current app version: `APP_VERSION` in `src/app.js`.
 
 ## How to work here (read this first, then stop reading)
 

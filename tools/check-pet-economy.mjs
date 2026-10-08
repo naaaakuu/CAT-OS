@@ -18,7 +18,7 @@ import { join, dirname } from 'node:path';
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const load = (rel) => import(pathToFileURL(join(ROOT, rel)).href);
 
-const ORDER = ['toffee', 'chai', 'matcha', 'mochi', 'ginger', 'mallow', 'sesame'];
+const ORDER = ['toffee', 'chai', 'matcha', 'mochi', 'ginger', 'mallow', 'sesame', 'biscuit'];
 const DECOR_IDS = 'lanterns,bunting,flowers,fireflies,swing,chimes,kite,lilylights,skylanterns';
 const HOUR = 3600e3;
 const D = (day, h = 10) => new Date(2026, 8, day, h, 0, 0).getTime(); // local September 2026
@@ -38,7 +38,7 @@ function run(pet, at, { stars = 3, flawless = false } = {}) {
   if (pet === 'toffee') return { L: { id, kind: 'gauntlet-run', stars: flawless ? 3 : stars, flawless, score: { correct, total }, finished_at: iso(at) } };
   const score = { correct, total, accuracy: correct / total, attempted: total };
   if (pet === 'chai') return { S: { id, passage_id: 'rc-1', finished_at: iso(at), duration_ms: (fast ? 5 : 9) * 60000, score, answers: [] } };
-  const module = { mochi: 'ps', ginger: 'pj', mallow: 'ooo', sesame: 'pc' }[pet];
+  const module = { mochi: 'ps', ginger: 'pj', mallow: 'ooo', sesame: 'pc', biscuit: 'sp' }[pet];
   return { S: { id, module, item_ids: ['x1', 'x2'], finished_at: iso(at), duration_ms: (fast ? 100 : 400) * 1000, score, answers: [] } };
 }
 const recs = (...rs) => ({ sessions: rs.flat().filter((r) => r.S).map((r) => r.S), learning: rs.flat().filter((r) => r.L).map((r) => r.L) });
@@ -141,7 +141,7 @@ export async function checkPetEconomy() {
       ],
     };
     const got = E.visitsFrom(mods, content).map((x) => `${x.id}:${x.pet}:${x.stars}${x.flawless ? '+' : ''}`).join();
-    if (got !== 'm1:chai:2,m2:matcha:2,m3:ginger:3+,m4:sesame:2,m5:chai:1,m6:matcha:0,m7:matcha:2,m8:matcha:1,m9:toffee:2') bad(`3: every module's run is a visit to its friend: ${got}`);
+    if (got !== 'm1:chai:2,m2:matcha:2,m3:biscuit:3+,m4:sesame:2,m5:chai:1,m6:matcha:0,m7:matcha:2,m8:matcha:1,m9:toffee:2') bad(`3: every module's run is a visit to its friend: ${got}`);
   }
 
   /* 4. The day's first run is a visit to Toffee too */
@@ -186,11 +186,11 @@ export async function checkPetEconomy() {
     const t0 = D(5);
     const out = derive(recs(run('chai', t0)), t0 + HOUR);
     const m = pet(out, 'chai').mood;
-    const want = 0.5 * ((0.3 * 5 + 2 * m) / 7) + 0.5 * Math.min(0.3, m); // Toffee shares the day's first run
+    const n = ORDER.length, want = 0.5 * ((0.3 * (n - 2) + 2 * m) / n) + 0.5 * Math.min(0.3, m); // Toffee shares the day's first run
     if (!near(out.harmony, want, 1e-9)) bad(`6: harmony ${out.harmony}, want ${want}`);
     const all = derive(recs(ORDER.map((id) => run(id, t0))), t0 + HOUR);
     const moods = all.pets.map((p) => p.mood);
-    if (!near(all.harmony, 0.5 * (moods.reduce((a, b) => a + b, 0) / moods.length) + 0.5 * Math.min(...moods), 1e-9) || moods.length !== 7) bad('6: harmony with every pet met');
+    if (!near(all.harmony, 0.5 * (moods.reduce((a, b) => a + b, 0) / moods.length) + 0.5 * Math.min(...moods), 1e-9) || moods.length !== ORDER.length) bad('6: harmony with every pet met');
     if (out.neediest !== 'matcha') bad(`6: ties go to the gentlest door first, Chai then Matcha (neediest ${out.neediest})`);
   }
 
@@ -209,22 +209,24 @@ export async function checkPetEconomy() {
     if (new Set(Array.from({ length: 129 }, (_, d) => S(d, 128).stage)).size !== 11) bad('7: a real subject passes through all eleven stages, 0 to 10');
     if (S(-5, 10).stage !== 0 || S(NaN, 10).stage !== 0 || S(5, 0).stage !== 0 || S(50, 10).stage !== 10) bad('7: stageOf clamps what it is given');
     const ginger = (solved, spSolved = 0) => pet(derive(recs(), D(2), { loom: { solved, total: 76 }, banks: { sp: { solved: spSolved, total: 52 } } }), 'ginger');
-    const mid = ginger(30, 2), want = S(32, 128);
-    if (mid.stage !== want.stage || mid.done !== 32 || mid.total !== 128 || mid.unit !== 'questions' || mid.toNext !== want.toNext || mid.hearts !== Math.floor(want.stage / 2)) bad(`7: Ginger grows with jumbles and placements solved: ${json(mid)}`);
+    const mid = ginger(30, 2), want = S(30, 76);
+    if (mid.stage !== want.stage || mid.done !== 30 || mid.total !== 76 || mid.unit !== 'questions' || mid.toNext !== want.toNext || mid.hearts !== Math.floor(want.stage / 2)) bad(`7: Ginger grows with jumbles solved, and placements are Biscuit's: ${json(mid)}`);
     const one = ginger(1);
     if (one.stage !== 1 || one.hearts !== 0 || one.story !== null || one.request !== REQUESTS.ginger[0]) bad(`7: the first jumble solved is stage 1, before any chapter: ${json({ stage: one.stage, story: one.story })}`);
-    let d2 = 0; while (S(d2, 128).stage < 2) d2 += 1;
+    let d2 = 0; while (S(d2, 76).stage < 2) d2 += 1;
     const two = ginger(d2);
     if (two.stage !== 2 || two.hearts !== 1 || two.story !== STORIES.ginger[0] || two.request !== REQUESTS.ginger[1]) bad('7: stage 2 tells the first story and asks the second request');
-    const full = ginger(76, 52);
+    const full = ginger(76);
     if (full.stage !== 10 || full.hearts !== 5 || full.toNext !== 0 || full.story !== STORIES.ginger[4] || full.request !== BEST_FRIEND_ASK.ginger) bad('7: every question done is stage 10: the last story, and best friends');
-    const st = { reading: { qSolved: 4, qTotal: 500 }, banks: { cr: { solved: 0, total: 30 }, pc: { solved: 1, total: 40 }, sp: { solved: 0, total: 52 }, wb: { solved: 0, total: 100 } }, meadow: { known: 12, total: 3000 }, table: { solved: 1, total: 70 }, bench: { solved: 3, total: 60 }, loom: { solved: 5, total: 76 } };
+    const biscuit = pet(derive(recs(), D(2), { loom: { solved: 30, total: 76 }, banks: { sp: { solved: 2, total: 52 } } }), 'biscuit');
+    if (biscuit.stage !== S(2, 52).stage || biscuit.done !== 2 || biscuit.total !== 52 || biscuit.unit !== 'questions') bad(`7: Biscuit grows with placements solved, never jumbles: ${json(biscuit)}`);
+    const st = { reading: { qSolved: 4, qTotal: 500 }, banks: { cr: { solved: 0, total: 30 }, pc: { solved: 1, total: 40 }, sp: { solved: 3, total: 52 }, wb: { solved: 0, total: 100 } }, meadow: { known: 12, total: 3000 }, table: { solved: 1, total: 70 }, bench: { solved: 3, total: 60 }, loom: { solved: 5, total: 76 } };
     const all = derive(recs(), D(2), st);
-    const wants = { chai: S(4, 530).stage, matcha: S(12, 3100).stage, mochi: S(1, 70).stage, ginger: S(5, 128).stage, mallow: S(3, 60).stage, sesame: S(1, 40).stage, toffee: 0 };
+    const wants = { chai: S(4, 530).stage, matcha: S(12, 3100).stage, mochi: S(1, 70).stage, ginger: S(5, 76).stage, mallow: S(3, 60).stage, sesame: S(1, 40).stage, biscuit: S(3, 52).stage, toffee: 0 };
     for (const [id, s] of Object.entries(wants)) if (pet(all, id).stage !== s) bad(`7: ${id} reads its own subject: stage ${pet(all, id).stage}, want ${s}`);
-    /* Each house grows with the section it holds: Ginger's two houses each with their own half. */
+    /* Each house grows with the section it holds, which is its friend's. */
     const H = all.houses ?? {};
-    const wantH = { chai: wants.chai, ginger: S(5, 76).stage, mochi: wants.mochi, mallow: wants.mallow, cottage: 0, sesame: wants.sesame, matcha: wants.matcha, toffee: 0 };
+    const wantH = { chai: wants.chai, ginger: wants.ginger, mochi: wants.mochi, mallow: wants.mallow, biscuit: wants.biscuit, sesame: wants.sesame, matcha: wants.matcha, toffee: 0 };
     if (json(Object.keys(H).sort()) !== json(Object.keys(wantH).sort()) || Object.entries(wantH).some(([k, s]) => H[k] !== s)) bad(`7: houses grow with their own subject: ${json(H)}, want ${json(wantH)}`);
     if (all.sources.milestones !== all.pets.reduce((n, p) => n + p.stage, 0) * G.GLOW.STAGE || all.sources.milestones <= 0) bad(`7: each stage grown is ${G.GLOW.STAGE} Glow: ${json(all.sources)}`);
   }

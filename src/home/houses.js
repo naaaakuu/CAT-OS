@@ -91,7 +91,7 @@ export const HOUSE_ART = {
     perch: [[1212, 300], [1262, 295], [1302, 292]], aura: [1272, 395, 180], crown: [1266, 278], motes: [1272, 400, 150, 70],
     wonders: ['arrows', 'vane'],
   },
-  cottage: {
+  biscuit: {
     mask: [300, 652, 205, 125], windows: [15, 16, 17, 18], lamps: [15], chimney: { x: 214, y: 562 },
     flowers: [[455, 768, 'cream', 1, 2], [150, 602, 'sun', 1, 2], [535, 742, 'lilac', 1, 3], [100, 650, 'cream', 1, 3], [520, 612, 'coral', 1.1, 8], [395, 772, 'sky', 1.05, 8]],
     keep: ['roses', 352, 744], garland: { kind: 'lights', a: [398, 656], b: [520, 702], sag: 10, n: 11 },

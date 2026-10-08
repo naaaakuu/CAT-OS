@@ -242,6 +242,7 @@ const VOICE = {
   ginger: { base: 560, type: 'triangle', step: 0.05, lp: 3000, peak: 0.06 },
   mallow: { base: 520, type: 'sine', step: 0.07, lp: 2400, peak: 0.065, glide: 1.12 },
   sesame: { base: 980, type: 'triangle', step: 0.045, lp: 4200, peak: 0.05, glide: 1.18 },
+  biscuit: { base: 470, type: 'triangle', step: 0.07, lp: 2100, peak: 0.06, glide: 0.92 },
 };
 const VOICE_STEPS = [0, 2, 4, 7, 9, 12];
 let voiceUntil = 0;
@@ -279,6 +280,8 @@ const CALLS = {
   mallow: (t, v) => { [0, 7].forEach((s, i) => pluck(t + i * 0.22, 523.25 * 2 ** (s / 12), 0.07 * v, (i - 0.5) * 0.3)); },
   // Two quick squeaks, the second higher: a mouse saying hello.
   sesame: (t, v, lp) => { tone(t, { freq: 1500, type: 'sine', peak: 0.075 * v, a: 0.004, hold: 0.03, d: 0.07, glide: 1.35, dest: lp }); tone(t + 0.13, { freq: 1750, type: 'sine', peak: 0.07 * v, a: 0.004, hold: 0.04, d: 0.09, glide: 1.4, dest: lp }); },
+  // A rising trill, then a soft falling "ow": a cat saying mrrp.
+  biscuit: (t, v, lp) => { tone(t, { freq: 430, type: 'triangle', peak: 0.08 * v, a: 0.012, hold: 0.05, d: 0.1, glide: 1.45, dest: lp }); tone(t + 0.16, { freq: 640, type: 'sine', peak: 0.07 * v, a: 0.014, hold: 0.06, d: 0.2, glide: 0.72, dest: lp }); },
 };
 
 /** A friend's tap sound (SIGNATURE). Mochi says its name in the browser's deep voice; everyone else makes a tone. */

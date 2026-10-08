@@ -4,6 +4,13 @@
 > Versions here are app releases; they map onto the capability milestones in
 > `PROJECT_ROADMAP.md` (0.x releases build toward Roadmap V1.0).
 
+## 3.9.0: Biscuit, the calico of the rose cottage (2026-10-09)
+
+- An eighth friend: **Biscuit**, a calico cat who keeps Sentence Placement in the rose cottage (it was Ginger's second house). "If it fits, I sits": a sentence only sits in the gap it fits, and a cat's whiskers measure a gap before he squeezes in, as a learner checks the sentence before and after. He adores Sesame next door: she has the gap and finds the sentence, he has the sentence and finds the gap. Ginger keeps Para Jumbles only.
+- Painted in the strip's hand by `tools/paint-biscuit.mjs` (warm white coat, marmalade and charcoal patches with a white blaze, cat ears with pink bowls and cream tufts, a banded fluffy tail, whiskers, a tufted rose velvet cushion with gold tassels: the seat), baked into five faces and a big-eyed kitten sheet. Sesame's painter now shares its brush, light and grain through `tools/paint-kit.mjs`; Sesame repaints byte for byte as committed.
+- His own: ten stages (Kitten, Box Sitter, Seat Tester, Whisker Measurer, Snug Fit, Seat Finder, Perfect Fit, Head of the Table, Grand Usher, Keeper of Every Seat), a straw boater with a rosebud, a floating cushion charm, a soft prowl, "making biscuits" (kneading his cushion with his eyes shut, purr notes rising), tea on the patio, trips to the dock, a "mrrp" trill, and about a hundred lines, many a true placement tip.
+- Every house now grows with its own friend (`houseStages` lost Ginger's two-house case); the cottage tap opens Biscuit's card like any house; the progress page, collections (placement sets still pointed at the loom), the place screen and the gates follow.
+
 ## 3.8.2: Begin works again in word rounds (2026-10-09)
 
 - Matcha's word rounds (the Meadow, the Mirror Pond, the Thicket) could not be started by touch or mouse: the brief's Begin took focus but computed `pointer-events: none`, because a Rootwood-only `.is-veiled` rule in `components.css` also matched the brief (`world.css` restored its opacity on arrival, never its pointer events). Broken since 1.1.1; gates clicked with `.click()`, which skips hit testing. The arrived brief now takes taps (also fixes the RC second look, same brief). `check-reach` now fails any control that takes focus but ignores a tap, and walks a word round.

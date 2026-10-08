@@ -20,7 +20,7 @@ map says which (nothing else lives there: no DILR, no quant):
 | the workshop (**Para Jumbles**) | **Ginger**, a fox | four sentences into the author's order |
 | the archery cabin (**Para Summary**) | **Mochi**, a pebble | the summary that keeps the point |
 | the observatory (**Odd One Out**) | **Mallow**, a cloud | the sentence that does not belong |
-| the rose cottage (**Sentence Placement**) | **Ginger** | the one place a sentence fits |
+| the rose cottage (**Sentence Placement**) | **Biscuit**, a calico cat | the one place a sentence fits |
 | the clock tower (**Para Completion**) | **Sesame**, a mouse | the sentence the gap in a paragraph needs |
 | the greenhouse (**Vocabulary**) | **Matcha**, a sprout | word rounds, roots, word parts, words in context |
 | the notice board (**The Gauntlet**) | **Toffee**, a flame | the weekly timed mix; Toffee also keeps the daily fire |
@@ -52,8 +52,9 @@ The game is simple; the learning is not.
 The village is losing its words. Each friend has a trouble only learning can
 fix: Chai's pages are going blank, Matcha's word garden is wilting, Mochi's
 notebook lost its notes, Ginger's gears are stuck, Mallow's stars went dim,
-Sesame's clock tower stopped ticking, and Toffee keeps the fire that holds it
-all together. Every round you finish
+Sesame's clock tower stopped ticking, the chairs of Biscuit's rose cottage
+have wandered off, and Toffee keeps the fire that holds it all together.
+Every round you finish
 with a friend helps them:
 
 - **Glow.** The village's one resource, paid for learning done: 1 for each
@@ -70,8 +71,8 @@ with a friend helps them:
   their own hat, a ring of light, a floating charm, gold trim, a sparkle
   trail, a second charm, a golden aura, a crown of stars) and has a name.
   Every second stage is a chapter of their story.
-- **Houses that grow.** Every house grows with its own section (the workshop
-  with jumbles, the rose cottage with placements, and so on), ten steps from
+- **Houses that grow.** Every house grows with its own section, and so with
+  its friend (the workshop with jumbles, the rose cottage with placements), ten steps from
   faded and dark-windowed to rich, golden and crowned: smoke and a lit lamp,
   lit windows and flowers, a keepsake by the door, a garland, two wonders of
   its own (floating pages and words rising from the library's book, a

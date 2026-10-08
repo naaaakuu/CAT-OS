@@ -420,8 +420,6 @@ export async function renderVillageHome(outlet, ctx) {
     const spot = e.target.closest('[data-spot]');
     if (spot) {
       const s = spot.dataset.spot;
-      // The rose cottage is Ginger's second house: straight to its subject.
-      if (!PET_BY_ID.has(s)) { unlock(); play('open'); location.hash = `#/world/place/${HOUSES.find((h) => h.spot === s).place}`; return; }
       if (s === 'toffee') { life.poke(s); reveal(NODES.f1); openCard('fire', null, spot); return; }
       life.poke(s); reveal(life.positionOf(s)); openCard('pet', s, spot);
       return;
@@ -546,7 +544,7 @@ export async function renderVillageHome(outlet, ctx) {
         later(() => checkParties(true), reduced ? 1200 : 7600);
       }, reduced ? 50 : 450);
     } else if (focusSlug && petForPlace(focusSlug)) {
-      // Back from a place: face its own house (the rose cottage is not its friend's home).
+      // Back from a place: face its own house.
       const spot = HOUSES.find((h) => h.place === focusSlug)?.spot ?? petForPlace(focusSlug);
       const home = NODES[(HOMES[spot] ?? PLACES[spot]).node];
       panTo(home.x, home.y, { ms: 0 });
@@ -565,7 +563,7 @@ export async function renderVillageHome(outlet, ctx) {
     store.set('catos:met-gang', '1');
     if (firstVisit) saveValley(storage, { awakened_at: new Date().toISOString(), met_at: new Date().toISOString() }).then((v) => { valley = v; }, () => { /* the hello will repeat once */ });
     const meetEl = root.querySelector('.cw-meet');
-    const ORDER = ['toffee', 'chai', 'ginger', 'mochi', 'sesame', 'mallow', 'matcha'];
+    const ORDER = ['toffee', 'chai', 'ginger', 'mochi', 'sesame', 'mallow', 'matcha', 'biscuit'];
     let skipped = false;
     const keeps = (id) => (id === 'toffee' ? ['The daily fire', 'The Gauntlet'] : HOUSES.filter((h) => h.pet === id).map((h) => h.subject));
     const meetCard = (id) => {

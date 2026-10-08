@@ -1,7 +1,7 @@
 /**
  * check-village.mjs — the pet village, in a real browser.
  *
- * What a learner would notice if it broke: the seven friends are there and
+ * What a learner would notice if it broke: the eight friends are there and
  * walking; the big button starts a real activity; each friend's card names
  * it and starts its real next activity; the friends, today, level, fire and
  * cottage cards open as proper dialogs and give focus back; the village
@@ -51,7 +51,7 @@ try {
   ok(await ev(SEED) === 'seeded', 'could not seed the learner');
   await ev(`localStorage.setItem('catos:hour', 'afternoon'); localStorage.setItem('catos:met-gang', '1')`);
   await browser.open(`${server.url}#/world`, 1500);
-  ok(await waitFor(`document.querySelectorAll('.cw .pet').length === 7 && !!document.querySelector('.cw-art')?.naturalWidth`), 'the village did not draw seven pets on the painting');
+  ok(await waitFor(`document.querySelectorAll('.cw .pet').length === 8 && !!document.querySelector('.cw-art')?.naturalWidth`), 'the village did not draw eight pets on the painting');
   ok(await ev(`!!document.querySelector('.cw h1')`), 'the village needs a heading');
   ok(await ev(`['.cw-chip--fire', '.cw-chip--level', '[data-open="friends"]', '[data-open="cottage"]', '.cw-today', '.cw-play'].every((s) => document.querySelector(s))`), 'the top bar or the big button is missing');
   ok(await ev(`!document.querySelector('[data-open="satchel"], .cw-location, .cw-welcome, .vhud, .cw-envelope')`), 'old home chrome is back on the map');
@@ -130,7 +130,7 @@ try {
   ok(await waitFor(`document.querySelectorAll('.cw-treasure--lanterns').length === 4`), 'the plaza lanterns are not drawn for a level-2 village');
   // Each house grows with its own section (src/home/houses.js): Chai's library (sixteen right answers, stage 2) has its lamps and windows lit; new Ginger's workshop is still dark.
   ok(await ev(`(() => { const g = JSON.parse(document.querySelector('.cw').__village.grown() || '{}'); const on = (h, k) => [...document.querySelectorAll('.cw-glow--' + k + '[data-house="' + h + '"]')].filter((e) => !e.classList.contains('is-off')).length; return g.chai >= 2 && g.ginger === 0 && on('chai', 'win') >= 4 && on('chai', 'lamp') >= 2 && on('ginger', 'win') === 0 && on('ginger', 'lamp') === 0; })()`), "the houses do not show how far each section has come");
-  ok(await ev(`document.querySelectorAll('.pet .rig__foot').length === 14`), 'the friends should walk on two feet each');
+  ok(await ev(`document.querySelectorAll('.pet .rig__foot').length === 16`), 'the friends should walk on two feet each');
 
   // Each friend grows with their subject and wears it: this learner's Chai has questions right, so is past stage 1.
   ok(await ev(`[...document.querySelectorAll('.pet')].every((e) => /^\\d+$/.test(e.dataset.stage ?? ''))`), 'every friend should carry its growth stage');
@@ -142,10 +142,10 @@ try {
   await sleep(900);
   await ev(`location.hash = '#/world'`);
   const pc = JSON.parse(await ev(`import('/src/pets/paths.js').then((m) => JSON.stringify(m.NODES.pc))`));
-  ok(await waitFor(`(() => { const v = document.querySelector('.cw')?.__village; return !!v && ['toffee', 'chai', 'matcha', 'mochi', 'ginger', 'mallow', 'sesame'].filter((id) => { const p = v.positionOf(id); return Math.hypot(p.x - ${pc.x}, p.y + 40 - ${pc.y}) < 210; }).length >= 5; })()`, 15000), 'the friends did not gather in the plaza after a finished set');
+  ok(await waitFor(`(() => { const v = document.querySelector('.cw')?.__village; return !!v && ['toffee', 'chai', 'matcha', 'mochi', 'ginger', 'mallow', 'sesame', 'biscuit'].filter((id) => { const p = v.positionOf(id); return Math.hypot(p.x - ${pc.x}, p.y + 40 - ${pc.y}) < 210; }).length >= 5; })()`, 15000), 'the friends did not gather in the plaza after a finished set');
   ok(await waitFor(`document.querySelectorAll('.pet[data-state="cheer"]').length >= 4`, 8000), 'the friends in the plaza are not cheering');
 
-  // The clock tower is Sesame's home (Para Completion); the rose cottage is Ginger's Sentence Placement.
+  // The clock tower is Sesame's home (Para Completion); the rose cottage is Biscuit's (Sentence Placement).
   await ev(`document.querySelector('[data-spot="sesame"]').click()`);
   ok(await waitFor(`/Sesame/.test(document.querySelector('.cw-card--pet .cw-card__name')?.textContent ?? '') && /^#\\/(bank\\/session\\/pc|world\\/place\\/completion)/.test(document.querySelector('.cw-card--pet .cw-go')?.getAttribute('href') ?? '')`), 'the clock tower did not open Sesame and Para Completion');
   await ev(`document.querySelector('.cw-card [data-close]').click()`);
@@ -153,9 +153,13 @@ try {
   await ev(`location.hash = '#/world/place/completion'`);
   ok(await waitFor(`/Para completion · with Sesame/i.test(document.querySelector('.place__eyebrow')?.textContent ?? '')`), 'Para Completion is not hosted by Sesame');
   await ev(`location.hash = '#/world'`);
-  ok(await waitFor(`!!document.querySelector('[data-spot="cottage"]')`), 'the village did not come back');
-  await ev(`document.querySelector('[data-spot="cottage"]').click()`);
-  ok(await waitFor(`location.hash === '#/world/place/placement' && /Sentence placement/i.test(document.querySelector('.place__eyebrow')?.textContent ?? '')`), 'the rose cottage did not open Sentence Placement');
+  ok(await waitFor(`!!document.querySelector('[data-spot="biscuit"]')`), 'the village did not come back');
+  await ev(`document.querySelector('[data-spot="biscuit"]').click()`);
+  ok(await waitFor(`/Biscuit/.test(document.querySelector('.cw-card--pet .cw-card__name')?.textContent ?? '') && /^#\\/(bank\\/session\\/sp|world\\/place\\/placement)/.test(document.querySelector('.cw-card--pet .cw-go')?.getAttribute('href') ?? '')`), 'the rose cottage did not open Biscuit and Sentence Placement');
+  await ev(`document.querySelector('.cw-card [data-close]').click()`);
+  await sleep(400);
+  await ev(`location.hash = '#/world/place/placement'`);
+  ok(await waitFor(`/Sentence placement · with Biscuit/i.test(document.querySelector('.place__eyebrow')?.textContent ?? '')`), 'Sentence Placement is not hosted by Biscuit');
 
   // Night: the pets go home to sleep.
   await ev(`localStorage.setItem('catos:hour', 'night')`);
@@ -202,7 +206,7 @@ try {
     ok(await waitFor(`Promise.all(['./assets/art/home-world-v1.png', './assets/art/pet-chai.png'].map((u) => caches.match(u))).then((r) => r.every(Boolean))`, 30000), 'the painting and the pets must be cached for offline use');
     await browser.send('Network.emulateNetworkConditions', { offline: true, latency: 0, downloadThroughput: 0, uploadThroughput: 0 });
     await browser.send('Page.reload', { ignoreCache: false });
-    ok(await waitFor(`document.querySelectorAll('.cw .pet').length === 7 && !!document.querySelector('.cw-art')?.naturalWidth`, 20000), 'the village did not reopen offline');
+    ok(await waitFor(`document.querySelectorAll('.cw .pet').length === 8 && !!document.querySelector('.cw-art')?.naturalWidth`, 20000), 'the village did not reopen offline');
   }
   console.log(`check-village: ${checks} checks passed`);
 } catch (err) {

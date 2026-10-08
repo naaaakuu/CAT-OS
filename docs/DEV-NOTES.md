@@ -3,7 +3,7 @@
 ## Economy and growth
 - Glow (`pets/glow.js`): 1 per question answered, +1 right, +2 whole set, 6 per growth stage, 10 for today's three, fire = min(5, run of days) on a day that earned. Time never pays; answers under 1000 ms and skips pay 0; each question pays once per local day. Levels: 0,15,36,63,99,144,198,264,342,435 then +108.
 - 0-3 stars survive only as run feedback and mood weight (0.4+0.2*stars). New rewards/achievements/decor read `derivePets().glow/.sources`, never stars.
-- Stages: `stageOf(done,total)`; stage 1 = first right answer, 10 = every question of the subject. Ages (`pets.js AGES/ageOf`): Baby 0-2, Growing up 3-6, Grown up 7-10. New growth visuals key off `ageOf(stage)`, never a new counter. A new village is six babies; Settings has Start over (asked twice; clears stores + local/sessionStorage).
+- Stages: `stageOf(done,total)`; stage 1 = first right answer, 10 = every question of the subject. Ages (`pets.js AGES/ageOf`): Baby 0-2, Growing up 3-6, Grown up 7-10. New growth visuals key off `ageOf(stage)`, never a new counter. A new village is all babies; Settings has Start over (asked twice; clears stores + local/sessionStorage).
 - Items inside a level are dealt per learner (`core/learning/order.js byLearner`, seed `catos:order-seed`; Node uses a fixed seed). Never hard-code a fixed first item.
 - Growth cards/parties show only after a run (`checkParties(true)`); any other arrival stores `catos:stages` silently, else a restored backup pops a focus-trapping modal.
 - Houses order in `HOUSES` is deliberate (as CAT weights sections); do not reorder it to match a request's list.
@@ -43,6 +43,7 @@
 ## Browser verification (no npm, no Playwright)
 - `tools/cdp-lite.mjs`: `findChrome`, `serveRepo` (async), `launchChrome`, `open`, `shot`, `send`, `close`. Bypasses the service worker and reloads with ignoreCache on purpose, so offline tests need that turned off for that leg. `open()` = navigate + reload and eats one-shot UI; arrive by `location.hash` for return-toast checks.
 - Git Bash mangles `#/route` argv: prefix with `MSYS_NO_PATHCONV=1` or hardcode the hash. Never put JS template literals in bash heredocs or `node -e`; write scripts with Write.
+- "A tap does nothing": reproduce with a real CDP mouse event (`Input.dispatchMouseEvent` pressed + released) and `document.elementFromPoint` at the control's centre. `el.click()` skips hit testing, so a control under `pointer-events: none` or under another layer still "works" in a gate (3.8.2's word-round Begin hid behind it for a month).
 - Wait for the screen, not a clock: `window.__catosBooted && #view.children.length && !.route-waiting`. `Runtime.consoleAPICalled` is an event; capture console by patching `console.error` in page.
 - `SEED` (exported by `check-rendered-contrast.mjs`) is the one "learner a week in" fixture. Seed via `import('/src/core/storage/indexeddb-adapter.js')` in page context; settings `{id:'valley'}` skip the intro.
 - Chrome is at `C:/Program Files/Google/Chrome/Application/chrome.exe`; never `taskkill /IM chrome.exe` (kills the owner's Chrome); a stale server may own `:8765`; Python is not installed.

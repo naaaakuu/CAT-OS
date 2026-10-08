@@ -117,7 +117,7 @@ function wordsNext(world) {
 }
 
 /**
- * @param {string} petId   toffee | chai | matcha | mochi | ginger | mallow | sesame
+ * @param {string} petId   toffee | chai | matcha | mochi | ginger | mallow | sesame | biscuit
  * @param {object} world   { content, records, state } from loadWorld
  * @param {object} [opts]  { first: boolean }  the very first passage should be short
  * @returns {{ href, label, sub, minutes, kind, why } | null}
@@ -128,7 +128,8 @@ export function nextFor(petId, world, opts = {}) {
     if (petId === 'matcha') return wordsNext(world);
     if (petId === 'mochi') return verbalNext(world, 'ps', 'table', 'summaries', null, 'The summary table');
     if (petId === 'sesame') return (world?.content?.pc ?? []).length ? bankActivity('pc', world.state) : { href: '#/world/place/completion', label: 'The clock tower', sub: 'Every completion in one place', minutes: 5, kind: 'new' };
-    if (petId === 'ginger') return verbalNext(world, 'pj', 'loom', 'jumbles', 'sp', 'The workshop');
+    if (petId === 'biscuit') return (world?.content?.sp ?? []).length ? bankActivity('sp', world.state) : { href: '#/world/place/placement', label: 'The rose cottage', sub: 'Every placement in one place', minutes: 5, kind: 'new' };
+    if (petId === 'ginger') return verbalNext(world, 'pj', 'loom', 'jumbles', null, 'The workshop');
     if (petId === 'mallow') return verbalNext(world, 'ooo', 'bench', 'sets', null, 'The observatory');
     if (petId === 'toffee') return { href: '#/world/place/wilds', label: 'Run the Gauntlet', sub: 'Everything at once, fast · about 8 min', minutes: 8, kind: 'new' };
   } catch { /* the pet's place screen is always a fallback */ }
@@ -167,7 +168,7 @@ export function noticeFor(petId, world, next) {
       if (!(state?.meadow?.met)) return 'Twelve words, picked just for you. Some come inside real CAT sentences.';
       return `You know ${state.meadow.known + (state.pond?.known ?? 0) + (state.thicket?.known ?? 0)} words now. Let us grow a few more.`;
     }
-    const mods = { mochi: ['ps'], ginger: ['pj', 'sp'], mallow: ['ooo'], sesame: ['pc'] }[petId] ?? [];
+    const mods = { mochi: ['ps'], ginger: ['pj'], mallow: ['ooo'], sesame: ['pc'], biscuit: ['sp'] }[petId] ?? [];
     const mine = sessions.filter((s) => mods.includes(s?.module) && s.score?.total).sort((a, b) => String(b.finished_at).localeCompare(String(a.finished_at)));
     const lastRun = mine[0];
     if (!lastRun) return `We start gentle: ${next?.label ?? 'the first set'}, ${mins}.`;
@@ -203,7 +204,8 @@ export function cornersOf(petId, world) {
   }
   if (petId === 'mochi') return [c('#/world/place/table', 'Para Summary: the archery cabin', 'Every summary, tier by tier')];
   if (petId === 'sesame') return [c('#/world/place/completion', 'Para Completion: the clock tower', has('pc') ? BANK.pc[2] : 'Every completion, tier by tier')];
-  if (petId === 'ginger') return [c('#/world/place/loom', 'Para Jumbles: the workshop', 'Every jumble, tier by tier'), ...(has('sp') ? [c('#/world/place/placement', 'Sentence Placement: the rose cottage', BANK.sp[2])] : [])];
+  if (petId === 'biscuit') return [c('#/world/place/placement', 'Sentence Placement: the rose cottage', has('sp') ? BANK.sp[2] : 'Every placement, tier by tier')];
+  if (petId === 'ginger') return [c('#/world/place/loom', 'Para Jumbles: the workshop', 'Every jumble, tier by tier')];
   if (petId === 'mallow') return [c('#/world/place/bench', 'The observatory', 'Every odd-one-out set, tier by tier')];
   if (petId === 'toffee') return [c('#/world/place/wilds', 'The Gauntlet', 'Everything at once, against the clock'), c('#/world/place/hearth', 'Records', 'Your days, your Glow, your treasures')];
   return [];

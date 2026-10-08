@@ -65,7 +65,7 @@ export async function renderPlace(outlet, { storage }, params) {
 
   outlet.innerHTML = `
     <section class="place place--page" aria-label="${escapeHTML(region.name)}">
-      <div class="place__hero place__hero--short place__hero--painted" style="${backdropStyle(SECOND_HOUSE[region.slug] ?? host)}">
+      <div class="place__hero place__hero--short place__hero--painted" style="${backdropStyle(host)}">
         <a class="place__back" href="#/world" id="back">← Village</a>
         <div class="place__hero-stat" id="hero-stat"></div>
         <span class="place__pet place__pet--door place__pet--${host}" aria-hidden="true">${petFigure(host, { size: 104, frame: FRAME.happy, stage: hostState?.stage ?? 0 })}</span>
@@ -306,8 +306,7 @@ export async function renderPlace(outlet, { storage }, params) {
       <div class="tiles">
         ${tiers.map((t) => { const inTier = items.filter((it) => it.tier === t.id); const s = inTier.filter((it) => solved.has(it.id)).length; const done = inTier.length > 0 && s === inTier.length; return `<a class="tile ${rec && rec.item.tier === t.id ? 'tile--next' : ''} ${done ? 'tile--done' : ''}" href="#/${prefix}/session/${t.id}"><p class="tile__name">${escapeHTML(t.label)}</p><p class="tile__meta">${s} of ${inTier.length} ${unit}</p><div class="tile__bar ${done ? 'tile__bar--gold' : ''}"><i style="width:${inTier.length ? Math.round((s / inTier.length) * 100) : 0}%"></i></div></a>`; }).join('')}
       </div>
-      <p class="sub" style="margin-top:14px"><a href="#/${prefix}/about">How this craft works</a> · <a href="#/${prefix}">The full journey</a></p>`)
-      + (kind === 'loom' ? section(`${hostDef.name}'s other house`, '', '<a class="g-btn" href="#/world/place/placement">Sentence Placement, in the rose cottage →</a>') : '');
+      <p class="sub" style="margin-top:14px"><a href="#/${prefix}/about">How this craft works</a> · <a href="#/${prefix}">The full journey</a></p>`);
     return;
   }
 
@@ -337,9 +336,6 @@ export async function renderPlace(outlet, { storage }, params) {
     return;
   }
 }
-
-/** The subject that lives in a friend's second house paints that house, not the friend's first one. */
-const SECOND_HOUSE = { placement: 'cottage' };
 
 /* ---- The content engine's banks, as shelves inside the places ---- */
 

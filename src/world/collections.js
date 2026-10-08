@@ -144,7 +144,7 @@ export function collections(s, content) {
     const banks = s.banks ?? {};
     const solvedIn = (mod, ids) => ids.filter((id) => banks[mod]?.solvedIds?.has(id)).length;
     for (const [mod, name, mark, route] of [
-      ['sp', 'Sentence placement', 'workshop', '#/world/place/loom'],
+      ['sp', 'Sentence placement', 'cottage', '#/world/place/placement'],
       ['pc', 'Paragraph completion', 'workshop', '#/world/place/completion'],
     ]) {
       const rows = content?.[mod] ?? [];
@@ -156,7 +156,7 @@ export function collections(s, content) {
           id: `bank:${mod}:${tier}`, group: 'verbal', mark,
           name: `${name} · ${tier.replace('-', ' ')}`, what: 'solved',
           have: solvedIn(mod, ids), total: ids.length, unit: 'items',
-          route, line: mod === 'sp' ? 'The Loom' : 'The Clock Tower',
+          route, line: mod === 'sp' ? 'The Rose Cottage' : 'The Clock Tower',
           hard: Math.max(0, ORDER.indexOf(tier)) / 7,
         }));
       }

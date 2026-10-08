@@ -55,12 +55,12 @@ export function shellFiles() {
   }
   // Every picture the app shows. The companion strip is only the pets' bake
   // input (tools/bake-pets.mjs): 1.5 MB no screen ever draws.
-  for (const name of fs.readdirSync(path.join(ROOT, 'assets/art')).sort()) if (name.endsWith('.png') && !BAKE_ONLY.has(name)) out.add(`./assets/art/${name}`);
+  for (const name of fs.readdirSync(path.join(ROOT, 'assets/art')).sort()) if (name.endsWith('.png') && !BAKE_ONLY.test(name)) out.add(`./assets/art/${name}`);
   return [...out].sort();
 }
 
-/* Sources the bake tools read; the app only ever loads what they bake. */
-const BAKE_ONLY = new Set(['home-companions-v1.png', 'home-companion-sesame.png']);
+/* Sources the bake tools read (the strip, and each painted friend's tools/paint-<id>.mjs output); the app only ever loads what they bake. */
+const BAKE_ONLY = /^home-companions?-[a-z0-9]+\.png$/;
 
 /** Every stylesheet index.html links: each one blocks the first paint, so each one is core. */
 export function linkedStylesheets() {

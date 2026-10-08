@@ -68,7 +68,7 @@ const CONTENT_VERSION = 16;
    ALWAYS lands in a new cache, whether or not anybody remembered to bump the
    number above. Nothing used to enforce that bump, and an installed learner
    could sit on old code forever with no symptom anybody could see. */
-const BUILD_ID = 'a0ff0c818c';
+const BUILD_ID = 'a92e3040ba';
 const CONTENT_ID = 'fa1ec949c0';
 const SHELL_CACHE = `cat-os-shell-v${CACHE_VERSION}.${BUILD_ID}`;
 const CONTENT_CACHE = `cat-os-content-v${CONTENT_VERSION}.${CONTENT_ID}`;
@@ -105,6 +105,7 @@ const CORE_FILES = [
   './src/ui/styles/home.css',
   './src/ui/styles/rewards.css',
   './assets/art/home-world-v1.png',
+  './assets/art/pet-biscuit.png',
   './assets/art/pet-chai.png',
   './assets/art/pet-ginger.png',
   './assets/art/pet-mallow.png',
@@ -183,6 +184,8 @@ const SHELL_FILES = [
   './assets/art/grass.png',
   './assets/art/home-motion-v1.png',
   './assets/art/home-world-v1.png',
+  './assets/art/pet-biscuit-baby.png',
+  './assets/art/pet-biscuit.png',
   './assets/art/pet-chai-baby.png',
   './assets/art/pet-chai.png',
   './assets/art/pet-ginger-baby.png',

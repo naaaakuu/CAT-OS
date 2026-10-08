@@ -4,7 +4,7 @@
  *   node tools/bake-pets.mjs [--baby] [--only <id>[,<id>]] [--preview <dir>]
  *
  * Reads assets/art/home-companions-v1.png (or a pet's own painting, the 4th
- * field of PETS: Sesame's is tools/paint-sesame.mjs) in headless Chrome, finds each
+ * field of PETS: tools/paint-sesame.mjs, tools/paint-biscuit.mjs) in headless Chrome, finds each
  * pet's eyes and smile (or Chai's beak), paints the blink / happy / talk /
  * sleep faces over the painted ones, scales every frame to 384 px tall and
  * writes assets/art/pet-<id>.png (frames: idle, blink, happy, talk, sleep;
@@ -24,6 +24,7 @@ const PETS = [
   ['toffee', 0, 350], ['chai', 355, 330], ['matcha', 700, 338],
   ['mochi', 1040, 335], ['ginger', 1380, 397], ['mallow', 1780, 392],
   ['sesame', 0, 416, '/assets/art/home-companion-sesame.png'],
+  ['biscuit', 0, 416, '/assets/art/home-companion-biscuit.png'],
 ];
 const H = 384, GUTTER = 4, FRAMES = 5;
 /* The baby sheets are smaller: a baby is never drawn much bigger than three

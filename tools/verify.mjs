@@ -1923,7 +1923,7 @@ console.log('\n16. The world (regions · economy · lexicon rounds · state · a
     const content = { families: [], rc: [{ id: 'rc-0001', estimated_time_min: 6 }], pj: [], ps: [], ooo: [], wd: [], sp: [], pc: [], wb: [], cr: [], fields: { meadow: [{ id: 'lex-high-a', total: 100 }], pond: [], thicket: [] } };
     const empty = state.deriveWorldState(content, { sessions: [], learning: [] }, Date.parse('2026-09-11T10:00:00Z'));
     if (!empty.isNew || empty.stars !== 0) bad('world state: an empty world is new, with no stars');
-    if (empty.pets?.pets?.length !== 7 || !empty.pets.pets.every((x) => x.isNew)) bad('world state: a new learner meets seven pets, none of them met yet');
+    if (empty.pets?.pets?.length !== 8 || !empty.pets.pets.every((x) => x.isNew)) bad('world state: a new learner meets eight pets, none of them met yet');
     if (empty.pets.today?.picks?.length !== 3 || empty.pets.nextDecor?.id !== 'lanterns' || empty.pets.glow !== 0) bad('world state: a new village has three friends to help today, no Glow yet, and the lanterns to come first');
     const t0 = Date.parse('2026-09-11T09:00:00Z');
     const M = 60000;
@@ -1945,7 +1945,7 @@ console.log('\n16. The world (regions · economy · lexicon rounds · state · a
     if (s2.stars !== 5) bad(`world state: stars total across places (${s2.stars})`);
     const change = state.petChangeLine(before, s2);
     if (change?.pet !== 'chai' || change.earned !== 9 || change.why?.total !== 9 || change.repeat) bad(`world state: the change line names the pet, its Glow and what it was for (${JSON.stringify(change)})`);
-    if (problems.length === b0) ok('a new learner meets seven pets and three to help today; a passage and a round are visits that earn their own Glow; the change line names who, how many, and why');
+    if (problems.length === b0) ok('a new learner meets eight pets and three to help today; a passage and a round are visits that earn their own Glow; the change line names who, how many, and why');
   }
 
   /* ---- The pets' voice and economy, in full (their own tools) ---- */
@@ -2224,7 +2224,7 @@ console.log('\n20. Bank engine dry run (session · set picking · rest · stars 
   if (computeBankScore(session.answers).marks !== 3) bad('bank session: +3 / 0 marking');
   const st = verbalStars(session, session.target_sec);
   if (typeof st.stars !== 'number') bad('bank session: stars derive from the record');
-  if (petForModule('sp') !== 'ginger' || petForModule('pc') !== 'sesame' || petForModule('wb') !== 'matcha' || petForModule('cr') !== 'chai') bad('banks: placement belongs to Ginger, completion to Sesame, the word bank to Matcha, arguments to Chai');
+  if (petForModule('sp') !== 'biscuit' || petForModule('pc') !== 'sesame' || petForModule('wb') !== 'matcha' || petForModule('cr') !== 'chai') bad('banks: placement belongs to Biscuit, completion to Sesame, the word bank to Matcha, arguments to Chai');
   // Picking a set: unsolved first; a missed item rests; a solved one comes last.
   const pool = [mk(1), mk(2), mk(3), mk(4)];
   const later = new Date(Date.now() - 60_000).toISOString();

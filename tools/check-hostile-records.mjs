@@ -75,6 +75,7 @@ export async function checkHostileRecords() {
   const { totalXP } = await load('src/core/engagement/xp.js');
   const { skillLedger, trapLedger, patternLedger } = await load('src/core/learning/review.js');
   const { derivePets } = await load('src/pets/economy.js');
+  const { PETS } = await load('src/pets/pets.js');
 
   const records = hostileRecords();
   const retired = { sessions: [], learning: records.learning.filter((r) => String(r.kind).startsWith('village-')) };
@@ -108,7 +109,7 @@ export async function checkHostileRecords() {
   try {
     const s = deriveWorldState(empty, records, 1789000000000);
     const p = s.pets;
-    if (!p || p.pets?.length !== 7) problems.push('the pets did not derive');
+    if (!p || p.pets?.length !== PETS.length) problems.push('the pets did not derive');
     for (const pet of p?.pets ?? []) {
       if (!Number.isFinite(pet.mood) || pet.mood < 0 || pet.mood > 1) problems.push(`${pet.id}'s mood is ${pet.mood}`);
       if (!Number.isInteger(pet.hearts) || pet.hearts < 0 || pet.hearts > 5 || !Number.isFinite(pet.earned) || pet.earned < 0) problems.push(`${pet.id} has hearts ${pet.hearts}, earned ${pet.earned}`);

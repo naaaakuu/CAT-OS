@@ -56,7 +56,7 @@ export const PATCHES = [
 
   /* --- fire and smoke --- */
   { k: 'flame', x: 805, y: 834, w: 36, h: 62, cx: 823, cy: 893, t: 1.7 },
-  { k: 'flow', x: 212, y: 520, w: 46, h: 58, dx: 2, dy: -6, t: 2.8, house: 'cottage', from: 1 },
+  { k: 'flow', x: 212, y: 520, w: 46, h: 58, dx: 2, dy: -6, t: 2.8, house: 'biscuit', from: 1 },
 
   /* --- water: the falls at the left edge, the pond's outflow, the stream under the clock-tower bridge, the pond --- */
   { k: 'flow', poly: [[0, 506], [28, 504], [46, 528], [44, 551], [18, 549], [0, 541]], blur: 2.5, dx: 2, dy: 5, t: 1.4 },
@@ -80,7 +80,7 @@ export const PATCHES = [
   { k: 'sway', poly: [[394, 363], [444, 365], [444, 395], [394, 393]], blur: 2, cx: 419, cy: 366, a: 2.4, t: 3.2, dl: -0.6 },
   { k: 'flap', poly: [[892, 128], [905, 117], [970, 135], [980, 149], [963, 165], [930, 171], [903, 165], [889, 148]], blur: 2, cx: 900, cy: 120, t: 3.4, dl: 0 },
   { k: 'flap', poly: [[1073, 367], [1165, 355], [1191, 380], [1128, 399], [1074, 386]], blur: 2, cx: 1120, cy: 362, t: 3.9, dl: -1.3 },
-  { k: 'wobble', x: 430, y: 660, w: 58, h: 30, cx: 458, cy: 708, a: 1.4, t: 5.4, house: 'cottage', from: 1 },
+  { k: 'wobble', x: 430, y: 660, w: 58, h: 30, cx: 458, cy: 708, a: 1.4, t: 5.4, house: 'biscuit', from: 1 },
 
   /* --- trees: canopy ellipses, swaying about the trunk below them --- */
   ...[
