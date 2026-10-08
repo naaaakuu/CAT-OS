@@ -4,6 +4,12 @@
 > Versions here are app releases; they map onto the capability milestones in
 > `PROJECT_ROADMAP.md` (0.x releases build toward Roadmap V1.0).
 
+## 3.8.2: Begin works again in word rounds (2026-10-09)
+
+- Matcha's word rounds (the Meadow, the Mirror Pond, the Thicket) could not be started by touch or mouse: the brief's Begin took focus but computed `pointer-events: none`, because a Rootwood-only `.is-veiled` rule in `components.css` also matched the brief (`world.css` restored its opacity on arrival, never its pointer events). Broken since 1.1.1; gates clicked with `.click()`, which skips hit testing. The arrived brief now takes taps (also fixes the RC second look, same brief). `check-reach` now fails any control that takes focus but ignores a tap, and walks a word round.
+- A friend's speech bubble and "!" sit above every friend and the plaza bunting, so a friend can walk behind a lamp post's string while their words stay in front.
+- Sound comes back reliably: audio wakes on every tap, key and return to the page, and skips sounds while asleep instead of bursting them out late.
+
 ## Content: a second batch, twenty more items (2026-10-07)
 
 - `batch-rc-008`, rc-0157 to rc-0166: ten passages in the shelves still thin after the first batch (architecture, markets, scientific-method, intellectual-history, environment, urban-studies, ethics, medicine-health, arts-culture, law) and the forms the audit still lacked: a sustained description of how a cathedral stands, a second review, a second heated argument, a first-person aporia, a handover told as a scene. Question mix at the exam's weight: inference family 20 of 38, one detail per passage, no main-idea question, tone once. Blind-solved 38 of 38 by a reader with the text; a separate reader without the text scored 34 of 38, at the corpus's documented baseline for this structural leak (AUTHORING §2a), crediting general knowledge of the famous mechanisms; option lengths sit within a 9-character mean spread, so length is no longer a cue either way. Audit rows added (three A, seven B).

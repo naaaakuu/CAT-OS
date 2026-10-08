@@ -19,6 +19,10 @@
  *   THE FIRST STOP     is the skip link. #/rc was sixty stops deep.
  *   TARGETS            every control is 44x44 — the exception being a link
  *                      inside a line of prose, which cannot be.
+ *   TAPPABLE           what a key can reach, a finger can press. The word
+ *                      round's Begin took focus but computed pointer-events:
+ *                      none (a garden-only .is-veiled rule), so a tap went
+ *                      through it and the round could never start.
  *   NAMES              nothing is announced by its element id. Three
  *                      Settings groups were read out as "music-picker".
  *   LIVE REGIONS       nothing announces a paragraph. The result screen said
@@ -56,6 +60,7 @@ export const REACH_ROUTES = [
   { hash: '#/settings', name: 'settings' },
   { hash: '#/growth', name: 'growth' },
   { hash: '#/rc/second-look', name: 'the second look' },
+  { hash: '#/round/meadow', name: 'a word round' },
   { hash: '#/world/place/reading-room', name: 'the reading room' },
   { hash: '#/nowhere', name: 'a screen that is not there' },
 ];
@@ -77,6 +82,7 @@ const STOP = `(() => {
     w: Math.round(r.width), h: Math.round(r.height),
     shadow: cs.boxShadow, outline: cs.outlineStyle + ' ' + cs.outlineWidth,
     visible: r.width > 0 && r.height > 0 && cs.visibility !== 'hidden' && cs.display !== 'none',
+    untappable: cs.pointerEvents === 'none',
     inProse: !!el.closest('p, li, .row__hint, .list-item__reason') && cs.display.indexOf('inline') === 0,
     label,
     idNamed: !!label && !!el.id && label === el.id,
@@ -215,6 +221,8 @@ export async function checkReach({ theme = 'light', only = null, width = 390, he
         const w = small[0];
         problems.push(`${where}: ${small.length} control(s) under ${MIN_TARGET}x${MIN_TARGET}, e.g. <${w.tag} class="${w.cls}"> "${w.text}" at ${w.w}x${w.h}`);
       }
+      const dead = seen.filter((x) => x.visible && x.untappable);
+      if (dead.length) problems.push(`${where}: ${dead.length} control(s) take focus but ignore a tap (pointer-events: none), e.g. <${dead[0].tag} class="${dead[0].cls}"> "${dead[0].text}"`);
       const idn = seen.filter((x) => x.idNamed);
       if (idn.length) problems.push(`${where}: ${idn.length} control(s) announced by their element id, e.g. "${idn[0].label}"`);
 
