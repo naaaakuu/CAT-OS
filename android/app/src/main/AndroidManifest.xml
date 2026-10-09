@@ -15,6 +15,10 @@
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="${admobAppId}" />
+        <!-- One activity holds every screen: the page logs its own screen_view per route (app.js). -->
+        <meta-data
+            android:name="google_analytics_automatic_screen_reporting_enabled"
+            android:value="false" />
 
         <activity
             android:name=".MainActivity"

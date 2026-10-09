@@ -7,7 +7,12 @@
  *                     the pass survives a reload
  *   Pro             → nothing locked, plays offline, prices come from "Play"
  *   Settings        → Pro card, Share (reaches the share sheet), privacy link
- *   the web         → no bridge: nothing locked, no wall, no Pro card
+ *   Google account  → sign in saves this phone's village; leaving the app
+ *                     sends only what changed; a second phone chooses, and
+ *                     "bring back" restores the account's village; delete
+ *   EEA/UK          → "Privacy choices" only where the law asks for it
+ *   Analytics       → screen_view per route, login
+ *   the web         → no bridge: nothing locked, no wall, no Pro card, no account
  *
  * Run: node tools/check-app-shell.mjs  (exits 1 on any failure)
  */
@@ -17,8 +22,19 @@ import { SEED } from './check-rendered-contrast.mjs';
 
 const FAKE = `(() => {
   const st = () => { try { return JSON.parse(localStorage.getItem('fake') || '{}'); } catch { return {}; } };
+  const put = (v) => localStorage.setItem('fake', JSON.stringify(Object.assign(st(), v)));
   const answer = (id, v, ms = 60) => setTimeout(() => window.__catosNative(id, JSON.stringify(v)), ms);
+  window.__events = [];
   window.CatOSAndroid = {
+    logEvent: (n, p) => { window.__events.push([n, JSON.parse(p)]); },
+    privacyOptionsRequired: () => st().eea === true,
+    showPrivacyOptions: () => { window.__privacy = (window.__privacy || 0) + 1; },
+    account: () => (st().account ? JSON.stringify(st().account) : ''),
+    signIn: (id) => { put({ account: { uid: 'u1', email: 'learner@example.com', name: 'Learner' } }); answer(id, { ok: true }); },
+    signOut: (id) => { put({ account: null }); answer(id, { ok: true }); },
+    cloudSave: (id, json) => { localStorage.setItem('fakeCloud', json); put({ saves: (st().saves || 0) + 1 }); answer(id, { ok: true }); },
+    cloudLoad: (id) => { const c = localStorage.getItem('fakeCloud'); answer(id, { ok: true, backup: c ? JSON.parse(c) : null }); },
+    deleteAccount: (id) => { localStorage.removeItem('fakeCloud'); put({ account: null }); answer(id, { ok: true }); },
     isOnline: () => st().online !== false,
     isPro: () => st().pro === true,
     proPlan: () => (st().pro ? 'yearly' : ''),
@@ -55,6 +71,7 @@ try {
   check(await b.evaluate(`!document.querySelector('.why-lock__card') && !!document.querySelector('cat-explanation #working')`), 'web: explanations open, no lock');
   await go('#/settings');
   check(await b.evaluate(`![...document.querySelectorAll('h2')].some((h) => h.textContent === 'CAT OS Pro') && !!document.querySelector('#share-app')`), 'web: no Pro card, Share is there');
+  check(await b.evaluate(`!document.querySelector('#account') && !document.querySelector('#privacy-choices')`), 'web: no Google account card, no privacy choices');
 
   // ---- The app ----
   await b.send('Page.addScriptToEvaluateOnNewDocument', { source: FAKE });
@@ -97,6 +114,52 @@ try {
   check(await until(`(window.__shared || '').includes('play.google.com/store/apps/details?id=com.nakulcreations.catos')`, 2000), 'app settings: Share sends the Play link');
   await b.evaluate(`document.querySelector('#privacy').click(); 1`);
   check(await b.evaluate(`(window.__opened || '').endsWith('/privacy.html')`), 'app settings: the privacy policy opens outside the app');
+
+  // ---- Google account and the cloud save ----
+  const fake = () => b.evaluate(`localStorage.getItem('fake')`).then((s) => JSON.parse(s || '{}'));
+  const cloud = () => b.evaluate(`localStorage.getItem('fakeCloud')`).then((s) => JSON.parse(s || 'null'));
+  const leave = `Object.defineProperty(document, 'visibilityState', { value: 'hidden', configurable: true }); document.dispatchEvent(new Event('visibilitychange')); 1`;
+  const valley = `import('/src/core/storage/indexeddb-adapter.js').then(async (m) => { const s = new m.IndexedDBAdapter(); await s.init(); return (await s.get('settings', 'valley'))?.value?.name ?? null; })`;
+  await b.evaluate(`['fakeCloud', 'catos:cloud-linked', 'catos:cloud-sig'].forEach((k) => localStorage.removeItem(k)); 1`);
+  await go('#/settings');
+  check(await b.evaluate(`!!document.querySelector('#acct-in') && !document.querySelector('#privacy-choices')`), 'app settings: Sign in with Google offered; no privacy choices outside the EEA');
+  check(await b.evaluate(`window.__events.some(([n, p]) => n === 'screen_view' && p.screen_name === 'settings')`), 'analytics: a screen_view names the route');
+  await b.evaluate(`document.querySelector('#acct-in').click(); 1`);
+  check(await until(`!!document.querySelector('#acct-save') && JSON.parse(localStorage.getItem('fakeCloud') || '{}').format === 'cat-os-backup'`, 5000), 'sign in to an empty account: this phone\'s village is saved to it');
+  check(await b.evaluate(`window.__events.some(([n, p]) => n === 'login' && p.method === 'Google')`), 'analytics: the sign-in is logged');
+  const saved = (await fake()).saves;
+  await b.evaluate(leave);
+  await wait(800);
+  check((await fake()).saves === saved, 'leaving the app with nothing new sends nothing');
+  await b.evaluate(`import('/src/core/storage/indexeddb-adapter.js').then(async (m) => { const s = new m.IndexedDBAdapter(); await s.init(); await s.put('settings', { id: 'reading-size', value: 'l' }); return 1; })`);
+  await b.evaluate(leave);
+  check(await until(`JSON.parse(localStorage.getItem('fake')).saves === ${saved + 1}`, 3000), 'leaving the app after a change saves it');
+
+  // A second phone: the account holds "Cloudvale", this phone holds Ashfield.
+  const theirs = await cloud();
+  theirs.stores.settings = theirs.stores.settings.map((r) => (r.id === 'valley' ? { ...r, value: { ...r.value, name: 'Cloudvale' } } : r));
+  await b.evaluate(`localStorage.setItem('fakeCloud', ${JSON.stringify(JSON.stringify(theirs))}); localStorage.removeItem('catos:cloud-linked'); 1`);
+  await b.evaluate(`document.querySelector('#acct-out').click(); 1`);
+  check(await until(`!!document.querySelector('#acct-in')`, 3000), 'sign out: the sign-in button is back');
+  await b.evaluate(`document.querySelector('#acct-in').click(); 1`);
+  check(await until(`(document.querySelector('.gmenu__card')?.textContent || '').includes('Cloudvale')`, 5000), 'a phone with its own village is asked which to keep, and sees both');
+  check((await cloud()).stores.settings.some((r) => r.value?.name === 'Cloudvale'), 'nothing is sent before the learner chooses');
+  await b.evaluate(`document.querySelector('[data-do="restore"]').click(); 1`);
+  await wait(1500);
+  await until(ready);
+  check(await b.evaluate(valley) === 'Cloudvale', '"Bring back the saved village" restores the account\'s village');
+
+  await setFake({ online: true, eea: true, account: { uid: 'u1', email: 'learner@example.com', name: 'Learner' } });
+  await go('#/settings');
+  check(await b.evaluate(`!!document.querySelector('#acct-save')`), 'after a restore this phone saves to the account');
+  await b.evaluate(`document.querySelector('#privacy-choices').click(); 1`);
+  check(await b.evaluate(`window.__privacy === 1`), 'EEA/UK: Privacy choices reopens Google\'s consent form');
+  await b.evaluate(`document.querySelector('#acct-delete').click(); 1`);
+  await until(`!!document.querySelector('[data-do="delete"]')`, 2000);
+  await b.evaluate(`document.querySelector('[data-do="delete"]').click(); 1`);
+  check(await until(`!!document.querySelector('#acct-in') && !localStorage.getItem('fakeCloud') && !localStorage.getItem('catos:cloud-linked')`, 3000), 'delete account: the cloud save and the link are gone');
+  check(await b.evaluate(valley) === 'Cloudvale', 'delete account: this phone keeps its village');
+  await setFake({ online: true });
 
   await go('#/pro');
   check(await until(`document.querySelector('[data-price="catos_pro_yearly"]')?.textContent === '₹499.00 a year'`, 3000), 'Pro screen: the yearly price is Play\'s');

@@ -67,13 +67,13 @@ export async function renderPro(outlet) {
         </div>` : `
         <div class="pro__plans" role="group" aria-label="Choose a plan">
           <button class="pro__plan is-best" type="button" data-buy="${YEARLY}">
-            <span class="pro__tag">Best for this CAT season</span>
+            <span class="pro__tag">A year of practice</span>
             <span class="pro__name">One year</span>
             <span class="pro__price" data-price="${YEARLY}">Loading price…</span>
             <span class="pro__per" data-per="${YEARLY}">Renews every year until you cancel</span>
           </button>
           <button class="pro__plan" type="button" data-buy="${LIFETIME}">
-            <span class="pro__tag">For repeat takers</span>
+            <span class="pro__tag">For the long game</span>
             <span class="pro__name">Lifetime</span>
             <span class="pro__price" data-price="${LIFETIME}">Loading price…</span>
             <span class="pro__per">Pay once. Pro for good.</span>

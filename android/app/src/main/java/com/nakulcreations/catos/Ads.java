@@ -13,6 +13,9 @@ import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.rewarded.RewardedAd;
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback;
+import com.google.android.ump.ConsentInformation;
+import com.google.android.ump.ConsentRequestParameters;
+import com.google.android.ump.UserMessagingPlatform;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +28,11 @@ import java.util.function.Consumer;
  * starts at once. Answers {"rewarded":true}, or a reason: "closed" (they
  * left early, the explanation stays shut) or "unavailable" (no video could
  * be had; the page opens the explanation anyway).
+ *
+ * In the EEA, the UK and Switzerland Google's consent form (UMP, the message
+ * set up in AdMob, Privacy and messaging) comes first and nothing loads
+ * until it is answered; everywhere else it answers at once and asks nothing.
+ * The same answer reaches Google Analytics through consent mode.
  */
 final class Ads {
     private static final long WAIT_MS = 8000;
@@ -32,14 +40,32 @@ final class Ads {
     private final BooleanSupplier pro;
     private final Handler main = new Handler(Looper.getMainLooper());
     private final List<Runnable> waiting = new ArrayList<>();
+    private final ConsentInformation consent;
     private RewardedAd ad;
-    private boolean loading, ready;
+    private boolean loading, ready, started;
 
     Ads(Activity act, BooleanSupplier pro) {
         this.act = act;
         this.pro = pro;
+        consent = UserMessagingPlatform.getConsentInformation(act);
+        consent.requestConsentInfoUpdate(act, new ConsentRequestParameters.Builder().build(),
+                () -> UserMessagingPlatform.loadAndShowConsentFormIfRequired(act, e -> start()),
+                e -> start());
+        start();   // an answer given on an earlier day already counts
+    }
+
+    private void start() {
+        if (started || !consent.canRequestAds()) return;
+        started = true;
         new Thread(() -> MobileAds.initialize(act, status -> main.post(() -> { ready = true; if (!pro.getAsBoolean()) load(); }))).start();
     }
+
+    /** Settings shows "Privacy choices" only where the law asks for a way back in. */
+    boolean privacyRequired() {
+        return consent.getPrivacyOptionsRequirementStatus() == ConsentInformation.PrivacyOptionsRequirementStatus.REQUIRED;
+    }
+
+    void privacyOptions() { UserMessagingPlatform.showPrivacyOptionsForm(act, e -> start()); }
 
     private void load() {
         if (!ready || ad != null || loading) return;

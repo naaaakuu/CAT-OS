@@ -9,8 +9,9 @@
  *   READING     reading size; theme
  *   YOUR DATA   export, import, storage used, start over
  *   PRO         the Android app only: go Pro, or "you are Pro" (shell/pro.js)
+ *   ACCOUNT     the Android app only: Sign in with Google, the cloud save, delete the account (shell/account.js)
  *   SHARE       send the Play link to a friend
- *   ABOUT       the version, the privacy policy
+ *   ABOUT       the version, privacy choices (EEA/UK, the app only), the privacy policy
  */
 
 import { STORES } from '../core/storage/storage-adapter.js';
@@ -25,7 +26,8 @@ import { playSound } from '../core/engagement/audio.js';
 import { play, unlock, startMusic, startAmbience, musicEnabled } from '../world/audio.js';
 import { escapeHTML } from '../core/utils/format.js';
 import { workerStatus, librarySyncProgress, startLibrarySync } from '../core/content-loader/library-sync.js';
-import { inApp, isPro, shareApp, openExternal, PLAY_URL, PRIVACY_URL } from '../core/native.js';
+import { NATIVE, inApp, isPro, ask, account, track, shareApp, openExternal, PLAY_URL, PRIVACY_URL } from '../core/native.js';
+import { linked, backUp, link, deleteAccount } from './account.js';
 
 /* The three preferences the shell applies at boot live in prefs.js, so the
    boot path never has to load this screen. Re-exported here because that is
@@ -75,7 +77,17 @@ const onOff = (id, attr, label) => `
   </div>`;
 const slider = (id, label) => `<input class="range" id="${id}" type="range" min="0" max="100" step="1" value="100" aria-label="${escapeHTML(label)}" data-sfx="off" />`;
 
+/* What a cloud-save answer means, in words (shell/account.js, android/ Cloud.java). */
+const CLOUD_SAID = {
+  saved: 'Your village is saved to your Google account.',
+  same: 'Already saved. Nothing new since last time.',
+  later: 'Signed in. Choose a village here whenever you are ready.',
+  offline: 'You are offline. Try again when you are connected.',
+  'too-big': 'Your village is too big for a cloud save. Export a backup file instead.',
+};
+
 export function renderSettings(outlet, { storage, version }) {
+  const who = inApp ? account() : null;
   outlet.innerHTML = `
     <section class="screen screen--cottage">
       <div class="cottage__hero" style="${backdropStyle('cottage')}" aria-hidden="true"></div>
@@ -89,6 +101,17 @@ export function renderSettings(outlet, { storage, version }) {
         ${isPro()
           ? row(icon('star', { size: 20 }), 'You are Pro', 'Every explanation open, no videos, plays offline. Thank you.', '<a class="btn" href="#/pro">Details</a>')
           : row(icon('star', { size: 20 }), 'Go Pro', 'Are videos interrupting your study session? Pro opens every explanation and plays offline.', '<a class="btn btn--primary" href="#/pro">See Pro</a>')}
+      </div>
+
+      <div class="card" id="account">
+        <h2>Google account</h2>
+        ${who ? `
+        ${linked()
+          ? row(icon('check', { size: 20 }), 'Signed in', `${who.email || who.name}. Your village is saved to this account whenever you leave the app, and comes back on any phone you sign in on.`, '<button class="btn" id="acct-save">Save now</button>')
+          : row(icon('house', { size: 20 }), 'Signed in', `${who.email || who.name}. Choose which village to keep, this phone’s or the one saved in your account. Saving starts after that.`, '<button class="btn btn--primary" id="acct-link">Choose</button>')}
+        ${row(icon('arrow', { size: 20 }), 'Sign out', 'This phone keeps its village', '<button class="btn" id="acct-out">Sign out</button>')}
+        ${row(icon('lock', { size: 20 }), 'Delete account', 'Deletes the cloud save and your CAT OS account. This phone keeps its village.', '<button class="btn btn--danger" id="acct-delete">Delete</button>')}`
+        : row(icon('house', { size: 20 }), 'Sign in with Google', 'Optional. Keeps your village safe in your Google account and brings it to a new phone.', '<button class="btn btn--primary" id="acct-in">Sign in</button>')}
       </div>` : ''}
 
       <div class="card">
@@ -143,13 +166,14 @@ export function renderSettings(outlet, { storage, version }) {
 
       <div class="card">
         <h2>Share</h2>
-        ${row(icon('share', { size: 20 }), 'Share CAT OS', 'Send the app to a friend preparing for CAT', '<button class="btn" id="share-app">Share</button>')}
+        ${row(icon('share', { size: 20 }), 'Share CAT OS', 'Send the app to a friend', '<button class="btn" id="share-app">Share</button>')}
       </div>
 
       <div class="card">
         <h2>About</h2>
-        ${row(icon('cat', { size: 20 }), 'CAT OS', `Version ${version} · your data stays on this device`, '')}
-        ${row(icon('house', { size: 20 }), 'The village', 'Eight friends, one for each part of CAT English. Learning is what keeps them well.', '<a class="btn" href="#/world">Open</a>')}
+        ${row(icon('cat', { size: 20 }), 'CAT OS', `Version ${version} · ${who && linked() ? 'saved to your Google account' : 'your data stays on this device'}`, '')}
+        ${row(icon('house', { size: 20 }), 'The village', 'Eight friends, one for each English skill. Learning is what keeps them well.', '<a class="btn" href="#/world">Open</a>')}
+        ${NATIVE?.privacyOptionsRequired?.() ? row(icon('lock', { size: 20 }), 'Privacy choices', 'Change what Google’s ads may use about you', '<button class="btn" id="privacy-choices">Change</button>') : ''}
         ${row(icon('lock', { size: 20 }), 'Privacy policy', 'What the app keeps, and what it never collects', '<button class="btn" id="privacy">Read</button>')}
       </div>
     </section>`;
@@ -216,8 +240,78 @@ export function renderSettings(outlet, { storage, version }) {
     const r = await shareApp();
     if (r === 'copied') toast('Link copied. Paste it to a friend.', 'info', { mute: true });
     else if (r === 'failed') toast(PLAY_URL, 'info', { mute: true });
+    if (r === 'shared') track('share', { content_type: 'app' });
   });
   outlet.querySelector('#privacy').addEventListener('click', () => openExternal(PRIVACY_URL));
+  outlet.querySelector('#privacy-choices')?.addEventListener('click', () => NATIVE.showPrivacyOptions());
+
+  /* ---- Google account (the app only; the save itself is shell/account.js) ---- */
+  const again = () => renderSettings(outlet, { storage, version });
+  const busy = (e) => { e.currentTarget.disabled = true; };
+  outlet.querySelector('#acct-in')?.addEventListener('click', async (e) => {
+    busy(e);
+    const r = await ask('signIn');
+    if (!r?.ok) {
+      if (r?.reason !== 'cancelled') toast('Could not sign in. Check your connection and try again.', 'error');
+      again();
+      return;
+    }
+    track('login', { method: 'Google' });
+    await lineUp();
+  });
+  outlet.querySelector('#acct-link')?.addEventListener('click', (e) => { busy(e); lineUp(); });
+  outlet.querySelector('#acct-save')?.addEventListener('click', async (e) => {
+    busy(e);
+    const r = await backUp(storage, { force: true });
+    toast(CLOUD_SAID[r] ?? 'Could not save just now. Try again in a moment.', 'info', { mute: true });
+    again();
+  });
+  outlet.querySelector('#acct-out')?.addEventListener('click', async (e) => {
+    busy(e);
+    await ask('signOut');
+    toast('Signed out. This phone keeps its village.', 'info', { mute: true });
+    again();
+  });
+  outlet.querySelector('#acct-delete')?.addEventListener('click', async () => {
+    const sure = await askSheet('Google account', 'Delete your CAT OS account?', `
+          <p class="importsheet__warn"><b>This deletes your cloud save and your CAT OS account for good.</b> This phone keeps its village. Google asks you to pick your account once more to confirm.</p>
+          <div class="importsheet__acts">
+            <button class="btn btn--danger" data-do="delete">Delete my account</button>
+            <button class="btn btn--primary" data-close>Keep it</button>
+          </div>`);
+    if (sure !== 'delete') return;
+    const r = await deleteAccount();
+    if (r?.ok) toast('Your account and its cloud save are deleted.', 'info', { mute: true });
+    else if (r?.reason !== 'cancelled') toast('Could not delete the account just now. Try again in a moment.', 'error');
+    again();
+  });
+
+  /** After a sign-in, or "Choose": which village this account keeps. */
+  async function lineUp() {
+    const said = await link(storage, (saved, here) => {
+      const what = (d) => `${d.counts.attempts ?? 0} answers and ${d.counts.sessions ?? 0} finished runs`;
+      const when = saved.exportedAt ? new Date(saved.exportedAt).toLocaleDateString(undefined, { day: 'numeric', month: 'long', year: 'numeric' }) : 'an earlier day';
+      return askSheet('Google account', 'Which village do you keep?', `
+          <ul class="importsheet__what">
+            <li><b>In your account</b>: ${escapeHTML(saved.valley?.name ?? 'a village')}, saved ${escapeHTML(when)}, ${what(saved)}</li>
+            <li><b>On this phone</b>: ${escapeHTML(here.valley?.name ?? 'a village')}, ${what(here)}</li>
+          </ul>
+          <p class="importsheet__warn">The one you do not keep is replaced.</p>
+          <div class="importsheet__acts">
+            <button class="btn btn--primary" data-do="restore">Bring back the saved village</button>
+            <button class="btn" data-do="keep">Keep this phone’s and save it</button>
+            <button class="btn btn--quiet" data-close>Decide later</button>
+          </div>`);
+    });
+    if (said === 'restored') {
+      // A fresh page: every screen re-reads the restored records.
+      location.hash = '#/world';
+      location.reload();
+      return;
+    }
+    toast(CLOUD_SAID[said] ?? 'Signed in, but the cloud save could not be checked. Tap Choose to try again.', 'info', { mute: true });
+    again();
+  }
 
   /* ---- Audio ---- */
   const musicVol = outlet.querySelector('#music-volume');

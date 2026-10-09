@@ -11,6 +11,12 @@ CAT English, and each is only as happy as your practice of that part.
 Leave a subject alone and its friend misses you; help them and the whole
 village comes back to life.
 
+**How it is presented (owner, 2026-10-09).** To the world CAT OS is an
+advanced English game: reading, reasoning and vocabulary for anyone, in any
+country. The CAT is named once, as the exam the questions are built on, and
+never as the headline: the Play listing, the launch videos, the share text
+and the web page description all follow this (`android/store/listing.md`).
+
 Every house in the village holds one part of CAT VARC, and its sign on the
 map says which (nothing else lives there: no DILR, no quant):
 

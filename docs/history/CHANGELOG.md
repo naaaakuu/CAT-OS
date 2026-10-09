@@ -4,7 +4,14 @@
 > Versions here are app releases; they map onto the capability milestones in
 > `PROJECT_ROADMAP.md` (0.x releases build toward Roadmap V1.0).
 
-## 3.11.0: CAT OS on Google Play (2026-10-09)
+## 3.12.0: Advanced English, worldwide, with Google sign-in (2026-10-09)
+
+- Positioning: CAT OS is presented as an advanced English game for anyone, anywhere; the CAT is named once, as the exam the questions are built on. New Play listing ("CAT OS: Advanced English"), share text, web description and manifest; Settings and the Pro plans lose their CAT-season wording (`docs/PRODUCT.md`).
+- Worldwide: the closed-testing track targets all 178 countries and regions. Ads in the EEA, the UK and Switzerland now wait for Google's consent form (UMP 4.0 in `Ads.java`, the AdMob message "CAT OS - GDPR consent", with a Do not consent button); Settings shows "Privacy choices" where the law asks for a way back.
+- Sign in with Google (optional, Settings, Google account): Credential Manager, Firebase Auth, and one cloud save per account in Firestore (the backup file, gzipped; only that account can read it). The village is saved whenever the learner leaves the app and something changed; a phone that already has a village is asked which one to keep before anything is replaced; Delete account removes the save and the account (Play's account-deletion rule; also by email, `privacy.html#delete-account`).
+- Google Analytics through Firebase (project `cat-os-612e8`): a `screen_view` per route, `login`, `share`; installs, purchases and AdMob events come on their own. The web version sends nothing.
+- Privacy policy rewritten for sign-in, the cloud save, analytics, consent and deletion.
+- Gates: `check-app-shell.mjs` 32 checks (sign in, save only what changed, choose between two villages, restore, delete, privacy choices, analytics).
 
 - An Android app (`android/`, `com.nakulcreations.catos`): one WebView that serves the whole web app from inside the APK, so it opens instantly and never downloads itself (no service worker, no library sync in the app). Target API 36, edge to edge with the icon's green behind the system bars, back walks the app's history and leaves from the village, backups save through "Save as" and import through the file picker. Signed AAB about 19 MB.
 - Free with one kind of ad. After an answer the verdict is free; the full explanation (the trap, the why, every other option, the mentor's lesson at the end of a run, the passage explained simply) waits behind "Watch a short video" (AdMob rewarded, the only ad). One video opens every explanation for 20 minutes; a video that cannot be found opens it anyway; closing early keeps it shut and says so. Locks in RC, review, second look, the bank, PJ, PS, OOO and their Learning Pages.

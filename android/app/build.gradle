@@ -1,5 +1,7 @@
 plugins {
     id 'com.android.application'
+    // Reads app/google-services.json (Firebase project cat-os-612e8; git-ignored, download it from the Firebase console).
+    id 'com.google.gms.google-services'
 }
 
 /* The app inside the app: the same files GitHub Pages serves, copied into
@@ -28,8 +30,8 @@ android {
         applicationId 'com.nakulcreations.catos'
         minSdk 24
         targetSdk 36
-        versionCode 31100
-        versionName '3.11.0'
+        versionCode 31200
+        versionName '3.12.0'
         buildConfigField 'String', 'ADMOB_APP_ID', '"ca-app-pub-2797167472636000~2881643697"'
         manifestPlaceholders = [admobAppId: 'ca-app-pub-2797167472636000~2881643697']
     }
@@ -82,5 +84,15 @@ dependencies {
     implementation 'androidx.fragment:fragment:1.8.5'
     implementation 'androidx.webkit:webkit:1.14.0'
     implementation 'com.google.android.gms:play-services-ads:25.5.0'
+    // Google's consent form for the EEA, UK and Switzerland (Ads.java).
+    implementation 'com.google.android.ump:user-messaging-platform:4.0.0'
     implementation 'com.android.billingclient:billing:8.3.0'
+    // Google Analytics, and Sign in with Google with a cloud save (Cloud.java).
+    implementation platform('com.google.firebase:firebase-bom:35.0.0')
+    implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-auth'
+    implementation 'com.google.firebase:firebase-firestore'
+    implementation 'androidx.credentials:credentials:1.6.0'
+    implementation 'androidx.credentials:credentials-play-services-auth:1.6.0'
+    implementation 'com.google.android.libraries.identity.googleid:googleid:1.2.1'
 }

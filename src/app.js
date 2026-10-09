@@ -24,7 +24,7 @@ import { hourWord } from './world/engine/palette.js';
 import { initFeedback, installGlobalFeedback } from './core/engagement/feedback.js';
 import { loadTheme, applyTheme, loadReadingSize, applyReadingSize, applyMotion } from './shell/prefs.js';
 import { installOnlineGate } from './shell/online-gate.js';
-import { inApp } from './core/native.js';
+import { inApp, track } from './core/native.js';
 import './ui/components/cat-nav.js';
 
 /* ------------------------------------------------------------------ */
@@ -49,7 +49,7 @@ window.addEventListener('unhandledrejection', (e) => {
 /* Storage + theme                                                    */
 /* ------------------------------------------------------------------ */
 
-const APP_VERSION = '3.11.0'; // keep in step with CHANGELOG.md and android/app/build.gradle versionName
+const APP_VERSION = '3.12.0'; // keep in step with CHANGELOG.md and android/app/build.gradle versionName
 
 const storage = new IndexedDBAdapter();
 
@@ -183,6 +183,16 @@ async function boot() {
   };
   applyImmersiveChrome();
   window.addEventListener('hashchange', applyImmersiveChrome);
+
+  /* The Android app: Google Analytics sees one screen_view per place, named
+     by the route's first two parts (rc/review, world/place), and the cloud
+     save (shell/account.js) runs whenever the learner leaves. */
+  if (inApp) {
+    const seen = () => track('screen_view', { screen_name: location.hash.replace(/^#\/?/, '').split('/').slice(0, 2).join('/') || 'world' });
+    seen();
+    window.addEventListener('hashchange', seen);
+    import('./shell/account.js').then((m) => m.keepBackedUp(storage)).catch(() => { /* no cloud save this session */ });
+  }
 
   /* The village song plays everywhere, from the first touch, until the
      learner turns it off. Each place has its own lead instrument; a timed

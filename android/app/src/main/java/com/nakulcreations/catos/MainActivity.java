@@ -37,7 +37,8 @@ import java.nio.charset.StandardCharsets;
  * The whole Android app: one WebView showing the web app from inside the
  * APK (build.gradle copyWeb), plus the few things a page cannot do itself,
  * offered to it as window.CatOSAndroid (Bridge): a rewarded video (Ads),
- * Pro through Google Play (Billing), the share sheet, Save as, and whether
+ * Pro through Google Play (Billing), Sign in with Google and a cloud save
+ * (Cloud), Google Analytics events, the share sheet, Save as, and whether
  * the phone is online.
  */
 public class MainActivity extends ComponentActivity {
@@ -47,6 +48,7 @@ public class MainActivity extends ComponentActivity {
     WebView web;
     Ads ads;
     Billing billing;
+    Cloud cloud;
     private ConnectivityManager net;
     private ValueCallback<Uri[]> picked;
     private String saveId, saveText;
@@ -89,6 +91,7 @@ public class MainActivity extends ComponentActivity {
 
         billing = new Billing(this);
         ads = new Ads(this, billing::isPro);
+        cloud = new Cloud(this);
         net = getSystemService(ConnectivityManager.class);
         net.registerDefaultNetworkCallback(new ConnectivityManager.NetworkCallback() {
             @Override public void onCapabilitiesChanged(Network n, NetworkCapabilities c) { pushNet(); }

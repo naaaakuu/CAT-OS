@@ -50,9 +50,19 @@ export function isPro() {
   try { return !!NATIVE?.isPro(); } catch { return false; }
 }
 
+/** The Google account signed in on this phone ({uid, email, name}), or null. Always null on the web. */
+export function account() {
+  try { const a = NATIVE?.account?.(); return a ? JSON.parse(a) : null; } catch { return null; }
+}
+
+/** One Google Analytics event (Firebase, in the app). The web sends nothing anywhere. */
+export function track(name, params = {}) {
+  try { NATIVE?.logEvent?.(name, JSON.stringify(params)); } catch { /* counting never breaks the app */ }
+}
+
 /** The Android share sheet, Web Share, or the clipboard, in that order. */
 export async function shareApp() {
-  const text = 'I prepare for CAT verbal in CAT OS: a little village that grows when you get better at reading. Free on Google Play:';
+  const text = 'I am sharpening my English in CAT OS: a little village that grows when you read and reason better. Free on Google Play:';
   if (NATIVE) { NATIVE.share(`${text} ${PLAY_URL}`); return 'shared'; }
   try { if (navigator.share) { await navigator.share({ title: 'CAT OS', text, url: PLAY_URL }); return 'shared'; } } catch { return 'cancelled'; }
   try { await navigator.clipboard.writeText(`${text} ${PLAY_URL}`); return 'copied'; } catch { return 'failed'; }
