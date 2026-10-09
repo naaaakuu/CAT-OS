@@ -4,6 +4,13 @@
 > Versions here are app releases; they map onto the capability milestones in
 > `PROJECT_ROADMAP.md` (0.x releases build toward Roadmap V1.0).
 
+## 3.9.1: Friends walk only on the path (2026-10-09)
+
+- Biscuit was walking on the cottage railing. Cause: every walk ended with a sideways offset (chores ±16 px, chats ±30, greetings ±20, the party ring ±150 by ±70) and the next walk started with a straight line to the nearest node, so a friend stood and crossed wherever the painting had a fence, a step or a flowerbed. In a 7 minute run Biscuit was more than 8 px off the road 22% of the time, up to 30 px for a chat on the plaza.
+- Now a friend stands only on a node and turns only at one. Two side by side take neighbouring nodes (`CHATS`, the plaza pairs; `HOMES[].side`, the node beside each home), the party ring is the plaza's own ring nodes, and a friend stopped or called mid-walk finishes the step in hand first. Measured again: 0 px off the path for every friend, party included.
+- Also found: the "spot taken" list never forgot a friend who had left, so within two minutes the plaza, the bench and the fire all read as taken and everyone stayed home. It is now asked of the friends themselves. With the village roaming again, strolls are rarer (a few decisions in a hundred), friends who are out head back, one chat runs at a time, and a stroll lingers a while.
+- Gates: `tools/check-walk.mjs` (new, verify §23c) runs the real village on synthetic frames and fails on any friend more than 1 px off the path, on a party mid-walk that cuts across the ground and on a village that stops roaming; `check-village-data` also samples the painting along every road.
+
 ## 3.9.0: Biscuit, the calico of the rose cottage (2026-10-09)
 
 - An eighth friend: **Biscuit**, a calico cat who keeps Sentence Placement in the rose cottage (it was Ginger's second house). "If it fits, I sits": a sentence only sits in the gap it fits, and a cat's whiskers measure a gap before he squeezes in, as a learner checks the sentence before and after. He adores Sesame next door: she has the gap and finds the sentence, he has the sentence and finds the gap. Ginger keeps Para Jumbles only.

@@ -2307,6 +2307,19 @@ console.log('\n23b. The village, running (tools/check-village.mjs — a real bro
   else ok(out[out.length - 1]);
 }
 
+console.log('\n23c. The friends walk only on the path (tools/check-walk.mjs — a real browser, synthetic frames)');
+{
+  // Every friend stays within a pixel of the traced walk for minutes of village
+  // life (never on a fence, a step or a flowerbed), a party called mid-walk
+  // gathers all eight, and the village keeps roaming.
+  const { spawnSync } = await import('node:child_process');
+  const r = spawnSync(process.execPath, [join(root, 'tools/check-walk.mjs')], { cwd: root, encoding: 'utf8', timeout: 600000 });
+  const out = `${r.stdout ?? ''}${r.stderr ?? ''}`.trim().split('\n');
+  if (out.some((l) => l.startsWith('SKIPPED'))) console.log('  --  SKIPPED: no Chrome on this machine (set CHROME_PATH). This section did NOT run.');
+  else if (r.status !== 0) bad('walk: ' + out.slice(-3).join(' | '));
+  else ok(out[out.length - 1]);
+}
+
 console.log('\n24. Rendered contrast (tools/check-rendered-contrast.mjs — real pixels)');
 {
   // §22 proves the PALETTE is sound and passed every release while the

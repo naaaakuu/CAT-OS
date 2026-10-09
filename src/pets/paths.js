@@ -6,7 +6,10 @@
  * never change with the viewport. Pets walk ONLY along EDGES between NODES,
  * which were traced onto the sand and stone of the painting and checked by
  * tools/check-village-data.mjs: a node that drifts onto a roof, a tree or the
- * pond fails the gate.
+ * pond fails the gate. They also STAND only on a node (never beside one: a few
+ * pixels off the traced path is already a fence, a step or a flowerbed), so
+ * everything that needs two friends side by side names two neighbouring nodes
+ * (CHATS, HOMES[].side).
  */
 
 export const MAP = Object.freeze({ w: 1536, h: 1024, src: './assets/art/home-world-v1.png' });
@@ -65,16 +68,16 @@ export const EDGES = Object.freeze([
 
 /* ---- Homes, places and spots ---------------------------------------- */
 
-/** Each pet's home: where it stands, and the building's tap area. */
+/** Each pet's home: where it stands, `side` (the next node down its road: where a visitor stands beside it), and the building's tap area. */
 export const HOMES = Object.freeze({
-  chai: { node: 'lib', door: { x: 322, y: 222 }, hit: { x: 150, y: 40, w: 300, h: 220 }, label: 'The library' },
-  ginger: { node: 'shop', door: { x: 822, y: 200 }, hit: { x: 610, y: 30, w: 330, h: 200 }, label: 'The workshop' },
-  mallow: { node: 'obs', door: { x: 1231, y: 190 }, hit: { x: 1170, y: 20, w: 240, h: 190 }, label: 'The observatory' },
-  matcha: { node: 'green', door: { x: 325, y: 420 }, hit: { x: 130, y: 300, w: 280, h: 160 }, label: 'The greenhouse' },
-  mochi: { node: 'cabin', door: { x: 1225, y: 420 }, hit: { x: 1100, y: 280, w: 300, h: 170 }, label: 'The archery cabin' },
-  toffee: { node: 'f1', door: { x: 806, y: 760 }, hit: { x: 720, y: 680, w: 180, h: 130 }, label: 'The campfire' },
-  sesame: { node: 'clock', door: { x: 1256, y: 772 }, hit: { x: 1170, y: 520, w: 230, h: 280 }, label: 'The clock tower' },
-  biscuit: { node: 'cottage', door: { x: 272, y: 716 }, hit: { x: 170, y: 560, w: 270, h: 180 }, label: 'The rose cottage' },
+  chai: { node: 'lib', side: 'l1', door: { x: 322, y: 222 }, hit: { x: 150, y: 40, w: 300, h: 220 }, label: 'The library' },
+  ginger: { node: 'shop', side: 'w1', door: { x: 822, y: 200 }, hit: { x: 610, y: 30, w: 330, h: 200 }, label: 'The workshop' },
+  mallow: { node: 'obs', side: 'o1', door: { x: 1231, y: 190 }, hit: { x: 1170, y: 20, w: 240, h: 190 }, label: 'The observatory' },
+  matcha: { node: 'green', side: 'g1', door: { x: 325, y: 420 }, hit: { x: 130, y: 300, w: 280, h: 160 }, label: 'The greenhouse' },
+  mochi: { node: 'cabin', side: 'a1', door: { x: 1225, y: 420 }, hit: { x: 1100, y: 280, w: 300, h: 170 }, label: 'The archery cabin' },
+  toffee: { node: 'f1', side: 'f3', door: { x: 806, y: 760 }, hit: { x: 720, y: 680, w: 180, h: 130 }, label: 'The campfire' },
+  sesame: { node: 'clock', side: 't4', door: { x: 1256, y: 772 }, hit: { x: 1170, y: 520, w: 230, h: 280 }, label: 'The clock tower' },
+  biscuit: { node: 'cottage', side: 'c1', door: { x: 272, y: 716 }, hit: { x: 170, y: 560, w: 270, h: 180 }, label: 'The rose cottage' },
 });
 
 /** Places that are not a pet's own home: the fire. */
@@ -98,14 +101,17 @@ export const SIGNS = Object.freeze({
   toffee: { x: 808, y: 704 },
 });
 
-/** Places a pet may wander to and linger. */
+/** Places a pet may wander to and linger. `ring` is the plaza's edge, in order round it. */
 export const SPOTS = Object.freeze({
   plaza: ['pn', 'pne', 'pe', 'pse', 'ps', 'psw', 'pw', 'pnw', 'pc'],
+  ring: ['pn', 'pne', 'pe', 'pse', 'ps', 'psw', 'pw', 'pnw'],
   bench: ['pw', 'pe', 'pn'],
   fire: ['f1', 'f2', 'f3'],
   dock: ['dock'],
-  visit: ['lib', 'shop', 'obs', 'green', 'cabin', 'cottage', 'clock'],
 });
+
+/** Two friends who stop on the plaza to talk: neighbouring nodes, close enough to chat, never off the paving. */
+export const CHATS = Object.freeze([['pc', 'pn'], ['pc', 'ps'], ['pne', 'pe'], ['pe', 'pse'], ['psw', 'pw'], ['pw', 'pnw']]);
 
 /* ---- Light, smoke, water, time -------------------------------------- */
 
@@ -186,10 +192,10 @@ for (const [a, b] of EDGES) {
   ADJ.get(a).push([b, d]); ADJ.get(b).push([a, d]);
 }
 
-/** The shortest walk between two nodes, as points (both ends included). */
+/** The shortest walk between two nodes, as fresh points (both ends included), each carrying its node `id`. */
 export function route(from, to) {
   if (!NODES[from] || !NODES[to]) return [];
-  if (from === to) return [NODES[from]];
+  if (from === to) return [{ ...NODES[from], id: from }];
   const dist = new Map([[from, 0]]), prev = new Map(), open = new Set([from]);
   while (open.size) {
     let u = null;
@@ -204,7 +210,7 @@ export function route(from, to) {
   if (!prev.has(to)) return [];
   const ids = [to];
   while (ids[0] !== from) ids.unshift(prev.get(ids[0]));
-  return ids.map((id) => NODES[id]);
+  return ids.map((id) => ({ ...NODES[id], id }));
 }
 
 export function nearestNode(p) {
