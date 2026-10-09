@@ -36,6 +36,15 @@ const SHOTS = [
 const b = await launchChrome({ width: 360, height: 640, dpr: 3 });
 await b.open(server.url + 'index.html#/world', 1500);
 await b.evaluate(SEED);
+// One real-shaped attempt (chosen options, duration_ms) so the review shows verdicts and traps.
+await b.evaluate(`(async () => {
+  const s = await import('/src/core/storage/indexeddb-adapter.js');
+  const st = new s.IndexedDBAdapter(); await st.init();
+  await st.put('sessions', { id: 'store-rc', passage_id: 'rc-0001', started_at: new Date(Date.now() - 500000).toISOString(), finished_at: new Date().toISOString(),
+    duration_ms: 412000, stars: 2, score: { correct: 2, total: 4, accuracy: 0.5 },
+    answers: ['A', 'C', 'B', 'D'].map((chosen, q) => ({ question_id: 'rc-0001-q' + (q + 1), chosen, time_ms: 60000 })) });
+  return 1;
+})()`);
 let n = 0;
 for (const [hash, js] of SHOTS) {
   await b.open(server.url + 'index.html' + hash, 6000);

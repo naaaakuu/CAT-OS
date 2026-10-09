@@ -109,7 +109,7 @@ export async function renderPro(outlet) {
   const per = outlet.querySelector(`[data-per="${YEARLY}"]`);
   const yearly = byId.get(YEARLY);
   if (per && yearly && perMonth(yearly)) per.textContent = `That is ${perMonth(yearly)}. Renews every year until you cancel.`;
-  if (!byId.size) said.textContent = 'Google Play did not answer just now. Check the connection and open this page again.';
+  if (!byId.size) said.textContent = 'Pro is not on sale just yet. Until it is, one short video opens every explanation for 20 minutes.';
 
   outlet.querySelector('.pro__plans')?.addEventListener('click', async (e) => {
     const btn = e.target.closest('[data-buy]');

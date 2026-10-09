@@ -46,6 +46,16 @@ CAT OS is an independent study app. It is not affiliated with the IIMs or the Co
 
 Why these prices: a CAT season is about a year, so the yearly plan is the natural one, priced under the ₹500 line (about ₹42 a month, less than one paid mock). Lifetime is for repeat takers, at about 2.6 years of the yearly plan, so it is the better deal only for someone who expects a second attempt.
 
+## Play Console state (2026-10-09)
+
+App "CAT OS: CAT VARC Prep", id 4976374917894694481, personal account Nakul Creations. Done: privacy policy URL, sign-in details (nothing restricted), ads (yes), content rating (IARC, All other app types, education, digital purchases), target audience 18+, data safety (AdMob: approximate location, app interactions, crash logs, diagnostics, device IDs; collected and shared, encrypted, no accounts), advertising ID (yes), government/financial/health (none), category Education, contact email and website, default store listing (text, icon, feature graphic, six phone screenshots), internal testers (the "Last Wave testers" list).
+
+Left for the owner:
+1. Upload `CAT-OS-3.11.0-release.aab` to the internal testing release (Test and release, Testing, Internal testing) and roll it out. The browser tool cannot send files over 10 MB.
+2. Set up a payments merchant account (Play Console, Setup, Payments profile), then create the two products above. Until then the Pro screen says Pro is not on sale yet.
+3. Production needs a closed test with at least 12 testers for 14 days (new personal accounts), then "Apply for production". Set countries to India.
+4. When the app is live, add the Play listing to the AdMob app (AdMob, Apps, CAT OS, Add store) so AdMob can review it; serving is limited until it approves, and whenever no video is available the explanation simply opens.
+
 ## Ads
 
 AdMob app `ca-app-pub-2797167472636000~2881643697`, one rewarded unit `ca-app-pub-2797167472636000/9244795501` ("Full explanation (rewarded)"). No other ad formats.

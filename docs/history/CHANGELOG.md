@@ -11,7 +11,8 @@
 - The free app plays online only (the videos need it): offline, a calm wall covers the app and lifts when the network returns, with nothing lost underneath.
 - CAT OS Pro (`#/pro`), sold through Google Play: no videos, everything open, plays offline. ₹499 a year or ₹1,299 lifetime; prices on screen come from Play. "Are videos interrupting your study session?" on every lock and in Settings.
 - Settings: Pro, Share CAT OS (the Play link through the share sheet), the privacy policy (`privacy.html`). The web version is unchanged: nothing locked, still offline-first.
-- Gates: `tools/check-app-shell.mjs` drives all of it with a fake bridge (17 checks). Store images: `tools/store/render.mjs`.
+- Gates: `tools/check-app-shell.mjs` drives all of it with a fake bridge (17 checks). Store images: `tools/store/render.mjs`. Also run for real on an Android 14 emulator (WebView 113): the village boots from the APK with no errors, the offline wall lifted by itself when the network came up, and a real AdMob test video played, granted its reward and opened the passage page.
+- Google Play: the app exists in Play Console (`com.nakulcreations.catos`) with its listing, declarations and internal testers done; the bundle upload, the merchant account and the Pro products are the owner's (`android/store/listing.md`).
 
 ## 3.10.0: Friends call on each other (2026-10-09)
 
