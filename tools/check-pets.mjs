@@ -37,6 +37,8 @@ export async function checkPets() {
   let P;
   try { P = await load('src/pets/pets.js'); } catch (err) { return { problems: [`src/pets/pets.js does not load: ${err.message}`], lines: 0 }; }
   const { REGIONS } = await load('src/world/regions.js');
+  const { VISITS } = await load('src/pets/visits.js');
+  const { CHORES } = await load('src/home/life.js');
   const sameSet = (a, b) => [...a].sort().join() === [...b].sort().join();
 
   /* ---- Roster ---- */
@@ -153,6 +155,30 @@ export async function checkPets() {
   for (const id of ORDER) for (let s = 1; s <= 10; s += 1) add(`stageGift(${id}, ${s})`, P.stageGift(id, s));
   for (const id of ORDER) add(`SIGNATURE.${id}`, P.SIGNATURE?.[id]?.say);
 
+  /* ---- Visits (3.10): one friend calls on another and they talk (src/pets/visits.js; life.js plays them) ---- */
+  if (new Set(VISITS.map((v) => v.id)).size !== VISITS.length) bad('two visits share an id');
+  for (const v of VISITS) {
+    const talk = v.beats.filter((b) => b !== 'go');
+    if (!ORDER.includes(v.g) || !ORDER.includes(v.h) || v.g === v.h || v.id !== `${v.g}-${v.h}`) bad(`visit ${v.id} is not "guest-host" of two different friends`);
+    if (talk.length < 4 || talk.length > 7) bad(`visit ${v.id} has ${talk.length} lines, wants 4 to 7`);
+    if (v.beats.filter((b) => b === 'go').length > 1 || v.beats[0] === 'go' || v.beats.at(-1) === 'go') bad(`visit ${v.id}: "go" (walk to the guest's home together) comes once, in the middle`);
+    let last = null;   // they take turns; after the walk together, either may speak first
+    v.beats.forEach((b, i) => {
+      if (b === 'go') { last = null; return; }
+      if ((last === null && i === 0 && b[0] !== 'g') || b[0] === last) bad(`visit ${v.id}[${i}]: the guest speaks first and then they take turns`);
+      last = b[0];
+      add(`VISITS.${v.id}[${i}]`, b[1]);
+      const who = b[0] === 'g' ? v.g : b[0] === 'h' ? v.h : null;
+      if (!who) bad(`visit ${v.id}[${i}] is said by "${b[0]}", not g or h`);
+      else if (b[2] && !CHORES[who]?.some((c) => c.kind === b[2])) bad(`visit ${v.id}[${i}]: ${b[2]} is not one of ${who}'s chores`);
+    });
+  }
+  for (const id of ORDER) {
+    if (VISITS.filter((v) => v.g === id).length < 2) bad(`${id} calls on others in fewer than 2 visits`);
+    if (!VISITS.some((v) => v.h === id)) bad(`nobody calls on ${id}`);
+  }
+  for (const f of F) for (const [x, y] of [[f.a, f.b], [f.b, f.a]]) if (!VISITS.some((v) => v.g === x && v.h === y)) bad(`${x} has no visit to best friend ${y}`);
+
   /* ---- Signature voices: one fixed phrase and tone each, spoken on every tap ---- */
   if (!sameSet(Object.keys(P.SIGNATURE ?? {}), ORDER)) bad(`SIGNATURE is keyed by ${Object.keys(P.SIGNATURE ?? {}).join()}, not the eight pets`);
   for (const id of ORDER) {
@@ -268,12 +294,12 @@ export async function checkPets() {
   if (o.slice(0, 8).map((x) => x.id).join() === o.slice(0, 8).map((x) => x.id).sort().join()) bad('inside a stage the order is the learner\'s own, not by id or difficulty');
   if (journeyOrder([...items].reverse()).map((x) => x.id).join() !== o.map((x) => x.id).join()) bad('the learner\'s order is stable whatever order the registry lists');
 
-  return { problems, lines: lines.length };
+  return { problems, lines: lines.length, visits: VISITS.length };
 }
 
 if (process.argv[1]?.endsWith('check-pets.mjs')) {
-  const { problems, lines } = await checkPets();
-  if (!problems.length) { console.log(`✓ eight friends, five friendships, ten house stages each, ${lines} lines in voice (≤ 96 chars, no em dash, no banned words), five requests and five stories each`); process.exit(0); }
+  const { problems, lines, visits } = await checkPets();
+  if (!problems.length) { console.log(`✓ eight friends, five friendships, ${visits} visits between them, ten house stages each, ${lines} lines in voice (≤ 96 chars, no em dash, no banned words), five requests and five stories each`); process.exit(0); }
   console.log(`✗ ${problems.length} problem(s):`);
   for (const p of problems) console.log('  ' + p);
   process.exit(1);

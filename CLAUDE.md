@@ -13,7 +13,7 @@ Offline-first, no-build PWA for CAT VARC prep, presented as a painted village wh
 
 | Task | Read | Code |
 |---|---|---|
-| Village screen, friend cards, walking, motion, sprites | `docs/ARCHITECTURE.md` §Village | `src/home/*`, `src/pets/sprite.js`, `src/pets/pets.js` |
+| Village screen, friend cards, walking, visits, motion, sprites | `docs/ARCHITECTURE.md` §Village, `docs/DEV-NOTES.md` §Village | `src/home/*`, `src/pets/paths.js`, `src/pets/visits.js`, `src/pets/sprite.js`, `src/pets/pets.js` |
 | Glow, levels, growth stages, ages, achievements | §Economy | `src/pets/glow.js`, `economy.js`, `progress.js`, `pets.js` |
 | A learning room (RC, PJ, PS, OOO, Word DNA, bank, Rootwood) | §Rooms | `src/modules/<room>/`, `src/core/engine/*-session.js`, `src/world/screens/` |
 | What to show next, ledgers, mentor voice, noticing | §Learning core | `src/core/learning/*`, `src/world/curator.js` |

@@ -10,6 +10,8 @@
  * each) and measures every friend against the path, every 5 frames:
  *
  *   - no friend is ever more than 1 px from an edge of the walk graph;
+ *   - a visit (Ginger asks Mochi for a favour, they walk to the workshop
+ *     together) says every line in turn and stays on the path;
  *   - a party called while friends are mid-walk (they turn at the next node,
  *     never cut across the ground) gathers all eight on the plaza, still on it;
  *   - the village keeps roaming: friends are on the move in every minute (a
@@ -19,6 +21,7 @@
  */
 import { serveRepo, launchChrome, findChrome } from './cdp-lite.mjs';
 import { NODES, EDGES } from '../src/pets/paths.js';
+import { VISIT_BY_ID } from '../src/pets/visits.js';
 
 if (!findChrome()) { console.log('SKIPPED: no Chrome'); process.exit(0); }
 
@@ -30,7 +33,7 @@ const HOOK = `(() => {
   window.cancelAnimationFrame = () => {};
   const re = /translate3d\\(([-\\d.]+)px,\\s*([-\\d.]+)px/;
   const off = (x, y) => { let m = 1e9; for (const [a, b] of EDGES) { const A = NODES[a], B = NODES[b], dx = B.x - A.x, dy = B.y - A.y, l2 = dx * dx + dy * dy; const t = Math.max(0, Math.min(1, ((x - A.x) * dx + (y - A.y) * dy) / l2)); m = Math.min(m, Math.hypot(x - A.x - t * dx, y - A.y - t * dy)); } return m; };
-  const stat = window.__walk = { samples: 0, worst: 0, at: '', walking: {}, seen: {}, errors: [] };
+  const stat = window.__walk = { samples: 0, worst: 0, at: '', walking: {}, seen: {}, said: [], errors: [] };
   window.__run = (n) => {
     for (let i = 0; i < n; i += 1) {
       T += ${DT};
@@ -43,6 +46,13 @@ const HOOK = `(() => {
         if (d > stat.worst) { stat.worst = d; stat.at = el.dataset.pet + ' ' + s + ' ' + m[1] + ',' + m[2]; }
         if (s === 'walk') { const min = Math.floor(T / 60000); stat.walking[min] = (stat.walking[min] || 0) + 1; }
         (stat.seen[el.dataset.pet] ||= {})[s] = 1;
+      }
+      // What is said during a visit, in order (the bubbles of the greeting at arrival are not part of it).
+      if (document.querySelector('.cw').dataset.visit) for (const top of document.querySelectorAll('.cw .pet-top')) {
+        const bub = top.querySelector('.pet-bubble');
+        if (!bub || bub.hidden || bub.classList.contains('is-out')) continue;
+        const said = top.dataset.pet + ': ' + bub.textContent.trim();
+        if (!stat.said.includes(said)) stat.said.push(said);
       }
     }
   };
@@ -88,6 +98,20 @@ try {
   const mins = [0, 1].map((m) => w.walking[m] ?? 0);
   ok(mins.every((n) => n > 100), `friends stopped roaming: walking samples per minute ${mins.join(', ')}`);
 
+  // A friend calls on another (src/pets/visits.js): Ginger asks Mochi for a favour; they say every line in turn,
+  // walk to the workshop together (the pebble follows) and Mochi goes home. All of it on the path.
+  const scene = VISIT_BY_ID.get('ginger-mochi');
+  await ev('Object.assign(window.__walk, { worst: 0, said: [] }); 1');
+  for (let i = 0; i < 200 && !(await ev(`document.querySelector('.cw').__village.callOn('ginger-mochi')`)); i += 1) await run(60);
+  ok(await ev(`!!document.querySelector('.cw').dataset.visit`), 'Ginger could not call on Mochi (a friend who is free, awake and at home)');
+  for (let i = 0; i < 60 && (await ev(`!!document.querySelector('.cw').dataset.visit`)); i += 1) await run(150);
+  ok(!(await ev(`!!document.querySelector('.cw').dataset.visit`)), 'the visit never ended');
+  w = await ev('JSON.parse(JSON.stringify(window.__walk))');
+  ok(!w.errors.length, `the village threw during the visit: ${w.errors[0]}`);
+  ok(w.worst <= 1, `a friend left the path during the visit, ${w.worst.toFixed(1)} px off (${w.at})`);
+  const want = scene.beats.filter((b) => b !== 'go').map(([who, text]) => `${who === 'g' ? scene.g : scene.h}: ${text}`);
+  ok(want.every((l, i) => w.said.includes(l) && (!i || w.said.indexOf(l) > w.said.indexOf(want[i - 1]))), `the visit's lines were not all said in turn: ${w.said.join(' | ')}`);
+
   // A party called while friends are mid-walk: they finish the step in hand, turn at the node, and gather.
   for (let i = 0; i < 40 && (await ev(`[...document.querySelectorAll('.cw .pet')].filter((e) => e.dataset.state === 'walk').length`)) < 2; i += 1) await run(60);
   await ev(`document.querySelector('.cw').__village.party('chai', { ms: 20000 }); window.__walk.seen = {}; 1`);
@@ -98,7 +122,7 @@ try {
   const cheered = Object.entries(w.seen).filter(([, s]) => s.cheer).map(([id]) => id);
   ok(cheered.length === 8, `only ${cheered.join(', ')} reached the party`);
 
-  console.log(`walk: ${w.samples} positions of eight friends over ${((6000 + 1200) * DT / 60000).toFixed(1)} village minutes, none more than ${w.worst.toFixed(2)} px off the path; a party mid-walk gathered all eight (${checks} checks)`);
+  console.log(`walk: ${w.samples} positions of eight friends over ${((6000 + 1200) * DT / 60000).toFixed(1)} village minutes, none more than ${w.worst.toFixed(2)} px off the path; Ginger's call on Mochi said every line in turn; a party mid-walk gathered all eight (${checks} checks)`);
 } catch (err) {
   console.log(`✗ ${err.message}`);
   process.exitCode = 1;

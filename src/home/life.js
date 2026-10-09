@@ -7,9 +7,12 @@
  *                on its own two feet (an owl waddles, a pebble plods, a fox
  *                trots, a flame bounces, a cloud floats), does chores round
  *                its home with a prop in hand (watering, sweeping, reading,
- *                hammering, sipping tea, raining on the flowers), visits its
- *                best friend, chats on the plaza, greets you when you arrive
- *                and goes home to sleep at night.
+ *                hammering, sipping tea, raining on the flowers), calls on
+ *                another friend for a small story of daily life (a favour, a
+ *                borrowed chair, a word of the day: src/pets/visits.js), chats
+ *                on the plaza, greets you when you arrive and goes home to
+ *                sleep at night. A friend stands only on a node of the path
+ *                (src/pets/paths.js) and turns only at one.
  *   THE AIR      one canvas the size of the screen (plus a margin), moved
  *                with the camera and drawn at the screen's own sharpness:
  *                what each house has grown (src/home/houses.js), fire
@@ -29,6 +32,7 @@
 import { NODES, HOMES, SPOTS, CHATS, route, FIRE, CHIMNEYS, TEAPOT, POND, CLOCK, TREASURE_AT, MAP } from '../pets/paths.js';
 import { FRAME, growOf } from '../pets/sprite.js';
 import { PETS, PET_BY_ID, SIGNATURE, gossipLine, lineFor, dealLine } from '../pets/pets.js';
+import { VISITS, VISIT_BY_ID } from '../pets/visits.js';
 import { rng } from '../world/engine/palette.js';
 import { voice, signature } from '../world/audio.js';
 import { createWater } from './water.js';
@@ -142,7 +146,7 @@ export function createLife(root, { pets: petsState, atmo, reduced, view = null, 
   const walkTo = (a, nodeId, next = 'idle') => {
     const pts = route(a.node, nodeId);
     if (!pts.length) return false;
-    if (Math.hypot(pts[0].x - a.x, pts[0].y - a.y) < 4) pts.shift();
+    if (Math.hypot(pts[0].x - a.x, pts[0].y - a.y) < 0.5) pts.shift();   // already on the node (a few px short of it is still the way to it)
     if (pts.length) a.node = pts[0].id;
     a.target = nodeId; a.path = pts; a.state = 'walk'; a.next = next;
     endChore(a);
@@ -154,6 +158,16 @@ export function createLife(root, { pets: petsState, atmo, reduced, view = null, 
   const freeNode = (list, a) => {
     const free = list.filter((n) => !taken(n, a) && (n === a.home || !HOME_NODES.has(n)));
     return free.length ? pickOf(free) : null;
+  };
+  /** The free node closest to `nodeId`: a greeting meets you where you are looking, never on top of a friend. */
+  const nearFree = (nodeId, a) => {
+    const at = NODES[nodeId] ?? NODES.pc;
+    let best = nodeId, bd = Infinity;
+    for (const [n, p] of Object.entries(NODES)) {
+      const d = Math.hypot(p.x - at.x, p.y - at.y);
+      if (d < bd && !taken(n, a) && (n === a.home || !HOME_NODES.has(n))) { bd = d; best = n; }
+    }
+    return best;
   };
 
   /** The next line a friend has not said lately (a shuffled deck, kept across visits). */
@@ -177,11 +191,12 @@ export function createLife(root, { pets: petsState, atmo, reduced, view = null, 
   };
 
   /* ---- Chores ---- */
-  const startChore = (a) => {
+  /** A chore of its own: a given `kind` for `ms` (a visit's beat), or any, for as long as it takes. */
+  const startChore = (a, kind = null, ms = 0) => {
     const list = CHORES[a.id];
-    if (!list?.length) return false;
-    const c = pickOf(list);
-    a.chore = { ...c, until: now + rand(c.ms[0], c.ms[1]) };
+    const c = kind ? list?.find((x) => x.kind === kind) : list?.length ? pickOf(list) : null;
+    if (!c) return false;
+    a.chore = { ...c, until: now + (ms || rand(c.ms[0], c.ms[1])) };
     a.state = 'chore'; a.until = a.chore.until; a.emitAt = now + 300;
     a.facing = Math.random() < 0.5 ? -1 : 1;
     a.el.dataset.chore = c.kind;
@@ -214,6 +229,7 @@ export function createLife(root, { pets: petsState, atmo, reduced, view = null, 
     if (a.id === 'toffee') {
       if (night()) { a.state = r < 0.6 ? 'sleep' : 'idle'; a.until = now + rand(8e3, 16e3); return; }
       if (a.node !== a.home && r < 0.5) { walkTo(a, a.home, 'idle'); return; }
+      if (r >= 0.88 && now >= nextSocialAt && !chats.length && startVisit(a)) return;
       if (r < 0.4 && startChore(a)) return;
       if (r < 0.5) { const n = freeNode(SPOTS.fire.filter((x) => x !== a.node), a); if (n) { walkTo(a, n, 'idle'); return; } }
       if (r < 0.6) { const n = freeNode(['kiosk', 'ps', 's2'], a); if (n) { walkTo(a, n, 'idle'); return; } }
@@ -229,7 +245,7 @@ export function createLife(root, { pets: petsState, atmo, reduced, view = null, 
     // there and back, so only a few decisions in a hundred are a stroll, and one social call (a chat) runs at a time.
     const away = !YARD[a.id].includes(a.node);
     if (r < (away ? 0.6 : 0.7)) { goChore(a); return; }
-    if (r >= 0.85 && r < 0.96 && now >= nextSocialAt && !chats.length && w !== 'missing' && startChat(a)) return;
+    if (r >= 0.85 && r < 0.96 && now >= nextSocialAt && !chats.length && !visit && w !== 'missing' && ((Math.random() < 0.7 && startVisit(a)) || startChat(a))) return;
     if (r >= 0.96) {
       if (r < 0.98) { const n = freeNode(SPOTS.plaza, a); if (n) { walkTo(a, n, 'idle'); return; } }
       if (r < 0.985) { const n = freeNode(SPOTS.bench, a); if (n) { walkTo(a, n, 'sit'); return; } }
@@ -263,7 +279,7 @@ export function createLife(root, { pets: petsState, atmo, reduced, view = null, 
       if (c.a.state !== 'wait' || c.b.state !== 'wait') continue;
       if (!c.at) { c.a.facing = c.b.x >= c.a.x ? 1 : -1; c.b.facing = -c.a.facing; c.at = now; }
       if (now < c.at) continue;
-      if (c.step >= c.n) { chats.splice(i, 1); c.a.partner = c.b.partner = null; nextSocialAt = now + rand(20e3, 45e3); decide(c.a); decide(c.b); continue; }
+      if (c.step >= c.n) { chats.splice(i, 1); c.a.partner = c.b.partner = null; nextSocialAt = now + rand(15e3, 35e3); decide(c.a); decide(c.b); continue; }
       const speaker = c.step % 2 ? c.b : c.a;
       let text = pickOf(CHAT_ICONS);
       if (Math.random() < 0.35) {
@@ -274,6 +290,64 @@ export function createLife(root, { pets: petsState, atmo, reduced, view = null, 
       if (text === '♥') { speaker.happyUntil = now + 900; heart(speaker); }
       c.step += 1; c.at = now + (text.length > 3 ? 3200 : 1900);
     }
+  };
+
+  /* ---- One friend calls on another (src/pets/visits.js) ---- */
+  let visit = null;
+  const recent = [];   // the last few scenes, so one does not come round again at once
+  /** The host is at home, awake and free; the spot beside its door (and, for a favour, beside the guest's) is empty. */
+  const callable = (s, g) => {
+    const h = byId.get(s.h);
+    return !!h && h !== g && !h.partner && AWAKE.has(h.word) && h.node === h.home && (h.state === 'idle' || h.state === 'chore')
+      && !taken(HOMES[h.id].side, g, h) && (!s.beats.includes('go') || !taken(HOMES[g.id].side, g, h));
+  };
+  const startVisit = (a, only = null) => {
+    if (visit || night() || a.partner) return false;
+    const ok = (only ? [only] : VISITS.filter((s) => s.g === a.id && !recent.includes(s.id))).filter((s) => callable(s, a));
+    if (!ok.length) return false;
+    const s = pickOf(ok), h = byId.get(s.h), side = HOMES[h.id].side;
+    if (!walkTo(a, side, 'wait')) return false;
+    endChore(h);
+    h.partner = a; a.partner = h; h.state = 'wait'; h.until = 1e9; h.facing = NODES[side].x >= h.x ? 1 : -1;
+    visit = { g: a, h, s, step: 0, at: 0, until: now + 18e4 };
+    recent.push(s.id); if (recent.length > 6) recent.shift();
+    root.dataset.visit = s.id;
+    return true;
+  };
+  const endVisit = (done) => {
+    const { g, h } = visit;
+    visit = null; delete root.dataset.visit;
+    nextSocialAt = now + rand(15e3, 35e3);
+    for (const x of [g, h]) {
+      if (x.partner === (x === g ? h : g)) x.partner = null;
+      if (x.state !== 'wait' && x.state !== 'chore') continue;   // already off on its own (a party, an introduction)
+      if (done) { x.reactUntil = now + 600; heart(x); }
+      if (x.node !== x.home) walkTo(x, x.home, 'idle'); else decide(x);
+    }
+  };
+  const runVisit = () => {
+    const v = visit;
+    if (!v) return;
+    const { g, h } = v;
+    if (g.partner !== h || h.partner !== g || now > v.until) { endVisit(false); return; }
+    if (g.state !== 'wait' || h.state !== 'wait' || now < v.at) return;   // still walking, or a line is being said
+    const b = v.s.beats[v.step];
+    if (!b) { endVisit(true); return; }
+    v.step += 1;
+    if (b === 'go') {   // a favour: they walk to the guest's home together (the host takes the spot beside it)
+      const there = HOMES[g.id].side;
+      if (taken(there, g, h)) { endVisit(false); return; }
+      walkTo(g, g.home, 'wait'); walkTo(h, there, 'wait');
+      return;
+    }
+    const [who, text, kind] = b, s = who === 'g' ? g : h, o = s === g ? h : g;
+    const ms = Math.max(2200, Math.min(5600, 1400 + text.length * 50));
+    if (o.sayUntil) o.sayUntil = now;   // one bubble at a time
+    if (kind) startChore(s, kind, ms);
+    s.facing = o.x >= s.x ? 1 : -1; o.facing = -s.facing;
+    say(s, `<span>${text}</span>`, ms, { soft: true });
+    if (v.step === 1) { h.reactUntil = now + 600; h.happyUntil = now + 1200; heart(h); }
+    v.at = now + ms + 400;
   };
 
   /* ---- A finished set: everyone runs to the plaza and cheers ---- */
@@ -315,7 +389,8 @@ export function createLife(root, { pets: petsState, atmo, reduced, view = null, 
         emit('sparkle', a.x + rand(-14, 14), a.y - a.size * rand(0.5, 1));
       }
     } else if (a.state === 'chore') {
-      if (now > a.chore.until) { decide(a); return; }
+      // A friend in the middle of a visit goes back to waiting for the next line; any other picks its next thing.
+      if (now > a.chore.until) { if (a.partner) { endChore(a); a.state = 'wait'; a.until = 1e9; } else decide(a); return; }
       if (now > a.emitAt) {
         a.emitAt = now + a.chore.every * rand(0.7, 1.3);
         const k = a.chore.kind === 'rain' ? 'raindrop' : a.chore.emit;
@@ -335,6 +410,8 @@ export function createLife(root, { pets: petsState, atmo, reduced, view = null, 
     if (next === 'cheer') { startCheer(a); return; }
     if (next === 'chore') { if (!startChore(a)) { a.state = 'idle'; a.until = now + 3000; } return; }
     if (next === 'greet') { a.state = 'idle'; a.until = now + rand(3000, 5000); return; }
+    // Nobody to wait for (the call was cut short on the way): carry on with the day.
+    if (next === 'wait' && !a.partner) { a.state = 'idle'; a.until = now + rand(1500, 3000); return; }
     // A stroll is worth the walk: it lingers a while where it stops.
     a.state = next; a.until = now + (next === 'sleep' ? rand(15e3, 30e3) : next === 'sit' ? rand(5e3, 10e3) : next === 'wait' ? 1e9 : next === 'idle' && !YARD[a.id].includes(a.node) ? rand(6e3, 12e3) : rand(2500, 6000));
   };
@@ -735,6 +812,7 @@ export function createLife(root, { pets: petsState, atmo, reduced, view = null, 
     if (!reduced) {
       for (const a of actors) stepPet(a, dt);
       runChats();
+      runVisit();
     }
     for (const a of actors) paintPet(a);
     if (!reduced) air(dt);
@@ -777,11 +855,13 @@ export function createLife(root, { pets: petsState, atmo, reduced, view = null, 
         say(a, `<span>${deal(a.id, night() ? 'arriveNight' : 'arrive')}</span>`, 2400, { speak: false });
       }, 500 + i * 420));
     },
+    /** For the browser gates: that visit now, if the guest and host are free. */
+    callOn(id) { const s = VISIT_BY_ID.get(id); const g = s && byId.get(s.g); return !reduced && !!g && startVisit(g, s); },
     /** A friend comes to meet you at a node and says something. */
     comeSay(id, nodeId, line) {
       const a = byId.get(id);
       if (!a) return;
-      if (reduced || !walkTo(a, nodeId, 'greet')) { say(a, `<span>${line}</span>`, 5200); return; }
+      if (reduced || !walkTo(a, nearFree(nodeId, a), 'greet')) { say(a, `<span>${line}</span>`, 5200); return; }
       const wait = setInterval(() => {
         if (destroyed) { clearInterval(wait); return; }
         if (a.state !== 'walk') { clearInterval(wait); a.reactUntil = now + 700; a.happyUntil = now + 2400; heart(a); say(a, `<span>${line}</span>`, 5200); }
@@ -861,4 +941,4 @@ export function createLife(root, { pets: petsState, atmo, reduced, view = null, 
   };
 }
 
-export { CLOCK };
+export { CLOCK, CHORES };

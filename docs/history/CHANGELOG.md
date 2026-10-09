@@ -4,6 +4,13 @@
 > Versions here are app releases; they map onto the capability milestones in
 > `PROJECT_ROADMAP.md` (0.x releases build toward Roadmap V1.0).
 
+## 3.10.0: Friends call on each other (2026-10-09)
+
+- Friends now visit each other's homes and talk, in 18 short scenes of daily life (`src/pets/visits.js`), each in the two voices: Biscuit tests Chai's library chairs ("Twice? Then I shall test them a third time. For science."); Ginger asks Mochi for a favour (a map that keeps blowing off the bench needs something heavy and calm, which is what a pebble is) and the two walk to the workshop together; Toffee comes to warm Matcha's shivering greenhouse; Mallow drizzles on thirsty leaves; Sesame finishes Mochi's sentences; Chai reads Toffee every page with fire in it, cookbook included. Every best friendship runs both ways, and every friend is a guest in at least two scenes.
+- How it plays: the guest walks to the node beside the host's door (`HOMES[].side`) while the host waits; they take turns in speech bubbles (one at a time, soft calls) and each does a chore of its own while speaking (tea, reading, hammering, kneading, raining, dancing); a favour sends them to the guest's home together and the host walks back alone. One social call at a time (a chat or a visit), 15 to 35 s apart, by day only, and never over a party or an introduction.
+- Cost: no new timer, canvas or per-frame allocation; one small scene object at a time and about a hundred short lines of data. Friends who are off screen still live their day, as before.
+- Gates: `check-pets` checks every scene (who speaks, chores that friend really has, the copy rules, no line said twice, both ways for every best friendship); `check-walk` plays Ginger's call on Mochi in the real village and fails unless every line is said in turn and everyone stays on the path.
+
 ## 3.9.1: Friends walk only on the path (2026-10-09)
 
 - Biscuit was walking on the cottage railing. Cause: every walk ended with a sideways offset (chores ±16 px, chats ±30, greetings ±20, the party ring ±150 by ±70) and the next walk started with a straight line to the nearest node, so a friend stood and crossed wherever the painting had a fence, a step or a flowerbed. In a 7 minute run Biscuit was more than 8 px off the road 22% of the time, up to 30 px for a chat on the plaza.
