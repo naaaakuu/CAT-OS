@@ -20,9 +20,13 @@
  * that changed, because the default is what gets read.
  *
  * Presentation only: set `.data = { question, chosen }`.
+ *
+ * In the Android app everything after the verdict waits behind one short
+ * video (core/ads/rewarded.js); the verdict itself is never locked.
  */
 
 import { escapeHTML } from '../../core/utils/format.js';
+import { isUnlocked, lockCard } from '../../core/ads/rewarded.js';
 
 /** Trap types, said as a reader would say them rather than as data. */
 const TRAP_NAME = {
@@ -144,8 +148,11 @@ function firstSentence(text, max = 190) {
 class CatExplanation extends HTMLElement {
   #q = null;
   #chosen = null;
+  #open = () => this.#render();
 
   set data({ question, chosen }) { this.#q = question; this.#chosen = chosen ?? null; this.#render(); }
+  connectedCallback() { window.addEventListener('catos:why-open', this.#open); }
+  disconnectedCallback() { window.removeEventListener('catos:why-open', this.#open); }
 
   #render() {
     if (!this.#q) return;
@@ -260,6 +267,9 @@ class CatExplanation extends HTMLElement {
             : `You chose ${escapeHTML(chosen)}. The answer is <b>${escapeHTML(q.correct)}</b>.`}</span>
       </div>
 
+      ${!isUnlocked() ? lockCard({ text: correct
+        ? 'Why the answer holds, the evidence in the passage, and every other option taken apart.'
+        : 'Why your pick tempted you, why the answer holds, and every other option taken apart.' }) : `
       ${correct ? '' : TRAP_HTML}${WHY_HTML}${correct ? TRAP_HTML : ''}
 
       <button type="button" class="more" id="more" aria-expanded="false" aria-controls="working">Show the full working</button>
@@ -287,7 +297,7 @@ class CatExplanation extends HTMLElement {
               <p>${escapeHTML(habit)}</p>
             </div>
           </div>` : ''}
-      </div>
+      </div>`}
     `;
 
     const more = this.querySelector('#more');

@@ -4,6 +4,15 @@
 > Versions here are app releases; they map onto the capability milestones in
 > `PROJECT_ROADMAP.md` (0.x releases build toward Roadmap V1.0).
 
+## 3.11.0: CAT OS on Google Play (2026-10-09)
+
+- An Android app (`android/`, `com.nakulcreations.catos`): one WebView that serves the whole web app from inside the APK, so it opens instantly and never downloads itself (no service worker, no library sync in the app). Target API 36, edge to edge with the icon's green behind the system bars, back walks the app's history and leaves from the village, backups save through "Save as" and import through the file picker. Signed AAB about 19 MB.
+- Free with one kind of ad. After an answer the verdict is free; the full explanation (the trap, the why, every other option, the mentor's lesson at the end of a run, the passage explained simply) waits behind "Watch a short video" (AdMob rewarded, the only ad). One video opens every explanation for 20 minutes; a video that cannot be found opens it anyway; closing early keeps it shut and says so. Locks in RC, review, second look, the bank, PJ, PS, OOO and their Learning Pages.
+- The free app plays online only (the videos need it): offline, a calm wall covers the app and lifts when the network returns, with nothing lost underneath.
+- CAT OS Pro (`#/pro`), sold through Google Play: no videos, everything open, plays offline. ₹499 a year or ₹1,299 lifetime; prices on screen come from Play. "Are videos interrupting your study session?" on every lock and in Settings.
+- Settings: Pro, Share CAT OS (the Play link through the share sheet), the privacy policy (`privacy.html`). The web version is unchanged: nothing locked, still offline-first.
+- Gates: `tools/check-app-shell.mjs` drives all of it with a fake bridge (17 checks). Store images: `tools/store/render.mjs`.
+
 ## 3.10.0: Friends call on each other (2026-10-09)
 
 - Friends now visit each other's homes and talk, in 18 short scenes of daily life (`src/pets/visits.js`), each in the two voices: Biscuit tests Chai's library chairs ("Twice? Then I shall test them a third time. For science."); Ginger asks Mochi for a favour (a map that keeps blowing off the bench needs something heavy and calm, which is what a pebble is) and the two walk to the workshop together; Toffee comes to warm Matcha's shivering greenhouse; Mallow drizzles on thirsty leaves; Sesame finishes Mochi's sentences; Chai reads Toffee every page with fire in it, cookbook included. Every best friendship runs both ways, and every friend is a guest in at least two scenes.

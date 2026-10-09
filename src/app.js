@@ -23,6 +23,8 @@ import { silenceWorld, startMusic } from './world/audio.js';
 import { hourWord } from './world/engine/palette.js';
 import { initFeedback, installGlobalFeedback } from './core/engagement/feedback.js';
 import { loadTheme, applyTheme, loadReadingSize, applyReadingSize, applyMotion } from './shell/prefs.js';
+import { installOnlineGate } from './shell/online-gate.js';
+import { inApp } from './core/native.js';
 import './ui/components/cat-nav.js';
 
 /* ------------------------------------------------------------------ */
@@ -47,7 +49,7 @@ window.addEventListener('unhandledrejection', (e) => {
 /* Storage + theme                                                    */
 /* ------------------------------------------------------------------ */
 
-const APP_VERSION = '3.10.0'; // keep in step with CHANGELOG.md
+const APP_VERSION = '3.11.0'; // keep in step with CHANGELOG.md and android/app/build.gradle versionName
 
 const storage = new IndexedDBAdapter();
 
@@ -98,6 +100,9 @@ function renderNotFound(outlet) {
 /* ------------------------------------------------------------------ */
 
 async function boot() {
+  // 0. In the Android app a free player plays online (shell/online-gate.js).
+  installOnlineGate();
+
   // 1. Storage first — the theme depends on it. If IndexedDB is
   //    unavailable the app still runs; it just can't persist yet.
   try {
@@ -128,6 +133,7 @@ async function boot() {
     // on, so they load when they are opened (see the RC module for why).
     .register({ path: '/growth',   title: 'Growth',   render: (o) => import('./shell/growth.js').then((m) => m.renderGrowth(o, { storage })) })
     .register({ path: '/settings', title: 'Settings', render: (o) => import('./shell/settings.js').then((m) => m.renderSettings(o, { storage, version: APP_VERSION })) })
+    .register({ path: '/pro',      title: 'CAT OS Pro', render: (o) => import('./shell/pro.js').then((m) => m.renderPro(o)) })
     .registerNotFound({ title: 'Not found', render: renderNotFound });
 
   registerRC(router, { storage });
@@ -260,6 +266,10 @@ async function boot() {
   // keep the files. It used to live INSIDE the try below, so a registration
   // that threw — a host that cannot serve the worker, a private window —
   // meant the library was never fetched at all.
+  // The Android app carries every file inside it (android/), so there is
+  // nothing to download and no worker to keep: both are web-only.
+  if (inApp) return;
+
   startLibrarySync({ delayMs: 7000 });
 
   if ('serviceWorker' in navigator) {

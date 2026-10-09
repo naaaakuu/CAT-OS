@@ -5,8 +5,8 @@
  * 3.2: it opens on "Explained simply" (mentor.eli10): the big idea, the
  * passage told the way you would tell a ten-year-old, one line per
  * paragraph, and what the writer thinks. Everything below folds under "Go
- * deeper". The whole page is the extra a rewarded ad will one day open
- * (core/ads/rewarded.js); in this build it is free.
+ * deeper". In the app the whole page opens with one short rewarded video
+ * (core/ads/rewarded.js); on the web it is free.
  *
  * Design intent (0.6.0): a chapter from a beautiful book. A calm
  * monochrome illustration drawn for THIS passage's theme, then the
@@ -36,7 +36,7 @@ import { SEED_LINES } from '../../../core/mentor/garden-voice.js';
 import { escapeHTML } from '../../../core/utils/format.js';
 import { toast } from '../../../ui/components/cat-toast.js';
 import { cue } from '../../../core/engagement/feedback.js';
-import { isUnlocked, unlockWithAd } from '../../../core/ads/rewarded.js';
+import { isUnlocked, lockCard } from '../../../core/ads/rewarded.js';
 import '../../../ui/components/cat-reflection.js';
 
 /* ------------------------------------------------------------------ */
@@ -324,8 +324,8 @@ export async function renderMentor(outlet, { storage }, params) {
     return;
   }
 
-  /* The explanation of a whole passage is the extra a rewarded ad will one
-     day open (core/ads/rewarded.js). Today no ad is wired, so this is open. */
+  /* The explanation of a whole passage opens with one short video in the
+     app (core/ads/rewarded.js) and stays open on this device. */
   const key = `explain:${item.meta.id}`;
   if (!isUnlocked(key)) {
     outlet.innerHTML = `
@@ -336,22 +336,10 @@ export async function renderMentor(outlet, { storage }, params) {
             <p class="screen__eyebrow">Explain this passage simply</p>
             <h1 class="mentor__title">${escapeHTML(item.passage.title)}</h1>
           </header>
-          <div class="card mentor__lock">
-            <p>The whole passage in plain words, paragraph by paragraph, and what the writer really thinks. Watch one short video to open it. It stays open on this device.</p>
-            <button class="btn btn--primary" id="unlock">Watch and open</button>
-            <p class="hint" id="unlock-said" role="status" aria-live="polite"></p>
-          </div>
+          ${lockCard({ key, title: 'The passage, explained simply', text: 'The whole passage in plain words, paragraph by paragraph, and what the writer really thinks. It stays open on this device.' })}
         </article>
       </section>`;
-    const btn = outlet.querySelector('#unlock');
-    btn.addEventListener('click', async () => {
-      btn.disabled = true;
-      btn.textContent = 'Playing…';
-      if (await unlockWithAd(key)) { if (outlet.isConnected) renderMentor(outlet, { storage }, params); return; }
-      btn.disabled = false;
-      btn.textContent = 'Watch and open';
-      outlet.querySelector('#unlock-said').textContent = 'The video did not finish, so the explanation is still closed. Try again any time.';
-    });
+    window.addEventListener('catos:why-open', () => { if (outlet.isConnected) renderMentor(outlet, { storage }, params); }, { once: true });
     return;
   }
 

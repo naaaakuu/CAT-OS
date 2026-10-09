@@ -8,7 +8,9 @@
  *   FEEL        haptics; reduced motion
  *   READING     reading size; theme
  *   YOUR DATA   export, import, storage used, start over
- *   ABOUT       the version
+ *   PRO         the Android app only: go Pro, or "you are Pro" (shell/pro.js)
+ *   SHARE       send the Play link to a friend
+ *   ABOUT       the version, the privacy policy
  */
 
 import { STORES } from '../core/storage/storage-adapter.js';
@@ -23,6 +25,7 @@ import { playSound } from '../core/engagement/audio.js';
 import { play, unlock, startMusic, startAmbience, musicEnabled } from '../world/audio.js';
 import { escapeHTML } from '../core/utils/format.js';
 import { workerStatus, librarySyncProgress, startLibrarySync } from '../core/content-loader/library-sync.js';
+import { inApp, isPro, shareApp, openExternal, PLAY_URL, PRIVACY_URL } from '../core/native.js';
 
 /* The three preferences the shell applies at boot live in prefs.js, so the
    boot path never has to load this screen. Re-exported here because that is
@@ -80,6 +83,14 @@ export function renderSettings(outlet, { storage, version }) {
       <h1>Settings</h1>
       <p class="cottage__line">Text size, sound, motion and your backup.</p>
 
+      ${inApp ? `
+      <div class="card">
+        <h2>CAT OS Pro</h2>
+        ${isPro()
+          ? row(icon('star', { size: 20 }), 'You are Pro', 'Every explanation open, no videos, plays offline. Thank you.', '<a class="btn" href="#/pro">Details</a>')
+          : row(icon('star', { size: 20 }), 'Go Pro', 'Are videos interrupting your study session? Pro opens every explanation and plays offline.', '<a class="btn btn--primary" href="#/pro">See Pro</a>')}
+      </div>` : ''}
+
       <div class="card">
         <h2>Reading</h2>
         ${row(icon('page', { size: 20 }), 'Text size', 'Changes passages, questions and lessons', `
@@ -122,17 +133,24 @@ export function renderSettings(outlet, { storage, version }) {
         <input type="file" id="backup-file" accept="application/json" hidden />
       </div>
 
+      ${inApp ? '' : `
       <div class="card">
         <h2>Offline</h2>
         <p class="row__hint">CAT OS downloads itself so it works on a train, in a basement, on a dead connection. The library arrives in the background, a few files at a time, and picks up where it stopped.</p>
         ${row(icon('check', { size: 20 }), 'Downloaded for offline', 'Checking…', '<button class="btn" id="offline-refresh">Check</button>')}
         <div class="offline-bar" id="offline-bar" aria-hidden="true"><i style="width:0%"></i></div>
+      </div>`}
+
+      <div class="card">
+        <h2>Share</h2>
+        ${row(icon('share', { size: 20 }), 'Share CAT OS', 'Send the app to a friend preparing for CAT', '<button class="btn" id="share-app">Share</button>')}
       </div>
 
       <div class="card">
         <h2>About</h2>
-        ${row(icon('cat', { size: 20 }), 'CAT OS', `Version ${version} · offline-first · your data stays yours`, '')}
-        ${row(icon('house', { size: 20 }), 'The village', 'Six friends, one for each part of CAT English. Learning is what keeps them well.', '<a class="btn" href="#/world">Open</a>')}
+        ${row(icon('cat', { size: 20 }), 'CAT OS', `Version ${version} · your data stays on this device`, '')}
+        ${row(icon('house', { size: 20 }), 'The village', 'Eight friends, one for each part of CAT English. Learning is what keeps them well.', '<a class="btn" href="#/world">Open</a>')}
+        ${row(icon('lock', { size: 20 }), 'Privacy policy', 'What the app keeps, and what it never collects', '<button class="btn" id="privacy">Read</button>')}
       </div>
     </section>`;
 
@@ -191,7 +209,15 @@ export function renderSettings(outlet, { storage, version }) {
       await refreshOffline();
     } finally { btn.disabled = false; }
   });
-  refreshOffline();
+  if (!inApp) refreshOffline();
+
+  /* ---- Share and privacy ---- */
+  outlet.querySelector('#share-app').addEventListener('click', async () => {
+    const r = await shareApp();
+    if (r === 'copied') toast('Link copied. Paste it to a friend.', 'info', { mute: true });
+    else if (r === 'failed') toast(PLAY_URL, 'info', { mute: true });
+  });
+  outlet.querySelector('#privacy').addEventListener('click', () => openExternal(PRIVACY_URL));
 
   /* ---- Audio ---- */
   const musicVol = outlet.querySelector('#music-volume');
@@ -270,7 +296,7 @@ export function renderSettings(outlet, { storage, version }) {
 
   /* ---- Backup & restore ---- */
   outlet.querySelector('#backup-export').addEventListener('click', async () => {
-    await downloadBackup(storage);
+    try { await downloadBackup(storage); } catch (err) { toast(err.message, 'info', { mute: true }); return; }
     cue('backupOk');
     toast('Backup saved', 'info', { mute: true });
   });

@@ -27,6 +27,7 @@
  */
 
 import { STORES } from './storage-adapter.js';
+import { NATIVE, ask } from '../native.js';
 
 const FORMAT = 'cat-os-backup';
 const FORMAT_VERSION = 2;
@@ -48,6 +49,12 @@ export async function exportAll(storage) {
 /** Trigger a download of the backup as a .json file (browser only). */
 export async function downloadBackup(storage) {
   const data = await exportAll(storage);
+  // A WebView cannot download a blob: the Android shell opens "Save as" instead.
+  if (NATIVE) {
+    const r = await ask('saveFile', `cat-os-backup-${data.exported_at.slice(0, 10)}.json`, JSON.stringify(data, null, 2));
+    if (!r?.ok) throw new Error(r?.reason === 'cancelled' ? 'Backup not saved.' : 'The backup could not be saved.');
+    return data;
+  }
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');

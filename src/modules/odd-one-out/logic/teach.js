@@ -26,6 +26,7 @@
 import { escapeHTML } from '../../../core/utils/format.js';
 import { OOO_TRAP_PATTERNS, OOO_VIOLATION_PATTERNS, OOO_TIE_LABELS } from '../../../core/mentor/ooo-voice.js';
 import { tierIndex } from './tiers.js';
+import { gated } from '../../../core/ads/rewarded.js';
 
 const SPINE_LABELS = Object.freeze({
   narrative: 'A story, told in order',
@@ -217,9 +218,11 @@ function working(html) {
     </details>`;
 }
 
+/* Everything here is the why, so in the app it all waits for one short
+   video (core/ads/rewarded.js); the verdict above it never does. */
 export function renderTeaching(item, answer) {
   const depth = teachDepth(item.meta.tier);
-  return `
+  return gated(`
     <div class="oox">
       ${renderCore(item)}
       ${renderViolation(item, answer)}
@@ -230,5 +233,5 @@ export function renderTeaching(item, answer) {
         ${renderHabit(item)}
       `)}
       ${renderTakeaway(item)}
-    </div>`;
+    </div>`, { text: 'What holds the paragraph together, why the odd sentence breaks it, and why your pick looked odd.' });
 }

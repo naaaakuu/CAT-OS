@@ -26,6 +26,7 @@ import { loadWorld, loadWorldRecords, deriveWorldState, petChangeLine } from '..
 import { newlyFinished } from '../../../world/collections.js';
 import { play, silenceWorld, startAmbience } from '../../../world/audio.js';
 import { escapeHTML } from '../../../core/utils/format.js';
+import { gated } from '../../../core/ads/rewarded.js';
 
 const KEYS = ['A', 'B', 'C', 'D', 'E'];
 const SIZE = 6;
@@ -174,11 +175,11 @@ export async function renderSecondLook(outlet, { storage }) {
         body.querySelector('#card').classList.add(correct ? 'is-right' : 'is-wrong');
         const trap = (q.explanation?.distractors ?? []).find((d) => d.option === chosen);
         const fb = body.querySelector('#feedback');
-        fb.innerHTML = correct
+        fb.innerHTML = gated(correct
           ? `<p class="look__why">${escapeHTML(q.explanation?.correct_reasoning ?? '')}</p>
              ${q.explanation?.reading_habit ? `<p class="look__habit">${escapeHTML(q.explanation.reading_habit)}</p>` : ''}`
           : `${trap ? `<p class="look__trap"><b>${escapeHTML(String(trap.trap_type ?? '').replace(/_/g, ' '))}</b>…${escapeHTML(trap.why_wrong ?? '')}</p>` : ''}
-             <p class="look__why">${escapeHTML(q.explanation?.correct_reasoning ?? '')}</p>`;
+             <p class="look__why">${escapeHTML(q.explanation?.correct_reasoning ?? '')}</p>`);
         const next = body.querySelector('#next');
         next.hidden = false;
         next.addEventListener('click', () => {

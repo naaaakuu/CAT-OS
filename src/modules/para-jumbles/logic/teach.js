@@ -16,6 +16,7 @@
 
 import { escapeHTML } from '../../../core/utils/format.js';
 import { PJ_TRAP_PATTERNS, DEVICE_LABELS, RELIABILITY_LABELS } from '../../../core/mentor/pj-voice.js';
+import { gated } from '../../../core/ads/rewarded.js';
 
 const MACRO_LABELS = Object.freeze({
   general_to_specific: 'General to specific',
@@ -177,10 +178,13 @@ function working(html) {
     </details>`;
 }
 
+/* The paragraph in its right order is part of the verdict; the why behind
+   it waits for one short video in the app (core/ads/rewarded.js). */
 export function renderTeaching(item, answer) {
   return `
     <div class="pjx">
       ${renderAssembled(item)}
+      ${gated(`
       ${renderLinks(item, answer)}
       ${working(`
         ${renderShape(item)}
@@ -188,6 +192,6 @@ export function renderTeaching(item, answer) {
         ${renderTemptations(item, answer)}
         ${renderTrap(item)}
       `)}
-      ${renderPlain(item)}
+      ${renderPlain(item)}`, { text: 'Why each sentence sits where it does, the order that tempted you, and the trap named so you see it next time.' })}
     </div>`;
 }

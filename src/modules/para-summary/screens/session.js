@@ -32,6 +32,7 @@ import { saveDraft, loadDraft, clearDraft } from '../../../core/learning/draft.j
 import { savePSResults, saveOwnSummary } from '../logic/store.js';
 import { psJourneyOrder, tierInfo } from '../logic/tiers.js';
 import { renderTeaching } from '../logic/teach.js';
+import { gated, LESSON } from '../../../core/ads/rewarded.js';
 import { thinkQuestions } from '../logic/think.js';
 import { STORES } from '../../../core/storage/storage-adapter.js';
 import { sessionXP } from '../../../core/engagement/xp.js';
@@ -441,7 +442,7 @@ export async function renderPSSession(outlet, { storage }, params) {
           ${lesson ? `
             <h1 class="moment__opening">${escapeHTML(lesson.opening)}</h1>
 
-            <div class="moment__lesson">
+            ${gated(`<div class="moment__lesson">
               <span class="moment__chip">${escapeHTML(lesson.title)}</span>
               <div class="moment__block">
                 <div class="moment__label">The moment</div>
@@ -456,7 +457,7 @@ export async function renderPSSession(outlet, { storage }, params) {
                 <p>${escapeHTML(lesson.teach.notice)}</p>
               </div>
               ${lesson.teach.known ? `<p class="moment__known">${escapeHTML(lesson.teach.known)}</p>` : ''}
-            </div>
+            </div>`, LESSON)}
 
             ${lesson.item_id ? `
               <p class="hint" style="margin-bottom: var(--space-4)">

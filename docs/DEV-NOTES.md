@@ -42,6 +42,9 @@
 ## Shipping
 - `build-precache.mjs` after any precached change and after every `APP_VERSION` bump (`app.js`). New `src/pets/*.js` files too. `service-worker.js`, `content/index.json`, many src files are CRLF.
 - Bump `APP_VERSION`, add a CHANGELOG entry at the top of `docs/history/CHANGELOG.md`, commit, push `origin/main`.
+- Android release: bump `versionCode` (must rise every upload; scheme `MAJOR*10000+MINOR*100+PATCH`, 3.11.0 = 31100) and `versionName` in `android/app/build.gradle`, then from `android/`: `JAVA_HOME=D:\android-tools\jdk`, `ANDROID_HOME=D:\android-tools\sdk`, `.\gradlew.bat bundleRelease` → `app/build/outputs/bundle/release/app-release.aab`, upload in Play Console. Toolchain (JDK 21, SDK 36, Gradle 8.14.3) lives in `D:\android-tools`, outside the repo. The upload key is `D:\USER DATA\Desktop\CAT OS\android-keys\catos-upload.jks` (password in the README beside it), read through git-ignored `android/keystore.properties`; never commit either. Debug builds use Google's test ad unit.
+- The app's web files are copied at build time: a web change ships to Android only with a new AAB. Building while `verify.mjs` runs starves its browser sections (check-walk failed that way once); run them apart.
+- A WebView cannot download blobs or use Web Share: `backup.js` and `shareApp()` go through the bridge (`saveFile`, `share`). Anything new that needs the OS goes there too.
 
 ## Browser verification (no npm, no Playwright)
 - `tools/cdp-lite.mjs`: `findChrome`, `serveRepo` (async), `launchChrome`, `open`, `shot`, `send`, `close`. Bypasses the service worker and reloads with ignoreCache on purpose, so offline tests need that turned off for that leg. `open()` = navigate + reload and eats one-shot UI; arrive by `location.hash` for return-toast checks.
@@ -58,3 +61,4 @@
 - Glow follow-ups: mood weight still includes pace; the fire lights on any finished run; Word DNA garden visits are one question per family+kind.
 - Language Garden and lexicon word rounds have no draft/resume. Five weakness models still disagree. Button/radius/shadow consolidation pending. Village scene rebuilds whole per craft (11.4 ms).
 - Empty states (Records zero tiles, Gauntlet duplicate copy) not redesigned. `check-resume` village toast once showed +1 not +25 (not investigated). License unchosen.
+- Android: distributed in India only, so no consent form (add Google UMP before adding EEA/UK countries). Pro is checked on the device only (no server verification of purchase tokens). No `app-ads.txt` yet (needs a file at the root of the developer website's domain). Word DNA, word rounds, the Gauntlet and the Rootwood have no lock: they teach rather than explain an answer.

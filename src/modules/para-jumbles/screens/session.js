@@ -27,6 +27,7 @@ import { saveDraft, loadDraft, clearDraft } from '../../../core/learning/draft.j
 import { savePJResults, listPJSessions } from '../logic/store.js';
 import { pjJourneyOrder, tierInfo } from '../logic/tiers.js';
 import { renderTeaching } from '../logic/teach.js';
+import { gated, LESSON } from '../../../core/ads/rewarded.js';
 import { STORES } from '../../../core/storage/storage-adapter.js';
 import { sessionXP } from '../../../core/engagement/xp.js';
 import { deriveEngagement } from '../../../core/engagement/stats.js';
@@ -315,7 +316,7 @@ export async function renderPJSession(outlet, { storage }, params) {
           ${lesson ? `
             <h1 class="moment__opening">${escapeHTML(lesson.opening)}</h1>
 
-            <div class="moment__lesson">
+            ${gated(`<div class="moment__lesson">
               <span class="moment__chip">${escapeHTML(lesson.title)}</span>
               <div class="moment__block">
                 <div class="moment__label">The moment</div>
@@ -330,7 +331,7 @@ export async function renderPJSession(outlet, { storage }, params) {
                 <p>${escapeHTML(lesson.teach.notice)}</p>
               </div>
               ${lesson.teach.known ? `<p class="moment__known">${escapeHTML(lesson.teach.known)}</p>` : ''}
-            </div>
+            </div>`, LESSON)}
 
             ${lesson.item_id ? `
               <p class="hint" style="margin-bottom: var(--space-4)">

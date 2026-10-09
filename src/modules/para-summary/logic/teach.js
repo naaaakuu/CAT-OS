@@ -23,6 +23,7 @@
 
 import { escapeHTML } from '../../../core/utils/format.js';
 import { PS_TRAP_PATTERNS } from '../../../core/mentor/ps-voice.js';
+import { gated } from '../../../core/ads/rewarded.js';
 import { tierIndex } from './tiers.js';
 
 const ARCHITECTURE_LABELS = Object.freeze({
@@ -214,9 +215,11 @@ function working(html) {
     </details>`;
 }
 
+/* Everything here is the why, so in the app it all waits for one short
+   video (core/ads/rewarded.js); the verdict above it never does. */
 export function renderTeaching(item, answer) {
   const depth = teachDepth(item.meta.tier);
-  return `
+  return gated(`
     <div class="psx">
       ${renderWhyBest(item)}
       ${theTrap(item, answer)}
@@ -228,5 +231,5 @@ export function renderTeaching(item, answer) {
         ${renderHabit(item)}
       `)}
       ${renderTakeaway(item)}
-    </div>`;
+    </div>`, { text: 'Why the best summary holds, what your pick changed, and every other option taken apart.' });
 }

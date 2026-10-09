@@ -22,6 +22,7 @@ Offline-first, no-build PWA for CAT VARC prep, presented as a painted village wh
 | Content generation prompts and module Bibles | `KNOWLEDGE/README.md` | (outside the repo's `cat-os/`) |
 | Colour, theme, CSS, dialogs, a11y | §UI | `src/ui/styles/world.css` (palette owner), `src/ui/modal.js` |
 | Service worker, precache, offline, versioning | §Shipping | `service-worker.js`, `tools/build-precache.mjs` |
+| Android app, ads, Pro, Play release | §Shipping (The Android app), `docs/DEV-NOTES.md` §Shipping | `android/`, `src/core/native.js`, `src/core/ads/rewarded.js`, `src/shell/pro.js`, `src/shell/online-gate.js`, `tools/check-app-shell.mjs` |
 | Storage, backup, Start over, settings | §Storage | `src/core/storage/*`, `src/shell/settings.js` |
 | Tests, gates, driving a real browser | §Gates, `docs/DEV-NOTES.md` §Browser | `tools/verify.mjs`, `tools/cdp-lite.mjs` |
 | Product intent, copy, UX judgement | `docs/PRODUCT.md` | |
@@ -42,6 +43,7 @@ Offline-first, no-build PWA for CAT VARC prep, presented as a painted village wh
 - Serve: `npx serve .` (any static server; a service worker needs http). No install step.
 - Check: `node tools/verify.mjs` (30 sections, several drive real Chrome, takes more than 10 min: use `run_in_background`). Release check: `CATOS_FULL=1 node tools/verify.mjs`.
 - Content: `node tools/check-content.mjs <file|dir>` then `node tools/build-index.mjs && node tools/build-manifest.mjs`.
+- Android: `node tools/check-app-shell.mjs` (the app's web side with a fake bridge); release AAB per `docs/DEV-NOTES.md` §Shipping.
 - Pin the hour while looking: `localStorage.setItem('catos:hour','night')` (dawn, morning, afternoon, dusk, night).
 
 ## Where facts live (one fact, one place)

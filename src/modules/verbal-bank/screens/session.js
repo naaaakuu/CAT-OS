@@ -21,6 +21,7 @@ import { cue } from '../../../core/engagement/feedback.js';
 import { worldReward } from '../../../world/rewards.js';
 import { toast } from '../../../ui/components/cat-toast.js';
 import { trapName } from '../../../ui/components/cat-explanation.js';
+import { gated, LESSON } from '../../../core/ads/rewarded.js';
 import { escapeHTML, formatDuration } from '../../../core/utils/format.js';
 import { hostChip } from '../../../pets/sprite.js';
 import { petForModule } from '../../../pets/pets.js';
@@ -360,13 +361,13 @@ export async function renderBankSession(outlet, { storage }, params) {
         <article class="moment">
           <p class="screen__eyebrow">${escapeHTML(String(resolved.label ?? '').toLowerCase().startsWith(bank.name.toLowerCase()) ? resolved.label : `${bank.name} · ${resolved.label ?? ''}`)}</p>
           <h1 class="moment__opening">${escapeHTML(lesson.opening)}</h1>
-          ${lesson.title ? `
+          ${lesson.title ? gated(`
           <div class="moment__lesson">
             <span class="moment__chip">${escapeHTML(lesson.title)}</span>
             ${lesson.moment ? `<div class="moment__block"><div class="moment__label">The moment</div><p>${escapeHTML(lesson.moment)}</p></div>` : ''}
             ${lesson.pull ? `<div class="moment__block"><div class="moment__label">The pull</div><p>${escapeHTML(lesson.pull)}</p></div>` : ''}
             ${lesson.notice ? `<div class="moment__block"><div class="moment__label">How to notice it next time</div><p>${escapeHTML(lesson.notice)}</p></div>` : ''}
-          </div>` : (lesson.notice ? `<p class="moment__closing">${escapeHTML(lesson.notice)}</p>` : '')}
+          </div>`, LESSON) : (lesson.notice ? `<p class="moment__closing">${escapeHTML(lesson.notice)}</p>` : '')}
           <p class="moment__numbers">${s.score.correct} of ${s.score.total}, in ${formatDuration(s.duration_ms)}.</p>
           <details class="reread moment__details">
             <summary>Set details</summary>

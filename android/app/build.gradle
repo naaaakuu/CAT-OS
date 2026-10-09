@@ -1,0 +1,86 @@
+plugins {
+    id 'com.android.application'
+}
+
+/* The app inside the app: the same files GitHub Pages serves, copied into
+   the APK's assets at build time and served by WebViewAssetLoader, so the
+   village opens from the phone itself (no download, no service worker). */
+def webOut = layout.buildDirectory.dir('generated/web')
+def copyWeb = tasks.register('copyWeb', Sync) {
+    from(rootProject.file('..')) {
+        include 'index.html', 'manifest.webmanifest', 'src/**', 'content/**', 'assets/**'
+        exclude '**/*.md', '**/README*'
+    }
+    into webOut.map { it.dir('www') }
+}
+preBuild.dependsOn copyWeb
+
+/* Upload key: android/keystore.properties (never committed) names the .jks. */
+def ksFile = rootProject.file('keystore.properties')
+def ks = new Properties()
+if (ksFile.exists()) ksFile.withInputStream { ks.load(it) }
+
+android {
+    namespace 'com.nakulcreations.catos'
+    compileSdk 36
+
+    defaultConfig {
+        applicationId 'com.nakulcreations.catos'
+        minSdk 24
+        targetSdk 36
+        versionCode 31100
+        versionName '3.11.0'
+        buildConfigField 'String', 'ADMOB_APP_ID', '"ca-app-pub-2797167472636000~2881643697"'
+        manifestPlaceholders = [admobAppId: 'ca-app-pub-2797167472636000~2881643697']
+    }
+
+    sourceSets {
+        main.assets.srcDirs += webOut.get().asFile
+    }
+
+    signingConfigs {
+        release {
+            if (ksFile.exists()) {
+                storeFile file(ks['storeFile'])
+                storePassword ks['storePassword']
+                keyAlias ks['keyAlias']
+                keyPassword ks['keyPassword']
+            }
+        }
+    }
+
+    buildTypes {
+        debug {
+            // Google's test unit: real ads are never shown to the developer.
+            buildConfigField 'String', 'REWARDED_ID', '"ca-app-pub-3940256099942544/5224354917"'
+        }
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField 'String', 'REWARDED_ID', '"ca-app-pub-2797167472636000/9244795501"'
+            if (ksFile.exists()) signingConfig signingConfigs.release
+        }
+    }
+
+    buildFeatures { buildConfig true }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    androidResources {
+        // JSON and PNG are already as small as they get; skip the work.
+        noCompress += ['png', 'webp']
+    }
+}
+
+dependencies {
+    implementation 'androidx.activity:activity:1.10.1'
+    // The ads SDK pulls an old Fragment that breaks Activity Result callbacks.
+    implementation 'androidx.fragment:fragment:1.8.5'
+    implementation 'androidx.webkit:webkit:1.14.0'
+    implementation 'com.google.android.gms:play-services-ads:25.5.0'
+    implementation 'com.android.billingclient:billing:8.3.0'
+}

@@ -68,7 +68,7 @@ const CONTENT_VERSION = 16;
    ALWAYS lands in a new cache, whether or not anybody remembered to bump the
    number above. Nothing used to enforce that bump, and an installed learner
    could sit on old code forever with no symptom anybody could see. */
-const BUILD_ID = '9927eb379b';
+const BUILD_ID = 'ee7a2283e3';
 const CONTENT_ID = 'fa1ec949c0';
 const SHELL_CACHE = `cat-os-shell-v${CACHE_VERSION}.${BUILD_ID}`;
 const CONTENT_CACHE = `cat-os-content-v${CONTENT_VERSION}.${CONTENT_ID}`;
@@ -130,6 +130,7 @@ const CORE_FILES = [
   './src/core/learning/order.js',
   './src/core/learning/review.js',
   './src/core/learning/taxonomy.js',
+  './src/core/native.js',
   './src/core/router/router.js',
   './src/core/storage/indexeddb-adapter.js',
   './src/core/storage/storage-adapter.js',
@@ -163,6 +164,7 @@ const CORE_FILES = [
   './src/pets/sheets.js',
   './src/pets/sprite.js',
   './src/pets/visits.js',
+  './src/shell/online-gate.js',
   './src/shell/prefs.js',
   './src/ui/components/cat-nav.js',
   './src/ui/components/cat-toast.js',
@@ -257,6 +259,7 @@ const SHELL_FILES = [
   './src/core/mentor/wd-dna.js',
   './src/core/mentor/wd-lesson.js',
   './src/core/mentor/wd-voice.js',
+  './src/core/native.js',
   './src/core/router/router.js',
   './src/core/storage/backup.js',
   './src/core/storage/indexeddb-adapter.js',
@@ -335,7 +338,9 @@ const SHELL_FILES = [
   './src/pets/sprite.js',
   './src/pets/visits.js',
   './src/shell/growth.js',
+  './src/shell/online-gate.js',
   './src/shell/prefs.js',
+  './src/shell/pro.js',
   './src/shell/settings.js',
   './src/ui/components/cat-briefing.js',
   './src/ui/components/cat-explanation.js',

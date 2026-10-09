@@ -156,8 +156,26 @@ backup carries the whole village and nothing can drift from the truth.
 - After a passage, **Explain this passage simply** opens the passage told
   the way you would tell a ten-year-old (the big idea, the story, one line
   per paragraph, what the writer thinks), with the full expert breakdown
-  folded underneath. It is the extra a rewarded ad will one day open
-  (`src/core/ads/rewarded.js`); no ads are wired, so it is free.
+  folded underneath. In the Android app it opens with one short video and
+  stays open on that device; on the web it is free.
+
+## Free, with one kind of ad (the Android app, 3.11.0)
+
+The Play Store app is free. Its one ad is a rewarded video the learner asks
+for: the verdict after an answer (right or not, and what the answer was) is
+always free, and the full explanation (the trap, the why, every other
+option, the mentor's lesson at the end of a run) waits behind "Watch a short
+video". One video opens every explanation for 20 minutes, so a study
+session costs one video, not one per question. If no video can be had, the
+explanation opens anyway. No banners, no interstitials, nothing that plays
+on its own. Because the videos need a network, the free app plays only
+online; a calm wall says so and lifts when the connection returns.
+
+**CAT OS Pro** removes the videos, opens everything and plays offline:
+₹499 a year (a CAT season, under the ₹500 line) or ₹1,299 lifetime (for
+repeat takers). It is sold through Google Play; the lock card and Settings
+carry the playful nudge ("Are videos interrupting your study session?").
+Settings also has Share CAT OS. The web version stays free and unlocked.
 
 ## What the game knows about you
 

@@ -43,7 +43,7 @@ import { loadWorld, loadWorldRecords, deriveWorldState, petChangeLine } from '..
 import { hostChip } from '../../../pets/sprite.js';
 import { newlyFinished } from '../../../world/collections.js';
 import { play, silenceWorld } from '../../../world/audio.js';
-import { isUnlocked } from '../../../core/ads/rewarded.js';
+import { isUnlocked, gated, LESSON } from '../../../core/ads/rewarded.js';
 import { infoButton } from '../../../ui/info.js';
 import '../../../ui/components/cat-passage.js';
 import '../../../ui/components/cat-question-card.js';
@@ -399,8 +399,8 @@ export async function renderSession(outlet, { storage }, params) {
         <div class="result__mentor">
           <p class="label">Your mentor · ${escapeHTML(lesson.title)}</p>
           <p class="opening">${escapeHTML(lesson.opening)}</p>
-          <p>${escapeHTML(lesson.teach.moment)}</p>
-          <details><summary>${lesson.lesson_kind === 'watch' ? 'Why the brain goes there' : 'Worth keeping'}</summary><p style="margin-top:8px">${escapeHTML(lesson.teach.pull)}</p><p>${escapeHTML(lesson.teach.notice)}</p>${lesson.teach.known ? `<p><i>${escapeHTML(lesson.teach.known)}</i></p>` : ''}</details>
+          ${gated(`<p>${escapeHTML(lesson.teach.moment)}</p>
+          <details><summary>${lesson.lesson_kind === 'watch' ? 'Why the brain goes there' : 'Worth keeping'}</summary><p style="margin-top:8px">${escapeHTML(lesson.teach.pull)}</p><p>${escapeHTML(lesson.teach.notice)}</p>${lesson.teach.known ? `<p><i>${escapeHTML(lesson.teach.known)}</i></p>` : ''}</details>`, LESSON)}
           <p style="margin-top:8px"><i>${escapeHTML(lesson.closing)}</i></p>
         </div>` : '';
       /* WHAT THE LEDGER HAS NOTICED.
