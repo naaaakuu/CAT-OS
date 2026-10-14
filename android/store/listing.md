@@ -56,16 +56,17 @@ CAT OS is an independent app. It is not affiliated with the IIMs or the Common A
 
 Set the INR price and let Play convert it for every other country (local rounding included); the Pro screen shows whatever Play charges, in the learner's currency. ₹499 a year is about ₹42 a month; lifetime is about 2.6 years of the yearly plan.
 
-## Play Console state (2026-10-09, 3.12.0)
+## Play Console state (2026-10-14, 3.12.0)
 
-App id 4976374917894694481, personal account Nakul Creations. Done: privacy policy URL, sign-in details (nothing restricted; sign-in is optional), ads (yes), content rating (IARC), target audience 18+, data safety (as of 3.11.0: AdMob data, no accounts), advertising ID, category, tags, contact details, default store listing (3.12.0 text, video, icon, feature graphic, six screenshots: saved as a draft until changes are sent for review), internal testers, closed-testing track "Alpha" targeting all 178 countries (no release on it yet). Production is locked until the closed test.
+App id 4976374917894694481, personal account Nakul Creations. Done: privacy policy URL, sign-in details (nothing restricted; sign-in is optional), ads (yes), content rating (IARC), target audience 18+, data safety (AdMob and Analytics data; account creation by OAuth with the deletion URL above; name, email, user IDs and in-app progress ("Other actions"): collected, not shared, optional, for app functionality and account management), advertising ID, category, tags, contact details, default store listing (3.12.0 text, video, icon, feature graphic, six screenshots), internal testers, closed-testing track "Alpha" targeting all 178 countries (no release on it yet). All of it sent for review on 2026-10-14. Production is locked until the closed test.
+
+AdMob (2026-10-14): "CAT OS - GDPR consent" published, consent mode on for advertising and analytics, the app linked to the Firebase app (impression-level ad revenue left off: it is an account-wide setting). `app-ads.txt` is live at `https://naaaakuu.github.io/app-ads.txt` (public repo `naaaakuu/naaaakuu.github.io`).
 
 Left for the owner:
-1. `android/app/google-services.json` from the Firebase console (project `cat-os-612e8`), then a 3.12.0 AAB to upload to internal testing (over the browser tool's 10 MB cap).
+1. Upload each AAB to internal testing (over the browser tool's 10 MB cap). `android/app/google-services.json` is on the build machine only.
 2. Payments profile (Play Console, Settings, Payments profile: legal name, address, tax, bank), then the two products above.
-3. Data safety for 3.12.0: add Personal info (name, email, user IDs; collected, not shared, optional; account management and app functionality), the Analytics purpose on app interactions, device IDs, diagnostics, crash logs and approximate location, "users can create an account" with the deletion URL above.
-4. AdMob: publish the draft message "CAT OS - GDPR consent", turn on consent mode, link the app to Firebase; once the app is live, add the Play listing to the AdMob app. `app-ads.txt` needs the root of the website's domain (`naaaakuu.github.io/app-ads.txt`, a user-site repo) with `google.com, pub-2797167472636000, DIRECT, f08c47fec0942fa0`.
-5. Closed test with at least 12 testers for 14 days, then "Apply for production" and pick all countries.
+3. Once the app is live, add the Play listing to the AdMob app (App settings, App store details).
+4. Closed test with at least 12 testers for 14 days, then "Apply for production" and pick all countries.
 
 ## Ads
 
