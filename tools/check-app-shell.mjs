@@ -6,6 +6,8 @@
  *   explanations    → locked behind one video; one video opens them all, and
  *                     the pass survives a reload
  *   Pro             → nothing locked, plays offline, prices come from "Play"
+ *                     (monthly, yearly, lifetime; the yearly badge shows the saving)
+ *   Intro           → the opening video: app only, covers the screen, Skip, ends on its own
  *   Settings        → Pro card, Share (reaches the share sheet), privacy link
  *   Google account  → sign in saves this phone's village; leaving the app
  *                     sends only what changed; a second phone chooses, and
@@ -21,6 +23,7 @@ import { launchChrome, serveRepo, findChrome } from './cdp-lite.mjs';
 import { SEED } from './check-rendered-contrast.mjs';
 
 const FAKE = `(() => {
+  if (!localStorage.getItem('catos:intro')) localStorage.setItem('catos:intro', 'off'); // the opening video has its own checks at the end
   const st = () => { try { return JSON.parse(localStorage.getItem('fake') || '{}'); } catch { return {}; } };
   const put = (v) => localStorage.setItem('fake', JSON.stringify(Object.assign(st(), v)));
   const answer = (id, v, ms = 60) => setTimeout(() => window.__catosNative(id, JSON.stringify(v)), ms);
@@ -41,8 +44,9 @@ const FAKE = `(() => {
     version: () => 'test',
     showRewarded: (id) => { window.__videos = (window.__videos || 0) + 1; answer(id, { rewarded: st().closeAd ? false : true, reason: st().closeAd ? 'closed' : undefined }); },
     products: (id) => answer(id, { products: [
-      { id: 'catos_pro_yearly', price: '₹499.00', micros: 499000000, currency: 'INR', period: 'P1Y' },
-      { id: 'catos_pro_lifetime', price: '₹1,299.00', micros: 1299000000, currency: 'INR' } ] }),
+      { id: 'catos_pro_monthly', price: '₹199.00', micros: 199000000, currency: 'INR', period: 'P1M' },
+      { id: 'catos_pro_yearly', price: '₹999.00', micros: 999000000, currency: 'INR', period: 'P1Y' },
+      { id: 'catos_pro_lifetime', price: '₹2,999.00', micros: 2999000000, currency: 'INR' } ] }),
     buy: (id) => answer(id, { pro: false, reason: 'cancelled' }),
     restore: (id) => answer(id, { pro: st().pro === true }),
     share: (t) => { window.__shared = t; },
@@ -72,6 +76,7 @@ try {
   await go('#/settings');
   check(await b.evaluate(`![...document.querySelectorAll('h2')].some((h) => h.textContent === 'CAT OS Pro') && !!document.querySelector('#share-app')`), 'web: no Pro card, Share is there');
   check(await b.evaluate(`!document.querySelector('#account') && !document.querySelector('#privacy-choices')`), 'web: no Google account card, no privacy choices');
+  check(await b.evaluate(`!document.documentElement.hasAttribute('data-intro')`), 'web: no intro video');
 
   // ---- The app ----
   await b.send('Page.addScriptToEvaluateOnNewDocument', { source: FAKE });
@@ -162,9 +167,27 @@ try {
   await setFake({ online: true });
 
   await go('#/pro');
-  check(await until(`document.querySelector('[data-price="catos_pro_yearly"]')?.textContent === '₹499.00 a year'`, 3000), 'Pro screen: the yearly price is Play\'s');
+  check(await until(`document.querySelector('[data-price="catos_pro_yearly"]')?.textContent === '₹999.00 a year'`, 3000), 'Pro screen: the yearly price is Play\'s');
+  check(await b.evaluate(`document.querySelector('[data-price="catos_pro_monthly"]')?.textContent === '₹199.00 a month'`), 'Pro screen: the monthly price is Play\'s');
+  check(await b.evaluate(`document.querySelector('[data-price="catos_pro_lifetime"]')?.textContent === '₹2,999.00'`), 'Pro screen: the lifetime price is Play\'s');
+  check(await b.evaluate(`document.querySelectorAll('[data-buy]').length === 3 && ![...document.querySelectorAll('[data-buy]')].some((el) => el.disabled)`), 'Pro screen: three plans, all on sale');
   check(await b.evaluate(`(document.querySelector('[data-per="catos_pro_yearly"]')?.textContent || '').includes('a month')`), 'Pro screen: the monthly equivalent is shown');
-  check(await b.evaluate(`/renews automatically/i.test(document.querySelector('.pro__fine')?.textContent || '')`), 'Pro screen: the renewal terms are stated');
+  check(await b.evaluate(`document.querySelector('[data-tag="catos_pro_yearly"]')?.textContent === 'Save 58%'`), 'Pro screen: the yearly badge shows what it saves against twelve months');
+  check(await b.evaluate(`/renew automatically/i.test(document.querySelector('.pro__fine')?.textContent || '')`), 'Pro screen: the renewal terms are stated');
+  check(await b.evaluate(`/no ads/i.test(document.querySelector('.pro__perks')?.textContent || '')`), 'Pro screen: "no ads" is the first thing Pro promises');
+
+  // ---- The opening video: only in the app, always skippable, never traps ----
+  await b.evaluate(`localStorage.setItem('catos:intro', 'on'); 1`);
+  await go('#/world');
+  check(await b.evaluate(`document.documentElement.hasAttribute('data-intro') && !!document.querySelector('#intro video') && !!document.querySelector('#intro .intro__skip')`), 'intro: the video plays over the app, with a Skip button');
+  check(await b.evaluate(`document.querySelector('#intro').getBoundingClientRect().height >= innerHeight`), 'intro: the curtain covers the whole screen');
+  await b.evaluate(`document.querySelector('.intro__skip').click(); 1`);
+  check(await until(`!document.documentElement.hasAttribute('data-intro') && !document.querySelector('#intro video')`, 2500), 'intro: Skip ends it and takes the video away');
+  await go('#/world');
+  check(await until(`!document.documentElement.hasAttribute('data-intro')`, 10000), 'intro: left alone it ends by itself');
+  await b.evaluate(`localStorage.setItem('catos:intro', 'off'); 1`);
+  await go('#/world');
+  check(await b.evaluate(`!document.documentElement.hasAttribute('data-intro')`), 'intro: "off" keeps it away');
 } catch (err) {
   problems.push(String(err?.stack || err));
   console.error(err);

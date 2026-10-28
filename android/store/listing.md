@@ -36,7 +36,7 @@ FREE, WITH ONE KIND OF AD
 CAT OS is free. The only ad is a short video you choose to watch to open full explanations, and one video opens every explanation for 20 minutes. No banners. No pop-ups. The free app needs an internet connection.
 
 CAT OS PRO
-No videos, every explanation open, and the village plays offline. One year or lifetime.
+No ads, every explanation open, and the village plays offline. By the month, by the year, or for life.
 
 YOUR PROGRESS, SAFE
 Your village lives on your phone. Sign in with Google if you like, and it is saved to your account and comes back on a new phone. Or export a backup file any time.
@@ -51,10 +51,11 @@ CAT OS is an independent app. It is not affiliated with the IIMs or the Common A
 
 | Product id | Type | Default price | Notes |
 |---|---|---|---|
-| `catos_pro_yearly` | Subscription, base plan `yearly`, auto-renewing, 1 year | ₹499 | "CAT OS Pro (1 year)" |
-| `catos_pro_lifetime` | One-time product | ₹1,299 | "CAT OS Pro (Lifetime)" |
+| `catos_pro_monthly` | Subscription, base plan `monthly`, auto-renewing, 1 month | ₹199 | "CAT OS Pro (1 month)" |
+| `catos_pro_yearly` | Subscription, base plan `yearly`, auto-renewing, 1 year | ₹999 | "CAT OS Pro (1 year)" |
+| `catos_pro_lifetime` | One-time product | ₹2,999 | "CAT OS Pro (Lifetime)" |
 
-Set the INR price and let Play convert it for every other country (local rounding included); the Pro screen shows whatever Play charges, in the learner's currency. ₹499 a year is about ₹42 a month; lifetime is about 2.6 years of the yearly plan.
+Set the INR price and let Play convert it for every other country (local rounding included); the Pro screen shows whatever Play charges, in the learner's currency. ₹999 a year is about ₹83 a month and saves 58% against twelve months of the monthly plan; lifetime is exactly three years of the yearly plan. Monthly and yearly are separate products, so `Billing.buy` refuses a second subscription from a subscriber.
 
 ## Play Console state (2026-10-14, 3.12.0)
 

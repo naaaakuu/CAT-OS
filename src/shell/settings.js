@@ -99,8 +99,8 @@ export function renderSettings(outlet, { storage, version }) {
       <div class="card">
         <h2>CAT OS Pro</h2>
         ${isPro()
-          ? row(icon('star', { size: 20 }), 'You are Pro', 'Every explanation open, no videos, plays offline. Thank you.', '<a class="btn" href="#/pro">Details</a>')
-          : row(icon('star', { size: 20 }), 'Go Pro', 'Are videos interrupting your study session? Pro opens every explanation and plays offline.', '<a class="btn btn--primary" href="#/pro">See Pro</a>')}
+          ? row(icon('star', { size: 20 }), 'You are Pro', 'No ads, every explanation open, plays offline. Thank you.', '<a class="btn" href="#/pro">Details</a>')
+          : row(icon('star', { size: 20 }), 'Go Pro', 'Are videos interrupting your study session? Pro has no ads, opens every explanation and plays offline.', '<a class="btn btn--primary" href="#/pro">See Pro</a>')}
       </div>
 
       <div class="card" id="account">

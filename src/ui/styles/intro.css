@@ -1,0 +1,48 @@
+/* ============================================================
+   CAT OS — intro.css
+   The Android app's opening video (shell/intro.js). The curtain is
+   up from the first paint when index.html sets html[data-intro],
+   so the village never flashes before it; the colour is the video's
+   own dark, so there is no flash inside it either.
+   ============================================================ */
+
+.intro { display: none; }
+
+html[data-intro] .intro {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: grid;
+  background: #17152b;
+  opacity: 1;
+  transition: opacity 350ms ease;
+}
+html[data-intro] .intro.is-leaving { opacity: 0; pointer-events: none; }
+
+/* The video is 9:16 and its logo runs edge to edge: it is shown whole, never cropped (a taller phone gets thin dark bars). */
+.intro__video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #17152b;
+}
+
+.intro__skip {
+  position: absolute;
+  top: max(var(--space-3, 12px), env(safe-area-inset-top));
+  right: max(var(--space-3, 12px), env(safe-area-inset-right));
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 var(--space-4, 16px);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+  background: rgba(23, 21, 43, 0.55);
+  color: #fff;
+  font: inherit;
+  font-size: var(--text-sm, 0.875rem);
+  font-weight: 600;
+  cursor: pointer;
+}
+.intro__skip:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+
+@media (prefers-reduced-motion: reduce) { html[data-intro] .intro { transition: none; } }

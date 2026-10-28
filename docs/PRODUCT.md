@@ -177,9 +177,9 @@ explanation opens anyway. No banners, no interstitials, nothing that plays
 on its own. Because the videos need a network, the free app plays only
 online; a calm wall says so and lifts when the connection returns.
 
-**CAT OS Pro** removes the videos, opens everything and plays offline:
-₹499 a year (a CAT season, under the ₹500 line) or ₹1,299 lifetime (for
-repeat takers). It is sold through Google Play; the lock card and Settings
+**CAT OS Pro** removes every ad, opens everything and plays offline:
+₹199 a month, ₹999 a year (the yearly badge shows the saving against twelve
+months) or ₹2,999 lifetime (for repeat takers). It is sold through Google Play; the lock card and Settings
 carry the playful nudge ("Are videos interrupting your study session?").
 Settings also has Share CAT OS. The web version stays free and unlocked.
 

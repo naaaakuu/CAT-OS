@@ -1,9 +1,10 @@
 /**
- * pro.js — CAT OS Pro (#/pro): no videos, every explanation open, plays
+ * pro.js — CAT OS Pro (#/pro): no ads, every explanation open, plays
  * offline. Sold through Google Play Billing by the Android shell
  * (android/, core/native.js); prices come from Play, never from here, so
  * the screen always shows what Play will charge, in the learner's currency.
  *
+ *   catos_pro_monthly   subscription, base plan "monthly", renews each month
  *   catos_pro_yearly    subscription, base plan "yearly", renews each year
  *   catos_pro_lifetime  one-time, Pro for good
  */
@@ -14,12 +15,14 @@ import { escapeHTML } from '../core/utils/format.js';
 import { toast } from '../ui/components/cat-toast.js';
 import { cue } from '../core/engagement/feedback.js';
 
+export const MONTHLY = 'catos_pro_monthly';
 export const YEARLY = 'catos_pro_yearly';
 export const LIFETIME = 'catos_pro_lifetime';
 const PACKAGE = 'com.nakulcreations.catos';
 
 const PERKS = [
-  ['Every explanation, open', 'Why your pick tempted you, why the answer holds, every option taken apart. No videos, ever.'],
+  ['No ads, ever', 'No videos, no interruptions. Nothing plays between you and the passage.'],
+  ['Every explanation, open', 'Why your pick tempted you, why the answer holds, every option taken apart.'],
   ['Study offline', 'On a train, in a hostel with no Wi-Fi, in the library basement. The village comes with you.'],
   ['Keep the village growing', 'CAT OS is made by one person. Pro pays for new passages, new rooms and new friends.'],
 ];
@@ -43,7 +46,7 @@ export async function renderPro(outlet) {
       <p class="screen__eyebrow">CAT OS Pro</p>
       <h1>${pro ? 'You are Pro. Thank you.' : 'Are videos interrupting your study session?'}</h1>
       <p class="cottage__line">${pro
-        ? 'Every explanation is open, there are no videos, and the village plays offline.'
+        ? 'There are no ads, every explanation is open, and the village plays offline.'
         : 'Chai hates being interrupted halfway through a passage. So does Toffee. So do you.'}</p>
       <div class="pro__friends" aria-hidden="true">
         ${['chai', 'toffee', 'matcha', 'mochi'].map((id, i) => petSprite(id, { frame: pro ? 2 : (i % 2 ? 2 : 1), size: 72 })).join('')}
@@ -62,12 +65,18 @@ export async function renderPro(outlet) {
           <a class="btn btn--primary" href="${PLAY_URL}" target="_blank" rel="noopener">Get CAT OS on Google Play</a>
         </div>` : pro ? `
         <div class="card">
-          <p>${plan === 'lifetime' ? 'Lifetime: Pro for good, no renewals.' : 'One year, renewing each year until you cancel.'}</p>
+          <p>${plan === 'lifetime' ? 'Lifetime: Pro for good, no renewals.' : plan === 'monthly' ? 'One month at a time, renewing each month until you cancel.' : 'One year, renewing each year until you cancel.'}</p>
           ${plan === 'lifetime' ? '' : '<button class="btn" id="pro-manage" type="button">Manage in Google Play</button>'}
         </div>` : `
         <div class="pro__plans" role="group" aria-label="Choose a plan">
+          <button class="pro__plan" type="button" data-buy="${MONTHLY}">
+            <span class="pro__tag">Try it out</span>
+            <span class="pro__name">One month</span>
+            <span class="pro__price" data-price="${MONTHLY}">Loading price…</span>
+            <span class="pro__per">Renews every month until you cancel</span>
+          </button>
           <button class="pro__plan is-best" type="button" data-buy="${YEARLY}">
-            <span class="pro__tag">A year of practice</span>
+            <span class="pro__tag" data-tag="${YEARLY}">Best value</span>
             <span class="pro__name">One year</span>
             <span class="pro__price" data-price="${YEARLY}">Loading price…</span>
             <span class="pro__per" data-per="${YEARLY}">Renews every year until you cancel</span>
@@ -82,11 +91,11 @@ export async function renderPro(outlet) {
         <p class="pro__said" role="status" aria-live="polite"></p>`}
 
       ${NATIVE ? `<p><button class="btn btn--quiet" id="pro-restore" type="button">Restore a purchase</button></p>` : ''}
-      <p class="pro__fine">The yearly plan renews automatically at the same price each year until you cancel it in Google Play under Payments and subscriptions. Lifetime is a single payment. Payment is handled by Google Play. <a href="${PRIVACY_URL}" data-external>Privacy policy</a></p>
+      <p class="pro__fine">The monthly and yearly plans renew automatically at the same price until you cancel them in Google Play under Payments and subscriptions. Lifetime is a single payment. Payment is handled by Google Play. <a href="${PRIVACY_URL}" data-external>Privacy policy</a></p>
     </section>`;
 
   outlet.querySelector('[data-external]')?.addEventListener('click', (e) => { e.preventDefault(); openExternal(PRIVACY_URL); });
-  outlet.querySelector('#pro-manage')?.addEventListener('click', () => openExternal(`https://play.google.com/store/account/subscriptions?sku=${YEARLY}&package=${PACKAGE}`));
+  outlet.querySelector('#pro-manage')?.addEventListener('click', () => openExternal(`https://play.google.com/store/account/subscriptions?sku=${plan === 'monthly' ? MONTHLY : YEARLY}&package=${PACKAGE}`));
   outlet.querySelector('#pro-restore')?.addEventListener('click', async (e) => {
     const btn = e.currentTarget;
     btn.disabled = true;
@@ -103,12 +112,18 @@ export async function renderPro(outlet) {
   const byId = new Map((r?.products ?? []).map((p) => [p.id, p]));
   for (const el of outlet.querySelectorAll('[data-price]')) {
     const p = byId.get(el.dataset.price);
-    el.textContent = p ? `${p.price}${p.id === YEARLY ? ' a year' : ''}` : 'Not available yet';
+    el.textContent = p ? `${p.price}${p.id === YEARLY ? ' a year' : p.id === MONTHLY ? ' a month' : ''}` : 'Not available yet';
     if (!p) el.closest('[data-buy]').disabled = true;
   }
   const per = outlet.querySelector(`[data-per="${YEARLY}"]`);
   const yearly = byId.get(YEARLY);
   if (per && yearly && perMonth(yearly)) per.textContent = `That is ${perMonth(yearly)}. Renews every year until you cancel.`;
+  // The yearly badge says what it saves against twelve months of the monthly plan, from Play's own prices.
+  const monthly = byId.get(MONTHLY);
+  if (monthly?.micros && yearly?.micros) {
+    const saves = Math.round((1 - yearly.micros / (monthly.micros * 12)) * 100);
+    if (saves >= 10) outlet.querySelector(`[data-tag="${YEARLY}"]`).textContent = `Save ${saves}%`;
+  }
   if (!byId.size) said.textContent = 'Pro is not on sale just yet. Until it is, one short video opens every explanation for 20 minutes.';
 
   outlet.querySelector('.pro__plans')?.addEventListener('click', async (e) => {
@@ -118,7 +133,7 @@ export async function renderPro(outlet) {
     said.textContent = 'Opening Google Play…';
     const res = await ask('buy', btn.dataset.buy);
     if (!outlet.isConnected) return;
-    if (res?.pro) { cue('restore'); toast('Welcome to Pro. No more videos.', 'info', { mute: true }); renderPro(outlet); return; }
+    if (res?.pro) { cue('restore'); toast('Welcome to Pro. No more ads.', 'info', { mute: true }); renderPro(outlet); return; }
     for (const b of outlet.querySelectorAll('[data-buy]')) b.disabled = !byId.has(b.dataset.buy);
     said.textContent = res?.reason === 'pending'
       ? 'Your payment is pending. Pro switches on by itself once Google Play confirms it.'

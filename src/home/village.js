@@ -33,6 +33,7 @@ import { createHouseLife, bakeVillage, gradeAtlas, LAMP_HOUSE, WINDOW_HOUSE, HOU
 import { renderCard, decorLayer, ACT } from './cards.js';
 import { openModal, closeModal } from '../ui/modal.js';
 import { play, unlock, startMusic, startAmbience } from '../world/audio.js';
+import { whenIntroDone } from '../shell/intro.js';
 import { motionReduced } from '../core/engagement/feedback.js';
 import { escapeHTML } from '../core/utils/format.js';
 import { hourWord, weatherWord, seasonWord } from '../world/engine/palette.js';
@@ -592,6 +593,8 @@ export async function renderVillageHome(outlet, ctx) {
       later(() => panTo(at.x, at.y, { ms }), 30);
     };
     later(async () => {
+      await whenIntroDone(); // the opening video first; the hello starts when it is over or skipped
+      if (disposed) return;
       for (const id of ORDER) life.hold(id);
       visit('toffee', 0);
       if (firstVisit) await say('toffee', LINES.intro[0]);
@@ -613,7 +616,9 @@ export async function renderVillageHome(outlet, ctx) {
     }, reduced ? 100 : 900);
   } else if (!welcomed) {
     /* ---------------- Every other arrival: they wave; after a day away, someone comes to meet you ---------------- */
-    later(() => {
+    later(async () => {
+      await whenIntroDone();
+      if (disposed) return;
       const w = pets.welcome;
       if (w && store.get('catos:welcome-day') !== pets.today.key) {
         store.set('catos:welcome-day', pets.today.key);

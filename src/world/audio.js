@@ -109,6 +109,10 @@ arm();
 
 export function unlock() { wake(); }
 
+/** The opening video (shell/intro.js) has the air to itself: the song and the birds wait, then come in. */
+let hushed = false;
+export function hushWorld(on) { hushed = !!on; if (!hushed) wake(); }
+
 export async function initWorldAudio(storage) {
   state.storage = storage;
   state.music.on = feedbackPrefs().music;
@@ -436,7 +440,7 @@ function playSlot(slot, t, eighth, dest) {
 export function startMusic(region = 'world', { hour = state.music.hour ?? 'morning', warmth = 0 } = {}) {
   const m = state.music;
   m.region = region; m.hour = hour; m.warmth = Math.max(0, Math.min(1, warmth));
-  if (!m.on || musicGain() <= 0 || !ready() || m.playing) return; // not running yet: onLive() starts it
+  if (hushed || !m.on || musicGain() <= 0 || !ready() || m.playing) return; // not running yet: onLive() starts it
   const c = state.ctx;
   const bus = c.createGain();
   bus.gain.setValueAtTime(0.0001, c.currentTime);
@@ -478,7 +482,7 @@ export function stopMusic(fade = 0.6) {
  */
 export function startAmbience(region = 'world', { hour = 'morning', weather = 'clear', season = 'summer' } = {}) {
   state.amb.want = { region, hour, weather, season }; // replayed by onLive() until silenceWorld()
-  if (musicGain() <= 0 || !ready()) return;
+  if (hushed || musicGain() <= 0 || !ready()) return;
   const key = `${region}|${hour}|${weather}|${season}`;
   if (state.amb.key === key) return;
   stopAmbience(0.8);

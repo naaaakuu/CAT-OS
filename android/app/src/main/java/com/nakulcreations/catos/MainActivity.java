@@ -100,6 +100,8 @@ public class MainActivity extends ComponentActivity {
 
         WebSettings s = web.getSettings();
         s.setJavaScriptEnabled(true);
+        // The opening video (shell/intro.js) plays with its sound before any tap.
+        s.setMediaPlaybackRequiresUserGesture(false);
         s.setDomStorageEnabled(true);
         s.setAllowFileAccess(false);
         WebViewAssetLoader assets = new WebViewAssetLoader.Builder()

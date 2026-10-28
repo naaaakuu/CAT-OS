@@ -110,6 +110,19 @@
     })();
   </script>
 
+  <!-- The Android app opens with an intro video (shell/intro.js). Its curtain is raised here, before the first
+       paint, so the village never shows first; 'catos:intro' = 'on' previews it in a browser, 'off' disables it.
+       If the app never takes the curtain down, this does (a boot that failed must still show its own message). -->
+  <script>
+    try {
+      var introPref = localStorage.getItem('catos:intro');
+      if ((window.CatOSAndroid && introPref !== 'off') || introPref === 'on') {
+        document.documentElement.setAttribute('data-intro', '');
+        setTimeout(function () { document.documentElement.removeAttribute('data-intro'); }, 15000);
+      }
+    } catch (e) { /* no storage, no intro */ }
+  </script>
+
   <!-- Styles: tokens first (variables), then base, then components -->
   <link rel="stylesheet" href="./src/ui/styles/tokens.css" />
   <link rel="stylesheet" href="./src/ui/styles/base.css" />
@@ -118,8 +131,11 @@
   <link rel="stylesheet" href="./src/ui/styles/world.css" />
   <link rel="stylesheet" href="./src/ui/styles/home.css" />
   <link rel="stylesheet" href="./src/ui/styles/rewards.css" />
+  <link rel="stylesheet" href="./src/ui/styles/intro.css" />
 </head>
 <body>
+<!-- The intro video's curtain; empty and hidden unless html[data-intro] (shell/intro.js, intro.css). -->
+<div id="intro" class="intro" role="region" aria-label="CAT OS intro"></div>
 <!-- #/rc is sixty tab stops deep before the first passage. -->
 <a class="skip" href="#view">Skip to content</a>
   <!-- The shell: a header, a view outlet the router renders into, bottom nav. -->

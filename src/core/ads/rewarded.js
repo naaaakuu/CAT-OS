@@ -67,8 +67,8 @@ export const LESSON = { title: 'Your mentor\'s lesson', text: 'The moment this s
 /* The Pro line under every lock, dealt in turn so it reads fresh. */
 const NUDGE = [
   'Are videos interrupting your study session? Go Pro',
-  'Chai would rather you kept reading. Pro has no videos',
-  'Toffee hates waiting too. Pro means no videos, ever',
+  'Chai would rather you kept reading. Pro has no ads',
+  'Toffee hates waiting too. Pro means no ads, ever',
   'Studying on a train? Pro plays offline',
 ];
 const PLAY = '<svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 5.5v13a1 1 0 0 0 1.5.86l10.4-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>';

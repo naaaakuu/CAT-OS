@@ -68,7 +68,7 @@ const CONTENT_VERSION = 16;
    ALWAYS lands in a new cache, whether or not anybody remembered to bump the
    number above. Nothing used to enforce that bump, and an installed learner
    could sit on old code forever with no symptom anybody could see. */
-const BUILD_ID = 'd323bbd056';
+const BUILD_ID = '3be9fa258e';
 const CONTENT_ID = 'fa1ec949c0';
 const SHELL_CACHE = `cat-os-shell-v${CACHE_VERSION}.${BUILD_ID}`;
 const CONTENT_CACHE = `cat-os-content-v${CONTENT_VERSION}.${CONTENT_ID}`;
@@ -104,6 +104,7 @@ const CORE_FILES = [
   './src/ui/styles/world.css',
   './src/ui/styles/home.css',
   './src/ui/styles/rewards.css',
+  './src/ui/styles/intro.css',
   './assets/art/home-world-v1.png',
   './assets/art/pet-biscuit.png',
   './assets/art/pet-chai.png',
@@ -164,6 +165,7 @@ const CORE_FILES = [
   './src/pets/sheets.js',
   './src/pets/sprite.js',
   './src/pets/visits.js',
+  './src/shell/intro.js',
   './src/shell/online-gate.js',
   './src/shell/prefs.js',
   './src/ui/components/cat-nav.js',
@@ -339,6 +341,7 @@ const SHELL_FILES = [
   './src/pets/visits.js',
   './src/shell/account.js',
   './src/shell/growth.js',
+  './src/shell/intro.js',
   './src/shell/online-gate.js',
   './src/shell/prefs.js',
   './src/shell/pro.js',
@@ -364,6 +367,7 @@ const SHELL_FILES = [
   './src/ui/styles/components.css',
   './src/ui/styles/game.css',
   './src/ui/styles/home.css',
+  './src/ui/styles/intro.css',
   './src/ui/styles/rewards.css',
   './src/ui/styles/tokens.css',
   './src/ui/styles/world.css',

@@ -4,6 +4,11 @@
 > Versions here are app releases; they map onto the capability milestones in
 > `PROJECT_ROADMAP.md` (0.x releases build toward Roadmap V1.0).
 
+## 3.13.0: An opening video, and Pro by the month, year or lifetime (2026-10-28)
+
+- Opening: the Android app starts with the five-second Nakul Creations video (the vertical file, shown whole), over the village that is already loading. Always skippable; app only; a video that will not start cannot trap anyone, and a learner who asked for less motion skips it. The village song, the birds and the first-visit hello wait until it is over or skipped. New: `shell/intro.js`, `ui/styles/intro.css`, `assets/intro/`, `hushWorld` in `world/audio.js`, a curtain in `index.html`, and the WebView plays sound without a tap.
+- Pro: a third plan. Monthly (`catos_pro_monthly`) joins yearly and lifetime; the intended prices are ₹199, ₹999 and ₹2,999 (set in Play Console, not in the app). The Pro screen lists three plans, the yearly badge shows the saving against twelve months of the monthly plan from Play's own prices, and "no ads" leads the perks. A subscriber cannot buy a second subscription. Gate: `check-app-shell` covers three plans, the badge and the intro.
+
 ## 3.12.0: Advanced English, worldwide, with Google sign-in (2026-10-09)
 
 - Positioning: CAT OS is presented as an advanced English game for anyone, anywhere; the CAT is named once, as the exam the questions are built on. New Play listing ("CAT OS: Advanced English"), share text, web description and manifest; Settings and the Pro plans lose their CAT-season wording (`docs/PRODUCT.md`).

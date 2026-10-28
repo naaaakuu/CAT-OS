@@ -21,6 +21,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -28,12 +29,13 @@ import java.util.Map;
 import java.util.function.Consumer;
 
 /**
- * CAT OS Pro through Google Play: a yearly subscription or a one-time
- * lifetime purchase. Whether this phone is Pro is kept in preferences so it
- * holds offline (Pro plays offline) and is refreshed from Play on every
- * return to the app; Play decides, this only remembers.
+ * CAT OS Pro through Google Play: a monthly or yearly subscription, or a
+ * one-time lifetime purchase. Whether this phone is Pro is kept in
+ * preferences so it holds offline (Pro plays offline) and is refreshed from
+ * Play on every return to the app; Play decides, this only remembers.
  */
 final class Billing implements PurchasesUpdatedListener {
+    static final String MONTHLY = "catos_pro_monthly";
     static final String YEARLY = "catos_pro_yearly";
     static final String LIFETIME = "catos_pro_lifetime";
 
@@ -83,8 +85,10 @@ final class Billing implements PurchasesUpdatedListener {
                         if (!p.isAcknowledged()) {
                             client.acknowledgePurchase(AcknowledgePurchaseParams.newBuilder().setPurchaseToken(p.getPurchaseToken()).build(), r -> { });
                         }
+                        // The longest plan wins when an account holds more than one.
                         if (p.getProducts().contains(LIFETIME)) plan = "lifetime";
-                        else if (plan.isEmpty() && p.getProducts().contains(YEARLY)) plan = "yearly";
+                        else if (!plan.equals("lifetime") && p.getProducts().contains(YEARLY)) plan = "yearly";
+                        else if (plan.isEmpty() && p.getProducts().contains(MONTHLY)) plan = "monthly";
                     }
                     save(plan);
                     done.accept(!plan.isEmpty());
@@ -103,15 +107,15 @@ final class Billing implements PurchasesUpdatedListener {
 
     /** Prices as Play will charge them, in the learner's currency. */
     void products(Consumer<String> done) {
-        connect(() -> query(BillingClient.ProductType.SUBS, YEARLY, () ->
-                query(BillingClient.ProductType.INAPP, LIFETIME, () -> done.accept(productsJson()))),
+        connect(() -> query(BillingClient.ProductType.SUBS, Arrays.asList(MONTHLY, YEARLY), () ->
+                query(BillingClient.ProductType.INAPP, Collections.singletonList(LIFETIME), () -> done.accept(productsJson()))),
                 () -> done.accept("{\"products\":[]}"));
     }
 
-    private void query(String type, String id, Runnable then) {
-        QueryProductDetailsParams q = QueryProductDetailsParams.newBuilder()
-                .setProductList(Collections.singletonList(QueryProductDetailsParams.Product.newBuilder().setProductId(id).setProductType(type).build()))
-                .build();
+    private void query(String type, List<String> ids, Runnable then) {
+        List<QueryProductDetailsParams.Product> list = new ArrayList<>();
+        for (String id : ids) list.add(QueryProductDetailsParams.Product.newBuilder().setProductId(id).setProductType(type).build());
+        QueryProductDetailsParams q = QueryProductDetailsParams.newBuilder().setProductList(list).build();
         client.queryProductDetailsAsync(q, (r, result) -> act.runOnUiThread(() -> {
             for (ProductDetails d : result.getProductDetailsList()) details.put(d.getProductId(), d);
             then.run();
@@ -148,6 +152,8 @@ final class Billing implements PurchasesUpdatedListener {
     }
 
     void buy(String id, Consumer<String> done) {
+        // Monthly and yearly are separate products, so Play would bill both: a subscriber never buys a second subscription.
+        if (isPro() && !LIFETIME.equals(id)) { done.accept("{\"pro\":true}"); return; }
         ProductDetails d = details.get(id);
         if (d == null) {
             products(json -> {

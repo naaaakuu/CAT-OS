@@ -24,6 +24,7 @@ import { hourWord } from './world/engine/palette.js';
 import { initFeedback, installGlobalFeedback } from './core/engagement/feedback.js';
 import { loadTheme, applyTheme, loadReadingSize, applyReadingSize, applyMotion } from './shell/prefs.js';
 import { installOnlineGate } from './shell/online-gate.js';
+import { beginIntro } from './shell/intro.js';
 import { inApp, track } from './core/native.js';
 import './ui/components/cat-nav.js';
 
@@ -49,7 +50,7 @@ window.addEventListener('unhandledrejection', (e) => {
 /* Storage + theme                                                    */
 /* ------------------------------------------------------------------ */
 
-const APP_VERSION = '3.12.0'; // keep in step with CHANGELOG.md and android/app/build.gradle versionName
+const APP_VERSION = '3.13.0'; // keep in step with CHANGELOG.md and android/app/build.gradle versionName
 
 const storage = new IndexedDBAdapter();
 
@@ -121,6 +122,11 @@ async function boot() {
   // chime on the first gesture. Installed unconditionally so it works even
   // if storage init failed (sound simply stays at its OFF default).
   installGlobalFeedback();
+
+  // The Android app opens with a skippable intro video over the village that
+  // loads underneath it (shell/intro.js). Needs the motion and sound
+  // preferences above; does nothing on the web.
+  beginIntro();
 
   // 2. Router: shell routes + module routes. Modules receive a
   //    context object (today: storage) rather than importing globals,
