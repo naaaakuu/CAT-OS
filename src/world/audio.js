@@ -113,6 +113,14 @@ export function unlock() { wake(); }
 let hushed = false;
 export function hushWorld(on) { hushed = !!on; if (!hushed) wake(); }
 
+/** A reading passage has the air to itself: no song, no birds, no wind, until the learner leaves it (app.js). */
+let quiet = false;
+export function quietWorld(on) {
+  if (quiet === !!on) return;
+  quiet = !!on;
+  if (quiet) { stopMusic(0.4); stopAmbience(0.4); } else wake();
+}
+
 export async function initWorldAudio(storage) {
   state.storage = storage;
   state.music.on = feedbackPrefs().music;
@@ -447,11 +455,13 @@ function playSlot(slot, t, eighth, dest) {
 export function startMusic(region = 'world', { hour = state.music.hour ?? 'morning', warmth = 0 } = {}) {
   const m = state.music;
   m.region = region; m.hour = hour; m.warmth = Math.max(0, Math.min(1, warmth));
-  if (hushed || !m.on || musicGain() <= 0 || !ready() || m.playing) return; // not running yet: onLive() starts it
+  if (hushed || quiet || !m.on || musicGain() <= 0 || !ready() || m.playing) return; // not running yet: onLive() starts it
   const c = state.ctx;
   const bus = c.createGain();
+  /* A short straight ramp: an exponential one from 0.0001 is inaudible for most of its length
+     (measured: 0.9 s of silence after the first tap, the opening notes of the tune lost). */
   bus.gain.setValueAtTime(0.0001, c.currentTime);
-  bus.gain.exponentialRampToValueAtTime(Math.max(0.0001, musicGain() * MUSIC_LEVEL), c.currentTime + 1.2);
+  bus.gain.linearRampToValueAtTime(Math.max(0.0001, musicGain() * MUSIC_LEVEL), c.currentTime + 0.35);
   bus.connect(state.master);
   m.gain = bus; m.playing = true; m.slot = 0; m.next = c.currentTime + 0.15;
   const tick = () => {
@@ -489,7 +499,7 @@ export function stopMusic(fade = 0.6) {
  */
 export function startAmbience(region = 'world', { hour = 'morning', weather = 'clear', season = 'summer' } = {}) {
   state.amb.want = { region, hour, weather, season }; // replayed by onLive() until silenceWorld()
-  if (hushed || musicGain() <= 0 || !ready()) return;
+  if (hushed || quiet || musicGain() <= 0 || !ready()) return;
   const key = `${region}|${hour}|${weather}|${season}`;
   if (state.amb.key === key) return;
   stopAmbience(0.8);

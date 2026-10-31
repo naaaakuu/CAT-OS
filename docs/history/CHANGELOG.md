@@ -4,6 +4,11 @@
 > Versions here are app releases; they map onto the capability milestones in
 > `PROJECT_ROADMAP.md` (0.x releases build toward Roadmap V1.0).
 
+## 3.14.0 follow-up: Silent reading, and the song comes in at once (2026-11-01)
+
+- Reading Comprehension passages (and the second look) now have no sound under them at all. Before, `silenceWorld()` stopped only the birds and wind; the song kept playing as its "focus" mix. `quietWorld()` in `world/audio.js`, driven from `applyImmersiveChrome` in `app.js`, stops song and ambience on entering and lets them back on leaving. The other rooms keep the quiet focus mix; extend the route test in `app.js` to silence them too. Event sounds (taps, stars) are unchanged.
+- The song was late after the first tap: its fade-in was an exponential ramp from 0.0001 over 1.2 s, which is inaudible for most of its length. Measured in headless Chrome with the real autoplay gate, tap to audible went from 919 ms to 283 ms (full level from 1639 ms to 283 ms), and the opening notes of the tune are no longer lost. Now a 0.35 s straight ramp. In the Android app the song still waits for the opening video to finish, by design.
+
 ## 3.14.0: Chai's library (2026-10-31)
 
 - The Reading House is Chai's library (owner's design): under the stars there is only one long walnut bookcase, Elite on the top shelf and Foundation on the bottom, every passage a numbered book (a shelf holds as many books as its stage has passages). Every book starts dusty; finishing it wipes it as clean as the best run earned: all right gleams, half right is half dusty, none right stays dusty. Chai stands on a rolling library ladder beside the next book. Arriving, he flies down from the top of the ladder to it and the page follows him; coming back from a passage, the book is wiped with a cloth, a newly opened shelf drops its chain and padlock, and the ladder rolls Chai on to the next book. A tapped book comes off the shelf, turns, opens on its title page and the passage begins. New: `world/screens/library.js`, `ui/styles/library.css` (loaded the first time the library opens, so a cold open does not pay), `libraryShelves` in `core/learning/journey.js`, the `flap` and `dust` sounds.

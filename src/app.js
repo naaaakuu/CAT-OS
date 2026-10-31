@@ -19,7 +19,7 @@ import { registerBank } from './modules/verbal-bank/index.js';
 import { startLibrarySync } from './core/content-loader/library-sync.js';
 import { registerWorld, isWorldRoute } from './world/index.js';
 import { syncStage } from './world/stage.js';
-import { silenceWorld, startMusic } from './world/audio.js';
+import { silenceWorld, startMusic, quietWorld } from './world/audio.js';
 import { hourWord } from './world/engine/palette.js';
 import { initFeedback, installGlobalFeedback } from './core/engagement/feedback.js';
 import { loadTheme, applyTheme, loadReadingSize, applyReadingSize, applyMotion } from './shell/prefs.js';
@@ -172,6 +172,8 @@ async function boot() {
     document.documentElement.toggleAttribute('data-immersive', inWorld);
     document.documentElement.toggleAttribute('data-room', !inWorld);
     if (!inWorld) silenceWorld();
+    // Reading a passage is the one place with no sound under it at all (owner, 2026-11-01).
+    quietWorld(/^#\/rc\/session\//.test(h) || h === '#/rc/second-look');
     // Rooms beyond the valley still stand somewhere: the region's own scene
     // is painted behind them (src/world/stage.js).
     //
