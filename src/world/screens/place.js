@@ -18,11 +18,11 @@ import { petFigure, petPortrait, backdropStyle, FRAME } from '../../pets/sprite.
 import { regionBySlug } from '../regions.js';
 import { loadWorld } from '../state.js';
 import { starHTML } from './result.js';
-import { nextPassage, nextFamily, readingWeakness, typeName, missedQuestions, secondLookLine } from '../curator.js';
+import { nextFamily } from '../curator.js';
 import { play, unlock, startMusic, startAmbience } from '../audio.js';
 import { escapeHTML } from '../../core/utils/format.js';
 import { STAGES } from '../../core/engine/garden-session.js';
-import { STAGE_INFO, groupByStage } from '../../core/learning/journey.js';
+import { libraryShelves } from '../../core/learning/journey.js';
 import { wdTreeOrder } from '../../modules/word-dna/logic/tree.js';
 import { PJ_TIERS } from '../../modules/para-jumbles/logic/tiers.js';
 import { PS_TIERS } from '../../modules/para-summary/logic/tiers.js';
@@ -198,47 +198,28 @@ export async function renderPlace(outlet, { storage }, params) {
     return;
   }
 
-  /* ================= The Reading Room ================= */
+  /* ================= The Reading Room: Chai's library ================= */
   if (region.slug === 'reading-room') {
     const rd = state.reading;
     heroStat.innerHTML = pill(`★ ${rd.stars} / ${rd.maxStars}`);
-    const weakness = readingWeakness(world.records.sessions);
-    const rec = nextPassage(content, rd.best, weakness, `rc:${state.today}`);
     let night = false;
     try { night = rd.observatory && (await storage.get(STORES.SETTINGS, 'world:night-reading'))?.value === true; } catch { /* off */ }
-    const cta = rec ? {
-      href: `#/rc/session/${rec.item.id}`,
-      label: rec.item.title,
-      sub: `${STAGE_INFO[rec.item.stage]?.label ?? rec.item.stage ?? ''} · ${String(rec.item.genre ?? '').replace(/[-_]+/g, ' ')} · ~${rec.item.estimated_time_min} min · ${rec.item.question_count} questions`,
-      gold: rec.kind === 'retry',
-    } : null;
-    const note = rec?.why || (weakness.weakest ? `Your answers say ${typeName(weakness.weakest)} is the thing to work on.` : '');
-    const missed = missedQuestions(world.records.sessions, weakness);
-    head({ pct: rd.maxStars ? rd.stars / rd.maxStars : 0, label: `${rd.stars} / ${rd.maxStars} stars` },
-      missed.length >= 4 ? { href: '#/rc/second-look', label: 'The second look', sub: `${Math.min(6, missed.length)} questions that got away · the highest-yield run here`, gold: true } : cta,
-      missed.length >= 4 ? secondLookLine(missed, weakness) : note,
+    /* Under the stars, only the library (owner, 2026-10-31): every passage a
+       book on its shelf, as clean as the best run of it. What the place
+       teaches waits behind the ⓘ. */
+    head({ pct: rd.maxStars ? rd.stars / rd.maxStars : 0, label: `${rd.stars} / ${rd.maxStars} stars` }, null, '',
       infoButton('rc', { moreTitle: 'This place', more: [
+        'Every passage is a book on these shelves, Foundation at the bottom and Elite at the top. Read one and answer its questions: the more you get right, the cleaner the book shines.',
+        'A shelf opens once half the books on the shelf below it have been read.',
         'Every passage here is the size CAT sets: never more than four questions, never longer than the exam’s longest passage.',
         'Three stars means three quarters right inside the passage’s own time: the pace CAT asks for.',
       ] }));
-    if (missed.length >= 4 && rec) {
-      top.insertAdjacentHTML('beforeend', `<a class="g-btn place__second" href="#/rc/session/${rec.item.id}">Or read a new passage: ${escapeHTML(rec.item.title)}</a>`);
-    }
-    const groups = groupByStage(content.rc);
-    more.innerHTML = `
-      ${rd.observatory ? `<section class="place__section"><div class="upgrade"><div class="upgrade__lead"><p class="upgrade__name">Night Reading</p><p class="upgrade__line">From the Observatory: a tighter pace (four fifths of the time) for the flawless mark.</p></div><button class="upgrade__btn" id="night-toggle" aria-pressed="${night}">${night ? 'On' : 'Off'}</button></div></section>` : ''}
-      ${weakness.answered >= 8 ? section('What your answers say', 'Kept quietly, and used to choose what you read next.', `
-        <div class="weak">
-          ${[...weakness.byType.entries()].filter(([, e]) => e.n >= 2).sort((a, b) => a[1].acc - b[1].acc).slice(0, 5)
-            .map(([t, e]) => `<div class="weak__row"><span>${escapeHTML(typeName(t))}</span><span class="weak__bar"><i style="width:${Math.round(e.acc * 100)}%" class="${e.acc < 0.6 ? 'is-low' : e.acc > 0.85 ? 'is-high' : ''}"></i></span><b>${Math.round(e.acc * 100)}%</b></div>`).join('')}
-        </div>`) : ''}
-      ${section('The shelves', `${rd.passages} passages, foundation to elite.`, groups.map((g) => `
-        <h3 class="shelf">${escapeHTML(STAGE_INFO[g.stage]?.label ?? g.stage)}</h3>
-        <p class="sub">${escapeHTML(STAGE_INFO[g.stage]?.description ?? '')}</p>
-        <div class="g-list">
-          ${g.items.map((it, i) => { const b = rd.best.get(it.id); return `<a class="g-row ${rec?.item.id === it.id ? 'g-row--next' : ''}" href="#/rc/session/${it.id}"><span class="g-row__num">${i + 1}</span><span class="g-row__lead"><span class="g-row__title">${escapeHTML(it.title)}</span><span class="g-row__meta">${it.real_source ? `Real essay by ${escapeHTML(it.real_source.split(',')[0])} · ` : ''}${escapeHTML(it.genre)} · ${it.difficulty} · ~${it.estimated_time_min} min · ${it.question_count} Q${b ? ` · best ${Math.round(b.accuracy * 100)}%${b.flawless ? ' · flawless' : ''}` : ''}</span></span><span class="g-row__stars" aria-label="${b?.stars ?? 0} stars">${starHTML(b?.stars ?? 0)}</span></a>`; }).join('')}
-        </div>`).join(''))}
-      ${bankBundleList('cr', content.cr, state, 'Arguments', 'Short arguments in the CAT register: find the assumption, weaken the link, name the flaw. Five at a time, unsolved first.')}`;
+    const lib = libraryShelves(content.rc, world.records.sessions);
+    const { renderLibrary } = await import('./library.js');
+    if (location.hash !== arrivedAt) return;
+    const shelves = document.createElement('div');
+    more.replaceChildren(shelves);
+    if (rd.observatory) more.insertAdjacentHTML('beforeend', `<div class="lib__night"><div class="upgrade"><div class="upgrade__lead"><p class="upgrade__name">Night Reading</p><p class="upgrade__line">From the Observatory: a tighter pace (four fifths of the time) for the flawless mark.</p></div><button class="upgrade__btn" id="night-toggle" aria-pressed="${night}">${night ? 'On' : 'Off'}</button></div></div>`);
     /* Hold the button in a const. `e.currentTarget` is null after the first
        await — dispatch is over — so reading it again threw and the toggle
        never changed its label or its pressed state (village.js had the same
@@ -256,6 +237,7 @@ export async function renderPlace(outlet, { storage }, params) {
         console.error('[CAT OS] could not remember night reading', err);
       }
     });
+    await renderLibrary(shelves, { lib, stage: hostState?.stage ?? 0 });
     return;
   }
 

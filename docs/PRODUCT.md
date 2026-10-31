@@ -22,7 +22,7 @@ map says which (nothing else lives there: no DILR, no quant):
 
 | House (sign) | Friend | What you practise |
 |---|---|---|
-| the library (**Reading Comprehension**) | **Chai**, an owl | CAT-sized passages, the second look, arguments |
+| the library (**Reading Comprehension**) | **Chai**, an owl | CAT-sized passages, each a book on Chai's shelves; arguments |
 | the workshop (**Para Jumbles**) | **Ginger**, a fox | four sentences into the author's order |
 | the archery cabin (**Para Summary**) | **Mochi**, a pebble | the summary that keeps the point |
 | the observatory (**Odd One Out**) | **Mallow**, a cloud | the sentence that does not belong |
@@ -108,7 +108,9 @@ Then Chai waves from the library and the big button at the bottom glows:
 CAT passage against the clock.
 
 When you finish, the result screen counts up your Glow ("You helped
-Chai!"), Chai thanks you, and the level bar fills. Back in the village
+Chai!"), Chai thanks you, and the level bar fills. On the shelf the book
+you read is wiped as clean as your answers earned, and Chai rolls his
+ladder on to the next one. Back in the village
 every friend runs to the plaza for a party round Chai, and if Chai grew a
 stage you see the new look and the new name. Then the next friend's "!" is
 waiting.
@@ -155,6 +157,15 @@ backup carries the whole village and nothing can drift from the truth.
 - A lesson stands in a soft painted crop of its host pet's home. A reading
   run, a word round and the Gauntlet show the host's portrait in their bar.
 - A place screen shows the host at its own door.
+- **Chai's library** (the Reading House, 3.14.0): under the stars, one long
+  bookcase, Elite at the top and Foundation at the bottom, every passage a
+  numbered book. Every book starts dusty. Read it and answer its questions:
+  all right and it gleams, half right and it is half clean, none right and it
+  stays dusty, so the goal you can see is a clean library. Chai stands on a
+  rolling ladder beside the next book (he flies down to it when you come in);
+  tap any book on an open shelf and it comes off the shelf and opens. A shelf
+  opens once half the books on the shelf below it have been read. Help Chai
+  opens the book he is waiting beside.
 - Results show the friend celebrating, "You helped Chai!" with the stars
   counted up, the level bar, any new stage and its story line, and today's three.
 - Progress and Settings sit behind the gear and in the bottom bar; the rose

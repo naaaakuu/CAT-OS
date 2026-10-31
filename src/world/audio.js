@@ -219,6 +219,13 @@ const EVENTS = {
     for (const at of [1.5, 2.7, 4.2]) { noiseBurst(t + at, { peak: 0.06 * v, a: 0.004, d: 0.09, filter: 'bandpass', freq: 1400, q: 1.2 }); bell(t + at + 0.04, pitch(C5, 'sol', 1), 0.06 * v, Math.sin(at) * 0.5); }
   },
   page:     (t, v) => { noiseBurst(t, { peak: 0.05 * v, a: 0.01, d: 0.16, filter: 'highpass', freq: 1500 }); },
+  /* Chai's wings in the library: four soft beats. */
+  flap:     (t, v) => { for (let i = 0; i < 4; i += 1) noiseBurst(t + i * 0.11, { peak: 0.045 * v * (1 - i * 0.15), a: 0.02, d: 0.09, filter: 'bandpass', freq: 520 + i * 40, q: 0.8 }); },
+  /* A book wiped clean: three brushes of a cloth, then a little shimmer. */
+  dust:     (t, v) => {
+    for (let i = 0; i < 3; i += 1) noiseBurst(t + i * 0.22, { peak: 0.05 * v, a: 0.05, d: 0.18, filter: 'highpass', freq: 2200 + i * 500 });
+    [['mi', 1], ['sol', 1], ['do', 2]].forEach(([d, o], i) => tone(t + 0.75 + i * 0.07, { freq: pitch(C5, d, o - 1), type: 'sine', peak: 0.035 * v, a: 0.004, d: 0.4 }));
+  },
   swoosh:   (t, v) => { noiseBurst(t, { peak: 0.06 * v, a: 0.04, d: 0.26, filter: 'bandpass', freq: 900, q: 0.7 }); },
 };
 

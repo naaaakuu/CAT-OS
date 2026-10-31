@@ -34,7 +34,7 @@ import { trapHabit, hitHabit } from '../../../core/learning/noticing.js';
 import { chooseLesson, lessonRecord, pickRecall } from '../../../core/mentor/lesson.js';
 import { saveLesson, listLessons, markRecalled } from '../../../core/mentor/records.js';
 import { LINES } from '../../../core/mentor/voice.js';
-import { STAGE_INFO } from '../../../core/learning/journey.js';
+import { STAGE_INFO, libraryShelves } from '../../../core/learning/journey.js';
 import { toast } from '../../../ui/components/cat-toast.js';
 import { escapeHTML, formatDuration } from '../../../core/utils/format.js';
 import { rcStars } from '../../../world/economy.js';
@@ -70,6 +70,33 @@ export async function renderSession(outlet, { storage }, params) {
 
   let before = null;
   try { before = await loadWorld(storage); } catch { /* facts still show */ }
+
+  /* Chai's library (owner, 2026-10-31): a shelf opens once half the shelf
+     below it has been read, whichever door the learner came in by. */
+  let shelfSpot = null;
+  try { if (before) shelfSpot = libraryShelves(before.content.rc, before.records.sessions); } catch { /* the passage still opens */ }
+  const onShelf = shelfSpot?.byId.get(passageId(passage)) ?? null;
+  if (onShelf && !onShelf.shelf.open) {
+    const { shelf, book } = onShelf;
+    const owl = shelfSpot.owl;
+    outlet.innerHTML = `
+      <section class="run">
+        <div class="run__bar">
+          <a class="run__leave" href="#/world/place/reading-room" aria-label="Back to the library">×</a>
+          <div class="run__where"><div class="run__place">${hostChip('chai', 20)}<span>The Reading House</span></div><div class="run__what">${escapeHTML(shelf.label)} shelf · Book ${book.n}</div></div>
+        </div>
+        <div class="run__body">
+          <div class="brief">
+            <p class="brief__eyebrow">${escapeHTML(shelf.label)} · Book ${book.n}</p>
+            <h1 class="brief__title">This shelf is still locked</h1>
+            <p class="brief__opening">The ${escapeHTML(shelf.label)} shelf opens once ${shelf.need} ${escapeHTML(shelf.below?.label ?? '')} books are read. ${shelf.toGo} to go.</p>
+            ${owl ? `<a class="g-cta" href="#/rc/session/${escapeHTML(owl.id)}">Read ${escapeHTML(STAGE_INFO[owl.stage]?.label ?? owl.stage)} book ${owl.n}<small>The one Chai is waiting beside</small><span class="arrow" aria-hidden="true">→</span></a>` : ''}
+            <p class="muted" style="margin-top:14px"><a href="#/world/place/reading-room">Back to the library</a></p>
+          </div>
+        </div>
+      </section>`;
+    return;
+  }
 
   /* Night Reading, the Observatory's payload. The gate used to look for a
      LEARNING record of kind 'world-build' with upgrade_id 'observatory' —
@@ -110,7 +137,7 @@ export async function renderSession(outlet, { storage }, params) {
       </div>
       <div class="run__body">
         <div class="brief">
-          <p class="brief__eyebrow">${escapeHTML(stage)} · ${escapeHTML(m.genre ?? '')}${infoButton('rc', {
+          <p class="brief__eyebrow">${escapeHTML(stage)}${onShelf ? ` · Book ${onShelf.book.n}` : ''} · ${escapeHTML(m.genre ?? '')}${infoButton('rc', {
             moreTitle: 'This passage',
             more: [
               'What it argues is for you to find. Read it the way the exam reads it: once, closely, then answer from the text.',
@@ -438,10 +465,13 @@ export async function renderSession(outlet, { storage }, params) {
         ...(change?.pet === 'chai' ? { change } : {}),
         setsDone,
         extraHTML: mentorHTML + habitHTML + reviewHTML,
+        /* Back to the shelf first: that is where the book comes clean and
+           Chai moves on (world/screens/library.js). The village's party for
+           this run still waits there for twenty minutes. */
         actions: [
-          { label: 'Back to the village', href: '#/world', primary: true },
+          { label: 'See your book on the shelf', href: '#/world/place/reading-room', primary: true },
           { label: isUnlocked(`explain:${passage.meta.id}`) ? 'Explain this passage simply' : 'Explain this passage simply (short video)', href: `#/rc/mentor/${passage.meta.id}` },
-          { label: 'Back to the Reading House', href: '#/world/place/reading-room', quiet: true },
+          { label: 'Back to the village', href: '#/world', quiet: true },
         ],
       });
     }

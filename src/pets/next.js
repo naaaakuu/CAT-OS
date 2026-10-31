@@ -9,9 +9,8 @@
  * building in the 2.x canvas village.)
  */
 
-import { nextPassage, nextVerbal, nextFamily, readingWeakness, missedQuestions, typeName } from '../world/curator.js';
-import { STAGE_INFO } from '../core/learning/journey.js';
-import { byLearner } from '../core/learning/order.js';
+import { nextVerbal, nextFamily } from '../world/curator.js';
+import { STAGE_INFO, libraryShelves } from '../core/learning/journey.js';
 
 const BANK = {
   sp: ['sp', 'Sentence placement', 'A paragraph with one sentence taken out. Find the one seat it can take', 5],
@@ -77,24 +76,28 @@ function verbalNext(world, mod, slug, unit, bankType, placeLabel) {
   return { href: trio.href, label: it.title, sub, minutes: trio.minutes, kind, why };
 }
 
-function readingNext(world, opts) {
-  const { content, records, state } = world;
-  const rd = state?.reading;
-  if (opts.first || !rd?.read) {
-    // The very first passage: a foundation one, first in this learner's own order, so
-    // two new learners do not open the same passage (core/learning/order.js).
-    const p = [...(content?.rc ?? [])].filter((x) => x.stage === 'foundation').sort(byLearner)[0] ?? content?.rc?.[0];
-    if (!p) return null;
-    return { href: `#/rc/session/${p.id}`, label: p.title, sub: `${p.question_count ?? 3} questions · about ${Math.max(3, Math.round(p.estimated_time_min ?? 4))} min`, minutes: Math.round(p.estimated_time_min ?? 4), kind: 'first' };
-  }
-  const sessions = sessionsOf(records);
-  const weakness = readingWeakness(sessions);
-  const missed = missedQuestions(sessions, weakness, state.now);
-  if (missed.length >= 4) return { href: '#/rc/second-look', label: 'The second look', sub: `${Math.min(6, missed.length)} questions that got away · about 5 min`, minutes: 5, kind: 'retry' };
-  const rec = nextPassage(content, rd.best, weakness, `rc:${state.today}`);
-  if (!rec) return null;
-  const it = rec.item;
-  return { href: `#/rc/session/${it.id}`, label: it.title, sub: `${STAGE_INFO[it.stage]?.label ?? it.stage ?? ''} · ${it.question_count} questions · about ${it.estimated_time_min} min`, minutes: it.estimated_time_min, kind: rec.kind, why: rec.why };
+/**
+ * Chai's next book: the one he waits beside in his library (journey.js
+ * libraryShelves), so the card, the Reading House and the owl on the ladder
+ * always name the same book. A new learner's is Foundation book 1, first in
+ * their own order (core/learning/order.js). Never the second look: the owner
+ * (2026-10-31) found "Help Chai" opening old questions instead of a passage.
+ */
+function readingNext(world) {
+  const { content, records } = world;
+  const lib = libraryShelves(content?.rc ?? [], sessionsOf(records));
+  const b = lib.owl;
+  if (!b) return lib.books ? { href: '#/world/place/reading-room', label: 'The Reading House', sub: 'Every book on the shelves gleams', minutes: 5, kind: 'pace' } : null;
+  const it = b.item;
+  const minutes = Math.max(3, Math.round(Number(it.estimated_time_min) || 4));
+  return {
+    href: `#/rc/session/${b.id}`,
+    label: it.title,
+    sub: `${STAGE_INFO[b.stage]?.label ?? b.stage} shelf, book ${b.n} · ${it.question_count ?? 3} questions · about ${minutes} min`,
+    minutes,
+    kind: !lib.read ? 'first' : b.read ? 'retry' : 'new',
+    book: b,
+  };
 }
 
 function wordsNext(world) {
@@ -119,12 +122,13 @@ function wordsNext(world) {
 /**
  * @param {string} petId   toffee | chai | matcha | mochi | ginger | mallow | sesame | biscuit
  * @param {object} world   { content, records, state } from loadWorld
- * @param {object} [opts]  { first: boolean }  the very first passage should be short
+ * @param {object} [opts]  { first: boolean }  callers still pass it; Chai's library
+ *                         already starts a new learner on Foundation book 1
  * @returns {{ href, label, sub, minutes, kind, why } | null}
  */
 export function nextFor(petId, world, opts = {}) {
   try {
-    if (petId === 'chai') return readingNext(world, opts);
+    if (petId === 'chai') return readingNext(world);
     if (petId === 'matcha') return wordsNext(world);
     if (petId === 'mochi') return verbalNext(world, 'ps', 'table', 'summaries', null, 'The summary table');
     if (petId === 'sesame') return (world?.content?.pc ?? []).length ? bankActivity('pc', world.state) : { href: '#/world/place/completion', label: 'The clock tower', sub: 'Every completion in one place', minutes: 5, kind: 'new' };
@@ -155,11 +159,11 @@ export function noticeFor(petId, world, next) {
       return 'Help any friend today and I will light your very first fire.';
     }
     if (petId === 'chai') {
-      if (!state?.reading?.read) return `I picked a short one to start: ${next?.sub ?? mins}.`;
-      if (next?.kind === 'retry' && next.href === '#/rc/second-look') return 'A few questions got away last time. I saved them so we can look again, together.';
-      const w = readingWeakness(sessions);
-      if (w.answered >= 8 && w.weakest) return `I noticed ${typeName(w.weakest)} questions trip you up most. I picked a passage with some.`;
-      return next ? `I picked "${next.label}" for you. ${mins.replace(/^a/, 'A')}.` : 'Every passage is waiting on the shelves.';
+      const b = next?.book;
+      if (!b) return next ? 'Every book in my library gleams. Read one again, faster.' : 'Every passage is waiting on the shelves.';
+      if (!state?.reading?.read) return `My library is so dusty! Book ${b.n} is a short one to start. ${mins.replace(/^a/, 'A')}.`;
+      if (b.read) return `Book ${b.n} is still a little dusty. One more read and it shines.`;
+      return `Book ${b.n} on the ${STAGE_INFO[b.stage]?.label ?? b.stage} shelf is next. Every one you read comes clean.`;
     }
     if (petId === 'matcha') {
       const due = (state?.meadow?.due ?? 0) + (state?.pond?.due ?? 0) + (state?.thicket?.due ?? 0);
@@ -185,11 +189,7 @@ export function cornersOf(petId, world) {
   const has = (type) => (content?.[type] ?? []).length > 0;
   const c = (href, label, sub) => ({ href, label, sub });
   if (petId === 'chai') {
-    const out = [c('#/world/place/reading-room', 'The Reading House', 'Every passage, stage by stage')];
-    try {
-      const missed = missedQuestions(sessionsOf(records), readingWeakness(sessionsOf(records)), state?.now);
-      if (missed.length >= 4) out.push(c('#/rc/second-look', 'The second look', `${missed.length} questions that got away`));
-    } catch { /* no second look today */ }
+    const out = [c('#/world/place/reading-room', 'The Reading House', 'My library: every passage a book, Foundation to Elite')];
     if (has('cr')) out.push(c('#/bank/session/cr/next', 'Arguments', BANK.cr[2]));
     return out;
   }

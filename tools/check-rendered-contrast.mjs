@@ -76,25 +76,29 @@ export const ROUTES = [
   { hash: '#/world/place/wilds', name: 'gauntlet-question', risk: true, enter: [
     { click: 'gauntlet', wait: 2600 },
   ] },
-  { hash: '#/rc/session/rc-0001', name: 'rc-question', risk: true, enter: [
+  /* A Foundation passage: the shelf every learner can open (Chai's library
+     locks a shelf until half the one below it is read, journey.js). */
+  { hash: '#/rc/session/rc-0040', name: 'rc-question', risk: true, enter: [
     { click: 'begin', wait: 900 },
     { click: 'on to the', wait: 1100 },
   ] },
-  { hash: '#/rc/session/rc-0001', name: 'rc-explained', risk: true, enter: [
+  { hash: '#/rc/session/rc-0040', name: 'rc-explained', risk: true, enter: [
     { click: 'begin', wait: 900 },
     { click: 'on to the', wait: 1100 },
     { sel: 'cat-option button', wait: 400 },
     { click: 'lock it in', wait: 1100 },
   ] },
   /* The result every run ends on: the host pet's home behind a warm veil,
-     the pet with its gifts, the mentor. Four questions set aside gets there. */
-  { hash: '#/rc/session/rc-0001', name: 'rc-result', risk: true, enter: [
+     the pet with its gifts, the mentor. Three questions set aside gets there. */
+  { hash: '#/rc/session/rc-0040', name: 'rc-result', risk: true, enter: [
     { click: 'begin', wait: 900 },
     { click: 'on to the', wait: 1100 },
-    ...[1, 2, 3].flatMap(() => [{ click: 'set aside', wait: 500 }, { click: 'next question', wait: 700 }]),
+    ...[1, 2].flatMap(() => [{ click: 'set aside', wait: 500 }, { click: 'next question', wait: 700 }]),
     { click: 'set aside', wait: 500 },
     { click: 'see the result', wait: 4200 },
   ] },
+  /* A book on a shelf that has not opened yet says so, and how to open it. */
+  { hash: '#/rc/session/rc-0008', name: 'rc-locked' },
 ];
 
 /* The village screen is a painted game world, not a document: it keeps its

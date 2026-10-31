@@ -2,8 +2,9 @@
  * journey.js — the learning progression. Pure logic, no DOM, no storage.
  *
  * Principles (Reading Mentor milestone, recorded in STATUS.md):
- * - Stages RECOMMEND an order; nothing is ever locked. Locking punishes
- *   curiosity and adds game mechanics this product refuses.
+ * - Stages RECOMMEND an order. One exception, the owner's (2026-10-31): in
+ *   Chai's library a shelf opens once half the shelf below it has been read
+ *   (`libraryShelves`), so the climb from Foundation to Elite is earned.
  * - The reader should always be able to see WHY a passage is suggested,
  *   so every recommendation carries a plain-English reason.
  * - Difficulty balance: never recommend a second consecutive hard
@@ -78,6 +79,79 @@ export function groupByStage(items) {
     else groups.push({ stage: item.stage ?? 'unstaged', items: [item] });
   }
   return groups;
+}
+
+/* ------------------------------------------------------------------ */
+/* Chai's library (owner, 2026-10-31)                                  */
+/* ------------------------------------------------------------------ */
+
+/** A shelf opens once this share of the shelf below it has been read. */
+export const SHELF_OPENS_AT = 0.5;
+
+/**
+ * The library: every passage is a book, one shelf per stage, Foundation at
+ * the bottom and Elite at the top; inside a shelf, this learner's own order
+ * (groupByStage), numbered from 1. Derived from the records alone: nothing
+ * here is stored.
+ *
+ *   book.clean  the best share right in any finished run of it (0 unread):
+ *               all right gleams, half right is half dusty, none stays dusty
+ *   shelf.open  Foundation always; any other once SHELF_OPENS_AT of the
+ *               shelf below has been read (`need` books, `toGo` still to read)
+ *   owl         the book Chai waits beside: the next unread book to the right
+ *               of the last one read, else the first unread book on the
+ *               lowest open shelf, else the dustiest open book; null once
+ *               every book gleams
+ *
+ * @param {Array} items     RC registry rows
+ * @param {Array} sessions  every session record (anything else is skipped)
+ */
+export function libraryShelves(items, sessions) {
+  const runs = new Map(); // passage id -> { clean, at }
+  for (const s of Array.isArray(sessions) ? sessions : []) {
+    if (!s || typeof s !== 'object' || s.module || typeof s.passage_id !== 'string') continue;
+    const total = Number(s.score?.total), correct = Number(s.score?.correct);
+    if (!(total > 0) || !Number.isFinite(correct)) continue;
+    const clean = Math.max(0, Math.min(1, correct / total));
+    const at = String(s.finished_at ?? '');
+    const prev = runs.get(s.passage_id);
+    runs.set(s.passage_id, { clean: Math.max(prev?.clean ?? 0, clean), at: prev && prev.at > at ? prev.at : at });
+  }
+  const shelves = groupByStage(Array.isArray(items) ? items.filter((x) => x && x.id) : []).map((g) => ({
+    stage: g.stage,
+    label: STAGE_INFO[g.stage]?.label ?? g.stage,
+    books: g.items.map((item, i) => {
+      const r = runs.get(item.id);
+      return { id: item.id, n: i + 1, item, stage: g.stage, read: !!r, clean: r?.clean ?? 0, at: r?.at ?? '' };
+    }),
+  }));
+  const byId = new Map();
+  let open = true;
+  shelves.forEach((sh, i) => {
+    for (const b of sh.books) byId.set(b.id, { book: b, shelf: sh });
+    sh.read = sh.books.filter((b) => b.read).length;
+    sh.gleaming = sh.books.filter((b) => b.clean >= 1).length;
+    sh.open = open;
+    sh.below = i > 0 ? shelves[i - 1] : null;
+    sh.need = sh.below ? Math.ceil(sh.below.books.length * SHELF_OPENS_AT) : 0;
+    sh.toGo = sh.below ? Math.max(0, sh.need - sh.below.read) : 0;
+    open = sh.open && sh.read >= Math.ceil(sh.books.length * SHELF_OPENS_AT);
+  });
+
+  let owl = null;
+  const openBooks = shelves.filter((sh) => sh.open).flatMap((sh) => sh.books);
+  const last = openBooks.filter((b) => b.read).sort((a, b) => b.at.localeCompare(a.at))[0];
+  if (last) {
+    const row = byId.get(last.id).shelf.books, k = row.indexOf(last);
+    owl = row.slice(k + 1).find((b) => !b.read) ?? row.slice(0, k).find((b) => !b.read) ?? null;
+  }
+  if (!owl) owl = openBooks.find((b) => !b.read) ?? null;
+  if (!owl) for (const b of openBooks) if (b.clean < 1 && (!owl || b.clean < owl.clean)) owl = b;
+
+  const books = shelves.reduce((n, sh) => n + sh.books.length, 0);
+  const read = shelves.reduce((n, sh) => n + sh.read, 0);
+  const gleaming = shelves.reduce((n, sh) => n + sh.gleaming, 0);
+  return { shelves, byId, owl, books, read, gleaming };
 }
 
 /**

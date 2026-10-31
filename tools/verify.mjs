@@ -729,8 +729,30 @@ console.log('\n7. Journey dry run (pure logic)');
   if (first.difficulty_numeric !== minNumeric) {
     bad(`journey: first passage difficulty_numeric ${first.difficulty_numeric} is not the library minimum ${minNumeric}`);
   }
+  /* Chai's library (owner, 2026-10-31): a book is as clean as its best run,
+     a shelf opens at half the shelf below it read, Chai waits beside the next
+     unread book to the right of the last one read. */
+  {
+    const { libraryShelves } = await mod('src/core/learning/journey.js');
+    const run = (id, correct, total, at, extra = {}) => ({ passage_id: id, finished_at: new Date(Date.UTC(2026, 9, 1, at)).toISOString(), score: { correct, total }, ...extra });
+    const fresh2 = libraryShelves(items, []);
+    const f = fresh2.shelves[0].books, half = Math.ceil(f.length / 2);
+    if (fresh2.shelves.map((s) => s.stage).join() !== STAGES.join()) bad('journey: library shelves are not the stage ladder, Foundation first');
+    if (fresh2.shelves.filter((s) => s.open).length !== 1 || !fresh2.shelves[0].open) bad('journey: a new library should open Foundation alone');
+    if (fresh2.owl?.id !== f[0].id || fresh2.owl.id !== ordered[0].id) bad('journey: a new library should start Chai at Foundation book 1');
+    const some = f.slice(0, half - 1).map((b, i) => run(b.id, 3, 3, i));
+    if (libraryShelves(items, some).shelves[1].open) bad(`journey: the second shelf opened before ${half} Foundation books were read`);
+    const enough = [...some, run(f[half - 1].id, 0, 3, half)];
+    const lib = libraryShelves(items, enough);
+    if (!lib.shelves[1].open || lib.shelves[2].open) bad('journey: half the shelf below read should open the next shelf, and only that one');
+    if (lib.owl?.id !== f[half].id) bad('journey: Chai should wait beside the next unread book to the right of the last one read');
+    const twice = [run(f[0].id, 1, 3, 1), run(f[0].id, 3, 3, 2), run(f[0].id, 2, 3, 3), run(f[1].id, 3, 3, 4, { module: 'rc2' }), { passage_id: f[2].id, score: { correct: 'x', total: 3 } }, null, 7];
+    const cl = libraryShelves(items, twice);
+    if (cl.byId.get(f[0].id).book.clean !== 1 || cl.byId.get(f[1].id).book.read || cl.byId.get(f[2].id).book.read) bad('journey: a book is as clean as its best passage run; second looks and broken rows do not count');
+    if (libraryShelves(items, items.map((i, k) => run(i.id, 4, 4, k % 20))).owl !== null) bad('journey: once every book gleams Chai has no next book');
+  }
   if (problems.filter((p) => p.startsWith('journey')).length === 0) {
-    ok('stage ladder, grouping, balance rules, re-read fallback, full-stage coverage, gentle first step');
+    ok('stage ladder, grouping, balance rules, re-read fallback, full-stage coverage, gentle first step; the library: shelves, half-read locks, the owl\'s next book, cleanliness');
   }
 }
 

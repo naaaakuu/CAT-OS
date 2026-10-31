@@ -68,8 +68,8 @@ const CONTENT_VERSION = 16;
    ALWAYS lands in a new cache, whether or not anybody remembered to bump the
    number above. Nothing used to enforce that bump, and an installed learner
    could sit on old code forever with no symptom anybody could see. */
-const BUILD_ID = '3be9fa258e';
-const CONTENT_ID = 'fa1ec949c0';
+const BUILD_ID = 'bbac0cb5b6';
+const CONTENT_ID = '097f38a2b1';
 const SHELL_CACHE = `cat-os-shell-v${CACHE_VERSION}.${BUILD_ID}`;
 const CONTENT_CACHE = `cat-os-content-v${CONTENT_VERSION}.${CONTENT_ID}`;
 const META_CACHE = 'cat-os-meta';
@@ -368,6 +368,7 @@ const SHELL_FILES = [
   './src/ui/styles/game.css',
   './src/ui/styles/home.css',
   './src/ui/styles/intro.css',
+  './src/ui/styles/library.css',
   './src/ui/styles/rewards.css',
   './src/ui/styles/tokens.css',
   './src/ui/styles/world.css',
@@ -383,6 +384,7 @@ const SHELL_FILES = [
   './src/world/regions.js',
   './src/world/rewards.js',
   './src/world/screens/hearth.js',
+  './src/world/screens/library.js',
   './src/world/screens/place.js',
   './src/world/screens/result.js',
   './src/world/screens/round.js',
