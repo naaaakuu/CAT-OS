@@ -119,6 +119,16 @@ function wordsNext(world) {
   };
 }
 
+/** Chai's door: the library, where he waits beside his next book. */
+export const LIBRARY_HREF = '#/world/place/reading-room';
+
+/**
+ * Where a village button for a friend goes. Chai's is always his library, never
+ * his next book (owner, 2026-11-01): a "Help Chai" that skipped the shelves is
+ * why nobody found them.
+ */
+export const startHref = (petId, next, fallback) => (petId === 'chai' ? LIBRARY_HREF : next?.href ?? fallback);
+
 /**
  * @param {string} petId   toffee | chai | matcha | mochi | ginger | mallow | sesame | biscuit
  * @param {object} world   { content, records, state } from loadWorld

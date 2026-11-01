@@ -93,6 +93,9 @@ function loadStyle() {
   return styleReady;
 }
 
+/** place.js waits on this before it builds the room, so the room is never seen unstyled. */
+export const libraryStyle = loadStyle;
+
 function readMemory() {
   try {
     const m = JSON.parse(localStorage.getItem(MEMORY) || 'null');

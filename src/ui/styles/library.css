@@ -349,7 +349,85 @@
   background: radial-gradient(circle at 35% 30%, #FFF0B8, #E2B85E 60%, #A87C2C); box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); }
 .lib-open__back { position: absolute; inset: 0; border-radius: 3px 8px 8px 3px; transform: translateZ(-2px); background: var(--c, #6B2A22); box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55); }
 
-/* ---------------- Night Reading, beside the case ---------------- */
-.lib__night { max-width: 680px; margin: 14px auto 0; padding: 0 18px; }
+/* ==================================================================
+   The room (place.js, owner 2026-11-01): opening Chai's house is walking
+   into a library, so the case is the whole screen. No painting above it,
+   no title block, no Help: the way back, the stars, the ⓘ and Night
+   Reading float over it as brass plates, a plaque stands on the floor, and
+   the swipe hint fades after a few seconds. Mobile first: nothing here
+   takes room from the books, and every control is 44 px or more.
+   ================================================================== */
+.place--library { background: #1B110A; min-height: 100dvh; overflow: visible; padding-top: env(safe-area-inset-top); }
+.place--library .libroom__shelves { position: relative; }
+.place--library .lib { margin: 0 0 0 calc(50% - 50vw); }
+
+/* The case fills at least the screen; what is left under it is more floor. */
+.place--library .lib__view {
+  min-height: calc(100dvh - env(safe-area-inset-top));
+  background:
+    repeating-linear-gradient(to bottom, rgba(0, 0, 0, 0) 0 14px, rgba(24, 14, 7, 0.85) 14px 15px) local,
+    var(--lib-grain-h) local,
+    linear-gradient(to bottom, #5A3A21, #4A2F1B) local,
+    #1B110A;
+  box-shadow: inset 0 -10px 18px -12px rgba(0, 0, 0, 0.9);
+}
+
+/* Brass plates: the same metal as the shelf labels. */
+.place--library .place__back, .libroom__pill, .libroom__tools .info-btn::before {
+  background: linear-gradient(to bottom, #F7E4A8, #DDBE70 60%, #C7A453);
+  box-shadow: inset 0 0 0 1px rgba(110, 80, 24, 0.75), 0 3px 8px rgba(0, 0, 0, 0.55);
+  -webkit-backdrop-filter: none; backdrop-filter: none;
+}
+.place--library .place__back {
+  z-index: 8; min-height: 44px; padding: 0 16px 0 12px; border: 0;
+  color: var(--lib-ink, #2F2210); font: 800 14px/1 var(--g-ui); letter-spacing: 0.02em;
+}
+.libroom__tools { z-index: 8; align-items: center; justify-content: flex-end; flex-wrap: wrap; gap: 4px 6px; max-width: calc(100vw - 132px); }
+.libroom__pill {
+  display: inline-flex; align-items: center; gap: 6px; height: 40px; padding: 0 14px; border: 0; border-radius: 999px;
+  color: #2F2210; font: 800 13px/1 var(--g-ui); letter-spacing: 0.03em; font-variant-numeric: tabular-nums; white-space: nowrap;
+}
+.libroom__star { font-size: 14px; }
+.libroom__pill--btn { min-height: 44px; height: 44px; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.libroom__pill--btn:active { transform: scale(0.97); }
+.libroom__pill--btn[aria-pressed="true"] { background: linear-gradient(to bottom, #FFF0B8, #F2CE6A 60%, #D9AC3E); }
+.libroom__tools .info-btn { margin: 0; color: #2F2210; font-size: 15px; }
+.libroom__tools .info-btn::before { inset: 4px; border: 0; }
+
+/* The plaque on the floor: whose library, and how much of it is read. */
+.place--library .lib__head {
+  position: fixed; left: 50%; bottom: calc(env(safe-area-inset-bottom) + 10px); z-index: 7;
+  display: block; width: max-content; max-width: min(88vw, 360px); margin: 0; padding: 7px 20px 8px; text-align: center;
+  transform: translateX(-50%); pointer-events: none; border-radius: 6px; color: #2F2210;
+  background: linear-gradient(to bottom, #F7E4A8, #DDBE70 60%, #C7A453);
+  box-shadow: inset 0 0 0 1px rgba(110, 80, 24, 0.75), 0 0 0 3px rgba(40, 24, 11, 0.92), 0 6px 14px rgba(0, 0, 0, 0.6);
+}
+.place--library .lib__head h2 { margin: 0; font: 700 15px/1.15 var(--g-display); letter-spacing: 0.01em; color: inherit; }
+.place--library .lib__count { margin: 2px 0 0; font: 700 11.5px/1.25 var(--g-ui); letter-spacing: 0.03em; color: #2F2210; }
+.place--library .lib__count b { color: inherit; }
+
+/* How to use it: a learner who has read no book yet sees it on the plaque's own plate for a few seconds, then the plaque (Chai and his
+   words stay clear of it). Everyone else has it for a screen reader only. Chai's empty-shelf note is the one hint with no case before it. */
+.place--library:not([data-new]) .lib__view ~ .lib__hint {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+.place--library[data-new] .lib__view ~ .lib__hint {
+  position: fixed; left: 50%; bottom: calc(env(safe-area-inset-bottom) + 10px); z-index: 7;
+  width: max-content; max-width: min(88vw, 340px); margin: 0; padding: 8px 18px 9px; text-align: center;
+  transform: translateX(-50%); pointer-events: none; border-radius: 6px;
+  font: 700 12.5px/1.35 var(--g-ui); color: #2F2210;
+  background: linear-gradient(to bottom, #F7E4A8, #DDBE70 60%, #C7A453);
+  box-shadow: inset 0 0 0 1px rgba(110, 80, 24, 0.75), 0 0 0 3px rgba(40, 24, 11, 0.92), 0 6px 14px rgba(0, 0, 0, 0.6);
+  animation: libroom-hint 9s ease both;
+}
+.place--library[data-new] .lib__head { animation: libroom-plaque 9s ease both; }
+@keyframes libroom-hint { 0%, 6% { opacity: 0; } 14%, 78% { opacity: 1; } 90%, 100% { opacity: 0; visibility: hidden; } }
+@keyframes libroom-plaque { 0%, 80% { opacity: 0; } 94%, 100% { opacity: 1; } }
+.place--library .lib__hint:only-child { max-width: 30ch; margin: 0 auto; padding: 120px 24px; text-align: center; color: #F4E9CF; font-size: 15px; }
+
+/* The door: the room opens out of the dark the village shut (home.css .cw-door). */
+.libroom__door { position: fixed; inset: 0; z-index: 60; pointer-events: none; background: #1B110A; opacity: 1; transition: opacity 750ms ease-out 80ms; }
+.libroom__door.is-open { opacity: 0; }
+html[data-reduced-motion] .libroom__door { display: none; }
 
 html[data-reduced-motion] .lib__mote { display: none; }

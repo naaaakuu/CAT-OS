@@ -3,7 +3,8 @@
  *
  * What a learner would notice if it broke: the eight friends are there and
  * walking; the big button starts a real activity; each friend's card names
- * it and starts its real next activity; the friends, today, level, fire and
+ * it and starts its real next activity (Chai has no card: he and his house
+ * open his library as the whole screen); the friends, today, level, fire and
  * cottage cards open as proper dialogs and give focus back; the village
  * level draws its decorations; friends go home to sleep at night and stand
  * still when motion is reduced; the phone layout never scrolls sideways;
@@ -109,13 +110,22 @@ try {
   for (let t = 0; t < 40 && !moved; t += 1) { await sleep(500); moved = JSON.parse(await positions()).filter((x, i) => x !== p0[i]).length; }
   ok(moved >= 1, 'no pet moved in twenty seconds');
 
-  // A pet's card names the pet and starts its real next activity.
+  // Chai has no card and no Help button (owner, 2026-11-01): he and his house walk the learner straight into his library, and the shelves are the whole screen.
+  const inLibrary = `location.hash === '#/world/place/reading-room' && !!document.querySelector('.place--library .lib__case .bk')`;
+  const backToVillage = async (why) => {
+    await ev(`document.querySelector('#back').click()`);
+    ok(await waitFor(`location.hash === '#/world' && !!document.querySelector('[data-spot="chai"]')`), `the way back from the library did not reach the village (${why})`);
+  };
   await ev(`document.querySelector('.pet[data-pet="chai"]').click()`);
-  ok(await waitFor(`!!document.querySelector('.cw-card[aria-modal="true"] h2')?.textContent.includes('Chai')`), "Chai's card did not open as a named dialog");
-  ok(await waitFor(`!!document.activeElement.closest('.cw-card')`), "Chai's card did not take focus");
-  ok(await ev(`/^#\\/(rc|world\\/place|bank)\\//.test(document.querySelector('.cw-card .cw-go')?.getAttribute('href') ?? '')`), "Chai's card does not start a reading activity");
-  await key('Escape', 'Escape', 27);
-  ok(await waitFor(`document.querySelector('.cw-overlay').hidden`, 3000), 'Escape did not close the card');
+  ok(await waitFor(inLibrary, 10000), 'tapping Chai did not walk into his library');
+  ok(await ev(`!document.querySelector('.cw-card, .place__hero, .g-cta, #cta, .place__title')`), 'a card, a village picture, a title or a Help button stands between the learner and the library');
+  // The page slides in over a few hundred ms (game.css place-in): measure once it has settled.
+  const wholeScreen = `(() => { const r = document.querySelector('.lib__case').getBoundingClientRect(); return r.top <= 1 && r.bottom > innerHeight * 0.8; })()`;
+  ok(await waitFor(wholeScreen, 3000), `the shelves are not the whole screen (${await ev(`JSON.stringify(document.querySelector('.lib__case').getBoundingClientRect())`)})`);
+  await backToVillage('Chai');
+  await ev(`document.querySelector('[data-spot="chai"]').click()`);
+  ok(await waitFor(inLibrary, 10000), "Chai's house did not open his library");
+  await backToVillage('his house');
 
   // Who is who, today's three, the village level, the fire, the cottage.
   for (const [open, sel, n] of [['friends', '.cw-roster li a[href^="#/"]', 8], ['today', '.cw-todo li', 3], ['level', '.cw-road li', 9], ['fire', '.cw-week li', 7], ['cottage', '.cw-toggle', 2]]) {

@@ -5,6 +5,7 @@
  *
  *   pet      a friend: who they are, what they teach, your level, the big
  *            Help button, Achievements; the rest sits under "More about"
+ *            (Chai has no card: village.js sends his taps into the library)
  *   fire     Toffee's fire: the days in a row, the week, spare logs, the Gauntlet
  *   level    the village level: Glow, and what each level puts on the map
  *   friends  every subject: one row per house, each a tap from its next round
@@ -16,7 +17,7 @@
 import { PETS, PET_BY_ID, HOUSES, STORIES, FRIENDSHIPS, AGES, friendshipOf, lineFor, stageTitle, stageGift, ageOf, toGrow, houseGift } from '../pets/pets.js';
 import { DAILY_GIFT } from '../pets/economy.js';
 import { GLOW, GLOW_SVG } from '../pets/glow.js';
-import { nextFor, cornersOf, noticeFor } from '../pets/next.js';
+import { nextFor, startHref, cornersOf, noticeFor } from '../pets/next.js';
 import { levelFor, achievementsFor } from '../pets/progress.js';
 import { petFigure, petPortrait, backdropStyle, FRAME } from '../pets/sprite.js';
 import { TREASURE_AT } from '../pets/paths.js';
@@ -28,7 +29,9 @@ import { escapeHTML } from '../core/utils/format.js';
 const esc = escapeHTML;
 const MOOD_LABEL = { glowing: 'Very happy', happy: 'Happy', missing: 'Misses you', sleepy: 'Sleepy', wilting: 'Lonely', new: 'New friend' };
 /** What a round with each friend is, in three words. */
-export const ACT = { chai: 'Read a passage', matcha: 'Learn new words', mochi: 'Find the summary', ginger: 'Order the sentences', mallow: 'Spot the odd one out', sesame: 'Fill the missing sentence', biscuit: 'Seat the sentence', toffee: 'Weekly Gauntlet' };
+export const ACT = { chai: 'Open the library', matcha: 'Learn new words', mochi: 'Find the summary', ginger: 'Order the sentences', mallow: 'Spot the odd one out', sesame: 'Fill the missing sentence', biscuit: 'Seat the sentence', toffee: 'Weekly Gauntlet' };
+/** What a village button says to do with a friend: Chai is visited in his library, the others are helped. */
+export const callWord = (id) => (id === 'chai' ? 'Visit' : 'Help');
 const FLAME = '<svg viewBox="0 0 24 24" width="16" height="16"><path d="M12 2.6c2.4 3.3 6.2 6.2 6.2 11a6.2 6.2 0 0 1-12.4 0c0-2.7 1.3-4.5 2.7-6 .2 1.6.9 2.9 2.1 3.5-.5-3.1.3-6 1.4-8.5z" fill="#F2A23C" stroke="#7a4a1e" stroke-width="1.4" stroke-linejoin="round"/></svg>';
 const STAR = '<svg class="cw-orb" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.9 6.1 6.7.8-4.9 4.6 1.3 6.6L12 17.5l-6 3.2 1.3-6.6L2.4 9.5l6.7-.8z" fill="#F4C443" stroke="#B88A12" stroke-width="1.2" stroke-linejoin="round"/></svg>';
 
@@ -193,7 +196,7 @@ function friendsCard(card, api) {
   const P = api.pets;
   const start = (h) => (h.place === 'placement' || h.place === 'completion'
     ? `#/bank/session/${h.place === 'placement' ? 'sp' : 'pc'}/next`
-    : nextFor(h.pet, api.world, { first: P.pets.find((p) => p.id === h.pet)?.isNew })?.href ?? `#/world/place/${h.place}`);
+    : startHref(h.pet, nextFor(h.pet, api.world, { first: P.pets.find((p) => p.id === h.pet)?.isNew }), `#/world/place/${h.place}`));
   card.innerHTML = `
     ${close}
     <p class="cw-eyebrow">CAT VARC</p>
@@ -221,7 +224,7 @@ function todayCard(card, api) {
     <p class="cw-sub">${T.gift ? `You helped all three. ${DAILY_GIFT} bonus Glow went to the village. Come back tomorrow for three more.` : `These friends miss you most today. Help all three and open a gift worth ${DAILY_GIFT} Glow.`}</p>
     <ul class="cw-todo">${T.picks.map((id, i) => {
       const def = PET_BY_ID.get(id), next = nextFor(id, api.world, { first: api.pets.pets.find((p) => p.id === id)?.isNew });
-      return `<li class="${T.done[i] ? 'is-done' : ''}">${petPortrait(id, 44)}<span><b>Help ${esc(def.name)}</b><small>${esc(ACT[id])}${next?.minutes ? ` · about ${Math.max(1, Math.round(next.minutes))} min` : ''}</small></span>${T.done[i] ? '<i class="cw-todo__ok" aria-label="done">✓</i>' : `<a href="${esc(next?.href ?? `#/world/place/${def.places[0]}`)}" data-go>Go</a>`}</li>`;
+      return `<li class="${T.done[i] ? 'is-done' : ''}">${petPortrait(id, 44)}<span><b>${callWord(id)} ${esc(def.name)}</b><small>${esc(ACT[id])}${next?.minutes ? ` · about ${Math.max(1, Math.round(next.minutes))} min` : ''}</small></span>${T.done[i] ? '<i class="cw-todo__ok" aria-label="done">✓</i>' : `<a href="${esc(startHref(id, next, `#/world/place/${def.places[0]}`))}" data-go>Go</a>`}</li>`;
     }).join('')}</ul>
     <p class="cw-giftline">${T.gift ? 'Gift opened' : `${T.doneCount} of 3 done`}</p>`;
 }

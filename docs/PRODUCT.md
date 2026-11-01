@@ -104,8 +104,9 @@ by mood (Para Jumbles), Mochi keeps it short (Para Summary), Sesame finishes
 your sentences (Para Completion), Mallow spots the sheep among the clouds
 (Odd One Out), Matcha collects words (Vocabulary).
 Then Chai waves from the library and the big button at the bottom glows:
-**Help Chai · Read a passage · 5 min**. One tap and you are reading a real
-CAT passage against the clock.
+**Visit Chai · Open the library · 5 min**. One tap and the doorway closes
+behind you and you are standing in a room full of books; tap one and you are
+reading a real CAT passage against the clock.
 
 When you finish, the result screen counts up your Glow ("You helped
 Chai!"), Chai thanks you, and the level bar fills. On the shelf the book
@@ -135,7 +136,9 @@ scurries, Matcha bounces, Toffee hops, Mallow floats), does chores round its hom
 in hand, visits its best friend, chats on the plaza, waves when you arrive,
 and goes home to sleep at night. Every line comes with a little voice. Tap a
 friend for their card: what they need, what they noticed about your answers,
-the big Help button, everything you can do with them, and their story.
+the big Help button, everything you can do with them, and their story. Chai is
+the exception: his house, and he himself, open his library, with no card and no
+Help button between you and the shelves.
 
 **The painting moves.** Forty-four pieces of the painting are cut out with
 feathered edges and animated in place (the workshop gear, waterfalls and
@@ -157,15 +160,17 @@ backup carries the whole village and nothing can drift from the truth.
 - A lesson stands in a soft painted crop of its host pet's home. A reading
   run, a word round and the Gauntlet show the host's portrait in their bar.
 - A place screen shows the host at its own door.
-- **Chai's library** (the Reading House, 3.14.0): under the stars, one long
+- **Chai's library** (the Reading House, 3.14.0; a whole-screen room from
+  2026-11-01, so tapping his house feels like walking in): one long
   bookcase, Elite at the top and Foundation at the bottom, every passage a
   numbered book. Every book starts dusty. Read it and answer its questions:
   all right and it gleams, half right and it is half clean, none right and it
   stays dusty, so the goal you can see is a clean library. Chai stands on a
   rolling ladder beside the next book (he flies down to it when you come in);
   tap any book on an open shelf and it comes off the shelf and opens. A shelf
-  opens once half the books on the shelf below it have been read. Help Chai
-  opens the book he is waiting beside.
+  opens once half the books on the shelf below it have been read. There is no
+  Help Chai: every way to him (his house, him, the big button) lands in the
+  library, where he waits beside the next book.
 - Results show the friend celebrating, "You helped Chai!" with the stars
   counted up, the level bar, any new stage and its story line, and today's three.
 - Progress and Settings sit behind the gear and in the bottom bar; the rose

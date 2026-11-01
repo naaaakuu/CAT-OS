@@ -63,7 +63,27 @@ export async function renderPlace(outlet, { storage }, params) {
   const hostDef = PET_BY_ID.get(host);
   const hostState = state.pets?.pets.find((p) => p.id === host);
 
-  outlet.innerHTML = `
+  /* Chai's library is a room you stand in, not a page about one (owner,
+     2026-11-01): no village painting above it, no title or progress bar, no
+     help button. The bookcase is the whole screen, and its words (the way
+     back, the stars, the count) float over it. Its stylesheet comes before
+     the page so the room never shows unstyled. */
+  const inRoom = region.slug === 'reading-room';
+  let library = null;
+  if (inRoom) {
+    library = await import('./library.js');
+    await library.libraryStyle();
+    if (location.hash !== arrivedAt) return;
+  }
+
+  outlet.innerHTML = inRoom ? `
+    <section class="place place--library" aria-label="Chai's library">
+      <h1 class="sr-only">${escapeHTML(region.name)}</h1>
+      <a class="place__back" href="#/world" id="back">← Village</a>
+      <div class="place__hero-stat libroom__tools" id="hero-stat"></div>
+      <div class="libroom__shelves" id="more"></div>
+      <i class="libroom__door" aria-hidden="true"></i>
+    </section>` : `
     <section class="place place--page" aria-label="${escapeHTML(region.name)}">
       <div class="place__hero place__hero--short place__hero--painted" style="${backdropStyle(host)}">
         <a class="place__back" href="#/world" id="back">← Village</a>
@@ -201,35 +221,33 @@ export async function renderPlace(outlet, { storage }, params) {
   /* ================= The Reading Room: Chai's library ================= */
   if (region.slug === 'reading-room') {
     const rd = state.reading;
-    heroStat.innerHTML = pill(`★ ${rd.stars} / ${rd.maxStars}`);
     let night = false;
     try { night = rd.observatory && (await storage.get(STORES.SETTINGS, 'world:night-reading'))?.value === true; } catch { /* off */ }
-    /* Under the stars, only the library (owner, 2026-10-31): every passage a
-       book on its shelf, as clean as the best run of it. What the place
-       teaches waits behind the ⓘ. */
-    head({ pct: rd.maxStars ? rd.stars / rd.maxStars : 0, label: `${rd.stars} / ${rd.maxStars} stars` }, null, '',
-      infoButton('rc', { moreTitle: 'This place', more: [
+    const nightLabel = (on) => `Night reading: ${on ? 'on' : 'off'}`;
+    /* Inside the library (owner, 2026-11-01): the way back, the stars and the
+       ⓘ float over the shelves; what the place teaches waits behind the ⓘ. */
+    heroStat.innerHTML = `<span class="libroom__pill"><span class="libroom__star" aria-hidden="true">★</span>${rd.stars} / ${rd.maxStars}<span class="sr-only"> stars</span></span>`
+      + infoButton('rc', { moreTitle: 'This place', more: [
         'Every passage is a book on these shelves, Foundation at the bottom and Elite at the top. Read one and answer its questions: the more you get right, the cleaner the book shines.',
         'A shelf opens once half the books on the shelf below it have been read.',
         'Every passage here is the size CAT sets: never more than four questions, never longer than the exam’s longest passage.',
         'Three stars means three quarters right inside the passage’s own time: the pace CAT asks for.',
-      ] }));
+      ] })
+      + (rd.observatory ? `<button type="button" class="libroom__pill libroom__pill--btn" id="night-toggle" aria-pressed="${night}" title="From the Observatory: a tighter pace (four fifths of the time) for the flawless mark">${nightLabel(night)}</button>` : '');
     const lib = libraryShelves(content.rc, world.records.sessions);
-    const { renderLibrary } = await import('./library.js');
-    if (location.hash !== arrivedAt) return;
+    outlet.querySelector('.place--library').toggleAttribute('data-new', !lib.read);
     const shelves = document.createElement('div');
     more.replaceChildren(shelves);
-    if (rd.observatory) more.insertAdjacentHTML('beforeend', `<div class="lib__night"><div class="upgrade"><div class="upgrade__lead"><p class="upgrade__name">Night Reading</p><p class="upgrade__line">From the Observatory: a tighter pace (four fifths of the time) for the flawless mark.</p></div><button class="upgrade__btn" id="night-toggle" aria-pressed="${night}">${night ? 'On' : 'Off'}</button></div></div>`);
     /* Hold the button in a const. `e.currentTarget` is null after the first
        await — dispatch is over — so reading it again threw and the toggle
        never changed its label or its pressed state (village.js had the same
        bug on the sound button). The control answers first, and the write
        follows. */
-    const nightBtn = more.querySelector('#night-toggle');
+    const nightBtn = heroStat.querySelector('#night-toggle');
     nightBtn?.addEventListener('click', async () => {
       const on = nightBtn.getAttribute('aria-pressed') !== 'true';
       nightBtn.setAttribute('aria-pressed', String(on));
-      nightBtn.textContent = on ? 'On' : 'Off';
+      nightBtn.textContent = nightLabel(on);
       play('tap');
       try {
         await storage.put(STORES.SETTINGS, { id: 'world:night-reading', value: on });
@@ -237,7 +255,13 @@ export async function renderPlace(outlet, { storage }, params) {
         console.error('[CAT OS] could not remember night reading', err);
       }
     });
-    await renderLibrary(shelves, { lib, stage: hostState?.stage ?? 0 });
+    await library.renderLibrary(shelves, { lib, stage: hostState?.stage ?? 0 });
+    /* The door opens: the room fades up out of the dark the village shut behind the learner. */
+    const door = outlet.querySelector('.libroom__door');
+    if (door) {
+      if (document.documentElement.hasAttribute('data-reduced-motion')) door.remove();
+      else requestAnimationFrame(() => { door.classList.add('is-open'); setTimeout(() => door.remove(), 1000); });
+    }
     return;
   }
 

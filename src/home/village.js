@@ -25,12 +25,12 @@ import { GLOW_SVG } from '../pets/glow.js';
 import { PETS, PET_BY_ID, HOUSES, LINES, lineFor, petForPlace, stageTitle, stageGift, ageOf, grewLine, toGrow, houseGift } from '../pets/pets.js';
 import { MAP, HOMES, PLACES, SIGNS, NODES, LAMPS, WINDOWS, CLOCK, nearestNode } from '../pets/paths.js';
 import { petRig, petPortrait, petGear, petRing, petFigure, FRAME } from '../pets/sprite.js';
-import { nextFor } from '../pets/next.js';
+import { nextFor, startHref, LIBRARY_HREF } from '../pets/next.js';
 import { createLife, petSize } from './life.js';
 import { mountMotion } from './motion.js';
 import { ATLAS } from './motion-atlas.js';
 import { createHouseLife, bakeVillage, gradeAtlas, LAMP_HOUSE, WINDOW_HOUSE, HOUSE_ART } from './houses.js';
-import { renderCard, decorLayer, ACT } from './cards.js';
+import { renderCard, decorLayer, ACT, callWord } from './cards.js';
 import { openModal, closeModal } from '../ui/modal.js';
 import { play, unlock, startMusic, startAmbience } from '../world/audio.js';
 import { whenIntroDone } from '../shell/intro.js';
@@ -348,21 +348,25 @@ export async function renderVillageHome(outlet, ctx) {
     today.setAttribute('aria-label', `Today's three friends: ${T.doneCount} of 3 helped. ${T.gift ? 'Today\'s gift is open.' : 'Help all three for a gift of 10 Glow.'}`);
     const id = pets.play, who = PET_BY_ID.get(id), next = nextFor(id, world, { first: pets.pets.find((p) => p.id === id)?.isNew });
     const playEl = root.querySelector('.cw-play');
-    playEl.setAttribute('href', next?.href ?? `#/world/place/${who.places[0]}`);
-    playEl.innerHTML = `${petPortrait(id, 44)}<span class="cw-play__text"><b>${T.gift ? 'Keep going: help' : 'Help'} ${who.name}</b><small>${escapeHTML(ACT[id])}${next?.minutes ? ` · ${Math.max(1, Math.round(next.minutes))} min` : ''}</small></span><span class="cw-play__go" aria-hidden="true">${playSVG}</span>`;
-    playEl.setAttribute('aria-label', `Play: help ${who.name}. ${ACT[id]}${next?.label ? `: ${next.label}` : ''}.`);
+    const call = callWord(id);
+    playEl.setAttribute('href', startHref(id, next, `#/world/place/${who.places[0]}`));
+    playEl.innerHTML = `${petPortrait(id, 44)}<span class="cw-play__text"><b>${T.gift ? `Keep going: ${call.toLowerCase()}` : call} ${who.name}</b><small>${escapeHTML(ACT[id])}${next?.minutes ? ` · ${Math.max(1, Math.round(next.minutes))} min` : ''}</small></span><span class="cw-play__go" aria-hidden="true">${playSVG}</span>`;
+    playEl.setAttribute('aria-label', `Play: ${call.toLowerCase()} ${who.name}. ${ACT[id]}${id !== 'chai' && next?.label ? `: ${next.label}` : ''}.`);
     root.querySelector('.cw-treasures').innerHTML = decorLayer(pets);
     for (const p of PETS) {
       const pp = pets.pets.find((x) => x.id === p.id);
       const el = root.querySelector(`.pet[data-pet="${p.id}"]`);
       el.dataset.word = pp.word;
-      el.setAttribute('aria-label', `${p.name}, ${MOOD_LABEL[pp.word]}. ${p.subject}. ${ageOf(pp.stage).name}, stage ${pp.stage} of 10${pp.stage ? `, ${stageTitle(p.id, pp.stage)}` : ''}.${pp.pick && !pp.helpedToday ? ' Needs your help today.' : ''} Open ${p.name}'s card.`);
+      el.setAttribute('aria-label', `${p.name}, ${MOOD_LABEL[pp.word]}. ${p.subject}. ${ageOf(pp.stage).name}, stage ${pp.stage} of 10${pp.stage ? `, ${stageTitle(p.id, pp.stage)}` : ''}.${pp.pick && !pp.helpedToday ? ' Needs your help today.' : ''} ${p.id === 'chai' ? 'Go into his library.' : `Open ${p.name}'s card.`}`);
     }
     life.setMarks(T.picks.filter((pid, i) => !T.done[i]));
     root.style.setProperty('--harmony', pets.harmony.toFixed(2));
   };
   hud();
-  root.querySelector('.cw-play').addEventListener('click', () => { unlock(); play('open'); });
+  root.querySelector('.cw-play').addEventListener('click', (e) => {
+    if (e.currentTarget.getAttribute('href') === LIBRARY_HREF && !e.metaKey && !e.ctrlKey && !e.shiftKey) { e.preventDefault(); enterLibrary(e.currentTarget); return; }
+    unlock(); play('open');
+  });
 
   /* ---------------- Cards ---------------- */
   let openKind = null;
@@ -392,7 +396,31 @@ export async function renderVillageHome(outlet, ctx) {
     open: (kind, arg, trigger) => openCard(kind, arg, trigger),
     showPet: (id) => { life.poke(id); reveal(life.positionOf(id)); later(() => openCard('pet', id), reduced ? 0 : 260); },
   };
+  /* Chai's house is his library (owner, 2026-11-01): a tap on the house or on
+     him walks straight in. He has no card and no Help button, so the shelves
+     are never a second tap away. The doorway shuts warm and dark, and the
+     library opens out of the same dark (library.css .libroom__door). */
+  let entering = false;
+  const enterLibrary = (from) => {
+    if (entering) return;
+    entering = true;
+    unlock(); play('open');
+    announce("Chai: Hoo! Come in. Going into the library.");
+    life.poke('chai');
+    const go = () => { location.hash = LIBRARY_HREF; };
+    if (reduced) { go(); return; }
+    const r = from?.getBoundingClientRect?.();
+    const door = document.createElement('div');
+    door.className = 'cw-door';
+    door.style.setProperty('--x', `${Math.round(r ? r.left + r.width / 2 : innerWidth / 2)}px`);
+    door.style.setProperty('--y', `${Math.round(r ? r.top + r.height / 2 : innerHeight / 2)}px`);
+    root.appendChild(door);
+    requestAnimationFrame(() => requestAnimationFrame(() => door.classList.add('is-shut')));
+    later(go, 480);
+    later(() => { door.remove(); entering = false; }, 1800);
+  };
   const openCard = (kind, arg, trigger) => {
+    if (kind === 'pet' && arg === 'chai') { enterLibrary(trigger); return; }
     const was = openKind;
     if (was) closeModal(card);
     if (kind === 'pet' && arg === 'toffee') kind = 'fire';
@@ -412,6 +440,7 @@ export async function renderVillageHome(outlet, ctx) {
     const pet = e.target.closest('.pet[data-pet]');
     if (pet) {
       const id = pet.dataset.pet;
+      if (id === 'chai') { enterLibrary(pet); return; }
       unlock();
       announce(`${PET_BY_ID.get(id).name}: ${life.poke(id)}`);
       reveal(life.positionOf(id));
@@ -421,6 +450,7 @@ export async function renderVillageHome(outlet, ctx) {
     const spot = e.target.closest('[data-spot]');
     if (spot) {
       const s = spot.dataset.spot;
+      if (s === 'chai') { enterLibrary(spot); return; }
       if (s === 'toffee') { life.poke(s); reveal(NODES.f1); openCard('fire', null, spot); return; }
       life.poke(s); reveal(life.positionOf(s)); openCard('pet', s, spot);
       return;
