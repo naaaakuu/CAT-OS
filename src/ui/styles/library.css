@@ -54,7 +54,7 @@
   position: relative; isolation: isolate; contain: layout paint;
   background:
     /* each compartment: dark under its shelf, warm in the middle */
-    repeating-linear-gradient(to bottom, rgba(6, 3, 1, 0.85) 0, rgba(6, 3, 1, 0.42) 18px, rgba(6, 3, 1, 0.15) 55px, rgba(6, 3, 1, 0.05) 96px, rgba(6, 3, 1, 0.6) 127px) 0 76px / 100% 127px repeat-y,
+    repeating-linear-gradient(to bottom, rgba(6, 3, 1, 0.85) 0, rgba(6, 3, 1, 0.42) 18px, rgba(6, 3, 1, 0.15) 70px, rgba(6, 3, 1, 0.05) 142px, rgba(6, 3, 1, 0.6) 173px) 0 76px / 100% 173px repeat-y,
     /* panel seams */
     repeating-linear-gradient(90deg, rgba(0, 0, 0, 0) 0 158px, rgba(0, 0, 0, 0.45) 158px 160px, rgba(255, 210, 160, 0.06) 160px 161px),
     var(--lib-walnut) 0 0 / 420px 420px,
@@ -125,7 +125,7 @@
 }
 
 /* ---------------- A shelf ---------------- */
-.lib__row { position: absolute; left: 0; height: 127px; width: 100%; }
+.lib__row { position: absolute; left: 0; height: 173px; width: 100%; }
 .lib__plank {
   position: absolute; left: 0; right: 0; bottom: 0; height: 19px; z-index: 2; pointer-events: none;
   background:
@@ -147,22 +147,22 @@
 
 /* ---------------- A book ---------------- */
 .bk {
-  --bk-gold: var(--lib-gold);
+  --bk-gold: #B69A68;
+  --bk-cover: var(--c);
+  --bk-material: var(--lib-leather);
   --bk-shade: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0));
   position: absolute; bottom: 19px; z-index: 2; display: block;
   left: var(--x); width: var(--w); height: var(--h);
-  border-radius: 3px 3px 1px 1px;
+  border: 1px solid #160D0877;
+  border-radius: 4px 2px 2px 3px;
   background:
     var(--bk-shade),
-    /* raised bands across the spine */
-    linear-gradient(to bottom, transparent 21%, rgba(255, 232, 190, 0.24) 21% 22%, rgba(0, 0, 0, 0.36) 22% 24%, transparent 24% 63%, rgba(255, 232, 190, 0.22) 63% 64%, rgba(0, 0, 0, 0.34) 64% 66%, transparent 66%),
-    /* gilt rules at head and tail */
-    linear-gradient(to bottom, transparent 5.5%, var(--bk-gold) 5.5% 6.8%, transparent 6.8% 9%, var(--bk-gold) 9% 10.3%, transparent 10.3% 89.7%, var(--bk-gold) 89.7% 91%, transparent 91% 93.2%, var(--bk-gold) 93.2% 94.5%, transparent 94.5%),
-    /* the spine is round */
-    linear-gradient(90deg, rgba(0, 0, 0, 0.58), rgba(0, 0, 0, 0.14) 13%, rgba(255, 240, 215, 0.22) 31%, rgba(255, 240, 215, 0.06) 45%, rgba(0, 0, 0, 0.1) 70%, rgba(0, 0, 0, 0.62)),
-    var(--lib-leather),
-    var(--c);
-  box-shadow: inset 0 1px 0 rgba(255, 236, 200, 0.3), 3px 0 4px rgba(0, 0, 0, 0.55), -1px 0 1px rgba(0, 0, 0, 0.4);
+    /* A dull, rounded spine with a narrow joint beside the cover board. */
+    linear-gradient(90deg, #100A0788, #120D0322 7%, #EAD2AC19 19%, transparent 38%, #0B080518 72%, #0B080570 89%, #E4C18A33 92%, #120C0677 96%),
+    linear-gradient(0deg, #10090666, transparent 7% 95%, #E5CDA333),
+    var(--bk-material) var(--grain-x, 0px) 0 / 90px 90px,
+    var(--bk-cover);
+  box-shadow: inset 1px 0 0 #E1C09628, inset 0 -2px 1px #10090688, 2px 1px 2px #0C0705B3, 5px 3px 5px -3px #090503CC;
   color: var(--lib-ink); text-decoration: none; cursor: pointer;
   transition: transform 180ms cubic-bezier(.3, .7, .4, 1);
   -webkit-tap-highlight-color: transparent;
@@ -170,52 +170,50 @@
 .bk:hover { transform: translateY(-5px); }
 .bk:active { transform: translateY(-2px); }
 .bk:focus-visible { outline: 3px solid #FFD36B; outline-offset: 2px; }
-/* Cloth: no raised bands, a woven face and a dark title panel. */
+/* Cloth has a fine woven face rather than leather's raised cords. */
 .bk--cloth {
-  background:
-    var(--bk-shade),
-    linear-gradient(to bottom, transparent 12%, rgba(0, 0, 0, 0.42) 12% 20%, transparent 20%),
-    linear-gradient(to bottom, transparent 5%, var(--bk-gold) 5% 6%, transparent 6% 94%, var(--bk-gold) 94% 95%, transparent 95%),
-    linear-gradient(90deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.1) 14%, rgba(255, 240, 215, 0.16) 33%, rgba(0, 0, 0, 0.08) 70%, rgba(0, 0, 0, 0.55)),
-    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.05) 0 1px, rgba(0, 0, 0, 0) 1px 3px),
-    repeating-linear-gradient(to bottom, rgba(0, 0, 0, 0.07) 0 1px, rgba(0, 0, 0, 0) 1px 3px),
-    var(--c);
+  --bk-material: repeating-linear-gradient(0deg, #E0D5BD08 0 1px, #10090610 1px 2px, transparent 2px 3px), repeating-linear-gradient(90deg, #E0D5BD08 0 1px, transparent 1px 3px);
+  border-radius: 2px 1px 1px 2px;
 }
-/* Vellum: pale, with brown bands instead of gold. */
-.bk--vellum { --c: #D6C49A; --bk-gold: rgba(120, 78, 34, 0.75); }
+/* A separate cover variable keeps inline shelf colours from defeating vellum. */
+.bk--vellum { --bk-cover: #BEAD88; --bk-gold: #756044; }
+.bk__headcap { position: absolute; top: -2px; left: 2px; right: 3px; height: 4px; border-radius: 50% 45% 15% 15%; pointer-events: none;
+  background: repeating-linear-gradient(90deg, #433426 0 1px, #A89675 1px 2px, #625341 2px 3px); border-top: 1px solid #C2AB7A66; box-shadow: 0 1px 1px #170F0C99; }
+.bk__tooling { position: absolute; inset: 5px 3px 6px 2px; pointer-events: none; opacity: .65;
+  background: linear-gradient(0deg, transparent 4px, var(--bk-gold) 4px 5px, transparent 5px), linear-gradient(180deg, transparent 5px, var(--bk-gold) 5px 6px, transparent 6px), linear-gradient(180deg, transparent var(--band), #DDC6A133 calc(var(--band) + 1px), #160F0A88 calc(var(--band) + 2px), transparent calc(var(--band) + 4px) 81%, #DDC6A133 82%, #160F0A88 83%, transparent 85%); }
+.bk--cloth .bk__tooling { inset: 9px 7px; border-top: 1px solid var(--bk-gold); border-bottom: 1px solid var(--bk-gold); background: none; opacity: .4; }
 .bk__no {
-  position: absolute; left: 50%; top: 29%; z-index: 3; transform: translateX(-50%);
-  min-width: 22px; height: 19px; padding: 0 3px; display: grid; place-items: center;
-  font: 500 12px/1 var(--g-display); color: #F4E4C4; font-variant-numeric: lining-nums tabular-nums;
-  border-radius: 2px;
-  background: #33271E;
-  box-shadow: inset 0 0 0 1px #745C3D;
+  position: absolute; left: 50%; top: 12px; z-index: 3; transform: translateX(-50%);
+  min-width: 22px; height: 18px; padding: 0 3px; display: grid; place-items: center;
+  font: 500 11px/1 var(--g-display); color: #EAD9B7; font-variant-numeric: lining-nums tabular-nums;
+  border-radius: 1px; background: #30251E;
+  box-shadow: inset 0 0 0 1px #A88A574D;
 }
+.bk__title { position: absolute; top: 37px; bottom: 27px; left: 50%; z-index: 3; writing-mode: vertical-rl; transform: translateX(-50%) rotate(180deg); overflow: hidden; white-space: nowrap; text-overflow: ellipsis; max-width: 16px; font: 400 10px/16px Georgia, serif; letter-spacing: .035em; color: #F1E2C6; background: #30251E; padding: 3px 0; border-radius: 1px; pointer-events: none; }
 /* Dust: a grey film, thickest on the top edge, flecked, the leather still
    showing through. Its opacity IS the dust. */
 .bk__dust {
   position: absolute; inset: 0; z-index: 1; border-radius: inherit; pointer-events: none;
-  opacity: calc(var(--dust) * var(--dust-max, 0.36));
+  opacity: calc(var(--dust) * var(--dust-max, 0.18));
   background:
     radial-gradient(150% 20px at 50% -4px, rgba(238, 233, 220, 0.98) 28%, rgba(238, 233, 220, 0) 100%),
-    var(--lib-specks),
     radial-gradient(60% 40% at 30% 70%, rgba(205, 198, 182, 0.28), rgba(205, 198, 182, 0)),
     linear-gradient(90deg, rgba(150, 144, 130, 0.32), rgba(0, 0, 0, 0) 32%, rgba(0, 0, 0, 0) 68%, rgba(150, 144, 130, 0.36)),
     linear-gradient(to bottom, rgba(214, 207, 190, 0.86), rgba(190, 183, 168, 0.62) 26%, rgba(170, 164, 150, 0.5) 70%, rgba(160, 154, 141, 0.56));
   transition: opacity 1200ms cubic-bezier(.3, .7, .4, 1);
 }
 /* A cobweb from a long-unread book to the shelf above. */
-.bk__web { position: absolute; right: -5px; top: -17px; width: 30px; height: 30px; z-index: 3; pointer-events: none; opacity: calc(var(--dust) * 0.85);
+.bk__web { position: absolute; right: -3px; top: -10px; width: 18px; height: 18px; z-index: 3; pointer-events: none; opacity: calc(var(--dust) * 0.3);
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30' fill='none' stroke='%23F2EEE6' stroke-width='.6' stroke-linecap='round'%3E%3Cpath d='M30 0 L2 28M30 0 L12 29M30 0 L1 16M30 0 L22 30M30 0 L0 5'/%3E%3Cpath d='M24 2q1 3 2 4q-3 0-4 2q-1-3-4-3q2-2 2-4' opacity='.8'/%3E%3Cpath d='M18 2q1 5 4 8q-5 1-7 5q-2-5-8-6q4-3 4-7' opacity='.7'/%3E%3Cpath d='M11 2q2 8 7 13q-8 2-11 9q-2-8-7-11q6-4 6-11' opacity='.55'/%3E%3C/svg%3E") no-repeat center / contain;
   transition: opacity 600ms ease; }
 /* A ribbon marks a book that has been read. */
 .bk__rib { position: absolute; left: 26%; top: -3px; width: 5px; height: 17px; z-index: 3; pointer-events: none;
   background: linear-gradient(to bottom, #E0534B, #A3242A); clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 78%, 0 100%);
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.4); }
-/* Gleaming: every answer right. Brighter gilt, a sheen, the odd twinkle. */
-.bk.is-gleaming { --bk-gold: rgba(250, 220, 128, 1); box-shadow: inset 0 1px 0 rgba(255, 244, 214, 0.5), 3px 0 4px rgba(0, 0, 0, 0.55), -1px 0 1px rgba(0, 0, 0, 0.4), 0 0 9px rgba(255, 214, 120, 0.22); }
+/* Gleaming: antique gold leather, with a brief reflection on restoration. */
+.bk.is-gleaming { --bk-gold: #D7B879; --bk-cover: #96703D; box-shadow: inset 1px 0 0 #E1C09655, inset 0 -2px 1px #10090688, 2px 1px 2px #0C0705B3, 5px 3px 5px -3px #090503CC; }
 .bk.is-gleaming::before { content: ""; position: absolute; inset: 0; z-index: 2; border-radius: inherit; pointer-events: none;
-  background: linear-gradient(100deg, rgba(255, 255, 255, 0) 30%, rgba(255, 250, 230, 0.28) 42%, rgba(255, 255, 255, 0) 54%); }
+  background: linear-gradient(100deg, transparent 30%, #EAD5A30C 42%, transparent 54%); }
 .bk.is-gleaming::after { content: ""; position: absolute; left: 3px; top: 6%; width: 11px; height: 11px; z-index: 4; pointer-events: none;
   background: radial-gradient(closest-side, #FFFBEA, rgba(255, 236, 170, 0) 70%), conic-gradient(from 45deg, transparent 0 10%, #FFF4C8 12%, transparent 14% 35%, #FFF4C8 37%, transparent 39% 60%, #FFF4C8 62%, transparent 64% 85%, #FFF4C8 87%, transparent 89%);
   border-radius: 50%; opacity: 0; animation: lib-twinkle 7s ease-in-out var(--tw, 0s) infinite; }
@@ -231,7 +229,7 @@
 .bk.is-next .bk__no { color: #2F2210; background: #F3D89C; box-shadow: 0 0 0 1px #B18A48; }
 
 /* ---------------- A locked shelf ---------------- */
-.lib__row.is-locked .bk { --bk-shade: linear-gradient(rgba(16, 9, 4, 0.2), rgba(16, 9, 4, 0.2)); --bk-gold: rgba(192, 156, 92, 0.55); --dust-max: 0.26; cursor: pointer; }
+.lib__row.is-locked .bk { --bk-shade: linear-gradient(rgba(16, 9, 4, 0.12), rgba(16, 9, 4, 0.12)); --bk-gold: rgba(192, 156, 92, 0.55); --dust-max: 0.16; cursor: pointer; }
 .lib__row.is-locked .bk:hover { transform: none; }
 .lib__row.is-locked .bk__no { visibility: hidden; }
 .lib__row.is-locked .bk:focus-visible .bk__no { visibility: visible; }
@@ -320,11 +318,12 @@
 /* ---------------- Opening a book ---------------- */
 .lib-open { position: fixed; inset: 0; z-index: 90; pointer-events: none; perspective: 1400px; background: rgba(16, 10, 5, 0); }
 .lib-open__book { position: absolute; left: 0; top: 0; transform-style: preserve-3d; transform-origin: 0 0; }
-.lib-open__page, .lib-open__cover { position: absolute; inset: 0; border-radius: 3px 8px 8px 3px; }
+.lib-open__page, .lib-open__cover { position: absolute; inset: 0; border-radius: 2px 4px 4px 2px; }
 .lib-open__page {
   display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 12% 12%;
   background: radial-gradient(120% 80% at 30% 20%, #FFFBEF, #F2E6C8 70%, #E3D2AA); color: #2F2210;
-  box-shadow: inset 10px 0 18px -10px rgba(80, 50, 20, 0.5), 0 18px 40px rgba(0, 0, 0, 0.5);
+  border-right: 4px solid #C4B69A; border-bottom: 3px solid #D5C7A9;
+  box-shadow: inset 15px 0 22px -12px #50321488, 1px 1px 0 #F3E5C9, 2px 2px 0 #AE9E80, 3px 3px 0 #F3E5C9, 4px 4px 0 #AE9E80, 0 18px 40px #0008;
 }
 .lib-open__page small { font: 700 10px/1.3 var(--g-ui); letter-spacing: 0.18em; text-transform: uppercase; color: #6A4A1E; }
 .lib-open__page strong { display: block; margin: 10px 0; font: 400 22px/1.15 var(--g-display); }
@@ -334,10 +333,10 @@
   background:
     linear-gradient(90deg, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0) 9%, rgba(255, 240, 215, 0.12) 30%, rgba(0, 0, 0, 0.18)),
     var(--lib-leather, none), var(--c, #6B2A22);
-  box-shadow: inset 0 0 0 6px rgba(0, 0, 0, 0.18), inset 0 0 0 8px rgba(232, 196, 104, 0.8), inset 0 0 0 11px rgba(0, 0, 0, 0.12), inset 0 0 0 12px rgba(232, 196, 104, 0.55), 0 18px 40px rgba(0, 0, 0, 0.55);
+  box-shadow: inset 2px 0 2px #D3B88C44, inset 10px 0 8px -6px #100805BB, inset 0 0 0 8px #1B100B44, inset 0 0 0 9px #C4A57466, inset 0 -2px 2px #100805AA, 0 18px 40px #0008;
 }
-.lib-open__cover span { display: grid; place-items: center; width: 54px; height: 54px; border-radius: 50%; font: 700 24px/1 var(--g-display); color: #3A2A12;
-  background: radial-gradient(circle at 35% 30%, #FFF0B8, #E2B85E 60%, #A87C2C); box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); }
+.lib-open__cover span { display: grid; place-items: center; width: 58px; height: 72px; border-radius: 1px; font: 400 24px/1 var(--g-display); color: #E6D1A3;
+  background: #30251E; border: 1px solid #B69A6877; box-shadow: inset 0 0 0 4px #30251E, inset 0 0 0 5px #B69A6833; }
 .lib-open__back { position: absolute; inset: 0; border-radius: 3px 8px 8px 3px; transform: translateZ(-2px); background: var(--c, #6B2A22); box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55); }
 
 /* The room: worn walnut, recessed shelf backs, warm pools of lamplight.
@@ -364,21 +363,15 @@
 .lib__glow { top: -80px; width: 700px; height: 800px; margin-left: -350px; background: radial-gradient(ellipse at 50% 18%, #FFCF833D, #E5A75116 50%, transparent 74%); }
 .lib__reward { transform: scale(0.64); transform-origin: 0 100%; filter: drop-shadow(0 0 7px #FFD57966); }
 
-/* Quiet spine details, with an unmistakable ribbon and gold reward. */
-.bk { border: 1px solid #170D0844; }
-.bk__seal { position: absolute; left: 50%; top: 59%; transform: translateX(-50%); z-index: 2; color: #EACD8B; opacity: 0.65; font: normal 14px/1 Georgia, serif; pointer-events: none; }
-.bk__seal svg { display: block; width: 13px; height: 13px; }
-.bk__rib { left: auto; right: 8px; width: 7px; height: 23px; background: linear-gradient(90deg, #8B3C2D, #D28662 45%, #9D4933); }
-.bk.is-read { box-shadow: inset 0 1px 0 #FFF1BD88, 3px 0 4px #0009, 0 0 0 1px #AD87432E; }
+/* Small binder's marks, a fabric ribbon, and warm gold-tooled leather. */
+.bk__seal { position: absolute; left: 50%; bottom: 12px; transform: translateX(-50%); z-index: 2; color: #C4AA7E; opacity: 0.65; font: normal 11px/1 Georgia, serif; pointer-events: none; }
+.bk__seal svg { display: block; width: 10px; height: 10px; }
+.bk__rib { left: auto; right: 7px; width: 5px; height: 20px; background: repeating-linear-gradient(0deg, #E3B08018 0 1px, transparent 1px 2px), linear-gradient(90deg, #61352B, #AC7351 45%, #6D3A2C); }
 .bk.is-read .bk__seal { opacity: 1; color: #F6D69D; }
-.bk.is-gleaming { --bk-gold: #F9E1A4; background: linear-gradient(90deg, #72502B, #BF9250 14%, #E9C981 32%, #B98A44 66%, #62401F); box-shadow: inset 0 0 0 1px #EBD393, inset 0 4px 0 #72502B, inset 0 -5px 0 #72502B, 3px 0 5px #0009, 0 0 12px #F5CC6544; }
-.bk.is-gleaming .bk__seal { color: #38260F; }
+.bk.is-gleaming .bk__seal { color: #F4DCAC; }
 .bk.is-next { transform: translateY(-4px); }
 .bk.is-next::after { content: ""; position: absolute; left: 50%; bottom: -8px; width: 5px; height: 5px; border-radius: 50%; background: #FFE5A1; box-shadow: 0 0 7px #FFD470; }
 .lib__row.is-locked .bk__seal { opacity: 0.45; }
-.lib__row[data-stage="elite"] .bk { border-radius: 5px 5px 1px 1px; }
-.lib__row[data-stage="advanced"] .bk__seal { font-size: 17px; }
-.lib__row[data-stage="developing"] .bk__seal { transform: translateX(-50%) rotate(-15deg); }
 
 /* Chai is a real touch target. His poses follow visits and inactivity. */
 .lib__owl-touch { position: absolute; left: -37px; bottom: -3px; width: 74px; height: 78px; padding: 0; border: 0; border-radius: 40%; background: transparent; cursor: pointer; pointer-events: auto; -webkit-tap-highlight-color: transparent; }

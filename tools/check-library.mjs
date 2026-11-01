@@ -49,7 +49,7 @@ try {
   ok(await waitFor(`document.querySelectorAll('.lib__row').length === 5`), 'five shelves render');
   ok(await page.evaluate(`!document.querySelector('.lib__chain, .lib__padlock') && document.querySelectorAll('.lib__lock').length === 4`), 'fresh library has four subtle locks and no chains');
   ok(await page.evaluate(`new Set([...document.querySelectorAll('.lib__row')].map(r=>r.querySelector('.bk').style.getPropertyValue('--c'))).size === 5`), 'each level has different bindings');
-  ok(await page.evaluate(`document.documentElement.scrollWidth === innerWidth && document.documentElement.scrollHeight <= innerHeight + 1`), 'fresh mobile room fits without overflow');
+  ok(await page.evaluate(`document.documentElement.scrollWidth === innerWidth && [...document.querySelectorAll('.bk')].every(b=>b.offsetWidth>=44)`), 'taller mobile books scroll vertically without sideways overflow or smaller touch targets');
   await shot('fresh-390');
   await tap('.lib__owl-touch');
   ok(await waitFor(`document.querySelector('#lib-live').textContent.includes('saved book')`), 'a real tap on Chai offers guidance');

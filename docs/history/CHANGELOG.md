@@ -4,6 +4,12 @@
 > Versions here are app releases; they map onto the capability milestones in
 > `PROJECT_ROADMAP.md` (0.x releases build toward Roadmap V1.0).
 
+## 3.14.1 follow-up: More lifelike library bindings (2026-11-02)
+
+- Reproportioned the books as taller volumes, retaining 44 px touch targets and vertical room scrolling. Added stitched headcaps, recessed cover joints, restrained binding bands, varied leather/cloth/vellum and passage-title labels; reduced the dust film and oversized cobwebs. Perfect reads now have textured antique-gold bindings rather than shiny metal blocks. Opening a book shows layered paper edges and a quieter cover label, matching its shelf material.
+- Learning records, rewards and unlock rules are unchanged. The existing library browser gate now allows the taller room's intentional vertical scrolling while checking touch widths and horizontal overflow.
+- Validation: `node tools/verify.mjs` and `node tools/check-library.mjs` pass. The focused library contrast check passes 170 text runs across both themes. Inspected phone and desktop previews, including completed shelves; checked that cloth and vellum opening covers retain their shelf material. Offline fingerprints regenerated.
+
 ## 3.14.1: Chai's warmer, quieter library (2026-11-02)
 
 - Refined the five-shelf room with a natural walnut texture, recessed backs, deeper shelf edges and warm lamplight. Each level has distinct leather bindings and an emblem. Heavy chains, repeated unlock instructions and large number plates are replaced by small shelf locks and quiet spine details.

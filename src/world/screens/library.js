@@ -37,7 +37,7 @@ const MEMORY = 'catos:shelf';
 const PAD = 92;          // shelf space before book 1: room for Chai
 const CROWN = 76;        // cornice, controls and rail
 const HEAD = 20;         // air above the tallest book
-const BOOKS = 88;        // the tallest book
+const BOOKS = 134;       // the tallest book: a folio, not a square block
 const PLANK = 19;        // the shelf board
 const FLOOR = 128;       // plinth and the reading ledger
 const ROW = HEAD + BOOKS + PLANK;
@@ -49,11 +49,11 @@ const RUNG = ROW / 5;
 /* Leather, cloth and a little vellum: the colours old libraries are. */
 const COLOURS = ['#7A2420', '#5E1B2A', '#2F4F3A', '#24405E', '#4B2E52', '#8A5A1C', '#1F5257', '#6B3A1E', '#3C4A5C', '#56602C', '#8C3B2A', '#2C3E33', '#6A2D3C', '#3B355E', '#704A24', '#29454F'];
 const SHELF_STYLE = {
-  foundation: { colours: ['#8C5036', '#A06C43', '#74452F', '#AF8052'], symbol: '❧', prop: 'tea' },
-  developing: { colours: ['#4C6543', '#6A7548', '#3F5746', '#798358'], symbol: '❧', prop: 'ivy' },
-  intermediate: { colours: ['#36576D', '#4A6A79', '#2F495B', '#587A86'], symbol: '✧', prop: 'globe' },
-  advanced: { colours: ['#7B3741', '#914C49', '#682F3C', '#9E5C50'], symbol: '✥', prop: 'quill' },
-  elite: { colours: ['#655071', '#78617E', '#50405E', '#8A738D'], symbol: '✦', prop: 'figure' },
+  foundation: { colours: ['#62412D', '#785039', '#50372A', '#896547'], symbol: '❧', prop: 'tea' },
+  developing: { colours: ['#3F4B37', '#545B3D', '#35463D', '#62694B'], symbol: '❧', prop: 'ivy' },
+  intermediate: { colours: ['#334753', '#435A63', '#293E4C', '#50636B'], symbol: '✧', prop: 'globe' },
+  advanced: { colours: ['#5E3437', '#71423D', '#4D2F34', '#81574A'], symbol: '✥', prop: 'quill' },
+  elite: { colours: ['#4B3F50', '#5C4D60', '#3C3545', '#6C596A'], symbol: '✦', prop: 'figure' },
 };
 const shelfStyle = (sh) => SHELF_STYLE[sh.stage] ?? SHELF_STYLE.foundation;
 const dustFor = (clean, read) => read ? (1 - clean) * 0.42 : 1;
@@ -210,7 +210,7 @@ function layout(lib) {
     const books = sh.books.map((b) => {
       const s = hash(b.id);
       const w = 44 + (s % 9);
-      const h = BOOKS - 20 + ((s >>> 5) % 21);
+      const h = BOOKS - 26 + ((s >>> 5) % 27);
       const out = { b, x, w, h, s };
       x += w + 1 + ((s >>> 11) % 3 === 0 ? 1 : 0);
       return out;
@@ -256,7 +256,7 @@ function bookHTML({ b, x, w, h, s }, sh, { dust, ribbon, gleam }) {
   const cls = `bk${kind}${ribbon ? ' is-read' : ''}${gleam ? ' is-gleaming' : ''}`;
   const where = locked ? 'role="link" aria-disabled="true"' : `href="#/rc/session/${escapeHTML(b.id)}"`;
   const colours = shelfStyle(sh).colours;
-  return `<a class="${cls}" ${where} data-id="${escapeHTML(b.id)}" tabindex="-1" aria-label="${escapeHTML(label)}" style="--x:${x}px;--w:${w}px;--h:${h}px;--c:${colours[(s >>> 3) % colours.length]};--dust:${dust.toFixed(2)};--tw:${((s >>> 7) % 70) / 10}s"><i class="bk__dust"></i>${!ribbon && s % 5 === 0 ? '<i class="bk__web"></i>' : ''}${ribbon ? '<i class="bk__rib"></i>' : ''}<span class="bk__no" aria-hidden="true">${b.n}</span><i class="bk__seal" aria-hidden="true">${bookSeal(ribbon, gleam)}</i></a>`;
+  return `<a class="${cls}" ${where} data-id="${escapeHTML(b.id)}" tabindex="-1" aria-label="${escapeHTML(label)}" style="--x:${x}px;--w:${w}px;--h:${h}px;--c:${colours[(s >>> 3) % colours.length]};--grain-x:${s % 83}px;--band:${17 + (s % 4) * 3}%;--dust:${dust.toFixed(2)};--tw:${((s >>> 7) % 70) / 10}s"><i class="bk__headcap" aria-hidden="true"></i><i class="bk__tooling" aria-hidden="true"></i><i class="bk__dust" aria-hidden="true"></i>${!ribbon && s % 11 === 0 ? '<i class="bk__web" aria-hidden="true"></i>' : ''}${ribbon ? '<i class="bk__rib" aria-hidden="true"></i>' : ''}<span class="bk__no" aria-hidden="true">${b.n}</span><span class="bk__title" aria-hidden="true">${escapeHTML(displayTitle(b.item))}</span><i class="bk__seal" aria-hidden="true">${bookSeal(ribbon, gleam)}</i></a>`;
 }
 
 function rowHTML(p, look, lockedNow) {
@@ -621,8 +621,9 @@ export async function renderLibrary(host, { lib, stage = 0 }) {
     const ov = document.createElement('div');
     ov.className = 'lib-open';
     ov.setAttribute('aria-hidden', 'true');
-    ov.style.setProperty('--c', getComputedStyle(el).getPropertyValue('--c'));
-    ov.style.setProperty('--lib-leather', getComputedStyle(root).getPropertyValue('--lib-leather'));
+    const binding = getComputedStyle(el);
+    ov.style.setProperty('--c', binding.getPropertyValue('--bk-cover').trim() || binding.getPropertyValue('--c'));
+    ov.style.setProperty('--lib-leather', binding.getPropertyValue('--bk-material'));
     ov.innerHTML = `<div class="lib-open__book" style="width:${W}px;height:${H}px"><div class="lib-open__back"></div><div class="lib-open__page"><small>${escapeHTML(sh.label)} · Book ${b.n}</small><strong>${escapeHTML(displayTitle(b.item))}</strong><i></i></div><div class="lib-open__cover"><span>${b.n}</span></div></div>`;
     document.body.appendChild(ov);
     const book = ov.firstElementChild, cover = book.querySelector('.lib-open__cover');
