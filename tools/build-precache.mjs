@@ -55,7 +55,7 @@ export function shellFiles() {
   }
   // Every picture the app shows. The companion strip is only the pets' bake
   // input (tools/bake-pets.mjs): 1.5 MB no screen ever draws.
-  for (const name of fs.readdirSync(path.join(ROOT, 'assets/art')).sort()) if (name.endsWith('.png') && !BAKE_ONLY.test(name)) out.add(`./assets/art/${name}`);
+  for (const name of fs.readdirSync(path.join(ROOT, 'assets/art')).sort()) if (/\.(png|jpe?g|webp)$/.test(name) && !BAKE_ONLY.test(name)) out.add(`./assets/art/${name}`);
   return [...out].sort();
 }
 

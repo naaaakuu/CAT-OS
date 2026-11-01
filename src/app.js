@@ -50,7 +50,7 @@ window.addEventListener('unhandledrejection', (e) => {
 /* Storage + theme                                                    */
 /* ------------------------------------------------------------------ */
 
-const APP_VERSION = '3.14.0'; // keep in step with CHANGELOG.md and android/app/build.gradle versionName
+const APP_VERSION = '3.14.1'; // keep in step with CHANGELOG.md and android/app/build.gradle versionName
 
 const storage = new IndexedDBAdapter();
 

@@ -3,7 +3,7 @@
  * 2026-10-31). Every passage is a book on one long bookcase, Elite at the
  * top and Foundation at the bottom (core/learning/journey.js
  * libraryShelves). A book is as clean as the best run of it: every answer
- * right gleams, half right is half dusty, none right stays dusty. A shelf
+ * right gleams; finishing restores the binding and adds a ribbon. A shelf
  * opens once half the shelf below it has been read. Chai waits on the
  * rolling ladder beside the next book.
  *
@@ -16,7 +16,7 @@
  *   arriving     Chai starts at the top of the ladder and flies down to his
  *                book; the page follows him until the learner touches it
  *   coming back  a book read since the last visit is wiped as clean as the
- *                run earned, a shelf that opened drops its chain, and the
+ *                run earned, a shelf that opened lights its brass seal, and the
  *                ladder rolls Chai on to the next book
  *   opening      a tapped book comes off the shelf, turns, opens, and the
  *                passage begins
@@ -34,12 +34,12 @@ const STYLE = './src/ui/styles/library.css';
 const MEMORY = 'catos:shelf';
 
 /* Geometry in CSS px; library.css paints to the same numbers. */
-const PAD = 74;          // shelf space before book 1: room for the ladder
-const CROWN = 52;        // the cornice and its rail
-const HEAD = 16;         // air above the tallest book
-const BOOKS = 96;        // the tallest book
-const PLANK = 15;        // the shelf board
-const FLOOR = 64;        // plinth and floorboards
+const PAD = 92;          // shelf space before book 1: room for Chai
+const CROWN = 76;        // cornice, controls and rail
+const HEAD = 20;         // air above the tallest book
+const BOOKS = 88;        // the tallest book
+const PLANK = 19;        // the shelf board
+const FLOOR = 128;       // plinth and the reading ledger
 const ROW = HEAD + BOOKS + PLANK;
 const LADDER_W = 50;
 const LADDER_TOP = 36;
@@ -48,13 +48,22 @@ const RUNG = ROW / 5;
 
 /* Leather, cloth and a little vellum: the colours old libraries are. */
 const COLOURS = ['#7A2420', '#5E1B2A', '#2F4F3A', '#24405E', '#4B2E52', '#8A5A1C', '#1F5257', '#6B3A1E', '#3C4A5C', '#56602C', '#8C3B2A', '#2C3E33', '#6A2D3C', '#3B355E', '#704A24', '#29454F'];
+const SHELF_STYLE = {
+  foundation: { colours: ['#8C5036', '#A06C43', '#74452F', '#AF8052'], symbol: '❧', prop: 'tea' },
+  developing: { colours: ['#4C6543', '#6A7548', '#3F5746', '#798358'], symbol: '❧', prop: 'ivy' },
+  intermediate: { colours: ['#36576D', '#4A6A79', '#2F495B', '#587A86'], symbol: '✧', prop: 'globe' },
+  advanced: { colours: ['#7B3741', '#914C49', '#682F3C', '#9E5C50'], symbol: '✥', prop: 'quill' },
+  elite: { colours: ['#655071', '#78617E', '#50405E', '#8A738D'], symbol: '✦', prop: 'figure' },
+};
+const shelfStyle = (sh) => SHELF_STYLE[sh.stage] ?? SHELF_STYLE.foundation;
+const dustFor = (clean, read) => read ? (1 - clean) * 0.42 : 1;
 
 const SAY = {
-  first: 'So much dust! Read a book and it comes clean.',
+  first: 'Come in. I saved this book for you.',
   next: (b) => `Book ${b.n} next. Shall we?`,
   gleam: 'Gleaming! Not a speck left.',
-  better: 'Cleaner! A few specks still to go.',
-  dusty: 'Still dusty. It will shine next time.',
+  better: 'Another book restored. Look at that ribbon!',
+  dusty: 'Your first read counts. We can try it again.',
   open: (sh) => `The ${sh.label} shelf is open!`,
   locked: (sh) => `${sh.toGo} more ${sh.below?.label ?? ''} ${sh.toGo === 1 ? 'book' : 'books'} first!`,
   done: 'Every book gleams. Thank you!',
@@ -76,7 +85,7 @@ function rng(seed) {
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const ease = (t) => (t < 0.5 ? 4 * t * t * t : 1 - (-2 * t + 2) ** 3 / 2);
-const reduced = () => document.documentElement.hasAttribute('data-reduced-motion');
+const reduced = () => document.documentElement.hasAttribute('data-reduced-motion') || matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 let styleReady = null;
 /** The library's own stylesheet, once; a library opened offline still works (the worker precaches it). */
@@ -212,6 +221,7 @@ function layout(lib) {
   for (const p of rows) {
     const r = rng(hash(`${p.sh.stage}:props`));
     p.props = [{ kind: 'bookend', x: p.end, r }];
+    if (p.sh.read === p.sh.books.length && p.sh.read) p.props.push({ kind: shelfStyle(p.sh).prop, x: 22, r, reward: true });
     let x = p.end + 14 + 34 + r() * 60, last = 'bookend';
     for (;;) {
       let k = PROP_KINDS[Math.floor(r() * PROP_KINDS.length)];
@@ -229,6 +239,11 @@ function layout(lib) {
 /* HTML                                                                */
 /* ------------------------------------------------------------------ */
 
+const bookSeal = (read, gleam) => `<svg viewBox="0 0 20 20" aria-hidden="true" focusable="false">${gleam
+  ? '<path d="M10 1l2.3 6.7L19 10l-6.7 2.3L10 19l-2.3-6.7L1 10l6.7-2.3z" fill="currentColor"/>'
+  : read ? '<path d="M4 10l4 4 8-9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>'
+    : '<path d="M5 16C4 8 10 4 17 4c0 8-5 11-12 12zM5 16l8-8" fill="none" stroke="currentColor" stroke-width="1"/>'}</svg>`;
+
 /** `look` is how the book is drawn now: its dust, and whether it shows the read ribbon and the gleam yet. */
 function bookHTML({ b, x, w, h, s }, sh, { dust, ribbon, gleam }) {
   const locked = !sh.open;
@@ -238,28 +253,26 @@ function bookHTML({ b, x, w, h, s }, sh, { dust, ribbon, gleam }) {
       : b.clean >= 1 ? 'Read with every answer right: gleaming'
         : `Read, best ${Math.round(b.clean * 100)} percent right`;
   const label = `Book ${b.n}${locked ? '' : `, ${displayTitle(b.item)}`}. ${status}.`;
-  const cls = `bk${kind}${b.read ? ' is-read' : ''}${gleam ? ' is-gleaming' : ''}`;
+  const cls = `bk${kind}${ribbon ? ' is-read' : ''}${gleam ? ' is-gleaming' : ''}`;
   const where = locked ? 'role="link" aria-disabled="true"' : `href="#/rc/session/${escapeHTML(b.id)}"`;
-  return `<a class="${cls}" ${where} data-id="${escapeHTML(b.id)}" tabindex="-1" aria-label="${escapeHTML(label)}" style="--x:${x}px;--w:${w}px;--h:${h}px;--c:${COLOURS[(s >>> 3) % COLOURS.length]};--dust:${dust.toFixed(2)};--tw:${((s >>> 7) % 70) / 10}s"><i class="bk__dust"></i>${!ribbon && s % 4 === 0 ? '<i class="bk__web"></i>' : ''}${ribbon ? '<i class="bk__rib"></i>' : ''}<span class="bk__no" aria-hidden="true">${b.n}</span></a>`;
+  const colours = shelfStyle(sh).colours;
+  return `<a class="${cls}" ${where} data-id="${escapeHTML(b.id)}" tabindex="-1" aria-label="${escapeHTML(label)}" style="--x:${x}px;--w:${w}px;--h:${h}px;--c:${colours[(s >>> 3) % colours.length]};--dust:${dust.toFixed(2)};--tw:${((s >>> 7) % 70) / 10}s"><i class="bk__dust"></i>${!ribbon && s % 5 === 0 ? '<i class="bk__web"></i>' : ''}${ribbon ? '<i class="bk__rib"></i>' : ''}<span class="bk__no" aria-hidden="true">${b.n}</span><i class="bk__seal" aria-hidden="true">${bookSeal(ribbon, gleam)}</i></a>`;
 }
 
 function rowHTML(p, look, lockedNow) {
   const { sh, r } = p;
   const locked = lockedNow(sh);
-  // A shelf drawn locked only until its unlock plays was one book short before this visit.
-  const lockChip = locked && sh.below
-    ? `<span class="lib__plate lib__plate--lock">${PADLOCK}Read ${sh.open ? Math.max(1, sh.toGo) : sh.toGo} more ${escapeHTML(sh.below.label)}</span>` : '';
+  const identity = shelfStyle(sh);
   const props = p.props.map((q) => {
     const P = PROPS[q.kind];
     const sink = P.sink ?? 0;
-    return `<span class="lib__prop lib__prop--${q.kind}" aria-hidden="true" style="left:${q.x.toFixed(0)}px;width:${P.w}px;height:${P.h}px;bottom:${PLANK - sink}px"><svg viewBox="0 0 ${P.w} ${P.h}">${P.svg(q.r)}</svg></span>`;
+    return `<span class="lib__prop lib__prop--${q.kind}${q.reward ? ' lib__reward' : ''}" aria-hidden="true" style="left:${q.x.toFixed(0)}px;width:${P.w}px;height:${P.h}px;bottom:${PLANK - sink}px"><svg viewBox="0 0 ${P.w} ${P.h}">${P.svg(q.r)}</svg></span>`;
   }).join('');
   const view = { ...sh, open: !locked };
   return `<div class="lib__row${locked ? ' is-locked' : ''}" data-stage="${escapeHTML(sh.stage)}" style="top:${CROWN + r * ROW}px" role="toolbar" aria-label="${escapeHTML(`${sh.label} shelf: ${sh.read} of ${sh.books.length} read${locked ? ', locked' : ''}`)}">
-    <span class="lib__tags" aria-hidden="true"><span class="lib__tags-in"><span class="lib__plate">${escapeHTML(sh.label)}<b>${sh.read}/${sh.books.length}</b></span>${lockChip}</span></span>
+    <span class="lib__tags" aria-hidden="true"><span class="lib__tags-in"><span class="lib__plate"><i class="lib__shelf-symbol">${identity.symbol}</i>${escapeHTML(sh.label)}${locked ? `<span class="lib__lock">${PADLOCK}</span>` : `<span class="lib__shelf-progress" style="--read:${sh.read / sh.books.length * 100}%"></span><b>${sh.read}/${sh.books.length}</b>`}</span></span></span>
     ${p.books.map((q) => bookHTML(q, view, look(q.b))).join('')}
     ${props}
-    ${locked ? `<i class="lib__chain" aria-hidden="true" style="width:${Math.max(120, p.end - 40)}px"></i><span class="lib__padlock" aria-hidden="true">${PADLOCK}</span>` : ''}
     <i class="lib__plank" aria-hidden="true"></i>
   </div>`;
 }
@@ -298,8 +311,8 @@ export async function renderLibrary(host, { lib, stage = 0 }) {
   const story = motion && changed.length ? 'back' : 'arrive';
   /* A book about to be wiped is drawn as it was; every other book as it is. */
   const look = (b) => {
-    if (story === 'back' && before.has(b.id)) { const prev = before.get(b.id); return { dust: 1 - (prev ?? 0), ribbon: prev !== null, gleam: false }; }
-    return { dust: 1 - b.clean, ribbon: b.read, gleam: b.read && b.clean >= 1 };
+    if (story === 'back' && before.has(b.id)) { const prev = before.get(b.id); return { dust: dustFor(prev ?? 0, prev !== null), ribbon: prev !== null, gleam: false }; }
+    return { dust: dustFor(b.clean, b.read), ribbon: b.read, gleam: b.read && b.clean >= 1 };
   };
   const lockedNow = (sh) => !sh.open || (story === 'back' && opened.includes(sh));
 
@@ -308,15 +321,24 @@ export async function renderLibrary(host, { lib, stage = 0 }) {
   for (let x = 300; x < L.width - 120; x += 540) lamps.push(x);
   const motes = [];
   const mr = rng(7);
-  for (const x of lamps) for (let i = 0; i < 4; i += 1) motes.push({ x: x - 120 + mr() * 240, y: 70 + mr() * (L.height - 220), mx: Math.round(-30 + mr() * 60), my: Math.round(40 + mr() * 80), md: (11 + mr() * 9).toFixed(1), mdel: (-mr() * 18).toFixed(1) });
+  for (const x of lamps) for (let i = 0; i < 2; i += 1) motes.push({ x: x - 120 + mr() * 240, y: 70 + mr() * (L.height - 220), mx: Math.round(-30 + mr() * 60), my: Math.round(40 + mr() * 80), md: (11 + mr() * 9).toFixed(1), mdel: (-mr() * 18).toFixed(1) });
   const ladderH = L.height - FLOOR + 30 - LADDER_TOP;
   const total = lib.books;
+  const current = (lib.owl && lib.byId.get(lib.owl.id)?.shelf) ?? lib.shelves[lib.shelves.length - 1];
+  const milestone = lib.shelves.find((s) => !s.open);
+  const milestoneLine = milestone
+    ? `${milestone.toGo} more ${milestone.below.label} ${milestone.toGo === 1 ? 'book' : 'books'} to open ${milestone.label}`
+    : lib.read < total ? `${total - lib.read} books still waiting to be read` : 'Every shelf restored. Your library is alive.';
 
   host.innerHTML = `
-    <section class="lib" aria-labelledby="lib-h">
+    <section class="lib" aria-labelledby="lib-h" style="--case-height:${L.height}px">
       ${DEFS}
       <div class="lib__head">
-        <div><h2 id="lib-h">Chai's library</h2><p class="lib__count"><b>${lib.read}</b> of ${total} books read · <b>${lib.gleaming}</b> gleaming</p></div>
+        <div class="lib__ledger-title"><h2 id="lib-h">Chai's library</h2><span>${lib.read} / ${total} read</span></div>
+        <p class="lib__count">Level ${lib.shelves.indexOf(current) + 1} · ${escapeHTML(current.label)}${lib.gleaming ? ` · ${lib.gleaming} golden` : ''}</p>
+        <div class="lib__journey" role="img" aria-label="${openNow} of ${lib.shelves.length} shelves open">${lib.shelves.map((s) => `<i class="${s.open ? 'is-open' : ''}${s === current ? ' is-current' : ''}" aria-hidden="true"></i>`).join('')}</div>
+        <p class="lib__milestone">${escapeHTML(milestoneLine)}</p>
+        <button type="button" class="lib__find">${lib.owl ? 'Find my book' : 'Visit Chai'}<span aria-hidden="true"> ↗</span></button>
       </div>
       <div class="lib__view">
         <div class="lib__case" style="width:${L.width}px;height:${L.height}px">
@@ -329,11 +351,11 @@ export async function renderLibrary(host, { lib, stage = 0 }) {
           <i class="lib__floor" aria-hidden="true"></i>
           <i class="lib__end lib__end--l" aria-hidden="true"></i><i class="lib__end lib__end--r" aria-hidden="true"></i>
           <span class="lib__ladder" aria-hidden="true" style="height:${ladderH}px">${ladderSVG(ladderH)}</span>
-          <span class="lib__owl" aria-hidden="true"><span class="lib__owl-fig"><i class="lib__wing lib__wing--l">${WING}</i><i class="lib__wing lib__wing--r">${WING}</i>${petSprite('chai', { frame: FRAME.idle, size: OWL, stage })}</span><p class="lib__say"></p></span>
+          <span class="lib__owl"><button type="button" class="lib__owl-touch" aria-label="Talk to Chai for a reading hint"><span class="lib__owl-fig"><i class="lib__wing lib__wing--l">${WING}</i><i class="lib__wing lib__wing--r">${WING}</i>${petSprite('chai', { frame: FRAME.idle, size: OWL, stage })}<i class="lib__owl-book" aria-hidden="true"></i><i class="lib__sleep" aria-hidden="true">z</i></span></button><p class="lib__say" aria-hidden="true"></p></span>
           <span class="lib__fx" aria-hidden="true"></span>
         </div>
       </div>
-      <p class="lib__hint">Swipe along the shelves and tap a book to read it. A shelf opens once half the shelf below it is read.</p>
+      <p class="lib__hint">Swipe to explore · Tap a book to read · Tap Chai for a hint</p>
       <p class="sr-only" aria-live="polite" id="lib-live"></p>
     </section>`;
 
@@ -347,6 +369,8 @@ export async function renderLibrary(host, { lib, stage = 0 }) {
   const halo = root.querySelector('.lib__halo');
   const fx = root.querySelector('.lib__fx');
   const live = root.querySelector('#lib-live');
+  const owlButton = root.querySelector('.lib__owl-touch');
+  root.querySelector(`.lib__row[data-stage="${CSS.escape(current.stage)}"]`)?.classList.add('is-current');
   const alive = () => root.isConnected;
   const bookEl = (id) => kase.querySelector(`.bk[data-id="${CSS.escape(id)}"]`);
   const rowIndex = new Map(L.rows.map((p) => [p.sh.stage, p]));
@@ -379,26 +403,58 @@ export async function renderLibrary(host, { lib, stage = 0 }) {
   };
 
   /* ---------------- Chai ---------------- */
-  let frame = FRAME.idle, sayTimer = 0;
+  let frame = FRAME.idle, sayTimer = 0, idleTimer = 0, cheerTimer = 0;
   const setFrame = (f) => { frame = f; sprite?.style.setProperty('--f', String(f)); };
+  const settle = () => {
+    clearTimeout(idleTimer);
+    owl.classList.remove('is-reading', 'is-sleeping');
+    if (frame === FRAME.sleep) setFrame(FRAME.idle);
+    idleTimer = setTimeout(() => {
+      if (!alive() || document.hidden) return;
+      owl.classList.add('is-reading');
+      idleTimer = setTimeout(() => {
+        if (!alive() || document.hidden) return;
+        owl.classList.remove('is-reading');
+        owl.classList.add('is-sleeping');
+        setFrame(FRAME.sleep);
+      }, 24000);
+    }, 16000);
+  };
   const blink = () => {
     if (!alive()) return;
     if (frame === FRAME.idle) { sprite?.style.setProperty('--f', String(FRAME.blink)); setTimeout(() => { if (frame === FRAME.idle) sprite?.style.setProperty('--f', String(FRAME.idle)); }, 140); }
     setTimeout(blink, 2600 + Math.random() * 3600);
   };
   setTimeout(blink, 2200);
-  const cheer = (ms = 1600) => { setFrame(FRAME.happy); setTimeout(() => { if (alive()) setFrame(FRAME.idle); }, ms); };
+  const cheer = (ms = 1600) => { settle(); clearTimeout(cheerTimer); setFrame(FRAME.happy); cheerTimer = setTimeout(() => { if (alive()) setFrame(FRAME.idle); }, ms); };
   const once = (cls) => { owl.classList.remove(cls); void owl.offsetWidth; owl.classList.add(cls); setTimeout(() => owl.classList.remove(cls), 700); };
   const say = (text, ms = 3400) => {
     if (!text || !alive()) return;
+    settle();
     bubble.textContent = text;
-    bubble.classList.toggle('is-flip', cur.x > L.width - 230);
+    // Keep the bubble inside the visible phone viewport, even after a swipe.
+    const edge = owl.getBoundingClientRect().left;
+    bubble.style.left = `${clamp(-26, 12 - edge, window.innerWidth - 216 - edge)}px`;
     bubble.classList.add('is-on');
     live.textContent = `Chai: ${text}`;
     voice('chai', text, { soft: true });
     clearTimeout(sayTimer);
     sayTimer = setTimeout(() => bubble.classList.remove('is-on'), ms);
   };
+  const hints = [
+    lib.owl ? `I saved book ${lib.owl.n} on ${current.label} for you.` : SAY.done,
+    milestoneLine + '.',
+    'After each paragraph, ask: what changed in the argument?',
+    'A ribbon means read. Every answer right gives a book its golden spine.',
+    'Look for the author’s point before judging the answer choices.',
+  ];
+  let hintIndex = 0;
+  owlButton.addEventListener('click', () => {
+    cam?.stop();
+    cheer();
+    if (!reduced()) once('is-hop');
+    say(hints[hintIndex++ % hints.length], 5200);
+  });
 
   /* ---------------- The camera: the page and the case follow Chai ---------------- */
   let cam = null;
@@ -507,10 +563,12 @@ export async function renderLibrary(host, { lib, stage = 0 }) {
     play('dust');
     burst(cx, top + 8, 9, 'lib__puff', 46);
     await sleep(160);
-    el.style.setProperty('--dust', (1 - b.clean).toFixed(2));
+    el.style.setProperty('--dust', dustFor(b.clean, true).toFixed(2));
     setTimeout(() => burst(cx, top + pos.h * 0.55, 6, 'lib__puff', 38), 420);
     await sleep(980);
     cloth.remove();
+    el.classList.add('is-read');
+    el.querySelector('.bk__seal').innerHTML = bookSeal(true, b.clean >= 1);
     if (!el.querySelector('.bk__rib')) el.insertAdjacentHTML('beforeend', '<i class="bk__rib"></i>');
     el.querySelector('.bk__web')?.remove();
     if (b.clean >= 1) {
@@ -538,14 +596,13 @@ export async function renderLibrary(host, { lib, stage = 0 }) {
     openRow(row, sh);
     await sleep(900);
     flash.remove();
-    row.querySelector('.lib__padlock')?.remove();
-    row.querySelector('.lib__plate--lock')?.remove();
-    row.querySelector('.lib__chain')?.remove();
     row.classList.remove('is-unlocking');
   };
   /** A shelf that has just opened: its books become links. */
   const openRow = (row, sh) => {
     row.classList.remove('is-locked');
+    row.querySelector('.lib__lock')?.remove();
+    if (!row.querySelector('.lib__shelf-progress')) row.querySelector('.lib__plate')?.insertAdjacentHTML('beforeend', `<span class="lib__shelf-progress" style="--read:${sh.read / sh.books.length * 100}%"></span><b>${sh.read}/${sh.books.length}</b>`);
     row.setAttribute('aria-label', `${sh.label} shelf: ${sh.read} of ${sh.books.length} read`);
     for (const el of row.querySelectorAll('.bk')) {
       const b = lib.byId.get(el.dataset.id)?.book;
@@ -592,11 +649,13 @@ export async function renderLibrary(host, { lib, stage = 0 }) {
 
   /* ---------------- Touch and keys ---------------- */
   const lockedTap = (el, sh) => {
-    el.classList.remove('is-rattle'); void el.offsetWidth; el.classList.add('is-rattle');
-    setTimeout(() => el.classList.remove('is-rattle'), 420);
+    if (!reduced()) { el.classList.remove('is-rattle'); void el.offsetWidth; el.classList.add('is-rattle'); setTimeout(() => el.classList.remove('is-rattle'), 420); }
     play('tap');
-    once('is-nope');
+    if (!reduced()) once('is-nope');
     say(SAY.locked(sh));
+    const note = root.querySelector('.lib__milestone');
+    note.textContent = `${sh.label}: ${SAY.locked(sh)}`;
+    setTimeout(() => { if (alive()) note.textContent = milestoneLine; }, 6000);
   };
   kase.addEventListener('click', (e) => {
     const el = e.target.closest?.('.bk');
@@ -613,6 +672,7 @@ export async function renderLibrary(host, { lib, stage = 0 }) {
     cheer(900);
     const go = `#/rc/session/${b.id}`;
     openBook(el, b, sh).then((ov) => {
+      if (!alive()) { ov.remove(); return; }
       const outlet = document.getElementById('view');
       let shut = false;
       const finish = () => { if (shut) return; shut = true; obs?.disconnect(); setTimeout(() => closeOverlay(ov), 120); };
@@ -620,7 +680,7 @@ export async function renderLibrary(host, { lib, stage = 0 }) {
       obs?.observe(outlet, { childList: true });
       setTimeout(finish, 1500);
       location.hash = go;
-    }, () => { location.hash = go; });
+    }, () => { if (alive()) location.hash = go; });
   });
   kase.addEventListener('keydown', (e) => {
     const el = e.target.closest?.('.bk');
@@ -660,10 +720,28 @@ export async function renderLibrary(host, { lib, stage = 0 }) {
     (mine ?? books[0])?.setAttribute('tabindex', '0');
   }
 
-  window.addEventListener('hashchange', () => cam?.stop(), { once: true });
+  const visibility = new IntersectionObserver((entries) => {
+    for (const entry of entries) entry.target.toggleAttribute('data-off', !entry.isIntersecting);
+  }, { root: view, rootMargin: '80px' });
+  for (const el of root.querySelectorAll('.bk, .lib__prop, .lib__mote, .lib__lamp, .lib__owl')) visibility.observe(el);
+  const onVisibility = () => { root.toggleAttribute('data-paused', document.hidden); if (!document.hidden) settle(); };
+  document.addEventListener('visibilitychange', onVisibility);
+  window.addEventListener('hashchange', () => {
+    cam?.stop(); clearTimeout(idleTimer); clearTimeout(sayTimer); clearTimeout(cheerTimer);
+    visibility.disconnect(); document.removeEventListener('visibilitychange', onVisibility);
+  }, { once: true });
 
   /* ---------------- The story ---------------- */
   const target = lib.owl ? posOf(lib.owl.id) : null;
+  root.querySelector('.lib__find').addEventListener('click', () => {
+    cam?.stop();
+    const el = lib.owl ? bookEl(lib.owl.id) : owlButton;
+    showAt(target ? target.x : cur.x);
+    el?.scrollIntoView({ block: 'center', inline: 'nearest', behavior: reduced() ? 'instant' : 'smooth' });
+    el?.focus({ preventScroll: true });
+    cheer();
+    say(lib.owl ? `Here it is. Book ${lib.owl.n}, ${current.label}.` : SAY.done);
+  });
   const nextLine = () => (lib.owl ? (lib.owl.read ? (lib.owl.clean >= 1 ? '' : 'This one could shine brighter.') : SAY.next(lib.owl)) : SAY.done);
   /* Everything is placed before this returns; what moves runs on its own. */
   const arrive = async () => {
@@ -747,5 +825,6 @@ export async function renderLibrary(host, { lib, stage = 0 }) {
     }
   };
 
+  settle();
   (story === 'arrive' ? arrive() : comeBack()).catch((err) => console.error('[CAT OS] library', err));
 }

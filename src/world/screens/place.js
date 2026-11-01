@@ -65,8 +65,8 @@ export async function renderPlace(outlet, { storage }, params) {
 
   /* Chai's library is a room you stand in, not a page about one (owner,
      2026-11-01): no village painting above it, no title or progress bar, no
-     help button. The bookcase is the whole screen, and its words (the way
-     back, the stars, the count) float over it. Its stylesheet comes before
+     help button. The bookcase is the whole screen, navigation floats over
+     its crown and the reading ledger sits on the floor. Its stylesheet comes before
      the page so the room never shows unstyled. */
   const inRoom = region.slug === 'reading-room';
   let library = null;
@@ -224,12 +224,13 @@ export async function renderPlace(outlet, { storage }, params) {
     let night = false;
     try { night = rd.observatory && (await storage.get(STORES.SETTINGS, 'world:night-reading'))?.value === true; } catch { /* off */ }
     const nightLabel = (on) => `Night reading: ${on ? 'on' : 'off'}`;
-    /* Inside the library (owner, 2026-11-01): the way back, the stars and the
-       ⓘ float over the shelves; what the place teaches waits behind the ⓘ. */
-    heroStat.innerHTML = `<span class="libroom__pill"><span class="libroom__star" aria-hidden="true">★</span>${rd.stars} / ${rd.maxStars}<span class="sr-only"> stars</span></span>`
-      + infoButton('rc', { moreTitle: 'This place', more: [
-        'Every passage is a book on these shelves, Foundation at the bottom and Elite at the top. Read one and answer its questions: the more you get right, the cleaner the book shines.',
+    /* Detailed rules and stars stay in the info popover; the room's floor
+       ledger gives the learner their current level and next milestone. */
+    heroStat.innerHTML = infoButton('rc', { moreTitle: 'Chai’s library', more: [
+        'Swipe along the shelves to explore. Foundation is at the bottom, Elite at the top. Tap Chai for a reading hint, or Find my book to return to your next read.',
+        'Reading restores a book and earns its ribbon. More correct answers clear the remaining dust; every answer right turns its spine gold. Finish every book on a shelf to earn a keepsake.',
         'A shelf opens once half the books on the shelf below it have been read.',
+        `You have earned ${rd.stars} of ${rd.maxStars} reading stars.`,
         'Every passage here is the size CAT sets: never more than four questions, never longer than the exam’s longest passage.',
         'Three stars means three quarters right inside the passage’s own time: the pace CAT asks for.',
       ] })

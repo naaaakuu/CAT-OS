@@ -4,6 +4,13 @@
 > Versions here are app releases; they map onto the capability milestones in
 > `PROJECT_ROADMAP.md` (0.x releases build toward Roadmap V1.0).
 
+## 3.14.1: Chai's warmer, quieter library (2026-11-02)
+
+- Refined the five-shelf room with a natural walnut texture, recessed backs, deeper shelf edges and warm lamplight. Each level has distinct leather bindings and an emblem. Heavy chains, repeated unlock instructions and large number plates are replaced by small shelf locks and quiet spine details.
+- A floor ledger shows books read, the current reading level, shelf progression and the next milestone. Find my book returns to the recommended passage. Read books gain ribbons and lose most dust; perfect reads gain gold spines and sparkles; completing a shelf reveals a keepsake. Existing learning records, scores and unlock thresholds are unchanged.
+- Chai now answers taps and keyboard activation with reading hints and progress guidance, reads while idle, sleeps after a longer pause, wakes when tapped and celebrates restored books. System and app reduced-motion settings are respected; decorative animation pauses offscreen and when the app is hidden. New browser checks exercise real taps, idle states, unlock transitions, mobile sizes and completion states. Updated offline art precaching and version metadata; the Android bundle will be built after the owner's remaining refinements.
+- Validation: `node tools/verify.mjs`, `node tools/check-app-shell.mjs`, `node tools/check-library.mjs`, and the library's rendered contrast check in both themes pass. Inspected 390×844, 320×568 and 1280×900 previews; fixed an owl sprite intercepting book taps and fixed navigation scrolling away on a short phone. The generated walnut texture's full prompt is in `docs/library-texture-prompt.txt`.
+
 ## 3.14.0 follow-up: Chai's door opens on the library (2026-11-01)
 
 - Owner: "when I click at the house, a whole library opens and it would actually feel like we are in a room full of library", with no Help option, because with one "nobody can ever find the library". Tapping Chai's house, Chai himself, or the big bottom button now walks straight into the library: the village shuts a dark doorway (`.cw-door`) from where the learner tapped, and the library fades up out of the same dark (`.libroom__door`). Chai has no card any more (`openCard('pet', 'chai')` enters the library), and every "Help Chai" link in the village (big button, today's three, every-subject list) reads "Visit Chai" and goes to the library (`startHref`, `LIBRARY_HREF` in `pets/next.js`). `nextFor('chai')` still names his next book, the one he waits beside once you are in.
