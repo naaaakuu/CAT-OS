@@ -2510,6 +2510,13 @@ console.log('\n31. Complete player flows and small-screen layouts (tools/check-p
   }
 }
 
+console.log('\n32. Mochi’s room is derived from learning records (tools/check-thought-room.mjs)');
+{
+  const { checkThoughtRoom } = await mod('tools/check-thought-room.mjs');
+  const r = checkThoughtRoom();
+  ok(`${r.cases} room checks: unique correct summaries, lasting cleanup, eight corners and stable papers`);
+}
+
 console.log('\n─────────────────────────────────────');
 if (problems.length === 0) {
   console.log('✓ Repository is internally consistent.\n');

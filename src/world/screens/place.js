@@ -25,7 +25,6 @@ import { STAGES } from '../../core/engine/garden-session.js';
 import { libraryShelves } from '../../core/learning/journey.js';
 import { wdTreeOrder } from '../../modules/word-dna/logic/tree.js';
 import { PJ_TIERS } from '../../modules/para-jumbles/logic/tiers.js';
-import { PS_TIERS } from '../../modules/para-summary/logic/tiers.js';
 import { OOO_TIERS } from '../../modules/odd-one-out/logic/tiers.js';
 import { renderHearth } from './hearth.js';
 import { renderWilds } from './wilds.js';
@@ -63,6 +62,16 @@ export async function renderPlace(outlet, { storage }, params) {
   const host = petForPlace(region.slug) ?? 'toffee';
   const hostDef = PET_BY_ID.get(host);
   const hostState = state.pets?.pets.find((p) => p.id === host);
+
+  // Mochi's home owns its complete frame, just as Chai's library does.
+  // Lazy art and styles keep the village's cold open unchanged.
+  if (region.slug === 'table') {
+    const room = await import('./thought-room.js');
+    await room.thoughtRoomStyle();
+    if (location.hash !== arrivedAt) return;
+    room.renderThoughtRoom(outlet, { content, records: world.records, state, stage: hostState?.stage ?? 0 });
+    return;
+  }
 
   /* Chai's library is a room you stand in, not a page about one (owner,
      2026-11-01): no village painting above it, no title or progress bar, no
@@ -289,13 +298,13 @@ export async function renderPlace(outlet, { storage }, params) {
     return;
   }
 
-  /* ================= The Quarter: Loom / Table / Bench ================= */
-  if (region.slug === 'loom' || region.slug === 'table' || region.slug === 'bench') {
+  /* ================= The Quarter: Loom / Bench ================= */
+  if (region.slug === 'loom' || region.slug === 'bench') {
     const v = state[region.slug];
     const kind = region.slug;
     heroStat.innerHTML = pill(`★ ${v.stars}`);
     const [tiers, items, prefix, unit, noun] = kind === 'loom' ? [PJ_TIERS, content.pj, 'pj', 'jumbles', ['jumble', 'jumbles']]
-      : kind === 'table' ? [PS_TIERS, content.ps, 'ps', 'summaries', ['summary', 'summaries']] : [OOO_TIERS, content.ooo, 'ooo', 'sets', ['odd one out', 'odd ones out']];
+      : [OOO_TIERS, content.ooo, 'ooo', 'sets', ['odd one out', 'odd ones out']];
     const sessions = world.records.sessions;
     /* The button starts the same three the friend's card offers (pets/next.js
        verbalTrio, same seed): a set short enough to finish, so the thanks

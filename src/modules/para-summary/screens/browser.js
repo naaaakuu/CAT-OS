@@ -18,6 +18,7 @@ export async function renderPSBrowser(outlet, { storage }) {
       <header class="journey-head">
         <p class="screen__eyebrow">Practice · Para Summary</p>
         <h1>Your summary journey${infoButton('ps', { guide: '#/ps/about' })}</h1>
+        <p><a class="btn" href="#/world/place/table">← Mochi’s room</a></p>
       </header>
       <div id="ps-list" aria-busy="true">
         <div class="skeleton skeleton--line" style="width: 40%"></div>

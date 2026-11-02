@@ -68,7 +68,7 @@ const CONTENT_VERSION = 16;
    ALWAYS lands in a new cache, whether or not anybody remembered to bump the
    number above. Nothing used to enforce that bump, and an installed learner
    could sit on old code forever with no symptom anybody could see. */
-const BUILD_ID = 'c80ab80b28';
+const BUILD_ID = 'e9f8cf1daa';
 const CONTENT_ID = 'fa1ec949c0';
 const SHELL_CACHE = `cat-os-shell-v${CACHE_VERSION}.${BUILD_ID}`;
 const CONTENT_CACHE = `cat-os-content-v${CONTENT_VERSION}.${CONTENT_ID}`;
@@ -303,6 +303,7 @@ const SHELL_FILES = [
   './src/modules/para-jumbles/screens/learn.js',
   './src/modules/para-jumbles/screens/session.js',
   './src/modules/para-summary/index.js',
+  './src/modules/para-summary/logic/room.js',
   './src/modules/para-summary/logic/store.js',
   './src/modules/para-summary/logic/teach.js',
   './src/modules/para-summary/logic/think.js',
@@ -371,8 +372,10 @@ const SHELL_FILES = [
   './src/ui/styles/intro.css',
   './src/ui/styles/library.css',
   './src/ui/styles/rewards.css',
+  './src/ui/styles/thought-room.css',
   './src/ui/styles/tokens.css',
   './src/ui/styles/world.css',
+  './src/ui/thought-room-style.js',
   './src/world/audio.js',
   './src/world/collections.js',
   './src/world/companion.js',
@@ -389,6 +392,8 @@ const SHELL_FILES = [
   './src/world/screens/place.js',
   './src/world/screens/result.js',
   './src/world/screens/round.js',
+  './src/world/screens/thought-room-art.js',
+  './src/world/screens/thought-room.js',
   './src/world/screens/wilds.js',
   './src/world/stage.js',
   './src/world/state.js',

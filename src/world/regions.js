@@ -77,9 +77,9 @@ export const REGIONS = Object.freeze([
     route: '#/world/place/loom', color: '#8A6C9C',
   },
   {
-    slug: 'table', name: 'The Summary Table', kind: 'learn', inQuarter: true,
-    line: 'Para Summary. Find the author’s point and protect it from the options that almost say it.',
-    verb: 'Sit at the table',
+    slug: 'table', name: 'The Messy Thoughts Room', kind: 'learn', inQuarter: true,
+    line: 'Para Summary. Find the author’s point and help Mochi put a tangled thought away.',
+    verb: 'Visit Mochi’s room',
     skill: 'Para summary',
     anchor: { x: 516, y: 606 }, hit: { x: 486, y: 560, w: 62, h: 60 },
     route: '#/world/place/table', color: '#C6533A',

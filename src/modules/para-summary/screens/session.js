@@ -46,7 +46,9 @@ import { choosePSLesson, psLessonRecord } from '../../../core/mentor/ps-lesson.j
 import { PS_LINES, PS_MISSIONS } from '../../../core/mentor/ps-voice.js';
 import { toast } from '../../../ui/components/cat-toast.js';
 import { escapeHTML, formatDuration } from '../../../core/utils/format.js';
-import { hostChip } from '../../../pets/sprite.js';
+import { hostChip, petSprite, FRAME } from '../../../pets/sprite.js';
+import { thoughtRoom } from '../logic/room.js';
+import { thoughtRoomStyle } from '../../../ui/thought-room-style.js';
 import { infoButton } from '../../../ui/info.js';
 import { focusContent } from '../../../ui/focus.js';
 import { openModal, closeModal } from '../../../ui/modal.js';
@@ -81,6 +83,7 @@ async function resolveSet(setParam) {
 }
 
 export async function renderPSSession(outlet, { storage }, params) {
+  const arrivedAt = location.hash;
   let resolved;
   try {
     resolved = await resolveSet(params.set);
@@ -93,6 +96,16 @@ export async function renderPSSession(outlet, { storage }, params) {
       </section>`;
     return;
   }
+
+  let home = thoughtRoom();
+  try {
+    const [items, records] = await Promise.all([listPSItems(), storage.getAll(STORES.SESSIONS)]);
+    home = thoughtRoom(items, records);
+    // Only a last look for the return animation; progress comes from records.
+    sessionStorage.setItem('catos:thought-room:last-look', JSON.stringify([...home.solved]));
+  } catch { /* A room preview must never block practice. */ }
+  await thoughtRoomStyle();
+  if (location.hash !== arrivedAt) return;
 
   const session = new PSSession(resolved.items, resolved.setId);
   /* A set abandoned halfway used to record nothing at all. It carries on now.
@@ -110,6 +123,12 @@ export async function renderPSSession(outlet, { storage }, params) {
   /* Per-item behavior the engine wants to know about. */
   let summaryText = null;   // the learner's own sentence, if written
   let thinkOpened = false;  // the Think coach was consulted
+  const newThoughts = () => home.total ? session.items.filter((it) => session.answerFor(it.meta.id)?.is_correct === true && !home.solved.has(it.meta.id)).length : 0;
+  const pendingLine = () => {
+    const n = newThoughts();
+    return n ? `${n} new ${n === 1 ? 'thought' : 'thoughts'} ready to put away. Finish the set to save ${n === 1 ? 'it' : 'them'}.`
+      : 'Find the main idea. Keep its meaning. Leave the extra details.';
+  };
 
   function showItem() {
     const item = session.current;
@@ -124,11 +143,16 @@ export async function renderPSSession(outlet, { storage }, params) {
       <section class="screen">
         <h1 class="sr-only">Para Summary: paragraph ${session.index + 1} of ${session.total}</h1>
         <div class="session-bar">
-          <a href="#/ps">← Journey</a>
+          <a href="#/world/place/table" aria-label="Back to Mochi’s room">← Room</a>
           <span class="session-bar__count">${hostChip('mochi', 20)} Paragraph <b>${session.index + 1}</b> of ${session.total}</span>
           <cat-timer></cat-timer>
         </div>
         <cat-progress-bar max="${session.total}" value="${session.index}"></cat-progress-bar>
+
+        <aside class="thought-companion" aria-label="Mochi’s company">
+          <button class="thought-companion__pet" type="button" aria-label="Ask Mochi for a little encouragement">${petSprite('mochi', { size: 64, frame: FRAME.idle, stage: 0 })}</button>
+          <div><p class="thought-companion__say" role="status">${session.index ? 'A little clearer already. Let’s find the next thought.' : 'One little thought. What is the author really saying?'}</p><small class="thought-companion__note">${pendingLine()}</small></div>
+        </aside>
 
         <div class="card">
           <div class="lesson-heading"><p class="screen__eyebrow">Find the author's point${infoButton('ps', {
@@ -165,6 +189,19 @@ export async function renderPSSession(outlet, { storage }, params) {
     const actions = outlet.querySelector('#actions');
     const thinkBtn = outlet.querySelector('#think-open');
     const thinkSlot = outlet.querySelector('#think-slot');
+    const companion = outlet.querySelector('.thought-companion');
+    const mochiSays = (text, frame = FRAME.idle, correct = false) => {
+      companion.querySelector('.thought-companion__say').textContent = text;
+      companion.querySelector('.pet-sprite').style.setProperty('--f', frame);
+      companion.classList.toggle('is-correct', correct);
+      companion.querySelector('.thought-companion__note').textContent = pendingLine();
+    };
+    let nudges = 0;
+    companion.querySelector('button').addEventListener('click', () => mochiSays([
+      'I’m right here. We can take our time.',
+      'A tiny sentence can hold a very big thought.',
+      'Read it once more. What does the author want you to keep?',
+    ][nudges++ % 3], FRAME.happy));
     session.markItemShown();
     focusContent(outlet.querySelector('h1'));
 
@@ -263,6 +300,10 @@ export async function renderPSSession(outlet, { storage }, params) {
       if (card) card.reveal = { chosen: answer?.chosen ?? null, correct: q.correct };
       thinkBtn.remove();
       thinkSlot.innerHTML = '';
+      mochiSays(answer?.is_correct
+        ? home.solved.has(m.id) ? 'Still fits perfectly. That thought already has a home.' : 'That’s the little thought! One more paper ready to put away.'
+        : answer?.chosen ? 'A little tangle. Let’s see where the meaning changed.' : 'We can leave this thought here and come back to it.',
+      answer?.is_correct ? FRAME.happy : FRAME.blink, answer?.is_correct === true);
 
       const verdict = answer === null || answer.chosen === null
         ? { cls: '', text: `Set aside. The author's point is option ${q.correct}.` }
@@ -274,6 +315,9 @@ export async function renderPSSession(outlet, { storage }, params) {
         <div class="psx-verdict ${verdict.cls}">${escapeHTML(verdict.text)}</div>
         ${summaryText ? renderCompare() : ''}
       `;
+      // Mochi follows the learner's attention down to the verdict instead
+      // of celebrating above a long paragraph, outside the phone viewport.
+      compareSlot.prepend(companion);
       if (summaryText) wireCompare();
 
       teachingSlot.innerHTML = renderTeaching(item, answer);
@@ -282,7 +326,8 @@ export async function renderPSSession(outlet, { storage }, params) {
           ${session.isLast ? 'Finish the set' : 'Next paragraph'}
         </button>`;
       actions.querySelector('#next').addEventListener('click', onNext);
-      focusContent(compareSlot.querySelector('.psx-verdict'), { scroll: true });
+      focusContent(compareSlot.querySelector('.psx-verdict'));
+      companion.scrollIntoView({ block: 'start' });
     }
 
     /* The learner's sentence against the author's: honest, guided
@@ -380,8 +425,10 @@ export async function renderPSSession(outlet, { storage }, params) {
     const results = session.finish();
 
     // Persist FIRST; nothing is shown until the data is safe.
+    let saved = false;
     try {
       await savePSResults(storage, results);
+      saved = true;
       await clearDraft(storage, 'ps', resolved.setId);
     } catch (err) {
       console.error('[CAT OS]', err);
@@ -435,10 +482,15 @@ export async function renderPSSession(outlet, { storage }, params) {
     outlet.innerHTML = `
       <section class="screen">
         <div class="session-bar">
-          <a href="#/ps">← Journey</a>
+          <a href="#/world/place/table">← Mochi’s room</a>
         </div>
 
         ${worldRewardHTML}
+        <section class="thought-homecoming" aria-labelledby="thought-homecoming-title">
+          <h2 id="thought-homecoming-title">${saved && newThoughts() ? `${newThoughts() === 1 ? 'A little thought has' : `${newThoughts()} little thoughts have`} a home.` : saved ? 'Mochi saved your spot.' : 'Your thoughts could not be saved yet.'}</h2>
+          <p>${saved && newThoughts() ? 'Come home with Mochi. There are papers to put away and a little more room to breathe.' : saved ? 'Your room keeps every thought you have already put away. There is always another little tangle to try.' : 'The room will show only the work safely saved on this device.'}</p>
+          <a class="btn btn--primary btn--block" href="#/world/place/table">${saved && newThoughts() ? 'See the room get tidier' : 'Come home with Mochi'} <span aria-hidden="true">→</span></a>
+        </section>
         <article class="moment">
           <p class="screen__eyebrow">Your mentor · Para Summary</p>
           ${lesson ? `

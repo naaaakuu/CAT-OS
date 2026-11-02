@@ -285,7 +285,7 @@ export async function checkPlayerExperience({ matrix = true, log = () => {} } = 
         '#/bank/session/sp/sp-0001', '#/bank/session/pc/pc-0001', '#/bank/session/wb/next', '#/bank/session/cr/next',
         '#/wd/garden', '#/garden/session/lg-0001', '#/garden/plant/lg-0001', '#/rc/mentor/rc-0040', '#/rc/review/rc-0040', '#/pro',
       ])];
-      const narrow = ['#/settings', '#/growth', '#/world/place/reading-room', '#/world/place/rootwood', '#/world/place/wilds',
+      const narrow = ['#/settings', '#/growth', '#/world/place/reading-room', '#/world/place/table', '#/world/place/rootwood', '#/world/place/wilds',
         '#/pj/session/pj-0001', '#/ps/session/ps-0001', '#/ooo/session/ooo-0001', '#/bank/session/sp/sp-0001', '#/bank/session/pc/pc-0001', '#/round/meadow'];
       for (const theme of ['light','dark']) {
         await b.evaluate(`import('/src/shell/prefs.js').then(m=>m.applyTheme(${JSON.stringify(theme)}))`);
