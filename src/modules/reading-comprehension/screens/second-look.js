@@ -130,7 +130,7 @@ export async function renderSecondLook(outlet, { storage }) {
     const tick = () => {
       if (!alive || !clock.isConnected) return;
       clock.textContent = formatClock(Date.now() - startedAt);
-      requestAnimationFrame(tick);
+      setTimeout(tick, 1000);
     };
     requestAnimationFrame(tick);
     const cleanup = () => { alive = false; window.removeEventListener('hashchange', cleanup); };

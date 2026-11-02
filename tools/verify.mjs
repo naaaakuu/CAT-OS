@@ -2355,11 +2355,12 @@ console.log('\n24. Rendered contrast (tools/check-rendered-contrast.mjs — real
   const full = process.env.CATOS_FULL === '1';
   const { checkRenderedContrast, ROUTES } = await mod('tools/check-rendered-contrast.mjs');
   const routes = full ? ROUTES : ROUTES.filter((r) => r.risk);
-  const { skipped, failures, checked } = await checkRenderedContrast({ routes });
+  const { skipped, failures, checked, unmeasured = [] } = await checkRenderedContrast({ routes, log: (line) => console.log(line) });
   if (skipped) console.log('  --  SKIPPED: no Chrome on this machine (set CHROME_PATH). This section did NOT run.');
   else {
     for (const f of failures) bad(`contrast: [${f.theme}] ${f.hash} ${f.sel} is ${f.ratio}:1, needs ${f.need} ("${f.text}")`);
-    if (!failures.length) ok(`${checked} rendered text runs over ${routes.length} route(s) x 2 themes clear AA against what is actually behind them${full ? '' : ` (CATOS_FULL=1 sweeps all ${ROUTES.length})`}`);
+    for (const route of unmeasured) bad('contrast could not measure: ' + route);
+    if (!failures.length && !unmeasured.length) ok(`${checked} rendered text runs over ${routes.length} route(s) x 2 themes clear AA against what is actually behind them${full ? '' : ` (CATOS_FULL=1 sweeps all ${ROUTES.length})`}`);
   }
 }
 
@@ -2494,6 +2495,18 @@ console.log('\n30. What a learner comes back to (tools/check-resume.mjs — a re
   else {
     for (const p of r.problems) bad('resume: ' + p);
     if (problems.length === before) ok(`${r.cases} things a learner comes back to, checked on a real screen: four modules resume after a refresh and record what was answered before it; the village greets a finished run once, with its pet and its gifts`);
+  }
+}
+
+console.log('\n31. Complete player flows and small-screen layouts (tools/check-player-experience.mjs)');
+{
+  const before = problems.length;
+  const { checkPlayerExperience } = await mod('tools/check-player-experience.mjs');
+  const r = await checkPlayerExperience({ matrix: process.env.CATOS_FULL === '1', log: (line) => console.log(line) });
+  if (r.skipped) console.log('  --  SKIPPED: no Chrome. Player flows were not tested.');
+  else {
+    for (const p of r.problems) bad('player experience: ' + p);
+    if (problems.length === before) ok(`${r.cases} player checks, ${r.screens} screen/viewport/theme combinations: real taps, completion, replay, Android Back, focus and saved progress`);
   }
 }
 

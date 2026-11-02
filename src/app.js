@@ -27,6 +27,7 @@ import { installOnlineGate } from './shell/online-gate.js';
 import { beginIntro } from './shell/intro.js';
 import { inApp, track } from './core/native.js';
 import './ui/components/cat-nav.js';
+import { dismissTopLayer } from './ui/modal.js';
 
 /* ------------------------------------------------------------------ */
 /* Global error handling — one calm surface, details in the console.  */
@@ -39,18 +40,18 @@ window.addEventListener('error', (e) => {
   // The browser's own "I will retry next frame" notice, not a fault.
   if (typeof e.message === 'string' && e.message.startsWith('ResizeObserver loop')) return;
   console.error('[CAT OS]', e.error ?? e.message);
-  toast('Something went wrong. Details are in the console.', 'error');
+  toast('That action did not finish. Try again, or reopen the game.', 'error');
 });
 window.addEventListener('unhandledrejection', (e) => {
   console.error('[CAT OS]', e.reason);
-  toast('Something went wrong. Details are in the console.', 'error');
+  toast('That action did not finish. Try again, or reopen the game.', 'error');
 });
 
 /* ------------------------------------------------------------------ */
 /* Storage + theme                                                    */
 /* ------------------------------------------------------------------ */
 
-const APP_VERSION = '3.14.1'; // keep in step with CHANGELOG.md and android/app/build.gradle versionName
+const APP_VERSION = '3.15.0'; // keep in step with CHANGELOG.md and android/app/build.gradle versionName
 
 const storage = new IndexedDBAdapter();
 
@@ -101,6 +102,7 @@ function renderNotFound(outlet) {
 /* ------------------------------------------------------------------ */
 
 async function boot() {
+  window.__catosBack = dismissTopLayer;
   // 0. In the Android app a free player plays online (shell/online-gate.js).
   installOnlineGate();
 
@@ -132,6 +134,11 @@ async function boot() {
   //    context object (today: storage) rather than importing globals,
   //    keeping them testable and island-shaped (Rule 5).
   const outlet = document.getElementById('view');
+  document.querySelector('.skip')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    outlet.focus({ preventScroll: true });
+    outlet.scrollIntoView({ block: 'start', behavior: 'instant' });
+  });
   const router = new Router(outlet)
     .register({ path: '/home',     title: 'Home',     render: renderHome })
     .register({ path: '/practice', title: 'Practice', render: renderPractice })
@@ -196,7 +203,7 @@ async function boot() {
      by the route's first two parts (rc/review, world/place), and the cloud
      save (shell/account.js) runs whenever the learner leaves. */
   if (inApp) {
-    const seen = () => track('screen_view', { screen_name: location.hash.replace(/^#\/?/, '').split('/').slice(0, 2).join('/') || 'world' });
+    const seen = () => track('screen_view', { screen_name: location.hash.split('?')[0].replace(/^#\/?/, '').split('/').slice(0, 2).join('/') || 'world' });
     seen();
     window.addEventListener('hashchange', seen);
     import('./shell/account.js').then((m) => m.keepBackedUp(storage)).catch(() => { /* no cloud save this session */ });
@@ -208,6 +215,7 @@ async function boot() {
      without talking over the passage. The song never restarts between
      screens: startMusic only retunes it. */
   const sceneFor = (h) => {
+    h = h.split('?')[0];
     if (/^#\/(rc|pj|ps|ooo|wd|bank)\/session\//.test(h) || h === '#/rc/second-look') return 'focus';
     if (h.startsWith('#/round/')) return h.split('/')[2] || 'meadow';
     if (h.startsWith('#/garden')) return 'rootwood';

@@ -131,12 +131,16 @@ public class MainActivity extends ComponentActivity {
         web.addJavascriptInterface(new Bridge(this), "CatOSAndroid");
         if (state == null) web.loadUrl(START); else web.restoreState(state);
 
-        // Back walks the app's own history; from the village it leaves.
+        // Back first dismisses an in-room sheet or popover, then walks
+        // history. A friend card in the village must not send the app away.
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override public void handleOnBackPressed() {
-                String url = web.getUrl();
-                if (web.canGoBack() && url != null && !url.endsWith("#/world")) web.goBack();
-                else moveTaskToBack(true);
+                web.evaluateJavascript("Boolean(window.__catosBack && window.__catosBack())", consumed -> {
+                    if ("true".equals(consumed)) return;
+                    String url = web.getUrl();
+                    if (web.canGoBack() && url != null && !url.endsWith("#/world")) web.goBack();
+                    else moveTaskToBack(true);
+                });
             }
         });
     }

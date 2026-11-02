@@ -86,7 +86,7 @@ export class Router {
     }
     if (!matched) return;
 
-    document.title = matched.title ? `${matched.title}CAT OS` : 'CAT OS';
+    document.title = matched.title ? `${matched.title} · CAT OS` : 'CAT OS';
     // A screen that has to read a passage, fifty root families or the whole
     // record log is not instant, and until it resolves the outlet is empty.
     // Nothing is shown for the first fifth of a second — a fast screen must
@@ -193,7 +193,8 @@ function match(routeSegs, urlSegs) {
   const params = {};
   for (let i = 0; i < routeSegs.length; i += 1) {
     if (routeSegs[i].startsWith(':')) {
-      params[routeSegs[i].slice(1)] = decodeURIComponent(urlSegs[i]);
+      try { params[routeSegs[i].slice(1)] = decodeURIComponent(urlSegs[i]); }
+      catch { return null; } // a damaged link still gets the way home
     } else if (routeSegs[i] !== urlSegs[i]) {
       return null;
     }

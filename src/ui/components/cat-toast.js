@@ -29,6 +29,8 @@ class CatToast extends HTMLElement {
           bottom: calc(var(--nav-height) + env(safe-area-inset-bottom) + var(--space-4));
           transform: translateX(-50%) translateY(10px) scale(0.98);
           max-width: min(92vw, 26rem);
+          width: max-content;
+          overflow-wrap: anywhere;
           padding: var(--space-3) var(--space-4);
           border-radius: var(--radius-md);
           background: var(--color-ink);
@@ -40,7 +42,7 @@ class CatToast extends HTMLElement {
           pointer-events: none;
           transition: opacity var(--duration) var(--ease-out),
                       transform var(--duration) var(--ease-out);
-          z-index: 20;
+          z-index: 90;
         }
         cat-toast.is-open { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
         cat-toast.is-error { background: var(--color-danger); color: var(--color-danger-ink); }

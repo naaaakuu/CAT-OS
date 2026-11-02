@@ -675,7 +675,7 @@ html[data-reduced-motion] .cw-base { transition: none; }
 .cw-name input { flex: 1; min-width: 0; min-height: 46px; padding: 0 14px; border-radius: 14px; border: 1px solid var(--color-line-strong); background: var(--color-surface); color: var(--color-ink); font: 16px var(--font-display); }
 .cw-name__row button { min-height: 46px; padding: 0 18px; border-radius: 14px; border: 0; background: var(--color-accent); color: var(--color-accent-ink); font-weight: 650; }
 .cw-name__ideas { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 0; }
-.cw-name__ideas button { min-height: 36px; padding: 0 12px; border-radius: 999px; border: 1px dashed var(--color-line-strong); background: none; font: italic 13.5px var(--font-display); color: var(--color-ink-2); }
+.cw-name__ideas button { min-height: 44px; padding: 0 12px; border-radius: 999px; border: 1px dashed var(--color-line-strong); background: none; font: italic 13.5px var(--font-display); color: var(--color-ink-2); }
 .cw-toggles { display: grid; gap: 8px; margin: 0 0 14px; }
 .cw-toggle { display: flex; align-items: center; justify-content: space-between; min-height: 52px; padding: 0 14px; border-radius: 16px; border: 0; background: var(--color-surface-2); font-size: 14.5px; text-align: left; }
 .cw-toggle i { width: 46px; height: 28px; border-radius: 14px; background: var(--color-line-strong); position: relative; transition: background 0.2s; }
@@ -726,6 +726,9 @@ html[data-reduced-motion] .cw-base { transition: none; }
   background: var(--color-surface); color: var(--color-ink); box-shadow: 0 16px 40px rgba(20, 16, 8, 0.4);
 }
 .cw-meet[hidden] { display: none; }
+.cw-tour-skip { position: absolute; right: max(12px, env(safe-area-inset-right)); top: calc(max(12px, env(safe-area-inset-top)) + 60px); z-index: 35; min-height: 44px; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--color-line-strong); background: var(--color-surface); color: var(--color-ink); font: 650 12px/1.2 var(--font-ui); box-shadow: var(--shadow-1); }
+.cw-tour-skip[hidden] { display: none; }
+.cw.is-intro .cw-today { visibility: hidden; }
 .cw-meet.is-top { top: calc(max(12px, env(safe-area-inset-top)) + 60px); bottom: auto; }
 .cw-meet.is-in { animation: cw-meet-in 0.42s cubic-bezier(.2, 1.4, .4, 1); }
 @keyframes cw-meet-in { from { opacity: 0; translate: -50% 26px; } }

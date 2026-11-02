@@ -109,13 +109,13 @@ function petCard(card, id, api) {
       <h2 class="cw-card__name">${esc(def.name)}</h2>
       <p class="cw-role">Teaches ${esc(def.subject)}</p>
       <p class="cw-tag">${esc(def.tag)}</p>
+      <p class="cw-status"><span class="cw-moodchip cw-moodchip--${p.word}">${MOOD_LABEL[p.word]}</span>${pick && !done ? ' · One of today’s three' : ''}</p>
     </div>
+    ${next ? `<a class="cw-go" href="${esc(next.href)}" data-go><span><b>Help ${esc(def.name)}</b><small>${esc(ACT[id])}${next.minutes ? ` · about ${Math.max(1, Math.round(next.minutes))} min` : ''}</small></span><i aria-hidden="true">▶</i></a>` : ''}
     ${growBlock(p, levelFor(id, api.world, p))}
-    ${next ? `<a class="cw-go" href="${esc(next.href)}" data-go><span><b>Help ${esc(def.name)}</b><small>${esc(ACT[id])}: ${esc(next.label)}${next.sub ? ` · ${esc(next.sub)}` : ''}</small></span><i aria-hidden="true">▶</i></a>` : ''}
     ${achievements(id, api)}
     <details class="cw-more">
       <summary>More about ${esc(def.name)}</summary>
-      <p class="cw-status"><span class="cw-moodchip cw-moodchip--${p.word}">${MOOD_LABEL[p.word]}</span></p>
       <p class="cw-say">${esc(`${greet} ${p.request}`)}</p>
       ${notice ? `<p class="cw-notice"><span class="cw-notice__spark" aria-hidden="true">✦</span><span>${esc(notice)}</span></p>` : ''}
       ${pick && !done ? `<p class="cw-pickline"><b>!</b> One of today's three friends. Help ${esc(def.name)} for today's gift.</p>` : ''}
@@ -235,15 +235,16 @@ function todayCard(card, api) {
 
 function cottageCard(card, api) {
   const prefs = feedbackPrefs();
+  const headingId = card.querySelector('.cw-card__name')?.id;
   const name = valleyName(api.valley);
   const named = !!api.valley?.name;
   card.innerHTML = `
     ${close}
     <p class="cw-eyebrow">Settings</p>
-    <h2 class="cw-card__name">${esc(name)}</h2>
+    <h2 class="cw-card__name"${headingId ? ` id="${esc(headingId)}"` : ''}>${esc(name)}</h2>
     <form class="cw-name" data-name>
       <label for="cw-name-in">${named ? 'Rename your village' : 'Give your village a name'}</label>
-      <div class="cw-name__row"><input id="cw-name-in" maxlength="28" autocomplete="off" placeholder="${esc(nameSuggestions()[0])}" value="${named ? esc(api.valley.name) : ''}"><button>Save</button></div>
+      <div class="cw-name__row"><input id="cw-name-in" maxlength="28" required autocomplete="off" placeholder="${esc(nameSuggestions()[0])}" value="${named ? esc(api.valley.name) : ''}"><button>Save</button></div>
       <p class="cw-name__ideas">${nameSuggestions().map((n) => `<button type="button" data-idea="${esc(n)}">${esc(n)}</button>`).join('')}</p>
     </form>
     <div class="cw-toggles">
@@ -261,8 +262,10 @@ function cottageCard(card, api) {
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const clean = cleanValleyName(input.value);
-    if (!clean) { input.focus(); return; }
-    try { const v = await saveValley(api.storage, { name: clean }); api.setValley(v); api.play('place'); cottageCard(card, api); card.querySelector('.cw-name input')?.focus({ preventScroll: true }); api.toast(`Welcome to <b>${esc(clean)}</b>!`); } catch (err) { console.error('[CAT OS] could not save the name', err); }
+    if (!clean) { input.focus(); api.toast('Choose a name with a letter or a number.'); return; }
+    const save = form.querySelector('button');
+    save.disabled = true;
+    try { const v = await saveValley(api.storage, { name: clean }); api.setValley(v); api.play('place'); if (!form.isConnected) return; cottageCard(card, api); card.querySelector('.cw-name input')?.focus({ preventScroll: true }); api.toast(`Welcome to <b>${esc(clean)}</b>!`); } catch (err) { save.disabled = false; console.error('[CAT OS] could not save the name', err); api.toast('The name could not be saved. Try again.'); }
   });
   const music = card.querySelector('[data-music]'), sfx = card.querySelector('[data-sfx]');
   music.addEventListener('click', async () => {

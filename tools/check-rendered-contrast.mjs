@@ -419,6 +419,11 @@ if (process.argv[1]?.endsWith('check-rendered-contrast.mjs')) {
     process.exit(0);
   }
   console.log(`\nMeasured ${checked} rendered text runs across ${routes.length} route(s) x ${themes.length} theme(s) in ${Math.round((Date.now() - t0) / 1000)}s.`);
+  if (unmeasured.length) {
+    for (const route of unmeasured) console.log('  !! Could not measure: ' + route);
+    console.log('The contrast check is incomplete.');
+    process.exit(1);
+  }
   if (!failures.length) { console.log('✓ every rendered text run clears WCAG AA against what is actually behind it.\n'); process.exit(0); }
   console.log(`\n✗ ${failures.length} text run(s) below AA:\n`);
   for (const f of failures.sort((a, b) => a.ratio - b.ratio)) {

@@ -23,13 +23,15 @@ export async function renderHearth(outlet, { storage }) {
 
   let world;
   try { world = await loadWorld(storage); } catch (err) {
-    outlet.innerHTML = `<section class="place"><div class="place__body"><h1 class="place__title">The records will not open</h1><p>${escapeHTML(err.message)}</p></div></section>`;
+    console.error('[CAT OS] records could not open', err);
+    outlet.innerHTML = `<section class="place"><div class="place__body" style="padding-top:60px"><h1 class="place__title">The records could not open</h1><p>Part of the room did not arrive. Your saved progress is still on this device.</p><p><button class="g-btn g-btn--primary" onclick="location.reload()">Try again</button> <a class="g-btn" href="#/world">Back to the village</a></p></div></section>`;
     return;
   }
   const { state } = world;
   const P = state.pets;
   const atmo = state.atmo;
   const f = P.flame;
+  const hasPractice = state.hearth.activeDays > 0 || world.records.sessions.length > 0 || P.pets.some((p) => p.visits > 0);
 
   outlet.innerHTML = `
     <section class="place place--hearth">
@@ -40,7 +42,7 @@ export async function renderHearth(outlet, { storage }) {
       <div class="place__body" id="body">
         <p class="place__eyebrow">Records · kept by Toffee</p>
         <h1 class="place__title">${f.days ? `A ${f.days}-day fire` : 'A fresh fire'}</h1>
-        <p class="place__line">Village level ${P.level.level} · ${P.glow} Glow · ${state.hearth.activeDays} ${state.hearth.activeDays === 1 ? 'day' : 'days'} in the village · best run ${state.hearth.streak.best} · ${f.kindling} spare ${f.kindling === 1 ? 'log' : 'logs'}.</p>
+        <p class="place__line">${hasPractice ? `Village level ${P.level.level} · ${P.glow} Glow · ${state.hearth.activeDays} ${state.hearth.activeDays === 1 ? 'day' : 'days'} in the village · best run ${state.hearth.streak.best} · ${f.kindling} spare ${f.kindling === 1 ? 'log' : 'logs'}.` : 'Your story starts with one round. Toffee will keep every visit, every bit of Glow and every growing friendship here.'}</p>
         <div id="panel" class="is-in"></div>
       </div>
     </section>`;
@@ -56,6 +58,7 @@ export async function renderHearth(outlet, { storage }) {
   try { weakness = readingWeakness(world.records.sessions); } catch { /* none */ }
   const lines = standingLines(state, weakness);
   outlet.querySelector('#panel').innerHTML = `
+    ${hasPractice ? `
     <div class="standing">
       ${lines.map((l) => `<p>${escapeHTML(l)}</p>`).join('')}
     </div>
@@ -70,7 +73,12 @@ export async function renderHearth(outlet, { storage }) {
         ['Verbal items solved', String(state.loom.solved + state.table.solved + state.bench.solved)],
         ['Days in the village', String(state.hearth.activeDays)],
       ].map(([k, val]) => `<div class="figure"><b>${escapeHTML(val)}</b><span>${escapeHTML(k)}</span></div>`).join('')}
-    </div>
+    </div>` : `
+    <div class="records-welcome">
+      <h2>Your first page is waiting</h2>
+      <p>Pick a friend, try a round, and come back to see what you helped grow.</p>
+      <a class="g-cta" href="#/world/place/reading-room">Visit Chai<small>Open the library · about 5 min</small><span class="arrow" aria-hidden="true">→</span></a>
+    </div>`}
     <h2 class="shelf">Your friends</h2>
     <div class="friends">
       ${PETS.map((def) => {
@@ -78,14 +86,15 @@ export async function renderHearth(outlet, { storage }) {
         return `<a class="friend friend--${p.word}" href="${def.places[0] === 'hearth' ? '#/world/place/wilds' : `#/world/place/${def.places[0]}`}">
           ${petPortrait(def.id, 44, { mood: p.isNew ? 0.3 : p.mood })}
           <span class="friend__lead"><b>${escapeHTML(def.name)}</b><small>${escapeHTML(def.subject)}</small></span>
-          <span class="friend__side"><span class="friend__stage">${escapeHTML(ageOf(p.stage).name)}${p.stage ? ` · stage ${p.stage} · ${escapeHTML(stageTitle(def.id, p.stage))}` : ''}</span><small>${MOOD_LABEL[p.word]} · ${p.visits} ${p.visits === 1 ? 'visit' : 'visits'}</small></span>
+          <span class="friend__side"><span class="friend__stage">${escapeHTML(ageOf(p.stage).name)}${p.stage ? ` · stage ${p.stage} · ${escapeHTML(stageTitle(def.id, p.stage))}` : ''}</span><small>${p.visits ? `${MOOD_LABEL[p.word]} · ${p.visits} ${p.visits === 1 ? 'visit' : 'visits'}` : 'Ready for your first visit'}</small></span>
         </a>`;
       }).join('')}
     </div>
-    <h2 class="shelf">The village, level by level</h2>
+    ${hasPractice ? '<h2 class="shelf">The village, level by level</h2>' : '<details class="records-future"><summary>What the village can become</summary>'}
     <ul class="treasures-made">
       ${P.decor.map((t) => `<li class="${t.made ? 'is-made' : t === P.nextDecor ? 'is-next' : ''}"><i aria-hidden="true">${t.made ? '✓' : t === P.nextDecor ? '★' : '·'}</i><span><b>Level ${t.level}: ${escapeHTML(t.name)}</b><small>${escapeHTML(t.appears)}</small></span></li>`).join('')}
     </ul>
+    ${hasPractice ? '' : '</details>'}
     <p class="panel__foot"><a href="#/growth">The clock tower →</a> · <a href="#/settings">Settings, backup and restore →</a></p>`;
 }
 

@@ -37,6 +37,7 @@ import { WD_LINES } from '../../../core/mentor/wd-voice.js';
 import { toast } from '../../../ui/components/cat-toast.js';
 import { escapeHTML, formatDuration } from '../../../core/utils/format.js';
 import { hostChip } from '../../../pets/sprite.js';
+import { focusContent } from '../../../ui/focus.js';
 import '../../../ui/components/cat-option.js';
 import '../../../ui/components/cat-progress-bar.js';
 import '../../../ui/components/cat-timer.js';
@@ -123,6 +124,7 @@ export async function renderWDSession(outlet, { storage }, params) {
 
     outlet.innerHTML = `
       <section class="screen">
+        <h1 class="sr-only">Word DNA: family ${session.index + 1} of ${session.total}</h1>
         <div class="session-bar">
           <a href="#/wd">← Tree</a>
           <span class="session-bar__count">${hostChip('matcha', 20)} Family <b>${session.index + 1}</b> of ${session.total}</span>
@@ -156,6 +158,7 @@ export async function renderWDSession(outlet, { storage }, params) {
     const teachingSlot = outlet.querySelector('#teaching-slot');
     const actions = outlet.querySelector('#actions');
     session.markItemShown();
+    focusContent(outlet.querySelector('h1'));
 
     /* ---------------- Notice ---------------- */
     const taught = item.members.filter((m) => !m.held_out);
@@ -261,7 +264,7 @@ export async function renderWDSession(outlet, { storage }, params) {
         <div class="wdx-verdict ${verdict.cls}">${verdict.text}</div>
         ${understandBlockHTML()}
       `;
-      understandSlot.scrollIntoView({ block: 'nearest' });
+      focusContent(understandSlot.querySelector('.wdx-verdict'), { scroll: true });
       showApply(0);
     }
 
@@ -302,6 +305,7 @@ export async function renderWDSession(outlet, { storage }, params) {
           ? `That is what "${challenge.held_out_word}" means, applied from the pattern.`
           : `Close. The pattern actually gives "${challenge.held_out_word}" a slightly different sense here.`;
         block.appendChild(line);
+        focusContent(line, { scroll: true });
       }
 
       /* Back after an interruption with this challenge already answered. */
@@ -360,12 +364,13 @@ export async function renderWDSession(outlet, { storage }, params) {
 
     function showFinalTeaching() {
       teachingSlot.innerHTML = finalHabitHTML();
-      teachingSlot.scrollIntoView({ block: 'start' });
+      focusContent(teachingSlot, { scroll: true });
       actions.innerHTML = nextButtonHTML();
       actions.querySelector('#next').addEventListener('click', onNext);
     }
 
     async function onNext() {
+      actions.querySelector('#next')?.setAttribute('disabled', '');
       if (session.next()) {
         keep();
         showItem();
@@ -392,6 +397,7 @@ export async function renderWDSession(outlet, { storage }, params) {
 
   /* ---------------- The mentor moment ---------------- */
   async function finishSession() {
+    const finishingScreen = outlet.querySelector('section');
     const results = session.finish();
 
     // Persist FIRST; nothing is shown until the data is safe.
@@ -445,6 +451,7 @@ export async function renderWDSession(outlet, { storage }, params) {
       console.error('[CAT OS] wd mentor derive failed:', err);
     }
 
+    if (!finishingScreen?.isConnected) return;
     const worldRewardHTML = worldReward(s, resolved.items ?? [], { storage }).html;
     outlet.innerHTML = `
       <section class="screen">
@@ -512,6 +519,7 @@ export async function renderWDSession(outlet, { storage }, params) {
       </section>
     `;
 
+    focusContent(outlet.querySelector('.moment__opening'));
     cue('mentor'); // the calm signature; rewards layer over it consonantly
 
     if (engagement) {

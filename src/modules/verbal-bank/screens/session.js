@@ -26,6 +26,7 @@ import { escapeHTML, formatDuration } from '../../../core/utils/format.js';
 import { hostChip } from '../../../pets/sprite.js';
 import { petForModule } from '../../../pets/pets.js';
 import { infoButton } from '../../../ui/info.js';
+import { focusContent } from '../../../ui/focus.js';
 import '../../../ui/components/cat-question-card.js';
 import '../../../ui/components/cat-explanation.js';
 import '../../../ui/components/cat-progress-bar.js';
@@ -151,7 +152,7 @@ function bodyHTML(it, revealed = false) {
     const letterAtPos = Object.fromEntries(Object.entries(b.positions).map(([letter, p]) => [p, letter]));
     const pos = revealed ? b.positions[it.correct] : -1;
     const slot = (p) => (revealed || !(p in letterAtPos) ? '' :
-      `<li class="sp-slot"><button type="button" class="sp-slot__btn" data-letter="${letterAtPos[p]}">place it here</button></li>`);
+      `<li class="sp-slot"><button type="button" class="sp-slot__btn" data-letter="${letterAtPos[p]}" aria-pressed="false" aria-label="Place the sentence ${p === 0 ? 'at the beginning' : `after sentence ${p}`}">place it here</button></li>`);
     const rows = [slot(0)];
     if (pos === 0) rows.push(`<li class="bank-para__placed"><span class="bank-n">•</span>${escapeHTML(b.missing)}</li>`);
     for (const s of b.sentences) {
@@ -247,6 +248,7 @@ export async function renderBankSession(outlet, { storage }, params) {
     const it = session.current;
     outlet.innerHTML = `
       <section class="screen">
+        <h1 class="sr-only">${escapeHTML(bank.name)}: item ${session.index + 1} of ${session.total}</h1>
         <div class="session-bar">
           <a href="${back}">← ${escapeHTML(REGION_NAME[resolved.region] ?? 'The village')}</a>
           <span class="session-bar__count">${hostChip(petForModule(type), 20)} Item <b>${session.index + 1}</b> of ${session.total}</span>
@@ -272,6 +274,7 @@ export async function renderBankSession(outlet, { storage }, params) {
     const teaching = outlet.querySelector('#teaching-slot');
     const actions = outlet.querySelector('#actions');
     session.markItemShown();
+    focusContent(outlet.querySelector('h1'));
 
     let selected = null;
     if (type === 'sp') {
@@ -282,7 +285,7 @@ export async function renderBankSession(outlet, { storage }, params) {
         const btn = e.target.closest('.sp-slot__btn');
         if (!btn) return;
         selected = btn.dataset.letter;
-        for (const el of body.querySelectorAll('.sp-slot__btn')) el.classList.toggle('is-selected', el === btn);
+        for (const el of body.querySelectorAll('.sp-slot__btn')) { el.classList.toggle('is-selected', el === btn); el.setAttribute('aria-pressed', String(el === btn)); }
         syncChoosing();
       });
     } else {
@@ -305,7 +308,7 @@ export async function renderBankSession(outlet, { storage }, params) {
       if (it.mentor?.takeaway) teaching.insertAdjacentHTML('beforeend', `<p class="bank-takeaway">${escapeHTML(it.mentor.takeaway)}</p>`);
       actions.innerHTML = `<button class="btn btn--primary btn--block" id="next">${session.isLast ? 'Finish the set' : 'Next'}</button>`;
       actions.querySelector('#next').addEventListener('click', onNext);
-      requestAnimationFrame(() => ex.querySelector('.verdict')?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+      focusContent(ex.querySelector('.verdict'), { scroll: true });
     }
     function onLock() {
       if (!selected) return;
@@ -316,14 +319,18 @@ export async function renderBankSession(outlet, { storage }, params) {
     }
     function onSkip() { session.skip(); reveal(null); saveDraft(storage, 'bank', resolved.setId, session.snapshot()); }
     async function onNext() {
+      actions.querySelector('#next')?.setAttribute('disabled', '');
       if (session.next()) { saveDraft(storage, 'bank', resolved.setId, session.snapshot()); showItem(); window.scrollTo(0, 0); }
       else { await finish(); window.scrollTo(0, 0); }
     }
-    syncChoosing();
+    const prior = session.answerFor(it.id);
+    if (prior) reveal(prior.chosen);
+    else syncChoosing();
   }
 
   /* ---------------- The moment ---------------- */
   async function finish() {
+    const finishingScreen = outlet.querySelector('section');
     const results = session.finish();
     // The draft goes only once the record is safe: if the save fails the
     // learner comes back to the last item and can press Finish again.
@@ -353,6 +360,7 @@ export async function renderBankSession(outlet, { storage }, params) {
       notice: missedItem?.explanation?.reading_habit ?? '',
     } : { opening: s.score.correct === s.score.total ? 'Nothing here got past you.' : 'Set complete.', title: '', moment: '', pull: '', notice: session.items[0]?.explanation?.reading_habit ?? '' };
 
+    if (!finishingScreen?.isConnected) return;
     const reward = worldReward(s, session.items, { storage });
     outlet.innerHTML = `
       <section class="screen">
@@ -385,6 +393,7 @@ export async function renderBankSession(outlet, { storage }, params) {
           <a class="btn btn--primary btn--block" href="#/world">Back to the village</a>
         </div>
       </section>`;
+    focusContent(outlet.querySelector('.moment__opening'));
     cue('mentor');
   }
 

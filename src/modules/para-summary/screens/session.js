@@ -48,6 +48,8 @@ import { toast } from '../../../ui/components/cat-toast.js';
 import { escapeHTML, formatDuration } from '../../../core/utils/format.js';
 import { hostChip } from '../../../pets/sprite.js';
 import { infoButton } from '../../../ui/info.js';
+import { focusContent } from '../../../ui/focus.js';
+import { openModal, closeModal } from '../../../ui/modal.js';
 import '../../../ui/components/cat-question-card.js';
 import '../../../ui/components/cat-progress-bar.js';
 import '../../../ui/components/cat-timer.js';
@@ -120,6 +122,7 @@ export async function renderPSSession(outlet, { storage }, params) {
 
     outlet.innerHTML = `
       <section class="screen">
+        <h1 class="sr-only">Para Summary: paragraph ${session.index + 1} of ${session.total}</h1>
         <div class="session-bar">
           <a href="#/ps">← Journey</a>
           <span class="session-bar__count">${hostChip('mochi', 20)} Paragraph <b>${session.index + 1}</b> of ${session.total}</span>
@@ -128,9 +131,11 @@ export async function renderPSSession(outlet, { storage }, params) {
         <cat-progress-bar max="${session.total}" value="${session.index}"></cat-progress-bar>
 
         <div class="card">
-          <p class="screen__eyebrow">Find the author's point${infoButton('ps', {
+          <div class="lesson-heading"><p class="screen__eyebrow">Find the author's point${infoButton('ps', {
             more: [mission && `${mission.title} ${mission.line}`, item.mentor.challenge],
             moreTitle: PS_LINES.missionEyebrow })}</p>
+            <button class="ps-think" id="think-open" type="button" aria-label="Open the thinking coach"><span class="ps-think__glyph" aria-hidden="true">?</span><span>Think</span></button>
+          </div>
           <div class="briefing-chips">
             <span class="badge">${escapeHTML(tier.label)}</span>
             <span class="badge">${escapeHTML(m.genre)}</span>
@@ -148,11 +153,6 @@ export async function renderPSSession(outlet, { storage }, params) {
           <div class="session-actions" id="actions"></div>
         </div>
 
-        <button class="ps-think" id="think-open" type="button"
-                aria-label="Open the thinking coach">
-          <span class="ps-think__glyph" aria-hidden="true">?</span>
-          <span class="ps-think__label">Think</span>
-        </button>
         <div id="think-slot"></div>
       </section>
     `;
@@ -166,6 +166,7 @@ export async function renderPSSession(outlet, { storage }, params) {
     const thinkBtn = outlet.querySelector('#think-open');
     const thinkSlot = outlet.querySelector('#think-slot');
     session.markItemShown();
+    focusContent(outlet.querySelector('h1'));
 
     /* ---------- The Think coach: questions, never hints ---------- */
     thinkBtn.addEventListener('click', () => {
@@ -184,13 +185,11 @@ export async function renderPSSession(outlet, { storage }, params) {
           </div>
         </div>`;
       const close = () => {
+        closeModal(sheet);
         thinkSlot.innerHTML = '';
-        document.removeEventListener('keydown', onKey);
       };
-      const onKey = (e) => {
-        if (e.key === 'Escape' || !thinkSlot.isConnected) close();
-      };
-      document.addEventListener('keydown', onKey);
+      const sheet = thinkSlot.querySelector('[role="dialog"]');
+      openModal(sheet, close, { returnTo: thinkBtn, label: 'Thinking coach' });
       for (const el of thinkSlot.querySelectorAll('[data-think-close]')) {
         el.addEventListener('click', close);
       }
@@ -246,7 +245,7 @@ export async function renderPSSession(outlet, { storage }, params) {
         syncChoosing();
       });
       syncChoosing();
-      chooseSlot.scrollIntoView({ block: 'nearest' });
+      focusContent(card.querySelector('.stem'), { scroll: true });
     }
 
     function syncChoosing() {
@@ -283,7 +282,7 @@ export async function renderPSSession(outlet, { storage }, params) {
           ${session.isLast ? 'Finish the set' : 'Next paragraph'}
         </button>`;
       actions.querySelector('#next').addEventListener('click', onNext);
-      compareSlot.scrollIntoView({ block: 'start' });
+      focusContent(compareSlot.querySelector('.psx-verdict'), { scroll: true });
     }
 
     /* The learner's sentence against the author's: honest, guided
@@ -350,6 +349,7 @@ export async function renderPSSession(outlet, { storage }, params) {
     }
 
     async function onNext() {
+      actions.querySelector('#next')?.setAttribute('disabled', '');
       if (session.next()) {
         keep();
         showItem();
@@ -376,6 +376,7 @@ export async function renderPSSession(outlet, { storage }, params) {
 
   /* ---------------- The mentor moment ---------------- */
   async function finishSession() {
+    const finishingScreen = outlet.querySelector('section');
     const results = session.finish();
 
     // Persist FIRST; nothing is shown until the data is safe.
@@ -429,6 +430,7 @@ export async function renderPSSession(outlet, { storage }, params) {
       console.error('[CAT OS] ps mentor derive failed:', err);
     }
 
+    if (!finishingScreen?.isConnected) return;
     const worldRewardHTML = worldReward(s, resolved.items ?? [], { storage }).html;
     outlet.innerHTML = `
       <section class="screen">
@@ -497,6 +499,7 @@ export async function renderPSSession(outlet, { storage }, params) {
       </section>
     `;
 
+    focusContent(outlet.querySelector('.moment__opening'));
     cue('mentor'); // the calm signature; rewards layer over it consonantly
 
     if (engagement) {

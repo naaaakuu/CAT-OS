@@ -25,15 +25,18 @@ import { renderResult, formatClock } from './result.js';
 import { paintedBackdrop, hostChip } from '../../pets/sprite.js';
 import { escapeHTML } from '../../core/utils/format.js';
 import { toast } from '../../ui/components/cat-toast.js';
+import { focusContent } from '../../ui/focus.js';
+import { infoButton } from '../../ui/info.js';
 
 const KEYS = ['A', 'B', 'C', 'D', 'E'];
 
 export async function renderRound(outlet, { storage }, params) {
+  const arrivedAt = location.hash;
   const region = regionBySlug(params.region);
   // replace(), not a hash assignment: a bad address pushed a history entry,
   // so Back took the learner straight to the bad address again and they were
   // trapped bouncing between the two.
-  if (!region) { location.replace('#/world'); return; }
+  if (!region || !['meadow', 'pond', 'thicket'].includes(region.slug)) { location.replace('#/world'); return; }
   document.documentElement.setAttribute('data-world', '');
   silenceWorld();
 
@@ -85,6 +88,7 @@ export async function renderRound(outlet, { storage }, params) {
   const round = new LexRound({ region: region.slug, picks, languages, context });
   const target = TARGET_MS[region.slug] ?? 7000;
   const atmo = before.state.atmo;
+  if (location.hash !== arrivedAt) return;
 
   /* ---- The frame: Matcha's greenhouse, painted, behind everything ---- */
   outlet.innerHTML = `
@@ -106,7 +110,7 @@ export async function renderRound(outlet, { storage }, params) {
   /* ---- Briefing: what this handful is, in one line ---- */
   body.innerHTML = `
     <div class="brief is-veiled">
-      <p class="brief__eyebrow">${escapeHTML(region.skill ?? 'Vocabulary')}</p>
+      <p class="brief__eyebrow">${escapeHTML(region.skill ?? 'Vocabulary')}${infoButton('vocab', { moreTitle: 'Stars for this round', more: ['★★★ nine in ten right, inside the pace', '★★ three in four right', '★ half right', 'Read the explanation after each answer. Tap Next word when you are ready.'] })}</p>
       <h1 class="brief__title">${escapeHTML(title)}</h1>
       <p class="brief__line">${escapeHTML(line)}</p>
       <div class="brief__facts">
@@ -116,11 +120,6 @@ export async function renderRound(outlet, { storage }, params) {
         ${counts.new ? `<span class="brief__fact is-new">${counts.new} new</span>` : ''}
         ${counts.context ? `<span class="brief__fact is-context">${counts.context} in context</span>` : ''}
         <span class="brief__fact">~${Math.round(target / 1000)}s each</span>
-      </div>
-      <div class="brief__stars">
-        <span><b>★★★</b> nine in ten right, inside the pace</span>
-        <span><b>★★</b> three in four right</span>
-        <span><b>★</b> half right</span>
       </div>
       <button class="g-cta" id="begin">Begin<span class="arrow" aria-hidden="true">→</span></button>
     </div>`;
@@ -142,28 +141,32 @@ export async function renderRound(outlet, { storage }, params) {
     let locked = false;
     let hurried = false;
     let alive = true;
+    let clockTimer;
 
     const tick = () => {
       if (!alive || !ring.isConnected) return;
-      const el = Date.now() - shownAt;
-      const p = Math.min(1, el / target);
-      ring.style.setProperty('--p', `${Math.round(p * 100)}%`);
-      ring.classList.toggle('is-over', p >= 1);
       clock.textContent = formatClock(Date.now() - startedAt);
-      if (p >= 1 && !hurried && !locked) { hurried = true; play('hurry'); }
-      requestAnimationFrame(tick);
+      if (!locked) {
+        const p = Math.min(1, (Date.now() - shownAt) / target);
+        ring.style.setProperty('--p', `${Math.round(p * 100)}%`);
+        ring.classList.toggle('is-over', p >= 1);
+        if (p >= 1 && !hurried) { hurried = true; play('hurry'); }
+      }
+      clockTimer = setTimeout(tick, 250);
     };
     requestAnimationFrame(tick);
 
     const onKey = (e) => {
+      if (e.repeat || e.altKey || e.ctrlKey || e.metaKey || e.target.closest?.('input, textarea, select, [contenteditable="true"]')) return;
       const i = KEYS.indexOf(e.key.toUpperCase());
-      if (i >= 0) { const btn = body.querySelectorAll('.vopt')[i]; if (btn && !btn.disabled) btn.click(); }
+      if (i >= 0) { const btn = body.querySelectorAll('.vopt')[i]; if (btn && !btn.disabled) { e.preventDefault(); btn.click(); } }
     };
     window.addEventListener('keydown', onKey);
-    const cleanup = () => { alive = false; window.removeEventListener('keydown', onKey); window.removeEventListener('hashchange', cleanup); };
+    const cleanup = () => { alive = false; clearTimeout(clockTimer); window.removeEventListener('keydown', onKey); window.removeEventListener('hashchange', cleanup); };
     window.addEventListener('hashchange', cleanup);
 
     function showQuestion() {
+      if (!alive || !body.isConnected) return;
       const q = round.current;
       const pick = round.picks[round.index];
       locked = false; hurried = false;
@@ -173,6 +176,7 @@ export async function renderRound(outlet, { storage }, params) {
       const isTwinPick = q.kind === 'twin';
       body.innerHTML = `
         <div class="vround" id="card">
+          <h1 class="sr-only">${escapeHTML(region.name)}: word ${round.index + 1} of ${round.total}</h1>
           ${pick?.status === 'due' ? '<p class="vround__tag is-due">Due for review</p>' : pick?.status === 'new' ? '<p class="vround__tag is-new">New word</p>' : pick?.status === 'shaky' ? '<p class="vround__tag is-shaky">This one slipped</p>' : ''}
           ${q.wordShown ? `<h2 class="vround__word">${escapeHTML(q.stem)}</h2>` : `<p class="vround__sentence">${markStem(q)}</p>`}
           <p class="vround__ask">${escapeHTML(q.ask)}${q.hint ? ` · <i>${escapeHTML(q.hint)}</i>` : ''}</p>
@@ -182,6 +186,8 @@ export async function renderRound(outlet, { storage }, params) {
           <div class="vround__feedback" id="feedback"></div>
         </div>`;
       requestAnimationFrame(() => body.querySelector('#card')?.classList.add('is-in'));
+      body.scrollTop = 0;
+      focusContent(body.querySelector('h1'));
       body.querySelector('#opts').addEventListener('click', (e) => {
         const btn = e.target.closest('.vopt');
         if (!btn || locked) return;
@@ -198,25 +204,31 @@ export async function renderRound(outlet, { storage }, params) {
           body.querySelector('#card')?.classList.add('is-right');
           if (combo >= 3) { const c = document.createElement('div'); c.className = 'vround__combo'; c.textContent = `×${combo}`; outlet.querySelector('.run').appendChild(c); setTimeout(() => c.remove(), 900); }
           // Even a right answer teaches: the meaning is confirmed, briefly.
-          fb.innerHTML = combo >= 5
-            ? `<b>${combo} in a row.</b>`
-            : q.kind === 'meaning' || q.kind === 'loan' ? '' : `<span class="muted">${escapeHTML(e2.word ?? '')}${e2.meaning ? `${escapeHTML(trim(e2.meaning, 70))}` : ''}</span>`;
+          const meaning = q.kind === 'context' ? q.context?.meaning : e2.meaning;
+          const word = e2.word ?? q.markWord ?? '';
+          fb.innerHTML = `${combo >= 5 ? `<b>${combo} in a row.</b> ` : ''}${q.kind === 'meaning' || q.kind === 'loan' || !meaning ? '' : `<span class="muted">${word ? `${escapeHTML(word)}: ` : ''}${escapeHTML(meaning)}</span>`}`;
         } else {
           play('wrong');
           body.querySelector('#card')?.classList.add('is-wrong');
           const right = q.options[verdict.correctIndex]?.text ?? '';
           fb.innerHTML = q.kind === 'context'
-            ? `Here it means <b>${escapeHTML(trim(q.context?.meaning ?? '', 90))}</b>.`
+            ? `Here it means <b>${escapeHTML(q.context?.meaning ?? '')}</b>.`
             : q.kind === 'twin' || q.kind === 'twin-meaning'
-            ? `<b>${escapeHTML(right)}</b>…${escapeHTML(e2.explanation ?? '')}`
-            : q.kind === 'reverse' ? `The word is <b>${escapeHTML(right)}</b>. ${escapeHTML(trim(e2.meaning ?? '', 80))}`
+            ? `<b>${escapeHTML(right)}</b>. ${escapeHTML(e2.explanation ?? '')}`
+            : q.kind === 'reverse' ? `The word is <b>${escapeHTML(right)}</b>. ${escapeHTML(e2.meaning ?? '')}`
               : `<b>${escapeHTML(e2.word ?? '')}</b>: ${escapeHTML(e2.meaning ?? '')}`;
         }
-        setTimeout(advance, verdict.correct ? 720 : 2200);
+        const meaning = fb.innerHTML;
+        fb.innerHTML = `<p class="vround__verdict" role="status">${verdict.correct ? 'Correct.' : 'Not this time.'}</p>${meaning ? `<p>${meaning}</p>` : ''}`;
+        fb.insertAdjacentHTML('afterend', `<button class="g-btn g-btn--primary vround__next" id="word-next">${round.index + 1 === round.total ? 'See the result' : 'Next word'} <span aria-hidden="true">→</span></button>`);
+        body.querySelector('#word-next').addEventListener('click', advance, { once: true });
+        focusContent(fb, { scroll: true });
       });
     }
 
     async function advance() {
+      if (!alive || !body.isConnected) return;
+      body.querySelector('#word-next')?.setAttribute('disabled', '');
       if (round.next()) { showQuestion(); return; }
       cleanup();
       await finish();
@@ -236,6 +248,7 @@ export async function renderRound(outlet, { storage }, params) {
           <p class="review__head">${misses.length} to keep</p>
           ${misses.map((a) => { const e = byId.get(a.entry_id); return `<div class="review__row"><b>${escapeHTML(e?.word ?? (e?.words ?? []).join(' / ') ?? '')}</b><span>${escapeHTML(trim(e?.meaning ?? e?.explanation ?? '', 110))}</span></div>`; }).join('')}
         </div>` : '';
+      if (!body.isConnected || location.hash !== arrivedAt) return;
       renderResult(outlet, {
         region: region.slug,
         eyebrow: `${region.name} · ${title}`,
@@ -255,7 +268,7 @@ export async function renderRound(outlet, { storage }, params) {
         setsDone,
         extraHTML: reviewHTML,
         actions: [
-          { label: 'Another round', href: `#/round/${region.slug}`, primary: true },
+          { label: 'Another round', href: `#/round/${region.slug}?again=${Date.now()}`, primary: true },
           { label: `Back to ${region.name}`, href: region.route },
           { label: 'Back to the village', href: '#/world', quiet: true },
         ],

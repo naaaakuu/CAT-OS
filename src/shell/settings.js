@@ -456,7 +456,7 @@ export function renderSettings(outlet, { storage, version }) {
             <button class="btn btn--primary" data-do="merge">Add it to this device</button>
             <button class="btn btn--danger" data-do="replace">Replace everything here</button>
             <button class="btn btn--quiet" data-close>Do nothing</button>
-          </div>`);
+          </div>`, outlet.querySelector('#backup-import'));
     return act === null ? null : act === 'replace';
   }
 
@@ -467,7 +467,8 @@ export function renderSettings(outlet, { storage, version }) {
      growth (all of it is derived from those records), and this browser's
      small notes (the order a level deals its items in, which cards were
      seen). Asked twice, and both sheets default to doing nothing. */
-  outlet.querySelector('#start-over').addEventListener('click', async () => {
+  outlet.querySelector('#start-over').addEventListener('click', async (e) => {
+    const trigger = e.currentTarget;
     const counts = {};
     for (const s of Object.values(STORES)) { try { counts[s] = (await storage.getAll(s)).length; } catch { counts[s] = 0; } }
     const runs = counts[STORES.SESSIONS] ?? 0, answers = counts[STORES.ATTEMPTS] ?? 0;
@@ -476,14 +477,14 @@ export function renderSettings(outlet, { storage, version }) {
           <div class="importsheet__acts">
             <button class="btn btn--danger" data-do="next">Yes, start over</button>
             <button class="btn btn--primary" data-close>Keep my village</button>
-          </div>`);
+          </div>`, trigger);
     if (first !== 'next') return;
     const sure = await askSheet('Start over', 'Are you sure?', `
           <p class="importsheet__warn"><b>This deletes everything on this device and cannot be undone</b>: ${runs} finished ${runs === 1 ? 'run' : 'runs'}, ${answers} ${answers === 1 ? 'answer' : 'answers'}, every word you keep, and your village's name. Export a backup first if you might want it back.</p>
           <div class="importsheet__acts">
             <button class="btn btn--danger" data-do="wipe">Delete everything and start over</button>
             <button class="btn btn--primary" data-close>No, keep it</button>
-          </div>`);
+          </div>`, trigger);
     if (sure !== 'wipe') { toast('Nothing was changed.', 'info', { mute: true }); return; }
     try {
       for (const s of Object.values(STORES)) await storage.clear(s);
@@ -499,7 +500,7 @@ export function renderSettings(outlet, { storage, version }) {
    * body's buttons, and a promise of the `data-do` tapped, or null for
    * Escape, a tap outside, or any `data-close` button.
    */
-  function askSheet(eyebrow, title, body) {
+  function askSheet(eyebrow, title, body, trigger = document.activeElement) {
     return new Promise((resolve) => {
       const el = document.createElement('div');
       el.className = 'gmenu is-in';
@@ -531,7 +532,7 @@ export function renderSettings(outlet, { storage, version }) {
       });
       // Escape, a tap outside, and the quiet button all mean the same thing,
       // and that thing is nothing.
-      openModal(card, () => finish(null), { label: title });
+      openModal(card, () => finish(null), { label: title, returnTo: trigger });
     });
   }
 

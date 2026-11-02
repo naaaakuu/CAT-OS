@@ -19,6 +19,8 @@ import { play, unlock, startMusic, startAmbience, silenceWorld } from '../audio.
 import { renderResult, formatClock, starHTML } from './result.js';
 import { escapeHTML, formatDate } from '../../core/utils/format.js';
 import { toast } from '../../ui/components/cat-toast.js';
+import { focusContent } from '../../ui/focus.js';
+import { infoButton } from '../../ui/info.js';
 
 export const GAUNTLET_SIZE = 30;
 export const GAUNTLET_MS = 3 * 60_000;
@@ -63,10 +65,11 @@ export async function composeGauntlet(week) {
 }
 
 export async function renderWilds(outlet, { storage }) {
+  const arrivedAt = location.hash;
   /* "Run again" on the result screen arrives as #/world/place/wilds?run=1.
      It used to navigate here and then auto-click #run on a 400 ms timer,
      which lost the race two times in three. */
-  const autoRun = /[?&]run=1/.test(location.hash);
+  const autoRun = new URLSearchParams(location.hash.split('?')[1] ?? '').get('run') === '1';
   document.documentElement.setAttribute('data-world', '');
   const region = regionBySlug('wilds');
   const week = weekKey();
@@ -86,27 +89,32 @@ export async function renderWilds(outlet, { storage }) {
       </div>
       <div class="place__body">
         <p class="place__eyebrow">${escapeHTML(region.skill)} · week ${escapeHTML(week.slice(-2))} · with Toffee</p>
-        <h1 class="place__title">The Gauntlet</h1>
-        <p class="place__line">${GAUNTLET_SIZE} questions: words from the Meadow, the Pond and the Thicket, and nine asked the way CAT asks them, inside a real sentence. The same ${GAUNTLET_SIZE} all week, in ${GAUNTLET_MS / 60000} minutes. No hints, no second tries. Beat your own best.</p>
+        <h1 class="place__title">The Gauntlet${infoButton('gauntlet', { moreTitle: 'Inside the challenge', more: ['Words from the Meadow, the Pond and the Thicket, with nine questions inside a real sentence. No hints or second choices during a run.'] })}</h1>
+        <p class="place__line">${GAUNTLET_SIZE} vocabulary questions in ${GAUNTLET_MS / 60000} minutes. The same set all week, so you can beat your own best.</p>
         <button class="g-cta g-cta--gold" id="run">Run the Gauntlet<small>${thisWeek.length ? `${thisWeek.length} run${thisWeek.length === 1 ? '' : 's'} this week · best ${weekBest.score?.correct}/${GAUNTLET_SIZE} in ${formatClock(weekBest.duration_ms)}` : 'Your first run this week'}</small><span class="arrow" aria-hidden="true">→</span></button>
         <div class="place__section">
           <h2>Records</h2>
           <p class="sub">${allBest ? `All-time best: <b>${allBest.score?.correct}/${GAUNTLET_SIZE}</b> in ${formatClock(allBest.duration_ms)} (${escapeHTML(allBest.week)}).` : 'No runs yet. The first one sets the mark.'}</p>
           <div class="g-list">
-            ${runs.slice(0, 12).map((r) => `<div class="g-row"><span class="g-row__num">${r.score?.correct}</span><span class="g-row__lead"><span class="g-row__title">${escapeHTML(r.week)} · ${formatClock(r.duration_ms)}${r === allBest ? ' · best' : ''}</span><span class="g-row__meta">${formatDate(r.finished_at)}${r.splits ? ` · Meadow ${r.splits.meadow ?? 0} · Pond ${r.splits.pond ?? 0} · Thicket ${r.splits.thicket ?? 0}` : ''}</span></span><span class="g-row__stars">${starHTML(r.stars ?? 0)}</span></div>`).join('') || '<div class="g-empty">Toffee is keeping the fire warm for the first one.</div>'}
+            ${runs.slice(0, 12).map((r) => `<div class="g-row"><span class="g-row__num">${r.score?.correct}</span><span class="g-row__lead"><span class="g-row__title">${escapeHTML(r.week)} · ${formatClock(r.duration_ms)}${r === allBest ? ' · best' : ''}</span><span class="g-row__meta">${formatDate(r.finished_at)}${r.splits ? ` · Meadow ${r.splits.meadow ?? 0} · Pond ${r.splits.pond ?? 0} · Thicket ${r.splits.thicket ?? 0}` : ''}</span></span><span class="g-row__stars">${starHTML(r.stars ?? 0)}</span></div>`).join('')}
           </div>
         </div>
       </div>
     </section>`;
   outlet.querySelector('#back').addEventListener('click', () => { sessionStorage.setItem('world:focus', 'wilds'); play('close'); });
 
-  window.addEventListener('pointerdown', () => { unlock(); startMusic('wilds', { hour: 'night' }); startAmbience('wilds', { hour: 'night', weather: 'clear', season: 'autumn' }); }, { capture: true, once: true });
+  const onDown = () => { unlock(); startMusic('wilds', { hour: 'night' }); startAmbience('wilds', { hour: 'night', weather: 'clear', season: 'autumn' }); };
+  window.addEventListener('pointerdown', onDown, { capture: true, once: true });
+  window.addEventListener('hashchange', () => window.removeEventListener('pointerdown', onDown, { capture: true }), { once: true });
   startMusic('wilds', { hour: 'night' }); startAmbience('wilds', { hour: 'night', weather: 'clear', season: 'autumn' });
 
   const startRun = async () => {
+    const startButton = outlet.querySelector('#run');
+    if (!startButton || startButton.disabled) return;
     play('open');
     silenceWorld();
-    outlet.querySelector('#run').disabled = true;
+    startButton.disabled = true;
+    startButton.setAttribute('aria-busy', 'true');
     let picks, ledger, before;
     /* Both of these used to be a silent `return`: the learner tapped the
        biggest button on the screen, nothing happened, and the only evidence
@@ -114,25 +122,28 @@ export async function renderWilds(outlet, { storage }) {
        so it stays enabled — and it says what went wrong under its own label. */
     const refuse = (line) => {
       const btn = outlet.querySelector('#run');
-      if (btn) { btn.disabled = false; const small = btn.querySelector('small'); if (small) small.textContent = line; }
+      if (btn) { btn.disabled = false; btn.removeAttribute('aria-busy'); const small = btn.querySelector('small'); if (small) small.textContent = line; }
       toast(line, 'error');
     };
     try { [picks, ledger, before] = await Promise.all([composeGauntlet(week), loadLedger(storage), loadWorld(storage)]); }
     catch (err) { console.error('[CAT OS] the Gauntlet could not be composed', err); refuse(err?.message ?? 'This could not be set up just now. Try again in a moment.'); return; }
+    if (!startButton.isConnected || location.hash !== arrivedAt) return;
     if (picks.length < 10) { refuse('There are not enough words on this device yet. They arrive in the background: try again in a minute.'); return; }
-    runGauntlet(outlet, storage, { picks, ledger, before, week });
+    runGauntlet(outlet, storage, { picks, ledger, before, beforeRecords, week });
   };
   outlet.querySelector('#run').addEventListener('click', startRun);
   if (autoRun) startRun();
 }
 
-function runGauntlet(outlet, storage, { picks, ledger, before, week }) {
+function runGauntlet(outlet, storage, { picks, ledger, before, beforeRecords, week }) {
+  const arrivedAt = location.hash;
   const startedAt = Date.now();
   const questions = picks.map((p, i) => (p.context
     ? { ...buildContextQuestion(p.context, p.contextPool, `gauntlet:${week}:${i}`), region: p.region, bundle: null, inContext: true }
     : { ...buildQuestion(p.entry, p.bundle, p.region, `gauntlet:${week}:${i}`, p.languages), region: p.region, bundle: p.bundle }));
   const answers = [];
   let index = 0, shownAt = Date.now(), locked = false, alive = true, ended = false;
+  let clockTimer, advanceTimer;
 
   outlet.innerHTML = `
     ${paintedBackdrop('toffee')}
@@ -155,15 +166,20 @@ function runGauntlet(outlet, storage, { picks, ledger, before, week }) {
     ring.style.setProperty('--p', `${Math.round(Math.max(0, left) / GAUNTLET_MS * 100)}%`);
     if (left < 20_000 && !warned) { warned = true; play('hurry'); }
     if (left <= 0) { finish(); return; }
-    requestAnimationFrame(tick);
+    clockTimer = setTimeout(tick, 250);
   };
   requestAnimationFrame(tick);
-  const onKey = (e) => { const i = KEYS.indexOf(e.key.toUpperCase()); if (i >= 0) body.querySelectorAll('.vopt')[i]?.click(); };
+  const onKey = (e) => {
+    if (e.repeat || e.altKey || e.ctrlKey || e.metaKey || e.target.closest?.('input, textarea, select, [contenteditable="true"]')) return;
+    const i = KEYS.indexOf(e.key.toUpperCase());
+    if (i >= 0) { e.preventDefault(); body.querySelectorAll('.vopt')[i]?.click(); }
+  };
   window.addEventListener('keydown', onKey);
-  const cleanup = () => { alive = false; window.removeEventListener('keydown', onKey); window.removeEventListener('hashchange', cleanup); };
+  const cleanup = () => { alive = false; clearTimeout(clockTimer); clearTimeout(advanceTimer); window.removeEventListener('keydown', onKey); window.removeEventListener('hashchange', cleanup); };
   window.addEventListener('hashchange', cleanup);
 
   function show() {
+    if (!alive || ended || !body.isConnected) return;
     const q = questions[index];
     locked = false; shownAt = Date.now();
     pos.textContent = String(index + 1);
@@ -180,22 +196,26 @@ function runGauntlet(outlet, storage, { picks, ledger, before, week }) {
        three-minute clock running over thirty questions. */
     body.innerHTML = `
       <div class="vround" id="card">
+        <h1 class="sr-only">The Gauntlet: question ${index + 1} of ${questions.length}</h1>
         <p class="vround__pos">${q.inContext ? 'In context' : escapeHTML(regionBySlug(q.region)?.name ?? '')}</p>
         ${q.wordShown ? `<h2 class="vround__word">${escapeHTML(q.stem)}</h2>` : `<p class="vround__sentence">${markStem(q)}</p>`}
         <p class="vround__ask">${escapeHTML(q.ask)}</p>
         <div class="vround__options ${q.kind === 'twin' ? 'twin__pair' : ''}" id="opts">${q.options.map((o, i) => `<button class="vopt" data-i="${i}"><span class="key" aria-hidden="true">${KEYS[i] ?? ''}</span><span>${escapeHTML(o.text)}</span></button>`).join('')}</div>
       </div>`;
     requestAnimationFrame(() => body.querySelector('#card')?.classList.add('is-in'));
+    body.scrollTop = 0;
+    focusContent(body.querySelector('h1'));
     body.querySelector('#opts').addEventListener('click', (e) => {
       const btn = e.target.closest('.vopt'); if (!btn || locked) return;
       locked = true;
+      track.style.width = `${Math.round(((index + 1) / questions.length) * 100)}%`;
       const i = Number(btn.dataset.i);
       const correct = !!q.options[i]?.correct;
       const ci = q.options.findIndex((o) => o.correct);
       answers.push({ entry_id: q.entry.id, region: q.region, bundle_id: q.bundle?.meta.id ?? null, kind: q.kind, chosen: i, correct, ms: Date.now() - shownAt });
       body.querySelectorAll('.vopt').forEach((b, j) => { b.disabled = true; if (j === ci) b.classList.add('is-correct'); else if (j === i) b.classList.add('is-wrong'); else b.classList.add('is-dim'); });
       play(correct ? 'correct' : 'wrong');
-      setTimeout(() => { index += 1; if (index >= questions.length) finish(); else show(); }, correct ? 420 : 900);
+      advanceTimer = setTimeout(() => { if (!alive || ended || !body.isConnected) return; index += 1; if (index >= questions.length) finish(); else show(); }, correct ? 420 : 900);
     });
   }
 
@@ -237,6 +257,7 @@ function runGauntlet(outlet, storage, { picks, ledger, before, week }) {
     let prevBest = null;
     try { const all = (await storage.getAll(STORES.LEARNING)).filter((r) => r.kind === 'gauntlet-run' && r.id !== record.id); prevBest = [...all].sort((a, b) => (b.score?.correct - a.score?.correct) || (a.duration_ms - b.duration_ms))[0] ?? null; } catch { /* none */ }
     const isRecord = !prevBest || correct > prevBest.score?.correct || (correct === prevBest.score?.correct && record.duration_ms < prevBest.duration_ms);
+    if (!body.isConnected || location.hash !== arrivedAt) return;
     if (isRecord && answers.length) play('unlock', { delay: 1.6 });
     renderResult(outlet, {
       region: 'wilds',
@@ -261,7 +282,7 @@ function runGauntlet(outlet, storage, { picks, ledger, before, week }) {
            the button takes 43 ms, 1722 ms and 2579 ms to exist — so two times
            in three the learner tapped "Run again", landed on the Wilds, and
            the run never started. The screen starts it itself now. */
-        { label: 'Run again', href: '#/world/place/wilds?run=1', primary: true },
+        { label: 'Run again', href: `#/world/place/wilds?run=1&again=${Date.now()}`, primary: true },
         { label: 'Back to the village', href: '#/world' },
       ],
     });

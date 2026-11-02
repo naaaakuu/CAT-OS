@@ -122,7 +122,8 @@ export async function renderGrowth(outlet, { storage }) {
     return;
   }
 
-  if (!s || (s.reading.read === 0 && s.meadow.met === 0 && s.rootwood.metCount === 0)) {
+  // Every subject counts, including a first set with no correct answers.
+  if (!s || (!sessions.length && !s.hearth.activeDays && !s.pets?.pets.some((p) => p.visits > 0))) {
     body.removeAttribute('aria-busy');
     body.innerHTML = `
       <div class="reach__empty">

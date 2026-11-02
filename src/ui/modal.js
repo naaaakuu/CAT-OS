@@ -12,12 +12,34 @@
  * So it lives here now, and every sheet in the app uses the same one.
  */
 
-const FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]), select, textarea, summary, [tabindex]:not([tabindex="-1"])';
+const FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), summary, [tabindex]:not([tabindex="-1"])';
 let seq = 0;
 /* A stack, not a single slot: a sheet can open a sheet, and the second one
    closing must hand focus back to the first, not to whatever came before
    both of them. */
-const returnTo = [];
+const modals = [];
+let priorOverflow = '';
+
+/** Android Back dismisses the open layer before walking away from a room. */
+export function dismissTopLayer() {
+  try {
+    const popover = [...document.querySelectorAll(':popover-open')].at(-1);
+    if (popover) { popover.hidePopover(); return true; }
+  } catch { /* older WebViews have no Popover API */ }
+  const modal = modals.at(-1);
+  if (!modal) return false;
+  modal.close();
+  closeModal(modal.card);
+  return true;
+}
+
+// A route change also closes a sheet, including one opened inside a lesson.
+window.addEventListener('hashchange', () => {
+  for (const modal of [...modals].reverse()) {
+    modal.close();
+    closeModal(modal.card);
+  }
+});
 
 /**
  * Make `card` behave like a dialog: named, focused, Tab-trapped, Escape-able.
@@ -30,8 +52,11 @@ const returnTo = [];
  */
 export function openModal(card, close, opts = {}) {
   if (!card) return;
+  if (modals.some((m) => m.card === card)) closeModal(card);
   const prior = document.activeElement;
-  returnTo.push(opts.returnTo ?? (prior && prior !== document.body ? prior : null));
+  if (!modals.length) { priorOverflow = document.body.style.overflow; document.body.style.overflow = 'hidden'; }
+  const modal = { card, close, back: opts.returnTo ?? (prior && prior !== document.body ? prior : null) };
+  modals.push(modal);
   card.setAttribute('role', card.getAttribute('role') ?? 'dialog');
   card.setAttribute('aria-modal', 'true');
   const name = card.querySelector('.vpop__name, .vsheet__name, .vsign__label, .gmenu__name, h1, h2, h3');
@@ -43,15 +68,19 @@ export function openModal(card, close, opts = {}) {
   }
   card.setAttribute('tabindex', '-1');
   const onKey = (e) => {
-    if (e.key === 'Escape') { e.preventDefault(); close(); return; }
+    if (modals.at(-1) !== modal || card.closest('[inert]')) return;
+    if (e.key === 'Escape') { e.preventDefault(); e.stopImmediatePropagation(); dismissTopLayer(); return; }
     if (e.key !== 'Tab') return;
-    const f = [...card.querySelectorAll(FOCUSABLE)].filter((el) => el.offsetParent !== null);
+    const f = [...card.querySelectorAll(FOCUSABLE)].filter((el) => el.getClientRects().length && getComputedStyle(el).visibility !== 'hidden' && !el.closest('[inert]'));
     if (!f.length) { e.preventDefault(); card.focus({ preventScroll: true }); return; }
     const first = f[0], last = f[f.length - 1];
-    if (e.shiftKey && (document.activeElement === first || document.activeElement === card)) { e.preventDefault(); last.focus(); }
-    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    if (e.shiftKey && (document.activeElement === first || document.activeElement === card || !card.contains(document.activeElement))) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && (document.activeElement === last || document.activeElement === card || !card.contains(document.activeElement))) { e.preventDefault(); first.focus(); }
   };
+  const onFocus = (e) => { if (modals.at(-1) === modal && !card.closest('[inert]') && !card.contains(e.target)) card.focus({ preventScroll: true }); };
   document.addEventListener('keydown', onKey, true);
+  document.addEventListener('focusin', onFocus, true);
+  modal.onFocus = onFocus;
   card.__keys = onKey;
   // Only if it is still open: an Escape inside that frame has already handed
   // focus back, and taking it again would strand it on a card about to hide.
@@ -60,7 +89,13 @@ export function openModal(card, close, opts = {}) {
 
 /** Take the listener back off and put focus where it was. Always pair it. */
 export function closeModal(card) {
+  const index = modals.findIndex((m) => m.card === card);
+  if (index < 0) return;
+  const wasTop = index === modals.length - 1;
+  const [modal] = modals.splice(index, 1);
   if (card?.__keys) { document.removeEventListener('keydown', card.__keys, true); card.__keys = null; }
-  const back = returnTo.pop();
-  if (back && back.isConnected) { try { back.focus({ preventScroll: true }); } catch { /* fine */ } }
+  document.removeEventListener('focusin', modal.onFocus, true);
+  if (!modals.length) document.body.style.overflow = priorOverflow;
+  const back = modal.back;
+  if (wasTop && back?.isConnected) { try { back.focus({ preventScroll: true }); } catch { /* fine */ } }
 }

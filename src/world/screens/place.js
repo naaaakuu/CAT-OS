@@ -52,7 +52,8 @@ export async function renderPlace(outlet, { storage }, params) {
   const arrivedAt = location.hash;
   let world;
   try { world = await loadWorld(storage); } catch (err) {
-    outlet.innerHTML = `<section class="place"><div class="place__body" style="padding-top:60px"><h1 class="place__title">This place will not open</h1><p>${escapeHTML(err.message)}</p></div></section>`;
+    console.error('[CAT OS] place could not open', err);
+    outlet.innerHTML = `<section class="place"><div class="place__body" style="padding-top:60px"><h1 class="place__title">This place could not open</h1><p>Part of the room did not arrive. Try opening it again.</p><p><button class="g-btn g-btn--primary" onclick="location.reload()">Try again</button> <a class="g-btn" href="#/world">Back to the village</a></p></div></section>`;
     return;
   }
   // Left while it loaded: no place music under the next screen.

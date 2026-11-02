@@ -98,12 +98,12 @@ async function launchOnce({ width = 390, height = 844, dpr = 1, port = 0 } = {})
 
   let info = null;
   for (let i = 0; i < 120; i += 1) {
-    try { const r = await fetch(`http://127.0.0.1:${debugPort}/json/version`); if (r.ok) { info = await r.json(); break; } } catch { /* not up */ }
+    try { const r = await fetch(`http://127.0.0.1:${debugPort}/json/version`, { signal: AbortSignal.timeout(2000) }); if (r.ok) { info = await r.json(); break; } } catch { /* not up */ }
     await new Promise((r) => setTimeout(r, 100));
   }
   if (!info) { try { proc.kill(); } catch { /* gone */ } throw new Error('Chrome did not expose its debugging port'); }
 
-  const list = await (await fetch(`http://127.0.0.1:${debugPort}/json/list`)).json();
+  const list = await (await fetch(`http://127.0.0.1:${debugPort}/json/list`, { signal: AbortSignal.timeout(4000) })).json();
   const target = list.find((t) => t.type === 'page');
   const ws = new WebSocket(target.webSocketDebuggerUrl);
   await new Promise((res, rej) => { ws.onopen = res; ws.onerror = rej; });
@@ -116,14 +116,18 @@ async function launchOnce({ width = 390, height = 844, dpr = 1, port = 0 } = {})
     const p = pending.get(msg.id);
     if (!p) return;
     pending.delete(msg.id);
+    clearTimeout(p.timer);
     if (msg.error) p.rej(new Error(JSON.stringify(msg.error))); else p.res(msg.result);
   };
   const send = (method, params = {}, timeout = 60000) => new Promise((res, rej) => {
+    if (ws.readyState !== WebSocket.OPEN) { rej(new Error(`browser disconnected before ${method}`)); return; }
     const myId = (id += 1);
-    pending.set(myId, { res, rej });
-    ws.send(JSON.stringify({ id: myId, method, params }));
-    setTimeout(() => { if (pending.has(myId)) { pending.delete(myId); rej(new Error(`timeout ${method}`)); } }, timeout);
+    const timer = setTimeout(() => { pending.delete(myId); rej(new Error(`timeout ${method}`)); }, timeout);
+    pending.set(myId, { res, rej, timer });
+    try { ws.send(JSON.stringify({ id: myId, method, params })); }
+    catch (err) { clearTimeout(timer); pending.delete(myId); rej(err); }
   });
+  ws.onclose = () => { for (const p of pending.values()) { clearTimeout(p.timer); p.rej(new Error('test browser disconnected')); } pending.clear(); };
 
   await send('Page.enable');
   await send('Runtime.enable');
@@ -134,6 +138,8 @@ async function launchOnce({ width = 390, height = 844, dpr = 1, port = 0 } = {})
      fix that did not. */
   await send('Network.setBypassServiceWorker', { bypass: true });
   await send('Emulation.setDeviceMetricsOverride', { width, height, deviceScaleFactor: dpr, mobile: width < 700 });
+  await send('Page.bringToFront');
+  await send('Emulation.setFocusEmulationEnabled', { enabled: true });
 
   return {
     send,
@@ -158,6 +164,7 @@ async function launchOnce({ width = 390, height = 844, dpr = 1, port = 0 } = {})
        frame deadline and never answer. Two more tries beats losing a
        twenty-minute sweep to one slow capture. */
     async shot() {
+      await send('Page.bringToFront');
       let last;
       for (let i = 0; i < 3; i += 1) {
         try { return (await send('Page.captureScreenshot', { format: 'png' }, 25000)).data; } catch (err) {

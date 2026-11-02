@@ -83,6 +83,7 @@ export async function renderPlant(outlet, context, params) {
 
   outlet.innerHTML = `
     <section class="screen lg-plant lg-plant--enter" data-time="${atmo.time}">
+      <h1 class="sr-only">${escapeHTML(family.root.label)} in the Rootwood</h1>
       <div class="lg-plant__world" id="lg-plant-world" aria-hidden="true">${paintedBackdrop('matcha')}</div>
       <button class="lg-plant__close" id="lg-plant-close" aria-label="Back to the wood">×</button>
 

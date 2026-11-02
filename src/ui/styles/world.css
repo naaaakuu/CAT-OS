@@ -1827,4 +1827,14 @@
    column with padding, so the scrollbar sits at the edge of a desktop
    screen instead of in the middle of it. */
 .run__body { max-width: none; padding-left: max(18px, calc((100% - 604px) / 2)); padding-right: max(18px, calc((100% - 604px) / 2)); }
+.run { animation-fill-mode: backwards; }
+.run__body { min-height: 0; scroll-padding-top: 18px; }
+.vround__feedback > p { margin-bottom: 8px; }
+.vround__verdict { font-weight: 700; color: var(--g-ink); }
+.vround__next { width: 100%; margin-top: 8px; }
+.records-welcome { padding: 18px; margin: 18px 0 24px; border: 1px solid var(--g-line); border-radius: var(--g-radius-lg); background: var(--g-paper-2); }
+.records-welcome h2 { font-family: var(--g-display); font-weight: 400; font-size: 23px; }
+.records-welcome p { color: var(--g-ink-2); font-size: 14px; }
+.records-future { margin-top: 24px; }
+.records-future summary { cursor: pointer; color: var(--g-accent); font-weight: 600; }
 .bank-blank--gap { font-family: var(--font-ui); }

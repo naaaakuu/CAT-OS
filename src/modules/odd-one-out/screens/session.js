@@ -53,6 +53,8 @@ import { toast } from '../../../ui/components/cat-toast.js';
 import { escapeHTML, formatDuration } from '../../../core/utils/format.js';
 import { hostChip } from '../../../pets/sprite.js';
 import { infoButton } from '../../../ui/info.js';
+import { focusContent } from '../../../ui/focus.js';
+import { openModal, closeModal } from '../../../ui/modal.js';
 import '../../../ui/components/cat-jumble-board.js';
 import '../../../ui/components/cat-progress-bar.js';
 import '../../../ui/components/cat-timer.js';
@@ -128,6 +130,7 @@ export async function renderOOOSession(outlet, { storage }, params) {
 
     outlet.innerHTML = `
       <section class="screen">
+        <h1 class="sr-only">Odd One Out: item ${session.index + 1} of ${session.total}</h1>
         <div class="session-bar">
           <a href="#/ooo">← Journey</a>
           <span class="session-bar__count">${hostChip('mallow', 20)} Item <b>${session.index + 1}</b> of ${session.total}</span>
@@ -136,12 +139,14 @@ export async function renderOOOSession(outlet, { storage }, params) {
         <cat-progress-bar max="${session.total}" value="${session.index}"></cat-progress-bar>
 
         <div class="card">
-          <p class="screen__eyebrow">${mode === 'construct'
+          <div class="lesson-heading"><p class="screen__eyebrow">${mode === 'construct'
             ? 'Tap four in order, leave the odd one out'
             : 'Tap the sentence that does not belong'}${infoButton('ooo', {
             more: [mission && `${mission.title} ${mission.line}`, item.mentor.challenge,
               mode === 'construct' ? OOO_LINES.constructHint : OOO_LINES.excludeHint],
             moreTitle: OOO_LINES.missionEyebrow })}</p>
+            <button class="ooo-think" id="think-open" type="button" aria-label="Open the thinking coach"><span class="ooo-think__glyph" aria-hidden="true">?</span><span>Think</span></button>
+          </div>
           <div class="briefing-chips">
             <span class="badge">${escapeHTML(tier.label)}</span>
             <span class="badge">${escapeHTML(m.genre)}</span>
@@ -155,11 +160,6 @@ export async function renderOOOSession(outlet, { storage }, params) {
           <div class="session-actions" id="actions"></div>
         </div>
 
-        <button class="ooo-think" id="think-open" type="button"
-                aria-label="Open the thinking coach">
-          <span class="ooo-think__glyph" aria-hidden="true">?</span>
-          <span class="ooo-think__label">Think</span>
-        </button>
         <div id="think-slot"></div>
       </section>
     `;
@@ -172,6 +172,7 @@ export async function renderOOOSession(outlet, { storage }, params) {
     const thinkBtn = outlet.querySelector('#think-open');
     const thinkSlot = outlet.querySelector('#think-slot');
     session.markItemShown();
+    focusContent(outlet.querySelector('h1'));
 
     /* ---------- The Think coach: questions, never hints ---------- */
     thinkBtn.addEventListener('click', () => {
@@ -190,13 +191,11 @@ export async function renderOOOSession(outlet, { storage }, params) {
           </div>
         </div>`;
       const close = () => {
+        closeModal(sheet);
         thinkSlot.innerHTML = '';
-        document.removeEventListener('keydown', onKey);
       };
-      const onKey = (e) => {
-        if (e.key === 'Escape' || !thinkSlot.isConnected) close();
-      };
-      document.addEventListener('keydown', onKey);
+      const sheet = thinkSlot.querySelector('[role="dialog"]');
+      openModal(sheet, close, { returnTo: thinkBtn, label: 'Thinking coach' });
       for (const el of thinkSlot.querySelectorAll('[data-think-close]')) {
         el.addEventListener('click', close);
       }
@@ -269,7 +268,7 @@ export async function renderOOOSession(outlet, { storage }, params) {
     } else {
       solveSlot.innerHTML = item.sentences.map((s) => `
         <button type="button" class="ooo-sent" data-label="${escapeHTML(s.label)}"
-                aria-pressed="false" aria-label="Sentence ${escapeHTML(s.label)}. Tap to mark it as the one that stands apart.">
+                aria-pressed="false" aria-label="Sentence ${escapeHTML(s.label)}: ${escapeHTML(s.text)}">
           <span class="ooo-sent__slot" aria-hidden="true"></span>
           <span class="ooo-sent__tag">${escapeHTML(s.label)}</span>
           <span class="ooo-sent__text">${escapeHTML(s.text)}</span>
@@ -330,7 +329,7 @@ export async function renderOOOSession(outlet, { storage }, params) {
           ${session.isLast ? 'Finish the set' : 'Next item'}
         </button>`;
       actions.querySelector('#next').addEventListener('click', onNext);
-      teachingSlot.scrollIntoView({ block: 'start' });
+      focusContent(teachingSlot.querySelector('.oox-verdict'), { scroll: true });
     }
 
     function onLock() {
@@ -357,6 +356,7 @@ export async function renderOOOSession(outlet, { storage }, params) {
     }
 
     async function onNext() {
+      actions.querySelector('#next')?.setAttribute('disabled', '');
       if (session.next()) {
         keep();
         showItem();
@@ -380,6 +380,7 @@ export async function renderOOOSession(outlet, { storage }, params) {
 
   /* ---------------- The mentor moment ---------------- */
   async function finishSession() {
+    const finishingScreen = outlet.querySelector('section');
     const results = session.finish();
 
     // Persist FIRST; nothing is shown until the data is safe.
@@ -433,6 +434,7 @@ export async function renderOOOSession(outlet, { storage }, params) {
       console.error('[CAT OS] ooo mentor derive failed:', err);
     }
 
+    if (!finishingScreen?.isConnected) return;
     const worldRewardHTML = worldReward(s, resolved.items ?? [], { storage }).html;
     outlet.innerHTML = `
       <section class="screen">
@@ -500,6 +502,7 @@ export async function renderOOOSession(outlet, { storage }, params) {
       </section>
     `;
 
+    focusContent(outlet.querySelector('.moment__opening'));
     cue('mentor'); // the calm signature; rewards layer over it consonantly
 
     if (engagement) {

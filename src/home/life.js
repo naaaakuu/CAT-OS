@@ -915,13 +915,17 @@ export function createLife(root, { pets: petsState, atmo, reduced, view = null, 
     sayAndWait(id, line, { ms = 5000, tapToSkip = false } = {}) {
       const a = byId.get(id);
       if (!a) return Promise.resolve();
-      say(a, `<span>${line}</span><small class="pet-bubble__tap">${tapToSkip ? 'tap to continue' : ''}</small>`, ms);
+      say(a, `<span>${line}</span><small class="pet-bubble__tap">${tapToSkip ? 'tap or press Enter to continue' : ''}</small>`, ms);
       a.bubble.classList.add('is-pinned');
       return new Promise((res) => {
         let done = false;
-        const finish = () => { if (done) return; done = true; a.bubble.classList.remove('is-pinned'); a.sayUntil = now; root.removeEventListener('pointerdown', finish, true); res(); };
+        const onKey = (e) => {
+          if (e.repeat || !['Enter', ' '].includes(e.key) || e.target.closest?.('input, textarea, select, a, button:not([data-skip])')) return;
+          e.preventDefault(); finish();
+        };
+        const finish = () => { if (done) return; done = true; a.bubble.classList.remove('is-pinned'); a.sayUntil = now; root.removeEventListener('pointerdown', finish, true); root.removeEventListener('keydown', onKey, true); res(); };
         setTimeout(finish, ms);
-        if (tapToSkip) setTimeout(() => root.addEventListener('pointerdown', finish, true), 350);
+        if (tapToSkip) setTimeout(() => { if (done) return; root.addEventListener('pointerdown', finish, true); root.addEventListener('keydown', onKey, true); }, 350);
       });
     },
     /** The camera moved: with less motion, redraw the still canvas for the new view. */

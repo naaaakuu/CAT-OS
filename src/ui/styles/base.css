@@ -6,6 +6,9 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 
+/* Component display rules must never reveal an explicitly hidden control. */
+[hidden] { display: none !important; }
+
 html {
   height: 100%;
   -webkit-text-size-adjust: 100%;
@@ -131,7 +134,7 @@ textarea {
    cards follow in a quiet stagger. Nothing else moves on load. */
 
 .screen {
-  animation: screen-in var(--duration-slow) var(--ease-out) both;
+  animation: screen-in var(--duration-slow) var(--ease-out) backwards;
 }
 
 @keyframes screen-in {
@@ -143,7 +146,7 @@ textarea {
    directly under the screen. Delays are capped — content is never
    made to wait for choreography. */
 .screen > .card, .screen > .list-item, .screen > .stat-grid {
-  animation: screen-in var(--duration-slow) var(--ease-out) both;
+  animation: screen-in var(--duration-slow) var(--ease-out) backwards;
 }
 .screen > :nth-child(2) { animation-delay: 40ms; }
 .screen > :nth-child(3) { animation-delay: 80ms; }

@@ -76,7 +76,7 @@ export const SUBJECT_INFO = Object.freeze({
   },
   gauntlet: {
     title: 'The Gauntlet',
-    lines: ['Thirty quick questions from every subject, against the clock. Once a week.'],
+    lines: ['Thirty vocabulary questions in three minutes. The same set all week, with as many tries as you like.'],
     tip: 'Do not stop to agonise. Speed is the whole point here.',
   },
 });

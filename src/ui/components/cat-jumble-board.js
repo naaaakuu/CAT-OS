@@ -95,7 +95,7 @@ class CatJumbleBoard extends HTMLElement {
           border-radius: var(--radius-md);
           background: var(--color-surface);
           font-family: var(--font-reading);
-          font-size: var(--text-sm);
+          font-size: calc(var(--text-read) - 1px);
           line-height: var(--leading-body);
           transition: border-color var(--duration-fast) var(--ease-out),
                       background-color var(--duration-fast) var(--ease-out),

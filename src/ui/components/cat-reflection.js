@@ -12,6 +12,7 @@
  */
 
 import { escapeHTML, formatDate } from '../../core/utils/format.js';
+import { focusContent } from '../focus.js';
 
 export const REFLECTION_PROMPTS = Object.freeze([
   'I never realised…',
@@ -25,10 +26,12 @@ class CatReflection extends HTMLElement {
   #prompt = REFLECTION_PROMPTS[0];
 
   set reflection(r) {
+    const heldFocus = this.contains(document.activeElement);
     this.#reflection = r ?? null;
     this.#editing = false;
     if (r?.prompt && REFLECTION_PROMPTS.includes(r.prompt)) this.#prompt = r.prompt;
     this.#render();
+    if (heldFocus) focusContent(this.querySelector('.kept'));
   }
 
   #render() {
@@ -62,7 +65,7 @@ class CatReflection extends HTMLElement {
           margin-bottom: var(--space-3);
         }
         cat-reflection .prompt {
-          min-height: calc(var(--tap-target) - 8px);
+          min-height: var(--tap-target);
           padding: var(--space-1) var(--space-3);
           border: 1px solid var(--color-line-strong);
           border-radius: var(--radius-full);
@@ -122,7 +125,8 @@ class CatReflection extends HTMLElement {
           color: var(--color-ink-3);
         }
         cat-reflection .edit-btn {
-          min-height: 0;
+          min-height: var(--tap-target);
+          min-width: var(--tap-target);
           padding: var(--space-1) var(--space-2);
           font-size: var(--text-2xs);
           font-weight: var(--weight-semibold);
@@ -192,6 +196,7 @@ class CatReflection extends HTMLElement {
       this.querySelector('#edit').addEventListener('click', () => {
         this.#editing = true;
         this.#render();
+        this.querySelector('textarea').focus();
       });
     }
   }

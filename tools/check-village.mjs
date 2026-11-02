@@ -189,7 +189,8 @@ try {
   ok(await ev(`document.documentElement.scrollWidth <= innerWidth`), 'the phone village scrolls sideways');
   ok(await ev(`window.__catos.errors.length === 0`), 'browser errors: ' + await ev(`JSON.stringify(window.__catos.errors)`));
 
-  // The first visit: Toffee, then each friend says who they are with a card naming their subject; Skip jumps to Chai.
+  // The first visit: each friend names their subject; Skip immediately
+  // releases the player to the library button without another speech.
   await ev(`(async () => { const s = await import('/src/core/storage/indexeddb-adapter.js'); const st = new s.IndexedDBAdapter(); await st.init(); await st.delete('settings', 'valley'); await st.put('settings', { id: 'motion', value: 'full' }); return 1; })()`);
   await browser.open(`${server.url}#/world`, 1500);
   ok(await waitFor(`document.querySelector('.cw')?.classList.contains('is-intro')`), 'a first visit should open on the introductions');
@@ -198,10 +199,8 @@ try {
   ok(await waitFor(`!document.querySelector('.cw-meet').hidden && /Toffee/.test(document.querySelector('.cw-meet h2')?.textContent ?? '') && /Gauntlet/.test(document.querySelector('.cw-meet__keeps')?.textContent ?? '')`, 6000), "Toffee's meet card did not name Toffee and the Gauntlet");
   await sleep(500);
   await nudge('[data-skip]');
-  ok(await waitFor(`document.querySelector('.cw').classList.contains('is-pointing') && document.querySelector('.cw-meet').hidden`, 6000), 'Skip did not jump to Chai calling you to the big button');
-  await sleep(500);
-  await nudge();
-  ok(await waitFor(`!document.querySelector('.cw').classList.contains('is-intro')`, 6000), 'the introductions did not end');
+  ok(await waitFor(`!document.querySelector('.cw').classList.contains('is-intro') && document.querySelector('.cw-meet').hidden`, 1500), 'Skip did not end the introductions immediately');
+  ok(await ev(`document.querySelector('.cw-play').getAttribute('href') === '#/world/place/reading-room' && getComputedStyle(document.querySelector('.cw-play')).pointerEvents !== 'none' && Number(getComputedStyle(document.querySelector('.cw-dock')).opacity) > 0.9`), 'the library button is not ready after Skip');
 
   // A wide screen: the card sits on the right, clear of the map's centre.
   await browser.send('Emulation.setDeviceMetricsOverride', { width: 1440, height: 900, deviceScaleFactor: 1, mobile: false });

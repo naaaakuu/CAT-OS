@@ -45,6 +45,7 @@ import { newlyFinished } from '../../../world/collections.js';
 import { play, silenceWorld } from '../../../world/audio.js';
 import { isUnlocked, gated, LESSON } from '../../../core/ads/rewarded.js';
 import { infoButton } from '../../../ui/info.js';
+import { focusContent } from '../../../ui/focus.js';
 import '../../../ui/components/cat-passage.js';
 import '../../../ui/components/cat-question-card.js';
 import '../../../ui/components/cat-explanation.js';
@@ -217,6 +218,7 @@ export async function renderSession(outlet, { storage }, params) {
     const startedAt = session.startedAt; // after a restore: time on task, not wall-clock
     let alive = true;
     let overWarned = false;
+    let clockTimer;
 
     const barHTML = (what) => `
       <div class="run__bar">
@@ -235,9 +237,9 @@ export async function renderSession(outlet, { storage }, params) {
       ring.classList.toggle('is-over', left < 0);
       ring.style.setProperty('--p', `${Math.round(Math.max(0, left) / targetMs * 100)}%`);
       if (left < 0 && !overWarned) { overWarned = true; play('hurry'); }
-      requestAnimationFrame(tickClock);
+      clockTimer = setTimeout(tickClock, 250);
     };
-    const stop = () => { alive = false; window.removeEventListener('hashchange', stop); };
+    const stop = () => { alive = false; clearTimeout(clockTimer); window.removeEventListener('hashchange', stop); };
     window.addEventListener('hashchange', stop);
 
     outlet.innerHTML = `
@@ -302,7 +304,6 @@ export async function renderSession(outlet, { storage }, params) {
           </div>
         </section>`;
       outlet.querySelector('cat-passage').passage = passage.passage;
-      requestAnimationFrame(tickClock);
 
       const screenEl = outlet.querySelector('section.run');
       const rereadFold = outlet.querySelector('.reread');
@@ -336,7 +337,16 @@ export async function renderSession(outlet, { storage }, params) {
         card.question = session.current;
         pos.textContent = String(session.index + 1);
         fill.style.width = `${Math.round((session.index / session.total) * 100)}%`;
-        syncActions('answering');
+        const prior = session.answerFor(session.current.id);
+        if (prior) {
+          card.reveal = { chosen: prior.chosen, correct: session.current.correct };
+          revealExplanation(prior.chosen, prior.is_correct);
+          fill.style.width = `${Math.round(((session.index + 1) / session.total) * 100)}%`;
+          syncActions('revealed');
+        } else {
+          syncActions('answering');
+          focusContent(card.querySelector('.stem'));
+        }
       }
       function syncActions(mode) {
         if (mode === 'answering') {
@@ -386,6 +396,7 @@ export async function renderSession(outlet, { storage }, params) {
         syncActions('revealed');
       }
       async function onNext() {
+        actions.querySelector('#next')?.setAttribute('disabled', '');
         // Written again on the way forward, not only on the way in: the draft
         // is taken at answer time, so without this a learner who came back
         // was handed the question they had just finished.
@@ -397,6 +408,7 @@ export async function renderSession(outlet, { storage }, params) {
 
     /* ---------------- RESULT ---------------- */
     async function finishSession() {
+      const finishingScreen = outlet.querySelector('section');
       const results = session.finish();
       if (night) results.session.night_reading = true;
       // The draft goes only once the record is safe: if the save fails the
@@ -449,6 +461,7 @@ export async function renderSession(outlet, { storage }, params) {
       const reviewHTML = `<div class="result__review">${s.answers.map((a, i) => `<div class="r ${a.is_correct === true ? 'ok' : a.is_correct === false ? 'no' : ''}"><span>Q${i + 1} · ${a.chosen ? `chose ${a.chosen}` : 'set aside'}</span><span>${formatDuration(a.time_ms)}</span></div>`).join('')}</div>`;
 
       cue('mentor');
+      if (!finishingScreen?.isConnected) return;
       renderResult(outlet, {
         region: 'reading-room',
         eyebrow: `The Reading House · ${passage.passage.title}`,

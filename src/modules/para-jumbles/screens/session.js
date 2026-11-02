@@ -42,6 +42,7 @@ import { toast } from '../../../ui/components/cat-toast.js';
 import { escapeHTML, formatDuration } from '../../../core/utils/format.js';
 import { hostChip } from '../../../pets/sprite.js';
 import { infoButton } from '../../../ui/info.js';
+import { focusContent } from '../../../ui/focus.js';
 import '../../../ui/components/cat-jumble-board.js';
 import '../../../ui/components/cat-progress-bar.js';
 import '../../../ui/components/cat-timer.js';
@@ -112,6 +113,7 @@ export async function renderPJSession(outlet, { storage }, params) {
 
     outlet.innerHTML = `
       <section class="screen">
+        <h1 class="sr-only">Para Jumbles: jumble ${session.index + 1} of ${session.total}</h1>
         <div class="session-bar">
           <a href="#/pj">← Journey</a>
           <span class="session-bar__count">${hostChip('ginger', 20)} Jumble <b>${session.index + 1}</b> of ${session.total}</span>
@@ -211,7 +213,7 @@ export async function renderPJSession(outlet, { storage }, params) {
           ${session.isLast ? 'Finish the set' : 'Next jumble'}
         </button>`;
       actions.querySelector('#next').addEventListener('click', onNext);
-      teachingSlot.scrollIntoView({ block: 'start' });
+      focusContent(teachingSlot.querySelector('.pjx-verdict'), { scroll: true });
     }
 
     function onLock() {
@@ -231,6 +233,7 @@ export async function renderPJSession(outlet, { storage }, params) {
     }
 
     async function onNext() {
+      actions.querySelector('#next')?.setAttribute('disabled', '');
       if (session.next()) {
         keep();
         showItem();
@@ -245,11 +248,12 @@ export async function renderPJSession(outlet, { storage }, params) {
        verdict and the teaching, not an empty board. */
     const prior = session.answerFor(item.meta.id);
     if (prior) reveal(prior.entered ? prior : null);
-    else syncSolving();
+    else { syncSolving(); focusContent(outlet.querySelector('h1')); }
   }
 
   /* ---------------- The mentor moment ---------------- */
   async function finishSession() {
+    const finishingScreen = outlet.querySelector('section');
     const results = session.finish();
 
     // Persist FIRST; nothing is shown until the data is safe.
@@ -303,6 +307,7 @@ export async function renderPJSession(outlet, { storage }, params) {
       console.error('[CAT OS] pj mentor derive failed:', err);
     }
 
+    if (!finishingScreen?.isConnected) return;
     const worldRewardHTML = worldReward(s, resolved.items ?? [], { storage }).html;
     outlet.innerHTML = `
       <section class="screen">
@@ -370,6 +375,7 @@ export async function renderPJSession(outlet, { storage }, params) {
       </section>
     `;
 
+    focusContent(outlet.querySelector('.moment__opening'));
     cue('mentor'); // the calm signature; rewards layer over it consonantly
 
     if (engagement) {

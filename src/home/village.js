@@ -50,7 +50,8 @@ export async function renderVillageHome(outlet, ctx) {
   const arrivedAt = location.hash;
   let world, valley;
   try { [world, valley] = await Promise.all([loadWorld(storage), loadValley(storage)]); } catch (err) {
-    outlet.innerHTML = `<section class="cw cw--error"><h1>The village will not open</h1><p>${escapeHTML(err.message)}</p></section>`;
+    console.error('[CAT OS] village could not open', err);
+    outlet.innerHTML = `<section class="cw cw--error"><h1>The village could not open</h1><p>Part of the village did not arrive. Your saved progress is still on this device.</p><button class="btn btn--primary" onclick="location.reload()">Try again</button></section>`;
     return;
   }
   // Left while the records loaded: do not start a village (its music, its
@@ -98,6 +99,7 @@ export async function renderVillageHome(outlet, ctx) {
       </div>
       <button class="cw-edge" hidden></button>
       <div class="cw-meet" hidden></div>
+      <button class="cw-tour-skip" type="button" data-skip hidden>Skip introductions</button>
       <div class="cw-toast" role="status" aria-live="polite"></div>
       <div class="cw-overlay" hidden><div class="cw-scrim" data-close></div><section class="cw-card"></section></div>
       <div class="cw-party" hidden></div>
@@ -346,7 +348,8 @@ export async function renderVillageHome(outlet, ctx) {
     const today = root.querySelector('.cw-today');
     today.innerHTML = `<span class="cw-today__faces">${T.picks.map((id, i) => `<span class="cw-face ${T.done[i] ? 'is-done' : ''}">${petPortrait(id, 30)}${T.done[i] ? '<i aria-hidden="true">✓</i>' : ''}</span>`).join('')}</span><span class="cw-today__gift ${T.gift ? 'is-open' : ''}" aria-hidden="true">${giftSVG}</span><span class="cw-today__text">${T.gift ? 'Today\'s gift is yours!' : `${T.doneCount} of 3 helped`}</span>`;
     today.setAttribute('aria-label', `Today's three friends: ${T.doneCount} of 3 helped. ${T.gift ? 'Today\'s gift is open.' : 'Help all three for a gift of 10 Glow.'}`);
-    const id = pets.play, who = PET_BY_ID.get(id), next = nextFor(id, world, { first: pets.pets.find((p) => p.id === id)?.isNew });
+    const id = firstVisit || root.classList.contains('is-intro') ? 'chai' : pets.play;
+    const who = PET_BY_ID.get(id), next = nextFor(id, world, { first: pets.pets.find((p) => p.id === id)?.isNew });
     const playEl = root.querySelector('.cw-play');
     const call = callWord(id);
     playEl.setAttribute('href', startHref(id, next, `#/world/place/${who.places[0]}`));
@@ -391,7 +394,7 @@ export async function renderVillageHome(outlet, ctx) {
   const api = {
     storage, close, refresh, toast, play, reduced,
     get world() { return world; }, get pets() { return pets; }, get valley() { return valley; },
-    setValley: (v) => { valley = v; hud(); },
+    setValley: (v) => { valley = v; root.querySelector('h1').textContent = `${valleyName(v)}: your village`; hud(); },
     celebrate: (id) => life.poke(id, { happy: true }),
     open: (kind, arg, trigger) => openCard(kind, arg, trigger),
     showPet: (id) => { life.poke(id); reveal(life.positionOf(id)); later(() => openCard('pet', id), reduced ? 0 : 260); },
@@ -590,6 +593,9 @@ export async function renderVillageHome(outlet, ctx) {
      too (after any party, never over one). */
   if (firstVisit || (!welcomed && !store.get('catos:met-gang'))) {
     root.classList.add('is-intro');
+    hud();
+    const skipTour = root.querySelector('.cw-tour-skip');
+    skipTour.hidden = false;
     // Saved before the first line: leaving mid-welcome (Enter on the big button) must not replay it every visit.
     store.set('catos:met-gang', '1');
     if (firstVisit) saveValley(storage, { awakened_at: new Date().toISOString(), met_at: new Date().toISOString() }).then((v) => { valley = v; }, () => { /* the hello will repeat once */ });
@@ -599,12 +605,22 @@ export async function renderVillageHome(outlet, ctx) {
     const keeps = (id) => (id === 'toffee' ? ['The daily fire', 'The Gauntlet'] : HOUSES.filter((h) => h.pet === id).map((h) => h.subject));
     const meetCard = (id) => {
       const p = PET_BY_ID.get(id);
-      meetEl.innerHTML = `<p class="cw-meet__dots" aria-hidden="true">${ORDER.map((x) => `<i class="${x === id ? 'is-on' : ''}"></i>`).join('')}</p><h2 class="cw-meet__name">${escapeHTML(p.name)}<small>the ${escapeHTML(p.creature)}</small></h2><p class="cw-meet__keeps">${keeps(id).map((s) => `<b>${escapeHTML(s)}</b>`).join('')}</p><p class="cw-meet__why">${escapeHTML(LINES.meet[id][1])}</p><button class="cw-meet__skip" type="button" data-skip>Skip</button>`;
+      meetEl.innerHTML = `<p class="cw-meet__dots" aria-hidden="true">${ORDER.map((x) => `<i class="${x === id ? 'is-on' : ''}"></i>`).join('')}</p><h2 class="cw-meet__name">${escapeHTML(p.name)}<small>the ${escapeHTML(p.creature)}</small></h2><p class="cw-meet__keeps">${keeps(id).map((s) => `<b>${escapeHTML(s)}</b>`).join('')}</p><p class="cw-meet__why">${escapeHTML(LINES.meet[id][1])}</p>`;
       meetEl.hidden = false;
       meetEl.classList.remove('is-in'); void meetEl.offsetWidth; meetEl.classList.add('is-in');
     };
-    // On the root, before any line's tap-to-continue listener, so a tap on Skip is a skip by the time the line ends.
-    root.addEventListener('pointerdown', (e) => { if (e.target.closest?.('[data-skip]')) skipped = true; }, true);
+    const skipIntroductions = () => {
+      skipped = true;
+      meetEl.hidden = true; skipTour.hidden = true;
+      root.classList.remove('is-intro', 'is-pointing');
+      life.release();
+      visit('chai', reduced ? 0 : 400);
+    };
+    // End the introduction immediately, including its final line. The
+    // library button should never wait for another speech after Skip.
+    root.addEventListener('pointerdown', (e) => { if (e.target.closest?.('[data-skip]')) skipIntroductions(); }, true);
+    root.addEventListener('keydown', (e) => { if ((e.key === 'Enter' || e.key === ' ') && e.target.closest?.('[data-skip]')) { e.preventDefault(); skipIntroductions(); } }, true);
+    skipTour.addEventListener('click', skipIntroductions);
     const pause = (ms) => new Promise((r) => later(r, reduced ? 0 : ms));
     const say = async (id, line, ms = 9000) => {
       if (skipped || disposed) return;
@@ -624,19 +640,22 @@ export async function renderVillageHome(outlet, ctx) {
     };
     later(async () => {
       await whenIntroDone(); // the opening video first; the hello starts when it is over or skipped
-      if (disposed) return;
+      if (disposed || skipped) return;
       for (const id of ORDER) life.hold(id);
       visit('toffee', 0);
       if (firstVisit) await say('toffee', LINES.intro[0]);
       for (const id of ORDER) {
         if (skipped || disposed) break;
         if (id !== 'toffee') { visit(id); await pause(1000); }
+        if (skipped || disposed) break;
         meetCard(id); play('tap'); life.poke(id, { happy: true, quiet: true });
         await say(id, LINES.meet[id][0]);
         if (id === 'toffee') { meetEl.hidden = true; for (const line of LINES.intro.slice(1, -1)) await say('toffee', line); }
       }
       meetEl.hidden = true;
+      skipTour.hidden = true;
       if (disposed) return;
+      if (skipped) { root.classList.remove('is-intro', 'is-pointing'); life.release(); return; }
       skipped = false;
       visit('chai', 1400); root.classList.add('is-pointing');
       await say('chai', LINES.intro.at(-1));

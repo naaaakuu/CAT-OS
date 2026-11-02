@@ -105,6 +105,7 @@ export async function renderGardenSession(outlet, context, params) {
   const atmo = atmosphereFor();
   outlet.innerHTML = `
     <section class="screen lgx" data-beat="" data-time="${atmo.time}">
+      <h1 class="sr-only">The Rootwood: ${escapeHTML(family.root.label)}</h1>
       <div class="lgx__world" id="lgx-world" aria-hidden="true">${paintedBackdrop('matcha')}</div>
       <button class="lgx__close" id="lgx-close" aria-label="Leave the garden">×</button>
       <div class="lgx__veil-wrap" id="lgx-veil-wrap">
