@@ -1,17 +1,16 @@
-/** Mochi's home is a view of learning records, never a second save game.
- * A correct summary stays put away even after a less successful retry.
- * Zones are data so new furniture and mess can be added independently. */
+/** Little worlds grow from unique correct summaries in learning records.
+ * Visiting, petting and rain are play, never a second progress economy. */
 import { PS_TIERS, psJourneyOrder } from './tiers.js';
 
 export const THOUGHT_ZONES = Object.freeze([
-  { tier: 'foundation', name: 'The welcome basket', x: 177, y: 544, labelY: 607, color: '#c79160', keepsake: 'A basket of clear thoughts' },
-  { tier: 'easy', name: 'The writing desk', x: 366, y: 351, labelY: 418, color: '#8f9c72', keepsake: 'A desk ready for daydreams' },
-  { tier: 'medium', name: 'The little side table', x: 658, y: 371, labelY: 439, color: '#c58d92', keepsake: 'A place for a warm cup' },
-  { tier: 'advanced', name: 'The reading chair', x: 904, y: 412, labelY: 483, color: '#b58a6b', keepsake: 'A cosy reading nook' },
-  { tier: 'cat', name: 'The sunlit rug', x: 819, y: 560, labelY: 622, color: '#97a883', keepsake: 'A sunny patch for a nap' },
-  { tier: 'cat-plus', name: 'The daydream corner', x: 402, y: 587, labelY: 655, color: '#aca1bd', keepsake: 'Room for new daydreams' },
-  { tier: 'ninety-nine', name: 'The keepsake shelf', x: 154, y: 310, labelY: 375, color: '#85a4a0', keepsake: 'A shelf of tiny treasures' },
-  { tier: 'premium', name: 'The windowsill', x: 949, y: 265, labelY: 330, color: '#d0ad69', keepsake: 'A window full of light' },
+  { tier: 'foundation', name: 'Dewdrop Meadow', color: '#83a77a', sky: '#e3ead5', flower: '#f2c6a5', kind: 'meadow', keepsake: 'A sleepy snail moves into the meadow' },
+  { tier: 'easy', name: 'Mushroom Hollow', color: '#b48079', sky: '#f0ddd6', flower: '#e9aaa1', kind: 'mushroom', keepsake: 'A ladybird finds a mushroom to call home' },
+  { tier: 'medium', name: 'Lotus Lagoon', color: '#739e99', sky: '#d8e9e1', flower: '#e7b6cc', kind: 'pond', keepsake: 'A little frog settles by the lotus pond' },
+  { tier: 'advanced', name: 'Amber Orchard', color: '#b59559', sky: '#f4e4bd', flower: '#edbd68', kind: 'orchard', keepsake: 'A honeybee discovers the orchard' },
+  { tier: 'cat', name: 'Cloud Garden', color: '#8aa5bb', sky: '#e0e9ed', flower: '#c5c4ea', kind: 'cloud', keepsake: 'A tiny cloud brings its own rainbow' },
+  { tier: 'cat-plus', name: 'Moonflower Grove', color: '#a295b5', sky: '#e5dfee', flower: '#e5cfee', kind: 'moon', keepsake: 'A moon moth unfolds its silver wings' },
+  { tier: 'ninety-nine', name: 'Starfall Island', color: '#8b98b7', sky: '#dbe0f0', flower: '#f5d998', kind: 'star', keepsake: 'A shooting star comes to rest on the island' },
+  { tier: 'premium', name: 'Sunrise Sanctuary', color: '#c49a77', sky: '#f3dfc7', flower: '#f1b398', kind: 'sunrise', keepsake: 'A golden butterfly makes itself at home' },
 ]);
 
 /** Unknown/deleted items, skips, wrong answers and other modules cannot
@@ -42,5 +41,5 @@ export function thoughtRoom(items = [], sessions = []) {
   return { items: ordered, solved, tried, zones, total, done: solved.size, clean,
     // Reserve 100% for the final thought, even with a very large library.
     percent: clean === 1 ? 100 : Math.floor(clean * 100),
-    mood: clean === 1 ? 'Peaceful at last' : clean >= .75 ? 'Almost a little sanctuary' : clean >= .4 ? 'Room to breathe' : clean > 0 ? 'A little clearer already' : 'A lovely little mess' };
+    mood: clean === 1 ? 'Eight worlds in full bloom' : clean >= .75 ? 'So much life in little places' : clean >= .4 ? 'Our little worlds are growing' : clean > 0 ? 'Something lovely is growing' : 'Big ideas. Little worlds.' };
 }

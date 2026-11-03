@@ -113,9 +113,8 @@ export async function checkResume({ width = 390, height = 844 } = {}) {
     {
       const url = '#/ps/session/foundation', tag = 'Para Summary';
       await goto(url);
-      if (!await waitFor('#builder-skip')) bad(tag + ': no builder');
-      await click('#builder-skip');
       if (!await waitFor('cat-question-card cat-option')) bad(tag + ': no options');
+      if (await has('textarea, #builder-skip')) bad(tag + ': writing step still present');
       await click('cat-question-card cat-option[letter="B"] button');
       await click('#lock');
       if (!await waitFor('.psx-verdict')) bad(tag + ': no verdict after lock');
@@ -124,7 +123,7 @@ export async function checkResume({ width = 390, height = 844 } = {}) {
       else ok(tag + ': refreshed on a locked paragraph → verdict, options and teaching are back');
       await carriedOn(tag);
       await click('#next');
-      if (!await waitFor('#builder-skip')) bad(tag + ': next did not show paragraph 2');
+      if (!await waitFor('cat-question-card cat-option')) bad(tag + ': next did not show paragraph 2');
       await goto(url);
       const b2 = await bar();
       if (!/Paragraph 2 of/.test(b2 ?? '')) bad(tag + ': after a refresh on paragraph 2 the bar says ' + JSON.stringify(b2)); else ok(tag + ': refreshed on paragraph 2 → still paragraph 2');

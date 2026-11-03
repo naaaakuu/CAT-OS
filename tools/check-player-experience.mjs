@@ -147,10 +147,11 @@ export async function checkPlayerExperience({ matrix = true, log = () => {} } = 
       await tap('#next'); await waitFor('.moment');
     });
 
-    await check('writing a summary, choosing, and completing', async () => {
-      await goto('#/ps/session/ps-0001'); await tap('#own-summary');
-      await b.send('Input.insertText',{text:'Unfinished tasks keep the mind engaged until they are completed.'});
-      await tap('#builder-lock'); await tap('cat-option button'); await tap('#lock');
+    await check('summary choices open directly and complete without typing', async () => {
+      await goto('#/ps/session/ps-0001');
+      assert(!await has('textarea, #builder-skip, #builder-lock'), 'Summary practice still opens a writing step');
+      assert(await b.evaluate('document.querySelectorAll("cat-option").length === 4'), 'Four summary options did not open directly');
+      await tap('cat-option button'); await tap('#lock');
       await waitFor('.psx-verdict'); await tap('#next'); await waitFor('.moment');
     });
 

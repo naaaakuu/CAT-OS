@@ -2512,9 +2512,15 @@ console.log('\n31. Complete player flows and small-screen layouts (tools/check-p
 
 console.log('\n32. Mochi’s room is derived from learning records (tools/check-thought-room.mjs)');
 {
-  const { checkThoughtRoom } = await mod('tools/check-thought-room.mjs');
+  const { checkThoughtRoom, checkThoughtRoomBrowser } = await mod('tools/check-thought-room.mjs');
   const r = checkThoughtRoom();
-  ok(`${r.cases} room checks: unique correct summaries, lasting cleanup, eight corners and stable papers`);
+  ok(`${r.cases} room checks: unique correct summaries, lasting blooms and eight little worlds`);
+  const browser = await checkThoughtRoomBrowser();
+  if (browser.skipped) console.log('  -- SKIPPED: no Chrome. Little Worlds interactions were not tested.');
+  else {
+    for (const p of browser.problems) bad('Little Worlds: ' + p);
+    if (!browser.problems.length) ok(`${browser.cases} Little Worlds browser checks: play, direct questions, saved blooms, residents and responsive layouts`);
+  }
 }
 
 console.log('\n─────────────────────────────────────');

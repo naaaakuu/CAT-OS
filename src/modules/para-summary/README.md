@@ -10,11 +10,12 @@ Reading DNA (`core/mentor/ps-dna.js`).
 
 The two module-defining experiences:
 
-- **The Summary Builder** — before the options, the learner writes the
-  author's point in one sentence of their own, then compares it against
-  the ideal summary on the item's own checks (core idea, scope,
-  certainty, additions, stance). Generation before recognition.
-- **The Think button** — a floating coach available while solving. It
+- **Little Worlds**: Mochi's house opens a paragraph with its four options
+  directly. Unique correct summaries grow permanent blooms in eight glass
+  gardens; a completed tier welcomes a tiny resident. Rain, tea, petting,
+  butterflies and fireflies are presentation only. Historic written
+  summaries remain readable on their Learning Pages.
+- **The Think button** — a coach beside the instruction while solving. It
   never hints; it asks the questions expert readers ask themselves
   (Bible §3), tuned to the item's mission.
 
@@ -26,7 +27,7 @@ index.js            registerPS(router, context); all app.js knows
 screens/intro.js    the first-time introduction (then /ps/about forever;
                     Settings can reset it)
 screens/browser.js  the tier journey
-screens/session.js  mission → read → write → choose → be taught → mentor
+screens/session.js  mission → read and choose → be taught → mentor
 screens/learn.js    an item's revisitable Learning Page
 logic/tiers.js      the eight-tier ladder + recommendation (pure)
 logic/store.js      persistence through the StorageAdapter only (Rule 6)
@@ -61,10 +62,9 @@ brief (the schema file is the authority):
   with its function (§2): thesis, support, evidence, example,
   concession, setup, conclusion, restatement, qualification, question.
   At most one thesis; zero means the apex is implicit.
-- `ideal_summary` — the faithful compression the correct option
-  paraphrases and the Summary Builder compares against.
-- `builder` — the write-first prompt and 3 to 5 comparison checks,
-  each teaching from either answer (kept / drifted).
+- `ideal_summary` — the faithful compression the correct option paraphrases.
+- `builder` — legacy prompts and comparison checks retained in the versioned
+  content contract; practice no longer asks for writing.
 - `question` — stem, four options, `correct`, and the explanation:
   `paragraph_meaning` (plain retelling), `correct_reasoning` (the
   meaning-preservation test, applied), three `distractors` each with

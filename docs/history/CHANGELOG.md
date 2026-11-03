@@ -4,6 +4,12 @@
 > Versions here are app releases; they map onto the capability milestones in
 > `PROJECT_ROADMAP.md` (0.x releases build toward Roadmap V1.0).
 
+## 3.15.0 follow-up: Mochi's Little Worlds (2026-11-04)
+
+- Replaced the paper-cleanup room with a warm conservatory of eight miniature worlds. Unique correct summaries grow permanent blooms; quarter-world milestones fill out the plants and completed worlds welcome tiny residents. Mochi accepts pets and tea, shelters under a leaf in rain, befriends a butterfly, watches fireflies and naps. Play never changes learning progress.
+- Para-summary practice now opens the paragraph and four choices directly. Removed the writing and sentence-comparison step, kept the thinking coach and full explanations, and preserved historic writing and draft compatibility. Results invite a return to see new blooms. The whole scene fits phones, the difficulty gardens scroll separately and desktop places practice beside the scene.
+- Validation: 235 player checks across 216 screen/viewport/theme combinations; 13 room model checks and seven real-browser Mochi scenarios. The full sweep passed every other gate and identified small-label contrast issues; after darkening the labels, the focused room and paragraph-tray recheck measured 345 text runs in both themes with no failures or unmeasured screens. Offline fingerprints regenerated.
+
 ## 3.15.0 follow-up: Simpler mobile reading (2026-11-04)
 
 - Removed the notebook writing box, reflection prompt and learning-gains checklist from RC passage help. The page now leads with the main idea, paragraph meanings and the writer's view, with the simpler retelling and detailed notes available below. Shortened the surrounding labels and result-screen mentor preamble; clean runs skip the repeated generic tip.

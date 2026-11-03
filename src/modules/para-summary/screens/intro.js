@@ -133,11 +133,11 @@ export function renderPSIntro(outlet, { storage }, { firstTime = true, onBegin =
         `)}
 
         ${section(ART.mentor, 'How this journey teaches', `
-          <p>You will not get a wall of rules. You will read, write, and choose,
-          and every answer will teach.</p>
-          <p>Before the options, you can write the point in one sentence of your
-          own. Writing first is the fastest way to learn this skill, and the app
-          will walk you through comparing your sentence with the author's.</p>
+          <p>Read a paragraph, then choose from four summaries. Each answer
+          explains what preserved the meaning and what changed it.</p>
+          <p>At Mochi’s house, each new correct summary grows a bloom in a
+          little glass world. Eight worlds are yours to explore, with a tiny
+          resident waiting for every world you bring into full bloom.</p>
           <p>Each paragraph opens with a small mission, one thing to protect as
           you read. A Think button sits beside you the whole time. It never
           gives hints. It asks the questions strong readers ask themselves.</p>

@@ -58,7 +58,7 @@ export const ROUTES = [
   { hash: '#/world/place/hearth', name: 'place-hearth' },
   { hash: '#/world/place/reading-room', name: 'place-reading' },
   { hash: '#/world/place/table', name: 'place-summary', risk: true },
-  { hash: '#/world/place/table', name: 'summary-corner', risk: true, enter: [{ sel: '[data-zone="foundation"]' }] },
+  { hash: '#/world/place/table', name: 'summary-corner', risk: true, enter: [{ sel: '[data-zone="foundation"]' }, { sel: '.thought-world-list' }] },
   { hash: '#/ps/session/ps-0038', name: 'summary-with-mochi', risk: true },
   { hash: '#/world/place/meadow', name: 'place-meadow' },
   { hash: '#/world/place/pond', name: 'place-pond' },

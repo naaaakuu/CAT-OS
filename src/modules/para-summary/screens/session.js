@@ -1,25 +1,18 @@
 /**
  * session.js (screen) — the Para Summary core loop, end to end:
- * receive the mission → read the paragraph → SAY IT YOURSELF →
+ * receive the mission → read the paragraph →
  * choose the summary → be taught → next → the mentor moment.
  *
- * Two pieces of deliberate product design, both from the Bible:
- *
- * · The Summary Builder: before the options, the learner can write the
- *   author's point in one sentence of their own. Generation before
- *   recognition is how the skill actually forms; afterwards the screen
- *   walks an honest comparison against the ideal summary on the item's
- *   own checks (core idea, scope, certainty, additions, stance).
- *
- * · The Think button: a floating coach available the whole time. It
+ * The paragraph and four options appear together, with no writing step.
+ * The Think button is a coach available while solving. It
  *   never hints and never narrows the options; it asks the questions
  *   an expert reader asks themselves (Bible §3), chosen for this
  *   item's mission.
  *
  * Phases per item:
  *  1. solving   — the paragraph (its mission and challenge wait behind
- *                 the ⓘ), the builder, then the four options.
- *  2. revealed  — verdict + your sentence against the author's + the
+ *                 the ⓘ) and the four options.
+ *  2. revealed  — verdict + Mochi's response + the
  *                 full teaching layer (logic/teach.js).
  * The set ends with ONE lesson (core/mentor/ps-lesson), never a
  * scoreboard; the numbers stay one quiet tap away.
@@ -29,7 +22,7 @@ import { worldReward } from '../../../world/rewards.js';
 import { loadPSItem, loadPSItems, listPSItems } from '../../../core/content-loader/loader.js';
 import { PSSession } from '../../../core/engine/ps-session.js';
 import { saveDraft, loadDraft, clearDraft } from '../../../core/learning/draft.js';
-import { savePSResults, saveOwnSummary } from '../logic/store.js';
+import { savePSResults } from '../logic/store.js';
 import { psJourneyOrder, tierInfo } from '../logic/tiers.js';
 import { renderTeaching } from '../logic/teach.js';
 import { gated, LESSON } from '../../../core/ads/rewarded.js';
@@ -121,12 +114,11 @@ export async function renderPSSession(outlet, { storage }, params) {
   if (resumed) toast(`Carried on from paragraph ${session.index + 1}, where you left off.`);
 
   /* Per-item behavior the engine wants to know about. */
-  let summaryText = null;   // the learner's own sentence, if written
   let thinkOpened = false;  // the Think coach was consulted
   const newThoughts = () => home.total ? session.items.filter((it) => session.answerFor(it.meta.id)?.is_correct === true && !home.solved.has(it.meta.id)).length : 0;
   const pendingLine = () => {
     const n = newThoughts();
-    return n ? `${n} new ${n === 1 ? 'thought' : 'thoughts'} ready to put away. Finish the set to save ${n === 1 ? 'it' : 'them'}.`
+    return n ? `${n} new ${n === 1 ? 'bloom' : 'blooms'} for your little world. Finish the set to save ${n === 1 ? 'it' : 'them'}.`
       : 'Find the main idea. Keep its meaning. Leave the extra details.';
   };
 
@@ -136,11 +128,10 @@ export async function renderPSSession(outlet, { storage }, params) {
     const q = item.question;
     const tier = tierInfo(m.tier);
     const mission = PS_MISSIONS[m.mission];
-    summaryText = null;
     thinkOpened = false;
 
     outlet.innerHTML = `
-      <section class="screen">
+      <section class="screen ps-direct-session">
         <h1 class="sr-only">Para Summary: paragraph ${session.index + 1} of ${session.total}</h1>
         <div class="session-bar">
           <a href="#/world/place/table" aria-label="Back to Mochi’s room">← Room</a>
@@ -170,7 +161,6 @@ export async function renderPSSession(outlet, { storage }, params) {
             ${item.paragraph.sentences.map((s) => escapeHTML(s.text)).join(' ')}
           </div>
 
-          <div id="builder-slot"></div>
           <div id="choose-slot"></div>
           <div id="compare-slot"></div>
           <div id="teaching-slot"></div>
@@ -182,7 +172,6 @@ export async function renderPSSession(outlet, { storage }, params) {
     `;
 
     outlet.querySelector('cat-timer').startAt = startedAt;
-    const builderSlot = outlet.querySelector('#builder-slot');
     const chooseSlot = outlet.querySelector('#choose-slot');
     const compareSlot = outlet.querySelector('#compare-slot');
     const teachingSlot = outlet.querySelector('#teaching-slot');
@@ -232,47 +221,10 @@ export async function renderPSSession(outlet, { storage }, params) {
       }
     });
 
-    /* ---------- Phase 1a: say it yourself (the Summary Builder) ---------- */
-    function showBuilder() {
-      builderSlot.innerHTML = `
-        <div class="ps-builder">
-          <p class="psx__label">${escapeHTML(PS_LINES.builderPrompt)}</p>
-          <p class="ps-builder__prompt">${escapeHTML(item.builder.prompt)}</p>
-          <textarea class="ps-builder__input" id="own-summary" rows="3"
-                    placeholder="${escapeHTML(PS_LINES.builderNudge)}"
-                    aria-label="Your one sentence summary"></textarea>
-          <div class="session-actions" style="margin-top: var(--space-3)">
-            <button class="btn" id="builder-skip">Straight to the options</button>
-            <button class="btn btn--primary" id="builder-lock" disabled>Hold my sentence</button>
-          </div>
-        </div>`;
-      const input = builderSlot.querySelector('#own-summary');
-      const lock = builderSlot.querySelector('#builder-lock');
-      input.addEventListener('input', () => {
-        lock.disabled = input.value.trim().length < 10;
-      });
-      lock.addEventListener('click', async () => {
-        summaryText = input.value.trim();
-        try { await saveOwnSummary(storage, m.id, summaryText); } catch { /* non-fatal */ }
-        cue('reflect');
-        showChoosing();
-      });
-      builderSlot.querySelector('#builder-skip').addEventListener('click', () => {
-        summaryText = null;
-        showChoosing();
-      });
-      actions.innerHTML = '';
-    }
-
-    /* ---------- Phase 1b: the four options ---------- */
+    /* ---------- Read and choose: four options immediately ---------- */
     let selected = null;
 
     function showChoosing() {
-      builderSlot.innerHTML = summaryText ? `
-        <div class="ps-yours">
-          <p class="ps-yours__eyebrow">Your sentence, held</p>
-          <p class="ps-yours__text">${escapeHTML(summaryText)}</p>
-        </div>` : '';
       chooseSlot.innerHTML = '<cat-question-card></cat-question-card>';
       const card = chooseSlot.querySelector('cat-question-card');
       card.question = { type: 'best_summary', stem: q.stem, options: q.options };
@@ -282,7 +234,6 @@ export async function renderPSSession(outlet, { storage }, params) {
         syncChoosing();
       });
       syncChoosing();
-      focusContent(card.querySelector('.stem'), { scroll: true });
     }
 
     function syncChoosing() {
@@ -301,7 +252,7 @@ export async function renderPSSession(outlet, { storage }, params) {
       thinkBtn.remove();
       thinkSlot.innerHTML = '';
       mochiSays(answer?.is_correct
-        ? home.solved.has(m.id) ? 'Still fits perfectly. That thought already has a home.' : 'That’s the little thought! One more paper ready to put away.'
+        ? home.solved.has(m.id) ? 'Still fits perfectly. That bloom is already growing in our world.' : 'A big thought, kept in a little sentence. You grew a new bloom!'
         : answer?.chosen ? 'A little tangle. Let’s see where the meaning changed.' : 'We can leave this thought here and come back to it.',
       answer?.is_correct ? FRAME.happy : FRAME.blink, answer?.is_correct === true);
 
@@ -313,12 +264,10 @@ export async function renderPSSession(outlet, { storage }, params) {
 
       compareSlot.innerHTML = `
         <div class="psx-verdict ${verdict.cls}">${escapeHTML(verdict.text)}</div>
-        ${summaryText ? renderCompare() : ''}
       `;
       // Mochi follows the learner's attention down to the verdict instead
       // of celebrating above a long paragraph, outside the phone viewport.
       compareSlot.prepend(companion);
-      if (summaryText) wireCompare();
 
       teachingSlot.innerHTML = renderTeaching(item, answer);
       actions.innerHTML = `
@@ -330,52 +279,9 @@ export async function renderPSSession(outlet, { storage }, params) {
       companion.scrollIntoView({ block: 'start' });
     }
 
-    /* The learner's sentence against the author's: honest, guided
-       self-comparison on the item's own checks. */
-    function renderCompare() {
-      return `
-        <div class="ps-compare">
-          <div class="psx__label">Your sentence, against the author's</div>
-          <p class="ps-compare__yours">${escapeHTML(summaryText)}</p>
-          <p class="ps-compare__ideal">${escapeHTML(item.ideal_summary)}</p>
-          <p class="ps-compare__lead">${escapeHTML(PS_LINES.builderCompareLead)}</p>
-          ${item.builder.checks.map((c, i) => `
-            <div class="ps-check" data-check="${i}">
-              <p class="ps-check__ask">${escapeHTML(c.ask)}</p>
-              <div class="ps-check__actions">
-                <button class="btn btn--quiet" data-check-kept="${i}">Mine held it</button>
-                <button class="btn btn--quiet" data-check-drifted="${i}">Mine drifted</button>
-              </div>
-              <div class="ps-check__note" hidden></div>
-            </div>`).join('')}
-        </div>`;
-    }
-
-    function wireCompare() {
-      const answerCheck = (i, kept) => {
-        const check = item.builder.checks[i];
-        const holder = compareSlot.querySelector(`[data-check="${i}"]`);
-        if (!holder) return;
-        holder.querySelector('.ps-check__actions').remove();
-        const note = holder.querySelector('.ps-check__note');
-        note.hidden = false;
-        note.className = `ps-check__note ${kept ? 'is-kept' : 'is-drifted'}`;
-        note.textContent = kept ? check.kept : check.drifted;
-        cue('toggle');
-      };
-      compareSlot.addEventListener('click', (e) => {
-        const kept = e.target.closest('[data-check-kept]');
-        if (kept) { answerCheck(Number(kept.dataset.checkKept), true); return; }
-        const drifted = e.target.closest('[data-check-drifted]');
-        if (drifted) answerCheck(Number(drifted.dataset.checkDrifted), false);
-      });
-    }
-
     function onLock() {
       if (!selected) return;
       const verdict = session.answer(selected, {
-        summary_written: !!summaryText,
-        summary_text: summaryText,
         think_opened: thinkOpened,
       });
       keep();
@@ -385,8 +291,6 @@ export async function renderPSSession(outlet, { storage }, params) {
 
     function onSkip() {
       session.skip({
-        summary_written: !!summaryText,
-        summary_text: summaryText,
         think_opened: thinkOpened,
       });
       keep();
@@ -405,17 +309,15 @@ export async function renderPSSession(outlet, { storage }, params) {
       }
     }
 
-    /* Back after an interruption, on an item already locked in: the options
-       with the verdict and the teaching, and the learner's own sentence if
-       they wrote one, not the empty builder. */
+    /* A locked answer resumes with its verdict and teaching. Historic
+       summary text remains in storage, but there is no writing UI. */
     const prior = session.answerFor(m.id);
     if (prior) {
-      summaryText = prior.summary_text;
       thinkOpened = prior.think_opened;
       showChoosing();
       reveal(prior.chosen === null ? null : prior);
     } else {
-      showBuilder();
+      showChoosing();
     }
   }
 
@@ -487,9 +389,9 @@ export async function renderPSSession(outlet, { storage }, params) {
 
         ${worldRewardHTML}
         <section class="thought-homecoming" aria-labelledby="thought-homecoming-title">
-          <h2 id="thought-homecoming-title">${saved && newThoughts() ? `${newThoughts() === 1 ? 'A little thought has' : `${newThoughts()} little thoughts have`} a home.` : saved ? 'Mochi saved your spot.' : 'Your thoughts could not be saved yet.'}</h2>
-          <p>${saved && newThoughts() ? 'Come home with Mochi. There are papers to put away and a little more room to breathe.' : saved ? 'Your room keeps every thought you have already put away. There is always another little tangle to try.' : 'The room will show only the work safely saved on this device.'}</p>
-          <a class="btn btn--primary btn--block" href="#/world/place/table">${saved && newThoughts() ? 'See the room get tidier' : 'Come home with Mochi'} <span aria-hidden="true">→</span></a>
+          <h2 id="thought-homecoming-title">${saved && newThoughts() ? `${newThoughts() === 1 ? 'A new bloom' : `${newThoughts()} new blooms`} in your little world.` : saved ? 'Mochi saved your spot.' : 'Your thoughts could not be saved yet.'}</h2>
+          <p>${saved && newThoughts() ? 'You kept the important thought. Something tiny grew. Come home and see what you made.' : saved ? 'Every bloom you have already grown is safe. Mochi has a warm cup waiting for you.' : 'Your little worlds show only the work safely saved on this device.'}</p>
+          <a class="btn btn--primary btn--block" href="#/world/place/table">${saved && newThoughts() ? 'See what grew' : 'Come home with Mochi'} <span aria-hidden="true">→</span></a>
         </section>
         <article class="moment">
           <p class="screen__eyebrow">Your mentor · Para Summary</p>

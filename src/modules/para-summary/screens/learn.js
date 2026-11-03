@@ -54,8 +54,8 @@ export async function renderPSLearn(outlet, { storage }, params) {
               : `. The author's point is option ${escapeHTML(item.question.correct)}.`}
           </p>` : `
           <p class="hint" style="margin-bottom: var(--space-4)">You have not
-          answered this one yet. Reading the walkthrough first is fine.
-          Writing your own summary first teaches more.</p>`}
+          answered this one yet. Try the four summaries first, or explore
+          the walkthrough below.</p>`}
 
         ${own ? `
           <div class="ps-compare" style="margin-bottom: var(--space-5)">
