@@ -4,6 +4,13 @@
 > Versions here are app releases; they map onto the capability milestones in
 > `PROJECT_ROADMAP.md` (0.x releases build toward Roadmap V1.0).
 
+## 3.15.0 follow-up: Simpler mobile reading (2026-11-04)
+
+- Removed the notebook writing box, reflection prompt and learning-gains checklist from RC passage help. The page now leads with the main idea, paragraph meanings and the writer's view, with the simpler retelling and detailed notes available below. Shortened the surrounding labels and result-screen mentor preamble; clean runs skip the repeated generic tip.
+- Gave reading sessions a separate bottom action bar so controls never obscure answers or explanations. Added a direct return from the passage to the current question or explanation, preserved selections, and folded the passage on each new phone question. Explanations show the correct answer text and complete authored reasoning, with a direct supporting-paragraph link and other options folded below. Added a brief question transition that respects reduced motion.
+- Played 20 distinct Foundation passages at 390×844, answering all 60 questions and visiting passage help and the library after every run. Updated the player-flow checks for the dock, evidence return and help without typing. Scoring, saved progress, authored passage data and reward rules are unchanged.
+- Validation: 14 real-touch layout combinations passed, including 320 px phones, short viewports, landscape, desktop and extra-large text in both themes. The four RC contrast states measured 223 text runs with no failures or unmeasured screens; their test steps now use stable control IDs. All other repository gates passed in the full sweep. The short-screen return control lives in the main dock, replacing the answer actions while the passage is open.
+
 ## 3.15.0 follow-up: Mochi's Messy Thoughts Room (2026-11-03)
 
 - Replaced the Summary Table's generic page with Mochi's furnished study: garden window, bookcase, writing desk, reading chair, woven basket, rug, plants and tea. Every para-summary is a scattered paper; unique correct answers gather them into neat bundles across eight tier corners. Completed corners earn little keepsake stars, and saved progress gradually clears the room without being undone by later mistakes.

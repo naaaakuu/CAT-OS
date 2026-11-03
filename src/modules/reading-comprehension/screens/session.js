@@ -243,16 +243,16 @@ export async function renderSession(outlet, { storage }, params) {
     window.addEventListener('hashchange', stop);
 
     outlet.innerHTML = `
-      <section class="run">
+      <section class="run run--rc">
         ${barHTML('Reading')}
         <div class="run__track"><i id="read-fill" style="width:0%"></i></div>
         <div class="run__body">
           <cat-passage></cat-passage>
           ${realSource ? `<p class="hint brief__source">From ${escapeHTML(realSource)}. Public domain.</p>` : ''}
-          <div class="run__actions">
-            <button class="g-btn g-btn--primary" id="to-questions">On to the ${session.total} questions</button>
-          </div>
         </div>
+        <div class="rc-dock"><div class="run__actions">
+          <button class="g-btn g-btn--primary" id="to-questions">Answer ${session.total} questions</button>
+        </div></div>
       </section>`;
     outlet.querySelector('cat-passage').passage = passage.passage;
     requestAnimationFrame(tickClock);
@@ -287,20 +287,23 @@ export async function renderSession(outlet, { storage }, params) {
     /* ---------------- ANSWERING ---------------- */
     function renderQuestions() {
       outlet.innerHTML = `
-        <section class="run">
+        <section class="run run--rc">
           ${barHTML(`Question <b id="q-pos">1</b> of ${session.total}`)}
           <div class="run__track"><i id="q-fill" style="width:0%"></i></div>
           <div class="run__body run__qa">
             <details class="reread" ${WIDE.matches ? 'open' : ''}>
-              <summary>Re-read the passage</summary>
+              <summary>Read the passage</summary>
               <div class="reread__body"><cat-passage></cat-passage></div>
             </details>
             <p class="sr-only" id="run-said" role="status" aria-live="polite"></p>
             <div class="card">
               <cat-question-card></cat-question-card>
               <div id="explanation-slot" tabindex="-1"></div>
-              <div class="run__actions" id="actions"></div>
             </div>
+          </div>
+          <div class="rc-dock">
+            <button class="g-btn" id="back-to-question">Back to question</button>
+            <div class="run__actions" id="actions"></div>
           </div>
         </section>`;
       outlet.querySelector('cat-passage').passage = passage.passage;
@@ -325,6 +328,10 @@ export async function renderSession(outlet, { storage }, params) {
       const pos = outlet.querySelector('#q-pos');
       const actions = outlet.querySelector('#actions');
       const explanationSlot = outlet.querySelector('#explanation-slot');
+      outlet.querySelector('#back-to-question').addEventListener('click', () => {
+        rereadFold.open = false;
+        focusContent(explanationSlot.children.length ? explanationSlot : card.querySelector('.stem'), { scroll: true });
+      });
       const said = outlet.querySelector('#run-said');
       const say = (line) => { if (said) said.textContent = line; };
       let selected = null;
@@ -333,6 +340,7 @@ export async function renderSession(outlet, { storage }, params) {
 
       function showQuestion() {
         selected = null;
+        rereadFold.open = WIDE.matches;
         explanationSlot.innerHTML = '';
         card.question = session.current;
         pos.textContent = String(session.index + 1);
@@ -350,7 +358,7 @@ export async function renderSession(outlet, { storage }, params) {
       }
       function syncActions(mode) {
         if (mode === 'answering') {
-          actions.innerHTML = `<button class="g-btn" id="skip">Set aside</button><button class="g-btn g-btn--primary" id="submit" ${selected ? '' : 'disabled'}>Lock it in</button>`;
+          actions.innerHTML = `<button class="g-btn rc-skip" id="skip">Skip</button><button class="g-btn g-btn--primary" id="submit" ${selected ? '' : 'disabled'}>Check answer</button>`;
           actions.querySelector('#submit').addEventListener('click', onSubmit);
           actions.querySelector('#skip').addEventListener('click', onSkip);
         } else {
@@ -434,13 +442,13 @@ export async function renderSession(outlet, { storage }, params) {
       let change = null, setsDone = [];
       try { if (before) { const records = await loadWorldRecords(storage); const after = deriveWorldState(before.content, records); change = petChangeLine(before.state, after); setsDone = newlyFinished(before.state, after, before.content); } } catch { /* fine */ }
 
-      const mentorHTML = lesson ? `
+      // A clean run needs its reward, not the same generic lecture again.
+      // Keep the lesson record for recall; show a tip after a missed answer.
+      const mentorHTML = lesson && s.answers.some((a) => a.is_correct === false) ? `
         <div class="result__mentor">
-          <p class="label">Your mentor · ${escapeHTML(lesson.title)}</p>
-          <p class="opening">${escapeHTML(lesson.opening)}</p>
+          <p class="label">A reading tip</p>
           ${gated(`<p>${escapeHTML(lesson.teach.moment)}</p>
-          <details><summary>${lesson.lesson_kind === 'watch' ? 'Why the brain goes there' : 'Worth keeping'}</summary><p style="margin-top:8px">${escapeHTML(lesson.teach.pull)}</p><p>${escapeHTML(lesson.teach.notice)}</p>${lesson.teach.known ? `<p><i>${escapeHTML(lesson.teach.known)}</i></p>` : ''}</details>`, LESSON)}
-          <p style="margin-top:8px"><i>${escapeHTML(lesson.closing)}</i></p>
+          <details><summary>More about this tip</summary><p style="margin-top:8px">${escapeHTML(lesson.teach.pull)}</p><p>${escapeHTML(lesson.teach.notice)}</p>${lesson.teach.known ? `<p><i>${escapeHTML(lesson.teach.known)}</i></p>` : ''}</details>`, LESSON)}
         </div>` : '';
       /* WHAT THE LEDGER HAS NOTICED.
          The trap ledger has counted every option this learner has fallen for
@@ -482,8 +490,8 @@ export async function renderSession(outlet, { storage }, params) {
            Chai moves on (world/screens/library.js). The village's party for
            this run still waits there for twenty minutes. */
         actions: [
-          { label: 'See your book on the shelf', href: '#/world/place/reading-room', primary: true },
-          { label: isUnlocked(`explain:${passage.meta.id}`) ? 'Explain this passage simply' : 'Explain this passage simply (short video)', href: `#/rc/mentor/${passage.meta.id}` },
+          { label: 'Back to the library', href: '#/world/place/reading-room', primary: true },
+          { label: isUnlocked(`explain:${passage.meta.id}`) ? 'Explain the passage' : 'Explain the passage (short video)', href: `#/rc/mentor/${passage.meta.id}` },
           { label: 'Back to the village', href: '#/world', quiet: true },
         ],
       });

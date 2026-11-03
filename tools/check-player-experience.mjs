@@ -232,6 +232,7 @@ export async function checkPlayerExperience({ matrix = true, log = () => {} } = 
 
     await check('reading, answering, result, and the library return', async () => {
       await goto('#/rc/session/rc-0040'); await tap('#begin'); await tap('#to-questions');
+      assert(await b.evaluate('!document.querySelector(".run__body").contains(document.querySelector("#actions"))'), 'Reading controls still overlay the scrolling lesson');
       await b.evaluate(`window.__clockWrites=0; window.__clockObserver=new MutationObserver(()=>window.__clockWrites++); window.__clockObserver.observe(document.querySelector('#clock'),{childList:true});`);
       await sleep(1100);
       assert(await b.evaluate('window.__clockWrites > 0 && window.__clockWrites < 10'), 'The lesson clock is stalled or needlessly redrawn every frame');
@@ -242,6 +243,10 @@ export async function checkPlayerExperience({ matrix = true, log = () => {} } = 
           const verdict = await text('cat-explanation .verdict');
           await b.open(server.url + '#/rc/session/rc-0040', 700); await tap('#begin'); await waitFor('#next');
           assert(await text('cat-explanation .verdict') === verdict, 'A locked reading answer became an unanswered question after reload');
+          await tap('cat-explanation .evidence');
+          assert(await has('.reread[open] .p-flash'), 'The supporting paragraph did not open');
+          await tap('#back-to-question');
+          assert(!await has('.reread[open]'), 'Back to question left the passage expanded');
         }
         assert(await b.evaluate('document.activeElement.id === "explanation-slot"'), 'Focus did not follow the reading explanation');
         await tap('#next');
@@ -251,14 +256,16 @@ export async function checkPlayerExperience({ matrix = true, log = () => {} } = 
       await waitFor('.libroom__shelves');
     });
 
-    await check('reflection writing, saving, and rewriting', async () => {
+    await check('passage help needs no typing and keeps explanations accessible', async () => {
       await goto('#/rc/mentor/rc-0040');
-      await tap('cat-reflection textarea');
-      await b.send('Input.insertText', {text:'A proof can persuade and certify in different ways.'});
-      await tap('cat-reflection #keep'); await waitFor('cat-reflection .kept');
-      assert(await b.evaluate('document.activeElement.classList.contains("kept")'), 'Saving a reflection lost the reader’s place');
-      await tap('cat-reflection #edit');
-      assert(await b.evaluate('document.activeElement.matches("cat-reflection textarea")'), 'Rewrite did not return to the writing');
+      assert(!await has('cat-reflection, textarea, .mentor__reflect-q'), 'Passage help still asks the reader to write');
+      assert(await has('.mentor__one-line') && await has('.journey'), 'The main idea or paragraph explanation is missing');
+      await tap('.mentor__story > summary');
+      assert(await has('.mentor__story[open] .mentor__plain'), 'The simpler retelling cannot be opened');
+      await tap('.mentor__deeper > summary');
+      assert(await has('.mentor__deeper[open] .vocab'), 'The detailed explanation or vocabulary cannot be opened');
+      await tap('.mentor-actions a[href="#/world/place/reading-room"]');
+      await waitFor('.libroom__shelves');
     });
 
     await check('backup and reset can be dismissed without changing progress', async () => {

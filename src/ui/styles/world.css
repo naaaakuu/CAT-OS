@@ -1829,6 +1829,42 @@
 .run__body { max-width: none; padding-left: max(18px, calc((100% - 604px) / 2)); padding-right: max(18px, calc((100% - 604px) / 2)); }
 .run { animation-fill-mode: backwards; }
 .run__body { min-height: 0; scroll-padding-top: 18px; }
+/* Reading has its own dock below the scroller. It never covers an option
+   or fades out the last line of an explanation. */
+.run--rc .run__body { scroll-padding-bottom: 24px; padding-bottom: 24px; }
+.run--rc .run__body > *:last-child { margin-bottom: 0; }
+.run--rc .rc-dock {
+  flex: none; padding: 10px max(18px, calc((100% - 604px) / 2)) calc(10px + env(safe-area-inset-bottom));
+  background: var(--g-paper-2); border-top: 1px solid var(--g-line);
+}
+.run--rc .rc-dock .run__actions { position: static; margin: 0; padding: 0; background: none; }
+.run--rc .rc-dock .g-btn { min-height: 50px; }
+.run--rc .rc-dock .rc-skip { flex: 0 0 auto; min-width: 68px; border-color: transparent; background: transparent; }
+.run--rc #back-to-question { display: none; width: 100%; }
+.run--rc .run__qa > .card { padding-bottom: 16px; }
+.run--rc cat-explanation .verdict { scroll-margin-top: 16px; }
+@media (max-width: 63.999rem) {
+  .run--rc:has(.reread[open]) .rc-dock #actions { display: none; }
+  .run--rc:has(.reread[open]) #back-to-question { display: block; }
+}
+.screen--rc-explained .mentor__hero { text-align: left; padding-top: 8px; padding-bottom: 20px; }
+.screen--rc-explained .mentor__art { justify-content: flex-start; margin: 0 0 12px; }
+.screen--rc-explained .mentor__art svg { width: 44px; height: 44px; }
+.screen--rc-explained .mentor__simple { padding: 0; background: none; }
+.screen--rc-explained .mentor__mark h2 { font-size: 14px; letter-spacing: 0; text-transform: none; }
+.screen--rc-explained .mentor__one-line { font-size: var(--text-read); line-height: 1.6; }
+.screen--rc-explained .journey .note, .screen--rc-explained .mentor__view { font-size: var(--text-read); line-height: 1.65; color: var(--color-ink); }
+.run--rc cat-explanation p { font-size: var(--text-read); line-height: 1.6; }
+.screen--rc-explained .mentor__story { margin: 18px 0; }
+.screen--rc-explained .mentor__story > summary { min-height: 44px; display: flex; align-items: center; cursor: pointer; color: var(--color-accent); font-weight: 600; }
+.screen--rc-explained .mentor__story > summary::before { content: '+'; margin-right: 10px; }
+.screen--rc-explained .mentor__story[open] > summary::before { content: '−'; }
+.screen--rc-explained .mentor-actions .session-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.screen--rc-explained .mentor-actions .session-actions > a { flex: 1 1 200px; min-height: 48px; text-align: center; }
+@keyframes rc-question-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: no-preference) {
+  :root:not([data-reduced-motion]) .run--rc cat-question-card .stem { animation: rc-question-in 180ms ease-out; }
+}
 .vround__feedback > p { margin-bottom: 8px; }
 .vround__verdict { font-weight: 700; color: var(--g-ink); }
 .vround__next { width: 100%; margin-top: 8px; }

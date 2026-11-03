@@ -1,23 +1,9 @@
 /**
  * <cat-explanation> — what you are told the moment after you answer.
  *
- * Rewritten around one rule: a learner who has just got a question wrong
- * will read four lines and will not read fourteen. Everything that used
- * to appear at once now appears in order of what actually changes their
- * next answer:
- *
- *   1. THE VERDICT     right or not, and what the answer was.
- *   2. THE TRAP        why the option THEY chose was built to tempt them.
- *                      This is first after a wrong answer, because it is
- *                      the one thing that changes the next one. A reader
- *                      who has just missed a question will read one box.
- *   3. WHY             one sentence on how a strong reader gets there.
- *   4. [Show the full working] — the reasoning in full, the evidence
- *      paragraph, every other distractor, and the habit worth keeping.
- *
- * Nothing is removed: the teardown that used to be mandatory is still
- * here, one tap away, for the learner who wants it. It is the default
- * that changed, because the default is what gets read.
+ * Verdict, complete reasoning, the chosen distractor, and a direct link
+ * to the supporting paragraph. Other options and reading advice fold
+ * below. Never split a sentence to make the explanation look shorter.
  *
  * Presentation only: set `.data = { question, chosen }`.
  *
@@ -130,21 +116,6 @@ export function trapName(key) {
   return TRAP_NAME[key] ?? String(key ?? '').replaceAll('_', ' ');
 }
 
-/** One sentence, at most — the rest is waiting behind the working. The cut
- *  has to read as a finished thought: an explanation that stops on a
- *  semicolon looks like a bug, not like brevity. */
-function firstSentence(text, max = 190) {
-  const t = String(text ?? '').trim();
-  if (t.length <= max) return { head: t, rest: '' };
-  const cut = t.slice(0, max);
-  const stop = Math.max(cut.lastIndexOf('. '), cut.lastIndexOf('; '));
-  const at = stop > max * 0.45 ? stop + 1 : cut.lastIndexOf(' ');
-  let head = t.slice(0, at).trim().replace(/[;,:—–-]+$/, '');
-  const rest = t.slice(at).trim();
-  if (head && !/[.!?]$/.test(head)) head += rest ? '…' : '.';
-  return { head, rest };
-}
-
 class CatExplanation extends HTMLElement {
   #q = null;
   #chosen = null;
@@ -164,20 +135,18 @@ class CatExplanation extends HTMLElement {
     const mine = distractors.find((d) => d.option === chosen) ?? null;
     const others = distractors.filter((d) => d.option !== chosen);
     const habit = ex.reading_habit ?? ex.question_type_note ?? '';
-    // A wrong answer already has the trap to read; the "why" beside it is
-    // a short second line, not a paragraph. A right answer has no trap, so
-    // the reasoning is the whole of what is worth reading.
-    const why = firstSentence(ex.correct_reasoning, correct ? 200 : 130);
+    // An explanation must finish its thought. Splitting it at a character
+    // limit hid the conclusion behind another tap and left fragments there.
+    const why = String(ex.correct_reasoning ?? '').trim();
 
-    const WHY_HTML = why.head ? `
+    const WHY_HTML = why ? `
         <div class="block">
-          <div class="label">${correct ? 'Why' : 'Why ' + escapeHTML(q.correct) + ' is right'}</div>
-          <p>${escapeHTML(why.head)}</p>
+          <div class="label">Why ${escapeHTML(q.correct)} is right</div>
+          <p>${escapeHTML(why)}</p>
         </div>` : '';
     const TRAP_HTML = mine ? `
         <div class="block trap">
-          <div class="label">The trap</div>
-          ${mine.trap_type ? `<span class="trap__kind">${escapeHTML(TRAP_NAME[mine.trap_type] ?? String(mine.trap_type).replaceAll('_', ' '))}</span>` : ''}
+          <div class="label">Why ${escapeHTML(chosen)} doesn't fit</div>
           <p>${escapeHTML(mine.why_wrong)}</p>
         </div>` : '';
 
@@ -199,6 +168,7 @@ class CatExplanation extends HTMLElement {
         cat-explanation .verdict.is-wrong   .verdict__word { color: var(--color-wrong-ink); }
         cat-explanation .verdict__answer { font-size: var(--text-sm); color: var(--color-ink-2); }
         cat-explanation .verdict__answer b { color: var(--color-ink); }
+        cat-explanation .answer-text { margin: 0 0 var(--space-4); padding-left: var(--space-3); border-left: 2px solid var(--color-correct-ink); color: var(--color-ink-2); }
         cat-explanation .block { margin-bottom: var(--space-4); }
         cat-explanation .label {
           font-size: var(--text-2xs); font-weight: var(--weight-bold);
@@ -218,7 +188,7 @@ class CatExplanation extends HTMLElement {
           margin-top: var(--space-1);
           font: inherit; font-size: var(--text-sm); font-weight: var(--weight-semibold);
           color: var(--color-accent); background: none; border: 0;
-          padding: var(--space-2) 0; cursor: pointer;
+          padding: var(--space-2) 0; min-height: 44px; cursor: pointer;
         }
         cat-explanation .more::after { content: "▾"; font-size: 10px; transition: transform var(--duration-fast) var(--ease-out); }
         cat-explanation .more[aria-expanded="true"]::after { transform: rotate(180deg); }
@@ -227,7 +197,7 @@ class CatExplanation extends HTMLElement {
         cat-explanation .evidence {
           font: inherit; font-size: var(--text-xs); font-weight: var(--weight-semibold);
           color: var(--color-accent); background: none; border: 0;
-          padding: var(--space-2) 0; cursor: pointer; text-align: left;
+          padding: var(--space-2) 0; min-height: 44px; cursor: pointer; text-align: left;
         }
         cat-explanation .distractor { padding: var(--space-3) 0; border-top: 1px solid var(--color-line); }
         cat-explanation .distractor__head { display: flex; align-items: center; gap: var(--space-2); margin-bottom: 2px; }
@@ -270,12 +240,12 @@ class CatExplanation extends HTMLElement {
       ${!isUnlocked() ? lockCard({ text: correct
         ? 'Why the answer holds, the evidence in the passage, and every other option taken apart.'
         : 'Why your pick tempted you, why the answer holds, and every other option taken apart.' }) : `
-      ${correct ? '' : TRAP_HTML}${WHY_HTML}${correct ? TRAP_HTML : ''}
+      ${q.options?.[q.correct] ? `<p class="answer-text">${escapeHTML(q.options[q.correct])}</p>` : ''}
+      ${WHY_HTML}${TRAP_HTML}
+      ${ex.passage_anchor ? `<button type="button" class="evidence" data-anchor="${escapeHTML(ex.passage_anchor)}">Read the supporting paragraph →</button>` : ''}
 
-      <button type="button" class="more" id="more" aria-expanded="false" aria-controls="working">Show the full working</button>
+      <button type="button" class="more" id="more" aria-expanded="false" aria-controls="working">Why the other options don't fit</button>
       <div class="working" id="working" hidden>
-        ${why.rest ? `<div class="block"><p>${escapeHTML(why.rest)}</p></div>` : ''}
-        ${ex.passage_anchor ? `<button type="button" class="evidence" data-anchor="${escapeHTML(ex.passage_anchor)}">¶ Re-read the evidence</button>` : ''}
         ${mine?.seductive_element ? `<div class="block"><div class="label">Why it felt right</div><p style="font-size:var(--text-sm);color:var(--color-ink-2)">${escapeHTML(mine.seductive_element)}</p></div>` : ''}
         ${others.length ? `
           <div class="block">
@@ -306,7 +276,7 @@ class CatExplanation extends HTMLElement {
       const open = more.getAttribute('aria-expanded') === 'true';
       more.setAttribute('aria-expanded', String(!open));
       working.hidden = open;
-      more.firstChild.textContent = open ? 'Show the full working' : 'Hide the working';
+      more.firstChild.textContent = open ? "Why the other options don't fit" : 'Hide other options';
     });
   }
 }

@@ -2100,7 +2100,7 @@ console.log('\n17. The welcome, the map and the art (companion · pins · art ·
     const b0 = problems.length;
     const src = readFileSync(join(root, 'src/ui/components/cat-explanation.js'), 'utf8');
     if (!/class="working" id="working" hidden/.test(src)) bad('feedback: the full teardown is not hidden by default');
-    if (!/THE TRAP|class="label">The trap/.test(src)) bad('feedback: the trap the learner fell into is not named');
+    if (!/Why \$\{escapeHTML\(chosen\)\} doesn't fit/.test(src) || !src.includes('mine.why_wrong')) bad('feedback: the chosen option has no explanation');
     // Every trap type the corpus uses must have a human name, or the screen
     // shows a database value to a person.
     const names = src.slice(src.indexOf('const TRAP_NAME = {'), src.indexOf('};', src.indexOf('const TRAP_NAME = {')));

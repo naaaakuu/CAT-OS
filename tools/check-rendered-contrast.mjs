@@ -82,24 +82,25 @@ export const ROUTES = [
   /* A Foundation passage: the shelf every learner can open (Chai's library
      locks a shelf until half the one below it is read, journey.js). */
   { hash: '#/rc/session/rc-0040', name: 'rc-question', risk: true, enter: [
-    { click: 'begin', wait: 900 },
-    { click: 'on to the', wait: 1100 },
+    { sel: '#begin', wait: 900 },
+    { sel: '#to-questions', wait: 1100 },
   ] },
   { hash: '#/rc/session/rc-0040', name: 'rc-explained', risk: true, enter: [
-    { click: 'begin', wait: 900 },
-    { click: 'on to the', wait: 1100 },
+    { sel: '#begin', wait: 900 },
+    { sel: '#to-questions', wait: 1100 },
     { sel: 'cat-option button', wait: 400 },
-    { click: 'lock it in', wait: 1100 },
+    { sel: '#submit', wait: 1100 },
   ] },
   /* The result every run ends on: the host pet's home behind a warm veil,
      the pet with its gifts, the mentor. Three questions set aside gets there. */
   { hash: '#/rc/session/rc-0040', name: 'rc-result', risk: true, enter: [
-    { click: 'begin', wait: 900 },
-    { click: 'on to the', wait: 1100 },
-    ...[1, 2].flatMap(() => [{ click: 'set aside', wait: 500 }, { click: 'next question', wait: 700 }]),
-    { click: 'set aside', wait: 500 },
-    { click: 'see the result', wait: 4200 },
+    { sel: '#begin', wait: 900 },
+    { sel: '#to-questions', wait: 1100 },
+    ...[1, 2].flatMap(() => [{ sel: '#skip', wait: 500 }, { sel: '#next', wait: 700 }]),
+    { sel: '#skip', wait: 500 },
+    { sel: '#next', wait: 4200 },
   ] },
+  { hash: '#/rc/mentor/rc-0040', name: 'rc-mentor', risk: true },
   /* A book on a shelf that has not opened yet says so, and how to open it. */
   { hash: '#/rc/session/rc-0008', name: 'rc-locked' },
 ];

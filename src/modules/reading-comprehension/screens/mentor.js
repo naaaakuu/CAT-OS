@@ -2,10 +2,9 @@
  * mentor.js (screen) — the Learning Page: what turns "I scored 4/5"
  * into "I understand this now." One of CAT OS's signature surfaces.
  *
- * 3.2: it opens on "Explained simply" (mentor.eli10): the big idea, the
- * passage told the way you would tell a ten-year-old, one line per
- * paragraph, and what the writer thinks. Everything below folds under "Go
- * deeper". In the app the whole page opens with one short rewarded video
+ * It opens with the main idea, one line per paragraph and the writer's
+ * view. The simpler retelling and detailed argument notes fold below.
+ * There is no writing exercise. In the app it opens with a rewarded video
  * (core/ads/rewarded.js); on the web it is free.
  *
  * Design intent (0.6.0): a chapter from a beautiful book. A calm
@@ -22,22 +21,18 @@
  *   Keep this forever               (the one pull-quote the page earns)
  *   Where life will show you this again
  *
- * …then "What you learned today" (derived from this session, never
- * generic) and an optional reflection kept on-device (learning store).
+ * Existing reflection records stay in storage, without a writing UI.
  *
  * Route: /rc/mentor/:id (from results, review, and the library).
  */
 
 import { loadRCPassage } from '../../../core/content-loader/loader.js';
-import { icon } from '../../../world/icons.js';
-import { latestSessionFor, getReflection, saveReflection } from '../logic/store.js';
+import { latestSessionFor } from '../logic/store.js';
 import { findSeedableForPassage, plantSeed } from '../../../core/engine/garden-gate.js';
 import { SEED_LINES } from '../../../core/mentor/garden-voice.js';
 import { escapeHTML } from '../../../core/utils/format.js';
 import { toast } from '../../../ui/components/cat-toast.js';
-import { cue } from '../../../core/engagement/feedback.js';
 import { isUnlocked, lockCard } from '../../../core/ads/rewarded.js';
-import '../../../ui/components/cat-reflection.js';
 
 /* ------------------------------------------------------------------ */
 /* The app's only artwork: one quiet line-motif per PASSAGE, drawn to
@@ -294,13 +289,9 @@ function prose(text) {
 export async function renderMentor(outlet, { storage }, params) {
   let item;
   let last = null;
-  let reflection = null;
   try {
     item = await loadRCPassage(params.id);
-    [last, reflection] = await Promise.all([
-      latestSessionFor(storage, params.id),
-      getReflection(storage, params.id),
-    ]);
+    last = await latestSessionFor(storage, params.id);
   } catch (err) {
     outlet.innerHTML = `<section class="screen"><h1>Can't open the Learning Page</h1>
       <div class="card"><p>${escapeHTML(err.message)}</p>
@@ -358,37 +349,19 @@ export async function renderMentor(outlet, { storage }, params) {
   // Learning Page opened on a blank screen. The page is the point; the
   // offer is a quiet extra. It arrives when it arrives (below).
 
-  const skills = item.meta.skills ?? [];
-  const skillLabel = (s) => s.replaceAll('-', ' ');
   const paragraphsById = new Map(item.passage.paragraphs.map((p) => [p.id, p]));
 
-  /* "What you learned today" is derived, never generic: this passage,
-     this session. */
-  const learnedRows = [
-    // Four typographic marks — ¶ ◎ ∎ ✓ — in a product whose icon language
-    // says every icon is painted by the same hand as the village.
-    { icon: icon('scroll', { size: 20 }), label: 'Concept understood', hint: item.meta.theme },
-    ...(skills.length ? [{ icon: icon('page', { size: 20 }), label: 'Reading skills practiced',
-      hint: skills.map(skillLabel).join(' · ') }] : []),
-    ...(vocab.length ? [{ icon: icon('seed', { size: 20 }), label: `Vocabulary gained · ${vocab.length} words`,
-      hint: vocab.map((v) => v.word).join(', ') }] : []),
-    ...(last ? [{ icon: icon('check', { size: 20 }), label: 'Thinking patterns exercised',
-      hint: [...new Set(item.questions.map((q) => q.type.replaceAll('_', ' ')))].join(' · ') }] : []),
-  ];
-
   outlet.innerHTML = `
-    <section class="screen">
+    <section class="screen screen--rc-explained">
       <div class="session-bar">
-        <a href="#/world/place/reading-room">← The Reading House</a>
+        <a href="#/world/place/reading-room">← Library</a>
         ${last ? `<a href="#/rc/review/${item.meta.id}">Your answers</a>` : ''}
       </div>
 
       <article class="mentor">
         <header class="mentor__hero">
-          <div class="mentor__art" aria-hidden="true">
-            <svg viewBox="0 0 72 72">${artFor(item)}</svg>
-          </div>
-          <p class="screen__eyebrow">Learning page · ${escapeHTML(item.meta.genre)} · ${escapeHTML(item.meta.stage ?? '')}</p>
+          <div class="mentor__art" aria-hidden="true"><svg viewBox="0 0 72 72">${artFor(item)}</svg></div>
+          <p class="screen__eyebrow">The passage, explained</p>
           <h1 class="mentor__title">${escapeHTML(item.passage.title)}</h1>
           ${kid ? '' : `<p class="mentor__lede">${escapeHTML(item.meta.theme)}</p>`}
           ${item.meta.source?.publication && item.meta.source.publication !== 'original' ? `<p class="mentor__lede"><i>From ${escapeHTML(item.meta.source.publication)}</i></p>` : ''}
@@ -396,33 +369,30 @@ export async function renderMentor(outlet, { storage }, params) {
 
         ${kid ? `
           <section class="mentor__section mentor__simple">
-            <div class="mentor__mark"><h2>Explained simply</h2><div class="rule"></div></div>
+            <div class="mentor__mark"><h2>The main idea</h2><div class="rule"></div></div>
             <p class="mentor__one-line">${escapeHTML(kid.big_idea)}</p>
-            <div class="mentor__plain">${prose(kid.story)}</div>
-            <h3 class="mentor__subhead">Paragraph by paragraph</h3>
+            <details class="mentor__story"><summary>Read a simpler version</summary><div class="mentor__plain">${prose(kid.story)}</div></details>
+            <h3 class="mentor__subhead">What each paragraph says</h3>
             <ol class="journey">${kid.paragraphs.map((line, i) => `<li data-n="${i + 1}"><p class="note">${escapeHTML(line)}</p></li>`).join('')}</ol>
-            <p class="mentor__view"><b>What the writer thinks.</b> ${escapeHTML(kid.author_view)}</p>
+            <p class="mentor__view"><b>The writer's view.</b> ${escapeHTML(kid.author_view)}</p>
           </section>` : ''}
 
         <details class="mentor__deeper"${kid ? '' : ' open'}>
-        <summary>Go deeper: the full breakdown</summary>
+        <summary>More about the argument and vocabulary</summary>
 
-        ${section('What was this actually about?', `
-          <details class="mentor__recall">
-            <summary>First, try to say it in your own words: then open</summary>
-            <div class="mentor__reveal">
+        ${section('The main argument', `
+            <div>
               ${mentor.one_sentence_summary
                 ? `<p class="mentor__one-line">${escapeHTML(mentor.one_sentence_summary)}</p>` : ''}
               <p>${escapeHTML(mentor.main_idea)}</p>
-            </div>
-          </details>`)}
+            </div>`)}
 
         ${mentor.simple_explanation ? section('The passage, retold in full', `
           <div class="mentor__plain">${prose(mentor.simple_explanation)}</div>`) : ''}
 
         ${section('What was the author doing?', `<p>${escapeHTML(mentor.author_intention)}</p>`)}
 
-        ${section('The journey, paragraph by paragraph', `
+        ${section('How the paragraphs connect', `
           <ol class="journey">
             ${mentor.paragraph_journey.map((j, i) => `
               <li data-n="${i + 1}">
@@ -435,7 +405,7 @@ export async function renderMentor(outlet, { storage }, params) {
         ${section('Where the argument turns', `
           ${mentor.key_transitions.map((t) => `<p>${escapeHTML(t)}</p>`).join('')}`)}
 
-        ${section('How the voice moves', `<p>${escapeHTML(mentor.tone_progression)}</p>`)}
+        ${section('The writer’s tone', `<p>${escapeHTML(mentor.tone_progression)}</p>`)}
 
         ${mentor.why_difficult ? section('Why this passage was difficult', `
           <p>${escapeHTML(mentor.why_difficult)}</p>`) : ''}
@@ -443,7 +413,7 @@ export async function renderMentor(outlet, { storage }, params) {
         ${mentor.misunderstanding ? section('Why readers misread it', `
           <p>${escapeHTML(mentor.misunderstanding)}</p>`) : ''}
 
-        ${section('The traps, as advice', `<p>${escapeHTML(mentor.traps_summary)}</p>`)}
+        ${section('What to watch for in the answers', `<p>${escapeHTML(mentor.traps_summary)}</p>`)}
 
         ${mentor.reading_lesson ? section('The reading lesson', `
           <div class="mentor__lesson"><p>${escapeHTML(mentor.reading_lesson)}</p></div>`) : ''}
@@ -458,41 +428,19 @@ export async function renderMentor(outlet, { storage }, params) {
               </div>`).join('')}
           </div>`) : ''}
 
-        ${section('Keep this forever', `
+        ${section('One thing to remember', `
           <blockquote class="mentor__keep">${escapeHTML(mentor.takeaway)}</blockquote>`)}
 
-        ${section('Where life will show you this again', `<p>${escapeHTML(mentor.real_world)}</p>`)}
+        ${section('An everyday example', `<p>${escapeHTML(mentor.real_world)}</p>`)}
         </details>
       </article>
 
       <div class="mentor-actions">
-        <div class="card">
-          <h2>What you learned today</h2>
-          ${learnedRows.map((r) => `
-            <div class="row">
-              <div class="row__lead">
-                <span class="row__icon" aria-hidden="true">${r.icon}</span>
-                <div>
-                  <div class="row__label">${escapeHTML(r.label)}</div>
-                  <div class="row__hint">${escapeHTML(r.hint)}</div>
-                </div>
-              </div>
-            </div>`).join('')}
-        </div>
-
-        ${mentor.reflection_question ? `
-          <div class="mentor__reflect-q">
-            <span class="mentor__reflect-eyebrow">A question to sit with</span>
-            <p>${escapeHTML(mentor.reflection_question)}</p>
-          </div>` : ''}
-
-        <cat-reflection></cat-reflection>
-
         <div class="session-actions">
           ${last
             ? `<a class="btn" href="#/rc/review/${item.meta.id}">Review answers</a>`
             : `<a class="btn" href="#/rc/session/${item.meta.id}">Practice this passage</a>`}
-          <a class="btn btn--primary" href="#/world/place/reading-room">Next passage</a>
+          <a class="btn btn--primary" href="#/world/place/reading-room">Back to the library</a>
         </div>
       </div>
     </section>
@@ -545,18 +493,4 @@ export async function renderMentor(outlet, { storage }, params) {
     })();
   }
 
-  /* Reflection: presentation in the component, persistence here (Rule 6). */
-  const reflectionEl = outlet.querySelector('cat-reflection');
-  reflectionEl.reflection = reflection;
-  reflectionEl.addEventListener('cat-reflection-save', async (e) => {
-    try {
-      const record = await saveReflection(storage, item.meta.id, e.detail);
-      reflectionEl.reflection = record;
-      cue('reflect'); // a warm confirmation — the reflection is kept
-      toast('Kept: it stays on this device.', 'info', { mute: true });
-    } catch (err) {
-      console.error('[CAT OS]', err);
-      toast('Could not save the reflection.', 'error');
-    }
-  });
 }
