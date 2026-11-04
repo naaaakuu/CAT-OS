@@ -185,15 +185,21 @@ export async function checkPlayerExperience({ matrix = true, log = () => {} } = 
 
     await check('a word round waits, completes, and replays twice', async () => {
       await goto('#/round/meadow');
-      assert(await b.evaluate('getComputedStyle(document.querySelector("#pace")).display === "none"'), 'The unstarted clock is visible');
+      assert(!await has('#pace'), 'The recall session should have no pace clock');
       for (let replay = 0; replay < 2; replay += 1) {
         await tap('#begin');
         const total = Number((await text('#run-what')).match(/of (\d+)/)?.[1]);
-        assert(total > 0, 'The round has no questions');
-        for (let i = 0; i < total; i += 1) {
+        assert(total > 0 && total <= 10, 'The recall session has more than ten words or no words');
+        const meanings = new Map();
+        for (let i = 0; i < 60 && !await has('.gh-complete'); i += 1) {
           const at = await text('#run-what');
-          await tap('.vopt:not(:disabled)');
+          const word = await text('.gh-question-word');
+          const answer = meanings.get(word);
+          const choice = answer ? await b.evaluate(`Array.from(document.querySelectorAll('[data-option]')).findIndex(e=>e.querySelector('span:nth-child(2)').textContent === ${JSON.stringify(answer)})`) : 0;
+          assert(choice >= 0, 'The learned meaning disappeared on a return visit');
+          await tap(`[data-option="${choice}"]`);
           await waitFor('#word-next');
+          meanings.set(word, await text('.gh-option.is-correct>span:nth-child(2)'));
           if (replay === 0 && i === 0) {
             await sleep(2400);
             assert(await text('#run-what') === at, 'The explanation advanced before the player continued');
@@ -201,8 +207,14 @@ export async function checkPlayerExperience({ matrix = true, log = () => {} } = 
           }
           await tap('#word-next');
         }
-        await waitFor('.result');
+        await waitFor('.gh-complete');
+        assert(await has('.gh-recall-leaf.is-green') && !await has('.gh-recall-leaf.is-yellow'), 'The completed session still has yellow leaves');
         await tap('.result__actions a');
+        await waitFor('.gh-house');
+        await tap('#gh-words');
+        await waitFor('.gh-dialog[open] .gh-word-row.is-green');
+        assert(await b.evaluate('window.__catosBack() && !document.querySelector(".gh-dialog[open]")'), 'Android Back did not close the word journal');
+        await tap('.gh-dock .gh-start');
         await waitFor('#begin');
       }
       await tap('#begin'); await tap('.vopt');

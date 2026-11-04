@@ -31,6 +31,10 @@ import { infoButton } from '../../ui/info.js';
 const KEYS = ['A', 'B', 'C', 'D', 'E'];
 
 export async function renderRound(outlet, { storage }, params) {
+  if (params.region === 'meadow') {
+    const room = await import('./greenhouse-practice.js');
+    return room.renderGreenhousePractice(outlet, { storage }, params);
+  }
   const arrivedAt = location.hash;
   const region = regionBySlug(params.region);
   // replace(), not a hash assignment: a bad address pushed a history entry,

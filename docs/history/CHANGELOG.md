@@ -4,6 +4,13 @@
 > Versions here are app releases; they map onto the capability milestones in
 > `PROJECT_ROADMAP.md` (0.x releases build toward Roadmap V1.0).
 
+## 3.16.0: Matcha's Glasshouse (2026-11-04)
+
+- Replaced the Meadow with a sunlit painted greenhouse, Matcha's mascot, and High/Medium/Low frequency collections of citrus, jasmine and ferns. Every A–Z bed shows real learned/total counts and proportional growth. Due leaves turn yellow; a completed review restores green. Missing letters remain empty beds rather than invented words.
+- Practice introduces at most ten words, one at a time, without a timer. Every word needs two consecutive correct recalls. Misses show the meaning gently, reset that word's recall count, and return in shuffled later passes. Optional meanings/examples, per-answer pause/resume, retryable saving and a paginated searchable word journal keep daily visits practical. Rehearsals cannot inflate mastery spacing or rewards. All existing vocabulary routes and records remain compatible.
+- Added pure recall/growth checks and updated the vocabulary player-flow regression for the new two-recall experience. Mobile browser testing covered missed-word recovery, shuffled returns, session completion, saved growth, pause/resume and the journal. The illustration was made with built-in image generation: sunlit green iron glasshouse, trailing foliage, clear oak bench, painterly storybook texture, no text or characters (`assets/art/matcha-glasshouse.jpg`).
+- Validation: the standard repository sweep passed, including 19 player flows and 2,722 rendered text runs in both themes. Thirty focused model assertions and the separate Android-sized browser regression cover 320/360/412 px layouts, all three A–Z collections, touch targets, native journal Back, single-word beds with four options, refresh/resume and yellow-to-green review recovery. These are browser simulations; no Android APK/AAB was built or installed for this change. `tools/greenhouse-design-preview.html` shows explicitly labelled sample progress without changing learner records.
+
 ## 3.15.0 follow-up: Mochi's Little Worlds (2026-11-04)
 
 - Replaced the paper-cleanup room with a warm conservatory of eight miniature worlds. Unique correct summaries grow permanent blooms; quarter-world milestones fill out the plants and completed worlds welcome tiny residents. Mochi accepts pets and tea, shelters under a leaf in rain, befriends a butterfly, watches fireflies and naps. Play never changes learning progress.

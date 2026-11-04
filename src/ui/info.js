@@ -65,7 +65,7 @@ export const SUBJECT_INFO = Object.freeze({
     title: 'Vocabulary',
     lines: [
       'CAT no longer asks word meanings directly, but every passage is full of hard words.',
-      'Rounds of twelve words, many inside a real sentence. The ones that slip come back later.',
+      'In Matcha’s Glasshouse, practise ten words and recall each twice. Words in context and confusable pairs have their own rounds.',
     ],
     tip: 'Guess from the sentence first, then check. That is how the exam makes you read.',
   },

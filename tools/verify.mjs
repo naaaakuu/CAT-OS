@@ -2523,6 +2523,10 @@ console.log('\n32. Mochi’s room is derived from learning records (tools/check-
   }
 }
 
+console.log('\n33. Matcha’s recall loop and proportional plant growth (tools/check-greenhouse.mjs)');
+try { await mod('tools/check-greenhouse.mjs'); ok('Ten-word limit, shuffled returns, two consecutive recalls, drafts, spacing and growth'); }
+catch (e) { bad('Glasshouse: ' + e.message); }
+
 console.log('\n─────────────────────────────────────');
 if (problems.length === 0) {
   console.log('✓ Repository is internally consistent.\n');

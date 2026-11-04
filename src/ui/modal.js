@@ -26,6 +26,8 @@ export function dismissTopLayer() {
     const popover = [...document.querySelectorAll(':popover-open')].at(-1);
     if (popover) { popover.hidePopover(); return true; }
   } catch { /* older WebViews have no Popover API */ }
+  const nativeDialog = [...document.querySelectorAll('dialog[open]')].at(-1);
+  if (nativeDialog) { nativeDialog.close(); return true; }
   const modal = modals.at(-1);
   if (!modal) return false;
   modal.close();

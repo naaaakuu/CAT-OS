@@ -113,8 +113,8 @@ function wordsNext(world) {
   const region = (p.due ?? 0) > (m.due ?? 0) ? 'pond' : 'meadow';
   return {
     href: `#/round/${region}`,
-    label: due >= 5 ? 'The words that are fading' : region === 'pond' ? 'Twelve look-alike twins' : 'Twelve words, chosen for you',
-    sub: due >= 5 ? `${due} words are due · about 2 min` : 'Some inside a real sentence · about 2 min',
+    label: due >= 5 ? 'The words that are fading' : region === 'pond' ? 'Twelve look-alike twins' : 'Ten words, chosen for you',
+    sub: due >= 5 ? `${due} words are due · about 2 min` : region === 'pond' ? 'Some inside a real sentence · about 2 min' : 'One word at a time · two good recalls',
     minutes: 2, kind: due >= 5 ? 'retry' : 'new',
   };
 }
@@ -127,7 +127,7 @@ export const LIBRARY_HREF = '#/world/place/reading-room';
  * his next book (owner, 2026-11-01): a "Help Chai" that skipped the shelves is
  * why nobody found them.
  */
-export const startHref = (petId, next, fallback) => (petId === 'chai' ? LIBRARY_HREF : next?.href ?? fallback);
+export const startHref = (petId, next, fallback) => (petId === 'chai' ? LIBRARY_HREF : petId === 'matcha' ? '#/world/place/meadow' : next?.href ?? fallback);
 
 /**
  * @param {string} petId   toffee | chai | matcha | mochi | ginger | mallow | sesame | biscuit
@@ -179,7 +179,7 @@ export function noticeFor(petId, world, next) {
       const due = (state?.meadow?.due ?? 0) + (state?.pond?.due ?? 0) + (state?.thicket?.due ?? 0);
       if (due >= 5) return `${due} of your words are starting to fade. Two minutes and they are safe again.`;
       if ((state?.rootwood?.dueCount ?? 0) > 0) return 'A root family is ready to revisit. Spacing is how roots hold.';
-      if (!(state?.meadow?.met)) return 'Twelve words, picked just for you. Some come inside real CAT sentences.';
+      if (!(state?.meadow?.met)) return 'Ten words, one at a time. Two good recalls help each word take root.';
       return `You know ${state.meadow.known + (state.pond?.known ?? 0) + (state.thicket?.known ?? 0)} words now. Let us grow a few more.`;
     }
     const mods = { mochi: ['ps'], ginger: ['pj'], mallow: ['ooo'], sesame: ['pc'], biscuit: ['sp'] }[petId] ?? [];
@@ -205,7 +205,7 @@ export function cornersOf(petId, world) {
   }
   if (petId === 'matcha') {
     return [
-      c('#/world/place/meadow', 'Word rounds', 'The CAT word lists, twelve at a time'),
+      c('#/world/place/meadow', 'The Glasshouse', 'Ten words, two good recalls, a little more green'),
       c('#/world/place/pond', 'Look-alike twins', 'Words that look alike and mean different things'),
       c('#/world/place/thicket', 'Borrowed words', 'English words that came from other languages'),
       c('#/world/place/rootwood', 'Root families', 'Take one root apart and a family of words opens'),

@@ -1,0 +1,19 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><base href="../"><title>Matcha's Glasshouse · Design preview with sample progress</title>
+<link rel="stylesheet" href="../src/ui/styles/tokens.css"><link rel="stylesheet" href="../src/ui/styles/base.css"><link rel="stylesheet" href="../src/ui/styles/components.css"><link rel="stylesheet" href="../src/ui/styles/home.css"><link rel="stylesheet" href="../src/ui/styles/world.css"><link rel="stylesheet" href="../src/ui/styles/greenhouse.css?final=318">
+<style>body{margin:0}#preview{min-height:100svh}.pet-sprite{background-image:var(--preview-pet)!important}.preview-label{position:fixed;bottom:0;left:0;right:0;z-index:10;text-align:center;pointer-events:none;font:8px system-ui,sans-serif;letter-spacing:.04em;color:#4f624a;background:#faf6e9}</style><div id="preview"></div><div class="preview-label">DESIGN PREVIEW · SAMPLE LEARNING PROGRESS</div>
+<script type="module">
+import { renderGreenhouse } from '../src/world/screens/greenhouse.js?design=3.16.0';
+import { loadWorldContent } from '../src/world/state.js';
+import { loadField } from '../src/world/lexicon.js';
+document.documentElement.setAttribute('data-world','');
+const content = await loadWorldContent();
+const learning = [];
+const samples = [['lex-high-a',58,8],['lex-high-b',12,3],['lex-high-c',21,0],['lex-high-d',64,4],['lex-medium-a',46,3],['lex-medium-b',20,0],['lex-low-a',38,2],['lex-low-b',8,0]];
+for (const [id,n,due] of samples) {
+  const bundle = await loadField('meadow',id);
+  for (const [i,e] of bundle.entries.slice(0,n).entries()) learning.push({id:`lexm:${e.id}`,kind:'lex-mastery',region:'meadow',bundle_id:id,entry_id:e.id,level:2,next_at:new Date(Date.now()+(i<due?-1000:86400000)).toISOString()});
+}
+const storage = {get:async()=>null};
+await renderGreenhouse(document.querySelector('#preview'),{storage,world:{content,records:{learning}},stage:0});
+document.querySelector('.gh-mascot .pet-sprite').style.setProperty('--preview-pet','url("../assets/art/pet-matcha-baby.png")');
+</script></html>

@@ -63,6 +63,13 @@ export async function renderPlace(outlet, { storage }, params) {
   const hostDef = PET_BY_ID.get(host);
   const hostState = state.pets?.pets.find((p) => p.id === host);
 
+  if (region.slug === 'meadow') {
+    const room = await import('./greenhouse.js');
+    await room.greenhouseStyle();
+    if (location.hash !== arrivedAt) return;
+    return room.renderGreenhouse(outlet, { storage, world, stage: hostState?.stage ?? 0 });
+  }
+
   // Mochi's home owns its complete frame, just as Chai's library does.
   // Lazy art and styles keep the village's cold open unchanged.
   if (region.slug === 'table') {

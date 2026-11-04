@@ -68,7 +68,7 @@ const CONTENT_VERSION = 16;
    ALWAYS lands in a new cache, whether or not anybody remembered to bump the
    number above. Nothing used to enforce that bump, and an installed learner
    could sit on old code forever with no symptom anybody could see. */
-const BUILD_ID = '11dd0a312b';
+const BUILD_ID = '873bf5bbe6';
 const CONTENT_ID = 'fa1ec949c0';
 const SHELL_CACHE = `cat-os-shell-v${CACHE_VERSION}.${BUILD_ID}`;
 const CONTENT_CACHE = `cat-os-content-v${CONTENT_VERSION}.${CONTENT_ID}`;
@@ -189,6 +189,7 @@ const SHELL_FILES = [
   './assets/art/home-motion-v1.png',
   './assets/art/home-world-v1.png',
   './assets/art/library-walnut.jpg',
+  './assets/art/matcha-glasshouse.jpg',
   './assets/art/pet-biscuit-baby.png',
   './assets/art/pet-biscuit.png',
   './assets/art/pet-chai-baby.png',
@@ -363,11 +364,13 @@ const SHELL_FILES = [
   './src/ui/components/cat-week-strip.js',
   './src/ui/components/cat-xp-bar.js',
   './src/ui/focus.js',
+  './src/ui/greenhouse-style.js',
   './src/ui/info.js',
   './src/ui/modal.js',
   './src/ui/styles/base.css',
   './src/ui/styles/components.css',
   './src/ui/styles/game.css',
+  './src/ui/styles/greenhouse.css',
   './src/ui/styles/home.css',
   './src/ui/styles/intro.css',
   './src/ui/styles/library.css',
@@ -382,11 +385,15 @@ const SHELL_FILES = [
   './src/world/curator.js',
   './src/world/economy.js',
   './src/world/engine/palette.js',
+  './src/world/greenhouse.js',
   './src/world/icons.js',
   './src/world/index.js',
   './src/world/lexicon.js',
   './src/world/regions.js',
   './src/world/rewards.js',
+  './src/world/screens/greenhouse-art.js',
+  './src/world/screens/greenhouse-practice.js',
+  './src/world/screens/greenhouse.js',
   './src/world/screens/hearth.js',
   './src/world/screens/library.js',
   './src/world/screens/place.js',

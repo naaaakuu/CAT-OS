@@ -29,9 +29,9 @@ export const REGIONS = Object.freeze([
     route: '#/world/place/rootwood', color: '#4E9E4C',
   },
   {
-    slug: 'meadow', name: 'The Meadow', kind: 'learn',
-    line: 'The CAT word lists. Every word you master is a flower that stays.',
-    verb: 'Bloom a field',
+    slug: 'meadow', name: 'The Glasshouse', kind: 'learn',
+    line: 'Ten words at a time. Remember them twice and Matcha’s plants grow.',
+    verb: 'Grow with Matcha',
     skill: 'Vocabulary',
     anchor: { x: 150, y: 428 }, hit: { x: 24, y: 350, w: 250, h: 120 },
     route: '#/world/place/meadow', color: '#A6CF72',
