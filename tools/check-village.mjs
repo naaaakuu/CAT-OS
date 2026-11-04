@@ -127,6 +127,15 @@ try {
   ok(await waitFor(inLibrary, 10000), "Chai's house did not open his library");
   await backToVillage('his house');
 
+  // Matcha shares direct room entry: neither the mascot nor house opens a card.
+  for (const sel of ['.pet[data-pet="matcha"]', '[data-spot="matcha"]']) {
+    await ev(`document.querySelector('${sel}').click()`);
+    ok(await waitFor(`location.hash === '#/world/place/meadow' && !!document.querySelector('.gh-house--immersive')`, 10000), 'Matcha did not open the glasshouse directly');
+    ok(await ev(`!document.querySelector('.cw-card, .gh-hero')`), 'Matcha still has a card or a banner between the learner and the room');
+    await ev(`document.querySelector('.gh-back').click()`);
+    ok(await waitFor(`!!document.querySelector('.cw')?.__village`), 'the greenhouse did not return to the village');
+  }
+
   // Who is who, today's three, the village level, the fire, the cottage.
   for (const [open, sel, n] of [['friends', '.cw-roster li a[href^="#/"]', 8], ['today', '.cw-todo li', 3], ['level', '.cw-road li', 9], ['fire', '.cw-week li', 7], ['cottage', '.cw-toggle', 2]]) {
     await ev(`document.querySelector('[data-open="${open}"]').focus(); document.querySelector('[data-open="${open}"]').click()`);
@@ -205,7 +214,7 @@ try {
   // A wide screen: the card sits on the right, clear of the map's centre.
   await browser.send('Emulation.setDeviceMetricsOverride', { width: 1440, height: 900, deviceScaleFactor: 1, mobile: false });
   await browser.open(`${server.url}#/world`, 2000);
-  await ev(`document.querySelector('.pet[data-pet="matcha"]').click()`);
+  await ev(`document.querySelector('.pet[data-pet="ginger"]').click()`);
   ok(await waitFor(`document.querySelector('.cw-card')?.getBoundingClientRect().left > 900`), 'the desktop card should sit on the right');
 
   if (!quick) {

@@ -34,6 +34,10 @@ try {
     assert(await browser.evaluate(`Array.from(document.querySelectorAll('.gh-tabs button,.gh-back,.gh-nav .info-btn,.gh-dock .gh-start')).every(e=>{const r=e.getBoundingClientRect();return r.width>=44&&r.height>=44})`),'A primary control is smaller than 44 px');
   }
   console.log('ok three frequency gardens, 26 beds each, no overflow and 44 px controls at 320/360/412');
+  assert(await browser.evaluate(`(()=>{const r=document.querySelector('.gh-room-backdrop').getBoundingClientRect();return r.top===0&&r.width===innerWidth&&r.height===innerHeight&&getComputedStyle(document.querySelector('.gh-room-backdrop')).position==='fixed'&&!document.querySelector('.gh-hero')})()`),'The glasshouse must fill the viewport rather than a banner');
+  await browser.send('Input.dispatchMouseEvent',{type:'mouseWheel',x:200,y:500,deltaX:0,deltaY:420});await wait(300);
+  assert(await browser.evaluate(`scrollY>150&&document.querySelector('.gh-room-backdrop').getBoundingClientRect().top===0&&document.querySelector('.gh-room-tools').getBoundingClientRect().top===0`),'Scrolling lost the room or its navigation');
+  console.log('ok nursery benches scroll inside a full-screen glasshouse with fixed navigation');
   await tap('[data-letter="X"]');await until('.gh-dialog[open] #gh-word-list .gh-word-row');
   assert(await browser.evaluate('window.__catosBack()&&!document.querySelector(".gh-dialog[open]")'));
   console.log('ok Android Back closes the journal');
@@ -61,5 +65,15 @@ try {
   await go('#/world/place/meadow','.gh-house');await tap('[data-band="low"]');await tap('#gh-words');await until('.gh-dialog[open] .gh-word-row');
   await shot('word-journal');
   assert(await browser.evaluate('window.__catosBack()&&!document.querySelector(".gh-dialog[open]")'));
+  await browser.evaluate(`(async()=>{${db}const at=new Date().toISOString();await s.put('settings',{id:'valley',value:{name:'Glasshouse checks',awakened_at:at,met_at:at}});await s.put('settings',{id:'motion',value:'reduced'});localStorage.setItem('catos:met-gang','1');sessionStorage.setItem('world:focus','meadow');})()`);
+  for(const selector of ['[data-spot="matcha"]','.pet[data-pet="matcha"]']){
+    await go('#/world','.cw-spot');
+    await browser.evaluate(`document.querySelector('.cw').__village.look(332,470)`);await wait(200);
+    await tap(selector);await until('.gh-house--immersive');
+    assert(!await browser.evaluate('!!document.querySelector(".cw-card,.cw-overlay,.gh-hero")'),'A friend card still stands between the village and Matcha’s room');
+  }
+  await go('#/world','.cw-spot');await tap('[data-open="friends"]');await tap('.cw-roster a[href="#/world/place/meadow"]');await until('.gh-house--immersive');
+  console.log('ok house, Matcha and subject roster enter the glasshouse directly without a friend card');
+  await shot('immersive-room');
   console.log('Glasshouse: focused Android browser checks passed.');
 } finally { await browser.close(); server.close(); }

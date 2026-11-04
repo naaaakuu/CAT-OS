@@ -1,6 +1,6 @@
 import { BANDS, GREENHOUSE_DRAFT, greenhouseBeds, leafState } from '../greenhouse.js';
 import { loadField, ledgerFromRecords } from '../lexicon.js';
-import { plantArt } from './greenhouse-art.js';
+import { plantArt, emptyPotArt } from './greenhouse-art.js';
 import { petSprite, FRAME } from '../../pets/sprite.js';
 import { escapeHTML as esc } from '../../core/utils/format.js';
 import { STORES } from '../../core/storage/storage-adapter.js';
@@ -21,20 +21,18 @@ export async function renderGreenhouse(outlet, { storage, world, stage = 0 }) {
   const controller = new AbortController();
   const { signal } = controller;
   window.addEventListener('hashchange', () => controller.abort(), { once: true });
-  outlet.innerHTML = `<section class="gh-house" aria-label="Matcha's Glasshouse">
-    <header class="gh-hero">
-      <nav class="gh-nav"><a href="#/world" class="gh-back" aria-label="Back to village">←</a><span>Matcha’s vocabulary house</span>${infoButton('vocab', { label: 'How the glasshouse grows', moreTitle: 'Growing your glasshouse', more: ['Each letter is a plant bed. Its size follows learned words divided by all the words in that bed. Yellow leaves need another visit; green leaves are remembered.', 'Practise up to ten words. Every word needs two correct recalls in a row. Miss one and it returns in a shuffled later pass. Yellow means one recall; green means two.', 'A visit grows memory, then reviews are spaced over days. Empty beds stay open for future words.'] })}</nav>
-      <div class="gh-hero-title"><p class="gh-eyebrow">A home for growing words</p><h1>The Glasshouse<span>.</span></h1></div>
-      <div class="gh-welcome"><span class="gh-welcome__line">A word today.<br>A little greener tomorrow.</span><span class="gh-mascot" aria-hidden="true">${petSprite('matcha', { size: 112, frame: FRAME.happy, stage })}</span></div>
+  outlet.innerHTML = `<section class="gh-house gh-house--immersive" aria-label="Matcha's Glasshouse">
+    <div class="gh-room-backdrop" aria-hidden="true"></div>
+    <header class="gh-room-tools">
+      <nav class="gh-nav"><a href="#/world" class="gh-back" aria-label="Back to village">←</a><h1 class="gh-room-name">The Glasshouse</h1>${infoButton('vocab', { label: 'How the glasshouse grows', moreTitle: 'Growing your glasshouse', more: ['Scroll along the nursery benches to explore the A–Z beds. Each plant grows with learned words divided by all the words in its bed. Yellow leaves need another visit; green leaves are remembered.', 'Practise up to ten words. Every word needs two correct recalls in a row. Miss one and it returns in a shuffled later pass. Yellow means one recall; green means two.', 'A visit grows memory, then reviews are spaced over days. Empty beds stay open for future words.'] })}</nav>
+      <div class="gh-room-progress"><span><b>${remembered.toLocaleString()}</b> / ${total.toLocaleString()} words learned</span><button type="button" id="gh-words">Your words ↗</button></div>
+      <div class="gh-tabs" role="group" aria-label="Word frequency">${BANDS.map((b) => `<button type="button" data-band="${b.id}" aria-pressed="${b === band}">${b.label.split(' ')[0]}<small>frequency</small></button>`).join('')}</div>
     </header>
     <main class="gh-main">
-      <div class="gh-ledger"><div><span class="gh-eyebrow">Your growing vocabulary</span><p><strong>${remembered.toLocaleString()}</strong><span> / ${total.toLocaleString()} words learned</span></p></div><span class="gh-ledger__seal" aria-hidden="true">❧</span><div class="gh-meter"><i style="width:${total ? remembered / total * 100 : 0}%"></i></div></div>
-      <div class="gh-tabs" role="group" aria-label="Word frequency">${BANDS.map((b) => `<button type="button" data-band="${b.id}" aria-pressed="${b === band}">${b.label.split(' ')[0]}<small>frequency</small></button>`).join('')}</div>
-      <div class="gh-section-heading"><div><p class="gh-eyebrow" id="gh-band-note">The everyday collection</p><h2 id="gh-band-title">Citrus grove</h2></div><span class="gh-section-heading__letters">A–Z <span aria-hidden="true">↘</span></span></div>
-      <div class="gh-legend"><span><i class="gh-dot is-green"></i>Remembered</span><span><i class="gh-dot is-yellow"></i>Needs review</span><button type="button" id="gh-words">Your words ↗</button></div>
-      <div class="gh-beds" id="gh-beds"></div>
+      <div class="gh-section-heading"><div class="gh-nursery-sign"><p class="gh-eyebrow" id="gh-band-note">The everyday collection</p><h2 id="gh-band-title">Citrus grove</h2><span class="gh-section-heading__letters">A–Z plant beds · scroll to explore ↓</span></div><span class="gh-mascot" aria-hidden="true">${petSprite('matcha', { size: 100, frame: FRAME.happy, stage })}</span></div>
+      <div class="gh-legend"><span><i class="gh-dot is-green"></i>Remembered</span><span><i class="gh-dot is-yellow"></i>Needs review</span></div>
+      <div class="gh-beds" id="gh-beds" aria-label="Nursery benches"></div>
       <details class="gh-more"><summary>More ways to grow</summary><a href="#/world/place/rootwood">Word roots ↗</a><a href="#/world/place/pond">Confusable words ↗</a><a href="#/world/place/terraces">Word parts ↗</a><a href="#/bank/session/wb/wb-0001">Words in context ↗</a><a href="#/world/place/thicket">Borrowed words ↗</a></details>
-      <p class="gh-footer-note">Little visits. Lasting roots.</p>
     </main>
     <footer class="gh-dock"><a class="gh-start${due && !draft?.value ? ' is-review' : ''}" href="#/round/meadow"><span>${draft?.value ? 'Continue your practice' : due ? 'Revive yellow leaves' : 'Grow ten words'}<small>${draft?.value ? 'Your little session is saved' : due ? `${due} leaves to refresh · one word at a time` : 'One word at a time · two good recalls'}</small></span><span aria-hidden="true">→</span></a></footer>
     <dialog class="gh-dialog" aria-labelledby="gh-dialog-title"><div id="gh-dialog-body"></div></dialog>
@@ -42,13 +40,14 @@ export async function renderGreenhouse(outlet, { storage, world, stage = 0 }) {
   const house = outlet.querySelector('.gh-house');
   const dialog = house.querySelector('dialog');
   const body = house.querySelector('#gh-dialog-body');
+  house.querySelector('.gh-back').addEventListener('click', () => sessionStorage.setItem('world:focus', 'meadow'), { signal });
   let request = 0;
   function drawBeds() {
     house.querySelector('.gh-dock .gh-start').href = draft?.value ? '#/round/meadow?resume=1' : due ? '#/round/meadow?review=1' : `#/round/meadow?band=${band.id}`;
     house.querySelector('#gh-band-title').textContent = band.plant;
     house.querySelector('#gh-band-note').textContent = { high: 'The everyday collection', medium: 'The discovery collection', low: 'The rare collection' }[band.id];
     for (const b of house.querySelectorAll('[data-band]')) b.setAttribute('aria-pressed', String(b.dataset.band === band.id));
-    house.querySelector('#gh-beds').innerHTML = greenhouseBeds(fields, ledger, band.id).map((bed,i) => `<button class="gh-bed${!bed.total ? ' is-empty' : ''}" type="button" data-letter="${bed.letter}" ${!bed.total ? 'disabled' : ''} aria-label="${bed.letter}, ${bed.grown} of ${bed.total} words learned, ${Math.round(bed.ratio * 100)} percent grown${bed.yellow ? `, ${bed.yellow} need review` : ''}"><span class="gh-bed__letter">${bed.letter}</span>${bed.yellow ? `<span class="gh-bed__due">${bed.yellow} to review</span>` : ''}<span class="gh-bed__art">${bed.total ? plantArt(band.id, bed.ratio, Math.ceil(bed.yellow / (bed.total || 1) * 28), i) : '<span class="gh-empty-soil" aria-hidden="true">· · ·</span>'}</span><span class="gh-bed__count"><b>${bed.grown}</b> / ${bed.total} <span>words</span></span><span class="gh-bed__bar"><i style="width:${bed.ratio * 100}%"></i></span><span class="gh-bed__caption">${!bed.total ? 'Awaiting new seeds' : bed.grown ? `${Math.round(bed.ratio * 100)}% grown` : 'Ready to take root'}${bed.total ? '<span aria-hidden="true">↗</span>' : ''}</span></button>`).join('');
+    house.querySelector('#gh-beds').innerHTML = greenhouseBeds(fields, ledger, band.id).map((bed,i) => `<button class="gh-bed${!bed.total ? ' is-empty' : ''}" type="button" data-letter="${bed.letter}" ${!bed.total ? 'disabled' : ''} aria-label="${bed.letter}, ${bed.grown} of ${bed.total} words learned, ${Math.round(bed.ratio * 100)} percent grown${bed.yellow ? `, ${bed.yellow} need review` : ''}"><span class="gh-bed__letter">${bed.letter}</span>${bed.yellow ? `<span class="gh-bed__due">${bed.yellow} to review</span>` : ''}<span class="gh-bed__art">${bed.total ? plantArt(band.id, bed.ratio, Math.ceil(bed.yellow / (bed.total || 1) * 28), i) : emptyPotArt()}</span><span class="gh-bed__label"><span class="gh-bed__count"><b>${bed.grown}</b> / ${bed.total} <span>words</span></span><span class="gh-bed__bar"><i style="width:${bed.ratio * 100}%"></i></span><span class="gh-bed__caption">${!bed.total ? 'Awaiting new seeds' : bed.grown ? `${Math.round(bed.ratio * 100)}% grown` : 'Ready to take root'}${bed.total ? '<span aria-hidden="true">↗</span>' : ''}</span></span></button>`).join('');
   }
   drawBeds();
   for (const b of house.querySelectorAll('[data-band]')) b.addEventListener('click', () => { band = BANDS.find((x) => x.id === b.dataset.band); play('page'); drawBeds(); }, { signal });

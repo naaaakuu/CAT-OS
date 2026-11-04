@@ -25,7 +25,7 @@ import { GLOW_SVG } from '../pets/glow.js';
 import { PETS, PET_BY_ID, HOUSES, LINES, lineFor, petForPlace, stageTitle, stageGift, ageOf, grewLine, toGrow, houseGift } from '../pets/pets.js';
 import { MAP, HOMES, PLACES, SIGNS, NODES, LAMPS, WINDOWS, CLOCK, nearestNode } from '../pets/paths.js';
 import { petRig, petPortrait, petGear, petRing, petFigure, FRAME } from '../pets/sprite.js';
-import { nextFor, startHref, LIBRARY_HREF } from '../pets/next.js';
+import { nextFor, startHref, LIBRARY_HREF, GREENHOUSE_HREF } from '../pets/next.js';
 import { createLife, petSize } from './life.js';
 import { mountMotion } from './motion.js';
 import { ATLAS } from './motion-atlas.js';
@@ -360,14 +360,15 @@ export async function renderVillageHome(outlet, ctx) {
       const pp = pets.pets.find((x) => x.id === p.id);
       const el = root.querySelector(`.pet[data-pet="${p.id}"]`);
       el.dataset.word = pp.word;
-      el.setAttribute('aria-label', `${p.name}, ${MOOD_LABEL[pp.word]}. ${p.subject}. ${ageOf(pp.stage).name}, stage ${pp.stage} of 10${pp.stage ? `, ${stageTitle(p.id, pp.stage)}` : ''}.${pp.pick && !pp.helpedToday ? ' Needs your help today.' : ''} ${p.id === 'chai' ? 'Go into his library.' : `Open ${p.name}'s card.`}`);
+      el.setAttribute('aria-label', `${p.name}, ${MOOD_LABEL[pp.word]}. ${p.subject}. ${ageOf(pp.stage).name}, stage ${pp.stage} of 10${pp.stage ? `, ${stageTitle(p.id, pp.stage)}` : ''}.${pp.pick && !pp.helpedToday ? ' Needs your help today.' : ''} ${p.id === 'chai' ? 'Go into his library.' : p.id === 'matcha' ? 'Go into the glasshouse.' : `Open ${p.name}'s card.`}`);
     }
     life.setMarks(T.picks.filter((pid, i) => !T.done[i]));
     root.style.setProperty('--harmony', pets.harmony.toFixed(2));
   };
   hud();
   root.querySelector('.cw-play').addEventListener('click', (e) => {
-    if (e.currentTarget.getAttribute('href') === LIBRARY_HREF && !e.metaKey && !e.ctrlKey && !e.shiftKey) { e.preventDefault(); enterLibrary(e.currentTarget); return; }
+    const href = e.currentTarget.getAttribute('href');
+    if ([LIBRARY_HREF, GREENHOUSE_HREF].includes(href) && !e.metaKey && !e.ctrlKey && !e.shiftKey) { e.preventDefault(); enterRoom(href === LIBRARY_HREF ? 'chai' : 'matcha', e.currentTarget); return; }
     unlock(); play('open');
   });
 
@@ -397,20 +398,18 @@ export async function renderVillageHome(outlet, ctx) {
     setValley: (v) => { valley = v; root.querySelector('h1').textContent = `${valleyName(v)}: your village`; hud(); },
     celebrate: (id) => life.poke(id, { happy: true }),
     open: (kind, arg, trigger) => openCard(kind, arg, trigger),
-    showPet: (id) => { life.poke(id); reveal(life.positionOf(id)); later(() => openCard('pet', id), reduced ? 0 : 260); },
+    showPet: (id) => { if (id === 'chai' || id === 'matcha') { enterRoom(id); return; } life.poke(id); reveal(life.positionOf(id)); later(() => openCard('pet', id), reduced ? 0 : 260); },
   };
-  /* Chai's house is his library (owner, 2026-11-01): a tap on the house or on
-     him walks straight in. He has no card and no Help button, so the shelves
-     are never a second tap away. The doorway shuts warm and dark, and the
-     library opens out of the same dark (library.css .libroom__door). */
+  /* Chai and Matcha have rooms, with no friend card between a tap and entry.
+     Their house, mascot, roster and main action all use the same doorway. */
   let entering = false;
-  const enterLibrary = (from) => {
+  const enterRoom = (id, from) => {
     if (entering) return;
     entering = true;
     unlock(); play('open');
-    announce("Chai: Hoo! Come in. Going into the library.");
-    life.poke('chai');
-    const go = () => { location.hash = LIBRARY_HREF; };
+    announce(id === 'chai' ? 'Chai: Hoo! Come in. Going into the library.' : 'Matcha: Come in. Your glasshouse is waiting.');
+    life.poke(id);
+    const go = () => { location.hash = id === 'chai' ? LIBRARY_HREF : GREENHOUSE_HREF; };
     if (reduced) { go(); return; }
     const r = from?.getBoundingClientRect?.();
     const door = document.createElement('div');
@@ -423,7 +422,7 @@ export async function renderVillageHome(outlet, ctx) {
     later(() => { door.remove(); entering = false; }, 1800);
   };
   const openCard = (kind, arg, trigger) => {
-    if (kind === 'pet' && arg === 'chai') { enterLibrary(trigger); return; }
+    if (kind === 'pet' && (arg === 'chai' || arg === 'matcha')) { if (openKind) close(); enterRoom(arg, trigger); return; }
     const was = openKind;
     if (was) closeModal(card);
     if (kind === 'pet' && arg === 'toffee') kind = 'fire';
@@ -443,7 +442,7 @@ export async function renderVillageHome(outlet, ctx) {
     const pet = e.target.closest('.pet[data-pet]');
     if (pet) {
       const id = pet.dataset.pet;
-      if (id === 'chai') { enterLibrary(pet); return; }
+      if (id === 'chai' || id === 'matcha') { enterRoom(id, pet); return; }
       unlock();
       announce(`${PET_BY_ID.get(id).name}: ${life.poke(id)}`);
       reveal(life.positionOf(id));
@@ -453,7 +452,7 @@ export async function renderVillageHome(outlet, ctx) {
     const spot = e.target.closest('[data-spot]');
     if (spot) {
       const s = spot.dataset.spot;
-      if (s === 'chai') { enterLibrary(spot); return; }
+      if (s === 'chai' || s === 'matcha') { enterRoom(s, spot); return; }
       if (s === 'toffee') { life.poke(s); reveal(NODES.f1); openCard('fire', null, spot); return; }
       life.poke(s); reveal(life.positionOf(s)); openCard('pet', s, spot);
       return;

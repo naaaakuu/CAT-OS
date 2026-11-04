@@ -1,4 +1,9 @@
 /** Botanical silhouettes are live SVG, so growth always reflects the ledger. */
+function potArt(plant = '') {
+  return `<svg viewBox="0 0 200 175" class="gh-plant" aria-hidden="true"><ellipse cx="100" cy="156" rx="65" ry="9" fill="#5e6740" opacity=".12"/>${plant}<path d="M57 142H143L135 160Q100 168 65 160Z" fill="#a9704d"/><path d="M54 138Q100 130 146 138L143 145Q100 151 57 145Z" fill="#c99c6c"/><ellipse cx="100" cy="138" rx="43" ry="5" fill="#594b34"/><path d="M68 151Q101 157 132 151" stroke="#dda975" fill="none" opacity=".55"/></svg>`;
+}
+export const emptyPotArt = () => potArt();
+
 export function plantArt(band, growth = 0, yellow = 0, salt = 0) {
   const pct = Math.max(0, Math.min(1, growth));
   const scale = .1 + .9 * pct;
@@ -24,5 +29,5 @@ export function plantArt(band, growth = 0, yellow = 0, salt = 0) {
     }
     if (pct > .7) art += '<path d="M102 143Q125 90 110 50" stroke="#697b46" fill="none" stroke-width="2"/><g fill="#b392b3"><circle cx="110" cy="50" r="5"/><circle cx="117" cy="65" r="4"/><circle cx="115" cy="80" r="3.5"/></g>';
   }
-  return `<svg viewBox="0 0 200 175" class="gh-plant" aria-hidden="true"><ellipse cx="100" cy="156" rx="65" ry="9" fill="#5e6740" opacity=".12"/><g transform="translate(100 138) scale(${scale}) translate(-100 -145)">${art}</g><path d="M57 142H143L135 160Q100 168 65 160Z" fill="#a9704d"/><path d="M54 138Q100 130 146 138L143 145Q100 151 57 145Z" fill="#c99c6c"/><ellipse cx="100" cy="138" rx="43" ry="5" fill="#594b34"/><path d="M68 151Q101 157 132 151" stroke="#dda975" fill="none" opacity=".55"/></svg>`;
+  return potArt(`<g transform="translate(100 138) scale(${scale}) translate(-100 -145)">${art}</g>`);
 }

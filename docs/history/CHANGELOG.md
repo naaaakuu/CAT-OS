@@ -4,6 +4,13 @@
 > Versions here are app releases; they map onto the capability milestones in
 > `PROJECT_ROADMAP.md` (0.x releases build toward Roadmap V1.0).
 
+## 3.16.1: Walk straight into Matcha's glasshouse (2026-11-04)
+
+- Matcha and the vocabulary house now enter the greenhouse directly, through the same doorway transition as Chai's library. Removed the friend-card detour from mascot, house, main-action and indirect friend entry; village copy now says Visit Matcha.
+- The glasshouse painting fills the entire viewport. Letter plants stand on wooden nursery benches with small progress tags, and the benches scroll inside the room. Frequency signs, learned-word count, the journal and practice remain reachable over the scenery. Removed the separate hero banner, greeting and cream-page layout. Learning, reviews and saved progress are unchanged.
+- Focused browser checks cover direct house/mascot/roster entry, full-screen scenery during scrolling, the three frequency collections and 44 px controls at 320/360/412 px, plus the existing recall, resume and review flows. No new artwork or Android package build.
+- Validation: 69 village checks and 30 recall/growth assertions passed; 400 rendered text runs in both themes cleared AA after keeping empty-bed labels fully opaque. The focused mobile regression passed direct entry, scenery/navigation during scroll, journal Back, saved recalls and review recovery.
+
 ## 3.16.0: Matcha's Glasshouse (2026-11-04)
 
 - Replaced the Meadow with a sunlit painted greenhouse, Matcha's mascot, and High/Medium/Low frequency collections of citrus, jasmine and ferns. Every A–Z bed shows real learned/total counts and proportional growth. Due leaves turn yellow; a completed review restores green. Missing letters remain empty beds rather than invented words.
