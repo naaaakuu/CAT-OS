@@ -1973,7 +1973,7 @@ console.log('\n16. The world (regions · economy · lexicon rounds · state · a
   /* ---- The pets' voice and economy, in full (their own tools) ---- */
   {
     const { spawnSync } = await import('node:child_process');
-    for (const tool of ['tools/check-pets.mjs', 'tools/check-pet-economy.mjs']) {
+    for (const tool of ['tools/check-pets.mjs', 'tools/check-pet-economy.mjs', 'tools/check-journey.mjs']) {
       const r = spawnSync(process.execPath, [join(root, tool)], { cwd: root, encoding: 'utf8', timeout: 600000 });
       const out = `${r.stdout ?? ''}${r.stderr ?? ''}`.trim().split('\n');
       if (r.status !== 0) bad(`${tool}: ${out.slice(-4).join(' | ')}`);
@@ -2526,6 +2526,14 @@ console.log('\n32. Mochi’s room is derived from learning records (tools/check-
 console.log('\n33. Matcha’s recall loop and proportional plant growth (tools/check-greenhouse.mjs)');
 try { await mod('tools/check-greenhouse.mjs'); ok('Ten-word limit, shuffled returns, two consecutive recalls, drafts, spacing and growth'); }
 catch (e) { bad('Glasshouse: ' + e.message); }
+
+console.log('\n34. Village Journal: earned keepsakes, chapters and weekly expeditions');
+{
+  const { spawnSync } = await import('node:child_process');
+  const r = spawnSync(process.execPath, [join(root, 'tools/check-journal-browser.mjs')], { cwd: root, encoding: 'utf8', timeout: 300000 });
+  if (r.status !== 0) bad(`Journal: ${(r.stdout ?? '') + (r.stderr ?? '')}`);
+  else ok(r.stdout.trim());
+}
 
 console.log('\n─────────────────────────────────────');
 if (problems.length === 0) {

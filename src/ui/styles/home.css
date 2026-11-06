@@ -359,7 +359,7 @@ html[data-reduced-motion] .cw-base { transition: none; }
 }
 .cw-hud > *, .cw-hud__left > *, .cw-hud__right > * { pointer-events: auto; }
 .cw-hud__left, .cw-hud__right { display: flex; gap: 8px; min-width: 0; }
-.cw-chip, .cw-round, .cw-today {
+.cw-chip, .cw-round, .cw-today, .cw-journal {
   border: 1px solid color-mix(in srgb, var(--color-line-strong) 70%, transparent);
   background: color-mix(in srgb, var(--color-surface) 94%, transparent); color: var(--color-ink);
   box-shadow: 0 6px 20px rgba(30, 24, 12, 0.22), 0 1px 0 rgba(255, 255, 255, 0.6) inset;
@@ -389,6 +389,51 @@ html[data-reduced-motion] .cw-base { transition: none; }
 .cw-today { position: absolute; left: 12px; top: calc(max(12px, env(safe-area-inset-top)) + 54px); display: flex; align-items: center; gap: 8px; min-height: 44px; padding: 4px 14px 4px 6px; border-radius: 999px; font: 650 13.5px/1 var(--font-ui); white-space: nowrap; }
 .cw-today__faces { display: flex; }
 .cw-today__text { display: none; }
+.cw-journal { position: absolute; right: max(12px, env(safe-area-inset-right)); top: calc(max(12px, env(safe-area-inset-top)) + 54px); display: flex; align-items: center; gap: 5px; min-height: 48px; max-width: calc(100% - 180px); padding: 3px 10px 3px 5px; border-radius: 18px; text-align: left; }
+.cw-journal .j-art { width: 36px; height: 36px; flex: none; }
+.cw-journal span { display: grid; gap: 3px; }
+.cw-journal b { font: 750 13px/1.15 var(--font-ui); }
+.cw-journal small { font: 600 10px/1.2 var(--font-ui); white-space: nowrap; }
+.cw.is-intro .cw-journal { visibility: hidden; }
+.cw-toast .j-art { width: 46px; height: 46px; vertical-align: middle; margin-right: 8px; }
+.j-tabs { display: flex; gap: 4px; padding: 4px; margin: 20px 0; border: 1px solid var(--color-line); border-radius: 16px; }
+.j-tabs button { flex: 1; min-height: 44px; border: 0; border-radius: 12px; background: transparent; color: var(--color-ink); font: 700 12px/1.3 var(--font-ui); padding: 6px; }
+.j-tabs button[aria-pressed="true"] { background: var(--color-accent); color: var(--color-accent-ink); }
+.j-cover { text-align: center; padding: 16px 14px 20px; border-radius: 22px; background: color-mix(in srgb, var(--color-accent) 9%, var(--color-surface)); border: 1px solid var(--color-line); }
+.j-art { width: 96px; height: 96px; }
+.j-art.is-waiting { filter: grayscale(1); opacity: .65; }
+.j-cover h3 { margin: 6px 0 10px; font: 400 27px/1.15 var(--font-display); }
+.j-cover p { margin: 6px 0; font-size: 14px; line-height: 1.55; }
+.j-meter { height: 7px; margin: 16px 0 4px; border-radius: 5px; background: var(--color-line); overflow: hidden; }
+.j-meter i { display: block; height: 100%; border-radius: inherit; background: var(--color-accent); }
+.j-goals { list-style: none; padding: 0; margin: 10px 0; }
+.j-goals li { display: flex; gap: 10px; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--color-line); font-size: 14px; }
+.j-goals li > span:last-child { flex: 1; }
+.j-goals small { display: block; margin-top: 3px; color: var(--color-ink-2); font-size: 12px; font-variant-numeric: tabular-nums; }
+.j-check { display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--color-line-strong); flex: none; }
+.j-check.is-done { background: var(--color-accent); color: var(--color-accent-ink); }
+.j-reward, .j-week-date { font-size: 13px; line-height: 1.5; color: var(--color-ink-2); }
+.j-action { display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 9px 12px; border-radius: 15px; background: var(--color-accent); color: var(--color-accent-ink) !important; text-decoration: none; font: 700 14px/1.3 var(--font-ui); }
+.j-action > span:nth-child(2) { flex: 1; }
+.j-chapters { list-style: none; padding: 0; }
+.j-chapters li { display: flex; gap: 12px; align-items: center; padding: 14px 8px; border-bottom: 1px solid var(--color-line); }
+.j-chapters li > span { width: 30px; height: 30px; border: 1px solid var(--color-line-strong); border-radius: 50%; display: grid; place-items: center; flex: none; }
+.j-chapters li.is-active { border-radius: 12px; background: color-mix(in srgb, var(--color-accent) 9%, var(--color-surface)); }
+.j-chapters li.is-done > span { background: var(--color-accent); color: var(--color-accent-ink); }
+.j-chapters b { font-size: 14px; }
+.j-chapters small { display: block; margin-top: 3px; font-size: 12px; color: var(--color-ink-2); }
+.j-collection { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; align-items: start; }
+.j-keepsake { padding: 10px; border: 1px solid var(--color-line); border-radius: 18px; min-width: 0; }
+.j-keepsake.is-earned { background: color-mix(in srgb, var(--color-accent) 7%, var(--color-surface)); border-color: var(--color-line-strong); }
+.j-keepsake summary { display: grid; justify-items: center; text-align: center; cursor: pointer; list-style: none; gap: 6px; }
+.j-keepsake summary::-webkit-details-marker { display: none; }
+.j-keepsake summary b { font-size: 13px; line-height: 1.35; }
+.j-keepsake summary small { font-size: 11px; color: var(--color-ink-2); }
+.j-keepsake .j-art { width: 76px; height: 76px; }
+.j-keepsake .j-meter { width: 100%; margin: 6px 0; }
+.j-keepsake p { font-size: 12px; line-height: 1.5; }
+.j-keepsake .j-action { padding: 8px; font-size: 12px; }
+.j-keepsake .j-action .pet-portrait { display: none; }
 .cw-face { position: relative; margin-right: -6px; }
 .cw-face .pet-portrait { padding: 2px; background: var(--color-surface); box-shadow: 0 1px 3px rgba(40, 30, 10, 0.25); }
 .cw-face:not(.is-done) .pet-portrait__disc { filter: saturate(0.8); }
@@ -430,7 +475,7 @@ html[data-reduced-motion] .cw-base { transition: none; }
   width: max-content; max-width: min(92vw, 420px);
 }
 .cw:has(.cw-overlay.is-open) .cw-toast { opacity: 0; pointer-events: none; }
-.cw-toast.is-in { opacity: 1; translate: -50% 0; pointer-events: auto; }
+.cw-toast.is-in { opacity: 1; translate: -50% 0; pointer-events: none; }
 .cw-toast p {
   margin: 0; display: flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 16px;
   background: var(--color-surface); color: var(--color-ink); font-size: 15px; line-height: 1.35;

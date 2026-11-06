@@ -18,6 +18,7 @@ records (IndexedDB, via StorageAdapter)
 - New subject for a friend: `MODULE_PET` and `PLACE_PET` in `pets.js`, a Glow/progress source in `economy.js`, an entry in `next.js`.
 
 ## Economy (`src/pets/`)
+- `journey.js` derives the Village Journal from paid practice: eight permanent chapters, three gifts from each of eight friends plus eight chapter keepsakes, and a Monday-to-Monday expedition rotating through seven subjects. No new stored progression or currency. `home/village-journal.js` renders Journey/Keepsakes/This week in the existing modal; `home/journal-art.js` paints the distinct SVG collectibles. `world/state.js petChangeLine` adds newly earned gifts and chapter progress for shared results. `#/world?journal=1` opens the journal on return; `catos:keepsakes-seen` is animation memory only. Verify §34 and `tools/check-journey.mjs` cover earned-record semantics, calendar boundaries and phone interactions.
 - `glow.js` holds every number (`GLOW`). `economy.js` derives; `progress.js` has `levelFor` (subject ladders) and `achievementsFor` (10 whole-app achievements). Nothing here is stored.
 - Friends: Toffee (Gauntlet + fire), Chai owl (Reading), Matcha sprout (Vocabulary), Mochi pebble (PS), Ginger fox (PJ), Mallow cloud (OOO), Sesame mouse (PC, the clock tower), Biscuit calico cat (SP, the rose cottage). The six are cut from the strip; Sesame and Biscuit are painted in code (`tools/paint-sesame.mjs`, `paint-biscuit.mjs`, both on `paint-kit.mjs`'s brush, light and grain), baked with `bake-pets --only <id>` and `--baby --only <id>`.
 

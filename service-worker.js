@@ -68,7 +68,7 @@ const CONTENT_VERSION = 16;
    ALWAYS lands in a new cache, whether or not anybody remembered to bump the
    number above. Nothing used to enforce that bump, and an installed learner
    could sit on old code forever with no symptom anybody could see. */
-const BUILD_ID = 'd94db72030';
+const BUILD_ID = 'e010aff58e';
 const CONTENT_ID = 'fa1ec949c0';
 const SHELL_CACHE = `cat-os-shell-v${CACHE_VERSION}.${BUILD_ID}`;
 const CONTENT_CACHE = `cat-os-content-v${CONTENT_VERSION}.${CONTENT_ID}`;
@@ -138,10 +138,12 @@ const CORE_FILES = [
   './src/core/utils/format.js',
   './src/home/cards.js',
   './src/home/houses.js',
+  './src/home/journal-art.js',
   './src/home/life.js',
   './src/home/motion-atlas.js',
   './src/home/motion.js',
   './src/home/paint.js',
+  './src/home/village-journal.js',
   './src/home/village.js',
   './src/home/water.js',
   './src/modules/language-garden/index.js',
@@ -158,6 +160,7 @@ const CORE_FILES = [
   './src/modules/word-dna/index.js',
   './src/pets/economy.js',
   './src/pets/glow.js',
+  './src/pets/journey.js',
   './src/pets/next.js',
   './src/pets/paths.js',
   './src/pets/pets.js',
@@ -270,10 +273,12 @@ const SHELL_FILES = [
   './src/core/utils/format.js',
   './src/home/cards.js',
   './src/home/houses.js',
+  './src/home/journal-art.js',
   './src/home/life.js',
   './src/home/motion-atlas.js',
   './src/home/motion.js',
   './src/home/paint.js',
+  './src/home/village-journal.js',
   './src/home/village.js',
   './src/home/water.js',
   './src/modules/language-garden/index.js',
@@ -334,6 +339,7 @@ const SHELL_FILES = [
   './src/modules/word-dna/screens/tree.js',
   './src/pets/economy.js',
   './src/pets/glow.js',
+  './src/pets/journey.js',
   './src/pets/next.js',
   './src/pets/paths.js',
   './src/pets/pets.js',

@@ -25,6 +25,7 @@ import { saveValley, valleyName, cleanValleyName, nameSuggestions } from '../wor
 import { musicEnabled, setMusicEnabled, unlock, startMusic, startAmbience } from '../world/audio.js';
 import { feedbackPrefs, setFeedbackPref } from '../core/engagement/feedback.js';
 import { escapeHTML } from '../core/utils/format.js';
+import { journalCard } from './village-journal.js';
 
 const esc = escapeHTML;
 const MOOD_LABEL = { glowing: 'Very happy', happy: 'Happy', missing: 'Misses you', sleepy: 'Sleepy', wilting: 'Lonely', new: 'New friend' };
@@ -36,6 +37,7 @@ const FLAME = '<svg viewBox="0 0 24 24" width="16" height="16"><path d="M12 2.6c
 const STAR = '<svg class="cw-orb" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.9 6.1 6.7.8-4.9 4.6 1.3 6.6L12 17.5l-6 3.2 1.3-6.6L2.4 9.5l6.7-.8z" fill="#F4C443" stroke="#B88A12" stroke-width="1.2" stroke-linejoin="round"/></svg>';
 
 export function renderCard(card, kind, arg, api) {
+  if (kind === 'journal') return journalCard(card, api);
   if (kind === 'pet') return petCard(card, arg, api);
   if (kind === 'fire') return fireCard(card, api);
   if (kind === 'level') return levelCard(card, api);

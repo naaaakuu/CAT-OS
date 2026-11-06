@@ -4,6 +4,15 @@
 > Versions here are app releases; they map onto the capability milestones in
 > `PROJECT_ROADMAP.md` (0.x releases build toward Roadmap V1.0).
 
+## 3.17.0: The Village Journal (2026-11-06)
+
+- Added eight permanent story chapters and 32 illustrated keepsakes: three gifts per friend and a reward for every chapter. Progress derives from saved, paid learning; existing villages receive credit, and breaks never remove earned gifts.
+- Added rotating weekly expeditions with practice, featured-friend and nonconsecutive learning-day goals, visible progress and a clear next-expedition date. Journal actions lead straight to the relevant learning room.
+- Added a compact village Journal entry, three accessible sections, distinct offline SVG collectibles, chapter progress and new-keepsake feedback in shared results, and a direct result-to-Journal link.
+- Celebrations wait while a player reads a village card. Informational reward notices no longer intercept taps; ordinary arrivals quietly remember level/gift progress.
+- Added record-based progression tests and phone/browser checks for saved rewards, 320/360/412 px layouts, landscape, desktop, touch targets and Back/focus behavior. Updated web and Android version to 3.17.0.
+- Validation: all behavioral gates in the repository sweep passed, including 2,761 rendered text checks. Two retired-module-name findings were resolved by naming the new view `village-journal.js`; the import guard, module budget, progression tests and 89 Journal browser checks then passed. Android bridge checks passed. Signed APK/AAB builds succeeded and all 190 packaged JS/CSS files matched source. The existing Google dependencies emit nonfatal Kotlin metadata diagnostics during release lint; no physical-device test or Play upload was performed.
+
 ## 3.16.1: Walk straight into Matcha's glasshouse (2026-11-04)
 
 - Matcha and the vocabulary house now enter the greenhouse directly, through the same doorway transition as Chai's library. Removed the friend-card detour from mascot, house, main-action and indirect friend entry; village copy now says Visit Matcha.

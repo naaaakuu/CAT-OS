@@ -19,6 +19,7 @@ import { dayKey, shiftDay } from '../core/engagement/streaks.js';
 import { computeStreamLevel } from '../modules/language-garden/logic/effort.js';
 import { rcStars, verbalStars, titleFor, levelFromCleared } from './economy.js';
 import { derivePets, changeBetween } from '../pets/economy.js';
+import { deriveJourney, newKeepsakes } from '../pets/journey.js';
 import { listFields, ledgerFromRecords, summarizeLedger, fieldSummary } from './lexicon.js';
 import { skillLedger, nextSkill, weakSkills } from '../core/learning/review.js';
 import { hourWord, seasonWord, weatherWord } from './engine/palette.js';
@@ -383,5 +384,10 @@ export function starGlyphs(n, max = 3) {
  */
 export function petChangeLine(before, after) {
   if (!before?.pets || !after?.pets) return null;
-  return changeBetween(before.pets, after.pets);
+  const earlier = deriveJourney(before.pets), journey = deriveJourney(after.pets);
+  return { ...changeBetween(before.pets, after.pets), journal: {
+    collected: newKeepsakes(earlier, journey),
+    chapter: journey.current ? { number: journey.current.number, title: journey.current.title, pct: journey.current.pct } : null,
+    earnedCount: journey.earnedCount,
+  } };
 }

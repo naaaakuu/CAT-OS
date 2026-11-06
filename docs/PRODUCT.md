@@ -95,6 +95,25 @@ with a friend helps them:
 - **Toffee's fire.** Your days in a row. Seven in a row saves a spare log
   that covers one missed day, and adds a little Glow on a day that earned.
 
+## Your Village Journal
+
+The Journal button beside today's friends opens a longer story: eight chapters
+from **A little light** to **A place to come home to**. Each chapter asks for
+practice Glow, visits to different subjects, and learning on different days.
+The days never need to be consecutive, and chapters never expire.
+
+Collect **32 illustrated keepsakes**: three thank-you gifts from each friend
+and one for every chapter. Each has its own picture, story and visible goal.
+Open a keepsake to visit its friend and continue practising. Earned keepsakes
+come straight from saved learning, so existing players receive credit too and
+a backup carries the collection. A result shows newly earned keepsakes and
+the next chapter's progress, with a link straight into the Journal.
+
+**This week's expedition** rotates its featured friend every Monday. Earn
+60 practice Glow, earn 12 with that friend, and learn on three different days.
+The Journal shows the next expedition's date. Every question also contributes
+to permanent chapters and keepsakes; taking a break does not remove them.
+
 ## The first minutes
 
 The village opens at the campfire. Toffee says hello, then everyone

@@ -31,6 +31,8 @@ import { mountMotion } from './motion.js';
 import { ATLAS } from './motion-atlas.js';
 import { createHouseLife, bakeVillage, gradeAtlas, LAMP_HOUSE, WINDOW_HOUSE, HOUSE_ART } from './houses.js';
 import { renderCard, decorLayer, ACT, callWord } from './cards.js';
+import { deriveJourney } from '../pets/journey.js';
+import { keepsakeArt } from './journal-art.js';
 import { openModal, closeModal } from '../ui/modal.js';
 import { play, unlock, startMusic, startAmbience } from '../world/audio.js';
 import { whenIntroDone } from '../shell/intro.js';
@@ -95,6 +97,7 @@ export async function renderVillageHome(outlet, ctx) {
       </header>
       <div class="cw-dock">
         <button class="cw-today" data-open="today"></button>
+        <button class="cw-journal" data-open="journal"></button>
         <a class="cw-play" data-play href="#/world"></a>
       </div>
       <button class="cw-edge" hidden></button>
@@ -348,6 +351,10 @@ export async function renderVillageHome(outlet, ctx) {
     const today = root.querySelector('.cw-today');
     today.innerHTML = `<span class="cw-today__faces">${T.picks.map((id, i) => `<span class="cw-face ${T.done[i] ? 'is-done' : ''}">${petPortrait(id, 30)}${T.done[i] ? '<i aria-hidden="true">✓</i>' : ''}</span>`).join('')}</span><span class="cw-today__gift ${T.gift ? 'is-open' : ''}" aria-hidden="true">${giftSVG}</span><span class="cw-today__text">${T.gift ? 'Today\'s gift is yours!' : `${T.doneCount} of 3 helped`}</span>`;
     today.setAttribute('aria-label', `Today's three friends: ${T.doneCount} of 3 helped. ${T.gift ? 'Today\'s gift is open.' : 'Help all three for a gift of 10 Glow.'}`);
+    const J = deriveJourney(pets);
+    const journal = root.querySelector('.cw-journal');
+    journal.innerHTML = `${keepsakeArt(J.focusPet || 'toffee')}<span><b>Journal</b><small>${J.current ? `Chapter ${J.current.number}` : 'All chapters'} · ${J.earnedCount}/${J.totalCount}</small></span>`;
+    journal.setAttribute('aria-label', `Village Journal. ${J.earnedCount} of ${J.totalCount} keepsakes. Open your journey and weekly expedition.`);
     const id = firstVisit || root.classList.contains('is-intro') ? 'chai' : pets.play;
     const who = PET_BY_ID.get(id), next = nextFor(id, world, { first: pets.pets.find((p) => p.id === id)?.isNew });
     const playEl = root.querySelector('.cw-play');
@@ -474,6 +481,9 @@ export async function renderVillageHome(outlet, ctx) {
   let partying = false;
   const celebrate = (html, sound, onDone) => { queue.push({ html, sound, onDone }); if (!partying) nextParty(); };
   function nextParty() {
+    if (disposed) return;
+    // Reading a card is an intentional action. Let the player finish first.
+    if (openKind) { partying = true; later(nextParty, 500); return; }
     const c = queue.shift();
     if (!c || disposed) { partying = false; return; }
     partying = true;
@@ -494,6 +504,17 @@ export async function renderVillageHome(outlet, ctx) {
   }
   const stagesNow = () => JSON.stringify(Object.fromEntries(pets.pets.map((p) => [p.id, p.stage])));
   const checkParties = (afterRun = false) => {
+    // Animation memory only. The collection itself always comes from records.
+    const collected = deriveJourney(pets).keepsakes.filter(k => k.earned);
+    let seenKeepsakes = null;
+    try { seenKeepsakes = JSON.parse(store.get('catos:keepsakes-seen') || 'null'); } catch { /* old memory */ }
+    store.set('catos:keepsakes-seen', JSON.stringify(collected.map(k => k.id)));
+    if (afterRun && Array.isArray(seenKeepsakes)) {
+      const fresh = collected.filter(k => !seenKeepsakes.includes(k.id));
+      if (fresh.length) whenQuiet(() => {
+        toast(`${keepsakeArt(fresh[0].pet, true, fresh[0].icon, fresh[0].tier)}<span><b>${escapeHTML(fresh[0].name)}</b>${fresh.length > 1 ? ` and ${fresh.length - 1} more` : ''} added to your Journal.</span>`, 6500);
+      });
+    }
     /* A friend who grew: their new look, named, before anything else. Only
        on the way back from a run (that run's friend, and Toffee on a new
        day): progress that arrives any other way, a restored backup or an
@@ -510,9 +531,8 @@ export async function renderVillageHome(outlet, ctx) {
       }
     }
     const L = pets.level.level, seen = Number(store.get('catos:level-seen'));
-    if (!seen) store.set('catos:level-seen', String(L));
-    else if (L > seen) {
-      store.set('catos:level-seen', String(L));
+    store.set('catos:level-seen', String(L));
+    if (afterRun && seen && L > seen) {
       const d = pets.decor.find((x) => x.level === L);
       celebrate(`<p class="cw-party__eyebrow">The village grew</p><h2 id="cw-party-h">Level ${L}!</h2>${d ? `<p class="cw-party__new">New: <b>${escapeHTML(d.name)}</b></p><p>${escapeHTML(d.appears)}</p>` : '<p>Every friend in the village is cheering.</p>'}`, 'levelup', () => {
         root.querySelectorAll(`.cw-treasure[data-t="${d?.id}"]`).forEach((el) => el.classList.add('is-new'));
@@ -529,7 +549,7 @@ export async function renderVillageHome(outlet, ctx) {
     }
     if (pets.today.gift && store.get('catos:gift-day') !== pets.today.key) {
       store.set('catos:gift-day', pets.today.key);
-      celebrate(`<p class="cw-party__eyebrow">All three friends helped</p><span class="cw-party__chest" aria-hidden="true">${giftSVG}</span><h2 id="cw-party-h">Today's gift: +${DAILY_GIFT} ${GLOW_SVG}</h2><p>Come back tomorrow: three more friends will need you.</p>`, 'chest');
+      if (afterRun) celebrate(`<p class="cw-party__eyebrow">All three friends helped</p><span class="cw-party__chest" aria-hidden="true">${giftSVG}</span><h2 id="cw-party-h">Today's gift: +${DAILY_GIFT} ${GLOW_SVG}</h2><p>Come back tomorrow: three more friends will need you.</p>`, 'chest');
     }
   };
 
@@ -554,6 +574,7 @@ export async function renderVillageHome(outlet, ctx) {
   let welcomed = false;
   // Where every friend stands, remembered from the very first visit, so the first stage anyone reaches gets its card.
   if (!store.get('catos:stages')) store.set('catos:stages', stagesNow());
+  if (!store.get('catos:keepsakes-seen')) store.set('catos:keepsakes-seen', JSON.stringify(deriveJourney(pets).keepsakes.filter(k => k.earned).map(k => k.id)));
   if (!store.get('catos:houses')) store.set('catos:houses', JSON.stringify(pets.houses ?? {}));
   {
     const last = pets.last;
@@ -675,6 +696,13 @@ export async function renderVillageHome(outlet, ctx) {
       life.greet(PETS.map((p) => p.id).filter((id) => onScreen(id) && id !== w?.pet));
       checkParties();
     }, reduced ? 50 : 900);
+  }
+
+  if (!firstVisit && new URLSearchParams(arrivedAt.split('?')[1] || '').get('journal') === '1') {
+    later(async () => {
+      await whenIntroDone();
+      if (!disposed) openCard('journal', null, root.querySelector('.cw-journal'));
+    }, reduced ? 50 : 400);
   }
 
   /* ---------------- Sound: the song is started on the first touch (app.js) ---------------- */
