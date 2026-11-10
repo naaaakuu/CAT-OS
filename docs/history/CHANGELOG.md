@@ -4,6 +4,15 @@
 > Versions here are app releases; they map onto the capability milestones in
 > `PROJECT_ROADMAP.md` (0.x releases build toward Roadmap V1.0).
 
+## 3.19.0: All of VARC on the rope, and one voice at a time (2026-11-10)
+
+- The owner found that PLAY was always the same game ("play vs smudge") and asked for the whole of VARC in the same fun form. Every Muddle is now a part of the exam and a duel against one is mostly that part: two jumbles, strays, gaps, seats or summaries with quick strikes round them. Any Muddle can be fought at any stop; the Laurel Road now only decides how hard they pull.
+- Reading Comprehension joins the duel through a tenth Muddle, the Skimmer (painted in code like the others). The Long Read is the library's next book: the passage in silence, then its questions one at a time with the passage a tap away, the trap named in plain words on a miss (34 RC trap types given plain names). It is saved as an ordinary reading.
+- PLAY chooses who is next (a Muddle never met, one rematch after a loss, today's troublemaker, then the one left alone longest) and never repeats a face after a win. Tonight's Bill (`#/bill`, from the face on the corner of PLAY) shows all ten with your record and three ribbons each. Today's troublemaker, one of your three weakest, pays double laurels once a day.
+- Sound: the village song restarted under the duel's song on every tap, and effects landed on top of each other. The duel and the letter now hold the village song off, `play()` makes big sounds take turns and ducks the music under them, and the duel orders its own sounds instead of stacking them.
+- A duel's time limit counts rope time only, so reading a paragraph slowly can no longer end the duel.
+- Validation: `check-duel` simulates every bout at the first and last stop (80% players win 88 to 98%, guessers under 10%) and the new cast rules; a silent real-browser run at 390 px played all ten bouts to a result with no page errors and saved sessions for rc, pj, ooo, pc, sp and ps. Test browsers are now muted. No new AAB (versionName 3.19.0 / 31900 set for the next one).
+
 ## 3.18.0: The Muddles, the rope, five new houses and reminders (2026-11-10)
 
 - A real game at the front door. PLAY starts a 90-second tug of war against the Muddles, nine painted villains who each personify a bad habit of English. Right answers pull the rope; streaks pull harder and are praised in the vocabulary the game teaches. Word strikes are the shared spaced-practice engine, 211 hand-written "Plain English" lines decode pompous English up to hard-essay register, and each big move is the curator's next jumble, stray, gap, seat or summary, saved as an ordinary session of that subject. Nine stops on the Laurel Road introduce one Muddle and one way to play at a time. A new player is in a duel seconds after opening the app; the eight-friend slideshow is gone.

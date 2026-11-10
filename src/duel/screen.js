@@ -11,13 +11,13 @@
 import { STORES } from '../core/storage/storage-adapter.js';
 import { escapeHTML as esc } from '../core/utils/format.js';
 import { loadWorldRecords } from '../world/state.js';
-import { play, silenceWorld, stopMusic, startDuelMusic, stopDuelMusic, setDuelHeat } from '../world/audio.js';
+import { play, silenceWorld, holdMusic, startDuelMusic, stopDuelMusic, setDuelHeat, hushDuelMusic } from '../world/audio.js';
 import { PET_BY_ID } from '../pets/pets.js';
 import { composeDuel, saveWordFeeds, saveBigMove } from './compose.js';
 import { loadMuddles, liner } from './content.js';
 import { Arena, arenaHTML, muddleSprite } from './arena.js';
 import { petFigure } from '../pets/sprite.js';
-import { DUEL, ROPE_END, applyRope, bigEffect, driftOf, duelsIn, ladderOf, laurelsFor, nearMiss, newRope, quickEffect, settleRope, winTitle } from './model.js';
+import { BOUTS, DUEL, ROPE_END, applyRope, bigEffect, boutOf, castOf, driftOf, duelsIn, isBout, ladderOf, laurelsFor, nearMiss, newRope, nextBout, quickEffect, readEffect, settleRope, troublemakerOf, winTitle } from './model.js';
 import { gradeFor } from './letters.js';
 import { buzz, reduced, throwWord } from './fx.js';
 import { ensureDuelStyle } from './style.js';
@@ -29,14 +29,15 @@ const LEAVE_COST = 8;
 /* A streak is praised in the language the game teaches. */
 const PRAISE = { 3: 'Astute!', 5: 'Trenchant!', 7: 'Perspicacious!', 9: 'Sagacious!', 12: 'Unimpeachable!' };
 const FLAME = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 2c2.6 3.6 6.6 6.4 6.6 11.4A6.6 6.6 0 0 1 5.4 13.4c0-2.8 1.4-4.8 2.9-6.3.2 1.7 1 3.1 2.2 3.8-.5-3.3.3-6.3 1.5-8.9z" fill="#F2A23C" stroke="#4a2a12" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 11.6c1.4 1.7 2.8 2.9 2.8 4.9a2.8 2.8 0 0 1-5.6 0c0-1.6 1-3.1 2.8-4.9z" fill="#FFD978"/></svg>';
-const BIG_NAMES = { chain: 'Couple the train', stray: 'Find the stray', gap: 'Fill the gap', seat: 'Take a seat', point: 'Hit the point' };
-const BIG_TEACH = { chain: 'Tap the sentences into the order the writer meant.', stray: 'One sentence does not belong here. Find it.', gap: 'The paragraph has a hole in it. Try a sentence in the gap.', seat: 'A sentence has lost its place. Tap where it fits.', point: 'Read it, then pick the one line that says it all.' };
+const BIG_NAMES = { chain: 'Couple the train', stray: 'Find the stray', gap: 'Fill the gap', seat: 'Take a seat', point: 'Hit the point', read: 'The long read' };
+const BIG_TEACH = { chain: 'Tap the sentences into the order the writer meant.', stray: 'One sentence does not belong here. Find it.', gap: 'The paragraph has a hole in it. Try a sentence in the gap.', seat: 'A sentence has lost its place. Tap where it fits.', point: 'Read it, then pick the one line that says it all.', read: 'Read the passage properly. The questions come after, and you can always look back.' };
+const BIG_MODULE = { chain: 'pj', stray: 'ooo', gap: 'pc', seat: 'sp', point: 'ps' };
 
 export async function renderDuel(outlet, { storage }) {
   const arrivedAt = location.hash;
   outlet.innerHTML = '<section class="dl dl--loading"><p class="dl-wait">The Muddles are grabbing the rope…</p></section>';
   await ensureDuelStyle();
-  silenceWorld(); stopMusic(0.3);
+  silenceWorld(); holdMusic(true);
 
   const now = Date.now();
   const records = await loadWorldRecords(storage);
@@ -45,10 +46,19 @@ export async function renderDuel(outlet, { storage }) {
   const first = duels.length === 0;
   const arena = ladder.arena;
   const seed = `duel:${now}`;
+  /* Who is on the other end of the rope. A stop decides how hard they pull;
+     the Muddle decides what the duel is made of. `?vs=` is a challenge from the
+     bill, otherwise PLAY chooses (model.js nextBout). */
+  const query = new URLSearchParams(arrivedAt.split('?')[1] ?? '');
+  const bout = first ? BOUTS[0] : isBout(query.get('vs')) ? boutOf(query.get('vs')) : nextBout(duels, now);
+  const tally = castOf(duels);
+  const meeting = !first && !tally.get(bout.id).fought;
+  const trouble = troublemakerOf(duels, now);
+  const bounty = !first && !!trouble?.open && trouble.bout.id === bout.id;
 
   let comp, cast;
   try {
-    [comp, cast] = await Promise.all([composeDuel(storage, { arena, seed, first, now }), loadMuddles()]);
+    [comp, cast] = await Promise.all([composeDuel(storage, { arena, bout, seed, first, now }), loadMuddles()]);
   } catch (err) {
     console.error('[CAT OS] duel could not be set up', err);
     outlet.innerHTML = `<section class="dl dl--loading"><p class="dl-wait">The rope is tangled. Check your connection and try again.</p><a class="dl-btn" href="#/world">Back to the village</a></section>`;
@@ -60,16 +70,16 @@ export async function renderDuel(outlet, { storage }) {
     return;
   }
 
-  const muddle = cast.get(arena.muddle);
+  const muddle = cast.get(bout.id);
   const say = liner(muddle, Math.random());
-  const pet = PET_BY_ID.get(arena.friend);
-  const friendStage = comp.world.state.pets.pets.find((p) => p.id === arena.friend)?.stage ?? 0;
+  const pet = PET_BY_ID.get(bout.friend);
+  const friendStage = comp.world.state.pets.pets.find((p) => p.id === bout.friend)?.stage ?? 0;
   const drift = driftOf(arena, comp.scale);
 
   outlet.innerHTML = `
-    <section class="dl" data-arena="${arena.id}">
+    <section class="dl" data-arena="${arena.id}" data-muddle="${bout.id}">
       <div class="dl-stagewrap">
-        ${arenaHTML({ friend: arena.friend, friendStage, muddle: arena.muddle, backdrop: arena.backdrop ?? arena.friend })}
+        ${arenaHTML({ friend: bout.friend, friendStage, muddle: bout.id, backdrop: arena.backdrop ?? arena.friend })}
         <button class="dl-quit" id="quit" aria-label="Leave the duel"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/></svg></button>
         <div class="dl-streak" id="streak" hidden></div>
         <div class="dl-ticks" id="ticks" aria-hidden="true">${comp.moves.map((m) => `<i class="${m.kind === 'big' ? 'is-big' : ''}"></i>`).join('')}</div>
@@ -85,7 +95,7 @@ export async function renderDuel(outlet, { storage }) {
   const streakEl = outlet.querySelector('#streak');
   const fxLayer = outlet.querySelector('#fxlayer');
   const tickEls = [...outlet.querySelectorAll('#ticks i')];
-  const stage = new Arena(outlet.querySelector('#arena'), { friend: arena.friend, muddle: arena.muddle });
+  const stage = new Arena(outlet.querySelector('#arena'), { friend: bout.friend, muddle: bout.id });
 
   const s = newRope({ start: first ? 18 : 0 });
   const startedAt = Date.now();
@@ -98,10 +108,11 @@ export async function renderDuel(outlet, { storage }) {
   stage.rope = s.rope;
 
   /* ---- The Muddle leans on the rope between answers ---- */
-  let lastTick = Date.now(), nextHeave = Date.now() + 13000;
+  let lastTick = Date.now(), nextHeave = Date.now() + 13000, ropeSecs = 0;
   const drifter = setInterval(() => {
     const t = Date.now(), dt = (t - lastTick) / 1000; lastTick = t;
     if (!alive || !driftOn || document.hidden || s.over) return;
+    ropeSecs += Math.min(dt, 1);
     applyRope(s, -drift * dt);
     if (first) s.rope = Math.max(s.rope, -60);
     if (t >= nextHeave) {
@@ -110,18 +121,20 @@ export async function renderDuel(outlet, { storage }) {
     }
     stage.rope = s.rope;
     lowest = Math.min(lowest, s.rope);
-    if ((t - startedAt) / 1000 > DUEL.MAX_SECONDS) settleRope(s);
+    if (ropeSecs > DUEL.MAX_SECONDS) settleRope(s);
     setDuelHeat(Math.abs(s.rope) / ROPE_END);
     if (s.over) finish();
   }, 120);
 
-  function cleanup() {
+  function cleanup({ toResult = false } = {}) {
     alive = false;
     clearInterval(drifter);
     for (const t of timers) clearTimeout(t);
     timers.clear();
     stage.destroy();
     stopDuelMusic();
+    // The village song comes back once the fanfare has had its say, or at once on the way home.
+    holdMusic(false, { resumeIn: toResult ? 2.4 : 0.3 });
     window.__catosBack = outerBack;
     window.removeEventListener('hashchange', onHash);
   }
@@ -177,18 +190,20 @@ export async function renderDuel(outlet, { storage }) {
     if (correct) {
       const power = Math.min(1.5, 0.75 + s.combo * 0.12);
       stage.yank('me', power);
-      play('yank', { pitch: Math.min(6, s.combo) });
+      // One thing speaks at a time: the winning pull is finish()'s to play, and praise follows the yank instead of landing on it.
+      if (!s.over) play('yank', { pitch: Math.min(6, s.combo) });
       buzz(s.combo >= 5 ? [18, 30, 18] : 16);
       if (fromEl && label) {
         const r = fromEl.getBoundingClientRect(), to = stage.ropePointOnScreen();
         throwWord(fxLayer, label, { x: r.left + r.width / 2, y: r.top + r.height / 2 }, to);
       }
-      if (PRAISE[s.combo]) { play('combo', { pitch: s.combo }); stage.praise(PRAISE[s.combo]); }
+      if (PRAISE[s.combo]) { if (!s.over) play('combo', { pitch: s.combo, delay: 0.14 }); stage.praise(PRAISE[s.combo]); }
       if (s.rope >= 70 && !lowSaid && !s.over) { lowSaid = true; stage.say(say('low')); }
       else if (!s.over && Math.random() < 0.34) stage.say(say('hit'), 1800);
     } else {
       stage.yank('them', 1.1);
-      play('heave'); buzz([28, 40, 28]);
+      if (!s.over) play('heave');
+      buzz([28, 40, 28]);
       if (!s.over) stage.say(say('gloat'));
     }
     if (s.over) { finish(); return true; }
@@ -273,8 +288,11 @@ export async function renderDuel(outlet, { storage }) {
     root.classList.add('is-big');
     stage.setCompact(true);
     bigPaid = 0;
-    const firstOfType = !comp.world.records.sessions.some((x) => x?.module === { chain: 'pj', stray: 'ooo', gap: 'pc', seat: 'sp', point: 'ps' }[type]);
-    sheet.innerHTML = `<div class="dl-bigsign"><p>${esc(BIG_NAMES[type])}</p><h2>Big move</h2><span>${esc(firstOfType ? BIG_TEACH[type] : `${muddle.name} stops to read too. Take your time.`)}</span><button class="dl-btn dl-btn--go" id="biggo">Go</button></div>`;
+    const isRead = type === 'read';
+    const brink = ROPE_END - 3;
+    const sessions = comp.world.records.sessions ?? [];
+    const firstOfType = isRead ? !sessions.some((x) => x && !x.module && x.passage_id) : !sessions.some((x) => x?.module === BIG_MODULE[type]);
+    sheet.innerHTML = `<div class="dl-bigsign"><p>${esc(BIG_NAMES[type])}</p><h2>${isRead ? 'Stop and read' : 'Big move'}</h2><span>${esc(firstOfType || (isRead && meeting) ? BIG_TEACH[type] : `${muddle.name} stops to read too. Take your time.`)}</span><button class="dl-btn dl-btn--go" id="biggo">Go</button></div>`;
     play('vs');
     const begin = () => {
       if (!alive) return;
@@ -282,15 +300,42 @@ export async function renderDuel(outlet, { storage }) {
       const host = document.createElement('div'); sheet.appendChild(host); sheet.scrollTop = 0;
       let doneShown = false;
       const started = Date.now();
+      // Reading has the air to itself: the song drops away for the passage and comes back, quietly, for the questions.
+      if (isRead) hushDuelMusic(0);
       PLAYERS[type](host, item, {
         guided: true,
+        onRead: ({ ms, words }) => {
+          hushDuelMusic(0.5);
+          sheet.scrollTop = 0;
+          // Faster than anybody reads: the Skimmer approves, which is the joke and the warning.
+          const line = ms < words * 110 ? say('skim') : '';
+          if (line) stage.say(line, 2600);
+        },
         onStep: ({ correct, index }) => {
+          if (isRead) {
+            // A question of a passage is a real answer: it counts, it streaks, and it pulls hard.
+            // The rope waits at the brink until the last one, so a passage is always finished.
+            const d = readEffect(correct, s.combo);
+            const to = Math.max(-brink, Math.min(brink, s.rope + d));
+            applyRope(s, to - s.rope, { correct });
+            stage.rope = s.rope;
+            lowest = Math.min(lowest, s.rope);
+            stage.popNumber(d);
+            stage.yank(correct ? 'me' : 'them', correct ? 1.1 : 1);
+            play(correct ? 'yank' : 'heave', { pitch: Math.min(6, s.combo) });
+            buzz(correct ? 16 : [28, 40, 28]);
+            showStreak();
+            setDuelHeat(Math.abs(s.rope) / ROPE_END);
+            if (!correct) stage.say(say('gloat'));
+            return;
+          }
           const d = correct ? 7 : -6;
           bigPaid += d;
           applyRope(s, d, {});
           stage.rope = s.rope;
           stage.yank(correct ? 'me' : 'them', 0.7);
-          play(correct ? 'yank' : 'heave', { pitch: index ?? 0 });
+          // The paragraph makes its own sound for the tap; the rope answers a beat later.
+          play(correct ? 'yank' : 'heave', { pitch: index ?? 0, delay: 0.1 });
           buzz(correct ? 14 : [20, 30, 20]);
           if (s.over) finish();
         },
@@ -298,20 +343,31 @@ export async function renderDuel(outlet, { storage }) {
           if (doneShown || !alive) return;
           doneShown = true;
           const correct = o.correct;
-          const eff = Math.max(-12, bigEffect(o.share ?? 0) - bigPaid);
-          applyRope(s, eff, { correct });
-          stage.rope = s.rope;
-          stage.popNumber(Math.round(bigEffect(o.share ?? 0)));
-          stage.yank(correct ? 'me' : 'them', 1.5);
-          play(correct ? 'combo' : 'heave', { pitch: 8 });
-          buzz(correct ? [20, 40, 40] : [40, 40, 40]);
-          showStreak();
+          if (isRead) {
+            hushDuelMusic(1);
+            // Let go of the brink: a rope held there goes over now.
+            if (Math.abs(s.rope) >= brink) applyRope(s, Math.sign(s.rope) * 8, {});
+            stage.rope = s.rope;
+            if (correct && !s.over) play('combo', { pitch: 8, delay: 0.12 });
+            misses.push(...(o.wrongs ?? []));
+          } else {
+            const eff = Math.max(-12, bigEffect(o.share ?? 0) - bigPaid);
+            applyRope(s, eff, { correct });
+            stage.rope = s.rope;
+            stage.popNumber(Math.round(bigEffect(o.share ?? 0)));
+            stage.yank(correct ? 'me' : 'them', 1.5);
+            if (!s.over) play(correct ? 'combo' : 'heave', { pitch: 8, delay: 0.12 });
+            buzz(correct ? [20, 40, 40] : [40, 40, 40]);
+            showStreak();
+            if (!correct) misses.push({ head: item.meta?.title ?? item.title ?? BIG_NAMES[type], body: o.teach ?? '' });
+          }
+          lowest = Math.min(lowest, s.rope);
           saveBigMove(storage, type, item, { ...o, started });
-          if (!correct) misses.push({ head: item.meta?.title ?? item.title ?? BIG_NAMES[type], body: o.teach ?? '' });
           if (s.over) { finish(); return; }
           const panel = document.createElement('div');
           panel.className = `dl-donepanel ${correct ? 'is-good' : 'is-miss'}`;
-          panel.innerHTML = `<p class="dl-donepanel__v">${correct ? 'Beautiful.' : 'Not quite.'}</p>${o.teach ? `<p class="dl-donepanel__t">${esc(o.teach)}</p>` : ''}<button class="dl-btn dl-btn--go" id="bigcont">Back to the rope</button>`;
+          const verdict = isRead ? `${o.right} of ${o.total}${correct ? '. Every one.' : o.right ? '.' : '. It got away.'}` : correct ? 'Beautiful.' : 'Not quite.';
+          panel.innerHTML = `<p class="dl-donepanel__v">${esc(verdict)}</p>${o.teach ? `<p class="dl-donepanel__t">${esc(o.teach)}</p>` : ''}<button class="dl-btn dl-btn--go" id="bigcont">Back to the rope</button>`;
           host.appendChild(panel);
           panel.querySelector('#bigcont').addEventListener('click', () => { nextMove(); }, { once: true });
           later(() => panel.scrollIntoView({ block: 'end', behavior: 'smooth' }), 60);
@@ -341,7 +397,7 @@ export async function renderDuel(outlet, { storage }) {
     stopDuelMusic();
     later(async () => {
       const { renderDuelResult } = await import('./result.js');
-      cleanup();
+      cleanup({ toResult: true });
       if (location.hash === arrivedAt) renderDuelResult(outlet, { storage, summary });
     }, reduced() ? 200 : 650);
   }
@@ -355,12 +411,13 @@ export async function renderDuel(outlet, { storage }) {
     const total = s.right + s.wrong;
     const accuracy = total ? s.right / total : 0;
     const beforeLad = ladder;
-    const delta = forfeited ? -LEAVE_COST : laurelsFor({ won: s.won, accuracy, rope: s.rope, first });
+    const paidDouble = bounty && !!s.won && !forfeited;
+    const delta = forfeited ? -LEAVE_COST : laurelsFor({ won: s.won, accuracy, rope: s.rope, first, bounty: paidDouble });
     const lettersSoFar = duels.filter((d) => d.letter).length;
     const letter = s.won ? { id: `letter-${startedAt}`, grade: gradeFor(seed, lettersSoFar, { first }) } : null;
     const record = {
       id: `duel-${new Date(startedAt).toISOString().replace(/[:.]/g, '-')}`, kind: 'duel', module: 'duel',
-      arena: arena.n, muddle: arena.muddle, friend: arena.friend,
+      arena: arena.n, muddle: bout.id, friend: bout.friend, ...(paidDouble ? { bounty: true } : {}),
       started_at: new Date(startedAt).toISOString(), finished_at: new Date(finishedAt).toISOString(),
       duration_ms: finishedAt - startedAt,
       won: !!s.won, rope: Math.round(s.rope), best_combo: s.bestCombo, first, forfeited,
@@ -372,7 +429,10 @@ export async function renderDuel(outlet, { storage }) {
     try { await storage.put(STORES.LEARNING, record); } catch (err) { console.error('[CAT OS] duel could not be saved', err); }
     const afterDuels = [...duels, record];
     const afterLad = ladderOf(afterDuels);
-    summary = { record, won: !!s.won, delta, before: beforeLad, after: afterLad, muddle, friend: arena.friend, friendStage, arena, misses, right: s.right, wrong: s.wrong, bestCombo: s.bestCombo, newBest: s.bestCombo >= 3 && s.bestCombo > duels.reduce((n, d) => Math.max(n, d.best_combo ?? 0), 0), newWords, near: nearMiss({ won: !!s.won, rope: s.rope }), title: s.won ? winTitle({ wrong: s.wrong, lowest, right: s.right }) : null, lowest, loseLine: say('win'), winLine: say('lose'), first, letter, newArena: afterLad.arena.n > beforeLad.arena.n ? afterLad.arena : null };
+    const mine = castOf(afterDuels).get(bout.id);
+    const ribbon = s.won && mine.ribbon && mine.ribbon.id !== tally.get(bout.id).ribbon?.id ? mine.ribbon : null;
+    const firstDunk = !!s.won && !first && tally.get(bout.id).wins === 0;
+    summary = { record, won: !!s.won, delta, before: beforeLad, after: afterLad, muddle, friend: bout.friend, friendStage, arena, bout, bounty: paidDouble, ribbon, firstDunk, tally: mine, next: nextBout(afterDuels, finishedAt), misses, right: s.right, wrong: s.wrong, bestCombo: s.bestCombo, newBest: s.bestCombo >= 3 && s.bestCombo > duels.reduce((n, d) => Math.max(n, d.best_combo ?? 0), 0), newWords, near: nearMiss({ won: !!s.won, rope: s.rope }), title: s.won ? winTitle({ wrong: s.wrong, lowest, right: s.right }) : null, lowest, loseLine: say('win'), winLine: say('lose'), first, letter, newArena: afterLad.arena.n > beforeLad.arena.n ? afterLad.arena : null };
   }
 
   /* ---- Curtain up ---- */
@@ -381,7 +441,8 @@ export async function renderDuel(outlet, { storage }) {
   if (first) { later(nextMove, 500); return; }
 
   // "Play again" goes straight back on the rope: the wait between goes is where people leave.
-  if (new URLSearchParams(arrivedAt.split('?')[1] ?? '').has('again')) { later(nextMove, reduced() ? 100 : 420); return; }
+  // A Muddle you have never met still gets its playbill: that is where the new game is explained.
+  if (query.has('again') && !meeting) { later(nextMove, reduced() ? 100 : 420); return; }
 
   /* The playbill: who is on tonight, and the bad habit they have come to do. */
   const bill = outlet.querySelector('#vs');
@@ -389,13 +450,16 @@ export async function renderDuel(outlet, { storage }) {
   bill.innerHTML = `
     <article class="pb">
       <p class="pb__where">Tonight at ${esc(arena.name)}</p>
-      <div class="pb__fig">${muddleSprite(arena.muddle, { size: 150 })}</div>
+      <div class="pb__fig">${muddleSprite(bout.id, { size: 150 })}</div>
       <h2 class="pb__name">${esc(muddle.name)}</h2>
       ${muddle.title ? `<p class="pb__title">${esc(muddle.title)}</p>` : ''}
       <p class="pb__habit">${esc(muddle.habit ?? '')}</p>
+      ${meeting ? `<p class="pb__new"><i>New game</i><b>${esc(bout.game)}</b><span>${esc(bout.line)}</span></p>` : `<p class="pb__skill">${esc(bout.skill)}</p>`}
+      ${bounty ? '<p class="pb__bounty">Today\'s troublemaker. Win for double laurels.</p>' : ''}
       <div class="pb__rule" aria-hidden="true"></div>
-      <p class="pb__with"><span class="pb__friend">${petFigure(arena.friend, { size: 54, stage: friendStage })}</span>Pulling for you: <b>${esc(pet?.name ?? '')}</b></p>
+      <p class="pb__with"><span class="pb__friend">${petFigure(bout.friend, { size: 54, stage: friendStage })}</span>Pulling for you: <b>${esc(pet?.name ?? '')}</b></p>
       <button class="dl-btn dl-btn--go" id="billgo">Grab the rope</button>
+      <a class="pb__other" href="#/bill">Pick another Muddle</a>
     </article>`;
   play('vs');
   let gone = false;

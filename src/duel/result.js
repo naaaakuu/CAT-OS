@@ -33,7 +33,10 @@ function countUp(el, from, to, ms = 900) {
 
 export async function renderDuelResult(outlet, { storage, summary }) {
   await ensureDuelStyle();
-  const { won, delta, before, after, muddle, friend, friendStage, arena, misses, right, wrong, bestCombo, first, letter, newArena, near, title, newWords, newBest } = summary;
+  const { won, delta, before, after, muddle, friend, friendStage, arena, misses, right, wrong, bestCombo, first, letter, newArena, near, title, newWords, newBest, bout, bounty, ribbon, firstDunk, next } = summary;
+  // One line of honour at most, the rarest first.
+  const medal = ribbon ? `${ribbon.name} taken off ${muddle.name}` : bounty ? 'Troublemaker dunked: double laurels' : firstDunk ? `First dunking of ${muddle.name}` : '';
+  const stamp = Date.now();
   const total = right + wrong;
   const pct = after.next ? after.pct : 1;
   const fromPct = before.arena.n === after.arena.n ? (before.next ? before.pct : 1) : 0;
@@ -57,7 +60,7 @@ export async function renderDuelResult(outlet, { storage, summary }) {
       <div class="rs__veil"></div>
       <div class="rs__scroll">
         <div class="rs__head">
-          <p class="rs__kicker">${esc(arena.name)}</p>
+          <p class="rs__kicker">${esc(bout?.skill ? `${bout.skill} · ${arena.name}` : arena.name)}</p>
           <h1 class="rs__title" tabindex="-1">${won ? esc(title ?? 'In the pond!') : near ? 'So close!' : 'Pulled in!'}</h1>
           ${!won && near ? `<p class="rs__near">${near === 1 ? 'One more right answer' : 'Two more right answers'} and ${esc(muddle.name)} was in the pond.</p>` : ''}
           <p class="sr-only" role="status">${won ? 'You won the duel' : 'You lost the duel'}. ${delta >= 0 ? '+' : ''}${delta} laurels. ${right} of ${total} right.</p>
@@ -67,6 +70,7 @@ export async function renderDuelResult(outlet, { storage, summary }) {
           <div class="rs__fig rs__fig--them ${won ? 'is-down' : 'is-up'}">${muddleSprite(muddle.id, { size: 118, frame: won ? FRAME.sleep : FRAME.happy })}</div>
           ${line ? `<p class="rs__quote"><b>${esc(muddle.name)}:</b> ${esc(line)}</p>` : ''}
         </div>
+        ${medal ? `<p class="rs__medal">${esc(medal)}</p>` : ''}
         <div class="rs__laurels">
           <div class="rs__delta ${delta >= 0 ? 'is-up' : 'is-down'}">${laurelSVG(26)}<b>${delta >= 0 ? '+' : ''}${delta}</b></div>
           <div class="rs__bar"><i id="bar" style="width:${(fromPct * 100).toFixed(1)}%"></i></div>
@@ -80,8 +84,13 @@ export async function renderDuelResult(outlet, { storage, summary }) {
         ${won ? letterHTML : ''}
         ${notes}
         <div class="rs__actions">
-          <a class="dl-btn dl-btn--go dl-btn--xl" id="again" href="#/duel?again=${Date.now()}">${won ? 'Play again' : 'Rematch'}</a>
-          <a class="dl-btn dl-btn--plain" href="#/world">Village</a>
+          ${won
+    ? `<a class="dl-btn dl-btn--go dl-btn--xl" id="again" href="#/duel?again=${stamp}">Play again${next && !first ? `<small class="rs__next">Next: ${esc(next.name)}, ${esc(next.skill)}</small>` : ''}</a>`
+    : `<a class="dl-btn dl-btn--go dl-btn--xl" id="again" href="#/duel?again=${stamp}&vs=${esc(muddle.id)}">Rematch</a>`}
+          <div class="rs__more">
+            <a class="dl-btn dl-btn--plain" href="#/bill">Pick a Muddle</a>
+            <a class="dl-btn dl-btn--plain" href="#/world">Village</a>
+          </div>
         </div>
       </div>
     </section>`;
@@ -117,8 +126,8 @@ export async function renderDuelResult(outlet, { storage, summary }) {
           <p class="rs-unlock__kicker">The road opens</p>
           <h2>${esc(newArena.name)}</h2>
           <div class="rs-unlock__fig">${muddleSprite(newArena.muddle, { size: 128 })}</div>
-          <p class="rs-unlock__teach">${esc(newArena.teach)}</p>
-          <p class="rs-unlock__line">${esc(newArena.teachLine)}</p>
+          <p class="rs-unlock__teach">${esc(newArena.muddleName)} lives here</p>
+          <p class="rs-unlock__line">A new stop on the Laurel Road. From here on, every Muddle pulls a little harder.</p>
           <button class="dl-btn dl-btn--go" data-close>Bring it on</button>
         </div>`;
       root.appendChild(sheet);

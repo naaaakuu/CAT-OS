@@ -10,6 +10,8 @@
  *   gap     tap an option and it drops into the gap, so you read it in place
  *   seat    tap a gap and the sentence sits there, so you read it in place
  *   point   four summaries, one true one; a miss names exactly how it missed
+ *   read    a whole passage, then its questions one at a time, with the
+ *           passage a tap away; a miss names the trap and shows the reasoning
  *
  * Players know nothing about ropes, rooms or storage. They take an item and
  * call back with what happened; a duel or a room decides what that means.
@@ -60,6 +62,49 @@ export const TRAP_NAMES = Object.freeze({
   summary_where_development_needed: 'It sums up when the paragraph wants more',
   new_topic_introduced: 'It brings in a new subject',
   tense_break: 'The time does not match',
+  // Reading Comprehension traps
+  opposite_direction: 'It says the opposite of the passage',
+  out_of_scope: 'The passage never goes there',
+  passage_language_shifted: 'The passage\'s own words, bent into a new claim',
+  too_narrow: 'True of one part, not the whole',
+  too_broad: 'Bigger than anything the passage claims',
+  unsupported_inference: 'A step further than the passage allows',
+  overstatement: 'Stronger than the writer ever said it',
+  half_right: 'Half right, and the other half sinks it',
+  true_but_irrelevant: 'True, but it does not answer the question',
+  true_but_insufficient: 'True, but not enough to answer the question',
+  reported_view_as_author: 'That is a view the writer reports, not the writer\'s own',
+  misattributed_view: 'It gives the view to the wrong person',
+  prescriptive_leap: 'The passage describes; this one gives advice',
+  wrong_condition: 'It changes the condition the claim depends on',
+  fact_right_interpretation_wrong: 'Right fact, wrong reading of it',
+  comparison_distortion: 'It twists the comparison',
+  near_synonym_confusion: 'A near word with a different meaning',
+  common_knowledge_intrusion: 'True in the world, but not in this passage',
+  concession_as_position: 'That is what the writer gives away, not the position',
+  over_intense_tone: 'The writer is calmer than that',
+  wrong_valence_tone: 'It gets the writer\'s attitude the wrong way round',
+  temporal_distortion: 'It moves things in time',
+  weakened_version: 'A watered-down version of the claim',
+  wrong_abstraction_level: 'Too general or too specific for what is asked',
+  wrong_structural_role: 'It mistakes the job that part is doing',
+  reversed_causation: 'Cause and effect are swapped',
+  possibility_as_certainty: 'It turns "may" into "does"',
+  criticism_as_rejection: 'The writer criticises it without throwing it out',
+  sophisticated_sounding: 'It sounds clever and says nothing the passage says',
+  wrong_population: 'It is about a different group',
+  necessary_as_sufficient: 'It mixes up "needed" and "enough"',
+  correlation_as_causation: 'Going together is not causing',
+});
+
+/** What an RC question is really asking, in two or three words. */
+const Q_KINDS = Object.freeze({
+  inference: 'Read between the lines', main_idea: 'The main idea', specific_detail: 'A detail', vocabulary_in_context: 'A word in context',
+  paragraph_function: 'What a paragraph does', author_purpose: 'Why the writer says it', primary_purpose: 'What the passage is for', phrase_in_context: 'A phrase in context',
+  tone: 'The tone', application: 'Apply the idea', title_selection: 'The best title', role_of_detail: 'What a detail is for', best_characterization: 'The best description',
+  weaken: 'Weaken it', strengthen: 'Strengthen it', strengthen_weaken: 'Strengthen or weaken', logical_structure: 'How the argument is built', agree_disagree: 'Would the writer agree?',
+  not_true: 'Which is NOT true', except: 'All EXCEPT', implication: 'What follows', assumption: 'The hidden assumption', author_attitude: 'The writer\'s attitude',
+  relationship: 'How two things relate', comparative: 'Compare', must_be_true: 'What must be true', cannot_be_inferred: 'What CANNOT be inferred', scope: 'How far the claim goes',
 });
 
 export const trapName = (id) => TRAP_NAMES[id] ?? null;
@@ -414,7 +459,114 @@ export function mountPoint(el, item, { onDone = () => {} } = {}) {
   return { destroy() { done = true; el.innerHTML = ''; } };
 }
 
-export const PLAYERS = Object.freeze({ chain: mountChain, stray: mountStray, gap: mountGap, seat: mountSeat, point: mountPoint });
+/* ------------------------------------------------------------------ */
+/* Read: a passage and its questions                                   */
+/* ------------------------------------------------------------------ */
+
+/**
+ * The exam's biggest part, one thumb wide. The passage is read first with
+ * nothing else on screen. Then the questions come one at a time, and the
+ * passage folds away above them, one tap from open: looking back is what a
+ * careful reader does, so it costs nothing. A right answer moves straight on;
+ * a wrong one stops, names the trap in plain words and shows the reasoning.
+ *
+ * onRead({ ms, words })            the reader says they have read it
+ * onStep({ correct, index, of })   one question answered
+ * onDone({ correct, share, answers, read_ms, wrongs, teach, started })
+ */
+export function mountRead(el, item, { onRead = () => {}, onStep = () => {}, onDone = () => {} } = {}) {
+  const started = Date.now();
+  const paras = item.passage?.paragraphs ?? [];
+  const words = paras.reduce((n, p) => n + String(p.text).split(/\s+/).length, 0);
+  const questions = item.questions ?? [];
+  const passageHTML = paras.map((p) => `<p>${esc(p.text)}</p>`).join('');
+  const minutes = Math.max(1, Math.round(words / 220));
+  let done = false, readMs = 0, qi = -1;
+  const answers = [], wrongs = [];
+
+  el.innerHTML = `
+    <div class="pl pl--read">
+      <p class="rdp__kicker">${words} words · about ${minutes} min · ${questions.length} questions</p>
+      <h3 class="rdp__title pl__ask" tabindex="-1">${esc(item.passage?.title ?? 'The passage')}</h3>
+      <div class="rdp" id="pass">${passageHTML}</div>
+      <button class="pl__go" id="ready">I have read it</button>
+    </div>`;
+  const root = el.querySelector('.pl');
+
+  el.querySelector('#ready').addEventListener('click', () => {
+    if (done || qi >= 0) return;
+    readMs = Date.now() - started;
+    play('page'); buzz(8);
+    onRead({ ms: readMs, words });
+    root.innerHTML = `
+      <details class="rdp__again" id="again"><summary>Look at the passage again</summary><div class="rdp">${passageHTML}</div></details>
+      <div id="q"></div>`;
+    ask(0);
+  }, { once: true });
+
+  function ask(i) {
+    qi = i;
+    const q = questions[i];
+    const keys = Object.keys(q.options);
+    const shownAt = Date.now();
+    const host = root.querySelector('#q');
+    const again = root.querySelector('#again');
+    if (again) again.open = false;
+    host.innerHTML = `
+      <p class="rdq__n"><b>Question ${i + 1} of ${questions.length}</b>${Q_KINDS[q.type] ? `<span>${esc(Q_KINDS[q.type])}</span>` : ''}</p>
+      <p class="pl__ask rdq__stem" tabindex="-1">${esc(q.stem)}</p>
+      <div class="pl__opts" id="opts">
+        ${keys.map((k) => `<button class="pl__opt" data-k="${k}">${esc(q.options[k])}</button>`).join('')}
+      </div>
+      <button class="pl__go" id="go" hidden>Lock it in</button>
+      <div class="rdq__why" id="why" hidden></div>`;
+    const opts = host.querySelector('#opts'), go = host.querySelector('#go'), why = host.querySelector('#why');
+    try { host.querySelector('.rdq__stem').focus({ preventScroll: true }); } catch { /* fine */ }
+    host.scrollIntoView({ block: 'start', behavior: reduced() ? 'auto' : 'smooth' });
+    let picked = null, locked = false;
+    opts.addEventListener('click', (e) => {
+      const b = e.target.closest('.pl__opt');
+      if (!b || locked) return;
+      picked = b.dataset.k;
+      opts.querySelectorAll('.pl__opt').forEach((x) => x.classList.toggle('is-picked', x === b));
+      go.hidden = false;
+      play('tap'); buzz(8);
+    });
+    go.addEventListener('click', () => {
+      if (locked || !picked || done) return;
+      locked = true; go.hidden = true;
+      const correct = picked === q.correct;
+      answers.push({ chosen: picked, ms: Date.now() - shownAt });
+      opts.querySelectorAll('.pl__opt').forEach((b) => { b.disabled = true; b.classList.toggle('is-right', b.dataset.k === q.correct); b.classList.toggle('is-wrong', b.dataset.k === picked && !correct); b.classList.toggle('is-dim', b.dataset.k !== picked && b.dataset.k !== q.correct); });
+      const last = i === questions.length - 1;
+      const onward = () => { if (done) return; if (last) finish(); else ask(i + 1); };
+      onStep({ correct, index: i, of: questions.length });
+      if (correct) { setTimeout(onward, reduced() ? 300 : 850); return; }
+      const d = q.explanation?.distractors?.find((x) => x.option === picked);
+      const trap = trapName(d?.trap_type) ?? 'Not this one';
+      wrongs.push({ head: q.stem, body: `${q.options[q.correct]} ${q.explanation?.correct_reasoning ?? ''}`.trim() });
+      why.hidden = false;
+      why.innerHTML = `
+        <p class="rdq__trap">${esc(trap)}</p>
+        ${d?.why_wrong ? `<p>${esc(d.why_wrong)}</p>` : ''}
+        ${q.explanation?.correct_reasoning ? `<p><b>Why the green one:</b> ${esc(q.explanation.correct_reasoning)}</p>` : ''}
+        <button class="pl__go" id="next">${last ? 'Back to the rope' : 'Next question'}</button>`;
+      why.querySelector('#next').addEventListener('click', onward, { once: true });
+      setTimeout(() => why.scrollIntoView({ block: 'nearest', behavior: reduced() ? 'auto' : 'smooth' }), 60);
+    });
+  }
+
+  function finish() {
+    if (done) return;
+    done = true;
+    const right = answers.filter((a, i) => a.chosen === questions[i].correct).length;
+    onDone({ correct: right === questions.length, share: questions.length ? right / questions.length : 0, right, total: questions.length, answers, read_ms: readMs, wrongs, teach: item.mentor?.takeaway ?? '', started });
+  }
+
+  return { destroy() { done = true; el.innerHTML = ''; } };
+}
+
+export const PLAYERS = Object.freeze({ chain: mountChain, stray: mountStray, gap: mountGap, seat: mountSeat, point: mountPoint, read: mountRead });
 
 /** The longer explanation, for a room where there is time for it. Plain HTML, escaped. */
 export function whyHTML(type, item, outcome) {

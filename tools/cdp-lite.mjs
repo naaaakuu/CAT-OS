@@ -92,6 +92,7 @@ async function launchOnce({ width = 390, height = 844, dpr = 1, port = 0 } = {})
   const proc = spawn(chrome, [
     '--headless=new', `--remote-debugging-port=${debugPort}`, `--user-data-dir=${profile}`,
     '--no-first-run', '--no-default-browser-check', '--disable-extensions',
+    '--mute-audio', // a gate plays the whole game; it must never be heard over whatever the owner is listening to
     '--disable-background-timer-throttling', '--disable-renderer-backgrounding',
     '--force-device-scale-factor=1', `--window-size=${width},${height}`, 'about:blank',
   ], { stdio: 'ignore' });

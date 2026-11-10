@@ -6,7 +6,7 @@
  * guesser usually loses, a duel lasts a minute or two, the ladder climbs at a
  * sensible rate, and a letter holds what it should.
  */
-import { ARENAS, DUEL, ROPE_END, arenaFor, newRope, applyRope, settleRope, quickEffect, bigEffect, driftOf, driftScale, laurelsFor, laurelsFrom, ladderOf, duelsIn } from '../src/duel/model.js';
+import { ARENAS, BOUTS, DUEL, RIBBONS, ROPE_END, arenaFor, newRope, applyRope, settleRope, quickEffect, bigEffect, readEffect, quickCount, boutOf, castOf, nextBout, troublemakerOf, dayKey, driftOf, driftScale, laurelsFor, laurelsFrom, ladderOf, duelsIn } from '../src/duel/model.js';
 import { gradeFor, drawCards, pendingLetters, ownedCards, openRecord } from '../src/duel/letters.js';
 import { PLAN_DAYS, postTime, reminderPlan, usualHour } from '../src/duel/reminders.js';
 
@@ -16,12 +16,16 @@ const check = (name, ok, extra = '') => { if (!ok) failed += 1; console.log(`${o
 let seed = 12345;
 const rand = () => { seed = (seed * 1664525 + 1013904223) >>> 0; return seed / 4294967296; };
 
-function simulate(arena, p, { secPerMove = 5, big = arena.big, scale = 1 } = {}) {
+/* One duel as the screen plays it: the bout's quick moves with its paragraphs
+   (or its passage) laid evenly among them, the Muddle reading while you read. */
+function simulate(arena, p, { secPerMove = 5, bout = boutOf(arena.muddle), scale = 1 } = {}) {
   const s = newRope();
-  const quick = big ? DUEL.QUICK_WITH_BIG : DUEL.QUICK_MOVES;
+  const quick = quickCount(bout), bigs = bout.bigs.length;
   const script = [];
-  for (let i = 0; i < quick; i += 1) { script.push('q'); if (big && i === 4) script.push('B'); }
-  let t = 0, nextHeave = 14;
+  const gap = quick / (bigs + 1);
+  let b = 0;
+  for (let i = 0; i < quick; i += 1) { script.push('q'); if (b < bigs && i + 1 >= Math.max(1, Math.round(gap * (b + 1))) && i < quick - 1) script.push(bout.bigs[b++] === 'read' ? 'R' : 'B'); }
+  let t = 0, nextHeave = 14, rope = 0;
   for (const m of script) {
     if (s.over) break;
     if (m === 'B') {
@@ -29,18 +33,24 @@ function simulate(arena, p, { secPerMove = 5, big = arena.big, scale = 1 } = {})
       t += 40;
       const c = rand() < p;
       applyRope(s, bigEffect(c ? 1 : 0), { correct: c });
+    } else if (m === 'R') {
+      // A passage: four questions, the rope held at the brink until the last.
+      t += 200;
+      const brink = ROPE_END - 3;
+      for (let q = 0; q < 4; q += 1) { const c = rand() < p; const to = Math.max(-brink, Math.min(brink, s.rope + readEffect(c, s.combo))); applyRope(s, to - s.rope, { correct: c }); }
+      if (Math.abs(s.rope) >= brink) applyRope(s, Math.sign(s.rope) * 8);
     } else {
       const secs = secPerMove * (0.7 + rand() * 0.8);
-      t += secs;
+      t += secs; rope += secs;
       applyRope(s, -driftOf(arena, scale) * secs);
-      if (t >= nextHeave) { applyRope(s, -DUEL.HEAVE); nextHeave += 11 + rand() * 6; }
+      if (rope >= nextHeave) { applyRope(s, -DUEL.HEAVE); nextHeave += 11 + rand() * 6; }
       if (s.over) break;
       const c = rand() < p;
       applyRope(s, quickEffect(c, s.combo, secs * 1000), { correct: c });
     }
   }
   settleRope(s);
-  return { won: s.won, secs: t, rope: s.rope };
+  return { won: s.won, secs: t, rope: s.rope, ropeSecs: rope };
 }
 
 function rate(arena, p, o) {
@@ -51,12 +61,51 @@ function rate(arena, p, o) {
 }
 
 console.log('The tug of war');
-for (const a of ARENAS) {
-  const careful = rate(a, 0.8), middling = rate(a, 0.62), guessing = rate(a, 0.25);
-  console.log(`  arena ${a.n} ${a.name.padEnd(20)} careful ${(careful.win * 100).toFixed(0)}%  middling ${(middling.win * 100).toFixed(0)}%  guessing ${(guessing.win * 100).toFixed(0)}%   ${careful.secs.toFixed(0)}s`);
-  check(`arena ${a.n}: an 80% player wins most duels`, careful.win >= 0.75, `${(careful.win * 100).toFixed(0)}%`);
-  check(`arena ${a.n}: a guesser loses`, guessing.win <= 0.08, `${(guessing.win * 100).toFixed(0)}%`);
-  check(`arena ${a.n}: a duel is a minute or two`, careful.secs >= 35 && careful.secs <= DUEL.MAX_SECONDS, `${careful.secs.toFixed(0)}s`);
+/* Any Muddle can be challenged at any stop, so every bout has to be fair at the
+   easiest stop and at the hardest. */
+for (const bout of BOUTS) {
+  for (const a of [ARENAS[0], ARENAS[ARENAS.length - 1]]) {
+    const careful = rate(a, 0.8, { bout }), middling = rate(a, 0.62, { bout }), guessing = rate(a, 0.25, { bout });
+    console.log(`  ${bout.id.padEnd(12)} stop ${a.n}  careful ${(careful.win * 100).toFixed(0)}%  middling ${(middling.win * 100).toFixed(0)}%  guessing ${(guessing.win * 100).toFixed(0)}%   ${careful.secs.toFixed(0)}s`);
+    check(`${bout.id} at stop ${a.n}: an 80% player wins most duels`, careful.win >= 0.75, `${(careful.win * 100).toFixed(0)}%`);
+    check(`${bout.id} at stop ${a.n}: a guesser loses`, guessing.win <= 0.1, `${(guessing.win * 100).toFixed(0)}%`);
+    check(`${bout.id} at stop ${a.n}: a duel is short`, careful.secs >= 30 && careful.secs <= (bout.bigs.includes('read') ? 330 : 190), `${careful.secs.toFixed(0)}s`);
+  }
+}
+
+console.log('The cast');
+{
+  const at = new Date(2026, 0, 1, 9).getTime(), DAY = 864e5;
+  const duel = (i, muddle, won, when = at + i * 600000) => ({ kind: 'duel', id: `c${i}`, finished_at: new Date(when).toISOString(), muddle, won, laurels: won ? 30 : -10 });
+  check('every Muddle is a different part of the exam', new Set(BOUTS.map((b) => b.skill)).size === BOUTS.length && BOUTS.length === 10);
+  check('every stop is the home of a Muddle on the bill', ARENAS.every((a) => boutOf(a.muddle).id === a.muddle));
+  check('reading is on the bill', BOUTS.some((b) => b.bigs.includes('read')));
+  check('the first duel is Smudge', nextBout([]).id === 'smudge');
+  // Win every duel: the first ten are ten different Muddles, in the bill's order.
+  const run = [];
+  for (let i = 0; i < BOUTS.length; i += 1) run.push(duel(i, nextBout(run, at + i * 600000).id, true));
+  check('ten wins meet all ten Muddles, one new game each time', run.map((d) => d.muddle).join() === BOUTS.map((b) => b.id).join());
+  const lost = [duel(0, 'smudge', true), duel(1, 'verbose', false)];
+  check('a loss gets one rematch', nextBout(lost, at).id === 'verbose');
+  lost.push(duel(2, 'verbose', false));
+  check('two losses running and PLAY moves on', nextBout(lost, at).id !== 'verbose');
+  // After everyone is met, nobody comes up twice running and nobody is left out.
+  const long = [...run];
+  for (let i = 10; i < 60; i += 1) long.push(duel(i, nextBout(long, at + i * 600000).id, true));
+  check('never the same Muddle twice running after a win', long.every((d, i) => i === 0 || d.muddle !== long[i - 1].muddle));
+  check('PLAY keeps coming back to everyone', [...castOf(long).values()].every((c) => c.fought >= 4));
+  const c = castOf([...run, duel(20, 'waffle', true), duel(21, 'waffle', true), duel(22, 'waffle', false)]).get('waffle');
+  check('a Muddle keeps your record against it', c.fought === 4 && c.wins === 3 && c.losses === 1 && c.ribbon?.id === 'bronze' && c.toRibbon === RIBBONS[1].at - 3);
+  check('damaged records do not break the cast', castOf([{ kind: 'duel', muddle: 'nobody', won: true, finished_at: 'x' }]).get('smudge').fought === 0);
+
+  check('no troublemaker until four Muddles are met', troublemakerOf(run.slice(0, 3), at + DAY) === null);
+  const weak = [...run, duel(30, 'waffle', false), duel(31, 'waffle', false), duel(32, 'skimmer', false), duel(33, 'tangent', false)];
+  const t1 = troublemakerOf(weak, at + DAY);
+  check('the troublemaker is one of your weakest', !!t1 && ['waffle', 'skimmer', 'tangent'].includes(t1.bout.id) && t1.open, t1?.bout.id);
+  check('it does not change while you play today', troublemakerOf([...weak, duel(40, 'smudge', true, at + DAY + 1000)], at + DAY + 2000).bout.id === t1.bout.id);
+  check('its double is paid once a day', troublemakerOf([...weak, duel(41, t1.bout.id, true, at + DAY + 1000)], at + DAY + 2000).open === false);
+  check('a double is a double, and only for a win', laurelsFor({ won: true, accuracy: 1, bounty: true }) === 2 * laurelsFor({ won: true, accuracy: 1 }) && laurelsFor({ won: false, rope: -50, bounty: true }) === laurelsFor({ won: false, rope: -50 }));
+  check('days are the learner\'s own calendar days', dayKey(new Date(2026, 2, 5, 23, 59).getTime()) === '2026-03-05' && dayKey(new Date(2026, 2, 6, 0, 1).getTime()) === '2026-03-06');
 }
 
 console.log('The ladder');
@@ -68,8 +117,8 @@ console.log('The ladder');
     const l = laurelsFrom(duels);
     const a = arenaFor(l);
     const scale = driftScale(duels);
-    const r = simulate(a, 0.68, { scale });
-    duels.push({ kind: 'duel', id: `d${i}`, finished_at: new Date(at + i * 600000).toISOString(), won: r.won, laurels: laurelsFor({ won: r.won, accuracy: 0.7, rope: r.rope, first: i === 0 }) });
+    const r = simulate(a, 0.68, { scale, bout: nextBout(duels, at + i * 600000) });
+    duels.push({ kind: 'duel', id: `d${i}`, finished_at: new Date(at + i * 600000).toISOString(), muddle: nextBout(duels, at + i * 600000).id, won: r.won, laurels: laurelsFor({ won: r.won, accuracy: 0.7, rope: r.rope, first: i === 0 }) });
     const reached = arenaFor(laurelsFrom(duels)).n;
     if (reached > a.n) console.log(`  arena ${reached} after ${i + 1} duels`);
   }

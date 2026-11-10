@@ -442,6 +442,12 @@ html[data-reduced-motion] .cw-base { transition: none; }
 .cw-play:active { translate: -50% 5px; box-shadow: 0 2px 0 #3b2508, 0 6px 14px rgba(40, 24, 6, 0.4); }
 .cw-play b { font: 900 33px/1 var(--font-ui); letter-spacing: 0.03em; }
 .cw-play small { max-width: 100%; font: 700 13px/1.15 var(--font-ui); color: #4a2f0b; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cw-vs { position: absolute; left: calc(50% + min(23.5vw, 115px) - 30px); bottom: calc(var(--dock-b) + 56px); z-index: 2; width: 58px; height: 58px; display: block; border-radius: 50%; background: #FBF3E0; border: 3px solid #3b2508; box-shadow: 0 4px 0 #3b2508, 0 8px 14px rgba(40, 24, 6, 0.4); text-decoration: none; touch-action: manipulation; }
+.cw-vs[hidden] { display: none; }
+.cw-vs:active { translate: 0 3px; box-shadow: 0 1px 0 #3b2508; }
+.cw-vs__face { position: absolute; inset: 3px; border-radius: 50%; background-repeat: no-repeat; background-size: auto 122%; background-position: 3% 30%; background-color: #cfe3ea; }
+.cw-vs i { position: absolute; left: 50%; bottom: -9px; translate: -50% 0; padding: 3px 7px; white-space: nowrap; border-radius: 999px; background: #3b2508; color: #FBF3E0; font: 800 10.5px/1 var(--font-ui); font-style: normal; letter-spacing: 0.04em; }
+.cw:has(.cw-overlay.is-open) .cw-vs { opacity: 0; pointer-events: none; }
 .cw-side { position: absolute; bottom: calc(var(--dock-b) + 3px); width: 76px; height: 74px; padding: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; border-radius: 20px; font: 750 13px/1 var(--font-ui); text-decoration: none; color: var(--color-ink); cursor: pointer; touch-action: manipulation; }
 .cw-side:active { scale: 0.96; }
 .cw-side svg { width: 27px; height: 27px; }
@@ -466,6 +472,7 @@ html[data-reduced-motion] .cw-base { transition: none; }
 @media (min-width: 700px) and (orientation: landscape) {
   .cw-play { left: auto; right: max(100px, calc(env(safe-area-inset-right) + 100px)); translate: 0 0; }
   .cw-play:active { translate: 0 5px; }
+  .cw-vs { left: auto; right: max(88px, calc(env(safe-area-inset-right) + 88px)); }
   .cw-side--l { left: auto; right: calc(max(100px, calc(env(safe-area-inset-right) + 100px)) + min(47vw, 230px) + 10px); }
   .cw-letter { left: auto; right: 160px; translate: 0 0; }
 }

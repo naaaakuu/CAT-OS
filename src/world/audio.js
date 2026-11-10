@@ -121,6 +121,20 @@ export function quietWorld(on) {
   if (quiet) { stopMusic(0.4); stopAmbience(0.4); } else wake();
 }
 
+/**
+ * The duel and a letter being opened have their own sound. The village song
+ * waits until they let go, however many taps wake the audio in between: before
+ * this, every answer in a duel restarted the song on top of the duel's own.
+ */
+let held = false, holdTimer = 0;
+export function holdMusic(on, { resumeIn = 0 } = {}) {
+  clearTimeout(holdTimer);
+  if (on) { held = true; stopMusic(0.3); return; }
+  if (!held) return;
+  const release = () => { held = false; wake(); };
+  if (resumeIn > 0) holdTimer = setTimeout(release, resumeIn * 1000); else release();
+}
+
 export async function initWorldAudio(storage) {
   state.storage = storage;
   state.music.on = feedbackPrefs().music;
@@ -252,13 +266,39 @@ const EVENTS = {
 
 export const WORLD_SOUND_NAMES = Object.freeze(Object.keys(EVENTS));
 
+/* One thing speaks at a time. A big sound (seconds it needs the air for, below)
+   waits for the big sound before it, the music steps back under it, and small
+   sounds that land inside it are played softly. The same sound asked for twice
+   in one breath is played once. */
+const BIG = Object.freeze({ vs: 0.5, bigyank: 0.5, splash: 0.7, fanfare: 0.95, defeat: 0.95, levelup: 1.4, combo: 0.32, reveal: 0.55, unlock: 0.95, party: 0.6, chest: 0.8, grow: 0.9, build: 0.8, rip: 0.22, star3: 0.3 });
+const lastPlayed = new Map();
+let bigUntil = 0;
+
+function duck(t, len) {
+  const buses = [[state.music.playing ? state.music.gain : null, musicGain() * MUSIC_LEVEL], [duel?.bus ?? null, duelLevel()]];
+  for (const [bus, base] of buses) {
+    if (!bus || base <= 0.0002) continue;
+    try { bus.gain.cancelScheduledValues(t); bus.gain.setTargetAtTime(Math.max(0.0001, base * 0.38), t, 0.03); bus.gain.setTargetAtTime(Math.max(0.0001, base), t + len, 0.14); } catch { /* the sound still plays */ }
+  }
+}
+
 export function play(name, { delay = 0, pitch = 0 } = {}) {
   try {
     const v = gain();
     if (v <= 0 || document.visibilityState === 'hidden' || !ready()) return;
     const fn = EVENTS[name];
     if (!fn) return;
-    fn(state.ctx.currentTime + delay, v, pitch);
+    const now = state.ctx.currentTime;
+    let t = now + delay, level = 1;
+    if (Math.abs(t - (lastPlayed.get(name) ?? -9)) < 0.07) return;
+    const len = BIG[name];
+    if (len) {
+      if (t < bigUntil) { if (bigUntil - t > 1.5) return; t = bigUntil + 0.04; }
+      bigUntil = t + len;
+      duck(t, len);
+    } else if (t < bigUntil) level = 0.4;
+    lastPlayed.set(name, t);
+    fn(t, v * level, pitch);
   } catch { /* never a blocker */ }
 }
 
@@ -468,7 +508,7 @@ function playSlot(slot, t, eighth, dest) {
 export function startMusic(region = 'world', { hour = state.music.hour ?? 'morning', warmth = 0 } = {}) {
   const m = state.music;
   m.region = region; m.hour = hour; m.warmth = Math.max(0, Math.min(1, warmth));
-  if (hushed || quiet || !m.on || musicGain() <= 0 || !ready() || m.playing) return; // not running yet: onLive() starts it
+  if (hushed || quiet || held || !m.on || musicGain() <= 0 || !ready() || m.playing) return; // not running yet: onLive() starts it
   const c = state.ctx;
   const bus = c.createGain();
   /* A short straight ramp: an exponential one from 0.0001 is inaudible for most of its length
@@ -599,12 +639,25 @@ export function startDuelMusic(arena = 1) {
     bus.gain.linearRampToValueAtTime(Math.max(0.0001, musicGain() * MUSIC_LEVEL * 0.9), c.currentTime + 0.25);
     bus.connect(state.master);
     const lp = c.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 1400; lp.connect(bus);
-    duel = { bus, lp, step: 0, next: c.currentTime + 0.1, heat: 0, root: DUEL_KEYS[(arena - 1) % DUEL_KEYS.length], timer: setInterval(duelTick, 25) };
+    duel = { bus, lp, hush: 1, step: 0, next: c.currentTime + 0.1, heat: 0, root: DUEL_KEYS[(arena - 1) % DUEL_KEYS.length], timer: setInterval(duelTick, 25) };
     duelTick();
   } catch { /* the duel plays on in silence */ }
 }
 
 export function setDuelHeat(h) { if (duel) duel.heat = Math.max(0, Math.min(1, h)); }
+
+function duelLevel() { return duel ? musicGain() * MUSIC_LEVEL * 0.9 * duel.hush : 0; }
+
+/**
+ * Reading has the air to itself (owner, 2026-11-01), in a duel too: while a
+ * passage is on screen the duel's song drops away, and comes back for the
+ * questions. `amount` is how much of the song is left, 0 to 1.
+ */
+export function hushDuelMusic(amount = 0) {
+  if (!duel) return;
+  duel.hush = Math.max(0, Math.min(1, amount));
+  try { const c = state.ctx; duel.bus.gain.cancelScheduledValues(c.currentTime); duel.bus.gain.setTargetAtTime(Math.max(0.0001, duelLevel()), c.currentTime, 0.18); } catch { /* fine */ }
+}
 
 export function stopDuelMusic(fade = 0.35) {
   const d = duel;

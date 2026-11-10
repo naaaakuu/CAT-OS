@@ -4,6 +4,7 @@ export const MUDDLE_SHEETS = {
   smudge: { w: 336, h: 384, gutter: 4, frames: 5 },
   verbose: { w: 336, h: 384, gutter: 4, frames: 5 },
   scrambler: { w: 336, h: 384, gutter: 4, frames: 5 },
+  skimmer: { w: 336, h: 384, gutter: 4, frames: 5 },
   tangent: { w: 336, h: 384, gutter: 4, frames: 5 },
   ellipsis: { w: 336, h: 384, gutter: 4, frames: 5 },
   gatecrasher: { w: 336, h: 384, gutter: 4, frames: 5 },

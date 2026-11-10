@@ -14,13 +14,15 @@ import { STORES } from '../core/storage/storage-adapter.js';
 import { LexRound, listFields, loadLedger, saveRound, loadField } from '../world/lexicon.js';
 import { composeRound, nextVerbal } from '../world/curator.js';
 import { loadWorld } from '../world/state.js';
-import { loadBankFile, normalizeBankItem, loadOOOItem, loadPJItem, loadPSItem } from '../core/content-loader/loader.js';
+import { loadBankFile, normalizeBankItem, loadOOOItem, loadPJItem, loadPSItem, loadRCPassage } from '../core/content-loader/loader.js';
+import { PracticeSession } from '../core/engine/session.js';
+import { libraryShelves } from '../core/learning/journey.js';
 import { PJSession } from '../core/engine/pj-session.js';
 import { OOOSession } from '../core/engine/ooo-session.js';
 import { PSSession } from '../core/engine/ps-session.js';
 import { BankSession } from '../core/engine/bank-session.js';
 import { loadDecode } from './content.js';
-import { DUEL, driftScale, duelsIn } from './model.js';
+import { DUEL, BOUTS, driftScale, duelsIn, quickCount } from './model.js';
 import { seeded } from './letters.js';
 
 /** The first duel of a player's life: everyday words, a certain win. */
@@ -52,6 +54,7 @@ const BIG = Object.freeze({
   point: { mod: 'ps', load: loadPSItem, name: 'Hit the Point' },
   gap: { mod: 'pc', bank: true, name: 'The Missing Cog' },
   seat: { mod: 'sp', bank: true, name: 'Take a Seat' },
+  read: { mod: 'rc', load: loadRCPassage, name: 'The Long Read' },
 });
 const BIG_ROTATION = ['chain', 'stray', 'gap', 'seat', 'point'];
 
@@ -61,14 +64,38 @@ export async function loadBigItem(type, id) {
   return def.load(id);
 }
 
-async function pickBig(arena, world, seed, now) {
-  const type = arena.big === 'any' ? BIG_ROTATION[Math.floor(seeded(`big:${seed}`)() * BIG_ROTATION.length)] : arena.big;
-  if (!type) return null;
-  const def = BIG[type];
-  const rows = world.content?.[def.mod] ?? [];
-  const rec = nextVerbal(rows, (world.records.sessions ?? []).filter((x) => x && typeof x === 'object'), def.mod, seed, now);
-  if (!rec?.item) return null;
-  try { return { type, item: await loadBigItem(type, rec.item.id) }; } catch { return null; }
+const cleanSessions = (world) => (world.records.sessions ?? []).filter((x) => x && typeof x === 'object');
+
+/* The passage is the book Chai is waiting beside in the library, so a reading
+   duel and the library are one shelf, read in one order. */
+function nextPassageId(world) {
+  const lib = libraryShelves(world.content?.rc ?? [], cleanSessions(world));
+  return lib.owl?.id ?? lib.shelves.flatMap((sh) => sh.books)[0]?.id ?? null;
+}
+
+/**
+ * The paragraphs (or the passage) one bout stops for. `any` deals a different
+ * kind each time, and nothing is dealt twice in one duel.
+ */
+async function pickBigs(bout, world, seed, now) {
+  const out = [], used = new Set();
+  const deal = shuffled(BIG_ROTATION, seeded(`big:${seed}`));
+  for (let i = 0; i < bout.bigs.length; i += 1) {
+    const type = bout.bigs[i] === 'any' ? deal[i % deal.length] : bout.bigs[i];
+    const def = BIG[type];
+    try {
+      let id;
+      if (type === 'read') id = nextPassageId(world);
+      else {
+        const rows = (world.content?.[def.mod] ?? []).filter((x) => !used.has(x.id));
+        id = nextVerbal(rows, cleanSessions(world), def.mod, `${seed}:${i}`, now)?.item?.id;
+      }
+      if (!id) continue;
+      used.add(id);
+      out.push({ type, item: await loadBigItem(type, id) });
+    } catch { /* a paragraph that will not load is left out; the duel plays on */ }
+  }
+  return out;
 }
 
 /* Decode lines get harder as the arenas do; ones you have already got right rest. */
@@ -96,7 +123,7 @@ export function questionFromDecode(d, r) {
  * Everything one duel needs, ready to play.
  * @returns {Promise<{moves:Array, feeds:{meadow:LexRound|null, pond:LexRound|null}, ledger:Map, scale:number, decodePlayed:Array}>}
  */
-export async function composeDuel(storage, { arena, seed, first = false, now = Date.now() }) {
+export async function composeDuel(storage, { arena, bout = BOUTS[0], seed, first = false, now = Date.now() }) {
   const r = seeded(seed);
   const [world, ledger, decodes] = await Promise.all([loadWorld(storage, now), loadLedger(storage), first ? [] : loadDecode()]);
   const duels = duelsIn(world.records.learning);
@@ -108,45 +135,61 @@ export async function composeDuel(storage, { arena, seed, first = false, now = D
     return { moves, feeds, ledger, scale: 0.5, world };
   }
 
-  const big = await pickBig(arena, world, seed, now);
-  const quickCount = big ? DUEL.QUICK_WITH_BIG : DUEL.QUICK_MOVES;
-  // Lay out the quick moves from this arena's own recipe.
+  const bigs = await pickBigs(bout, world, seed, now);
+  // A paragraph that could not be dealt gives its place back to the quick moves.
+  const count = bigs.length === bout.bigs.length ? quickCount(bout) : bigs.length ? DUEL.QUICK_WITH_BIGS + 4 : DUEL.QUICK_MOVES;
   const quick = [];
-  for (let i = 0; i < quickCount; i += 1) quick.push(arena.quick[i % arena.quick.length]);
+  for (let i = 0; i < count; i += 1) quick.push(bout.quick[i % bout.quick.length]);
   const kinds = shuffled(quick, r);
-  // Open and close with a word: a duel should start crisp and end on a strike.
+  // Open with a word where there is one: a duel should start crisp.
   const firstWord = kinds.findIndex((k) => k === 'word' || k === 'twin');
   if (firstWord > 0) [kinds[0], kinds[firstWord]] = [kinds[firstWord], kinds[0]];
 
   const decodeList = pickDecodes(decodes, arena, kinds.filter((k) => k === 'decode').length, duels, r);
   // A deck that runs short is topped up with words, so the feed is sized for that too.
   const decodeShort = kinds.filter((k) => k === 'decode').length - decodeList.length;
-  const wordsNeeded = kinds.filter((k) => k === 'word').length + decodeShort;
   const twinsNeeded = kinds.filter((k) => k === 'twin').length;
+  const wordsNeeded = kinds.filter((k) => k === 'word').length + decodeShort;
 
-  if (wordsNeeded) {
-    const fields = await listFields('meadow');
-    const composed = await composeRound('meadow', fields, ledger, { n: wordsNeeded + 2, seed, now, context: null });
-    feeds.meadow = new LexRound({ region: 'meadow', picks: composed.entries, context: null });
-  }
   if (twinsNeeded) {
     const fields = await listFields('pond');
     const composed = await composeRound('pond', fields, ledger, { n: twinsNeeded + 1, seed: `${seed}:twin`, now, context: null });
     feeds.pond = new LexRound({ region: 'pond', picks: composed.entries, context: null });
   }
+  const twinShort = Math.max(0, twinsNeeded - (feeds.pond?.total ?? 0));
+  if (wordsNeeded + twinShort) {
+    const fields = await listFields('meadow');
+    const composed = await composeRound('meadow', fields, ledger, { n: wordsNeeded + twinShort + 2, seed, now, context: null });
+    feeds.meadow = new LexRound({ region: 'meadow', picks: composed.entries, context: null });
+  }
 
   let dI = 0, words = 0, twins = 0;
-  const moves = [];
-  const word = () => { if (feeds.meadow && words < feeds.meadow.total) { words += 1; moves.push({ kind: 'word', feed: 'meadow' }); } };
-  kinds.forEach((k, i) => {
+  const quickMoves = [];
+  const word = () => { if (feeds.meadow && words < feeds.meadow.total) { words += 1; quickMoves.push({ kind: 'word', feed: 'meadow' }); } };
+  for (const k of kinds) {
     if (k === 'word') word();
-    else if (k === 'twin') { if (feeds.pond && twins < feeds.pond.total) { twins += 1; moves.push({ kind: 'twin', feed: 'pond' }); } }
-    else if (decodeList[dI]) moves.push({ kind: 'decode', q: questionFromDecode(decodeList[dI++], r) });
+    else if (k === 'twin') { if (feeds.pond && twins < feeds.pond.total) { twins += 1; quickMoves.push({ kind: 'twin', feed: 'pond' }); } else word(); }
+    else if (decodeList[dI]) quickMoves.push({ kind: 'decode', q: questionFromDecode(decodeList[dI++], r) });
     else word();
-    // Past the opening exchanges, the big move: the moment you stop and read.
-    if (big && i === 3) moves.push({ kind: 'big', big });
+  }
+  return { moves: layOut(quickMoves, bigs), feeds, ledger, scale: driftScale(duels), world };
+}
+
+/**
+ * Quick, quick, stop and read, quick, quick: the paragraphs sit evenly among
+ * the quick moves, never first (you warm up on the rope) and never last (a
+ * duel ends on a strike).
+ */
+export function layOut(quickMoves, bigs) {
+  if (!bigs.length) return quickMoves;
+  const moves = [], gap = quickMoves.length / (bigs.length + 1);
+  let b = 0;
+  quickMoves.forEach((m, i) => {
+    moves.push(m);
+    if (b < bigs.length && i + 1 >= Math.max(1, Math.round(gap * (b + 1))) && i < quickMoves.length - 1) moves.push({ kind: 'big', big: bigs[b++] });
   });
-  return { moves, feeds, ledger, scale: driftScale(duels), world };
+  while (b < bigs.length) moves.splice(Math.max(1, moves.length - 1), 0, { kind: 'big', big: bigs[b++] });
+  return moves;
 }
 
 /** Save whatever the word strikes reached. Unanswered words stay unasked. */
@@ -163,6 +206,7 @@ export async function saveWordFeeds(storage, feeds, ledger) {
  * @param {object} outcome { correct, share, entered?, chosen?, ms, started }
  */
 export async function saveBigMove(storage, type, item, outcome) {
+  if (type === 'read') return saveRead(storage, item, outcome);
   let t = outcome.started ?? Date.now();
   const now = () => t;
   const def = BIG[type];
@@ -186,3 +230,29 @@ export async function saveBigMove(storage, type, item, outcome) {
   return results.session;
 }
 
+
+/**
+ * A passage read in a duel is a passage read: saved exactly as the library
+ * saves one, so the book comes clean on Chai's shelf, the questions count for
+ * Glow, and a first read leaves a letter inside it.
+ * @param {object} outcome { answers: [{ chosen, ms }], started, read_ms }
+ */
+async function saveRead(storage, passage, outcome) {
+  let t = outcome.started ?? Date.now();
+  const session = new PracticeSession(passage, { now: () => t });
+  t += Math.max(1000, outcome.read_ms ?? 1000);
+  session.markQuestionShown();
+  (outcome.answers ?? []).forEach((a, i) => {
+    if (i >= session.total) return;
+    t += Math.max(500, a.ms ?? 500);
+    if (a.chosen) session.answer(a.chosen); else session.skip();
+    session.next();
+  });
+  const results = session.finish();
+  results.session.in_duel = true;
+  try {
+    await storage.put(STORES.SESSIONS, results.session);
+    for (const a of results.attempts) await storage.put(STORES.ATTEMPTS, a);
+  } catch (err) { console.error('[CAT OS] a passage could not be saved', err); }
+  return results.session;
+}

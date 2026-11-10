@@ -30,6 +30,10 @@
 - Decode answers are the only answers kept on a `duel` record, and that is what stops a duel paying Glow twice.
 - Every rule of attention in `docs/PRODUCT.md` §Why it holds attention must stay honest: the teaser is a promise (`drawCards` puts it first), a near miss is only claimed when true, and nothing pays for time.
 - Players use the Web Animations API for coupling and joining; it respects `reduced()`.
+- Sound, one voice at a time. `world/audio.js wake()` runs on every tap and restarts the village song if it is not playing, so anything with its own sound must call `holdMusic(true)` (a plain `stopMusic()` lasts until the next tap: that was the overlap the owner heard in 3.18.0). `play()` is a small mixer: sounds named in `BIG` wait for the big sound before them and duck the music, small sounds landing inside one are played at 40%, and the same sound asked for twice within 70 ms plays once. At a call site, order sounds with `delay` rather than stacking them (the rope answers a paragraph's own tap 0.1 s later; the winning pull is `finish()`'s alone).
+- Any Muddle can be fought at any stop, so `check-duel.mjs` simulates every bout at stop 1 and stop 9. A duel's clock (`DUEL.MAX_SECONDS`) counts rope time only; counting wall time ended a duel the moment a slow reader came back from a paragraph.
+- A passage in a duel cannot be half saved: `screen.js` holds the rope three short of either end until the last question, then lets it go. Leaving mid-passage is a forfeit and saves no reading.
+- Adding a Muddle: a `BOUTS` row, a `CAST` row and an `EXTRAS` painter in `tools/paint-muddles.mjs` (`node tools/paint-muddles.mjs <id>` paints one and rewrites `muddle-sheets.js`), and its lines in `content/duel/muddles.json` (an optional `skim` list is said when a passage is "read" impossibly fast).
 - The Muddles' sprite sheets are WebP (a tenth of the PNG size, with alpha). `cdp-lite` serves `.webp` so a gate sees what a phone sees.
 
 ## Learning core
@@ -57,6 +61,7 @@
 - A WebView cannot download blobs or use Web Share: `backup.js` and `shareApp()` go through the bridge (`saveFile`, `share`). Anything new that needs the OS goes there too.
 
 ## Browser verification (no npm, no Playwright)
+- `cdp-lite` launches Chrome with `--mute-audio`: a gate plays whole duels and must never be heard (owner, 2026-11-10).
 - `tools/cdp-lite.mjs`: `findChrome`, `serveRepo` (async), `launchChrome`, `open`, `shot`, `send`, `close`. Bypasses the service worker and reloads with ignoreCache on purpose, so offline tests need that turned off for that leg. `open()` = navigate + reload and eats one-shot UI; arrive by `location.hash` for return-toast checks.
 - Git Bash mangles `#/route` argv: prefix with `MSYS_NO_PATHCONV=1` or hardcode the hash. Never put JS template literals in bash heredocs or `node -e`; write scripts with Write.
 - "A tap does nothing": reproduce with a real CDP mouse event (`Input.dispatchMouseEvent` pressed + released) and `document.elementFromPoint` at the control's centre. `el.click()` skips hit testing, so a control under `pointer-events: none` or under another layer still "works" in a gate (3.8.2's word-round Begin hid behind it for a month).

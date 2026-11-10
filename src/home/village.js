@@ -26,7 +26,7 @@ import { PETS, PET_BY_ID, HOUSES, lineFor, petForPlace, stageTitle, stageGift, a
 import { MAP, HOMES, PLACES, SIGNS, NODES, LAMPS, WINDOWS, CLOCK, nearestNode } from '../pets/paths.js';
 import { petRig, petPortrait, petGear, petRing, petFigure, FRAME } from '../pets/sprite.js';
 import { ROOM_OF } from '../pets/next.js';
-import { duelsIn, ladderOf } from '../duel/model.js';
+import { duelsIn, ladderOf, nextBout, troublemakerOf } from '../duel/model.js';
 import { pendingLetters, ownedCards, teaseCard } from '../duel/letters.js';
 import { laurelSVG } from '../duel/art.js';
 import { createLife, petSize } from './life.js';
@@ -102,6 +102,7 @@ export async function renderVillageHome(outlet, ctx) {
         <a class="cw-tease" href="#/duel" hidden></a>
         <button class="cw-side cw-side--l" data-open="friends" aria-label="The rooms: every house and subject">${subjectsSVG}<span>Rooms</span></button>
         <a class="cw-play" data-play href="#/duel"></a>
+        <a class="cw-vs" href="#/bill" hidden></a>
         <a class="cw-side cw-side--r" href="#/book" aria-label="The Book of Curiosities: the cards you have collected">${bookSVG}<span>Book</span></a>
       </div>
       <button class="cw-edge" hidden></button>
@@ -354,8 +355,20 @@ export async function renderVillageHome(outlet, ctx) {
     lv.setAttribute('aria-label', `Stop ${lad.arena.n} on the Laurel Road, ${lad.arena.name}. ${lad.laurels} laurels${lad.next ? `; ${lad.toNext} more to reach ${lad.next.name}` : ''}. Open the Laurel Road.`);
     const playEl = root.querySelector('.cw-play');
     playEl.setAttribute('href', '#/duel');
-    playEl.innerHTML = `<b>PLAY</b><small>vs ${escapeHTML(lad.arena.muddleName)}</small>`;
-    playEl.setAttribute('aria-label', `Play a duel against ${lad.arena.muddleName} at ${lad.arena.name}.`);
+    const allDuels = duelsIn(learning);
+    const up = nextBout(allDuels, Date.now());
+    const trouble = troublemakerOf(allDuels, Date.now());
+    const double = !!trouble?.open && trouble.bout.id === up.id;
+    playEl.innerHTML = `<b>PLAY</b><small>${double ? 'Double laurels · ' : ''}vs ${escapeHTML(up.name)}</small>`;
+    playEl.setAttribute('aria-label', `Play a duel against ${up.name}: ${up.skill}.${double ? ' Today\'s troublemaker, for double laurels.' : ''}`);
+    /* Who is next, as a face on the corner of PLAY. Tapping the face opens the
+       bill, where every Muddle (every part of the exam) can be challenged. */
+    const vsEl = root.querySelector('.cw-vs');
+    vsEl.hidden = !lad.duels;
+    if (lad.duels) {
+      vsEl.innerHTML = `<span class="cw-vs__face" style="background-image:url(./assets/art/muddle-${up.id}.webp)"></span><i>All 10</i>`;
+      vsEl.setAttribute('aria-label', `Tonight's bill: choose which Muddle to play. Next is ${up.name}.`);
+    }
     const waiting = pendingLetters(learning, Date.now(), world.records?.sessions ?? []).length;
     const letterEl = root.querySelector('.cw-letter');
     letterEl.hidden = !waiting;

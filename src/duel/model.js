@@ -15,18 +15,42 @@
 
 export const ROPE_END = 100;
 
-/** Each stop on the Laurel Road is one friend's home, one Muddle and one new way to play. */
+/** Each stop on the Laurel Road is one friend's home and the Muddle who lives there. The higher the stop, the harder everyone pulls. */
 export const ARENAS = Object.freeze([
-  { n: 1, id: 'campfire', name: 'The Campfire', friend: 'toffee', muddle: 'smudge', muddleName: 'Smudge', from: 0, drift: 0.34, quick: ['word'], big: null, teach: 'Word Strikes', teachLine: 'Tap what the word means. Right answers pull the rope.' },
-  { n: 2, id: 'steps', name: 'Chai\'s Steps', friend: 'chai', muddle: 'verbose', muddleName: 'Baron Verbose', from: 60, drift: 0.44, quick: ['word', 'word', 'decode'], big: null, teach: 'Plain English', teachLine: 'The Baron talks like a legal notice. Work out what he means.' },
-  { n: 3, id: 'yard', name: 'The Workshop Yard', friend: 'ginger', muddle: 'scrambler', muddleName: 'The Scrambler', from: 160, drift: 0.5, quick: ['word', 'word', 'decode'], big: 'chain', teach: 'Couple the Train', teachLine: 'Four sentences, out of order. Tap them into the order the writer meant.' },
-  { n: 4, id: 'hill', name: 'Observatory Hill', friend: 'mallow', muddle: 'tangent', muddleName: 'Count Tangent', from: 300, drift: 0.56, quick: ['word', 'decode'], big: 'stray', teach: 'The Stray Star', teachLine: 'One sentence wandered in from somewhere else. Find it.' },
-  { n: 5, id: 'square', name: 'The Clock Square', friend: 'sesame', muddle: 'ellipsis', muddleName: 'Dame Ellipsis', from: 480, drift: 0.62, quick: ['word', 'decode'], big: 'gap', teach: 'The Missing Cog', teachLine: 'The paragraph stops. Choose the sentence that keeps it turning.' },
-  { n: 6, id: 'garden', name: 'The Rose Garden', friend: 'biscuit', muddle: 'gatecrasher', muddleName: 'The Gatecrasher', from: 700, drift: 0.68, quick: ['word', 'decode', 'decode'], big: 'seat', teach: 'Take a Seat', teachLine: 'A sentence needs a place in the paragraph. Only one seat fits.' },
-  { n: 7, id: 'green', name: 'The Archery Green', friend: 'mochi', muddle: 'waffle', muddleName: 'Sir Waffle', from: 960, drift: 0.74, quick: ['word', 'decode', 'decode'], big: 'point', teach: 'Hit the Point', teachLine: 'Sir Waffle never gets to the point. You will. Pick the true summary.' },
-  { n: 8, id: 'glasshouse', name: 'The Glasshouse', friend: 'matcha', muddle: 'mixup', muddleName: 'Madame Mixup', from: 1260, drift: 0.8, quick: ['twin', 'decode', 'word'], big: 'any', teach: 'Twin Words', teachLine: 'Madame Mixup swaps words that look alike. You know the difference.' },
-  { n: 9, id: 'lastpage', name: 'The Last Page', friend: 'chai', muddle: 'greatmuddle', muddleName: 'The Great Muddle', from: 1600, drift: 0.88, quick: ['twin', 'decode', 'word'], big: 'any', teach: 'The Great Muddle', teachLine: 'Every bad habit at once. Everything you have learned, together.' },
+  { n: 1, id: 'campfire', name: 'The Campfire', friend: 'toffee', muddle: 'smudge', muddleName: 'Smudge', from: 0, drift: 0.34 },
+  { n: 2, id: 'steps', name: 'Chai\'s Steps', friend: 'chai', muddle: 'verbose', muddleName: 'Baron Verbose', from: 60, drift: 0.44 },
+  { n: 3, id: 'yard', name: 'The Workshop Yard', friend: 'ginger', muddle: 'scrambler', muddleName: 'The Scrambler', from: 160, drift: 0.5 },
+  { n: 4, id: 'hill', name: 'Observatory Hill', friend: 'mallow', muddle: 'tangent', muddleName: 'Count Tangent', from: 300, drift: 0.56 },
+  { n: 5, id: 'square', name: 'The Clock Square', friend: 'sesame', muddle: 'ellipsis', muddleName: 'Dame Ellipsis', from: 480, drift: 0.62 },
+  { n: 6, id: 'garden', name: 'The Rose Garden', friend: 'biscuit', muddle: 'gatecrasher', muddleName: 'The Gatecrasher', from: 700, drift: 0.68 },
+  { n: 7, id: 'green', name: 'The Archery Green', friend: 'mochi', muddle: 'waffle', muddleName: 'Sir Waffle', from: 960, drift: 0.74 },
+  { n: 8, id: 'glasshouse', name: 'The Glasshouse', friend: 'matcha', muddle: 'mixup', muddleName: 'Madame Mixup', from: 1260, drift: 0.8 },
+  { n: 9, id: 'lastpage', name: 'The Last Page', friend: 'chai', muddle: 'greatmuddle', muddleName: 'The Great Muddle', from: 1600, drift: 0.88 },
 ].map(Object.freeze));
+
+/**
+ * The cast. Every Muddle is one part of the exam, and a duel against one is
+ * mostly that part: `quick` is the recipe for its fast moves, `bigs` the
+ * paragraphs or the passage it makes you stop and read. Any Muddle can be
+ * challenged at any stop, so the whole of VARC is in reach from the second
+ * duel. The order is the order a new player meets them in, one per PLAY.
+ */
+export const BOUTS = Object.freeze([
+  { id: 'smudge', name: 'Smudge', friend: 'toffee', skill: 'Vocabulary', game: 'Word Strikes', line: 'Tap what the word means. Right answers pull the rope.', quick: ['word'], bigs: [] },
+  { id: 'verbose', name: 'Baron Verbose', friend: 'chai', skill: 'Dense sentences', game: 'Plain English', line: 'The Baron talks like a legal notice. Work out what he means.', quick: ['decode', 'decode', 'word'], bigs: [] },
+  { id: 'scrambler', name: 'The Scrambler', friend: 'ginger', skill: 'Para Jumbles', game: 'Couple the Train', line: 'Four sentences, out of order. Tap them into the order the writer meant.', quick: ['word', 'decode'], bigs: ['chain', 'chain'] },
+  { id: 'skimmer', name: 'The Skimmer', friend: 'chai', skill: 'Reading Comprehension', game: 'The Long Read', line: 'One passage, then its questions. The Skimmer never reads to the end. You will.', quick: ['word', 'decode'], bigs: ['read'] },
+  { id: 'tangent', name: 'Count Tangent', friend: 'mallow', skill: 'Odd One Out', game: 'The Stray Star', line: 'One sentence wandered in from somewhere else. Find it.', quick: ['word', 'decode'], bigs: ['stray', 'stray'] },
+  { id: 'ellipsis', name: 'Dame Ellipsis', friend: 'sesame', skill: 'Para Completion', game: 'The Missing Cog', line: 'The paragraph stops. Choose the sentence that keeps it turning.', quick: ['word', 'decode'], bigs: ['gap', 'gap'] },
+  { id: 'gatecrasher', name: 'The Gatecrasher', friend: 'biscuit', skill: 'Sentence Placement', game: 'Take a Seat', line: 'A sentence needs a place in the paragraph. Only one seat fits.', quick: ['word', 'decode'], bigs: ['seat', 'seat'] },
+  { id: 'waffle', name: 'Sir Waffle', friend: 'mochi', skill: 'Para Summary', game: 'Hit the Point', line: 'Sir Waffle never gets to the point. You will. Pick the true summary.', quick: ['word', 'decode'], bigs: ['point', 'point'] },
+  { id: 'mixup', name: 'Madame Mixup', friend: 'matcha', skill: 'Confusing words', game: 'Twin Words', line: 'Madame Mixup swaps words that look alike. You know the difference.', quick: ['twin', 'twin', 'word'], bigs: [] },
+  { id: 'greatmuddle', name: 'The Great Muddle', friend: 'chai', skill: 'Everything at once', game: 'The Mixed Bag', line: 'Every bad habit at once. Two paragraphs of any kind, and everything between.', quick: ['twin', 'decode', 'word'], bigs: ['any', 'any'] },
+].map(Object.freeze));
+
+const BOUT_BY_ID = new Map(BOUTS.map((b) => [b.id, b]));
+export const boutOf = (id) => BOUT_BY_ID.get(id) ?? BOUTS[0];
+export const isBout = (id) => BOUT_BY_ID.has(id);
 
 export const arenaFor = (laurels) => {
   let a = ARENAS[0];
@@ -38,11 +62,11 @@ export const nextArena = (arena) => ARENAS[arena.n] ?? null;
 
 /** How much a duel is made of. */
 export const DUEL = Object.freeze({
-  QUICK_MOVES: 14,      // the longest a duel can run
-  QUICK_WITH_BIG: 10,   // quick moves when a big move is in the duel
-  BIG_MOVES: 1,
+  QUICK_MOVES: 14,      // a duel that is all quick moves
+  QUICK_WITH_BIGS: 6,   // quick moves round two paragraphs
+  QUICK_WITH_READ: 4,   // quick moves round a passage
   FIRST_MOVES: 7,       // the very first duel is short and winnable
-  MAX_SECONDS: 170,
+  MAX_SECONDS: 170,     // of rope time: reading with the Muddle is not on the clock
   HEAVE_EVERY: [11, 17], // seconds between the Muddle's big heaves
   HEAVE: 5,
   MIN_READ_MS: 500,     // options wake after this, so nobody wins by tapping blind
@@ -58,7 +82,18 @@ export function quickEffect(correct, combo, ms) {
 
 /** A big move pays once, and pays well. `share` is how cleanly it was solved, 0 to 1. */
 export function bigEffect(share) {
-  return share >= 0.99 ? 40 : share > 0 ? Math.round(14 + 22 * share) : -22;
+  return share >= 0.99 ? 40 : share > 0 ? Math.round(14 + 22 * share) : -30;
+}
+
+/** How many quick moves a bout holds. */
+export function quickCount(bout) {
+  if (!bout.bigs.length) return DUEL.QUICK_MOVES;
+  return bout.bigs.includes('read') ? DUEL.QUICK_WITH_READ : DUEL.QUICK_WITH_BIGS;
+}
+
+/** One question of a passage. It was read for, so it pulls harder than a word. */
+export function readEffect(correct, combo = 0) {
+  return correct ? 22 + Math.min(combo, 3) * 2 : -17;
 }
 
 /** The Muddle's pull in rope per second, shaped by how the learner is doing. */
@@ -105,9 +140,9 @@ export function settleRope(s) {
 /* ------------------------------------------------------------------ */
 
 /** What a duel pays. A narrow loss costs less than a flattening. */
-export function laurelsFor({ won, accuracy = 0, rope = 0, first = false }) {
+export function laurelsFor({ won, accuracy = 0, rope = 0, first = false, bounty = false }) {
   if (first) return 36;
-  if (won) return 24 + Math.round(12 * Math.max(0, Math.min(1, accuracy)));
+  if (won) return (24 + Math.round(12 * Math.max(0, Math.min(1, accuracy)))) * (bounty ? 2 : 1);
   return -(8 + Math.round(6 * Math.max(0, Math.min(1, -rope / ROPE_END))));
 }
 
@@ -153,4 +188,86 @@ export function ladderOf(duels) {
   const into = next ? laurels - arena.from : 1;
   const wins = duels.filter((d) => d.won).length;
   return { laurels, arena, next, pct: Math.max(0, Math.min(1, into / span)), toNext: next ? next.from - laurels : 0, duels: duels.length, wins, losses: duels.length - wins };
+}
+
+/* ------------------------------------------------------------------ */
+/* The cast: who you have met, who you have dunked, who is next        */
+/* ------------------------------------------------------------------ */
+
+/** Ribbons say how thoroughly a Muddle has been dunked. */
+export const RIBBONS = Object.freeze([
+  { id: 'bronze', name: 'Bronze ribbon', at: 3 },
+  { id: 'silver', name: 'Silver ribbon', at: 8 },
+  { id: 'gold', name: 'Gold ribbon', at: 15 },
+].map(Object.freeze));
+
+export function ribbonFor(wins) {
+  let r = null;
+  for (const x of RIBBONS) if (wins >= x.at) r = x;
+  return r;
+}
+
+const pad = (n) => String(n).padStart(2, '0');
+/** The learner's own calendar day, as a sortable string. */
+export function dayKey(ms) { const d = new Date(ms); return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`; }
+const dayOf = (d) => dayKey(Date.parse(d.finished_at));
+
+/**
+ * Every Muddle's record against this learner, derived from the saved duels.
+ * @returns {Map<string,{bout:object,fought:number,wins:number,losses:number,lastAt:number,lastWon:boolean|null,ribbon:object|null,toRibbon:number}>}
+ */
+export function castOf(duels) {
+  const cast = new Map(BOUTS.map((bout) => [bout.id, { bout, fought: 0, wins: 0, losses: 0, lastAt: 0, lastWon: null, ribbon: null, toRibbon: RIBBONS[0].at }]));
+  for (const d of duels) {
+    const c = cast.get(d.muddle);
+    if (!c) continue;
+    c.fought += 1;
+    if (d.won) c.wins += 1; else c.losses += 1;
+    c.lastAt = Date.parse(d.finished_at); c.lastWon = !!d.won;
+  }
+  for (const c of cast.values()) {
+    c.ribbon = ribbonFor(c.wins);
+    const next = RIBBONS.find((r) => r.at > c.wins);
+    c.toRibbon = next ? next.at - c.wins : 0;
+  }
+  return cast;
+}
+
+/**
+ * Today's troublemaker: one of the Muddles this learner finds hardest, chosen
+ * from the days before today so it cannot change while they play. The first
+ * win against it each day pays double laurels, which points the biggest
+ * reward in the game at the weakest part of the syllabus.
+ * @returns {{bout:object, open:boolean}|null} `open` while the double is still unclaimed today
+ */
+export function troublemakerOf(duels, now = Date.now()) {
+  const today = dayKey(now);
+  const cast = castOf(duels.filter((d) => dayOf(d) < today));
+  const met = BOUTS.filter((b) => cast.get(b.id).fought > 0);
+  if (met.length < 4) return null;
+  const share = (b) => { const c = cast.get(b.id); return (c.wins + 1) / (c.fought + 2); };
+  const weakest = [...met].sort((a, b) => share(a) - share(b) || a.id.localeCompare(b.id)).slice(0, 3);
+  let h = 7; for (const ch of today) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
+  const bout = weakest[h % weakest.length];
+  const open = !duels.some((d) => d.won && d.muddle === bout.id && dayOf(d) === today);
+  return { bout, open };
+}
+
+/**
+ * Who PLAY sends you against. A loss gets one rematch, because a grudge is the
+ * best reason to play again; after that a Muddle you have never met, so the
+ * first ten duels are ten different games; then today's troublemaker; then
+ * whoever you have left alone the longest. Never the same face twice running
+ * unless you lost to it.
+ */
+export function nextBout(duels, now = Date.now()) {
+  if (!duels.length) return BOUTS[0];
+  const cast = castOf(duels);
+  const last = duels[duels.length - 1], prev = duels[duels.length - 2];
+  if (!last.won && isBout(last.muddle) && !(prev && !prev.won && prev.muddle === last.muddle)) return boutOf(last.muddle);
+  const unmet = BOUTS.find((b) => !cast.get(b.id).fought);
+  if (unmet) return unmet;
+  const t = troublemakerOf(duels, now);
+  if (t?.open && t.bout.id !== last.muddle) return t.bout;
+  return BOUTS.filter((b) => b.id !== last.muddle).sort((a, b) => cast.get(a.id).lastAt - cast.get(b.id).lastAt)[0];
 }

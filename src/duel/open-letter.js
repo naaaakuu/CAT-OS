@@ -9,7 +9,7 @@
 
 import { STORES } from '../core/storage/storage-adapter.js';
 import { escapeHTML as esc } from '../core/utils/format.js';
-import { play, stopMusic } from '../world/audio.js';
+import { play, holdMusic } from '../world/audio.js';
 import { loadWorldRecords } from '../world/state.js';
 import { shareText, track } from '../core/native.js';
 import { remindersSupported, remindersOn, turnOnReminders } from '../shell/reminders.js';
@@ -67,7 +67,10 @@ export async function renderLetterOpen(outlet, { storage, letter, first = false,
   const env = outlet.querySelector('#env');
   const cardsEl = outlet.querySelector('#cards');
   const fxLayer = outlet.querySelector('#fxlayer');
-  stopMusic(0.3);
+  // The seal, the rip and the reveal have the air to themselves; the song comes back when the letter is done.
+  holdMusic(true);
+  const letGo = () => { window.removeEventListener('hashchange', letGo); holdMusic(false, { resumeIn: 0.4 }); };
+  window.addEventListener('hashchange', letGo);
 
   const [{ chapters, cards }, records] = await Promise.all([loadCurios(), loadWorldRecords(storage)]);
   const chapterOf = new Map(chapters.map((c) => [c.id, c]));
@@ -155,6 +158,7 @@ export async function renderLetterOpen(outlet, { storage, letter, first = false,
 
   function finish() {
     if (doneHref) { location.hash = doneHref; return; }
+    letGo();
     onDone?.();
   }
 }
