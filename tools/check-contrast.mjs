@@ -100,7 +100,7 @@ const VILLAGE_PAIRS = (css) => {
   const gold = css.match(/\.cw-play\s*\{[^}]*linear-gradient\([^)]*?(#[0-9a-fA-F]{6})\s*100%\)/)?.[1] ?? null;
   return [
     ['the Play button label on gold', inkOf(/\.cw-play\s*\{([^}]*)\}/), gold, 4.5],
-    ['the Play button detail on gold', inkOf(/\.cw-play__text small\s*\{([^}]*)\}/), gold, 4.5],
+    ['the Play button detail on gold', inkOf(/\.cw-play small\s*\{([^}]*)\}/), gold, 4.5],
   ];
 };
 

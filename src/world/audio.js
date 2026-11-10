@@ -235,17 +235,30 @@ const EVENTS = {
     [['mi', 1], ['sol', 1], ['do', 2]].forEach(([d, o], i) => tone(t + 0.75 + i * 0.07, { freq: pitch(C5, d, o - 1), type: 'sine', peak: 0.035 * v, a: 0.004, d: 0.4 }));
   },
   swoosh:   (t, v) => { noiseBurst(t, { peak: 0.06 * v, a: 0.04, d: 0.26, filter: 'bandpass', freq: 900, q: 0.7 }); },
+  /* The tug of war. A yank climbs the pentatonic with the streak, so a run of right answers plays a tune. */
+  yank:     (t, v, p = 0) => { const steps = [0, 2, 4, 7, 9, 12, 14]; const f = 440 * 2 ** (steps[Math.min(6, Math.max(0, p))] / 12); tone(t, { freq: 90, type: 'sine', peak: 0.2 * v, a: 0.002, d: 0.12, glide: 0.55 }); noiseBurst(t, { peak: 0.08 * v, a: 0.002, d: 0.06, filter: 'lowpass', freq: 900 }); pluck(t + 0.01, f, 0.13 * v, -0.15); pluck(t + 0.07, f * 1.5, 0.08 * v, 0.15); },
+  bigyank:  (t, v) => { tone(t, { freq: 70, type: 'sine', peak: 0.28 * v, a: 0.002, d: 0.28, glide: 0.5 }); noiseBurst(t, { peak: 0.14 * v, a: 0.003, d: 0.2, filter: 'lowpass', freq: 700 }); ['do', 'sol', 'do'].forEach((d, i) => bell(t + 0.05 + i * 0.06, pitch(C5, d, i === 2 ? 1 : 0), 0.1 * v)); },
+  heave:    (t, v) => { tone(t, { freq: 150, type: 'sawtooth', peak: 0.05 * v, a: 0.02, d: 0.26, glide: 0.5 }); tone(t, { freq: 75, type: 'sine', peak: 0.2 * v, a: 0.01, d: 0.28, glide: 0.7 }); noiseBurst(t, { peak: 0.05 * v, a: 0.01, d: 0.18, filter: 'lowpass', freq: 500 }); },
+  combo:    (t, v, p = 3) => { const n = Math.min(6, 3 + Math.floor(p / 3)); for (let i = 0; i < n; i += 1) bell(t + i * 0.055, 523.25 * 2 ** ([0, 4, 7, 12, 16, 19][i] / 12), 0.09 * v, (i - n / 2) * 0.12); },
+  splash:   (t, v) => { noiseBurst(t, { peak: 0.22 * v, a: 0.006, d: 0.5, filter: 'bandpass', freq: 700, q: 0.6 }); noiseBurst(t + 0.05, { peak: 0.12 * v, a: 0.02, d: 0.7, filter: 'highpass', freq: 2600 }); for (let i = 0; i < 7; i += 1) tone(t + 0.16 + i * 0.07 + Math.random() * 0.04, { freq: 320 + Math.random() * 500, type: 'sine', peak: 0.06 * v, a: 0.004, d: 0.1, glide: 1.9 }); },
+  vs:       (t, v) => { tone(t, { freq: 110, type: 'sawtooth', peak: 0.06 * v, a: 0.004, d: 0.4 }); tone(t, { freq: 165, type: 'square', peak: 0.03 * v, a: 0.004, d: 0.32 }); tone(t, { freq: 62, type: 'sine', peak: 0.26 * v, a: 0.003, d: 0.42, glide: 0.6 }); noiseBurst(t, { peak: 0.1 * v, a: 0.004, d: 0.5, filter: 'highpass', freq: 3000 }); },
+  rip:      (t, v) => { for (let i = 0; i < 8; i += 1) noiseBurst(t + i * 0.022, { peak: (0.12 - i * 0.008) * v, a: 0.002, d: 0.03, filter: 'highpass', freq: 3200 + i * 280 }); },
+  cardflip: (t, v) => { noiseBurst(t, { peak: 0.08 * v, a: 0.01, d: 0.12, filter: 'bandpass', freq: 1500, q: 0.7 }); tone(t + 0.08, { freq: 300, type: 'sine', peak: 0.1 * v, a: 0.004, d: 0.1, glide: 1.5 }); },
+  reveal:   (t, v, p = 0) => { const scale = [[0, 7], [0, 7, 12], [0, 4, 7, 12, 16], [0, 4, 7, 12, 16, 19, 24]][Math.min(3, p)]; scale.forEach((s, i) => bell(t + i * (p >= 2 ? 0.08 : 0.1), 523.25 * 2 ** (s / 12), (0.1 + p * 0.02) * v, (i - scale.length / 2) * 0.14)); if (p >= 3) tone(t + 0.1, { freq: 130.81, type: 'sine', peak: 0.16 * v, a: 0.1, hold: 0.6, d: 1.4 }); },
+  fanfare:  (t, v) => { VALLEY_PHRASE.forEach(([d, o], i) => { const f = pitch(261.63, d, o); pluck(t + i * 0.12, f, 0.16 * v, (i - 2.5) * 0.14); tone(t + i * 0.12, { freq: f / 2, type: 'triangle', peak: 0.1 * v, a: 0.004, d: 0.2 }); }); bell(t + 0.74, pitch(C5, 'do', 1), 0.16 * v); bell(t + 0.74, pitch(C5, 'sol'), 0.12 * v); },
+  defeat:   (t, v) => { [0, -3, -5, -7].forEach((s, i) => tone(t + i * 0.17, { freq: 293.66 * 2 ** (s / 12), type: 'triangle', peak: 0.12 * v, a: 0.006, d: 0.34 })); tone(t + 0.68, { freq: 98, type: 'sine', peak: 0.18 * v, a: 0.02, d: 0.8 }); },
+  bite:     (t, v) => { noiseBurst(t, { peak: 0.09 * v, a: 0.002, d: 0.04, filter: 'lowpass', freq: 1500 }); tone(t, { freq: 240, type: 'square', peak: 0.03 * v, a: 0.001, d: 0.05, glide: 0.7 }); },
 };
 
 export const WORLD_SOUND_NAMES = Object.freeze(Object.keys(EVENTS));
 
-export function play(name, { delay = 0 } = {}) {
+export function play(name, { delay = 0, pitch = 0 } = {}) {
   try {
     const v = gain();
     if (v <= 0 || document.visibilityState === 'hidden' || !ready()) return;
     const fn = EVENTS[name];
     if (!fn) return;
-    fn(state.ctx.currentTime + delay, v);
+    fn(state.ctx.currentTime + delay, v, pitch);
   } catch { /* never a blocker */ }
 }
 
@@ -538,3 +551,71 @@ export function stopAmbience(fade = 0.6) {
 
 /** Leaving the village for a screen with no place of its own: the birds go quiet, the song plays on. */
 export function silenceWorld() { state.amb.want = null; stopAmbience(0.5); }
+
+/* ------------------------------------------------------------------ */
+/* The duel's song                                                     */
+/* ------------------------------------------------------------------ */
+
+/* Sixteen steps round and round: a stomping bass, the village's own hook on
+   top, and more of everything as the rope nears either end. Each arena sits
+   in its own key. Stops the moment somebody hits the water. */
+const DUEL_KEYS = [110, 123.47, 98, 130.81, 116.54, 146.83, 103.83, 138.59, 87.31];
+const DUEL_BASS = [0, 0, 12, 0, 7, 0, 10, 12, 0, 0, 12, 0, 3, 5, 7, 10];
+const DUEL_HOOK = new Map([[0, 12], [3, 15], [6, 17], [8, 15], [11, 17], [14, 19]]);
+let duel = null;
+
+function duelTick() {
+  const d = duel;
+  if (!d || !ready()) return;
+  const c = state.ctx;
+  if (document.visibilityState === 'hidden') { d.next = c.currentTime + 0.2; return; }
+  const sixteenth = 60 / (124 + d.heat * 28) / 4;
+  if (d.next < c.currentTime - 0.25) d.next = c.currentTime + 0.05;
+  while (d.next < c.currentTime + 0.12) {
+    const t = d.next, s = d.step % 16, bar = Math.floor(d.step / 16);
+    const f = (n) => d.root * 2 ** (n / 12);
+    if (s === 0 || s === 8) tone(t, { freq: 96, type: 'sine', peak: 0.3, a: 0.002, d: 0.14, glide: 0.42, dest: d.bus });
+    if (s === 4 || s === 12) { noiseBurst(t, { peak: 0.09, a: 0.002, d: 0.08, filter: 'bandpass', freq: 1700, q: 1.2, dest: d.bus }); tone(t, { freq: 190, type: 'triangle', peak: 0.07, a: 0.002, d: 0.08, dest: d.bus }); }
+    if (s % 2 === 0) tone(t, { freq: f(DUEL_BASS[s]), type: 'sawtooth', peak: 0.06, a: 0.004, d: sixteenth * 1.6, dest: d.lp });
+    if (s % 2 === 0) tone(t, { freq: f(DUEL_BASS[s]), type: 'sine', peak: 0.12, a: 0.004, d: sixteenth * 1.8, dest: d.bus });
+    if (s === 2 || s === 6 || s === 10 || s === 14) for (const n of [12, 15, 19]) tone(t, { freq: f(n) * 2, type: 'triangle', peak: 0.018, a: 0.004, d: sixteenth * 0.9, dest: d.bus });
+    noiseBurst(t, { peak: (s % 2 ? 0.018 : 0.03) + d.heat * 0.022, a: 0.002, d: 0.03, filter: 'highpass', freq: 7200, dest: d.bus });
+    // the tune comes in on the second time round, and every other bar after
+    const note = DUEL_HOOK.get(s);
+    if (note !== undefined && bar % 2 === 1) { tone(t, { freq: f(note) * 2, type: 'square', peak: 0.03, a: 0.004, d: sixteenth * 1.5, dest: d.lp }); tone(t, { freq: f(note) * 4, type: 'sine', peak: 0.025, a: 0.004, d: sixteenth * 1.5, dest: d.bus }); }
+    if (d.heat > 0.55 && s % 2 === 1) tone(t, { freq: f([12, 15, 19, 24][Math.floor(s / 4)]) * 2, type: 'triangle', peak: 0.028 + d.heat * 0.012, a: 0.002, d: sixteenth * 0.9, dest: d.bus });
+    d.step += 1; d.next += sixteenth;
+  }
+}
+
+/** Start the duel's song. Safe to call before the audio has woken. */
+export function startDuelMusic(arena = 1) {
+  stopDuelMusic(0);
+  try {
+    if (!ready() || !state.music.on || musicGain() <= 0 || hushed) return;
+    const c = state.ctx;
+    const bus = c.createGain();
+    bus.gain.setValueAtTime(0.0001, c.currentTime);
+    bus.gain.linearRampToValueAtTime(Math.max(0.0001, musicGain() * MUSIC_LEVEL * 0.9), c.currentTime + 0.25);
+    bus.connect(state.master);
+    const lp = c.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 1400; lp.connect(bus);
+    duel = { bus, lp, step: 0, next: c.currentTime + 0.1, heat: 0, root: DUEL_KEYS[(arena - 1) % DUEL_KEYS.length], timer: setInterval(duelTick, 25) };
+    duelTick();
+  } catch { /* the duel plays on in silence */ }
+}
+
+export function setDuelHeat(h) { if (duel) duel.heat = Math.max(0, Math.min(1, h)); }
+
+export function stopDuelMusic(fade = 0.35) {
+  const d = duel;
+  duel = null;
+  if (!d) return;
+  clearInterval(d.timer);
+  try {
+    const c = state.ctx;
+    d.bus.gain.cancelScheduledValues(c.currentTime);
+    d.bus.gain.setValueAtTime(Math.max(0.0001, d.bus.gain.value), c.currentTime);
+    d.bus.gain.exponentialRampToValueAtTime(0.0001, c.currentTime + Math.max(0.02, fade));
+    setTimeout(() => { try { d.bus.disconnect(); } catch { /* gone */ } }, (fade + 0.2) * 1000);
+  } catch { /* gone */ }
+}

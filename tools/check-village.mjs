@@ -54,9 +54,9 @@ try {
   await browser.open(`${server.url}#/world`, 1500);
   ok(await waitFor(`document.querySelectorAll('.cw .pet').length === 8 && !!document.querySelector('.cw-art')?.naturalWidth`), 'the village did not draw eight pets on the painting');
   ok(await ev(`!!document.querySelector('.cw h1')`), 'the village needs a heading');
-  ok(await ev(`['.cw-chip--fire', '.cw-chip--level', '[data-open="friends"]', '[data-open="cottage"]', '.cw-today', '.cw-play'].every((s) => document.querySelector(s))`), 'the top bar or the big button is missing');
+  ok(await ev(`['.cw-chip--fire', '.cw-chip--level', '[data-open="friends"]', '[data-open="cottage"]', '.cw-play'].every((s) => document.querySelector(s))`), 'the top bar or the big button is missing');
   ok(await ev(`!document.querySelector('[data-open="satchel"], .cw-location, .cw-welcome, .vhud, .cw-envelope')`), 'old home chrome is back on the map');
-  ok(await ev(`['#/rc/', '#/round/', '#/garden/', '#/pj/', '#/ps/', '#/ooo/', '#/bank/', '#/wd/', '#/world/place/'].some((p) => (document.querySelector('.cw-play').getAttribute('href') ?? '').startsWith(p))`), 'the big button does not start a real activity');
+  ok(await ev(`document.querySelector('.cw-play').getAttribute('href') === '#/duel'`), 'the big button does not start a duel');
   ok(await ev(`document.querySelector('.pet[data-pet="ginger"]').dataset.word === 'new' && document.querySelector('.pet[data-pet="chai"]').dataset.word !== 'new'`), 'pet moods do not follow the records');
 
   // The painting itself moves: the wheel, the water, the banners, the trees.
@@ -137,15 +137,23 @@ try {
   }
 
   // Who is who, today's three, the village level, the fire, the cottage.
-  for (const [open, sel, n] of [['friends', '.cw-roster li a[href^="#/"]', 8], ['today', '.cw-todo li', 3], ['level', '.cw-road li', 9], ['fire', '.cw-week li', 7], ['cottage', '.cw-toggle', 2]]) {
+  for (const [open, sel, n] of [['friends', '.cw-roster li a[href^="#/"]', 8], ['fire', '.cw-week li', 7], ['cottage', '.cw-toggle', 2]]) {
     await ev(`document.querySelector('[data-open="${open}"]').focus(); document.querySelector('[data-open="${open}"]').click()`);
     ok(await waitFor(`document.querySelectorAll('.cw-card ${sel}').length === ${n}`), `${open} did not open with ${n} × ${sel}`);
     await key('Escape', 'Escape', 27);
     ok(await waitFor(`document.querySelector('.cw-overlay').hidden && document.activeElement?.dataset?.open === '${open}'`, 3000), `${open} did not close and give focus back`);
   }
+  // Today's three and the village level live in the Rooms sheet now.
+  for (const [open, sel, n] of [['today', '.cw-todo li', 3], ['level', '.cw-road li', 9]]) {
+    await ev(`document.querySelector('[data-open="friends"]').focus(); document.querySelector('[data-open="friends"]').click()`);
+    ok(await waitFor(`!!document.querySelector('.cw-roomlinks [data-open="${open}"]')`), `the Rooms sheet has no way to ${open}`);
+    await ev(`document.querySelector('.cw-roomlinks [data-open="${open}"]').click()`);
+    ok(await waitFor(`document.querySelectorAll('.cw-card ${sel}').length === ${n}`), `${open} did not open with ${n} × ${sel}`);
+    await key('Escape', 'Escape', 27);
+    ok(await waitFor(`document.querySelector('.cw-overlay').hidden && document.activeElement?.dataset?.open === 'friends'`, 3000), `${open} did not close and give focus back to Rooms`);
+  }
 
   // The village level draws what it has earned: this learner is past level 2, so the plaza lanterns hang.
-  ok(await ev(`Number(document.querySelector('.cw-lv b')?.textContent) >= 2`), 'this learner should be past village level 2');
   ok(await waitFor(`document.querySelectorAll('.cw-treasure--lanterns').length === 4`), 'the plaza lanterns are not drawn for a level-2 village');
   // Each house grows with its own section (src/home/houses.js): Chai's library (sixteen right answers, stage 2) has its lamps and windows lit; new Ginger's workshop is still dark.
   ok(await ev(`(() => { const g = JSON.parse(document.querySelector('.cw').__village.grown() || '{}'); const on = (h, k) => [...document.querySelectorAll('.cw-glow--' + k + '[data-house="' + h + '"]')].filter((e) => !e.classList.contains('is-off')).length; return g.chai >= 2 && g.ginger === 0 && on('chai', 'win') >= 4 && on('chai', 'lamp') >= 2 && on('ginger', 'win') === 0 && on('ginger', 'lamp') === 0; })()`), "the houses do not show how far each section has come");
@@ -166,19 +174,12 @@ try {
 
   // The clock tower is Sesame's home (Para Completion); the rose cottage is Biscuit's (Sentence Placement).
   await ev(`document.querySelector('[data-spot="sesame"]').click()`);
-  ok(await waitFor(`/Sesame/.test(document.querySelector('.cw-card--pet .cw-card__name')?.textContent ?? '') && /^#\\/(bank\\/session\\/pc|world\\/place\\/completion)/.test(document.querySelector('.cw-card--pet .cw-go')?.getAttribute('href') ?? '')`), 'the clock tower did not open Sesame and Para Completion');
-  await ev(`document.querySelector('.cw-card [data-close]').click()`);
-  await sleep(400);
-  await ev(`location.hash = '#/world/place/completion'`);
-  ok(await waitFor(`/Para completion · with Sesame/i.test(document.querySelector('.place__eyebrow')?.textContent ?? '')`), 'Para Completion is not hosted by Sesame');
+  ok(await waitFor(`location.hash.startsWith('#/world/place/completion') && /Sesame/.test(document.querySelector('.rm__title b')?.textContent ?? '')`, 10000), "the clock tower did not walk straight into Sesame's room");
   await ev(`location.hash = '#/world'`);
   ok(await waitFor(`!!document.querySelector('[data-spot="biscuit"]')`), 'the village did not come back');
+  await sleep(600);
   await ev(`document.querySelector('[data-spot="biscuit"]').click()`);
-  ok(await waitFor(`/Biscuit/.test(document.querySelector('.cw-card--pet .cw-card__name')?.textContent ?? '') && /^#\\/(bank\\/session\\/sp|world\\/place\\/placement)/.test(document.querySelector('.cw-card--pet .cw-go')?.getAttribute('href') ?? '')`), 'the rose cottage did not open Biscuit and Sentence Placement');
-  await ev(`document.querySelector('.cw-card [data-close]').click()`);
-  await sleep(400);
-  await ev(`location.hash = '#/world/place/placement'`);
-  ok(await waitFor(`/Sentence placement · with Biscuit/i.test(document.querySelector('.place__eyebrow')?.textContent ?? '')`), 'Sentence Placement is not hosted by Biscuit');
+  ok(await waitFor(`location.hash.startsWith('#/world/place/placement') && /Biscuit/.test(document.querySelector('.rm__title b')?.textContent ?? '')`, 10000), "the rose cottage did not walk straight into Biscuit's room");
 
   // Night: the pets go home to sleep.
   await ev(`localStorage.setItem('catos:hour', 'night')`);
@@ -198,23 +199,16 @@ try {
   ok(await ev(`document.documentElement.scrollWidth <= innerWidth`), 'the phone village scrolls sideways');
   ok(await ev(`window.__catos.errors.length === 0`), 'browser errors: ' + await ev(`JSON.stringify(window.__catos.errors)`));
 
-  // The first visit: each friend names their subject; Skip immediately
-  // releases the player to the library button without another speech.
+  // The first visit: one line from Toffee, and PLAY is ready at once.
   await ev(`(async () => { const s = await import('/src/core/storage/indexeddb-adapter.js'); const st = new s.IndexedDBAdapter(); await st.init(); await st.delete('settings', 'valley'); await st.put('settings', { id: 'motion', value: 'full' }); return 1; })()`);
   await browser.open(`${server.url}#/world`, 1500);
-  ok(await waitFor(`document.querySelector('.cw')?.classList.contains('is-intro')`), 'a first visit should open on the introductions');
-  await sleep(1400);
-  await nudge();
-  ok(await waitFor(`!document.querySelector('.cw-meet').hidden && /Toffee/.test(document.querySelector('.cw-meet h2')?.textContent ?? '') && /Gauntlet/.test(document.querySelector('.cw-meet__keeps')?.textContent ?? '')`, 6000), "Toffee's meet card did not name Toffee and the Gauntlet");
-  await sleep(500);
-  await nudge('[data-skip]');
-  ok(await waitFor(`!document.querySelector('.cw').classList.contains('is-intro') && document.querySelector('.cw-meet').hidden`, 1500), 'Skip did not end the introductions immediately');
-  ok(await ev(`document.querySelector('.cw-play').getAttribute('href') === '#/world/place/reading-room' && getComputedStyle(document.querySelector('.cw-play')).pointerEvents !== 'none' && Number(getComputedStyle(document.querySelector('.cw-dock')).opacity) > 0.9`), 'the library button is not ready after Skip');
+  ok(await waitFor(`document.querySelector('.cw')?.classList.contains('is-pointing')`), 'a first visit should point at PLAY');
+  ok(await ev(`document.querySelector('.cw-play').getAttribute('href') === '#/duel' && getComputedStyle(document.querySelector('.cw-play')).pointerEvents !== 'none' && Number(getComputedStyle(document.querySelector('.cw-dock')).opacity) > 0.9`), 'PLAY is not ready on a first visit');
 
   // A wide screen: the card sits on the right, clear of the map's centre.
   await browser.send('Emulation.setDeviceMetricsOverride', { width: 1440, height: 900, deviceScaleFactor: 1, mobile: false });
   await browser.open(`${server.url}#/world`, 2000);
-  await ev(`document.querySelector('.pet[data-pet="ginger"]').click()`);
+  await ev(`document.querySelector('[data-open="friends"]').click()`);
   ok(await waitFor(`document.querySelector('.cw-card')?.getBoundingClientRect().left > 900`), 'the desktop card should sit on the right');
 
   if (!quick) {

@@ -70,14 +70,11 @@ export async function renderPlace(outlet, { storage }, params) {
     return room.renderGreenhouse(outlet, { storage, world, stage: hostState?.stage ?? 0 });
   }
 
-  // Mochi's home owns its complete frame, just as Chai's library does.
-  // Lazy art and styles keep the village's cold open unchanged.
-  if (region.slug === 'table') {
-    const room = await import('./thought-room.js');
-    await room.thoughtRoomStyle();
+  // The railway, the sky, the clockworks, the long table and the pantry: each a whole room.
+  if (['loom', 'bench', 'completion', 'placement', 'table'].includes(region.slug)) {
+    const { ROOMS, renderRoom } = await import('../../rooms/room.js');
     if (location.hash !== arrivedAt) return;
-    room.renderThoughtRoom(outlet, { content, records: world.records, state, stage: hostState?.stage ?? 0 });
-    return;
+    return renderRoom(outlet, { world, stage: hostState?.stage ?? 0 }, ROOMS[region.slug]);
   }
 
   /* Chai's library is a room you stand in, not a page about one (owner,

@@ -128,7 +128,8 @@ export const GREENHOUSE_HREF = '#/world/place/meadow';
  * his next book (owner, 2026-11-01): a "Help Chai" that skipped the shelves is
  * why nobody found them.
  */
-export const startHref = (petId, next, fallback) => (petId === 'chai' ? LIBRARY_HREF : petId === 'matcha' ? GREENHOUSE_HREF : next?.href ?? fallback);
+export const ROOM_OF = new Map([['chai', LIBRARY_HREF], ['matcha', GREENHOUSE_HREF], ['ginger', '#/world/place/loom'], ['mallow', '#/world/place/bench'], ['mochi', '#/world/place/table'], ['sesame', '#/world/place/completion'], ['biscuit', '#/world/place/placement']]);
+export const startHref = (petId, next, fallback) => ROOM_OF.get(petId) ?? next?.href ?? fallback;
 
 /**
  * @param {string} petId   toffee | chai | matcha | mochi | ginger | mallow | sesame | biscuit

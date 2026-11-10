@@ -28,8 +28,8 @@ try {
   await browser.open(`${server.url}#/settings`, 1500);
   await ev(`(async () => { const {IndexedDBAdapter}=await import('/src/core/storage/indexeddb-adapter.js'); window.st = new IndexedDBAdapter(); await st.init(); await st.put('settings',{id:'valley',value:{name:'Journal test',awakened_at:new Date().toISOString(),met_at:new Date().toISOString()}}); localStorage.setItem('catos:met-gang','1'); localStorage.setItem('catos:motion','reduced'); })()`);
   await browser.open(`${server.url}#/world`, 1500);
-  await waitFor(`document.querySelector('.cw-journal')?.textContent.includes('Journal')`);
-  await tap('.cw-journal');
+  const openJournal = async () => { await waitFor(`!!document.querySelector('[data-open="friends"]')`); await tap('[data-open="friends"]'); await waitFor(`!!document.querySelector('.cw-roomlinks [data-open="journal"]')`); await tap('.cw-roomlinks [data-open="journal"]'); };
+  await openJournal();
   await waitFor(`document.querySelector('.cw-card--journal')?.getAttribute('role') === 'dialog'`);
   ok(await ev(`document.querySelector('.j-cover h3').textContent === 'A little light'`), 'New village starts at chapter one');
   ok(await ev(`document.querySelector('.j-reward').textContent.includes('First-light lantern')`), 'Chapter reward is named');
@@ -42,13 +42,12 @@ try {
   ok(await ev(`document.querySelector('.j-week-date').textContent.includes('New expedition')`), 'Weekly deadline visible');
   ok(await ev(`(async () => { const {dismissTopLayer}=await import('/src/ui/modal.js'); return dismissTopLayer(); })()`), 'Android Back dismisses journal');
   await pause(400);
-  ok(await ev(`document.activeElement.matches('.cw-journal')`), 'Journal returns focus to trigger');
+  ok(await ev(`document.activeElement.matches('[data-open="friends"]')`), 'Journal returns focus to the Rooms button');
 
   // A real saved session, then navigation: no private UI counter can grant these.
   await ev(`(async () => { const {IndexedDBAdapter}=await import('/src/core/storage/indexeddb-adapter.js'); const st = new IndexedDBAdapter(); await st.init(); const now = Date.now()-1000; await st.put('sessions',{id:'journal-saved-session',module:'pj',finished_at:new Date(now).toISOString(),started_at:new Date(now-90000).toISOString(),duration_ms:90000,score:{correct:6,total:6,accuracy:1},answers:Array.from({length:6},(_,i)=>({item_id:'journal-item-'+i,is_correct:true,time_ms:15000}))}); })()`);
   await browser.open(`${server.url}#/world`, 1500);
-  await waitFor(`!!document.querySelector('.cw-journal')`);
-  await tap('.cw-journal');
+  await openJournal();
   ok(await ev(`document.querySelector('.j-cover h3').textContent === 'Paths between friends'`), 'Saved learning advances chapter');
   await tap('[data-j-tab="collection"]');
   ok(await ev(`document.querySelectorAll('.j-keepsake.is-earned').length === 2`), 'Saved learning awards chapter gift and friend gift');

@@ -333,12 +333,11 @@ export async function checkPlayerExperience({ matrix = true, log = () => {} } = 
     }
     const errors = await b.evaluate('window.__catos?.errors ?? []');
     for (const e of errors) problems.push('Browser error: ' + e);
-    await check('a new player can skip introductions immediately', async () => {
+    await check('a new player is in a duel with one tap', async () => {
       await goto('#/settings');
       await b.evaluate(`(async()=>{${DB} for(const name of ['settings','sessions','attempts','learning'])await st.clear(name);localStorage.clear();})()`);
-      await goto('#/world'); await tap('.cw-tour-skip'); await sleep(150);
-      assert(await b.evaluate('!document.querySelector(".cw").classList.contains("is-intro")'), 'Skipping the tour left the village waiting');
-      await tap('.cw-play'); await waitFor('.libroom__shelves');
+      await goto('#/world');
+      await tap('.cw-play'); await waitFor('.dl .opt');
     });
   } finally { b.close(); server.close(); }
   return { skipped: false, problems, cases, screens };

@@ -40,6 +40,7 @@ export function registerWorld(router, context) {
 export function isWorldRoute(hash) {
   return hash === '#/world' || hash === '#/awaken' || hash.startsWith('#/world/') || hash.startsWith('#/round/')
     || hash === '#/garden' || hash.startsWith('#/garden/')
+    || /^#\/(duel|letters|book|road|play)(\?|\/|$)/.test(hash)
     // A timed run is immersive wherever it lives: a tab bar under a clock
     // is an invitation to leave in the middle of a passage.
     //

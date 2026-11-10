@@ -68,6 +68,14 @@ export async function shareApp() {
   try { await navigator.clipboard.writeText(`${text} ${PLAY_URL}`); return 'copied'; } catch { return 'failed'; }
 }
 
+/** Pass something on: a card worth showing someone. */
+export async function shareText(text) {
+  const full = `${text}\n\nFound in CAT OS, a game about the strange and brilliant English language: ${PLAY_URL}`;
+  if (NATIVE) { NATIVE.share(full); return 'shared'; }
+  try { if (navigator.share) { await navigator.share({ title: 'CAT OS', text: full }); return 'shared'; } } catch { return 'cancelled'; }
+  try { await navigator.clipboard.writeText(full); return 'copied'; } catch { return 'failed'; }
+}
+
 /** A link that must leave the app (privacy policy, Play subscriptions). */
 export function openExternal(url) {
   if (NATIVE) NATIVE.openExternal(url); else window.open(url, '_blank', 'noopener');

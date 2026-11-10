@@ -16,6 +16,7 @@ import { registerOOO } from './modules/odd-one-out/index.js';
 import { registerWD } from './modules/word-dna/index.js';
 import { registerLanguageGarden } from './modules/language-garden/index.js';
 import { registerBank } from './modules/verbal-bank/index.js';
+import { registerDuel } from './duel/index.js';
 import { startLibrarySync } from './core/content-loader/library-sync.js';
 import { registerWorld, isWorldRoute } from './world/index.js';
 import { syncStage } from './world/stage.js';
@@ -156,6 +157,7 @@ async function boot() {
   registerWD(router, { storage }); // soft-hidden from the nav since 0.14.0; its routes stay live
   registerLanguageGarden(router, { storage });
   registerBank(router, { storage });
+  registerDuel(router, { storage });
   registerWorld(router, { storage });
 
   // 1.0.0: the world is the application. A cold open lands in the valley;

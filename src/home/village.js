@@ -3,13 +3,13 @@
  *
  * The whole game on one screen, in the order a learner reads it:
  *
- *   TOP      Toffee's fire (the days in a row) · the village level and its
- *            Glow · every subject · settings (sound, name, progress)
+ *   TOP      Toffee's fire (the days in a row) · your laurels and stop ·
+ *            settings (sound, name, progress)
  *   THE MAP  the painting, alive: friends walking, doing chores, waving.
  *            A "!" floats over each of today's three friends.
- *   BOTTOM   today's three friends and their gift, and ONE big button:
- *            "Help Chai · Read a short passage · 4 min". One tap and you
- *            are learning; every round brings the village back to life.
+ *   BOTTOM   Rooms · ONE big button, PLAY · the Book. One tap and you are
+ *            pulling a rope against a Muddle; every answer still grows the
+ *            village. A waiting letter floats above the button.
  *
  * The camera is a transform on one 1536×1024 layer, so every coordinate
  * below is a pixel of the painting (src/pets/paths.js), whatever the screen.
@@ -22,15 +22,18 @@ import { loadWorld, loadWorldRecords, deriveWorldState } from '../world/state.js
 import { loadValley, saveValley, valleyName } from '../world/companion.js';
 import { derivePets, DAILY_GIFT } from '../pets/economy.js';
 import { GLOW_SVG } from '../pets/glow.js';
-import { PETS, PET_BY_ID, HOUSES, LINES, lineFor, petForPlace, stageTitle, stageGift, ageOf, grewLine, toGrow, houseGift } from '../pets/pets.js';
+import { PETS, PET_BY_ID, HOUSES, lineFor, petForPlace, stageTitle, stageGift, ageOf, grewLine, toGrow, houseGift } from '../pets/pets.js';
 import { MAP, HOMES, PLACES, SIGNS, NODES, LAMPS, WINDOWS, CLOCK, nearestNode } from '../pets/paths.js';
 import { petRig, petPortrait, petGear, petRing, petFigure, FRAME } from '../pets/sprite.js';
-import { nextFor, startHref, LIBRARY_HREF, GREENHOUSE_HREF } from '../pets/next.js';
+import { ROOM_OF } from '../pets/next.js';
+import { duelsIn, ladderOf } from '../duel/model.js';
+import { pendingLetters, ownedCards, teaseCard } from '../duel/letters.js';
+import { laurelSVG } from '../duel/art.js';
 import { createLife, petSize } from './life.js';
 import { mountMotion } from './motion.js';
 import { ATLAS } from './motion-atlas.js';
 import { createHouseLife, bakeVillage, gradeAtlas, LAMP_HOUSE, WINDOW_HOUSE, HOUSE_ART } from './houses.js';
-import { renderCard, decorLayer, ACT, callWord } from './cards.js';
+import { renderCard, decorLayer } from './cards.js';
 import { deriveJourney } from '../pets/journey.js';
 import { keepsakeArt } from './journal-art.js';
 import { openModal, closeModal } from '../ui/modal.js';
@@ -88,21 +91,20 @@ export async function renderVillageHome(outlet, ctx) {
       <header class="cw-hud">
         <div class="cw-hud__left">
           <button class="cw-chip cw-chip--fire" data-open="fire"></button>
-          <button class="cw-chip cw-chip--level" data-open="level"></button>
+          <button class="cw-chip cw-chip--level"></button>
         </div>
         <div class="cw-hud__right">
-          <button class="cw-round" data-open="friends" aria-label="All subjects: start any of them">${subjectsSVG}</button>
           <button class="cw-round" data-open="cottage" aria-label="Settings: sound, your village's name and your progress">${gearSVG}</button>
         </div>
       </header>
       <div class="cw-dock">
-        <button class="cw-today" data-open="today"></button>
-        <button class="cw-journal" data-open="journal"></button>
-        <a class="cw-play" data-play href="#/world"></a>
+        <a class="cw-letter" href="#/letters" hidden></a>
+        <a class="cw-tease" href="#/duel" hidden></a>
+        <button class="cw-side cw-side--l" data-open="friends" aria-label="The rooms: every house and subject">${subjectsSVG}<span>Rooms</span></button>
+        <a class="cw-play" data-play href="#/duel"></a>
+        <a class="cw-side cw-side--r" href="#/book" aria-label="The Book of Curiosities: the cards you have collected">${bookSVG}<span>Book</span></a>
       </div>
       <button class="cw-edge" hidden></button>
-      <div class="cw-meet" hidden></div>
-      <button class="cw-tour-skip" type="button" data-skip hidden>Skip introductions</button>
       <div class="cw-toast" role="status" aria-live="polite"></div>
       <div class="cw-overlay" hidden><div class="cw-scrim" data-close></div><section class="cw-card"></section></div>
       <div class="cw-party" hidden></div>
@@ -340,28 +342,35 @@ export async function renderVillageHome(outlet, ctx) {
 
   /* ---------------- The HUD ---------------- */
   const hud = () => {
-    const f = pets.flame, L = pets.level, T = pets.today;
+    const f = pets.flame, T = pets.today;
     const fire = root.querySelector('.cw-chip--fire');
     fire.innerHTML = `${flameSVG(f.tier)}<b>${f.days}</b>`;
     fire.setAttribute('aria-label', f.days ? `Toffee's fire: ${f.days} ${f.days === 1 ? 'day' : 'days'} in a row` : "Toffee's fire: help any friend today to light it");
     fire.classList.toggle('is-out', !f.today);
+    const learning = world.records?.learning ?? [];
+    const lad = ladderOf(duelsIn(learning));
     const lv = root.querySelector('.cw-chip--level');
-    lv.innerHTML = `<span class="cw-lv"><small>Lv</small><b>${L.level}</b></span><span class="cw-lvbar" aria-hidden="true"><i style="width:${Math.round(L.pct * 100)}%"></i></span><span class="cw-glowcount">${GLOW_SVG}<b>${pets.glow}</b></span>`;
-    lv.setAttribute('aria-label', `Village level ${L.level}. ${pets.glow} Glow; ${L.need} more for level ${L.level + 1}.`);
-    const today = root.querySelector('.cw-today');
-    today.innerHTML = `<span class="cw-today__faces">${T.picks.map((id, i) => `<span class="cw-face ${T.done[i] ? 'is-done' : ''}">${petPortrait(id, 30)}${T.done[i] ? '<i aria-hidden="true">✓</i>' : ''}</span>`).join('')}</span><span class="cw-today__gift ${T.gift ? 'is-open' : ''}" aria-hidden="true">${giftSVG}</span><span class="cw-today__text">${T.gift ? 'Today\'s gift is yours!' : `${T.doneCount} of 3 helped`}</span>`;
-    today.setAttribute('aria-label', `Today's three friends: ${T.doneCount} of 3 helped. ${T.gift ? 'Today\'s gift is open.' : 'Help all three for a gift of 10 Glow.'}`);
-    const J = deriveJourney(pets);
-    const journal = root.querySelector('.cw-journal');
-    journal.innerHTML = `${keepsakeArt(J.focusPet || 'toffee')}<span><b>Journal</b><small>${J.current ? `Chapter ${J.current.number}` : 'All chapters'} · ${J.earnedCount}/${J.totalCount}</small></span>`;
-    journal.setAttribute('aria-label', `Village Journal. ${J.earnedCount} of ${J.totalCount} keepsakes. Open your journey and weekly expedition.`);
-    const id = firstVisit || root.classList.contains('is-intro') ? 'chai' : pets.play;
-    const who = PET_BY_ID.get(id), next = nextFor(id, world, { first: pets.pets.find((p) => p.id === id)?.isNew });
+    lv.innerHTML = `<span class="cw-lv"><small>Stop</small><b>${lad.arena.n}</b></span><span class="cw-lvbar" aria-hidden="true"><i style="width:${Math.round(lad.pct * 100)}%"></i></span><span class="cw-laurels">${laurelSVG(21)}<b>${lad.laurels}</b></span>`;
+    lv.setAttribute('aria-label', `Stop ${lad.arena.n} on the Laurel Road, ${lad.arena.name}. ${lad.laurels} laurels${lad.next ? `; ${lad.toNext} more to reach ${lad.next.name}` : ''}. Open the Laurel Road.`);
     const playEl = root.querySelector('.cw-play');
-    const call = callWord(id);
-    playEl.setAttribute('href', startHref(id, next, `#/world/place/${who.places[0]}`));
-    playEl.innerHTML = `${petPortrait(id, 44)}<span class="cw-play__text"><b>${T.gift ? `Keep going: ${call.toLowerCase()}` : call} ${who.name}</b><small>${escapeHTML(ACT[id])}${next?.minutes ? ` · ${Math.max(1, Math.round(next.minutes))} min` : ''}</small></span><span class="cw-play__go" aria-hidden="true">${playSVG}</span>`;
-    playEl.setAttribute('aria-label', `Play: ${call.toLowerCase()} ${who.name}. ${ACT[id]}${id !== 'chai' && next?.label ? `: ${next.label}` : ''}.`);
+    playEl.setAttribute('href', '#/duel');
+    playEl.innerHTML = `<b>PLAY</b><small>vs ${escapeHTML(lad.arena.muddleName)}</small>`;
+    playEl.setAttribute('aria-label', `Play a duel against ${lad.arena.muddleName} at ${lad.arena.name}.`);
+    const waiting = pendingLetters(learning, Date.now(), world.records?.sessions ?? []).length;
+    const letterEl = root.querySelector('.cw-letter');
+    letterEl.hidden = !waiting;
+    letterEl.innerHTML = waiting ? `${ENVELOPE_SVG}<b>${waiting}</b>` : '';
+    letterEl.setAttribute('aria-label', `${waiting} ${waiting === 1 ? 'letter is' : 'letters are'} waiting to be opened`);
+    /* An open question, planted on the home screen: the first line of what the
+       next letter holds. It only ever names a card that letter will really open with. */
+    const teaseEl = root.querySelector('.cw-tease');
+    if (waiting || !lad.duels) teaseEl.hidden = true;
+    else import('../duel/content.js').then(({ loadCurios }) => loadCurios()).then(({ cards }) => {
+      const card = teaseCard(cards, ownedCards(learning));
+      if (disposed || !card) { teaseEl.hidden = true; return; }
+      teaseEl.innerHTML = `<small>Your next letter opens with</small>${escapeHTML(card.hook)}`;
+      teaseEl.hidden = false;
+    }, () => { teaseEl.hidden = true; });
     root.querySelector('.cw-treasures').innerHTML = decorLayer(pets);
     for (const p of PETS) {
       const pp = pets.pets.find((x) => x.id === p.id);
@@ -373,11 +382,8 @@ export async function renderVillageHome(outlet, ctx) {
     root.style.setProperty('--harmony', pets.harmony.toFixed(2));
   };
   hud();
-  root.querySelector('.cw-play').addEventListener('click', (e) => {
-    const href = e.currentTarget.getAttribute('href');
-    if ([LIBRARY_HREF, GREENHOUSE_HREF].includes(href) && !e.metaKey && !e.ctrlKey && !e.shiftKey) { e.preventDefault(); enterRoom(href === LIBRARY_HREF ? 'chai' : 'matcha', e.currentTarget); return; }
-    unlock(); play('open');
-  });
+  root.querySelector('.cw-play').addEventListener('click', () => { unlock(); play('open'); });
+  root.querySelector('.cw-chip--level').addEventListener('click', () => { unlock(); location.hash = '#/road'; });
 
   /* ---------------- Cards ---------------- */
   let openKind = null;
@@ -405,18 +411,18 @@ export async function renderVillageHome(outlet, ctx) {
     setValley: (v) => { valley = v; root.querySelector('h1').textContent = `${valleyName(v)}: your village`; hud(); },
     celebrate: (id) => life.poke(id, { happy: true }),
     open: (kind, arg, trigger) => openCard(kind, arg, trigger),
-    showPet: (id) => { if (id === 'chai' || id === 'matcha') { enterRoom(id); return; } life.poke(id); reveal(life.positionOf(id)); later(() => openCard('pet', id), reduced ? 0 : 260); },
+    showPet: (id) => { if (ROOM_OF.has(id)) { enterRoom(id); return; } life.poke(id); reveal(life.positionOf(id)); later(() => openCard('pet', id), reduced ? 0 : 260); },
   };
-  /* Chai and Matcha have rooms, with no friend card between a tap and entry.
-     Their house, mascot, roster and main action all use the same doorway. */
+  /* Every house is a room you walk straight into, with no friend card between
+     a tap and entry. House, friend and roster all use the same doorway. */
   let entering = false;
   const enterRoom = (id, from) => {
     if (entering) return;
     entering = true;
     unlock(); play('open');
-    announce(id === 'chai' ? 'Chai: Hoo! Come in. Going into the library.' : 'Matcha: Come in. Your glasshouse is waiting.');
+    announce(`${PET_BY_ID.get(id).name}: Come in.`);
     life.poke(id);
-    const go = () => { location.hash = id === 'chai' ? LIBRARY_HREF : GREENHOUSE_HREF; };
+    const go = () => { location.hash = ROOM_OF.get(id); };
     if (reduced) { go(); return; }
     const r = from?.getBoundingClientRect?.();
     const door = document.createElement('div');
@@ -429,7 +435,9 @@ export async function renderVillageHome(outlet, ctx) {
     later(() => { door.remove(); entering = false; }, 1800);
   };
   const openCard = (kind, arg, trigger) => {
-    if (kind === 'pet' && (arg === 'chai' || arg === 'matcha')) { if (openKind) close(); enterRoom(arg, trigger); return; }
+    if (kind === 'pet' && ROOM_OF.has(arg)) { if (openKind) close(); enterRoom(arg, trigger); return; }
+    // A card opened from inside another card replaces its trigger; focus goes back to the button that started it.
+    if (trigger && card.contains(trigger)) trigger = root.querySelector('[data-open="friends"]');
     const was = openKind;
     if (was) closeModal(card);
     if (kind === 'pet' && arg === 'toffee') kind = 'fire';
@@ -449,7 +457,7 @@ export async function renderVillageHome(outlet, ctx) {
     const pet = e.target.closest('.pet[data-pet]');
     if (pet) {
       const id = pet.dataset.pet;
-      if (id === 'chai' || id === 'matcha') { enterRoom(id, pet); return; }
+      if (ROOM_OF.has(id)) { enterRoom(id, pet); return; }
       unlock();
       announce(`${PET_BY_ID.get(id).name}: ${life.poke(id)}`);
       reveal(life.positionOf(id));
@@ -459,7 +467,7 @@ export async function renderVillageHome(outlet, ctx) {
     const spot = e.target.closest('[data-spot]');
     if (spot) {
       const s = spot.dataset.spot;
-      if (s === 'chai' || s === 'matcha') { enterRoom(s, spot); return; }
+      if (ROOM_OF.has(s)) { enterRoom(s, spot); return; }
       if (s === 'toffee') { life.poke(s); reveal(NODES.f1); openCard('fire', null, spot); return; }
       life.poke(s); reveal(life.positionOf(s)); openCard('pet', s, spot);
       return;
@@ -605,84 +613,23 @@ export async function renderVillageHome(outlet, ctx) {
     }
   }
 
-  /* ---------------- First visit: Toffee says hello, then everyone introduces themselves ----------------
-     Each friend IS their subject (owner, 2026-10-03), so meeting them is
-     meeting the exam: the bookworm keeps Reading, the tidy fox keeps Para
-     Jumbles. One tap per friend; "Skip" jumps to Chai's call. A village
-     from before 3.3 never had them introduced, so it gets the round once
-     too (after any party, never over one). */
-  if (firstVisit || (!welcomed && !store.get('catos:met-gang'))) {
-    root.classList.add('is-intro');
-    hud();
-    const skipTour = root.querySelector('.cw-tour-skip');
-    skipTour.hidden = false;
-    // Saved before the first line: leaving mid-welcome (Enter on the big button) must not replay it every visit.
+  /* ---------------- First visit: one line from Toffee and the big button glows ----------------
+     The new player is in a duel a few seconds after opening the app. The other
+     friends are met where they live, one stop at a time, not in a slideshow. */
+  if (firstVisit) {
+    root.classList.add('is-pointing');
     store.set('catos:met-gang', '1');
-    if (firstVisit) saveValley(storage, { awakened_at: new Date().toISOString(), met_at: new Date().toISOString() }).then((v) => { valley = v; }, () => { /* the hello will repeat once */ });
-    const meetEl = root.querySelector('.cw-meet');
-    const ORDER = ['toffee', 'chai', 'ginger', 'mochi', 'sesame', 'mallow', 'matcha', 'biscuit'];
-    let skipped = false;
-    const keeps = (id) => (id === 'toffee' ? ['The daily fire', 'The Gauntlet'] : HOUSES.filter((h) => h.pet === id).map((h) => h.subject));
-    const meetCard = (id) => {
-      const p = PET_BY_ID.get(id);
-      meetEl.innerHTML = `<p class="cw-meet__dots" aria-hidden="true">${ORDER.map((x) => `<i class="${x === id ? 'is-on' : ''}"></i>`).join('')}</p><h2 class="cw-meet__name">${escapeHTML(p.name)}<small>the ${escapeHTML(p.creature)}</small></h2><p class="cw-meet__keeps">${keeps(id).map((s) => `<b>${escapeHTML(s)}</b>`).join('')}</p><p class="cw-meet__why">${escapeHTML(LINES.meet[id][1])}</p>`;
-      meetEl.hidden = false;
-      meetEl.classList.remove('is-in'); void meetEl.offsetWidth; meetEl.classList.add('is-in');
-    };
-    const skipIntroductions = () => {
-      skipped = true;
-      meetEl.hidden = true; skipTour.hidden = true;
-      root.classList.remove('is-intro', 'is-pointing');
-      life.release();
-      visit('chai', reduced ? 0 : 400);
-    };
-    // End the introduction immediately, including its final line. The
-    // library button should never wait for another speech after Skip.
-    root.addEventListener('pointerdown', (e) => { if (e.target.closest?.('[data-skip]')) skipIntroductions(); }, true);
-    root.addEventListener('keydown', (e) => { if ((e.key === 'Enter' || e.key === ' ') && e.target.closest?.('[data-skip]')) { e.preventDefault(); skipIntroductions(); } }, true);
-    skipTour.addEventListener('click', skipIntroductions);
-    const pause = (ms) => new Promise((r) => later(r, reduced ? 0 : ms));
-    const say = async (id, line, ms = 9000) => {
-      if (skipped || disposed) return;
-      announce(`${PET_BY_ID.get(id).name}: ${line}`);
-      await life.sayAndWait(id, line, { ms, tapToSkip: true });
-    };
-    /* Bring a friend to the middle, a moment after the tap that got us here:
-       that tap's own pointerdown, still on its way to the map, cancels any
-       pan started inside it. A phone shows the painting's whole height, so
-       the camera cannot lift a friend clear of the card; the card moves to
-       the top instead when the friend stands low. */
-    const visit = (id, ms = 1100) => {
-      const at = life.positionOf(id), s = scale(), hh = vh / 2 / s;
-      const cy = hh * 2 >= MAP.h ? MAP.h / 2 : clamp(at.y, hh, MAP.h - hh);
-      meetEl.classList.toggle('is-top', vh / 2 + (at.y - cy) * s > vh * 0.52);
-      later(() => panTo(at.x, at.y, { ms }), 30);
-    };
+    saveValley(storage, { awakened_at: new Date().toISOString(), met_at: new Date().toISOString() }).then((v) => { valley = v; }, () => { /* the hello will repeat once */ });
     later(async () => {
-      await whenIntroDone(); // the opening video first; the hello starts when it is over or skipped
-      if (disposed || skipped) return;
-      for (const id of ORDER) life.hold(id);
-      visit('toffee', 0);
-      if (firstVisit) await say('toffee', LINES.intro[0]);
-      for (const id of ORDER) {
-        if (skipped || disposed) break;
-        if (id !== 'toffee') { visit(id); await pause(1000); }
-        if (skipped || disposed) break;
-        meetCard(id); play('tap'); life.poke(id, { happy: true, quiet: true });
-        await say(id, LINES.meet[id][0]);
-        if (id === 'toffee') { meetEl.hidden = true; for (const line of LINES.intro.slice(1, -1)) await say('toffee', line); }
-      }
-      meetEl.hidden = true;
-      skipTour.hidden = true;
+      await whenIntroDone(); // the opening video first
       if (disposed) return;
-      if (skipped) { root.classList.remove('is-intro', 'is-pointing'); life.release(); return; }
-      skipped = false;
-      visit('chai', 1400); root.classList.add('is-pointing');
-      await say('chai', LINES.intro.at(-1));
-      if (disposed) return;
-      root.classList.remove('is-intro', 'is-pointing');
-      life.release();
-    }, reduced ? 100 : 900);
+      life.hold('toffee');
+      const at = life.positionOf('toffee');
+      later(() => panTo(at.x, at.y - 40, { ms: 0 }), 30);
+      announce(`Toffee: ${FIRST_HELLO}`);
+      await life.sayAndWait('toffee', FIRST_HELLO, { ms: 9000, tapToSkip: true });
+      if (!disposed) life.release();
+    }, reduced ? 50 : 700);
   } else if (!welcomed) {
     /* ---------------- Every other arrival: they wave; after a day away, someone comes to meet you ---------------- */
     later(async () => {
@@ -807,7 +754,9 @@ function flameSVG(tier) {
   return `<svg class="cw-flame__svg cw-flame--${tier}" viewBox="0 0 24 24" aria-hidden="true"><g transform="translate(12 22) scale(${s}) translate(-12 -22)"><path d="M12 2.6c2.4 3.3 6.2 6.2 6.2 11a6.2 6.2 0 0 1-12.4 0c0-2.7 1.3-4.5 2.7-6 .2 1.6.9 2.9 2.1 3.5-.5-3.1.3-6 1.4-8.5z" fill="#F2A23C" stroke="#7a4a1e" stroke-width="1.2" stroke-linejoin="round"/><path d="M12 11.4c1.3 1.6 2.6 2.7 2.6 4.6a2.6 2.6 0 0 1-5.2 0c0-1.5.9-2.9 2.6-4.6z" fill="#FFD978"/></g></svg>`;
 }
 const giftSVG = '<svg viewBox="0 0 32 32" aria-hidden="true"><rect x="4" y="13" width="24" height="15" rx="2.5" fill="#D9603A" stroke="#5a2e1a" stroke-width="1.5"/><rect x="2.5" y="9" width="27" height="6" rx="2" fill="#E9A23B" stroke="#5a2e1a" stroke-width="1.5"/><path d="M16 9v19" stroke="#F6EEDB" stroke-width="3"/><path d="M16 9c-3-6-9-5-8-1 1 3 8 1 8 1zm0 0c3-6 9-5 8-1-1 3-8 1-8 1z" fill="#F4C443" stroke="#5a2e1a" stroke-width="1.3" stroke-linejoin="round"/></svg>';
-const playSVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg>';
+const FIRST_HELLO = 'You came! The Muddles are eating our words. Quick, grab the rope!';
+const bookSVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><path d="M12 6.2C10 4.8 7.2 4.4 4 5v13.5c3.2-.6 6-.2 8 1.2 2-1.4 4.8-1.8 8-1.2V5c-3.2-.6-6-.2-8 1.2z"/><path d="M12 6.2v13.5"/></g></svg>';
+const ENVELOPE_SVG = '<svg viewBox="0 0 48 36" width="44" height="33" aria-hidden="true"><rect x="2" y="3" width="44" height="30" rx="4" fill="#FBEBC6" stroke="#3b2a1c" stroke-width="2.2"/><path d="M3 5l21 16L45 5" fill="#F2DCA8" stroke="#3b2a1c" stroke-width="2.2" stroke-linejoin="round"/><circle cx="24" cy="21" r="5.2" fill="#C2513A" stroke="#3b2a1c" stroke-width="1.8"/></svg>';
 const subjectsSVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><rect x="4" y="4" width="6.5" height="6.5" rx="1.6"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.6"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.6"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.6"/></g></svg>';
 const gearSVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 3.5l1.4 2.3 2.6-.7.7 2.6 2.3 1.4-1.2 2.4 1.2 2.4-2.3 1.4-.7 2.6-2.6-.7L12 20.5l-1.4-2.3-2.6.7-.7-2.6-2.3-1.4L6.2 12 5 9.6l2.3-1.4.7-2.6 2.6.7z"/></g></svg>';
 

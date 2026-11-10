@@ -252,7 +252,7 @@ export function deriveWorldState(content, records, now = Date.now()) {
   pond.lanterns = false; pond.heron = false; terraces.arbour = false; thicket.arch = false; thicket.path = false; meadow.hives = false; meadow.path = false;
 
   /* ---- The days this valley was worked ---- */
-  const allRuns = [...sessions, ...gardenSessions, ...rounds, ...gauntlets];
+  const allRuns = [...sessions, ...gardenSessions, ...rounds, ...gauntlets, ...learning.filter((r) => r.kind === 'duel')];
   const activeDays = new Set(allRuns.map((s) => dayKey(s.finished_at)).filter(Boolean));
   const today = dayKey(date);
   const practicedToday = activeDays.has(today);

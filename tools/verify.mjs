@@ -2510,17 +2510,22 @@ console.log('\n31. Complete player flows and small-screen layouts (tools/check-p
   }
 }
 
-console.log('\n32. Mochi’s room is derived from learning records (tools/check-thought-room.mjs)');
+console.log('\n32. The houses and the duel (tools/check-duel.mjs, check-rooms.mjs, check-duel-browser.mjs)');
 {
-  const { checkThoughtRoom, checkThoughtRoomBrowser } = await mod('tools/check-thought-room.mjs');
-  const r = checkThoughtRoom();
-  ok(`${r.cases} room checks: unique correct summaries, lasting blooms and eight little worlds`);
-  const browser = await checkThoughtRoomBrowser();
-  if (browser.skipped) console.log('  -- SKIPPED: no Chrome. Little Worlds interactions were not tested.');
-  else {
-    for (const p of browser.problems) bad('Little Worlds: ' + p);
-    if (!browser.problems.length) ok(`${browser.cases} Little Worlds browser checks: play, direct questions, saved blooms, residents and responsive layouts`);
-  }
+  const { spawnSync } = await import('node:child_process');
+  const duel = spawnSync(process.execPath, [join(root, 'tools/check-duel.mjs')], { cwd: root, encoding: 'utf8', timeout: 120000 });
+  if (duel.status === 0) ok('Tug-of-war rules, the ladder and the post hold over simulated duels');
+  else bad('Duel rules: ' + (duel.stdout + duel.stderr).split('\n').filter((l) => l.startsWith('FAIL')).join('; '));
+  const { checkRoomModel, checkRoomsBrowser } = await mod('tools/check-rooms.mjs');
+  const m = checkRoomModel();
+  ok(`${m.cases} room model checks: solved, tried, opening rows and damaged records`);
+  const rooms = await checkRoomsBrowser();
+  if (rooms.skipped) console.log('  -- SKIPPED: no Chrome. The houses were not played.');
+  else { for (const p of rooms.problems) bad('Rooms: ' + p); if (!rooms.problems.length) ok(`${rooms.cases} room checks: five houses walked into, played to the end and saved, down to 320 px`); }
+  const { checkDuelBrowser } = await mod('tools/check-duel-browser.mjs');
+  const d = await checkDuelBrowser();
+  if (d.skipped) console.log('  -- SKIPPED: no Chrome. The first duel was not played.');
+  else { for (const p of d.problems) bad('First minute: ' + p); if (!d.problems.length) ok(`${d.cases} first-minute checks: PLAY, a real duel, the letter, the Book, the Road, forfeits, small phones`); }
 }
 
 console.log('\n33. Matcha’s recall loop and proportional plant growth (tools/check-greenhouse.mjs)');

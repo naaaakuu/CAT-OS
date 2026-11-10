@@ -92,7 +92,7 @@ export const PRECACHE_DIRS = ['schema', 'vocabulary', 'language-garden', 'word-d
 
 export function precacheFiles() {
   // boot-index.json first: it is what the village waits on.
-  const files = ['./content/boot-index.json', './content/index.json', './content/manifest.json', './content/context/pack.json'];
+  const files = ['./content/boot-index.json', './content/index.json', './content/manifest.json', './content/context/pack.json', './content/duel/curios.json', './content/duel/decode.json', './content/duel/muddles.json'];
   for (const dir of PRECACHE_DIRS) {
     const abs = path.join(ROOT, 'content', dir);
     if (!fs.existsSync(abs)) continue;

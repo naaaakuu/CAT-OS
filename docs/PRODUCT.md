@@ -2,7 +2,7 @@
 
 Read for UX, copy, game-design or product-fit tasks. Not needed for engineering tasks.
 
-**A painted village where every CAT English question you answer helps one of seven small friends.**
+**A painted village under attack by the Muddles, who eat meaning. One tap and you are pulling a rope against one of them. Every right answer pulls harder, every win drops a sealed letter, and everything you answer is real CAT English.**
 
 CAT OS is an offline-first Progressive Web App for the VARC section of India's
 Common Admission Test. It is not a study app with a game on top. It is one
@@ -53,47 +53,47 @@ The game is simple; the learning is not.
 
 ## The game in ten seconds
 
-**Learn → earn Glow → the village grows.**
+**Tap PLAY → a 90-second tug of war → the Muddle goes in the pond → a letter drops → the card inside is the most interesting thing you will read today → tap PLAY.**
 
-The village is losing its words. Each friend has a trouble only learning can
-fix: Chai's pages are going blank, Matcha's word garden is wilting, Mochi's
-notebook lost its notes, Ginger's gears are stuck, Mallow's stars went dim,
-Sesame's clock tower stopped ticking, the chairs of Biscuit's rose cottage
-have wandered off, and Toffee keeps the fire that holds it all together.
-Every round you finish
-with a friend helps them:
+- **The villains are the syllabus.** A Muddle is a bad habit of English: Smudge eats words, Baron Verbose never says in five words what fifty will do, the Scrambler talks out of order, Count Tangent wanders off the point, Dame Ellipsis never finishes her..., the Gatecrasher barges in at the wrong moment, Sir Waffle cannot reach the point, Madame Mixup confidently uses the wrong word, and the Great Muddle does all of it. Beating one is the skill the exam tests.
+- **The rope is the only clock.** A right answer yanks it toward you, a streak yanks harder, a wrong answer gives the Muddle a free heave. Between answers the Muddle leans on the rope. While something long is on screen it stops to read too, so careful reading is never punished.
+- **Word Strikes** are the shared word engine (due, slipped, then new), so a duel is real spaced repetition and Matcha grows from it. **Plain English** is 200 pompous lines to decode, from "I find myself regrettably unable to accede" (no) up to the dense sentences of a hard essay. **Big moves** are the curator's next jumble, stray, gap, seat or summary, saved as an ordinary session of that subject, so the houses grow from it too.
+- **Laurels and the Laurel Road.** A win pays laurels, a loss costs a few, and you cannot fall below a stop you reached. Nine stops, one friend's home and one Muddle each, and each opens a new way to play. Only the next Muddle shows its face. Derived from saved duels, never stored.
+- **Letters and the Book.** A win drops a sealed letter, the Morning Post brings one each day, and Chai tucks one inside every book you finish for the first time. Three taps break the seal. Inside are cards from the Book of Curiosities: words that changed their minds, English that came from India, the writer's tricks, reading secrets. Paper grades, from humblest to rarest: Scrap, Folio, Manuscript, First Edition. Cards you have not found stay face down, showing only their hook. Your next letter's first card is always teased in advance, on the home screen.
+- **Toffee's fire** is still your days in a row, and every answer still pays Glow, so the village keeps growing underneath everything (the rules are unchanged; see `glow.js`).
 
-- **Glow.** The village's one resource, paid for learning done: 1 for each
-  question you answer, 1 more when it is right, 2 for finishing a set. Time
-  never counts: slow or fast, a question pays the same, and an open app or a
-  skipped question pays nothing. Each question pays once a day; tomorrow it is
-  review and pays again. You still see 1 to 3 stars for how a run went.
-- **The village level.** Glow adds up to levels, and every level puts
-  something new on the map: lanterns, bunting, flowers, firefly jars, a
-  swing, chimes, a kite, lily-pad lights, sky lanterns.
-- **Growing up.** Each friend grows through ten stages (6 Glow each) as you work through
-  their subject: stage 1 is the first question you get right, stage 10 is
-  every question in it. Every stage shows on them (a twinkle, a bigger body,
-  their own hat, a ring of light, a floating charm, gold trim, a sparkle
-  trail, a second charm, a golden aura, a crown of stars) and has a name.
-  Every second stage is a chapter of their story.
-- **Houses that grow.** Every house grows with its own section, and so with
-  its friend (the workshop with jumbles, the rose cottage with placements), ten steps from
-  faded and dark-windowed to rich, golden and crowned: smoke and a lit lamp,
-  lit windows and flowers, a keepsake by the door, a garland, two wonders of
-  its own (floating pages and words rising from the library's book, a
-  windmill and a balloon at the workshop, an orrery and a night constellation
-  at the observatory, arrows finding the bullseye at Mochi's cabin, the clock
-  tower's bell and pigeons, and more), birds on the roof, golden dust, a halo,
-  a crown of light. At night you can see at a glance which subjects you have
-  worked at: their windows are lit. A house that grew gets its own moment
-  when you come back from a set.
-- **A party after every set.** Finish a passage or three questions and every
-  friend runs to the plaza to celebrate the one you helped.
-- **Today's three.** Every day the three friends who miss you most wear a
-  "!". Help all three and today's gift opens: 10 bonus Glow.
-- **Toffee's fire.** Your days in a row. Seven in a row saves a spare log
-  that covers one missed day, and adds a little Glow on a day that earned.
+## Why it holds attention
+
+The owner's brief was the science of attention, not any particular game. Each mechanic is here because of a known effect, and each is pointed at learning: nothing pays for time, no reward is held back behind a timer, and a missed day costs you nothing you built.
+
+| Effect | Where it lives |
+|---|---|
+| Curiosity gap (people need to close a question they have noticed) | Face-down cards show only a hook; home shows the first line of your next letter |
+| Variable reward (unpredictable payoffs beat predictable ones) | You never know the paper grade or the card; every tenth letter is gold so a dry spell always ends |
+| Anticipation (the wait is half the pleasure) | Three taps to break a seal, each harder in the hand |
+| Open loops (unfinished things stay in the mind) | Every letter ends by naming what the next one opens with |
+| Goal gradient and endowed progress (effort rises near a goal; a head start helps) | The first win puts the bar over halfway; "2 wins to Chai's Steps" |
+| Near miss (almost winning motivates more than losing) | A narrow loss says exactly how many right answers short you were, only when true, with a one-tap rematch |
+| Peak-end (we remember the peak and the ending) | Every session ends on a splash and a card, not on a score |
+| Flow (difficulty that tracks skill) | The Muddle's pull quietly follows your recent results; the curator picks the words |
+| Loss aversion (a loss hurts about twice as much as a gain pleases) | Laurels can fall, the fire can go out, walking away costs laurels |
+| IKEA effect (you value what you built) | A train you coupled, a sky you lit, a table you seated, a shelf of jars you sealed |
+| Personal bests and social proof | "New best!" moments; every card can be sent to someone |
+| Spacing and retrieval (how memory actually works) | The same ledger as every word round; missed words come back |
+
+## The houses
+
+Chai's library set the standard: every question is a thing in the room, and getting it right changes that thing, for good, where you can see it. So every house is now a full-screen room you walk straight into, with one big button and no tier grid. Solving something plays on paper, phone-first, and when you finish you go back and watch your thing arrive.
+
+| House | What you practise | What you build |
+|---|---|---|
+| Chai's library | Reading | Dusty books wiped clean |
+| Ginger's Railway | Para Jumbles | Carriages coupled onto a train, one per jumble. Tap the next sentence and it couples on, and each coupling says why it follows |
+| Mallow's Sky | Odd One Out | A constellation named for each set. Tap the stray and the other four join up |
+| Sesame's Clockworks | Para Completion | Cogs that start turning, under a clock that creeps forward. Tap an option and it drops into the gap, so you read it in place |
+| Biscuit's Long Table | Sentence Placement | A guest at a place setting. Tap a gap and the sentence sits there, so you read it in place |
+| Mochi's Pantry | Para Summary | A jar sealed with the paragraph's one true line inside, which you can read any time. A miss names exactly how it missed |
+| Matcha's Glasshouse | Vocabulary | Plants, letter by letter |
 
 ## Your Village Journal
 
@@ -116,24 +116,7 @@ to permanent chapters and keepsakes; taking a break does not remove them.
 
 ## The first minutes
 
-The village opens at the campfire. Toffee says hello, then everyone
-introduces themselves, and each one is their subject: Chai has read every
-book in the village twice (Reading), Ginger sorts socks by colour and then
-by mood (Para Jumbles), Mochi keeps it short (Para Summary), Sesame finishes
-your sentences (Para Completion), Mallow spots the sheep among the clouds
-(Odd One Out), Matcha collects words (Vocabulary).
-Then Chai waves from the library and the big button at the bottom glows:
-**Visit Chai · Open the library · 5 min**. One tap and the doorway closes
-behind you and you are standing in a room full of books; tap one and you are
-reading a real CAT passage against the clock.
-
-When you finish, the result screen counts up your Glow ("You helped
-Chai!"), Chai thanks you, and the level bar fills. On the shelf the book
-you read is wiped as clean as your answers earned, and Chai rolls his
-ladder on to the next one. Back in the village
-every friend runs to the plaza for a party round Chai, and if Chai grew a
-stage you see the new look and the new name. Then the next friend's "!" is
-waiting.
+The village opens at the campfire. Toffee says one line ("The Muddles are eating our words. Quick, grab the rope!") and the big button glows. One tap and you are in a duel with Smudge: seven everyday words, three clear choices each, and a win you cannot really lose. The Muddle goes in the pond, the laurel bar jumps past halfway, a gold-sealed letter drops, and the first card inside is one of the best in the Book. Then PLAY again. The other friends are met where they live, one stop at a time, instead of in a slideshow.
 
 ## The village
 
@@ -144,20 +127,20 @@ Every house carries a sign with its subject, always visible; tap the sign or
 the house to go in.
 
 **On top of it, only this:**
-- the top bar: Toffee's fire, the village level and its stars, **every
-  subject** (one list, each a tap from its next round) and the settings gear
-  (sound, your village's name, progress, records);
-- the bottom: today's three friends and their gift, and the big button.
+- the top bar: Toffee's fire, your stop and laurels (a tap opens the Laurel
+  Road), and the settings gear (sound, your village's name, progress, records);
+- the bottom: Rooms (every house, plus today's three, the Journal and the
+  village level), the big PLAY button, and the Book. A waiting letter, or the
+  teaser for your next one, floats above the button.
 
 **The friends live there.** Each one walks the painted paths on its own two
 feet with its own gait (Chai waddles, Mochi plods, Ginger trots, Sesame
 scurries, Matcha bounces, Toffee hops, Mallow floats), does chores round its home with a prop
 in hand, visits its best friend, chats on the plaza, waves when you arrive,
 and goes home to sleep at night. Every line comes with a little voice. Tap a
-friend for their card: what they need, what they noticed about your answers,
-the big Help button, everything you can do with them, and their story. Chai is
-the exception: his house, and he himself, open his library, with no card and no
-Help button between you and the shelves.
+friend or their house and the doorway closes behind you: you are in their room,
+with no card and no Help button between you and it. Toffee has no room; tap the
+fire for the fire's own card.
 
 **The painting moves.** Forty-four pieces of the painting are cut out with
 feathered edges and animated in place (the workshop gear, waterfalls and

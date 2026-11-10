@@ -491,6 +491,8 @@ export async function renderSession(outlet, { storage }, params) {
            this run still waits there for twenty minutes. */
         actions: [
           { label: 'Back to the library', href: '#/world/place/reading-room', primary: true },
+          // Chai tucks a letter inside every book you finish for the first time (duel/letters.js).
+          ...(prior.some((p) => p.passage_id === s.passage_id) ? [] : [{ label: 'Chai left a letter in this book', href: '#/letters' }]),
           { label: isUnlocked(`explain:${passage.meta.id}`) ? 'Explain the passage' : 'Explain the passage (short video)', href: `#/rc/mentor/${passage.meta.id}` },
           { label: 'Back to the village', href: '#/world', quiet: true },
         ],

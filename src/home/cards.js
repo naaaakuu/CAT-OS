@@ -26,6 +26,7 @@ import { musicEnabled, setMusicEnabled, unlock, startMusic, startAmbience } from
 import { feedbackPrefs, setFeedbackPref } from '../core/engagement/feedback.js';
 import { escapeHTML } from '../core/utils/format.js';
 import { journalCard } from './village-journal.js';
+import { deriveJourney } from '../pets/journey.js';
 
 const esc = escapeHTML;
 const MOOD_LABEL = { glowing: 'Very happy', happy: 'Happy', missing: 'Misses you', sleepy: 'Sleepy', wilting: 'Lonely', new: 'New friend' };
@@ -194,23 +195,25 @@ function levelCard(card, api) {
 /* ------------------------------------------------------------------ */
 
 /** Every subject in one list, each one tap from its next round (the map's signs say the same thing). */
+const ROOM_NAME = { 'reading-room': 'Chai\'s Library', loom: 'Ginger\'s Railway', table: 'Mochi\'s Pantry', bench: 'Mallow\'s Sky', placement: 'Biscuit\'s Long Table', completion: 'Sesame\'s Clockworks', meadow: 'Matcha\'s Glasshouse', wilds: 'Toffee\'s Gauntlet' };
+
 function friendsCard(card, api) {
   const P = api.pets;
-  const start = (h) => (h.place === 'placement' || h.place === 'completion'
-    ? `#/bank/session/${h.place === 'placement' ? 'sp' : 'pc'}/next`
-    : startHref(h.pet, nextFor(h.pet, api.world, { first: P.pets.find((p) => p.id === h.pet)?.isNew }), `#/world/place/${h.place}`));
+  const start = (h) => startHref(h.pet, null, `#/world/place/${h.place}`);
+  const T = P.today, J = deriveJourney(P);
   card.innerHTML = `
     ${close}
-    <p class="cw-eyebrow">CAT VARC</p>
-    <h2 class="cw-card__name">Every subject</h2>
-    <p class="cw-sub">Each house in the village holds one part of the VARC section, and its sign on the map says which. Start any of them: every round helps that friend and grows the village.</p>
-    <ul class="cw-roster">${HOUSES.map((h) => `<li><a href="${esc(start(h))}" data-go>${petPortrait(h.pet, 44)}<span class="cw-roster__who"><b>${esc(h.subject)}</b><small>${esc(h.ask)} · with ${esc(PET_BY_ID.get(h.pet).name)}</small></span><i class="cw-roster__go" aria-hidden="true">▶</i></a></li>`).join('')}</ul>
-    <h3 class="cw-h3">Who is who</h3>
-    <ul class="cw-pairs">${PETS.map((def) => { const p = P.pets.find((x) => x.id === def.id); return `<li><span class="cw-pairs__faces">${petPortrait(def.id, 34)}</span><span><b>${esc(def.name)}</b> · ${esc(def.tag)}<small class="cw-pairs__stage">${esc(ageOf(p?.stage).name)}${p?.stage ? ` · ${esc(stageTitle(def.id, p.stage))}` : ''}</small></span></li>`; }).join('')}</ul>
-    <h3 class="cw-h3">Best friends</h3>
-    <ul class="cw-pairs">${FRIENDSHIPS.map((f) => `<li><span class="cw-pairs__faces">${petPortrait(f.a, 30)}${petPortrait(f.b, 30)}</span><span>${esc(f.line)}</span></li>`).join('')}</ul>
-    <p class="cw-sub">And you? You are the new friend everyone has been waiting for.</p>`;
+    <p class="cw-eyebrow">The rooms</p>
+    <h2 class="cw-card__name">Every house</h2>
+    <p class="cw-sub">No rope, no rush. Each house holds one part of English, and everything you solve stays there.</p>
+    <ul class="cw-roster">${HOUSES.map((h) => `<li><a href="${esc(start(h))}" data-go>${petPortrait(h.pet, 44)}<span class="cw-roster__who"><b>${esc(ROOM_NAME[h.place] ?? h.subject)}</b><small>${esc(h.subject)}</small></span><i class="cw-roster__arrow" aria-hidden="true">›</i></a></li>`).join('')}</ul>
+    <div class="cw-roomlinks">
+      <button data-open="today"><b>Today's three</b><small>${T.gift ? 'Gift opened' : `${T.doneCount} of 3 helped`}</small></button>
+      <button data-open="journal"><b>Journal</b><small>${J.earnedCount} of ${J.totalCount} keepsakes</small></button>
+      <button data-open="level"><b>Village</b><small>Level ${P.level.level} · ${P.glow} Glow</small></button>
+    </div>`;
   for (const a of card.querySelectorAll('[data-go]')) a.addEventListener('click', () => api.play('open'));
+  for (const b of card.querySelectorAll('.cw-roomlinks [data-open]')) b.addEventListener('click', (e) => { e.stopPropagation(); api.open(b.dataset.open, null, b); });
 }
 
 /* ------------------------------------------------------------------ */

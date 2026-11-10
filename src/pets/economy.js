@@ -168,6 +168,8 @@ export function visitsFrom(records, content) {
     const at = Date.parse(r.finished_at);
     if (r.kind === 'lex-round') push(r, 'lex', at, num(r.stars), r.flawless);
     else if (r.kind === 'gauntlet-run') push(r, 'gauntlet', at, num(r.stars), r.flawless);
+    // A duel's words and big moves are saved as their own records; only the lines it decoded are paid here.
+    else if (r.kind === 'duel' && arr(r.answers).length) push(r, 'gauntlet', at, num(r.stars), false);
     else if (r.kind === 'garden-session') push(r, 'garden', at, r.clean === true ? 2 : 1, false);
   }
   return payVisits(out.sort((a, b) => a.at - b.at || String(a.id).localeCompare(String(b.id))));

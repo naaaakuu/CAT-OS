@@ -1,6 +1,6 @@
 # CAT OS
 
-Offline-first, no-build PWA for CAT VARC prep, presented as a painted village where eight pet friends (one per subject) grow as the learner answers real CAT questions. Vanilla JS ES modules, IndexedDB, static JSON content. Current app version: `APP_VERSION` in `src/app.js`.
+Offline-first, no-build PWA for CAT VARC prep: a painted village where one tap starts a 90-second tug of war against a Muddle (a bad habit of English), wins drop letters of collectible curiosities, and eight pet friends (one per subject) grow as the learner answers real CAT questions. Vanilla JS ES modules, IndexedDB, static JSON content. Current app version: `APP_VERSION` in `src/app.js`.
 
 ## How to work here (read this first, then stop reading)
 
@@ -14,6 +14,8 @@ Offline-first, no-build PWA for CAT VARC prep, presented as a painted village wh
 | Task | Read | Code |
 |---|---|---|
 | Village screen, friend cards, walking, visits, motion, sprites | `docs/ARCHITECTURE.md` §Village, `docs/DEV-NOTES.md` §Village | `src/home/*`, `src/pets/paths.js`, `src/pets/visits.js`, `src/pets/sprite.js`, `src/pets/pets.js` |
+| The duel, letters, the Book, the Laurel Road | §The game, `docs/PRODUCT.md` §The game in ten seconds | `src/duel/*`, `tools/check-duel.mjs`, `tools/check-duel-browser.mjs` |
+| A rebuilt house (railway, sky, clockworks, long table, pantry) or how a paragraph is played | §The game | `src/rooms/*`, `src/play/players.js`, `tools/check-rooms.mjs` |
 | Glow, levels, growth stages, ages, achievements | §Economy | `src/pets/glow.js`, `economy.js`, `progress.js`, `pets.js` |
 | A learning room (RC, PJ, PS, OOO, Word DNA, bank, Rootwood) | §Rooms | `src/modules/<room>/`, `src/core/engine/*-session.js`, `src/world/screens/` |
 | What to show next, ledgers, mentor voice, noticing | §Learning core | `src/core/learning/*`, `src/world/curator.js` |
