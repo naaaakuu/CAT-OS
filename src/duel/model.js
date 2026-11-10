@@ -34,18 +34,26 @@ export const ARENAS = Object.freeze([
  * paragraphs or the passage it makes you stop and read. Any Muddle can be
  * challenged at any stop, so the whole of VARC is in reach from the second
  * duel. The order is the order a new player meets them in, one per PLAY.
+ *
+ * `weight` is how often PLAY deals a Muddle once all ten are met, and it
+ * follows the paper: reading comprehension is two thirds of the questions, so
+ * the Skimmer comes round about one duel in three (and a passage is the
+ * longest duel there is, so most of the answering is reading). The four
+ * paragraph types the exam sets every year get two shares each, para
+ * completion one, and the three that are never asked directly but sit under
+ * everything (words, dense sentences, confusing words) one each.
  */
 export const BOUTS = Object.freeze([
-  { id: 'smudge', name: 'Smudge', friend: 'toffee', skill: 'Vocabulary', game: 'Word Strikes', line: 'Tap what the word means. Right answers pull the rope.', quick: ['word'], bigs: [] },
-  { id: 'verbose', name: 'Baron Verbose', friend: 'chai', skill: 'Dense sentences', game: 'Plain English', line: 'The Baron talks like a legal notice. Work out what he means.', quick: ['decode', 'decode', 'word'], bigs: [] },
-  { id: 'scrambler', name: 'The Scrambler', friend: 'ginger', skill: 'Para Jumbles', game: 'Couple the Train', line: 'Four sentences, out of order. Tap them into the order the writer meant.', quick: ['word', 'decode'], bigs: ['chain', 'chain'] },
-  { id: 'skimmer', name: 'The Skimmer', friend: 'chai', skill: 'Reading Comprehension', game: 'The Long Read', line: 'One passage, then its questions. The Skimmer never reads to the end. You will.', quick: ['word', 'decode'], bigs: ['read'] },
-  { id: 'tangent', name: 'Count Tangent', friend: 'mallow', skill: 'Odd One Out', game: 'The Stray Star', line: 'One sentence wandered in from somewhere else. Find it.', quick: ['word', 'decode'], bigs: ['stray', 'stray'] },
-  { id: 'ellipsis', name: 'Dame Ellipsis', friend: 'sesame', skill: 'Para Completion', game: 'The Missing Cog', line: 'The paragraph stops. Choose the sentence that keeps it turning.', quick: ['word', 'decode'], bigs: ['gap', 'gap'] },
-  { id: 'gatecrasher', name: 'The Gatecrasher', friend: 'biscuit', skill: 'Sentence Placement', game: 'Take a Seat', line: 'A sentence needs a place in the paragraph. Only one seat fits.', quick: ['word', 'decode'], bigs: ['seat', 'seat'] },
-  { id: 'waffle', name: 'Sir Waffle', friend: 'mochi', skill: 'Para Summary', game: 'Hit the Point', line: 'Sir Waffle never gets to the point. You will. Pick the true summary.', quick: ['word', 'decode'], bigs: ['point', 'point'] },
-  { id: 'mixup', name: 'Madame Mixup', friend: 'matcha', skill: 'Confusing words', game: 'Twin Words', line: 'Madame Mixup swaps words that look alike. You know the difference.', quick: ['twin', 'twin', 'word'], bigs: [] },
-  { id: 'greatmuddle', name: 'The Great Muddle', friend: 'chai', skill: 'Everything at once', game: 'The Mixed Bag', line: 'Every bad habit at once. Two paragraphs of any kind, and everything between.', quick: ['twin', 'decode', 'word'], bigs: ['any', 'any'] },
+  { id: 'smudge', weight: 1, name: 'Smudge', friend: 'toffee', skill: 'Vocabulary', game: 'Word Strikes', line: 'Tap what the word means. Right answers pull the rope.', quick: ['word'], bigs: [] },
+  { id: 'verbose', weight: 1, name: 'Baron Verbose', friend: 'chai', skill: 'Dense sentences', game: 'Plain English', line: 'The Baron talks like a legal notice. Work out what he means.', quick: ['decode', 'decode', 'word'], bigs: [] },
+  { id: 'scrambler', weight: 2, name: 'The Scrambler', friend: 'ginger', skill: 'Para Jumbles', game: 'Couple the Train', line: 'Four sentences, out of order. Tap them into the order the writer meant.', quick: ['word', 'decode'], bigs: ['chain', 'chain'] },
+  { id: 'skimmer', weight: 6, name: 'The Skimmer', friend: 'chai', skill: 'Reading Comprehension', game: 'The Long Read', line: 'One passage, then its questions. The Skimmer never reads to the end. You will.', quick: ['word', 'decode'], bigs: ['read'] },
+  { id: 'tangent', weight: 2, name: 'Count Tangent', friend: 'mallow', skill: 'Odd One Out', game: 'The Stray Star', line: 'One sentence wandered in from somewhere else. Find it.', quick: ['word', 'decode'], bigs: ['stray', 'stray'] },
+  { id: 'ellipsis', weight: 1, name: 'Dame Ellipsis', friend: 'sesame', skill: 'Para Completion', game: 'The Missing Cog', line: 'The paragraph stops. Choose the sentence that keeps it turning.', quick: ['word', 'decode'], bigs: ['gap', 'gap'] },
+  { id: 'gatecrasher', weight: 2, name: 'The Gatecrasher', friend: 'biscuit', skill: 'Sentence Placement', game: 'Take a Seat', line: 'A sentence needs a place in the paragraph. Only one seat fits.', quick: ['word', 'decode'], bigs: ['seat', 'seat'] },
+  { id: 'waffle', weight: 2, name: 'Sir Waffle', friend: 'mochi', skill: 'Para Summary', game: 'Hit the Point', line: 'Sir Waffle never gets to the point. You will. Pick the true summary.', quick: ['word', 'decode'], bigs: ['point', 'point'] },
+  { id: 'mixup', weight: 1, name: 'Madame Mixup', friend: 'matcha', skill: 'Confusing words', game: 'Twin Words', line: 'Madame Mixup swaps words that look alike. You know the difference.', quick: ['twin', 'twin', 'word'], bigs: [] },
+  { id: 'greatmuddle', weight: 1, name: 'The Great Muddle', friend: 'chai', skill: 'Everything at once', game: 'The Mixed Bag', line: 'Every bad habit at once. Two paragraphs of any kind, and everything between.', quick: ['twin', 'decode', 'word'], bigs: ['any', 'any'] },
 ].map(Object.freeze));
 
 const BOUT_BY_ID = new Map(BOUTS.map((b) => [b.id, b]));
@@ -253,12 +261,18 @@ export function troublemakerOf(duels, now = Date.now()) {
   return { bout, open };
 }
 
+export const WEIGHT_TOTAL = BOUTS.reduce((n, b) => n + b.weight, 0);
+/** A bout's share of PLAY, 0 to 1. */
+export const shareOf = (bout) => bout.weight / WEIGHT_TOTAL;
+const RECENT_DUELS = WEIGHT_TOTAL * 2;
+
 /**
  * Who PLAY sends you against. A loss gets one rematch, because a grudge is the
  * best reason to play again; after that a Muddle you have never met, so the
  * first ten duels are ten different games; then today's troublemaker; then
- * whoever you have left alone the longest. Never the same face twice running
- * unless you lost to it.
+ * whoever is furthest behind their share of the exam (`weight`), so over any
+ * stretch of play the duels are dealt in the paper's own proportions. Never
+ * the same face twice running unless you lost to it.
  */
 export function nextBout(duels, now = Date.now()) {
   if (!duels.length) return BOUTS[0];
@@ -269,5 +283,9 @@ export function nextBout(duels, now = Date.now()) {
   if (unmet) return unmet;
   const t = troublemakerOf(duels, now);
   if (t?.open && t.bout.id !== last.muddle) return t.bout;
-  return BOUTS.filter((b) => b.id !== last.muddle).sort((a, b) => cast.get(a.id).lastAt - cast.get(b.id).lastAt)[0];
+  // Only the recent past counts, so an old habit of one Muddle is not paid back for weeks.
+  const recent = castOf(duels.slice(-RECENT_DUELS));
+  const played = Math.min(duels.length, RECENT_DUELS) + 1;
+  const behind = (b) => shareOf(b) * played - recent.get(b.id).fought;
+  return BOUTS.filter((b) => b.id !== last.muddle).sort((a, b) => behind(b) - behind(a) || cast.get(a.id).lastAt - cast.get(b.id).lastAt)[0];
 }

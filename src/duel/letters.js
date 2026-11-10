@@ -10,6 +10,7 @@
  */
 
 import { dayKey } from '../core/engagement/streaks.js';
+import { sideLetters } from './sideshows.js';
 
 export const GRADES = Object.freeze({
   wax: { id: 'wax', name: 'A sealed letter', cards: 1 },
@@ -39,10 +40,11 @@ export function gradeFor(seed, lettersSoFar, { first = false } = {}) {
 }
 
 /**
- * Letters waiting to be opened, oldest first. Three sources: a won duel, the
- * Morning Post, and the first time you finish a book in Chai's library (he
- * tucks a letter inside it). Book letters come three at a time, so a long
- * reader's history arrives as a treat and not a heap.
+ * Letters waiting to be opened, oldest first. Five sources: a won duel, the
+ * Morning Post, the first time you finish a book in Chai's library (he tucks
+ * a letter inside it), a day's ten words in Matcha's Glasshouse and a week's
+ * run of Toffee's Gauntlet (sideshows.js). Book letters come three at a time,
+ * so a long reader's history arrives as a treat and not a heap.
  */
 export function pendingLetters(learning, now = Date.now(), sessions = []) {
   const list = Array.isArray(learning) ? learning : [];
@@ -64,6 +66,7 @@ export function pendingLetters(learning, now = Date.now(), sessions = []) {
     bookLetters += 1;
     out.push({ id, grade: b.score.correct === b.score.total ? 'silver' : 'wax', from: 'book', at: b.finished_at });
   }
+  for (const l of sideLetters(list)) if (!opened.has(l.id)) out.push(l);
   out.sort((a, b) => String(a.at).localeCompare(String(b.at)));
   // The Morning Post waits for you from the day after your first duel.
   const today = dayKey(now);

@@ -56,7 +56,7 @@ export async function renderLetterOpen(outlet, { storage, letter, first = false,
   outlet.innerHTML = `
     <section class="lt lt--${esc(letter.grade)}" data-state="sealed">
       <div class="lt__glow"></div>
-      <p class="lt__head">${esc(letter.from === 'post' ? 'The Morning Post' : letter.from === 'book' ? 'Tucked inside the book' : grade.name)}</p>
+      <p class="lt__head">${esc(letter.from === 'post' ? 'The Morning Post' : letter.from === 'book' ? 'Tucked inside the book' : letter.from === 'glasshouse' ? 'Left under a flowerpot' : letter.from === 'gauntlet' ? 'Kept by the fire for you' : grade.name)}</p>
       <button class="lt__env" id="env" aria-label="Open the letter">${envelopeSVG(letter.grade, { width: 240 })}</button>
       <p class="lt__hint" id="hint">Tap the seal to break it</p>
       <div class="lt__cards" id="cards"></div>

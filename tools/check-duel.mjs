@@ -6,8 +6,9 @@
  * guesser usually loses, a duel lasts a minute or two, the ladder climbs at a
  * sensible rate, and a letter holds what it should.
  */
-import { ARENAS, BOUTS, DUEL, RIBBONS, ROPE_END, arenaFor, newRope, applyRope, settleRope, quickEffect, bigEffect, readEffect, quickCount, boutOf, castOf, nextBout, troublemakerOf, dayKey, driftOf, driftScale, laurelsFor, laurelsFrom, ladderOf, duelsIn } from '../src/duel/model.js';
+import { ARENAS, BOUTS, DUEL, RIBBONS, ROPE_END, arenaFor, newRope, applyRope, settleRope, quickEffect, bigEffect, readEffect, quickCount, boutOf, castOf, nextBout, shareOf, troublemakerOf, dayKey, driftOf, driftScale, laurelsFor, laurelsFrom, ladderOf, duelsIn } from '../src/duel/model.js';
 import { gradeFor, drawCards, pendingLetters, ownedCards, openRecord } from '../src/duel/letters.js';
+import { sideLetters, sideShows, sideDoor } from '../src/duel/sideshows.js';
 import { PLAN_DAYS, postTime, reminderPlan, usualHour } from '../src/duel/reminders.js';
 
 let failed = 0;
@@ -93,7 +94,23 @@ console.log('The cast');
   const long = [...run];
   for (let i = 10; i < 60; i += 1) long.push(duel(i, nextBout(long, at + i * 600000).id, true));
   check('never the same Muddle twice running after a win', long.every((d, i) => i === 0 || d.muddle !== long[i - 1].muddle));
-  check('PLAY keeps coming back to everyone', [...castOf(long).values()].every((c) => c.fought >= 4));
+  check('PLAY keeps coming back to everyone', [...castOf(long).values()].every((c) => c.fought >= 3));
+  // The exam's own proportions: two hundred duels dealt by PLAY.
+  const exam = [...run];
+  for (let i = 10; i < 210; i += 1) exam.push(duel(i, nextBout(exam, at + i * 600000).id, true));
+  const dealt = castOf(exam.slice(10));
+  const got = (id) => dealt.get(id).fought / 200;
+  console.log(`  dealt: ${BOUTS.map((b) => `${b.id} ${Math.round(got(b.id) * 100)}%`).join(', ')}`);
+  check('the weights add up to shares', Math.abs(BOUTS.reduce((n, b) => n + shareOf(b), 0) - 1) < 1e-9);
+  check('reading is about one duel in three', got('skimmer') > 0.28 && got('skimmer') < 0.36, got('skimmer'));
+  check('every Muddle is dealt close to its share of the exam', BOUTS.every((b) => Math.abs(got(b.id) - shareOf(b)) < 0.03));
+  check('the paragraph types together outweigh the three foundations', ['scrambler', 'tangent', 'gatecrasher', 'waffle', 'ellipsis'].reduce((n, id) => n + got(id), 0) > 2 * ['smudge', 'verbose', 'mixup'].reduce((n, id) => n + got(id), 0));
+  check('never the same Muddle twice running, however heavy', exam.every((d, i) => i === 0 || d.muddle !== exam[i - 1].muddle));
+  // A player who has been choosing one Muddle from the bill is steered back, not punished for weeks.
+  const hooked = [...run];
+  for (let i = 10; i < 60; i += 1) hooked.push(duel(i, 'smudge', true));
+  for (let i = 60; i < 100; i += 1) hooked.push(duel(i, nextBout(hooked, at + i * 600000).id, true));
+  check('after a binge on one Muddle PLAY returns to the exam within forty duels', castOf(hooked.slice(60)).get('skimmer').fought >= 10 && castOf(hooked.slice(80)).get('smudge').fought >= 1);
   const c = castOf([...run, duel(20, 'waffle', true), duel(21, 'waffle', true), duel(22, 'waffle', false)]).get('waffle');
   check('a Muddle keeps your record against it', c.fought === 4 && c.wins === 3 && c.losses === 1 && c.ribbon?.id === 'bronze' && c.toRibbon === RIBBONS[1].at - 3);
   check('damaged records do not break the cast', castOf([{ kind: 'duel', muddle: 'nobody', won: true, finished_at: 'x' }]).get('smudge').fought === 0);
@@ -174,6 +191,47 @@ console.log('The post');
   check('an opened letter stays opened', pendingLetters(log, day2).every((l) => l.id !== next[0].id));
   check('opened cards are the collection', ownedCards(log).has('c1') && ownedCards(log).has('c2'));
   check('damaged letter records are harmless', pendingLetters([null, { kind: 'letter-open' }, { kind: 'duel' }], day2).length === 1 && ownedCards([{ kind: 'letter-open', cards: 'no' }]).size === 0);
+}
+
+console.log('The side shows');
+{
+  const D = 864e5, mon = new Date(2026, 0, 5, 10).getTime();
+  const iso = (ms) => new Date(ms).toISOString();
+  const round = (ms, id = 'r' + ms) => ({ id, kind: 'lex-round', module: 'lex', region: 'meadow', greenhouse: true, finished_at: iso(ms) });
+  const run = (ms, week, answered = 30) => ({ id: 'g' + ms, kind: 'gauntlet-run', week, finished_at: iso(ms), duration_ms: 170000, score: { correct: 21, total: 30, answered } });
+  const duelRec = { kind: 'duel', id: 'd0', finished_at: iso(mon - 3 * D), letter: null };
+  check('nothing played, nothing owed', sideLetters([]).length === 0 && sideLetters(null).length === 0);
+  let log = [duelRec, round(mon), round(mon + 3600000)];
+  check('ten words in the Glasshouse leave one letter a day, however many visits', sideLetters(log).length === 1 && sideLetters(log)[0].id.startsWith('glasshouse-') && sideLetters(log)[0].grade === 'wax');
+  check('a word round outside the Glasshouse leaves none', sideLetters([{ kind: 'lex-round', region: 'meadow', finished_at: iso(mon) }]).length === 0);
+  log.push(run(mon + 7200000, '2026-W02'), run(mon + 7300000, '2026-W02'));
+  const both = sideLetters(log);
+  check('a week of the Gauntlet pays one silver letter, however many runs', both.filter((l) => l.from === 'gauntlet').length === 1 && both.find((l) => l.from === 'gauntlet').grade === 'silver');
+  check('a run with nothing answered pays nothing', sideLetters([run(mon, '2026-W02', 0)]).length === 0);
+  check('the letters reach the post', pendingLetters(log, mon + 7400000).filter((l) => l.from === 'glasshouse' || l.from === 'gauntlet').length === 2);
+  const g = both.find((l) => l.from === 'glasshouse');
+  log.push(openRecord(g, ['c1'], mon + 7500000));
+  check('an opened side letter does not come back', pendingLetters(log, mon + 7600000).every((l) => l.id !== g.id) && sideLetters(log).every((l) => l.id !== g.id));
+  const history = [];
+  for (let i = 0; i < 30; i += 1) history.push(round(mon - (40 - i) * D));
+  check('a long history arrives two letters at a time', sideLetters(history).length === 2);
+  check('damaged records are harmless', sideLetters([null, 3, { kind: 'lex-round', greenhouse: true }, { kind: 'gauntlet-run', finished_at: 'x' }, { kind: 'gauntlet-run', week: 5, finished_at: iso(mon) }]).length === 0);
+
+  const ledger = [
+    { kind: 'lex-mastery', region: 'meadow', level: 3, next_at: iso(mon + 5 * D) },
+    { kind: 'lex-mastery', region: 'meadow', level: 3, next_at: iso(mon - D) },
+    { kind: 'lex-mastery', region: 'meadow', level: 1, next_at: iso(mon + D) },
+    { kind: 'lex-mastery', region: 'pond', level: 1, next_at: iso(mon - D) },
+  ];
+  const s0 = sideShows(ledger, mon);
+  check('rooted words and yellow leaves are counted the Glasshouse way', s0.glasshouse.rooted === 2 && s0.glasshouse.yellow === 2 && !s0.glasshouse.today && !s0.gauntlet.ran && s0.gauntlet.best === null);
+  const s1 = sideShows([...ledger, round(mon - 3600000), run(mon - 1800000, s0.gauntlet.week)], mon);
+  check('today and this week are noticed', s1.glasshouse.today && s1.gauntlet.ran && s1.gauntlet.best.correct === 21);
+  check('yesterday does not count as today', !sideShows([round(mon - D)], mon).glasshouse.today && !sideShows([run(mon - 8 * D, '2026-W01')], mon).gauntlet.ran);
+  check('no door for a brand-new player', sideDoor(s0, 2) === null);
+  check('when both are owed they take turns', sideDoor(s0, 3)?.id === 'glasshouse' && sideDoor(s0, 4)?.id === 'gauntlet');
+  check('a door only stays open while its letter is unearned', sideDoor(s1, 9) === null && sideDoor(sideShows([round(mon - 3600000)], mon), 4)?.id === 'gauntlet' && sideDoor(sideShows([run(mon - 1800000, s0.gauntlet.week)], mon), 5)?.id === 'glasshouse');
+  check('no em dash in anything the doors say', [sideDoor(s0, 3), sideDoor(s0, 4)].every((d) => !/\u2014/.test(d.title + d.line + d.go)));
 }
 
 console.log('The reminders');

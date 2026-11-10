@@ -442,6 +442,7 @@ html[data-reduced-motion] .cw-base { transition: none; }
 .cw-play:active { translate: -50% 5px; box-shadow: 0 2px 0 #3b2508, 0 6px 14px rgba(40, 24, 6, 0.4); }
 .cw-play b { font: 900 33px/1 var(--font-ui); letter-spacing: 0.03em; }
 .cw-play small { max-width: 100%; font: 700 13px/1.15 var(--font-ui); color: #4a2f0b; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cw-play__x2 { position: absolute; left: -8px; top: -13px; rotate: -5deg; padding: 4px 9px; border-radius: 999px; background: #3b2508; color: #FFE7A0; font: 800 12px/1 var(--font-ui); font-style: normal; letter-spacing: 0.04em; white-space: nowrap; box-shadow: 0 2px 0 rgba(40, 24, 6, 0.5); pointer-events: none; }
 .cw-vs { position: absolute; left: calc(50% + min(23.5vw, 115px) - 30px); bottom: calc(var(--dock-b) + 56px); z-index: 2; width: 58px; height: 58px; display: block; border-radius: 50%; background: #FBF3E0; border: 3px solid #3b2508; box-shadow: 0 4px 0 #3b2508, 0 8px 14px rgba(40, 24, 6, 0.4); text-decoration: none; touch-action: manipulation; }
 .cw-vs[hidden] { display: none; }
 .cw-vs:active { translate: 0 3px; box-shadow: 0 1px 0 #3b2508; }

@@ -68,7 +68,7 @@ const CONTENT_VERSION = 16;
    ALWAYS lands in a new cache, whether or not anybody remembered to bump the
    number above. Nothing used to enforce that bump, and an installed learner
    could sit on old code forever with no symptom anybody could see. */
-const BUILD_ID = '2c39b90e6b';
+const BUILD_ID = '5fa23e6ac1';
 const CONTENT_ID = '86f7e6576d';
 const SHELL_CACHE = `cat-os-shell-v${CACHE_VERSION}.${BUILD_ID}`;
 const CONTENT_CACHE = `cat-os-content-v${CONTENT_VERSION}.${CONTENT_ID}`;
@@ -140,6 +140,7 @@ const CORE_FILES = [
   './src/duel/index.js',
   './src/duel/letters.js',
   './src/duel/model.js',
+  './src/duel/sideshows.js',
   './src/home/cards.js',
   './src/home/houses.js',
   './src/home/journal-art.js',
@@ -301,6 +302,7 @@ const SHELL_FILES = [
   './src/duel/result.js',
   './src/duel/road.js',
   './src/duel/screen.js',
+  './src/duel/sideshows.js',
   './src/duel/style.js',
   './src/home/cards.js',
   './src/home/houses.js',

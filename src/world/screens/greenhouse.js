@@ -6,11 +6,14 @@ import { escapeHTML as esc } from '../../core/utils/format.js';
 import { STORES } from '../../core/storage/storage-adapter.js';
 import { infoButton } from '../../ui/info.js';
 import { play } from '../audio.js';
+import { sideShows } from '../../duel/sideshows.js';
 export { greenhouseStyle } from '../../ui/greenhouse-style.js';
 
 export async function renderGreenhouse(outlet, { storage, world, stage = 0 }) {
   const at = location.hash;
   const ledger = ledgerFromRecords(world.records.learning);
+  /* A day's first ten words leave a letter (duel/sideshows.js); say so only while it is true. */
+  const letterOwed = !sideShows(world.records.learning).glasshouse.today;
   const fields = world.content.fields.meadow;
   const draft = await storage.get(STORES.SETTINGS, GREENHOUSE_DRAFT).catch(() => null);
   if (location.hash !== at) return;
@@ -34,7 +37,7 @@ export async function renderGreenhouse(outlet, { storage, world, stage = 0 }) {
       <div class="gh-beds" id="gh-beds" aria-label="Nursery benches"></div>
       <details class="gh-more"><summary>More ways to grow</summary><a href="#/world/place/rootwood">Word roots ↗</a><a href="#/world/place/pond">Confusable words ↗</a><a href="#/world/place/terraces">Word parts ↗</a><a href="#/bank/session/wb/wb-0001">Words in context ↗</a><a href="#/world/place/thicket">Borrowed words ↗</a></details>
     </main>
-    <footer class="gh-dock"><a class="gh-start${due && !draft?.value ? ' is-review' : ''}" href="#/round/meadow"><span>${draft?.value ? 'Continue your practice' : due ? 'Revive yellow leaves' : 'Grow ten words'}<small>${draft?.value ? 'Your little session is saved' : due ? `${due} leaves to refresh · one word at a time` : 'One word at a time · two good recalls'}</small></span><span aria-hidden="true">→</span></a></footer>
+    <footer class="gh-dock"><a class="gh-start${due && !draft?.value ? ' is-review' : ''}" href="#/round/meadow"><span>${draft?.value ? 'Continue your practice' : due ? 'Revive yellow leaves' : 'Grow ten words'}<small>${draft?.value ? 'Your little session is saved' : due ? `${due} leaves to refresh${letterOwed ? ' · and a letter for today' : ' · one word at a time'}` : letterOwed ? 'Two good recalls each · a letter for today' : 'One word at a time · two good recalls'}</small></span><span aria-hidden="true">→</span></a></footer>
     <dialog class="gh-dialog" aria-labelledby="gh-dialog-title"><div id="gh-dialog-body"></div></dialog>
   </section>`;
   const house = outlet.querySelector('.gh-house');

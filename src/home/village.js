@@ -359,7 +359,8 @@ export async function renderVillageHome(outlet, ctx) {
     const up = nextBout(allDuels, Date.now());
     const trouble = troublemakerOf(allDuels, Date.now());
     const double = !!trouble?.open && trouble.bout.id === up.id;
-    playEl.innerHTML = `<b>PLAY</b><small>${double ? 'Double laurels · ' : ''}vs ${escapeHTML(up.name)}</small>`;
+    /* The double is a tag on the corner: in the line under PLAY it pushed the Muddle's name off the button. */
+    playEl.innerHTML = `${double ? '<i class="cw-play__x2">2× laurels</i>' : ''}<b>PLAY</b><small>vs ${escapeHTML(up.name)}</small>`;
     playEl.setAttribute('aria-label', `Play a duel against ${up.name}: ${up.skill}.${double ? ' Today\'s troublemaker, for double laurels.' : ''}`);
     /* Who is next, as a face on the corner of PLAY. Tapping the face opens the
        bill, where every Muddle (every part of the exam) can be challenged. */

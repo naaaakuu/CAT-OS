@@ -7,6 +7,7 @@ import { plantArt } from './greenhouse-art.js';
 import { escapeHTML as esc } from '../../core/utils/format.js';
 import { focusContent } from '../../ui/focus.js';
 import { play, silenceWorld } from '../audio.js';
+import { sideShows } from '../../duel/sideshows.js';
 
 export async function renderGreenhousePractice(outlet, { storage }, params) {
   const arrived = location.hash;
@@ -126,7 +127,10 @@ export async function renderGreenhousePractice(outlet, { storage }, params) {
     if (!alive()) return;
     body.innerHTML = `<div class="gh-brief"><h1>Putting down roots…</h1><p role="status">Saving your new growth.</p></div>`;
     const now = Date.now();
+    let letter = false;
     try {
+      // The first ten words of a day leave a letter under a flowerpot.
+      letter = !sideShows(await storage.getAll(STORES.LEARNING), now).glasshouse.today;
       for (const p of round.picks) {
         const previous = ledger.get(p.entry.id);
         const rec = previous?.greenhouse_round === round.id ? previous : { ...greenhouseRecord(previous, p, now), greenhouse_round: round.id };
@@ -142,7 +146,7 @@ export async function renderGreenhousePractice(outlet, { storage }, params) {
     if (!alive()) return;
     what.textContent = `${round.total} of ${round.total} words rooted`;
     drawTrack();
-    body.innerHTML = `<div class="gh-complete result"><div class="gh-complete-art">${plantArt(round.picks[0]?.bundle.meta.band || 'high', .8)}</div><p class="gh-eyebrow">A good day in the glasshouse</p><h1>${round.total} words.<br>Stronger roots.</h1><p>You recalled every word correctly twice in a row.<br>Matcha will keep a leaf for each one.</p><div class="gh-result-count"><span class="gh-dot is-green"></span><strong>${round.total}</strong> leaves turned green</div><div class="result__actions"><a class="gh-start" href="#/world/place/meadow">See your glasshouse <span aria-hidden="true">→</span></a><a class="gh-text-link" href="${entryRoute}?fresh=${Date.now()}">Another little session ↗</a></div><details class="gh-session-words"><summary>The words you grew</summary>${round.picks.map((p) => `<div class="gh-word-row is-green"><b>${esc(p.entry.word)}</b><span>${esc(p.entry.meaning)}</span></div>`).join('')}</details><p class="gh-save-note">Saved. Future visits will keep these leaves green.</p></div>`;
+    body.innerHTML = `<div class="gh-complete result"><div class="gh-complete-art">${plantArt(round.picks[0]?.bundle.meta.band || 'high', .8)}</div><p class="gh-eyebrow">A good day in the glasshouse</p><h1>${round.total} words.<br>Stronger roots.</h1><p>You recalled every word correctly twice in a row.<br>Matcha will keep a leaf for each one.</p><div class="gh-result-count"><span class="gh-dot is-green"></span><strong>${round.total}</strong> leaves turned green</div>${letter ? '<p class="gh-letter-note">Matcha left a letter under a flowerpot for you.</p>' : ''}${letter ? '<a class="gh-start is-review gh-letter-go" href="#/letters">Open your letter <span aria-hidden="true">→</span></a>' : ''}<div class="result__actions"><a class="gh-start" href="#/world/place/meadow">See your glasshouse <span aria-hidden="true">→</span></a><a class="gh-text-link" href="${entryRoute}?fresh=${Date.now()}">Another little session ↗</a></div><details class="gh-session-words"><summary>The words you grew</summary>${round.picks.map((p) => `<div class="gh-word-row is-green"><b>${esc(p.entry.word)}</b><span>${esc(p.entry.meaning)}</span></div>`).join('')}</details><p class="gh-save-note">Saved. Future visits will keep these leaves green.</p></div>`;
     focusContent(body.querySelector('h1'));
   }
 }

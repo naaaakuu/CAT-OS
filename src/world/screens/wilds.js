@@ -8,6 +8,7 @@
  */
 
 import { regionBySlug } from '../regions.js';
+import { weekKey } from '../../core/engagement/streaks.js';
 import { listFields, loadField, loadLedger, buildQuestion, buildContextQuestion, LexRound, applyAnswer, loadContext } from '../lexicon.js';
 import { roundStars } from '../economy.js';
 import { loadWorld, loadWorldRecords, deriveWorldState, petChangeLine, loadWorldContent } from '../state.js';
@@ -26,15 +27,7 @@ export const GAUNTLET_SIZE = 30;
 export const GAUNTLET_MS = 3 * 60_000;
 const KEYS = ['A', 'B', 'C', 'D'];
 
-/** ISO-week key, e.g. 2026-W37. */
-export function weekKey(date = new Date()) {
-  const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
-  const day = d.getUTCDay() || 7;
-  d.setUTCDate(d.getUTCDate() + 4 - day);
-  const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
-  const week = Math.ceil(((d - yearStart) / 86400000 + 1) / 7);
-  return `${d.getUTCFullYear()}-W${String(week).padStart(2, '0')}`;
-}
+export { weekKey };
 
 /** The week's thirty: ten from each place, fields and entries chosen by the week's seed. */
 export async function composeGauntlet(week) {
@@ -91,7 +84,7 @@ export async function renderWilds(outlet, { storage }) {
         <p class="place__eyebrow">${escapeHTML(region.skill)} · week ${escapeHTML(week.slice(-2))} · with Toffee</p>
         <h1 class="place__title">The Gauntlet${infoButton('gauntlet', { moreTitle: 'Inside the challenge', more: ['Words from the Meadow, the Pond and the Thicket, with nine questions inside a real sentence. No hints or second choices during a run.'] })}</h1>
         <p class="place__line">${GAUNTLET_SIZE} vocabulary questions in ${GAUNTLET_MS / 60000} minutes. The same set all week, so you can beat your own best.</p>
-        <button class="g-cta g-cta--gold" id="run">Run the Gauntlet<small>${thisWeek.length ? `${thisWeek.length} run${thisWeek.length === 1 ? '' : 's'} this week · best ${weekBest.score?.correct}/${GAUNTLET_SIZE} in ${formatClock(weekBest.duration_ms)}` : 'Your first run this week'}</small><span class="arrow" aria-hidden="true">→</span></button>
+        <button class="g-cta g-cta--gold" id="run">Run the Gauntlet<small>${thisWeek.length ? `${thisWeek.length} run${thisWeek.length === 1 ? '' : 's'} this week · best ${weekBest.score?.correct}/${GAUNTLET_SIZE} in ${formatClock(weekBest.duration_ms)}` : 'Your first run this week pays a silver-sealed letter'}</small><span class="arrow" aria-hidden="true">→</span></button>
         <div class="place__section">
           <h2>Records</h2>
           <p class="sub">${allBest ? `All-time best: <b>${allBest.score?.correct}/${GAUNTLET_SIZE}</b> in ${formatClock(allBest.duration_ms)} (${escapeHTML(allBest.week)}).` : 'No runs yet. The first one sets the mark.'}</p>
@@ -129,13 +122,13 @@ export async function renderWilds(outlet, { storage }) {
     catch (err) { console.error('[CAT OS] the Gauntlet could not be composed', err); refuse(err?.message ?? 'This could not be set up just now. Try again in a moment.'); return; }
     if (!startButton.isConnected || location.hash !== arrivedAt) return;
     if (picks.length < 10) { refuse('There are not enough words on this device yet. They arrive in the background: try again in a minute.'); return; }
-    runGauntlet(outlet, storage, { picks, ledger, before, beforeRecords, week });
+    runGauntlet(outlet, storage, { picks, ledger, before, beforeRecords, week, letterOwed: !thisWeek.some((r) => (r.score?.answered ?? 0) > 0) });
   };
   outlet.querySelector('#run').addEventListener('click', startRun);
   if (autoRun) startRun();
 }
 
-function runGauntlet(outlet, storage, { picks, ledger, before, beforeRecords, week }) {
+function runGauntlet(outlet, storage, { picks, ledger, before, beforeRecords, week, letterOwed = false }) {
   const arrivedAt = location.hash;
   const startedAt = Date.now();
   const questions = picks.map((p, i) => (p.context
@@ -254,6 +247,8 @@ function runGauntlet(outlet, storage, { picks, ledger, before, beforeRecords, we
       setsDone = newlyFinished(beforeState, afterState, before?.content ?? null);
     } catch { /* the run still counts */ }
 
+    /* The week's first run pays a letter (duel/sideshows.js). */
+    const letterEarned = answers.length > 0 && letterOwed;
     let prevBest = null;
     try { const all = (await storage.getAll(STORES.LEARNING)).filter((r) => r.kind === 'gauntlet-run' && r.id !== record.id); prevBest = [...all].sort((a, b) => (b.score?.correct - a.score?.correct) || (a.duration_ms - b.duration_ms))[0] ?? null; } catch { /* none */ }
     const isRecord = !prevBest || correct > prevBest.score?.correct || (correct === prevBest.score?.correct && record.duration_ms < prevBest.duration_ms);
@@ -265,7 +260,7 @@ function runGauntlet(outlet, storage, { picks, ledger, before, beforeRecords, we
       title: isRecord ? 'A new record' : 'Gauntlet complete',
       result: stars,
       record,
-      verdict: isRecord ? `${correct} of ${total} in ${formatClock(record.duration_ms)}. Your best run. Toffee keeps it by the fire.` : `${correct} of ${total} in ${formatClock(record.duration_ms)}. Best so far: ${prevBest.score?.correct} in ${formatClock(prevBest.duration_ms)}.`,
+      verdict: isRecord ? `${correct} of ${total} in ${formatClock(record.duration_ms)}. Your best run. Toffee keeps it by the fire.${letterEarned && saved ? ' He kept a letter there for you too.' : ''}` : `${correct} of ${total} in ${formatClock(record.duration_ms)}. Best so far: ${prevBest.score?.correct} in ${formatClock(prevBest.duration_ms)}.${letterEarned && saved ? ' Toffee kept a letter by the fire for you.' : ''}`,
       facts: [
         { label: 'Right', value: `${correct}/${total}`, good: correct >= total * 0.75 },
         { label: 'Time', value: formatClock(record.duration_ms), good: record.duration_ms < GAUNTLET_MS },
@@ -276,13 +271,13 @@ function runGauntlet(outlet, storage, { picks, ledger, before, beforeRecords, we
       // Nothing was kept, so nothing is handed over.
       ...(saved ? {} : { change: { pet: 'toffee', earned: 0 } }),
       setsDone,
-      extraHTML: `<div class="result__facts" style="grid-template-columns:repeat(3,1fr)"><div class="result__fact"><b>${splits.meadow}</b><span>Meadow</span></div><div class="result__fact"><b>${splits.pond}</b><span>Pond</span></div><div class="result__fact"><b>${splits.thicket}</b><span>Thicket</span></div></div>`,
+      extraHTML: `<div class="result__facts" style="grid-template-columns:repeat(3,1fr)"><div class="result__fact"><b>${splits.meadow}</b><span>Meadow</span></div><div class="result__fact"><b>${splits.pond}</b><span>Pond</span></div><div class="result__fact"><b>${splits.thicket}</b><span>Thicket</span></div></div>${letterEarned && saved ? '<a class="g-btn g-btn--primary result__letter" href="#/letters">Open your letter</a>' : ''}`,
       actions: [
         /* It used to navigate and then auto-click #run after 400 ms. Measured,
            the button takes 43 ms, 1722 ms and 2579 ms to exist — so two times
            in three the learner tapped "Run again", landed on the Wilds, and
            the run never started. The screen starts it itself now. */
-        { label: 'Run again', href: `#/world/place/wilds?run=1&again=${Date.now()}`, primary: true },
+        { label: 'Run again', href: `#/world/place/wilds?run=1&again=${Date.now()}`, primary: !(letterEarned && saved) },
         { label: 'Back to the village', href: '#/world' },
       ],
     });

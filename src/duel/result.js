@@ -17,6 +17,9 @@ import { GRADES } from './letters.js';
 import { renderLetterOpen } from './open-letter.js';
 import { laurelSVG, envelopeSVG } from './art.js';
 import { openModal, closeModal } from '../ui/modal.js';
+import { loadWorldRecords } from '../world/state.js';
+import { duelsIn } from './model.js';
+import { sideShows, sideDoor } from './sideshows.js';
 
 function countUp(el, from, to, ms = 900) {
   if (!el) return;
@@ -91,6 +94,7 @@ export async function renderDuelResult(outlet, { storage, summary }) {
             <a class="dl-btn dl-btn--plain" href="#/bill">Pick a Muddle</a>
             <a class="dl-btn dl-btn--plain" href="#/world">Village</a>
           </div>
+          <div id="side" hidden></div>
         </div>
       </div>
     </section>`;
@@ -112,6 +116,19 @@ export async function renderDuelResult(outlet, { storage, summary }) {
     letterBtn.addEventListener('click', () => {
       renderLetterOpen(outlet, { storage, letter, first, doneLabel: 'Play again', doneHref: `#/duel?again=${Date.now()}` });
     });
+  }
+
+  /* One door to a house with no rope, after a win and only while its letter
+     is still unearned: the Glasshouse and the Gauntlet are not duels, so this
+     is where a player who lives on PLAY is reminded they exist. */
+  if (won && !first) {
+    loadWorldRecords(storage).then((records) => {
+      const door = sideDoor(sideShows(records.learning), duelsIn(records.learning).length);
+      const slot = outlet.querySelector('#side');
+      if (!door || !slot) return;
+      slot.innerHTML = `<a class="rs-side" href="${door.href}"><span class="rs-side__fig">${petFigure(door.friend, { size: 48 })}</span><span class="rs-side__text"><b>${esc(door.title)}</b><span>${esc(door.line)}</span></span><i aria-hidden="true">›</i></a>`;
+      slot.hidden = false;
+    }).catch(() => { /* the result stands without it */ });
   }
 
   if (newArena) {
