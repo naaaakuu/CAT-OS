@@ -382,6 +382,8 @@ export async function renderVillageHome(outlet, ctx) {
     root.style.setProperty('--harmony', pets.harmony.toFixed(2));
   };
   hud();
+  // Coming back to the village is when the plan changes: in the app, rewrite what the phone will show.
+  if (window.CatOSAndroid) import('../shell/reminders.js').then((m) => m.syncReminders(storage)).catch(() => { /* no reminders */ });
   root.querySelector('.cw-play').addEventListener('click', () => { unlock(); play('open'); });
   root.querySelector('.cw-chip--level').addEventListener('click', () => { unlock(); location.hash = '#/road'; });
 

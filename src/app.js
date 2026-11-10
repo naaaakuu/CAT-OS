@@ -52,7 +52,7 @@ window.addEventListener('unhandledrejection', (e) => {
 /* Storage + theme                                                    */
 /* ------------------------------------------------------------------ */
 
-const APP_VERSION = '3.17.0'; // keep in step with CHANGELOG.md and android/app/build.gradle versionName
+const APP_VERSION = '3.18.0'; // keep in step with CHANGELOG.md and android/app/build.gradle versionName
 
 const storage = new IndexedDBAdapter();
 
@@ -209,6 +209,7 @@ async function boot() {
     seen();
     window.addEventListener('hashchange', seen);
     import('./shell/account.js').then((m) => m.keepBackedUp(storage)).catch(() => { /* no cloud save this session */ });
+    import('./shell/reminders.js').then((m) => m.watchReminders(storage)).catch(() => { /* no reminders this session */ });
   }
 
   /* The village song plays everywhere, from the first touch, until the

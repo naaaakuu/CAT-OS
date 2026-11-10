@@ -8,6 +8,7 @@
  */
 import { ARENAS, DUEL, ROPE_END, arenaFor, newRope, applyRope, settleRope, quickEffect, bigEffect, driftOf, driftScale, laurelsFor, laurelsFrom, ladderOf, duelsIn } from '../src/duel/model.js';
 import { gradeFor, drawCards, pendingLetters, ownedCards, openRecord } from '../src/duel/letters.js';
+import { PLAN_DAYS, postTime, reminderPlan, usualHour } from '../src/duel/reminders.js';
 
 let failed = 0;
 const check = (name, ok, extra = '') => { if (!ok) failed += 1; console.log(`${ok ? '  ok ' : 'FAIL '} ${name}${extra ? `  ${extra}` : ''}`); };
@@ -124,6 +125,29 @@ console.log('The post');
   check('an opened letter stays opened', pendingLetters(log, day2).every((l) => l.id !== next[0].id));
   check('opened cards are the collection', ownedCards(log).has('c1') && ownedCards(log).has('c2'));
   check('damaged letter records are harmless', pendingLetters([null, { kind: 'letter-open' }, { kind: 'duel' }], day2).length === 1 && ownedCards([{ kind: 'letter-open', cards: 'no' }]).size === 0);
+}
+
+console.log('The reminders');
+{
+  const morning = new Date(2026, 0, 10, 7, 0).getTime(), afternoon = new Date(2026, 0, 10, 15, 0).getTime(), late = new Date(2026, 0, 10, 23, 0).getTime();
+  const base = { now: morning, hasDueled: true, playedToday: false, fireDays: 0, postOpenedToday: false, hook: 'It began life as an insult.', hour: null };
+  const within = (p) => p.every((n) => { const h = new Date(n.at).getHours(); return h >= 8 && h <= 21; });
+  check('nothing before a first duel', reminderPlan({ ...base, hasDueled: false }).length === 0);
+  const plain = reminderPlan(base);
+  check('three letters and no more: someone who stops playing stops hearing from us', plain.length === 3 && plain.every((n) => n.at < morning + (PLAN_DAYS + 1) * 864e5));
+  check('the first letter names what is inside', plain[0].text === base.hook && plain[0].route === '#/letters');
+  check('never at night', within(plain) && within(reminderPlan({ ...base, hour: 2 })) && within(reminderPlan({ ...base, hour: 23, fireDays: 9 })));
+  check('at most one letter on any day', new Set(plain.map((n) => new Date(n.at).toDateString())).size === plain.length);
+  check('the letter comes a little before the usual hour', postTime(13)[0] === 12 && postTime(null)[0] === 8);
+  check('an opened post is not announced again today', reminderPlan({ ...base, postOpenedToday: true }).every((n) => new Date(n.at).getDate() !== 10));
+  check('no letter is announced on the first day, because there is none yet', reminderPlan({ ...base, firstDayToday: true }).every((n) => new Date(n.at).getDate() !== 10));
+  check('a time already gone is skipped', reminderPlan({ ...base, now: afternoon }).every((n) => n.at > afternoon) && reminderPlan({ ...base, now: late }).every((n) => n.at > late));
+  const fire = (o) => reminderPlan({ ...base, fireDays: 5, ...o }).filter((n) => n.id >= 2000);
+  check('the fire warns once, today if not yet played', fire({ playedToday: false }).length === 1 && new Date(fire({ playedToday: false })[0].at).getDate() === 10);
+  check('the fire warns tomorrow if today is done', new Date(fire({ playedToday: true })[0].at).getDate() === 11);
+  check('a one-day fire is not worth a nudge', fire({ fireDays: 1 }).length === 0);
+  check('no em dashes in anything sent', plain.concat(fire({})).every((n) => !/[\u2013\u2014]/.test(n.title + n.text)));
+  check('usual hour needs a few plays and ignores nonsense', usualHour(['x', '2026-01-01T09:00:00']) === null && usualHour(['2026-01-01T09:00:00', '2026-01-02T09:30:00', '2026-01-03T21:00:00']) === 9);
 }
 
 if (failed) { console.error(`\n${failed} check(s) failed`); process.exit(1); }

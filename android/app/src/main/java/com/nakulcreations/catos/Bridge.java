@@ -55,6 +55,13 @@ final class Bridge {
     @JavascriptInterface public void cloudLoad(String id) { a.runOnUiThread(() -> a.cloud.load(json -> a.reply(id, json))); }
     @JavascriptInterface public void deleteAccount(String id) { a.runOnUiThread(() -> a.cloud.delete(json -> a.reply(id, json))); }
 
+    // Notifications, scheduled on the phone (Reminders.java; the plan comes from src/duel/reminders.js).
+    @JavascriptInterface public boolean notificationsAllowed() { return Reminders.allowed(a); }
+    @JavascriptInterface public void requestNotifications(String id) { a.runOnUiThread(() -> a.requestNotifications(id)); }
+    @JavascriptInterface public void openNotificationSettings() { a.runOnUiThread(a::openNotificationSettings); }
+    @JavascriptInterface public void scheduleReminders(String plan) { Reminders.schedule(a, plan); }
+    @JavascriptInterface public void cancelReminders() { Reminders.clear(a); }
+
     /** A page event into Google Analytics (Firebase): whole numbers stay numbers, the rest become strings. */
     @JavascriptInterface public void logEvent(String name, String params) {
         Bundle b = new Bundle();

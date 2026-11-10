@@ -78,6 +78,7 @@ The owner's brief was the science of attention, not any particular game. Each me
 | Flow (difficulty that tracks skill) | The Muddle's pull quietly follows your recent results; the curator picks the words |
 | Loss aversion (a loss hurts about twice as much as a gain pleases) | Laurels can fall, the fire can go out, walking away costs laurels |
 | IKEA effect (you value what you built) | A train you coupled, a sky you lit, a table you seated, a shelf of jars you sealed |
+| External triggers, used sparingly (a nudge works when it arrives near a habit) | A notification names the card inside your next letter and comes just before your usual time. At most two a day, never at night, asked for only after you have seen a teaser, and planned three days ahead so they stop if you stop |
 | Personal bests and social proof | "New best!" moments; every card can be sent to someone |
 | Spacing and retrieval (how memory actually works) | The same ledger as every word round; missed words come back |
 

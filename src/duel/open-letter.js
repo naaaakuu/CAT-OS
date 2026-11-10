@@ -12,6 +12,7 @@ import { escapeHTML as esc } from '../core/utils/format.js';
 import { play, stopMusic } from '../world/audio.js';
 import { loadWorldRecords } from '../world/state.js';
 import { shareText, track } from '../core/native.js';
+import { remindersSupported, remindersOn, turnOnReminders } from '../shell/reminders.js';
 import { ensureDuelStyle } from './style.js';
 import { loadCurios } from './content.js';
 import { GRADES, drawCards, ownedCards, openRecord, teaseCard } from './letters.js';
@@ -89,6 +90,9 @@ export async function renderLetterOpen(outlet, { storage, letter, first = false,
   // What the next letter promises, now that these are yours.
   const after = new Map(owned); for (const id of ids) after.set(id, 1);
   const nextTease = teaseCard(cards, after);
+  // Right after the teaser is when someone wants to be told. Asked here, never on opening the app.
+  let offerReminder = false;
+  try { offerReminder = remindersSupported() && !(await remindersOn(storage)) && !localStorage.getItem('catos:reminder-denied'); } catch { /* no offer */ }
 
   /* Three taps to break it. The wait is half the pleasure: each one cracks the
      wax a little more, harder in the hand, and the third lets it go. */
@@ -130,6 +134,7 @@ export async function renderLetterOpen(outlet, { storage, letter, first = false,
         <button class="dl-btn dl-btn--go dl-btn--xl" id="next">${isLast ? esc(doneLabel) : 'Next card'}</button>
         ${isLast ? '<a class="dl-btn dl-btn--plain" href="#/book">See your Book</a>' : ''}
         ${isLast && nextTease ? `<p class="lt__tease"><span>Your next letter opens with</span>${esc(nextTease.hook)}</p>` : ''}
+        ${isLast && nextTease && offerReminder ? '<button class="lt__share" id="remind">Tell me when it arrives</button>' : ''}
       </div>`;
     play('cardflip');
     setTimeout(() => {
@@ -139,6 +144,13 @@ export async function renderLetterOpen(outlet, { storage, letter, first = false,
     }, reduced() ? 0 : 340);
     cardsEl.querySelector('#next').addEventListener('click', () => (isLast ? finish() : show(i + 1)), { once: true });
     cardsEl.querySelector('#share').addEventListener('click', () => shareCard(c, cardsEl.querySelector('#share')));
+    cardsEl.querySelector('#remind')?.addEventListener('click', async (e) => {
+      const b = e.currentTarget;
+      b.disabled = true;
+      const ok = await turnOnReminders(storage);
+      if (!ok) { try { localStorage.setItem('catos:reminder-denied', '1'); } catch { /* fine */ } }
+      b.textContent = ok ? 'Done. Watch for it.' : 'You can turn this on in Settings';
+    });
   }
 
   function finish() {

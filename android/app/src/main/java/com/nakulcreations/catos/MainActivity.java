@@ -1,13 +1,17 @@
 package com.nakulcreations.catos;
 
+import android.Manifest;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
@@ -52,7 +56,8 @@ public class MainActivity extends ComponentActivity {
     private ConnectivityManager net;
     private ValueCallback<Uri[]> picked;
     private String saveId, saveText;
-    private ActivityResultLauncher<String> openFile, saveFile;
+    private ActivityResultLauncher<String> openFile, saveFile, askNotify;
+    private String notifyId;
 
     @Override
     protected void onCreate(Bundle state) {
@@ -89,6 +94,11 @@ public class MainActivity extends ComponentActivity {
             saveText = null;
         });
 
+        askNotify = registerForActivityResult(new ActivityResultContracts.RequestPermission(), granted -> {
+            reply(notifyId, "{\"granted\":" + (granted && Reminders.allowed(this)) + "}");
+            notifyId = null;
+        });
+
         billing = new Billing(this);
         ads = new Ads(this, billing::isPro);
         cloud = new Cloud(this);
@@ -98,6 +108,8 @@ public class MainActivity extends ComponentActivity {
             @Override public void onLost(Network n) { pushNet(); }
         });
 
+        // Debug builds only: lets a gate drive the real WebView over adb.
+        if (BuildConfig.DEBUG) WebView.setWebContentsDebuggingEnabled(true);
         WebSettings s = web.getSettings();
         s.setJavaScriptEnabled(true);
         // The opening video (shell/intro.js) plays with its sound before any tap.
@@ -129,7 +141,8 @@ public class MainActivity extends ComponentActivity {
             }
         });
         web.addJavascriptInterface(new Bridge(this), "CatOSAndroid");
-        if (state == null) web.loadUrl(START); else web.restoreState(state);
+        String route = routeOf(getIntent());
+        if (state == null) web.loadUrl(route == null ? START : "https://" + HOST + "/www/index.html" + route); else web.restoreState(state);
 
         // Back first dismisses an in-room sheet or popover, then walks
         // history. A friend card in the village must not send the app away.
@@ -143,6 +156,35 @@ public class MainActivity extends ComponentActivity {
                 });
             }
         });
+    }
+
+    /** Where a tapped notification wants to go. Only places this app itself sends people. */
+    private static String routeOf(Intent i) {
+        String r = i == null ? null : i.getStringExtra(Reminders.EXTRA_ROUTE);
+        return "#/letters".equals(r) || "#/duel".equals(r) ? r : null;
+    }
+
+    @Override
+    protected void onNewIntent(Intent i) {
+        super.onNewIntent(i);
+        setIntent(i);
+        String route = routeOf(i);
+        if (route != null) web.evaluateJavascript("location.hash=" + JSONObject.quote(route), null);
+    }
+
+    /** Android 13 and later ask the person; earlier phones allow notifications by default. */
+    void requestNotifications(String id) {
+        if (Build.VERSION.SDK_INT < 33 || checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
+            reply(id, "{\"granted\":" + Reminders.allowed(this) + "}");
+            return;
+        }
+        if (notifyId != null) { reply(id, "{\"granted\":false}"); return; }
+        notifyId = id;
+        askNotify.launch(Manifest.permission.POST_NOTIFICATIONS);
+    }
+
+    void openNotificationSettings() {
+        try { startActivity(new Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS).putExtra(Settings.EXTRA_APP_PACKAGE, getPackageName())); } catch (ActivityNotFoundException ignored) { }
     }
 
     boolean online() {

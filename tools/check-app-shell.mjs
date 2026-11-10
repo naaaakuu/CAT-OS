@@ -52,6 +52,11 @@ const FAKE = `(() => {
     share: (t) => { window.__shared = t; },
     openExternal: (u) => { window.__opened = u; },
     saveFile: (id) => answer(id, { ok: true }),
+    notificationsAllowed: () => st().notify === true,
+    requestNotifications: (id) => { put({ notify: st().denyNotify ? false : true }); answer(id, { granted: !st().denyNotify }); },
+    openNotificationSettings: () => { window.__notifySettings = (window.__notifySettings || 0) + 1; },
+    scheduleReminders: (json) => { window.__plan = JSON.parse(json); put({ plans: (st().plans || 0) + 1 }); },
+    cancelReminders: () => { window.__plan = []; put({ cancels: (st().cancels || 0) + 1 }); },
   };
 })();`;
 
@@ -175,6 +180,25 @@ try {
   check(await b.evaluate(`document.querySelector('[data-tag="catos_pro_yearly"]')?.textContent === 'Save 58%'`), 'Pro screen: the yearly badge shows what it saves against twelve months');
   check(await b.evaluate(`/renew automatically/i.test(document.querySelector('.pro__fine')?.textContent || '')`), 'Pro screen: the renewal terms are stated');
   check(await b.evaluate(`/no ads/i.test(document.querySelector('.pro__perks')?.textContent || '')`), 'Pro screen: "no ads" is the first thing Pro promises');
+
+  // ---- Reminders: nothing without a yes, and the plan reaches the phone ----
+  await b.evaluate(`localStorage.removeItem('catos:reminder-denied'); (async () => { const { IndexedDBAdapter } = await import('/src/core/storage/indexeddb-adapter.js'); const s = new IndexedDBAdapter(); await s.init(); const at = new Date(Date.now() - 3600e3).toISOString(); await s.put('learning', { id: 'duel-remind', kind: 'duel', module: 'duel', arena: 1, muddle: 'smudge', friend: 'toffee', started_at: at, finished_at: at, won: true, rope: 100, best_combo: 3, laurels: 30, letter: null, answers: [], score: { correct: 5, total: 6, accuracy: 0.83 }, stars: 2 }); return true; })()`);
+  await go('#/world');
+  await wait(800);
+  check(await b.evaluate(`!window.__plan`), 'reminders: nothing is scheduled before the player says yes');
+  await go('#/settings');
+  check(await b.evaluate(`document.querySelector('#reminders')?.textContent.trim() === 'Turn on'`), 'reminders: Settings offers them, off by default');
+  await b.evaluate(`document.querySelector('#reminders').click(); 1`);
+  check(await until(`Array.isArray(window.__plan) && window.__plan.length >= 3`, 4000), 'reminders: saying yes sends the phone a plan');
+  check(await b.evaluate(`window.__plan.every((n) => n.at > Date.now() && n.title && n.text && ['#/letters', '#/duel'].includes(n.route))`), 'reminders: every planned notification is in the future, worded, and leads somewhere');
+  check(await until(`document.querySelector('#reminders')?.textContent.trim() === 'Turn off'`, 3000), 'reminders: the switch reads Turn off once on');
+  await b.evaluate(`document.querySelector('#reminders').click(); 1`);
+  check(await until(`Array.isArray(window.__plan) && window.__plan.length === 0 && document.querySelector('#reminders')?.textContent.trim() === 'Turn on'`, 3000), 'reminders: turning off clears everything planned');
+  await b.evaluate(`localStorage.setItem('fake', JSON.stringify(Object.assign(JSON.parse(localStorage.getItem('fake') || '{}'), { denyNotify: true, notify: false }))); 1`);
+  await go('#/settings');
+  await b.evaluate(`document.querySelector('#reminders').click(); 1`);
+  check(await until(`window.__notifySettings === 1`, 3000), 'reminders: a phone that says no is sent to its own settings, not nagged');
+  await b.evaluate(`localStorage.setItem('fake', JSON.stringify(Object.assign(JSON.parse(localStorage.getItem('fake') || '{}'), { denyNotify: false }))); 1`);
 
   // ---- The opening video: only in the app, always skippable, never traps ----
   await b.evaluate(`localStorage.setItem('catos:intro', 'on'); 1`);

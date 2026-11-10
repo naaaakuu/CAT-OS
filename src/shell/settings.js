@@ -28,6 +28,7 @@ import { escapeHTML } from '../core/utils/format.js';
 import { workerStatus, librarySyncProgress, startLibrarySync } from '../core/content-loader/library-sync.js';
 import { NATIVE, inApp, isPro, ask, account, track, shareApp, openExternal, PLAY_URL, PRIVACY_URL } from '../core/native.js';
 import { linked, backUp, link, deleteAccount } from './account.js';
+import { remindersSupported, remindersOn, turnOnReminders, turnOffReminders } from './reminders.js';
 
 /* The three preferences the shell applies at boot live in prefs.js, so the
    boot path never has to load this screen. Re-exported here because that is
@@ -86,8 +87,9 @@ const CLOUD_SAID = {
   'too-big': 'Your village is too big for a cloud save. Export a backup file instead.',
 };
 
-export function renderSettings(outlet, { storage, version }) {
+export async function renderSettings(outlet, { storage, version }) {
   const who = inApp ? account() : null;
+  const remindOn = await remindersOn(storage);
   outlet.innerHTML = `
     <section class="screen screen--cottage">
       <div class="cottage__hero" style="${backdropStyle('cottage')}" aria-hidden="true"></div>
@@ -163,6 +165,11 @@ export function renderSettings(outlet, { storage, version }) {
         ${row(icon('check', { size: 20 }), 'Downloaded for offline', 'Checking…', '<button class="btn" id="offline-refresh">Check</button>')}
         <div class="offline-bar" id="offline-bar" aria-hidden="true"><i style="width:0%"></i></div>
       </div>`}
+
+      ${remindersSupported() ? `<div class="card">
+        <h2>Reminders</h2>
+        ${row(icon('bell', { size: 20 }), 'Letters and your fire', 'A daily letter, and a nudge if your fire is about to go out. At most two a day, never at night, and they stop if you stop playing.', `<button class="btn" id="reminders">${remindOn ? 'Turn off' : 'Turn on'}</button>`)}
+      </div>` : ''}
 
       <div class="card">
         <h2>Share</h2>
@@ -247,6 +254,15 @@ export function renderSettings(outlet, { storage, version }) {
 
   /* ---- Google account (the app only; the save itself is shell/account.js) ---- */
   const again = () => renderSettings(outlet, { storage, version });
+  outlet.querySelector('#reminders')?.addEventListener('click', async (e) => {
+    e.currentTarget.disabled = true;
+    if (remindOn) await turnOffReminders(storage);
+    else if (!(await turnOnReminders(storage))) {
+      toast('Allow notifications for CAT OS in your phone settings, then turn this on.', 'info', { mute: true });
+      NATIVE?.openNotificationSettings?.();
+    }
+    again();
+  });
   const busy = (e) => { e.currentTarget.disabled = true; };
   outlet.querySelector('#acct-in')?.addEventListener('click', async (e) => {
     busy(e);
