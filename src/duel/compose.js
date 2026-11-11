@@ -197,6 +197,8 @@ export async function saveWordFeeds(storage, feeds, ledger) {
   for (const round of [feeds.meadow, feeds.pond]) {
     if (!round || !round.answers.length) continue;
     const result = round.finish();
+    // Marked as the duel's own: a word strike is not a round played in a room (src/pets/seals.js).
+    if (result.record) result.record.in_duel = true;
     try { await saveRound(storage, round, result, ledger); } catch (err) { console.error('[CAT OS] duel words could not be saved', err); }
   }
 }
@@ -204,8 +206,9 @@ export async function saveWordFeeds(storage, feeds, ledger) {
 /**
  * Save a finished big move as an ordinary session of its own subject.
  * @param {object} outcome { correct, share, entered?, chosen?, ms, started }
+ * @param {{ inDuel?: boolean }} o  a move made in a duel is marked as the duel's (it is not a room's play: src/pets/seals.js)
  */
-export async function saveBigMove(storage, type, item, outcome) {
+export async function saveBigMove(storage, type, item, outcome, { inDuel = false } = {}) {
   if (type === 'read') return saveRead(storage, item, outcome);
   let t = outcome.started ?? Date.now();
   const now = () => t;
@@ -223,6 +226,7 @@ export async function saveBigMove(storage, type, item, outcome) {
   else if (type === 'point') session.answer(outcome.chosen, {});
   else session.answer(outcome.chosen);
   const results = session.finish();
+  if (inDuel) results.session.in_duel = true;
   try {
     await storage.put(STORES.SESSIONS, results.session);
     for (const a of results.attempts) await storage.put(STORES.ATTEMPTS, a);

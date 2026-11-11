@@ -7,6 +7,7 @@ import { STORES } from '../../core/storage/storage-adapter.js';
 import { infoButton } from '../../ui/info.js';
 import { play } from '../audio.js';
 import { sideShows } from '../../duel/sideshows.js';
+import { deriveSeals, sealLine } from '../../pets/seals.js';
 export { greenhouseStyle } from '../../ui/greenhouse-style.js';
 
 export async function renderGreenhouse(outlet, { storage, world, stage = 0 }) {
@@ -28,6 +29,7 @@ export async function renderGreenhouse(outlet, { storage, world, stage = 0 }) {
     <div class="gh-room-backdrop" aria-hidden="true"></div>
     <header class="gh-room-tools">
       <nav class="gh-nav"><a href="#/world" class="gh-back" aria-label="Back to village">←</a><h1 class="gh-room-name">The Glasshouse</h1>${infoButton('vocab', { label: 'How the glasshouse grows', moreTitle: 'Growing your glasshouse', more: ['Scroll along the nursery benches to explore the A–Z beds. Each plant grows with learned words divided by all the words in its bed. Yellow leaves need another visit; green leaves are remembered.', 'Practise up to ten words. Every word needs two correct recalls in a row. Miss one and it returns in a shuffled later pass. Yellow means one recall; green means two.', 'A visit grows memory, then reviews are spaced over days. Empty beds stay open for future words.'] })}</nav>
+      ${sealLine(deriveSeals(world.records), 'matcha')}
       <div class="gh-room-progress"><span><b>${remembered.toLocaleString()}</b> / ${total.toLocaleString()} words learned</span><button type="button" id="gh-words">Your words ↗</button></div>
       <div class="gh-tabs" role="group" aria-label="Word frequency">${BANDS.map((b) => `<button type="button" data-band="${b.id}" aria-pressed="${b === band}">${b.label.split(' ')[0]}<small>frequency</small></button>`).join('')}</div>
     </header>

@@ -14,12 +14,16 @@
  *   node tools/check-village.mjs --quick    no offline leg
  */
 import { serveRepo, launchChrome, findChrome } from './cdp-lite.mjs';
-import { MAP, HOMES, NODES } from '../src/pets/paths.js';
+import { MAP, HOMES, NODES, LAMPS } from '../src/pets/paths.js';
+import { groundY, STILL, ART_FILES, HOUSES } from '../src/home/landscape.js';
+import { REACHES } from '../src/home/water.js';
 
 if (!findChrome()) { console.log('SKIPPED: no Chrome'); process.exit(0); }
 const quick = process.argv.includes('--quick');
 const server = await serveRepo();
 const browser = await launchChrome({ width: 390, height: 844 });
+// A phone has a touch screen: two-finger gestures only reach the page as pointers when touch is emulated from the first load.
+await browser.send('Emulation.setTouchEmulationEnabled', { enabled: true, maxTouchPoints: 5 });
 let checks = 0;
 const ok = (c, m) => { if (!c) throw new Error(m); checks += 1; };
 const ev = (x) => browser.evaluate(x);
@@ -75,24 +79,29 @@ try {
   ok(await ev(`document.querySelector('.cw-play').getAttribute('href') === '#/duel'`), 'the big button does not start a duel');
   ok(await ev(`document.querySelector('.pet[data-pet="ginger"]').dataset.word === 'new' && document.querySelector('.pet[data-pet="chai"]').dataset.word !== 'new'`), 'pet moods do not follow the records');
 
-  // The painting itself moves: the wheel, the water, the banners, the trees.
-  // ...laid over the painting as this learner has grown it (src/home/houses.js), the patches just above it.
-  ok(await waitFor(`!!document.querySelector('.cw-base.is-in') && document.querySelectorAll('.cw-motion .mo').length >= 2 && document.querySelector('.cw-motion').previousElementSibling?.classList.contains('cw-base')`, 20000), 'the grown landmarks or their selective motion did not mount');
-  // A house's own machine waits for it: Ginger is new, so the workshop gear is still.
-  ok(await ev(`!document.querySelector('.cw-motion .mo--spin[data-house="ginger"]')`), 'the workshop gear turns before its house has woken');
-  // On screen every patch runs; off screen they pause (a running CSS animation is restyled every frame, seen or not).
-  await ev(`document.querySelector('.cw').__village.look(${NODES.f1.x}, ${NODES.f1.y})`);
-  await sleep(120);
-  ok(await ev(`(() => { const on = [...document.querySelectorAll('.cw-motion .mo:not([data-off]) > b')], off = [...document.querySelectorAll('.cw-motion .mo[data-off] > b')]; return on.length >= 1 && on.every((b) => b.getAnimations().some((a) => a.playState === 'running')) && off.every((b) => b.getAnimations().every((a) => a.playState === 'paused')); })()`), 'a patch on screen is standing still, or one off screen is still animating');
-  ok(await ev(`document.querySelectorAll('.cw-glow--lamp').length >= 20 && getComputedStyle(document.querySelector('.cw-glow--lamp')).opacity > 0`), 'the lamps should glow faintly by day');
-
-  // A mature village retains each landmark's own machinery after relocation.
-  // Restore the record-derived stages before any gameplay assertions.
+  // The valley is assembled from separate pieces (src/home/scenery.js): eight baked house bodies cut at their ground lines, each with its parts canvas, bridges and oaks.
+  ok(await waitFor(`document.querySelectorAll('.cw-scene .cw-house[data-ready]').length === 8 && document.querySelectorAll('.cw-scene .cw-house--ground').length === 8 && document.querySelectorAll('.cw-scene .cw-parts').length === 8 && document.querySelectorAll('.cw-bridge').length === 2 && document.querySelectorAll('.cw-tree').length >= 3`, 20000), 'the assembled houses, bridges or oaks did not mount');
+  ok(await ev(`!document.querySelector('.cw-base, .cw-motion, .cw-woodland, .cw-ground')`), 'a layer of the old cropped painting is back');
+  // A house sorts with the friends at its ground line (life.js gives each friend z-index = foot y), and the scene layer makes no stacking context of its own.
+  ok(await ev(`(() => { const s = getComputedStyle(document.querySelector('.cw-scene')); const w = document.querySelector('.cw-house[data-house="chai"]:not(.cw-house--ground)'); return s.zIndex === 'auto' && s.transform === 'none' && s.opacity === '1' && Math.abs(Number(w.style.zIndex) - ${Math.round(groundY('chai'))}) <= 1; })()`), 'houses do not sort with the friends at their ground line');
+  // A machine waits for its house to wake: Ginger is new, so the railway's carriages and clock stand still; its parts canvas does not change.
+  const partsOf = (id) => `(() => { const c = document.querySelector('.cw-parts[data-house="${id}"]'); return c.width > 1 ? Array.from(c.getContext('2d').getImageData(0, 0, c.width, c.height).data.filter((_, i) => i % 97 === 0)).join(',') : ''; })()`;
+  const moves = async (id) => { const a = await ev(partsOf(id)); await sleep(900); const b = await ev(partsOf(id)); return { drawn: a.length > 0, moved: a !== b }; };
+  await ev(`document.querySelector('.cw').__village.look(${HOMES.ginger.door.x}, ${HOMES.ginger.door.y - 60})`);
+  await sleep(400);
+  { const m = await moves('ginger'); ok(m.drawn && !m.moved, `the railway's parts ${m.drawn ? 'move before its house has woken' : 'were never drawn'}`); }
+  // Oak canopies sway over planted trunks; one off screen is paused (a running CSS animation is restyled every frame, seen or not).
+  ok(await ev(`(() => { const t = [...document.querySelectorAll('.cw-tree')]; const on = t.filter((e) => !e.hasAttribute('data-off')), off = t.filter((e) => e.hasAttribute('data-off')); return on.length >= 1 && off.length >= 1 && on.every((e) => e.querySelector('.cw-tree__canopy').getAnimations().some((a) => a.playState === 'running') && e.querySelector('.cw-tree__trunk').getAnimations().length === 0) && off.every((e) => e.querySelector('.cw-tree__canopy').getAnimations().every((a) => a.playState === 'paused')); })()`), 'oak canopies do not sway on screen over still trunks, or keep swaying off screen');
+  ok(await ev(`document.querySelectorAll('.cw-glow--lamp').length >= ${LAMPS.length} && ${LAMPS.length} >= 10 && getComputedStyle(document.querySelector('.cw-glow--lamp')).opacity > 0`), 'the lamps should glow faintly by day');
+  // A mature village: every machine wakes (the clockworks' gear, the telescope, the carriages); then the record-derived stages come back.
   await ev(`(async () => { const v = document.querySelector('.cw').__village; window.__recordStages = JSON.parse(v.grown()); await v.houses(Object.fromEntries(Object.keys(window.__recordStages).map(id => [id, 10]))); return 1; })()`);
-  ok(await waitFor(`document.querySelectorAll('.cw-motion .mo--spin[data-house="ginger"]').length === 3 && document.querySelectorAll('.cw-motion .mo--flag[data-house="sesame"]').length === 2 && !!document.querySelector('.cw-motion .mo--turn[data-house="mallow"]')`), 'grown landmark machinery no longer follows its house');
-  ok(await ev(`(() => { const off = [...document.querySelectorAll('.cw-motion .mo[data-off] > b')]; return off.length > 0 && off.every(b => b.getAnimations().every(a => a.playState === 'paused')); })()`), 'offscreen mature landmarks keep animating');
+  for (const id of ['sesame', 'mallow', 'ginger']) {
+    await ev(`document.querySelector('.cw').__village.look(${HOMES[id].door.x}, ${HOMES[id].door.y - 60})`);
+    await sleep(500);
+    const m = await moves(id); ok(m.drawn && m.moved, `${id}'s house is grown but its moving parts are still`);
+  }
   await ev(`(async () => { await document.querySelector('.cw').__village.houses(window.__recordStages); return 1; })()`);
-  ok(await waitFor(`!document.querySelector('.cw-motion .mo--spin[data-house="ginger"]')`), 'restoring record-derived house stages left the workshop awake');
+  ok(await waitFor(`document.querySelector('.cw').__village.grown() === JSON.stringify(window.__recordStages)`), 'restoring record-derived house stages did not take');
 
   // Sample the rendered water twice: every reach on screen must actually move (one off screen keeps its last picture).
   ok(await waitFor(`document.querySelector('.cw-water')?.dataset.ready === 'true'`), 'the water mask did not load');
@@ -109,37 +118,38 @@ try {
     });
   })()`);
   const seen = JSON.parse(await ev(`JSON.stringify([...document.querySelectorAll('.cw-water canvas')].map((c) => { const r = c.getBoundingClientRect(); return r.right > 0 && r.left < innerWidth && r.bottom > 0 && r.top < innerHeight; }))`));
-  ok(water.length === 3 && seen.some(Boolean) && water.every((n, i) => !seen[i] || n > 20), `a river reach on screen is still: ${water} (on screen: ${seen})`);
-  ok(await ev(`(() => {
-    const homes = ${JSON.stringify(Object.values(HOMES).map(h => h.hit))};
-    return [...document.querySelectorAll('.cw-water canvas')].every(c => {
-      const x = parseFloat(c.style.left), y = parseFloat(c.style.top), w = parseFloat(c.style.width), h = parseFloat(c.style.height);
-      const g = c.getContext('2d');
-      return homes.every(b => {
-        for (let py = Math.max(y, b.y); py < Math.min(y + h, b.y + b.h); py += 12)
-          for (let px = Math.max(x, b.x); px < Math.min(x + w, b.x + b.w); px += 12)
-            if (g.getImageData(Math.floor((px - x) / w * c.width), Math.floor((py - y) / h * c.height), 1, 1).data[3] > 8) return false;
-        return true;
-      });
-    });
-  })()`), 'animated river water painted over a relocated house');
+  ok(water.length === REACHES.length && seen.some(Boolean) && water.every((n, i) => !seen[i] || n > 20), `a river reach on screen is still: ${water} (on screen: ${seen})`);
+  // The river sits under the valley's pieces: in front of the terrain, behind every bridge, house and friend.
+  ok(await ev(`(() => { const w = document.querySelector('.cw-water'), sc = document.querySelector('.cw-scene'); return getComputedStyle(w).zIndex === 'auto' && !!(w.compareDocumentPosition(sc) & Node.DOCUMENT_POSITION_FOLLOWING); })()`), 'the animated river is not under the bridges and houses');
 
-  // No zoom (owner, 2026-10-03): on a phone the painting fills the height at full detail and scrolls sideways.
-  ok(await ev(`!document.querySelector('[data-camera="overview"], .cw-overview')`), 'a zoom-out control is back on the map');
-  ok(await ev(`(() => { const r = document.querySelector('.cw-map').getBoundingClientRect(); return Math.abs(r.height - innerHeight) <= 1 && r.width > innerWidth * 2; })()`), 'the phone map should fill the height and allow horizontal exploration');
-  await browser.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ x: 300, y: 420 }, { x: 120, y: 420 }] });
-  await browser.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [{ x: 360, y: 420 }, { x: 60, y: 420 }] });
-  await browser.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
-  await sleep(300);
-  ok(await ev(`Math.abs(document.querySelector('.cw-map').getBoundingClientRect().height - innerHeight) <= 1`), 'a pinch changed the zoom');
+  // The valley always covers the screen (never a small picture with empty edges, owner 2026-10-03), opens closer than that on a phone so a house reads at a
+  // useful size, and a pinch goes closer or wider but never wider than covering the screen.
+  const mapBox = () => ev(`JSON.stringify(document.querySelector('.cw-map').getBoundingClientRect())`).then(JSON.parse);
+  ok(await ev(`(() => { const c = document.querySelector('.cw').__village.camera; return c.zoom > 1.2 && c.s * ${HOUSES.chai.place.w} >= 250; })()`), 'a phone should open framed closer than the whole valley, with houses at a useful size');
+  { const r = await mapBox(); ok(r.width >= 389 && r.height >= 843, 'the valley no longer covers the phone screen'); }
   await ev(`document.querySelector('.cw').__village.look(${MAP.w / 2}, ${MAP.h / 2})`);
-  const xa = await ev(`document.querySelector('.cw-map').getBoundingClientRect().left`);
+  const before = await mapBox();
+  // Two real fingers (touch emulation is on from the start, as on a phone), the gesture in small steps.
+  const pinch = async (from, to) => {
+    await browser.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ x: 195 + from, y: 420, id: 1 }, { x: 195 - from, y: 420, id: 2 }] });
+    for (let k = 1; k <= 6; k += 1) { const d = from + (to - from) * k / 6; await browser.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [{ x: 195 + d, y: 420, id: 1 }, { x: 195 - d, y: 420, id: 2 }] }); await sleep(25); }
+    await browser.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+    await sleep(150);
+  };
+  await pinch(35, 105);
+  ok(await waitFor(`document.querySelector('.cw-map').getBoundingClientRect().height > ${before.height * 1.3}`, 3000), 'spreading two fingers did not bring the valley closer');
+  for (let k = 0; k < 4; k += 1) await pinch(150, 20);
+  await sleep(400);
+  { const r = await mapBox(); ok(r.height >= 843 && r.width >= 389 && r.left <= 0.5 && r.top <= 0.5, 'pinching in left the valley smaller than the screen'); }
+  await ev(`document.querySelector('.cw').__village.look(${MAP.w / 2}, ${MAP.h / 2}, 1.6)`);
+  const ya = (await mapBox()).top;
   await browser.send('Input.dispatchMouseEvent', { type: 'mouseWheel', x: 200, y: 420, deltaX: 0, deltaY: 240 });
   await sleep(250);
-  ok(await ev(`document.querySelector('.cw-map').getBoundingClientRect().left`) < xa - 100, 'an ordinary mouse wheel should scroll the village sideways');
+  ok((await mapBox()).top < ya - 100, 'an ordinary mouse wheel should scroll the tall valley down');
+  await ev(`document.querySelector('.cw').__village.look(${MAP.w / 2}, ${MAP.h / 2}, 1.42)`);
 
   // Every house says its subject, on a sign that is always up.
-  ok(await ev(`(() => { const p = [...document.querySelectorAll('.cw-spot .cw-plate')]; return p.length === 8 && p.every((e) => getComputedStyle(e).opacity === '1' && e.getBoundingClientRect().width > 60 && e.textContent.trim().length > 4); })()`), 'every house needs a visible subject sign');
+  ok(await ev(`(() => { const p = [...document.querySelectorAll('.cw-plates .cw-plate')]; return p.length === 8 && p.every((e) => getComputedStyle(e).opacity === '1' && e.getBoundingClientRect().width > 60 && e.textContent.trim().length > 4); })()`), 'every house needs a visible subject sign');
   ok(await ev(`['Reading Comprehension', 'Para Jumbles', 'Para Summary', 'Odd One Out', 'Sentence Placement', 'Para Completion', 'Vocabulary'].every((t) => [...document.querySelectorAll('.cw-plate')].some((p) => p.textContent.includes(t)))`), 'a VARC subject has no house');
 
   // Pets choose at random, and every one may idle for a while: wait for any of them to move, up to twenty seconds.
@@ -195,7 +205,7 @@ try {
   // The village level draws what it has earned: this learner is past level 2, so the plaza lanterns hang.
   ok(await waitFor(`document.querySelectorAll('.cw-treasure--lanterns').length === 4`), 'the plaza lanterns are not drawn for a level-2 village');
   // Each house grows with its own section (src/home/houses.js): Chai's library (sixteen right answers, stage 2) has its lamps and windows lit; new Ginger's workshop is still dark.
-  ok(await ev(`(() => { const g = JSON.parse(document.querySelector('.cw').__village.grown() || '{}'); const on = (h, k) => [...document.querySelectorAll('.cw-glow--' + k + '[data-house="' + h + '"]')].filter((e) => !e.classList.contains('is-off')).length; return g.chai >= 2 && g.ginger === 0 && on('chai', 'win') >= 4 && on('chai', 'lamp') >= 2 && on('ginger', 'win') === 0 && on('ginger', 'lamp') === 0; })()`), "the houses do not show how far each section has come");
+  ok(await ev(`(() => { const g = JSON.parse(document.querySelector('.cw').__village.grown() || '{}'); const on = (h, k) => [...document.querySelectorAll('.cw-glow--' + k + '[data-house="' + h + '"]')].filter((e) => !e.classList.contains('is-off')).length; return g.chai >= 2 && g.ginger === 0 && on('chai', 'win') >= 4 && on('chai', 'lamp') >= 1 && on('ginger', 'win') === 0 && on('ginger', 'lamp') === 0; })()`), "the houses do not show how far each section has come");
   ok(await ev(`document.querySelectorAll('.pet .rig__foot').length === 16`), 'the friends should walk on two feet each');
 
   // Each friend grows with their subject and wears it: this learner's Chai has questions right, so is past stage 1.
@@ -232,7 +242,7 @@ try {
   await browser.open(`${server.url}#/world`, 2500);
   const r0 = await positions(); await sleep(4000); const r1 = await positions();
   ok(r0 === r1, 'pets walked with reduced motion on');
-  ok(await ev(`!document.querySelector('.cw-motion')`), 'the painting moved with reduced motion on');
+  ok(await ev(`[...document.querySelectorAll('.cw-tree__canopy')].every((t) => t.getAnimations().every((a) => a.playState !== 'running'))`), 'the oaks swayed with reduced motion on');
   ok(await ev(`!document.querySelector('.cw-water')`), 'water animation mounted with reduced motion on');
   ok(await ev(`!document.querySelector('.pet .prop')`), 'a friend started a chore with reduced motion on');
   ok(await ev(`document.documentElement.scrollWidth <= innerWidth`), 'the phone village scrolls sideways');
@@ -245,7 +255,7 @@ try {
     ok(await ev(`document.documentElement.scrollWidth <= innerWidth && [...document.querySelectorAll('.pet, .cw-spot')].every(e => { const r=e.getBoundingClientRect(); return r.width >= 43.9 && r.height >= 43.9; })`), `touch targets shrank or the page overflowed at ${width}×${height}`);
     ok(await ev(`['.cw-play','.cw-side--l','.cw-side--r'].every(s => {const r=document.querySelector(s).getBoundingClientRect();return r.left>=0 && r.top>=0 && r.right<=innerWidth+1 && r.bottom<=innerHeight+1;})`), `the dock is clipped at ${width}×${height}`);
   }
-  ok(await ev(`[...document.querySelectorAll('.cw-woodland img')].every(t => t.getAnimations().every(a => a.playState !== 'running'))`), 'trees moved with reduced motion on');
+  ok(await ev(`document.querySelectorAll('.cw-scene .cw-house[data-ready]').length === 8`), 'the houses did not bake with reduced motion on');
 
   // The first visit: one line from Toffee, and PLAY is ready at once.
   await ev(`(async () => { const s = await import('/src/core/storage/indexeddb-adapter.js'); const st = new s.IndexedDBAdapter(); await st.init(); await st.delete('settings', 'valley'); await st.put('settings', { id: 'motion', value: 'full' }); return 1; })()`);
@@ -263,7 +273,7 @@ try {
     await browser.send('Network.setBypassServiceWorker', { bypass: false });
     await browser.send('Page.navigate', { url: `${server.url}?offline-check=1#/world` });
     ok(await waitFor(`!!navigator.serviceWorker.controller`, 60000), 'the service worker did not take control');
-    ok(await waitFor(`Promise.all(['./assets/art/home-world-v1.png', ${JSON.stringify(MAP.src)}, './assets/art/village-paths-v2.webp', './assets/art/village-oak-v2.webp', './assets/art/pet-chai.png'].map((u) => caches.match(u))).then((r) => r.every(Boolean))`, 30000), 'terrain, paths, trees, landmarks and pets must be cached for offline use');
+    ok(await waitFor(`Promise.all([${JSON.stringify(ART_FILES.terrain)}, ${JSON.stringify(STILL.src)}, ${JSON.stringify(HOUSES.chai.file)}, ${JSON.stringify(ART_FILES.mechanisms)}, ${JSON.stringify(ART_FILES.water)}, './src/home/mechanisms.js', './assets/art/pet-chai.png'].map((u) => caches.match(u))).then((r) => r.every(Boolean))`, 30000), 'the valley, its houses, moving parts, water and friends must be cached for offline');
     await browser.send('Network.emulateNetworkConditions', { offline: true, latency: 0, downloadThroughput: 0, uploadThroughput: 0 });
     await browser.send('Page.reload', { ignoreCache: false });
     ok(await waitFor(`document.querySelectorAll('.cw .pet').length === 8 && !!document.querySelector('.cw-art')?.naturalWidth`, 20000), 'the village did not reopen offline');

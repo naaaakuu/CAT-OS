@@ -103,3 +103,7 @@ body:has(.gh-dialog[open]){overflow:hidden}
 @media(max-height:560px) and (min-width:561px){.gh-room-tools{max-width:600px;padding-top:8px}.gh-house--immersive .gh-main{padding-top:205px}.gh-house--immersive .gh-section-heading{margin-left:0}.gh-house--immersive .gh-dock{padding:10px 18px}.gh-house--immersive .gh-dock>.gh-start{max-width:370px;margin-left:auto;margin-right:0;min-height:58px}}
 .gh-letter-note{margin:14px 0 0;font:italic 500 17px/1.35 Georgia,serif;color:#5a4a1f}
 .gh-letter-go{margin:12px 0 0}
+
+/* The tour's seal line (src/pets/seals.js): the same paper as the progress bar under it, in either theme. */
+.gh-room-tools p.tour-seal{background:#fff9ea;color:#2f3b2a;border-color:#dbcda5;margin:9px 0 0;box-shadow:0 2px 9px #263c2420}
+.gh-room-tools p.tour-seal>span{color:#2f3b2a;font:650 12px/1.3 system-ui,sans-serif}

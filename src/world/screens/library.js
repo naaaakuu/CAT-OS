@@ -286,7 +286,7 @@ function rowHTML(p, look, lockedNow) {
  * @param {{ lib: ReturnType<import('../../core/learning/journey.js').libraryShelves>, stage?: number }} o
  *        `stage` is Chai's growth stage (a baby owl is drawn from the baby sheet)
  */
-export async function renderLibrary(host, { lib, stage = 0 }) {
+export async function renderLibrary(host, { lib, stage = 0, seal = '' }) {
   await loadStyle();
   if (!host.isConnected) return;
   if (!lib?.books) {
@@ -338,6 +338,7 @@ export async function renderLibrary(host, { lib, stage = 0 }) {
         <p class="lib__count">Level ${lib.shelves.indexOf(current) + 1} · ${escapeHTML(current.label)}${lib.gleaming ? ` · ${lib.gleaming} golden` : ''}</p>
         <div class="lib__journey" role="img" aria-label="${openNow} of ${lib.shelves.length} shelves open">${lib.shelves.map((s) => `<i class="${s.open ? 'is-open' : ''}${s === current ? ' is-current' : ''}" aria-hidden="true"></i>`).join('')}</div>
         <p class="lib__milestone">${escapeHTML(milestoneLine)}</p>
+        ${seal}
         <button type="button" class="lib__find">${lib.owl ? 'Find my book' : 'Visit Chai'}<span aria-hidden="true"> ↗</span></button>
       </div>
       <div class="lib__view">

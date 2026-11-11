@@ -11,11 +11,14 @@
  *            pulling a rope against a Muddle; every answer still grows the
  *            village. A waiting letter floats above the button.
  *
- * The camera transforms a layered 2048×1280 world, so every coordinate
- * below is a world pixel (src/pets/paths.js), whatever the screen.
- * It never zooms (owner, 2026-10-03: zoomed out, the village "does not look
- * good"): the painting always fills the screen at full detail, and on a phone
- * you scroll left and right to see the rest of it.
+ * The camera transforms a layered 1086×1448 valley (src/home/landscape.js),
+ * so every coordinate below is a world pixel (src/pets/paths.js), whatever
+ * the screen. The valley is tall and the phone is taller still: it always
+ * covers the screen (owner, 2026-10-03: zoomed out with empty edges, the
+ * village "does not look good"), opens framed a little closer than that on a
+ * phone so the houses read at a useful size, and pans with a finger in both
+ * directions; a pinch (or ctrl + wheel, or + and -) goes closer or wider,
+ * never wider than covering the screen.
  */
 
 import { loadWorld, loadWorldRecords, deriveWorldState } from '../world/state.js';
@@ -23,16 +26,15 @@ import { loadValley, saveValley, valleyName } from '../world/companion.js';
 import { derivePets, DAILY_GIFT } from '../pets/economy.js';
 import { GLOW_SVG } from '../pets/glow.js';
 import { PETS, PET_BY_ID, HOUSES, lineFor, petForPlace, stageTitle, stageGift, ageOf, grewLine, toGrow, houseGift } from '../pets/pets.js';
-import { MAP, HOMES, PLACES, SIGNS, NODES, LAMPS, WINDOWS, CLOCK, nearestNode } from '../pets/paths.js';
+import { MAP, HOMES, PLACES, SIGNS, NODES, LAMPS, WINDOWS, nearestNode } from '../pets/paths.js';
 import { petRig, petPortrait, petGear, petRing, petFigure, FRAME } from '../pets/sprite.js';
 import { ROOM_OF } from '../pets/next.js';
 import { duelsIn, ladderOf, nextBout, troublemakerOf } from '../duel/model.js';
 import { pendingLetters, ownedCards, teaseCard } from '../duel/letters.js';
 import { laurelSVG } from '../duel/art.js';
 import { createLife, petSize } from './life.js';
-import { ART, BUILDINGS, worldPoint } from './landscape.js';
-import { ATLAS } from './motion-atlas.js';
-import { createHouseLife, bakeVillage, gradeAtlas, LAMP_HOUSE, WINDOW_HOUSE, HOUSE_ART } from './houses.js';
+import { TERRAIN, CELLS, ART_FILES } from './landscape.js';
+import { createHouseLife, LAMP_HOUSE, WINDOW_HOUSE, HOUSE_ART } from './houses.js';
 import { renderCard, decorLayer } from './cards.js';
 import { deriveJourney } from '../pets/journey.js';
 import { keepsakeArt } from './journal-art.js';
@@ -53,12 +55,12 @@ const store = {
 export async function renderVillageHome(outlet, ctx) {
   const { storage } = ctx;
   const arrivedAt = location.hash;
-  let world, valley, scenery, moving;
+  let world, valley, scenery, seals;
   try {
-    [world, valley, scenery, moving] = await Promise.all([
+    [world, valley, scenery, seals] = await Promise.all([
       loadWorld(storage), loadValley(storage),
       import('./scenery.js').then(async (scene) => { await scene.loadScenery(); return scene; }),
-      import('./motion.js'),
+      import('../pets/seals.js'),
     ]);
   } catch (err) {
     console.error('[CAT OS] village could not open', err);
@@ -68,8 +70,8 @@ export async function renderVillageHome(outlet, ctx) {
   // Left while the records loaded: do not start a village (its music, its
   // greeting, Toffee's hello) underneath whatever screen comes next.
   if (!outlet.isConnected || location.hash !== arrivedAt) return;
-  const { buildingLayer, groundLayer, composeScene, mountWoodland } = scenery;
-  const { mountMotion } = moving;
+  const { mountScene } = scenery;
+  const { deriveSeals, TOUR } = seals;
   let state = world.state;
   let pets = state.pets ?? derivePets(state, world.records, world.content, state.now);
   const atmo = state.atmo;
@@ -83,18 +85,19 @@ export async function renderVillageHome(outlet, ctx) {
       <p class="sr-only" aria-live="polite" data-said></p>
       <div class="cw-viewport" tabindex="0" role="group" aria-label="The village. Drag or use the arrow keys to look around; Tab to visit a friend or a building.">
         <div class="cw-map" style="width:${MAP.w}px;height:${MAP.h}px">
-          <img class="cw-art" src="${MAP.src}" alt="" draggable="false" decoding="async" fetchpriority="high">
-          <div class="cw-clouds" aria-hidden="true"><i></i><i></i><i></i></div>
+          <img class="cw-art" src="${TERRAIN}" alt="" draggable="false" decoding="async" fetchpriority="high">
+          <div class="cw-clouds" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
           <div class="cw-tint" aria-hidden="true"></div>
           <div class="cw-sunlight" aria-hidden="true"></div>
-          <div class="cw-glows" aria-hidden="true">${[...LAMPS.map((l, i) => glow(l, 'lamp', i)), ...WINDOWS.map((w, i) => glow(w, 'win', i))].join('')}${Object.entries(HOUSE_ART).map(([id, art]) => { const p = worldPoint(id, {x:art.aura[0],y:art.aura[1]}); const h = {aura:[p.x,p.y,art.aura[2]*BUILDINGS[id].scale]}; return `<i class="cw-aura" data-house="${id}" style="left:${h.aura[0]}px;top:${h.aura[1]}px;--r:${h.aura[2]}px"></i>`; }).join('')}</div>
+          <div class="cw-glows" aria-hidden="true">${[...LAMPS.map((l, i) => glow(l, 'lamp', i)), ...WINDOWS.map((w, i) => glow(w, 'win', i))].join('')}${Object.entries(HOUSE_ART).map(([id, art]) => `<i class="cw-aura" data-house="${id}" style="left:${art.aura[0].toFixed(1)}px;top:${art.aura[1].toFixed(1)}px;--r:${art.aura[2].toFixed(1)}px"></i>`).join('')}</div>
           <div class="cw-treasures" aria-hidden="true"></div>
-          <svg class="cw-clock" aria-hidden="true" style="left:${CLOCK.x - CLOCK.r}px;top:${CLOCK.y - CLOCK.r}px" width="${CLOCK.r * 2}" height="${CLOCK.r * 2}" viewBox="-10 -10 20 20"><line class="cw-clock__h" x1="0" y1="0" x2="0" y2="-4.6"/><line class="cw-clock__m" x1="0" y1="0" x2="0" y2="-6.8"/><circle r=".9"/></svg>
           <canvas class="cw-life" width="${MAP.w / 2}" height="${MAP.h / 2}" aria-hidden="true"></canvas>
           <div class="cw-spots">${spotsHTML()}</div>
           <div class="cw-pets">${PETS.map((p) => petHTML(p, pets)).join('')}</div>
+          <div class="cw-plates" aria-hidden="true">${platesHTML()}</div>
           <div class="cw-says" aria-hidden="true">${PETS.map((p) => saysHTML(p, pets)).join('')}</div>
         </div>
+        <div class="cw-foliage" aria-hidden="true">${Object.entries(CELLS.foliage).map(([k, [x, y, w, h]]) => `<i class="cw-foliage__${k}" style="background-image:url(${ART_FILES.foliage});--x:${x}px;--y:${y}px;--w:${w};--h:${h}"></i>`).join('')}</div>
       </div>
       <header class="cw-hud">
         <div class="cw-hud__left">
@@ -103,6 +106,7 @@ export async function renderVillageHome(outlet, ctx) {
         </div>
         <div class="cw-hud__right">
           <button class="cw-round" data-open="cottage" aria-label="Settings: sound, your village's name and your progress">${gearSVG}</button>
+          <button class="cw-chip cw-chip--tour" data-open="tour"></button>
         </div>
       </header>
       <div class="cw-dock">
@@ -131,36 +135,54 @@ export async function renderVillageHome(outlet, ctx) {
   const later = (fn, ms) => { const id = setTimeout(() => { timers.delete(id); if (!disposed) fn(); }, ms); timers.add(id); return id; };
 
   /* ---------------- The camera ---------------- */
-  const cam = { x: NODES.pc.x, y: NODES.pc.y + 40 };
-  let vw = 1, vh = 1, s = 1, tween = null, onCamera = () => {};
+  const cam = { x: NODES.lib.x + 120, y: NODES.lib.y - 150 };
+  let vw = 1, vh = 1, s = 1, base = 1, zoom = null, tween = null, onCamera = () => {};
   const scale = () => s;
-  /* The camp's foot (y 1260) must clear the big button. In a landscape window the button sits in the corner, so only the screen edge matters;
-     otherwise it is a strip along the bottom (66px + margins) and the painting rides up by that much, losing a sliver of the top, which the top bar hides anyway. */
-  const lowestCam = () => 1260 - (vh / 2 - (matchMedia('(min-width: 700px) and (orientation: landscape)').matches ? 0 : 84)) / s;
+  /* The dock floats over the valley's foot: the bottom edge may slide up from under it by that much. */
+  const DOCK = 104;
+  const portrait = () => vh >= vw * 1.1;
+  const zoomRange = () => [1, Math.min(2.6, Math.max(1.3, 1.9 / base))];
+  const foliage = root.querySelector('.cw-foliage');
   const apply = () => {
-    const hw = vw / 2 / s, hh = vh / 2 / s, low = lowestCam();
+    const [lo, hi] = zoomRange();
+    zoom = clamp(zoom ?? (portrait() ? 1.42 : 1), lo, hi);
+    s = base * zoom;
+    const hw = vw / 2 / s, hh = vh / 2 / s, low = MAP.h - hh + DOCK / s;
     cam.x = hw * 2 >= MAP.w ? MAP.w / 2 : clamp(cam.x, hw, MAP.w - hw);
-    cam.y = hh * 2 >= MAP.h ? Math.max(MAP.h / 2, low) : clamp(cam.y, hh, Math.max(MAP.h - hh, low));
+    cam.y = hh * 2 >= MAP.h + DOCK / s ? (MAP.h + DOCK / s) / 2 : clamp(cam.y, hh, low);
     map.style.transform = `translate3d(${(vw / 2 - cam.x * s).toFixed(2)}px,${(vh / 2 - cam.y * s).toFixed(2)}px,0) scale(${s.toFixed(4)})`;
     map.style.setProperty('--inv', (1 / s).toFixed(4));
+    // Seen from far off, a plate is just the friend's face: names come back as you go closer.
+    root.classList.toggle('is-wide', zoom < 1.2 && s < 0.9);
+    // the leaves at the screen's corners are nearer than the valley: they drift a little the other way
+    foliage.style.transform = `translate3d(${clamp(-(cam.x - MAP.w / 2) * s * 0.03, -14, 14).toFixed(1)}px,${clamp(-(cam.y - MAP.h / 2) * s * 0.02, -12, 12).toFixed(1)}px,0)`;
     onCamera();
   };
   const layout = () => {
     vw = viewport.clientWidth || window.innerWidth; vh = viewport.clientHeight || window.innerHeight;
-    s = Math.max(vw / MAP.w, vh / MAP.h); // always covers the screen; a phone sees a third of the width
+    base = Math.max(vw / MAP.w, vh / MAP.h); // covering the screen: the widest the valley ever goes
     apply();
   };
-  const panTo = (x, y, { ms = 900 } = {}) => {
-    if (reduced || ms <= 0) { cam.x = x; cam.y = y; apply(); return; }
-    const from = { ...cam }, t0 = performance.now();
+  /** Glide to a world point (and, if asked, to a closeness `zoomTo`). */
+  const panTo = (x, y, { ms = 900, zoomTo = null } = {}) => {
+    if (reduced || ms <= 0) { cam.x = x; cam.y = y; if (zoomTo) zoom = zoomTo; apply(); return; }
+    const from = { ...cam, z: zoom }, to = { x, y, z: zoomTo ?? zoom }, t0 = performance.now();
     const step = (t) => {
       if (tween !== step || disposed) return;
       const p = Math.min(1, (t - t0) / ms), e = 1 - (1 - p) ** 3;
-      cam.x = from.x + (x - from.x) * e; cam.y = from.y + (y - from.y) * e;
+      zoom = from.z + (to.z - from.z) * e;
+      cam.x = from.x + (to.x - from.x) * e; cam.y = from.y + (to.y - from.y) * e;
       apply();
       if (p < 1) requestAnimationFrame(step); else tween = null;
     };
     tween = step; requestAnimationFrame(step);
+  };
+  /** Closer or wider by `k`, keeping the world point under screen point (sx, sy) where it is. */
+  const zoomAt = (k, sx = vw / 2, sy = vh / 2) => {
+    const wx = cam.x + (sx - vw / 2) / s, wy = cam.y + (sy - vh / 2) / s, [lo, hi] = zoomRange();
+    zoom = clamp(zoom * k, lo, hi); s = base * zoom;
+    cam.x = wx - (sx - vw / 2) / s; cam.y = wy - (sy - vh / 2) / s;
+    apply();
   };
   /** Bring a point into the part of the screen a card does not cover. */
   const reveal = (p) => {
@@ -169,35 +191,49 @@ export async function renderVillageHome(outlet, ctx) {
     else panTo(p.x + (0.5 - 0.36) * vw / s, p.y, { ms: 600 });
   };
   const ro = new ResizeObserver(layout); ro.observe(viewport); layout();
-  // The plaza and the campfire cannot both fit a short window; open on the lower view so the camp is in it.
-  apply();
 
-  /* Drag, fling, wheel, keys. A drag never becomes a tap. A second finger
-     does nothing: there is no zoom to pinch. */
+  /* Drag, fling, pinch, wheel, keys. A drag never becomes a tap. Two fingers
+     pinch: the valley grows or shrinks round the point between them. */
   const ptrs = new Map();
-  let drag = null, moved = false, fling = null;
+  let drag = null, moved = false, fling = null, pinch = null;
+  const local = (p) => { const r = viewport.getBoundingClientRect(); return { x: p.x - r.left, y: p.y - r.top }; };
+  const startPinch = () => {
+    const [a, b] = [...ptrs.values()], m = local({ x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 });
+    pinch = { d: Math.max(20, Math.hypot(a.x - b.x, a.y - b.y)), z: zoom, wx: cam.x + (m.x - vw / 2) / s, wy: cam.y + (m.y - vh / 2) / s };
+    drag = null;
+  };
   viewport.addEventListener('pointerdown', (e) => {
     if (e.button !== 0 && e.pointerType === 'mouse') return;
     tween = null; fling = null;
     ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY });
-    if (ptrs.size === 1) { drag = { x: e.clientX, y: e.clientY, cx: cam.x, cy: cam.y, t: performance.now(), vx: 0, vy: 0 }; moved = false; }
+    if (ptrs.size === 1) { drag = { x: e.clientX, y: e.clientY, cx: cam.x, cy: cam.y, t: performance.now(), vx: 0, vy: 0 }; moved = false; pinch = null; }
+    else if (ptrs.size === 2) startPinch();
   });
   viewport.addEventListener('pointermove', (e) => {
-    if (!drag || !ptrs.has(e.pointerId)) return;
+    if (!ptrs.has(e.pointerId)) return;
     ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY });
-    if (e.pointerId !== ptrs.keys().next().value) return; // only the first finger drags
+    if (pinch && ptrs.size >= 2) {
+      const [a, b] = [...ptrs.values()], m = local({ x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 }), [lo, hi] = zoomRange();
+      if (!moved) { moved = true; viewport.classList.add('is-dragging'); }
+      zoom = clamp(pinch.z * Math.hypot(a.x - b.x, a.y - b.y) / pinch.d, lo, hi); s = base * zoom;
+      cam.x = pinch.wx - (m.x - vw / 2) / s; cam.y = pinch.wy - (m.y - vh / 2) / s;
+      apply();
+      return;
+    }
+    if (!drag || e.pointerId !== ptrs.keys().next().value) return; // only the first finger drags
     const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
     if (!moved && Math.hypot(dx, dy) < 7) return;
     if (!moved) { moved = true; try { viewport.setPointerCapture(e.pointerId); } catch { /* fine */ } viewport.classList.add('is-dragging'); }
-    const s = scale(), now = performance.now(), nx = drag.cx - dx / s, ny = drag.cy - dy / s;
+    const sc = scale(), now = performance.now(), nx = drag.cx - dx / sc, ny = drag.cy - dy / sc;
     const dt = Math.max(1, now - drag.t);
     drag.vx = ((nx - cam.x) / dt) * 0.6 + drag.vx * 0.4; drag.vy = ((ny - cam.y) / dt) * 0.6 + drag.vy * 0.4; drag.t = now;
     cam.x = nx; cam.y = ny; apply();
   });
   const endDrag = (e) => {
     ptrs.delete(e.pointerId);
-    // When the first finger lifts and another stays down, the drag carries on from the one still down.
-    if (ptrs.size) { const [p] = [...ptrs.values()]; drag = { x: p.x, y: p.y, cx: cam.x, cy: cam.y, t: performance.now(), vx: 0, vy: 0 }; return; }
+    // A pinch that loses a finger becomes a drag from the finger still down.
+    if (ptrs.size) { pinch = null; const [p] = [...ptrs.values()]; drag = { x: p.x, y: p.y, cx: cam.x, cy: cam.y, t: performance.now(), vx: 0, vy: 0 }; return; }
+    pinch = null;
     viewport.classList.remove('is-dragging');
     // A drag swallows the click it ends in (below), and only that one: a click from the keyboard comes later.
     if (moved) setTimeout(() => { moved = false; }, 0);
@@ -218,16 +254,19 @@ export async function renderVillageHome(outlet, ctx) {
   viewport.addEventListener('click', (e) => { if (moved) { e.stopPropagation(); e.preventDefault(); moved = false; } }, true);
   viewport.addEventListener('wheel', (e) => {
     e.preventDefault(); tween = null;
-    // The painting fills the height on a phone-shaped window, so an ordinary wheel scrolls it sideways.
-    const sideways = MAP.h * s <= vh + 1;
-    cam.x += (e.deltaX + (sideways ? e.deltaY : 0)) / s;
-    if (!sideways) cam.y += e.deltaY / s;
+    // A trackpad pinch arrives as a wheel with ctrl held.
+    if (e.ctrlKey) { const p = local({ x: e.clientX, y: e.clientY }); zoomAt(Math.exp(-e.deltaY * 0.01), p.x, p.y); return; }
+    cam.x += (e.deltaX + (e.shiftKey ? e.deltaY : 0)) / s;
+    if (!e.shiftKey) cam.y += e.deltaY / s;
     apply();
   }, { passive: false });
   viewport.addEventListener('keydown', (e) => {
+    if (e.target !== viewport) return;
+    if (e.key === '+' || e.key === '=') { e.preventDefault(); zoomAt(1.2); return; }
+    if (e.key === '-' || e.key === '_') { e.preventDefault(); zoomAt(1 / 1.2); return; }
     const step = 70 / s;
     const keys = { ArrowLeft: [-step, 0], ArrowRight: [step, 0], ArrowUp: [0, -step], ArrowDown: [0, step] };
-    if (keys[e.key] && e.target === viewport) { e.preventDefault(); panTo(cam.x + keys[e.key][0], cam.y + keys[e.key][1], { ms: 220 }); }
+    if (keys[e.key]) { e.preventDefault(); panTo(cam.x + keys[e.key][0], cam.y + keys[e.key][1], { ms: 220 }); }
   });
   // A focused friend or building that sits off-screen is brought into view.
   viewport.addEventListener('focusin', (e) => {
@@ -239,13 +278,15 @@ export async function renderVillageHome(outlet, ctx) {
   });
 
   /* ---------------- Life ---------------- */
-  /* What each house has grown (src/home/houses.js): the living part on the scene canvas, the still part baked into the painting below. */
-  const houses = createHouseLife({ reduced, stages: pets.houses });
-  const life = createLife(root, { pets, atmo, reduced, houses, memory: store, view: () => ({ x: cam.x - vw / 2 / s, y: cam.y - vh / 2 / s, w: vw / s, h: vh / s, s }) });
+  /* The valley's pieces (scenery.js): shadows, bridges, the eight houses (each cut at its ground line so friends walk behind its walls) and the oaks.
+     What each house has grown (houses.js) and its moving parts (mechanisms.js) draw on the house's own canvas. */
+  const scene = mountScene(map, { reduced });
+  const houses = createHouseLife({ reduced, stages: pets.houses, scene, scale });
+  const life = createLife(root, { pets, atmo, reduced, houses, memory: store, images: scene.images, view: () => ({ x: cam.x - vw / 2 / s, y: cam.y - vh / 2 / s, w: vw / s, h: vh / s, s }) });
   // For the browser gates: put the camera somewhere, find a friend, show the houses at given stages (looks only; nothing is saved).
   root.__village = {
-    look: (x, y) => panTo(x, y, { ms: 0 }), positionOf: (id) => life.positionOf(id), party: (id, o) => life.party(id, o), callOn: (id) => life.callOn(id),
-    houses: (stages) => showHouses(stages), grown: () => shownStages, get pace() { return life.pace; },
+    look: (x, y, z) => panTo(x, y, { ms: 0, zoomTo: z ?? null }), positionOf: (id) => life.positionOf(id), party: (id, o) => life.party(id, o), callOn: (id) => life.callOn(id),
+    houses: (stages) => showHouses(stages), grown: () => shownStages, get pace() { return life.pace; }, get camera() { return { ...cam, s, zoom, base }; }, zoomAt: (k) => zoomAt(k),
   };
   viewport.addEventListener('click', (e) => {
     if (e.target.closest('button')) return;
@@ -254,74 +295,46 @@ export async function renderVillageHome(outlet, ctx) {
   });
   const saidEl = root.querySelector('[data-said]');
   const announce = (text) => { if (text) saidEl.textContent = String(text).replace(/<[^>]*>/g, ''); };
-  /* What is on screen, at most once a frame: off-screen patches and halos pause (motion.js setView). */
+  /* What is on screen, at most once a frame: off-screen halos pause. */
   let viewQueued = false;
   const viewNow = () => ({ x: cam.x - vw / 2 / s, y: cam.y - vh / 2 / s, w: vw / s, h: vh / s });
   const glowEls = [...root.querySelectorAll('.cw-glow')].map((el) => ({ el, x: parseFloat(el.style.left), y: parseFloat(el.style.top), off: false }));
+  /* Subject plates stay readable: one half off the screen's edge, or under the top bar, slides back in (only while its house is near). */
+  const plates = [...root.querySelectorAll('.cw-plate')].map((el) => ({ el, at: SIGNS[el.dataset.spot], w: 0, h: 0, dx: 0, dy: 0 }));
+  const keepPlates = () => {
+    for (const p of plates) {
+      if (!p.w) { p.w = p.el.offsetWidth; p.h = p.el.offsetHeight; }
+      const sx = vw / 2 + (p.at.x - cam.x) * s, sy = vh / 2 + (p.at.y - cam.y) * s;
+      const near = sx > -p.w / 2 && sx < vw + p.w / 2 && sy > 0 && sy < vh;
+      const dx = near ? clamp(sx, 8 + p.w / 2, vw - 8 - p.w / 2) - sx : 0;
+      // Clear of the top bar, and on the right of the tour chip under the settings button.
+      const top = sx + dx + p.w / 2 > vw - 120 ? 108 : 64, dy = near ? Math.max(0, top - (sy - p.h)) : 0;
+      if (Math.abs(dx - p.dx) > 0.5 || Math.abs(dy - p.dy) > 0.5) {
+        p.dx = dx; p.dy = dy;
+        p.el.style.setProperty('--dx', `${(dx / s).toFixed(1)}px`); p.el.style.setProperty('--dy', `${(dy / s).toFixed(1)}px`);
+      }
+    }
+  };
   const syncView = () => {
     viewQueued = false;
     if (disposed) return;
+    keepPlates();
     const v = viewNow();
-    motion.setView(v);
     for (const g of glowEls) { const off = g.x < v.x - 60 || g.x > v.x + v.w + 60 || g.y < v.y - 60 || g.y > v.y + v.h + 60; if (off !== g.off) { g.off = off; g.el.toggleAttribute('data-off', off); } }
   };
-  // The moving patches wait for the painting: on a first visit the small
-  // atlas lands long before the 3.8 MB picture, and fragments of trees and
-  // water would float over an empty green. Then the painting is grown: a copy
-  // with each house's colour, windows and keepsakes baked in (houses.js),
-  // and the patches cut from an atlas graded to match it.
-  let motion = { setAtmo() {}, setView() {}, destroy() {} };
-  const terrain = map.querySelector('.cw-art');
-  terrain.after(groundLayer());
-  const woodland = mountWoodland(map, {reduced});
-  const art = new Image(); art.src = ART.src;
-  let shownStages = null, baking = 0, atlasUrl = null, atlasImg = null;
-  const mountMoving = (stages, atlas) => { motion.destroy(); motion = mountMotion(map, { atmo: root.dataset.hour ? { ...atmo, hour: root.dataset.hour } : atmo, reduced, stages, atlas }); };
-  const growPainting = async (stages) => {
-    const job = ++baking, key = JSON.stringify(stages ?? {});
-    if (key === shownStages) return;
-    const stale = () => disposed || job !== baking;
-    // Not before the painting has decoded: an empty bake would hide it.
-    if (!art.naturalWidth) { try { await art.decode(); } catch { return; } if (stale()) return; }
-    try {
-      const base = await bakeVillage(art, stages, { isAborted: stale });
-      if (!base || stale()) return;
-      let url = null;
-      if (!reduced && ATLAS.at.length) {
-        try {
-          if (!atlasImg) { atlasImg = new Image(); atlasImg.src = ATLAS.src; await atlasImg.decode(); }
-          const c = await gradeAtlas(atlasImg, ATLAS.at, stages, { isAborted: stale });
-          if (c) url = await new Promise((res) => c.toBlob((b) => res(b ? URL.createObjectURL(b) : null)));
-        } catch { url = null; }
-      }
-      if (stale()) { if (url) URL.revokeObjectURL(url); return; }
-      const buildings = buildingLayer(base);
-      const old = map.querySelector('.cw-base');
-      (old ?? map.querySelector('.cw-ground')).after(buildings);
-      requestAnimationFrame(() => { buildings.classList.add('is-in'); later(() => { old?.remove(); }, reduced ? 0 : 700); });
-      mountMoving(stages, url);
-      syncView();
-      if (atlasUrl) URL.revokeObjectURL(atlasUrl);
-      atlasUrl = url;
-      await terrain.decode();
-      if (stale()) return;
-      life.setPainting(composeScene(terrain, base));
-      shownStages = key;
-    } catch (err) {
-      console.error('[CAT OS] the village could not grow its painting', err);
-      if (!shownStages) mountMoving(stages, null);
-    }
-  };
+  /* Each house body is baked for its stage and the hour (scenery.js): the colour, dark or lit windows, the hour's light. */
+  let shownStages = null;
+  const bake = (stages) => scene.setLook(stages, root.dataset.hour, root.dataset.weather).then(() => { if (!disposed) shownStages = JSON.stringify(stages ?? {}); }, (err) => console.error('[CAT OS] the village could not bake its houses', err));
   /** A house's own lamps light at stage 1 and its windows at stage 2; the village's lamps always burn. */
   const lightHouses = (stages) => {
     for (const el of root.querySelectorAll('.cw-glow[data-house]')) el.classList.toggle('is-off', (stages?.[el.dataset.house] ?? 0) < (el.classList.contains('cw-glow--lamp') ? 1 : 2));
     // Stage 9: a golden glow round the whole house.
     for (const el of root.querySelectorAll('.cw-aura')) el.classList.toggle('is-on', (stages?.[el.dataset.house] ?? 0) >= 9);
   };
-  const showHouses = (stages) => { houses.setStages(stages); lightHouses(stages); life.housesChanged(); return growPainting(stages); };
+  let lookStages = pets.houses;
+  const showHouses = (stages) => { lookStages = stages; houses.setStages(stages); lightHouses(stages); life.housesChanged(); return bake(stages); };
   lightHouses(pets.houses);
-  const startPainting = () => { if (!disposed) growPainting(pets.houses); };
-  if (art.complete && art.naturalWidth) startPainting(); else art.decode().then(startPainting, () => mountMoving(pets.houses, null));
+  bake(pets.houses);
 
   const onScreen = (id, margin = 0) => {
     const at = life.positionOf(id), s = scale();
@@ -406,6 +419,11 @@ export async function renderVillageHome(outlet, ctx) {
       el.setAttribute('aria-label', `${p.name}, ${MOOD_LABEL[pp.word]}. ${p.subject}. ${ageOf(pp.stage).name}, stage ${pp.stage} of 10${pp.stage ? `, ${stageTitle(p.id, pp.stage)}` : ''}.${pp.pick && !pp.helpedToday ? ' Needs your help today.' : ''} ${p.id === 'chai' ? 'Go into his library.' : p.id === 'matcha' ? 'Go into the glasshouse.' : `Open ${p.name}'s card.`}`);
     }
     life.setMarks(T.picks.filter((pid, i) => !T.done[i]));
+    /* The valley tour (src/pets/seals.js): how many homes are sealed, and a glow on the next home's plate. */
+    const tour = deriveSeals(world.records), tourEl = root.querySelector('.cw-chip--tour'), nextHome = tour.homes.find((h) => h.id === tour.next);
+    tourEl.innerHTML = `${SEAL_SVG}<b>${tour.sealed}</b><small>/${tour.total}</small>`;
+    tourEl.setAttribute('aria-label', `The valley tour: ${tour.sealed} of ${tour.total} homes sealed${nextHome ? `. Next: ${nextHome.home}` : ''}. Open the tour.`);
+    for (const el of root.querySelectorAll('.cw-plate')) el.classList.toggle('is-next', el.dataset.spot === tour.next);
     root.style.setProperty('--harmony', pets.harmony.toFixed(2));
   };
   hud();
@@ -435,7 +453,7 @@ export async function renderVillageHome(outlet, ctx) {
     if (JSON.stringify(pets.houses ?? {}) !== before) showHouses(pets.houses);
   };
   const api = {
-    storage, close, refresh, toast, play, reduced,
+    storage, close, refresh, toast, play, reduced, seals,
     get world() { return world; }, get pets() { return pets; }, get valley() { return valley; },
     setValley: (v) => { valley = v; root.querySelector('h1').textContent = `${valleyName(v)}: your village`; hud(); },
     celebrate: (id) => life.poke(id, { happy: true }),
@@ -453,11 +471,14 @@ export async function renderVillageHome(outlet, ctx) {
     life.poke(id);
     const go = () => { location.hash = ROOM_OF.get(id); };
     if (reduced) { go(); return; }
-    const r = from?.getBoundingClientRect?.();
+    // Walking in: the camera glides up to the door as the doorway closes round it.
+    const at = HOMES[id]?.door, box = viewport.getBoundingClientRect();
+    if (at) panTo(at.x, at.y - 18, { ms: 520, zoomTo: Math.min(zoomRange()[1], zoom * 1.8) });
+    const r = at ? null : from?.getBoundingClientRect?.();
     const door = document.createElement('div');
     door.className = 'cw-door';
-    door.style.setProperty('--x', `${Math.round(r ? r.left + r.width / 2 : innerWidth / 2)}px`);
-    door.style.setProperty('--y', `${Math.round(r ? r.top + r.height / 2 : innerHeight / 2)}px`);
+    door.style.setProperty('--x', `${Math.round(at ? box.left + vw / 2 : r ? r.left + r.width / 2 : innerWidth / 2)}px`);
+    door.style.setProperty('--y', `${Math.round(at ? box.top + vh / 2 : r ? r.top + r.height / 2 : innerHeight / 2)}px`);
     root.appendChild(door);
     requestAnimationFrame(() => requestAnimationFrame(() => door.classList.add('is-shut')));
     later(go, 480);
@@ -497,7 +518,7 @@ export async function renderVillageHome(outlet, ctx) {
     if (spot) {
       const s = spot.dataset.spot;
       if (ROOM_OF.has(s)) { enterRoom(s, spot); return; }
-      if (s === 'toffee') { life.poke(s); reveal(NODES.f1); openCard('fire', null, spot); return; }
+      if (s === 'toffee') { life.poke(s); reveal(NODES.camp); openCard('fire', null, spot); return; }
       life.poke(s); reveal(life.positionOf(s)); openCard('pet', s, spot);
       return;
     }
@@ -552,6 +573,28 @@ export async function renderVillageHome(outlet, ctx) {
         toast(`${keepsakeArt(fresh[0].pet, true, fresh[0].icon, fresh[0].tier)}<span><b>${escapeHTML(fresh[0].name)}</b>${fresh.length > 1 ? ` and ${fresh.length - 1} more` : ''} added to your Journal.</span>`, 6500);
       });
     }
+    /* A home newly sealed on the valley tour, or the whole tour done. Animation memory only: the seals themselves come from records. */
+    {
+      const tour = deriveSeals(world.records), sealedNow = tour.homes.filter((h) => h.sealed).map((h) => h.id);
+      let had = null;
+      try { had = JSON.parse(store.get('catos:seals') || 'null'); } catch { /* old memory */ }
+      store.set('catos:seals', JSON.stringify({ done: tour.toursDone, sealed: sealedNow }));
+      if (afterRun && had && typeof had === 'object') {
+        if (tour.toursDone > (Number(had.done) || 0)) {
+          celebrate(`<p class="cw-party__eyebrow">Every home is sealed</p><span class="cw-party__chest" aria-hidden="true">${SEAL_SVG}</span><h2 id="cw-party-h">The valley tour is complete!</h2><p>Eight homes, every part of the paper. Tour ${tour.tour} starts again at Chai's library, whenever you like.</p>`, 'levelup');
+        } else {
+          const fresh = sealedNow.filter((id) => !(had.sealed ?? []).includes(id));
+          if (fresh.length) whenQuiet(() => {
+            const h = TOUR.find((x) => x.id === fresh[0]);
+            const [cx, cy] = HOUSE_ART[h.id]?.mask ?? [NODES.pc.x, NODES.pc.y];
+            reveal({ x: cx, y: cy });
+            later(() => { houses.burst(h.id); play('grow'); }, reduced ? 0 : 650);
+            toast(`${SEAL_SVG}<span><b>${escapeHTML(h.home)} is sealed!</b> ${tour.sealed} of ${tour.total} homes on the valley tour.</span>`, 6000);
+            announce(`${h.home} is sealed. ${tour.sealed} of ${tour.total} homes on the valley tour.`);
+          });
+        }
+      }
+    }
     /* A friend who grew: their new look, named, before anything else. Only
        on the way back from a run (that run's friend, and Toffee on a new
        day): progress that arrives any other way, a restored backup or an
@@ -595,8 +638,7 @@ export async function renderVillageHome(outlet, ctx) {
   /** Each house that grew, one after another: look at it, a burst of light, and what it gained. */
   function showGrown(list) {
     list.forEach((h, i) => later(() => {
-      const source = HOUSE_ART[h.spot]?.mask ?? [NODES.pc.x, NODES.pc.y];
-      const {x:cx,y:cy} = worldPoint(h.spot, {x:source[0],y:source[1]}), stage = pets.houses?.[h.spot] ?? 0;
+      const [cx, cy] = HOUSE_ART[h.spot]?.mask ?? [NODES.pc.x, NODES.pc.y], stage = pets.houses?.[h.spot] ?? 0;
       reveal({ x: cx, y: cy });
       later(() => {
         houses.burst(h.spot);
@@ -629,8 +671,8 @@ export async function renderVillageHome(outlet, ctx) {
       later(() => {
         const line = lineFor(last.pet, 'thanks', String(last.at));
         life.party(last.pet, { line });
-        announce(`Everyone ran to the plaza to celebrate. ${p.name}: ${line}`);
-        toast(`${last.earned > 0 ? `${GLOW_SVG} <b>+${last.earned}</b> ` : ''}You helped ${p.name}! Party in the plaza!`, 5600);
+        announce(`Everyone ran to the green to celebrate. ${p.name}: ${line}`);
+        toast(`${last.earned > 0 ? `${GLOW_SVG} <b>+${last.earned}</b> ` : ''}You helped ${p.name}! Party on the green!`, 5600);
         play('party');
         // The cards (a friend who grew, a new level, the day's gift) wait for the party to wind down.
         later(() => checkParties(true), reduced ? 1200 : 7600);
@@ -638,8 +680,10 @@ export async function renderVillageHome(outlet, ctx) {
     } else if (focusSlug && petForPlace(focusSlug)) {
       // Back from a place: face its own house.
       const spot = HOUSES.find((h) => h.place === focusSlug)?.spot ?? petForPlace(focusSlug);
-      const home = NODES[(HOMES[spot] ?? PLACES[spot]).node];
-      panTo(home.x, home.y, { ms: 0 });
+      faceHouse(spot);
+    } else {
+      // Any other arrival opens on the house the big button is for.
+      faceHouse(pets.play ?? 'chai');
     }
   }
 
@@ -692,7 +736,7 @@ export async function renderVillageHome(outlet, ctx) {
   const tickHour = setInterval(() => {
     const d = new Date(), now = { hour: hourWord(d), season: seasonWord(d), weather: weatherWord(d, seasonWord(d)) };
     if (now.hour !== root.dataset.hour || now.weather !== root.dataset.weather || now.season !== root.dataset.season) {
-      Object.assign(root.dataset, now); Object.assign(atmo, now); life.setAtmo(now); motion.setAtmo(now);
+      Object.assign(root.dataset, now); Object.assign(atmo, now); life.setAtmo(now); bake(lookStages);
       startMusic('world', { hour: now.hour, warmth });
     }
   }, 60e3);
@@ -709,12 +753,17 @@ export async function renderVillageHome(outlet, ctx) {
     window.removeEventListener('hashchange', onHash);
     window.removeEventListener('pointerdown', startSound, { capture: true });
     clearInterval(tickHour); clearInterval(edgeTimer); clearInterval(museTimer);
-    baking += 1; if (atlasUrl) URL.revokeObjectURL(atlasUrl);
     for (const id of timers) clearTimeout(id);
-    ro.disconnect(); life.destroy(); motion.destroy(); woodland.destroy();
+    ro.disconnect(); life.destroy(); scene.destroy();
     if (openKind) closeModal(card);
   };
   window.addEventListener('hashchange', onHash);
+
+  /** Put a house (and the lane at its door) in the middle of the screen. */
+  function faceHouse(id) {
+    const m = HOUSE_ART[id]?.mask, home = NODES[(HOMES[id] ?? PLACES[id])?.node];
+    if (m) panTo(m[0], m[1] + m[3] * 0.35, { ms: 0 }); else if (home) panTo(home.x, home.y, { ms: 0 });
+  }
 
   function spotCentre(id) {
     const h = HOMES[id]?.hit ?? PLACES[id]?.hit;
@@ -735,8 +784,16 @@ function glow(p, kind, i) {
 /** Every house, with its subject on a sign that is always up: on a phone there is no hover to reveal it. */
 function spotsHTML() {
   return HOUSES.map((h) => {
-    const b = HOMES[h.spot] ?? PLACES[h.spot], at = SIGNS[h.spot], who = PET_BY_ID.get(h.pet).name;
-    return `<button class="cw-spot" data-spot="${h.spot}" style="left:${b.hit.x}px;top:${b.hit.y}px;width:${b.hit.w}px;height:${b.hit.h}px" aria-label="${escapeHTML(`${h.subject}, with ${who}: ${b.label}`)}"><span class="cw-plate" style="left:${at.x - b.hit.x}px;top:${at.y - b.hit.y}px">${petPortrait(h.pet, 24)}<b>${escapeHTML(h.subject)}</b></span></button>`;
+    const b = HOMES[h.spot] ?? PLACES[h.spot], who = PET_BY_ID.get(h.pet).name;
+    return `<button class="cw-spot" data-spot="${h.spot}" style="left:${b.hit.x.toFixed(1)}px;top:${b.hit.y.toFixed(1)}px;width:${b.hit.w.toFixed(1)}px;height:${b.hit.h.toFixed(1)}px" aria-label="${escapeHTML(`${h.subject}, with ${who}: ${b.label}`)}"></button>`;
+  }).join('');
+}
+
+/** Each house's subject plate, above every friend and roof (the hit area under the house is .cw-spot; a plate is a second, larger target for the same door). */
+function platesHTML() {
+  return HOUSES.map((h) => {
+    const at = SIGNS[h.spot];
+    return `<span class="cw-plate" data-spot="${h.spot}" style="left:${at.x.toFixed(1)}px;top:${at.y.toFixed(1)}px">${petPortrait(h.pet, 24)}<b>${escapeHTML(h.subject)}</b></span>`;
   }).join('');
 }
 
@@ -785,6 +842,7 @@ function flameSVG(tier) {
 }
 const giftSVG = '<svg viewBox="0 0 32 32" aria-hidden="true"><rect x="4" y="13" width="24" height="15" rx="2.5" fill="#D9603A" stroke="#5a2e1a" stroke-width="1.5"/><rect x="2.5" y="9" width="27" height="6" rx="2" fill="#E9A23B" stroke="#5a2e1a" stroke-width="1.5"/><path d="M16 9v19" stroke="#F6EEDB" stroke-width="3"/><path d="M16 9c-3-6-9-5-8-1 1 3 8 1 8 1zm0 0c3-6 9-5 8-1-1 3-8 1-8 1z" fill="#F4C443" stroke="#5a2e1a" stroke-width="1.3" stroke-linejoin="round"/></svg>';
 const FIRST_HELLO = 'You came! The Muddles are eating our words. Quick, grab the rope!';
+const SEAL_SVG = '<svg class="cw-seal" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.4c1.2 0 1.7 1.1 2.8 1.3 1.1.2 2.1-.5 3 .2.9.7.6 1.9 1.2 2.8.6.9 1.8 1.2 2 2.3.2 1.1-.8 1.8-.8 2.9s1 1.8.8 2.9c-.2 1.1-1.4 1.4-2 2.3-.6.9-.3 2.1-1.2 2.8-.9.7-1.9 0-3 .2-1.1.2-1.6 1.3-2.8 1.3s-1.7-1.1-2.8-1.3c-1.1-.2-2.1.5-3-.2-.9-.7-.6-1.9-1.2-2.8-.6-.9-1.8-1.2-2-2.3-.2-1.1.8-1.8.8-2.9s-1-1.8-.8-2.9c.2-1.1 1.4-1.4 2-2.3.6-.9.3-2.1 1.2-2.8.9-.7 1.9 0 3-.2C10.3 3.5 10.8 2.4 12 2.4z" fill="#C2412F" stroke="#6E1F16" stroke-width="1.1"/><circle cx="12" cy="12" r="5.2" fill="none" stroke="#F2B7A6" stroke-width="1.2" opacity=".8"/><path d="M9.4 12.2l1.8 1.8 3.6-3.8" fill="none" stroke="#FBE3D6" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 const bookSVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><path d="M12 6.2C10 4.8 7.2 4.4 4 5v13.5c3.2-.6 6-.2 8 1.2 2-1.4 4.8-1.8 8-1.2V5c-3.2-.6-6-.2-8 1.2z"/><path d="M12 6.2v13.5"/></g></svg>';
 const ENVELOPE_SVG = '<svg viewBox="0 0 48 36" width="44" height="33" aria-hidden="true"><rect x="2" y="3" width="44" height="30" rx="4" fill="#FBEBC6" stroke="#3b2a1c" stroke-width="2.2"/><path d="M3 5l21 16L45 5" fill="#F2DCA8" stroke="#3b2a1c" stroke-width="2.2" stroke-linejoin="round"/><circle cx="24" cy="21" r="5.2" fill="#C2513A" stroke="#3b2a1c" stroke-width="1.8"/></svg>';
 const subjectsSVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><rect x="4" y="4" width="6.5" height="6.5" rx="1.6"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.6"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.6"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.6"/></g></svg>';

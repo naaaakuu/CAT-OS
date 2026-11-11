@@ -38,12 +38,12 @@ import { voice, signature } from '../world/audio.js';
 import { createWater } from './water.js';
 import { glow, twinkle, glyphSprite, stamp } from './paint.js';
 import { HOUSE_ART } from './houses.js';
-import { worldPoint } from './landscape.js';
 
 /** Drawn height of each pet at full size, in painting pixels. */
 export const PET_SIZE = Object.freeze({ toffee: 70, chai: 84, matcha: 78, mochi: 78, ginger: 84, mallow: 80, sesame: 70, biscuit: 78 });
 /** A friend's drawn height at their growth stage: they get bigger as you work through their subject. */
-export const petSize = (id, stage) => Math.round(PET_SIZE[id] * growOf(stage));
+// The valley's houses are drawn at storybook scale: a grown friend stands about a doorway high.
+export const petSize = (id, stage) => Math.round(PET_SIZE[id] * 0.8 * growOf(stage));
 const CONFETTI = ['#F4C443', '#E9963A', '#8FB56A', '#D97A8A', '#93AED1', '#F6EEDB'];
 
 const SPEED = { glowing: 46, happy: 42, missing: 34, sleepy: 26, wilting: 24, new: 38 };
@@ -82,7 +82,7 @@ const EMIT_AT = {
   note: [0.15, -0.95], steam: [0.42, -0.6], sparkle: [0.3, -0.5], raindrop: [0.5, -0.9],
 };
 /** Chores happen beside the door, on the path, never on the roof. */
-const YARD = { chai: ['lib', 'l1'], matcha: ['green', 'g1'], mochi: ['cabin', 'a1'], ginger: ['shop', 'w1'], mallow: ['obs', 'o1'], toffee: ['f1', 'f2'], sesame: ['clock', 't4'], biscuit: ['cottage', 'c1'] };
+const YARD = { chai: ['lib', 'lj'], matcha: ['green', 'e2'], mochi: ['pantry', 'p1'], ginger: ['shop', 'gj'], mallow: ['obs', 'sb3'], toffee: ['camp', 'f2'], sesame: ['clock', 'sj'], biscuit: ['cottage', 'bj'] };
 
 const PROPS = {
   can: '<svg viewBox="0 0 40 30"><path d="M8 11h17l-2 15H10z" fill="#7FA9A0" stroke="#3f3a30" stroke-width="1.6" stroke-linejoin="round"/><path d="M24 15l11-7 2 3-11 8" fill="#7FA9A0" stroke="#3f3a30" stroke-width="1.6" stroke-linejoin="round"/><path d="M10 11c0-6 13-6 13 0" fill="none" stroke="#3f3a30" stroke-width="1.8"/><circle cx="36" cy="9" r="2.4" fill="#5d8a80" stroke="#3f3a30" stroke-width="1.2"/></svg>',
@@ -102,11 +102,11 @@ const PROPS = {
  *   houses  src/home/houses.js createHouseLife(), or null
  *   memory  { get, set } on this device's small store: which lines each friend has already said, so none comes round again early
  */
-export function createLife(root, { pets: petsState, atmo, reduced, view = null, houses = null, memory = null }) {
+export function createLife(root, { pets: petsState, atmo, reduced, view = null, houses = null, memory = null, images = null }) {
   const map = root.querySelector('.cw-map');
   const canvas = root.querySelector('.cw-life');
   const g = canvas.getContext('2d');
-  const water = createWater(map, { reduced });
+  const water = createWater(map, { reduced, images });
   let pets = petsState;
   let hour = atmo.hour, weather = atmo.weather, season = atmo.season;
   const night = () => hour === 'night';
@@ -233,7 +233,7 @@ export function createLife(root, { pets: petsState, atmo, reduced, view = null, 
       if (r >= 0.88 && now >= nextSocialAt && !chats.length && startVisit(a)) return;
       if (r < 0.4 && startChore(a)) return;
       if (r < 0.5) { const n = freeNode(SPOTS.fire.filter((x) => x !== a.node), a); if (n) { walkTo(a, n, 'idle'); return; } }
-      if (r < 0.6) { const n = freeNode(['kiosk', 'ps', 's2'], a); if (n) { walkTo(a, n, 'idle'); return; } }
+      if (r < 0.6) { const n = freeNode(['m37', 'm36', 'f3'], a); if (n) { walkTo(a, n, 'idle'); return; } }
       a.state = 'idle'; a.until = now + rand(3e3, 7e3);
       return;
     }
@@ -250,7 +250,8 @@ export function createLife(root, { pets: petsState, atmo, reduced, view = null, 
     if (r >= 0.96) {
       if (r < 0.98) { const n = freeNode(SPOTS.plaza, a); if (n) { walkTo(a, n, 'idle'); return; } }
       if (r < 0.985) { const n = freeNode(SPOTS.bench, a); if (n) { walkTo(a, n, 'sit'); return; } }
-      if (r < 0.99 && (a.id === 'matcha' || a.id === 'mallow' || a.id === 'mochi' || a.id === 'sesame' || a.id === 'biscuit') && !taken('dock', a)) { walkTo(a, 'dock', 'idle'); return; }
+      // the middle of the wooden bridge, to watch the water go by
+      if (r < 0.99 && (a.id === 'matcha' || a.id === 'mallow' || a.id === 'mochi' || a.id === 'sesame' || a.id === 'biscuit') && !taken(SPOTS.dock[0], a)) { walkTo(a, SPOTS.dock[0], 'idle'); return; }
       const n = freeNode(SPOTS.fire, a); if (n) { walkTo(a, n, 'sit'); return; }
     }
     if (a.node !== a.home) { walkTo(a, a.home, 'idle'); return; }
@@ -525,6 +526,7 @@ export function createLife(root, { pets: petsState, atmo, reduced, view = null, 
   const inView = (r, x, y, pad = 12) => x > r.x - pad && x < r.x + r.w + pad && y > r.y - pad && y < r.y + r.h + pad;
 
   const flameRate = { embers: 2, small: 4, steady: 6, tall: 9, bonfire: 13 };
+  const FLAME_SIZE = { embers: 0.62, small: 0.78, steady: 0.9, tall: 1, bonfire: 1.12 };
   let isAutumn = season === 'autumn', isSpring = season === 'spring', isWinter = season === 'winter';
   const made = (id) => pets.decor?.find((t) => t.id === id)?.made;
   const grown = (n) => Object.entries(pets.houses ?? {}).filter(([, s]) => s >= n).map(([id]) => id);
@@ -551,14 +553,11 @@ export function createLife(root, { pets: petsState, atmo, reduced, view = null, 
   const LETTERS = 'abcdefghijklmnopqrstuvwxyz';
   const houseAt = (id) => {
     const m = HOUSE_ART[id]?.mask;
-    const p = m ? worldPoint(id, { x: m[0], y: m[1] + m[3] * 0.35 }) : NODES.pc;
-    return [p.x, p.y];
+    return m ? [m[0], m[1] + m[3] * 0.35] : [NODES.pc.x, NODES.pc.y];
   };
   const FIREFLY_AT = ['chai', 'matcha', 'ginger', 'mallow', 'mochi', 'biscuit', 'sesame', 'toffee'].map(houseAt);
-  const BUTTERFLY_AT = [
-    ['matcha', 300, 470], ['biscuit', 460, 700], ['mochi', 1250, 480],
-    ['toffee', 700, 930], ['sesame', 1205, 842], ['chai', 450, 300], ['ginger', 940, 300],
-  ].map(([id, x, y]) => { const p = worldPoint(id, { x, y }); return [p.x, p.y]; });
+  // flower beds and the green, in world px
+  const BUTTERFLY_AT = [[860, 1080], [470, 470], [210, 640], [700, 330], [420, 330], [180, 1180], [690, 860]];
 
   /** A chore's particle, thrown into the air at painting point (x, y). */
   function emit(kind, x, y, scale = 1, dir = 1) {
@@ -614,7 +613,7 @@ export function createLife(root, { pets: petsState, atmo, reduced, view = null, 
     g.setTransform(K, 0, 0, K, -r.x * K, -r.y * K);
     g.clearRect(r.x, r.y, r.w, r.h);
     // what the houses have grown, under the air
-    houses?.draw(g, reduced ? 0 : now, dt, r, { dark: dark(), night: night(), hour, weather, tint: TINT[hour] ?? '' });
+    houses?.draw(g, reduced ? 0 : now, dt, r, { dark: dark(), night: night(), hour, weather, tint: TINT[hour] ?? '', flame: FLAME_SIZE[pets.flame?.tier] ?? 0.9 });
     // the fire's own light
     g.globalCompositeOperation = 'lighter';
     if (inView(r, FIRE.x, FIRE.y, 140)) {
@@ -773,16 +772,9 @@ export function createLife(root, { pets: petsState, atmo, reduced, view = null, 
     g.globalCompositeOperation = 'source-over';
   };
 
-  /* ================= The clock tower keeps real time (once Sesame has a cog back) ================= */
-  const hourHand = root.querySelector('.cw-clock__h'), minHand = root.querySelector('.cw-clock__m');
-  const setClock = () => {
-    // Stopped at twenty to five until the first gap is filled (Sesame's story); then the real time.
-    const stopped = houses && houses.stageOf('sesame') < 1;
-    const d = new Date(), m = stopped ? 40 : d.getMinutes(), h = stopped ? 4 + 40 / 60 : (d.getHours() % 12) + m / 60;
-    hourHand?.setAttribute('transform', `rotate(${h * 30})`); minHand?.setAttribute('transform', `rotate(${m * 6})`);
-  };
-  setClock();
-  const clockTimer = setInterval(setClock, 20e3);
+  /* The clocks keep real time once their house wakes (stopped at twenty to five before): src/home/mechanisms.js draws the hands.
+     With less motion nothing loops, so the hands are brought up to the minute here. */
+  const clockTimer = reduced ? setInterval(() => { if (!destroyed) redraw(); }, 30e3) : 0;
 
   /* ================= The loop ================= */
   for (const a of actors) paintPet(a);
@@ -822,7 +814,8 @@ export function createLife(root, { pets: petsState, atmo, reduced, view = null, 
     const t0 = performance.now();
     pace(t);
     if (view) viewNow = view();
-    const dt = Math.min(0.05, (t - last) / 1000); last = t; now += dt * 1000;
+    // A frame's timestamp can precede the moment the loop started: the clock never runs backwards.
+    const dt = Math.max(0, Math.min(0.05, (t - last) / 1000)); last = t; now += dt * 1000;
     if (!reduced) {
       for (const a of actors) stepPet(a, dt);
       runChats();
@@ -945,7 +938,7 @@ export function createLife(root, { pets: petsState, atmo, reduced, view = null, 
     /** The camera moved: with less motion, redraw the still canvas for the new view. */
     redraw,
     /** The houses grew (or the records changed): the clock may start, the canvas may need a fresh still frame. */
-    housesChanged() { setClock(); redraw(); },
+    housesChanged() { redraw(); },
     /** The village's grown copy of the painting is ready: the water refracts that one. */
     setPainting(c) { water.setSource(c); },
     update(next) {

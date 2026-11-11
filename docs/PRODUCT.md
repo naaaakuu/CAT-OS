@@ -132,11 +132,28 @@ The village opens at the campfire. Toffee says one line ("The Muddles are eating
 
 ## The village
 
-**One painting** (`assets/art/home-world-v1.png`, 1536 × 1024) fills the
-screen at full detail and never zooms: on a phone it fills the height and
-you scroll left and right (drag, wheel or arrow keys) to see the rest.
-Every house carries a sign with its subject, always visible; tap the sign or
-the house to go in.
+**A tall painted valley** (`assets/art/village/`) built from separate pieces:
+a winding lane climbs from the library at its foot past the glasshouse, the
+railway workshop, the observatory over its stream, the pantry, the long-table
+cottage and the clockworks to Toffee's hearth at the top. Each house looks like
+the room inside it, and its own machine moves once it wakes: the clocks keep
+real time, the telescope sweeps, the carriages shunt, the gear turns, the fire
+burns. The river flows, the falls tumble, the oaks sway, smoke rises, and at
+night the windows of a grown house glow. Friends walk behind a house and in
+front of it as they pass. The valley always fills the screen; a phone opens a
+little closer so a house reads well, you drag in any direction, and a pinch
+goes closer or back out to the whole valley. Every house carries a plate with
+its subject; tap the plate or the house and the camera walks you to its door.
+
+**The valley tour.** The lane is also a tour: every home gives a wax seal when
+something real is played in it (a passage and an Arguments set in the library;
+ten glasshouse words, a twins round, a borrowed-words round, a root family and
+a word-parts set with Matcha; three items in each paragraph room), and Toffee's
+Gauntlet with a star seals the hearth once the other seven are sealed. The next
+home's plate carries a bobbing seal, the top bar counts the seals, and the tour
+card lists what each home still asks for. No deadline and no reward of its own:
+it makes sure every part of the paper gets played. A finished tour starts the
+next one at the library. Duels never count toward it.
 
 **On top of it, only this:**
 - the top bar: Toffee's fire, your stop and laurels (a tap opens the Laurel

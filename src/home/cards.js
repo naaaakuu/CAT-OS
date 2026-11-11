@@ -45,6 +45,7 @@ export function renderCard(card, kind, arg, api) {
   if (kind === 'friends') return friendsCard(card, api);
   if (kind === 'today') return todayCard(card, api);
   if (kind === 'cottage') return cottageCard(card, api);
+  if (kind === 'tour') return tourCard(card, api);
   return null;
 }
 
@@ -211,9 +212,31 @@ function friendsCard(card, api) {
       <button data-open="today"><b>Today's three</b><small>${T.gift ? 'Gift opened' : `${T.doneCount} of 3 helped`}</small></button>
       <button data-open="journal"><b>Journal</b><small>${J.earnedCount} of ${J.totalCount} keepsakes</small></button>
       <button data-open="level"><b>Village</b><small>Level ${P.level.level} · ${P.glow} Glow</small></button>
+      <button data-open="tour"><b>Valley tour</b><small>${(() => { const t = api.seals.deriveSeals(api.world.records); return `${t.sealed} of ${t.total} homes sealed`; })()}</small></button>
     </div>`;
   for (const a of card.querySelectorAll('[data-go]')) a.addEventListener('click', () => api.play('open'));
   for (const b of card.querySelectorAll('.cw-roomlinks [data-open]')) b.addEventListener('click', (e) => { e.stopPropagation(); api.open(b.dataset.open, null, b); });
+}
+
+/* ------------------------------------------------------------------ */
+/* The valley tour: a seal from every home (src/pets/seals.js)          */
+/* ------------------------------------------------------------------ */
+
+function tourCard(card, api) {
+  const { deriveSeals, homeLine: sealStatus } = api.seals; // src/pets/seals.js, loaded with the village
+  const T = deriveSeals(api.world.records);
+  card.innerHTML = `
+    ${close}
+    <p class="cw-eyebrow">The valley tour${T.toursDone ? ` · tour ${T.tour}` : ''}</p>
+    <h2 class="cw-card__name">${T.sealed} of ${T.total} homes sealed</h2>
+    <p class="cw-sub">Up the lane from the library to Toffee's hearth: play something real in every home and it gives you its seal. Every part of the paper is on the way. Nothing expires, so take your time.${T.toursDone ? ` You have toured the whole valley ${T.toursDone === 1 ? 'once' : `${T.toursDone} times`}.` : ''}</p>
+    <ol class="cw-tour">${T.homes.map((h) => `<li class="${h.sealed ? 'is-sealed' : ''}${h.id === T.next ? ' is-next' : ''}">
+      <span class="cw-tour__seal" aria-hidden="true"></span>${petPortrait(h.id, 40)}
+      <div class="cw-tour__home"><b>${esc(h.home)}</b><small>${esc(sealStatus(h))}</small>
+        <ul>${h.strands.map((x) => `<li class="${x.done ? 'is-done' : ''}"><a href="${esc(x.href)}" data-go>${esc(x.label)}${x.need > 1 ? ` <small>${x.have}/${x.need}</small>` : ''}${x.done ? '<span class="sr-only"> (done)</span>' : ''}</a></li>`).join('')}</ul>
+      </div></li>`).join('')}</ol>
+    <p class="cw-tour__note">A tour visits every subject once. How much of each subject you have mastered lives inside its home.</p>`;
+  for (const a of card.querySelectorAll('[data-go]')) a.addEventListener('click', () => api.play('open'));
 }
 
 /* ------------------------------------------------------------------ */

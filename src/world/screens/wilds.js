@@ -22,6 +22,7 @@ import { escapeHTML, formatDate } from '../../core/utils/format.js';
 import { toast } from '../../ui/components/cat-toast.js';
 import { focusContent } from '../../ui/focus.js';
 import { infoButton } from '../../ui/info.js';
+import { deriveSeals, sealLine } from '../../pets/seals.js';
 
 export const GAUNTLET_SIZE = 30;
 export const GAUNTLET_MS = 3 * 60_000;
@@ -84,6 +85,7 @@ export async function renderWilds(outlet, { storage }) {
         <p class="place__eyebrow">${escapeHTML(region.skill)} · week ${escapeHTML(week.slice(-2))} · with Toffee</p>
         <h1 class="place__title">The Gauntlet${infoButton('gauntlet', { moreTitle: 'Inside the challenge', more: ['Words from the Meadow, the Pond and the Thicket, with nine questions inside a real sentence. No hints or second choices during a run.'] })}</h1>
         <p class="place__line">${GAUNTLET_SIZE} vocabulary questions in ${GAUNTLET_MS / 60000} minutes. The same set all week, so you can beat your own best.</p>
+        ${sealLine(deriveSeals(beforeRecords), 'toffee')}
         <button class="g-cta g-cta--gold" id="run">Run the Gauntlet<small>${thisWeek.length ? `${thisWeek.length} run${thisWeek.length === 1 ? '' : 's'} this week · best ${weekBest.score?.correct}/${GAUNTLET_SIZE} in ${formatClock(weekBest.duration_ms)}` : 'Your first run this week pays a silver-sealed letter'}</small><span class="arrow" aria-hidden="true">→</span></button>
         <div class="place__section">
           <h2>Records</h2>

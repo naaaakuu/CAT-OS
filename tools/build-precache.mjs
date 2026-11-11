@@ -56,7 +56,14 @@ export function shellFiles() {
   // Every picture the app shows. The companion strip is only the pets' bake
   // input (tools/bake-pets.mjs): 1.5 MB no screen ever draws.
   for (const name of fs.readdirSync(path.join(ROOT, 'assets/art')).sort()) if (/\.(png|jpe?g|webp)$/.test(name) && !BAKE_ONLY.test(name)) out.add(`./assets/art/${name}`);
+  for (const f of villageArt()) out.add(f);
   return [...out].sort();
+}
+
+/** The village's separate pieces and moving parts (assets/art/village/). */
+export function villageArt() {
+  const dir = path.join(ROOT, 'assets/art/village');
+  return fs.existsSync(dir) ? fs.readdirSync(dir).filter((n) => /\.webp$/.test(n)).sort().map((n) => `./assets/art/village/${n}`) : [];
 }
 
 /* Sources the bake tools read (the strip, and each painted friend's tools/paint-<id>.mjs output); the app only ever loads what they bake. */
@@ -79,14 +86,13 @@ export function coreFiles() {
     './index.html',
     './manifest.webmanifest',
     ...linkedStylesheets(),
-    './assets/art/home-world-v1.png',
-    './assets/art/village-terrain-v2.webp',
-    './assets/art/village-paths-v2.webp',
-    './assets/art/village-oak-v2.webp',
+    // The valley's pieces the village waits for before it paints (src/home/scenery.js ESSENTIAL):
+    // the terrain, the eight houses, the bridges and the oaks.
+    ...villageArt().filter((f) => /terrain-base|tree-|bridge-|-(library|glasshouse|railway|observatory|pantry|dining|clockworks|hearth)\.webp$/.test(f)),
     // Loaded on entering the village rather than every app route, but still
     // needed for an offline first visit as soon as core installation finishes.
     './src/home/scenery.js',
-    './src/home/motion.js',
+    './src/home/mechanisms.js',
     ...pets,
     './content/boot-index.json',
     './assets/icons/icon-192.png',

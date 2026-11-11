@@ -4,6 +4,15 @@
 > Versions here are app releases; they map onto the capability milestones in
 > `PROJECT_ROADMAP.md` (0.x releases build toward Roadmap V1.0).
 
+## 3.21.0: A living valley, and a tour of every home (2026-11-11)
+
+- Replaced 3.20's cropped-painting village with the new art pack: a tall 1086 × 1448 valley built from separate pieces (clean terrain, eight freshly painted houses that match their rooms, two bridges, oaks with swaying canopies over still trunks, corner foliage). Houses sort in depth with the friends at their ground line, so friends pass behind and in front of them. The old 3.8 MB painting, its 44-patch motion atlas and the 3.20 map art are gone.
+- Each house's own machine moves once it wakes: real-time hands on the railway and clockworks faces, the clockworks gear, the telescope in the dome slot, carriages shunting on the railway track, the glasshouse vent, the pantry's sign, herbs and kettle, the library's book sign, the cottage awning and the camp fire. The river refracts and carries glints downstream; the falls play a falling-water loop. The growth ladder (stages 0 to 10) is re-anchored on the new houses; Mochi's archery wonders became glinting jam jars.
+- The camera covers the screen, opens closer on a phone, pans both ways, pinches between the whole valley and 2.6× (ctrl + wheel, + and - on a keyboard), keeps subject plates on screen, and glides to the door on entering a room. Room and card backdrops use a baked still of the assembled valley (`tools/bake-village-still.mjs`).
+- New: the valley tour (`src/pets/seals.js`). Thirteen strands across eight homes, sealed only by records of real play in each home (duels never count; duel records are now marked `in_duel`), with the Gauntlet as the finale after the seven other seals. Derived, never stored; no extra reward. HUD chip, next-home marker, tour card, a line in every home, a toast when a seal lands.
+- Room counters ("0/8") sit on a dark pill so a starfield or a dimmed tier behind them never drops them below AA; each home's seal line floats under its header as a solid pill (inside the header it lengthened the header's veil).
+- Validation: `check-village-data` (84 nodes, 88 edges: no node or walk in the river, in a wall or off its lane), `check-walk`, `check-seals` (29 checks), `check-tour` (21 browser checks: a visit seals nothing, real plays do, duel plays never, a full tour starts the next), `check-village` (89 checks incl. pinch, rooms, night, reduced motion, 320/360/390/844 px, offline). Script cost about 2.8 ms a frame for a grown valley under a 4× CPU slowdown.
+
 ## 3.20.0: A spacious, layered village (2026-11-11)
 
 - Replaced the crowded single-painting layout with a 2048 × 1280 meadow, winding river, painted trails, wooden bridge and open village square. The original eight landmarks remain independently placed artwork, including Chai's library and Matcha's greenhouse; room routes, pet sprites and learning progression are unchanged.

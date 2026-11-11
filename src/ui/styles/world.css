@@ -1874,3 +1874,10 @@
 .records-future { margin-top: 24px; }
 .records-future summary { cursor: pointer; color: var(--g-accent); font-weight: 600; }
 .bank-blank--gap { font-family: var(--font-ui); }
+
+/* A home's seal on the valley tour (src/pets/seals.js sealLine), on every home's own screen. */
+.tour-seal { display: inline-flex; align-items: center; gap: 7px; margin: 6px 0 0; padding: 4px 11px 4px 5px; border-radius: 999px; background: color-mix(in srgb, var(--color-surface) 92%, transparent); color: var(--color-ink); border: 1px solid color-mix(in srgb, var(--color-line-strong) 60%, transparent); font: 650 12.5px/1.3 var(--font-ui); text-align: left; max-width: 100%; }
+p.tour-seal > span { color: inherit; font: inherit; text-shadow: none; }
+.tour-seal { text-shadow: none; }
+.tour-seal i { flex: none; width: 18px; height: 18px; border-radius: 50%; border: 2px dashed color-mix(in srgb, var(--color-ink) 45%, transparent); }
+.tour-seal.is-sealed i { border: 0; background: radial-gradient(circle at 36% 30%, #E46A57, #A8331F 70%); box-shadow: 0 0 0 2px #FBE3D6; }

@@ -46,25 +46,36 @@
 .cw :focus-visible { outline: 3px solid var(--honey); outline-offset: 3px; }
 .cw--error { display: grid; place-content: center; padding: 24px; text-align: center; color: #fff9ec; }
 .cw-viewport { position: absolute; inset: 0; overflow: hidden; cursor: grab; outline: none; }
-.cw-viewport::before { content: ""; position: absolute; inset: -30px; background: #34483c url('../../../assets/art/village-terrain-v2.webp') center / cover; filter: blur(22px) brightness(0.48) saturate(0.7); pointer-events: none; }
+.cw-viewport::before { content: ""; position: absolute; inset: -30px; background: #34483c url('../../../assets/art/village/terrain-base.webp') center / cover; filter: blur(22px) brightness(0.48) saturate(0.7); pointer-events: none; }
 .cw-viewport:focus-visible { box-shadow: inset 0 0 0 3px var(--honey); }
 .cw-viewport.is-dragging { cursor: grabbing; }
 .cw-map { position: absolute; left: 0; top: 0; transform-origin: 0 0; will-change: transform; contain: layout style; }
 .cw-art { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; -webkit-user-drag: none; }
-/* The painting as this learner has grown it (src/home/houses.js bakeVillage), laid over the original once ready. */
-.cw-ground { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
-.cw-woodland { position: absolute; inset: 0; pointer-events: none; }
-.cw-woodland img { position: absolute; transform-origin: 50% 92%; animation: cw-oak var(--sway) ease-in-out var(--delay) infinite alternate; }
-.cw-woodland img[data-off], .cw-woodland[data-reduced] img { animation-play-state: paused; }
-@keyframes cw-oak { from { transform: rotate(-.35deg); } to { transform: rotate(.35deg); } }
-@media (prefers-reduced-motion: reduce) { .cw-woodland img { animation: none; } }
-html[data-reduced-motion] .cw-woodland img { animation: none; }
-.cw-base { left: 0; top: 0; width: 100%; height: 100%; pointer-events: none; opacity: 0; transition: opacity 0.6s ease; }
-.cw-base.is-in { opacity: 1; }
-html[data-reduced-motion] .cw-base { transition: none; }
+/* The valley's pieces (src/home/scenery.js). .cw-scene makes no stacking context of its own: its houses (z-index = ground y) and
+   oaks (z-index = root y) sort with the friends (z-index = foot y). Each house is cut at its ground line; its parts canvas sits just in front. */
+.cw-shadows, .cw-scene { left: 0; top: 0; width: 100%; height: 100%; pointer-events: none; }
+.cw-scene > * { position: absolute; display: block; }
+.cw-tree > canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.cw-tree__canopy { animation: cw-oak var(--sway) ease-in-out var(--delay) infinite alternate; will-change: transform; }
+.cw-tree[data-off] .cw-tree__canopy, .cw-scene[data-reduced] .cw-tree__canopy { animation-play-state: paused; }
+@keyframes cw-oak { from { transform: rotate(-.5deg) skewX(-.4deg); } to { transform: rotate(.5deg) skewX(.4deg); } }
+@media (prefers-reduced-motion: reduce) { .cw-tree__canopy { animation: none; } }
+html[data-reduced-motion] .cw-tree__canopy { animation: none; }
+/* The leaves at the screen's corners: nearer than the valley, drifting a little against the camera (village.js apply). */
+.cw-foliage { position: absolute; inset: -16px; pointer-events: none; z-index: 1; --fs: 0.42; transition: filter 2s; }
+.cw-foliage i { position: absolute; width: calc(var(--w) * var(--fs) * 1px); height: calc(var(--h) * var(--fs) * 1px); background-repeat: no-repeat; background-size: calc(768px * var(--fs)) calc(1024px * var(--fs)); background-position: calc(var(--x) * var(--fs) * -1) calc(var(--y) * var(--fs) * -1); }
+.cw-foliage__tl { left: 0; top: 0; } .cw-foliage__tr { right: 0; top: 0; } .cw-foliage__bl { left: 0; bottom: 0; } .cw-foliage__br { right: 0; bottom: 0; }
+.cw[data-hour="dusk"] .cw-foliage { filter: brightness(0.8) sepia(0.2); }
+.cw[data-hour="night"] .cw-foliage { filter: brightness(0.42) saturate(0.7) hue-rotate(12deg); }
+@media (min-width: 700px) { .cw-foliage { --fs: 0.6; } }
 .cw-map > * { position: absolute; }
-.cw-motion, .cw-water, .cw-sunlight, .cw-tint, .cw-glows, .cw-clouds, .cw-treasures, .cw-life, .cw-spots, .cw-pets, .cw-says { left: 0; top: 0; width: 100%; height: 100%; }
-.cw-motion, .cw-water, .cw-sunlight, .cw-tint, .cw-glows, .cw-clouds, .cw-life, .cw-treasures, .cw-says { pointer-events: none; }
+.cw-water, .cw-sunlight, .cw-tint, .cw-glows, .cw-clouds, .cw-treasures, .cw-life, .cw-spots, .cw-pets, .cw-plates, .cw-says { left: 0; top: 0; width: 100%; height: 100%; }
+.cw-water, .cw-sunlight, .cw-tint, .cw-glows, .cw-clouds, .cw-life, .cw-treasures, .cw-plates, .cw-says { pointer-events: none; }
+/* Above every house and friend: cloud shadows, then lamp halos, then the air (smoke, fireflies), then the subject plates. */
+.cw-clouds { z-index: 1650; }
+.cw-glows { z-index: 1700; }
+.cw-life { z-index: 1800; }
+.cw-plates { z-index: 1900; }
 /* Speech and "!" sit above every friend and the plaza bunting (whose z-index is its ground y, like a friend's). */
 .cw-says { z-index: 2000; }
 .pet-top { position: absolute; left: 0; top: 0; width: 0; height: 0; }
@@ -119,61 +130,8 @@ html[data-reduced-motion] .cw-base { transition: none; }
 @keyframes cw-breath { 0%, 100% { opacity: 0.7; scale: 0.9; } 50% { opacity: 1; scale: 1.07; } }
 @keyframes cw-flicker { 0%, 100% { opacity: 1; } 45% { opacity: 0.86; } 52% { opacity: 0.96; } 70% { opacity: 0.9; } }
 
-/* ---------------- The living painting (src/home/motion.js) ----------------
-   Patches cut from the painting itself (pre-feathered in home-motion-v1.png),
-   pixel-identical at rest, moved only by transform, opacity and filter. */
-.cw-motion { pointer-events: none; --wind: 1; }
-.cw-motion[data-weather="rain"] { --wind: 1.7; }
-.mo { position: absolute; }
-.mo > b { position: absolute; inset: 0; background-repeat: no-repeat; will-change: transform; }
-/* Off screen (motion.js setView, village.js): paused, so the page does not restyle what nobody sees. */
-.mo[data-off] > b, .cw-glow[data-off]::before { animation-play-state: paused; }
-.mo--spin > b { animation: mo-spin var(--t) linear infinite; }
-.mo--flow > b { animation: mo-flow var(--t) linear infinite; }
-.mo--flow > b + b { opacity: 0; animation: mo-flow var(--t) linear calc(var(--t) * -0.5) infinite, mo-fade var(--t) linear calc(var(--t) * -0.5) infinite; }
-.mo--sway > b { animation: mo-sway var(--t) ease-in-out var(--dl) infinite; }
-.mo--flag > b { animation: mo-flag var(--t) ease-in-out var(--dl) infinite; }
-.mo--flap > b { animation: mo-flap var(--t) ease-in-out var(--dl) infinite; }
-.mo--bob > b { animation: mo-bob var(--t) ease-in-out var(--dl) infinite; }
-.mo--flame > b { animation: mo-flame var(--t) linear infinite; }
-.mo--pan > b { animation: mo-pan var(--t) ease-in-out infinite; }
-.cw[data-hour="night"] .mo--pan > b, .cw[data-hour="dusk"] .mo--pan > b { animation-duration: 12s; }
-.mo--turn > b { animation: mo-turn var(--t) ease-in-out infinite alternate; }
-.mo--wobble > b { animation: mo-wobble var(--t) ease-in-out infinite; }
-@keyframes mo-spin { from { transform: scale(var(--sx), var(--sy)) rotate(0turn) scale(var(--ix), var(--iy)); } to { transform: scale(var(--sx), var(--sy)) rotate(1turn) scale(var(--ix), var(--iy)); } }
-@keyframes mo-flow { from { transform: translate(0, 0); } to { transform: translate(var(--dx), var(--dy)); } }
-@keyframes mo-fade { 0%, 100% { opacity: 0; } 50% { opacity: 1; } }
-@keyframes mo-sway {
-  0%, 100% { transform: skewX(calc(var(--a) * var(--wind) * -0.65deg)); }
-  36% { transform: skewX(calc(var(--a) * var(--wind) * 1deg)) translateY(-0.6px); }
-  64% { transform: skewX(calc(var(--a) * var(--wind) * 0.25deg)); }
-  80% { transform: skewX(calc(var(--a) * var(--wind) * 0.55deg)); }
-}
-@keyframes mo-flag {
-  0%, 100% { transform: skewX(calc(var(--wind) * 1.2deg)) scaleX(1); }
-  30% { transform: skewX(calc(var(--wind) * -2deg)) scaleX(0.97); }
-  60% { transform: skewX(calc(var(--wind) * 2.4deg)) scaleX(1.01); }
-  80% { transform: skewX(calc(var(--wind) * -0.8deg)) scaleX(0.985); }
-}
-@keyframes mo-flap {
-  0%, 100% { transform: scaleY(1) skewX(0deg); }
-  35% { transform: scaleY(0.94) skewX(calc(var(--wind) * -1.2deg)); }
-  55% { transform: scaleY(1.03) skewX(calc(var(--wind) * 0.8deg)); }
-  75% { transform: scaleY(0.98) skewX(calc(var(--wind) * -0.4deg)); }
-}
-@keyframes mo-bob { 0%, 100% { transform: translateY(calc(var(--a) * -1px)) rotate(calc(var(--r) * -1deg)); } 50% { transform: translateY(calc(var(--a) * 1px)) rotate(calc(var(--r) * 1deg)); } }
-@keyframes mo-flame {
-  0%, 100% { transform: scale(1, 1) skewX(0deg); filter: brightness(1); }
-  12% { transform: scale(0.96, 1.08) skewX(-3deg); filter: brightness(1.12); }
-  27% { transform: scale(1.04, 0.95) skewX(2deg); filter: brightness(0.96); }
-  41% { transform: scale(0.98, 1.05) skewX(-1deg); filter: brightness(1.08); }
-  58% { transform: scale(1.03, 0.97) skewX(3deg); filter: brightness(1); }
-  73% { transform: scale(0.97, 1.1) skewX(-2deg); filter: brightness(1.15); }
-  88% { transform: scale(1.02, 0.96) skewX(1deg); filter: brightness(0.98); }
-}
-@keyframes mo-pan { 0%, 50%, 100% { transform: rotate(0deg); } 58%, 68% { transform: rotate(-3.5deg); } 77%, 86% { transform: rotate(2deg); } }
-@keyframes mo-turn { from { transform: scaleX(1) rotate(0deg); } to { transform: scaleX(0.86) rotate(4deg); } }
-@keyframes mo-wobble { 0%, 100% { transform: rotate(calc(var(--a) * var(--wind) * -1deg)); } 50% { transform: rotate(calc(var(--a) * var(--wind) * 1deg)); } }
+/* Off screen (village.js syncView): a halo that is not seen does not breathe. */
+.cw-glow[data-off]::before { animation-play-state: paused; }
 
 /* Cloud shadows: very soft, very slow, only while the sun is up. */
 .cw-clouds i {
@@ -184,15 +142,9 @@ html[data-reduced-motion] .cw-base { transition: none; }
 .cw-clouds i:nth-child(1) { top: 40px; animation-delay: -24s; }
 .cw-clouds i:nth-child(2) { top: 430px; animation-duration: 110s; animation-delay: -65s; width: 1100px; }
 .cw-clouds i:nth-child(3) { top: 700px; animation-duration: 95s; animation-delay: -40s; width: 760px; height: 400px; }
+.cw-clouds i:nth-child(4) { top: 1040px; animation-duration: 120s; animation-delay: -10s; width: 980px; }
 .cw[data-hour="night"] .cw-clouds, .cw[data-hour="dusk"] .cw-clouds { display: none; }
 @keyframes cw-cloud { to { transform: translateX(2700px); } }
-
-/* The clock tower's hands. */
-.cw-clock { overflow: visible; }
-.cw-clock line { stroke: #2f2a26; stroke-linecap: round; }
-.cw-clock__h { stroke-width: 1.5; }
-.cw-clock__m { stroke-width: 1; }
-.cw-clock circle { fill: #2f2a26; }
 
 /* ---------------- Buildings you can tap ---------------- */
 .cw-spots { z-index: 1; }
@@ -201,7 +153,7 @@ html[data-reduced-motion] .cw-base { transition: none; }
 /* Each house's subject sign: always up (a phone has no hover), held at a
    readable size by --inv, and part of the button, so the sign is a tap target too. */
 .cw-plate {
-  position: absolute; transform: translate(-50%, -100%) scale(var(--inv, 1)); transform-origin: 50% 100%;
+  position: absolute; transform: translate(calc(-50% + var(--dx, 0px)), calc(-100% + var(--dy, 0px))) scale(var(--inv, 1)); transform-origin: 50% 100%;
   display: flex; align-items: center; gap: 6px;
   padding: 3px 12px 3px 3px; border-radius: 999px; white-space: nowrap;
   background: color-mix(in srgb, var(--color-surface) 93%, transparent); color: var(--color-ink);
@@ -210,7 +162,10 @@ html[data-reduced-motion] .cw-base { transition: none; }
   transition: translate 0.18s;
 }
 .cw-plate .pet-portrait { flex: none; }
-.cw-spot:hover .cw-plate, .cw-spot:focus-visible .cw-plate { translate: 0 -3px; background: var(--color-surface); }
+.cw-plates .cw-plate { pointer-events: auto; cursor: pointer; }
+.cw.is-wide .cw-plate { padding: 3px; gap: 0; }
+.cw.is-wide .cw-plate b { display: none; }
+.cw-plate:hover { translate: 0 -3px; background: var(--color-surface); }
 
 /* ---------------- The friends ---------------- */
 /* The button is the hit area, feet at its bottom middle; a baby is drawn
@@ -388,6 +343,36 @@ html[data-reduced-motion] .cw-base { transition: none; }
 .cw-glowcount b { font-size: 16px; }
 .cw-round { position: relative; width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; padding: 0; flex: none; }
 .cw-round svg { width: 23px; height: 23px; color: var(--color-ink-2); }
+/* The valley tour (src/pets/seals.js): settings, then the tour's count under it. */
+.cw-hud__right { flex-direction: column; align-items: flex-end; }
+.cw-chip--tour { padding: 4px 12px 4px 6px; gap: 4px; min-height: 44px; }
+.cw-chip--tour small { font: 700 13px/1 var(--font-ui); color: var(--color-ink-2); }
+.cw-seal { width: 28px; height: 28px; flex: none; filter: drop-shadow(0 1px 1px rgba(60, 20, 10, 0.35)); }
+/* The next home on the tour: its plate carries a wax seal that bobs over it. */
+.cw-plate.is-next { box-shadow: 0 0 0 2px #E2A93B, 0 4px 14px rgba(40, 30, 16, 0.3); }
+.cw-plate.is-next::after {
+  content: ""; position: absolute; left: 50%; bottom: calc(100% + 3px); width: 22px; height: 22px; margin-left: -11px; border-radius: 50%;
+  background: radial-gradient(circle at 36% 30%, #E46A57, #A8331F 70%); box-shadow: 0 0 0 2px #FBE3D6, 0 3px 8px rgba(60, 20, 10, 0.4);
+  animation: cw-next 1.6s ease-in-out infinite;
+}
+@keyframes cw-next { 0%, 100% { translate: 0 0; } 50% { translate: 0 -5px; } }
+html[data-reduced-motion] .cw-plate.is-next::after { animation: none; }
+@media (prefers-reduced-motion: reduce) { .cw-plate.is-next::after { animation: none; } }
+/* The tour card */
+.cw-tour { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 8px; }
+.cw-tour > li { position: relative; display: grid; grid-template-columns: 40px 1fr; gap: 10px; align-items: start; padding: 10px 10px 10px 12px; border-radius: 14px; border: 1px solid var(--color-line-strong); background: var(--color-surface-2, transparent); }
+.cw-tour > li.is-next { border-color: #E2A93B; box-shadow: 0 0 0 2px color-mix(in srgb, #E2A93B 45%, transparent); }
+.cw-tour > li.is-sealed { opacity: 0.86; }
+.cw-tour__seal { position: absolute; right: 10px; top: 10px; width: 22px; height: 22px; border-radius: 50%; border: 2px dashed var(--color-line-strong); }
+.cw-tour > li.is-sealed .cw-tour__seal { border: 0; background: radial-gradient(circle at 36% 30%, #E46A57, #A8331F 70%); box-shadow: 0 0 0 2px #FBE3D6; }
+.cw-tour__home b { display: block; font: 750 15px/1.2 var(--font-ui); padding-right: 28px; }
+.cw-tour__home > small { display: block; margin-top: 2px; font: 600 12.5px/1.25 var(--font-ui); color: var(--color-ink-2); }
+.cw-tour__home ul { list-style: none; margin: 6px 0 0; padding: 0; display: grid; gap: 2px; }
+.cw-tour__home ul a { display: flex; align-items: center; gap: 6px; min-height: 44px; font: 600 14px/1.25 var(--font-ui); color: var(--color-ink); text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--color-ink) 30%, transparent); text-underline-offset: 3px; }
+.cw-tour__home ul small { font: 700 12px/1 var(--font-ui); color: var(--color-ink-2); }
+.cw-tour__home ul li.is-done a { text-decoration: line-through; color: var(--color-ink-2); }
+.cw-tour__home ul li.is-done a::before { content: ""; flex: none; width: 14px; height: 14px; border-radius: 50%; background: #5E8F45; box-shadow: inset 0 0 0 3px #DDEBCF; }
+.cw-tour__note { margin: 12px 2px 0; font: 500 13px/1.4 var(--font-ui); color: var(--color-ink-2); }
 
 /* ---------------- The bottom: today's three, and the big button ---------------- */
 /* The dock is an overlay: the big button alone sits low (so the campfire above it stays clear) and "today's three" rides under the top bar. */
@@ -472,7 +457,7 @@ html[data-reduced-motion] .cw-base { transition: none; }
 .cw:has(.cw-overlay.is-open) .cw-tease { opacity: 0; }
 .cw-laurels { display: flex; align-items: center; gap: 3px; }
 .cw-laurels b { font: 800 17px/1 var(--font-ui); }
-.cw-roomlinks { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 14px; }
+.cw-roomlinks { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-top: 14px; }
 .cw-roomlinks button { display: flex; flex-direction: column; gap: 3px; padding: 10px 6px; min-height: 60px; border-radius: 14px; border: 1px solid var(--color-line-strong); background: var(--color-surface-2, transparent); color: var(--color-ink); cursor: pointer; text-align: center; }
 .cw-roomlinks b { font: 750 14px/1.1 var(--font-ui); }
 .cw-roomlinks small { font: 600 11.5px/1.15 var(--font-ui); color: var(--color-ink-2); }

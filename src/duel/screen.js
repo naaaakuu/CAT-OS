@@ -362,7 +362,7 @@ export async function renderDuel(outlet, { storage }) {
             if (!correct) misses.push({ head: item.meta?.title ?? item.title ?? BIG_NAMES[type], body: o.teach ?? '' });
           }
           lowest = Math.min(lowest, s.rope);
-          saveBigMove(storage, type, item, { ...o, started });
+          saveBigMove(storage, type, item, { ...o, started }, { inDuel: true });
           if (s.over) { finish(); return; }
           const panel = document.createElement('div');
           panel.className = `dl-donepanel ${correct ? 'is-good' : 'is-miss'}`;

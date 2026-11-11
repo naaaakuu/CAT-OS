@@ -31,6 +31,7 @@ import { renderWilds } from './wilds.js';
 import { STORES } from '../../core/storage/storage-adapter.js';
 import { infoButton } from '../../ui/info.js';
 import { verbalTrio } from '../../pets/next.js';
+import { deriveSeals, sealLine } from '../../pets/seals.js';
 
 const STAGE_WORD = { open_ground: 'Unmet', seed: 'A seed', sprout: 'Sprout', young: 'Young', in_leaf: 'In leaf', mature: 'Mature', ancient: 'Ancient' };
 /** A tree's stage, in one typographic mark. Deliberately not emoji: the
@@ -270,7 +271,7 @@ export async function renderPlace(outlet, { storage }, params) {
         console.error('[CAT OS] could not remember night reading', err);
       }
     });
-    await library.renderLibrary(shelves, { lib, stage: hostState?.stage ?? 0 });
+    await library.renderLibrary(shelves, { lib, stage: hostState?.stage ?? 0, seal: sealLine(deriveSeals(world.records), 'chai') });
     /* The door opens: the room fades up out of the dark the village shut behind the learner. */
     const door = outlet.querySelector('.libroom__door');
     if (door) {

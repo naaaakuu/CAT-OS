@@ -20,6 +20,7 @@ import { PLAYERS, whyHTML } from '../play/players.js';
 import { openModal, closeModal } from '../ui/modal.js';
 import { focusContent } from '../ui/focus.js';
 import { roomModel } from './model.js';
+import { deriveSeals, sealLine } from '../pets/seals.js';
 import { railway, sky, clock, table, pantry } from './scenes.js';
 
 export const ROOMS = Object.freeze({
@@ -63,7 +64,7 @@ export async function renderRoom(outlet, { world, stage = 0 }, room) {
       <div class="rm__scene" id="scene" tabindex="-1">${room.scene(m)}<div class="rm__foot"></div></div>
       <header class="rm__top">
         <a class="dl-back" href="#/world" id="back" aria-label="Back to the village"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-        <div class="rm__title"><b>${esc(room.name)}</b><span>${m.solved} of ${m.total} ${esc(room.nouns)}</span></div>
+        <div class="rm__title"><b>${esc(room.name)}</b><span>${m.solved} of ${m.total} ${esc(room.nouns)}</span>${sealLine(deriveSeals(records), room.pet)}</div>
       </header>
       <div class="rm__dock">
         <div class="rm__friend" id="friend">${petFigure(room.pet, { size: 92, stage, frame: FRAME.happy })}<p class="rm__says" id="says">${esc(m.solved ? (landed ? `${pet.name} is delighted.` : room.say) : room.say)}</p></div>

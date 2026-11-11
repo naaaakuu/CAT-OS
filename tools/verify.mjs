@@ -1973,7 +1973,7 @@ console.log('\n16. The world (regions · economy · lexicon rounds · state · a
   /* ---- The pets' voice and economy, in full (their own tools) ---- */
   {
     const { spawnSync } = await import('node:child_process');
-    for (const tool of ['tools/check-pets.mjs', 'tools/check-pet-economy.mjs', 'tools/check-journey.mjs']) {
+    for (const tool of ['tools/check-pets.mjs', 'tools/check-pet-economy.mjs', 'tools/check-journey.mjs', 'tools/check-seals.mjs']) {
       const r = spawnSync(process.execPath, [join(root, tool)], { cwd: root, encoding: 'utf8', timeout: 600000 });
       const out = `${r.stdout ?? ''}${r.stderr ?? ''}`.trim().split('\n');
       if (r.status !== 0) bad(`${tool}: ${out.slice(-4).join(' | ')}`);
@@ -2085,14 +2085,15 @@ console.log('\n17. The welcome, the map and the art (companion · pins · art ·
     const b0 = problems.length;
     const { SHEETS } = await mod('src/pets/sheets.js');
     const { PETS } = await mod('src/pets/pets.js');
-    for (const f of ['assets/art/home-world-v1.png', 'assets/art/home-companions-v1.png']) if (!existsSync(join(root, f))) bad(`art: ${f} is missing`);
+    const { ART_FILES, HOUSES, STILL } = await mod('src/home/landscape.js');
+    for (const f of ['assets/art/home-companions-v1.png', ...Object.values(ART_FILES), ...Object.values(HOUSES).map((h) => h.file), STILL.src].map((x) => x.replace('./', ''))) if (!existsSync(join(root, f))) bad(`art: ${f} is missing`);
     for (const pet of PETS) {
       if (!existsSync(join(root, `assets/art/pet-${pet.id}.png`))) bad(`art: ${pet.name} has no sheet`);
       const sh = SHEETS[pet.id];
       if (!sh || sh.frames !== 5 || sh.h !== 384 || !(sh.w > 0)) bad(`art: ${pet.name}'s sheet is not five 384px frames`);
       if (!sh?.feet || !(sh.feet.top > sh.h * 0.8 && sh.feet.top < sh.feet.bottom && sh.feet.split > 0 && sh.feet.split < sh.w)) bad(`art: ${pet.name}'s sheet has no feet to walk on`);
     }
-    if (problems.length === b0) ok(`the painting and ${PETS.length} five-frame pet sheets are on disk`);
+    if (problems.length === b0) ok(`the valley's pieces and ${PETS.length} five-frame pet sheets are on disk`);
   }
 
   /* ---- Feedback stays short by default ---- */
@@ -2339,6 +2340,19 @@ console.log('\n23c. The friends walk only on the path (tools/check-walk.mjs — 
   const out = `${r.stdout ?? ''}${r.stderr ?? ''}`.trim().split('\n');
   if (out.some((l) => l.startsWith('SKIPPED'))) console.log('  --  SKIPPED: no Chrome on this machine (set CHROME_PATH). This section did NOT run.');
   else if (r.status !== 0) bad('walk: ' + out.slice(-3).join(' | '));
+  else ok(out[out.length - 1]);
+}
+
+console.log('\n23d. The valley tour (tools/check-tour.mjs — a real browser)');
+{
+  // A visit or a deep link seals nothing; real plays in a home seal it (chip,
+  // plate, card and room agree); a duel's plays never count; a full tour
+  // starts the next one; nothing about the tour is stored.
+  const { spawnSync } = await import('node:child_process');
+  const r = spawnSync(process.execPath, [join(root, 'tools/check-tour.mjs')], { cwd: root, encoding: 'utf8', timeout: 300000 });
+  const out = `${r.stdout ?? ''}${r.stderr ?? ''}`.trim().split('\n');
+  if (out.some((l) => l.startsWith('SKIPPED'))) console.log('  --  SKIPPED: no Chrome on this machine (set CHROME_PATH). This section did NOT run.');
+  else if (r.status !== 0) bad('tour: ' + out.slice(-3).join(' | '));
   else ok(out[out.length - 1]);
 }
 

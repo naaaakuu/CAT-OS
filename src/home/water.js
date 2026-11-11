@@ -1,21 +1,27 @@
 /**
- * Living water, in painting coordinates. A small, cached colour mask keeps
- * refraction, foam and ripples off the rocks, lilies, banks and bridges.
- * Shares life's clock; no WebGL, dependencies or separate animation loop.
+ * Living water, in world coordinates. A small colour mask read once from the
+ * terrain keeps everything on the painted water (off the banks, rocks and
+ * bridges, which sit above this layer anyway). Each reach refracts the
+ * painting in narrow bands, carries the water tile's own sun glints
+ * downstream, and draws flecks along its current; the falls play the art
+ * pack's falling-water loop with a little foam at their feet. Shares life's
+ * clock; no WebGL, dependencies or separate animation loop.
  */
 import { MAP } from '../pets/paths.js';
+import { FALLS, CELLS } from './landscape.js';
 import { rng } from '../world/engine/palette.js';
 
-// Separate visible reaches: the bridges occlude the current between them.
+/** Separate visible reaches, each with its centre line (upstream first). */
 export const REACHES = [
-  { box:[1380,350,668,285],line:[[2048,397],[1915,475],[1700,495],[1510,550],[1450,620]],width:22,speed:24,count:36 },
-  { box:[1370,635,470,340],line:[[1455,650],[1510,710],[1690,768],[1765,820],[1720,875],[1580,930]],width:24,speed:28,count:44,pond:true },
-  { box:[1050,965,600,315],line:[[1580,965],[1370,1010],[1240,1080],[1280,1190],[1190,1280]],width:25,speed:25,count:40 },
+  { box: [880, 186, 206, 452], line: [[1048, 196], [1028, 230], [998, 264], [984, 304], [976, 344], [972, 392], [984, 440], [990, 484], [986, 530], [1000, 578], [1040, 620]], width: 20, speed: 34, count: 30 },
+  { box: [596, 640, 330, 234], line: [[612, 668], [650, 700], [700, 728], [760, 760], [820, 790], [870, 826], [905, 862]], width: 26, speed: 24, count: 34, pond: true },
+  { box: [848, 826, 238, 330], line: [[905, 862], [950, 906], [990, 960], [1014, 1010], [1028, 1060], [1000, 1110], [960, 1142]], width: 24, speed: 28, count: 26 },
+  { box: [356, 1080, 730, 368], line: [[1070, 1078], [980, 1130], [900, 1180], [820, 1222], [740, 1262], [660, 1300], [580, 1336], [500, 1368], [430, 1402], [380, 1446]], width: 30, speed: 24, count: 44 },
 ];
 
 const TAU = Math.PI * 2;
 const clamp = (n, a, b) => Math.max(a, Math.min(b, n));
-const canvasOf = (w, h) => Object.assign(document.createElement('canvas'), { width: w, height: h });
+const canvasOf = (w, h) => Object.assign(document.createElement('canvas'), { width: Math.max(1, Math.round(w)), height: Math.max(1, Math.round(h)) });
 
 function along(reach, distance, lane = 0) {
   let d = clamp(distance, 0, reach.length - 0.001);
@@ -27,20 +33,33 @@ function along(reach, distance, lane = 0) {
   return reach.line[reach.line.length - 1];
 }
 
+/** The water tile's bright glints only, as white on transparent (read once). */
+function glintsOf(tile) {
+  const N = 256, c = canvasOf(N, N), g = c.getContext('2d', { willReadFrequently: true });
+  g.drawImage(tile, 0, 0, N, N);
+  const px = g.getImageData(0, 0, N, N), d = px.data;
+  for (let i = 0; i < d.length; i += 4) {
+    const L = 0.299 * d[i] + 0.587 * d[i + 1] + 0.114 * d[i + 2];
+    d[i + 3] = Math.round(255 * clamp((L - 170) / 70, 0, 1) ** 1.4);
+    d[i] = 255; d[i + 1] = 252; d[i + 2] = 236;
+  }
+  g.putImageData(px, 0, 0);
+  return c;
+}
+
 function prepare(img, spec, index) {
   const [x, y, w, h] = spec.box;
-  const source = canvasOf(w, h), mask = canvasOf(w, h), surface = canvasOf(Math.ceil(w / 2), Math.ceil(h / 2));
+  const source = canvasOf(w, h), mask = canvasOf(w, h), surface = canvasOf(w / 2, h / 2);
   surface.style.cssText = `position:absolute;left:${x}px;top:${y}px;width:${w}px;height:${h}px`;
-  const sg = source.getContext('2d');
-  const sx=(img.naturalWidth||img.width)/MAP.w, sy=(img.naturalHeight||img.height)/MAP.h;
-  sg.drawImage(img, x*sx, y*sy, w*sx, h*sy, 0, 0, w, h);
+  const sg = source.getContext('2d', { willReadFrequently: true });
+  const sx = (img.naturalWidth || img.width) / MAP.w, sy = (img.naturalHeight || img.height) / MAP.h;
+  sg.drawImage(img, x * sx, y * sy, w * sx, h * sy, 0, 0, w, h);
   const mg = mask.getContext('2d'), pixels = sg.getImageData(0, 0, w, h);
-  // Water is blue/teal, land is warm. Read once, never in the frame loop.
-  // Soft chroma edges retain the painted banks and foreground vegetation.
+  // Water is blue, land and rock are warm or grey. Read once, never in the frame loop.
   for (let i = 0; i < pixels.data.length; i += 4) {
     const r = pixels.data[i], g = pixels.data[i + 1], b = pixels.data[i + 2];
     const px = (i / 4) % w, py = Math.floor(i / 4 / w);
-    const blue = clamp((Math.min(g - r, b - r) - 5) / 22, 0, 1);
+    const blue = clamp((b - r - 28) / 34, 0, 1) * clamp((b - g + 6) / 24, 0, 1);
     const edge = clamp(Math.min(px, py, w - px - 1, h - py - 1) / 5, 0, 1);
     pixels.data[i + 3] = Math.round(255 * blue * edge);
   }
@@ -49,48 +68,46 @@ function prepare(img, spec, index) {
     const [ax, ay] = spec.line[i];
     return { x: ax, y: ay, dx: bx - ax, dy: by - ay, length: Math.hypot(bx - ax, by - ay) };
   });
+  const [fx, fy] = spec.line[0], [lx, ly] = spec.line[spec.line.length - 1], fl = Math.hypot(lx - fx, ly - fy) || 1;
   const random = rng(`water-${index}`);
   const flecks = Array.from({ length: spec.count }, () => ({
     phase: random(), lane: (random() - 0.5) * spec.width * 2,
-    size: 4 + random() * 12, alpha: 0.2 + random() * 0.4, speed: 0.75 + random() * 0.5,
+    size: 4 + random() * 10, alpha: 0.2 + random() * 0.4, speed: 0.75 + random() * 0.5,
   }));
-  const waves = Array.from({ length: spec.pond ? 32 : 0 }, () => ({
-    x: 15 + random() * (w - 30), y: 30 + random() * (h - 40), phase: random() * TAU, size: 6 + random() * 14,
-  }));
-  return { ...spec, source, mask, surface, g: surface.getContext('2d'), segments,
-    length: segments.reduce((sum, s) => sum + s.length, 0), flecks, waves };
+  return { ...spec, source, mask, surface, g: surface.getContext('2d'), segments, dir: [(lx - fx) / fl, (ly - fy) / fl],
+    length: segments.reduce((sum, s) => sum + s.length, 0), flecks };
 }
 
-export function createWater(map, { reduced = false } = {}) {
+export function createWater(map, { reduced = false, images = null } = {}) {
   const noop = { paint() {}, ripple() {}, setSource() {}, destroy() {} };
   const img = map.querySelector('.cw-art');
   if (reduced || !img) return noop;
-  const canvas = document.createElement('div');
-  canvas.className = 'cw-water'; canvas.setAttribute('aria-hidden', 'true');
-  // Under the hour's tint, so the same current belongs to day and night.
-  map.insertBefore(canvas, map.querySelector('.cw-ground') ?? map.querySelector('.cw-clouds'));
-  let reaches = [], disposed = false, last = -Infinity, clock = 0;
+  const layer = document.createElement('div');
+  layer.className = 'cw-water'; layer.setAttribute('aria-hidden', 'true');
+  // Over the terrain, under the shadows, bridges and houses.
+  img.after(layer);
+  let reaches = [], disposed = false, last = -Infinity, clock = 0, glints = null, pattern = null;
   const ripples = [];
-  /** Cut the water from `src` (the painting, or the village's grown copy of it). */
+  const falls = FALLS.map(([x, top, w, h]) => ({ x, top, w, h, reach: REACHES.findIndex((r) => x >= r.box[0] && x <= r.box[0] + r.box[2] && top >= r.box[1] && top <= r.box[1] + r.box[3]) }));
   const from = (src) => {
     if (disposed) return;
     const next = REACHES.map((s, i) => prepare(src, s, i));
     for (const r of reaches) r.surface.remove();
     reaches = next;
-    canvas.append(...reaches.map((r) => r.surface));
-    canvas.dataset.ready = 'true';
+    layer.append(...reaches.map((r) => r.surface));
+    layer.dataset.ready = 'true';
   };
-  img.decode().then(() => { if (!reaches.length) from(img); }).catch(() => { canvas.remove(); });
+  img.decode().then(() => { if (!reaches.length) from(img); }).catch(() => { layer.remove(); });
 
   return {
     paint(ms, weather = '', view = null) {
       clock = ms / 1000;
-      // Water runs at 30 fps; pets and camera remain at the display's rate.
-      if (!reaches.length || ms - last < 32) return;
+      // Water runs at about 24 fps; friends and the camera keep the display's rate.
+      if (!reaches.length || ms - last < (view?.s < 0.7 ? 80 : 40)) return;
       last = ms;
       const time = clock * (weather === 'rain' ? 1.3 : 1);
       while (ripples.length && clock - ripples[0].time > 2.4) ripples.shift();
-      for (const reach of reaches) {
+      for (const [ri, reach] of reaches.entries()) {
         const [x, y, w, h] = reach.box, c = reach.g;
         // A reach off screen keeps its last picture: nobody is looking at it.
         if (view && (x > view.x + view.w || x + w < view.x || y > view.y + view.h || y + h < view.y)) continue;
@@ -98,9 +115,21 @@ export function createWater(map, { reduced = false } = {}) {
         c.clearRect(0, 0, w, h);
         // Refract the actual painting in narrow bands. The mask stays fixed.
         for (let row = 0; row < h; row += 3) {
-          const dx = Math.sin(row * 0.16 - time * 2.8) * 2.6 + Math.sin(row * 0.07 + time * 1.4) * 1.4;
-          const sy = clamp(row + Math.sin(row * 0.09 - time * 3.2) * 2, 0, h - 3);
+          const dx = Math.sin(row * 0.16 - time * 2.8) * 2.2 + Math.sin(row * 0.07 + time * 1.4) * 1.2;
+          const sy = clamp(row + Math.sin(row * 0.09 - time * 3.2) * 1.6, 0, h - 3);
           c.drawImage(reach.source, 0, sy, w, Math.min(3, h - row), dx, row, w, Math.min(3, h - row));
+        }
+        // The tile's sun glints, two layers drifting downstream at different speeds.
+        if (!glints && images?.water) glints = glintsOf(images.water);
+        if (glints) {
+          if (!pattern) pattern = c.createPattern(glints, 'repeat');
+          const [ux, uy] = reach.dir, k = 0.34;
+          for (const [speed, side, alpha] of [[reach.speed, 0, 0.55], [reach.speed * 0.62, 9, 0.35]]) {
+            const d = time * speed, ox = ux * d - uy * side * Math.sin(time * 0.4), oy = uy * d + ux * side * Math.sin(time * 0.4);
+            c.save(); c.globalAlpha = alpha; c.translate(ox % (256 * k) - 256 * k, oy % (256 * k) - 256 * k); c.scale(k, k);
+            c.fillStyle = pattern; c.fillRect(0, 0, (w + 512 * k) / k, (h + 512 * k) / k);
+            c.restore();
+          }
         }
         c.lineCap = 'round';
         for (const f of reach.flecks) {
@@ -108,30 +137,40 @@ export function createWater(map, { reduced = false } = {}) {
           const lane = f.lane + Math.sin(time * 1.5 + f.phase * TAU) * 2;
           const a = along(reach, distance, lane), b = along(reach, distance + f.size, lane);
           const fade = Math.min(1, distance / 16, (reach.length - distance) / 16);
-          c.strokeStyle = `rgba(215,249,242,${f.alpha * fade})`; c.lineWidth = reach.pond ? 1.2 : 1.7;
+          c.strokeStyle = `rgba(222,249,246,${f.alpha * fade})`; c.lineWidth = 1.4;
           c.beginPath(); c.moveTo(a[0] - x, a[1] - y);
           c.quadraticCurveTo((a[0] + b[0]) / 2 - x + 2, (a[1] + b[1]) / 2 - y - 2, b[0] - x, b[1] - y); c.stroke();
         }
-        for (const wave of reach.waves) {
-          const phase = time * 1.2 + wave.phase, wx = wave.x + Math.sin(phase * 0.7) * 8, wy = wave.y + Math.sin(phase) * 3;
-          c.strokeStyle = `rgba(225,250,239,${0.12 + (Math.sin(phase) + 1) * 0.12})`; c.lineWidth = 1;
-          c.beginPath(); c.ellipse(wx, wy, wave.size, 2.2, 0, 0.1, Math.PI - 0.1); c.stroke();
-        }
-        // Rings at the foot of the falls, plus rings where the learner taps.
-        const mouth = reach.line[Math.min(2, reach.line.length - 1)];
-        const rings = [{ x: mouth[0], y: mouth[1], age: (time % 2) / 2 },
+        // Rings at the foot of each fall, plus rings where the learner taps.
+        const rings = [...falls.filter((f) => f.reach === ri).map((f, i) => ({ x: f.x, y: f.top + f.h, age: ((time + i * 0.7) % 2) / 2 })),
           ...ripples.map((r) => ({ ...r, age: (clock - r.time) / 2.4 }))];
         for (const r of rings) {
           if (r.x < x || r.x > x + w || r.y < y || r.y > y + h) continue;
           for (let j = 0; j < 2; j += 1) {
             const age = r.age - j * 0.17;
             if (age <= 0 || age >= 1) continue;
-            c.strokeStyle = `rgba(227,250,239,${(1 - age) * 0.5})`; c.lineWidth = 1.2;
-            c.beginPath(); c.ellipse(r.x - x, r.y - y, 3 + age * 28, 1 + age * 9, 0, 0, TAU); c.stroke();
+            c.strokeStyle = `rgba(232,250,244,${(1 - age) * 0.5})`; c.lineWidth = 1.1;
+            c.beginPath(); c.ellipse(r.x - x, r.y - y, 3 + age * 20, 1 + age * 6, 0, 0, TAU); c.stroke();
           }
         }
         c.globalCompositeOperation = 'destination-in'; c.drawImage(reach.mask, 0, 0);
         c.globalCompositeOperation = 'source-over';
+        // The falls and their foam ride over the rocks, so they are not masked.
+        if (images?.falls) {
+          const frame = Math.floor(time * 10) % 4;
+          for (const [i, f] of falls.entries()) {
+            if (f.reach !== ri) continue;
+            const [fx, fy, fw, fh] = CELLS.falls[(frame + i) % 4];
+            c.globalAlpha = 0.82;
+            c.drawImage(images.falls, fx, fy, fw, fh * 0.86, f.x - f.w / 2 - x, f.top - y, f.w, f.h);
+            if (images.fx) {
+              const [qx, qy, qw, qh] = CELLS.fx.foam, fw2 = f.w * 1.5, drift = Math.sin(time * 1.3 + i) * 1.5;
+              c.globalAlpha = 0.55 + 0.2 * Math.sin(time * 2.1 + i);
+              c.drawImage(images.fx, qx, qy, qw, qh, f.x - fw2 / 2 - x + drift, f.top + f.h - fw2 * 0.18 - y, fw2, fw2 * qh / qw);
+            }
+            c.globalAlpha = 1;
+          }
+        }
       }
     },
     ripple(x, y) {
@@ -139,8 +178,8 @@ export function createWater(map, { reduced = false } = {}) {
       if (ripples.length >= 8) ripples.shift();
       ripples.push({ x, y, time: clock });
     },
-    /** The painting changed under the water (a house grew): cut it again from the new picture. */
+    /** Cut the water again from another picture of the terrain. */
     setSource(src) { try { from(src); } catch { /* keep the old water */ } },
-    destroy() { disposed = true; reaches = []; ripples.length = 0; canvas.remove(); },
+    destroy() { disposed = true; reaches = []; ripples.length = 0; layer.remove(); },
   };
 }
