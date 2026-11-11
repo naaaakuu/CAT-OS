@@ -4,6 +4,13 @@
 > Versions here are app releases; they map onto the capability milestones in
 > `PROJECT_ROADMAP.md` (0.x releases build toward Roadmap V1.0).
 
+## Unreleased: A spacious, layered village (2026-11-11)
+
+- Replaced the crowded single-painting layout with a 2048 × 1280 meadow, winding river, painted trails, wooden bridge and open village square. The original eight landmarks remain independently placed artwork, including Chai's library and Matcha's greenhouse; room routes, pet sprites and learning progression are unchanged.
+- Separate landscape, path, building, tree, water, marker and pet layers support future expansion. House growth, smoke, moving machinery, lamps and clock follow their relocated buildings. Tree sway and water are selective, pause offscreen and respect reduced motion.
+- Phone panning, room taps and speech positioning stay usable on narrow screens. New landscape art is shipped as three WebP files totalling about 1 MB, with the village renderer loaded only when needed and assets included in offline installation.
+- Validation: 85 browser checks including 320/360/390 px portrait and 844 px landscape layouts, minimum 44 px touch targets, room taps, reduced motion and offline reopening. All 61 navigation nodes and 68 paths pass composed-art geometry checks; 28,224 simulated pet positions stay on the walk graph and all eight friends reach the party. The eager module budget remains within its existing limit.
+
 ## 3.19.0: All of VARC on the rope, and one voice at a time (2026-11-10)
 
 - The owner found that PLAY was always the same game ("play vs smudge") and asked for the whole of VARC in the same fun form. Every Muddle is now a part of the exam and a duel against one is mostly that part: two jumbles, strays, gaps, seats or summaries with quick strikes round them. Any Muddle can be fought at any stop; the Laurel Road now only decides how hard they pull.

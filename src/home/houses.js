@@ -28,7 +28,8 @@
  * canvas, only for houses on screen. Painting pixels throughout.
  */
 
-import { WINDOWS } from '../pets/paths.js';
+import { SOURCE_WINDOWS as WINDOWS } from '../pets/paths.js';
+import { ART, BUILDINGS, worldPoint, sourcePoint } from './landscape.js';
 import {
   canvasOf, stamp, glow, glowSprite, glyphSprite, flowerBush, pottedPlant, sunflowerHead, pumpkin, lanternSprite, starLanternSprite,
   bookStack, cogCrate, telescopeSprite, teaSet, logBench, roseBasket, mendingCart, balloonSprite, crownStarSprite,
@@ -116,6 +117,9 @@ export const HOUSE_ART = {
 
 /** The order houses are drawn in: back (top of the painting) to front. */
 const DRAW_ORDER = Object.keys(HOUSE_ART).sort((a, b) => HOUSE_ART[a].mask[1] - HOUSE_ART[b].mask[1]);
+// House painters retain source-art coordinates; only the scene boundary
+// changes them into world coordinates. The same art can move again later.
+const WORLD_DRAW_ORDER = [...DRAW_ORDER].sort((a, b) => worldPoint(a, { x: 0, y: HOUSE_ART[a].mask[1] }).y - worldPoint(b, { x: 0, y: HOUSE_ART[b].mask[1] }).y);
 
 /** LAMPS that belong to a house (lit from stage 1); the rest are the village's and always lit. */
 export const LAMP_HOUSE = new Map(Object.entries(HOUSE_ART).flatMap(([id, h]) => h.lamps.map((i) => [i, id])));
@@ -233,7 +237,7 @@ export function stampStatics(g, stages) {
  * size of the painting (or null if `isAborted` turns true while it works).
  */
 export async function bakeVillage(img, stages, { isAborted = () => false } = {}) {
-  const w = img.naturalWidth || 1536, h = img.naturalHeight || 1024;
+  const w = img.naturalWidth || ART.w, h = img.naturalHeight || ART.h;
   const c = canvasOf(w, h), g = c.getContext('2d', { willReadFrequently: true });
   g.drawImage(img, 0, 0, w, h);
   const data = await gradePixels(g, w, h, stages, undefined, isAborted);
@@ -567,18 +571,34 @@ export function createHouseLife({ reduced = false, stages: initial = {} } = {}) 
     setStages(next) { stages = { ...next }; },
     stageOf: st,
     /** Chimneys that smoke: a house's own from stage 1. */
-    chimneys() { return Object.entries(HOUSE_ART).filter(([id, h]) => h.chimney && st(id) >= 1).map(([, h]) => h.chimney); },
+    chimneys() { return Object.entries(HOUSE_ART).filter(([id, h]) => h.chimney && st(id) >= 1).map(([id, h]) => worldPoint(id, h.chimney)); },
     /** A house that just grew sends up a burst of light (starting the next time it is drawn). */
     burst(id) { if (S[id] && !reduced) S[id].burst = -1; },
     /** With less motion this is called once per view, with `now` held still: the house shows everything it has grown, keeping still. */
     draw(g, now, dt, rect, env) {
       const lights = [];
       let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
-      for (const id of DRAW_ORDER) {
-        const l = drawHouse(id, g, now, dt, env, rect);
+      for (const id of WORLD_DRAW_ORDER) {
+        const placement = BUILDINGS[id];
+        const origin = sourcePoint(id, rect);
+        const localRect = { ...origin, w: rect.w / placement.scale, h: rect.h / placement.scale };
+        g.save();
+        g.translate(placement.x, placement.y);
+        g.scale(placement.scale, placement.scale);
+        const l = drawHouse(id, g, now, dt, env, localRect);
+        g.restore();
         if (!l) continue;
-        lights.push(...l);
-        const b = BOX[id]; x0 = Math.min(x0, b.x0); y0 = Math.min(y0, b.y0); x1 = Math.max(x1, b.x1); y1 = Math.max(y1, b.y1);
+        // Deferred glows run after the hour tint, in the same local space
+        // as the plain paint that emitted them.
+        lights.push(() => {
+          g.save();
+          g.translate(placement.x, placement.y);
+          g.scale(placement.scale, placement.scale);
+          for (const light of l) light();
+          g.restore();
+        });
+        const b = BOX[id], a = worldPoint(id, { x: b.x0, y: b.y0 }), z = worldPoint(id, { x: b.x1, y: b.y1 });
+        x0 = Math.min(x0, a.x); y0 = Math.min(y0, a.y); x1 = Math.max(x1, z.x); y1 = Math.max(y1, z.y);
       }
       if (!lights.length) return;
       // Plain paint takes the hour's colour, as the painting does under the tint; lights go on top, added.

@@ -40,7 +40,7 @@
  */
 
 import { ATLAS } from './motion-atlas.js';
-import { MAP } from '../pets/paths.js';
+import { ART, BUILDINGS, worldPoint } from './landscape.js';
 
 /** k, rect (an ellipse fills it) or poly, then what the kind needs. Painting pixels throughout. */
 export const PATCHES = [
@@ -136,23 +136,32 @@ export function mountMotion(map, { atmo, reduced, stages = null, atlas = null } 
   const art = map?.querySelector('.cw-art');
   // At rest every patch IS the painting, so with less motion there is nothing
   // to add; and nothing at all from an atlas cut from another painting.
-  if (reduced || !art || !ATLAS.at.length || ATLAS.painting !== MAP.src) return { setAtmo() {}, setView() {}, destroy() {} };
+  if (reduced || !art || !ATLAS.at.length || ATLAS.painting !== ART.src) return { setAtmo() {}, setView() {}, destroy() {} };
   const src = `url("${atlas ?? new URL(ATLAS.src, document.baseURI).href}")`;
   const box = document.createElement('div');
   box.className = 'cw-motion';
   box.setAttribute('aria-hidden', 'true');
   PATCHES.forEach((p, i) => {
     const r = rectOf(p), a = ATLAS.at[i];
+    // Only retained landmark details animate. Old terrain patches would ghost
+    // fragments of the original forest over the new meadow.
+    const owner = p.house ?? (p.k === 'flame' ? 'toffee' : p.k === 'flap' ? (p.poly[0][0] < 1000 ? 'ginger' : 'mochi') : null);
+    if (!owner) return;
     // A machine whose house has not woken up yet keeps still: the painting under it is the same picture.
     if (p.house && stages && (stages[p.house] ?? 0) < p.from) return;
     // A stale bake would show the wrong piece of the painting; leave it still instead.
-    if (a && a[0] === r.x && a[1] === r.y && a[2] === r.w && a[3] === r.h) box.appendChild(patch(p, r, a[4], a[5], src));
+    if (a && a[0] === r.x && a[1] === r.y && a[2] === r.w && a[3] === r.h) {
+      const el=patch(p,r,a[4],a[5],src), b=BUILDINGS[owner], at=worldPoint(owner,r);
+      el.dataset.house=owner; el.dataset.scale=b.scale;
+      el.style.left=at.x+'px';el.style.top=at.y+'px';el.style.transformOrigin='0 0';el.style.transform='scale('+b.scale+')';
+      box.appendChild(el);
+    }
   });
   ([...map.querySelectorAll('.cw-base')].at(-1) ?? art).after(box);
   const setAtmo = (at = {}) => { box.dataset.weather = at.weather ?? ''; };
   setAtmo(atmo);
   /* A patch off screen is paused: a running CSS animation is restyled every frame the page draws, seen or not. */
-  const items = [...box.children].map((el) => ({ el, x0: parseFloat(el.style.left), y0: parseFloat(el.style.top), x1: parseFloat(el.style.left) + parseFloat(el.style.width), y1: parseFloat(el.style.top) + parseFloat(el.style.height), off: false }));
+  const items = [...box.children].map((el) => ({ el, x0: parseFloat(el.style.left), y0: parseFloat(el.style.top), x1: parseFloat(el.style.left) + parseFloat(el.style.width) * Number(el.dataset.scale), y1: parseFloat(el.style.top) + parseFloat(el.style.height) * Number(el.dataset.scale), off: false }));
   const setView = (v) => {
     for (const it of items) {
       const off = it.x1 < v.x - 40 || it.x0 > v.x + v.w + 40 || it.y1 < v.y - 40 || it.y0 > v.y + v.h + 40;

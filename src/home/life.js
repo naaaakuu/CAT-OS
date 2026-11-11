@@ -38,6 +38,7 @@ import { voice, signature } from '../world/audio.js';
 import { createWater } from './water.js';
 import { glow, twinkle, glyphSprite, stamp } from './paint.js';
 import { HOUSE_ART } from './houses.js';
+import { worldPoint } from './landscape.js';
 
 /** Drawn height of each pet at full size, in painting pixels. */
 export const PET_SIZE = Object.freeze({ toffee: 70, chai: 84, matcha: 78, mochi: 78, ginger: 84, mallow: 80, sesame: 70, biscuit: 78 });
@@ -474,6 +475,12 @@ export function createLife(root, { pets: petsState, atmo, reduced, view = null, 
     if (view && !reduced) { const v = viewNow; if (a.x < v.x - 160 || a.x > v.x + v.w + 160 || a.y < v.y - 60 || a.y > v.y + v.h + 200) return; }
     const pos = `translate3d(${a.x.toFixed(1)}px,${a.y.toFixed(1)}px,0)`;
     if (pos !== a.lastPos) { a.lastPos = pos; a.el.style.transform = pos; a.top.style.transform = pos; }
+    if (a.sayUntil && view) {
+      const v = viewNow, pad = 145 / v.s;
+      const bx = Math.max(v.x + pad, Math.min(v.x + v.w - pad, a.x));
+      a.bubble.style.marginLeft = `${(bx - a.x).toFixed(1)}px`;
+      a.bubble.style.visibility = a.x < v.x || a.x > v.x + v.w ? 'hidden' : '';
+    }
     const z = Math.round(a.y);
     if (z !== a.lastZ) { a.lastZ = z; a.el.style.zIndex = String(z); a.top.style.zIndex = String(z); }
     const body = `translateY(${(-lift).toFixed(1)}px) rotate(${tilt.toFixed(2)}deg) scale(${(a.facing * sx).toFixed(3)},${sy.toFixed(3)})`;
@@ -542,9 +549,16 @@ export function createLife(root, { pets: petsState, atmo, reduced, view = null, 
   const ensure = (kind, n, make) => { for (let i = count[kind] ?? 0; i < n; i += 1) add(make(i)); };
   const lilies = (TREASURE_AT.lilylights ?? []);
   const LETTERS = 'abcdefghijklmnopqrstuvwxyz';
-  const FIREFLY_AT = [[620, 540], [940, 540], [330, 520], [1200, 520], [400, 820], [800, 660], [1100, 760], [770, 420]];
-  const BUTTERFLY_AT = [[300, 470], [460, 700], [1250, 480], [560, 640], [980, 640], [450, 300], [940, 330]];
-  const houseAt = (id) => { const m = HOUSE_ART[id]?.mask; return m ? [m[0], m[1] + m[3] * 0.35] : [770, 492]; };
+  const houseAt = (id) => {
+    const m = HOUSE_ART[id]?.mask;
+    const p = m ? worldPoint(id, { x: m[0], y: m[1] + m[3] * 0.35 }) : NODES.pc;
+    return [p.x, p.y];
+  };
+  const FIREFLY_AT = ['chai', 'matcha', 'ginger', 'mallow', 'mochi', 'biscuit', 'sesame', 'toffee'].map(houseAt);
+  const BUTTERFLY_AT = [
+    ['matcha', 300, 470], ['biscuit', 460, 700], ['mochi', 1250, 480],
+    ['toffee', 700, 930], ['sesame', 1205, 842], ['chai', 450, 300], ['ginger', 940, 300],
+  ].map(([id, x, y]) => { const p = worldPoint(id, { x, y }); return [p.x, p.y]; });
 
   /** A chore's particle, thrown into the air at painting point (x, y). */
   function emit(kind, x, y, scale = 1, dir = 1) {
@@ -579,10 +593,10 @@ export function createLife(root, { pets: petsState, atmo, reduced, view = null, 
       const grownSix = grown(6), grownTwo = grown(2);
       ensure('firefly', fireflyCount(), (i) => { const q = R(`ff${i}${now | 0}`); const [ax, ay] = i % 3 === 2 && grownSix.length ? houseAt(grownSix[i % grownSix.length]) : FIREFLY_AT[i % FIREFLY_AT.length]; return { kind: 'firefly', ax: ax + (q() - 0.5) * 160, ay: ay + (q() - 0.5) * 90, x: ax, y: ay, t: q() * 100, sp: 0.3 + q() * 0.5 }; });
       ensure('butterfly', butterflyCount(), (i) => { const q = R(`bf${i}${now | 0}`); const [ax, ay] = i % 3 === 2 && grownTwo.length ? houseAt(grownTwo[i % grownTwo.length]) : BUTTERFLY_AT[i % BUTTERFLY_AT.length]; return { kind: 'butterfly', ax, ay, x: ax, y: ay, t: q() * 100, c: ['#FFF6E0', '#F7D774', '#A9C8F0', '#F4B6C2'][i % 4] }; });
-      if (isAutumn || isSpring) ensure('leaf', weather === 'rain' ? 4 : 9, () => ({ kind: 'leaf', x: rand(0, 1536), y: rand(-200, 900), vx: rand(6, 18), vy: rand(14, 26), rot: rand(0, 6), vr: rand(-1.5, 1.5), sway: rand(0, 6), c: isSpring ? pickOf(['#F6C9D2', '#FBE3E8', '#F2B4C3']) : pickOf(['#D9822B', '#E6A23C', '#C4602D', '#E9C46A']) }));
-      if (weather === 'rain') ensure('rain', 140, () => ({ kind: 'rain', x: rand(-100, 1536), y: rand(-100, 1024), v: rand(520, 700) }));
-      if (weather === 'snow' || isWinter) ensure('snow', weather === 'snow' ? 90 : 0, () => ({ kind: 'snow', x: rand(0, 1536), y: rand(-50, 1024), v: rand(14, 30), s: rand(0, 6), r: rand(1.2, 2.6) }));
-      if (hour === 'afternoon' || hour === 'morning') ensure('mote', 12, (i) => ({ kind: 'mote', x: rand(400, 1150), y: rand(250, 800), t: i * 1.7 }));
+      if (isAutumn || isSpring) ensure('leaf', weather === 'rain' ? 4 : 9, () => ({ kind: 'leaf', x: rand(0, MAP.w), y: rand(-200, MAP.h - 100), vx: rand(6, 18), vy: rand(14, 26), rot: rand(0, 6), vr: rand(-1.5, 1.5), sway: rand(0, 6), c: isSpring ? pickOf(['#F6C9D2', '#FBE3E8', '#F2B4C3']) : pickOf(['#D9822B', '#E6A23C', '#C4602D', '#E9C46A']) }));
+      if (weather === 'rain') ensure('rain', 140, () => ({ kind: 'rain', x: rand(-100, MAP.w), y: rand(-100, MAP.h), v: rand(520, 700) }));
+      if (weather === 'snow' || isWinter) ensure('snow', weather === 'snow' ? 90 : 0, () => ({ kind: 'snow', x: rand(0, MAP.w), y: rand(-50, MAP.h), v: rand(14, 30), s: rand(0, 6), r: rand(1.2, 2.6) }));
+      if (hour === 'afternoon' || hour === 'morning') ensure('mote', 12, (i) => ({ kind: 'mote', x: rand(MAP.w * 0.2, MAP.w * 0.8), y: rand(MAP.h * 0.2, MAP.h * 0.8), t: i * 1.7 }));
       // Two dragonflies over the pond by day.
       ensure('dragonfly', !dark() && weather !== 'rain' ? 2 : 0, (i) => ({ kind: 'dragonfly', ax: POND.x - 80 + i * 150, ay: POND.y - 30, x: POND.x, y: POND.y, t: rand(0, 50), dart: 0 }));
       if (now > rippleAt) { rippleAt = now + rand(weather === 'rain' ? 600 : 3500, weather === 'rain' ? 1400 : 8000); const q = R(`rip${now | 0}`); const t = q() * Math.PI * 2, d = Math.sqrt(q()) * 0.8; add({ kind: 'ripple', x: POND.x + Math.cos(t) * POND.rx * d, y: POND.y + Math.sin(t) * POND.ry * d, age: 0, life: 2.6 }); }
@@ -591,9 +605,9 @@ export function createLife(root, { pets: petsState, atmo, reduced, view = null, 
       if (!dark() && weather !== 'rain' && now > birdsAt) {
         birdsAt = now + rand(22e3, 42e3);
         const ltr = Math.random() < 0.5, y0 = rand(50, 200), n = 3 + Math.floor(Math.random() * 3);
-        for (let i = 0; i < n; i += 1) add({ kind: 'bird', x: ltr ? -40 - i * 26 : 1576 + i * 26, y: y0 + (i % 2) * 14 + i * 4, vx: ltr ? rand(70, 85) : -rand(70, 85), t: Math.random() * 6, age: 0, life: 30 });
+        for (let i = 0; i < n; i += 1) add({ kind: 'bird', x: ltr ? -40 - i * 26 : MAP.w + 40 + i * 26, y: y0 + (i % 2) * 14 + i * 4, vx: ltr ? rand(70, 85) : -rand(70, 85), t: Math.random() * 6, age: 0, life: MAP.w / 70 + 5 });
       }
-      if (night() && made('skylanterns') && pets.harmony >= 0.5) { lanternAcc += dt * 0.5; while (lanternAcc > 1) { lanternAcc -= 1; add({ kind: 'lantern', x: rand(640, 900), y: rand(440, 560), vy: rand(-14, -9), age: 0, life: 40, t: Math.random() * 6 }); } }
+      if (night() && made('skylanterns') && pets.harmony >= 0.5) { lanternAcc += dt * 0.5; while (lanternAcc > 1) { lanternAcc -= 1; add({ kind: 'lantern', x: NODES.pc.x + rand(-130, 130), y: NODES.pc.y + rand(-60, 60), vy: rand(-14, -9), age: 0, life: 40, t: Math.random() * 6 }); } }
     }
 
     // draw
@@ -712,19 +726,19 @@ export function createLife(root, { pets: petsState, atmo, reduced, view = null, 
         }
         case 'leaf':
           p.x += (p.vx + Math.sin(now / 900 + p.sway) * 14) * dt; p.y += p.vy * dt; p.rot += p.vr * dt;
-          if (p.y > 1040 || p.x > 1560) { p.x = rand(-40, 1400); p.y = rand(-60, -10); }
+          if (p.y > MAP.h + 16 || p.x > MAP.w + 24) { p.x = rand(-40, MAP.w); p.y = rand(-60, -10); }
           if (!inView(r, p.x, p.y)) break;
           g.save(); g.translate(p.x, p.y); g.rotate(p.rot); g.fillStyle = p.c; g.beginPath(); g.ellipse(0, 0, 4.4, 2.2, 0, 0, 7); g.fill(); g.restore();
           break;
         case 'rain':
           p.y += p.v * dt; p.x += p.v * 0.18 * dt;
-          if (p.y > 1030) { p.y = rand(-60, -10); p.x = rand(-200, 1536); }
+          if (p.y > MAP.h + 6) { p.y = rand(-60, -10); p.x = rand(-200, MAP.w); }
           if (!inView(r, p.x, p.y)) break;
           g.strokeStyle = 'rgba(220,230,245,.32)'; g.lineWidth = 1.2; g.beginPath(); g.moveTo(p.x, p.y); g.lineTo(p.x - 3, p.y - 15); g.stroke();
           break;
         case 'snow':
           p.y += p.v * dt; p.x += Math.sin(now / 1000 + p.s) * 10 * dt;
-          if (p.y > 1030) { p.y = -10; p.x = rand(0, 1536); }
+          if (p.y > MAP.h + 6) { p.y = -10; p.x = rand(0, MAP.w); }
           if (!inView(r, p.x, p.y)) break;
           g.fillStyle = 'rgba(255,255,255,.85)'; g.beginPath(); g.arc(p.x, p.y, p.r, 0, 7); g.fill();
           break;
@@ -740,7 +754,7 @@ export function createLife(root, { pets: petsState, atmo, reduced, view = null, 
           g.strokeStyle = `rgba(235,245,255,${(0.5 * (1 - k)).toFixed(2)})`; g.lineWidth = 1.4; g.beginPath(); g.ellipse(p.x, p.y, 4 + k * 26, 2 + k * 10, 0, 0, 7); g.stroke();
           break;
         case 'bird': {
-          p.x += p.vx * dt; p.t += dt * 9; if (p.x < -80 || p.x > 1620) { drop(i); break; }
+          p.x += p.vx * dt; p.t += dt * 9; if (p.x < -80 || p.x > MAP.w + 84) { drop(i); break; }
           if (!inView(r, p.x, p.y)) break;
           const w = Math.sin(p.t) * 4;
           g.strokeStyle = 'rgba(52,48,44,.7)'; g.lineWidth = 1.8; g.lineCap = 'round';

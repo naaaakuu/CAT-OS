@@ -80,6 +80,13 @@ export function coreFiles() {
     './manifest.webmanifest',
     ...linkedStylesheets(),
     './assets/art/home-world-v1.png',
+    './assets/art/village-terrain-v2.webp',
+    './assets/art/village-paths-v2.webp',
+    './assets/art/village-oak-v2.webp',
+    // Loaded on entering the village rather than every app route, but still
+    // needed for an offline first visit as soon as core installation finishes.
+    './src/home/scenery.js',
+    './src/home/motion.js',
     ...pets,
     './content/boot-index.json',
     './assets/icons/icon-192.png',

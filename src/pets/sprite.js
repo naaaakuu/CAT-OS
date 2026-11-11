@@ -9,7 +9,8 @@
  */
 
 import { SHEETS, BABY_SHEETS } from './sheets.js';
-import { MAP, CROPS, HOMES } from './paths.js';
+import { CROPS, SOURCE_HOMES as HOMES } from './paths.js';
+import { ART as MAP } from '../home/landscape.js';
 import { PET_BY_ID, ageOf } from './pets.js';
 
 export const FRAME = Object.freeze({ idle: 0, blink: 1, happy: 2, talk: 3, sleep: 4 });

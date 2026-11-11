@@ -11,8 +11,8 @@
  *            pulling a rope against a Muddle; every answer still grows the
  *            village. A waiting letter floats above the button.
  *
- * The camera is a transform on one 1536×1024 layer, so every coordinate
- * below is a pixel of the painting (src/pets/paths.js), whatever the screen.
+ * The camera transforms a layered 2048×1280 world, so every coordinate
+ * below is a world pixel (src/pets/paths.js), whatever the screen.
  * It never zooms (owner, 2026-10-03: zoomed out, the village "does not look
  * good"): the painting always fills the screen at full detail, and on a phone
  * you scroll left and right to see the rest of it.
@@ -30,7 +30,7 @@ import { duelsIn, ladderOf, nextBout, troublemakerOf } from '../duel/model.js';
 import { pendingLetters, ownedCards, teaseCard } from '../duel/letters.js';
 import { laurelSVG } from '../duel/art.js';
 import { createLife, petSize } from './life.js';
-import { mountMotion } from './motion.js';
+import { ART, BUILDINGS, worldPoint } from './landscape.js';
 import { ATLAS } from './motion-atlas.js';
 import { createHouseLife, bakeVillage, gradeAtlas, LAMP_HOUSE, WINDOW_HOUSE, HOUSE_ART } from './houses.js';
 import { renderCard, decorLayer } from './cards.js';
@@ -53,8 +53,14 @@ const store = {
 export async function renderVillageHome(outlet, ctx) {
   const { storage } = ctx;
   const arrivedAt = location.hash;
-  let world, valley;
-  try { [world, valley] = await Promise.all([loadWorld(storage), loadValley(storage)]); } catch (err) {
+  let world, valley, scenery, moving;
+  try {
+    [world, valley, scenery, moving] = await Promise.all([
+      loadWorld(storage), loadValley(storage),
+      import('./scenery.js').then(async (scene) => { await scene.loadScenery(); return scene; }),
+      import('./motion.js'),
+    ]);
+  } catch (err) {
     console.error('[CAT OS] village could not open', err);
     outlet.innerHTML = `<section class="cw cw--error"><h1>The village could not open</h1><p>Part of the village did not arrive. Your saved progress is still on this device.</p><button class="btn btn--primary" onclick="location.reload()">Try again</button></section>`;
     return;
@@ -62,6 +68,8 @@ export async function renderVillageHome(outlet, ctx) {
   // Left while the records loaded: do not start a village (its music, its
   // greeting, Toffee's hello) underneath whatever screen comes next.
   if (!outlet.isConnected || location.hash !== arrivedAt) return;
+  const { buildingLayer, groundLayer, composeScene, mountWoodland } = scenery;
+  const { mountMotion } = moving;
   let state = world.state;
   let pets = state.pets ?? derivePets(state, world.records, world.content, state.now);
   const atmo = state.atmo;
@@ -79,7 +87,7 @@ export async function renderVillageHome(outlet, ctx) {
           <div class="cw-clouds" aria-hidden="true"><i></i><i></i><i></i></div>
           <div class="cw-tint" aria-hidden="true"></div>
           <div class="cw-sunlight" aria-hidden="true"></div>
-          <div class="cw-glows" aria-hidden="true">${[...LAMPS.map((l, i) => glow(l, 'lamp', i)), ...WINDOWS.map((w, i) => glow(w, 'win', i))].join('')}${Object.entries(HOUSE_ART).map(([id, h]) => `<i class="cw-aura" data-house="${id}" style="left:${h.aura[0]}px;top:${h.aura[1]}px;--r:${h.aura[2]}px"></i>`).join('')}</div>
+          <div class="cw-glows" aria-hidden="true">${[...LAMPS.map((l, i) => glow(l, 'lamp', i)), ...WINDOWS.map((w, i) => glow(w, 'win', i))].join('')}${Object.entries(HOUSE_ART).map(([id, art]) => { const p = worldPoint(id, {x:art.aura[0],y:art.aura[1]}); const h = {aura:[p.x,p.y,art.aura[2]*BUILDINGS[id].scale]}; return `<i class="cw-aura" data-house="${id}" style="left:${h.aura[0]}px;top:${h.aura[1]}px;--r:${h.aura[2]}px"></i>`; }).join('')}</div>
           <div class="cw-treasures" aria-hidden="true"></div>
           <svg class="cw-clock" aria-hidden="true" style="left:${CLOCK.x - CLOCK.r}px;top:${CLOCK.y - CLOCK.r}px" width="${CLOCK.r * 2}" height="${CLOCK.r * 2}" viewBox="-10 -10 20 20"><line class="cw-clock__h" x1="0" y1="0" x2="0" y2="-4.6"/><line class="cw-clock__m" x1="0" y1="0" x2="0" y2="-6.8"/><circle r=".9"/></svg>
           <canvas class="cw-life" width="${MAP.w / 2}" height="${MAP.h / 2}" aria-hidden="true"></canvas>
@@ -126,9 +134,9 @@ export async function renderVillageHome(outlet, ctx) {
   const cam = { x: NODES.pc.x, y: NODES.pc.y + 40 };
   let vw = 1, vh = 1, s = 1, tween = null, onCamera = () => {};
   const scale = () => s;
-  /* The camp's foot (y 950) must clear the big button. In a landscape window the button sits in the corner, so only the screen edge matters;
+  /* The camp's foot (y 1260) must clear the big button. In a landscape window the button sits in the corner, so only the screen edge matters;
      otherwise it is a strip along the bottom (66px + margins) and the painting rides up by that much, losing a sliver of the top, which the top bar hides anyway. */
-  const lowestCam = () => 950 - (vh / 2 - (matchMedia('(min-width: 700px) and (orientation: landscape)').matches ? 0 : 84)) / s;
+  const lowestCam = () => 1260 - (vh / 2 - (matchMedia('(min-width: 700px) and (orientation: landscape)').matches ? 0 : 84)) / s;
   const apply = () => {
     const hw = vw / 2 / s, hh = vh / 2 / s, low = lowestCam();
     cam.x = hw * 2 >= MAP.w ? MAP.w / 2 : clamp(cam.x, hw, MAP.w - hw);
@@ -162,7 +170,7 @@ export async function renderVillageHome(outlet, ctx) {
   };
   const ro = new ResizeObserver(layout); ro.observe(viewport); layout();
   // The plaza and the campfire cannot both fit a short window; open on the lower view so the camp is in it.
-  cam.y = Math.max(cam.y, lowestCam()); apply();
+  apply();
 
   /* Drag, fling, wheel, keys. A drag never becomes a tap. A second finger
      does nothing: there is no zoom to pinch. */
@@ -263,7 +271,10 @@ export async function renderVillageHome(outlet, ctx) {
   // with each house's colour, windows and keepsakes baked in (houses.js),
   // and the patches cut from an atlas graded to match it.
   let motion = { setAtmo() {}, setView() {}, destroy() {} };
-  const art = map.querySelector('.cw-art');
+  const terrain = map.querySelector('.cw-art');
+  terrain.after(groundLayer());
+  const woodland = mountWoodland(map, {reduced});
+  const art = new Image(); art.src = ART.src;
   let shownStages = null, baking = 0, atlasUrl = null, atlasImg = null;
   const mountMoving = (stages, atlas) => { motion.destroy(); motion = mountMotion(map, { atmo: root.dataset.hour ? { ...atmo, hour: root.dataset.hour } : atmo, reduced, stages, atlas }); };
   const growPainting = async (stages) => {
@@ -284,15 +295,17 @@ export async function renderVillageHome(outlet, ctx) {
         } catch { url = null; }
       }
       if (stale()) { if (url) URL.revokeObjectURL(url); return; }
-      base.className = 'cw-base'; base.setAttribute('aria-hidden', 'true');
+      const buildings = buildingLayer(base);
       const old = map.querySelector('.cw-base');
-      (old ?? art).after(base);
-      requestAnimationFrame(() => { base.classList.add('is-in'); later(() => { old?.remove(); art.style.visibility = 'hidden'; }, reduced ? 0 : 700); });
+      (old ?? map.querySelector('.cw-ground')).after(buildings);
+      requestAnimationFrame(() => { buildings.classList.add('is-in'); later(() => { old?.remove(); }, reduced ? 0 : 700); });
       mountMoving(stages, url);
       syncView();
       if (atlasUrl) URL.revokeObjectURL(atlasUrl);
       atlasUrl = url;
-      life.setPainting(base);
+      await terrain.decode();
+      if (stale()) return;
+      life.setPainting(composeScene(terrain, base));
       shownStages = key;
     } catch (err) {
       console.error('[CAT OS] the village could not grow its painting', err);
@@ -582,7 +595,8 @@ export async function renderVillageHome(outlet, ctx) {
   /** Each house that grew, one after another: look at it, a burst of light, and what it gained. */
   function showGrown(list) {
     list.forEach((h, i) => later(() => {
-      const [cx, cy] = HOUSE_ART[h.spot]?.mask ?? [NODES.pc.x, NODES.pc.y], stage = pets.houses?.[h.spot] ?? 0;
+      const source = HOUSE_ART[h.spot]?.mask ?? [NODES.pc.x, NODES.pc.y];
+      const {x:cx,y:cy} = worldPoint(h.spot, {x:source[0],y:source[1]}), stage = pets.houses?.[h.spot] ?? 0;
       reveal({ x: cx, y: cy });
       later(() => {
         houses.burst(h.spot);
@@ -697,7 +711,7 @@ export async function renderVillageHome(outlet, ctx) {
     clearInterval(tickHour); clearInterval(edgeTimer); clearInterval(museTimer);
     baking += 1; if (atlasUrl) URL.revokeObjectURL(atlasUrl);
     for (const id of timers) clearTimeout(id);
-    ro.disconnect(); life.destroy(); motion.destroy();
+    ro.disconnect(); life.destroy(); motion.destroy(); woodland.destroy();
     if (openKind) closeModal(card);
   };
   window.addEventListener('hashchange', onHash);

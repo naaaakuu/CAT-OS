@@ -1,10 +1,10 @@
 /**
  * paths.js — where things are in the painted village.
  *
- * Every number is a pixel in the painting's own space (1536 × 1024,
- * assets/art/home-world-v1.png). The screen scales the painting, so these
+ * Navigation uses the 2048 × 1280 world. SOURCE_* coordinates refer to the
+ * immutable 1536 × 1024 landmark atlas. The screen scales the world, so these
  * never change with the viewport. Pets walk ONLY along EDGES between NODES,
- * which were traced onto the sand and stone of the painting and checked by
+ * which follow the layered sand, stone and bridge surfaces and are checked by
  * tools/check-village-data.mjs: a node that drifts onto a roof, a tree or the
  * pond fails the gate. They also STAND only on a node (never beside one: a few
  * pixels off the traced path is already a fence, a step or a flowerbed), so
@@ -12,36 +12,256 @@
  * (CHATS, HOMES[].side).
  */
 
-export const MAP = Object.freeze({ w: 1536, h: 1024, src: './assets/art/home-world-v1.png' });
+import { TERRAIN, worldPoint, worldBox } from '../home/landscape.js';
+export const MAP = Object.freeze({ w: 2048, h: 1280, src: TERRAIN });
 
 /* ---- The walkable graph -------------------------------------------- */
 
 export const NODES = Object.freeze({
-  // the plaza: a paved ellipse round the flower medallion
-  pc: { x: 770, y: 492 },
-  pn: { x: 770, y: 420 }, pne: { x: 872, y: 438 }, pe: { x: 925, y: 490 }, pse: { x: 872, y: 545 },
-  ps: { x: 770, y: 556 }, psw: { x: 668, y: 545 }, pw: { x: 615, y: 490 }, pnw: { x: 668, y: 438 },
-  // north-west road to the library
-  l4: { x: 622, y: 392 }, l3: { x: 566, y: 334 }, l2: { x: 500, y: 302 }, l1: { x: 420, y: 298 }, lib: { x: 336, y: 290 },
-  // north-east: the workshop and the observatory share a fork
-  w3: { x: 864, y: 384 }, w2: { x: 890, y: 336 }, fork: { x: 935, y: 300 }, w1: { x: 896, y: 268 }, shop: { x: 846, y: 250 },
-  o2: { x: 1010, y: 274 }, o1: { x: 1080, y: 280 }, obs: { x: 1162, y: 280 },
-  // west: the greenhouse
-  g3: { x: 556, y: 480 }, g2: { x: 496, y: 472 }, g1: { x: 420, y: 478 }, green: { x: 332, y: 470 },
-  // east: the archery cabin
-  a5: { x: 1004, y: 456 }, a4: { x: 1052, y: 510 }, a3: { x: 1102, y: 548 }, a2: { x: 1150, y: 520 }, a1: { x: 1166, y: 484 }, cabin: { x: 1232, y: 476 },
-  // the southern loop round the flower bed
-  sw1: { x: 446, y: 522 }, sw2: { x: 470, y: 566 }, sw3: { x: 530, y: 590 }, sw4: { x: 600, y: 608 }, s1: { x: 662, y: 622 },
-  s2: { x: 770, y: 640 }, s3: { x: 880, y: 628 }, se1: { x: 950, y: 608 },
-  // south-west: the rose arch and the cottage
-  c3: { x: 486, y: 636 }, c2: { x: 420, y: 704 }, c1: { x: 342, y: 736 }, cottage: { x: 290, y: 752 },
-  // the dock along the pond
-  d1: { x: 350, y: 796 }, dock: { x: 446, y: 822 }, d2: { x: 528, y: 830 }, d3: { x: 586, y: 818 },
-  // south: steps down to the kiosk and the fire
-  k1: { x: 646, y: 690 }, k2: { x: 640, y: 744 }, k3: { x: 642, y: 800 }, k4: { x: 712, y: 818 }, kiosk: { x: 806, y: 820 },
-  f1: { x: 742, y: 866 }, f2: { x: 902, y: 842 }, f3: { x: 820, y: 922 },
-  // south-east: down to the clock tower
-  t1: { x: 1000, y: 652 }, t2: { x: 1048, y: 700 }, t3: { x: 1090, y: 746 }, t4: { x: 1160, y: 800 }, clock: { x: 1244, y: 814 },
+  "pc": {
+    "x": 850,
+    "y": 650
+  },
+  "pn": {
+    "x": 840,
+    "y": 550
+  },
+  "pne": {
+    "x": 950,
+    "y": 570
+  },
+  "pe": {
+    "x": 1040,
+    "y": 650
+  },
+  "pse": {
+    "x": 965,
+    "y": 738
+  },
+  "ps": {
+    "x": 850,
+    "y": 775
+  },
+  "psw": {
+    "x": 735,
+    "y": 735
+  },
+  "pw": {
+    "x": 650,
+    "y": 650
+  },
+  "pnw": {
+    "x": 730,
+    "y": 565
+  },
+  "l4": {
+    "x": 630,
+    "y": 500
+  },
+  "l3": {
+    "x": 570,
+    "y": 465
+  },
+  "l2": {
+    "x": 520,
+    "y": 451
+  },
+  "l1": {
+    "x": 493,
+    "y": 458
+  },
+  "lib": {
+    "x": 417,
+    "y": 451
+  },
+  "w3": {
+    "x": 1020,
+    "y": 500
+  },
+  "w2": {
+    "x": 1090,
+    "y": 455
+  },
+  "fork": {
+    "x": 1240,
+    "y": 420
+  },
+  "w1": {
+    "x": 1173,
+    "y": 368
+  },
+  "shop": {
+    "x": 1130,
+    "y": 353
+  },
+  "o2": {
+    "x": 1420,
+    "y": 400
+  },
+  "o1": {
+    "x": 1640,
+    "y": 450
+  },
+  "obs": {
+    "x": 1754,
+    "y": 454
+  },
+  "g3": {
+    "x": 550,
+    "y": 650
+  },
+  "g2": {
+    "x": 440,
+    "y": 690
+  },
+  "g1": {
+    "x": 316,
+    "y": 769
+  },
+  "green": {
+    "x": 241,
+    "y": 763
+  },
+  "a5": {
+    "x": 1210,
+    "y": 600
+  },
+  "a4": {
+    "x": 1350,
+    "y": 650
+  },
+  "a3": {
+    "x": 1660,
+    "y": 650
+  },
+  "a2": {
+    "x": 1900,
+    "y": 760
+  },
+  "a1": {
+    "x": 1840,
+    "y": 963
+  },
+  "cabin": {
+    "x": 1737,
+    "y": 955
+  },
+  "sw1": {
+    "x": 365,
+    "y": 820
+  },
+  "sw2": {
+    "x": 450,
+    "y": 840
+  },
+  "sw3": {
+    "x": 565,
+    "y": 860
+  },
+  "sw4": {
+    "x": 650,
+    "y": 855
+  },
+  "s1": {
+    "x": 745,
+    "y": 850
+  },
+  "s2": {
+    "x": 875,
+    "y": 875
+  },
+  "s3": {
+    "x": 1000,
+    "y": 850
+  },
+  "se1": {
+    "x": 1100,
+    "y": 820
+  },
+  "c3": {
+    "x": 605,
+    "y": 910
+  },
+  "c2": {
+    "x": 660,
+    "y": 970
+  },
+  "c1": {
+    "x": 670,
+    "y": 1017
+  },
+  "cottage": {
+    "x": 626,
+    "y": 1030
+  },
+  "d1": {
+    "x": 740,
+    "y": 1080
+  },
+  "dock": {
+    "x": 810,
+    "y": 1110
+  },
+  "d2": {
+    "x": 850,
+    "y": 1140
+  },
+  "d3": {
+    "x": 900,
+    "y": 1150
+  },
+  "k1": {
+    "x": 780,
+    "y": 930
+  },
+  "k2": {
+    "x": 815,
+    "y": 1010
+  },
+  "k3": {
+    "x": 863,
+    "y": 1126
+  },
+  "k4": {
+    "x": 926,
+    "y": 1142
+  },
+  "kiosk": {
+    "x": 1010,
+    "y": 1144
+  },
+  "f1": {
+    "x": 953,
+    "y": 1185
+  },
+  "f2": {
+    "x": 1097,
+    "y": 1164
+  },
+  "f3": {
+    "x": 1023,
+    "y": 1236
+  },
+  "t1": {
+    "x": 1150,
+    "y": 845
+  },
+  "t2": {
+    "x": 1190,
+    "y": 855
+  },
+  "t3": {
+    "x": 1220,
+    "y": 855
+  },
+  "t4": {
+    "x": 1198,
+    "y": 814
+  },
+  "clock": {
+    "x": 1269,
+    "y": 826
+  }
 });
 
 export const EDGES = Object.freeze([
@@ -69,7 +289,7 @@ export const EDGES = Object.freeze([
 /* ---- Homes, places and spots ---------------------------------------- */
 
 /** Each pet's home: where it stands, `side` (the next node down its road: where a visitor stands beside it), and the building's tap area. */
-export const HOMES = Object.freeze({
+export const SOURCE_HOMES = Object.freeze({
   chai: { node: 'lib', side: 'l1', door: { x: 322, y: 222 }, hit: { x: 150, y: 40, w: 300, h: 220 }, label: 'The library' },
   ginger: { node: 'shop', side: 'w1', door: { x: 822, y: 200 }, hit: { x: 610, y: 30, w: 330, h: 200 }, label: 'The workshop' },
   mallow: { node: 'obs', side: 'o1', door: { x: 1231, y: 190 }, hit: { x: 1170, y: 20, w: 240, h: 190 }, label: 'The observatory' },
@@ -80,9 +300,11 @@ export const HOMES = Object.freeze({
   biscuit: { node: 'cottage', side: 'c1', door: { x: 272, y: 716 }, hit: { x: 170, y: 560, w: 270, h: 180 }, label: 'The rose cottage' },
 });
 
+export const HOMES = Object.freeze(Object.fromEntries(Object.entries(SOURCE_HOMES).map(([id,h]) => [id, { ...h, door: worldPoint(id,h.door), hit: worldBox(id,h.hit) }])));
+
 /** Places that are not a pet's own home: the fire. */
 export const PLACES = Object.freeze({
-  fire: { node: 'f1', hit: { x: 740, y: 836, w: 170, h: 90 }, label: 'The fire' },
+  fire: { node: 'f1', hit: worldBox('toffee', { x: 740, y: 836, w: 170, h: 90 }), label: 'The fire' },
 });
 
 /**
@@ -90,7 +312,7 @@ export const PLACES = Object.freeze({
  * painting px. Low on the roof or the wall, so a phone's top bar never
  * covers it, and clear of the door where the friend stands.
  */
-export const SIGNS = Object.freeze({
+const SOURCE_SIGNS = Object.freeze({
   chai: { x: 282, y: 168 },
   ginger: { x: 742, y: 160 },
   mallow: { x: 1286, y: 166 },
@@ -100,6 +322,8 @@ export const SIGNS = Object.freeze({
   sesame: { x: 1240, y: 668 },
   toffee: { x: 808, y: 704 },
 });
+
+export const SIGNS = Object.freeze(Object.fromEntries(Object.entries(SOURCE_SIGNS).map(([id,p]) => [id, worldPoint(id,p)])));
 
 /** Places a pet may wander to and linger. `ring` is the plaza's edge, in order round it. */
 export const SPOTS = Object.freeze({
@@ -116,7 +340,7 @@ export const CHATS = Object.freeze([['pc', 'pn'], ['pc', 'ps'], ['pne', 'pe'], [
 /* ---- Light, smoke, water, time -------------------------------------- */
 
 /** Every painted lamp post and lantern (the glass): a faint halo by day, full at dusk and night. */
-export const LAMPS = Object.freeze([
+const SOURCE_LAMPS = Object.freeze([
   // the library
   { x: 112, y: 180, r: 24 }, { x: 274, y: 197, r: 24 }, { x: 365, y: 200, r: 24 }, { x: 436, y: 151, r: 24 },
   // the workshop
@@ -136,7 +360,7 @@ export const LAMPS = Object.freeze([
 ]);
 
 /** Painted windows: warm at dusk, glowing at night. */
-export const WINDOWS = Object.freeze([
+export const SOURCE_WINDOWS = Object.freeze([
   { x: 166, y: 184, r: 22 }, { x: 236, y: 190, r: 22 }, { x: 397, y: 186, r: 22 }, { x: 320, y: 212, r: 18 },
   { x: 177, y: 107, r: 12 }, { x: 374, y: 102, r: 12 },
   { x: 712, y: 180, r: 16 }, { x: 822, y: 200, r: 26 },
@@ -146,26 +370,32 @@ export const WINDOWS = Object.freeze([
   { x: 1366, y: 630, r: 10 }, { x: 1386, y: 708, r: 12 },
 ]);
 
+const lampOwners = ['chai','chai','chai','chai','ginger','ginger','ginger','mallow','mallow','mallow',null,null,null,null,'matcha','biscuit',null,'toffee','toffee','mochi','mochi','sesame','sesame','sesame','sesame'];
+const windowOwners = ['chai','chai','chai','chai','chai','chai','ginger','ginger','mallow','mallow','mallow','matcha','matcha','matcha','mochi','biscuit','biscuit','biscuit','biscuit','sesame','sesame'];
+const squareLamps = {10:{x:655,y:480,r:34},11:{x:1070,y:515,r:34},12:{x:620,y:755,r:34},13:{x:1090,y:790,r:34},16:{x:810,y:1080,r:24}};
+export const LAMPS = Object.freeze(SOURCE_LAMPS.map((p,i)=>lampOwners[i]?worldPoint(lampOwners[i],p):squareLamps[i]));
+export const WINDOWS = Object.freeze(SOURCE_WINDOWS.map((p,i)=>worldPoint(windowOwners[i],p)));
+
 /** Smoke rises from each painted chimney: the cottage, the library, the workshop, the cabin. */
-export const CHIMNEYS = Object.freeze([{ x: 214, y: 562 }, { x: 228, y: 42 }, { x: 860, y: 18 }, { x: 1339, y: 278 }]);
+export const CHIMNEYS = Object.freeze([worldPoint('biscuit', { x: 214, y: 562 }), worldPoint('chai', { x: 228, y: 42 }), worldPoint('ginger', { x: 860, y: 18 }), worldPoint('mochi', { x: 1339, y: 278 })]);
 /** The teapot on the cottage patio steams. */
-export const TEAPOT = Object.freeze({ x: 430, y: 700 });
-export const POND = Object.freeze({ x: 250, y: 900, rx: 300, ry: 110 });
-export const CLOCK = Object.freeze({ x: 1324, y: 634, r: 26 });
-export const FIRE = Object.freeze({ x: 822, y: 878 });
+export const TEAPOT = Object.freeze(worldPoint('biscuit', { x: 430, y: 700 }));
+export const POND = Object.freeze({ x: 1670, y: 895, rx: 40, ry: 23 });
+export const CLOCK = Object.freeze(worldPoint('sesame', { x: 1324, y: 634, r: 22 }));
+export const FIRE = Object.freeze(worldPoint('toffee', { x: 822, y: 878 }));
 
 /** Where each treasure draws itself. */
 export const TREASURE_AT = Object.freeze({
   /* `ground` is the painting y where the lamp post stands (the foot of its stone base, or of the iron post for the south pair). A friend whose feet are above it walks BEHIND the lantern or string, below it IN FRONT (life.js sets each friend's z-index to its foot y; cards.js gives these the same scale). */
-  lanterns: [{ x: 552, y: 330, ground: 450 }, { x: 966, y: 330, ground: 450 }, { x: 520, y: 462, ground: 555 }, { x: 980, y: 464, ground: 555 }],
-  bunting: [[{ x: 552, y: 340, ground: 450 }, { x: 966, y: 340 }], [{ x: 520, y: 470, ground: 555 }, { x: 980, y: 472 }]],
+  lanterns: [{ x: 655, y: 480, ground: 560 }, { x: 1070, y: 515, ground: 595 }, { x: 620, y: 755, ground: 835 }, { x: 1090, y: 790, ground: 870 }],
+  bunting: [[{ x: 655, y: 490, ground: 560 }, { x: 1070, y: 525 }], [{ x: 620, y: 765, ground: 835 }, { x: 1090, y: 800 }]],
   flowers: [{ x: 452, y: 300 }, { x: 600, y: 360 }, { x: 940, y: 330 }, { x: 1040, y: 560 }, { x: 560, y: 640 }, { x: 980, y: 640 }],
   fireflies: [{ x: 600, y: 540 }, { x: 948, y: 540 }],
-  swing: { x: 700, y: 330 },
+  swing: { x: 590, y: 490 },
   chimes: { x: 1128, y: 196 },
   kite: { x: 1060, y: 120 },
   lilylights: [{ x: 90, y: 860 }, { x: 180, y: 900 }, { x: 290, y: 940 }, { x: 380, y: 880 }, { x: 140, y: 960 }],
-  skylanterns: { x: 770, y: 480 },
+  skylanterns: { x: 850, y: 650 },
 });
 
 /** Painted crops of each home, for backdrops behind other screens. */

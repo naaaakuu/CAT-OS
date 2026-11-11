@@ -3,15 +3,14 @@
  * refraction, foam and ripples off the rocks, lilies, banks and bridges.
  * Shares life's clock; no WebGL, dependencies or separate animation loop.
  */
+import { MAP } from '../pets/paths.js';
 import { rng } from '../world/engine/palette.js';
 
 // Separate visible reaches: the bridges occlude the current between them.
 export const REACHES = [
-  { box: [0, 505, 56, 56], line: [[0, 519], [21, 529], [40, 542]], width: 13, speed: 36, count: 16 },
-  { box: [43, 607, 76, 96], line: [[76, 610], [79, 632], [66, 652], [77, 676], [85, 702]], width: 14, speed: 54, count: 30 },
-  { box: [0, 741, 548, 203], line: [[48, 744], [52, 777], [27, 796], [59, 822], [191, 880], [308, 887], [383, 920], [514, 930]], width: 27, speed: 25, count: 64, pond: true },
-  { box: [369, 957, 92, 67], line: [[383, 959], [407, 980], [427, 998], [436, 1024]], width: 11, speed: 49, count: 24 },
-  { box: [1318, 875, 89, 89], line: [[1367, 881], [1373, 906], [1360, 930], [1328, 951]], width: 14, speed: 34, count: 24 },
+  { box:[1380,350,668,285],line:[[2048,397],[1915,475],[1700,495],[1510,550],[1450,620]],width:22,speed:24,count:36 },
+  { box:[1370,635,470,340],line:[[1455,650],[1510,710],[1690,768],[1765,820],[1720,875],[1580,930]],width:24,speed:28,count:44,pond:true },
+  { box:[1050,965,600,315],line:[[1580,965],[1370,1010],[1240,1080],[1280,1190],[1190,1280]],width:25,speed:25,count:40 },
 ];
 
 const TAU = Math.PI * 2;
@@ -33,7 +32,8 @@ function prepare(img, spec, index) {
   const source = canvasOf(w, h), mask = canvasOf(w, h), surface = canvasOf(Math.ceil(w / 2), Math.ceil(h / 2));
   surface.style.cssText = `position:absolute;left:${x}px;top:${y}px;width:${w}px;height:${h}px`;
   const sg = source.getContext('2d');
-  sg.drawImage(img, x, y, w, h, 0, 0, w, h);
+  const sx=(img.naturalWidth||img.width)/MAP.w, sy=(img.naturalHeight||img.height)/MAP.h;
+  sg.drawImage(img, x*sx, y*sy, w*sx, h*sy, 0, 0, w, h);
   const mg = mask.getContext('2d'), pixels = sg.getImageData(0, 0, w, h);
   // Water is blue/teal, land is warm. Read once, never in the frame loop.
   // Soft chroma edges retain the painted banks and foreground vegetation.
@@ -68,7 +68,7 @@ export function createWater(map, { reduced = false } = {}) {
   const canvas = document.createElement('div');
   canvas.className = 'cw-water'; canvas.setAttribute('aria-hidden', 'true');
   // Under the hour's tint, so the same current belongs to day and night.
-  map.insertBefore(canvas, map.querySelector('.cw-clouds'));
+  map.insertBefore(canvas, map.querySelector('.cw-ground') ?? map.querySelector('.cw-clouds'));
   let reaches = [], disposed = false, last = -Infinity, clock = 0;
   const ripples = [];
   /** Cut the water from `src` (the painting, or the village's grown copy of it). */

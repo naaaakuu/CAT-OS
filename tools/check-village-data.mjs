@@ -12,6 +12,7 @@
  *   node tools/check-village-data.mjs --graph   graph only (no browser)
  */
 import { MAP, NODES, EDGES, HOMES, PLACES, SPOTS, CHATS, route } from '../src/pets/paths.js';
+import { ART } from '../src/home/landscape.js';
 
 const fails = [];
 const ok = (c, m) => { if (!c) fails.push(m); };
@@ -45,10 +46,11 @@ ok(SPOTS.ring.every((n) => SPOTS.plaza.includes(n)) && SPOTS.ring.every((n, i) =
   PATCHES.forEach((p, i) => { const r = rectOf(p), a = ATLAS.at[i] ?? []; ok(a[0] === r.x && a[1] === r.y && a[2] === r.w && a[3] === r.h, `motion patch ${i} (${p.k}) moved since the bake: run node tools/bake-motion.mjs`); });
   const png = readFileSync(new URL(`../${ATLAS.src.replace('./', '')}`, import.meta.url));
   ok(png.readUInt32BE(16) === ATLAS.w && png.readUInt32BE(20) === ATLAS.h, `${ATLAS.src} is not the ${ATLAS.w}×${ATLAS.h} atlas motion-atlas.js describes`);
-  // Cut from THIS painting: a repainted village under an old atlas would animate pieces of a picture that is gone.
+  // Animated patches still come from the preserved landmark artwork,
+  // independently of the terrain and its world-space placement.
   const { createHash } = await import('node:crypto');
-  const sha = createHash('sha1').update(readFileSync(new URL(`../${MAP.src.replace('./', '')}`, import.meta.url))).digest('hex').slice(0, 12);
-  ok(ATLAS.painting === MAP.src && ATLAS.paintingHash === sha, `the motion atlas was cut from ${ATLAS.painting} (${ATLAS.paintingHash}), the village paints ${MAP.src} (${sha}): run node tools/bake-motion.mjs`);
+  const sha = createHash('sha1').update(readFileSync(new URL(`../${ART.src.replace('./', '')}`, import.meta.url))).digest('hex').slice(0, 12);
+  ok(ATLAS.painting === ART.src && ATLAS.paintingHash === sha, `the motion atlas was cut from ${ATLAS.painting} (${ATLAS.paintingHash}), the landmarks use ${ART.src} (${sha}): run node tools/bake-motion.mjs`);
 }
 
 if (!process.argv.includes('--graph')) {
@@ -58,9 +60,16 @@ if (!process.argv.includes('--graph')) {
   try {
     await browser.open(`${server.url}nothing-here.html`, 600);
     const samples = await browser.evaluate(`(async () => {
-      const img = await new Promise((r, j) => { const i = new Image(); i.onload = () => r(i); i.onerror = j; i.src = ${JSON.stringify(MAP.src.replace('./', '/'))}; });
-      const c = document.createElement('canvas'); c.width = img.naturalWidth; c.height = img.naturalHeight;
-      const g = c.getContext('2d'); g.drawImage(img, 0, 0);
+      const load = (src) => new Promise((r, j) => { const i = new Image(); i.onload = () => r(i); i.onerror = j; i.src = src; });
+      const [terrain, source, scene] = await Promise.all([
+        load(${JSON.stringify(MAP.src.replace('./', '/'))}),
+        load(${JSON.stringify(ART.src.replace('./', '/'))}),
+        import('/src/home/scenery.js'),
+      ]);
+      // Sample exactly the composed terrain, paths, bridges and landmarks
+      // that the player sees, including anything that could cover a road.
+      await scene.loadScenery();
+      const c = scene.composeScene(terrain, source), g = c.getContext('2d');
       const out = {};
       for (const [id, n] of Object.entries(${JSON.stringify(NODES)})) {
         const d = g.getImageData(n.x - 3, n.y - 3, 7, 7).data;
@@ -77,7 +86,7 @@ if (!process.argv.includes('--graph')) {
         for (let i = 0; i <= n; i += 1) if (!warm(Math.round(A.x + (B.x - A.x) * i / n), Math.round(A.y + (B.y - A.y) * i / n))) bad += 1;
         edges[a + '–' + b] = bad / (n + 1);
       }
-      return { w: img.naturalWidth, h: img.naturalHeight, out, edges };
+      return { w: c.width, h: c.height, out, edges };
     })()`);
     ok(samples.w === MAP.w && samples.h === MAP.h, `the painting is ${samples.w}×${samples.h}, paths.js says ${MAP.w}×${MAP.h}`);
     for (const [id, [r, g, b]] of Object.entries(samples.out)) {

@@ -68,7 +68,7 @@ const CONTENT_VERSION = 16;
    ALWAYS lands in a new cache, whether or not anybody remembered to bump the
    number above. Nothing used to enforce that bump, and an installed learner
    could sit on old code forever with no symptom anybody could see. */
-const BUILD_ID = '5fa23e6ac1';
+const BUILD_ID = '176905455b';
 const CONTENT_ID = '86f7e6576d';
 const SHELL_CACHE = `cat-os-shell-v${CACHE_VERSION}.${BUILD_ID}`;
 const CONTENT_CACHE = `cat-os-content-v${CONTENT_VERSION}.${CONTENT_ID}`;
@@ -106,6 +106,11 @@ const CORE_FILES = [
   './src/ui/styles/rewards.css',
   './src/ui/styles/intro.css',
   './assets/art/home-world-v1.png',
+  './assets/art/village-terrain-v2.webp',
+  './assets/art/village-paths-v2.webp',
+  './assets/art/village-oak-v2.webp',
+  './src/home/scenery.js',
+  './src/home/motion.js',
   './assets/art/pet-biscuit.png',
   './assets/art/pet-chai.png',
   './assets/art/pet-ginger.png',
@@ -144,9 +149,9 @@ const CORE_FILES = [
   './src/home/cards.js',
   './src/home/houses.js',
   './src/home/journal-art.js',
+  './src/home/landscape.js',
   './src/home/life.js',
   './src/home/motion-atlas.js',
-  './src/home/motion.js',
   './src/home/paint.js',
   './src/home/village-journal.js',
   './src/home/village.js',
@@ -228,6 +233,9 @@ const SHELL_FILES = [
   './assets/art/tree_birch.png',
   './assets/art/tree_oak.png',
   './assets/art/tree_pine.png',
+  './assets/art/village-oak-v2.webp',
+  './assets/art/village-paths-v2.webp',
+  './assets/art/village-terrain-v2.webp',
   './assets/icons/apple-touch-icon.png',
   './assets/icons/icon-192.png',
   './assets/icons/icon-512.png',
@@ -307,10 +315,12 @@ const SHELL_FILES = [
   './src/home/cards.js',
   './src/home/houses.js',
   './src/home/journal-art.js',
+  './src/home/landscape.js',
   './src/home/life.js',
   './src/home/motion-atlas.js',
   './src/home/motion.js',
   './src/home/paint.js',
+  './src/home/scenery.js',
   './src/home/village-journal.js',
   './src/home/village.js',
   './src/home/water.js',
