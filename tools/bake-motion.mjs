@@ -21,7 +21,7 @@ import { writeFileSync, existsSync, readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { join } from 'node:path';
 import { serveRepo, launchChrome, REPO_ROOT } from './cdp-lite.mjs';
-import { MAP } from '../src/pets/paths.js';
+import { ART as MAP } from '../src/home/landscape.js';
 
 /** Which painting the patches were cut from: a short hash of its bytes. */
 const paintingHash = createHash('sha1').update(readFileSync(join(REPO_ROOT, MAP.src))).digest('hex').slice(0, 12);
