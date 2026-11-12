@@ -502,3 +502,11 @@ a.bl-card:active { transform: translateY(4px); box-shadow: 0 1px 0 var(--d-ink);
 @media (prefers-reduced-motion: reduce) {
   .dl *, .rs *, .lt *, .bk *, .rd * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
 }
+/* 3.22: a beaten Muddle runs into a house (chase.js). The result says where, and the big button follows it. */
+.rs-chase { display: flex; align-items: center; gap: 12px; margin: 4px 0 12px; padding: 8px 14px 8px 8px; border-radius: 16px; text-align: left; color: #FBEFD6; background: linear-gradient(180deg, #5b3c22, #3f2617); border: 1px solid #2a180d; box-shadow: inset 0 0 0 1.5px rgba(232, 190, 108, 0.6), 0 8px 22px rgba(20, 10, 4, 0.4); }
+.rs-chase > span:last-child { display: grid; gap: 3px; font: 600 14px/1.3 var(--font-ui, sans-serif); }
+.rs-chase b { font: 700 17px/1.2 var(--font-display, Georgia, serif); color: #FFE3A3; }
+.rs-chase__fig { flex: none; width: 64px; height: 64px; display: grid; place-items: end center; overflow: hidden; border-radius: 12px; background: radial-gradient(circle at 50% 70%, #F7ECCF, #D9C08E); }
+.rs-chase__fig .pet-sprite { margin-bottom: -16px; }
+.dl-btn--chase { background: linear-gradient(#FF9A6B, #D9482B); color: #fff !important; text-shadow: 0 2px 0 rgba(74, 20, 8, 0.55); }
+.dl-btn--chase .rs__next { color: #fff; opacity: 0.95; }

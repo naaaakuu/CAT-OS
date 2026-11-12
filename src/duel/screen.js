@@ -17,7 +17,9 @@ import { composeDuel, saveWordFeeds, saveBigMove } from './compose.js';
 import { loadMuddles, liner } from './content.js';
 import { Arena, arenaHTML, muddleSprite } from './arena.js';
 import { petFigure } from '../pets/sprite.js';
-import { BOUTS, DUEL, ROPE_END, applyRope, bigEffect, boutOf, castOf, driftOf, duelsIn, isBout, ladderOf, laurelsFor, nearMiss, newRope, nextBout, quickEffect, readEffect, settleRope, troublemakerOf, winTitle } from './model.js';
+import { BOUTS, DUEL, ROPE_END, applyRope, bigEffect, boutOf, castOf, driftOf, duelsIn, isBout, laurelsFor, nearMiss, newRope, nextBout, quickEffect, readEffect, settleRope, troublemakerOf, winTitle } from './model.js';
+import { ladderFrom, hideoutFor, homeName, CHASE_LAURELS } from './chase.js';
+import { evidenceFrom } from '../pets/seals.js';
 import { gradeFor } from './letters.js';
 import { buzz, reduced, throwWord } from './fx.js';
 import { ensureDuelStyle } from './style.js';
@@ -42,7 +44,7 @@ export async function renderDuel(outlet, { storage }) {
   const now = Date.now();
   const records = await loadWorldRecords(storage);
   const duels = duelsIn(records.learning);
-  const ladder = ladderOf(duels);
+  const ladder = ladderFrom(records);
   const first = duels.length === 0;
   const arena = ladder.arena;
   const seed = `duel:${now}`;
@@ -428,11 +430,11 @@ export async function renderDuel(outlet, { storage }) {
     };
     try { await storage.put(STORES.LEARNING, record); } catch (err) { console.error('[CAT OS] duel could not be saved', err); }
     const afterDuels = [...duels, record];
-    const afterLad = ladderOf(afterDuels);
+    const afterLad = ladderFrom({ ...records, learning: [...records.learning, record] });
     const mine = castOf(afterDuels).get(bout.id);
     const ribbon = s.won && mine.ribbon && mine.ribbon.id !== tally.get(bout.id).ribbon?.id ? mine.ribbon : null;
     const firstDunk = !!s.won && !first && tally.get(bout.id).wins === 0;
-    summary = { record, won: !!s.won, delta, before: beforeLad, after: afterLad, muddle, friend: bout.friend, friendStage, arena, bout, bounty: paidDouble, ribbon, firstDunk, tally: mine, next: nextBout(afterDuels, finishedAt), misses, right: s.right, wrong: s.wrong, bestCombo: s.bestCombo, newBest: s.bestCombo >= 3 && s.bestCombo > duels.reduce((n, d) => Math.max(n, d.best_combo ?? 0), 0), newWords, near: nearMiss({ won: !!s.won, rope: s.rope }), title: s.won ? winTitle({ wrong: s.wrong, lowest, right: s.right }) : null, lowest, loseLine: say('win'), winLine: say('lose'), first, letter, newArena: afterLad.arena.n > beforeLad.arena.n ? afterLad.arena : null };
+    summary = { record, won: !!s.won, delta, before: beforeLad, after: afterLad, muddle, friend: bout.friend, friendStage, arena, bout, bounty: paidDouble, ribbon, firstDunk, tally: mine, next: nextBout(afterDuels, finishedAt), misses, right: s.right, wrong: s.wrong, bestCombo: s.bestCombo, newBest: s.bestCombo >= 3 && s.bestCombo > duels.reduce((n, d) => Math.max(n, d.best_combo ?? 0), 0), newWords, near: nearMiss({ won: !!s.won, rope: s.rope }), title: s.won ? winTitle({ wrong: s.wrong, lowest, right: s.right }) : null, lowest, loseLine: say('win'), winLine: say('lose'), first, letter, newArena: afterLad.arena.n > beforeLad.arena.n ? afterLad.arena : null, chase: s.won ? { home: hideoutFor(bout.id, evidenceFrom(records), finishedAt), name: homeName(hideoutFor(bout.id, evidenceFrom(records), finishedAt)), laurels: CHASE_LAURELS } : null };
   }
 
   /* ---- Curtain up ---- */

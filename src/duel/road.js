@@ -8,7 +8,8 @@ import { loadWorldRecords } from '../world/state.js';
 import { silenceWorld, startMusic } from '../world/audio.js';
 import { ensureDuelStyle } from './style.js';
 import { loadMuddles } from './content.js';
-import { ARENAS, boutOf, castOf, duelsIn, ladderOf } from './model.js';
+import { ARENAS, boutOf, castOf, duelsIn } from './model.js';
+import { ladderFrom } from './chase.js';
 import { muddleSprite } from './arena.js';
 import { laurelSVG } from './art.js';
 import { PET_BY_ID } from '../pets/pets.js';
@@ -21,7 +22,7 @@ export async function renderRoad(outlet, { storage }) {
   if (location.hash !== arrived) return;
   silenceWorld(); startMusic('world');
   const duels = duelsIn(records.learning);
-  const lad = ladderOf(duels);
+  const lad = ladderFrom(records);
   const met = castOf(duels);
 
   // Top of the road first, so the screen scrolls to where you stand.

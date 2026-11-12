@@ -18,6 +18,7 @@
  */
 import { ART_FILES, HOUSES, PLACED, BRIDGES, TREES, TREE, worldPoint, groundY } from './landscape.js';
 import { gradeOf } from './houses.js';
+import { SQUARE_BOX, paintSquareGround, squarePieces, posterOn } from './square.js';
 
 const canvasOf = (w, h) => Object.assign(document.createElement('canvas'), { width: Math.max(1, Math.round(w)), height: Math.max(1, Math.round(h)) });
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
@@ -115,9 +116,9 @@ async function bakeBody(id, stage, light, isAborted) {
   return c;
 }
 
-/** A sprite with the hour's multiply baked in (bridges, trees). */
+/** A sprite with the hour's multiply baked in (bridges, trees, the square's pieces). */
 function tinted(img, light, region = null) {
-  const [sx, sy, sw, sh] = region ?? [0, 0, img.naturalWidth, img.naturalHeight];
+  const [sx, sy, sw, sh] = region ?? [0, 0, img.naturalWidth ?? img.width, img.naturalHeight ?? img.height];
   const c = canvasOf(sw, sh), g = c.getContext('2d');
   g.drawImage(img, sx, sy, sw, sh, 0, 0, sw, sh);
   if (light) {
@@ -173,12 +174,14 @@ export async function composeStill({ stages = null, scale = 1 } = {}) {
   const c = canvasOf(1086 * scale, 1448 * scale), g = c.getContext('2d');
   g.scale(scale, scale);
   g.drawImage(IMG.terrain, 0, 0, 1086, 1448);
+  g.drawImage(paintSquareGround(2), SQUARE_BOX.x, SQUARE_BOX.y, SQUARE_BOX.w, SQUARE_BOX.h);
   g.drawImage(shadowLayer(), 0, 0, 1086, 1448);
   for (const s of BRIDGES) { const b = placedBox(s); g.drawImage(IMG[s.id === 'stone' ? 'bridgeStone' : 'bridgeWood'], b.x, b.y, 896 * b.k, 896 * b.k); }
   const order = Object.keys(HOUSES).sort((a, b) => groundY(a) - groundY(b));
   const items = [
     ...order.map((id) => ({ y: groundY(id), draw: async () => { const b = PLACED[id]; const body = stages ? await bakeBody(id, stages[id] ?? 0, null, () => false) : IMG[id]; g.drawImage(body, b.x, b.y, b.size, b.size); } })),
     ...TREES.map((t) => ({ y: t.y, draw: () => { const b = treeBox(t); g.drawImage(IMG.trunk, b.x, b.y, b.size, b.size); g.drawImage(IMG.canopy, b.x, b.y, b.size, b.size); } })),
+    ...squarePieces().map((p) => ({ y: p.y, draw: () => g.drawImage(p.sprite.c, p.x - p.sprite.ax, p.y - p.sprite.ay, p.sprite.w, p.sprite.h) })),
   ].sort((a, b) => a.y - b.y);
   for (const it of items) await it.draw();
   return c;
@@ -192,10 +195,16 @@ export async function composeStill({ stages = null, scale = 1 } = {}) {
  */
 export function mountScene(map, { reduced = false } = {}) {
   const terrain = map.querySelector('.cw-art');
+  // The square's cobbles: flat on the terrain, under the hour's tint like the painting (no z-index).
+  const squareGround = paintSquareGround(2);
+  squareGround.className = 'cw-square';
+  squareGround.setAttribute('aria-hidden', 'true');
+  squareGround.style.cssText = `left:${SQUARE_BOX.x}px;top:${SQUARE_BOX.y}px;width:${SQUARE_BOX.w}px;height:${SQUARE_BOX.h}px`;
+  terrain.after(squareGround);
   const shadows = shadowLayer();
   shadows.className = 'cw-shadows';
   shadows.setAttribute('aria-hidden', 'true');
-  terrain.after(shadows);
+  squareGround.after(shadows);
 
   const scene = document.createElement('div');
   scene.className = 'cw-scene';
@@ -243,6 +252,14 @@ export function mountScene(map, { reduced = false } = {}) {
     scene.append(el);
     return { el, trunk, canopy, region: [vx, vy, vw, vh] };
   });
+  // the square's pieces: each sorts with the friends by its foot, like a house's walls
+  const pieces = squarePieces().map((p) => {
+    const el = canvasOf(p.sprite.c.width, p.sprite.c.height);
+    el.className = 'cw-piece'; el.dataset.piece = p.id;
+    place(el, p.x - p.sprite.ax, p.y - p.sprite.ay, p.sprite.w, p.sprite.h, p.y);
+    scene.append(el);
+    return { ...p, el, src: p.sprite.c };
+  });
   if (reduced) scene.dataset.reduced = 'true';
   shadows.after(scene);
 
@@ -258,9 +275,21 @@ export function mountScene(map, { reduced = false } = {}) {
     g.clearRect(0, 0, canvas.width, canvas.height);
     g.drawImage(src, sx, sy, sw, sh, 0, 0, canvas.width, canvas.height);
   };
+  const lightPiece = (p, light) => drawInto(p.el, tinted(p.src, light), [0, 0, p.src.width, p.src.height]);
+  for (const p of pieces) lightPiece(p, null);
+  let pieceLight = null;
   return {
     houses,
     images: IMG,
+    /** Where the square's pieces stand ({ id, x, y }), for the gates. */
+    pieces: pieces.map(({ id, x, y }) => ({ id, x, y })),
+    /** Post a Muddle on the square's notice board (its sheet's first frame); null takes the poster down to a blank playbill. */
+    poster(img, sheet) {
+      const board = pieces.find((p) => p.id === 'board');
+      if (!board || disposed) return;
+      board.src = posterOn(img, sheet).c;
+      lightPiece(board, pieceLight);
+    },
     /** Bake every body for these stages and this hour (bridges and trees for the hour). Old pictures stay until the new ones are ready. */
     async setLook(stages, hour, weather) {
       const mine = ++job, stale = () => disposed || mine !== job;
@@ -270,6 +299,8 @@ export function mountScene(map, { reduced = false } = {}) {
         for (const b of bridges) drawInto(b.el, tinted(IMG[b.s.id === 'stone' ? 'bridgeStone' : 'bridgeWood'], light), b.region);
         const trunk = tinted(IMG.trunk, light), canopy = tinted(IMG.canopy, light);
         for (const t of trees) { drawInto(t.trunk, trunk, t.region); drawInto(t.canopy, canopy, t.region); }
+        pieceLight = light;
+        for (const p of pieces) lightPiece(p, light);
       }
       for (const id of Object.keys(HOUSES)) {
         // A house whose stage and light are unchanged keeps its picture (baking is a pass over every pixel).
@@ -285,7 +316,7 @@ export function mountScene(map, { reduced = false } = {}) {
       }
       scene.dataset.ready = 'true';
     },
-    destroy() { disposed = true; job += 1; observer.disconnect(); scene.remove(); shadows.remove(); },
+    destroy() { disposed = true; job += 1; observer.disconnect(); scene.remove(); shadows.remove(); squareGround.remove(); },
   };
 }
 

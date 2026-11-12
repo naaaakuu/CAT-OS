@@ -130,6 +130,26 @@ export const TREES = Object.freeze([
   { x: 640, y: 1218, w: 116 },
 ]);
 
+/**
+ * The village square, on the green between the railway, the river and the
+ * glasshouse (owner, 2026-11-12: "a centre of the village ground where
+ * everyone joins"). Painted in code (src/home/square.js): a cobbled round
+ * in the valley's perspective with a fountain at its heart, the notice board
+ * where tonight's Muddle is posted, a market stall, two benches and four
+ * lamp posts. Each piece is placed by its foot (world px), which is also
+ * where it sorts against the friends (z = foot y).
+ */
+export const SQUARE = Object.freeze({
+  cx: 630, cy: 842, rx: 124, ry: 70,
+  fountain: { x: 630, y: 860 },
+  board: { x: 501, y: 858 },
+  stall: { x: 432, y: 886 },
+  benches: Object.freeze([{ x: 542, y: 835, flip: false }, { x: 719, y: 835, flip: true }]),
+  lamps: Object.freeze([{ x: 590, y: 778 }, { x: 676, y: 780 }, { x: 566, y: 902 }, { x: 694, y: 900 }]),
+  /** Lanes into the square, painted as dirt like the valley's own: from the main lane above and below. */
+  paths: Object.freeze([[[519, 762], [538, 780], [560, 800]], [[497, 975], [520, 940], [548, 905], [566, 884]]]),
+});
+
 /** Waterfalls painted on the terrain, overlaid with the falling-water loop: [x centre, top y, width, height]. */
 export const FALLS = Object.freeze([[1030, 210, 34, 40], [979, 322, 30, 34], [994, 450, 22, 20], [1021, 1004, 26, 30]]);
 

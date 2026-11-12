@@ -14,7 +14,7 @@
  * its sprite's pixels in landscape.js and moved into the world here.
  */
 
-import { WORLD, STILL, HOUSES, worldPoint, worldBox } from '../home/landscape.js';
+import { WORLD, STILL, HOUSES, SQUARE, worldPoint, worldBox } from '../home/landscape.js';
 export const MAP = Object.freeze({ w: WORLD.w, h: WORLD.h, src: STILL.src });
 
 /* ---- The walkable graph -------------------------------------------- */
@@ -40,8 +40,8 @@ export const NODES = Object.freeze({
   m29: n(340, 374), sj: n(328, 357), clock: n(302, 340),
   m30: n(390, 360), m31: n(440, 350), m32: n(500, 325), m33: n(558, 300), m34: n(592, 280), m35: n(606, 255), m36: n(640, 238), m37: n(700, 226),
   camp: n(728, 274), f3: n(776, 304), f2: n(826, 282),
-  // the village green: the open meadow where friends gather (parties, chats)
-  pc: n(684, 862), pn: n(684, 818), pne: n(758, 830), pe: n(790, 862), pse: n(758, 894), ps: n(684, 906), psw: n(610, 894), pw: n(578, 862), pnw: n(610, 830),
+  // the village square: a ring of cobbles round the fountain where friends gather (parties, chats); pc is the front of the fountain
+  pc: n(630, 886), pn: n(630, 790), pne: n(692, 804), pe: n(718, 838), pse: n(692, 872), psw: n(568, 872), pw: n(542, 838), pnw: n(568, 804),
 });
 
 export const EDGES = Object.freeze([
@@ -58,9 +58,8 @@ export const EDGES = Object.freeze([
   // the cottage, the clockworks, the hearth
   ['oj', 'm18'], ['m18', 'm19'], ['m19', 'm20'], ['m20', 'm21'], ['m21', 'bj'], ['bj', 'cottage'], ['bj', 'm22'], ['m22', 'm23'], ['m23', 'm24'], ['m24', 'm25'], ['m25', 'm26'], ['m26', 'm27'], ['m27', 'm28'],
   ['m28', 'm29'], ['m29', 'sj'], ['sj', 'clock'], ['m29', 'm30'], ['m30', 'm31'], ['m31', 'm32'], ['m32', 'm33'], ['m33', 'm34'], ['m34', 'm35'], ['m35', 'm36'], ['m36', 'm37'], ['m37', 'camp'], ['camp', 'f3'], ['f3', 'f2'],
-  // the green: a ring and its spokes, reached from the main lane on either side
-  ['pn', 'pne'], ['pne', 'pe'], ['pe', 'pse'], ['pse', 'ps'], ['ps', 'psw'], ['psw', 'pw'], ['pw', 'pnw'], ['pnw', 'pn'],
-  ['pc', 'pn'], ['pc', 'pe'], ['pc', 'ps'], ['pc', 'pw'],
+  // the square: a ring round the fountain (nobody walks through it), reached by the two lanes from the main lane
+  ['pn', 'pne'], ['pne', 'pe'], ['pe', 'pse'], ['pse', 'pc'], ['pc', 'psw'], ['psw', 'pw'], ['pw', 'pnw'], ['pnw', 'pn'],
   ['m12', 'pnw'], ['m4', 'psw'],
 ]);
 
@@ -88,23 +87,25 @@ export const PLACES = Object.freeze({
 /** Where each house's subject plate hangs (its bottom centre): above the roof, clear of the door and facade. */
 export const SIGNS = Object.freeze(Object.fromEntries(Object.entries(HOUSES).map(([id, h]) => [id, worldPoint(id, h.sign)])));
 
-/** Places a friend may wander to and linger. `ring` is the green's edge, in order round it. */
+/** Places a friend may wander to and linger. `ring` goes round the fountain, in order (pc, its front, is where a party's host stands). */
 export const SPOTS = Object.freeze({
-  plaza: ['pn', 'pne', 'pe', 'pse', 'ps', 'psw', 'pw', 'pnw', 'pc'],
-  ring: ['pn', 'pne', 'pe', 'pse', 'ps', 'psw', 'pw', 'pnw'],
-  bench: ['pw', 'pe', 'pn'],
+  plaza: ['pn', 'pne', 'pe', 'pse', 'pc', 'psw', 'pw', 'pnw'],
+  ring: ['pn', 'pne', 'pe', 'pse', 'pc', 'psw', 'pw', 'pnw'],
+  bench: ['pw', 'pe'],
   fire: ['camp', 'f2', 'f3'],
   dock: ['wb2'],
 });
 
-/** Two friends who stop on the green to talk: neighbouring nodes. */
-export const CHATS = Object.freeze([['pc', 'pn'], ['pc', 'ps'], ['pne', 'pe'], ['pe', 'pse'], ['psw', 'pw'], ['pw', 'pnw']]);
+/** Two friends who stop in the square to talk: neighbouring nodes. */
+export const CHATS = Object.freeze([['pn', 'pne'], ['pnw', 'pn'], ['pne', 'pe'], ['pe', 'pse'], ['psw', 'pw'], ['pw', 'pnw']]);
 
 /* ---- Light, smoke, water, time -------------------------------------- */
 
 const own = (key) => Object.freeze(Object.entries(HOUSES).flatMap(([id, h]) => h[key].map(([x, y, r]) => Object.freeze({ ...worldPoint(id, [x, y]), r: Math.max(6, r * 0.42), house: id }))));
+/** The square's lamp posts: their glass is 50 world px above the foot (square.js LAMP_HEAD). They always burn. */
+const SQUARE_LAMPS = SQUARE.lamps.map((l) => Object.freeze({ x: l.x, y: l.y - 50, r: 9 }));
 /** Every painted lantern and lamp (a faint halo by day, full at dusk and night); `house` lights with its house. */
-export const LAMPS = own('lamps');
+export const LAMPS = Object.freeze([...own('lamps'), ...SQUARE_LAMPS]);
 /** Painted windows: warm at dusk, glowing at night. */
 export const WINDOWS = own('windows');
 
@@ -112,6 +113,8 @@ export const WINDOWS = own('windows');
 export const CHIMNEYS = Object.freeze(Object.entries(HOUSES).flatMap(([id, h]) => h.chimneys.map((p) => Object.freeze({ ...worldPoint(id, p), house: id }))));
 /** The kettle on the pantry counter steams. */
 export const TEAPOT = Object.freeze(worldPoint('mochi', [668, 560]));
+/** The square's fountain: the top of its upper bowl (water spills from here) and the basin's water, for the air's drops and ripples. */
+export const FOUNTAIN = Object.freeze({ x: SQUARE.fountain.x, top: SQUARE.fountain.y - 58, pool: { x: SQUARE.fountain.x, y: SQUARE.fountain.y - 23, rx: 30, ry: 11 } });
 /** A calm pool where the lower stream widens: glints, a fish, dragonflies. */
 export const POND = Object.freeze({ x: 742, y: 752, rx: 40, ry: 16 });
 /** The clockworks' face (its hands are drawn by src/home/mechanisms.js). */
@@ -120,15 +123,16 @@ export const FIRE = Object.freeze(worldPoint('toffee', [379, 706]));
 
 /** Where each village treasure draws itself. `ground` joins the friends' z scale (z = foot y). */
 export const TREASURE_AT = Object.freeze({
-  lanterns: [{ x: 598, y: 796, ground: 842 }, { x: 790, y: 802, ground: 848 }, { x: 592, y: 900, ground: 946 }, { x: 792, y: 896, ground: 942 }],
-  bunting: [[{ x: 598, y: 806, ground: 842 }, { x: 790, y: 812 }], [{ x: 592, y: 910, ground: 946 }, { x: 792, y: 906 }]],
-  flowers: [{ x: 452, y: 884 }, { x: 640, y: 770 }, { x: 512, y: 1190 }, { x: 395, y: 604 }, { x: 700, y: 520 }, { x: 866, y: 1060 }],
+  // a paper lantern on each lamp post's hook, and bunting strung between the posts at the back and the front of the square
+  lanterns: SQUARE.lamps.map((l) => ({ x: l.x + 6.5, y: l.y - 38, ground: l.y })),
+  bunting: [[{ x: SQUARE.lamps[0].x, y: SQUARE.lamps[0].y - 57, ground: SQUARE.lamps[0].y }, { x: SQUARE.lamps[1].x, y: SQUARE.lamps[1].y - 57 }], [{ x: SQUARE.lamps[2].x, y: SQUARE.lamps[2].y - 57, ground: SQUARE.lamps[2].y }, { x: SQUARE.lamps[3].x, y: SQUARE.lamps[3].y - 57 }]],
+  flowers: [{ x: 452, y: 884 }, { x: 760, y: 900 }, { x: 512, y: 1190 }, { x: 395, y: 604 }, { x: 700, y: 520 }, { x: 866, y: 1060 }],
   fireflies: [{ x: 552, y: 862 }, { x: 828, y: 880 }],
   swing: { x: 702, y: 556 },
   chimes: { x: 742, y: 400 },
   kite: { x: 560, y: 140 },
   lilylights: [{ x: 712, y: 742 }, { x: 760, y: 762 }, { x: 806, y: 786 }, { x: 650, y: 1300 }, { x: 724, y: 1270 }],
-  skylanterns: { x: 684, y: 862 },
+  skylanterns: { x: SQUARE.cx, y: SQUARE.cy },
 });
 
 /** Framings of the assembled valley still (landscape.js STILL) for backdrops behind other screens. */
@@ -143,7 +147,7 @@ export const CROPS = Object.freeze({
   sesame: { x: 150, y: 50, w: 360, h: 330 },
   clock: { x: 150, y: 50, w: 360, h: 330 },
   toffee: { x: 620, y: 50, w: 380, h: 300 },
-  plaza: { x: 440, y: 680, w: 520, h: 400 },
+  plaza: { x: 440, y: 680, w: 400, h: 330 },
 });
 
 /* ---- Routing -------------------------------------------------------- */

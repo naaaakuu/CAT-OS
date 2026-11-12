@@ -39,10 +39,14 @@ const tapHouse = async (id) => {
   const h = HOMES[id].hit;
   await ev(`document.querySelector('.cw').__village.look(${h.x + h.w / 2}, ${h.y + h.h / 2})`);
   await sleep(120);
+  // The middle of the house first; a friend wandering in front of it has its own tap area, so try the rest of the facade too.
   const p = await ev(`(() => {
-    const el = document.querySelector('[data-spot="${id}"]'), r = el.getBoundingClientRect();
-    const x = r.left + r.width / 2, y = r.top + r.height / 2;
-    return { x, y, hit: document.elementFromPoint(x, y)?.closest('[data-spot]')?.dataset.spot };
+    const el = document.querySelector('.cw-spot[data-spot="${id}"]'), r = el.getBoundingClientRect();
+    const tries = [[0.5, 0.5], [0.5, 0.32], [0.3, 0.45], [0.7, 0.45], [0.5, 0.65]].map(([fx, fy]) => ({ x: r.left + r.width * fx, y: r.top + r.height * fy }));
+    const on = tries.filter((q) => q.x > 0 && q.x < innerWidth && q.y > 0 && q.y < innerHeight);
+    for (const q of on) { const hit = document.elementFromPoint(q.x, q.y)?.closest('[data-spot]')?.dataset.spot; if (hit === '${id}') return { ...q, hit }; }
+    const q = on[0] ?? tries[0];
+    return { ...q, hit: document.elementFromPoint(q.x, q.y)?.closest('[data-spot]')?.dataset.spot };
   })()`);
   ok(p.x > 0 && p.x < 390 && p.y > 0 && p.y < 844 && p.hit === id, `${id}'s relocated house is not reachable by a phone tap`);
   await browser.send('Input.dispatchMouseEvent', { type: 'mousePressed', x: p.x, y: p.y, button: 'left', clickCount: 1 });
@@ -122,35 +126,42 @@ try {
   // The river sits under the valley's pieces: in front of the terrain, behind every bridge, house and friend.
   ok(await ev(`(() => { const w = document.querySelector('.cw-water'), sc = document.querySelector('.cw-scene'); return getComputedStyle(w).zIndex === 'auto' && !!(w.compareDocumentPosition(sc) & Node.DOCUMENT_POSITION_FOLLOWING); })()`), 'the animated river is not under the bridges and houses');
 
-  // The valley always covers the screen (never a small picture with empty edges, owner 2026-10-03), opens closer than that on a phone so a house reads at a
-  // useful size, and a pinch goes closer or wider but never wider than covering the screen.
+  // The valley is held at the screen's full height with its top at the top (owner, 2026-11-12: no drifting up and down, "not a premium game feel"),
+  // and only slides sideways: a drag, a wheel or a pinch never moves it up or down, and a pinch never changes its size.
   const mapBox = () => ev(`JSON.stringify(document.querySelector('.cw-map').getBoundingClientRect())`).then(JSON.parse);
-  ok(await ev(`(() => { const c = document.querySelector('.cw').__village.camera; return c.zoom > 1.2 && c.s * ${HOUSES.chai.place.w} >= 250; })()`), 'a phone should open framed closer than the whole valley, with houses at a useful size');
-  { const r = await mapBox(); ok(r.width >= 389 && r.height >= 843, 'the valley no longer covers the phone screen'); }
+  { const r = await mapBox(); ok(Math.abs(r.top) <= 0.5 && Math.abs(r.height - 844) <= 1 && r.width >= 389, `the valley is not the screen's full height with its top at the top: ${JSON.stringify(r)}`); }
   await ev(`document.querySelector('.cw').__village.look(${MAP.w / 2}, ${MAP.h / 2})`);
   const before = await mapBox();
-  // Two real fingers (touch emulation is on from the start, as on a phone), the gesture in small steps.
+  const drag = async (dx, dy) => {
+    await browser.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ x: 200, y: 420, id: 1 }] });
+    for (let k = 1; k <= 6; k += 1) { await browser.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [{ x: 200 + dx * k / 6, y: 420 + dy * k / 6, id: 1 }] }); await sleep(25); }
+    await browser.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+    await sleep(500);
+  };
+  await drag(-140, -160);
+  { const r = await mapBox(); ok(r.left < before.left - 60 && Math.abs(r.top - before.top) <= 0.5, `a diagonal drag should slide the valley sideways only: ${JSON.stringify(r)}`); }
   const pinch = async (from, to) => {
     await browser.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ x: 195 + from, y: 420, id: 1 }, { x: 195 - from, y: 420, id: 2 }] });
     for (let k = 1; k <= 6; k += 1) { const d = from + (to - from) * k / 6; await browser.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [{ x: 195 + d, y: 420, id: 1 }, { x: 195 - d, y: 420, id: 2 }] }); await sleep(25); }
     await browser.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
-    await sleep(150);
+    await sleep(300);
   };
-  await pinch(35, 105);
-  ok(await waitFor(`document.querySelector('.cw-map').getBoundingClientRect().height > ${before.height * 1.3}`, 3000), 'spreading two fingers did not bring the valley closer');
-  for (let k = 0; k < 4; k += 1) await pinch(150, 20);
-  await sleep(400);
-  { const r = await mapBox(); ok(r.height >= 843 && r.width >= 389 && r.left <= 0.5 && r.top <= 0.5, 'pinching in left the valley smaller than the screen'); }
-  await ev(`document.querySelector('.cw').__village.look(${MAP.w / 2}, ${MAP.h / 2}, 1.6)`);
-  const ya = (await mapBox()).top;
+  await pinch(35, 120);
+  { const r = await mapBox(); ok(Math.abs(r.height - before.height) <= 1 && Math.abs(r.top) <= 0.5, 'a pinch changed the size of the valley'); }
+  await ev(`document.querySelector('.cw').__village.look(${MAP.w / 2}, ${MAP.h / 2})`);
+  const xa = (await mapBox()).left;
   await browser.send('Input.dispatchMouseEvent', { type: 'mouseWheel', x: 200, y: 420, deltaX: 0, deltaY: 240 });
   await sleep(250);
-  ok((await mapBox()).top < ya - 100, 'an ordinary mouse wheel should scroll the tall valley down');
-  await ev(`document.querySelector('.cw').__village.look(${MAP.w / 2}, ${MAP.h / 2}, 1.42)`);
+  { const r = await mapBox(); ok(r.left < xa - 60 && Math.abs(r.top) <= 0.5, 'an ordinary mouse wheel should slide the valley sideways, never up or down'); }
+  await ev(`document.querySelector('.cw').__village.look(${MAP.w / 2}, ${MAP.h / 2})`);
 
-  // Every house says its subject, on a sign that is always up.
-  ok(await ev(`(() => { const p = [...document.querySelectorAll('.cw-plates .cw-plate')]; return p.length === 8 && p.every((e) => getComputedStyle(e).opacity === '1' && e.getBoundingClientRect().width > 60 && e.textContent.trim().length > 4); })()`), 'every house needs a visible subject sign');
-  ok(await ev(`['Reading Comprehension', 'Para Jumbles', 'Para Summary', 'Odd One Out', 'Sentence Placement', 'Para Completion', 'Vocabulary'].every((t) => [...document.querySelectorAll('.cw-plate')].some((p) => p.textContent.includes(t)))`), 'a VARC subject has no house');
+  // The square: cobbles under the hour's tint, a fountain, the notice board with tonight's Muddle, and that Muddle on the cobbles.
+  ok(await ev(`(() => { const sq = document.querySelector('.cw-square'), f = document.querySelector('.cw-piece[data-piece="fountain"]'); return !!sq && getComputedStyle(sq).zIndex === 'auto' && !!f && Number(f.style.zIndex) > 800 && document.querySelectorAll('.cw-piece').length >= 9; })()`), 'the village square, its fountain and its pieces are not in the scene');
+  ok(await ev(`(() => { const m = document.querySelector('.cw-muddle'); return !!m && !m.hidden && m.dataset.mode === 'square' && !!m.querySelector('.pet-sprite'); })()`), "tonight's Muddle is not waiting in the square");
+
+  // Every house says its name and subject on a sign that is always up, and no sign carries a face (owner, 2026-11-12).
+  ok(await ev(`(() => { const p = [...document.querySelectorAll('.cw-plates .cw-plate')]; return p.length === 8 && p.every((e) => getComputedStyle(e).opacity === '1' && e.getBoundingClientRect().width > 60 && e.textContent.trim().length > 4 && !e.querySelector('.pet-portrait, .pet-sprite')); })()`), 'every house needs a visible name sign, with no portrait on it');
+  ok(await ev(`['Reading', 'Para Jumbles', 'Summaries', 'Odd One Out', 'Placement', 'Completion', 'Vocabulary'].every((t) => [...document.querySelectorAll('.cw-plate')].some((p) => p.textContent.includes(t)))`), 'a VARC subject has no house');
 
   // Pets choose at random, and every one may idle for a while: wait for any of them to move, up to twenty seconds.
   const p0 = JSON.parse(await positions());

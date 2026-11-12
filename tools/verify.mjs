@@ -1973,7 +1973,7 @@ console.log('\n16. The world (regions · economy · lexicon rounds · state · a
   /* ---- The pets' voice and economy, in full (their own tools) ---- */
   {
     const { spawnSync } = await import('node:child_process');
-    for (const tool of ['tools/check-pets.mjs', 'tools/check-pet-economy.mjs', 'tools/check-journey.mjs', 'tools/check-seals.mjs']) {
+    for (const tool of ['tools/check-pets.mjs', 'tools/check-pet-economy.mjs', 'tools/check-journey.mjs', 'tools/check-seals.mjs', 'tools/check-chase.mjs']) {
       const r = spawnSync(process.execPath, [join(root, tool)], { cwd: root, encoding: 'utf8', timeout: 600000 });
       const out = `${r.stdout ?? ''}${r.stderr ?? ''}`.trim().split('\n');
       if (r.status !== 0) bad(`${tool}: ${out.slice(-4).join(' | ')}`);

@@ -54,6 +54,8 @@
 /* The valley's pieces (src/home/scenery.js). .cw-scene makes no stacking context of its own: its houses (z-index = ground y) and
    oaks (z-index = root y) sort with the friends (z-index = foot y). Each house is cut at its ground line; its parts canvas sits just in front. */
 .cw-shadows, .cw-scene { left: 0; top: 0; width: 100%; height: 100%; pointer-events: none; }
+/* The village square's cobbles (src/home/square.js): flat on the terrain, under the hour's tint like the painting. */
+.cw-square { pointer-events: none; }
 .cw-scene > * { position: absolute; display: block; }
 .cw-tree > canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
 .cw-tree__canopy { animation: cw-oak var(--sway) ease-in-out var(--delay) infinite alternate; will-change: transform; }
@@ -152,20 +154,22 @@ html[data-reduced-motion] .cw-tree__canopy { animation: none; }
 .cw-spot:focus-visible { outline: 3px solid var(--honey); outline-offset: -6px; }
 /* Each house's subject sign: always up (a phone has no hover), held at a
    readable size by --inv, and part of the button, so the sign is a tap target too. */
+/* A walnut sign with a thin gilt line, the house's name in the storybook serif and its subject in small capitals
+   under it; a little notch points down at the roof. No portrait: the house itself is the picture. */
 .cw-plate {
-  position: absolute; transform: translate(calc(-50% + var(--dx, 0px)), calc(-100% + var(--dy, 0px))) scale(var(--inv, 1)); transform-origin: 50% 100%;
-  display: flex; align-items: center; gap: 6px;
-  padding: 3px 12px 3px 3px; border-radius: 999px; white-space: nowrap;
-  background: color-mix(in srgb, var(--color-surface) 93%, transparent); color: var(--color-ink);
-  border: 1px solid color-mix(in srgb, var(--color-line-strong) 60%, transparent);
-  font: 750 13px/1.15 var(--font-ui); box-shadow: 0 4px 14px rgba(40, 30, 16, 0.3);
+  position: absolute; transform: translate(calc(-50% + var(--dx, 0px)), calc(-100% + var(--dy, 0px) - 7px)) scale(var(--inv, 1)); transform-origin: 50% calc(100% + 7px);
+  display: grid; justify-items: center; gap: 1px;
+  padding: 4px 11px 5px; border-radius: 7px; white-space: nowrap;
+  background: linear-gradient(180deg, #5b3c22 0%, #43291a 100%); color: #FBEFD6;
+  border: 1px solid #2a180d;
+  box-shadow: inset 0 0 0 1.5px rgba(232, 190, 108, 0.55), inset 0 1px 0 2px rgba(255, 226, 170, 0.12), 0 3px 8px rgba(30, 18, 8, 0.45);
   transition: translate 0.18s;
 }
-.cw-plate .pet-portrait { flex: none; }
+.cw-plate::after { content: ""; position: absolute; left: 50%; top: 100%; width: 10px; height: 7px; margin-left: -5px; background: #43291a; clip-path: polygon(0 0, 100% 0, 50% 100%); }
+.cw-plate b { font: 700 12.5px/1.1 var(--font-display); letter-spacing: 0.01em; text-shadow: 0 1px 0 rgba(20, 10, 4, 0.6); }
+.cw-plate small { font: 800 8.5px/1.1 var(--font-ui); letter-spacing: 0.12em; text-transform: uppercase; color: #EAC77E; }
 .cw-plates .cw-plate { pointer-events: auto; cursor: pointer; }
-.cw.is-wide .cw-plate { padding: 3px; gap: 0; }
-.cw.is-wide .cw-plate b { display: none; }
-.cw-plate:hover { translate: 0 -3px; background: var(--color-surface); }
+.cw-plate:hover { translate: 0 -3px; }
 
 /* ---------------- The friends ---------------- */
 /* The button is the hit area, feet at its bottom middle; a baby is drawn
@@ -349,15 +353,15 @@ html[data-reduced-motion] .cw-tree__canopy { animation: none; }
 .cw-chip--tour small { font: 700 13px/1 var(--font-ui); color: var(--color-ink-2); }
 .cw-seal { width: 28px; height: 28px; flex: none; filter: drop-shadow(0 1px 1px rgba(60, 20, 10, 0.35)); }
 /* The next home on the tour: its plate carries a wax seal that bobs over it. */
-.cw-plate.is-next { box-shadow: 0 0 0 2px #E2A93B, 0 4px 14px rgba(40, 30, 16, 0.3); }
-.cw-plate.is-next::after {
+.cw-plate.is-next { box-shadow: inset 0 0 0 1.5px rgba(232, 190, 108, 0.55), 0 0 0 2px #E2A93B, 0 3px 10px rgba(30, 18, 8, 0.45); }
+.cw-plate.is-next::before {
   content: ""; position: absolute; left: 50%; bottom: calc(100% + 3px); width: 22px; height: 22px; margin-left: -11px; border-radius: 50%;
   background: radial-gradient(circle at 36% 30%, #E46A57, #A8331F 70%); box-shadow: 0 0 0 2px #FBE3D6, 0 3px 8px rgba(60, 20, 10, 0.4);
   animation: cw-next 1.6s ease-in-out infinite;
 }
 @keyframes cw-next { 0%, 100% { translate: 0 0; } 50% { translate: 0 -5px; } }
-html[data-reduced-motion] .cw-plate.is-next::after { animation: none; }
-@media (prefers-reduced-motion: reduce) { .cw-plate.is-next::after { animation: none; } }
+html[data-reduced-motion] .cw-plate.is-next::before { animation: none; }
+@media (prefers-reduced-motion: reduce) { .cw-plate.is-next::before { animation: none; } }
 /* The tour card */
 .cw-tour { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 8px; }
 .cw-tour > li { position: relative; display: grid; grid-template-columns: 40px 1fr; gap: 10px; align-items: start; padding: 10px 10px 10px 12px; border-radius: 14px; border: 1px solid var(--color-line-strong); background: var(--color-surface-2, transparent); }
@@ -884,3 +888,72 @@ html[data-reduced-motion] .place__pet { animation: none; }
 
 /* Stars not yet earned on a place's lists: an outline in the quiet ink, legible in both themes. */
 :root .g-row__stars .off, :root .tile__stars .off { color: var(--color-ink-3); -webkit-text-stroke: 0; }
+
+/* ---------------- 3.22: the Muddles in the village, CHASE, walking into a house ---------------- */
+/* Tonight's Muddle lurks in the square; a beaten one peeks out of the door of the house it ran into (village.js showMuddle). */
+.cw-muddle {
+  position: absolute; padding: 0; border: 0; background: none; border-radius: 40%;
+  --hit: max(64, calc(44 * var(--inv, 1)));
+  width: calc(var(--hit) * 1px); height: calc(var(--hit) * 1px); margin: calc(var(--hit) * -1px) 0 0 calc(var(--hit) * -0.5px);
+  pointer-events: auto; cursor: pointer; --dir: 1;
+}
+.cw-muddle[hidden] { display: none; }
+.cw-muddle__fig { position: absolute; left: 50%; bottom: 0; width: 0; height: 0; }
+.cw-muddle__fig .pet-sprite { position: absolute; left: 0; bottom: -2px; translate: -50% 0; transform-origin: 50% 100%; animation: cw-lurk 2.6s ease-in-out infinite; filter: drop-shadow(0 2px 2px rgba(30, 20, 10, 0.35)); }
+.cw-muddle[data-mode="hiding"] .cw-muddle__fig .pet-sprite { animation: cw-peek 1.9s ease-in-out infinite; }
+.cw-muddle.is-running .cw-muddle__fig .pet-sprite { animation: cw-dash 0.24s ease-in-out infinite; scale: var(--dir) 1; }
+.cw-muddle__mark {
+  position: absolute; left: 50%; bottom: calc(100% - 6px); width: 22px; height: 22px; margin-left: -11px; border-radius: 50%;
+  display: grid; place-items: center; transform: scale(var(--inv, 1)); transform-origin: 50% 100%;
+  background: #A9362A; color: #FFF3DA; font: 900 14px/1 var(--font-ui); box-shadow: 0 0 0 2px #FFF3DA, 0 3px 8px rgba(40, 12, 6, 0.45);
+  animation: cw-mark 1.2s ease-in-out infinite;
+}
+.cw-muddle.is-running .cw-muddle__mark { display: none; }
+.cw-muddle:focus-visible { outline: none; }
+.cw-muddle:focus-visible .pet-sprite { filter: drop-shadow(0 0 4px var(--honey)) drop-shadow(0 0 6px var(--honey)); }
+.cw[data-hour="dusk"] .cw-muddle .pet-sprite { filter: brightness(0.92) sepia(0.1); }
+.cw[data-hour="night"] .cw-muddle .pet-sprite { filter: brightness(0.74) saturate(0.85); }
+@keyframes cw-lurk { 0%, 100% { transform: rotate(-4deg); } 50% { transform: translateY(-3px) rotate(4deg); } }
+@keyframes cw-peek { 0%, 100% { transform: translateX(-7px) rotate(-8deg); } 45%, 55% { transform: translateX(6px) rotate(6deg); } }
+@keyframes cw-dash { 0%, 100% { transform: translateY(0) rotate(-6deg); } 50% { transform: translateY(-6px) rotate(6deg); } }
+html[data-reduced-motion] .cw-muddle .pet-sprite, html[data-reduced-motion] .cw-muddle__mark { animation: none; }
+@media (prefers-reduced-motion: reduce) { .cw-muddle .pet-sprite, .cw-muddle__mark { animation: none; } }
+/* The house a Muddle is hiding in: its sign glows red-gold. */
+.cw-plate.is-chase { box-shadow: inset 0 0 0 1.5px rgba(232, 190, 108, 0.55), 0 0 0 2px #E2563B, 0 0 16px 3px rgba(226, 86, 59, 0.55); animation: cw-hunt 1.4s ease-in-out infinite; }
+@keyframes cw-hunt { 0%, 100% { translate: 0 0; } 50% { translate: 0 -4px; } }
+html[data-reduced-motion] .cw-plate.is-chase { animation: none; }
+/* CHASE: the big button in a hunter's red while a Muddle is hiding. */
+.cw-play.is-chase { background: linear-gradient(180deg, #FF9A6B 0%, #D9482B 100%); color: #fff !important; border-color: #4a1408; box-shadow: 0 7px 0 #4a1408, 0 14px 26px rgba(60, 14, 6, 0.5); }
+.cw-play.is-chase:active { box-shadow: 0 2px 0 #4a1408, 0 6px 14px rgba(60, 14, 6, 0.4); }
+.cw-play.is-chase b { text-shadow: 0 2px 0 rgba(74, 20, 8, 0.55); }
+.cw-play.is-chase small { color: #fff; text-shadow: 0 1px 0 rgba(74, 20, 8, 0.7); }
+.cw-play.is-chase .cw-play__x2 { background: #4a1408; color: #FFE7A0; }
+
+/* Walking into a house (village.js enterRoom): the bars slip away and the screen's edges darken as the camera pushes in. */
+.cw-hud, .cw-dock { transition: opacity 0.32s ease, transform 0.42s cubic-bezier(0.5, 0, 0.75, 0); }
+.cw.is-entering .cw-hud { opacity: 0; transform: translateY(-36px); pointer-events: none; }
+.cw.is-entering .cw-dock { opacity: 0; transform: translateY(48px); pointer-events: none; }
+.cw.is-entering .cw-edge, .cw.is-entering .cw-toast { opacity: 0; }
+.cw-viewport::after { content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 2; opacity: 0; transition: opacity 0.9s ease-in; background: radial-gradient(ellipse at 50% 48%, rgba(27, 17, 10, 0) 30%, rgba(27, 17, 10, 0.55) 72%, rgba(27, 17, 10, 0.92) 100%); }
+.cw.is-entering .cw-viewport::after { opacity: 1; }
+/* Coming back out, the bars return as the camera pulls back. */
+.cw.is-leaving-house .cw-hud, .cw.is-leaving-house .cw-dock { animation: cw-bars-in 0.9s ease-out 0.35s both; }
+@keyframes cw-bars-in { from { opacity: 0; } to { opacity: 1; } }
+/* The room opens out of the doorway's dark (village.js throughDoor): on <body>, so it outlives the village. */
+.doorway { position: fixed; inset: 0; z-index: 9000; pointer-events: none; background: radial-gradient(circle at 50% 46%, #3a2414 0%, #1B110A 62%); opacity: 1; transition: opacity 0.75s ease-out, transform 0.9s cubic-bezier(0.2, 0.7, 0.3, 1); }
+.doorway.is-open { opacity: 0; transform: scale(1.25); }
+/* A Muddle hiding in the room just opened. */
+.chase-banner {
+  position: fixed; z-index: 9001; left: 50%; top: max(70px, calc(env(safe-area-inset-top) + 66px)); width: min(92vw, 380px); box-sizing: border-box;
+  display: flex; align-items: center; gap: 12px; padding: 8px 14px 8px 8px; border-radius: 16px; cursor: pointer;
+  background: linear-gradient(180deg, #5b3c22, #3f2617); color: #FBEFD6; border: 1px solid #2a180d;
+  box-shadow: inset 0 0 0 1.5px rgba(232, 190, 108, 0.6), 0 10px 30px rgba(20, 10, 4, 0.5);
+  transform: translate(-50%, -140%); transition: transform 0.5s cubic-bezier(0.2, 1.3, 0.4, 1);
+}
+.chase-banner.is-in { transform: translate(-50%, 0); }
+.chase-banner__fig { flex: none; width: 58px; height: 58px; display: grid; place-items: end center; overflow: hidden; border-radius: 12px; background: radial-gradient(circle at 50% 70%, #F7ECCF, #D9C08E); }
+.chase-banner__fig .pet-sprite { margin-bottom: -14px; animation: cw-peek 1.9s ease-in-out infinite; }
+.chase-banner__text { display: grid; gap: 2px; font: 600 13px/1.3 var(--font-ui); }
+.chase-banner__text b { font: 700 16px/1.2 var(--font-display); color: #FFE3A3; }
+html[data-reduced-motion] .chase-banner { transition: none; }
+html[data-reduced-motion] .chase-banner__fig .pet-sprite { animation: none; }

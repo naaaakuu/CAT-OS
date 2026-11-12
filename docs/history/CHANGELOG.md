@@ -4,6 +4,17 @@
 > Versions here are app releases; they map onto the capability milestones in
 > `PROJECT_ROADMAP.md` (0.x releases build toward Roadmap V1.0).
 
+## 3.22.0: A village square, the chase, and a film-like way in (2026-11-12)
+
+- The owner found the village "loose": it drifted up, down and sideways, which is "not a premium game feel". The valley is now held at the screen's full height with its top at the top and only slides left and right; the pinch, the vertical wheel and the up/down keys are gone. A screen wider than the valley shows it whole on the blurred backdrop.
+- No more faces over the houses: each house has a small walnut sign with its name and subject ("The Railway / Para Jumbles").
+- The green above the glasshouse, where bunting and lanterns floated over an empty meadow, is now the village square (`src/home/square.js`, painted in code in the valley's light): cobbles in rings round a fountain with a little brass orrery, two benches, four lamp posts, a market stall and the notice board where tonight's Muddle is posted. That Muddle waits on the cobbles (tap it to duel). Friends chat round the fountain and every party is held there; the earned lanterns and bunting now hang from the lamp posts. The fountain's water spills and rings spread in its basin.
+- The game takes turns (`src/duel/chase.js`): a beaten Muddle runs into the house that cures its habit, PLAY turns red and says CHASE, the Muddle peeks out beside that house's door, and one real round inside catches it for 12 laurels on the Laurel Road. The duel result's big button is "Chase <Muddle>": the village opens on the square, the Muddle bolts along the lanes into its hideout with the camera after it, and the room opens with "<Muddle> is hiding in here!". A catch gets its own card when you come back. Derived from records like everything else; another duel lets an uncaught Muddle go.
+- Walking into a house is a camera move: the bars slip away, the screen's edges darken, the camera pushes in to the door, the doorway's dark closes and the room opens out of it. Coming back out, the camera starts at that door and pulls back.
+- The opening title: after the Nakul Creations video (or on an installed web app), CAT OS in gold, letter by letter out of a blur, a laurel wreath and rising embers, held about three seconds, then rushing past the camera as it fades. A tap ends it; less motion skips it.
+- Fixed: `#/world?…` routes showed the bottom tab bar over the village.
+- Validation: `check-chase` (28 checks), `check-village-data` (83 nodes, 84 edges, the square's pieces off every lane), `check-walk`, `check-village` (camera: full height, sideways only, pinch and wheel never move it vertically; signs without faces; the square and its Muddle) and the full `verify`, all passing except `check-resume`'s `#/pj/session/beginner` route, which fails the same way on 3.21.0 (open item). Cold open stays at 70 modules (the Muddle sheet table loads with the village). App and Android 3.22.0 (32200).
+
 ## 3.21.0: A living valley, and a tour of every home (2026-11-11)
 
 - Replaced 3.20's cropped-painting village with the new art pack: a tall 1086 × 1448 valley built from separate pieces (clean terrain, eight freshly painted houses that match their rooms, two bridges, oaks with swaying canopies over still trunks, corner foliage). Houses sort in depth with the friends at their ground line, so friends pass behind and in front of them. The old 3.8 MB painting, its 44-patch motion atlas and the 3.20 map art are gone.

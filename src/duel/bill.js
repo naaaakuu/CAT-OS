@@ -11,7 +11,8 @@ import { loadWorldRecords } from '../world/state.js';
 import { silenceWorld, startMusic, play } from '../world/audio.js';
 import { ensureDuelStyle } from './style.js';
 import { loadMuddles } from './content.js';
-import { BOUTS, RIBBONS, castOf, duelsIn, ladderOf, nextBout, troublemakerOf, shareOf } from './model.js';
+import { BOUTS, RIBBONS, castOf, duelsIn, nextBout, troublemakerOf, shareOf } from './model.js';
+import { ladderFrom } from './chase.js';
 import { muddleSprite } from './arena.js';
 import { laurelSVG, envelopeSVG } from './art.js';
 import { petFigure } from '../pets/sprite.js';
@@ -33,7 +34,7 @@ export async function renderBill(outlet, { storage }) {
 
   const now = Date.now();
   const duels = duelsIn(records.learning);
-  const lad = ladderOf(duels);
+  const lad = ladderFrom(records);
   const cast = castOf(duels);
   const up = nextBout(duels, now);
   const trouble = troublemakerOf(duels, now);

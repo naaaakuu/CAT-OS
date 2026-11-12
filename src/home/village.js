@@ -13,12 +13,12 @@
  *
  * The camera transforms a layered 1086×1448 valley (src/home/landscape.js),
  * so every coordinate below is a world pixel (src/pets/paths.js), whatever
- * the screen. The valley is tall and the phone is taller still: it always
- * covers the screen (owner, 2026-10-03: zoomed out with empty edges, the
- * village "does not look good"), opens framed a little closer than that on a
- * phone so the houses read at a useful size, and pans with a finger in both
- * directions; a pinch (or ctrl + wheel, or + and -) goes closer or wider,
- * never wider than covering the screen.
+ * the screen. The valley is held at the screen's full height, its top at the
+ * top of the screen, and only slides left and right (owner, 2026-11-12: a
+ * screen that drifts up, down and sideways is "not a premium game feel").
+ * There is no pinch: the one time the camera goes closer is walking into a
+ * house, when it pushes in to the door before the room opens. A screen wider
+ * than the valley at that height shows it whole, centred on a soft backdrop.
  */
 
 import { loadWorld, loadWorldRecords, deriveWorldState } from '../world/state.js';
@@ -26,10 +26,10 @@ import { loadValley, saveValley, valleyName } from '../world/companion.js';
 import { derivePets, DAILY_GIFT } from '../pets/economy.js';
 import { GLOW_SVG } from '../pets/glow.js';
 import { PETS, PET_BY_ID, HOUSES, lineFor, petForPlace, stageTitle, stageGift, ageOf, grewLine, toGrow, houseGift } from '../pets/pets.js';
-import { MAP, HOMES, PLACES, SIGNS, NODES, LAMPS, WINDOWS, nearestNode } from '../pets/paths.js';
+import { MAP, HOMES, PLACES, SIGNS, NODES, LAMPS, WINDOWS, nearestNode, route } from '../pets/paths.js';
 import { petRig, petPortrait, petGear, petRing, petFigure, FRAME } from '../pets/sprite.js';
 import { ROOM_OF } from '../pets/next.js';
-import { duelsIn, ladderOf, nextBout, troublemakerOf } from '../duel/model.js';
+import { duelsIn, nextBout, troublemakerOf, boutOf } from '../duel/model.js';
 import { pendingLetters, ownedCards, teaseCard } from '../duel/letters.js';
 import { laurelSVG } from '../duel/art.js';
 import { createLife, petSize } from './life.js';
@@ -55,12 +55,15 @@ const store = {
 export async function renderVillageHome(outlet, ctx) {
   const { storage } = ctx;
   const arrivedAt = location.hash;
-  let world, valley, scenery, seals;
+  let world, valley, scenery, seals, chases;
   try {
-    [world, valley, scenery, seals] = await Promise.all([
+    [world, valley, scenery, seals, chases] = await Promise.all([
       loadWorld(storage), loadValley(storage),
       import('./scenery.js').then(async (scene) => { await scene.loadScenery(); return scene; }),
       import('../pets/seals.js'),
+      import('../duel/chase.js'),
+      // The Muddles' sheet sizes, for the one in the square (loaded with the village, not at the cold open).
+      import('../duel/muddle-sheets.js').then((m) => { MUDDLE_SHEETS = m.MUDDLE_SHEETS; }),
     ]);
   } catch (err) {
     console.error('[CAT OS] village could not open', err);
@@ -72,6 +75,7 @@ export async function renderVillageHome(outlet, ctx) {
   if (!outlet.isConnected || location.hash !== arrivedAt) return;
   const { mountScene } = scenery;
   const { deriveSeals, TOUR } = seals;
+  const { openChase, lastCaught, ladderFrom, homeName, CHASE_LAURELS } = chases;
   let state = world.state;
   let pets = state.pets ?? derivePets(state, world.records, world.content, state.now);
   const atmo = state.atmo;
@@ -135,41 +139,40 @@ export async function renderVillageHome(outlet, ctx) {
   const later = (fn, ms) => { const id = setTimeout(() => { timers.delete(id); if (!disposed) fn(); }, ms); timers.add(id); return id; };
 
   /* ---------------- The camera ---------------- */
-  const cam = { x: NODES.lib.x + 120, y: NODES.lib.y - 150 };
-  let vw = 1, vh = 1, s = 1, base = 1, zoom = null, tween = null, onCamera = () => {};
+  const cam = { x: NODES.lib.x + 120, y: MAP.h / 2 };
+  let vw = 1, vh = 1, s = 1, base = 1, zoom = 1, tween = null, onCamera = () => {};
+  let entering = false; // walking into a house (enterRoom): the camera is pushing in and nothing else may move it
   const scale = () => s;
-  /* The dock floats over the valley's foot: the bottom edge may slide up from under it by that much. */
-  const DOCK = 104;
-  const portrait = () => vh >= vw * 1.1;
-  const zoomRange = () => [1, Math.min(2.6, Math.max(1.3, 1.9 / base))];
+  /* Closer than the full height only while walking into a house (enterRoom) or coming back out of one. */
+  const DOOR_ZOOM = 3.4;
   const foliage = root.querySelector('.cw-foliage');
   const apply = () => {
-    const [lo, hi] = zoomRange();
-    zoom = clamp(zoom ?? (portrait() ? 1.42 : 1), lo, hi);
+    zoom = clamp(zoom, 1, DOOR_ZOOM);
     s = base * zoom;
-    const hw = vw / 2 / s, hh = vh / 2 / s, low = MAP.h - hh + DOCK / s;
+    const hw = vw / 2 / s, hh = vh / 2 / s;
     cam.x = hw * 2 >= MAP.w ? MAP.w / 2 : clamp(cam.x, hw, MAP.w - hw);
-    cam.y = hh * 2 >= MAP.h + DOCK / s ? (MAP.h + DOCK / s) / 2 : clamp(cam.y, hh, low);
+    // At the full height there is nowhere to go up or down: the top of the valley stays at the top of the screen.
+    cam.y = hh * 2 >= MAP.h - 0.5 ? MAP.h / 2 : clamp(cam.y, hh, MAP.h - hh);
     map.style.transform = `translate3d(${(vw / 2 - cam.x * s).toFixed(2)}px,${(vh / 2 - cam.y * s).toFixed(2)}px,0) scale(${s.toFixed(4)})`;
     map.style.setProperty('--inv', (1 / s).toFixed(4));
-    // Seen from far off, a plate is just the friend's face: names come back as you go closer.
-    root.classList.toggle('is-wide', zoom < 1.2 && s < 0.9);
     // the leaves at the screen's corners are nearer than the valley: they drift a little the other way
-    foliage.style.transform = `translate3d(${clamp(-(cam.x - MAP.w / 2) * s * 0.03, -14, 14).toFixed(1)}px,${clamp(-(cam.y - MAP.h / 2) * s * 0.02, -12, 12).toFixed(1)}px,0)`;
+    foliage.style.transform = `translate3d(${clamp(-(cam.x - MAP.w / 2) * s * 0.03, -14, 14).toFixed(1)}px,0,0)`;
     onCamera();
   };
   const layout = () => {
     vw = viewport.clientWidth || window.innerWidth; vh = viewport.clientHeight || window.innerHeight;
-    base = Math.max(vw / MAP.w, vh / MAP.h); // covering the screen: the widest the valley ever goes
+    base = vh / MAP.h; // the whole height of the valley, top to bottom, on every screen
     apply();
   };
-  /** Glide to a world point (and, if asked, to a closeness `zoomTo`). */
-  const panTo = (x, y, { ms = 900, zoomTo = null } = {}) => {
-    if (reduced || ms <= 0) { cam.x = x; cam.y = y; if (zoomTo) zoom = zoomTo; apply(); return; }
-    const from = { ...cam, z: zoom }, to = { x, y, z: zoomTo ?? zoom }, t0 = performance.now();
+  /** Glide to a world point (and, if asked, to a closeness `zoomTo`). `inout` eases both ends, for the push in to a door. */
+  const panTo = (x, y, { ms = 900, zoomTo = null, inout = false } = {}) => {
+    // Any glide that does not ask for a closeness goes back to the full height (a pull-back cut short never leaves the camera close).
+    const z = zoomTo ?? (entering ? zoom : 1);
+    if (reduced || ms <= 0) { tween = null; cam.x = x; cam.y = y; zoom = z; apply(); return; }
+    const from = { ...cam, z: zoom }, to = { x, y, z }, t0 = performance.now();
     const step = (t) => {
       if (tween !== step || disposed) return;
-      const p = Math.min(1, (t - t0) / ms), e = 1 - (1 - p) ** 3;
+      const p = Math.min(1, (t - t0) / ms), e = inout ? (p < 0.5 ? 4 * p ** 3 : 1 - (-2 * p + 2) ** 3 / 2) : 1 - (1 - p) ** 3;
       zoom = from.z + (to.z - from.z) * e;
       cam.x = from.x + (to.x - from.x) * e; cam.y = from.y + (to.y - from.y) * e;
       apply();
@@ -177,73 +180,45 @@ export async function renderVillageHome(outlet, ctx) {
     };
     tween = step; requestAnimationFrame(step);
   };
-  /** Closer or wider by `k`, keeping the world point under screen point (sx, sy) where it is. */
-  const zoomAt = (k, sx = vw / 2, sy = vh / 2) => {
-    const wx = cam.x + (sx - vw / 2) / s, wy = cam.y + (sy - vh / 2) / s, [lo, hi] = zoomRange();
-    zoom = clamp(zoom * k, lo, hi); s = base * zoom;
-    cam.x = wx - (sx - vw / 2) / s; cam.y = wy - (sy - vh / 2) / s;
-    apply();
-  };
-  /** Bring a point into the part of the screen a card does not cover. */
+  /** Bring a point into view: the valley only slides sideways, so only its x matters (on a wide screen, clear of a card on the right). */
   const reveal = (p) => {
-    const s = scale();
-    if (vw < 900) panTo(p.x, p.y + (0.5 - 0.24) * vh / s, { ms: 600 });
-    else panTo(p.x + (0.5 - 0.36) * vw / s, p.y, { ms: 600 });
+    if (vw < 900) panTo(p.x, cam.y, { ms: 600 });
+    else panTo(p.x + (0.5 - 0.36) * vw / scale(), cam.y, { ms: 600 });
   };
   const ro = new ResizeObserver(layout); ro.observe(viewport); layout();
 
-  /* Drag, fling, pinch, wheel, keys. A drag never becomes a tap. Two fingers
-     pinch: the valley grows or shrinks round the point between them. */
-  const ptrs = new Map();
-  let drag = null, moved = false, fling = null, pinch = null;
-  const local = (p) => { const r = viewport.getBoundingClientRect(); return { x: p.x - r.left, y: p.y - r.top }; };
-  const startPinch = () => {
-    const [a, b] = [...ptrs.values()], m = local({ x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 });
-    pinch = { d: Math.max(20, Math.hypot(a.x - b.x, a.y - b.y)), z: zoom, wx: cam.x + (m.x - vw / 2) / s, wy: cam.y + (m.y - vh / 2) / s };
-    drag = null;
-  };
+  /* Drag, fling, wheel, keys: sideways only. A drag never becomes a tap; a second finger is ignored. */
+  let drag = null, moved = false, fling = null, finger = null;
   viewport.addEventListener('pointerdown', (e) => {
     if (e.button !== 0 && e.pointerType === 'mouse') return;
-    tween = null; fling = null;
-    ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY });
-    if (ptrs.size === 1) { drag = { x: e.clientX, y: e.clientY, cx: cam.x, cy: cam.y, t: performance.now(), vx: 0, vy: 0 }; moved = false; pinch = null; }
-    else if (ptrs.size === 2) startPinch();
+    if (finger !== null || entering) return; // only the first finger drags; nothing drags while walking in
+    // A drag during the pull-back out of a house finishes it at once: the valley is always dragged at its full height.
+    if (zoom > 1) { zoom = 1; apply(); }
+    tween = null; fling = null; finger = e.pointerId;
+    drag = { x: e.clientX, y: e.clientY, cx: cam.x, t: performance.now(), vx: 0 }; moved = false;
   });
   viewport.addEventListener('pointermove', (e) => {
-    if (!ptrs.has(e.pointerId)) return;
-    ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY });
-    if (pinch && ptrs.size >= 2) {
-      const [a, b] = [...ptrs.values()], m = local({ x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 }), [lo, hi] = zoomRange();
-      if (!moved) { moved = true; viewport.classList.add('is-dragging'); }
-      zoom = clamp(pinch.z * Math.hypot(a.x - b.x, a.y - b.y) / pinch.d, lo, hi); s = base * zoom;
-      cam.x = pinch.wx - (m.x - vw / 2) / s; cam.y = pinch.wy - (m.y - vh / 2) / s;
-      apply();
-      return;
-    }
-    if (!drag || e.pointerId !== ptrs.keys().next().value) return; // only the first finger drags
+    if (!drag || e.pointerId !== finger) return;
     const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
     if (!moved && Math.hypot(dx, dy) < 7) return;
     if (!moved) { moved = true; try { viewport.setPointerCapture(e.pointerId); } catch { /* fine */ } viewport.classList.add('is-dragging'); }
-    const sc = scale(), now = performance.now(), nx = drag.cx - dx / sc, ny = drag.cy - dy / sc;
-    const dt = Math.max(1, now - drag.t);
-    drag.vx = ((nx - cam.x) / dt) * 0.6 + drag.vx * 0.4; drag.vy = ((ny - cam.y) / dt) * 0.6 + drag.vy * 0.4; drag.t = now;
-    cam.x = nx; cam.y = ny; apply();
+    const now = performance.now(), nx = drag.cx - dx / scale(), dt = Math.max(1, now - drag.t);
+    drag.vx = ((nx - cam.x) / dt) * 0.6 + drag.vx * 0.4; drag.t = now;
+    cam.x = nx; apply();
   });
   const endDrag = (e) => {
-    ptrs.delete(e.pointerId);
-    // A pinch that loses a finger becomes a drag from the finger still down.
-    if (ptrs.size) { pinch = null; const [p] = [...ptrs.values()]; drag = { x: p.x, y: p.y, cx: cam.x, cy: cam.y, t: performance.now(), vx: 0, vy: 0 }; return; }
-    pinch = null;
+    if (e.pointerId !== finger) return;
+    finger = null;
     viewport.classList.remove('is-dragging');
     // A drag swallows the click it ends in (below), and only that one: a click from the keyboard comes later.
     if (moved) setTimeout(() => { moved = false; }, 0);
-    if (moved && drag && !reduced && Math.hypot(drag.vx, drag.vy) > 0.05) {
-      let { vx, vy } = drag, last = performance.now();
+    if (moved && drag && !reduced && Math.abs(drag.vx) > 0.05) {
+      let { vx } = drag, last = performance.now();
       const step = (t) => {
         if (fling !== step || disposed) return;
         const dt = t - last; last = t;
-        cam.x += vx * dt; cam.y += vy * dt; vx *= 0.92 ** (dt / 16); vy *= 0.92 ** (dt / 16); apply();
-        if (Math.hypot(vx, vy) > 0.01) requestAnimationFrame(step); else fling = null;
+        cam.x += vx * dt; vx *= 0.92 ** (dt / 16); apply();
+        if (Math.abs(vx) > 0.01) requestAnimationFrame(step); else fling = null;
       };
       fling = step; requestAnimationFrame(step);
     }
@@ -254,27 +229,23 @@ export async function renderVillageHome(outlet, ctx) {
   viewport.addEventListener('click', (e) => { if (moved) { e.stopPropagation(); e.preventDefault(); moved = false; } }, true);
   viewport.addEventListener('wheel', (e) => {
     e.preventDefault(); tween = null;
-    // A trackpad pinch arrives as a wheel with ctrl held.
-    if (e.ctrlKey) { const p = local({ x: e.clientX, y: e.clientY }); zoomAt(Math.exp(-e.deltaY * 0.01), p.x, p.y); return; }
-    cam.x += (e.deltaX + (e.shiftKey ? e.deltaY : 0)) / s;
-    if (!e.shiftKey) cam.y += e.deltaY / s;
+    if (e.ctrlKey) return; // a trackpad pinch: the valley has one size
+    // A mouse wheel only scrolls up and down; here that slides the valley sideways.
+    cam.x += (Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY) / s;
     apply();
   }, { passive: false });
   viewport.addEventListener('keydown', (e) => {
     if (e.target !== viewport) return;
-    if (e.key === '+' || e.key === '=') { e.preventDefault(); zoomAt(1.2); return; }
-    if (e.key === '-' || e.key === '_') { e.preventDefault(); zoomAt(1 / 1.2); return; }
     const step = 70 / s;
-    const keys = { ArrowLeft: [-step, 0], ArrowRight: [step, 0], ArrowUp: [0, -step], ArrowDown: [0, step] };
-    if (keys[e.key]) { e.preventDefault(); panTo(cam.x + keys[e.key][0], cam.y + keys[e.key][1], { ms: 220 }); }
+    const keys = { ArrowLeft: -step, ArrowRight: step };
+    if (keys[e.key]) { e.preventDefault(); panTo(cam.x + keys[e.key], cam.y, { ms: 220 }); }
   });
   // A focused friend or building that sits off-screen is brought into view.
   viewport.addEventListener('focusin', (e) => {
     const p = e.target.closest('[data-pet],[data-spot]');
     if (!p) return;
     const at = p.dataset.pet ? life.positionOf(p.dataset.pet) : spotCentre(p.dataset.spot);
-    const s = scale();
-    if (Math.abs(at.x - cam.x) * s > vw * 0.4 || Math.abs(at.y - cam.y) * s > vh * 0.4) panTo(at.x, at.y, { ms: 450 });
+    if (Math.abs(at.x - cam.x) * scale() > vw * 0.4) panTo(at.x, cam.y, { ms: 450 });
   });
 
   /* ---------------- Life ---------------- */
@@ -285,8 +256,8 @@ export async function renderVillageHome(outlet, ctx) {
   const life = createLife(root, { pets, atmo, reduced, houses, memory: store, images: scene.images, view: () => ({ x: cam.x - vw / 2 / s, y: cam.y - vh / 2 / s, w: vw / s, h: vh / s, s }) });
   // For the browser gates: put the camera somewhere, find a friend, show the houses at given stages (looks only; nothing is saved).
   root.__village = {
-    look: (x, y, z) => panTo(x, y, { ms: 0, zoomTo: z ?? null }), positionOf: (id) => life.positionOf(id), party: (id, o) => life.party(id, o), callOn: (id) => life.callOn(id),
-    houses: (stages) => showHouses(stages), grown: () => shownStages, get pace() { return life.pace; }, get camera() { return { ...cam, s, zoom, base }; }, zoomAt: (k) => zoomAt(k),
+    look: (x, y) => panTo(x, y ?? cam.y, { ms: 0 }), positionOf: (id) => life.positionOf(id), party: (id, o) => life.party(id, o), callOn: (id) => life.callOn(id),
+    houses: (stages) => showHouses(stages), grown: () => shownStages, get pace() { return life.pace; }, get camera() { return { ...cam, s, zoom, base }; },
   };
   viewport.addEventListener('click', (e) => {
     if (e.target.closest('button')) return;
@@ -367,6 +338,48 @@ export async function renderVillageHome(outlet, ctx) {
   const edgeTimer = setInterval(placeEdge, 700);
   edge.addEventListener('click', () => { if (edgeFor) { play('tap'); reveal(life.positionOf(edgeFor)); edge.hidden = true; } });
 
+  /* ---------------- The Muddles in the village (src/duel/chase.js) ----------------
+     Tonight's Muddle lurks in the square by the notice board, where its poster
+     is up; tap it to take it on. Beaten, it runs off and peeks out of the door
+     of the house it is hiding in until a round in there catches it. */
+  let chase = null;
+  const muddleEl = document.createElement('button');
+  muddleEl.className = 'cw-muddle';
+  muddleEl.hidden = true;
+  root.querySelector('.cw-pets').appendChild(muddleEl);
+  let shownMuddle = '';
+  /* A hiding Muddle peeks out beside the door, on the side away from where the house's own friend stands. */
+  const muddleSpot = (home) => {
+    if (!home) return MUDDLE_SQUARE;
+    const d = HOMES[home].door, f = NODES[HOMES[home].node];
+    return { x: d.x + (d.x >= f.x ? 30 : -30), y: Math.max(d.y, f.y) + 3 };
+  };
+  function showMuddle({ id, home }, { at = null } = {}) {
+    const bout = boutOf(id), p = at ?? muddleSpot(home), key = `${id}|${home}`;
+    muddleEl.hidden = false;
+    muddleEl.dataset.mode = home ? 'hiding' : 'square';
+    muddleEl.style.left = `${p.x.toFixed(1)}px`; muddleEl.style.top = `${p.y.toFixed(1)}px`; muddleEl.style.zIndex = String(Math.round(p.y + 2));
+    if (key === shownMuddle) return;
+    shownMuddle = key;
+    muddleEl.innerHTML = `<span class="cw-muddle__fig">${muddleFigure(id, 62)}</span><span class="cw-muddle__mark" aria-hidden="true">${home ? '?' : '!'}</span>`;
+    muddleEl.setAttribute('aria-label', home ? `${bout.name} is hiding in ${homeName(home)}. Go in and catch it.` : `${bout.name} is in the village square. Take it on.`);
+  }
+  muddleEl.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (muddleEl.dataset.mode === 'hiding' && chase) { enterRoom(chase.home, muddleEl); return; }
+    unlock(); play('open'); location.hash = '#/duel';
+  });
+  /* Tonight's Muddle on the square's notice board (painted onto the board itself, so friends still walk in front of it). */
+  let posted = '';
+  function postBill(id) {
+    if (posted === id) return;
+    posted = id;
+    const img = new Image();
+    img.decoding = 'async';
+    img.src = `./assets/art/muddle-${id}.webp`;
+    img.decode().then(() => { if (!disposed && posted === id) scene.poster(img, MUDDLE_SHEETS[id]); }, () => { /* the board keeps a blank playbill */ });
+  }
+
   /* ---------------- The HUD ---------------- */
   const hud = () => {
     const f = pets.flame, T = pets.today;
@@ -375,7 +388,7 @@ export async function renderVillageHome(outlet, ctx) {
     fire.setAttribute('aria-label', f.days ? `Toffee's fire: ${f.days} ${f.days === 1 ? 'day' : 'days'} in a row` : "Toffee's fire: help any friend today to light it");
     fire.classList.toggle('is-out', !f.today);
     const learning = world.records?.learning ?? [];
-    const lad = ladderOf(duelsIn(learning));
+    const lad = ladderFrom(world.records);
     const lv = root.querySelector('.cw-chip--level');
     lv.innerHTML = `<span class="cw-lv"><small>Stop</small><b>${lad.arena.n}</b></span><span class="cw-lvbar" aria-hidden="true"><i style="width:${Math.round(lad.pct * 100)}%"></i></span><span class="cw-laurels">${laurelSVG(21)}<b>${lad.laurels}</b></span>`;
     lv.setAttribute('aria-label', `Stop ${lad.arena.n} on the Laurel Road, ${lad.arena.name}. ${lad.laurels} laurels${lad.next ? `; ${lad.toNext} more to reach ${lad.next.name}` : ''}. Open the Laurel Road.`);
@@ -385,9 +398,24 @@ export async function renderVillageHome(outlet, ctx) {
     const up = nextBout(allDuels, Date.now());
     const trouble = troublemakerOf(allDuels, Date.now());
     const double = !!trouble?.open && trouble.bout.id === up.id;
-    /* The double is a tag on the corner: in the line under PLAY it pushed the Muddle's name off the button. */
-    playEl.innerHTML = `${double ? '<i class="cw-play__x2">2× laurels</i>' : ''}<b>PLAY</b><small>vs ${escapeHTML(up.name)}</small>`;
-    playEl.setAttribute('aria-label', `Play a duel against ${up.name}: ${up.skill}.${double ? ' Today\'s troublemaker, for double laurels.' : ''}`);
+    /* The game takes turns: a Muddle you beat runs into a house (src/duel/chase.js), and the big button
+       follows it in. Catch it with one real round there, and PLAY is a duel again. */
+    chase = openChase(world.records);
+    playEl.classList.toggle('is-chase', !!chase);
+    if (chase) {
+      playEl.dataset.chase = chase.home;
+      playEl.setAttribute('href', ROOM_OF.get(chase.home) ?? '#/duel');
+      playEl.innerHTML = `<i class="cw-play__x2">+${CHASE_LAURELS} laurels</i><b>CHASE</b><small>${escapeHTML(chase.bout.name)} · ${escapeHTML(HOUSE_NAME[chase.home])}</small>`;
+      playEl.setAttribute('aria-label', `Chase ${chase.bout.name} into ${homeName(chase.home)}. One round in there catches it, for ${CHASE_LAURELS} laurels.`);
+    } else {
+      delete playEl.dataset.chase;
+      /* The double is a tag on the corner: in the line under PLAY it pushed the Muddle's name off the button. */
+      playEl.innerHTML = `${double ? '<i class="cw-play__x2">2× laurels</i>' : ''}<b>PLAY</b><small>vs ${escapeHTML(up.name)}</small>`;
+      playEl.setAttribute('aria-label', `Play a duel against ${up.name}: ${up.skill}.${double ? ' Today\'s troublemaker, for double laurels.' : ''}`);
+    }
+    for (const el of root.querySelectorAll('.cw-plate')) el.classList.toggle('is-chase', el.dataset.spot === chase?.home);
+    showMuddle(chase ? { id: chase.bout.id, home: chase.home } : { id: up.id, home: null });
+    postBill(up.id);
     /* Who is next, as a face on the corner of PLAY. Tapping the face opens the
        bill, where every Muddle (every part of the exam) can be challenged. */
     const vsEl = root.querySelector('.cw-vs');
@@ -429,7 +457,12 @@ export async function renderVillageHome(outlet, ctx) {
   hud();
   // Coming back to the village is when the plan changes: in the app, rewrite what the phone will show.
   if (window.CatOSAndroid) import('../shell/reminders.js').then((m) => m.syncReminders(storage)).catch(() => { /* no reminders */ });
-  root.querySelector('.cw-play').addEventListener('click', () => { unlock(); play('open'); });
+  root.querySelector('.cw-play').addEventListener('click', (e) => {
+    const home = e.currentTarget.dataset.chase;
+    // CHASE walks into the house the Muddle ran into, the same way a tap on the house does.
+    if (home && ROOM_OF.has(home)) { e.preventDefault(); enterRoom(home, e.currentTarget); return; }
+    unlock(); play('open');
+  });
   root.querySelector('.cw-chip--level').addEventListener('click', () => { unlock(); location.hash = '#/road'; });
 
   /* ---------------- Cards ---------------- */
@@ -462,27 +495,38 @@ export async function renderVillageHome(outlet, ctx) {
   };
   /* Every house is a room you walk straight into, with no friend card between
      a tap and entry. House, friend and roster all use the same doorway. */
-  let entering = false;
+  /**
+   * Walking into a house, like a film: the bars and buttons slip away, the
+   * camera pushes in to the door while the edges of the screen darken, the
+   * doorway's dark closes round it, and the room opens out of that dark
+   * (throughDoor). A Muddle hiding in there is announced as the room opens.
+   */
   const enterRoom = (id, from) => {
-    if (entering) return;
+    if (entering || !ROOM_OF.has(id)) return;
     entering = true;
     unlock(); play('open');
     announce(`${PET_BY_ID.get(id).name}: Come in.`);
     life.poke(id);
-    const go = () => { location.hash = ROOM_OF.get(id); };
+    const hiding = chase?.home === id ? chase : null;
+    try { sessionStorage.setItem('catos:entered', JSON.stringify({ id, at: Date.now() })); } catch { /* private mode */ }
+    const go = () => { throughDoor(hiding && { bout: hiding.bout, laurels: CHASE_LAURELS }); location.hash = ROOM_OF.get(id); };
     if (reduced) { go(); return; }
-    // Walking in: the camera glides up to the door as the doorway closes round it.
-    const at = HOMES[id]?.door, box = viewport.getBoundingClientRect();
-    if (at) panTo(at.x, at.y - 18, { ms: 520, zoomTo: Math.min(zoomRange()[1], zoom * 1.8) });
-    const r = at ? null : from?.getBoundingClientRect?.();
-    const door = document.createElement('div');
-    door.className = 'cw-door';
-    door.style.setProperty('--x', `${Math.round(at ? box.left + vw / 2 : r ? r.left + r.width / 2 : innerWidth / 2)}px`);
-    door.style.setProperty('--y', `${Math.round(at ? box.top + vh / 2 : r ? r.top + r.height / 2 : innerHeight / 2)}px`);
-    root.appendChild(door);
-    requestAnimationFrame(() => requestAnimationFrame(() => door.classList.add('is-shut')));
-    later(go, 480);
-    later(() => { door.remove(); entering = false; }, 1800);
+    tween = null; fling = null;
+    root.classList.add('is-entering');
+    const at = HOMES[id]?.door, box = viewport.getBoundingClientRect(), aim = at ? { x: at.x, y: at.y - 26 } : null;
+    if (aim) panTo(aim.x, aim.y, { ms: 1150, zoomTo: DOOR_ZOOM, inout: true });
+    later(() => {
+      // The doorway's dark spreads from wherever the door is on screen by now.
+      const r = aim ? null : from?.getBoundingClientRect?.();
+      const door = document.createElement('div');
+      door.className = 'cw-door';
+      door.style.setProperty('--x', `${Math.round(aim ? box.left + vw / 2 + (aim.x - cam.x) * s : r ? r.left + r.width / 2 : innerWidth / 2)}px`);
+      door.style.setProperty('--y', `${Math.round(aim ? box.top + vh / 2 + (aim.y - cam.y) * s : r ? r.top + r.height / 2 : innerHeight / 2)}px`);
+      root.appendChild(door);
+      requestAnimationFrame(() => requestAnimationFrame(() => door.classList.add('is-shut')));
+    }, aim ? 640 : 0);
+    later(go, aim ? 1180 : 480);
+    later(() => { entering = false; }, 2400);
   };
   const openCard = (kind, arg, trigger) => {
     if (kind === 'pet' && ROOM_OF.has(arg)) { if (openKind) close(); enterRoom(arg, trigger); return; }
@@ -652,6 +696,68 @@ export async function renderVillageHome(outlet, ctx) {
 
   /* ---------------- Coming back from a run ---------------- */
   let welcomed = false;
+  /* The house just left, if the learner walked out of one (enterRoom remembers it for the way back). */
+  const entered = (() => {
+    try {
+      const v = JSON.parse(sessionStorage.getItem('catos:entered') || 'null');
+      sessionStorage.removeItem('catos:entered');
+      return v && HOMES[v.id] && Date.now() - Number(v.at) < 45 * 60e3 ? v : null;
+    } catch { return null; }
+  })();
+  const houseX = (id) => HOUSE_ART[id]?.mask?.[0] ?? HOMES[id]?.door?.x ?? NODES.pc.x;
+  /** Out of a house the way you went in: the camera starts close at its door and pulls back to the whole valley, then slides to `x`. */
+  function pullBack(x) {
+    if (!entered || reduced) { panTo(x, cam.y, { ms: 0 }); return; }
+    const d = HOMES[entered.id].door;
+    panTo(d.x, d.y - 26, { ms: 0, zoomTo: DOOR_ZOOM * 0.8 });
+    root.classList.add('is-leaving-house');
+    later(() => panTo(x, cam.y, { ms: 1250, zoomTo: 1, inout: true }), 80);
+    later(() => root.classList.remove('is-leaving-house'), 1200);
+  }
+  /** A beaten Muddle bolts from the square along the lanes into its hideout; the camera follows, then walks in after it. */
+  function runChase() {
+    const { bout, home } = chase, path = route(nearestNode(MUDDLE_SQUARE), HOMES[home].node);
+    panTo(MUDDLE_SQUARE.x, cam.y, { ms: 0 });
+    showMuddle({ id: bout.id, home: null });
+    announce(`${bout.name} ran off into ${homeName(home)}. Catch it in there.`);
+    if (reduced || path.length < 2) { showMuddle({ id: bout.id, home }); later(() => enterRoom(home, null), 900); return; }
+    const pts = [MUDDLE_SQUARE, ...path, HOMES[home].door], legs = [];
+    let total = 0;
+    for (let i = 1; i < pts.length; i += 1) { const d = Math.hypot(pts[i].x - pts[i - 1].x, pts[i].y - pts[i - 1].y); legs.push(d); total += d; }
+    const ms = clamp(total * 3.2, 1300, 2600);
+    later(() => {
+      play('swoosh');
+      toast(`<b>${escapeHTML(bout.name)} ran into ${escapeHTML(homeName(home))}!</b> Catch it in there: +${CHASE_LAURELS} laurels.`, 4600);
+      muddleEl.classList.add('is-running');
+      const t0 = performance.now();
+      const step = (t) => {
+        if (disposed) return;
+        let d = Math.min(1, (t - t0) / ms) * total, i = 0;
+        while (i < legs.length - 1 && d > legs[i]) { d -= legs[i]; i += 1; }
+        const a = pts[i], b = pts[i + 1], k = legs[i] ? Math.min(1, d / legs[i]) : 1, p = { x: a.x + (b.x - a.x) * k, y: a.y + (b.y - a.y) * k };
+        muddleEl.style.setProperty('--dir', b.x < a.x ? '-1' : '1');
+        showMuddle({ id: bout.id, home: null }, { at: p });
+        tween = null; cam.x = p.x; apply();
+        if (t - t0 < ms) requestAnimationFrame(step);
+        else { muddleEl.classList.remove('is-running'); showMuddle({ id: bout.id, home }); later(() => enterRoom(home, muddleEl), 650); }
+      };
+      requestAnimationFrame(step);
+    }, 700);
+  }
+  /* A Muddle caught in its hideout: its own card once the party is over, and the laurels it was worth. Animation memory only. */
+  if (store.get('catos:caught') === null) store.set('catos:caught', lastCaught(world.records)?.duel.id ?? 'none');
+  function checkCatch() {
+    const c = lastCaught(world.records);
+    if (!c || store.get('catos:caught') === c.duel.id) return;
+    store.set('catos:caught', c.duel.id);
+    if (Date.now() - c.caughtAt > 45 * 60e3) return;
+    whenQuiet(() => {
+      reveal({ x: houseX(c.home), y: cam.y });
+      later(() => { houses.burst(c.home); play('grow'); }, reduced ? 0 : 600);
+      celebrate(`<p class="cw-party__eyebrow">Caught in ${escapeHTML(homeName(c.home))}</p><span class="cw-party__pet">${muddleFigure(c.bout.id, 116, 4)}</span><h2 id="cw-party-h">You caught ${escapeHTML(c.bout.name)}!</h2><p class="cw-party__new">${laurelSVG(20)} <b>+${CHASE_LAURELS} laurels</b> on the Laurel Road</p><p>Another Muddle is waiting in the square. Press PLAY.</p>`, 'levelup');
+      announce(`You caught ${c.bout.name}: ${CHASE_LAURELS} laurels.`);
+    });
+  }
   // Where every friend stands, remembered from the very first visit, so the first stage anyone reaches gets its card.
   if (!store.get('catos:stages')) store.set('catos:stages', stagesNow());
   if (!store.get('catos:keepsakes-seen')) store.set('catos:keepsakes-seen', JSON.stringify(deriveJourney(pets).keepsakes.filter(k => k.earned).map(k => k.id)));
@@ -661,18 +767,24 @@ export async function renderVillageHome(outlet, ctx) {
     const seen = sessionStorage.getItem('world:toasted');
     const focusSlug = sessionStorage.getItem('world:focus');
     for (const k of ['world:focus', 'world:changed', 'world:change-line', 'world:earned', 'world:unlocked', 'world:pet', 'world:gifts', 'world:heart']) sessionStorage.removeItem(k);
-    if (last && Date.now() - last.at < 20 * 60e3 && seen !== String(last.at)) {
+    const chaseArrival = new URLSearchParams(arrivedAt.split('?')[1] || '').get('chase') === '1' && !!chase;
+    if (chaseArrival) {
+      // Straight from a won duel: the Muddle bolts from the square into its hideout, and you follow it in.
+      if (last) sessionStorage.setItem('world:toasted', String(last.at));
+      welcomed = true;
+      runChase();
+    } else if (last && Date.now() - last.at < 20 * 60e3 && seen !== String(last.at)) {
       /* A set finished: everyone runs to the plaza and throws a party round
          the friend you helped (owner, 2026-10-03). */
       welcomed = true;
       sessionStorage.setItem('world:toasted', String(last.at));
       const p = PET_BY_ID.get(last.pet);
-      panTo(NODES.pc.x, NODES.pc.y - 20, { ms: 0 });
+      pullBack(NODES.pc.x);
       later(() => {
         const line = lineFor(last.pet, 'thanks', String(last.at));
         life.party(last.pet, { line });
-        announce(`Everyone ran to the green to celebrate. ${p.name}: ${line}`);
-        toast(`${last.earned > 0 ? `${GLOW_SVG} <b>+${last.earned}</b> ` : ''}You helped ${p.name}! Party on the green!`, 5600);
+        announce(`Everyone ran to the square to celebrate. ${p.name}: ${line}`);
+        toast(`${last.earned > 0 ? `${GLOW_SVG} <b>+${last.earned}</b> ` : ''}You helped ${p.name}! Party in the square!`, 5600);
         play('party');
         // The cards (a friend who grew, a new level, the day's gift) wait for the party to wind down.
         later(() => checkParties(true), reduced ? 1200 : 7600);
@@ -680,11 +792,14 @@ export async function renderVillageHome(outlet, ctx) {
     } else if (focusSlug && petForPlace(focusSlug)) {
       // Back from a place: face its own house.
       const spot = HOUSES.find((h) => h.place === focusSlug)?.spot ?? petForPlace(focusSlug);
-      faceHouse(spot);
+      pullBack(houseX(spot));
+    } else if (entered) {
+      pullBack(houseX(entered.id));
     } else {
       // Any other arrival opens on the house the big button is for.
-      faceHouse(pets.play ?? 'chai');
+      faceHouse(chase?.home ?? pets.play ?? 'chai');
     }
+    later(checkCatch, welcomed ? (reduced ? 1500 : 8200) : (reduced ? 300 : 1400));
   }
 
   /* ---------------- First visit: one line from Toffee and the big button glows ----------------
@@ -789,11 +904,60 @@ function spotsHTML() {
   }).join('');
 }
 
-/** Each house's subject plate, above every friend and roof (the hit area under the house is .cw-spot; a plate is a second, larger target for the same door). */
+/** Set when the village loads (duel/muddle-sheets.js stays out of the cold open). */
+let MUDDLE_SHEETS = {};
+/** Where tonight's Muddle lurks in the square: on the cobbles in front of the notice board (world px). */
+const MUDDLE_SQUARE = Object.freeze({ x: 514, y: 884 });
+/** A Muddle's sprite, the same five-frame sheet a duel uses (duel/arena.js muddleSprite, without loading the arena). */
+function muddleFigure(id, size, frame = 0) {
+  const s = MUDDLE_SHEETS[id];
+  return s ? `<span class="pet-sprite" style="--fw:${s.w};--sh:${s.h};--g:${s.gutter};--f:${frame};--size:${size};background-image:url(./assets/art/muddle-${id}.webp)"></span>` : '';
+}
+
+/**
+ * The other side of a door. The doorway's dark is put on <body>, so it
+ * outlives the village and the room opens out of the same dark the door
+ * closed into. A Muddle hiding in the room is announced as it opens.
+ */
+function throughDoor(hiding) {
+  const dark = document.createElement('div');
+  dark.className = 'doorway';
+  dark.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(dark);
+  let opened = false;
+  const open = () => { if (opened) return; opened = true; dark.classList.add('is-open'); setTimeout(() => dark.remove(), 1000); };
+  // The room has drawn when the router swaps #view; give it a moment to settle, never more than a second and a half.
+  const view = document.getElementById('view');
+  const mo = new MutationObserver(() => { mo.disconnect(); setTimeout(open, 320); });
+  if (view) mo.observe(view, { childList: true });
+  setTimeout(() => { mo.disconnect(); open(); }, 1500);
+  if (hiding) setTimeout(() => chaseBanner(hiding), 900);
+}
+
+/** "Smudge is hiding in here!": a card that drops in at the top of the room, then goes on its own (or with a tap). */
+function chaseBanner({ bout, laurels }) {
+  const el = document.createElement('div');
+  el.className = 'chase-banner';
+  el.setAttribute('role', 'status');
+  el.innerHTML = `<span class="chase-banner__fig">${muddleFigure(bout.id, 58)}</span><span class="chase-banner__text"><b>${escapeHTML(bout.name)} is hiding in here!</b><span>Play one round to catch it: +${laurels} laurels.</span></span>`;
+  document.body.appendChild(el);
+  requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add('is-in')));
+  let gone = false;
+  const off = () => { if (gone) return; gone = true; el.classList.remove('is-in'); setTimeout(() => el.remove(), 450); window.removeEventListener('hashchange', off); };
+  el.addEventListener('click', off);
+  window.addEventListener('hashchange', off);
+  setTimeout(off, 6500);
+}
+
+/** What each house is called on its sign, and the part of the paper it teaches, in a word or two. */
+export const HOUSE_NAME = Object.freeze({ chai: 'The Library', matcha: 'The Glasshouse', ginger: 'The Railway', mallow: 'The Observatory', mochi: 'The Pantry', biscuit: 'The Long Table', sesame: 'The Clockworks', toffee: 'The Hearth' });
+const SIGN_SUBJECT = Object.freeze({ chai: 'Reading', matcha: 'Vocabulary', ginger: 'Para Jumbles', mallow: 'Odd One Out', mochi: 'Summaries', biscuit: 'Placement', sesame: 'Completion', toffee: 'The Gauntlet' });
+
+/** Each house's name on a small painted sign over its roof, above every friend (the hit area under the house is .cw-spot; the sign is a second target for the same door). No faces: the house is the picture. */
 function platesHTML() {
   return HOUSES.map((h) => {
     const at = SIGNS[h.spot];
-    return `<span class="cw-plate" data-spot="${h.spot}" style="left:${at.x.toFixed(1)}px;top:${at.y.toFixed(1)}px">${petPortrait(h.pet, 24)}<b>${escapeHTML(h.subject)}</b></span>`;
+    return `<span class="cw-plate" data-spot="${h.spot}" style="left:${at.x.toFixed(1)}px;top:${at.y.toFixed(1)}px"><b>${escapeHTML(HOUSE_NAME[h.spot])}</b><small>${escapeHTML(SIGN_SUBJECT[h.spot])}</small></span>`;
   }).join('');
 }
 

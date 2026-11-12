@@ -36,7 +36,9 @@ function countUp(el, from, to, ms = 900) {
 
 export async function renderDuelResult(outlet, { storage, summary }) {
   await ensureDuelStyle();
-  const { won, delta, before, after, muddle, friend, friendStage, arena, misses, right, wrong, bestCombo, first, letter, newArena, near, title, newWords, newBest, bout, bounty, ribbon, firstDunk, next } = summary;
+  const { won, delta, before, after, muddle, friend, friendStage, arena, misses, right, wrong, bestCombo, first, letter, newArena, near, title, newWords, newBest, bout, bounty, ribbon, firstDunk, next, chase } = summary;
+  /* A beaten Muddle runs off into a house (chase.js): the big button follows it in through the village. */
+  const chaseHref = '#/world?chase=1';
   // One line of honour at most, the rarest first.
   const medal = ribbon ? `${ribbon.name} taken off ${muddle.name}` : bounty ? 'Troublemaker dunked: double laurels' : firstDunk ? `First dunking of ${muddle.name}` : '';
   const stamp = Date.now();
@@ -84,11 +86,14 @@ export async function renderDuelResult(outlet, { storage, summary }) {
           <div class="${newBest ? 'is-best' : ''}"><b>${bestCombo}</b><span>${newBest ? 'New best!' : 'Best streak'}</span></div>
           <div><b>${newWords}</b><span>New ${newWords === 1 ? 'word' : 'words'}</span></div>
         </div>
+        ${won && chase ? `<p class="rs-chase"><span class="rs-chase__fig">${muddleSprite(muddle.id, { size: 64, frame: FRAME.talk })}</span><span><b>${esc(muddle.name)} ran off into ${esc(chase.name)}!</b><span>One round in there catches ${esc(muddle.name)}: +${chase.laurels} laurels.</span></span></p>` : ''}
         ${won ? letterHTML : ''}
         ${notes}
         <div class="rs__actions">
           ${won
-    ? `<a class="dl-btn dl-btn--go dl-btn--xl" id="again" href="#/duel?again=${stamp}">Play again${next && !first ? `<small class="rs__next">Next: ${esc(next.name)}, ${esc(next.skill)}</small>` : ''}</a>`
+    ? chase
+      ? `<a class="dl-btn dl-btn--go dl-btn--xl dl-btn--chase" id="chase" href="${chaseHref}">Chase ${esc(muddle.name)}<small class="rs__next">Into ${esc(chase.name)}</small></a><a class="dl-btn dl-btn--plain" id="again" href="#/duel?again=${stamp}">Duel again instead</a>`
+      : `<a class="dl-btn dl-btn--go dl-btn--xl" id="again" href="#/duel?again=${stamp}">Play again${next && !first ? `<small class="rs__next">Next: ${esc(next.name)}, ${esc(next.skill)}</small>` : ''}</a>`
     : `<a class="dl-btn dl-btn--go dl-btn--xl" id="again" href="#/duel?again=${stamp}&vs=${esc(muddle.id)}">Rematch</a>`}
           <div class="rs__more">
             <a class="dl-btn dl-btn--plain" href="#/bill">Pick a Muddle</a>
@@ -114,14 +119,14 @@ export async function renderDuelResult(outlet, { storage, summary }) {
   if (letterBtn) {
     setTimeout(() => { letterBtn.classList.add('is-in'); play('swoosh'); }, reduced() ? 0 : 1100);
     letterBtn.addEventListener('click', () => {
-      renderLetterOpen(outlet, { storage, letter, first, doneLabel: 'Play again', doneHref: `#/duel?again=${Date.now()}` });
+      renderLetterOpen(outlet, { storage, letter, first, doneLabel: chase ? `Chase ${muddle.name}` : 'Play again', doneHref: chase ? chaseHref : `#/duel?again=${Date.now()}` });
     });
   }
 
   /* One door to a house with no rope, after a win and only while its letter
      is still unearned: the Glasshouse and the Gauntlet are not duels, so this
      is where a player who lives on PLAY is reminded they exist. */
-  if (won && !first) {
+  if (won && !first && !chase) {
     loadWorldRecords(storage).then((records) => {
       const door = sideDoor(sideShows(records.learning), duelsIn(records.learning).length);
       const slot = outlet.querySelector('#side');

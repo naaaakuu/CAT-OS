@@ -160,10 +160,16 @@ export const duelsIn = (learning) => (Array.isArray(learning) ? learning : []).f
   .filter((d) => Number.isFinite(Date.parse(d.finished_at)))
   .sort((a, b) => Date.parse(a.finished_at) - Date.parse(b.finished_at) || String(a.id).localeCompare(String(b.id)));
 
-/** Laurels are the saved duels folded in time order. You cannot fall out of an arena you reached. */
-export function laurelsFrom(duels) {
+/**
+ * Laurels are the saved duels folded in time order. You cannot fall out of an
+ * arena you reached. `bonus` is other laurels earned along the way, as
+ * { at (ms), laurels }: the Muddles caught in their hideouts (chase.js).
+ */
+export function laurelsFrom(duels, bonus = []) {
+  const events = duels.map((d) => ({ at: Date.parse(d.finished_at), l: num(d.laurels) }));
+  if (bonus.length) { for (const b of bonus) events.push({ at: num(b.at), l: num(b.laurels) }); events.sort((a, b) => a.at - b.at); }
   let l = 0;
-  for (const d of duels) l = Math.max(arenaFor(l).from, l + num(d.laurels));
+  for (const e of events) l = Math.max(arenaFor(l).from, l + e.l);
   return l;
 }
 
@@ -188,8 +194,8 @@ export function winTitle({ wrong, lowest, right }) {
 }
 
 /** Everything a screen wants to say about the ladder. */
-export function ladderOf(duels) {
-  const laurels = laurelsFrom(duels);
+export function ladderOf(duels, bonus = []) {
+  const laurels = laurelsFrom(duels, bonus);
   const arena = arenaFor(laurels);
   const next = nextArena(arena);
   const span = next ? next.from - arena.from : 1;

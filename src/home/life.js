@@ -29,7 +29,7 @@
  * leaves the friends standing at home, awake, and the canvas still.
  */
 
-import { NODES, HOMES, SPOTS, CHATS, route, FIRE, CHIMNEYS, TEAPOT, POND, CLOCK, TREASURE_AT, MAP } from '../pets/paths.js';
+import { NODES, HOMES, SPOTS, CHATS, route, FIRE, CHIMNEYS, TEAPOT, POND, CLOCK, TREASURE_AT, MAP, FOUNTAIN } from '../pets/paths.js';
 import { FRAME, growOf } from '../pets/sprite.js';
 import { PETS, PET_BY_ID, SIGNATURE, gossipLine, lineFor, dealLine } from '../pets/pets.js';
 import { VISITS, VISIT_BY_ID } from '../pets/visits.js';
@@ -542,7 +542,7 @@ export function createLife(root, { pets: petsState, atmo, reduced, view = null, 
     return c;
   };
   const puffs = { day: puffOf('246,242,234'), dark: puffOf('150,152,166'), dust: puffOf('196,170,120') };
-  let sparkAcc = 0, smokeAcc = 0, steamAcc = 0, rippleAt = 2000, birdsAt = rand(2500, 6000), lanternAcc = 0, fishAt = rand(6000, 14000);
+  let fountainAcc = 0, poolAt = 0, sparkAcc = 0, smokeAcc = 0, steamAcc = 0, rippleAt = 2000, birdsAt = rand(2500, 6000), lanternAcc = 0, fishAt = rand(6000, 14000);
   const glints = Array.from({ length: 16 }, (_, i) => { const r = R(`glint${i}`); const t = r() * Math.PI * 2, d = Math.sqrt(r()); return { x: POND.x + Math.cos(t) * POND.rx * d * 0.85, y: POND.y + Math.sin(t) * POND.ry * d * 0.8, p: r() * 6 }; });
   /* Particles live in one array, removed by swapping with the last; a count per kind replaces a scan per frame. */
   const count = Object.create(null);
@@ -605,6 +605,12 @@ export function createLife(root, { pets: petsState, atmo, reduced, view = null, 
         birdsAt = now + rand(22e3, 42e3);
         const ltr = Math.random() < 0.5, y0 = rand(50, 200), n = 3 + Math.floor(Math.random() * 3);
         for (let i = 0; i < n; i += 1) add({ kind: 'bird', x: ltr ? -40 - i * 26 : MAP.w + 40 + i * 26, y: y0 + (i % 2) * 14 + i * 4, vx: ltr ? rand(70, 85) : -rand(70, 85), t: Math.random() * 6, age: 0, life: MAP.w / 70 + 5 });
+      }
+      // The square's fountain: water spilling from the upper bowl, rings spreading in the basin (only while it is on screen).
+      if (inView(r, FOUNTAIN.x, FOUNTAIN.top, 60)) {
+        fountainAcc += dt * 16;
+        while (fountainAcc > 1) { fountainAcc -= 1; const a = Math.random() * Math.PI, side = Math.cos(a); add({ kind: 'drop', x: FOUNTAIN.x + side * 15, y: FOUNTAIN.top + Math.sin(a) * 4, vx: side * rand(18, 30), vy: rand(-26, -8), life: rand(0.38, 0.5), age: 0 }); }
+        if (now > poolAt) { poolAt = now + rand(500, 1100); const t = Math.random() * Math.PI * 2, d = 0.4 + Math.random() * 0.5; add({ kind: 'ripple', x: FOUNTAIN.pool.x + Math.cos(t) * FOUNTAIN.pool.rx * d, y: FOUNTAIN.pool.y + Math.sin(t) * FOUNTAIN.pool.ry * d, age: 0, life: 1.4, sc: 0.32 }); }
       }
       if (night() && made('skylanterns') && pets.harmony >= 0.5) { lanternAcc += dt * 0.5; while (lanternAcc > 1) { lanternAcc -= 1; add({ kind: 'lantern', x: NODES.pc.x + rand(-130, 130), y: NODES.pc.y + rand(-60, 60), vy: rand(-14, -9), age: 0, life: 40, t: Math.random() * 6 }); } }
     }
@@ -750,7 +756,7 @@ export function createLife(root, { pets: petsState, atmo, reduced, view = null, 
         }
         case 'ripple':
           if (!inView(r, p.x, p.y, 30)) break;
-          g.strokeStyle = `rgba(235,245,255,${(0.5 * (1 - k)).toFixed(2)})`; g.lineWidth = 1.4; g.beginPath(); g.ellipse(p.x, p.y, 4 + k * 26, 2 + k * 10, 0, 0, 7); g.stroke();
+          g.strokeStyle = `rgba(235,245,255,${(0.5 * (1 - k)).toFixed(2)})`; g.lineWidth = 1.4; g.beginPath(); g.ellipse(p.x, p.y, (4 + k * 26) * (p.sc ?? 1), (2 + k * 10) * (p.sc ?? 1), 0, 0, 7); g.stroke();
           break;
         case 'bird': {
           p.x += p.vx * dt; p.t += dt * 9; if (p.x < -80 || p.x > MAP.w + 84) { drop(i); break; }
@@ -880,10 +886,10 @@ export function createLife(root, { pets: petsState, atmo, reduced, view = null, 
      * and they cheer; `center` says `line`. Confetti, then back to their day.
      */
     party(center, { line = '', ms = 9000 } = {}) {
-      const c = NODES.pc, ring = SPOTS.ring;
+      const c = NODES.pc, ring = SPOTS.ring.filter((n) => n !== 'pc');
       party = { center, line };
       const others = actors.filter((a) => a.id !== center);
-      // The ring is the plaza's own edge, evenly shared out: nobody stands off the paving.
+      // The host stands at the front of the fountain; the rest share out the ring round it: nobody stands off the cobbles.
       const spots = [[center, 'pc'], ...others.map((a, i) => [a.id, ring[Math.round((i * ring.length) / others.length) % ring.length]])];
       for (const [id, node] of spots) {
         const a = byId.get(id);

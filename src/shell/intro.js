@@ -13,7 +13,7 @@
  */
 
 import { feedbackPrefs } from '../core/engagement/feedback.js';
-import { hushWorld } from '../world/audio.js';
+import { hushWorld, play } from '../world/audio.js';
 
 const VIDEO = './assets/intro/nakul-creations-portrait.mp4'; // vertical only; a screen of another shape letterboxes it (intro.css)
 const START_BY_MS = 4000;  // not playing by now: something is wrong, carry on
@@ -25,11 +25,76 @@ let finished = Promise.resolve();
 /** Resolves once the intro is over (at once when there is none). */
 export function whenIntroDone() { return finished; }
 
+/**
+ * The title card (owner, 2026-11-12: "keep that wild cinematic cat title
+ * coming for a few seconds, and then fading away"): CAT OS in gold, letter by
+ * letter out of a blur, a laurel wreath growing round it and embers rising,
+ * held for a few seconds over the village loading underneath, then pushed
+ * past the camera as it fades. It follows the opening video in the app, and
+ * opens an installed web app on its own. A tap ends it; less motion skips it;
+ * 'catos:title' = 'off' keeps it away, 'on' shows it in any browser.
+ */
+const TITLE_MS = 3200;  // on screen, before it starts to leave
+const TITLE_OUT = 900;  // its exit
+
+function titleWanted() {
+  const root = document.documentElement;
+  if (root.hasAttribute('data-reduced-motion')) return false;
+  let pref = null;
+  try { pref = localStorage.getItem('catos:title'); } catch { /* no storage */ }
+  if (pref === 'off') return false;
+  if (pref === 'on') return true;
+  let standalone = false;
+  try { standalone = matchMedia('(display-mode: standalone)').matches; } catch { /* old browser */ }
+  return root.hasAttribute('data-intro') || standalone;
+}
+
+const leaf = (x, y, a, i) => `<g transform="translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${a.toFixed(1)})"><ellipse class="tc-leaf" style="--i:${i}" rx="9" ry="3.6"/></g>`;
+function wreathSVG() {
+  let leaves = '';
+  for (const side of [-1, 1]) {
+    for (let i = 0; i < 11; i += 1) {
+      const t = 0.17 + i * 0.07, a = Math.PI / 2 + side * (Math.PI * t * 1.18);
+      const x = 180 + Math.cos(a) * 172, y = 125 + Math.sin(a) * 112;
+      const deg = (a * 180) / Math.PI + (side > 0 ? -90 : 90) + side * 28;
+      leaves += leaf(x, y, deg, i);
+      leaves += leaf(x + Math.cos(a) * 10, y + Math.sin(a) * 10, deg - side * 50, i);
+    }
+  }
+  return `<svg class="title-card__wreath" viewBox="0 0 360 250" aria-hidden="true"><defs><linearGradient id="tc-gold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFE9A8"/><stop offset=".55" stop-color="#E9B24A"/><stop offset="1" stop-color="#A86A1C"/></linearGradient></defs><g fill="url(#tc-gold)" stroke="#5a3410" stroke-width=".8">${leaves}</g></svg>`;
+}
+
+/** Show the title card; resolves once it has gone. */
+export function showTitle() {
+  return new Promise((resolve) => {
+    const el = document.createElement('div');
+    el.className = 'title-card';
+    el.setAttribute('role', 'img');
+    el.setAttribute('aria-label', 'CAT OS');
+    const letters = [...'CAT OS'].map((c, i) => (c === ' ' ? '<span class="tc-gap"></span>' : `<span style="--i:${i}">${c}</span>`)).join('');
+    const embers = Array.from({ length: 22 }, (_, i) => `<i style="--x:${(Math.random() * 100).toFixed(1)}%;--d:${(Math.random() * 1.6).toFixed(2)}s;--t:${(2.4 + Math.random() * 1.8).toFixed(2)}s;--s:${(0.6 + Math.random() * 0.9).toFixed(2)}"></i>`).join('');
+    el.innerHTML = `<div class="title-card__glow"></div><div class="title-card__embers" aria-hidden="true">${embers}</div>
+      <div class="title-card__lockup">${wreathSVG()}<h1 class="title-card__word" data-text="CAT OS">${letters}</h1><p class="title-card__tag">The Muddles are loose. Save the village.</p></div>`;
+    document.body.appendChild(el);
+    try { play('reveal', { pitch: 3, delay: 0.35 }); } catch { /* silent */ }
+    let done = false;
+    const end = () => {
+      if (done) return;
+      done = true;
+      el.classList.add('is-leaving');
+      setTimeout(() => { el.remove(); resolve(); }, TITLE_OUT);
+    };
+    el.addEventListener('pointerdown', end);
+    setTimeout(end, TITLE_MS);
+  });
+}
+
 /** Raise the intro if index.html asked for it. Call once, after the motion preference is applied. */
 export function beginIntro() {
   const root = document.documentElement;
   const curtain = document.getElementById('intro');
-  if (!root.hasAttribute('data-intro') || !curtain) return;
+  const title = titleWanted();
+  if (!root.hasAttribute('data-intro') || !curtain) { if (title) finished = showTitle(); return; }
   // data-reduced-motion is the resolved answer (prefs.js): a learner who asked for less motion gets none.
   if (root.hasAttribute('data-reduced-motion')) { root.removeAttribute('data-intro'); return; }
 
@@ -74,7 +139,8 @@ export function beginIntro() {
       root.removeAttribute('data-intro');
       for (const el of behind) el.removeAttribute('aria-hidden');
       hushWorld(false);
-      resolve();
+      // The title card follows the video; the village waits for both.
+      if (title) showTitle().then(resolve); else resolve();
     }, LEAVE_MS);
   };
 

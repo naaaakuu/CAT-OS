@@ -55,6 +55,8 @@ The game is simple; the learning is not.
 
 **Tap PLAY → a 90-second tug of war → the Muddle goes in the pond → a letter drops → the card inside is the most interesting thing you will read today → tap PLAY.**
 
+**Then the Muddle runs.** A beaten Muddle bolts out of the square and hides in the house that cures its habit: the Scrambler in Ginger's railway, Sir Waffle in Mochi's pantry, the Skimmer in Chai's library, Smudge in Matcha's glasshouse. PLAY turns red and says CHASE, the Muddle peeks out beside that house's door, and one real round inside catches it for 12 laurels. Then PLAY is a duel again. So the game takes turns by itself: a duel in the square, then a house, then a duel (owner, 2026-11-12: "no one will ever go inside a particular house" while PLAY was the only button). Lose and nobody runs: it is a rematch. Start another duel instead and the Muddle simply gets away, with nothing taken.
+
 - **The villains are the syllabus, and all of it.** A Muddle is a bad habit of English, and each one is a part of the exam. Ten of them: Smudge eats words (vocabulary), Baron Verbose never says in five words what fifty will do (dense sentences), the Scrambler talks out of order (para jumbles), the Skimmer reads the first line and guesses the rest (reading comprehension, two thirds of the paper), Count Tangent wanders off the point (odd one out), Dame Ellipsis never finishes her... (para completion), the Gatecrasher barges in at the wrong moment (sentence placement), Sir Waffle cannot reach the point (para summary), Madame Mixup confidently uses the wrong word (confusing words), and the Great Muddle does all of it. A duel against one is mostly that part of the exam: two jumbles with quick strikes round them, or one whole passage and its questions.
 - **PLAY never gives you the same game twice running.** It chooses who you face: a Muddle you have never met first (so the first ten duels are ten different games, each explained on its playbill), then one rematch if you lost, then today's troublemaker, then whoever is furthest behind their share of the exam. The face on the corner of PLAY shows who is next and opens **Tonight's Bill**, where any Muddle can be challenged at any time.
 - **PLAY deals the exam's own proportions.** Once all ten are met, each Muddle comes up as often as its part of the paper deserves (`weight` in `duel/model.js`): the Skimmer about one duel in three, and since a passage is the longest duel, most of the answering is reading, as in the exam. The four paragraph types the exam sets every year (jumbles, odd one out, sentence placement, summary) come one duel in ten each, para completion and the Mixed Bag one in twenty, and so do the three foundations that are never asked directly (words, dense sentences, confusing words). Only the last 38 duels count, so a habit of picking one Muddle from the bill is corrected without being punished for weeks.
@@ -140,10 +142,26 @@ the room inside it, and its own machine moves once it wakes: the clocks keep
 real time, the telescope sweeps, the carriages shunt, the gear turns, the fire
 burns. The river flows, the falls tumble, the oaks sway, smoke rises, and at
 night the windows of a grown house glow. Friends walk behind a house and in
-front of it as they pass. The valley always fills the screen; a phone opens a
-little closer so a house reads well, you drag in any direction, and a pinch
-goes closer or back out to the whole valley. Every house carries a plate with
-its subject; tap the plate or the house and the camera walks you to its door.
+front of it as they pass. The whole valley fills the screen from top to bottom
+and stays put: you only slide it left and right, like the set of a play, and
+there is no pinch. Every house carries a small painted sign with its name and
+subject (no faces: the house is the picture). Tap the sign or the house and the
+camera pushes in to its door like a film, the doorway's dark closes, and the
+room opens out of that dark; coming back out, the camera pulls away from the
+same door.
+
+**The village square** sits on the green between the railway, the river and
+the glasshouse: a round of cobbles with a fountain at its heart, benches, lamp
+posts, a market stall and the notice board where tonight's Muddle is posted.
+That Muddle waits on the cobbles in front of the board (tap it to take it on),
+friends meet and chat round the fountain, and every party after a finished set
+is held there, the friend you helped at the front of the fountain. The
+lanterns and bunting the village earns hang from the square's lamp posts.
+
+**The title.** The app opens (after the Nakul Creations video) on CAT OS in
+gold, letter by letter out of a blur, a laurel wreath growing round it and
+embers rising, over the village loading underneath. It holds for about three
+seconds and then rushes past the camera as it fades. A tap ends it sooner.
 
 **The valley tour.** The lane is also a tour: every home gives a wax seal when
 something real is played in it (a passage and an Arguments set in the library;
