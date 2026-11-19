@@ -7,10 +7,12 @@
  *   - the next duel lets an uncaught Muddle go: no chase is left open, nothing is paid
  *   - the Great Muddle runs to the home left longest
  *   - a catch pays CHASE_LAURELS once, folded into the Laurel Road in time order; with none, the ladder is unchanged
+ *   - a Muddle runs off with what got away in its duel (got_away): cleaned, capped, the hideout's own kind first,
+ *     and the latest named trap of a kind is what the next big move of that kind is warned about
  *
  *   node tools/check-chase.mjs
  */
-import { chasesOf, openChase, lastCaught, chaseLaurels, ladderFrom, hideoutFor, HIDEOUT, HIDEOUTS, CHASE_LAURELS } from '../src/duel/chase.js';
+import { chasesOf, openChase, lastCaught, chaseLaurels, ladderFrom, hideoutFor, HIDEOUT, HIDEOUTS, CHASE_LAURELS, lootOf, lootShort, lootCount, lastMiss, packMiss, leadWith } from '../src/duel/chase.js';
 import { BOUTS, ladderOf, duelsIn } from '../src/duel/model.js';
 
 let checks = 0;
@@ -85,6 +87,33 @@ ok(openChase({ sessions: [rc(50)], learning: [duel('skimmer', 40)] }) === null, 
   const r = { sessions: [ses('ooo', 140), ses('pj', 160)], learning: [duel('tangent', 130), duel('scrambler', 150)] };
   const flip = { sessions: [...r.sessions].reverse(), learning: [...r.learning].reverse() };
   ok(JSON.stringify(chaseLaurels(r)) === JSON.stringify(chaseLaurels(flip)) && chaseLaurels(r).length === 2, 'the order records are read in changed the chases');
+}
+
+// What got away rides with the Muddle: read off the duel's own record, cleaned, and never trusted.
+{
+  const miss = { kind: 'point', head: 'It turns "often" into "always"', body: 'The paragraph calls its own rule a tendency.', trap: 'It turns "often" into "always"', from: 'The Wait at the Ford' };
+  const word = { kind: 'word', head: 'fragile', body: 'Easily broken or damaged.' };
+  const won = duel('waffle', 200, true, { got_away: [word, miss] });
+  ok(lootOf(won).length === 2 && lootOf(won)[0].head === 'fragile', 'a duel should keep what got away, in order');
+  ok(lootOf(won, 'mochi')[0].kind === 'point' && lootOf(won, 'matcha')[0].kind === 'word', 'a Muddle should hold up the miss its hideout teaches first');
+  ok(leadWith(lootOf(won), 'nowhere').length === 2, 'an unknown home should leave the loot alone');
+  ok(lootShort(lootOf(won)[0]) === 'fragile' && lootShort(packMiss(miss)) === miss.trap, 'a word is named by itself and a paragraph miss by its trap');
+  ok(lootShort(packMiss({ kind: 'decode', head: 'x'.repeat(90) })).length <= 55, 'a long miss should be shortened for a sentence');
+  ok(lootCount(1) === 'one of yours' && lootCount(3) === '3 of yours', 'the count should read as a sentence');
+  ok(lootOf(duel('smudge', 210)).length === 0 && lootOf(null).length === 0 && lootOf({ got_away: 'no' }).length === 0, 'a duel with nothing kept has no loot');
+  // Hostile records: wrong types, no head, far too many, far too long.
+  const hostile = lootOf({ got_away: [null, 7, { head: 4 }, { head: '  ' }, ...Array.from({ length: 30 }, (_, i) => ({ kind: {}, head: `w${i}${'z'.repeat(400)}`, body: [], trap: 9 }))] });
+  ok(hostile.length <= 8 && hostile.every((m) => typeof m.head === 'string' && m.head.length <= 160 && m.kind === '' && m.body === '' && m.trap === ''), 'a hostile got_away list was not cleaned');
+  // The sign before a big move remembers the latest named trap of that kind: this duel first, then saved ones, newest first.
+  const older = duel('waffle', 190, false, { got_away: [{ kind: 'point', head: 'old', trap: 'Only half of the point' }] });
+  ok(lastMiss([older, won], 'point')?.trap === miss.trap, 'the newest saved trap of a kind should be remembered');
+  ok(lastMiss([older, won], 'point', [{ kind: 'point', head: 'now', trap: 'Too extreme' }])?.trap === 'Too extreme', "this duel's own miss should come before a saved one");
+  ok(lastMiss([older, won], 'gap') === null && lastMiss([], 'point') === null && lastMiss(null, 'point') === null, 'a kind never missed has nothing to remember');
+  ok(lastMiss([duel('smudge', 220, true, { got_away: [word] })], 'word') === null, 'a miss with no named trap is not a warning');
+  // Loot never changes who is chased, who is caught or what is paid.
+  const plain = { sessions: [ses('ps', 205)], learning: [duel('waffle', 200)] };
+  const withLoot = { sessions: plain.sessions, learning: [{ ...plain.learning[0], got_away: [word, miss] }] };
+  ok(JSON.stringify(chaseLaurels(plain)) === JSON.stringify(chaseLaurels(withLoot)) && ladderFrom(plain).laurels === ladderFrom(withLoot).laurels, 'what got away changed the laurels');
 }
 
 if (fails.length) { console.error(`chase: ${fails.length} problem(s)`); for (const f of fails) console.error(`  - ${f}`); process.exit(1); }

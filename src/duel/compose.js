@@ -41,7 +41,7 @@ async function firstDuelFeed() {
   const r = seeded('first-duel');
   // Three clear choices for each, always "what does it mean?", on the very first day.
   round.questions = picks.map(({ entry }) => {
-    const others = shuffled(picks.filter((p) => p.entry.id !== entry.id), r).slice(0, 2).map((p) => ({ text: upper(clean(p.entry.meaning)), correct: false }));
+    const others = shuffled(picks.filter((p) => p.entry.id !== entry.id), r).slice(0, 2).map((p) => ({ text: upper(clean(p.entry.meaning)), correct: false, of: p.entry.word }));
     return { kind: 'meaning', ask: 'What does it mean?', stem: entry.word, options: shuffled([{ text: upper(clean(entry.meaning)), correct: true }, ...others], r), entry, wordShown: entry.word };
   });
   return round;

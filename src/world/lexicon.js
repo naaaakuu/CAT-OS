@@ -197,10 +197,10 @@ export function buildQuestion(entry, bundle, region, seed, languages = [], pool 
     return { kind, ask: kind === 'synonym' ? 'Closest in meaning' : 'Most nearly opposite', stem: entry.word, options: shuffle(opts, r), entry, wordShown: entry.word };
   }
   if (kind === 'reverse') {
-    const opts = [{ text: entry.word, correct: true }, ...sample(others, 3, r).map((o) => ({ text: o.word, correct: false }))];
+    const opts = [{ text: entry.word, correct: true }, ...sample(others, 3, r).map((o) => ({ text: o.word, correct: false, means: trimDot(o.meaning) }))];
     return { kind, ask: 'Which word fits this meaning?', stem: cap(trimDot(entry.meaning)), options: shuffle(opts, r), entry, wordShown: null };
   }
-  const opts = [{ text: cap(trimDot(entry.meaning)), correct: true }, ...sample(others, 3, r).map((o) => ({ text: cap(trimDot(o.meaning)), correct: false }))];
+  const opts = [{ text: cap(trimDot(entry.meaning)), correct: true }, ...sample(others, 3, r).map((o) => ({ text: cap(trimDot(o.meaning)), correct: false, of: o.word }))];
   return { kind: 'meaning', ask: 'What does it mean?', stem: entry.word, options: shuffle(opts, r), entry, wordShown: entry.word };
 }
 

@@ -75,7 +75,9 @@ export async function renderVillageHome(outlet, ctx) {
   if (!outlet.isConnected || location.hash !== arrivedAt) return;
   const { mountScene } = scenery;
   const { deriveSeals, TOUR } = seals;
-  const { openChase, lastCaught, ladderFrom, homeName, CHASE_LAURELS } = chases;
+  const { openChase, lastCaught, ladderFrom, homeName, CHASE_LAURELS, lootOf, lootShort, lootCount } = chases;
+  /* What a Muddle ran off with (chase.js lootOf), in a sentence: "one of yours: fragile". Empty when it took nothing. */
+  const lootSaid = (duel, home) => { const loot = lootOf(duel, home); return loot.length ? `${lootCount(loot.length)}: <b>${escapeHTML(lootShort(loot[0]))}</b>${loot.length > 1 ? ` and ${loot.length - 1} more` : ''}` : ''; };
   let state = world.state;
   let pets = state.pets ?? derivePets(state, world.records, world.content, state.now);
   const atmo = state.atmo;
@@ -405,8 +407,9 @@ export async function renderVillageHome(outlet, ctx) {
     if (chase) {
       playEl.dataset.chase = chase.home;
       playEl.setAttribute('href', ROOM_OF.get(chase.home) ?? '#/duel');
-      playEl.innerHTML = `<i class="cw-play__x2">+${CHASE_LAURELS} laurels</i><b>CHASE</b><small>${escapeHTML(chase.bout.name)} · ${escapeHTML(HOUSE_NAME[chase.home])}</small>`;
-      playEl.setAttribute('aria-label', `Chase ${chase.bout.name} into ${homeName(chase.home)}. One round in there catches it, for ${CHASE_LAURELS} laurels.`);
+      const took = lootOf(chase.duel, chase.home);
+      playEl.innerHTML = `<i class="cw-play__x2">+${CHASE_LAURELS} laurels</i><b>CHASE</b><small>${escapeHTML(chase.bout.name)} · ${escapeHTML(HOUSE_NAME[chase.home].replace(/^The /, ''))}</small>`;
+      playEl.setAttribute('aria-label', `Chase ${chase.bout.name} into ${homeName(chase.home)}.${took.length ? ` It took ${lootCount(took.length)}: ${lootShort(took[0])}.` : ''} One round in there catches it, for ${CHASE_LAURELS} laurels.`);
     } else {
       delete playEl.dataset.chase;
       /* The double is a tag on the corner: in the line under PLAY it pushed the Muddle's name off the button. */
@@ -509,7 +512,7 @@ export async function renderVillageHome(outlet, ctx) {
     life.poke(id);
     const hiding = chase?.home === id ? chase : null;
     try { sessionStorage.setItem('catos:entered', JSON.stringify({ id, at: Date.now() })); } catch { /* private mode */ }
-    const go = () => { throughDoor(hiding && { bout: hiding.bout, laurels: CHASE_LAURELS }); location.hash = ROOM_OF.get(id); };
+    const go = () => { throughDoor(hiding && { bout: hiding.bout, laurels: CHASE_LAURELS, home: id, took: lootSaid(hiding.duel, id) }); location.hash = ROOM_OF.get(id); };
     if (reduced) { go(); return; }
     tween = null; fling = null;
     root.classList.add('is-entering');
@@ -727,7 +730,8 @@ export async function renderVillageHome(outlet, ctx) {
     const ms = clamp(total * 3.2, 1300, 2600);
     later(() => {
       play('swoosh');
-      toast(`<b>${escapeHTML(bout.name)} ran into ${escapeHTML(homeName(home))}!</b> Catch it in there: +${CHASE_LAURELS} laurels.`, 4600);
+      const took = lootSaid(chase.duel, home);
+      toast(`<span class="cw-toast__chase"><b>${escapeHTML(bout.name)} ran into ${escapeHTML(homeName(home))}!</b> ${took ? `It took ${took}. ` : ''}Catch it in there: +${CHASE_LAURELS} laurels.</span>`, took ? 5600 : 4600);
       muddleEl.classList.add('is-running');
       const t0 = performance.now();
       const step = (t) => {
@@ -754,7 +758,7 @@ export async function renderVillageHome(outlet, ctx) {
     whenQuiet(() => {
       reveal({ x: houseX(c.home), y: cam.y });
       later(() => { houses.burst(c.home); play('grow'); }, reduced ? 0 : 600);
-      celebrate(`<p class="cw-party__eyebrow">Caught in ${escapeHTML(homeName(c.home))}</p><span class="cw-party__pet">${muddleFigure(c.bout.id, 116, 4)}</span><h2 id="cw-party-h">You caught ${escapeHTML(c.bout.name)}!</h2><p class="cw-party__new">${laurelSVG(20)} <b>+${CHASE_LAURELS} laurels</b> on the Laurel Road</p><p>Another Muddle is waiting in the square. Press PLAY.</p>`, 'levelup');
+      celebrate(`<p class="cw-party__eyebrow">Caught in ${escapeHTML(homeName(c.home))}</p><span class="cw-party__pet">${muddleFigure(c.bout.id, 116, 4)}</span><h2 id="cw-party-h">You caught ${escapeHTML(c.bout.name)}!</h2><p class="cw-party__new">${laurelSVG(20)} <b>+${CHASE_LAURELS} laurels</b> on the Laurel Road</p>${lootSaid(c.duel, c.home) ? `<p class="cw-party__back">It dropped ${lootSaid(c.duel, c.home)}. Yours again.</p>` : ''}<p>Another Muddle is waiting in the square. Press PLAY.</p>`, 'levelup');
       announce(`You caught ${c.bout.name}: ${CHASE_LAURELS} laurels.`);
     });
   }
@@ -798,6 +802,9 @@ export async function renderVillageHome(outlet, ctx) {
     } else {
       // Any other arrival opens on the house the big button is for.
       faceHouse(chase?.home ?? pets.play ?? 'chai');
+      /* Back another day with a Muddle still hiding: say what it is holding. That, not the laurels, is the reason to go in. */
+      const held = chase ? lootSaid(chase.duel, chase.home) : '';
+      if (held) later(() => { if (!disposed) toast(`<span class="cw-toast__chase">${escapeHTML(chase.bout.name)} still has ${held}. It is hiding in ${escapeHTML(homeName(chase.home))}.</span>`, 6200); }, reduced ? 400 : 1600);
     }
     later(checkCatch, welcomed ? (reduced ? 1500 : 8200) : (reduced ? 300 : 1400));
   }
@@ -935,19 +942,24 @@ function throughDoor(hiding) {
 }
 
 /** "Smudge is hiding in here!": a card that drops in at the top of the room, then goes on its own (or with a tap). */
-function chaseBanner({ bout, laurels }) {
-  const el = document.createElement('div');
-  el.className = 'chase-banner';
-  el.setAttribute('role', 'status');
-  el.innerHTML = `<span class="chase-banner__fig">${muddleFigure(bout.id, 58)}</span><span class="chase-banner__text"><b>${escapeHTML(bout.name)} is hiding in here!</b><span>Play one round to catch it: +${laurels} laurels.</span></span>`;
+function chaseBanner({ bout, laurels, home, took }) {
+  /* The Glasshouse has thirty doors and no single big button, so there the banner is the door: ten words, the ones that slipped first. */
+  const way = CATCH_HERE[home];
+  const el = document.createElement(way ? 'a' : 'div');
+  el.className = `chase-banner${way ? ' chase-banner--go' : ''}`;
+  if (way) el.setAttribute('href', way.href); else el.setAttribute('role', 'status');
+  el.innerHTML = `<span class="chase-banner__fig">${muddleFigure(bout.id, 58)}</span><span class="chase-banner__text"><b>${escapeHTML(bout.name)} is hiding in here!</b><span>${took ? `It has ${took}. ` : ''}${way ? `${way.line}: +${laurels} laurels.` : `Play one round to catch it: +${laurels} laurels.`}</span></span>${way ? '<i class="chase-banner__go" aria-hidden="true">›</i>' : ''}`;
   document.body.appendChild(el);
   requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add('is-in')));
   let gone = false;
   const off = () => { if (gone) return; gone = true; el.classList.remove('is-in'); setTimeout(() => el.remove(), 450); window.removeEventListener('hashchange', off); };
-  el.addEventListener('click', off);
+  el.addEventListener('click', () => { if (way) setTimeout(off, 0); else off(); });
   window.addEventListener('hashchange', off);
-  setTimeout(off, 6500);
+  // Something of the learner's own is worth the time to read, and a banner that is the way in waits longest.
+  setTimeout(off, way ? 20000 : took ? 9000 : 6500);
 }
+/** Where a chase is caught in a house that has no one big button of its own. */
+const CATCH_HERE = Object.freeze({ matcha: { href: '#/round/meadow', line: 'Tap here for ten words to catch it' } });
 
 /** What each house is called on its sign, and the part of the paper it teaches, in a word or two. */
 export const HOUSE_NAME = Object.freeze({ chai: 'The Library', matcha: 'The Glasshouse', ginger: 'The Railway', mallow: 'The Observatory', mochi: 'The Pantry', biscuit: 'The Long Table', sesame: 'The Clockworks', toffee: 'The Hearth' });

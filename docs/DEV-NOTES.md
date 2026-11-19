@@ -29,7 +29,8 @@
 
 ## The game
 - A word in a duel is one `LexRound` answer, so `feed.next()` must follow every `feed.answer()`, and a duel's `moves` may never ask a feed for more than its `total`. Words the duel never reached are simply not asked and not recorded.
-- Decode answers are the only answers kept on a `duel` record, and that is what stops a duel paying Glow twice.
+- Decode answers are the only answers kept on a `duel` record, and that is what stops a duel paying Glow twice. `got_away` on the same record is text for the result, the chase and the next big-move sign (`chase.js lootOf`, which cleans it): nothing may ever be paid from it.
+- A miss is answered about the option picked: players pass `why` (the picked distractor's `why_wrong`) and `trap` in `onDone`, and `screen.js` shows the item's `mentor.takeaway` only on a right answer (it is written for the commonest trap, so under another pick it read as a wrong diagnosis). A wrong option in a word round carries `of` (the word it is the meaning of) or `means`.
 - Every rule of attention in `docs/PRODUCT.md` §Why it holds attention must stay honest: the teaser is a promise (`drawCards` puts it first), a near miss is only claimed when true, and nothing pays for time.
 - Players use the Web Animations API for coupling and joining; it respects `reduced()`.
 - Sound, one voice at a time. `world/audio.js wake()` runs on every tap and restarts the village song if it is not playing, so anything with its own sound must call `holdMusic(true)` (a plain `stopMusic()` lasts until the next tap: that was the overlap the owner heard in 3.18.0). `play()` is a small mixer: sounds named in `BIG` wait for the big sound before them and duck the music, small sounds landing inside one are played at 40%, and the same sound asked for twice within 70 ms plays once. At a call site, order sounds with `delay` rather than stacking them (the rope answers a paragraph's own tap 0.1 s later; the winning pull is `finish()`'s alone).

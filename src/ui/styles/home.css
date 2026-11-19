@@ -957,3 +957,14 @@ html[data-reduced-motion] .cw-plate.is-chase { animation: none; }
 .chase-banner__text b { font: 700 16px/1.2 var(--font-display); color: #FFE3A3; }
 html[data-reduced-motion] .chase-banner { transition: none; }
 html[data-reduced-motion] .chase-banner__fig .pet-sprite { animation: none; }
+
+/* The chase banner names what the Muddle is holding (3.23.0); in the Glasshouse it is also the way to catch it. */
+.chase-banner__text b + span b { display: inline; font: 800 13px/1.3 var(--font-ui); color: #FFE3A3; }
+a.chase-banner { text-decoration: none; }
+.chase-banner--go { padding-right: 10px; box-shadow: inset 0 0 0 2px #E8BE6C, 0 10px 30px rgba(20, 10, 4, 0.5); }
+.chase-banner__go { flex: none; margin-left: auto; font: 800 26px/1 var(--font-ui); font-style: normal; color: #FFE3A3; }
+.cw-party__back { margin: 2px 0 6px; }
+.cw-toast__chase { display: block; text-align: left; }
+.cw-toast__chase b { font-weight: 800; }
+/* The very first screen says one thing: Toffee's line and the glowing button. The tour count (0/8) means nothing yet and sat on top of the bubble. */
+.cw.is-pointing .cw-chip--tour { visibility: hidden; }

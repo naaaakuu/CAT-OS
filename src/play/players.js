@@ -319,7 +319,7 @@ export function mountStray(el, item, { onDone = () => {} } = {}) {
       }, reduced() ? 0 : 520);
     }, reduced() ? 0 : correct ? 200 : 900);
     ask.innerHTML = correct ? 'Found it. The other four were one thought all along.' : 'That one belonged. Here is the real stray.';
-    onDone({ correct, share: correct ? 1 : 0, chosen: picked, ms: Date.now() - started, teach: item.mentor?.takeaway ?? '', started });
+    onDone({ correct, share: correct ? 1 : 0, chosen: picked, why: correct ? '' : (item.explanation?.why_it_breaks ?? ''), ms: Date.now() - started, teach: item.mentor?.takeaway ?? '', started });
   });
   return { destroy() { done = true; el.innerHTML = ''; } };
 }
@@ -365,9 +365,10 @@ export function mountGap(el, item, { onDone = () => {} } = {}) {
     opts.querySelectorAll('.pl__opt').forEach((b) => { b.disabled = true; b.classList.toggle('is-right', b.dataset.k === item.correct); b.classList.toggle('is-wrong', b.dataset.k === picked && !correct); b.classList.toggle('is-dim', b.dataset.k !== picked && b.dataset.k !== item.correct); });
     slot.textContent = item.options[item.correct];
     slot.classList.add(correct ? 'is-right' : 'is-fixed');
-    const trap = item.distractors?.find((d) => d.option === picked)?.trap_type;
+    const mine = item.distractors?.find((d) => d.option === picked);
+    const trap = mine?.trap_type;
     ask.innerHTML = correct ? 'The cog turns.' : esc(trapName(trap) ?? 'That one does not fit.');
-    onDone({ correct, share: correct ? 1 : 0, chosen: picked, trap, ms: Date.now() - started, teach: item.mentor?.takeaway ?? '', started });
+    onDone({ correct, share: correct ? 1 : 0, chosen: picked, trap, why: correct ? '' : (mine?.why_wrong ?? ''), ms: Date.now() - started, teach: item.mentor?.takeaway ?? '', started });
   });
   return { destroy() { done = true; el.innerHTML = ''; } };
 }
@@ -410,9 +411,10 @@ export function mountSeat(el, item, { onDone = () => {} } = {}) {
     done = true; go.hidden = true;
     const correct = picked === item.correct;
     seats.forEach((s) => { s.disabled = true; const k = s.dataset.k; if (k === item.correct) { s.classList.add(correct ? 'is-right' : 'is-fixed'); s.classList.remove('is-picked'); s.innerHTML = `<span class="se__sat">${esc(missing)}</span>`; } else if (k === picked) { s.classList.add('is-wrong'); s.innerHTML = '<i></i>'; } else s.classList.add('is-dim'); });
-    const trap = item.distractors?.find((d) => d.option === picked)?.trap_type;
+    const mine = item.distractors?.find((d) => d.option === picked);
+    const trap = mine?.trap_type;
     ask.innerHTML = correct ? 'Everyone is seated.' : esc(trapName(trap) ?? 'Not that seat.');
-    onDone({ correct, share: correct ? 1 : 0, chosen: picked, trap, ms: Date.now() - started, teach: item.mentor?.takeaway ?? '', started });
+    onDone({ correct, share: correct ? 1 : 0, chosen: picked, trap, why: correct ? '' : (mine?.why_wrong ?? ''), ms: Date.now() - started, teach: item.mentor?.takeaway ?? '', started });
   });
   return { destroy() { done = true; el.innerHTML = ''; } };
 }
@@ -454,7 +456,7 @@ export function mountPoint(el, item, { onDone = () => {} } = {}) {
     const d = q.explanation?.distractors?.find((x) => x.option === picked);
     const trap = d?.archetype;
     ask.innerHTML = correct ? 'Bullseye.' : esc(trapName(trap) ?? 'That misses the point.');
-    onDone({ correct, share: correct ? 1 : 0, chosen: picked, trap, ms: Date.now() - started, teach: item.mentor?.takeaway ?? '', started });
+    onDone({ correct, share: correct ? 1 : 0, chosen: picked, trap, why: correct ? '' : (d?.why_wrong ?? ''), ms: Date.now() - started, teach: item.mentor?.takeaway ?? '', started });
   });
   return { destroy() { done = true; el.innerHTML = ''; } };
 }
@@ -544,7 +546,7 @@ export function mountRead(el, item, { onRead = () => {}, onStep = () => {}, onDo
       if (correct) { setTimeout(onward, reduced() ? 300 : 850); return; }
       const d = q.explanation?.distractors?.find((x) => x.option === picked);
       const trap = trapName(d?.trap_type) ?? 'Not this one';
-      wrongs.push({ head: q.stem, body: `${q.options[q.correct]} ${q.explanation?.correct_reasoning ?? ''}`.trim() });
+      wrongs.push({ kind: 'read', head: q.stem, body: `${q.options[q.correct]} ${q.explanation?.correct_reasoning ?? ''}`.trim(), trap: trapName(d?.trap_type) ?? '', from: item.passage?.title ?? '' });
       why.hidden = false;
       why.innerHTML = `
         <p class="rdq__trap">${esc(trap)}</p>

@@ -88,6 +88,66 @@ export function chaseLaurels(records) {
   return chasesOf(records).filter((c) => c.caughtAt !== null).map((c) => ({ at: c.caughtAt, laurels: CHASE_LAURELS }));
 }
 
+/* ---- What the Muddle ran off with ----
+ * A duel keeps what got away from the learner (`got_away` on its record: each
+ * miss in the words the result screen used). The Muddle carries it into its
+ * hideout, so a chase is after something of the learner's own, and the sign
+ * before the next big move of that kind can say what happened last time.
+ * Display only: nothing here pays Glow or laurels, and a record without it
+ * (every duel before 3.23.0) simply has no loot.
+ */
+const str = (v, max) => (typeof v === 'string' ? v.trim().slice(0, max) : '');
+
+/** One miss as a duel record keeps it: { kind, head, body, trap, from }, every field a short string. */
+export function packMiss(m) {
+  return { kind: str(m?.kind, 20), head: str(m?.head, 160), body: str(m?.body, 600), trap: str(m?.trap, 120), from: str(m?.from, 120) };
+}
+
+/** The kind of miss each home can give back: the one a Muddle hiding there shows first. */
+const HOME_KINDS = Object.freeze({ chai: ['read', 'decode'], matcha: ['word', 'twin'], ginger: ['chain'], mallow: ['stray'], sesame: ['gap'], biscuit: ['seat'], mochi: ['point'] });
+
+/**
+ * The misses a duel record carries, cleaned (a hostile or old record gives []).
+ * With a `home`, the misses that home teaches come first, so Sir Waffle in the
+ * pantry holds up the summary you missed before the word you missed.
+ */
+export function lootOf(duel, home = null) {
+  const list = Array.isArray(duel?.got_away) ? duel.got_away : [];
+  return leadWith(list.slice(0, 8).map(packMiss).filter((m) => m.head), home);
+}
+
+/** The same misses with the ones a home teaches first (order otherwise kept). */
+export function leadWith(loot, home) {
+  const kinds = HOME_KINDS[home];
+  if (!kinds) return loot;
+  return [...loot.filter((m) => kinds.includes(m.kind)), ...loot.filter((m) => !kinds.includes(m.kind))];
+}
+
+/** One miss in a few words: the word itself, the trap in plain words, or the start of what was asked. */
+export function lootShort(m) {
+  if (!m) return '';
+  if (m.kind === 'word' || m.kind === 'twin') return m.head;
+  if (m.trap) return m.trap;
+  return m.head.length > 54 ? `${m.head.slice(0, 52).trimEnd()}...` : m.head;
+}
+
+/** "one of yours" / "3 of yours": how many things a Muddle took. */
+export const lootCount = (n) => (n === 1 ? 'one of yours' : `${n} of yours`);
+
+/**
+ * The latest miss of one kind that named its trap, newest first: what the
+ * sign before a big move reminds the learner of. `now` is this duel's own
+ * misses so far (they come before any saved duel).
+ */
+export function lastMiss(duels, kind, now = []) {
+  const named = (list) => [...list].reverse().find((m) => m?.kind === kind && m.trap);
+  const here = named(now.map(packMiss));
+  if (here) return here;
+  const list = Array.isArray(duels) ? duels : [];
+  for (let i = list.length - 1; i >= 0; i -= 1) { const hit = named(lootOf(list[i])); if (hit) return hit; }
+  return null;
+}
+
 /** The ladder with every caught Muddle folded in: what every screen should show. */
 export function ladderFrom(records) {
   return ladderOf(duelsIn(records?.learning), chaseLaurels(records));

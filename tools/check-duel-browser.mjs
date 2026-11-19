@@ -114,6 +114,50 @@ export async function checkDuelBrowser() {
       await b.evaluate(`location.hash = '#/world'; true`);
       await pause(300);
     }
+    /* ---- What got away (3.23.0): a miss is named, kept, and carried off by the Muddle ---- */
+    const early = await b.evaluate(`JSON.stringify(window.__errs ?? [])`);
+    ok(early === '[]', `page errors before the miss: ${early}`);
+    await b.send('Emulation.setDeviceMetricsOverride', { width: 390, height: 844, deviceScaleFactor: 1, mobile: true });
+    await b.evaluate(`(async () => { const dbs = await indexedDB.databases(); for (const d of dbs) await new Promise((r) => { const q = indexedDB.deleteDatabase(d.name); q.onsuccess = q.onerror = q.onblocked = () => r(); }); localStorage.clear(); sessionStorage.clear(); return true; })()`);
+    await b.open(server.url, 3000);
+    await b.evaluate(`window.__errs = []; addEventListener('error', (e) => __errs.push(e.message)); addEventListener('unhandledrejection', (e) => __errs.push(String(e.reason))); true`);
+    ok(await until(`!!document.querySelector('.cw-play') && /PLAY/.test(document.querySelector('.cw-play').textContent)`), 'a fresh village did not offer PLAY');
+    await tap('.cw-play');
+    ok(await until(`!!document.querySelector('.dl .opt:not(:disabled)')`, 12000), 'the duel for the miss did not open');
+    // One deliberate miss. A wrong meaning is another word's right one, and the game says whose.
+    const missed = (await b.evaluate(`document.querySelector('.q__word').textContent.trim()`)).toLowerCase();
+    const wrongAt = await b.evaluate(`(() => { const m = ${JSON.stringify(lex)}[${JSON.stringify(missed)}]; return [...document.querySelectorAll('.opt')].findIndex((o) => o.textContent.trim().toLowerCase() !== m); })()`);
+    await pause(320);
+    await tap(`.opt[data-i="${wrongAt}"]`);
+    ok(await until(`!!document.querySelector('.q__fixyou b')`, 3000), 'a missed word did not say whose meaning was picked');
+    ok(await b.evaluate(`(() => { const t = document.querySelector('.q__fixyou').textContent; const w = document.querySelector('.q__fixyou b').textContent.trim().toLowerCase(); return /^You picked the meaning of /.test(t) && w.length > 1 && w !== ${JSON.stringify(missed)} && w in ${JSON.stringify(lex)}; })()`), 'the picked meaning was not traced to its own word');
+    // The sheet scrolls the note into view smoothly: wait for it to settle before measuring.
+    ok(await until(`document.querySelector('#cont').getBoundingClientRect().bottom <= innerHeight + 1`, 2500), 'Got it is pushed off the screen by the note');
+    await tap('#cont');
+    guard = 0;
+    while (guard++ < 40 && !(await b.evaluate(`!!document.querySelector('.rs')`))) {
+      if (await b.evaluate(`!!document.querySelector('.dl .opt:not(:disabled)')`)) {
+        const pick = await b.evaluate(`(() => { const word = document.querySelector('.q__word')?.textContent.trim().toLowerCase(); const m = ${JSON.stringify(lex)}[word]; const opts = [...document.querySelectorAll('.opt')]; const i = opts.findIndex((o) => o.textContent.trim().toLowerCase() === m); return i < 0 ? 0 : i; })()`);
+        await pause(320);
+        await tap(`.opt[data-i="${pick}"]`);
+      }
+      await pause(240);
+    }
+    ok(await until(`!!document.querySelector('.rs.rs--won')`, 8000), 'the duel with one miss was not won');
+    ok(await b.evaluate(`(() => { const l = document.querySelector('#loot'); return !!l && l.getBoundingClientRect().height > 60 && l.querySelector('em').textContent.trim().toLowerCase() === ${JSON.stringify(missed)}; })()`), 'the win screen does not name what got away');
+    ok(await b.evaluate(`[...document.querySelectorAll('.rs__scroll > *')].every((e) => e.hidden || getComputedStyle(e).display === 'none' || e.getBoundingClientRect().height >= 20)`), 'a block of the result is crushed');
+    ok(await noOverflow(), 'the result with loot overflows sideways');
+    const kept = await store(`const all = await s.getAll('learning'); return all.filter((r) => r.kind === 'duel').map((r) => r.got_away ?? null);`);
+    ok(kept.length === 1 && kept[0]?.length === 1 && kept[0][0].kind === 'word' && kept[0][0].head.toLowerCase() === missed, 'the duel did not keep what got away');
+    await tap('#loot summary');
+    ok(await until(`document.querySelector('#loot').open && !!document.querySelector('.rs-chase__list li span')?.textContent.trim()`, 2000), 'the chase card does not open to say why');
+    // The Muddle carries it into the house, and in the Glasshouse the banner is the way to catch it.
+    await tap('#chase');
+    ok(await until(`location.hash.startsWith('#/world/place')`, 15000), 'the chase did not walk into the house');
+    ok(await until(`!!document.querySelector('.chase-banner')?.classList.contains('is-in')`, 6000), 'no banner in the hideout');
+    ok(await b.evaluate(`(() => { const e = document.querySelector('.chase-banner'); return !!e && e.tagName === 'A' && e.getAttribute('href') === '#/round/meadow' && e.textContent.toLowerCase().includes(${JSON.stringify(missed)}); })()`), 'the Glasshouse banner should name the word and lead to the round that catches it');
+    ok(await noOverflow(), 'the hideout overflows sideways');
+
     const errs = await b.evaluate(`JSON.stringify(window.__errs ?? [])`);
     ok(errs === '[]', `page errors: ${errs}`);
   } catch (err) { problems.push(err.message); } finally { b.close(); server.close(); }

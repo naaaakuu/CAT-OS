@@ -18,12 +18,12 @@ import { loadMuddles, liner } from './content.js';
 import { Arena, arenaHTML, muddleSprite } from './arena.js';
 import { petFigure } from '../pets/sprite.js';
 import { BOUTS, DUEL, ROPE_END, applyRope, bigEffect, boutOf, castOf, driftOf, duelsIn, isBout, laurelsFor, nearMiss, newRope, nextBout, quickEffect, readEffect, settleRope, troublemakerOf, winTitle } from './model.js';
-import { ladderFrom, hideoutFor, homeName, CHASE_LAURELS } from './chase.js';
+import { ladderFrom, hideoutFor, homeName, CHASE_LAURELS, packMiss, lastMiss } from './chase.js';
 import { evidenceFrom } from '../pets/seals.js';
 import { gradeFor } from './letters.js';
 import { buzz, reduced, throwWord } from './fx.js';
 import { ensureDuelStyle } from './style.js';
-import { PLAYERS } from '../play/players.js';
+import { PLAYERS, trapName } from '../play/players.js';
 import { openModal, closeModal } from '../ui/modal.js';
 import { focusContent } from '../ui/focus.js';
 
@@ -273,11 +273,14 @@ export async function renderDuel(outlet, { storage }) {
       const entry = q.entry;
       const fix = sheet.querySelector('#fix');
       let head2 = '', body = '';
-      if (q.kind === 'decode') { head2 = q.options[rightIndex].text; body = q.why; misses.push({ head: q.stem, body: `${q.options[rightIndex].text} ${q.why ?? ''}`.trim() }); }
-      else if (q.kind === 'twin' || q.kind === 'twin-meaning') { head2 = q.options[rightIndex].text; body = entry.explanation ?? ''; misses.push({ head: (entry.words ?? []).join(' / '), body: entry.explanation ?? '' }); }
-      else { head2 = entry.word; body = entry.meaning; misses.push({ head: entry.word, body: `${entry.meaning}${entry.synonyms?.length ? ` Like: ${entry.synonyms.slice(0, 3).join(', ').toLowerCase()}.` : ''}` }); }
+      if (q.kind === 'decode') { head2 = q.options[rightIndex].text; body = q.why; misses.push({ kind: 'decode', head: q.stem, body: `${q.options[rightIndex].text} ${q.why ?? ''}`.trim() }); }
+      else if (q.kind === 'twin' || q.kind === 'twin-meaning') { head2 = q.options[rightIndex].text; body = entry.explanation ?? ''; misses.push({ kind: 'twin', head: (entry.words ?? []).join(' / '), body: entry.explanation ?? '' }); }
+      else { head2 = entry.word; body = entry.meaning; misses.push({ kind: 'word', head: entry.word, body: `${entry.meaning}${entry.synonyms?.length ? ` Like: ${entry.synonyms.slice(0, 3).join(', ').toLowerCase()}.` : ''}` }); }
+      /* The learner's own pick, named: a wrong meaning is nearly always another word's right one, so a miss teaches two words. */
+      const mine = q.options[i];
+      const yours = mine?.of ? `You picked the meaning of <b>${esc(mine.of)}</b>.` : mine?.means ? `<b>${esc(mine.text)}</b> means ${esc(mine.means.charAt(0).toLowerCase() + mine.means.slice(1))}.` : '';
       fix.hidden = false;
-      fix.innerHTML = `<p class="q__fixline"><b>${esc(head2)}</b>${body ? `<span>${esc(body)}</span>` : ''}</p><button class="dl-btn dl-btn--go" id="cont">Got it</button>`;
+      fix.innerHTML = `<p class="q__fixline"><b>${esc(head2)}</b>${body ? `<span>${esc(body)}</span>` : ''}</p>${yours ? `<p class="q__fixyou">${yours}</p>` : ''}<button class="dl-btn dl-btn--go" id="cont">Got it</button>`;
       const go = () => { if (!alive) return; nextMove(); };
       fix.querySelector('#cont').addEventListener('click', go, { once: true });
       fix.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
@@ -294,7 +297,9 @@ export async function renderDuel(outlet, { storage }) {
     const brink = ROPE_END - 3;
     const sessions = comp.world.records.sessions ?? [];
     const firstOfType = isRead ? !sessions.some((x) => x && !x.module && x.passage_id) : !sessions.some((x) => x?.module === BIG_MODULE[type]);
-    sheet.innerHTML = `<div class="dl-bigsign"><p>${esc(BIG_NAMES[type])}</p><h2>${isRead ? 'Stop and read' : 'Big move'}</h2><span>${esc(firstOfType || (isRead && meeting) ? BIG_TEACH[type] : `${muddle.name} stops to read too. Take your time.`)}</span><button class="dl-btn dl-btn--go" id="biggo">Go</button></div>`;
+    /* What got away last time, said before the next one of its kind: feedback is only worth having if it is there when it can be used. */
+    const before = lastMiss(duels, type, misses);
+    sheet.innerHTML = `<div class="dl-bigsign${before ? ' has-last' : ''}"><p>${esc(BIG_NAMES[type])}</p><h2>${isRead ? 'Stop and read' : 'Big move'}</h2><span>${esc(firstOfType || (isRead && meeting) ? BIG_TEACH[type] : `${muddle.name} stops to read too. Take your time.`)}</span>${before ? `<em class="dl-bigsign__last" id="lasttime"><i>Last time, this got away</i><b>${esc(before.trap)}</b>Watch for it.</em>` : ''}<button class="dl-btn dl-btn--go" id="biggo">Go</button></div>`;
     play('vs');
     const begin = () => {
       if (!alive) return;
@@ -361,15 +366,20 @@ export async function renderDuel(outlet, { storage }) {
             if (!s.over) play(correct ? 'combo' : 'heave', { pitch: 8, delay: 0.12 });
             buzz(correct ? [20, 40, 40] : [40, 40, 40]);
             showStreak();
-            if (!correct) misses.push({ head: item.meta?.title ?? item.title ?? BIG_NAMES[type], body: o.teach ?? '' });
+            if (!correct) { const label = trapName(o.trap) ?? ''; misses.push({ kind: type, head: label || (item.meta?.title ?? item.title ?? BIG_NAMES[type]), body: o.why || o.teach || '', trap: label, from: item.meta?.title ?? item.title ?? '' }); }
           }
           lowest = Math.min(lowest, s.rope);
           saveBigMove(storage, type, item, { ...o, started }, { inDuel: true });
           if (s.over) { finish(); return; }
           const panel = document.createElement('div');
           panel.className = `dl-donepanel ${correct ? 'is-good' : 'is-miss'}`;
-          const verdict = isRead ? `${o.right} of ${o.total}${correct ? '. Every one.' : o.right ? '.' : '. It got away.'}` : correct ? 'Beautiful.' : 'Not quite.';
-          panel.innerHTML = `<p class="dl-donepanel__v">${esc(verdict)}</p>${o.teach ? `<p class="dl-donepanel__t">${esc(o.teach)}</p>` : ''}<button class="dl-btn dl-btn--go" id="bigcont">Back to the rope</button>`;
+          /* A miss is answered about the learner's own pick: the trap in plain words, then why that
+             option fails. The item's general lesson is kept for a right answer, where it is a reward
+             and cannot be mistaken for a comment on an option nobody chose. */
+          const trapSaid = !isRead && !correct ? trapName(o.trap) : null;
+          const verdict = isRead ? `${o.right} of ${o.total}${correct ? '. Every one.' : o.right ? '.' : '. It got away.'}` : correct ? 'Beautiful.' : trapSaid ?? 'Not quite.';
+          const lesson = !isRead && !correct && o.why ? o.why : o.teach;
+          panel.innerHTML = `${trapSaid ? '<p class="dl-donepanel__k">The trap you picked</p>' : ''}<p class="dl-donepanel__v">${esc(verdict)}</p>${lesson ? `<p class="dl-donepanel__t">${esc(lesson)}</p>` : ''}<button class="dl-btn dl-btn--go" id="bigcont">Back to the rope</button>`;
           host.appendChild(panel);
           panel.querySelector('#bigcont').addEventListener('click', () => { nextMove(); }, { once: true });
           later(() => panel.scrollIntoView({ block: 'end', behavior: 'smooth' }), 60);
@@ -425,6 +435,8 @@ export async function renderDuel(outlet, { storage }) {
       won: !!s.won, rope: Math.round(s.rope), best_combo: s.bestCombo, first, forfeited,
       laurels: delta, letter,
       answers: decodeAnswers,
+      /* What got away, kept so the Muddle can run off with it and the next duel can remember it (chase.js lootOf). Words to show, never answers to pay. */
+      ...(misses.length ? { got_away: misses.slice(0, 8).map(packMiss) } : {}),
       score: { correct: s.right, total, accuracy },
       stars: s.won ? (accuracy >= 0.85 ? 3 : 2) : accuracy >= 0.5 ? 1 : 0,
     };

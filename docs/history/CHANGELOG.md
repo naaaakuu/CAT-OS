@@ -4,6 +4,18 @@
 > Versions here are app releases; they map onto the capability milestones in
 > `PROJECT_ROADMAP.md` (0.x releases build toward Roadmap V1.0).
 
+## 3.23.0: What got away (2026-11-19)
+
+Played as a newcomer and as a returning learner at 390x844, picking a tempting wrong answer on purpose. The one thing a duel learns about a learner is what they got wrong, and the game threw it away three times: the note after a missed paragraph was the item's general lesson, not a word about the option picked (pick the "always" summary and it talked about vivid stories); on a win the list of misses was crushed to a 6 px line (`.rs__scroll` children could shrink); and the chase and the next visit knew nothing of it. So a miss is now the thing the Muddle runs off with.
+
+- After a wrong tap the game answers the learner's own pick. A missed paragraph (summary, gap, seat) says "The trap you picked", the trap in plain words, and that option's own `why_wrong`; a missed stray says why the real stray breaks the paragraph. The item's general takeaway is kept for a right answer. A missed word adds "You picked the meaning of hostile" (word rounds now keep whose meaning each wrong option is: `of` / `means` on the option), so one miss teaches two words.
+- A duel keeps what got away on its record (`got_away`, display only, at most eight short entries, never paid from). The win screen's chase card says "It took one of yours: fragile" and opens to the list; a clean sheet is named as one. The result column no longer crushes any of its blocks.
+- The Muddle carries it into the house: the village toast, the banner inside the room ("It has one of yours: ...") and the catch card ("It dropped ... Yours again.") all name it, leading with the miss that house teaches (`leadWith`). In the Glasshouse, which has thirty doors and no one big button, the banner is the door: it opens the ten-word round, where slipped words come first. Come back another day with the Muddle still hiding and the village says so: "Smudge still has one of yours: fragile. It is hiding in Matcha's glasshouse."
+- The sign before a big move remembers: "Last time, this got away: It turns "often" into "always". Watch for it." It reads this duel's misses first, then saved duels, so the feedback is there when it can be used, today or next week.
+- The CHASE button no longer cuts its line off ("Smudge · Glasshouse"). On the very first screen the tour count (0/8) is held back until the second visit: it sat on top of Toffee's opening line and meant nothing yet.
+- `tools/check-duel-browser.mjs` plays a first duel with one deliberate miss: the picked meaning is traced to its word, the win screen names it, no block of the result is crushed, the record keeps it, and the Glasshouse banner names it and leads to the round.
+- `tools/check-chase.mjs` covers the loot (cleaning, order, hostile records, that it never changes laurels).
+
 ## 3.22.0: A village square, the chase, and a film-like way in (2026-11-12)
 
 - The owner found the village "loose": it drifted up, down and sideways, which is "not a premium game feel". The valley is now held at the screen's full height with its top at the top and only slides left and right; the pinch, the vertical wheel and the up/down keys are gone. A screen wider than the valley shows it whole on the blurred backdrop.

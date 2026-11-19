@@ -20,6 +20,7 @@ import { openModal, closeModal } from '../ui/modal.js';
 import { loadWorldRecords } from '../world/state.js';
 import { duelsIn } from './model.js';
 import { sideShows, sideDoor } from './sideshows.js';
+import { lootShort, lootCount, leadWith } from './chase.js';
 
 function countUp(el, from, to, ms = 900) {
   if (!el) return;
@@ -47,11 +48,26 @@ export async function renderDuelResult(outlet, { storage, summary }) {
   const fromPct = before.arena.n === after.arena.n ? (before.next ? before.pct : 1) : 0;
 
   const line = won ? summary.winLine : summary.loseLine;
+  /* Every block of this screen keeps its full height now, so a long list would push Rematch off a phone:
+     the first two misses are shown and the rest wait one tap away. */
+  const noteLi = (m) => `<li><b>${esc(m.head)}</b><span>${esc(m.body)}</span></li>`;
   const notes = misses.length ? `
     <details class="rs-notes" ${won ? '' : 'open'}>
       <summary><b>${misses.length} ${misses.length === 1 ? 'thing' : 'things'} got away</b><span>Learn ${misses.length === 1 ? 'it' : 'them'} and win ${misses.length === 1 ? 'it' : 'them'} back</span></summary>
-      <ul>${misses.map((m) => `<li><b>${esc(m.head)}</b><span>${esc(m.body)}</span></li>`).join('')}</ul>
+      <ul>${misses.slice(0, 2).map(noteLi).join('')}</ul>
+      ${misses.length > 2 ? `<details class="rs-notes__rest"><summary>And ${misses.length - 2} more</summary><ul>${misses.slice(2).map(noteLi).join('')}</ul></details>` : ''}
     </details>` : '';
+
+  /* A beaten Muddle does not leave empty-handed: it takes what got away from you into the house, so the
+     chase is after something of your own. The card names it and opens to say why; a clean sheet says so. */
+  const li = (m) => `<li><b>${esc(m.head)}</b><span>${esc(m.body)}</span>${m.from && m.from !== m.head ? `<i>${esc(m.from)}</i>` : ''}</li>`;
+  const chaseFig = chase ? `<span class="rs-chase__fig">${muddleSprite(muddle.id, { size: 64, frame: FRAME.talk })}</span>` : '';
+  const loot = chase ? leadWith(misses.filter((m) => m?.head), chase.home) : []; // the screen's own full text; the record keeps a capped copy
+  const chaseHTML = !chase ? '' : loot.length ? `
+    <details class="rs-chase rs-chase--loot" id="loot">
+      <summary>${chaseFig}<span class="rs-chase__say"><b>${esc(muddle.name)} ran off into ${esc(chase.name)}!</b><span>It took ${lootCount(loot.length)}: <em>${esc(lootShort(loot[0]))}</em>${loot.length > 1 ? ` and ${loot.length - 1} more` : ''}. Catch it in there: +${chase.laurels} laurels.</span><i class="rs-chase__more">See what got away</i></span></summary>
+      <ul class="rs-chase__list">${loot.map(li).join('')}</ul>
+    </details>` : `<p class="rs-chase">${chaseFig}<span><b>${esc(muddle.name)} ran off into ${esc(chase.name)}!</b><span>A clean sheet: it took nothing of yours. One round in there catches it: +${chase.laurels} laurels.</span></span></p>`;
 
   const letterHTML = letter ? `
     <button class="rs-letter is-${esc(letter.grade)}" id="letter">
@@ -86,9 +102,9 @@ export async function renderDuelResult(outlet, { storage, summary }) {
           <div class="${newBest ? 'is-best' : ''}"><b>${bestCombo}</b><span>${newBest ? 'New best!' : 'Best streak'}</span></div>
           <div><b>${newWords}</b><span>New ${newWords === 1 ? 'word' : 'words'}</span></div>
         </div>
-        ${won && chase ? `<p class="rs-chase"><span class="rs-chase__fig">${muddleSprite(muddle.id, { size: 64, frame: FRAME.talk })}</span><span><b>${esc(muddle.name)} ran off into ${esc(chase.name)}!</b><span>One round in there catches ${esc(muddle.name)}: +${chase.laurels} laurels.</span></span></p>` : ''}
+        ${won && chase ? chaseHTML : ''}
         ${won ? letterHTML : ''}
-        ${notes}
+        ${won && chase ? '' : notes}
         <div class="rs__actions">
           ${won
     ? chase
